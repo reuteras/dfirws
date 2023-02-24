@@ -17,3 +17,5 @@ function tailf {
 Set-Alias less more
 Set-Alias grep findstr
 Set-Alias tail Get-Content
+
+# Dynamicly added functions below
