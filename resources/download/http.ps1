@@ -15,6 +15,7 @@ Try {
     Get-FileFromUri -uri "https://mark0.net/download/trid_w32.zip" -FilePath ".\tools\downloads\trid.zip"
     Get-FileFromUri -uri "https://mark0.net/download/triddefs.zip" -FilePath ".\tools\downloads\triddefs.zip"
     Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win64_lite.zip" -FilePath ".\tools\downloads\malcat.zip"
+    Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/total/total.yara" -FilePath ".\tools\downloads\total.yara"
     # Update the following when new versions are released
     Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe" -FilePath ".\tools\downloads\python3.exe"
     Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.72.exe" -FilePath ".\tools\downloads\npcap.exe"

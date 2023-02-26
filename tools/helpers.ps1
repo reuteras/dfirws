@@ -76,9 +76,10 @@ Remove-Item C:\temp\yararules\thor_inverse_matches.yar
 Remove-Item C:\temp\yararules\yara_mixed_ext_vars.yar
 Remove-Item C:\temp\yararules\configured_vulns_ext_vars.yar
 
-# Combine rules to one file
+# Combine rules to one file and add total.yara
 $content = Get-ChildItem C:\temp\yararules\ | Get-Content -raw
 [IO.File]::WriteAllLines("C:\Tools\signature.yar", $content)
+Copy-Item C:\temp\total.yara C:\Tools\total.yara
 
 Write-Output "Add to PATH"
 Add-ToUserPath "C:\Program Files\7-Zip"
