@@ -60,6 +60,7 @@ $DidierStevensSuite = `
     "plugin_msg_summary.py", `
     "plugin_msg.py", `
     "plugin_msi.py", `
+    "plugin_msi_info.py", `
     "plugin_nameobfuscation.py", `
     "plugin_office_crypto.py", `
     "plugin_olestreams.py", `
