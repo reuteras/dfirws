@@ -150,6 +150,7 @@ Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\x64dbg.lnk" "C:\Tools\x64dbg\r
 Copy-Item "C:\Users\WDAGUtilityAccount\Documents\tools\Microsoft.PowerShell_profile.ps1" "C:\Users\WDAGUtilityAccount\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 New-Item -ItemType Directory $PSHome\Modules\PSDecode
 Copy-Item "C:\Users\WDAGUtilityAccount\Documents\tools\utils\PSDecode.psm1" "$PSHome\Modules\PSDecode"
+Copy-Item "C:\Users\WDAGUtilityAccount\Documents\tools\utils\PowerSiem.ps1" "C:\Tools\bin\"
 
 Write-Output "Hide file extensions"
 REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f
