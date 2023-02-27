@@ -36,8 +36,8 @@ Function Get-FileFromUri {
     } else {
         try {
             # Use HttpWebRequest to download file
+            # Don't check remote Last-Modified - unreliable 
             $webRequest = [System.Net.HttpWebRequest]::Create($uri);
-            $webRequest.IfModifiedSince = ([System.IO.FileInfo]$FilePath).LastWriteTime
             $webRequest.Method = "GET";
             $webRequest.Headers["User-Agent"] = "Wget x64";
             [System.Net.HttpWebResponse]$webResponse = $webRequest.GetResponse()
@@ -46,14 +46,7 @@ Function Get-FileFromUri {
             $stream = New-Object System.IO.StreamReader($webResponse.GetResponseStream())
             # Save to file
             $stream.ReadToEnd() | Set-Content -Path $TmpFilePath -Force
-            $hashsourcefile = Get-FileHash $TmpFilePath -Algorithm "SHA256"
-            $hashdestfile = Get-FileHash $FilePath -Algorithm "SHA256"
-            if (Compare-Object -Referenceobject $hashsourcefile -Differenceobject $hashdestfile) {
-                Write-Output "Downloaded new $FilePath" >> .\log\log.txt
-                Copy-Item $TmpFilePath $FilePath
-            } else {
-                Write-Output "$FilePath not modified, not using downloaded file..." >> .\log\log.txt
-            }
+            rclone copyto --verbose --checksum $TmpFilePath $FilePath >> .\log\log.txt 2>&1
             Remove-Item $TmpFilePath
         } catch [System.Net.WebException] {
             # Check for a 304

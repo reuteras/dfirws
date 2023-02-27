@@ -1,5 +1,6 @@
 Write-Host "Download Didier Stevens tools."
 New-Item -ItemType Directory -Force -Path .\tools\downloads\DidierStevens > $null
+# Download to tmp directory since GitHub doesn't send Last-Modified for raw.
 New-Item -ItemType Directory -Force -Path .\tmp\tools\downloads\DidierStevens > $null
 
 . $PSScriptRoot\common.ps1
@@ -99,7 +100,7 @@ $DidierStevensSuite = `
 
 foreach ($Tool in $DidierStevensSuite)
 {
-  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/$Tool -FilePath .\tools\downloads\DidierStevens\$Tool
+  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/$Tool -FilePath .\tmp\tools\downloads\DidierStevens\$Tool
 }
 
 $DidierStevensBeta = "metatool.py", `
@@ -109,7 +110,8 @@ $DidierStevensBeta = "metatool.py", `
 
 foreach ($Tool in $DidierStevensBeta)
 {
-  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath .\tools\downloads\DidierStevens\$Tool
+  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath .\tmp\tools\downloads\DidierStevens\$Tool
 }
 
-Remove-Item -r .\tmp\tools
+rclone.exe sync --verbose --checksum .\tmp\tools\downloads\DidierStevens .\tools\downloads\DidierStevens >> .\log\log.txt 2>&1
+Remove-Item -r .\tmp\
