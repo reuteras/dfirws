@@ -2,6 +2,15 @@
 
 This repository contains a collection of scripts to install tools for DFIR work in a [Windows Sandbox][wsa]. The project started with the code in [Windows Sandbox Configuration][wsc]. Tools has been updated, added and removed after that. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
 
+## Requirements
+
+You need to have git and rclone installed to download files and resources. Install with
+
+```
+winget install Git.Git
+winget install Rclone.Rclone
+```
+
 ## Installation and configuration
 
 First enable Windows Sandbox by running **Add and remove Windows features** and adding Windows Sandbox.

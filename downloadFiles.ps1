@@ -15,11 +15,5 @@ Copy-Item README.md .\tools\downloads\
 Copy-Item .\resources\images\copying.png .\tools\downloads\
 Copy-Item .\resources\images\installing.png .\tools\downloads\
 Copy-Item .\resources\images\python.png .\tools\downloads\
-Write-Output "Convert background to jpg"
-$sourceFile = "$PSScriptRoot\tools\downloads\sans.png"
-$saveFile = "$PSScriptRoot\tools\downloads\sans.jpg"
-Add-Type -AssemblyName system.drawing
-$imageFormat = "System.Drawing.Imaging.ImageFormat" -as [type]
-$image = [drawing.image]::FromFile($sourceFile)
-$image.Save($saveFile, $imageFormat::jpeg)
+Copy-Item .\resources\images\sans.jpg .\tools\downloads\
 Write-Output "Download done"
