@@ -17,6 +17,14 @@ if (! (Test-Path -Path .\tmp )) {
     New-Item -ItemType Directory -Force -Path .\tmp > $null
 }
 
+if (! (Test-Path -Path .\mount )) {
+    New-Item -ItemType Directory -Force -Path .\mount > $null
+}
+
+if (! (Test-Path -Path .\mount\venv )) {
+    New-Item -ItemType Directory -Force -Path .\mount\venv > $null
+}
+
 if (Test-Path -Path .\tmp\pip ) {
     Remove-Item -r .\tmp\pip
 }
