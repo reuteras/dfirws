@@ -21,7 +21,7 @@ if (Test-Path -Path .\tmp\pip ) {
     Remove-Item -r .\tmp\pip
 }
 
-echo pip2pi ./tmp/pip `
+pip2pi ./tmp/pip `
     chepy[extras] `
     colorama `
     dnslib `
