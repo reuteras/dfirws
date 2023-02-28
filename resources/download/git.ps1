@@ -5,8 +5,8 @@ if (! (Get-Command git )) {
     Exit
 }
 
-New-Item -ItemType Directory -Force -Path tools\downloads\git > $null
-Set-Location tools\downloads\git
+New-Item -ItemType Directory -Force -Path downloads\git > $null
+Set-Location downloads\git
 
 $repourls = `
     "https://github.com/keydet89/Events-Ripper.git", `
@@ -19,11 +19,11 @@ foreach ($repourl in $repourls) {
     $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\..*$" }
     if ( Test-Path -Path $repo ) {
         Set-Location $repo
-        git pull >> ..\..\..\..\log\log.txt 2>&1
+        git pull >> ..\..\..\log\log.txt 2>&1
         Set-Location ..
     } else {
-        git clone $repourl >> ..\..\..\log\log.txt 2>&1
+        git clone $repourl >> ..\..\log\log.txt 2>&1
     }
 }
 
-Set-Location ..\..\..
+Set-Location ..\..

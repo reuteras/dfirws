@@ -21,7 +21,7 @@ if (Test-Path -Path .\tmp\pip ) {
     Remove-Item -r .\tmp\pip
 }
 
-pip2pi ./tmp/pip `
+echo pip2pi ./tmp/pip `
     chepy[extras] `
     colorama `
     dnslib `
@@ -68,4 +68,13 @@ pip2pi ./tmp/pip `
 deactivate
 Remove-Item -r "$VENV"
 
-Robocopy.exe .\tmp\pip .\tools\downloads\pip /COPY:D /E /PURGE /XN /XO >> .\log\log.txt
+Robocopy.exe .\tmp\pip .\downloads\pip /COPY:D /E /PURGE /XN /XO >> .\log\log.txt
+
+$ROOT_PATH=Resolve-Path "$PSScriptRoot\..\..\"
+
+Remove-Item $ROOT_PATH\mount\venv\done >> .\log\log.txt 2>&1
+
+(Get-Content generate_venv.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content .\generate_venv.wsb
+.\generate_venv.wsb
+Start-Sleep 10
+Remove-Item .\generate_venv.wsb

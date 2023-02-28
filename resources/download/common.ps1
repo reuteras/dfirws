@@ -32,20 +32,16 @@ Function Get-FileFromUri {
     if ( -not (Test-Path $FilePath) ) {
         # Use simple download
         Write-Output "Downloading file $FilePath." >> .\log\log.txt
-        [void] (New-Object System.Net.WebClient).DownloadFile($uri, $FilePath)
+        $downloader = New-Object System.Net.WebClient
+        $downloader.Headers.add("user-agent", "Wget x64")
+        $downloader.DownloadFile($uri, $FilePath)
+        #[void] (New-Object System.Net.WebClient).DownloadFile($uri, $FilePath)
     } else {
         try {
-            # Use HttpWebRequest to download file
-            # Don't check remote Last-Modified - unreliable 
-            $webRequest = [System.Net.HttpWebRequest]::Create($uri);
-            $webRequest.Method = "GET";
-            $webRequest.Headers["User-Agent"] = "Wget x64";
-            [System.Net.HttpWebResponse]$webResponse = $webRequest.GetResponse()
-
-            # Read HTTP result from the $webResponse
-            $stream = New-Object System.IO.StreamReader($webResponse.GetResponseStream())
-            # Save to file
-            $stream.ReadToEnd() | Set-Content -Path $TmpFilePath -Force
+            $downloader = New-Object System.Net.WebClient
+            $downloader.Headers.add("user-agent", "Wget x64")
+            $downloader.DownloadFile($uri, $TmpFilePath)
+            #[void] (New-Object System.Net.WebClient).DownloadFile($uri, $TmpFilePath)
             rclone copyto --verbose --checksum $TmpFilePath $FilePath >> .\log\log.txt 2>&1
             Remove-Item $TmpFilePath
         } catch [System.Net.WebException] {
