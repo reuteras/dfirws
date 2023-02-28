@@ -1,9 +1,9 @@
-include_in_dfirws/*
+downloads/*
+local/*
 log/*
 mount/*
 readonly/*
 readwrite/*
-*.wsb
-tmp/*
 setup/config.txt
-downloads/*
+tmp/*
+*.wsb

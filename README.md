@@ -7,6 +7,7 @@ This repository contains a collection of scripts to install tools for DFIR work 
 You need to have git and rclone installed to download files and resources. Install with
 
 ```
+winget install 7zip.7zip
 winget install Git.Git
 winget install Rclone.Rclone
 ```
