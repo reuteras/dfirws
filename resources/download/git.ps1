@@ -5,8 +5,8 @@ if (! (Get-Command git )) {
     Exit
 }
 
-New-Item -ItemType Directory -Force -Path downloads\git > $null
-Set-Location downloads\git
+New-Item -ItemType Directory -Force -Path mount\git > $null
+Set-Location mount\git
 
 $repourls = `
     "https://github.com/keydet89/Events-Ripper.git", `
