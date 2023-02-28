@@ -72,7 +72,7 @@ Robocopy.exe .\tmp\pip .\downloads\pip /COPY:D /E /PURGE /XN /XO >> .\log\log.tx
 
 $ROOT_PATH=Resolve-Path "$PSScriptRoot\..\..\"
 
-Remove-Item $ROOT_PATH\mount\venv\done >> .\log\log.txt 2>&1
+Remove-Item -Force $ROOT_PATH\mount\venv\done >> $null 2>&1
 
 (Get-Content generate_venv.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content .\generate_venv.wsb
 .\generate_venv.wsb
