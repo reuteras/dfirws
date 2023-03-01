@@ -37,7 +37,7 @@ If you like to have a more detailed view on the progress during the download (an
 
 ## Usage
 
-Start the Sandbox by clicking on **sandbox_tools_no_network.wsb** or running **./sandbox_tools_no_network.wsb** in a PowerShell terminal. Installation will take a couple of minutes depending on which tools are installed. The background will change during setup and installation. The following is an example screen of when the installation is done.
+Start the Sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a PowerShell terminal. Installation will take a couple of minutes depending on which tools are installed. The background will change during setup and installation. The following is an example screen of when the installation is done.
 
 ![Screen when installation is done](./resources/images/screen.png)
 
