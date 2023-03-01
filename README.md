@@ -4,11 +4,12 @@ This repository contains a collection of scripts to install tools for DFIR work 
 
 ## Requirements
 
-You need to have git and rclone installed to download files and resources. Install with
+You need to have git and rclone installed to download files and resources. 7-zip and Python 3.10 must also be installed. Install with
 
 ```
 winget install 7zip.7zip
 winget install Git.Git
+winget install Python.Python.3.10
 winget install Rclone.Rclone
 ```
 
@@ -18,32 +19,32 @@ First enable Windows Sandbox by running **Add and remove Windows features** and 
 
 Now start a PowerShell terminal and download the code. You have to have git available to use this tool. Not only to checkout the code from the repository.
 
-	git clone https:/github.com/reuteras/irtools.git
-	cd irtools\wsb
+	git clone https:/github.com/reuteras/dfirws.git
+	cd dfirws
 
 Create configuration with your local path by running the following command:
 
 	.\createSandboxConfig.ps1
 
-This will also create *./tools/config.txt*. Select the tools you would like to be available in the Sandbox here. All tools will still be downloaded.
+This will also create *./setup/config.txt*. Select the tools you would like to be available in the Sandbox here. All tools will still be downloaded and can be installed later in the Sandbox.
 
-You need to have Python 3.10 installed (or change to another version in the Sandbox by modifying the scripts) and then download all binaries and scripts with the help of the following command.
+Download all binaries and scripts with the help of the following command:
 
 	.\downloadFiles.ps1
 
-If you like to have a more detailed view on the progress during the download (and update) you can run the following **PowerShell** variant of **tail -f**:
+If you like to have a more detailed view off the progress during the download (and update) you can run the **PowerShell** variant of **tail -f**:
 
     Get-Content .\log\log.txt -Wait
 
 ## Usage
 
-Start the Sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a PowerShell terminal. Installation will take a couple of minutes depending on which tools are installed. The background will change during setup and installation. The following is an example screen of when the installation is done.
+Start the Sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a PowerShell terminal. Startup takes a just under one minute on a fast computer with the default configuration. The following is an example screen of when the installation is done.
 
 ![Screen when installation is done](./resources/images/screen.png)
 
 ## Tools
 
-The following tools are installed.
+The following tools are available.
 
 - [Amazon Corretto][amc]
 - [Bytecode Viewer][bcv]
