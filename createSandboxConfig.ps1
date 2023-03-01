@@ -1,4 +1,3 @@
-(Get-Content sandbox_clean_no_network.wsb.template).replace('__SANDBOX__', $PSScriptRoot) | Set-Content .\sandbox_clean_no_network.wsb
 (Get-Content dfirws.wsb.template).replace('__SANDBOX__', $PSScriptRoot) | Set-Content .\dfirws.wsb
 
 if (! (Test-Path -Path .\setup\config.txt)) {
