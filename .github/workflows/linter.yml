@@ -4,12 +4,12 @@
 name: Linter
 
 # Controls when the action will run. Triggers the workflow on push or pull
-# request events but only for the master branch
+# request events but only for the main branch
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 # A workflow run is made up of one or more jobs that can run sequentially
 # or in parallel
@@ -31,5 +31,5 @@ jobs:
         uses: github/super-linter/slim@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BRANCH: master
+          DEFAULT_BRANCH: main
           VALIDATE_ALL_CODEBASE: false
