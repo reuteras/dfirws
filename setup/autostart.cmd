@@ -72,7 +72,7 @@ copy "%SETUP_PATH%\python3.exe" "%SETUP_PATH%\vcredist_x64.exe" "%SETUP_PATH%\vc
 "%SETUP_PATH%\vcredist_16_x64.exe" /passive /norestart
 
 if %WSDFIR_HXD%=="Yes" (
-    copy "%SETUP_PATH%\hxd\HxDSetup.exe" "%TEMP%\HxDSetup.exe"
+    copy "%TOOLS%\hxd\HxDSetup.exe" "%TEMP%\HxDSetup.exe"
     "%TEMP%\HxDSetup.exe" /VERYSILENT /NORESTART
 )
 if %WSDFIR_GIT%=="Yes" (
