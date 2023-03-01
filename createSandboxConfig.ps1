@@ -1,3 +1,4 @@
+# Create default files and configuration
 (Get-Content dfirws.wsb.template).replace('__SANDBOX__', $PSScriptRoot) | Set-Content .\dfirws.wsb
 
 if (! (Test-Path -Path .\setup\config.txt)) {
