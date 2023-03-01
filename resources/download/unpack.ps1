@@ -1,5 +1,7 @@
 Write-Host "Prepare downloaded files"
 
+. $PSScriptRoot\common.ps1
+
 $TOOLS=".\mount\Tools"
 $TEMP=".\tmp"
 $SETUP_PATH=".\downloads"
@@ -93,5 +95,17 @@ Copy-Item $SETUP_PATH\total.yara $TOOLS\total.yara
 Remove-Item -Recurse -Force $TOOLS\loki\signature-base > $null 2>&1
 Copy-Item -r ".\mount\git\signature-base" $TOOLS\loki\signature-base
 
-Copy-Item ".\setup\utils\powershell-cleanup.py" ".\mount\venv\Scripts\"
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
+
+if (! (Test-Path .\tmp\venv\done)) {
+    Write-Output "Wait for python pip building."
+    While (! (Test-Path .\tmp\venv\done)){
+        Start-Sleep 1
+    }
+    Remove-Item .\tmp\venv\done
+}
+
+Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
+
+rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv >> .\log\log.txt 2>&1
+Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1

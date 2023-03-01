@@ -1,5 +1,7 @@
 Write-Host "Download Python pip packages."
 
+. $PSScriptRoot\common.ps1
+
 $VENV = "$env:HOMEDRIVE$env:HOMEPATH\.wsb"
 
 if (Test-Path -Path $VENV) {
@@ -80,7 +82,8 @@ Robocopy.exe .\tmp\pip .\downloads\pip /COPY:D /E /PURGE /XN /XO >> .\log\log.tx
 
 $ROOT_PATH=Resolve-Path "$PSScriptRoot\..\..\"
 
-Remove-Item -Force $ROOT_PATH\mount\venv\done >> $null 2>&1
+Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1
+mkdir .\tmp\venv > $null 2>&1
 
 (Get-Content generate_venv.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content .\generate_venv.wsb
 .\generate_venv.wsb

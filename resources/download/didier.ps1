@@ -114,4 +114,4 @@ foreach ($Tool in $DidierStevensBeta)
 }
 
 rclone.exe sync --verbose --checksum .\tmp\downloads\DidierStevens .\downloads\DidierStevens >> .\log\log.txt 2>&1
-Remove-Item -r .\tmp\
+Remove-Item -Recurse -Force .\tmp\downloads\DidierStevens 2>&1
