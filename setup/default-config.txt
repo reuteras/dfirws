@@ -5,7 +5,7 @@ rem Rename file to config.txt to configure
 rem Install cmder
 SET WSDFIR_CMDER="No"
 rem Install HxD
-SET WSDFIR_HXD="No"
+SET WSDFIR_HXD="Yes"
 rem Install git
 SET WSDFIR_GIT="Yes"
 rem Install Java - also affects Ghidra
@@ -15,7 +15,7 @@ SET WSDFIR_LIBREOFFICE="No"
 rem Install Notepad++
 SET WSDFIR_NPP="Yes"
 rem Install PDFStream Dumper
-SET WSDFIR_PDFSTREAM="No"
+SET WSDFIR_PDFSTREAM="Yes"
 rem Install Python pip packages - Python is still installed
 SET WSDFIR_PYTHON_PIP="Yes"
 rem Install Visual Studio Code
