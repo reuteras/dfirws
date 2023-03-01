@@ -2,6 +2,8 @@
 
 DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. The sandbox will also add one layer of security. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
 
+[![GitHub Super-Linter](https://github.com/reuteras/dfirws/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 ## Requirements
 
 You need to have git and rclone installed to download files and resources. 7-zip and Python 3.10 must also be installed. Install with
