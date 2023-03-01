@@ -1,6 +1,6 @@
 # DFIR in a Windows Sandbox - dfirws
 
-This repository contains a collection of scripts to install tools for DFIR work in a [Windows Sandbox][wsa]. The project started with the code in [Windows Sandbox Configuration][wsc]. Tools has been updated, added and removed after that. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
+DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. The sandbox will also add one layer of security. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
 
 ## Requirements
 
@@ -170,7 +170,6 @@ Below are sections similar to the [REMnux docs][rem].
   [vsc]: https://code.visualstudio.com/
   [wis]: https://wireshark.org/
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
-  [wsc]: https://github.com/firefart/sandbox
   [xdb]: https://x64dbg.com/
   [yar]: https://github.com/VirusTotal/yara
   [zim]: https://github.com/EricZimmerman
