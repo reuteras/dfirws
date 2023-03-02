@@ -98,11 +98,12 @@ Copy-Item -r ".\mount\git\signature-base" $TOOLS\loki\signature-base
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 
 if (! (Test-Path .\tmp\venv\done)) {
-    Write-Output "Wait for python pip building."
+    Write-Output "Wait for Python pip building."
     While (! (Test-Path .\tmp\venv\done)){
         Start-Sleep 1
     }
     Remove-Item .\tmp\venv\done
+    Write-Output "Python done. Continuing."
 }
 
 Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
