@@ -1,6 +1,7 @@
 @echo off
 rem Rename file to config.txt to configure 
 
+rem Commands to install
 
 rem Install cmder
 SET WSDFIR_CMDER="No"
@@ -20,6 +21,11 @@ rem Install Python pip packages - Python is still installed
 SET WSDFIR_PYTHON_PIP="Yes"
 rem Install Visual Studio Code
 SET WSDFIR_VSCODE="Yes"
+
+rem Links on Desktop
+
+rem Link to installed FullEventLogView from NirSoft
+SET WSDFIR_FLV="Yes"
 
 rem Location of Sysmon configuration
 SET SYSMON_CONF=C:\downloads\sysmonconfig-export.xml
