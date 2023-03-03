@@ -42,6 +42,7 @@ Add-ToUserPath "C:\Program Files\7-Zip"
 Add-ToUserPath "C:\Program Files\Git\bin"
 Add-ToUserPath "C:\Program Files\hxd"
 Add-ToUserPath "C:\Program Files\Notepad++\"
+Add-ToUserPath "C:\Tools\beaconhunter"
 Add-ToUserPath "C:\Tools\bin"
 Add-ToUserPath "C:\Tools\capa"
 Add-ToUserPath "C:\Tools\chainsaw"
@@ -49,6 +50,7 @@ Add-ToUserPath "C:\Tools\DidierStevens"
 Add-ToUserPath "C:\Tools\exiftool"
 Add-ToUserPath "C:\Tools\fakenet"
 Add-ToUserPath "C:\Tools\floss"
+Add-ToUserPath "C:\Tools\FullEventLogView"
 Add-ToUserPath "C:\Tools\GoReSym"
 Add-ToUserPath "C:\Tools\loki"
 Add-ToUserPath "C:\Tools\malcat\bin"
@@ -89,6 +91,9 @@ if ( $env:WSDFIR_CMDER -eq '"Yes"' ) {
 }
 Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\Cutter.lnk" "C:\Tools\cutter\cutter.exe"
 Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\dnSpy.lnk" "C:\Tools\dnSpy\dnSpy.exe"
+if ( $env:WSDFIR_FLV -eq '"Yes"') {
+    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\FullEventLogView.lnk" "C:\Tools\FullEventLogView\FullEventLogView.exe"
+}
 if ( $env:WSDFIR_JAVA -eq '"Yes"' ) {
     Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\ghidraRun.lnk" "C:\Tools\ghidra\ghidraRun.bat"
 }
@@ -143,3 +148,8 @@ Stop-Process -ProcessName Explorer -Force
 Copy-Item "C:\Users\WDAGUtilityAccount\Documents\tools\downloads\README.md" "C:\Users\WDAGUtilityAccount\Desktop\"
 PowerShell.exe -ExecutionPolicy Bypass -File C:\Users\WDAGUtilityAccount\Documents\tools\Update-Wallpaper.ps1 C:\downloads\sans.jpg
 C:\Tools\sysinternals\Bginfo64.exe /NOLICPROMPT /timer:0 C:\Users\WDAGUtilityAccount\Documents\tools\config.bgi
+
+# Run any custom scripts
+if (Test-Path "C:\local\customize.ps1") {
+    PowerShell.exe -ExecutionPolicy Bypass -File "C:\local\customize.ps1"
+}
