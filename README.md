@@ -115,7 +115,7 @@ Downloaded git repositories:
 
 ## Customize
 
-Rename *.\local\example-customize.ps1* to *.\local\example-customize.ps1* and add your own PowerShell code to that file. Files needed should be placed in *.\local*.
+Rename *.\local\example-customize.ps1* to *.\local\customize.ps1* and add your own PowerShell code to that file. Files needed should be placed in *.\local*.
 
 ## Documentation
 
