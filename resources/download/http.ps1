@@ -15,6 +15,7 @@ Try {
     Get-FileFromUri -uri "https://mark0.net/download/triddefs.zip" -FilePath ".\downloads\triddefs.zip"
     Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win64_lite.zip" -FilePath ".\downloads\malcat.zip"
     Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/total/total.yara" -FilePath ".\downloads\total.yara"
+    Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip"
     # Update the following when new versions are released
     Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.0/win/x86_64/LibreOffice_7.5.0_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
     Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe" -FilePath ".\downloads\python3.exe"

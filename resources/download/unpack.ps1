@@ -16,10 +16,12 @@ mkdir $TOOLS\lib > $null 2>$1
 mkdir $TOOLS\Zimmerman > $null 2>$1
 
 Copy-Item $SETUP_PATH\jq.exe $TOOLS\bin\ >> .\log\log.txt 2>&1
+Copy-Item $SETUP_PATH\JumplistBrowser.exe $TOOLS\bin\ >> .\log\log.txt 2>&1
 xcopy /E $SETUP_PATH\DidierStevens $TOOLS\DidierStevens >> .\log\log.txt 2>&1
 xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 
 # Unzip programs
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\beaconhunter.zip" -o"$TOOLS\beaconhunter" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chainsaw.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cmder.7z" -o"$TOOLS\cmder" >> .\log\log.txt 2>&1
@@ -30,9 +32,11 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\exiftool.zip" -o"$TOOLS\exiftool" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fakenet.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\floss.zip" -o"$TOOLS\floss" >> .\log\log.txt 2>&1
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fq.zip" -o"$TOOLS\bin" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hxd.zip" -o"$TOOLS\hxd" >> .\log\log.txt 2>&1
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\logview.zip" -o"$TOOLS\FullEventLogView" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\loki.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\malcat.zip" -o"$TOOLS\malcat" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\nmap.exe" -o"$TOOLS\nmap" >> .\log\log.txt 2>&1
