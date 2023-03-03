@@ -88,7 +88,7 @@ Remove-Item $TEMP\yararules\configured_vulns_ext_vars.yar
 
 # Combine rules to one file and add total.yara
 $content = Get-ChildItem $TEMP\yararules\ | Get-Content -raw
-[IO.File]::WriteAllLines("$PSScriptRoot\..\..\$TOOLS\signature.yar", $content)
+[IO.File]::WriteAllLines("$PSScriptRoot\..\..\$TOOLS\signature.yara", $content)
 Copy-Item $SETUP_PATH\total.yara $TOOLS\total.yara
 
 # Copy signatures
@@ -107,6 +107,8 @@ if (! (Test-Path .\tmp\venv\done)) {
 }
 
 Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
+Copy-Item ".\setup\utils\hash-id.py" ".\tmp\venv\Scripts\"
+Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"  
 
 rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv >> .\log\log.txt 2>&1
 Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1

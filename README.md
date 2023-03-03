@@ -103,8 +103,11 @@ Downloaded git repositories:
 - https://github.com/keydet89/Events-Ripper.git
 - https://github.com/Neo23x0/evt2sigma.git
 - https://github.com/Neo23x0/signature-base.git
+- https://github.com/pan-unit42/dotnetfile
 - https://github.com/SigmaHQ/sigma.git
 - https://github.com/volexity/threat-intel.git
+
+**Observe that some of the repositories above might trigger alerts from antivirus tools!**
 
 Below are sections similar to the [REMnux docs][rem].
 

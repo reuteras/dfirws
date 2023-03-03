@@ -1,3 +1,4 @@
+# This script runs in a Windows sandbox to prebuild the venv environment.
 Write-Host "Install Python based tools"
 # Update path
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
@@ -16,8 +17,11 @@ Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-
 Get-ChildItem . -Filter *.whl | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
 Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
 mkdir c:\tmp
-Copy-Item -r C:\git\threat-intel c:\tmp
+Copy-Item -r C:\git\threat-intel C:\tmp
+Copy-Item -r C:\git\dotnetfile C:\tmp
 Set-Location C:\tmp\threat-intel\tools\one-extract
-python -m pip install --disable-pip-version-check . 
+python -m pip install --disable-pip-version-check .
+Set-Location C:\tmp\dotnetfile
+python setup.py install
 deactivate
 Write-Host "Installed Python based tools done"

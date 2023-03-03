@@ -9,7 +9,7 @@ if (Test-Path -Path $VENV) {
     Exit
 }
 
-python3 -m venv "$VENV"
+python3.10.exe -m venv "$VENV"
 & "$VENV\Scripts\Activate.ps1"
 
 python -m pip install -U pip >> .\log\log.txt
@@ -63,8 +63,10 @@ pip2pi ./tmp/pip `
     pyOneNote `
     pypng `
     python-magic-bin `
+    pywin32 `
     pyzipper `
     python-magic `
+    regipy[full] `
     setuptools `
     time-decode `
     uncompyle6 `
