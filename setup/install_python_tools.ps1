@@ -2,12 +2,12 @@
 Write-Host "Install Python based tools"
 # Update path
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-rm -r "C:\venv\data" > $null 2>&1
-rm -r "C:\venv\Include" > $null 2>&1
-rm -r "C:\venv\Lib" > $null 2>&1
-rm -r "C:\venv\Scripts" > $null 2>&1
-rm -r "C:\venv\share" > $null 2>&1
-rm -r "C:\venv\pyvenv.cfg" > $null 2>&1
+Remove-Item -r "C:\venv\data" > $null 2>&1
+Remove-Item -r "C:\venv\Include" > $null 2>&1
+Remove-Item -r "C:\venv\Lib" > $null 2>&1
+Remove-Item -r "C:\venv\Scripts" > $null 2>&1
+Remove-Item -r "C:\venv\share" > $null 2>&1
+Remove-Item -r "C:\venv\pyvenv.cfg" > $null 2>&1
 python -m venv C:\venv
 C:\venv\Scripts\Activate.ps1
 python -m pip config set global.disable-pip-version-check true
