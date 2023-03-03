@@ -49,6 +49,7 @@ Start the Sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a
 The following tools are available.
 
 - [Amazon Corretto][amc]
+- [BeaconHunter][bhu]
 - [Bytecode Viewer][bcv]
 - [capa][cap]
 - [chainsaw][cha]
@@ -60,11 +61,14 @@ The following tools are available.
 - [exiftool][ext]
 - [flare-fakenet-ng][ffn]
 - [flare-floss][flf]
+- [fq][fq]
+- [FullEventLogView][fel]
 - [Ghidra][ghi]
 - [Git][git]
 - [GoReSym][grs]
 - [HxD][hxd]
 - [jq][jq]
+- [Jumplist-Browser][jub]
 - [LibreOffice][lio]
 - [LOKI][lok]
 - [Malcat][mal]
@@ -109,11 +113,17 @@ Downloaded git repositories:
 
 **Observe that some of the repositories above might trigger alerts from antivirus tools!**
 
+## Customize
+
+Rename *.\local\example-customize.ps1* to *.\local\example-customize.ps1* and add your own PowerShell code to that file. Files needed should be placed in *.\local*.
+
+## Documentation
+
 Below are sections similar to the [REMnux docs][rem].
 
-## Examine static properties of files
+### Examine static properties of files
 
-### General
+#### General
 
 - ExifTool
 - file-magic.py
@@ -129,6 +139,7 @@ Below are sections similar to the [REMnux docs][rem].
 
   [amc]: https://docs.aws.amazon.com/corretto/
   [bcv]: https://github.com/Konloch/bytecode-viewer
+  [bhu]: https://github.com/3lp4tr0n/BeaconHunter
   [cap]: https://github.com/mandiant/capa
   [cer]: https://github.com/cmderdev/cmder
   [cha]: https://github.com/WithSecureLabs/chainsaw
@@ -138,13 +149,16 @@ Below are sections similar to the [REMnux docs][rem].
   [dis]: https://github.com/DidierStevens/DidierStevensSuite
   [dns]: https://github.com/dnSpyEx/dnSpy
   [ext]: https://exiftool.org/
+  [fel]: https://www.nirsoft.net/utils/full_event_log_view.html
   [ffn]: https://github.com/mandiant/flare-fakenet-ng
   [flf]: https://github.com/mandiant/flare-floss
+  [fq]:  https://github.com/wader/fq
   [ghi]: https://github.com/NationalSecurityAgency/ghidra
   [git]: https://github.com/git-for-windows/git/
   [grs]: https://github.com/mandiant/GoReSym
   [hxd]: https://mh-nexus.de/
   [jq]:  https://github.com/stedolan/jq
+  [jub]: https://github.com/kacos2000/Jumplist-Browser
   [lio]: https://www.libreoffice.org/
   [lok]: https://github.com/Neo23x0/Loki
   [mal]: https://malcat.fr/
