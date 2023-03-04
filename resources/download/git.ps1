@@ -13,7 +13,6 @@ Set-Location mount\git
 $repourls = `
     "https://github.com/keydet89/Events-Ripper.git", `
     "https://github.com/Neo23x0/evt2sigma.git", `
-    "https://github.com/Neo23x0/signature-base.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/SigmaHQ/sigma.git", `
     "https://github.com/volexity/threat-intel.git"
