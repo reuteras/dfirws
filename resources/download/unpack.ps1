@@ -79,27 +79,10 @@ Remove-Item $TOOLS\GoReSym\GoReSym_lin
 Remove-Item $TOOLS\GoReSym\GoReSym_mac
 Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64
+Remove-Item -Recurse -Force $TOOLS\loki\signature-base
 
-xcopy /E ".\mount\git\signature-base\yara" $TEMP\yararules >> .\log\log.txt 2>&1
-
-# Remove rules specific to Loki and Thor
-Remove-Item $TEMP\yararules\generic_anomalies.yar
-Remove-Item $TEMP\yararules\general_cloaking.yar
-Remove-Item $TEMP\yararules\gen_webshells_ext_vars.yar
-Remove-Item $TEMP\yararules\thor_inverse_matches.yar
-Remove-Item $TEMP\yararules\yara_mixed_ext_vars.yar
-Remove-Item $TEMP\yararules\configured_vulns_ext_vars.yar
-
-# Combine rules to one file and add total.yara
-$content = Get-ChildItem $TEMP\yararules\ | Get-Content -raw
-[IO.File]::WriteAllLines("$PSScriptRoot\..\..\$TOOLS\signature.yara", $content)
-Copy-Item $SETUP_PATH\total.yara $TOOLS\total.yara
-
-# Copy signatures
-Remove-Item -Recurse -Force $TOOLS\loki\signature-base > $null 2>&1
-Copy-Item -r ".\mount\git\signature-base" $TOOLS\loki\signature-base
-
-Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
+Copy-Item $SETUP_PATH\signature.7z $TOOLS\signature.7z
+Copy-Item $SETUP_PATH\total.7z $TOOLS\total.7z
 
 if (! (Test-Path .\tmp\venv\done)) {
     Write-Output "Wait for Python pip building."
@@ -110,8 +93,9 @@ if (! (Test-Path .\tmp\venv\done)) {
     Write-Output "Python done. Continuing."
 }
 
-Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
 Copy-Item ".\setup\utils\hash-id.py" ".\tmp\venv\Scripts\"
+Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
+Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"  
 
 rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv >> .\log\log.txt 2>&1
