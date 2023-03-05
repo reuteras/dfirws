@@ -1,6 +1,6 @@
 # DFIR in a Windows Sandbox - dfirws
 
-DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. The sandbox will also add one layer of security. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
+DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. By default Windows Defender isn't running in the sandbox which makes your life easier.. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
@@ -15,28 +15,32 @@ winget install Python.Python.3.10
 winget install Rclone.Rclone
 ```
 
+Windows Sandbox must be enabled on the host. You can enable it by running the Windows tool **Add and remove Windows features** and adding Windows Sandbox.
+
+If you haven't enabled the option to run PowerShell scripts before you have to start a Windows Terminal och PowerShell prompt and run
+
+  Set-executionPolicy -ExecutionPolicy bypass
+
 ## Installation and configuration
 
-First enable Windows Sandbox by running **Add and remove Windows features** and adding Windows Sandbox.
-
-Now start a PowerShell terminal and download the code. You have to have git available to use this tool. Not only to checkout the code from the repository.
+Start a PowerShell terminal and checkout the code via Git.
 
 	git clone https:/github.com/reuteras/dfirws.git
 	cd dfirws
 
-Create configuration with your local path by running the following command:
+Start the download of included tools. It will take some time since all tools are downloaded to disk. After download the tools will be extracted and prepared for faster usage in the sandbox. Total space is currently around 8 GB. Download is done via
+
+	.\downloadFiles.ps1
+
+If you like to have a more detailed view off the progress during the download (or update) you can run the **PowerShell** variant of **tail -f**:
+
+    Get-Content .\log\log.txt -Wait
+
+Create a configuration file for the sandbox with your local path by running the following command:
 
 	.\createSandboxConfig.ps1
 
 This will also create *./setup/config.txt*. Select the tools you would like to be available in the Sandbox here. All tools will still be downloaded and can be installed later in the Sandbox.
-
-Download all binaries and scripts with the help of the following command:
-
-	.\downloadFiles.ps1
-
-If you like to have a more detailed view off the progress during the download (and update) you can run the **PowerShell** variant of **tail -f**:
-
-    Get-Content .\log\log.txt -Wait
 
 ## Usage
 
@@ -44,7 +48,15 @@ Start the Sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a
 
 ![Screen when installation is done](./resources/images/screen.png)
 
-## Tools
+## Customize
+
+Rename *.\local\example-customize.ps1* to *.\local\customize.ps1* and add your own PowerShell code to that file. Files needed by your script should be placed in the folder *.\local*.
+
+## Update
+
+Update scripts used to create the sandbox (i.e. this code) by running **git pull** and then update programs and tools by running **.\downloadFiles.ps1** again. Check *./setup/default-config.txt* for new configuration options.
+
+## Documentation
 
 The following tools are available.
 
@@ -64,7 +76,7 @@ The following tools are available.
 - [fq][fq]
 - [FullEventLogView][fel]
 - [Ghidra][ghi]
-- [Git][git]
+- [Git][git] for Windows (includes git bash)
 - [GoReSym][grs]
 - [HxD][hxd]
 - [jq][jq]
@@ -100,42 +112,18 @@ The following tools are available.
 Downloaded but not installed by default:
 
 - [Wireshark][wis]
-- [npcap][npc]
+- [npcap][npc] (requires manual install)
 
 Downloaded git repositories:
 
 - https://github.com/keydet89/Events-Ripper.git
 - https://github.com/Neo23x0/evt2sigma.git
-- https://github.com/Neo23x0/signature-base.git
 - https://github.com/pan-unit42/dotnetfile
+- https://github.com/reuteras/dfirws.wiki.git
 - https://github.com/SigmaHQ/sigma.git
 - https://github.com/volexity/threat-intel.git
 
-**Observe that some of the repositories above might trigger alerts from antivirus tools!**
-
-## Customize
-
-Rename *.\local\example-customize.ps1* to *.\local\customize.ps1* and add your own PowerShell code to that file. Files needed should be placed in *.\local*.
-
-## Documentation
-
-Below are sections similar to the [REMnux docs][rem].
-
-### Examine static properties of files
-
-#### General
-
-- ExifTool
-- file-magic.py
-- floss.exe
-- nth.exe (Name-That-Hash)
-- research.py
-- ssdeep.py
-- strings.py
-- TrID
-- Yara and the repo signature-base (collected in *C:\Tools\signature.yar*)
-- zipdump.py
-
+More information about tools are available in the GitHub [wiki][wid].
 
   [amc]: https://docs.aws.amazon.com/corretto/
   [bcv]: https://github.com/Konloch/bytecode-viewer
@@ -174,7 +162,6 @@ Below are sections similar to the [REMnux docs][rem].
   [pyt]: https://python.org/
   [qpd]: https://github.com/qpdf/qpdf
   [rad]: https://github.com/radareorg/radare2
-  [rem]: https://docs.remnux.org/discover-the-tools/examine+static+properties/general
   [rip]: https://github.com/BurntSushi/ripgrep
   [scd]: https://github.com/dzzie/VS_LIBEMU
   [sdi]: ./resources/download/didier.ps1
@@ -187,6 +174,7 @@ Below are sections similar to the [REMnux docs][rem].
   [upx]: https://github.com/upx/upx
   [vis]: https://www.visidata.org/
   [vsc]: https://code.visualstudio.com/
+  [wid]: https://github.com/reuteras/dfirws/wiki/Documentation
   [wis]: https://wireshark.org/
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
   [xdb]: https://x64dbg.com/
