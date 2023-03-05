@@ -3,12 +3,9 @@ Write-Host "Prepare downloaded files"
 . $PSScriptRoot\common.ps1
 
 $TOOLS=".\mount\Tools"
-$TEMP=".\tmp"
 $SETUP_PATH=".\downloads"
 
-Remove-Item -r $TEMP\yararules > $null 2>&1
 Remove-Item -r $TOOLS > $null 2>$1
-mkdir $TEMP\yararules > $null 2>$1
 mkdir $TOOLS > $null 2>$1
 mkdir $TOOLS\bin > $null 2>$1
 mkdir $TOOLS\DidierStevens > $null 2>$1
@@ -37,7 +34,6 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hxd.zip" -o"$TOOLS\hxd" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\logview.zip" -o"$TOOLS\FullEventLogView" >> .\log\log.txt 2>&1
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\loki.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\malcat.zip" -o"$TOOLS\malcat" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\nmap.exe" -o"$TOOLS\nmap" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pebear.zip" -o"$TOOLS\pebear" >> .\log\log.txt 2>&1
@@ -81,8 +77,7 @@ Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64
 Remove-Item -Recurse -Force $TOOLS\loki\signature-base
 
-Copy-Item $SETUP_PATH\signature.7z $TOOLS\signature.7z
-Copy-Item $SETUP_PATH\total.7z $TOOLS\total.7z
+Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 
 if (! (Test-Path .\tmp\venv\done)) {
     Write-Output "Wait for Python pip building."
@@ -95,7 +90,6 @@ if (! (Test-Path .\tmp\venv\done)) {
 
 Copy-Item ".\setup\utils\hash-id.py" ".\tmp\venv\Scripts\"
 Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
-Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"  
 
 rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv >> .\log\log.txt 2>&1
