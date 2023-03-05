@@ -31,17 +31,16 @@ Function Get-FileFromUri {
     # See if this file exists
     if ( -not (Test-Path $FilePath) ) {
         # Use simple download
-        Write-Output "Downloading file $FilePath." >> .\log\log.txt
+        Write-Output "Downloading new file $FilePath." >> .\log\log.txt
         $downloader = New-Object System.Net.WebClient
         $downloader.Headers.add("user-agent", "Wget x64")
         $downloader.DownloadFile($uri, $FilePath)
-        #[void] (New-Object System.Net.WebClient).DownloadFile($uri, $FilePath)
     } else {
         try {
+            Write-Output "Downloading file $FilePath." >> .\log\log.txt
             $downloader = New-Object System.Net.WebClient
             $downloader.Headers.add("user-agent", "Wget x64")
             $downloader.DownloadFile($uri, $TmpFilePath)
-            #[void] (New-Object System.Net.WebClient).DownloadFile($uri, $TmpFilePath)
             rclone copyto --verbose --checksum $TmpFilePath $FilePath >> .\log\log.txt 2>&1
             Remove-Item $TmpFilePath
         } catch [System.Net.WebException] {
