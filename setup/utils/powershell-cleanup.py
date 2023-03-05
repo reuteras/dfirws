@@ -2,10 +2,21 @@
 # Source: https://maxkersten.nl/binary-analysis-course/analysis-scripts/automatic-string-formatting-deobfuscation/
  
 import re
+import sys
  
 # Define information regarding the original script's location
-powershellPath = 'powershellSample.txt'
-powershellFile = open(powershellPath,'r')
+
+try:
+    powershellPath = sys.argv[1]
+except:
+    print("Need a filename as argument.")
+    sys.exit()
+try:
+    powershellFile = open(powershellPath,'r')
+except:
+    print("No such file!")
+    sys.exit()
+
 # Read all lines of the original script
 powershellContent = powershellFile.readlines()
  
