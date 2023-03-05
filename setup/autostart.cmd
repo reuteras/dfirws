@@ -5,7 +5,6 @@ set TOOLS=C:\Tools
 
 rem Create directories
 mkdir %TEMP%
-mkdir %TEMP%\yararules 
 mkdir C:\Users\WDAGUtilityAccount\Documents\WindowsPowerShell
 
 echo "Starting log" > %TEMP%\log.txt 2>&1 
