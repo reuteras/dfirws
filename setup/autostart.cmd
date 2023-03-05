@@ -5,22 +5,22 @@ set TOOLS=C:\Tools
 
 rem Create directories
 mkdir %TEMP%
-mkdir %TEMP%\yararules
+mkdir %TEMP%\yararules 
 mkdir C:\Users\WDAGUtilityAccount\Documents\WindowsPowerShell
+
+echo "Starting log" > %TEMP%\log.txt 2>&1 
 
 copy "C:\Users\WDAGUtilityAccount\Documents\tools\config.txt" %TEMP%\config.bat
 copy "C:\Users\WDAGUtilityAccount\Documents\tools\default-config.txt" %TEMP%\default-config.bat
 call %TEMP%\default-config.bat
 call %TEMP%\config.bat
 
-copy "C:\Users\WDAGUtilityAccount\Documents\tools\.bashrc" "C:\Users\WDAGUtilityAccount\"
-
 rem Install msi packages
-copy "%SETUP_PATH%\7zip.msi" "%TEMP%\7zip.msi"
-msiexec /i "%TEMP%\7zip.msi" /qn /norestart
+copy "%SETUP_PATH%\7zip.msi" "%TEMP%\7zip.msi" >> %TEMP%\log.txt 2>&1 
+msiexec /i "%TEMP%\7zip.msi" /qn /norestart >> %TEMP%\log.txt 2>&1 
 if %WSDFIR_JAVA%=="Yes" (
     copy "%SETUP_PATH%\corretto.msi" "%TEMP%\corretto.msi"
-    msiexec /i "%TEMP%\corretto.msi" /qn /norestart
+    msiexec /i "%TEMP%\corretto.msi" /qn /norestart >> %TEMP%\log.txt 2>&1 
 )
 if %WSDFIR_LIBREOFFICE%=="Yes" (
     copy "%SETUP_PATH%\LibreOffice.msi" "%TEMP%\LibreOffice.msi"
@@ -36,11 +36,11 @@ gm_r_ex_Dictionary_Si,gm_r_ex_Dictionary_Sk,gm_r_ex_Dictionary_Sl,gm_r_ex_Dictio
 gm_r_ex_Dictionary_Te,gm_r_ex_Dictionary_Th,gm_r_ex_Dictionary_Tr,gm_r_ex_Dictionary_Uk,^
 gm_r_ex_Dictionary_Vi,gm_r_ex_Dictionary_Zu,gm_r_ex_Dictionary_Sq,gm_r_ex_Dictionary_Hr,gm_r_ex_Dictionary_De,^
 gm_r_ex_Dictionary_Id,gm_r_ex_Dictionary_Is,gm_r_ex_Dictionary_Ko,gm_r_ex_Dictionary_Lo,gm_r_ex_Dictionary_Mn,^
-gm_r_ex_Dictionary_Sr,gm_r_ex_Dictionary_Eo,gm_r_ex_Dictionary_It,gm_r_ex_Dictionary_Fr
+gm_r_ex_Dictionary_Sr,gm_r_ex_Dictionary_Eo,gm_r_ex_Dictionary_It,gm_r_ex_Dictionary_Fr >> %TEMP%\log.txt 2>&1 
 )
 
 rem Set Notepad++ as default for many file types
-if %WSDFIR_GIT%=="Yes" (
+if %WSDFIR_NPP%=="Yes" (
     Ftype xmlfile="C:\Program Files\Notepad++\notepad++.exe" "%%*"
     Ftype txtfile="C:\Program Files\Notepad++\notepad++.exe" "%%*"
     Ftype chmfile="C:\Program Files\Notepad++\notepad++.exe" "%%*"
@@ -62,36 +62,34 @@ if %WSDFIR_GIT%=="Yes" (
     Ftype vbsfile="C:\WINDOWS\system32\notepad.exe" "%%*"
 )
 
-rem Start Sysmon
-"%TOOLS%\sysinternals\Sysmon64.exe" -accepteula -i "%SYSMON_CONF%"
-
 rem Install packages
 copy "%SETUP_PATH%\python3.exe" "%SETUP_PATH%\vcredist_x64.exe" "%SETUP_PATH%\vcredist_16_x64.exe" "%TEMP%\
-"%SETUP_PATH%\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
-"%SETUP_PATH%\vcredist_x64.exe" /passive /norestart
-"%SETUP_PATH%\vcredist_16_x64.exe" /passive /norestart
+"%SETUP_PATH%\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 >> %TEMP%\log.txt 2>&1 
+"%SETUP_PATH%\vcredist_x64.exe" /passive /norestart >> %TEMP%\log.txt 2>&1 
+"%SETUP_PATH%\vcredist_16_x64.exe" /passive /norestart >> %TEMP%\log.txt 2>&1 
 
 if %WSDFIR_HXD%=="Yes" (
     copy "%TOOLS%\hxd\HxDSetup.exe" "%TEMP%\HxDSetup.exe"
-    "%TEMP%\HxDSetup.exe" /VERYSILENT /NORESTART
+    "%TEMP%\HxDSetup.exe" /VERYSILENT /NORESTART >> %TEMP%\log.txt 2>&1 
 )
 if %WSDFIR_GIT%=="Yes" (
     copy "%SETUP_PATH%\git.exe" "%TEMP%\git.exe"
-    "%TEMP%\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh"
+    copy "C:\Users\WDAGUtilityAccount\Documents\tools\.bashrc" "C:\Users\WDAGUtilityAccount\"
+    "%TEMP%\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh" >> %TEMP%\log.txt 2>&1 
 )
 if %WSDFIR_NPP%=="Yes" (
     copy "%SETUP_PATH%\notepad++.exe" "%TEMP%\notepad++.exe"
-    "%TEMP%\notepad++.exe" /S
-    "%PROGRAMFILES%\7-Zip\7z.exe" x -aoa "%SETUP_PATH%\comparePlus.zip" -o"C:\Program Files\Notepad++\Plugins\ComparePlus"
+    "%TEMP%\notepad++.exe" /S >> %TEMP%\log.txt 2>&1 
+    "%PROGRAMFILES%\7-Zip\7z.exe" x -aoa "%SETUP_PATH%\comparePlus.zip" -o"C:\Program Files\Notepad++\Plugins\ComparePlus" >> %TEMP%\log.txt 2>&1 
 )
 if %WSDFIR_PDFSTREAM%=="Yes" (
     copy "%SETUP_PATH%\PDFStreamDumper.exe" "%TEMP%\PDFStreamDumper.exe"
-    "%TEMP%\PDFStreamDumper.exe" /verysilent
+    "%TEMP%\PDFStreamDumper.exe" /verysilent >> %TEMP%\log.txt 2>&1 
 )
 if %WSDFIR_VSCODE%=="Yes" (
     copy "%SETUP_PATH%\vscode.exe" "%TEMP%\vscode.exe"
-    "%TEMP%\vscode.exe" /verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"
+    "%TEMP%\vscode.exe" /verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath" >> %TEMP%\log.txt 2>&1 
 )
 
 rem Run PowerShell install
-PowerShell.exe -ExecutionPolicy Bypass -File "C:\Users\WDAGUtilityAccount\Documents\tools\helpers.ps1" 2>&1 >> %TEMP%\log.txt
+PowerShell.exe -ExecutionPolicy Bypass -File "C:\Users\WDAGUtilityAccount\Documents\tools\helpers.ps1" >> %TEMP%\log.txt 2>&1 
