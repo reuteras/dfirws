@@ -28,7 +28,7 @@ if (! (Test-Path -Path .\mount\venv )) {
 }
 
 if (Test-Path -Path .\tmp\pip ) {
-    Remove-Item -r .\tmp\pip
+    Remove-Item -r -Force .\tmp\pip
 }
 
 pip2pi ./tmp/pip `
@@ -78,13 +78,13 @@ pip2pi ./tmp/pip `
     wheel 2>&1 | findstr /V "ERROR linking" >> .\log\log.txt
 
 deactivate
-Remove-Item -r "$VENV"
+Remove-Item -r -Force "$VENV"
 
 Robocopy.exe .\tmp\pip .\downloads\pip /COPY:D /E /PURGE /XN /XO >> .\log\log.txt
 
 $ROOT_PATH=Resolve-Path "$PSScriptRoot\..\..\"
 
-Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1
+Remove-Item -r -Force .\tmp\venv > $null 2>&1
 mkdir .\tmp\venv > $null 2>&1
 
 (Get-Content generate_venv.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content .\generate_venv.wsb
