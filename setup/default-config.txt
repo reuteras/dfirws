@@ -1,5 +1,5 @@
 @echo off
-rem Rename file to config.txt to configure 
+rem Rename file to config.txt to configure dfirws
 
 rem Commands to install
 
@@ -9,8 +9,8 @@ rem Install HxD
 SET WSDFIR_HXD="Yes"
 rem Install git
 SET WSDFIR_GIT="Yes"
-rem Install Java - also affects Ghidra
-SET WSDFIR_JAVA="Yes"
+rem Install Java - also affects Ghidra and msgviewer
+SET WSDFIR_JAVA="No"
 rem Install LibreOffice
 SET WSDFIR_LIBREOFFICE="No"
 rem Install Notepad++
@@ -25,7 +25,34 @@ SET WSDFIR_VSCODE="Yes"
 rem Links on Desktop
 
 rem Link to installed FullEventLogView from NirSoft
-SET WSDFIR_FLV="Yes"
+SET WSDFIR_FLV="No"
+rem Link to installed CyberChef
+SET WSDFIR_CYBERCHEF="No"
+rem Link to installed 
+SET WSDFIR_="No"
+rem Link to installed 
+SET WSDFIR_="No"
+rem Link to installed Cutter 
+SET WSDFIR_CUTTER="No"
+rem Link to installed dnSpy 
+SET WSDFIR_DNSPY="Yes"
+rem Link to installed Malcat 
+SET WSDFIR_MALCAT="Yes"
+rem Link to installed PE-Bear
+SET WSDFIR_PEBEAR="Yes"
+rem Link to installed pestudio
+SET WSDFIR_PESTUDIO="No"
+rem Link to Tools directory
+SET WSDFIR_TOOLS="Yes"
+rem Link to installed x64dbg 
+SET WSDFIR_X64DBG="Yes"
+
+rem configuration
+
+rem Run sysmon
+SET WSDFIR_SYSMON="Yes"
 
 rem Location of Sysmon configuration
-SET SYSMON_CONF=C:\downloads\sysmonconfig-export.xml
+SET WSDFIR_SYSMON_CONF=C:\downloads\sysmonconfig-export.xml
+rem To use your own config place your sysmonconfig.xml in .\local and then
+rem change to: SET WSDFIR_SYSMON_CONF=C:\local\sysmonconfig.xml
