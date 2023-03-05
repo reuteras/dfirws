@@ -162,7 +162,7 @@ if ( $env:WSDFIR_CMDER -eq '"Yes"' ) {
 
 # Signal that everything is done to start using the tools (mostly).
 Copy-Item "C:\downloads\README.md" "C:\Users\WDAGUtilityAccount\Desktop\"
-PowerShell.exe -ExecutionPolicy Bypass -File C:\Users\WDAGUtilityAccount\Documents\tools\Update-Wallpaper.ps1 C:\downloads\sans.jpg
+PowerShell.exe -ExecutionPolicy Bypass -File C:\Users\WDAGUtilityAccount\Documents\tools\Update-Wallpaper.ps1 C:\downloads\dfirws.jpg
 C:\Tools\sysinternals\Bginfo64.exe /NOLICPROMPT /timer:0 C:\Users\WDAGUtilityAccount\Documents\tools\config.bgi
 
 # Run any custom scripts

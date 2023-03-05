@@ -78,6 +78,7 @@ Remove-Item -r $TOOLS\win64
 Remove-Item -Recurse -Force $TOOLS\loki\signature-base
 
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
+Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"
 
 if (! (Test-Path .\tmp\venv\done)) {
     Write-Output "Wait for Python pip building."
