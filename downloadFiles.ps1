@@ -13,7 +13,7 @@ if (Test-Path -Path .\log\log.txt) {
 }
 Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 
-# git and http are needed by python.
+# The scripts git and http are needed by the Python scripts.
 .\resources\download\git.ps1
 .\resources\download\http.ps1
 .\resources\download\python.ps1
@@ -22,8 +22,9 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 .\resources\download\zimmerman.ps1
 .\resources\download\unpack.ps1
 
-Write-Output "Copy files"
+Write-Output "Copy files."
 Copy-Item README.md .\downloads\
 Copy-Item .\resources\images\sans.jpg .\downloads\
+# done.txt is used to check last update in sandbox
 Write-Output "" > .\downloads\done.txt
-Write-Output "Download done"
+Write-Output "Download and preparations done."
