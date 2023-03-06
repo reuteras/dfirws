@@ -4,6 +4,8 @@ rem Rename file to config.txt to configure dfirws
 rem Commands to install
 
 rem Install cmder
+SET WSDFIR_BEACONHUNTER="Yes"
+rem Install cmder
 SET WSDFIR_CMDER="No"
 rem Install HxD
 SET WSDFIR_HXD="Yes"

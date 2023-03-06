@@ -51,10 +51,10 @@ Stop-Process -ProcessName Explorer -Force
 
 Write-Output "Add to PATH"
 Add-ToUserPath "C:\Program Files\7-Zip"
+Add-ToUserPath "C:\Program Files\bin"
 Add-ToUserPath "C:\Program Files\Git\bin"
 Add-ToUserPath "C:\Program Files\hxd"
 Add-ToUserPath "C:\Program Files\Notepad++\"
-Add-ToUserPath "C:\Tools\beaconhunter"
 Add-ToUserPath "C:\Tools\bin"
 Add-ToUserPath "C:\Tools\capa"
 Add-ToUserPath "C:\Tools\chainsaw"
@@ -93,6 +93,9 @@ Add-ToUserPath "C:\Tools\Zimmerman\XWFIM"
 
 Write-Output "Add shortcuts (shorten link names first)"
 REG ADD "HKU\%1\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "link" /t REG_BINARY /d 00000000 /f
+if ( $env:WSDFIR_BEACONHUNTER -eq '"Yes"' ) {
+    Copy-Item $env:SETUP_PATH\BeaconHunter.exe "C:\Program Files\bin"
+}
 if ( $env:WSDFIR_GIT -eq '"Yes"' ) {
     Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\bash.lnk" "C:\Program Files\Git\bin\bash.exe" "C:\Users\WDAGUtilityAccount\Desktop"
 }

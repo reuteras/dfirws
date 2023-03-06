@@ -6,6 +6,7 @@ $TOOLS=".\mount\Tools"
 $SETUP_PATH=".\downloads"
 
 Remove-Item -r $TOOLS > $null 2>$1
+mkdir "$env:ProgramFiles\bin"
 mkdir $TOOLS > $null 2>$1
 mkdir $TOOLS\bin > $null 2>$1
 mkdir $TOOLS\DidierStevens > $null 2>$1
@@ -18,7 +19,7 @@ xcopy /E $SETUP_PATH\DidierStevens $TOOLS\DidierStevens >> .\log\log.txt 2>&1
 xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 
 # Unzip programs
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\beaconhunter.zip" -o"$TOOLS\beaconhunter" >> .\log\log.txt 2>&1
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\beaconhunter.zip" -o"$SETUP_PATH\" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chainsaw.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cmder.7z" -o"$TOOLS\cmder" >> .\log\log.txt 2>&1

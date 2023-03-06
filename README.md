@@ -50,7 +50,7 @@ Start the Sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a
 
 ## Customize
 
-Rename *.\local\example-customize.ps1* to *.\local\customize.ps1* and add your own PowerShell code to that file. Files needed by your script should be placed in the folder *.\local*.
+Copy *.\local\example-customize.ps1* to *.\local\customize.ps1* and add your own PowerShell code to that file. Files needed by your script should be placed in the folder *.\local*.
 
 ## Update
 
