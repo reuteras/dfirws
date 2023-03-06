@@ -68,6 +68,7 @@ The following tools are available.
 - [cmder][cer] (will probably be removed in favour of git bash)
 - [Cutter][cut]
 - [CyberChef][cyb]
+- [debloat][deb]
 - [DensityScout][den]
 - [dnSpy][dns] (by dnSpyEx which is a unofficial continuation of the dnSpy project)
 - [exiftool][ext]
@@ -133,6 +134,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [cha]: https://github.com/WithSecureLabs/chainsaw
   [cut]: https://github.com/rizinorg/cutter
   [cyb]: https://github.com/gchq/CyberChef
+  [deb]: https://github.com/Squiblydoo/debloat
   [den]: https://cert.at/en/downloads/software/software-densityscout 
   [dis]: https://github.com/DidierStevens/DidierStevensSuite
   [dns]: https://github.com/dnSpyEx/dnSpy

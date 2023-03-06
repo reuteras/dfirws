@@ -18,6 +18,14 @@ Function Get-GitHubRelease {
         $url = $downloads
     }
 
+    if ( !$url) {
+        $url = curl --silent https://api.github.com/repos/$repo/releases | findstr tarball | Select-Object -First 1 | ForEach-Object { ($_ -split "\s+")[2] } | ForEach-Object { ($_ -replace '[",]','') }
+        if ( !$url) {
+            Write-Error "Can't find a file to download for repo $repo."
+            Exit
+        }
+    }
+
     Write-Output "Using $url for $repo." >> .\log\log.txt
     Get-FileFromUri -uri $url -FilePath $path
 }
@@ -46,6 +54,7 @@ Get-GitHubRelease -repo "pnedev/comparePlus" -path ".\downloads\comparePlus.zip"
 Get-GitHubRelease -repo "qpdf/qpdf" -path ".\downloads\qpdf.zip" -match msvc64.zip
 Get-GitHubRelease -repo "radareorg/radare2" -path ".\downloads\radare2.zip" -match w64.zip
 Get-GitHubRelease -repo "rizinorg/cutter" -path ".\downloads\cutter.zip" -match Windows-x86_64.zip
+Get-GitHubRelease -repo "Squiblydoo/debloat" -path ".\downloads\debloat.zip" -match Win64
 Get-GitHubRelease -repo "stedolan/jq" -path ".\downloads\jq.exe" -match win64
 Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path ".\downloads\thumbcacheviewer.zip" -match viewer_64
 Get-GitHubRelease -repo "upx/upx" -path ".\downloads\upx.zip" -match win64
