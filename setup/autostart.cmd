@@ -4,6 +4,7 @@ set TEMP=C:\tmp
 set TOOLS=C:\Tools
 
 rem Create directories
+mkdir "C:\data"
 mkdir %TEMP%
 mkdir C:\Users\WDAGUtilityAccount\Documents\WindowsPowerShell
 
