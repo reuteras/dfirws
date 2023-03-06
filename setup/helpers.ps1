@@ -171,10 +171,14 @@ if (Test-Path "C:\local\customize.ps1") {
 }
 
 # Last commands
-& "C:\Program Files\7-Zip\7z.exe" x -aoa "C:\downloads\loki.zip" -o"C:\Program Files\"
-Add-ToUserPath "C:\Program Files\loki"
+if ( $env:WSDFIR_X64DBG -eq '"Yes"' ) {
+    & "C:\Program Files\7-Zip\7z.exe" x -aoa "C:\downloads\loki.zip" -o"C:\Program Files\"
+    Remove-Item -Recurse -Force "$env:TOOLS\loki\signature-base"
+    Add-ToUserPath "C:\Program Files\loki"
+} else {
+    mkdir "C:\Program Files\loki"
+}
 & "C:\Program Files\7-Zip\7z.exe" x -pinfected "C:\downloads\signature.7z" -o"C:\Program Files\loki"
-mkdir "C:\data"
 Move-Item "C:\Program Files\loki\signature.yara" "C:\data"
 & "C:\Program Files\7-Zip\7z.exe" x -pinfected "C:\downloads\total.7z" -o"C:\data"
 
