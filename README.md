@@ -1,6 +1,6 @@
 # DFIR in a Windows Sandbox - dfirws
 
-DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. By default Windows Defender isn't running in the sandbox which makes your life easier.. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
+DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. By default Windows Defender isn't running in the sandbox which makes your life easier. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
@@ -17,7 +17,7 @@ winget install Rclone.Rclone
 
 Windows Sandbox must be enabled on the host. You can enable it by running the Windows tool **Add and remove Windows features** and adding Windows Sandbox.
 
-If you haven't enabled the option to run PowerShell scripts before you have to start a Windows Terminal och PowerShell prompt and run
+If you haven't enabled the option to run PowerShell scripts you have to start a Windows Terminal or PowerShell prompt and run
 
   Set-executionPolicy -ExecutionPolicy bypass
 
@@ -28,7 +28,7 @@ Start a PowerShell terminal and checkout the code via Git.
 	git clone https:/github.com/reuteras/dfirws.git
 	cd dfirws
 
-Start the download of included tools. It will take some time since all tools are downloaded to disk. After download the tools will be extracted and prepared for faster usage in the sandbox. Total space is currently around 8 GB. Download is done via
+Start the download of tools that are included in the sandbox. It will take some time since all tools are downloaded to disk. After the download the tools will be extracted and prepared for faster usage in the sandbox. Total space is currently around 8 GB. Download and preparation are done via
 
 	.\downloadFiles.ps1
 
