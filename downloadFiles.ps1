@@ -24,7 +24,7 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 
 Write-Output "Copy files."
 Copy-Item README.md .\downloads\
-Copy-Item .\resources\images\sans.jpg .\downloads\
+Copy-Item .\resources\images\dfirws.jpg .\downloads\
 # done.txt is used to check last update in sandbox
 Write-Output "" > .\downloads\done.txt
 Write-Output "Download and preparations done."
