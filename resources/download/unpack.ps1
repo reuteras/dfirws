@@ -75,7 +75,6 @@ Remove-Item $TOOLS\GoReSym\GoReSym_lin
 Remove-Item $TOOLS\GoReSym\GoReSym_mac
 Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64
-Remove-Item -Recurse -Force $TOOLS\loki\signature-base
 
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"

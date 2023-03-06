@@ -80,6 +80,8 @@ pip2pi ./tmp/pip `
 deactivate
 Remove-Item -r -Force "$VENV"
 
+Copy-Item ./downloads/dfir_ntfs.tar.gz ./tmp/pip/
+
 Robocopy.exe .\tmp\pip .\downloads\pip /COPY:D /E /PURGE /XN /XO >> .\log\log.txt
 
 $ROOT_PATH=Resolve-Path "$PSScriptRoot\..\..\"
