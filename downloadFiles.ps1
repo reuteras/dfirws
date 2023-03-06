@@ -13,12 +13,12 @@ if (Test-Path -Path .\log\log.txt) {
 }
 Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 
-# The scripts git and http are needed by the Python scripts.
+# The scripts git, http and release are needed by the Python script.
 .\resources\download\git.ps1
 .\resources\download\http.ps1
+.\resources\download\release.ps1
 .\resources\download\python.ps1
 .\resources\download\didier.ps1
-.\resources\download\release.ps1
 .\resources\download\zimmerman.ps1
 .\resources\download\unpack.ps1
 
