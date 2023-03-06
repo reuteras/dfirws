@@ -13,6 +13,8 @@ rem Install Java - also affects Ghidra and msgviewer
 SET WSDFIR_JAVA="No"
 rem Install LibreOffice
 SET WSDFIR_LIBREOFFICE="No"
+rem Install Loki
+SET WSDFIR_LOKI="Yes"
 rem Install Notepad++
 SET WSDFIR_NPP="Yes"
 rem Install PDFStream Dumper
