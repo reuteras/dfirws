@@ -19,7 +19,7 @@ $repourls = `
     "https://github.com/volexity/threat-intel.git"
 
 foreach ($repourl in $repourls) {
-    $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\..*$" }
+    $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\.git$" }
     if ( Test-Path -Path $repo ) {
         Set-Location $repo
         git pull >> ..\..\..\log\log.txt 2>&1
