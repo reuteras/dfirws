@@ -2,34 +2,6 @@ Write-Host "Download releases from GitHub."
 
 . $PSScriptRoot\common.ps1
 
-Function Get-GitHubRelease {
-    Param (
-        [string]$repo,
-        [string]$path,
-        [string]$match
-    )
-
-    $releases = "https://api.github.com/repos/$repo/releases/latest"
-
-    $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
-    if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-        $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig"
-    } else {
-        $url = $downloads
-    }
-
-    if ( !$url) {
-        $url = curl --silent https://api.github.com/repos/$repo/releases | findstr tarball | Select-Object -First 1 | ForEach-Object { ($_ -split "\s+")[2] } | ForEach-Object { ($_ -replace '[",]','') }
-        if ( !$url) {
-            Write-Error "Can't find a file to download for repo $repo."
-            Exit
-        }
-    }
-
-    Write-Output "Using $url for $repo." >> .\log\log.txt
-    Get-FileFromUri -uri $url -FilePath $path
-}
-
 Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path ".\downloads\beaconhunter.zip" -match BeaconHunter.zip
 Get-GitHubRelease -repo "BurntSushi/ripgrep" -path ".\downloads\ripgrep.zip" -match x86_64-pc-windows-msvc
 Get-GitHubRelease -repo "cmderdev/cmder" -path ".\downloads\cmder.7z" -match cmder.7z
