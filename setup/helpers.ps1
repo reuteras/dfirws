@@ -168,6 +168,11 @@ Copy-Item "C:\downloads\README.md" "C:\Users\WDAGUtilityAccount\Desktop\"
 PowerShell.exe -ExecutionPolicy Bypass -File C:\Users\WDAGUtilityAccount\Documents\tools\Update-Wallpaper.ps1 C:\downloads\dfirws.jpg
 C:\Tools\sysinternals\Bginfo64.exe /NOLICPROMPT /timer:0 C:\Users\WDAGUtilityAccount\Documents\tools\config.bgi
 
+if ( $env:WSDFIR_CHOCO -eq '"Yes"' ) {
+    & "C:\downloads\choco\tools\chocolateyInstall.ps1"
+    # Add packages below
+}
+
 # Run any custom scripts
 if (Test-Path "C:\local\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "C:\local\customize.ps1"

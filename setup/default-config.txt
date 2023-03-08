@@ -26,6 +26,11 @@ SET WSDFIR_PYTHON_PIP="Yes"
 rem Install Visual Studio Code
 SET WSDFIR_VSCODE="Yes"
 
+rem Chocolatey
+
+rem Install Chocolatey - must be "Yes" to install any packages
+SET WSDFIR_CHOCO="No"
+
 rem Links on Desktop
 
 rem Link to installed FullEventLogView from NirSoft

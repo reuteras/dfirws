@@ -85,3 +85,17 @@ Function Get-GitHubRelease {
     Get-FileFromUri -uri $url -FilePath $path
 }
 
+Function Get-ChocolateyUrl {
+    Param (
+        [string]$package
+    )
+
+    $url = curl --silent https://community.chocolatey.org/packages/$package | findstr /C:"Download the raw" | findstr ">Download<" | ForEach-Object { ($_ -split '"' )[1] }
+
+    if (!$url) {
+        Write-Error "Couldn't find download url for Chocolately package $package."
+        Exit
+    }
+
+    return $url
+}
