@@ -3,11 +3,14 @@ Write-Host "Download releases from GitHub."
 . $PSScriptRoot\common.ps1
 
 Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path ".\downloads\beaconhunter.zip" -match BeaconHunter.zip
+Get-GitHubRelease -repo "Bioruebe/UniExtract2" -path ".\downloads\uniextract2.zip" -match UniExtract
 Get-GitHubRelease -repo "BurntSushi/ripgrep" -path ".\downloads\ripgrep.zip" -match x86_64-pc-windows-msvc
+Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path ".\downloads\binlex.zip" -match windows
 Get-GitHubRelease -repo "cmderdev/cmder" -path ".\downloads\cmder.7z" -match cmder.7z
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path ".\downloads\dnSpy.zip" -match win64
 Get-GitHubRelease -repo "dzzie/pdfstreamdumper" -path ".\downloads\PDFStreamDumper.exe" -match PDFStreamDumper
 Get-GitHubRelease -repo "dzzie/VS_LIBEMU" -path ".\downloads\scdbg.zip" -match VS_LIBEMU
+Get-GitHubRelease -repo "facebook/zstd" -path ".\downloads\zstd.zip" -match win64
 Get-GitHubRelease -repo "hasherezade/pe-bear" -path ".\downloads\pebear.zip" -match x64_win_vs17.zip
 Get-GitHubRelease -repo "gchq/CyberChef" -path ".\downloads\CyberChef.zip" -match CyberChef
 Get-GitHubRelease -repo "git-for-windows/git" -path ".\downloads\git.exe" -match 64-bit.exe
@@ -33,3 +36,4 @@ Get-GitHubRelease -repo "upx/upx" -path ".\downloads\upx.zip" -match win64
 Get-GitHubRelease -repo "wader/fq" -path ".\downloads\fq.zip" -match windows_amd64.zip
 Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path ".\downloads\chainsaw.zip" -match x86_64-pc-windows-msvc
 Get-GitHubRelease -repo "VirusTotal/yara" -path ".\downloads\yara.zip" -match win64
+Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path ".\downloads\hayabusa.zip" -match win-64
