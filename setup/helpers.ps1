@@ -48,6 +48,10 @@ REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hidd
 REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowSuperHidden /t REG_DWORD /d 1 /f
 REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v DontPrettyPath /t REG_DWORD /d 1 /f
 
+if ( $env:WSDFIR_RIGHTCLICK -eq '"Yes"' ) {
+    reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+}
+
 reg import C:\Users\WDAGUtilityAccount\Documents\tools\registry.reg
 
 Stop-Process -ProcessName Explorer -Force

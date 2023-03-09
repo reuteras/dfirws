@@ -69,3 +69,6 @@ rem Location of Sysmon configuration
 SET WSDFIR_SYSMON_CONF=C:\downloads\sysmonconfig-export.xml
 rem To use your own config place your sysmonconfig.xml in .\local and then
 rem change to: SET WSDFIR_SYSMON_CONF=C:\local\sysmonconfig.xml
+
+rem Old school right-click expanded by default
+SET WSDFIR_RIGHTCLICK="Yes"
