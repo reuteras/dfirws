@@ -21,8 +21,12 @@ rem Install Notepad++
 SET WSDFIR_NPP="Yes"
 rem Install PDFStream Dumper
 SET WSDFIR_PDFSTREAM="Yes"
+rem Add PersistenceSniper
+SET WSDFIR_PERSISTENCESNIPER="Yes"
 rem Install Python pip packages - Python is still installed
 SET WSDFIR_PYTHON_PIP="Yes"
+rem Add uniextract2 to path
+SET WSDFIR_UNIEXTRACT="No"
 rem Install Visual Studio Code
 SET WSDFIR_VSCODE="Yes"
 
