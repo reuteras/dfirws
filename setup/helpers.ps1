@@ -47,6 +47,9 @@ REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hide
 REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hidden /t REG_DWORD /d 0 /f
 REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowSuperHidden /t REG_DWORD /d 1 /f
 REG ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v DontPrettyPath /t REG_DWORD /d 1 /f
+
+reg import C:\Users\WDAGUtilityAccount\Documents\tools\registry.reg
+
 Stop-Process -ProcessName Explorer -Force
 
 Write-Output "Add to PATH"
@@ -64,6 +67,7 @@ Add-ToUserPath "C:\Tools\fakenet"
 Add-ToUserPath "C:\Tools\floss"
 Add-ToUserPath "C:\Tools\FullEventLogView"
 Add-ToUserPath "C:\Tools\GoReSym"
+Add-ToUserPath "C:\Tools\hayabusa"
 Add-ToUserPath "C:\Tools\malcat\bin"
 Add-ToUserPath "C:\Tools\nmap"
 Add-ToUserPath "C:\Tools\qpdf\bin"
@@ -90,6 +94,10 @@ Add-ToUserPath "C:\Tools\Zimmerman\ShellBagsExplorer"
 Add-ToUserPath "C:\Tools\Zimmerman\SQLECmd"
 Add-ToUserPath "C:\Tools\Zimmerman\TimelineExplorer"
 Add-ToUserPath "C:\Tools\Zimmerman\XWFIM"
+Add-ToUserPath "C:\Tools\zstd"
+if ( $env:WSDFIR_UNIEXTRACT -eq '"Yes"' ) {
+    Add-ToUserPath "C:\Tools\UniExtract"
+}
 
 Write-Output "Add shortcuts (shorten link names first)"
 REG ADD "HKU\%1\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "link" /t REG_BINARY /d 00000000 /f
@@ -151,12 +159,18 @@ Copy-Item "C:\Users\WDAGUtilityAccount\Documents\tools\utils\PSDecode.psm1" "$PS
 New-Item -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging -Force
 Set-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging -Name EnableScriptBlockLogging -Value 1 -Force
 
-# Add cmder integration
+# Add cmder
 if ( $env:WSDFIR_CMDER -eq '"Yes"' ) {
     Add-ToUserPath "C:\Tools\cmder"
     Add-ToUserPath "C:\Tools\cmder\bin"
     Write-Output "C:\venv\scripts\activate.bat" | Out-File -Append -Encoding "ascii" C:\Tools\cmder\config\user_profile.cmd
     C:\Tools\cmder\cmder.exe /REGISTER ALL
+}
+
+# Add PersistenceSniper
+
+if ( $env:WSDFIR_PERSISTENCESNIPER -eq '"Yes"' ) {
+    Import-Module C:\git\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1
 }
 
 # Configure usage of new venv for PowerShell
