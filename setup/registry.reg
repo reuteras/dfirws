@@ -1,0 +1,75 @@
+Windows Registry Editor Version 5.00
+
+; Created by: Shawn Brink
+; Created on: March 5th 2017
+; Tutorial: https://www.tenforums.com/tutorials/78681-file-hash-context-menu-add-windows-8-windows-10-a.html
+
+
+[HKEY_CLASSES_ROOT\*\shell\hash]
+"MUIVerb"="Hash"
+"SubCommands"=""
+
+
+; SHA1
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\01menu]
+"MUIVerb"="SHA1"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\01menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA1 | format-list"
+
+
+; SHA256
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\02menu]
+"MUIVerb"="SHA256"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\02menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA256 | format-list"
+
+
+; SHA384
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\03menu]
+"MUIVerb"="SHA384"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\03menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA384 | format-list"
+
+
+; SHA512
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\04menu]
+"MUIVerb"="SHA512"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\04menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA512 | format-list"
+
+
+; MACTripleDES
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\05menu]
+"MUIVerb"="MACTripleDES"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\05menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list"
+
+
+; MD5
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\06menu]
+"MUIVerb"="MD5"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\06menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm MD5 | format-list"
+
+
+; RIPEMD160
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\07menu]
+"MUIVerb"="RIPEMD160"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\07menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list"
+
+
+; Allget-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu]
+"CommandFlags"=dword:00000020
+"MUIVerb"="Show all"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu\command]
+@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA1 | format-list;get-filehash -literalpath '%1' -algorithm SHA256 | format-list;get-filehash -literalpath '%1' -algorithm SHA384 | format-list;get-filehash -literalpath '%1' -algorithm SHA512 | format-list;get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list;get-filehash -literalpath '%1' -algorithm MD5 | format-list;get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list"
