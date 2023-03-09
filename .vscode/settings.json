@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "BEACONHUNTER",
+        "binlex",
         "capa",
         "CHOCO",
         "cmder",
@@ -16,6 +17,7 @@
         "exiftool",
         "fakenet",
         "Ghidra",
+        "Hayabusa",
         "Jumplist",
         "Kersten",
         "Libranalysis",
@@ -26,6 +28,7 @@
         "npcap",
         "PDFSTREAM",
         "PEBEAR",
+        "PERSISTENCESNIPER",
         "pestudio",
         "PESTUDIO",
         "qpdf",
@@ -40,6 +43,7 @@
         "Sysmon",
         "sysmonconfig",
         "Thumbcache",
+        "uniextract",
         "visidata",
         "winget",
         "Wireshark",
