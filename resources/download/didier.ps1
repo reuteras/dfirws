@@ -36,6 +36,9 @@ $DidierStevensSuite = `
     "headtail.py", `
     "hex-to-bin.py", `
     "jpegdump.py", `
+    "js-ascii.exe", `
+    "js-file.exe", `
+    "libnspr4.dll", `
     "msoffcrypto-crack.py", `
     "myjson-filter.py", `
     "nsrl.py", `
