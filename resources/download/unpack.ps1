@@ -19,6 +19,7 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 
 # Unzip programs
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\beaconhunter.zip" -o"$SETUP_PATH\" >> .\log\log.txt 2>&1
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\binlex.zip" -o"$TOOLS\bin" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chainsaw.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cmder.7z" -o"$TOOLS\cmder" >> .\log\log.txt 2>&1
@@ -33,6 +34,7 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fq.zip" -o"$TOOLS\bin" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym" >> .\log\log.txt 2>&1
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hayabusa.zip" -o"$TOOLS\hayabusa" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hxd.zip" -o"$TOOLS\hxd" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\logview.zip" -o"$TOOLS\FullEventLogView" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\malcat.zip" -o"$TOOLS\malcat" >> .\log\log.txt 2>&1
@@ -49,9 +51,11 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\thumbcacheviewer.zip" -o"$TOOLS\thumbcacheviewer" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\trid.zip" -o"$TOOLS\trid" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\triddefs.zip" -o"$TOOLS\trid" >> .\log\log.txt 2>&1
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\uniextract2.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\x64dbg.zip" -o"$TOOLS\x64dbg" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\zstd.zip" -o"$TOOLS\zstd" >> .\log\log.txt 2>&1
 
 Move-Item $TOOLS\win64\densityscout.exe $TOOLS\bin\densityscout.exe
 Move-Item $TOOLS\yara64.exe $TOOLS\bin\yara.exe
@@ -62,6 +66,7 @@ Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
+Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa.exe
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
 Move-Item $TOOLS\ripgrep-* $TOOLS\ripgrep
