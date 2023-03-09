@@ -40,11 +40,11 @@ Create a configuration file for the sandbox with your local path by running the 
 
 	.\createSandboxConfig.ps1
 
-This will also create *./setup/config.txt*. Select the tools you would like to be available in the Sandbox here. All tools will still be downloaded and can be installed later in the Sandbox.
+This will also create *./setup/config.txt*. Select the tools you would like to be available in the sandbox here. All tools will still be downloaded and can be installed later in the sandbox if needed. You can also turn off Sysmon and specify the configuration file to use. By default the sandbox will use the old expanded format for right-click but that can be changed back.
 
 ## Usage
 
-Start the Sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a PowerShell terminal. Startup takes a just under one minute on a fast computer with the default configuration. The following is an example screen of when the installation is done.
+Start the sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a PowerShell terminal. Startup takes a just under one minute on a fast computer with the default configuration. The following is an example screen of when the installation is done.
 
 ![Screen when installation is done](./resources/images/screen.png)
 
@@ -62,6 +62,7 @@ The following tools are available.
 
 - [Amazon Corretto][amc]
 - [BeaconHunter][bhu]
+- [binlex][bin]
 - [Bytecode Viewer][bcv]
 - [capa][cap]
 - [chainsaw][cha]
@@ -79,6 +80,7 @@ The following tools are available.
 - [Ghidra][ghi]
 - [Git][git] for Windows (includes git bash)
 - [GoReSym][grs]
+- [Hayabusa][hay]
 - [HxD][hxd]
 - [jq][jq]
 - [Jumplist-Browser][jub]
@@ -91,6 +93,7 @@ The following tools are available.
   - [comparePlus][ncp]
 - [PdfStream Dumper][psd]
 - [PE-bear][peb]
+- [PersistenceSniper][per]
 - [PEstudio][pes]
 - [Python][pyt]
 - [qpdf][qpd]
@@ -102,6 +105,7 @@ The following tools are available.
 - [Thumbcache viewer][thu]
 - [TrID][tri]
 - [x64dbg][xdb]
+- [UniExtract2][ue2]
 - [upx][upx]
 - [visidata][vis]
 - [Visual Studio Code][vsc]
@@ -118,17 +122,21 @@ Downloaded but not installed by default:
 Downloaded git repositories:
 
 - https://github.com/keydet89/Events-Ripper.git
+- https://github.com/last-byte/PersistenceSniper.git
 - https://github.com/Neo23x0/evt2sigma.git
 - https://github.com/pan-unit42/dotnetfile
 - https://github.com/reuteras/dfirws.wiki.git
 - https://github.com/SigmaHQ/sigma.git
 - https://github.com/volexity/threat-intel.git
+- https://github.com/wagga40/Zircolite
+- https://github.com/Yamato-Security/hayabusa-rules.git
 
 More information about tools are available in the GitHub [wiki][wid].
 
   [amc]: https://docs.aws.amazon.com/corretto/
   [bcv]: https://github.com/Konloch/bytecode-viewer
   [bhu]: https://github.com/3lp4tr0n/BeaconHunter
+  [bin]: https://github.com/c3rb3ru5d3d53c/binlex
   [cap]: https://github.com/mandiant/capa
   [cer]: https://github.com/cmderdev/cmder
   [cha]: https://github.com/WithSecureLabs/chainsaw
@@ -146,6 +154,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [ghi]: https://github.com/NationalSecurityAgency/ghidra
   [git]: https://github.com/git-for-windows/git/
   [grs]: https://github.com/mandiant/GoReSym
+  [hay]: https://github.com/Yamato-Security/hayabusa
   [hxd]: https://mh-nexus.de/
   [jq]:  https://github.com/stedolan/jq
   [jub]: https://github.com/kacos2000/Jumplist-Browser
@@ -158,6 +167,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [not]: https://notepad-plus-plus.org/
   [npc]: https://npcap.com/
   [peb]: https://github.com/hasherezade/pe-bear
+  [per]: https://github.com/last-byte/PersistenceSniper
   [pes]: https://www.winitor.com/
   [pip]: ./resources/download/python.ps1
   [psd]: https://github.com/dzzie/pdfstreamdumper/
@@ -173,6 +183,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [sym]: https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
   [thu]: https://thumbcacheviewer.github.io/
   [tri]: https://mark0.net/soft-trid-e.html
+  [ue2]: https://github.com/Bioruebe/UniExtract2
   [upx]: https://github.com/upx/upx
   [vis]: https://www.visidata.org/
   [vsc]: https://code.visualstudio.com/
