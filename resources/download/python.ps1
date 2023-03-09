@@ -32,14 +32,18 @@ if (Test-Path -Path .\tmp\pip ) {
 }
 
 pip2pi ./tmp/pip `
+    aiohttp[speedups] `
     chepy[extras] `
     colorama `
     dnslib `
     docx2txt `
     dpkt `
+    elasticsearch[async] `
+    evtx `
     extract-msg `
     fonttools `
     hachoir `
+    jinja2 `
     jsbeautifier `
     LnkParse3 `
     lxml `
@@ -52,11 +56,13 @@ pip2pi ./tmp/pip `
     olefile `
     oletools[full] `
     openpyxl `
+    orjson `
     pandas `
     pcode2code `
     pcodedmp `
     pefile `
     peutils `
+    pillow `
     ppdeep `
     pycryptodome `
     pyelftools `
@@ -67,13 +73,17 @@ pip2pi ./tmp/pip `
     pyzipper `
     python-magic `
     regipy[full] `
+    requests `
     setuptools `
     time-decode `
+    tqdm `
     uncompyle6 `
     unpy2exe `
+    urllib3 `
     visidata `
     xlrd `
     XLMMacroDeobfuscator `
+    xxhash `
     yara-python `
     wheel 2>&1 | findstr /V "ERROR linking" >> .\log\log.txt
 
