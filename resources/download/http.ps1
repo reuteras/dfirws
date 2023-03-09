@@ -18,6 +18,8 @@ Get-FileFromUri -uri "https://mark0.net/download/triddefs.zip" -FilePath ".\down
 Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win64_lite.zip" -FilePath ".\downloads\malcat.zip"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/signature/signature.7z" -FilePath ".\downloads\signature.7z"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/total/total.7z" -FilePath ".\downloads\total.7z"
+Get-FileFromUri -uri "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py" -FilePath ".\downloads\pe2pic.py"
+Get-FileFromUri -uri "https://github.com/hasherezade/shellconv/blob/master/shellconv.py" -FilePath ".\downloads\shellconv.py"
 Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip"
 Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
 # Update the following when new versions are released
