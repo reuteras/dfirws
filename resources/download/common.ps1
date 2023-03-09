@@ -66,14 +66,30 @@ Function Get-GitHubRelease {
 
     $releases = "https://api.github.com/repos/$repo/releases/latest"
 
-    $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
-    if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-        $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig"
-    } else {
-        $url = $downloads
+    try {
+        $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
+        if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
+            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig"
+        } else {
+            $url = $downloads
+        }
+    }
+    catch {
+        # Done
     }
 
-    if ( !$url) {
+    if ( !$url ) {
+        # Try without latest
+        $releases = "https://api.github.com/repos/$repo/releases"
+        $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
+        if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
+            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig"
+        } else {
+            $url = $downloads
+        }
+    }
+
+    if ( !$url ) {
         $url = curl --silent https://api.github.com/repos/$repo/releases | findstr tarball | Select-Object -First 1 | ForEach-Object { ($_ -split "\s+")[2] } | ForEach-Object { ($_ -replace '[",]','') }
         if ( !$url) {
             Write-Error "Can't find a file to download for repo $repo."
