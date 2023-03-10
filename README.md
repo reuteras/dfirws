@@ -111,6 +111,7 @@ The following tools are available.
 - [Visual Studio Code][vsc]
 - [yara][yar]
 - [Zimmerman Tools][zim]
+- [Zui][zui] formerly named Brim 
 - [Selected][sdi] scripts from [Didier Stevens][dis]
 - Selected pip packages for [Python][pip]
 
@@ -193,3 +194,4 @@ More information about tools are available in the GitHub [wiki][wid].
   [xdb]: https://x64dbg.com/
   [yar]: https://github.com/VirusTotal/yara
   [zim]: https://github.com/EricZimmerman
+  [zui]: https://github.com/brimdata/zui

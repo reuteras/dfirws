@@ -29,6 +29,8 @@ rem Add uniextract2 to path
 SET WSDFIR_UNIEXTRACT="No"
 rem Install Visual Studio Code
 SET WSDFIR_VSCODE="Yes"
+rem Install Zui 
+SET WSDFIR_ZUI="No"
 
 rem Chocolatey
 

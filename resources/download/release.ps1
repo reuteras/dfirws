@@ -4,6 +4,7 @@ Write-Host "Download releases from GitHub."
 
 Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path ".\downloads\beaconhunter.zip" -match BeaconHunter.zip
 Get-GitHubRelease -repo "Bioruebe/UniExtract2" -path ".\downloads\uniextract2.zip" -match UniExtract
+Get-GitHubRelease -repo "brimdata/zui" -path ".\downloads\zui.exe" -match Zui-Setup
 Get-GitHubRelease -repo "BurntSushi/ripgrep" -path ".\downloads\ripgrep.zip" -match x86_64-pc-windows-msvc
 Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path ".\downloads\binlex.zip" -match windows
 Get-GitHubRelease -repo "cmderdev/cmder" -path ".\downloads\cmder.7z" -match cmder.7z

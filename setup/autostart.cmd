@@ -91,6 +91,10 @@ if %WSDFIR_VSCODE%=="Yes" (
     copy "%SETUP_PATH%\vscode.exe" "%TEMP%\vscode.exe"
     "%TEMP%\vscode.exe" /verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath" >> %TEMP%\log.txt 2>&1 
 )
+if %WSDFIR_ZUI%=="Yes" (
+    copy "%SETUP_PATH%\zui.exe" "%TEMP%\zui.exe"
+    "%TEMP%\zui.exe" /S /AllUsers >> %TEMP%\log.txt 2>&1 
+)
 
 rem Run PowerShell install
 PowerShell.exe -ExecutionPolicy Bypass -File "C:\Users\WDAGUtilityAccount\Documents\tools\helpers.ps1" >> %TEMP%\log.txt 2>&1 

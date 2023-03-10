@@ -23,7 +23,7 @@ Get-FileFromUri -uri "https://github.com/hasherezade/shellconv/blob/master/shell
 Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip"
 Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
 # Update the following when new versions are released
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.0/win/x86_64/LibreOffice_7.5.0_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
+Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.1/win/x86_64/LibreOffice_7.5.1_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe" -FilePath ".\downloads\python3.exe"
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.72.exe" -FilePath ".\downloads\npcap.exe"
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.4.exe" -FilePath ".\downloads\wireshark.exe"
