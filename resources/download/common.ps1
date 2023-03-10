@@ -69,7 +69,7 @@ Function Get-GitHubRelease {
     try {
         $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
         if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig"
+            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
         } else {
             $url = $downloads
         }
@@ -83,7 +83,7 @@ Function Get-GitHubRelease {
         $releases = "https://api.github.com/repos/$repo/releases"
         $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
         if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig"
+            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
         } else {
             $url = $downloads
         }
