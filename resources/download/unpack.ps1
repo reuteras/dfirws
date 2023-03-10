@@ -66,7 +66,7 @@ Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
-Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa.exe
+Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
 Move-Item $TOOLS\ripgrep-* $TOOLS\ripgrep
@@ -82,6 +82,7 @@ Remove-Item $TOOLS\GoReSym\GoReSym_lin
 Remove-Item $TOOLS\GoReSym\GoReSym_mac
 Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64
+Remove-Item $TOOLS\license.txt
 
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"
