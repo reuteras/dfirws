@@ -1,5 +1,5 @@
 # This script runs in a Windows sandbox to prebuild the venv environment.
-Write-Host "Install Python based tools"
+Write-Output "Install Python based tools"
 # Update path
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 Remove-Item -r "C:\venv\data" > $null 2>&1
@@ -24,4 +24,4 @@ python -m pip install --disable-pip-version-check .
 Set-Location C:\tmp\dotnetfile
 python setup.py install
 deactivate
-Write-Host "Installed Python based tools done"
+Write-Output "Installed Python based tools done"

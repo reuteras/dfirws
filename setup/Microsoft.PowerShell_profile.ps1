@@ -4,10 +4,10 @@ if ( Test-Path C:\venv ) {
 }
 
 # Use git to diff to files
-function Compare-TwoFiles ($file1, $file2) {
+function Compare-File1AndFile2 ($file1, $file2) {
     git diff $file1 $file2
 }
-Set-Alias gdiff Compare-TwoFiles
+Set-Alias gdiff Compare-File1AndFile2
 
 function tailf {
     Get-Content -Wait $args

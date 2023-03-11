@@ -21,8 +21,12 @@ function Add-ToUserPath {
     Write-Error "$dir is already in PATH"
 }
 
-function Set-Shortcut {
-param ( [string]$SourceLnk, [string]$DestinationPath , [string]$WorkingDirectory)
+function Add-Shortcut {
+    param (
+        [string]$SourceLnk,
+        [string]$DestinationPath,
+        [string]$WorkingDirectory
+    )
     $WshShell = New-Object -comObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut($SourceLnk)
     if ($WorkingDirectory -ne $Null) {
@@ -109,53 +113,53 @@ if ( $env:WSDFIR_BEACONHUNTER -eq '"Yes"' ) {
     Copy-Item $env:SETUP_PATH\BeaconHunter.exe "C:\Program Files\bin"
 }
 if ( $env:WSDFIR_GIT -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\bash.lnk" "C:\Program Files\Git\bin\bash.exe" "C:\Users\WDAGUtilityAccount\Desktop"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\bash.lnk" -DestinationPath "C:\Program Files\Git\bin\bash.exe" -WorkingDirectory "C:\Users\WDAGUtilityAccount\Desktop"
 }
 if ( $env:WSDFIR_CYBERCHEF -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\CyberChef.lnk" "C:\Tools\CyberChef\CyberChef.html"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html"
 }
 if ( $env:WSDFIR_CMDER -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\cmder.lnk" "C:\Tools\cmder\cmder.exe" "C:\Users\WDAGUtilityAccount\Desktop"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\cmder.lnk" -DestinationPath "C:\Tools\cmder\cmder.exe" -WorkingDirectory "C:\Users\WDAGUtilityAccount\Desktop"
 }
 if ( $env:WSDFIR_CUTTER -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\Cutter.lnk" "C:\Tools\cutter\cutter.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
 }
 if ( $env:WSDFIR_DNSPY32 -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\dnSpy32.lnk" "C:\Tools\dnSpy32\dnSpy.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\dnSpy32.lnk" -DestinationPath "C:\Tools\dnSpy32\dnSpy.exe"
 }
 if ( $env:WSDFIR_DNSPY64 -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\dnSpy64.lnk" "C:\Tools\dnSpy64\dnSpy.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\dnSpy64.lnk" -DestinationPath "C:\Tools\dnSpy64\dnSpy.exe"
 }
 if ( $env:WSDFIR_FLV -eq '"Yes"') {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\FullEventLogView.lnk" "C:\Tools\FullEventLogView\FullEventLogView.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
 }
 if ( $env:WSDFIR_JAVA -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\ghidraRun.lnk" "C:\Tools\ghidra\ghidraRun.bat"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
 }
 if ( $env:WSDFIR_HXD -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\HxD.lnk" "C:\Program Files\HxD\HxD.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\HxD.lnk" -DestinationPath "C:\Program Files\HxD\HxD.exe"
 }
 if ( $env:WSDFIR_MALCAT -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\Malcat.lnk" "C:\Tools\Malcat\bin\malcat.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
 }
 if ( $env:WSDFIR_JAVA -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\msgviewer.lnk" "C:\Tools\lib\msgviewer.jar"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
 }
 if ( $env:WSDFIR_NPP -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\Notepad++.lnk" "C:\Program Files\Notepad++\notepad++.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\Notepad++.lnk" -DestinationPath "C:\Program Files\Notepad++\notepad++.exe"
 }
 if ( $env:WSDFIR_PEBEAR -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\PE-bear.lnk" "C:\Tools\pebear\PE-bear.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
 }
 if ( $env:WSDFIR_PESTUDIO -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\pestudio.lnk" "C:\Tools\pestudio\pestudio\pestudio.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
 }
 Copy-Item "C:\Users\WDAGUtilityAccount\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Windows PowerShell\Windows PowerShell.lnk" "C:\Users\WDAGUtilityAccount\Desktop\PowerShell.lnk"
 if ( $env:WSDFIR_TOOLS -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\Tools.lnk" "C:\Tools"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\Tools.lnk" -DestinationPath "C:\Tools"
 }
 if ( $env:WSDFIR_X64DBG -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\x64dbg.lnk" "C:\Tools\x64dbg\release\x64\x64dbg.exe"
+    Add-Shortcut -SourceLnk "C:\Users\WDAGUtilityAccount\Desktop\x64dbg.lnk" -DestinationPath "C:\Tools\x64dbg\release\x64\x64dbg.exe"
 }
 
 # PowerShell
@@ -204,6 +208,7 @@ if ( $env:WSDFIR_X64DBG -eq '"Yes"' ) {
     & "C:\Program Files\7-Zip\7z.exe" x -aoa "C:\downloads\loki.zip" -o"C:\Program Files\"
     Remove-Item -Recurse -Force "$env:TOOLS\loki\signature-base"
     Add-ToUserPath "C:\Program Files\loki"
+    Copy-Item -r ".\mount\git\signature-base" $TOOLS\loki\signature-base
 } else {
     mkdir "C:\Program Files\loki"
 }

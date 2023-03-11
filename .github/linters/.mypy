@@ -1,4 +1,0 @@
-[mypy]
-exclude = (?x)(
-    ^hash-id\.py$    # Included code.
-)

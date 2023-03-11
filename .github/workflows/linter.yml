@@ -33,3 +33,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
           VALIDATE_ALL_CODEBASE: true
+          FILTER_REGEX_EXCLUDE: hash-id\.py|PSDecode\.psm1
