@@ -3,23 +3,23 @@
  
 import re
 import sys
- 
+
+
 # Define information regarding the original script's location
 
 try:
     powershellPath = sys.argv[1]
-except:
+except IndexError:
     print("Need a filename as argument.")
     sys.exit()
 try:
-    powershellFile = open(powershellPath,'r')
-except:
+    with open(powershellPath, 'r', encoding="utf-8") as powershellFile:
+        # Read all lines of the original script
+        powershellContent = powershellFile.readlines()
+except (OSError, IOError):
     print("No such file!")
     sys.exit()
 
-# Read all lines of the original script
-powershellContent = powershellFile.readlines()
- 
 # The variable which contains all deobfuscated lines
 output = ''
 # The variable which keeps track of the amount of string formats that have been replaced
@@ -35,13 +35,13 @@ for line in powershellContent:
     # Replace the back tick with nothing to remove the needless back ticks
     line = line.replace("`", "")
     # Match the string formatting
-    matchedLine = re.findall(""""((?:\{\d+\})+)"\s*-[fF]\s*((?:'.*?',?)+)""", line)
+    matchedLine = re.findall(r""""((?:\{\d+\})+)"\s*-[fF]\s*((?:'.*?',?)+)""", line)
     # If one or more matches have been found, continue. Otherwise skip the replacement part
     if len(matchedLine) > 0:
         # Each match in each line is broken down into two parts: the indices part ("{0}{2}{1}") and the strings ("var", "ble", "ia")
         for match in matchedLine:
             # Convert all indices to integers within a list
-            indices = list(map(int, re.findall("{(\d+)}", match[0])))
+            indices = list(map(int, re.findall(r"{(\d+)}", match[0])))
             # All strings are saved in an array
             strings = re.findall("'([^']+?)'", match[1])
             # The result is the correctly formatted string
@@ -50,12 +50,12 @@ for line in powershellContent:
             line = line.replace(match[0], result, 1)
             line = line.replace(match[1], "", 1)
             # Regex the "-f" and "-F" so that "-f[something]" is not replaced
-            formatFlag = re.findall("""(-[fF])(?=[^\w])""", line)          
+            formatFlag = re.findall(r"""(-[fF])(?=[^\w])""", line)          
             if len(formatFlag) > 0:
                 for formatFlagMatch in formatFlag:
                     line = line.replace(formatFlagMatch, "")
             # Find all strings between quotation marks.
-            varDeclaration = re.findall("""(?<=\()\"(?=[^\)]+\+[^\)]+\))(?:[^\{\}\-\)])+\"(?=\))""", line)
+            varDeclaration = re.findall(r"""(?<=\()\"(?=[^\)]+\+[^\)]+\))(?:[^\{\}\-\)])+\"(?=\))""", line)
             # The concatenated variable
             variable = ''
             # For each string in the list, the items are concatenated
@@ -72,7 +72,7 @@ for line in powershellContent:
     # When all matches are done, add the altered line to the output
     output += line
 # When all lines are checked, write the output variable to a file
-with open('deobfuscatedSample.txt', 'w') as f:
+with open('deobfuscatedSample.txt', 'w', encoding="utf-8") as f:
     f.write(output)
 print("Amount of removed back ticks:")
 print(backtickCount)
