@@ -120,8 +120,11 @@ if ( $env:WSDFIR_CMDER -eq '"Yes"' ) {
 if ( $env:WSDFIR_CUTTER -eq '"Yes"' ) {
     Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\Cutter.lnk" "C:\Tools\cutter\cutter.exe"
 }
-if ( $env:WSDFIR_DNSPY -eq '"Yes"' ) {
-    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\dnSpy.lnk" "C:\Tools\dnSpy\dnSpy.exe"
+if ( $env:WSDFIR_DNSPY32 -eq '"Yes"' ) {
+    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\dnSpy32.lnk" "C:\Tools\dnSpy32\dnSpy.exe"
+}
+if ( $env:WSDFIR_DNSPY64 -eq '"Yes"' ) {
+    Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\dnSpy64.lnk" "C:\Tools\dnSpy64\dnSpy.exe"
 }
 if ( $env:WSDFIR_FLV -eq '"Yes"') {
     Set-Shortcut "C:\Users\WDAGUtilityAccount\Desktop\FullEventLogView.lnk" "C:\Tools\FullEventLogView\FullEventLogView.exe"

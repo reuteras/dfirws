@@ -49,8 +49,10 @@ rem Link to installed
 SET WSDFIR_="No"
 rem Link to installed Cutter 
 SET WSDFIR_CUTTER="No"
-rem Link to installed dnSpy 
-SET WSDFIR_DNSPY="Yes"
+rem Link to installed dnSpy 32
+SET WSDFIR_DNSPY32="No"
+rem Link to installed dnSpy 64
+SET WSDFIR_DNSPY64="Yes"
 rem Link to installed Malcat 
 SET WSDFIR_MALCAT="Yes"
 rem Link to installed PE-Bear
