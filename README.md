@@ -8,7 +8,7 @@ DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be u
 
 You need to have git and rclone installed to download files and resources. 7-zip and Python 3.10 must also be installed. Install with
 
-```
+```PowerShell
 winget install 7zip.7zip
 winget install Git.Git
 winget install Python.Python.3.10
@@ -19,26 +19,36 @@ Windows Sandbox must be enabled on the host. You can enable it by running the Wi
 
 If you haven't enabled the option to run PowerShell scripts you have to start a Windows Terminal or PowerShell prompt and run
 
-  Set-executionPolicy -ExecutionPolicy bypass
+```PowerShell
+Set-executionPolicy -ExecutionPolicy bypass
+```
 
 ## Installation and configuration
 
 Start a PowerShell terminal and checkout the code via Git.
 
-	git clone https:/github.com/reuteras/dfirws.git
-	cd dfirws
+```PowerShell
+git clone https:/github.com/reuteras/dfirws.git
+cd dfirws
+```
 
 Start the download of tools that are included in the sandbox. It will take some time since all tools are downloaded to disk. After the download the tools will be extracted and prepared for faster usage in the sandbox. Total space is currently around 8 GB. Download and preparation are done via
 
-	.\downloadFiles.ps1
+```PowerShell
+.\downloadFiles.ps1
+```
 
 If you like to have a more detailed view off the progress during the download (or update) you can run the **PowerShell** variant of **tail -f**:
 
-    Get-Content .\log\log.txt -Wait
+```PowerShell
+Get-Content .\log\log.txt -Wait
+```
 
 Create a configuration file for the sandbox with your local path by running the following command:
 
-	.\createSandboxConfig.ps1
+```PowerShell
+.\createSandboxConfig.ps1
+```
 
 This will also create *./setup/config.txt*. Select the tools you would like to be available in the sandbox here. All tools will still be downloaded and can be installed later in the sandbox if needed. You can also turn off Sysmon and specify the configuration file to use. By default the sandbox will use the old expanded format for right-click but that can be changed back.
 
