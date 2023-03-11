@@ -27,11 +27,11 @@ Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe" -FilePath ".\downloads\python3.exe"
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.72.exe" -FilePath ".\downloads\npcap.exe"
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.4.exe" -FilePath ".\downloads\wireshark.exe"
-Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3410000.zip" -FilePath ".\downloads\sqlite.zip"
+Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3410100.zip" -FilePath ".\downloads\sqlite.zip"
 Get-FileFromUri -uri "https://www.7-zip.org/a/7z2201-x64.msi" -FilePath ".\downloads\7zip.msi"
 Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip"
 Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.93-setup.exe" -FilePath ".\downloads\nmap.exe"
 # Dependence for PE-bear
-Get-FileFromUri -uri "https://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_x64.exe"
+Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"
 # Dependence for ncat
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe"

@@ -66,8 +66,8 @@ if %WSDFIR_NPP%=="Yes" (
 rem Install packages
 copy "%SETUP_PATH%\python3.exe" "%SETUP_PATH%\vcredist_x64.exe" "%SETUP_PATH%\vcredist_16_x64.exe" "%TEMP%\
 "%SETUP_PATH%\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 >> %TEMP%\log.txt 2>&1 
-"%SETUP_PATH%\vcredist_x64.exe" /passive /norestart >> %TEMP%\log.txt 2>&1 
 "%SETUP_PATH%\vcredist_16_x64.exe" /passive /norestart >> %TEMP%\log.txt 2>&1 
+"%SETUP_PATH%\vcredist_17_x64.exe" /passive /norestart >> %TEMP%\log.txt 2>&1 
 
 if %WSDFIR_HXD%=="Yes" (
     copy "%TOOLS%\hxd\HxDSetup.exe" "%TEMP%\HxDSetup.exe"
