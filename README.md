@@ -106,7 +106,7 @@ The following tools are available.
 - [PersistenceSniper][per]
 - [PEstudio][pes]
 - [Python][pyt]
-- [qpdf][qpd]
+- [QPDF][qpd]
 - [ripgrep][rip]
 - [scdbg][scd]
 - [sqlite][sql] cli
@@ -121,7 +121,7 @@ The following tools are available.
 - [Visual Studio Code][vsc]
 - [yara][yar]
 - [Zimmerman Tools][zim]
-- [Zui][zui] formerly named Brim 
+- [Zui][zui] formerly named Brim
 - [Selected][sdi] scripts from [Didier Stevens][dis]
 - Selected pip packages for [Python][pip]
 
@@ -132,15 +132,15 @@ Downloaded but not installed by default:
 
 Downloaded git repositories:
 
-- https://github.com/keydet89/Events-Ripper.git
-- https://github.com/last-byte/PersistenceSniper.git
-- https://github.com/Neo23x0/evt2sigma.git
-- https://github.com/pan-unit42/dotnetfile
-- https://github.com/reuteras/dfirws.wiki.git
-- https://github.com/SigmaHQ/sigma.git
-- https://github.com/volexity/threat-intel.git
-- https://github.com/wagga40/Zircolite
-- https://github.com/Yamato-Security/hayabusa-rules.git
+- [https://github.com/keydet89/Events-Ripper.git](https://github.com/keydet89/Events-Ripper.git)
+- [https://github.com/last-byte/PersistenceSniper.git](https://github.com/last-byte/PersistenceSniper.git)
+- [https://github.com/Neo23x0/evt2sigma.git](https://github.com/Neo23x0/evt2sigma.git)
+- [https://github.com/pan-unit42/dotnetfile](https://github.com/Neo23x0/evt2sigma.git)
+- [https://github.com/reuteras/dfirws.wiki.git](https://github.com/reuteras/dfirws.wiki.git)
+- [https://github.com/SigmaHQ/sigma.git](https://github.com/SigmaHQ/sigma.git)
+- [https://github.com/volexity/threat-intel.git](https://github.com/volexity/threat-intel.git)
+- [https://github.com/wagga40/Zircolite](https://github.com/wagga40/Zircolite)
+- [https://github.com/Yamato-Security/hayabusa-rules.git](https://github.com/Yamato-Security/hayabusa-rules.git)
 
 More information about tools are available in the GitHub [wiki][wid].
 
@@ -154,7 +154,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [cut]: https://github.com/rizinorg/cutter
   [cyb]: https://github.com/gchq/CyberChef
   [deb]: https://github.com/Squiblydoo/debloat
-  [den]: https://cert.at/en/downloads/software/software-densityscout 
+  [den]: https://cert.at/en/downloads/software/software-densityscout
   [dis]: https://github.com/DidierStevens/DidierStevensSuite
   [dns]: https://github.com/dnSpyEx/dnSpy
   [ext]: https://exiftool.org/
@@ -184,7 +184,6 @@ More information about tools are available in the GitHub [wiki][wid].
   [psd]: https://github.com/dzzie/pdfstreamdumper/
   [pyt]: https://python.org/
   [qpd]: https://github.com/qpdf/qpdf
-  [rad]: https://github.com/radareorg/radare2
   [rip]: https://github.com/BurntSushi/ripgrep
   [scd]: https://github.com/dzzie/VS_LIBEMU
   [sdi]: ./resources/download/didier.ps1

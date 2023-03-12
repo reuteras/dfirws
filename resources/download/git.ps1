@@ -1,9 +1,9 @@
-Write-Host "Download git repositories"
+Write-Output "Download git repositories"
 
 . $PSScriptRoot\common.ps1
 
 if (! (Get-Command git )) {
-    Write-Host "Need git to checkout git repositories."
+    Write-Output "Need git to checkout git repositories."
     Exit
 }
 

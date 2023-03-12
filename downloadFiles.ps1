@@ -3,7 +3,7 @@
 $VENV = "$env:HOMEDRIVE$env:HOMEPATH\.wsb"
 
 if ( tasklist | findstr Sandbox ) {
-    Write-Host "Sandbox can't be running during upgrade."
+    Write-Output "Sandbox can't be running during upgrade."
     Exit
 }
 

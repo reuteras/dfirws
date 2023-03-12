@@ -1,4 +1,4 @@
-Write-Host "Download Python pip packages."
+Write-Output "Download Python pip packages."
 
 . $PSScriptRoot\common.ps1
 

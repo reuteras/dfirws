@@ -1,4 +1,4 @@
-Write-Host "Download releases from GitHub."
+Write-Output "Download releases from GitHub."
 
 . $PSScriptRoot\common.ps1
 

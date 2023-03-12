@@ -1,4 +1,4 @@
-Write-Host "Download Didier Stevens tools."
+Write-Output "Download Didier Stevens tools."
 New-Item -ItemType Directory -Force -Path .\downloads\DidierStevens > $null
 # Download to tmp directory since GitHub doesn't send Last-Modified for raw.
 New-Item -ItemType Directory -Force -Path .\tmp\downloads\DidierStevens > $null

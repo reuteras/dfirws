@@ -1,4 +1,4 @@
-Write-Host "Download files via HTTP."
+Write-Output "Download files via HTTP."
 
 . $PSScriptRoot\common.ps1
 

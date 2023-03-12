@@ -73,7 +73,7 @@ Function Get-GitHubRelease {
         }
     }
     catch {
-        # Done
+        $url = ""
     }
 
     if ( !$url ) {

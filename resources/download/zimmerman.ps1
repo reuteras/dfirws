@@ -1,4 +1,4 @@
-Write-Host "Download Zimmerman tools."
+Write-Output "Download Zimmerman tools."
 
 . $PSScriptRoot\common.ps1
 

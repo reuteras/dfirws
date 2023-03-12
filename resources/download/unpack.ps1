@@ -1,4 +1,4 @@
-Write-Host "Prepare downloaded files"
+Write-Output "Prepare downloaded files"
 
 . $PSScriptRoot\common.ps1
 
@@ -99,7 +99,7 @@ if (! (Test-Path .\tmp\venv\done)) {
 
 Copy-Item ".\setup\utils\hash-id.py" ".\tmp\venv\Scripts\"
 Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
-Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"  
+Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"
 
 rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv >> .\log\log.txt 2>&1
 Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1
