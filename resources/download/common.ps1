@@ -1,5 +1,3 @@
-# From https://stackoverflow.com/questions/26533819/how-can-i-download-a-file-only-if-it-has-changed-using-powershell#30129694
-
 if (! (Test-Path -Path .\log )) {
     New-Item -ItemType Directory -Force -Path .\log > $null
 }
@@ -20,11 +18,11 @@ Function Get-FileFromUri {
 
     # Make sure the destination directory exists
     # System.IO.FileInfo works even if the file/dir doesn't exist, which is better then get-item which requires the file to exist
-    If (! ( Test-Path ([System.IO.FileInfo]$FilePath).DirectoryName ) ) { 
+    If (! ( Test-Path ([System.IO.FileInfo]$FilePath).DirectoryName ) ) {
         [void](New-Item ([System.IO.FileInfo]$FilePath).DirectoryName -force -type directory)
     }
 
-    If (! ( Test-Path ([System.IO.FileInfo]$TmpFilePath).DirectoryName ) ) { 
+    If (! ( Test-Path ([System.IO.FileInfo]$TmpFilePath).DirectoryName ) ) {
         [void](New-Item ([System.IO.FileInfo]$TmpFilePath).DirectoryName -force -type directory)
     }
 
@@ -55,6 +53,25 @@ Function Get-FileFromUri {
     }
 }
 
+Function Get-DownloadUrl {
+    Param (
+        [string]$releases,
+        [string]$match
+    )
+    try {
+        $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
+        if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
+            return Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
+        } else {
+            return $downloads
+        }
+    }
+    catch {
+        return ""
+    }
+    
+}
+
 Function Get-GitHubRelease {
     Param (
         [string]$repo,
@@ -64,27 +81,13 @@ Function Get-GitHubRelease {
 
     $releases = "https://api.github.com/repos/$repo/releases/latest"
 
-    try {
-        $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
-        if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
-        } else {
-            $url = $downloads
-        }
-    }
-    catch {
-        $url = ""
-    }
+    $url = Get-DownloadUrl -Releases $releases -Match $match
+
 
     if ( !$url ) {
         # Try without latest
         $releases = "https://api.github.com/repos/$repo/releases"
-        $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
-        if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-            $url = Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
-        } else {
-            $url = $downloads
-        }
+        $url = Get-DownloadUrl -Releases $releases -Match $match
     }
 
     if ( !$url ) {

@@ -1,11 +1,9 @@
 # Created by Max 'Libra' Kersten (@Libranalysis)
 # Source: https://maxkersten.nl/binary-analysis-course/analysis-scripts/automatic-string-formatting-deobfuscation/
- 
+
 import re
 import sys
 
-
-# Define information regarding the original script's location
 
 try:
     powershellPath = sys.argv[1]
@@ -13,7 +11,7 @@ except IndexError:
     print("Need a filename as argument.")
     sys.exit()
 try:
-    with open(powershellPath, 'r', encoding="utf-8") as powershellFile:
+    with open(powershellPath, "r", encoding="utf-8") as powershellFile:
         # Read all lines of the original script
         powershellContent = powershellFile.readlines()
 except (OSError, IOError):
@@ -21,14 +19,14 @@ except (OSError, IOError):
     sys.exit()
 
 # The variable which contains all deobfuscated lines
-output = ''
+output = ""
 # The variable which keeps track of the amount of string formats that have been replaced
 formatCount = 0
 # The variable which keeps track of the amount of variables that have been replaced
 variableCount = 0
 # The variable which keeps track of the amount of removed back ticks
 backtickCount = 0
- 
+
 # Loop through the file, line by line
 for line in powershellContent:
     backtickCount += line.count("`")
@@ -38,7 +36,8 @@ for line in powershellContent:
     matchedLine = re.findall(r""""((?:\{\d+\})+)"\s*-[fF]\s*((?:'.*?',?)+)""", line)
     # If one or more matches have been found, continue. Otherwise skip the replacement part
     if len(matchedLine) > 0:
-        # Each match in each line is broken down into two parts: the indices part ("{0}{2}{1}") and the strings ("var", "ble", "ia")
+        # Each match in each line is broken down into two parts: 
+        # the indices part ("{0}{2}{1}") and the strings ("var", "ble", "ia")
         for match in matchedLine:
             # Convert all indices to integers within a list
             indices = list(map(int, re.findall(r"{(\d+)}", match[0])))
@@ -50,29 +49,31 @@ for line in powershellContent:
             line = line.replace(match[0], result, 1)
             line = line.replace(match[1], "", 1)
             # Regex the "-f" and "-F" so that "-f[something]" is not replaced
-            formatFlag = re.findall(r"""(-[fF])(?=[^\w])""", line)          
+            formatFlag = re.findall(r"""(-[fF])(?=[^\w])""", line)
             if len(formatFlag) > 0:
                 for formatFlagMatch in formatFlag:
                     line = line.replace(formatFlagMatch, "")
             # Find all strings between quotation marks.
-            varDeclaration = re.findall(r"""(?<=\()\"(?=[^\)]+\+[^\)]+\))(?:[^\{\}\-\)])+\"(?=\))""", line)
+            varDeclaration = re.findall(
+                r"""(?<=\()\"(?=[^\)]+\+[^\)]+\))(?:[^\{\}\-\)])+\"(?=\))""", line
+            )
             # The concatenated variable
-            variable = ''
+            variable = ""
             # For each string in the list, the items are concatenated
             if len(varDeclaration) > 0:
                 for string in varDeclaration:
-                    variable = string.replace("\"", "")
+                    variable = string.replace('"', "")
                     variable = variable.replace("+", "")
                     variable = variable.replace(" ", "")
-                    variable = "\"" + variable + "\""
+                    variable = '"' + variable + '"'
                     variableCount += 1
-            # Replace the variable with the concatenated one
+                # Replace the variable with the concatenated one
                 line = line.replace(varDeclaration[0], variable)
             formatCount += 1
     # When all matches are done, add the altered line to the output
     output += line
 # When all lines are checked, write the output variable to a file
-with open('deobfuscatedSample.txt', 'w', encoding="utf-8") as f:
+with open("deobfuscatedSample.txt", "w", encoding="utf-8") as f:
     f.write(output)
 print("Amount of removed back ticks:")
 print(backtickCount)
