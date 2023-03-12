@@ -69,7 +69,6 @@ Function Get-DownloadUrl {
     catch {
         return ""
     }
-    
 }
 
 Function Get-GitHubRelease {

@@ -4,7 +4,6 @@
 import re
 import sys
 
-
 try:
     powershellPath = sys.argv[1]
 except IndexError:
@@ -36,7 +35,7 @@ for line in powershellContent:
     matchedLine = re.findall(r""""((?:\{\d+\})+)"\s*-[fF]\s*((?:'.*?',?)+)""", line)
     # If one or more matches have been found, continue. Otherwise skip the replacement part
     if len(matchedLine) > 0:
-        # Each match in each line is broken down into two parts: 
+        # Each match in each line is broken down into two parts:
         # the indices part ("{0}{2}{1}") and the strings ("var", "ble", "ia")
         for match in matchedLine:
             # Convert all indices to integers within a list
