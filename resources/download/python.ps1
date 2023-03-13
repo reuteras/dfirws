@@ -33,7 +33,6 @@ if (Test-Path -Path .\tmp\pip ) {
 
 pip2pi ./tmp/pip `
     aiohttp[speedups] `
-    balbuzard `
     chepy[extras] `
     colorama `
     dnslib `
