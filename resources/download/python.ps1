@@ -47,6 +47,7 @@ pip2pi ./tmp/pip `
     jsbeautifier `
     LnkParse3 `
     lxml `
+    maldump `
     minidump `
     mkyara `
     msgpack `
@@ -64,6 +65,7 @@ pip2pi ./tmp/pip `
     peutils `
     pillow `
     ppdeep `
+    protodeep `
     pycryptodome `
     pyelftools `
     pyOneNote `
