@@ -119,6 +119,7 @@ The following tools are available.
 - [upx][upx]
 - [visidata][vis]
 - [Visual Studio Code][vsc]
+  - [Powershell extension][vpe]
 - [yara][yar]
 - [Zimmerman Tools][zim]
 - [Zui][zui] formerly named Brim
@@ -196,6 +197,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [ue2]: https://github.com/Bioruebe/UniExtract2
   [upx]: https://github.com/upx/upx
   [vis]: https://www.visidata.org/
+  [vpe]: https://github.com/PowerShell/vscode-powershell/
   [vsc]: https://code.visualstudio.com/
   [wid]: https://github.com/reuteras/dfirws/wiki/Documentation
   [wis]: https://wireshark.org/
