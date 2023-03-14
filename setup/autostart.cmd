@@ -89,7 +89,10 @@ if %WSDFIR_PDFSTREAM%=="Yes" (
 )
 if %WSDFIR_VSCODE%=="Yes" (
     copy "%SETUP_PATH%\vscode.exe" "%TEMP%\vscode.exe"
-    "%TEMP%\vscode.exe" /verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath" >> %TEMP%\log.txt 2>&1 
+    "%TEMP%\vscode.exe" /verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath" >> %TEMP%\log.txt 2>&1
+    if %WSDFIR_VSCODE_POWERSHELL%=="Yes" (
+        "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code" --install-extension "C:\downloads\vscode\powershell.vsix" >> %TEMP%\log.txt 2>&1
+    )
 )
 if %WSDFIR_ZUI%=="Yes" (
     copy "%SETUP_PATH%\zui.exe" "%TEMP%\zui.exe"
