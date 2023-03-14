@@ -25,7 +25,7 @@ function Restore-Quarantine {
 	}
 
 	if (Test-Path "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip") {
-		Remove-Item -r -Force "C:\tmp\Quarantine"
+		Remove-Item -r -Force "C:\tmp\Quarantine" > $null 2>&1
 		& 'C:\Program Files\7-Zip\7z.exe' x "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip" -oc:\tmp > $null
 		if (!(Test-Path "C:\tmp\Quarantine")) {
 			Write-Output "Zip file didn't contain directory Quarantine."
