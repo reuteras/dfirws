@@ -17,13 +17,13 @@ function Restore-Quarantine {
 	if (!(Test-Path "C:\ProgramData\Microsoft\Windows Defender" )) {
 		mkdir "C:\ProgramData\Microsoft\Windows Defender" > $null
 	}
-	
-	
+
+
 	if (Test-Path "C:\ProgramData\Microsoft\Windows Defender\Quarantine" ) {
 		Write-Output "Directory C:\ProgramData\Microsoft\Windows Defender\Quarantine exists. Remove and try again."
 		return
 	}
-	
+
 	if (Test-Path "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip") {
 		Remove-Item -r -Force "C:\tmp\Quarantine"
 		& 'C:\Program Files\7-Zip\7z.exe' x "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip" -oc:\tmp > $null
@@ -37,7 +37,7 @@ function Restore-Quarantine {
 		Copy-Item -r "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine" "C:\ProgramData\Microsoft\Windows Defender"
 		return
 	}
-		
+
 	Write-Output "No directory ~\Desktop\readonly\Quarantine or file ~\Desktop\readonly\Quarantine.zip!"
 }
 
