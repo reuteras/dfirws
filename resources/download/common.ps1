@@ -6,7 +6,7 @@ if (! (Test-Path -Path .\log\log.txt )) {
     Get-Date > .\log\log.txt
 }
 
-Function Get-FileFromUri {
+function Get-FileFromUri {
     Param (
         [Parameter(Mandatory=$True)] [string]$uri,
         [Parameter(Mandatory=$True)] [string]$FilePath
@@ -53,7 +53,7 @@ Function Get-FileFromUri {
     }
 }
 
-Function Get-DownloadUrl {
+function Get-DownloadUrl {
     Param (
         [string]$releases,
         [string]$match
@@ -71,7 +71,7 @@ Function Get-DownloadUrl {
     }
 }
 
-Function Get-GitHubRelease {
+function Get-GitHubRelease {
     Param (
         [string]$repo,
         [string]$path,
@@ -101,7 +101,7 @@ Function Get-GitHubRelease {
     Get-FileFromUri -uri $url -FilePath $path
 }
 
-Function Get-ChocolateyUrl {
+function Get-ChocolateyUrl {
     Param (
         [string]$package
     )
@@ -114,4 +114,18 @@ Function Get-ChocolateyUrl {
     }
 
     return $url
+}
+
+function Get-DownloadUrlFromPage {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [string]
+        $url,
+        [Parameter()]
+        [regex]
+        $regex
+    )
+
+    return Invoke-WebRequest -Uri "$url" -UseBasicParsing | Select-String -Pattern "$regex" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
 }
