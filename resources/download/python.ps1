@@ -35,6 +35,7 @@ pip2pi ./tmp/pip `
     aiohttp[speedups] `
     chepy[extras] `
     colorama `
+    dfir-unfurl `
     dnslib `
     docx2txt `
     dpkt `
@@ -65,6 +66,7 @@ pip2pi ./tmp/pip `
     peutils `
     pillow `
     ppdeep `
+    protobuf>=4.22.0 `
     protodeep `
     pycryptodome `
     pyelftools `
