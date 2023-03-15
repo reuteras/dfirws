@@ -78,6 +78,8 @@ Add-ToUserPath "C:\Tools\GoReSym"
 Add-ToUserPath "C:\Tools\hayabusa"
 Add-ToUserPath "C:\Tools\malcat\bin"
 Add-ToUserPath "C:\Tools\nmap"
+Add-ToUserPath "C:\Tools\node"
+Add-ToUserPath "C:\Tools\pstwalker"
 Add-ToUserPath "C:\Tools\qpdf\bin"
 Add-ToUserPath "C:\Tools\radare2"
 Add-ToUserPath "C:\Tools\ripgrep"
@@ -105,6 +107,9 @@ Add-ToUserPath "C:\Tools\Zimmerman\XWFIM"
 Add-ToUserPath "C:\Tools\zstd"
 if ( $env:WSDFIR_UNIEXTRACT -eq '"Yes"' ) {
     Add-ToUserPath "C:\Tools\UniExtract"
+}
+if ( $env:WSDFIR_VSCODE -eq '"Yes"' ) {
+    Add-ToUserPath "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code"
 }
 
 Write-Output "Add shortcuts (shorten link names first)"
@@ -198,13 +203,17 @@ if ( $env:WSDFIR_CHOCO -eq '"Yes"' ) {
     # Add packages below
 }
 
+if ( $env:WSDFIR_NODE -eq '"Yes"' ) {
+    Copy-Item -r "$env:TOOLS\node" C:\Users\WDAGUtilityAccount\Desktop
+}
+
 # Run any custom scripts
 if (Test-Path "C:\local\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "C:\local\customize.ps1"
 }
 
 # Last commands
-if ( $env:WSDFIR_X64DBG -eq '"Yes"' ) {
+if ( $env:WSDFIR_LOKI -eq '"Yes"' ) {
     & "C:\Program Files\7-Zip\7z.exe" x -aoa "C:\downloads\loki.zip" -o"C:\Program Files\"
     Remove-Item -Recurse -Force "$env:TOOLS\loki\signature-base"
     Add-ToUserPath "C:\Program Files\loki"

@@ -28,6 +28,7 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 .\resources\download\didier.ps1
 .\resources\download\zimmerman.ps1
 .\resources\download\unpack.ps1
+.\resources\download\node.ps1
 
 Write-Output "Copy files."
 Copy-Item README.md .\downloads\

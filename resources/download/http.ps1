@@ -4,6 +4,7 @@ Write-Output "Download files via HTTP."
 
 # Get uri for latest nuget - ugly
 $choco = Get-ChocolateyUrl chocolatey
+$nodejs = Get-DownloadUrlFromPage -url https://nodejs.org/en/download/ -regex 'https:[^"]+win-x64.zip'
 
 Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -FilePath ".\downloads\vscode.exe"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml"
@@ -21,7 +22,9 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/mast
 Get-FileFromUri -uri "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py" -FilePath ".\downloads\pe2pic.py"
 Get-FileFromUri -uri "https://github.com/hasherezade/shellconv/blob/master/shellconv.py" -FilePath ".\downloads\shellconv.py"
 Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip"
+Get-FileFromUri -uri "https://downloads.pstwalker.com/pstwalker-portable" -FilePath ".\downloads\pstwalker.zip"
 Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
+Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip"
 # Update the following when new versions are released
 Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.1/win/x86_64/LibreOffice_7.5.1_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe" -FilePath ".\downloads\python3.exe"
