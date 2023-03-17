@@ -144,7 +144,7 @@ function Stop-SandboxWhenDone {
         $path
     )
 
-    while ($true ) { 
+    while ($true ) {
         $status = Get-Process WindowsSandboxClient 2> $null
         if ($status) {
             if ( Test-Path $path ) {
