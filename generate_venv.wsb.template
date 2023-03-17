@@ -1,6 +1,6 @@
 <Configuration>
   <VGpu>Disable</VGpu>
-  <Networking>Disable</Networking>
+  <Networking>Default</Networking>
   <AudioInput>Disable</AudioInput>
   <VideoInput>Disable</VideoInput>
   <ProtectedClient>Enable</ProtectedClient>
@@ -13,8 +13,8 @@
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
 	 <MappedFolder>
-      <HostFolder>__SANDBOX__downloads\pip</HostFolder>
-      <SandboxFolder>C:\pip</SandboxFolder>
+      <HostFolder>__SANDBOX__tmp\pip</HostFolder>
+      <SandboxFolder>C:\tmp\pip</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>
@@ -30,6 +30,11 @@
     <MappedFolder>
       <HostFolder>__SANDBOX__tmp\venv</HostFolder>
       <SandboxFolder>C:\venv</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__log</HostFolder>
+      <SandboxFolder>C:\log</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
   </MappedFolders>
