@@ -11,7 +11,7 @@ Write-Output "Setup node and install npm packages." > $ROOT_PATH\log\npm.txt
 
 while(Get-Sandbox) {
     Write-Output "Waiting for Sandbox to exit." > $ROOT_PATH\log\npm.txt
-    Start-Sleep 1 
+    Start-Sleep 1
 }
 
 if (! (Test-Path -Path "$ROOT_PATH\tmp" )) {

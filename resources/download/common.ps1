@@ -132,12 +132,12 @@ function Get-DownloadUrlFromPage {
 
 function Get-Sandbox {
     param ()
-    
+
     Get-Process WindowsSandboxClient 2> $null
 }
 
 function Stop-SandboxWhenDone {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter()]
         [string]
@@ -148,9 +148,11 @@ function Stop-SandboxWhenDone {
         $status = Get-Process WindowsSandboxClient 2> $null
         if ($status) {
             if ( Test-Path $path ) {
-                (Get-Process WindowsSandboxClient).Kill()
+                if($PSCmdlet.ShouldProcess($file.Name)) {
+                    (Get-Process WindowsSandboxClient).Kill()
+                }
             }
-            Start-Sleep 0.4
+            Start-Sleep 1
         } else {
             return
         }
