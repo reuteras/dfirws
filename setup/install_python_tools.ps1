@@ -1,3 +1,13 @@
+# First start logging
+Start-Transcript -Append "C:\log\python.txt"
+
+# Set variables
+$SETUP_PATH="C:\downloads"
+$TEMP="C:\tmp"
+
+Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1"
+Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd"
+
 # This script runs in a Windows sandbox to prebuild the venv environment.
 Write-Output "Install Python based tools"
 Remove-Item -r "C:\venv\data" > $null 2>&1
@@ -6,11 +16,11 @@ Remove-Item -r "C:\venv\Lib" > $null 2>&1
 Remove-Item -r "C:\venv\Scripts" > $null 2>&1
 Remove-Item -r "C:\venv\share" > $null 2>&1
 Remove-Item -r "C:\venv\pyvenv.cfg" > $null 2>&1
-Get-ChildItem -Path C:\tmp\pip\ -Include *.* -Recurse | ForEach-Object { $_.Delete()} > $null 2>&1
+Get-ChildItem -Path $TEMP\pip\ -Include *.* -Recurse | ForEach-Object { $_.Delete()} > $null 2>&1
 
-& "C:\downloads\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+& "$SETUP_PATH\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
 
-$PYTHON_BIN="C:\Program Files\Python310\python.exe"
+$PYTHON_BIN="$env:ProgramFiles\Python310\python.exe"
 
 while (Get-Process python3 2> $null) {
     Start-Sleep 1
@@ -85,20 +95,25 @@ pip2pi ./tmp/pip `
 
 deactivate
 
-Copy-Item C:\downloads\dfir_ntfs.tar.gz c:\tmp\pip
+Copy-Item $SETUP_PATH\dfir_ntfs.tar.gz $TEMP\pip
 
 & $PYTHON_BIN -m venv C:\venv
 C:\venv\Scripts\Activate.ps1
-Set-Location C:\tmp\pip
+Set-Location $TEMP\pip
 Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ }
 Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
 Get-ChildItem . -Filter *.whl | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
 Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
-Copy-Item -r C:\git\threat-intel C:\tmp
-Copy-Item -r C:\git\dotnetfile C:\tmp
-Set-Location C:\tmp\threat-intel\tools\one-extract
+Copy-Item -r C:\git\threat-intel $TEMP
+Copy-Item -r C:\git\dotnetfile $TEMP
+Set-Location $TEMP\threat-intel\tools\one-extract
 python -m pip install --disable-pip-version-check .
-Set-Location C:\tmp\dotnetfile
+Set-Location $TEMP\dotnetfile
 python setup.py install
 deactivate
 Write-Output "Installed Python based tools done"
+
+Write-Output "" > C:\venv\done
+Stop-Transcript
+
+shutdown /s /t 1 /c "Done with installing Python pip packages." /f /d p:4:1
