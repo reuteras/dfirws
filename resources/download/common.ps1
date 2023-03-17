@@ -1,9 +1,9 @@
-if (! (Test-Path -Path .\log )) {
-    New-Item -ItemType Directory -Force -Path .\log > $null
+# Ensure that we have a log directory and a clean log file
+if (! (Test-Path -Path "$PSScriptRoot\..\..\log" )) {
+    New-Item -ItemType Directory -Force -Path "$PSScriptRoot\..\..\log" > $null
 }
-
-if (! (Test-Path -Path .\log\log.txt )) {
-    Get-Date > .\log\log.txt
+if (! (Test-Path -Path "$PSScriptRoot\..\..\log\log.txt" )) {
+    Get-Date > "$PSScriptRoot\..\..\log\log.txt"
 }
 
 function Get-FileFromUri {
@@ -128,4 +128,32 @@ function Get-DownloadUrlFromPage {
     )
 
     return Invoke-WebRequest -Uri "$url" -UseBasicParsing | Select-String -Pattern "$regex" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+}
+
+function Get-Sandbox {
+    param ()
+    
+    Get-Process WindowsSandboxClient 2> $null
+}
+
+function Stop-SandboxWhenDone {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [string]
+        $path
+    )
+
+    while ($true ) { 
+        $status = Get-Process WindowsSandboxClient 2> $null
+        if ($status) {
+            if ( Test-Path $path ) {
+                (Get-Process WindowsSandboxClient).Kill()
+            }
+            Start-Sleep 0.4
+        } else {
+            return
+        }
+    }
+
 }
