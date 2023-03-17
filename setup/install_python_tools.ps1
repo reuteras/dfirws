@@ -1,15 +1,18 @@
 # First start logging
+Remove-Item "C:\log\python.txt"
 Start-Transcript -Append "C:\log\python.txt"
+Write-Output "Python"
 
 # Set variables
 $SETUP_PATH="C:\downloads"
 $TEMP="C:\tmp"
 
-Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1"
-Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd"
+Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
+Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
 # This script runs in a Windows sandbox to prebuild the venv environment.
 Write-Output "Install Python based tools"
+Remove-Item -r "C:\venv\done" > $null 2>&1
 Remove-Item -r "C:\venv\data" > $null 2>&1
 Remove-Item -r "C:\venv\Include" > $null 2>&1
 Remove-Item -r "C:\venv\Lib" > $null 2>&1
@@ -18,22 +21,19 @@ Remove-Item -r "C:\venv\share" > $null 2>&1
 Remove-Item -r "C:\venv\pyvenv.cfg" > $null 2>&1
 Get-ChildItem -Path $TEMP\pip\ -Include *.* -Recurse | ForEach-Object { $_.Delete()} > $null 2>&1
 
-& "$SETUP_PATH\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+&"$SETUP_PATH\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 | Out-String -Stream
 
 $PYTHON_BIN="$env:ProgramFiles\Python310\python.exe"
 
-while (Get-Process python3 2> $null) {
-    Start-Sleep 1
-}
+&"$PYTHON_BIN" -m venv C:\pip2pi | Out-String -Stream
 
-& $PYTHON_BIN -m venv "C:\pip2pi"
-& "C:\pip2pi\Scripts\Activate.ps1"
+&"C:\pip2pi\Scripts\Activate.ps1" | Out-String -Stream
 
-python -m pip install -U pip
-python -m pip install pip2pi
+&python -m pip install -U pip | Out-String -Stream
+&python -m pip install pip2pi | Out-String -Stream
 
 Set-Location C:\
-pip2pi ./tmp/pip `
+&pip2pi ./tmp/pip `
     aiohttp[speedups] `
     chepy[extras] `
     colorama `
@@ -91,13 +91,13 @@ pip2pi ./tmp/pip `
     XLMMacroDeobfuscator `
     xxhash `
     yara-python `
-    wheel 2>&1 | findstr /V "ERROR linking"
+    wheel 2>&1 | findstr /V "ERROR linking" | Out-String -Stream
 
 deactivate
 
-Copy-Item $SETUP_PATH\dfir_ntfs.tar.gz $TEMP\pip
+Copy-Item "$SETUP_PATH\dfir_ntfs.tar.gz" "$TEMP\pip"
 
-& $PYTHON_BIN -m venv C:\venv
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv"
 C:\venv\Scripts\Activate.ps1
 Set-Location $TEMP\pip
 Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ }
