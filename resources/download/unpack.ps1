@@ -5,13 +5,6 @@ Write-Output "Prepare downloaded files"
 $TOOLS=".\mount\Tools"
 $SETUP_PATH=".\downloads"
 
-Remove-Item -r $TOOLS > $null 2>$1
-mkdir $TOOLS > $null 2>$1
-mkdir $TOOLS\bin > $null 2>$1
-mkdir $TOOLS\DidierStevens > $null 2>$1
-mkdir $TOOLS\lib > $null 2>$1
-mkdir $TOOLS\Zimmerman > $null 2>$1
-
 Copy-Item $SETUP_PATH\jq.exe $TOOLS\bin\ >> .\log\log.txt 2>&1
 Copy-Item $SETUP_PATH\JumplistBrowser.exe $TOOLS\bin\ >> .\log\log.txt 2>&1
 xcopy /E $SETUP_PATH\DidierStevens $TOOLS\DidierStevens >> .\log\log.txt 2>&1
@@ -41,7 +34,6 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\logview.zip" -o"$TOOLS\FullEventLogView" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\malcat.zip" -o"$TOOLS\malcat" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\nmap.exe" -o"$TOOLS\nmap" >> .\log\log.txt 2>&1
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\nodejs.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pebear.zip" -o"$TOOLS\pebear" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pestudio.zip" -o"$TOOLS\pestudio" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pstwalker.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
@@ -67,7 +59,6 @@ Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
 Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
-Move-Item $TOOLS\node-* $TOOLS\node
 Move-Item $TOOLS\pstwalker[0-9]* $TOOLS\pstwalker
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
@@ -89,21 +80,14 @@ Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64
 Remove-Item $TOOLS\license.txt
 
-Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
-Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"
-
-if (! (Test-Path .\tmp\venv\done)) {
-    Write-Output "Wait for Python pip building."
-    While (! (Test-Path .\tmp\venv\done)){
-        Start-Sleep 1
-    }
-    Remove-Item .\tmp\venv\done
-    Write-Output "Python done. Continuing."
-}
-
-Copy-Item ".\setup\utils\hash-id.py" ".\tmp\venv\Scripts\"
-Copy-Item ".\setup\utils\powershell-cleanup.py" ".\tmp\venv\Scripts\"
-Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"
-
+rclone.exe sync --verbose --checksum .\tmp\node .\mount\Tools\node >> .\log\log.txt 2>&1
 rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv >> .\log\log.txt 2>&1
+
+Remove-Item -Recurse -Force .\tmp\node > $null 2>&1
 Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1
+
+Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"
+Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"
+Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
+Copy-Item ".\setup\utils\hash-id.py" ".\mount\venv\Scripts\"
+Copy-Item ".\setup\utils\powershell-cleanup.py" ".\mount\venv\Scripts\"
