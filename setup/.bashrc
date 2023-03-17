@@ -3,3 +3,5 @@ export PS1="\[\033]0;$TITLEPREFIX:$PWD\007\] \[\033[33m\]\w\[\033[36m\]`__git_ps
 if [[ -e /c/venv/Scripts/activate ]]; then
     . /c/venv/Scripts/activate
 fi
+
+export PATH="$PATH:/c/venv/Scripts"
