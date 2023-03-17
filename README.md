@@ -6,12 +6,11 @@ DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be u
 
 ## Requirements
 
-You need to have git and rclone installed to download files and resources. 7-zip and Python 3.10 must also be installed. Install with
+You need to have git and rclone installed to download files and resources. 7-zip must be installed to extract files. Install the tools you miss with
 
 ```PowerShell
 winget install 7zip.7zip
 winget install Git.Git
-winget install Python.Python.3.10
 winget install Rclone.Rclone
 ```
 
@@ -38,10 +37,10 @@ Start the download of tools that are included in the sandbox. It will take some 
 .\downloadFiles.ps1
 ```
 
-If you like to have a more detailed view off the progress during the download (or update) you can run the **PowerShell** variant of **tail -f**:
+If you like to have a more detailed view off the progress during the download (or update) you can run the **PowerShell** variant of **tail -f** after starting **.\downloadFiles.ps1**.
 
 ```PowerShell
-Get-Content .\log\log.txt -Wait
+ls .\log\ | ForEach-Object -Parallel { Get-Content -Path $_ -Wait }
 ```
 
 Create a configuration file for the sandbox with your local path by running the following command:
@@ -51,6 +50,8 @@ Create a configuration file for the sandbox with your local path by running the 
 ```
 
 This will also create *./setup/config.txt*. Select the tools you would like to be available in the sandbox here. All tools will still be downloaded and can be installed later in the sandbox if needed. You can also turn off Sysmon and specify the configuration file to use. By default the sandbox will use the old expanded format for right-click but that can be changed back.
+
+By default this sandbox will have networking and clipboard redirection off. If you like to enable clipboard you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
 
 ## Usage
 
@@ -105,8 +106,10 @@ The following tools are available.
 - [PE-bear][peb]
 - [PersistenceSniper][per]
 - [PEstudio][pes]
+- [pstwalker][pst]
 - [Python][pyt]
 - [QPDF][qpd]
+- [Radare2][rad]
 - [ripgrep][rip]
 - [scdbg][scd]
 - [sqlite][sql] cli
@@ -183,8 +186,10 @@ More information about tools are available in the GitHub [wiki][wid].
   [pes]: https://www.winitor.com/
   [pip]: ./resources/download/python.ps1
   [psd]: https://github.com/dzzie/pdfstreamdumper/
+  [pst]: https://www.pstwalker.com/blog/convert-pst-to-msg.html
   [pyt]: https://python.org/
   [qpd]: https://github.com/qpdf/qpdf
+  [rad]: https://www.radare.org/n/
   [rip]: https://github.com/BurntSushi/ripgrep
   [scd]: https://github.com/dzzie/VS_LIBEMU
   [sdi]: ./resources/download/didier.ps1
@@ -202,6 +207,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [wid]: https://github.com/reuteras/dfirws/wiki/Documentation
   [wis]: https://wireshark.org/
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
+  [wsc]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file
   [xdb]: https://x64dbg.com/
   [yar]: https://github.com/VirusTotal/yara
   [zim]: https://github.com/EricZimmerman
