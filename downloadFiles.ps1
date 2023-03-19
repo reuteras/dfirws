@@ -37,9 +37,9 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 Write-Output "Setup node and install npm packages."
 Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 .\resources\download\git.ps1
-.\resources\download\release.ps1
 Write-Output "Download Python pip packages."
 Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+.\resources\download\release.ps1
 .\resources\download\didier.ps1
 .\resources\download\zimmerman.ps1
 Write-Output "Wait for build."
