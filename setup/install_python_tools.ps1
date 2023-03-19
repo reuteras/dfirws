@@ -1,17 +1,14 @@
-# First start logging
-Remove-Item "C:\log\python.txt"
-Start-Transcript -Append "C:\log\python.txt"
-Write-Output "Python"
-
 # Set variables
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $SETUP_PATH="C:\downloads"
 $TEMP="C:\tmp"
+
+Write-Output "Creating Python venv in Sandbox." >> "C:\log\python.txt" 2>&1
 
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
 # This script runs in a Windows sandbox to prebuild the venv environment.
-Write-Output "Install Python based tools"
 Remove-Item -r "C:\venv\done" > $null 2>&1
 Remove-Item -r "C:\venv\data" > $null 2>&1
 Remove-Item -r "C:\venv\Include" > $null 2>&1
@@ -21,17 +18,20 @@ Remove-Item -r "C:\venv\share" > $null 2>&1
 Remove-Item -r "C:\venv\pyvenv.cfg" > $null 2>&1
 Get-ChildItem -Path $TEMP\pip\ -Include *.* -Recurse | ForEach-Object { $_.Delete()} > $null 2>&1
 
-&"$SETUP_PATH\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 | Out-String -Stream
+Write-Output "Install Python in Sandbox." >> "C:\log\python.txt" 2>&1
+Start-Process "$SETUP_PATH\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
+Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
 
 $PYTHON_BIN="$env:ProgramFiles\Python310\python.exe"
 
-&"$PYTHON_BIN" -m venv C:\pip2pi | Out-String -Stream
+&"$PYTHON_BIN" -m venv C:\pip2pi 
 
-&"C:\pip2pi\Scripts\Activate.ps1" | Out-String -Stream
+&"C:\pip2pi\Scripts\Activate.ps1" 
+Write-Output "Install pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
+&python -m pip install -U pip >> "C:\log\python.txt" 2>&1
+&python -m pip install pip2pi >> "C:\log\python.txt" 2>&1
 
-&python -m pip install -U pip | Out-String -Stream
-&python -m pip install pip2pi | Out-String -Stream
-
+Write-Output "Download packages with pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
 Set-Location C:\
 &pip2pi ./tmp/pip `
     aiohttp[speedups] `
@@ -91,29 +91,29 @@ Set-Location C:\
     XLMMacroDeobfuscator `
     xxhash `
     yara-python `
-    wheel 2>&1 | findstr /V "ERROR linking" | Out-String -Stream
+    wheel 2>&1 | findstr /V "ERROR linking" >> "C:\log\python.txt" 2>&1
 
 deactivate
 
 Copy-Item "$SETUP_PATH\dfir_ntfs.tar.gz" "$TEMP\pip"
 
+Write-Output "Install packages in venv in sandbox." >> "C:\log\python.txt" 2>&1
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv"
-C:\venv\Scripts\Activate.ps1
+C:\venv\Scripts\Activate.ps1 
 Set-Location $TEMP\pip
-Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ }
-Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
-Get-ChildItem . -Filter *.whl | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
-Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ }
+Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
+Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
+Get-ChildItem . -Filter *.whl | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
+Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
 Copy-Item -r C:\git\threat-intel $TEMP
 Copy-Item -r C:\git\dotnetfile $TEMP
 Set-Location $TEMP\threat-intel\tools\one-extract
-python -m pip install --disable-pip-version-check .
+python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
 Set-Location $TEMP\dotnetfile
-python setup.py install
+python setup.py install >> "C:\log\python.txt" 2>&1
 deactivate
-Write-Output "Installed Python based tools done"
+Write-Output "Python venv done." >> "C:\log\python.txt" 2>&1
 
 Write-Output "" > C:\venv\done
-Stop-Transcript
 
 shutdown /s /t 1 /c "Done with installing Python pip packages." /f /d p:4:1
