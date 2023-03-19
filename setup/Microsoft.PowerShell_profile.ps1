@@ -21,7 +21,6 @@ function Copy-Node {
 	Copy-Item -r C:\Tools\node "$DestinationPath"
 }
 
-
 function Restore-Quarantine {
 	if (!(Test-Path "C:\ProgramData\Microsoft\Windows Defender" )) {
 		mkdir "C:\ProgramData\Microsoft\Windows Defender" > $null
