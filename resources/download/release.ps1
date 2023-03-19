@@ -23,7 +23,6 @@ Get-GitHubRelease -repo "mandiant/capa" -path ".\downloads\capa-windows.zip" -ma
 Get-GitHubRelease -repo "mandiant/flare-floss" -path ".\downloads\floss.zip" -match windows
 Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path ".\downloads\fakenet.zip" -match fakenet
 Get-GitHubRelease -repo "mandiant/GoReSym" -path ".\downloads\GoReSym.zip" -match GoReSym
-Get-GitHubRelease -repo "msuhanov/dfir_ntfs" -path ".\downloads\dfir_ntfs.tar.gz" -match tar.gz
 Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path ".\downloads\ghidra.zip" -match ghidra
 Get-GitHubRelease -repo "Neo23x0/Loki" -path ".\downloads\loki.zip" -match loki
 Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path ".\downloads\notepad++.exe" -match Installer.x64.exe

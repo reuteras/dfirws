@@ -1,4 +1,4 @@
-Write-Output "Prepare downloaded files"
+Write-Output "Prepare downloaded files."
 
 . $PSScriptRoot\common.ps1
 

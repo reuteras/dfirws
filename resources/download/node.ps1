@@ -5,12 +5,12 @@ param (
 $ScriptRoot = "$ScriptRoot\resources\download"
 $ROOT_PATH=Resolve-Path "$ScriptRoot\..\..\"
 
-Write-Output "Setup node and install npm packages." > $ROOT_PATH\log\npm.txt
+Write-Output "Setup node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
 
 . $ScriptRoot\common.ps1
 
 while(Get-Sandbox) {
-    Write-Output "Waiting for Sandbox to exit." > $ROOT_PATH\log\npm.txt
+    Write-Output "Waiting for Sandbox to exit." >> $ROOT_PATH\log\npm.txt
     Start-Sleep 1
 }
 
@@ -34,3 +34,4 @@ Start-Sleep 10
 Remove-Item "$ROOT_PATH\generate_node.wsb"
 
 Stop-SandboxWhenDone "$ROOT_PATH\tmp\node\done"
+Write-Output "Installation of nodejs and npm done."

@@ -1,3 +1,4 @@
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # Ensure that we have a log directory and a clean log file
 if (! (Test-Path -Path "$PSScriptRoot\..\..\log" )) {
     New-Item -ItemType Directory -Force -Path "$PSScriptRoot\..\..\log" > $null
