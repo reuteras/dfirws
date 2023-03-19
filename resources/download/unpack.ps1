@@ -47,7 +47,6 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\triddefs.zip" -o"$TOOLS\trid" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\uniextract2.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\x64dbg.zip" -o"$TOOLS\x64dbg" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS" >> .\log\log.txt 2>&1
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\zstd.zip" -o"$TOOLS\zstd" >> .\log\log.txt 2>&1
 
@@ -71,8 +70,6 @@ Move-Item $TOOLS\yarac64.exe $TOOLS\bin\yarac.exe
 Copy-Item $SETUP_PATH\BCV.jar $TOOLS\lib
 Copy-Item $SETUP_PATH\msgviewer.jar $TOOLS\lib
 Write-Output "java -Xmx3G -jar C:\Tools\lib\BCV.jar" | Out-File -Encoding "ascii" $TOOLS\bin\bcv.bat
-Write-Output "C:\Users\WDAGUtilityAccount\AppData\Local\x64dbg" | Out-File -Encoding "utf8" $TOOLS\x64dbg\releases\x32\userdir
-Write-Output "C:\Users\WDAGUtilityAccount\AppData\Local\x64dbg" | Out-File -Encoding "utf8" $TOOLS\x64dbg\releases\x64\userdir
 
 # Remove unused
 Remove-Item $TOOLS\GoReSym\GoReSym_lin
