@@ -1,6 +1,7 @@
 # dfirws
 
 # First start logging
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $TEMP="C:\tmp"
 mkdir "$TEMP"
 Start-Transcript -Append "$TEMP\dfirws_log.txt"
