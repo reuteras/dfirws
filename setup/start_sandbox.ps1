@@ -4,7 +4,6 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $TEMP="C:\tmp"
 mkdir "$TEMP"
-mkdir "$HOME\AppData\Local\x64dbg"
 Start-Transcript -Append "$TEMP\dfirws_log.txt"
 
 Write-Output "start_sandbox.ps1"
@@ -159,8 +158,6 @@ Add-ToUserPath "C:\Tools\sysinternals"
 Add-ToUserPath "C:\Tools\thumbcacheviewer"
 Add-ToUserPath "C:\Tools\trid"
 Add-ToUserPath "C:\Tools\upx"
-Add-ToUserPath "C:\Tools\x64dbg\release\x32"
-Add-ToUserPath "C:\Tools\x64dbg\release\x64"
 Add-ToUserPath "C:\Tools\Zimmerman"
 Add-ToUserPath "C:\Tools\Zimmerman\EvtxECmd"
 Add-ToUserPath "C:\Tools\Zimmerman\EZViewer"
@@ -232,7 +229,10 @@ if ( $WSDFIR_TOOLS -eq "Yes" ) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\Tools.lnk" -DestinationPath "C:\Tools"
 }
 if ( $WSDFIR_X64DBG -eq "Yes" ) {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\x64dbg.lnk" -DestinationPath "C:\Tools\x64dbg\release\x64\x64dbg.exe"
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\x64dbg.zip" -o"$env:ProgramFiles\x64dbg"
+    Add-ToUserPath "$env:ProgramFiles\x64dbg\release\x32"
+    Add-ToUserPath "$env:ProgramFiles\x64dbg\release\x64"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\x64dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x64\x64dbg.exe"
 }
 
 # PowerShell
