@@ -35,6 +35,7 @@ Write-Output "Download packages with pip2pi in Sandbox." >> "C:\log\python.txt" 
 Set-Location C:\
 &pip2pi ./tmp/pip `
     aiohttp[speedups] `
+    cabarchive `
     chepy[extras] `
     colorama `
     dfir-unfurl `
@@ -68,6 +69,7 @@ Set-Location C:\
     peutils `
     pillow `
     ppdeep `
+    prettytable>=3.5 `
     protobuf>=4.22.0 `
     protodeep `
     pycryptodome `
@@ -81,6 +83,7 @@ Set-Location C:\
     regipy[full] `
     requests `
     setuptools `
+    ssdeep `
     time-decode `
     tqdm `
     uncompyle6 `
