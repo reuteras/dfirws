@@ -83,7 +83,6 @@ Set-Location C:\
     regipy[full] `
     requests `
     setuptools `
-    ssdeep `
     time-decode `
     tqdm `
     uncompyle6 `
