@@ -106,6 +106,7 @@ The following tools are available.
 - [PE-bear][peb]
 - [PersistenceSniper][per]
 - [PEstudio][pes]
+- [Prefetch-Browser][prb]
 - [pstwalker][pst]
 - [Python][pyt]
 - [QPDF][qpd]
@@ -115,6 +116,7 @@ The following tools are available.
 - [sqlite][sql] cli
 - [SysinternalsSuite][syi]
 - [Sysmon][sym] started with [SwiftOnSecurity sysmon-config][sws]
+- [System Informer][sin] (formerly ProcessHacker)
 - [Thumbcache viewer][thu]
 - [TrID][tri]
 - [x64dbg][xdb]
@@ -185,6 +187,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [per]: https://github.com/last-byte/PersistenceSniper
   [pes]: https://www.winitor.com/
   [pip]: ./resources/download/python.ps1
+  [prb]: https://github.com/kacos2000/Prefetch-Browser
   [psd]: https://github.com/dzzie/pdfstreamdumper/
   [pst]: https://www.pstwalker.com/blog/convert-pst-to-msg.html
   [pyt]: https://python.org/
@@ -193,6 +196,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [rip]: https://github.com/BurntSushi/ripgrep
   [scd]: https://github.com/dzzie/VS_LIBEMU
   [sdi]: ./resources/download/didier.ps1
+  [sin]: https://github.com/winsiderss/systeminformer
   [sql]: https://sqlite.org/
   [sws]: https://github.com/SwiftOnSecurity/sysmon-config
   [syi]: https://learn.microsoft.com/en-us/sysinternals/

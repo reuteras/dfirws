@@ -148,6 +148,8 @@ Add-ToUserPath "C:\Tools\hayabusa"
 Add-ToUserPath "C:\Tools\malcat\bin"
 Add-ToUserPath "C:\Tools\nmap"
 Add-ToUserPath "C:\Tools\node"
+Add-ToUserPath "C:\Tools\systeminformer\x64"
+Add-ToUserPath "C:\Tools\systeminformer\x86"
 Add-ToUserPath "C:\Tools\pstwalker"
 Add-ToUserPath "C:\Tools\qpdf\bin"
 Add-ToUserPath "C:\Tools\radare2"
@@ -209,11 +211,17 @@ if ( ($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_GHIDRA -eq "Yes") ) {
 if ( $WSDFIR_HXD -eq "Yes" ) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\HxD.lnk" -DestinationPath "$env:ProgramFiles\HxD\HxD.exe"
 }
+if ( ($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
+}
 if ( $WSDFIR_MALCAT -eq "Yes" ) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
 }
-if ( ($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
+if ( $WSDFIR_SYSTEMINFORMER64 -eq "Yes" ) {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\System_Informer_x64.lnk" -DestinationPath "C:\Tools\systeminformer\x64\ProcessHacker.exe"
+}
+if ( $WSDFIR_SYSTEMINFORMER86 -eq "Yes" ) {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\System_Informer_x86.lnk" -DestinationPath "C:\Tools\systeminformer\x86\ProcessHacker.exe"
 }
 if ( $WSDFIR_NPP -eq "Yes" ) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\Notepad++.lnk" -DestinationPath "$env:ProgramFiles\Notepad++\notepad++.exe"
