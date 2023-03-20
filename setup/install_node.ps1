@@ -11,7 +11,8 @@ $TEMP="C:\tmp"
 mkdir "$TEMP" > $null 2>&1
 
 Copy-Item "$SETUP_PATH\7zip.msi" "$TEMP\7zip.msi"
-&msiexec /i "$TEMP\7zip.msi" /qn /norestart >> "C:\log\npm.txt" 2>&1
+Start-Process -Wait msiexec -ArgumentList "/i $TEMP\7zip.msi /qn /norestart"
+Get-Job | Receive-Job
 
 Write-Output "Get-Content C:\log\npm.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
@@ -24,9 +25,15 @@ Move-Item * ..
 
 Set-Location $TOOLS\node
 Remove-Item -r -Force node-v*
-.\npm init -y  >> "C:\log\npm.txt" 2>&1
-.\npm install --global deobfuscator  >> "C:\log\npm.txt" 2>&1
-.\npm install --global jsdom  >> "C:\log\npm.txt" 2>&1
+Write-Output "Init npm." >> "C:\log\npm.txt" 2>&1
+.\npm init -y  | Out-String -Stream >> "C:\log\npm.txt" 2>&1
+Write-Output "Add npm packages" >> "C:\log\npm.txt" 2>&1
+# Obfuscate Javascript
+.\npm install --global deobfuscator | Out-String -Stream >> "C:\log\npm.txt" 2>&1
+# Create document
+.\npm install --global jsdom | Out-String -Stream >> "C:\log\npm.txt" 2>&1
+
+Get-Job | Receive-Job
 
 Write-Output "Node installation done."
 Write-Output "" > $TOOLS\node\done
