@@ -86,6 +86,7 @@ rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv >> .\log\log.txt 2>
 Remove-Item -Recurse -Force .\tmp\node > $null 2>&1
 Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1
 
+Copy-Item $SETUP_PATH\*.py ".\mount\venv\Scripts\"
 Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"
 Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
