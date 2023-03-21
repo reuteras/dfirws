@@ -92,3 +92,10 @@ Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 Copy-Item ".\setup\utils\hash-id.py" ".\mount\venv\Scripts\"
 Copy-Item ".\setup\utils\powershell-cleanup.py" ".\mount\venv\Scripts\"
+
+Get-ChildItem -Path ".\mount\venv\Scripts" -Filter *.py | ForEach-Object {
+    $content = Get-Content $_.FullName
+    if ($content[0] -match "^#!/usr/bin/python3" -or $content[0] -match "^#!/usr/bin/env python3") {
+        $content -replace '^#!/usr/bin/.*', '#!/usr/bin/env python' | Set-Content $_.FullName
+    }
+}

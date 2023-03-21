@@ -101,7 +101,7 @@ Copy-Item "$SETUP_PATH\dfir_ntfs.tar.gz" "$TEMP\pip"
 
 Write-Output "Install packages in venv in sandbox." >> "C:\log\python.txt" 2>&1
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv"
-C:\venv\Scripts\Activate.ps1
+C:\venv\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
 Set-Location $TEMP\pip
 Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
 Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
