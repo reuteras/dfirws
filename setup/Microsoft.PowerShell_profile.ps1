@@ -54,4 +54,9 @@ Set-Alias less more
 Set-Alias grep findstr
 Set-Alias tail Get-Content
 
+# Python
+
+# Comment this line to see warnings from Python
+$env:PYTHONWARNINGS="ignore"
+
 # Dynamicly added functions below
