@@ -26,7 +26,6 @@ $DidierStevensSuite = `
     "defuzzer.py", `
     "disitool.py", `
     "emldump.py", `
-    "extractscripts.py", `
     "file-magic.def", `
     "file-magic.py", `
     "find-file-in-file.py", `
