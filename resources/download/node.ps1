@@ -3,16 +3,14 @@ param (
 )
 
 $ScriptRoot = "$ScriptRoot\resources\download"
-$ROOT_PATH=Resolve-Path "$ScriptRoot\..\..\"
-
-Write-Output "Setup node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
+$ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
 . $ScriptRoot\common.ps1
 
-while(Get-Sandbox) {
-    Write-Output "Waiting for Sandbox to exit." >> $ROOT_PATH\log\npm.txt
-    Start-Sleep 1
-}
+Write-Output "Setup node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
+
+$mutexName = "Global\dfirwsMutex"
+$mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 if (! (Test-Path -Path "$ROOT_PATH\tmp" )) {
     New-Item -ItemType Directory -Force -Path "$ROOT_PATH\tmp" > $null
@@ -28,10 +26,11 @@ if ( Test-Path -Path "$ROOT_PATH\tmp\node" ) {
 
 New-Item -ItemType Directory -Force -Path "$ROOT_PATH\tmp\node" > $null
 
-(Get-Content $ROOT_PATH\generate_node.wsb.template).replace('__SANDBOX__', "$ROOT_PATH") | Set-Content "$ROOT_PATH\generate_node.wsb"
-& "$ROOT_PATH\generate_node.wsb"
-Start-Sleep 10
-Remove-Item "$ROOT_PATH\generate_node.wsb"
+(Get-Content $ROOT_PATH\resources\templates\generate_node.wsb.template).replace('__SANDBOX__', "$ROOT_PATH") | Set-Content "$ROOT_PATH\tmp\generate_node.wsb"
 
-Stop-SandboxWhenDone "$ROOT_PATH\tmp\node\done"
-Write-Output "Installation of nodejs and npm done."
+$mutex.WaitOne()
+& "$ROOT_PATH\tmp\generate_node.wsb"
+Start-Sleep 10
+Remove-Item "$ROOT_PATH\tmp\generate_node.wsb"
+
+Stop-SandboxWhenDone "$ROOT_PATH\tmp\node\done" $mutex

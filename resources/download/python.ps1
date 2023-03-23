@@ -12,10 +12,8 @@ Write-Output "Download Python pip packages." > $ROOT_PATH\log\python.txt
 Write-Output "Repo needed by python." >> $ROOT_PATH\log\python.txt
 Get-GitHubRelease -repo "msuhanov/dfir_ntfs" -path ".\downloads\dfir_ntfs.tar.gz" -match tar.gz
 
-while(Get-Sandbox) {
-    Write-Output "Waiting for Sandbox to exit." >> $ROOT_PATH\log\python.txt
-    Start-Sleep 1
-}
+$mutexName = "Global\dfirwsMutex"
+$mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 if (Test-Path -Path $ROOT_PATH\tmp\pip ) {
     Remove-Item -r -Force $ROOT_PATH\tmp\pip
@@ -31,10 +29,13 @@ if (Test-Path -Path $ROOT_PATH\tmp\venv\done ) {
 
 New-Item -ItemType Directory -Force -Path $ROOT_PATH\tmp\pip > $null
 
-(Get-Content $ROOT_PATH\generate_venv.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content $ROOT_PATH\generate_venv.wsb
-& $ROOT_PATH\generate_venv.wsb
-Start-Sleep 10
-Remove-Item $ROOT_PATH\generate_venv.wsb
+(Get-Content $ROOT_PATH\resources\templates\generate_venv.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content $ROOT_PATH\tmp\generate_venv.wsb
 
-Stop-SandboxWhenDone "$ROOT_PATH\tmp\venv\done"
+$mutex.WaitOne()
+& $ROOT_PATH\tmp\generate_venv.wsb
+Start-Sleep 10
+Remove-Item $ROOT_PATH\tmp\generate_venv.wsb
+
+Stop-SandboxWhenDone "$ROOT_PATH\tmp\venv\done" $mutex
+
 Write-Output "Pip packages done."
