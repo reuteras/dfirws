@@ -6,43 +6,9 @@ $TEMP="C:\tmp"
 mkdir "$TEMP"
 Start-Transcript -Append "$TEMP\dfirws_log.txt"
 
+. C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
+
 Write-Output "start_sandbox.ps1"
-
-# Declare helper functions
-function Add-ToUserPath {
-    param (
-        [Parameter(Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $dir
-    )
-
-    #$dir = (Resolve-Path $dir)
-
-    $path = [Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
-    if (!($path.Contains($dir))) {
-        # append dir to path
-        [Environment]::SetEnvironmentVariable("PATH", $path + ";$dir", [EnvironmentVariableTarget]::User)
-        Write-Output "Added $dir to PATH"
-        return
-    }
-    Write-Error "$dir is already in PATH"
-}
-
-function Add-Shortcut {
-    param (
-        [string]$SourceLnk,
-        [string]$DestinationPath,
-        [string]$WorkingDirectory
-    )
-    $WshShell = New-Object -comObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut($SourceLnk)
-    if ($WorkingDirectory -ne $Null) {
-        $Shortcut.WorkingDirectory = $WorkingDirectory
-    }
-    $Shortcut.TargetPath = $DestinationPath
-    $Shortcut.Save()
-}
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
@@ -99,7 +65,7 @@ if ( $WSDFIR_VSCODE -eq "Yes" ) {
     Copy-Item "$SETUP_PATH\vscode.exe" "$TEMP\vscode.exe"
     Start-Process -Wait "$TEMP\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
     if ( $WSDFIR_VSCODE_POWERSHELL -eq "Yes" ) {
-        & "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" --install-extension "C:\downloads\vscode\powershell.vsix"
+        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "C:\downloads\vscode\powershell.vsix"' -WindowStyle Hidden
     }
 }
 if ( $WSDFIR_ZUI -eq "Yes" ) {
@@ -133,6 +99,7 @@ Write-Output "Add to PATH"
 Add-ToUserPath "$env:ProgramFiles\7-Zip"
 Add-ToUserPath "$env:ProgramFiles\bin"
 Add-ToUserPath "$env:ProgramFiles\Git\bin"
+Add-ToUserPath "$env:ProgramFiles\Git\usr\bin\"
 Add-ToUserPath "$env:ProgramFiles\hxd"
 Add-ToUserPath "$env:ProgramFiles\Notepad++\"
 Add-ToUserPath "C:\Tools\bin"
@@ -272,8 +239,7 @@ if ( $WSDFIR_PERSISTENCESNIPER -eq "Yes" ) {
 
 # Signal that everything is done to start using the tools (mostly).
 Copy-Item "C:\downloads\README.md" "$HOME\Desktop\"
-PowerShell.exe -ExecutionPolicy Bypass -File $HOME\Documents\tools\Update-Wallpaper.ps1 C:\downloads\dfirws.jpg
-C:\Tools\sysinternals\Bginfo64.exe /NOLICPROMPT /timer:0 $HOME\Documents\tools\config.bgi
+Update-Wallpaper "C:\downloads\dfirws.jpg"
 
 if ( $WSDFIR_CHOCO -eq "Yes" ) {
     & "C:\downloads\choco\tools\chocolateyInstall.ps1"
@@ -282,6 +248,21 @@ if ( $WSDFIR_CHOCO -eq "Yes" ) {
 
 if ( $WSDFIR_NODE -eq "Yes" ) {
     Copy-Item -r "$TOOLS\node" $HOME\Desktop
+}
+
+# Run any custom scripts
+if (Test-Path "C:\local\customize.ps1") {
+    PowerShell.exe -ExecutionPolicy Bypass -File "C:\local\customize.ps1"
+}
+
+# Install extra tools for Git-bash
+if ( $WSDFIR_BASH_EXTRA -eq "Yes" ) {
+    Set-Location "$env:ProgramFiles\Git"
+    Get-ChildItem -Path C:\downloads\bash -Include "*.tar" -Recurse |
+        ForEach-Object {
+            $command = "tar.exe -x -vf /C/downloads/bash/" + $_.Name
+            &"C:\Program Files\Git\bin\bash.exe" -c "$command"
+        }
 }
 
 # Set Notepad++ as default for many file types
@@ -307,11 +288,6 @@ if ( $WSDFIR_NPP -eq "Yes" ) {
     cmd /c Ftype vbefile="C:\WINDOWS\system32\notepad.exe" "%%*"
     cmd /c Ftype vbsfile="C:\WINDOWS\system32\notepad.exe" "%%*"
  }
-
-# Run any custom scripts
-if (Test-Path "C:\local\customize.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "C:\local\customize.ps1"
-}
 
 # Last commands
 if ( $WSDFIR_LOKI -eq "Yes" ) {
