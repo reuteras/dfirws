@@ -20,7 +20,7 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 
 # Update path
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-Start-Process -Wait "$env:ProgramFiles\7-Zip\7z.exe" -ArgumentList "x -aoa $SETUP_PATH\zstd.zip -o$TOOLS\zstd" 
+Start-Process -Wait "$env:ProgramFiles\7-Zip\7z.exe" -ArgumentList "x -aoa $SETUP_PATH\zstd.zip -o$TOOLS\zstd"
 Get-Job | Receive-Job | Out-Default >> "C:\log\bash.txt" 2>&1
 
 Set-Location C:\bash
