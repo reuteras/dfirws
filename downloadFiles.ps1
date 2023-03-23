@@ -30,14 +30,9 @@ if (!(Test-Path .\downloads)) {
 
 # Cleanup
 if (Test-Path -Path .\log\log.txt) {
-    Remove-Item .\log\log.txt
-}
-if (Test-Path -Path .\log\npm.txt) {
-    Remove-Item .\log\npm.txt
+    Remove-Item .\log\*
+    Write-Output "" > .\log\bash.txt
     Write-Output "" > .\log\npm.txt
-}
-if (Test-Path -Path .\log\python.txt) {
-    Remove-Item .\log\python.txt
     Write-Output "" > .\log\python.txt
 }
 Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
