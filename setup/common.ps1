@@ -35,10 +35,12 @@ function Add-Shortcut {
 }
 
 function Update-WallPaper {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory = $true)][String]$path
     )
-    C:\Users\WDAGUtilityAccount\Documents\tools\Update-WallPaper $path
+    if($PSCmdlet.ShouldProcess($file.Name)) {
+        C:\Users\WDAGUtilityAccount\Documents\tools\Update-WallPaper $path
+    }
     C:\Tools\sysinternals\Bginfo64.exe /NOLICPROMPT /timer:0 $HOME\Documents\tools\config.bgi
 }
