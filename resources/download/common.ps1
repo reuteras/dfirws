@@ -172,8 +172,10 @@ function Stop-SandboxWhenDone {
                 if($PSCmdlet.ShouldProcess($file.Name)) {
                     (Get-Process WindowsSandboxClient).Kill()
                     Remove-Item -Force "$path"
+                    Start-Sleep 1
                     $mutex.ReleaseMutex()
                     $mutex.Dispose()
+                    return
                 }
             }
             Start-Sleep 1
