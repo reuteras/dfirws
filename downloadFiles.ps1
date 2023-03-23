@@ -2,6 +2,8 @@
 
 $TOOLS=".\mount\Tools"
 
+. .\resources\download\common.ps1
+
 Remove-Item -r $TOOLS > $null 2>$1
 mkdir $TOOLS > $null 2>$1
 mkdir $TOOLS\bin > $null 2>$1
@@ -12,6 +14,14 @@ mkdir $TOOLS\Zimmerman > $null 2>$1
 if ( tasklist | findstr Sandbox ) {
     Write-Output "Sandbox can't be running during install or upgrade."
     Exit
+}
+
+# Ensure that we have a log directory and a clean log file
+if (! (Test-Path -Path ".\log" )) {
+    New-Item -ItemType Directory -Force -Path ".\log" > $null
+}
+if (! (Test-Path -Path ".\log\log.txt" )) {
+    Get-Date > ".\log\log.txt"
 }
 
 if (!(Test-Path .\downloads)) {
@@ -32,8 +42,11 @@ if (Test-Path -Path .\log\python.txt) {
 }
 Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 
-# The scripts git, http and release are needed by the Python script.
+# The scripts git and http are needed by the Python script.
+# Most scripts need http.ps1.
 .\resources\download\http.ps1
+Write-Output "Download packages for Git for Windows (bash)."
+Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 Write-Output "Setup node and install npm packages."
 Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 .\resources\download\git.ps1
@@ -45,8 +58,9 @@ Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resou
 Write-Output "Wait for build."
 Get-Job | Wait-Job | Out-Null
 Write-Output "Done waiting."
-.\resources\download\unpack.ps1
-
+Write-Output "Prepare downloaded files."
+$result = .\resources\download\unpack.ps1 2>&1
+Write-SynchronizedLog "$result"
 Write-Output "Copy files."
 Copy-Item README.md .\downloads\
 Copy-Item .\resources\images\dfirws.jpg .\downloads\
