@@ -12,8 +12,8 @@ Write-Output "Download packages for Git for Windows (bash)."
 $mutexName = "Global\dfirwsMutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
-if (Test-Path -Path $ROOT_PATH\tmp\download\bash ) {
-    Remove-Item -r -Force $ROOT_PATH\tmp\download\bash
+if (Test-Path -Path $ROOT_PATH\tmp\downloads\bash ) {
+    Remove-Item -r -Force $ROOT_PATH\tmp\downloads\bash
 }
 
 $packages = "bash-completion", `
@@ -39,7 +39,7 @@ foreach ($package in $packages) {
 
 (Get-Content $ROOT_PATH\resources\templates\generate_bash.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content $ROOT_PATH\tmp\generate_bash.wsb
 
-$mutex.WaitOne()
+$mutex.WaitOne() | Out-Null
 & $ROOT_PATH\tmp\generate_bash.wsb
 Start-Sleep 10
 Remove-Item $ROOT_PATH\tmp\generate_bash.wsb
