@@ -1,21 +1,21 @@
 ﻿
 $SOURCE = "M:\IT\dfirws"
 
-Write-Host "Installing and updating files."
-Write-Host "Update downloads."
+Write-Output "Installing and updating files."
+Write-Output "Update downloads."
 Robocopy.exe /MT:96 /MIR "$SOURCE\dfirws\downloads" .\downloads  > $null
-Write-Host "Update mount."
+Write-Output "Update mount."
 Robocopy.exe /MT:96 /MIR "$SOURCE\dfirws\mount" .\mount > $null
-Write-Host "Update setup."
+Write-Output "Update setup."
 Robocopy.exe /MT:96 /MIR "$SOURCE\dfirws\setup" .\setup /XF "config.txt" > $null
-Write-Host "Update other files."
+Write-Output "Update other files."
 Copy-Item "$SOURCE\dfirws\README.md" .\README.md > $null
 Copy-Item "$SOURCE\dfirws\createSandboxConfig.ps1" .\createSandboxConfig.ps1 > $null
 Copy-Item "$SOURCE\dfirws\dfirws.wsb.template" .\dfirws.wsb.template > $null
 
 if ( -not (Test-Path -Path dfirws.wsb -PathType Leaf )) {
 	.\createSandboxConfig.ps1
-	Write-Host "Created wsb configuration"
+	Write-Output "Created wsb configuration"
 }
 
 $folders = "local", "readonly", "readwrite"
@@ -29,10 +29,10 @@ foreach ($folder in $folders) {
 Copy-Item "$SOURCE\dfirws\local\example-customize.ps1" .\local\example-customize.ps1 > $null
 
 if($Null -eq (Get-Process "WindowsSandbox" -ea SilentlyContinue) ){
-	Write-Host "Starting sandbox."
+	Write-Output "Starting sandbox."
 	.\dfirws.wsb
 } else {
-	Write-Host "Sandbox is running."
+	Write-Output "Sandbox is running."
 }
 
 if ($MyInvocation.InvocationName -eq "&") {
