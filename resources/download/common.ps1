@@ -33,13 +33,13 @@ function Get-FileFromUri {
                 $retries--
                 Write-SynchronizedLog "Waiting 10 seconds before retrying. Retries left: $retries"
                 Start-Sleep -Seconds 10
- 
+
             } else {
                 $exception = $_.Exception
                 throw $exception
             }
         }
-    }        
+    }
     $result = rclone copyto --verbose --checksum $TmpFilePath $FilePath 2>&1 | Out-String
     Write-SynchronizedLog "$result"
     Remove-Item $TmpFilePath
