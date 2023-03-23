@@ -47,6 +47,7 @@ Set-Location C:\
     extract-msg `
     fonttools `
     hachoir `
+    ipwrangle `
     jinja2 `
     jsbeautifier `
     LnkParse3 `
