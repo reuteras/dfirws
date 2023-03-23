@@ -1,16 +1,6 @@
-
+# Always start with Python venv
 if ( Test-Path C:\venv ) {
     C:\venv\Scripts\Activate.ps1
-}
-
-# Use git to diff to files
-function Compare-File1AndFile2 ($file1, $file2) {
-    git diff $file1 $file2
-}
-Set-Alias gdiff Compare-File1AndFile2
-
-function tailf {
-    Get-Content -Wait $args
 }
 
 function Copy-Node {
@@ -34,7 +24,7 @@ function Restore-Quarantine {
 
 	if (Test-Path "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip") {
 		Remove-Item -r -Force "C:\tmp\Quarantine" > $null 2>&1
-		& 'C:\Program Files\7-Zip\7z.exe' x "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip" -oc:\tmp > $null
+		& "$env:ProgramFiles\7-Zip\7z.exe" x "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip" -oc:\tmp > $null
 		if (!(Test-Path "C:\tmp\Quarantine")) {
 			Write-Output "Zip file didn't contain directory Quarantine."
 			return
@@ -50,11 +40,8 @@ function Restore-Quarantine {
 }
 
 # Make Windows be more like Linux :)
-Set-Alias less more
-Set-Alias grep findstr
-Set-Alias tail Get-Content
-
-# Python
+Set-Alias gdiff "$env:ProgramFiles\Git\usr\bin\diff.exe"
+Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
 
 # Comment this line to see warnings from Python
 $env:PYTHONWARNINGS="ignore"
