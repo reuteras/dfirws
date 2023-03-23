@@ -1,11 +1,4 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
-# Ensure that we have a log directory and a clean log file
-if (! (Test-Path -Path "$PSScriptRoot\..\..\log" )) {
-    New-Item -ItemType Directory -Force -Path "$PSScriptRoot\..\..\log" > $null
-}
-if (! (Test-Path -Path "$PSScriptRoot\..\..\log\log.txt" )) {
-    Get-Date > "$PSScriptRoot\..\..\log\log.txt"
-}
 
 function Get-FileFromUri {
     Param (
@@ -17,41 +10,40 @@ function Get-FileFromUri {
     $TmpFilePath= "$PSScriptRoot\..\..\tmp\$CleanPath"
     $FilePath = "$PSScriptRoot\..\..\$CleanPath"
 
-    # Make sure the destination directory exists
-    # System.IO.FileInfo works even if the file/dir doesn't exist, which is better then get-item which requires the file to exist
     If (! ( Test-Path ([System.IO.FileInfo]$FilePath).DirectoryName ) ) {
-        [void](New-Item ([System.IO.FileInfo]$FilePath).DirectoryName -force -type directory)
+        New-Item ([System.IO.FileInfo]$FilePath).DirectoryName -force -type directory | Out-Null
     }
 
     If (! ( Test-Path ([System.IO.FileInfo]$TmpFilePath).DirectoryName ) ) {
-        [void](New-Item ([System.IO.FileInfo]$TmpFilePath).DirectoryName -force -type directory)
+        New-Item ([System.IO.FileInfo]$TmpFilePath).DirectoryName -force -type directory | Out-Null
     }
 
-    # See if this file exists
-    $downloader = New-Object System.Net.WebClient
-    $downloader.Headers.add("user-agent", "Wget x64")
-    if ( -not (Test-Path $FilePath) ) {
-        # Use simple download
-        Write-Output "Downloading new file $FilePath." >> .\log\log.txt
-        $downloader.DownloadFile($uri, $FilePath)
-    } else {
+    $retries = 3
+    $ProgressPreference = 'SilentlyContinue'
+    while($true) {
         try {
-            Write-Output "Downloading file $FilePath." >> .\log\log.txt
-            $downloader.DownloadFile($uri, $TmpFilePath)
-            rclone copyto --verbose --checksum $TmpFilePath $FilePath >> .\log\log.txt 2>&1
-            Remove-Item $TmpFilePath
-        } catch [System.Net.WebException] {
-            # Check for a 304
-            if ($_.Exception.Response.StatusCode -eq [System.Net.HttpStatusCode]::NotModified) {
-                Write-Output "$FilePath not modified, not downloading..." >> .\log\log.txt
+            Invoke-WebRequest $uri -UserAgent "Wget x64" -OutFile $TmpFilePath
+            Write-SynchronizedLog "Downloaded $uri to $FilePath."
+            break
+        }
+        catch {
+            $exceptionMessage = $_.Exception.Message
+            Write-SynchronizedLog "Failed to download '$uri': $exceptionMessage"
+            if ($retries -gt 0) {
+                $retries--
+                Write-SynchronizedLog "Waiting 10 seconds before retrying. Retries left: $retries"
+                Start-Sleep -Seconds 10
+ 
             } else {
-                # Unexpected error
-                $Status = $_.Exception.Response.StatusCode
-                $msg = $_.Exception
-                Write-Output "Error dowloading $FilePath, Status code: $Status - $msg" >> .\log\log.txt
+                $exception = $_.Exception
+                throw $exception
             }
         }
-    }
+    }        
+    $result = rclone copyto --verbose --checksum $TmpFilePath $FilePath 2>&1 | Out-String
+    Write-SynchronizedLog "$result"
+    Remove-Item $TmpFilePath
+    $ProgressPreference = 'Continue'
 }
 
 function Get-DownloadUrl {
@@ -98,7 +90,7 @@ function Get-GitHubRelease {
         }
     }
 
-    Write-Output "Using $url for $repo." >> .\log\log.txt
+    Write-SynchronizedLog "Using $url for $repo."
     Get-FileFromUri -uri $url -FilePath $path
 }
 
@@ -131,18 +123,46 @@ function Get-DownloadUrlFromPage {
     return Invoke-WebRequest -Uri "$url" -UseBasicParsing | Select-String -Pattern "$regex" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
 }
 
-function Get-Sandbox {
-    param ()
+function Get-DownloadUrlMSYS {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [string]
+        $package
+    )
 
-    Get-Process WindowsSandboxClient 2> $null
+    $base = "https://repo.msys2.org/msys/x86_64/"
+    $package = '"' + $package + "-[0-9]"
+    $url = curl --silent $base |
+        findstr "$package" |
+        findstr /v ".sig" |
+        ForEach-Object { ($_ -split '"')[1]} |
+        ForEach-Object {
+            if ($_ -match '(.+)-([0-9.]+)-([0-9]+)-(.+)\.pkg\.tar\.zst') {
+                [PSCustomObject]@{
+                    FileName    = $_
+                    Name        = $matches[1]
+                    Version     = [System.Version]::Parse($matches[2])
+                    Release     = [int]::Parse($matches[3])
+                    Architecture = $matches[4]
+                }
+            } else {
+                [PSCustomObject]@{
+                    FileName    = $_
+                }
+            }
+        } |
+        Sort-Object -Property Version, Release -Descending |
+        Select-Object -First 1
+    return $base + $url.FileName
 }
 
 function Stop-SandboxWhenDone {
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter()]
-        [string]
-        $path
+        [string]$path,
+        [System.Threading.Mutex] $Mutex
     )
 
     while ($true ) {
@@ -151,12 +171,40 @@ function Stop-SandboxWhenDone {
             if ( Test-Path $path ) {
                 if($PSCmdlet.ShouldProcess($file.Name)) {
                     (Get-Process WindowsSandboxClient).Kill()
+                    Remove-Item -Force "$path"
+                    $mutex.ReleaseMutex()
+                    $mutex.Dispose()
                 }
             }
             Start-Sleep 1
         } else {
+            $mutex.ReleaseMutex()
+            $mutex.Dispose()
             return
         }
     }
 
+}
+
+function Write-SynchronizedLog {
+    param (
+        [string]$Message,
+        [string]$Path = "$PSScriptRoot\..\..\log\log.txt"
+    )
+
+    $logMutex = New-Object -TypeName 'System.Threading.Mutex' -ArgumentList $false, 'Global\dfirwsLogMutex'
+
+    try {
+        $result = $logMutex.WaitOne()
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $fullMessage = "$timestamp - $Message"
+        Add-Content -Path $Path -Value $fullMessage
+    }
+    finally {
+        $result = $logMutex.ReleaseMutex()
+    }
+
+    if (!$result) {
+        Write-Debug "Error"
+    }
 }
