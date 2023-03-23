@@ -25,10 +25,12 @@ foreach ($repourl in $repourls) {
     $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\.git$" }
     if ( Test-Path -Path $repo ) {
         Set-Location $repo
-        git pull >> ..\..\..\log\log.txt 2>&1
+        $result = git pull 2>&1
+        Write-SynchronizedLog "$result"
         Set-Location ..
     } else {
-        git clone $repourl >> ..\..\log\log.txt 2>&1
+        $result = git clone $repourl 2>&1
+        Write-SynchronizedLog "$result"
     }
 }
 
