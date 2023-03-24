@@ -4,8 +4,8 @@ $CURRENT="$PWD"
 
 Set-Location "$SOURCE_DIRECTORY"
 
-Start-Process -Wait "$env:ProgramFiles\7-Zip\7z.exe" -Argumentlist "a dfirws.zip .\downloads .\mount .\setup"
-Get-Job | Recieve-Job
+Start-Process -Wait 'C:\Program Files\7-Zip\7z.exe' -Argumentlist "a dfirws.zip .\downloads .\mount .\setup"
+Get-Job | Receive-Job
 Get-Job | Remove-Job
 Copy-Item dfirws.zip $CURRENT
 Remove-Item -Force dfirws.zip
