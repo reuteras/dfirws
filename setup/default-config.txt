@@ -36,7 +36,9 @@ $WSDFIR_UNIEXTRACT="No"
 $WSDFIR_VSCODE="Yes"
 # Install Visual Studio Code PowerShell extension
 $WSDFIR_VSCODE_POWERSHELL="Yes"
-# Link to installed x64dbg 
+# Install Windows loopback adapter on Windows 10. Doesn't work on Windows 11 at the moment.
+$WSDFIR_W10_LOOPBACK="No"
+# Link to installed x64dbg
 $WSDFIR_X64DBG="Yes"
 # Install Zui 
 $WSDFIR_ZUI="No"

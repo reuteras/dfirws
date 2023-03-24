@@ -1,5 +1,8 @@
 # DFIRWS
 
+$WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
+#$WIN11=(Get-ComputerInfo | Select-Object -expand OsName) -match 11
+
 # Start logging
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $TEMP = "C:\tmp"
@@ -314,6 +317,11 @@ if ($WSDFIR_NPP -eq "Yes") {
  }
 
 # Last commands
+
+if (($WSDFIR_W10_LOOPBACK -eq "Yes") -and ($WIN10)) {
+    & "C:\Users\WDAGUtilityAccount\Documents\tools\utils\devcon.exe" install $env:windir\inf\netloop.inf *msloop
+}
+
 if ($WSDFIR_LOKI -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "C:\downloads\loki.zip" -o"$env:ProgramFiles\"
     Add-ToUserPath "$env:ProgramFiles\loki"

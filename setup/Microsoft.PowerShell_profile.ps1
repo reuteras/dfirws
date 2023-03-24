@@ -3,10 +3,28 @@ if ( Test-Path C:\venv ) {
     C:\venv\Scripts\Activate.ps1
 }
 
+function Copy-Fakenet {
+	Param (
+        [string]$DestinationPath = "."
+    )
+
+	if (!(Test-Path "$DestinationPath")) {
+		mkdir "$DestinationPath"
+	}
+
+	Copy-Item -r C:\Tools\fakenet\configs\ "$DestinationPath"
+	Copy-Item -r C:\Tools\fakenet\defaultFiles\ "$DestinationPath"
+	Copy-Item -r C:\Tools\fakenet\listeners\ "$DestinationPath"
+}
+
 function Copy-Node {
 	Param (
         [string]$DestinationPath = "."
     )
+
+	if (!(Test-Path "$DestinationPath")) {
+		mkdir "$DestinationPath"
+	}
 
 	Copy-Item -r C:\Tools\node "$DestinationPath"
 }
