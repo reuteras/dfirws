@@ -18,5 +18,5 @@ if (! (Test-Path setup)) {
 	Remove-Item dfirws.zip
 }
 
-Copy-Item "$SOURCE\dfirws\update_and_run.ps1" .\update_and_run.ps1 > $null 
+Copy-Item "$SOURCE\dfirws\update_and_run.ps1" .\update_and_run.ps1 > $null
 .\update_and_run.ps1
