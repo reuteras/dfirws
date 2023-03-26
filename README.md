@@ -1,12 +1,12 @@
 # DFIR in a Windows Sandbox - dfirws
 
-DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. By default Windows Defender isn't running in the sandbox which makes your life easier. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
+DFIRWS is an easy way to do DFIR work in a [Windows Sandbox][wsa]. This can be useful if you can't install tools on your computer but are allowed to run a Windows Sandbox. By default Windows Defender isn't running in the sandbox which makes it easier to analyze malware. The scripts should work in Windows Sandbox on both Windows 10 and Windows 11.
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 ## Requirements
 
-You need to have git and rclone installed to download files and resources. 7-zip must be installed to extract files. Install the tools you miss with
+You need to have git installed to download files and resources. 7-zip must be installed to extract files. Then rclone is used to copy only new files. Install the tools you miss with
 
 ```PowerShell
 winget install 7zip.7zip
@@ -14,13 +14,21 @@ winget install Git.Git
 winget install Rclone.Rclone
 ```
 
-Windows Sandbox must be enabled on the host. You can enable it by running the Windows tool **Add and remove Windows features** and adding Windows Sandbox.
+Other requirements are handled by starting different Windows sandboxes during download.
+
+Windows Sandbox must be enabled on the host. You can enable it by running the Windows tool **Add and remove Windows features** and adding Windows Sandbox. An alternative is to open a windows terminal as adminstrator and run:
+
+```PowerShell
+Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
+```
 
 If you haven't enabled the option to run PowerShell scripts you have to start a Windows Terminal or PowerShell prompt and run
 
 ```PowerShell
 Set-executionPolicy -ExecutionPolicy bypass
 ```
+
+For more information about requirements for the sandbox look at Microsofts page [Windows Sandbox][wsa].
 
 ## Installation and configuration
 
@@ -31,7 +39,7 @@ git clone https:/github.com/reuteras/dfirws.git
 cd dfirws
 ```
 
-Start the download of tools that are included in the sandbox. It will take some time since all tools are downloaded to disk. After the download the tools will be extracted and prepared for faster usage in the sandbox. Total space is currently around 8 GB. Download and preparation are done via
+Start the download of tools that are included in the sandbox. Sandboxes will be started to run and install packages for Python and NodeJS so don't have any sandbox running since Microsoft only allows one sandbox running. It will take some time since all tools are downloaded to disk. After the download the tools will be extracted and prepared for faster usage in the sandbox. Total space is currently around 8 GB. Download and preparation are done via
 
 ```PowerShell
 .\downloadFiles.ps1
@@ -43,15 +51,20 @@ If you like to have a more detailed view off the progress during the download (o
 ls .\log\ | ForEach-Object -Parallel { Get-Content -Path $_ -Wait }
 ```
 
-Create a configuration file for the sandbox with your local path by running the following command:
+After download is finished you can create configuration files for the sandbox with your local path by running the following command:
 
 ```PowerShell
 .\createSandboxConfig.ps1
 ```
 
-This will also create *./setup/config.txt*. Select the tools you would like to be available in the sandbox here. All tools will still be downloaded and can be installed later in the sandbox if needed. You can also turn off Sysmon and specify the configuration file to use. By default the sandbox will use the old expanded format for right-click but that can be changed back.
+Two different configurations will be created:
 
-By default this sandbox will have networking and clipboard redirection off. If you like to enable clipboard you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
+- dfirws.wsb - no network
+- network_dfirws.wsb - network enabled
+
+This will also create *./setup/config.txt* file. Select the tools you would like to be available in the sandbox here. All tools will still be downloaded and can be installed later in the sandbox if needed. You can also turn off Sysmon and specify the configuration file to use. By default the sandbox will use the old expanded format for right-click but that can be changed.
+
+By default this sandbox will have clipboard redirection off as well as limit other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
 
 ## Usage
 
