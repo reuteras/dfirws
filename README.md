@@ -39,7 +39,8 @@ git clone https:/github.com/reuteras/dfirws.git
 cd dfirws
 ```
 
-Start the download of tools that are included in the sandbox. Sandboxes will be started to run and install packages for Python and NodeJS so don't have any sandbox running since Microsoft only allows one sandbox running. It will take some time since all tools are downloaded to disk. After the download the tools will be extracted and prepared for faster usage in the sandbox. Total space is currently around 8 GB. Download and preparation are done via
+Start the download of tools that are included in the sandbox. Sandboxes will be started to run and install packages for Python and NodeJS so don't have any sandbox running since Microsoft only allows one sandbox running. It will take some time since all tools are downloaded to disk. After download the tools will be extracted and prepared for faster usage in the sandbox.
+Total space is currently around 8 GB. Download and preparation are done via
 
 ```PowerShell
 .\downloadFiles.ps1
