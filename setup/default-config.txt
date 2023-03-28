@@ -85,3 +85,6 @@ $WSDFIR_SYSMON_CONF="C:\downloads\sysmonconfig-export.xml"
 
 # Old school right-click expanded by default
 $WSDFIR_RIGHTCLICK="Yes"
+
+# Dark mode
+$WSDFIR_DARK="Yes"

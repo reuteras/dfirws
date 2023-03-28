@@ -101,6 +101,12 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sLongDate -valu
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortTime -value "HH:mm"
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sTimeFormat -value "HH:mm:ss"
 
+# Dark mode
+
+if ($WSDFIR_DARK -eq "Yes") {
+    Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
+}
+
 # Show file extensions
 Write-Output "Show file extensions"
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f
