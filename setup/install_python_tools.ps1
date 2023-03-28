@@ -36,6 +36,7 @@ Set-Location C:\
 &pip2pi ./tmp/pip `
     aiohttp[speedups] `
     cabarchive `
+    capstone `
     chepy[extras] `
     colorama `
     dfir-unfurl `
@@ -47,9 +48,9 @@ Set-Location C:\
     extract-msg `
     fonttools `
     hachoir `
-    ipwrangle `
     jinja2 `
     jsbeautifier `
+    keystone-engine `
     LnkParse3 `
     lxml `
     maldump `
@@ -87,6 +88,7 @@ Set-Location C:\
     time-decode `
     tqdm `
     uncompyle6 `
+    unicorn `
     unpy2exe `
     urllib3 `
     visidata `
