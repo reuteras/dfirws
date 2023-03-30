@@ -78,6 +78,7 @@ Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64
 Remove-Item $TOOLS\license.txt
 
+rclone.exe sync --verbose --checksum .\tmp\pip .\downloads\pip
 rclone.exe sync --verbose --checksum .\tmp\node .\mount\Tools\node
 rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv
 

@@ -3,6 +3,8 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $SETUP_PATH="C:\downloads"
 $TEMP="C:\tmp"
 
+. C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
+
 Write-DateLog "Creating Python venv in Sandbox." >> "C:\log\python.txt" 2>&1
 
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
@@ -48,10 +50,10 @@ Set-Location C:\
     extract-msg `
     fonttools `
     hachoir `
+    ijson `
     jinja2 `
     jsbeautifier `
     keystone-engine `
-    knowsmore `
     LnkParse3 `
     lxml `
     maldump `
@@ -61,6 +63,7 @@ Set-Location C:\
     msoffcrypto-tool `
     name-that-hash `
     neo4j `
+    neo4j-driver `
     numpy `
     olefile `
     oletools[full] `
@@ -114,12 +117,15 @@ Get-ChildItem . -Filter tomlkit* | Foreach-Object { python -m pip install --disa
 Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
 Get-ChildItem . -Filter *.whl | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
 Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
-Copy-Item -r C:\git\threat-intel $TEMP
+Copy-Item -r C:\git\bloodhound-import $TEMP
 Copy-Item -r C:\git\dotnetfile $TEMP
-Set-Location $TEMP\threat-intel\tools\one-extract
-python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
+Copy-Item -r C:\git\threat-intel $TEMP
+Set-Location $TEMP\bloodhound-import
+python -m pip install --disable-pip-version-check --no-deps --no-build-isolation .
 Set-Location $TEMP\dotnetfile
 python setup.py install >> "C:\log\python.txt" 2>&1
+Set-Location $TEMP\threat-intel\tools\one-extract
+python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
 deactivate
 Write-DateLog "Python venv done." >> "C:\log\python.txt" 2>&1
 

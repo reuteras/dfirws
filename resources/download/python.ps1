@@ -5,9 +5,9 @@ param (
 $ScriptRoot = "$ScriptRoot\resources\download"
 $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
-Write-DateLog "Download Python pip packages." > $ROOT_PATH\log\python.txt
-
 . $ScriptRoot\common.ps1
+
+Write-DateLog "Download Python pip packages." > $ROOT_PATH\log\python.txt
 
 Write-DateLog "Repo needed by python." >> $ROOT_PATH\log\python.txt
 Get-GitHubRelease -repo "msuhanov/dfir_ntfs" -path ".\downloads\dfir_ntfs.tar.gz" -match tar.gz

@@ -1,8 +1,8 @@
+. $PSScriptRoot\common.ps1
+
 Write-DateLog "Download Didier Stevens tools."
 
 New-Item -ItemType Directory -Force -Path .\downloads\DidierStevens > $null
-
-. $PSScriptRoot\common.ps1
 
 $DidierStevensSuite = `
     "1768.json", `

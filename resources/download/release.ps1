@@ -1,6 +1,6 @@
-Write-DateLog "Download releases from GitHub."
-
 . $PSScriptRoot\common.ps1
+
+Write-DateLog "Download releases from GitHub."
 
 Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path ".\downloads\beaconhunter.zip" -match BeaconHunter.zip
 Get-GitHubRelease -repo "Bioruebe/UniExtract2" -path ".\downloads\uniextract2.zip" -match UniExtract

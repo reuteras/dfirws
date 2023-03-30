@@ -36,7 +36,7 @@ function Restore-Quarantine {
 
 
 	if (Test-Path "C:\ProgramData\Microsoft\Windows Defender\Quarantine" ) {
-		Write-DateLog "Directory C:\ProgramData\Microsoft\Windows Defender\Quarantine exists. Remove and try again."
+		Write-Output "Directory C:\ProgramData\Microsoft\Windows Defender\Quarantine exists. Remove and try again."
 		return
 	}
 
@@ -44,7 +44,7 @@ function Restore-Quarantine {
 		Remove-Item -r -Force "C:\tmp\Quarantine" > $null 2>&1
 		& "$env:ProgramFiles\7-Zip\7z.exe" x "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine.zip" -oc:\tmp > $null
 		if (!(Test-Path "C:\tmp\Quarantine")) {
-			Write-DateLog "Zip file didn't contain directory Quarantine."
+			Write-Output "Zip file didn't contain directory Quarantine."
 			return
 		}
 		Copy-Item -r "C:\tmp\Quarantine" "C:\ProgramData\Microsoft\Windows Defender"
@@ -54,7 +54,7 @@ function Restore-Quarantine {
 		return
 	}
 
-	Write-DateLog "No directory ~\Desktop\readonly\Quarantine or file ~\Desktop\readonly\Quarantine.zip!"
+	Write-Output "No directory ~\Desktop\readonly\Quarantine or file ~\Desktop\readonly\Quarantine.zip!"
 }
 
 # Make Windows be more like Linux :)

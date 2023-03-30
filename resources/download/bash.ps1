@@ -5,9 +5,9 @@ param (
 $ScriptRoot = "$ScriptRoot\resources\download"
 $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
-Write-DateLog "Download packages for Git for Windows (bash)."
-
 . $ScriptRoot\common.ps1
+
+Write-DateLog "Download packages for Git for Windows (bash)."
 
 $mutexName = "Global\dfirwsMutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)

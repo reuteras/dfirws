@@ -1,6 +1,6 @@
-Write-DateLog "Download files via HTTP."
-
 . $PSScriptRoot\common.ps1
+
+Write-DateLog "Download files via HTTP."
 
 # Get uri for latest nuget - ugly
 $choco = Get-ChocolateyUrl chocolatey
