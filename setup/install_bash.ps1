@@ -1,7 +1,7 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # This script runs in a Windows sandbox to uncompress zst files.
-Write-Output "Uncompress zst files for Git for Windows (bash)" > "C:\log\bash.txt" 2>&1
+Write-DateLog "Uncompress zst files for Git for Windows (bash)" > "C:\log\bash.txt" 2>&1
 
 # Set variables
 $SETUP_PATH="C:\downloads"
@@ -31,7 +31,7 @@ Get-ChildItem -Include * |
     }
 
 Get-Job | Receive-Job | Out-Default >> "C:\log\bash.txt" 2>&1
-Write-Output "Uncompress of zst files done." >> "C:\log\bash.txt" 2>&1
+Write-DateLog "Uncompress of zst files done." >> "C:\log\bash.txt" 2>&1
 Write-Output "" > C:\bash\done
 
 shutdown /s /t 1 /c "Done with uncompressing zst files." /f /d p:4:1

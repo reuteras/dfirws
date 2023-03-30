@@ -1,7 +1,7 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # This script runs in a Windows sandbox to prebuild the venv environment.
-Write-Output "Install npm packages" >> "C:\log\npm.txt" 2>&1
+Write-DateLog "Install npm packages" >> "C:\log\npm.txt" 2>&1
 
 # Set variables
 $SETUP_PATH="C:\downloads"
@@ -25,9 +25,9 @@ Move-Item * ..
 
 Set-Location $TOOLS\node
 Remove-Item -r -Force node-v*
-Write-Output "Init npm." >> "C:\log\npm.txt" 2>&1
+Write-DateLog "Init npm." >> "C:\log\npm.txt" 2>&1
 .\npm init -y  | Out-String -Stream >> "C:\log\npm.txt" 2>&1
-Write-Output "Add npm packages" >> "C:\log\npm.txt" 2>&1
+Write-DateLog "Add npm packages" >> "C:\log\npm.txt" 2>&1
 # Obfuscate Javascript
 .\npm install --global deobfuscator | Out-String -Stream >> "C:\log\npm.txt" 2>&1
 # Create document
@@ -35,7 +35,7 @@ Write-Output "Add npm packages" >> "C:\log\npm.txt" 2>&1
 
 Get-Job | Receive-Job
 
-Write-Output "Node installation done."
+Write-DateLog "Node installation done."
 Write-Output "" > $TOOLS\node\done
 
 shutdown /s /t 1 /c "Done with installing npm packages." /f /d p:4:1
