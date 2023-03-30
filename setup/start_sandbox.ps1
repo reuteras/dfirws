@@ -50,6 +50,7 @@ if (($WSDFIR_JAVA_JDK11 -eq "Yes") -and ($WSDFIR_NEO4J -eq "Yes")) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\neo4j.zip" -o"$env:ProgramFiles"
     Move-Item $env:ProgramFiles\neo4j-community* $env:ProgramFiles\neo4j
     Add-ToUserPath "$env:ProgramFiles\neo4j\bin"
+    & "$env:ProgramFiles\neo4j\bin\neo4j-admin" set-initial-password neo4j
     Copy-Item -Recurse "$TOOLS\neo4j" "$env:ProgramFiles"
 }
 
