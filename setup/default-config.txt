@@ -14,12 +14,16 @@ $WSDFIR_HXD="Yes"
 $WSDFIR_GIT="Yes"
 # Install Java - also affects Ghidra and msgviewer
 $WSDFIR_JAVA="Yes"
+# Install OpenJDK 11 for neo4j
+$WSDFIR_JAVA_JDK11="No"
 # Install LibreOffice
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki
 $WSDFIR_LOKI="Yes"
 # Install Notepad++
 $WSDFIR_NPP="Yes"
+# Install neo4j - requires WSDFIR_JAVA_JDK11
+$WSDFIR_NEO4J="No"
 # Install PDFStream Dumper
 $WSDFIR_PDFSTREAM="Yes"
 # Add PersistenceSniper

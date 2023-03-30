@@ -12,7 +12,7 @@ Start-Transcript -Append "$TEMP\dfirws_log.txt"
 # Import common functions
 . C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
 
-Write-Output "start_sandbox.ps1"
+Write-DateLog "start_sandbox.ps1"
 
 # Bypass the execution policy for the current session
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
@@ -39,6 +39,18 @@ Start-Process -Wait msiexec -ArgumentList "/i $TEMP\7zip.msi /qn /norestart"
 if ($WSDFIR_JAVA -eq "Yes") {
     Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
     Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
+}
+
+if ($WSDFIR_JAVA_JDK11 -eq "Yes") {
+    Copy-Item "$SETUP_PATH\microsoft-jdk-11.msi" "$TEMP\microsoft-jdk-11.msi"
+    Start-Process -Wait msiexec -ArgumentList "/i $TEMP\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=C:\java /qn /norestart"
+}
+
+if (($WSDFIR_JAVA_JDK11 -eq "Yes") -and ($WSDFIR_NEO4J -eq "Yes")) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\neo4j.zip" -o"$env:ProgramFiles"
+    Move-Item $env:ProgramFiles\neo4j-community* $env:ProgramFiles\neo4j
+    Add-ToUserPath "$env:ProgramFiles\neo4j\bin"
+    Copy-Item -Recurse "$TOOLS\neo4j" "$env:ProgramFiles"
 }
 
 if ($WSDFIR_LIBREOFFICE -eq "Yes") {
@@ -108,7 +120,7 @@ if ($WSDFIR_DARK -eq "Yes") {
 }
 
 # Show file extensions
-Write-Output "Show file extensions"
+Write-DateLog "Show file extensions"
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\HideFileExt /v DefaultValue /t REG_DWORD /d 0 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL /v DefaultValue /t REG_DWORD /d 1 /f
@@ -129,7 +141,7 @@ reg import $HOME\Documents\tools\registry.reg
 Stop-Process -ProcessName Explorer -Force
 
 # Add to PATH
-Write-Output "Add to PATH"
+Write-DateLog "Add to PATH"
 Add-ToUserPath "$env:ProgramFiles\7-Zip"
 Add-ToUserPath "$env:ProgramFiles\bin"
 Add-ToUserPath "$env:ProgramFiles\Git\bin"
@@ -180,7 +192,7 @@ if ($WSDFIR_UNIEXTRACT -eq "Yes") {
     Add-ToUserPath "C:\Tools\UniExtract"
 }
 
-Write-Output "Add shortcuts (shorten link names first)"
+Write-DateLog "Add shortcuts (shorten link names first)"
 #& reg add "HKU\%1\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "link" /t REG_BINARY /d 00000000 /f
 if ($WSDFIR_BEACONHUNTER -eq "Yes") {
     Copy-Item "$SETUP_PATH\BeaconHunter.exe" "$env:ProgramFiles\bin"
@@ -206,13 +218,13 @@ if ($WSDFIR_DNSPY64 -eq "Yes") {
 if ($WSDFIR_FLV -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
 }
-if ( ($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_GHIDRA -eq "Yes") ) {
+if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_GHIDRA -eq "Yes")) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
 }
 if ($WSDFIR_HXD -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\HxD.lnk" -DestinationPath "$env:ProgramFiles\HxD\HxD.exe"
 }
-if ( ($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
+if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
 }
 if ($WSDFIR_MALCAT -eq "Yes") {
@@ -344,5 +356,5 @@ if ($WSDFIR_SYSMON -eq "Yes") {
     & "$TOOLS\sysinternals\Sysmon64.exe" -accepteula -i "$WSDFIR_SYSMON_CONF"
 }
 
-Write-Output "helpers.ps1 done"
+Write-DateLog "helpers.ps1 done"
 Stop-Transcript

@@ -3,7 +3,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $SETUP_PATH="C:\downloads"
 $TEMP="C:\tmp"
 
-Write-Output "Creating Python venv in Sandbox." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Creating Python venv in Sandbox." >> "C:\log\python.txt" 2>&1
 
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
@@ -18,7 +18,7 @@ Remove-Item -r "C:\venv\share" > $null 2>&1
 Remove-Item -r "C:\venv\pyvenv.cfg" > $null 2>&1
 Get-ChildItem -Path $TEMP\pip\ -Include *.* -Recurse | ForEach-Object { $_.Delete()} > $null 2>&1
 
-Write-Output "Install Python in Sandbox." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt" 2>&1
 Start-Process "$SETUP_PATH\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
 Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
 
@@ -27,11 +27,11 @@ $PYTHON_BIN="$env:ProgramFiles\Python310\python.exe"
 &"$PYTHON_BIN" -m venv C:\pip2pi
 
 &"C:\pip2pi\Scripts\Activate.ps1"
-Write-Output "Install pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Install pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
 &python -m pip install -U pip >> "C:\log\python.txt" 2>&1
 &python -m pip install pip2pi >> "C:\log\python.txt" 2>&1
 
-Write-Output "Download packages with pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Download packages with pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
 Set-Location C:\
 &pip2pi ./tmp/pip `
     aiohttp[speedups] `
@@ -51,6 +51,7 @@ Set-Location C:\
     jinja2 `
     jsbeautifier `
     keystone-engine `
+    knowsmore `
     LnkParse3 `
     lxml `
     maldump `
@@ -59,6 +60,7 @@ Set-Location C:\
     msgpack `
     msoffcrypto-tool `
     name-that-hash `
+    neo4j `
     numpy `
     olefile `
     oletools[full] `
@@ -86,6 +88,7 @@ Set-Location C:\
     requests `
     setuptools `
     time-decode `
+    tomlkit `
     tqdm `
     uncompyle6 `
     unicorn `
@@ -96,17 +99,18 @@ Set-Location C:\
     XLMMacroDeobfuscator `
     xxhash `
     yara-python `
-    wheel 2>&1 | findstr /V "ERROR linking" >> "C:\log\python.txt" 2>&1
+    wheel 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
 
 deactivate
 
 Copy-Item "$SETUP_PATH\dfir_ntfs.tar.gz" "$TEMP\pip"
 
-Write-Output "Install packages in venv in sandbox." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Install packages in venv in sandbox." >> "C:\log\python.txt" 2>&1
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv"
 C:\venv\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
 Set-Location $TEMP\pip
 Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
+Get-ChildItem . -Filter tomlkit* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
 Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
 Get-ChildItem . -Filter *.whl | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
 Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
@@ -117,7 +121,7 @@ python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
 Set-Location $TEMP\dotnetfile
 python setup.py install >> "C:\log\python.txt" 2>&1
 deactivate
-Write-Output "Python venv done." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Python venv done." >> "C:\log\python.txt" 2>&1
 
 Write-Output "" > C:\venv\done
 

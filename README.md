@@ -114,6 +114,7 @@ The following tools are available.
 - [Malcat][mal]
 - [MessageViewer][mev]
 - [ncat][nca]
+- [neo4j][neo]
 - [Notepad++][not] with the following added plugins:
   - [comparePlus][ncp]
 - [PdfStream Dumper][psd]
@@ -195,6 +196,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [mev]: https://github.com/lolo101/MsgViewer
   [nca]: https://nmap.org/ncat/
   [ncp]: https://github.com/pnedev/comparePlus
+  [neo]: https://neo4j.com/
   [not]: https://notepad-plus-plus.org/
   [npc]: https://npcap.com/
   [peb]: https://github.com/hasherezade/pe-bear
