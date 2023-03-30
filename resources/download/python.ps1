@@ -5,11 +5,11 @@ param (
 $ScriptRoot = "$ScriptRoot\resources\download"
 $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
-Write-Output "Download Python pip packages." > $ROOT_PATH\log\python.txt
+Write-DateLog "Download Python pip packages." > $ROOT_PATH\log\python.txt
 
 . $ScriptRoot\common.ps1
 
-Write-Output "Repo needed by python." >> $ROOT_PATH\log\python.txt
+Write-DateLog "Repo needed by python." >> $ROOT_PATH\log\python.txt
 Get-GitHubRelease -repo "msuhanov/dfir_ntfs" -path ".\downloads\dfir_ntfs.tar.gz" -match tar.gz
 
 $mutexName = "Global\dfirwsMutex"
@@ -38,4 +38,4 @@ Remove-Item $ROOT_PATH\tmp\generate_venv.wsb
 
 Stop-SandboxWhenDone "$ROOT_PATH\tmp\venv\done" $mutex
 
-Write-Output "Pip packages done."
+Write-DateLog "Pip packages done."

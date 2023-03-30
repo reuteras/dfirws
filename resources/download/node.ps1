@@ -7,7 +7,7 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
 . $ScriptRoot\common.ps1
 
-Write-Output "Setup node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
+Write-DateLog "Setup node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
 
 $mutexName = "Global\dfirwsMutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)

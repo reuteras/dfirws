@@ -228,3 +228,12 @@ function Write-SynchronizedLog {
         Write-Debug "Error"
     }
 }
+
+function Write-DateLog {
+    param (
+        [string]$Message
+    )
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $fullMessage = "$timestamp - $Message"
+    Write-Output $fullMessage
+}

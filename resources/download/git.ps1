@@ -1,9 +1,9 @@
-Write-Output "Download git repositories"
+Write-DateLog "Download git repositories"
 
 . $PSScriptRoot\common.ps1
 
 if (! (Get-Command git )) {
-    Write-Output "Need git to checkout git repositories."
+    Write-DateLog "Need git to checkout git repositories."
     Exit
 }
 
@@ -11,6 +11,7 @@ New-Item -ItemType Directory -Force -Path mount\git > $null
 Set-Location mount\git
 
 $repourls = `
+    "https://github.com/gehaxelt/Python-dsstore.git", `
     "https://github.com/keydet89/Events-Ripper.git", `
     "https://github.com/last-byte/PersistenceSniper.git", `
     "https://github.com/Neo23x0/evt2sigma.git", `

@@ -1,4 +1,4 @@
-Write-Output "Download releases from GitHub."
+Write-DateLog "Download releases from GitHub."
 
 . $PSScriptRoot\common.ps1
 

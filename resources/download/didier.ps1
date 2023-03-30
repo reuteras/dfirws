@@ -1,4 +1,4 @@
-Write-Output "Download Didier Stevens tools."
+Write-DateLog "Download Didier Stevens tools."
 
 New-Item -ItemType Directory -Force -Path .\downloads\DidierStevens > $null
 

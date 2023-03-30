@@ -1,4 +1,4 @@
-Write-Output "Download files via HTTP."
+Write-DateLog "Download files via HTTP."
 
 . $PSScriptRoot\common.ps1
 
@@ -27,6 +27,10 @@ Get-FileFromUri -uri "https://downloads.pstwalker.com/pstwalker-portable" -FileP
 Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
 Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip"
 # Update the following when new versions are released
+# https://learn.microsoft.com/en-us/java/openjdk/download
+Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.18-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
+# https://neo4j.com/download-center/#community
+Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.18-windows.zip" -FilePath ".\downloads\neo4j.zip"
 Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.1/win/x86_64/LibreOffice_7.5.1_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe" -FilePath ".\downloads\python3.exe"
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.72.exe" -FilePath ".\downloads\npcap.exe"

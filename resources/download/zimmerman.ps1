@@ -1,4 +1,4 @@
-Write-Output "Download Zimmerman tools."
+Write-DateLog "Download Zimmerman tools."
 
 . $PSScriptRoot\common.ps1
 
