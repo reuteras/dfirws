@@ -12,7 +12,7 @@ mkdir $TOOLS\lib > $null 2>$1
 mkdir $TOOLS\Zimmerman > $null 2>$1
 
 if ( tasklist | findstr Sandbox ) {
-    Write-Output "Sandbox can't be running during install or upgrade."
+    Write-DateLog "Sandbox can't be running during install or upgrade."
     Exit
 }
 
@@ -40,25 +40,25 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 # The scripts git and http are needed by the Python script.
 # Most scripts need http.ps1.
 .\resources\download\http.ps1
-Write-Output "Download packages for Git for Windows (bash)."
+Write-DateLog "Download packages for Git for Windows (bash)."
 Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
-Write-Output "Setup node and install npm packages."
+Write-DateLog "Setup node and install npm packages."
 Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 .\resources\download\git.ps1
-Write-Output "Download Python pip packages."
+Write-DateLog "Download Python pip packages."
 Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 .\resources\download\release.ps1
 .\resources\download\didier.ps1
 .\resources\download\zimmerman.ps1
-Write-Output "Wait for build."
+Write-DateLog "Wait for build."
 Get-Job | Wait-Job | Out-Null
-Write-Output "Done waiting."
-Write-Output "Prepare downloaded files."
+Write-DateLog "Done waiting."
+Write-DateLog "Prepare downloaded files."
 $result = .\resources\download\unpack.ps1 2>&1
 Write-SynchronizedLog "$result"
-Write-Output "Copy files."
+Write-DateLog "Copy files."
 Copy-Item README.md .\downloads\
 Copy-Item .\resources\images\dfirws.jpg .\downloads\
 # done.txt is used to check last update in sandbox
 Write-Output "" > .\downloads\done.txt
-Write-Output "Download and preparations done."
+Write-DateLog "Download and preparations done."
