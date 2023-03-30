@@ -5,7 +5,7 @@ param (
 $ScriptRoot = "$ScriptRoot\resources\download"
 $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
-Write-Output "Download packages for Git for Windows (bash)."
+Write-DateLog "Download packages for Git for Windows (bash)."
 
 . $ScriptRoot\common.ps1
 
@@ -46,4 +46,4 @@ Remove-Item $ROOT_PATH\tmp\generate_bash.wsb
 
 Stop-SandboxWhenDone "$ROOT_PATH\downloads\bash\done" $mutex
 
-Write-Output "Git for Windows (bash) done."
+Write-DateLog "Git for Windows (bash) done."
