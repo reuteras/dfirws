@@ -81,6 +81,7 @@ Set-Location C:\
     protodeep `
     pycryptodome `
     pyelftools `
+    pyhindsight `
     pyOneNote `
     pypng `
     python-magic-bin `
@@ -103,6 +104,10 @@ Set-Location C:\
     xxhash `
     yara-python `
     wheel 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
+
+Set-Location C:\
+&pip2pi ./extra `
+    protobuf==3.* 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
 
 deactivate
 

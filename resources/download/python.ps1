@@ -23,6 +23,10 @@ if (! (Test-Path -Path $ROOT_PATH\tmp\venv )) {
     New-Item -ItemType Directory -Force -Path $ROOT_PATH\tmp\venv > $null
 }
 
+if (! (Test-Path -Path $ROOT_PATH\downloads\pip_extra )) {
+    New-Item -ItemType Directory -Force -Path $ROOT_PATH\downloads\pip_extra > $null
+}
+
 if (Test-Path -Path $ROOT_PATH\tmp\venv\done ) {
     Remove-Item $ROOT_PATH\tmp\venv\done > $null
 }
