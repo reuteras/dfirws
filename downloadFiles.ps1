@@ -11,7 +11,7 @@ mkdir $TOOLS\DidierStevens > $null 2>$1
 mkdir $TOOLS\lib > $null 2>$1
 mkdir $TOOLS\Zimmerman > $null 2>$1
 
-if ( tasklist | findstr Sandbox ) {
+if ( tasklist | findstr WindowsSandbox ) {
     Write-DateLog "Sandbox can't be running during install or upgrade."
     Exit
 }
