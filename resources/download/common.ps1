@@ -56,8 +56,8 @@ function Get-FileFromUri {
 # Function to get the download URL for a GitHub release
 function Get-DownloadUrl {
     Param (
-        [string]$releases,
-        [string]$match
+        [Parameter(Mandatory=$True)] [string]$releases,
+        [Parameter(Mandatory=$True)] [string]$match
     )
     try {
         # Retrieve the download URLs and filter them based on the provided regex match
@@ -76,9 +76,9 @@ function Get-DownloadUrl {
 # Function to download the specified GitHub release and save it to a specified file path
 function Get-GitHubRelease {
     Param (
-        [string]$repo,
-        [string]$path,
-        [string]$match
+        [Parameter(Mandatory=$True)] [string]$repo,
+        [Parameter(Mandatory=$True)] [string]$path,
+        [Parameter(Mandatory=$True)] [string]$match
     )
 
     # Construct the URL to get the latest release information
@@ -110,7 +110,7 @@ function Get-GitHubRelease {
 # Function to get the download URL for a Chocolatey package
 function Get-ChocolateyUrl {
     Param (
-        [string]$package
+        [Parameter(Mandatory=$True)] [string]$package
     )
 
     # Scrape the download URL from the Chocolatey package page
@@ -126,14 +126,9 @@ function Get-ChocolateyUrl {
 
 # Function to get the download URL from a specified web page, based on a regex pattern
 function Get-DownloadUrlFromPage {
-    [CmdletBinding()]
     param (
-        [Parameter()]
-        [string]
-        $url,
-        [Parameter()]
-        [regex]
-        $regex
+        [Parameter(Mandatory=$True)] [string]$url,
+        [Parameter(Mandatory=$True)] [regex]$regex
     )
 
     return Invoke-WebRequest -Uri "$url" -UseBasicParsing | Select-String -Pattern "$regex" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
@@ -141,11 +136,8 @@ function Get-DownloadUrlFromPage {
 
 # Function to get the download URL for an MSYS package
 function Get-DownloadUrlMSYS {
-    [CmdletBinding()]
     param (
-        [Parameter()]
-        [string]
-        $package
+        [Parameter(Mandatory=$True)] [string]$package
     )
 
     $base = "https://repo.msys2.org/msys/x86_64/"
@@ -178,9 +170,8 @@ function Get-DownloadUrlMSYS {
 function Stop-SandboxWhenDone {
     [CmdletBinding(SupportsShouldProcess)]
     param (
-        [Parameter()]
-        [string]$path,
-        [System.Threading.Mutex] $Mutex
+        [Parameter(Mandatory=$True)] [string]$path,
+        [Parameter(Mandatory=$True)] [System.Threading.Mutex] $Mutex
     )
 
     while ($true) {
@@ -208,8 +199,8 @@ function Stop-SandboxWhenDone {
 # Function to write a synchronized log to a specified file
 function Write-SynchronizedLog {
     param (
-        [string]$Message,
-        [string]$Path = "$PSScriptRoot\..\..\log\log.txt"
+        [Parameter(Mandatory=$True)] [string]$Message,
+        [Parameter(Mandatory=$false)] [string]$Path = "$PSScriptRoot\..\..\log\log.txt"
     )
 
     $logMutex = New-Object -TypeName 'System.Threading.Mutex' -ArgumentList $false, 'Global\dfirwsLogMutex'
@@ -229,9 +220,10 @@ function Write-SynchronizedLog {
     }
 }
 
+# Write a log with a timestamp
 function Write-DateLog {
     param (
-        [string]$Message
+        [Parameter(Mandatory=$True)] [string]$Message
     )
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $fullMessage = "$timestamp - $Message"
