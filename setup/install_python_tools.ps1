@@ -6,7 +6,7 @@ $TEMP="C:\tmp"
 . C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
 
 # Local function
-function Install-PythonPackages {
+function Install-PythonPackage {
     Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
     Get-ChildItem . -Filter tomlkit* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
     Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
@@ -14,7 +14,6 @@ function Install-PythonPackages {
     Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
     return
 }
-
 
 Write-DateLog "Creating Python venv in Sandbox." >> "C:\log\python.txt" 2>&1
 
@@ -128,7 +127,7 @@ C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
 Copy-Item "$SETUP_PATH\dfir_ntfs.tar.gz" "$TEMP\pip\default"
 
 Set-Location $TEMP\pip\default
-Install-PythonPackages
+Install-PythonPackage
 
 Copy-Item -r C:\git\dotnetfile $TEMP
 Set-Location $TEMP\dotnetfile
@@ -145,7 +144,7 @@ Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older pack
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-unfurl"
 C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
 Set-Location $TEMP\pip\dfir-unfurl
-Install-PythonPackages | Out-Null
+Install-PythonPackage | Out-Null
 Write-DateLog "Python venv dfir-unfurl done. Will update path and cache Cloudflare." >> "C:\log\python.txt" 2>&1
 
 $baseHtmlPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\templates\base.html"
