@@ -52,6 +52,8 @@ Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resou
 .\resources\download\zimmerman.ps1
 Write-DateLog "Wait for build."
 Get-Job | Wait-Job | Out-Null
+Get-Job | Receive-Job > .\log\jobs.txt
+Get-Job | Remove-Job | Out-Null
 Write-DateLog "Done waiting."
 Write-DateLog "Prepare downloaded files."
 $result = .\resources\download\unpack.ps1 2>&1
