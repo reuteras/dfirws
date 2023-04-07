@@ -19,6 +19,7 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\CyberChef.zip" -o"$TOOLS\CyberChef"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\debloat.zip" -o"$TOOLS\bin"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\DensityScout.zip" -o"$TOOLS"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dsq.zip" -o"$TOOLS\bin"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy32.zip" -o"$TOOLS\dnSpy32"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy64.zip" -o"$TOOLS\dnSpy64"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\exiftool.zip" -o"$TOOLS\exiftool"
@@ -78,23 +79,5 @@ Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64
 Remove-Item $TOOLS\license.txt
 
-rclone.exe sync --verbose --checksum .\tmp\pip .\downloads\pip
-rclone.exe sync --verbose --checksum .\tmp\node .\mount\Tools\node
-rclone.exe sync --verbose --checksum .\tmp\venv .\mount\venv
-
-Remove-Item -Recurse -Force .\tmp\node > $null 2>&1
-Remove-Item -Recurse -Force .\tmp\venv > $null 2>&1
-
-Copy-Item $SETUP_PATH\*.py ".\mount\venv\Scripts\"
-Copy-Item ".\mount\git\dotnetfile\examples\dotnetfile_dump.py" ".\mount\venv\Scripts\"
 Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\"
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
-Copy-Item ".\setup\utils\hash-id.py" ".\mount\venv\Scripts\"
-Copy-Item ".\setup\utils\powershell-cleanup.py" ".\mount\venv\Scripts\"
-
-Get-ChildItem -Path ".\mount\venv\Scripts" -Filter *.py | ForEach-Object {
-    $content = Get-Content $_.FullName
-    if ($content[0] -match "^#!/usr/bin/python3" -or $content[0] -match "^#!/usr/bin/env python3") {
-        $content -replace '^#!/usr/bin/.*', '#!/usr/bin/env python' | Set-Content $_.FullName
-    }
-}
