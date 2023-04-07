@@ -270,7 +270,7 @@ if ($WSDFIR_CMDER -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cmder.7z" -o"$env:ProgramFiles\cmder"
     Add-ToUserPath "$env:ProgramFiles\cmder"
     Add-ToUserPath "$env:ProgramFiles\cmder\bin"
-    Write-Output "C:\venv\scripts\activate.bat" | Out-File -Append -Encoding "ascii" $env:ProgramFiles\cmder\config\user_profile.cmd
+    Write-Output "C:\venv\default\scripts\activate.bat" | Out-File -Append -Encoding "ascii" $env:ProgramFiles\cmder\config\user_profile.cmd
     & "$env:ProgramFiles\cmder\cmder.exe" /REGISTER ALL
 }
 
@@ -280,8 +280,8 @@ if ($WSDFIR_PERSISTENCESNIPER -eq "Yes") {
 }
 
 # Configure usage of new venv for PowerShell
-(Get-ChildItem -File C:\venv\Scripts\).Name | findstr /R /V "[\._]" | findstr /V activate | `
-    ForEach-Object {Write-Output "function $_() { python C:\venv\Scripts\$_ `$PsBoundParameters.Values + `$args }"} | Out-File -Append -Encoding "ascii" "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+(Get-ChildItem -File C:\venv\default\Scripts\).Name | findstr /R /V "[\._]" | findstr /V activate | `
+    ForEach-Object {Write-Output "function $_() { python C:\venv\default\Scripts\$_ `$PsBoundParameters.Values + `$args }"} | Out-File -Append -Encoding "ascii" "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
 # Signal that everything is done to start using the tools (mostly).
 Copy-Item "C:\downloads\README.md" "$HOME\Desktop\"
