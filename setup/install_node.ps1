@@ -39,5 +39,3 @@ Get-Job | Receive-Job
 
 Write-DateLog "Node installation done."
 Write-Output "" > $TOOLS\node\done
-
-shutdown /s /t 1 /c "Done with installing npm packages." /f /d p:4:1

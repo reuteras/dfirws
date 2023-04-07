@@ -35,5 +35,3 @@ Get-ChildItem -Include * |
 Get-Job | Receive-Job | Out-Default >> "C:\log\bash.txt" 2>&1
 Write-DateLog "Uncompress of zst files done." >> "C:\log\bash.txt" 2>&1
 Write-Output "" > C:\bash\done
-
-shutdown /s /t 1 /c "Done with uncompressing zst files." /f /d p:4:1

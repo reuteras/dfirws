@@ -166,5 +166,3 @@ deactivate
 Write-DateLog "Python venv dfir-unfurl cache done." >> "C:\log\python.txt" 2>&1
 
 Write-Output "" > C:\venv\done
-
-shutdown /s /t 1 /c "Done with installing Python pip packages." /f /d p:4:1
