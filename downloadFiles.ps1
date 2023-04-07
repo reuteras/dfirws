@@ -42,7 +42,7 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 .\resources\download\http.ps1
 Write-DateLog "Download packages for Git for Windows (bash)."
 Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
-Write-DateLog "Setup node and install npm packages."
+Write-DateLog "Setup Node and install npm packages."
 Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 .\resources\download\git.ps1
 Write-DateLog "Download Python pip packages."
@@ -50,7 +50,7 @@ Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resou
 .\resources\download\release.ps1
 .\resources\download\didier.ps1
 .\resources\download\zimmerman.ps1
-Write-DateLog "Wait for build."
+Write-DateLog "Wait for builds."
 Get-Job | Wait-Job | Out-Null
 Get-Job | Receive-Job > .\log\jobs.txt 2>&1
 Get-Job | Remove-Job | Out-Null
