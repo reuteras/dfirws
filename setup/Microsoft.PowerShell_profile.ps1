@@ -1,6 +1,6 @@
 # Always start with Python venv
 if ( Test-Path C:\venv ) {
-    C:\venv\Scripts\Activate.ps1
+    C:\venv\default\Scripts\Activate.ps1
 }
 
 function Copy-Fakenet {
