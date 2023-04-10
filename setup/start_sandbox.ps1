@@ -150,6 +150,7 @@ Add-ToUserPath "$env:ProgramFiles\Git\usr\bin\"
 Add-ToUserPath "$env:ProgramFiles\hxd"
 Add-ToUserPath "$env:ProgramFiles\Notepad++\"
 Add-ToUserPath "C:\Tools\bin"
+Add-ToUserPath "C:\Tools\browsinghistoryview"
 Add-ToUserPath "C:\Tools\capa"
 Add-ToUserPath "C:\Tools\chainsaw"
 Add-ToUserPath "C:\Tools\DidierStevens"
@@ -200,6 +201,9 @@ if ($WSDFIR_BEACONHUNTER -eq "Yes") {
 }
 if ($WSDFIR_GIT -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\bash.lnk" -DestinationPath "$env:ProgramFiles\Git\bin\bash.exe" -WorkingDirectory "$HOME\Desktop"
+}
+if ($WSDFIR_BROWSINGHISTORYVIEW -eq "Yes") {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\BrowsingHistoryView.lnk" -DestinationPath "$env:ProgramFiles\browsinghistoryview\BrowsingHistoryView.exe" -WorkingDirectory "$HOME\Desktop"
 }
 if ($WSDFIR_CYBERCHEF -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html"

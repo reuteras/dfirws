@@ -54,6 +54,8 @@ $WSDFIR_CHOCO="No"
 
 # Links on Desktop
 
+# Link to installed BrowsingHistoryView
+$WSDFIR_BROWSINGHISTORYVIEW="No"
 # Link to installed FullEventLogView from NirSoft
 $WSDFIR_FLV="No"
 # Link to installed CyberChef

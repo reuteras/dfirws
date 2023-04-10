@@ -24,6 +24,7 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/hasherezade/shellconv/ma
 Get-FileFromUri -uri "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py" -FilePath ".\downloads\msidump.py"
 Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip"
 Get-FileFromUri -uri "https://downloads.pstwalker.com/pstwalker-portable" -FilePath ".\downloads\pstwalker.zip"
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/browsinghistoryview-x64.zip" -FilePath ".\downloads\browsinghistoryview.zip"
 Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
 Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip"
 # Update the following when new versions are released
