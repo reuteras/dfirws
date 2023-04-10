@@ -39,6 +39,7 @@ $DidierStevensSuite = `
     "libnspr4.dll", `
     "msoffcrypto-crack.py", `
     "myjson-filter.py", `
+    "myjson-transform.py", `
     "nsrl.py", `
     "numbers-to-hex.py", `
     "numbers-to-string.py", `
