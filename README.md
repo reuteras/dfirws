@@ -89,6 +89,7 @@ The following tools are available.
 - [BeaconHunter][bhu]
 - [binlex][bin]
 - [BrowsingHistoryView][bhv]
+- [bulk_extractor][bul]
 - [Bytecode Viewer][bcv]
 - [capa][cap]
 - [chainsaw][cha]
@@ -171,6 +172,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [bhv]: https://www.nirsoft.net/utils/browsing_history_view.html
   [bhu]: https://github.com/3lp4tr0n/BeaconHunter
   [bin]: https://github.com/c3rb3ru5d3d53c/binlex
+  [bul]: https://github.com/simsong/bulk_extractor
   [cap]: https://github.com/mandiant/capa
   [cer]: https://github.com/cmderdev/cmder
   [cha]: https://github.com/WithSecureLabs/chainsaw
