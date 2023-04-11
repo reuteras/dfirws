@@ -1,8 +1,4 @@
-#!/bin/bash
-PS1="\[\033]0;$TITLEPREFIX:$PWD\007\] \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]$ "
-
-export PS1
-
+# shellcheck shell=bash
 if [[ -e /c/venv/default/Scripts/activate ]]; then
     # shellcheck disable=SC1091
     . /c/venv/default/Scripts/activate
@@ -21,3 +17,4 @@ if [[ ! -e ~/.gitconfig ]]; then
 fi
 
 export PATH="$PATH:/c/venv/Scripts"
+export PS1="\[\033]0;$TITLEPREFIX:$PWD\007\] \[\033[33m\]\w\[\033[36m\]\`__git_ps1\`\[\033[0m\]$ "
