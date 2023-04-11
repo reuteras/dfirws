@@ -88,7 +88,6 @@ The following tools are available.
 - [Amazon Corretto][amc]
 - [BeaconHunter][bhu]
 - [binlex][bin]
-- [BrowsingHistoryView][bhv]
 - [bulk_extractor][bul]
 - [Bytecode Viewer][bcv]
 - [capa][cap]
@@ -169,7 +168,6 @@ More information about tools are available in the GitHub [wiki][wid].
 
   [amc]: https://docs.aws.amazon.com/corretto/
   [bcv]: https://github.com/Konloch/bytecode-viewer
-  [bhv]: https://www.nirsoft.net/utils/browsing_history_view.html
   [bhu]: https://github.com/3lp4tr0n/BeaconHunter
   [bin]: https://github.com/c3rb3ru5d3d53c/binlex
   [bul]: https://github.com/simsong/bulk_extractor

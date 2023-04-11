@@ -12,7 +12,6 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 # Unzip programs
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\beaconhunter.zip" -o"$SETUP_PATH\"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\binlex.zip" -o"$TOOLS\bin"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\browsinghistoryview.zip" -o"$TOOLS\browsinghistoryview"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\bulk_extractor.zip" -o"$TOOLS\bulk_extractor"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chainsaw.zip" -o"$TOOLS"
