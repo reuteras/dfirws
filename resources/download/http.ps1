@@ -33,7 +33,7 @@ Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.18-windows-
 Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.18-windows.zip" -FilePath ".\downloads\neo4j.zip"
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip"
 Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.1/win/x86_64/LibreOffice_7.5.1_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
-Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe" -FilePath ".\downloads\python3.exe"
+Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe" -FilePath ".\downloads\python3.exe"
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.72.exe" -FilePath ".\downloads\npcap.exe"
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.4.exe" -FilePath ".\downloads\wireshark.exe"
 Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3410100.zip" -FilePath ".\downloads\sqlite.zip"
