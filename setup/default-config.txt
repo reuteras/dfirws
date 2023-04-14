@@ -40,6 +40,10 @@ $WSDFIR_UNIEXTRACT="No"
 $WSDFIR_VSCODE="Yes"
 # Install Visual Studio Code PowerShell extension
 $WSDFIR_VSCODE_POWERSHELL="Yes"
+# Install Visual Studio Code Python extension
+$WSDFIR_VSCODE_PYTHON="Yes"
+# Install Visual Studio Code Spell Checker extension
+$WSDFIR_VSCODE_SPELL="Yes"
 # Install Windows loopback adapter on Windows 10. Doesn't work on Windows 11 at the moment.
 $WSDFIR_W10_LOOPBACK="No"
 # Link to installed x64dbg
