@@ -29,12 +29,13 @@ Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path ".\downloads\ghidr
 Get-GitHubRelease -repo "Neo23x0/Loki" -path ".\downloads\loki.zip" -match loki
 Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path ".\downloads\notepad++.exe" -match Installer.x64.exe
 Get-GitHubRelease -repo "pnedev/comparePlus" -path ".\downloads\comparePlus.zip" -match x64.zip
-Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path ".\downloads\vscode\powershell.vsix" -match vsix
+Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path ".\downloads\vscode\vscode-powershell.vsix" -match vsix
 Get-GitHubRelease -repo "qpdf/qpdf" -path ".\downloads\qpdf.zip" -match msvc64.zip
 Get-GitHubRelease -repo "radareorg/radare2" -path ".\downloads\radare2.zip" -match w64.zip
 Get-GitHubRelease -repo "rizinorg/cutter" -path ".\downloads\cutter.zip" -match Windows-x86_64.zip
 Get-GitHubRelease -repo "Squiblydoo/debloat" -path ".\downloads\debloat.zip" -match Win64
 Get-GitHubRelease -repo "stedolan/jq" -path ".\downloads\jq.exe" -match win64
+Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path ".\downloads\vscode\vscode-spell-checker.vsix" -match vsix
 Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path ".\downloads\thumbcacheviewer.zip" -match viewer_64
 Get-GitHubRelease -repo "upx/upx" -path ".\downloads\upx.zip" -match win64
 Get-GitHubRelease -repo "wader/fq" -path ".\downloads\fq.zip" -match windows_amd64.zip
