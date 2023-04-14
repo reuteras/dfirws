@@ -6,6 +6,11 @@ Write-DateLog "Download files via HTTP."
 $choco = Get-ChocolateyUrl chocolatey
 $nodejs = Get-DownloadUrlFromPage -url https://nodejs.org/en/download/ -regex 'https:[^"]+win-x64.zip'
 
+# Get URI for Visual Studio Code python extension - ugly
+$vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -regex '"AssetUri":"[^"]+python/([^/]+)/'
+$vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
+$vscode_python_version=$vscode_tmp.Matches.Groups[1].Value
+
 Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -FilePath ".\downloads\vscode.exe"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml"
 Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-17-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
@@ -26,6 +31,7 @@ Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -F
 Get-FileFromUri -uri "https://downloads.pstwalker.com/pstwalker-portable" -FilePath ".\downloads\pstwalker.zip"
 Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
 Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip"
+Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix"
 # Dependence for PE-bear
 Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"
 # Dependence for ncat
