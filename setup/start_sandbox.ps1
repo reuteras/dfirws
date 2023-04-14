@@ -98,7 +98,13 @@ if ($WSDFIR_VSCODE -eq "Yes") {
     Copy-Item "$SETUP_PATH\vscode.exe" "$TEMP\vscode.exe"
     Start-Process -Wait "$TEMP\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
     if ($WSDFIR_VSCODE_POWERSHELL -eq "Yes") {
-        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "C:\downloads\vscode\powershell.vsix"' -WindowStyle Hidden
+        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "C:\downloads\vscode\vscode-powershell.vsix"' -WindowStyle Hidden
+    }
+    if ($WSDFIR_VSCODE_PYTHON -eq "Yes") {
+        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "C:\downloads\vscode\vscode-python.vsix"' -WindowStyle Hidden
+    }
+    if ($WSDFIR_VSCODE_SPELL -eq "Yes") {
+        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "C:\downloads\vscode\vscode-spell-checker.vsix"' -WindowStyle Hidden
     }
 }
 
