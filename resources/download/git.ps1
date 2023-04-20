@@ -15,6 +15,7 @@ $repourls = `
     "https://github.com/keydet89/Events-Ripper.git", `
     "https://github.com/keydet89/RegRipper3.0", `
     "https://github.com/last-byte/PersistenceSniper.git", `
+    "https://github.com/Malandrone/PowerDecode.git", `
     "https://github.com/Neo23x0/evt2sigma.git", `
     "https://github.com/netspooky/scare.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
