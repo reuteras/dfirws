@@ -14,6 +14,7 @@ Get-GitHubRelease -repo "dzzie/pdfstreamdumper" -path ".\downloads\PDFStreamDump
 Get-GitHubRelease -repo "dzzie/VS_LIBEMU" -path ".\downloads\scdbg.zip" -match VS_LIBEMU
 Get-GitHubRelease -repo "facebook/zstd" -path ".\downloads\zstd.zip" -match win64
 Get-GitHubRelease -repo "hasherezade/pe-bear" -path ".\downloads\pebear.zip" -match x64_win_vs17.zip
+Get-GitHubRelease -repo "horsicq/DIE-engine" -path ".\downloads\die.zip" -match die_win64_portable
 Get-GitHubRelease -repo "gchq/CyberChef" -path ".\downloads\CyberChef.zip" -match CyberChef
 Get-GitHubRelease -repo "git-for-windows/git" -path ".\downloads\git.exe" -match 64-bit.exe
 Get-GitHubRelease -repo "kacos2000/Jumplist-Browser" -path ".\downloads\JumplistBrowser.exe" -match JumplistBrowser.exe
