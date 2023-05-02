@@ -74,6 +74,7 @@ $DidierStevensSuite = `
     "plugin_stream_sample.py", `
     "plugin_triage.py", `
     "plugin_vba_dco.py", `
+    "plugin_vba_dir.py", `
     "plugin_vba_routines.py", `
     "plugin_vba_summary.py", `
     "plugin_vba.py", `
