@@ -11,6 +11,7 @@ New-Item -ItemType Directory -Force -Path mount\git > $null
 Set-Location mount\git
 
 $repourls = `
+    "https://github.com/cyberark/White-Phoenix.git", `
     "https://github.com/gehaxelt/Python-dsstore.git", `
     "https://github.com/joeavanzato/Trawler.git", `
     "https://github.com/keydet89/Events-Ripper.git", `
