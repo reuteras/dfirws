@@ -108,6 +108,7 @@ The following tools are available.
 - [GoReSym][grs]
 - [Hayabusa][hay]
 - [HxD][hxd]
+- [INDXRipper][ind]
 - [jq][jq]
 - [Jumplist-Browser][jub]
 - [LibreOffice][lio]
@@ -154,14 +155,21 @@ Downloaded but not installed by default:
 
 Downloaded git repositories:
 
+- [https://github.com/cyberark/White-Phoenix.git](https://github.com/cyberark/White-Phoenix.git)
+- [https://github.com/gehaxelt/Python-dsstore.git](https://github.com/gehaxelt/Python-dsstore.git)
+- [https://github.com/joeavanzato/Trawler.git](https://github.com/joeavanzato/Trawler.git)
 - [https://github.com/keydet89/Events-Ripper.git](https://github.com/keydet89/Events-Ripper.git)
+- [https://github.com/keydet89/RegRipper3.0](https://github.com/keydet89/RegRipper3.0)
 - [https://github.com/last-byte/PersistenceSniper.git](https://github.com/last-byte/PersistenceSniper.git)
+- [https://github.com/Malandrone/PowerDecode.git](https://github.com/Malandrone/PowerDecode.git)
+- [https://github.com/MarkBaggett/ese-analyst.git](https://github.com/MarkBaggett/ese-analyst.git)
 - [https://github.com/Neo23x0/evt2sigma.git](https://github.com/Neo23x0/evt2sigma.git)
-- [https://github.com/pan-unit42/dotnetfile](https://github.com/Neo23x0/evt2sigma.git)
+- [https://github.com/netspooky/scare.git](https://github.com/netspooky/scare.git)
+- [https://github.com/pan-unit42/dotnetfile.git](https://github.com/pan-unit42/dotnetfile.git)
 - [https://github.com/reuteras/dfirws.wiki.git](https://github.com/reuteras/dfirws.wiki.git)
 - [https://github.com/SigmaHQ/sigma.git](https://github.com/SigmaHQ/sigma.git)
 - [https://github.com/volexity/threat-intel.git](https://github.com/volexity/threat-intel.git)
-- [https://github.com/wagga40/Zircolite](https://github.com/wagga40/Zircolite)
+- [https://github.com/wagga40/Zircolite.git](https://github.com/wagga40/Zircolite.git)
 - [https://github.com/Yamato-Security/hayabusa-rules.git](https://github.com/Yamato-Security/hayabusa-rules.git)
 
 More information about tools are available in the GitHub [wiki][wid].
@@ -190,6 +198,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [grs]: https://github.com/mandiant/GoReSym
   [hay]: https://github.com/Yamato-Security/hayabusa
   [hxd]: https://mh-nexus.de/
+  [ind]: https://github.com/harelsegev/INDXRipper
   [jq]:  https://github.com/stedolan/jq
   [jub]: https://github.com/kacos2000/Jumplist-Browser
   [lio]: https://www.libreoffice.org/

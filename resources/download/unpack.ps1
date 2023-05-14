@@ -32,6 +32,7 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hayabusa.zip" -o"$TOOLS\hayabusa"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hxd.zip" -o"$TOOLS\hxd"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\indxripper.zip" -o"$TOOLS\INDXRipper"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\logview.zip" -o"$TOOLS\FullEventLogView"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\malcat.zip" -o"$TOOLS\malcat"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\nmap.exe" -o"$TOOLS\nmap"
