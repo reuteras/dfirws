@@ -90,6 +90,7 @@ Set-Location C:\
     pyhindsight `
     pyOneNote `
     pypng `
+    pySigma `
     python-magic-bin `
     pywin32 `
     pyzipper `
