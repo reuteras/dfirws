@@ -13,7 +13,7 @@ Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path ".\downloads\dnSpy64.zip" -match w
 Get-GitHubRelease -repo "dzzie/pdfstreamdumper" -path ".\downloads\PDFStreamDumper.exe" -match PDFStreamDumper
 Get-GitHubRelease -repo "dzzie/VS_LIBEMU" -path ".\downloads\scdbg.zip" -match VS_LIBEMU
 Get-GitHubRelease -repo "facebook/zstd" -path ".\downloads\zstd.zip" -match win64
-Get-GitHubRelease -repo "harelsegev/INDXRipper" -path ".\downloads\indxripper.zip" -match INDXRipper
+Get-GitHubRelease -repo "harelsegev/INDXRipper" -path ".\downloads\indxripper.zip" -match amd64.zip
 Get-GitHubRelease -repo "hasherezade/pe-bear" -path ".\downloads\pebear.zip" -match x64_win_vs17.zip
 Get-GitHubRelease -repo "horsicq/DIE-engine" -path ".\downloads\die.zip" -match die_win64_portable
 Get-GitHubRelease -repo "gchq/CyberChef" -path ".\downloads\CyberChef.zip" -match CyberChef
