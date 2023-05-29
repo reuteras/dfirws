@@ -41,7 +41,6 @@ Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path ".\downl
 Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path ".\downloads\thumbcacheviewer.zip" -match viewer_64
 Get-GitHubRelease -repo "upx/upx" -path ".\downloads\upx.zip" -match win64
 Get-GitHubRelease -repo "wader/fq" -path ".\downloads\fq.zip" -match windows_amd64.zip
-Get-GitHubRelease -repo "winsiderss/systeminformer" -path ".\downloads\systeminformer.zip" -match bin.zip
 Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path ".\downloads\chainsaw.zip" -match x86_64-pc-windows-msvc
 Get-GitHubRelease -repo "VirusTotal/yara" -path ".\downloads\yara.zip" -match win64
 Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path ".\downloads\hayabusa.zip" -match win-64

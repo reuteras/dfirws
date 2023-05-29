@@ -30,10 +30,6 @@ $WSDFIR_PDFSTREAM="Yes"
 $WSDFIR_PERSISTENCESNIPER="Yes"
 # Install Python pip packages - Python is still installed
 $WSDFIR_PYTHON_PIP="Yes"
-# Install System Informer x64 (ProcessHacker)
-$WSDFIR_SYSTEMINFORMER64="Yes"
-# Install System Informer x86 (ProcessHacker) (is there a need for this? Does the sandbox run on 32 bit?)
-$WSDFIR_SYSTEMINFORMER86="No"
 # Add uniextract2 to path
 $WSDFIR_UNIEXTRACT="No"
 # Install Visual Studio Code

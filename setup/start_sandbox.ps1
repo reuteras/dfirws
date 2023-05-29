@@ -242,12 +242,6 @@ if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
 if ($WSDFIR_MALCAT -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
 }
-if ($WSDFIR_SYSTEMINFORMER64 -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\System_Informer_x64.lnk" -DestinationPath "C:\Tools\systeminformer\x64\ProcessHacker.exe"
-}
-if ($WSDFIR_SYSTEMINFORMER86 -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\System_Informer_x86.lnk" -DestinationPath "C:\Tools\systeminformer\x86\ProcessHacker.exe"
-}
 if ($WSDFIR_NPP -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\Notepad++.lnk" -DestinationPath "$env:ProgramFiles\Notepad++\notepad++.exe"
 }

@@ -133,7 +133,6 @@ The following tools are available.
 - [sqlite][sql] cli
 - [SysinternalsSuite][syi]
 - [Sysmon][sym] started with [SwiftOnSecurity sysmon-config][sws]
-- [System Informer][sin] (formerly ProcessHacker)
 - [Thumbcache viewer][thu]
 - [TrID][tri]
 - [x64dbg][xdb]
@@ -223,7 +222,6 @@ More information about tools are available in the GitHub [wiki][wid].
   [rip]: https://github.com/BurntSushi/ripgrep
   [scd]: https://github.com/dzzie/VS_LIBEMU
   [sdi]: ./resources/download/didier.ps1
-  [sin]: https://github.com/winsiderss/systeminformer
   [sql]: https://sqlite.org/
   [sws]: https://github.com/SwiftOnSecurity/sysmon-config
   [syi]: https://learn.microsoft.com/en-us/sysinternals/
