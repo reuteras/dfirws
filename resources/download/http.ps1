@@ -38,17 +38,17 @@ Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath 
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe"
 # Update the following when new versions are released
 # https://learn.microsoft.com/en-us/java/openjdk/download
-Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.18-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
+Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.19-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
 # https://neo4j.com/download-center/#community
-Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.19-windows.zip" -FilePath ".\downloads\neo4j.zip"
+Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.21-windows.zip" -FilePath ".\downloads\neo4j.zip"
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip"
 # https://www.libreoffice.org/download/download-libreoffice/
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.2/win/x86_64/LibreOffice_7.5.2_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
+Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.4/win/x86_64/LibreOffice_7.5.4_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 # https://www.python.org/downloads/
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe" -FilePath ".\downloads\python3.exe"
 # https://npcap.com/#download
-Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.73.exe" -FilePath ".\downloads\npcap.exe"
+Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.75.exe" -FilePath ".\downloads\npcap.exe"
 # https://www.wireshark.org/download.html
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.6.exe" -FilePath ".\downloads\wireshark.exe"
 # https://www.sqlite.org/download.html
@@ -58,4 +58,4 @@ Get-FileFromUri -uri "https://www.7-zip.org/a/7z2201-x64.msi" -FilePath ".\downl
 # https://cert.at/en/downloads/software/software-densityscout
 Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip"
 # https://nmap.org/download.html
-Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.93-setup.exe" -FilePath ".\downloads\nmap.exe"
+Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.94-setup.exe" -FilePath ".\downloads\nmap.exe"
