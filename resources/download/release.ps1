@@ -25,7 +25,7 @@ Get-GitHubRelease -repo "lolo101/MsgViewer" -path ".\downloads\msgviewer.jar" -m
 Get-GitHubRelease -repo "mandiant/capa" -path ".\downloads\capa-windows.zip" -match windows
 Get-GitHubRelease -repo "mandiant/flare-floss" -path ".\downloads\floss.zip" -match windows
 Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path ".\downloads\fakenet.zip" -match fakenet
-Get-GitHubRelease -repo "mandiant/GoReSym" -path ".\downloads\GoReSym.zip" -match GoReSym
+Get-GitHubRelease -repo "mandiant/GoReSym" -path ".\downloads\GoReSym.zip" -match GoReSym-windows
 Get-GitHubRelease -repo "multiprocessio/dsq" -path ".\downloads\dsq.zip" -match dsq-win
 Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path ".\downloads\ghidra.zip" -match ghidra
 Get-GitHubRelease -repo "Neo23x0/Loki" -path ".\downloads\loki.zip" -match loki
