@@ -28,6 +28,7 @@ Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path ".\downloads\fakenet.z
 Get-GitHubRelease -repo "mandiant/GoReSym" -path ".\downloads\GoReSym.zip" -match GoReSym-windows
 Get-GitHubRelease -repo "multiprocessio/dsq" -path ".\downloads\dsq.zip" -match dsq-win
 Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path ".\downloads\ghidra.zip" -match ghidra
+Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path ".\downloads\MetadataPlus.exe" -match MetadataPlus
 Get-GitHubRelease -repo "Neo23x0/Loki" -path ".\downloads\loki.zip" -match loki
 Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path ".\downloads\notepad++.exe" -match Installer.x64.exe
 Get-GitHubRelease -repo "pnedev/comparePlus" -path ".\downloads\comparePlus.zip" -match x64.zip

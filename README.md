@@ -115,6 +115,7 @@ The following tools are available.
 - [LOKI][lok]
 - [Malcat][mal]
 - [MessageViewer][mev]
+- [MetaDataPlus][mdp]
 - [ncat][nca]
 - [neo4j][neo]
 - [Notepad++][not] with the following added plugins:
@@ -203,6 +204,7 @@ More information about tools are available in the GitHub [wiki][wid].
   [lio]: https://www.libreoffice.org/
   [lok]: https://github.com/Neo23x0/Loki
   [mal]: https://malcat.fr/
+  [mdp]: https://github.com/nccgroup/MetadataPlus
   [mev]: https://github.com/lolo101/MsgViewer
   [nca]: https://nmap.org/ncat/
   [ncp]: https://github.com/pnedev/comparePlus
