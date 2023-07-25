@@ -44,7 +44,7 @@ Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.23
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip"
 # https://www.libreoffice.org/download/download-libreoffice/
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.4/win/x86_64/LibreOffice_7.5.5_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
+Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.5/win/x86_64/LibreOffice_7.5.5_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 # https://www.python.org/downloads/
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe" -FilePath ".\downloads\python3.exe"
 # https://npcap.com/#download
