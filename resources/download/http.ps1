@@ -46,7 +46,7 @@ Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_ext
 # https://www.libreoffice.org/download/download-libreoffice/
 Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.5/win/x86_64/LibreOffice_7.5.5_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 # https://www.python.org/downloads/
-Get-FileFromUri -uri "https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe" -FilePath ".\downloads\python3.exe"
+Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe" -FilePath ".\downloads\python3.exe"
 # https://npcap.com/#download
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.76.exe" -FilePath ".\downloads\npcap.exe"
 # https://www.wireshark.org/download.html
