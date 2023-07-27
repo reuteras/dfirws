@@ -120,7 +120,6 @@ The following tools are available.
 - [neo4j][neo]
 - [Notepad++][not] with the following added plugins:
   - [comparePlus][ncp]
-- [PdfStream Dumper][psd]
 - [PE-bear][peb]
 - [PersistenceSniper][per]
 - [PEstudio][pes]
@@ -216,7 +215,6 @@ More information about tools are available in the GitHub [wiki][wid].
   [pes]: https://www.winitor.com/
   [pip]: ./resources/download/python.ps1
   [prb]: https://github.com/kacos2000/Prefetch-Browser
-  [psd]: https://github.com/dzzie/pdfstreamdumper/
   [pst]: https://www.pstwalker.com/blog/convert-pst-to-msg.html
   [pyt]: https://python.org/
   [qpd]: https://github.com/qpdf/qpdf
