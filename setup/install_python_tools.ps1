@@ -139,12 +139,12 @@ Set-Location C:\
     dfir-unfurl `
     hexdump `
     tomlkit `
-    wheel 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
+    wheel>=0.40.0 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
 
 Set-Location C:\
 &pip2pi ./tmp/pip/pySigma `
     pySigma>=0.9.6 `
-    wheel 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
+    wheel>=0.40.0 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
 
 deactivate
 
