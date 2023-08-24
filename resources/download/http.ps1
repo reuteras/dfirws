@@ -44,13 +44,13 @@ Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.24
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip"
 # https://www.libreoffice.org/download/download-libreoffice/
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.5.5/win/x86_64/LibreOffice_7.5.5_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
+Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.0/win/x86_64/LibreOffice_7.6.0_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 # https://www.python.org/downloads/
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe" -FilePath ".\downloads\python3.exe"
 # https://npcap.com/#download
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.76.exe" -FilePath ".\downloads\npcap.exe"
 # https://www.wireshark.org/download.html
-Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.7.exe" -FilePath ".\downloads\wireshark.exe"
+Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.8.exe" -FilePath ".\downloads\wireshark.exe"
 # https://www.sqlite.org/download.html
 Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3420000.zip" -FilePath ".\downloads\sqlite.zip"
 # https://www.7-zip.org/download.html
