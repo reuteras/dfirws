@@ -38,7 +38,7 @@ Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath 
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe"
 # Update the following when new versions are released
 # https://learn.microsoft.com/en-us/java/openjdk/download
-Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.20-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
+Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.20.1-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
 # https://neo4j.com/download-center/#community
 Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.25-windows.zip" -FilePath ".\downloads\neo4j.zip"
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor
