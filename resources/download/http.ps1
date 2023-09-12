@@ -52,7 +52,7 @@ Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.76.exe" -FilePath ".\downlo
 # https://www.wireshark.org/download.html
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.8.exe" -FilePath ".\downloads\wireshark.exe"
 # https://www.sqlite.org/download.html
-Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3430000.zip" -FilePath ".\downloads\sqlite.zip"
+Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3430100.zip" -FilePath ".\downloads\sqlite.zip"
 # https://www.7-zip.org/download.html
 Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downloads\7zip.msi"
 # https://cert.at/en/downloads/software/software-densityscout
