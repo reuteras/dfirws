@@ -161,8 +161,8 @@ Copy-Item -r C:\git\dotnetfile $TEMP
 Set-Location $TEMP\dotnetfile
 python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
 
-Copy-Item -r C:\git\threat-intel $TEMP
-Set-Location $TEMP\threat-intel\tools\one-extract
+Copy-Item -r C:\git\one-extract $TEMP
+Set-Location $TEMP\one-extract
 python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
 
 deactivate
