@@ -129,7 +129,6 @@ The following tools are available.
 - [QPDF][qpd]
 - [Radare2][rad]
 - [ripgrep][rip]
-- [scdbg][scd]
 - [sqlite][sql] cli
 - [SysinternalsSuite][syi]
 - [Sysmon][sym] started with [SwiftOnSecurity sysmon-config][sws]
@@ -220,7 +219,6 @@ More information about tools are available in the GitHub [wiki][wid].
   [qpd]: https://github.com/qpdf/qpdf
   [rad]: https://www.radare.org/n/
   [rip]: https://github.com/BurntSushi/ripgrep
-  [scd]: https://github.com/dzzie/VS_LIBEMU
   [sdi]: ./resources/download/didier.ps1
   [sql]: https://sqlite.org/
   [sws]: https://github.com/SwiftOnSecurity/sysmon-config

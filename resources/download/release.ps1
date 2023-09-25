@@ -10,7 +10,6 @@ Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path ".\downloads\binlex.zip" -
 Get-GitHubRelease -repo "cmderdev/cmder" -path ".\downloads\cmder.7z" -match cmder.7z
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path ".\downloads\dnSpy32.zip" -match win32
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path ".\downloads\dnSpy64.zip" -match win64
-Get-GitHubRelease -repo "dzzie/VS_LIBEMU" -path ".\downloads\scdbg.zip" -match VS_LIBEMU
 Get-GitHubRelease -repo "facebook/zstd" -path ".\downloads\zstd.zip" -match win64
 Get-GitHubRelease -repo "harelsegev/INDXRipper" -path ".\downloads\indxripper.zip" -match amd64.zip
 Get-GitHubRelease -repo "hasherezade/pe-bear" -path ".\downloads\pebear.zip" -match x64_win_vs17.zip
