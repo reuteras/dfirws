@@ -60,7 +60,7 @@ Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
 Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
-Move-Item $TOOLS\pstwalker[0-9]* $TOOLS\pstwalker
+Move-Item $TOOLS\pstwalker* $TOOLS\pstwalker
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
 Move-Item $TOOLS\ripgrep-* $TOOLS\ripgrep
