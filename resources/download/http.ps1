@@ -50,7 +50,7 @@ Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.6/python-3.11.6-amd
 # https://npcap.com/#download
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.77.exe" -FilePath ".\downloads\npcap.exe"
 # https://www.wireshark.org/download.html
-Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.8.exe" -FilePath ".\downloads\wireshark.exe"
+Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.10.exe" -FilePath ".\downloads\wireshark.exe"
 # https://www.sqlite.org/download.html
 Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3430100.zip" -FilePath ".\downloads\sqlite.zip"
 # https://www.7-zip.org/download.html
