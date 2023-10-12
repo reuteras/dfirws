@@ -172,7 +172,7 @@ Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older pack
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-unfurl"
 C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
 Set-Location $TEMP\pip\dfir-unfurl
-Install-PythonPackage | Out-Null
+Install-PythonPackage
 Write-DateLog "Python venv dfir-unfurl done. Will update path and cache Cloudflare." >> "C:\log\python.txt" 2>&1
 
 $baseHtmlPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\templates\base.html"
