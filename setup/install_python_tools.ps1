@@ -105,7 +105,6 @@ Set-Location C:\
     pycryptodome `
     pycryptodomex>=3.17.0 `
     pyelftools `
-    pyhindsight `
     pyOneNote `
     pyparsing>=2.4.6 `
     pypng `

@@ -5,6 +5,7 @@ $SETUP_PATH=".\downloads"
 
 Copy-Item $SETUP_PATH\jq.exe $TOOLS\bin\
 Copy-Item $SETUP_PATH\JumplistBrowser.exe $TOOLS\bin\
+Copy-Item $SETUP_PATH\hindsight*.exe $TOOLS\bin\
 Copy-Item $SETUP_PATH\PrefetchBrowser.exe $TOOLS\bin\
 Copy-Item $SETUP_PATH\MetadataPlus.exe $TOOLS\bin\
 xcopy /E $SETUP_PATH\DidierStevens $TOOLS\DidierStevens

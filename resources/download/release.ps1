@@ -29,6 +29,8 @@ Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path ".\downloads\ghidr
 Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path ".\downloads\MetadataPlus.exe" -match MetadataPlus
 Get-GitHubRelease -repo "Neo23x0/Loki" -path ".\downloads\loki.zip" -match loki
 Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path ".\downloads\notepad++.exe" -match Installer.x64.exe
+Get-GitHubRelease -repo "obsidianforensics/hindsight" -path ".\downloads\hindsight.exe" -match hindsight.exe
+Get-GitHubRelease -repo "obsidianforensics/hindsight" -path ".\downloads\hindsight_gui.exe" -match hindsight_gui.exe
 Get-GitHubRelease -repo "pnedev/comparePlus" -path ".\downloads\comparePlus.zip" -match x64.zip
 Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path ".\downloads\vscode\vscode-powershell.vsix" -match vsix
 Get-GitHubRelease -repo "qpdf/qpdf" -path ".\downloads\qpdf.zip" -match msvc64.zip
