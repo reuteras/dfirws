@@ -24,11 +24,11 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job
     # can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
     # Runs a single command using the runners shell
       - name: Lint Code Base
-        uses: github/super-linter@v4
+        uses: github/super-linter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
