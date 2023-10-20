@@ -44,3 +44,13 @@ function Update-WallPaper {
     }
     C:\Tools\sysinternals\Bginfo64.exe /NOLICPROMPT /timer:0 $HOME\Documents\tools\config.bgi
 }
+
+# Write a log with a timestamp
+function Write-DateLog {
+    param (
+        [Parameter(Mandatory=$True)] [string]$Message
+    )
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $fullMessage = "$timestamp - $Message"
+    Write-Output $fullMessage
+}
