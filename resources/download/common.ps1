@@ -81,7 +81,7 @@ function Get-DownloadUrl {
     }
 
     if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-            return Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
+            return $downloads -replace ' ', "`r`n" | findstr /R $match | findstr /R /V "darwin \.sig blockmap"
     } else {
             return $downloads
     }
