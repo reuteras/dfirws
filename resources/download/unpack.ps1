@@ -53,7 +53,6 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\uniextract2.zip" -o"$TOOLS"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\zstd.zip" -o"$TOOLS\zstd"
 
 Move-Item "$TOOLS\exiftool\exiftool(-k).exe" $TOOLS\exiftool\exiftool.exe
 Move-Item $TOOLS\cutter-* $TOOLS\cutter
