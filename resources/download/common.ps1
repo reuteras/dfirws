@@ -62,14 +62,28 @@ function Get-DownloadUrl {
     try {
         # Retrieve the download URLs and filter them based on the provided regex match
         $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
-        if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-            return Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
-        } else {
-            return $downloads
+        }
+    catch {
+        $downloads = ""
+    }
+
+    if (!$downloads) {
+        try {
+            $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json).assets[0].browser_download_url
+        }
+        catch {
+            $downloads = ""
         }
     }
-    catch {
+
+    if (!$downloads) {
         return ""
+    }
+
+    if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
+            return Write-Output $downloads | findstr /R $match | findstr /R /V "darwin sig blockmap"
+    } else {
+            return $downloads
     }
 }
 
