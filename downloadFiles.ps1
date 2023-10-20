@@ -41,6 +41,8 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 # Most scripts need http.ps1.
 .\resources\download\http.ps1
 Write-DateLog "Download packages for Git for Windows (bash)."
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
 Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 Write-DateLog "Setup Node and install npm packages."
 Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
