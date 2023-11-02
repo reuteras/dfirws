@@ -38,7 +38,7 @@ Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath 
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe"
 # Update the following when new versions are released
 # https://learn.microsoft.com/en-us/java/openjdk/download
-Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.20.1-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
+Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.21-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
 # https://neo4j.com/download-center/#community
 Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.25-windows.zip" -FilePath ".\downloads\neo4j.zip"
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor
@@ -48,11 +48,11 @@ Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable
 # https://www.python.org/downloads/
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.6/python-3.11.6-amd64.exe" -FilePath ".\downloads\python3.exe"
 # https://npcap.com/#download
-Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.77.exe" -FilePath ".\downloads\npcap.exe"
+Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downloads\npcap.exe"
 # https://www.wireshark.org/download.html
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.10.exe" -FilePath ".\downloads\wireshark.exe"
 # https://www.sqlite.org/download.html
-Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win32-x86-3430200.zip" -FilePath ".\downloads\sqlite.zip"
+Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440000.zip" -FilePath ".\downloads\sqlite.zip"
 # https://www.7-zip.org/download.html
 Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downloads\7zip.msi"
 # https://cert.at/en/downloads/software/software-densityscout
