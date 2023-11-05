@@ -1,5 +1,8 @@
 # DFIRWS
 
+# Import common functions
+. C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
+
 $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
 #$WIN11=(Get-ComputerInfo | Select-Object -expand OsName) -match 11
 
@@ -9,23 +12,59 @@ $TEMP = "C:\tmp"
 mkdir "$TEMP"
 # Create directory for shortcuts to installed tools
 mkdir "$HOME\Desktop\dfirws"
+mkdir "$HOME\Desktop\dfirws\Browsers"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Browsers\hindsight.lnk" -DestinationPath "CC:\Tools\bin\hindsight_gui.exe"
 mkdir "$HOME\Desktop\dfirws\Cobalt Strike"
 mkdir "$HOME\Desktop\dfirws\Debuggers"
+if ($WSDFIR_X64DBG -eq "Yes") {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\x32dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x32\x32dbg.exe"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\x64dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x64\x64dbg.exe"
+}
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\dnSpy32.lnk" -DestinationPath "C:\Tools\dnSpy32\dnSpy.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\dnSpy64.lnk" -DestinationPath "C:\Tools\dnSpy64\dnSpy.exe"
+mkdir "$HOME\Desktop\dfirws\Editors"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Bytecode Viewer.lnk" -DestinationPath "C:\Tools\bin\bcv.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\HxD.lnk" -DestinationPath "$env:ProgramFiles\HxD\HxD.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Notepad++.lnk" -DestinationPath "$env:ProgramFiles\Notepad++\notepad++.exe"
 mkdir "$HOME\Desktop\dfirws\ELF"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\elfparser-ng.lnk" -DestinationPath "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\xelfviewer.lnk" -DestinationPath "C:\Tools\XELFViewer\xelfviewer.exe"
 mkdir "$HOME\Desktop\dfirws\Email"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Email\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
+mkdir "$HOME\Desktop\dfirws\Java"
+if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Java\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
+}
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Java\jd-gui.lnk" -DestinationPath "C:Tools\jd-gui\jd-gui.exe"
+mkdir "$HOME\Desktop\dfirws\Log"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Log\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
 mkdir "$HOME\Desktop\dfirws\Office"
 mkdir "$HOME\Desktop\dfirws\PDF"
+if ($WSDFIR_PDFSTREAM -eq "Yes") {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\pdfstreamdumper.lnk" -DestinationPath "C:\Tools\pdfstreamdumper\PDFStreamDumper.exe"
+}
 mkdir "$HOME\Desktop\dfirws\PE"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\Debloat.lnk" -DestinationPath "C:\Tools\bin\debloat.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
 mkdir "$HOME\Desktop\dfirws\Registry"
 mkdir "$HOME\Desktop\dfirws\Reverse Engineering"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
 mkdir "$HOME\Desktop\dfirws\Shellcode"
 mkdir "$HOME\Desktop\dfirws\Signature"
 mkdir "$HOME\Desktop\dfirws\Unpacking"
 mkdir "$HOME\Desktop\dfirws\Utilities"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\bash.lnk" -DestinationPath "$env:ProgramFiles\Git\bin\bash.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\cmder.lnk" -DestinationPath "$env:ProgramFiles\cmder\cmder.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\exiftool.lnk" -DestinationPath "C:\Tools\exiftool\exiftool.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\jq.lnk" -DestinationPath "C:\Tools\bin\jq.exe"
+mkdir "$HOME\Desktop\dfirws\Windows"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Windows\Jumplist-Browser.lnk" -DestinationPath "C:\Tools\bin\JumplistBrowser.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Windows\Prefetch-Browser.lnk" -DestinationPath "C:\Tools\bin\PrefetchBrowser.exe"
 Start-Transcript -Append "$TEMP\dfirws_log.txt"
-
-# Import common functions
-. C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
 
 Write-DateLog "start_sandbox.ps1"
 
@@ -179,6 +218,7 @@ Add-ToUserPath "C:\Tools\chainsaw"
 Add-ToUserPath "C:\Tools\cutter"
 Add-ToUserPath "C:\Tools\DidierStevens"
 Add-ToUserPath "C:\Tools\die"
+Add-ToUserPath "C:\Tools\elfparser-ng\Release"
 Add-ToUserPath "C:\Tools\exiftool"
 Add-ToUserPath "C:\Tools\fakenet"
 Add-ToUserPath "C:\Tools\floss"
@@ -239,12 +279,6 @@ if ($WSDFIR_CMDER -eq "Yes") {
 if ($WSDFIR_CUTTER -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
 }
-if ($WSDFIR_DNSPY32 -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dnSpy32.lnk" -DestinationPath "C:\Tools\dnSpy32\dnSpy.exe"
-}
-if ($WSDFIR_DNSPY64 -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dnSpy64.lnk" -DestinationPath "C:\Tools\dnSpy64\dnSpy.exe"
-}
 if ($WSDFIR_FLV -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
 }
@@ -257,8 +291,6 @@ if ($WSDFIR_HXD -eq "Yes") {
 if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
     Add-ToUserPath "$env:ProgramFiles\jadx\bin"
-    Add-Shortcut -SourceLnk "$HOME\Desktop\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
-    Add-Shortcut -SourceLnk "$HOME\Desktop\jd-gui.lnk" -DestinationPath "C:Tools\jd-gui\jd-gui.exe"
 }
 if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
@@ -283,7 +315,6 @@ if ($WSDFIR_X64DBG -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\x64dbg.zip" -o"$env:ProgramFiles\x64dbg"
     Add-ToUserPath "$env:ProgramFiles\x64dbg\release\x32"
     Add-ToUserPath "$env:ProgramFiles\x64dbg\release\x64"
-    Add-Shortcut -SourceLnk "$HOME\Desktop\x64dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x64\x64dbg.exe"
 }
 
 # PowerShell
@@ -313,7 +344,6 @@ if ($WSDFIR_PERSISTENCESNIPER -eq "Yes") {
     ForEach-Object {Write-Output "function $_() { python C:\venv\default\Scripts\$_ `$PsBoundParameters.Values + `$args }"} | Out-File -Append -Encoding "ascii" "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
 # Signal that everything is done to start using the tools (mostly).
-Copy-Item "C:\downloads\README.md" "$HOME\Desktop\"
 Update-Wallpaper "C:\downloads\dfirws.jpg"
 
 if ($WSDFIR_CHOCO -eq "Yes") {
@@ -391,7 +421,7 @@ if ($WSDFIR_JAVA -eq "Yes") {
     Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
 }
 
-Add-Shortcut -SourceLnk "$HOME\Desktop\documentation.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils\gollum.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils\gollum.bat"
 
 Write-DateLog "helpers.ps1 done"
 Stop-Transcript
