@@ -7,6 +7,21 @@ $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $TEMP = "C:\tmp"
 mkdir "$TEMP"
+# Create directory for shortcuts to installed tools
+mkdir "$HOME\Desktop\dfirws"
+mkdir "$HOME\Desktop\dfirws\Cobalt Strike"
+mkdir "$HOME\Desktop\dfirws\Debuggers"
+mkdir "$HOME\Desktop\dfirws\ELF"
+mkdir "$HOME\Desktop\dfirws\Email"
+mkdir "$HOME\Desktop\dfirws\Office"
+mkdir "$HOME\Desktop\dfirws\PDF"
+mkdir "$HOME\Desktop\dfirws\PE"
+mkdir "$HOME\Desktop\dfirws\Registry"
+mkdir "$HOME\Desktop\dfirws\Reverse Engineering"
+mkdir "$HOME\Desktop\dfirws\Shellcode"
+mkdir "$HOME\Desktop\dfirws\Signature"
+mkdir "$HOME\Desktop\dfirws\Unpacking"
+mkdir "$HOME\Desktop\dfirws\Utilities"
 Start-Transcript -Append "$TEMP\dfirws_log.txt"
 
 # Import common functions
@@ -171,7 +186,9 @@ Add-ToUserPath "C:\Tools\FullEventLogView"
 Add-ToUserPath "C:\Tools\GoReSym"
 Add-ToUserPath "C:\Tools\hayabusa"
 Add-ToUserPath "C:\Tools\INDXRipper"
+Add-ToUserPath "C:\Tools\jd-gui"
 Add-ToUserPath "C:\Tools\malcat\bin"
+Add-ToUserPath "C:\Tools\lessmsi"
 Add-ToUserPath "C:\Tools\nmap"
 Add-ToUserPath "C:\Tools\node"
 Add-ToUserPath "C:\Tools\systeminformer\x64"
@@ -182,10 +199,13 @@ Add-ToUserPath "C:\Tools\radare2"
 Add-ToUserPath "C:\Tools\ripgrep"
 Add-ToUserPath "C:\Tools\scdbg"
 Add-ToUserPath "C:\Tools\sqlite"
+Add-ToUserPath "C:\Tools\ssview"
 Add-ToUserPath "C:\Tools\sysinternals"
 Add-ToUserPath "C:\Tools\thumbcacheviewer"
 Add-ToUserPath "C:\Tools\trid"
 Add-ToUserPath "C:\Tools\upx"
+Add-ToUserPath "C:\Tools\winapiexec"
+Add-ToUserPath "C:\Tools\XELFViewer"
 Add-ToUserPath "C:\Tools\Zimmerman"
 Add-ToUserPath "C:\Tools\Zimmerman\EvtxECmd"
 Add-ToUserPath "C:\Tools\Zimmerman\EZViewer"
@@ -201,9 +221,6 @@ Add-ToUserPath "C:\Tools\Zimmerman\SQLECmd"
 Add-ToUserPath "C:\Tools\Zimmerman\TimelineExplorer"
 Add-ToUserPath "C:\Tools\Zimmerman\XWFIM"
 Add-ToUserPath "C:\Tools\zstd"
-if ($WSDFIR_UNIEXTRACT -eq "Yes") {
-    Add-ToUserPath "C:\Tools\UniExtract"
-}
 
 Write-DateLog "Add shortcuts (shorten link names first)"
 #& reg add "HKU\%1\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "link" /t REG_BINARY /d 00000000 /f
@@ -236,6 +253,12 @@ if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_GHIDRA -eq "Yes")) {
 }
 if ($WSDFIR_HXD -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\HxD.lnk" -DestinationPath "$env:ProgramFiles\HxD\HxD.exe"
+}
+if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
+    Add-ToUserPath "$env:ProgramFiles\jadx\bin"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\jd-gui.lnk" -DestinationPath "C:Tools\jd-gui\jd-gui.exe"
 }
 if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
@@ -362,6 +385,13 @@ Remove-Item "$env:ProgramFiles\loki\signature.yara"
 if ($WSDFIR_SYSMON -eq "Yes") {
     & "$TOOLS\sysinternals\Sysmon64.exe" -accepteula -i "$WSDFIR_SYSMON_CONF"
 }
+
+if ($WSDFIR_JAVA -eq "Yes") {
+    netsh firewall set opmode DISABLE
+    Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
+}
+
+Add-Shortcut -SourceLnk "$HOME\Desktop\documentation.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils\gollum.bat"
 
 Write-DateLog "helpers.ps1 done"
 Stop-Transcript
