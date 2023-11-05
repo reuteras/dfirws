@@ -69,6 +69,7 @@ Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
 Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
 Move-Item $TOOLS\jd-gui* $TOOLS\jd-gui
+Remove-Item -Recurse -Force $TOOLS\pstwalker
 Move-Item $TOOLS\pstwalker* $TOOLS\pstwalker
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
