@@ -42,6 +42,8 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 # Get GitHub password from user input
 $GH_USER = Read-Host "Enter GitHub user name"
 $GH_PASS = Read-Host "Enter GitHub token" -AsSecureString
+$null = $GH_PASS
+$null = $GH_USER
 .\resources\download\http.ps1
 Write-DateLog "Download packages for Git for Windows (bash)."
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
