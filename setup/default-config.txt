@@ -43,7 +43,7 @@ $WSDFIR_VSCODE_SPELL="Yes"
 # Install Windows loopback adapter on Windows 10. Doesn't work on Windows 11 at the moment.
 $WSDFIR_W10_LOOPBACK="No"
 # Link to installed x64dbg
-$WSDFIR_X64DBG="Yes"
+$WSDFIR_X64DBG="No"
 # Install Zui 
 $WSDFIR_ZUI="No"
 
@@ -63,19 +63,17 @@ $WSDFIR_CUTTER="No"
 # Link to installed dnSpy 32
 $WSDFIR_DNSPY32="No"
 # Link to installed dnSpy 64
-$WSDFIR_DNSPY64="Yes"
+$WSDFIR_DNSPY64="No"
 # Link to installed Ghidra - requires WSDFIR_JAVA
-$WSDFIR_GHIDRA="Yes"
+$WSDFIR_GHIDRA="No"
 # Link to installed Malcat 
-$WSDFIR_MALCAT="Yes"
+$WSDFIR_MALCAT="No"
 # Link to installed msgviewer - requires WSDFIR_JAVA
-$WSDFIR_MSGVIEWER="Yes"
+$WSDFIR_MSGVIEWER="No"
 # Link to installed PE-Bear
-$WSDFIR_PEBEAR="Yes"
+$WSDFIR_PEBEAR="No"
 # Link to installed pestudio
-$WSDFIR_PESTUDIO="Yes"
-# Link to Tools directory
-$WSDFIR_TOOLS="Yes"
+$WSDFIR_PESTUDIO="No"
 
 # configuration
 
