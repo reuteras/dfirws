@@ -39,6 +39,9 @@ Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 
 # The scripts git and http are needed by the Python script.
 # Most scripts need http.ps1.
+# Get GitHub password from user input
+$GH_USER = Read-Host "Enter GitHub user name"
+$GH_PASS = Read-Host "Enter GitHub token" -AsSecureString
 .\resources\download\http.ps1
 Write-DateLog "Download packages for Git for Windows (bash)."
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
