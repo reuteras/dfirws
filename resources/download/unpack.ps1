@@ -36,6 +36,8 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hayabusa.zip" -o"$TOOLS\hayabusa"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hxd.zip" -o"$TOOLS\hxd"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\indxripper.zip" -o"$TOOLS\INDXRipper"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jd-gui.zip" -o"$TOOLS"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\lessmsi.zip" -o"$TOOLS\lessmsi"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\logview.zip" -o"$TOOLS\FullEventLogView"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\malcat.zip" -o"$TOOLS\malcat"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\nmap.exe" -o"$TOOLS\nmap"
@@ -45,13 +47,15 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\qpdf.zip" -o"$TOOLS"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\radare2.zip" -o"$TOOLS"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ripgrep.zip" -o"$TOOLS"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlite.zip" -o"$TOOLS"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlite.zip" -o"$TOOLS\sqlite"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ssview.zip" -o"$TOOLS\ssview"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sysinternals.zip" -o"$TOOLS\sysinternals"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\thumbcacheviewer.zip" -o"$TOOLS\thumbcacheviewer"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\trid.zip" -o"$TOOLS\trid"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\triddefs.zip" -o"$TOOLS\trid"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\uniextract2.zip" -o"$TOOLS"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\winapiexec.zip" -o"$TOOLS\winapiexec"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\XELFViewer.zip" -o"$TOOLS\XELFViewer"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS"
 
 Move-Item "$TOOLS\exiftool\exiftool(-k).exe" $TOOLS\exiftool\exiftool.exe
@@ -61,6 +65,7 @@ Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
 Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
+Move-Item $TOOLS\jd-gui* $TOOLS\jd-gui
 Move-Item $TOOLS\pstwalker* $TOOLS\pstwalker
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
@@ -72,6 +77,7 @@ Move-Item $TOOLS\yara64.exe $TOOLS\bin\yara.exe
 Move-Item $TOOLS\yarac64.exe $TOOLS\bin\yarac.exe
 
 Copy-Item $SETUP_PATH\BCV.jar $TOOLS\lib
+Copy-Item $SETUP_PATH\gollum.war $TOOLS\lib
 Copy-Item $SETUP_PATH\msgviewer.jar $TOOLS\lib
 Write-Output "java -Xmx3G -jar C:\Tools\lib\BCV.jar" | Out-File -Encoding "ascii" $TOOLS\bin\bcv.bat
 
