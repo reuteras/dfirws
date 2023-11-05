@@ -12,10 +12,12 @@ $WSDFIR_CMDER="No"
 $WSDFIR_HXD="Yes"
 # Install git
 $WSDFIR_GIT="Yes"
-# Install Java - also affects Ghidra and msgviewer
+# Install Java - also affects Ghidra, jadx and msgviewer
 $WSDFIR_JAVA="Yes"
 # Install OpenJDK 11 for neo4j
 $WSDFIR_JAVA_JDK11="No"
+# Install jadx and jd-gui - requires WSDFIR_JAVA
+$WSDFIR_JAVA_JAVA="No"
 # Install LibreOffice
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki
@@ -30,8 +32,6 @@ $WSDFIR_PDFSTREAM="Yes"
 $WSDFIR_PERSISTENCESNIPER="Yes"
 # Install Python pip packages - Python is still installed
 $WSDFIR_PYTHON_PIP="Yes"
-# Add uniextract2 to path
-$WSDFIR_UNIEXTRACT="No"
 # Install Visual Studio Code
 $WSDFIR_VSCODE="Yes"
 # Install Visual Studio Code PowerShell extension
