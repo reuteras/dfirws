@@ -172,6 +172,7 @@ Add-ToUserPath "C:\Tools\floss"
 Add-ToUserPath "C:\Tools\FullEventLogView"
 Add-ToUserPath "C:\Tools\GoReSym"
 Add-ToUserPath "C:\Tools\hayabusa"
+Add-ToUserPath "C:\Tools\imhex"
 Add-ToUserPath "C:\Tools\INDXRipper"
 Add-ToUserPath "C:\Tools\jd-gui"
 Add-ToUserPath "C:\Tools\malcat\bin"
@@ -239,7 +240,7 @@ if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
     Add-ToUserPath "$env:ProgramFiles\jadx\bin"
 }
-if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER)) {
+if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER -eq "Yes")) {
     Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
 }
 if ($WSDFIR_MALCAT -eq "Yes") {
@@ -356,7 +357,7 @@ Remove-Item C:\Users\WDAGUtilityAccount\Desktop\PdfStreamDumper.exe.lnk
 
 # Create shortcuts for tools
 mkdir "$HOME\Desktop\dfirws\Browsers"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Browsers\hindsight.lnk" -DestinationPath "CC:\Tools\bin\hindsight_gui.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Browsers\hindsight.lnk" -DestinationPath "C:\Tools\bin\hindsight_gui.exe"
 mkdir "$HOME\Desktop\dfirws\Cobalt Strike"
 mkdir "$HOME\Desktop\dfirws\Debuggers"
 if ($WSDFIR_X64DBG -eq "Yes") {
@@ -368,8 +369,10 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\dnSpy64.lnk" -Destinatio
 mkdir "$HOME\Desktop\dfirws\Editors"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Bytecode Viewer.lnk" -DestinationPath "C:\Tools\bin\bcv.bat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\HxD.lnk" -DestinationPath "$env:ProgramFiles\HxD\HxD.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\ImHex.lnk" -DestinationPath "$env:ProgramFiles\imhex\imhex-gui.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Notepad++.lnk" -DestinationPath "$env:ProgramFiles\Notepad++\notepad++.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Visual Studio Code.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 mkdir "$HOME\Desktop\dfirws\ELF"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\elfparser-ng.lnk" -DestinationPath "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\xelfviewer.lnk" -DestinationPath "C:\Tools\XELFViewer\xelfviewer.exe"
