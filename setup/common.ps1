@@ -23,12 +23,20 @@ function Add-Shortcut {
     param (
         [string]$SourceLnk,
         [string]$DestinationPath,
-        [string]$WorkingDirectory
+        [string]$WorkingDirectory,
+        [string]$Iconlocation,
+        [switch]$IconArrayLocation
     )
     $WshShell = New-Object -comObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut($SourceLnk)
     if ($WorkingDirectory -ne $Null) {
         $Shortcut.WorkingDirectory = $WorkingDirectory
+    }
+    if ($Iconlocation -ne $Null) {
+        if ($IconArrayLocation -eq $Null) {
+            $IconArrayLocation = 0
+        }
+        $Shortcut.Iconlocation = "$Iconlocation, $IconArrayLocation"
     }
     $Shortcut.TargetPath = $DestinationPath
     $Shortcut.Save()
