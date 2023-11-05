@@ -9,7 +9,7 @@ $WSDFIR_BEACONHUNTER="Yes"
 # Install cmder
 $WSDFIR_CMDER="No"
 # Install HxD
-$WSDFIR_HXD="Yes"
+$WSDFIR_HXD="No"
 # Install git
 $WSDFIR_GIT="Yes"
 # Install Java - also affects Ghidra, jadx and msgviewer
