@@ -122,13 +122,13 @@ Set-Location C:\
     uncompyle6 `
     unicorn `
     unpy2exe `
-    urllib3>=1.26.15 `
+    urllib3>=2.0.6 `
     visidata>=2.11 `
     xlrd>=2.0.0 `
     XLMMacroDeobfuscator>=0.2.5 `
-    xxhash `
+    xxhash>=3.3.0 `
     yara-python `
-    wheel>=0.40.0 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
+    wheel>=0.41.2 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
 
 # Not compatible with Python 3.11:
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
