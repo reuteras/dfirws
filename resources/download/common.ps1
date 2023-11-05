@@ -29,8 +29,12 @@ function Get-FileFromUri {
     while($true) {
         try {
             # Attempt to download the file from the specified URI
-            Invoke-WebRequest $uri -UserAgent "Wget x64" -OutFile $TmpFilePath
-            Write-SynchronizedLog "Downloaded $uri to $FilePath."
+            Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
+            if ($uri -contains "github.com") {
+                curl.exe --silent -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $uri
+            } else {
+                curl.exe --silent -L --user-agent "Wget x64" --output $TmpFilePath $uri
+            }        Write-SynchronizedLog "Downloaded $uri to $FilePath."
             break
         }
         catch {
@@ -47,7 +51,7 @@ function Get-FileFromUri {
         }
     }
     # Copy the temporary file to the final file path and remove the temporary file
-    $result = rclone copyto --verbose --checksum $TmpFilePath $FilePath 2>&1 | Out-String
+    $result = rclone copyto --metadata --verbose --inplace --checksum $TmpFilePath $FilePath 2>&1 | Out-String
     Write-SynchronizedLog "$result"
     Remove-Item $TmpFilePath
     $ProgressPreference = 'Continue'
@@ -61,7 +65,7 @@ function Get-DownloadUrl {
     )
     try {
         # Retrieve the download URLs and filter them based on the provided regex match
-        $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json)[0].assets.browser_download_url
+        $downloads = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json)[0].assets.browser_download_url
         }
     catch {
         $downloads = ""
@@ -69,7 +73,7 @@ function Get-DownloadUrl {
 
     if (!$downloads) {
         try {
-            $downloads = (Invoke-WebRequest $releases | ConvertFrom-Json).assets[0].browser_download_url
+            $downloads = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json).assets[0].browser_download_url
         }
         catch {
             $downloads = ""
@@ -81,9 +85,9 @@ function Get-DownloadUrl {
     }
 
     if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-            return $downloads -replace ' ', "`r`n" | findstr /R $match | findstr /R /V "darwin \.sig blockmap"
+        return $downloads -replace ' ', "`r`n" | findstr /R $match | findstr /R /V "darwin \.sig blockmap"
     } else {
-            return $downloads
+        return $downloads
     }
 }
 
@@ -109,7 +113,7 @@ function Get-GitHubRelease {
 
     # If still no download URL is found, try getting the tarball URL
     if ( !$url ) {
-        $url = curl --silent https://api.github.com/repos/$repo/releases | findstr tarball | Select-Object -First 1 | ForEach-Object { ($_ -split "\s+")[2] } | ForEach-Object { ($_ -replace '[",]','') }
+        $url = curl --silent -L -u "${GH_USER}:${GH_PASS}" https://api.github.com/repos/$repo/releases | findstr tarball | Select-Object -First 1 | ForEach-Object { ($_ -split "\s+")[2] } | ForEach-Object { ($_ -replace '[",]','') }
         if ( !$url) {
             Write-Error "Can't find a file to download for repo $repo."
             Exit
@@ -145,7 +149,11 @@ function Get-DownloadUrlFromPage {
         [Parameter(Mandatory=$True)] [regex]$regex
     )
 
-    return Invoke-WebRequest -Uri "$url" -UseBasicParsing | Select-String -Pattern "$regex" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+    if ($url -contains "github.com") {
+        return curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$url" | Select-String -Pattern "$regex" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+    } else {
+        return curl.exe --silent -L "$url" | Select-String -Pattern "$regex" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+    }
 }
 
 # Function to get the download URL for an MSYS package
@@ -156,7 +164,7 @@ function Get-DownloadUrlMSYS {
 
     $base = "https://repo.msys2.org/msys/x86_64/"
     $package = '"' + $package + "-[0-9]"
-    $url = curl --silent $base |
+    $url = curl --silent -L $base |
         findstr "$package" |
         findstr /v ".sig" |
         ForEach-Object { ($_ -split '"')[1]} |
