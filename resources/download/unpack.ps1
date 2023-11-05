@@ -27,6 +27,7 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dsq.zip" -o"$TOOLS\bin"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy32.zip" -o"$TOOLS\dnSpy32"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy64.zip" -o"$TOOLS\dnSpy64"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\elfparser-ng.zip" -o"$TOOLS"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\exiftool.zip" -o"$TOOLS\exiftool"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fakenet.zip" -o"$TOOLS"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\floss.zip" -o"$TOOLS\floss"
@@ -61,6 +62,7 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 Move-Item "$TOOLS\exiftool\exiftool(-k).exe" $TOOLS\exiftool\exiftool.exe
 Move-Item $TOOLS\cutter-* $TOOLS\cutter
 Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
+Move-Item $TOOLS\elfparser-ng* $TOOLS\elfparser-ng
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
