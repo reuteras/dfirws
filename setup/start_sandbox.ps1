@@ -80,11 +80,9 @@ if ($WSDFIR_GIT -eq "Yes") {
 }
 
 # Install Notepad++ and ComparePlus plugin if specified
-if ($WSDFIR_NPP -eq "Yes") {
-    Copy-Item "$SETUP_PATH\notepad++.exe" "$TEMP\notepad++.exe"
-    & "$TEMP\notepad++.exe" /S
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\comparePlus.zip" -o"$env:ProgramFiles\Notepad++\Plugins\ComparePlus"
-}
+Copy-Item "$SETUP_PATH\notepad++.exe" "$TEMP\notepad++.exe"
+& "$TEMP\notepad++.exe" /S
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\comparePlus.zip" -o"$env:ProgramFiles\Notepad++\Plugins\ComparePlus"
 
 # Install PDFStreamDumper if specified
 if ($WSDFIR_PDFSTREAM -eq "Yes") {
@@ -228,17 +226,17 @@ if ($WSDFIR_CUTTER -eq "Yes") {
 if ($WSDFIR_FLV -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
 }
-if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_GHIDRA -eq "Yes")) {
+if ($WSDFIR_GHIDRA -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
 }
 if ($WSDFIR_HXD -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\HxD.lnk" -DestinationPath "$env:ProgramFiles\HxD\HxD.exe"
 }
-if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
+if ($WSDFIR_JAVA_JAVA -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
     Add-ToUserPath "$env:ProgramFiles\jadx\bin"
 }
-if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_MSGVIEWER -eq "Yes")) {
+if ($WSDFIR_MSGVIEWER -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
 }
 if ($WSDFIR_MALCAT -eq "Yes") {
@@ -314,31 +312,18 @@ if ($WSDFIR_BASH_EXTRA -eq "Yes") {
 }
 
 # Set Notepad++ as default for many file types
-if ($WSDFIR_NPP -eq "Yes") {
-    # Use %VARIABLE% in cmd.exe
-    cmd /c Ftype xmlfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype txtfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype chmfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype cmdfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype htafile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-    cmd /c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
- } else {
-    cmd /c Ftype xmlfile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype txtfile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype chmfile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype cmdfile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype htafile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype jsefile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype jsfile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype vbefile="C:\WINDOWS\system32\notepad.exe" "%%*"
-    cmd /c Ftype vbsfile="C:\WINDOWS\system32\notepad.exe" "%%*"
- }
+# Use %VARIABLE% in cmd.exe
+cmd /c Ftype xmlfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+cmd
+cmd /c Ftype chmfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+cmd /c Ftype cmdfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+cmd /c Ftype htafile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+cmd /c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+cmd /c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+cmd /c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+cmd /c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 
 # Last commands
-
 if (($WSDFIR_W10_LOOPBACK -eq "Yes") -and ($WIN10)) {
     & "C:\Users\WDAGUtilityAccount\Documents\tools\utils\devcon.exe" install $env:windir\inf\netloop.inf *msloop
 }
@@ -416,7 +401,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Python.lnk" -Destinati
 mkdir "$HOME\Desktop\dfirws\Programming\Go"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Go\GoReSym.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\Java"
-if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
+if ($WSDFIR_JAVA_JAVA -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
 }
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jd-gui.lnk" -DestinationPath "C:Tools\jd-gui\jd-gui.exe"
@@ -474,10 +459,9 @@ if ($WSDFIR_SYSMON -eq "Yes") {
     & "$TOOLS\sysinternals\Sysmon64.exe" -accepteula -i "$WSDFIR_SYSMON_CONF"
 }
 
-if ($WSDFIR_JAVA -eq "Yes") {
-    netsh firewall set opmode DISABLE
-    Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
-}
+# Start Gollum for local wiki
+netsh firewall set opmode DISABLE 2>&1 | Out-Null
+Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
 
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils\gollum.bat"
 
