@@ -8,12 +8,8 @@ $WSDFIR_BASH_EXTRA="Yes"
 $WSDFIR_BEACONHUNTER="Yes"
 # Install cmder
 $WSDFIR_CMDER="No"
-# Install HxD
-$WSDFIR_HXD="No"
 # Install git
 $WSDFIR_GIT="Yes"
-# Install Java - also affects Ghidra, jadx and msgviewer
-$WSDFIR_JAVA="Yes"
 # Install OpenJDK 11 for neo4j
 $WSDFIR_JAVA_JDK11="No"
 # Install jadx and jd-gui - requires WSDFIR_JAVA
@@ -22,16 +18,12 @@ $WSDFIR_JAVA_JAVA="No"
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki
 $WSDFIR_LOKI="Yes"
-# Install Notepad++
-$WSDFIR_NPP="Yes"
 # Install neo4j - requires WSDFIR_JAVA_JDK11
 $WSDFIR_NEO4J="No"
 # Install PDFStream Dumper
 $WSDFIR_PDFSTREAM="Yes"
 # Add PersistenceSniper
 $WSDFIR_PERSISTENCESNIPER="Yes"
-# Install Python pip packages - Python is still installed
-$WSDFIR_PYTHON_PIP="Yes"
 # Install Visual Studio Code
 $WSDFIR_VSCODE="Yes"
 # Install Visual Studio Code PowerShell extension
@@ -42,8 +34,6 @@ $WSDFIR_VSCODE_PYTHON="Yes"
 $WSDFIR_VSCODE_SPELL="Yes"
 # Install Windows loopback adapter on Windows 10. Doesn't work on Windows 11 at the moment.
 $WSDFIR_W10_LOOPBACK="No"
-# Link to installed x64dbg
-$WSDFIR_X64DBG="No"
 # Install Zui 
 $WSDFIR_ZUI="No"
 
@@ -64,16 +54,22 @@ $WSDFIR_CUTTER="No"
 $WSDFIR_DNSPY32="No"
 # Link to installed dnSpy 64
 $WSDFIR_DNSPY64="No"
+# Link to installed HxD
+$WSDFIR_HXD="No"
 # Link to installed Ghidra - requires WSDFIR_JAVA
 $WSDFIR_GHIDRA="No"
 # Link to installed Malcat 
 $WSDFIR_MALCAT="No"
 # Link to installed msgviewer - requires WSDFIR_JAVA
 $WSDFIR_MSGVIEWER="No"
+# Link to installed Notepad++
+$WSDFIR_NPP="No"
 # Link to installed PE-Bear
 $WSDFIR_PEBEAR="No"
 # Link to installed pestudio
 $WSDFIR_PESTUDIO="No"
+# Link to installed x64dbg
+$WSDFIR_X64DBG="No"
 
 # configuration
 
