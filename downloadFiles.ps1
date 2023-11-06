@@ -56,6 +56,7 @@ Write-DateLog "Download Python pip packages."
 Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 .\resources\download\release.ps1
 .\resources\download\didier.ps1
+.\resources\download\winget-download.ps1
 .\resources\download\zimmerman.ps1
 Write-DateLog "Wait for builds."
 Get-Job | Wait-Job | Out-Null

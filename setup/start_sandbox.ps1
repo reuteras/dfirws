@@ -10,8 +10,6 @@ $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $TEMP = "C:\tmp"
 mkdir "$TEMP"
-# Create directory for shortcuts to installed tools
-mkdir "$HOME\Desktop\dfirws"
 
 Write-DateLog "start_sandbox.ps1"
 
@@ -37,10 +35,9 @@ Copy-Item "$HOME\Documents\tools\default-config.txt" $TEMP\default-config.ps1
 Copy-Item "$SETUP_PATH\7zip.msi" "$TEMP\7zip.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\7zip.msi /qn /norestart"
 
-if ($WSDFIR_JAVA -eq "Yes") {
-    Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
-    Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
-}
+# Always install java. Needed for wiki
+Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
+Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
 
 if ($WSDFIR_JAVA_JDK11 -eq "Yes") {
     Copy-Item "$SETUP_PATH\microsoft-jdk-11.msi" "$TEMP\microsoft-jdk-11.msi"
@@ -68,11 +65,12 @@ if ($WSDFIR_LIBREOFFICE -eq "Yes") {
 Start-Process -Wait "$SETUP_PATH\vcredist_16_x64.exe" -ArgumentList "/passive /norestart"
 Start-Process -Wait "$SETUP_PATH\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
 
-# Install HxD if specified
-if ($WSDFIR_HXD -eq "Yes") {
-    Copy-Item "$TOOLS\hxd\HxDSetup.exe" "$TEMP\HxDSetup.exe"
-    & "$TEMP\HxDSetup.exe" /VERYSILENT /NORESTART
-}
+# Install .NET 6
+Start-Process -Wait "$SETUP_PATH\dotnet6.exe" -ArgumentList "/install /quiet /norestart"
+
+# Install HxD
+Copy-Item "$TOOLS\hxd\HxDSetup.exe" "$TEMP\HxDSetup.exe"
+& "$TEMP\HxDSetup.exe" /VERYSILENT /NORESTART
 
 # Install Git if specified
 if ($WSDFIR_GIT -eq "Yes") {
@@ -355,22 +353,13 @@ if ($WSDFIR_LOKI -eq "Yes") {
 # Clean up
 Remove-Item C:\Users\WDAGUtilityAccount\Desktop\PdfStreamDumper.exe.lnk
 
-# Create shortcuts for tools
-mkdir "$HOME\Desktop\dfirws\Browsers"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Browsers\hindsight.lnk" -DestinationPath "C:\Tools\bin\hindsight_gui.exe"
-mkdir "$HOME\Desktop\dfirws\Cobalt Strike"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Cobalt Strike\1768.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "C:\Program Files\bin\BeaconHunter.exe"
+# Create directory for shortcuts to installed tools
+mkdir "$HOME\Desktop\dfirws"
+mkdir "$HOME\Desktop\dfirws\Browser"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Browser\hindsight.lnk" -DestinationPath "C:\Tools\bin\hindsight_gui.exe"
 mkdir "$HOME\Desktop\dfirws\Database"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Database\SQLECmd.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\Zimmerman\SQLECmd\SQLECmd.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Database\sqlite3.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\sqlite\sqlite3.exe"
-mkdir "$HOME\Desktop\dfirws\Debuggers"
-if ($WSDFIR_X64DBG -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\x32dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x32\x32dbg.exe"
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\x64dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x64\x64dbg.exe"
-}
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\dnSpy32.lnk" -DestinationPath "C:\Tools\dnSpy32\dnSpy.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Debuggers\dnSpy64.lnk" -DestinationPath "C:\Tools\dnSpy64\dnSpy.exe"
 # C:\Tools\DidierStevens
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\DidierStevens.lnk" -DestinationPath "C:\Tools\DidierStevens"
 mkdir "$HOME\Desktop\dfirws\Disk"
@@ -385,36 +374,31 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Visual Studio Code.lnk" -D
 mkdir "$HOME\Desktop\dfirws\ELF"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\elfparser-ng.lnk" -DestinationPath "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\xelfviewer.lnk" -DestinationPath "C:\Tools\XELFViewer\xelfviewer.exe"
-mkdir "$HOME\Desktop\dfirws\Email"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Email\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
-mkdir "$HOME\Desktop\dfirws\Extraction"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Extraction\bulk_extractor.lnk" -DestinationPath "C:\Tools\bulk_extractor\win64\bulk_extractor.exe"
 mkdir "$HOME\Desktop\dfirws\File"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\File\binlex.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\File\bulk_extractor.lnk" -DestinationPath "C:\Tools\bulk_extractor\win64\bulk_extractor.exe"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\File\densityscout.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\File\Detect It Easy.lnk" -DestinationPath "C:\Tools\die\die.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\File\fq.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\File\lessmsi-gui.lnk" -DestinationPath "C:\Tools\lessmsi\lessmsi-gui.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\File\ripgrep (rg).lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\File\trid.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
-mkdir "$HOME\Desktop\dfirws\Go"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Go\GoReSym.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
-mkdir "$HOME\Desktop\dfirws\Java"
-if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Java\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
-}
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Java\jd-gui.lnk" -DestinationPath "C:Tools\jd-gui\jd-gui.exe"
 mkdir "$HOME\Desktop\dfirws\Log"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Log\chainsaw.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Log\Events-Ripper.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Log\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Log\hayabusa.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Log\PowerSiem.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+mkdir "$HOME\Desktop\dfirws\Malware tools"
+mkdir "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\1768.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "C:\Program Files\bin\BeaconHunter.exe"
 mkdir "$HOME\Desktop\dfirws\Network"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "C:\Tools\fakenet" -Iconlocation "C:\Tools\fakenet\fakenet.exe"
-mkdir "$HOME\Desktop\dfirws\Office"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office\MetadataPlus.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\bin\MetadataPlus.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office\Structured Storage Viewer (SSView).lnk" -DestinationPath "C:\Tools\ssview\SSView.exe"
+mkdir "$HOME\Desktop\dfirws\Office and email"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and emailMetadataPlus.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\bin\MetadataPlus.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\Structured Storage Viewer (SSView).lnk" -DestinationPath "C:\Tools\ssview\SSView.exe"
 mkdir "$HOME\Desktop\dfirws\PDF"
 if ($WSDFIR_PDFSTREAM -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\pdfstreamdumper.lnk" -DestinationPath "C:\Sandsprite\PDFStreamDumper\PDFStreamDumper.exe"
@@ -429,29 +413,41 @@ mkdir "$HOME\Desktop\dfirws\Programming"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\java.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\node.lnk" -DestinationPath "C:\Tools\node\node.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Python.lnk" -DestinationPath "C:\venv\default\Scripts\python.exe"
+mkdir "$HOME\Desktop\dfirws\Programming\Go"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Go\GoReSym.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+mkdir "$HOME\Desktop\dfirws\Java"
+if (($WSDFIR_JAVA -eq "Yes") -and ($WSDFIR_JAVA_JAVA -eq "Yes")) {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
+}
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jd-gui.lnk" -DestinationPath "C:Tools\jd-gui\jd-gui.exe"
 mkdir "$HOME\Desktop\dfirws\Registry"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Registry\Registry Explorer.lnk" -DestinationPath "C:\Tools\Zimmerman\RegistryExplorer\RegistryExplorer.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Registry\RegRipper (rip).lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\Reverse Engineering"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk" -DestinationPath "C:\Tools\dnSpy32\dnSpy.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy64.lnk" -DestinationPath "C:\Tools\dnSpy64\dnSpy.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "C:\Tools\ghidra\radare2.bat"
+if ($WSDFIR_X64DBG -eq "Yes") {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\x32dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x32\x32dbg.exe"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\x64dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x64\x64dbg.exe"
+}
 mkdir "$HOME\Desktop\dfirws\Signatures"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures\loki.lnk" -DestinationPath "C:\Program Files\loki\loki.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\yara.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures\yara.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 # "$HOME\Desktop\dfirws\Sysinternals"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Sysinternals.lnk" -DestinationPath "C:\Tools\sysinternals"
-mkdir "$HOME\Desktop\dfirws\Unpack"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Unpack\7-Zip.lnk" -DestinationPath "C:\Program Files\7-Zip\7zFM.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Unpack\upx.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Unpack\zstd.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\Utilities"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\7-Zip.lnk" -DestinationPath "C:\Program Files\7-Zip\7zFM.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\bash.lnk" -DestinationPath "$env:ProgramFiles\Git\bin\bash.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\cmder.lnk" -DestinationPath "$env:ProgramFiles\cmder\cmder.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\exiftool.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\exiftool\exiftool.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\floss.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\floss\floss.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\git.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Program Files\Git\cmd\git-gui.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\upx.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\zstd.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\Windows"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Windows\Jumplist-Browser.lnk" -DestinationPath "C:\Tools\bin\JumplistBrowser.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Windows\Prefetch-Browser.lnk" -DestinationPath "C:\Tools\bin\PrefetchBrowser.exe"
