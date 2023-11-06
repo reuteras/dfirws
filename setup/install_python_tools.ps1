@@ -108,6 +108,7 @@ Set-Location C:\
     pyOneNote `
     pyparsing>=2.4.6 `
     pypng `
+    pyreadline `
     python-magic-bin `
     pywin32 `
     pyzipper `
