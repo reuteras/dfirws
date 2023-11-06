@@ -440,6 +440,15 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Windows\Thumbcache Viewer.lnk" -De
 # "$HOME\Desktop\dfirws\Zimmerman"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Zimmerman.lnk" -DestinationPath "C:\Tools\Zimmerman"
 
+# Pin to explorer
+$shell = new-object -com "Shell.Application"
+$folder = $shell.Namespace('C:\Users\WDAGUtilityAccount\Desktop')
+$item = $folder.Parsename('dfirws')
+$verb = $item.Verbs() | ? { $_.Name -eq 'Pin to Quick access' }
+if ($verb) { 
+    $verb.DoIt()
+}
+
 # TODO
 # pstwalker
 # Links to
