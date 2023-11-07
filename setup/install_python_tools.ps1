@@ -94,6 +94,7 @@ Set-Location C:\
     pandas `
     pcode2code `
     pcodedmp `
+    peepdf-3 `
     pefile `
     peutils `
     pillow `
