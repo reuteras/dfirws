@@ -56,7 +56,6 @@ xcopy /E $SETUP_PATH\Zimmerman $TOOLS\Zimmerman
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\trid.zip" -o"$TOOLS\trid"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\triddefs.zip" -o"$TOOLS\trid"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\winapiexec.zip" -o"$TOOLS\winapiexec"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\XELFViewer.zip" -o"$TOOLS\XELFViewer"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS"
 
