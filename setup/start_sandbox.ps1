@@ -381,12 +381,21 @@ mkdir "$HOME\Desktop\dfirws\Network"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "C:\Tools\fakenet" -Iconlocation "C:\Tools\fakenet\fakenet.exe"
 mkdir "$HOME\Desktop\dfirws\Office and email"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\MetadataPlus.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\bin\MetadataPlus.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\mraptor.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oledump.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oleid.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\olevba.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\Structured Storage Viewer (SSView).lnk" -DestinationPath "C:\Tools\ssview\SSView.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\tree.com.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\zipdump.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
 mkdir "$HOME\Desktop\dfirws\PDF"
 if ($WSDFIR_PDFSTREAM -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\pdfstreamdumper.lnk" -DestinationPath "C:\Sandsprite\PDFStreamDumper\PDFStreamDumper.exe"
 }
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\pdf-parser.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\pdfid.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\peepdf.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\qpdf.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\PE"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\capa.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation C:\Tools\capa\capa.exe
@@ -444,7 +453,7 @@ $shell = new-object -com "Shell.Application"
 $folder = $shell.Namespace('C:\Users\WDAGUtilityAccount\Desktop')
 $item = $folder.Parsename('dfirws')
 $verb = $item.Verbs() | Where-Object { $_.Name -eq 'Pin to Quick access' }
-if ($verb) { 
+if ($verb) {
     $verb.DoIt()
 }
 
