@@ -1,0 +1,9 @@
+{
+    "scrollPastEnd": true,
+    "toolbar": [],
+    "editorConfig": {
+        "autoClosingBrackets": true,
+        "highlightActiveLine": true,
+        "highlightTrailingWhitespace": true
+    }
+}

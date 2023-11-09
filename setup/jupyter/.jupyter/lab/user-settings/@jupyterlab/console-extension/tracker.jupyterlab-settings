@@ -1,0 +1,10 @@
+{
+    "interactionMode": "notebook",
+    "showAllKernelActivity": false,
+    "promptCellConfig": {
+        "autoClosingBrackets": true,
+        "highlightActiveLine": true,
+        "highlightTrailingWhitespace": true,
+        "lineNumbers": false
+    }
+}
