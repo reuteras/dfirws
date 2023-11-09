@@ -5,44 +5,30 @@ $TEMP="C:\tmp"
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
 
-# Local function
-function Install-PythonPackage {
-    Get-ChildItem . -Filter wheel* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
-    Get-ChildItem . -Filter tomlkit* | Foreach-Object { python -m pip install --disable-pip-version-check $_ >> "C:\log\python.txt" 2>&1 }
-    Get-ChildItem . -Filter *.gz | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
-    Get-ChildItem . -Filter *.whl | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
-    Get-ChildItem . -Filter *.zip | Foreach-Object { python -m pip install --disable-pip-version-check --no-deps --no-build-isolation $_ >> "C:\log\python.txt" 2>&1 }
-    return
-}
-
-Write-DateLog "Creating Python venv in Sandbox." >> "C:\log\python.txt" 2>&1
-
+Write-DateLog "Creating Python venv in Sandbox." >> "C:\log\python.txt"
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
 # This script runs in a Windows sandbox to prebuild the venv environment.
-Remove-Item "C:\venv\done" > $null 2>&1
-Remove-Item -r C:\venv\default\* > $null 2>&1
-Remove-Item -r C:\venv\dfir-unfurl\* > $null 2>&1
-Get-ChildItem -Path $TEMP\pip\default -Include *.* -Recurse | ForEach-Object { $_.Delete()} > $null 2>&1
-Get-ChildItem -Path $TEMP\pip\dfir-unfurl -Include *.* -Recurse | ForEach-Object { $_.Delete()} > $null 2>&1
+Remove-Item "C:\venv\done" > $null
+Remove-Item -r C:\venv\default\* > $null
+Remove-Item -r C:\venv\dfir-unfurl\* > $null
 
-Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
 Start-Process "$SETUP_PATH\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
-Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+Get-Job | Receive-Job >> "C:\log\python.txt"
 
 $PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
 
-&"$PYTHON_BIN" -m venv C:\pip2pi
+Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\default"
+C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+# TODO: Get latest version of package
+python -m pip install https://github.com/msuhanov/dfir_ntfs/archive/1.1.18.tar.gz >> "C:\log\python.txt"
 
-&"C:\pip2pi\Scripts\Activate.ps1"
-Write-DateLog "Install pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
-&python -m pip install -U pip >> "C:\log\python.txt" 2>&1
-&python -m pip install pip2pi >> "C:\log\python.txt" 2>&1
-
-Write-DateLog "Download packages with pip2pi in Sandbox." >> "C:\log\python.txt" 2>&1
-Set-Location C:\
-&pip2pi ./tmp/pip/default `
+python -m pip install `
     aiohttp[speedups] `
     aiosignal>=1.2.0 `
     async_timeout>=4.0.1 `
@@ -94,7 +80,6 @@ Set-Location C:\
     pandas `
     pcode2code `
     pcodedmp `
-    peepdf-3 `
     pefile `
     peutils `
     pillow `
@@ -117,6 +102,7 @@ Set-Location C:\
     regipy `
     requests `
     setuptools `
+    soupsieve>=2.4.1 `
     time-decode `
     tomlkit `
     tqdm `
@@ -129,52 +115,37 @@ Set-Location C:\
     xlrd>=2.0.0 `
     XLMMacroDeobfuscator>=0.2.5 `
     xxhash>=3.3.0 `
-    yara-python `
-    wheel>=0.41.2 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
+    yara-python 2>&1 >> "C:\log\python.txt"
+
+python -m pip install `
+    jupyterlab 2>&1 >> "C:\log\python.txt"
 
 # Not compatible with Python 3.11:
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
 
-Set-Location C:\
-&pip2pi ./tmp/pip/dfir-unfurl `
+Copy-Item -r C:\git\dotnetfile $TEMP
+Set-Location $TEMP\dotnetfile
+python -m pip install . >> "C:\log\python.txt" 2>&1
+
+python -m pip install -U https://github.com/DissectMalware/pyOneNote/archive/master.zip --force >> "C:\log\python.txt"
+
+deactivate
+Write-DateLog "Python venv default done." >> "C:\log\python.txt"
+
+# dfir-unfurl
+Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-unfurl"
+C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+
+python -m pip install `
     dfir-unfurl `
     hexdump `
     tomlkit `
-    wheel>=0.40.0 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
+    wheel>=0.40.0 2>&1 >> "C:\log\python.txt" 
 
-Set-Location C:\
-&pip2pi ./tmp/pip/pySigma `
-    pySigma>=0.9.6 `
-    wheel>=0.40.0 2>&1 | findstr /V "ERROR linking" | findstr /V "Access is denied:" | findstr /V "skipping WinError" >> "C:\log\python.txt" 2>&1
-
-deactivate
-
-Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.txt" 2>&1
-Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\default"
-C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
-
-Copy-Item "$SETUP_PATH\dfir_ntfs.tar.gz" "$TEMP\pip\default"
-
-Set-Location $TEMP\pip\default
-Install-PythonPackage
-
-Copy-Item -r C:\git\dotnetfile $TEMP
-Set-Location $TEMP\dotnetfile
-python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
-
-Copy-Item -r C:\git\one-extract $TEMP
-Set-Location $TEMP\one-extract
-python -m pip install --disable-pip-version-check . >> "C:\log\python.txt" 2>&1
-
-deactivate
-Write-DateLog "Python venv default done." >> "C:\log\python.txt" 2>&1
-
-Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older packages)." >> "C:\log\python.txt" 2>&1
-Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-unfurl"
-C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
-Set-Location $TEMP\pip\dfir-unfurl
-Install-PythonPackage
-Write-DateLog "Python venv dfir-unfurl done. Will update path and cache Cloudflare." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Python venv dfir-unfurl done. Will update path and cache Cloudflare." >> "C:\log\python.txt"
 
 $baseHtmlPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\templates\base.html"
 $baseHtmlContent = Get-Content $baseHtmlPath -Raw
@@ -184,22 +155,25 @@ $urls = [regex]::Matches($baseHtmlContent, 'https://cdnjs.cloudflare.com[^"]+')
 foreach ($url in $urls) {
     $fileName = $url.Value.Split("/")[-1]
     $staticPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\static\$fileName"
-    Write-DateLog "Downloading $url.Value to $staticPath." >> "C:\log\python.txt" 2>&1
+    Write-DateLog "Downloading $url.Value to $staticPath." >> "C:\log\python.txt"
     Invoke-WebRequest -Uri $url.Value -OutFile $staticPath
     $baseHtmlContent = $baseHtmlContent.slace($url.Value, "/static/$fileName")
 }
-
 Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
-
 deactivate
-Write-DateLog "Python venv dfir-unfurl cache done." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Python venv dfir-unfurl cache done." >> "C:\log\python.txt"
 
-Write-DateLog "Install packages in venv pySigma in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt" 2>&1
+# pySigma
+Write-DateLog "Install packages in venv pySigma in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pySigma"
-C:\venv\pySigma\Scripts\Activate.ps1 >> "C:\log\python.txt" 2>&1
-Set-Location $TEMP\pip\pySigma
-Install-PythonPackage | Out-Null
+C:\venv\pySigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+
+python -m pip install `
+    pySigma>=0.9.6 `
+    wheel>=0.41.3 2>&1 >> "C:\log\python.txt"
 deactivate
-Write-DateLog "Python venv pySigma done." >> "C:\log\python.txt" 2>&1
+Write-DateLog "Python venv pySigma done." >> "C:\log\python.txt"
 
 Write-Output "" > C:\venv\done
