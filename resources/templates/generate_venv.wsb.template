@@ -5,17 +5,12 @@
   <VideoInput>Disable</VideoInput>
   <ProtectedClient>Enable</ProtectedClient>
   <PrinterRedirection>Disable</PrinterRedirection>
-  <ClipboardRedirection>Disable</ClipboardRedirection>
+  <ClipboardRedirection>Enable</ClipboardRedirection>
   <MappedFolders>
     <MappedFolder>
       <HostFolder>__SANDBOX__setup</HostFolder>
 	    <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
       <ReadOnly>true</ReadOnly>
-    </MappedFolder>
-	 <MappedFolder>
-      <HostFolder>__SANDBOX__tmp\pip</HostFolder>
-      <SandboxFolder>C:\tmp\pip</SandboxFolder>
-      <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>
       <HostFolder>__SANDBOX__mount\git</HostFolder>
