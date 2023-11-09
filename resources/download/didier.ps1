@@ -1,8 +1,12 @@
 . $PSScriptRoot\common.ps1
 
+$TOOLS=".\mount\Tools"
+$SETUP_PATH=".\downloads"
+
 Write-DateLog "Download Didier Stevens tools."
 
-New-Item -ItemType Directory -Force -Path .\downloads\DidierStevens > $null
+New-Item -ItemType Directory -Force -Path $TOOLS\DidierStevens > $null
+New-Item -ItemType Directory -Force -Path $SETUP_PATH\DidierStevens > $null
 
 $DidierStevensSuite = `
     "1768.json", `
@@ -115,3 +119,5 @@ foreach ($Tool in $DidierStevensBeta)
 {
   Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath .\downloads\DidierStevens\$Tool
 }
+
+xcopy /E $SETUP_PATH\DidierStevens $TOOLS\DidierStevens | Out-Null
