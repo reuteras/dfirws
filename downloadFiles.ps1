@@ -7,7 +7,6 @@ $TOOLS=".\mount\Tools"
 Remove-Item -r $TOOLS > $null 2>$1
 mkdir $TOOLS > $null 2>$1
 mkdir $TOOLS\bin > $null 2>$1
-mkdir $TOOLS\DidierStevens > $null 2>$1
 mkdir $TOOLS\lib > $null 2>$1
 mkdir $TOOLS\Zimmerman > $null 2>$1
 
@@ -32,8 +31,8 @@ if (!(Test-Path .\downloads)) {
 if (Test-Path -Path .\log\log.txt) {
     Remove-Item .\log\*
     Write-Output "" > .\log\bash.txt
+    Write-Output "" > .\log\jobs.txt
     Write-Output "" > .\log\npm.txt
-    Write-Output "" > .\log\python.txt
 }
 Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 
@@ -46,14 +45,12 @@ $null = $GH_PASS
 $null = $GH_USER
 .\resources\download\http.ps1
 Write-DateLog "Download packages for Git for Windows (bash)."
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
-Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
 Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 Write-DateLog "Setup Node and install npm packages."
 Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 .\resources\download\git.ps1
 Write-DateLog "Download Python pip packages."
-Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+.\downloadPython.ps1
 .\resources\download\release.ps1
 .\resources\download\didier.ps1
 .\resources\download\winget-download.ps1
@@ -63,12 +60,10 @@ Get-Job | Wait-Job | Out-Null
 Get-Job | Receive-Job > .\log\jobs.txt 2>&1
 Get-Job | Remove-Job | Out-Null
 Write-DateLog "Done waiting."
-Write-DateLog "Prepare downloaded files."
-$result = .\resources\download\unpack.ps1 2>&1
-Write-SynchronizedLog "$result"
 Write-DateLog "Copy files."
 Copy-Item README.md .\downloads\
 Copy-Item .\resources\images\dfirws.jpg .\downloads\
+Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 # done.txt is used to check last update in sandbox
 Write-Output "" > .\downloads\done.txt
 Write-DateLog "Download and preparations done."
