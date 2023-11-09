@@ -46,6 +46,7 @@ python -m pip install `
     cryptography>=41.0.1 `
     dnslib `
     docx2txt `
+    dotnetfile `
     dpkt `
     elasticsearch[async] `
     elastic_transport>=8.1.2 `
@@ -122,10 +123,6 @@ python -m pip install `
 
 # Not compatible with Python 3.11:
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
-
-Copy-Item -r C:\git\dotnetfile $TEMP
-Set-Location $TEMP\dotnetfile
-python -m pip install . >> "C:\log\python.txt" 2>&1
 
 python -m pip install -U https://github.com/DissectMalware/pyOneNote/archive/master.zip --force >> "C:\log\python.txt"
 
