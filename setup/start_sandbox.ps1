@@ -262,6 +262,11 @@ Copy-Item "$HOME\Documents\tools\Microsoft.PowerShell_profile.ps1" "$HOME\Docume
 New-Item -ItemType Directory $PSHome\Modules\PSDecode
 Copy-Item "$HOME\Documents\tools\utils\PSDecode.psm1" "$PSHome\Modules\PSDecode"
 
+# Jupyter
+Copy-Item "$HOME\Documents\tools\jupyter\.jupyter" "$HOME\" -Recurse
+mkdir "$HOME\Documents\jupyter"
+Copy-Item $HOME\Documents\tools\jupyter\*.ipynb "$HOME\Documents\jupyter\"
+
 New-Item -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging -Force
 Set-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging -Name EnableScriptBlockLogging -Value 1 -Force
 
@@ -383,9 +388,12 @@ mkdir "$HOME\Desktop\dfirws\Office and email"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\MetadataPlus.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\bin\MetadataPlus.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\mraptor.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msodde.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oledump.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oleid.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\olevba.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\rtfdump.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\rtfobj.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\Structured Storage Viewer (SSView).lnk" -DestinationPath "C:\Tools\ssview\SSView.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\tree.com.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\zipdump.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
@@ -477,10 +485,11 @@ if ($WSDFIR_SYSMON -eq "Yes") {
 }
 
 # Start Gollum for local wiki
-netsh firewall set opmode DISABLE 2>&1 | Out-Null
-Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
+#netsh firewall set opmode DISABLE 2>&1 | Out-Null
+#Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
 
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils\gollum.bat"
+REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
+Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\jupyter.bat"
 
 Write-DateLog "helpers.ps1 done"
 Stop-Transcript
