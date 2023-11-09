@@ -1,7 +1,6 @@
 # Set variables
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $SETUP_PATH="C:\downloads"
-$TEMP="C:\tmp"
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
 
