@@ -485,11 +485,12 @@ if ($WSDFIR_SYSMON -eq "Yes") {
 }
 
 # Start Gollum for local wiki
-#netsh firewall set opmode DISABLE 2>&1 | Out-Null
-#Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
+netsh firewall set opmode DISABLE 2>&1 | Out-Null
+Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
 
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
 Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\jupyter.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils\gollum.bat"
 
 Write-DateLog "helpers.ps1 done"
 Stop-Transcript
