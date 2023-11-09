@@ -1,53 +1,164 @@
 . $PSScriptRoot\common.ps1
 
+$TOOLS=".\mount\Tools"
+$SETUP_PATH=".\downloads"
+
 Write-DateLog "Download releases from GitHub."
 
-Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path ".\downloads\beaconhunter.zip" -match BeaconHunter.zip
-Get-GitHubRelease -repo "activescott/lessmsi" -path ".\downloads\lessmsi.zip" -match lessmsi-v
-Get-GitHubRelease -repo "brimdata/zui" -path ".\downloads\zui.exe" -match Zui-Setup
-Get-GitHubRelease -repo "BurntSushi/ripgrep" -path ".\downloads\ripgrep.zip" -match x86_64-pc-windows-msvc
-Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path ".\downloads\binlex.zip" -match windows
-Get-GitHubRelease -repo "cmderdev/cmder" -path ".\downloads\cmder.7z" -match cmder.7z
-Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path ".\downloads\dnSpy32.zip" -match win32
-Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path ".\downloads\dnSpy64.zip" -match win64
-Get-GitHubRelease -repo "facebook/zstd" -path ".\downloads\zstd.zip" -match win64
-Get-GitHubRelease -repo "gchq/CyberChef" -path ".\downloads\CyberChef.zip" -match CyberChef
-Get-GitHubRelease -repo "git-for-windows/git" -path ".\downloads\git.exe" -match 64-bit.exe
-Get-GitHubRelease -repo "gollum/gollum" -path ".\downloads\gollum.war" -match gollum.war
-Get-GitHubRelease -repo "harelsegev/INDXRipper" -path ".\downloads\indxripper.zip" -match amd64.zip
-Get-GitHubRelease -repo "hasherezade/pe-bear" -path ".\downloads\pebear.zip" -match x64_win_vs17.zip
-Get-GitHubRelease -repo "horsicq/DIE-engine" -path ".\downloads\die.zip" -match die_win64_portable
-Get-GitHubRelease -repo "horsicq/XELFViewer" -path ".\downloads\XELFViewer.zip" -match win64_portable
-Get-GitHubRelease -repo "java-decompiler/jd-gui" -path ".\downloads\jd-gui.zip" -match jd-gui-windows
-Get-GitHubRelease -repo "jqlang/jq" -path ".\downloads\jq.exe" -match win64
-Get-GitHubRelease -repo "kacos2000/Jumplist-Browser" -path ".\downloads\JumplistBrowser.exe" -match JumplistBrowser.exe
-Get-GitHubRelease -repo "kacos2000/Prefetch-Browser" -path ".\downloads\PrefetchBrowser.exe" -match PrefetchBrowser.exe
-Get-GitHubRelease -repo "Konloch/bytecode-viewer" -path ".\downloads\BCV.jar" -match Bytecode
-Get-GitHubRelease -repo "lolo101/MsgViewer" -path ".\downloads\msgviewer.jar" -match msgviewer.jar
-Get-GitHubRelease -repo "mandiant/capa" -path ".\downloads\capa-windows.zip" -match windows
-Get-GitHubRelease -repo "mandiant/flare-floss" -path ".\downloads\floss.zip" -match windows
-Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path ".\downloads\fakenet.zip" -match fakenet
-Get-GitHubRelease -repo "mandiant/GoReSym" -path ".\downloads\GoReSym.zip" -match GoReSym-windows
-Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path ".\downloads\elfparser-ng.zip" -match win64
-Get-GitHubRelease -repo "multiprocessio/dsq" -path ".\downloads\dsq.zip" -match dsq-win
-Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path ".\downloads\ghidra.zip" -match ghidra
-Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path ".\downloads\MetadataPlus.exe" -match MetadataPlus
-Get-GitHubRelease -repo "Neo23x0/Loki" -path ".\downloads\loki.zip" -match loki
-Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path ".\downloads\notepad++.exe" -match Installer.x64.exe
-Get-GitHubRelease -repo "obsidianforensics/hindsight" -path ".\downloads\hindsight.exe" -match hindsight.exe
-Get-GitHubRelease -repo "obsidianforensics/hindsight" -path ".\downloads\hindsight_gui.exe" -match hindsight_gui.exe
-Get-GitHubRelease -repo "pnedev/comparePlus" -path ".\downloads\comparePlus.zip" -match x64.zip
-Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path ".\downloads\vscode\vscode-powershell.vsix" -match vsix
-Get-GitHubRelease -repo "qpdf/qpdf" -path ".\downloads\qpdf.zip" -match msvc64.zip
-Get-GitHubRelease -repo "radareorg/radare2" -path ".\downloads\radare2.zip" -match w64.zip
-Get-GitHubRelease -repo "rizinorg/cutter" -path ".\downloads\cutter.zip" -match Windows-x86_64.zip
-Get-GitHubRelease -repo "skylot/jadx" -path ".\downloads\jadx.zip" -match jadx-1
-Get-GitHubRelease -repo "Squiblydoo/debloat" -path ".\downloads\debloat.zip" -match Windows
-Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path ".\downloads\vscode\vscode-spell-checker.vsix" -match vsix
-Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path ".\downloads\thumbcacheviewer.zip" -match viewer_64
-Get-GitHubRelease -repo "upx/upx" -path ".\downloads\upx.zip" -match win64
-Get-GitHubRelease -repo "wader/fq" -path ".\downloads\fq.zip" -match windows_amd64.zip
-Get-GitHubRelease -repo "WerWolv/ImHex" -path ".\downloads\imhex.zip" -match Portable-NoGPU-x86_64.zip
-Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path ".\downloads\chainsaw.zip" -match x86_64-pc-windows-msvc
-Get-GitHubRelease -repo "VirusTotal/yara" -path ".\downloads\yara.zip" -match win64
-Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path ".\downloads\hayabusa.zip" -match win-64
+New-Item -ItemType Directory -Force -Path $TOOLS\bin > $null
+New-Item -ItemType Directory -Force -Path $TOOLS\lib > $null
+
+Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "$SETUP_PATH\beaconhunter.zip" -match BeaconHunter.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\beaconhunter.zip" -o"$SETUP_PATH\" | Out-Null
+
+Get-GitHubRelease -repo "activescott/lessmsi" -path "$SETUP_PATH\lessmsi.zip" -match lessmsi-v
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\lessmsi.zip" -o"$TOOLS\lessmsi" | Out-Null
+
+Get-GitHubRelease -repo "brimdata/zui" -path "$SETUP_PATH\zui.exe" -match Zui-Setup
+
+Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "$SETUP_PATH\ripgrep.zip" -match x86_64-pc-windows-msvc
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ripgrep.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\ripgrep-* $TOOLS\ripgrep
+
+Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path "$SETUP_PATH\binlex.zip" -match windows
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\binlex.zip" -o"$TOOLS\bin" | Out-Null
+
+Get-GitHubRelease -repo "cmderdev/cmder" -path "$SETUP_PATH\cmder.7z" -match cmder.7z
+
+Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "$SETUP_PATH\dnSpy32.zip" -match win32
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy32.zip" -o"$TOOLS\dnSpy32" | Out-Null
+
+Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "$SETUP_PATH\dnSpy64.zip" -match win64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy64.zip" -o"$TOOLS\dnSpy64" | Out-Null
+
+Get-GitHubRelease -repo "facebook/zstd" -path "$SETUP_PATH\zstd.zip" -match win64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
+
+Get-GitHubRelease -repo "gchq/CyberChef" -path "$SETUP_PATH\CyberChef.zip" -match CyberChef
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\CyberChef.zip" -o"$TOOLS\CyberChef" | Out-Null
+Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
+
+Get-GitHubRelease -repo "git-for-windows/git" -path "$SETUP_PATH\git.exe" -match 64-bit.exe
+
+Get-GitHubRelease -repo "gollum/gollum" -path "$SETUP_PATH\gollum.war" -match gollum.war
+Copy-Item $SETUP_PATH\gollum.war $TOOLS\lib
+
+Get-GitHubRelease -repo "harelsegev/INDXRipper" -path "$SETUP_PATH\indxripper.zip" -match amd64.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\indxripper.zip" -o"$TOOLS\INDXRipper" | Out-Null
+
+Get-GitHubRelease -repo "hasherezade/pe-bear" -path "$SETUP_PATH\pebear.zip" -match x64_win_vs17.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pebear.zip" -o"$TOOLS\pebear" | Out-Null
+
+Get-GitHubRelease -repo "horsicq/DIE-engine" -path "$SETUP_PATH\die.zip" -match die_win64_portable
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\die.zip" -o"$TOOLS\die" | Out-Null
+
+Get-GitHubRelease -repo "horsicq/XELFViewer" -path "$SETUP_PATH\XELFViewer.zip" -match win64_portable
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\XELFViewer.zip" -o"$TOOLS\XELFViewer" | Out-Null
+
+Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "$SETUP_PATH\jd-gui.zip" -match jd-gui-windows
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jd-gui.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\jd-gui* $TOOLS\jd-gui
+
+Get-GitHubRelease -repo "jqlang/jq" -path "$SETUP_PATH\jq.exe" -match win64
+Copy-Item $SETUP_PATH\jq.exe $TOOLS\bin\
+
+Get-GitHubRelease -repo "kacos2000/Jumplist-Browser" -path "$SETUP_PATH\JumplistBrowser.exe" -match JumplistBrowser.exe
+Copy-Item $SETUP_PATH\JumplistBrowser.exe $TOOLS\bin\
+
+Get-GitHubRelease -repo "kacos2000/Prefetch-Browser" -path "$SETUP_PATH\PrefetchBrowser.exe" -match PrefetchBrowser.exe
+Copy-Item $SETUP_PATH\PrefetchBrowser.exe $TOOLS\bin\
+
+Get-GitHubRelease -repo "Konloch/bytecode-viewer" -path "$SETUP_PATH\BCV.jar" -match Bytecode
+Copy-Item $SETUP_PATH\BCV.jar $TOOLS\lib
+Write-Output "java -Xmx3G -jar C:\Tools\lib\BCV.jar" | Out-File -Encoding "ascii" $TOOLS\bin\bcv.bat
+
+Get-GitHubRelease -repo "lolo101/MsgViewer" -path "$SETUP_PATH\msgviewer.jar" -match msgviewer.jar
+Copy-Item $SETUP_PATH\msgviewer.jar $TOOLS\lib
+
+Get-GitHubRelease -repo "mandiant/capa" -path "$SETUP_PATH\capa-windows.zip" -match windows
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa" | Out-Null
+
+Get-GitHubRelease -repo "mandiant/flare-floss" -path "$SETUP_PATH\floss.zip" -match windows
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\floss.zip" -o"$TOOLS\floss" | Out-Null
+
+Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path "$SETUP_PATH\fakenet.zip" -match fakenet
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fakenet.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\fakenet* $TOOLS\fakenet
+
+Get-GitHubRelease -repo "mandiant/GoReSym" -path "$SETUP_PATH\GoReSym.zip" -match GoReSym-windows
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym" | Out-Null
+Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
+Remove-Item $TOOLS\GoReSym\GoReSym_lin
+Remove-Item $TOOLS\GoReSym\GoReSym_mac
+
+Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "$SETUP_PATH\elfparser-ng.zip" -match win64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\elfparser-ng.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\elfparser-ng* $TOOLS\elfparser-ng
+
+Get-GitHubRelease -repo "multiprocessio/dsq" -path "$SETUP_PATH\dsq.zip" -match dsq-win
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dsq.zip" -o"$TOOLS\bin" | Out-Null
+
+Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "$SETUP_PATH\ghidra.zip" -match ghidra
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
+
+Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path "$SETUP_PATH\MetadataPlus.exe" -match MetadataPlus
+Copy-Item $SETUP_PATH\MetadataPlus.exe $TOOLS\bin\
+
+Get-GitHubRelease -repo "Neo23x0/Loki" -path "$SETUP_PATH\loki.zip" -match loki
+
+Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path "$SETUP_PATH\notepad++.exe" -match Installer.x64.exe
+
+Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "$SETUP_PATH\hindsight.exe" -match hindsight.exe
+Copy-Item $SETUP_PATH\hindsight.exe $TOOLS\bin\
+
+Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "$SETUP_PATH\hindsight_gui.exe" -match hindsight_gui.exe
+Copy-Item $SETUP_PATH\hindsight_gui.exe $TOOLS\bin\
+
+Get-GitHubRelease -repo "pnedev/comparePlus" -path "$SETUP_PATH\comparePlus.zip" -match x64.zip
+
+Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "$SETUP_PATH\vscode\vscode-powershell.vsix" -match vsix
+
+Get-GitHubRelease -repo "qpdf/qpdf" -path "$SETUP_PATH\qpdf.zip" -match msvc64.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\qpdf.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
+
+Get-GitHubRelease -repo "radareorg/radare2" -path "$SETUP_PATH\radare2.zip" -match w64.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\radare2.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\radare2-* $TOOLS\radare2
+
+Get-GitHubRelease -repo "rizinorg/cutter" -path "$SETUP_PATH\cutter.zip" -match Windows-x86_64.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cutter.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\cutter-* $TOOLS\cutter
+
+Get-GitHubRelease -repo "skylot/jadx" -path "$SETUP_PATH\jadx.zip" -match jadx-1
+
+Get-GitHubRelease -repo "Squiblydoo/debloat" -path "$SETUP_PATH\debloat.zip" -match Windows
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\debloat.zip" -o"$TOOLS\bin" | Out-Null
+
+Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "$SETUP_PATH\vscode\vscode-spell-checker.vsix" -match vsix
+
+Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "$SETUP_PATH\thumbcacheviewer.zip" -match viewer_64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\thumbcacheviewer.zip" -o"$TOOLS\thumbcacheviewer" | Out-Null
+
+Get-GitHubRelease -repo "upx/upx" -path "$SETUP_PATH\upx.zip" -match win64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\upx-* $TOOLS\upx
+
+Get-GitHubRelease -repo "wader/fq" -path "$SETUP_PATH\fq.zip" -match windows_amd64.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fq.zip" -o"$TOOLS\bin" | Out-Null
+
+Get-GitHubRelease -repo "WerWolv/ImHex" -path "$SETUP_PATH\imhex.zip" -match Portable-NoGPU-x86_64.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\imhex.zip" -o"$TOOLS\imhex" | Out-Null
+
+Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path "$SETUP_PATH\chainsaw.zip" -match x86_64-pc-windows-msvc
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chainsaw.zip" -o"$TOOLS" | Out-Null
+
+Get-GitHubRelease -repo "VirusTotal/yara" -path "$SETUP_PATH\yara.zip" -match win64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\yara64.exe $TOOLS\bin\yara.exe
+Move-Item $TOOLS\yarac64.exe $TOOLS\bin\yarac.exe
+
+Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "$SETUP_PATH\hayabusa.zip" -match win-64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hayabusa.zip" -o"$TOOLS\hayabusa" | Out-Null
