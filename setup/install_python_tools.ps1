@@ -143,7 +143,7 @@ python -m pip install `
     dfir-unfurl `
     hexdump `
     tomlkit `
-    wheel>=0.40.0 2>&1 >> "C:\log\python.txt" 
+    wheel>=0.40.0 2>&1 >> "C:\log\python.txt"
 
 Write-DateLog "Python venv dfir-unfurl done. Will update path and cache Cloudflare." >> "C:\log\python.txt"
 

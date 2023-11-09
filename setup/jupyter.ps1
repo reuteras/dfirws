@@ -1,2 +1,2 @@
-cd C:\Users\WDAGUtilityAccount\Documents\jupyter
+Set-Location C:\Users\WDAGUtilityAccount\Documents\jupyter
 & jupyter lab
