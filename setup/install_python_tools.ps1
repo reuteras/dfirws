@@ -2,7 +2,7 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $SETUP_PATH="C:\downloads"
 
-. C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
+. C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
 Write-DateLog "Creating Python venv in Sandbox." >> "C:\log\python.txt"
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
@@ -32,6 +32,7 @@ python -m pip install `
     aiosignal>=1.2.0 `
     async_timeout>=4.0.1 `
     attrs>=22.2.0 `
+    autoit-ripper `
     beautifulsoup4>=4.12.1 `
     cabarchive `
     capstone `
@@ -94,7 +95,6 @@ python -m pip install `
     pyOneNote `
     pyparsing>=2.4.6 `
     pypng `
-    pyreadline `
     python-magic-bin `
     pywin32 `
     pyzipper `
@@ -124,6 +124,10 @@ python -m pip install `
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
 
 python -m pip install -U https://github.com/DissectMalware/pyOneNote/archive/master.zip --force >> "C:\log\python.txt"
+Set-Location "C:\venv\default\Scripts"
+curl -o "shellconv.py" "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
+curl -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
+Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 
 deactivate
 Write-DateLog "Python venv default done." >> "C:\log\python.txt"
@@ -171,5 +175,18 @@ python -m pip install `
     wheel>=0.41.3 2>&1 >> "C:\log\python.txt"
 deactivate
 Write-DateLog "Python venv pySigma done." >> "C:\log\python.txt"
+
+# pe2pic
+Write-DateLog "Install packages in venv pe2pic in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pe2pic"
+C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+
+python -m pip install -r https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt
+Set-Locations "C:\venv\pe2pic\Scripts"
+curl -o "pe2pic.py" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py"
+deactivate
+Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
 
 Write-Output "" > C:\venv\done
