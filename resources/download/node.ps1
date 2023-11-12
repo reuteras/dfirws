@@ -5,9 +5,10 @@ param (
 $ScriptRoot = "$ScriptRoot\resources\download"
 $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
-. $ScriptRoot\common.ps1 | Out-Null
+. $ScriptRoot\common.ps1
 
 Write-DateLog "Setup Node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
+Write-Output "" > .\log\npm.txt
 
 $mutexName = "Global\dfirwsMutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
