@@ -8,6 +8,7 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 . $ScriptRoot\common.ps1
 
 Write-DateLog "Download packages for Git for Windows (bash)."
+Write-Output "" > .\log\bash.txt
 
 $mutexName = "Global\dfirwsMutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
