@@ -16,12 +16,15 @@ $vscode_python_version=$vscode_tmp.Matches.Groups[1].Value
 
 # Get Visual Studio Code
 Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -FilePath ".\downloads\vscode.exe"
+# Install during start
 
 # Get SwiftOnSecurity sysmon config
 Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml"
+# Used from sysmon
 
 # Get Amazon Corretto
 Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-17-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
+# Install during start
 
 # Get Sysinternals Suite
 Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip"
@@ -29,6 +32,7 @@ Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.
 
 # Get x64dbg
 Get-FileFromUri -uri "https://sourceforge.net/projects/x64dbg/files/latest/download" -FilePath ".\downloads\x64dbg.zip"
+# Install during start
 
 # Get exiftool
 Get-FileFromUri -uri "https://sourceforge.net/projects/exiftool/files/latest/download" -FilePath ".\downloads\exiftool.zip"
@@ -63,6 +67,7 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/mast
 
 # msidump
 Get-FileFromUri -uri "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py" -FilePath ".\downloads\msidump.py"
+# Add by install_python_tools.ps1
 
 # FullEventLogView
 Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip"
@@ -89,11 +94,13 @@ Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -
 
 # pdfstreamdumper
 Get-FileFromUri -uri "http://sandsprite.com/CodeStuff/PDFStreamDumper_Setup.exe" -FilePath ".\downloads\pdfstreamdumper.exe"
+# Install during start
 
 # Plugins for Cutter
 Get-FileFromUri -uri "https://raw.githubusercontent.com/yossizap/x64dbgcutter/master/x64dbgcutter.py" -FilePath ".\downloads\x64dbgcutter.py"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_scripts/master/scripts/cutter_stackstrings.py" -FilePath ".\downloads\cutter_stackstrings.py"
 
+# Resource Hacker
 Get-FileFromUri -uri "https://www.angusj.com/resourcehacker/resource_hacker.zip" -FilePath ".\downloads\resource_hacker.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\resource_hacker.zip" -o"$TOOLS\resource_hacker" | Out-Null
 
@@ -103,6 +110,7 @@ Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
 
 # nodejs
 Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip"
+# Installed via sandbox
 
 # Visual Studio Code python extension
 Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix"
