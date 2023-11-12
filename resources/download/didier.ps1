@@ -105,8 +105,7 @@ $DidierStevensSuite = `
     "xorsearch.py", `
     "zipdump.py"
 
-foreach ($Tool in $DidierStevensSuite)
-{
+foreach ($Tool in $DidierStevensSuite) {
   Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/$Tool -FilePath .\downloads\DidierStevens\$Tool
 }
 
@@ -115,8 +114,7 @@ $DidierStevensBeta = "metatool.py", `
     "pngdump.py", `
     "xlsbdump.py"
 
-foreach ($Tool in $DidierStevensBeta)
-{
+foreach ($Tool in $DidierStevensBeta) {
   Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath .\downloads\DidierStevens\$Tool
 }
 
