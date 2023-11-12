@@ -5,7 +5,7 @@
   <VideoInput>Disable</VideoInput>
   <ProtectedClient>Enable</ProtectedClient>
   <PrinterRedirection>Disable</PrinterRedirection>
-  <ClipboardRedirection>Enable</ClipboardRedirection>
+  <ClipboardRedirection>Disable</ClipboardRedirection>
   <MappedFolders>
     <MappedFolder>
       <HostFolder>__SANDBOX__setup</HostFolder>
