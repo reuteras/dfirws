@@ -70,6 +70,7 @@ Write-DateLog "Sandboxes done."
 Copy-Item README.md .\downloads\
 Copy-Item .\resources\images\dfirws.jpg .\downloads\
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
+Copy-Item .\mount\git\CapaExplorer\capaexplorer.py ./mount/Tools/ghidra/Ghidra/Features/Python/ghidra_scripts
 # done.txt is used to check last update in sandbox
 Write-Output "" > .\downloads\done.txt
 Write-DateLog "Download and preparations done."

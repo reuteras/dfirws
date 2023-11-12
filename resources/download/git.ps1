@@ -52,6 +52,3 @@ foreach ($repourl in $repourls) {
 }
 
 Set-Location ..\..
-
-# Copy files
-Copy-Item .\mount\git\CapaExplorer\capaexplorer.py ./mount/Tools/ghidra/Ghidra/Features/Python/ghidra_scripts

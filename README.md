@@ -65,7 +65,7 @@ Two different configurations will be created:
 - dfirws.wsb - network disabled
 - network_dfirws.wsb - network enabled
 
-This script will also create the file *./setup/config.txt*. Here you can select the tools you would like to be available in the sandbox. All tools will be downloaded and can be installed later in the sandbox if needed. The difference will be the time it takes to start the sandbox. You can also turn off Sysmon and specify the configuration file to use. 
+This script will also create the file *./setup/config.txt*. Here you can select the tools you would like to be available in the sandbox. All tools will be downloaded and can be installed later in the sandbox if needed. The difference will be the time it takes to start the sandbox. You can also turn off Sysmon and specify the configuration file to use.
 
 By default the sandbox will have clipboard redirection off as well as secure defaults for other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
 
