@@ -1,6 +1,6 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
-. C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
+. C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
 # This script runs in a Windows sandbox to prebuild the venv environment.
 Write-DateLog "Install npm packages" >> "C:\log\npm.txt" 2>&1
