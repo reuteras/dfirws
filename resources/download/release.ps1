@@ -8,157 +8,263 @@ Write-DateLog "Download releases from GitHub."
 New-Item -ItemType Directory -Force -Path $TOOLS\bin > $null
 New-Item -ItemType Directory -Force -Path $TOOLS\lib > $null
 
+# BeaconHunter
 Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "$SETUP_PATH\beaconhunter.zip" -match BeaconHunter.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\beaconhunter.zip" -o"$SETUP_PATH\" | Out-Null
 
+# 4n4lDetector
+Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "$SETUP_PATH\4n4lDetector.zip" -match 4n4lDetector
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\4n4lDetector.zip" -o"$TOOLS\4n4lDetector" | Out-Null
+
+# lessmsi
 Get-GitHubRelease -repo "activescott/lessmsi" -path "$SETUP_PATH\lessmsi.zip" -match lessmsi-v
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\lessmsi.zip" -o"$TOOLS\lessmsi" | Out-Null
 
+# CobaltStrikeScan
+Get-GitHubRelease -repo "Apr4h/CobaltStrikeScan" -path "$SETUP_PATH\CobaltStrikeScan.exe" -match CobaltStrikeScan
+Copy-Item $SETUP_PATH\CobaltStrikeScan.exe $TOOLS\bin\
+
+# Brim/Zui
 Get-GitHubRelease -repo "brimdata/zui" -path "$SETUP_PATH\zui.exe" -match Zui-Setup
 
+# ripgrep
 Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "$SETUP_PATH\ripgrep.zip" -match x86_64-pc-windows-msvc
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ripgrep.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\ripgrep-* $TOOLS\ripgrep
 
+# binlex
 Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path "$SETUP_PATH\binlex.zip" -match windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\binlex.zip" -o"$TOOLS\bin" | Out-Null
 
+# cmder
 Get-GitHubRelease -repo "cmderdev/cmder" -path "$SETUP_PATH\cmder.7z" -match cmder.7z
 
+# dnSpy 32-bit
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "$SETUP_PATH\dnSpy32.zip" -match win32
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy32.zip" -o"$TOOLS\dnSpy32" | Out-Null
 
+# dnSpy 64-bit
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "$SETUP_PATH\dnSpy64.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy64.zip" -o"$TOOLS\dnSpy64" | Out-Null
 
+# mboxviewer
+Get-GitHubRelease -repo "eneam/mboxviewer" -path "$SETUP_PATH\mboxviewer.zip" -match mbox-viewer.exe
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\mboxviewer.zip" -o"$TOOLS\mboxviewer" | Out-Null
+
+# zsdt
 Get-GitHubRelease -repo "facebook/zstd" -path "$SETUP_PATH\zstd.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
 
+# CyberChef
 Get-GitHubRelease -repo "gchq/CyberChef" -path "$SETUP_PATH\CyberChef.zip" -match CyberChef
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\CyberChef.zip" -o"$TOOLS\CyberChef" | Out-Null
 Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
 
+# git
 Get-GitHubRelease -repo "git-for-windows/git" -path "$SETUP_PATH\git.exe" -match 64-bit.exe
 
+# Gollum
 Get-GitHubRelease -repo "gollum/gollum" -path "$SETUP_PATH\gollum.war" -match gollum.war
 Copy-Item $SETUP_PATH\gollum.war $TOOLS\lib
 
+# redress
+Get-GitHubRelease -repo "goretk/redress" -path "$SETUP_PATH\redress.zip" -match windows.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\redress.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\redress-* $TOOLS\redress
+
+# INDXRipper
 Get-GitHubRelease -repo "harelsegev/INDXRipper" -path "$SETUP_PATH\indxripper.zip" -match amd64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\indxripper.zip" -o"$TOOLS\INDXRipper" | Out-Null
 
+# dll_to_exe
+Get-GitHubRelease -repo "hasherezade/dll_to_exe" -path "$SETUP_PATH\dll_to_exe.exe" -match dll_to_exe.exe
+Copy-Item $SETUP_PATH\dll_to_exe.exe $TOOLS\bin
+
+# HollowsHunter
+Get-GitHubRelease -repo "hasherezade/hollows_hunter" -path "$SETUP_PATH\hollows_hunter.exe" -match hollows_hunter64.exe
+Copy-Item $SETUP_PATH\hollows_hunter.exe $TOOLS\bin\
+
+# PE-bear
 Get-GitHubRelease -repo "hasherezade/pe-bear" -path "$SETUP_PATH\pebear.zip" -match x64_win_vs17.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pebear.zip" -o"$TOOLS\pebear" | Out-Null
 
+# PE-sieve
+Get-GitHubRelease -repo "hasherezade/pe-sieve" -path "$SETUP_PATH\pe-sieve.exe" -match pe-sieve64.exe
+Copy-Item $SETUP_PATH\pe-sieve.exe $TOOLS\bin\
+
+# Flaged by MS AV - don't download at the moment since I don't want to force user to exclude files
+# at the moment.
+#Get-GitHubRelease -repo "hasherezade/pe_to_shellcode" -path "$SETUP_PATH\pe2shc.exe" -match pe2shc.exe
+#Copy-Item $SETUP_PATH\pe2shc.exe $TOOLS\bin\
+
+# PE-utils
+Get-GitHubRelease -repo "hasherezade/pe_utils" -path "$SETUP_PATH\dll_load32.exe" -match dll_load32.exe
+Copy-Item $SETUP_PATH\dll_load32.exe $TOOLS\bin\
+Get-GitHubRelease -repo "hasherezade/pe_utils" -path "$SETUP_PATH\dll_load64.exe" -match dll_load64.exe
+Copy-Item $SETUP_PATH\dll_load64.exe $TOOLS\bin\
+Get-GitHubRelease -repo "hasherezade/pe_utils" -path "$SETUP_PATH\kdb_check.exe" -match kdb_check.exe
+Copy-Item $SETUP_PATH\kdb_check.exe $TOOLS\bin\
+Get-GitHubRelease -repo "hasherezade/pe_utils" -path "$SETUP_PATH\pe_check.exe" -match pe_check.exe
+Copy-Item $SETUP_PATH\pe_check.exe $TOOLS\bin\
+
+# WinObjEx64
+Get-GitHubRelease -repo "hfiref0x/WinObjEx64" -path "$SETUP_PATH\WinObjEx64.zip" -match 2
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\WinObjEx64.zip" -o"$TOOLS\WinObjEx64" | Out-Null
+
+# Detect It Easy
 Get-GitHubRelease -repo "horsicq/DIE-engine" -path "$SETUP_PATH\die.zip" -match die_win64_portable
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\die.zip" -o"$TOOLS\die" | Out-Null
 
+# XELFViewer
 Get-GitHubRelease -repo "horsicq/XELFViewer" -path "$SETUP_PATH\XELFViewer.zip" -match win64_portable
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\XELFViewer.zip" -o"$TOOLS\XELFViewer" | Out-Null
 
+# jd-gui
 Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "$SETUP_PATH\jd-gui.zip" -match jd-gui-windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jd-gui.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\jd-gui* $TOOLS\jd-gui
 
+# jq
 Get-GitHubRelease -repo "jqlang/jq" -path "$SETUP_PATH\jq.exe" -match win64
 Copy-Item $SETUP_PATH\jq.exe $TOOLS\bin\
 
+# Jumplist Browser
 Get-GitHubRelease -repo "kacos2000/Jumplist-Browser" -path "$SETUP_PATH\JumplistBrowser.exe" -match JumplistBrowser.exe
 Copy-Item $SETUP_PATH\JumplistBrowser.exe $TOOLS\bin\
 
+# Prefetch Browser
 Get-GitHubRelease -repo "kacos2000/Prefetch-Browser" -path "$SETUP_PATH\PrefetchBrowser.exe" -match PrefetchBrowser.exe
 Copy-Item $SETUP_PATH\PrefetchBrowser.exe $TOOLS\bin\
 
+# bytecode-viewer
 Get-GitHubRelease -repo "Konloch/bytecode-viewer" -path "$SETUP_PATH\BCV.jar" -match Bytecode
 Copy-Item $SETUP_PATH\BCV.jar $TOOLS\lib
 Write-Output "java -Xmx3G -jar C:\Tools\lib\BCV.jar" | Out-File -Encoding "ascii" $TOOLS\bin\bcv.bat
 
+# gftrace
+Get-GitHubRelease -repo "leandrofroes/gftrace" -path "$SETUP_PATH\gftrace.zip" -match gftrace64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\gftrace.zip" -o"$TOOLS" | Out-Null
+
+# MsgViewer
 Get-GitHubRelease -repo "lolo101/MsgViewer" -path "$SETUP_PATH\msgviewer.jar" -match msgviewer.jar
 Copy-Item $SETUP_PATH\msgviewer.jar $TOOLS\lib
 
+# capa
 Get-GitHubRelease -repo "mandiant/capa" -path "$SETUP_PATH\capa-windows.zip" -match windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa" | Out-Null
 
+# Flare-Floss
 Get-GitHubRelease -repo "mandiant/flare-floss" -path "$SETUP_PATH\floss.zip" -match windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\floss.zip" -o"$TOOLS\floss" | Out-Null
 
+# Flare-Fakenet-NG
 Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path "$SETUP_PATH\fakenet.zip" -match fakenet
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fakenet.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 
+# GoReSym
 Get-GitHubRelease -repo "mandiant/GoReSym" -path "$SETUP_PATH\GoReSym.zip" -match GoReSym-windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym" | Out-Null
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
 Remove-Item $TOOLS\GoReSym\GoReSym_lin
 Remove-Item $TOOLS\GoReSym\GoReSym_mac
 
+# Elfparser-ng
 Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "$SETUP_PATH\elfparser-ng.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\elfparser-ng.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\elfparser-ng* $TOOLS\elfparser-ng
 
+# readpe
+Get-GitHubRelease -repo "mentebinaria/readpe" -path "$SETUP_PATH\readpe.zip" -match win.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\readpe.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\pev* $TOOLS\pev
+
+# dsq
 Get-GitHubRelease -repo "multiprocessio/dsq" -path "$SETUP_PATH\dsq.zip" -match dsq-win
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dsq.zip" -o"$TOOLS\bin" | Out-Null
 
+# Ghidra
 Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "$SETUP_PATH\ghidra.zip" -match ghidra
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 
+# MetadataPlus
 Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path "$SETUP_PATH\MetadataPlus.exe" -match MetadataPlus
 Copy-Item $SETUP_PATH\MetadataPlus.exe $TOOLS\bin\
 
+# Loki
 Get-GitHubRelease -repo "Neo23x0/Loki" -path "$SETUP_PATH\loki.zip" -match loki
 
+# Notepad++
 Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path "$SETUP_PATH\notepad++.exe" -match Installer.x64.exe
 
+# HindSight
 Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "$SETUP_PATH\hindsight.exe" -match hindsight.exe
 Copy-Item $SETUP_PATH\hindsight.exe $TOOLS\bin\
 
+# Hindsight GUI
 Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "$SETUP_PATH\hindsight_gui.exe" -match hindsight_gui.exe
 Copy-Item $SETUP_PATH\hindsight_gui.exe $TOOLS\bin\
 
+# ComparePlus plugin for Notepad++
 Get-GitHubRelease -repo "pnedev/comparePlus" -path "$SETUP_PATH\comparePlus.zip" -match x64.zip
 
+# Visual Studio Code powershell extension
 Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "$SETUP_PATH\vscode\vscode-powershell.vsix" -match vsix
 
+# qpdf
 Get-GitHubRelease -repo "qpdf/qpdf" -path "$SETUP_PATH\qpdf.zip" -match msvc64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\qpdf.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 
+# Radare2
 Get-GitHubRelease -repo "radareorg/radare2" -path "$SETUP_PATH\radare2.zip" -match w64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\radare2.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
 
+# Cutter
 Get-GitHubRelease -repo "rizinorg/cutter" -path "$SETUP_PATH\cutter.zip" -match Windows-x86_64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cutter.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\cutter-* $TOOLS\cutter
 
+# jadx
 Get-GitHubRelease -repo "skylot/jadx" -path "$SETUP_PATH\jadx.zip" -match jadx-1
 
+# debloat
 Get-GitHubRelease -repo "Squiblydoo/debloat" -path "$SETUP_PATH\debloat.zip" -match Windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\debloat.zip" -o"$TOOLS\bin" | Out-Null
 
+# Visual Studio Code spell checker extension
 Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "$SETUP_PATH\vscode\vscode-spell-checker.vsix" -match vsix
 
+# Thumbcacheviewer
 Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "$SETUP_PATH\thumbcacheviewer.zip" -match viewer_64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\thumbcacheviewer.zip" -o"$TOOLS\thumbcacheviewer" | Out-Null
 
+# upx
 Get-GitHubRelease -repo "upx/upx" -path "$SETUP_PATH\upx.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\upx-* $TOOLS\upx
 
+# fq
 Get-GitHubRelease -repo "wader/fq" -path "$SETUP_PATH\fq.zip" -match windows_amd64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fq.zip" -o"$TOOLS\bin" | Out-Null
 
+# imhex
 Get-GitHubRelease -repo "WerWolv/ImHex" -path "$SETUP_PATH\imhex.zip" -match Portable-NoGPU-x86_64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\imhex.zip" -o"$TOOLS\imhex" | Out-Null
 
+# chainsaw
 Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path "$SETUP_PATH\chainsaw.zip" -match x86_64-pc-windows-msvc
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chainsaw.zip" -o"$TOOLS" | Out-Null
 
+# yara
 Get-GitHubRelease -repo "VirusTotal/yara" -path "$SETUP_PATH\yara.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\yara64.exe $TOOLS\bin\yara.exe
 Move-Item $TOOLS\yarac64.exe $TOOLS\bin\yarac.exe
 
+# hayabusa
 Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "$SETUP_PATH\hayabusa.zip" -match win-64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hayabusa.zip" -o"$TOOLS\hayabusa" | Out-Null
