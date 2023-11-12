@@ -1,7 +1,7 @@
 # DFIRWS
 
 # Import common functions
-. C:\Users\WDAGUtilityAccount\Documents\tools\common.ps1
+. C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
 $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
 #$WIN11=(Get-ComputerInfo | Select-Object -expand OsName) -match 11
@@ -146,26 +146,31 @@ Stop-Process -ProcessName Explorer -Force
 
 # Add to PATH
 Write-DateLog "Add to PATH"
+Add-ToUserPath "$env:ProgramFiles\4n4lDetector"
 Add-ToUserPath "$env:ProgramFiles\7-Zip"
 Add-ToUserPath "$env:ProgramFiles\bin"
 Add-ToUserPath "$env:ProgramFiles\Git\bin"
-Add-ToUserPath "$env:ProgramFiles\Git\usr\bin\"
+Add-ToUserPath "$env:ProgramFiles\Git\usr\bin"
 Add-ToUserPath "$env:ProgramFiles\hxd"
-Add-ToUserPath "$env:ProgramFiles\Notepad++\"
-Add-ToUserPath "C:\git\Events-Ripper\"
+Add-ToUserPath "$env:ProgramFiles\idr\bin"
+Add-ToUserPath "$env:ProgramFiles\Notepad++"
+Add-ToUserPath "C:\git\Events-Ripper"
 Add-ToUserPath "C:\git\RegRipper3.0"
 Add-ToUserPath "C:\Tools\bin"
 Add-ToUserPath "C:\Tools\bulk_extractor\win64"
 Add-ToUserPath "C:\Tools\capa"
 Add-ToUserPath "C:\Tools\chainsaw"
 Add-ToUserPath "C:\Tools\cutter"
+Add-ToUserPath "C:\Tools\DB Browser for SQLite"
 Add-ToUserPath "C:\Tools\DidierStevens"
 Add-ToUserPath "C:\Tools\die"
 Add-ToUserPath "C:\Tools\elfparser-ng\Release"
 Add-ToUserPath "C:\Tools\exiftool"
 Add-ToUserPath "C:\Tools\fakenet"
+Add-ToUserPath "C:\Tools\fasm"
 Add-ToUserPath "C:\Tools\floss"
 Add-ToUserPath "C:\Tools\FullEventLogView"
+Add-ToUserPath "C:\Tools\gftrace64"
 Add-ToUserPath "C:\Tools\GoReSym"
 Add-ToUserPath "C:\Tools\hayabusa"
 Add-ToUserPath "C:\Tools\imhex"
@@ -177,9 +182,12 @@ Add-ToUserPath "C:\Tools\nmap"
 Add-ToUserPath "C:\Tools\node"
 Add-ToUserPath "C:\Tools\systeminformer\x64"
 Add-ToUserPath "C:\Tools\systeminformer\x86"
+Add-ToUserPath "C:\Tools\pev"
 Add-ToUserPath "C:\Tools\pstwalker"
 Add-ToUserPath "C:\Tools\qpdf\bin"
 Add-ToUserPath "C:\Tools\radare2"
+Add-ToUserPath "C:\Tools\redress"
+Add-ToUserPath "C:\Tools\resource_hacker"
 Add-ToUserPath "C:\Tools\ripgrep"
 Add-ToUserPath "C:\Tools\scdbg"
 Add-ToUserPath "C:\Tools\sqlite"
@@ -188,6 +196,8 @@ Add-ToUserPath "C:\Tools\sysinternals"
 Add-ToUserPath "C:\Tools\thumbcacheviewer"
 Add-ToUserPath "C:\Tools\trid"
 Add-ToUserPath "C:\Tools\upx"
+Add-ToUserPath "C:\Tools\WinApiSearch"
+Add-ToUserPath "C:\Tools\WinObjEx64"
 Add-ToUserPath "C:\Tools\XELFViewer"
 Add-ToUserPath "C:\Tools\Zimmerman"
 Add-ToUserPath "C:\Tools\Zimmerman\EvtxECmd"
@@ -270,6 +280,9 @@ Copy-Item $HOME\Documents\tools\jupyter\*.ipynb "$HOME\Documents\jupyter\"
 New-Item -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging -Force
 Set-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging -Name EnableScriptBlockLogging -Value 1 -Force
 
+Copy-Item -Recurse -Force C:\Tools\4n4lDetector "C:\Program Files"
+Copy-Item -Recurse -Force C:\git\IDR "C:\Program Files"
+
 # Add cmder
 if ($WSDFIR_CMDER -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cmder.7z" -o"$env:ProgramFiles\cmder"
@@ -347,8 +360,11 @@ mkdir "$HOME\Desktop\dfirws"
 mkdir "$HOME\Desktop\dfirws\Browser"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Browser\hindsight.lnk" -DestinationPath "C:\Tools\bin\hindsight_gui.exe"
 mkdir "$HOME\Desktop\dfirws\Database"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Database\DB Browser for SQLite.lnk" -DestinationPath "C:\Tools\DB Browser for SQLite\DB Browser for SQLite.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Database\fqlite.lnk" -DestinationPath "C:\Tools\fqlite\run.bat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Database\SQLECmd.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\Zimmerman\SQLECmd\SQLECmd.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Database\sqlite3.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\sqlite\sqlite3.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Database\SQLiteWalker.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 # C:\Tools\DidierStevens
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\DidierStevens.lnk" -DestinationPath "C:\Tools\DidierStevens"
 mkdir "$HOME\Desktop\dfirws\Disk"
@@ -382,21 +398,26 @@ mkdir "$HOME\Desktop\dfirws\Malware tools"
 mkdir "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\1768.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "C:\Program Files\bin\BeaconHunter.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\CobaltStrikeScan.lnk" -DestinationPath "C:\Tools\bin\CobaltStrikeScan.exe"
 mkdir "$HOME\Desktop\dfirws\Network"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "C:\Tools\fakenet" -Iconlocation "C:\Tools\fakenet\fakenet.exe"
 mkdir "$HOME\Desktop\dfirws\Office and email"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\Mbox Viewer.lnk" -DestinationPath "C:\Tools\mboxviewer\mboxview64.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\MetadataPlus.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\bin\MetadataPlus.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\mraptor.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msodde.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oledump.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oleid.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\olevba.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\rtfdump.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\rtfobj.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msodde.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oledump.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\oleid.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\olevba.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\msgviewer.lnk" -DestinationPath "C:\Tools\pstwalker\pstwalker.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\rtfdump.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\rtfobj.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\Structured Storage Viewer (SSView).lnk" -DestinationPath "C:\Tools\ssview\SSView.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\tree.com.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\zipdump.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\tree.com.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\zipdump.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+mkdir "$HOME\Desktop\dfirws\Online tools"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Online tools\vt.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\PDF"
 if ($WSDFIR_PDFSTREAM -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\pdfstreamdumper.lnk" -DestinationPath "C:\Sandsprite\PDFStreamDumper\PDFStreamDumper.exe"
@@ -406,21 +427,33 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\pdfid.py.lnk" -DestinationPath
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\peepdf.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PDF\qpdf.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\PE"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\4n4lDetector.lnk" -DestinationPath "C:\Program Files\4n4lDetector\4N4LDetector.exe"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\capa.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation C:\Tools\capa\capa.exe
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\Debloat.lnk" -DestinationPath "C:\Tools\bin\debloat.exe"
+Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\dll_to_exe.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\hollows_hunter.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation C:\Tools\bin\hollows_hunter.exe
+#Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\pe2shc.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation C:\Tools\bin\pe2shc.exe
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
+Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\PE-sieve.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation C:\Tools\bin\pe-sieve.exe
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
+Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\pescan.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "C:\Tools\pev"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\Resource Hacker.lnk" -DestinationPath "C:\Tools\resource_hacker\ResourceHacker.exe"
+Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\shellconv.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\PE\WinObjEx64.lnk" -DestinationPath "C:\Tools\WinObjEx64\WinObjEx64.exe"
 mkdir "$HOME\Desktop\dfirws\Programming"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\java.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\node.lnk" -DestinationPath "C:\Tools\node\node.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Python.lnk" -DestinationPath "C:\venv\default\Scripts\python.exe"
+mkdir "$HOME\Desktop\dfirws\Programming\Delphi"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Delphi\idr.lnk" -DestinationPath "C:\Program Files\idr\bin\Idr.exe"
 mkdir "$HOME\Desktop\dfirws\Programming\Go"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Go\gftrace.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Go\GoReSym.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\Java"
 if ($WSDFIR_JAVA_JAVA -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
 }
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jd-gui.lnk" -DestinationPath "C:Tools\jd-gui\jd-gui.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jd-gui.lnk" -DestinationPath "C:\Tools\jd-gui\jd-gui.exe"
 mkdir "$HOME\Desktop\dfirws\Registry"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Registry\Registry Explorer.lnk" -DestinationPath "C:\Tools\Zimmerman\RegistryExplorer\RegistryExplorer.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Registry\RegRipper (rip).lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
@@ -428,15 +461,18 @@ mkdir "$HOME\Desktop\dfirws\Reverse Engineering"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk" -DestinationPath "C:\Tools\dnSpy32\dnSpy.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy64.lnk" -DestinationPath "C:\Tools\dnSpy64\dnSpy.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "C:\Tools\ghidra\radare2.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\fasm.lnk" -DestinationPath "C:\Tools\fasm\FASM.EXE"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Ghidra.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 if ($WSDFIR_X64DBG -eq "Yes") {
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\x32dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x32\x32dbg.exe"
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\x64dbg.lnk" -DestinationPath "$env:ProgramFiles\x64dbg\release\x64\x64dbg.exe"
 }
-mkdir "$HOME\Desktop\dfirws\Signatures"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures\loki.lnk" -DestinationPath "C:\Program Files\loki\loki.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures\yara.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
+mkdir "$HOME\Desktop\dfirws\Signatures and information"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\loki.lnk" -DestinationPath "C:\Program Files\loki\loki.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\PatchaPalooza.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "C:\git\PatchaPalooza"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\WinApiSearch64.lnk" -DestinationPath "C:\Tools\WinApiSearch\WinApiSearch64.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\yara.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 # "$HOME\Desktop\dfirws\Sysinternals"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Sysinternals.lnk" -DestinationPath "C:\Tools\sysinternals"
 mkdir "$HOME\Desktop\dfirws\Utilities"
@@ -466,11 +502,20 @@ if ($verb) {
 }
 
 # TODO
-# pstwalker
 # Links to
 # - C:\git tools
 # - pip tools
 # - node tools
+
+New-Item -ItemType Directory -Force -Path "$HOME\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
+Copy-Item C:\git\radare2-deep-graph\cutter\graphs_plugin_grid.py "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+#Copy-Item C:\downloads\cutter_stackstrings.py "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+Copy-Item C:\downloads\x64dbgcutter.py "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+Copy-Item C:\git\cutterref\cutterref.py "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+Copy-Item -Recurse C:\git\cutterref\archs "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+#Copy-Item -Recurse C:\git\cutter-jupyter\cutter_jupyter "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+Copy-Item -Recurse C:\git\cutter-jupyter\icons "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+Copy-Item -Recurse C:\git\capa-explorer\capa_explorer_plugin "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
 
 Start-Transcript -Append "$TEMP\dfirws_log.txt"
 
