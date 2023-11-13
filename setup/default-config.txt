@@ -12,8 +12,6 @@ $WSDFIR_CMDER="No"
 $WSDFIR_GIT="Yes"
 # Install OpenJDK 11 for neo4j
 $WSDFIR_JAVA_JDK11="No"
-# Install jadx and jd-gui - requires WSDFIR_JAVA
-$WSDFIR_JAVA_JAVA="No"
 # Install LibreOffice
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki
