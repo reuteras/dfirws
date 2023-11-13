@@ -83,7 +83,7 @@ Get-GitHubRelease -repo "hasherezade/hollows_hunter" -path "$SETUP_PATH\hollows_
 Copy-Item $SETUP_PATH\hollows_hunter.exe $TOOLS\bin\
 
 # PE-bear
-Get-GitHubRelease -repo "hasherezade/pe-bear" -path "$SETUP_PATH\pebear.zip" -match x64_win_vs17.zip
+Get-GitHubRelease -repo "hasherezade/pe-bear" -path "$SETUP_PATH\pebear.zip" -match x64_win_vs19.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pebear.zip" -o"$TOOLS\pebear" | Out-Null
 
 # PE-sieve
@@ -265,3 +265,4 @@ Move-Item $TOOLS\yarac64.exe $TOOLS\bin\yarac.exe
 # hayabusa
 Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "$SETUP_PATH\hayabusa.zip" -match win-64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hayabusa.zip" -o"$TOOLS\hayabusa" | Out-Null
+Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
