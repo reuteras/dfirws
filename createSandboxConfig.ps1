@@ -14,6 +14,6 @@ if (! (Test-Path -Path ".\setup\config.txt")) {
 }
 
 if (! (Test-Path -Path ".\local\customize.ps1")) {
-    Copy-Item ".\local\example-customize.txt" ".\local\customize.ps1"
+    Copy-Item ".\local\example-customize.ps1" ".\local\customize.ps1"
     Write-Output "Created .\local\customize.ps1. Customize shortcuts on desktop, wallpaper and more."
 }
