@@ -1,7 +1,5 @@
 # Download and update files for the sandbox
 
-$TOOLS=".\mount\Tools"
-
 . .\resources\download\common.ps1
 
 # Check if sandbox is running

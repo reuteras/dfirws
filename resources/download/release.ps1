@@ -1,8 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-$TOOLS=".\mount\Tools"
-$SETUP_PATH=".\downloads"
-
 Write-DateLog "Download releases from GitHub."
 
 New-Item -ItemType Directory -Force -Path $TOOLS\bin > $null

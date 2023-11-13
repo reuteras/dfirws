@@ -1,8 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-$TOOLS=".\mount\Tools"
-$SETUP_PATH=".\downloads"
-
 Write-DateLog "Download tools via winget."
 
 # Local function
@@ -12,11 +9,28 @@ function Clear-Tmp {
     }
 }
 
-# DotNet 6 runtime
+# Autopsy
+Clear-Tmp
+winget download SleuthKit.Autopsy -d .\tmp\winget > $null 2>&1
+copy-item .\tmp\winget\Autopsy*.msi .\downloads\autopsy.msi
+Clear-Tmp
 
+# DotNet 6 runtime
 Clear-Tmp
 winget download Microsoft.DotNet.Runtime.6 -d .\tmp\winget > $null 2>&1
 Copy-Item .\tmp\winget\Microsoft*.exe .\downloads\dotnet6.exe
+Clear-Tmp
+
+# Microsoft LogParser
+Clear-Tmp
+winget download Microsoft.LogParser -d .\tmp\winget > $null 2>&1
+Copy-Item .\tmp\winget\Log*.msi .\downloads\logparser.msi
+Clear-Tmp
+
+# Obsidian
+Clear-Tmp
+winget download Obsidian.Obsidian -d .\tmp\winget > $null 2>&1
+Copy-Item .\tmp\winget\Obsidian*.exe .\downloads\obsidian.exe
 Clear-Tmp
 
 # VirusTotal CLI

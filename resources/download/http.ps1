@@ -1,8 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-$TOOLS=".\mount\Tools"
-$SETUP_PATH=".\downloads"
-
 Write-DateLog "Download files via HTTP."
 
 # Get uri for latest nuget - ugly
@@ -165,7 +162,7 @@ Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.94-setup.exe" -FilePath ".\do
 Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.12.2-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlitebrowser.zip" -o"$TOOLS\" | Out-Null
 
-# fasm
+# https://flatassembler.net/download.php
 Get-FileFromUri -uri "https://flatassembler.net/fasmw17331.zip" -FilePath ".\downloads\fasm.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fasm.zip" -o"$TOOLS\fasm" | Out-Null
 

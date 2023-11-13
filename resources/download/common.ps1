@@ -1,6 +1,14 @@
 # Set the default encoding for Out-File to UTF-8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
+$SETUP_PATH=".\downloads"
+$TEMP="C:\tmp"
+$TOOLS=".\mount\Tools"
+
+$null=$SETUP_PATH
+$null=$TEMP
+$null=$TOOLS
+
 # Function to download a file from a given URI and save it to a specified file path
 function Get-FileFromUri {
     Param (
