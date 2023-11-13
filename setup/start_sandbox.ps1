@@ -364,7 +364,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\1768.l
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "C:\Program Files\bin\BeaconHunter.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\CobaltStrikeScan.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\Network"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -NoExit -command 'if (! (test-path $HOME\fakenet)) { Copy-Item -r C:\Tools\fakenet $HOME}'" -WorkingDirectory "$HOME" -Iconlocation "C:\Tools\fakenet\fakenet.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\fakenet\fakenet.exe"
 mkdir "$HOME\Desktop\dfirws\Office and email"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\Mbox Viewer.lnk" -DestinationPath "C:\Tools\mboxviewer\mboxview64.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Office and email\MetadataPlus.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\bin\MetadataPlus.exe"
