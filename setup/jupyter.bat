@@ -1,1 +1,1 @@
-cmd /c start /min "" powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Users\WDAGUtilityAccount\Documents\tools\jupyter.ps1
+cmd /c start /min "" powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File "$HOME\Documents\tools\jupyter.ps1

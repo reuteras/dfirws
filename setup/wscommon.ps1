@@ -1,3 +1,12 @@
+# Set variables
+$SETUP_PATH="C:\downloads"
+$TEMP="C:\tmp"
+$TOOLS="C:\Tools"
+
+$null=$SETUP_PATH
+$null=$TEMP
+$null=$TOOLS
+
 # Declare helper functions
 function Add-ToUserPath {
     param (
@@ -29,11 +38,11 @@ function Add-Shortcut {
     )
     $WshShell = New-Object -comObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut($SourceLnk)
-    if ($WorkingDirectory -ne $Null) {
+    if ($Null -ne $WorkingDirectory) {
         $Shortcut.WorkingDirectory = $WorkingDirectory
     }
-    if ($Iconlocation -ne $Null) {
-        if ($IconArrayLocation -eq $Null) {
+    if ($Null -ne $Iconlocation) {
+        if ($Null -eq $IconArrayLocation) {
             $IconArrayLocation = 0
         }
         $Shortcut.Iconlocation = "$Iconlocation, $IconArrayLocation"
@@ -48,7 +57,7 @@ function Update-WallPaper {
         [parameter(Mandatory = $true)][String]$path
     )
     if($PSCmdlet.ShouldProcess($file.Name)) {
-        C:\Users\WDAGUtilityAccount\Documents\tools\Update-WallPaper $path
+        & "$HOME\Documents\tools\Update-WallPaper" $path
     }
     C:\Tools\sysinternals\Bginfo64.exe /NOLICPROMPT /timer:0 $HOME\Documents\tools\config.bgi
 }

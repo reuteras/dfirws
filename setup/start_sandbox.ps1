@@ -1,7 +1,7 @@
 # DFIRWS
 
 # Import common functions
-. C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
+. $HOME\Documents\tools\wscommon.ps1
 
 $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
 #$WIN11=(Get-ComputerInfo | Select-Object -expand OsName) -match 11
@@ -217,49 +217,12 @@ Add-ToUserPath "C:\Tools\zstd"
 
 Write-DateLog "Add shortcuts (shorten link names first)"
 #& reg add "HKU\%1\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "link" /t REG_BINARY /d 00000000 /f
-if ($WSDFIR_BEACONHUNTER -eq "Yes") {
-    Copy-Item "$SETUP_PATH\BeaconHunter.exe" "$env:ProgramFiles\bin"
-}
-if ($WSDFIR_GIT -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\bash.lnk" -DestinationPath "$env:ProgramFiles\Git\bin\bash.exe" -WorkingDirectory "$HOME\Desktop"
-}
-if ($WSDFIR_CYBERCHEF -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html"
-}
-if ($WSDFIR_CMDER -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\cmder.lnk" -DestinationPath "$env:ProgramFiles\cmder\cmder.exe" -WorkingDirectory "$HOME\Desktop"
-}
-if ($WSDFIR_CUTTER -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
-}
-if ($WSDFIR_FLV -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
-}
-if ($WSDFIR_GHIDRA -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
-}
-if ($WSDFIR_HXD -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\HxD.lnk" -DestinationPath "$env:ProgramFiles\HxD\HxD.exe"
-}
-if ($WSDFIR_JAVA_JAVA -eq "Yes") {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
-    Add-ToUserPath "$env:ProgramFiles\jadx\bin"
-}
-if ($WSDFIR_MSGVIEWER -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
-}
-if ($WSDFIR_MALCAT -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
-}
-if ($WSDFIR_NPP -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\Notepad++.lnk" -DestinationPath "$env:ProgramFiles\Notepad++\notepad++.exe"
-}
-if ($WSDFIR_PEBEAR -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
-}
-if ($WSDFIR_PESTUDIO -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
-}
+
+Copy-Item "$SETUP_PATH\BeaconHunter.exe" "$env:ProgramFiles\bin"
+
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
+Add-ToUserPath "$env:ProgramFiles\jadx\bin"
+
 Copy-Item "$HOME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Windows PowerShell\Windows PowerShell.lnk" "$HOME\Desktop\PowerShell.lnk"
 if ($WSDFIR_X64DBG -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\x64dbg.zip" -o"$env:ProgramFiles\x64dbg"
@@ -342,7 +305,7 @@ cmd /c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 
 # Last commands
 if (($WSDFIR_W10_LOOPBACK -eq "Yes") -and ($WIN10)) {
-    & "C:\Users\WDAGUtilityAccount\Documents\tools\utils\devcon.exe" install $env:windir\inf\netloop.inf *msloop
+    & "$HOME\Documents\tools\utils\devcon.exe" install $env:windir\inf\netloop.inf *msloop
 }
 
 if ($WSDFIR_LOKI -eq "Yes") {
@@ -353,7 +316,7 @@ if ($WSDFIR_LOKI -eq "Yes") {
 }
 
 # Clean up
-Remove-Item C:\Users\WDAGUtilityAccount\Desktop\PdfStreamDumper.exe.lnk
+Remove-Item $HOME\Desktop\PdfStreamDumper.exe.lnk
 
 # Create directory for shortcuts to installed tools
 mkdir "$HOME\Desktop\dfirws"
@@ -375,7 +338,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\HxD.lnk" -DestinationPath 
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\ImHex.lnk" -DestinationPath "C:Tools\imhex\imhex-gui.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Notepad++.lnk" -DestinationPath "$env:ProgramFiles\Notepad++\notepad++.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Visual Studio Code.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Visual Studio Code.lnk" -DestinationPath "$HOME\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 mkdir "$HOME\Desktop\dfirws\ELF"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\elfparser-ng.lnk" -DestinationPath "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\ELF\xelfviewer.lnk" -DestinationPath "C:\Tools\XELFViewer\xelfviewer.exe"
@@ -450,9 +413,7 @@ mkdir "$HOME\Desktop\dfirws\Programming\Go"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Go\gftrace.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Go\GoReSym.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\Java"
-if ($WSDFIR_JAVA_JAVA -eq "Yes") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
-}
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jadx-gui.lnk" -DestinationPath "$env:ProgramFiles\jadx\bin\jadx-gui.bat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jd-gui.lnk" -DestinationPath "C:\Tools\jd-gui\jd-gui.exe"
 mkdir "$HOME\Desktop\dfirws\Registry"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Registry\Registry Explorer.lnk" -DestinationPath "C:\Tools\Zimmerman\RegistryExplorer\RegistryExplorer.exe"
@@ -494,7 +455,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Zimmerman.lnk" -DestinationPath "C
 
 # Pin to explorer
 $shell = new-object -com "Shell.Application"
-$folder = $shell.Namespace('C:\Users\WDAGUtilityAccount\Desktop')
+$folder = $shell.Namespace("$HOME\Desktop")
 $item = $folder.Parsename('dfirws')
 $verb = $item.Verbs() | Where-Object { $_.Name -eq 'Pin to Quick access' }
 if ($verb) {
@@ -534,8 +495,8 @@ netsh firewall set opmode DISABLE 2>&1 | Out-Null
 Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
 
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
-Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\jupyter.bat"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils\gollum.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Documents\tools\jupyter.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "$HOME\Documents\tools\utils\gollum.bat"
 
 Write-DateLog "helpers.ps1 done"
 Stop-Transcript

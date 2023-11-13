@@ -1,2 +1,2 @@
-Set-Location C:\Users\WDAGUtilityAccount\Documents\jupyter
+Set-Location "$HOME\Documents\jupyter"
 & jupyter lab

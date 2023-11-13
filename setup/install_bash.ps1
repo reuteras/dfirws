@@ -5,11 +5,6 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # This script runs in a Windows sandbox to uncompress zst files.
 Write-DateLog "Uncompress zst files for Git for Windows (bash)" > "C:\log\bash.txt" 2>&1
 
-# Set variables
-$SETUP_PATH="C:\downloads"
-$TOOLS="C:\Tools"
-$TEMP="C:\tmp"
-
 mkdir "$TEMP" > $null 2>&1
 mkdir "$TOOLS" > $null 2>&1
 
