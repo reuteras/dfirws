@@ -21,6 +21,12 @@ winget download Microsoft.DotNet.Runtime.6 -d .\tmp\winget > $null 2>&1
 Copy-Item .\tmp\winget\Microsoft*.exe .\downloads\dotnet6.exe
 Clear-Tmp
 
+# GoLang
+Clear-Tmp
+winget download Golang.Go -d .\tmp\winget > $null 2>&1
+Copy-Item .\tmp\winget\Go*.msi .\downloads\golang.msi
+Clear-Tmp
+
 # Microsoft LogParser
 Clear-Tmp
 winget download Microsoft.LogParser -d .\tmp\winget > $null 2>&1
@@ -31,6 +37,12 @@ Clear-Tmp
 Clear-Tmp
 winget download Obsidian.Obsidian -d .\tmp\winget > $null 2>&1
 Copy-Item .\tmp\winget\Obsidian*.exe .\downloads\obsidian.exe
+Clear-Tmp
+
+# Ruby
+Clear-Tmp
+winget download RubyInstallerTeam.Ruby.3.2 -d .\tmp\winget > $null 2>&1
+Copy-Item .\tmp\winget\Ruby*.exe .\downloads\ruby.exe
 Clear-Tmp
 
 # VirusTotal CLI
