@@ -42,7 +42,7 @@ cd dfirws
 During download of the tolls you will need a classic GitHub token, see [https://github.com/settings/tokens](https://github.com/settings/tokens), to make sure that don't have problems with rate limiting on GitHub.
 
 Now it's time to start downloading tools included in dfirws. Sandboxes will be started to run and install packages for Python, bash and NodeJS. Therefore you can't have any sandbox running during download since Microsoft only allows one sandbox running at the time. After download the tools will be extracted and prepared for faster usage in the sandbox.
-Total space is currently around 8 GB. Download and preparations are done via
+Total space is currently around 14 GB. Download and preparations are done via
 
 ```PowerShell
 .\downloadFiles.ps1
