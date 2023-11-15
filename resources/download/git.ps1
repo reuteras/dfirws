@@ -11,7 +11,6 @@ New-Item -ItemType Directory -Force -Path mount\git > $null
 Set-Location mount\git
 
 $repourls = `
-    "https://github.com/Bw3ll/sharem.git", `
     "https://github.com/crypto2011/IDR.git", `
     "https://github.com/cyberark/White-Phoenix.git", `
     "https://github.com/gehaxelt/Python-dsstore.git", `
@@ -20,11 +19,11 @@ $repourls = `
     "https://github.com/keydet89/Events-Ripper.git", `
     "https://github.com/keydet89/RegRipper3.0", `
     "https://github.com/last-byte/PersistenceSniper.git", `
+    "https://github.com/last-byte/PersistenceSniper.wiki.git", `
     "https://github.com/MacDue/ssdeep-windows-32_64.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
-    "https://github.com/Neo23x0/evt2sigma.git", `
     "https://github.com/netspooky/scare.git", `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
