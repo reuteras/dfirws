@@ -20,7 +20,7 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-c
 # Used from sysmon
 
 # Get Amazon Corretto
-Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-17-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
+Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"    
 # Install during start
 
 # Get Sysinternals Suite
@@ -165,6 +165,19 @@ Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3
 # https://flatassembler.net/download.php
 Get-FileFromUri -uri "https://flatassembler.net/fasmw17331.zip" -FilePath ".\downloads\fasm.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fasm.zip" -o"$TOOLS\fasm" | Out-Null
+
+# https://procdot.com/downloadprocdotbinaries.htm
+Get-FileFromUri -uri "https://procdot.com/download/procdot/binaries/procdot_1_22_57_windows.zip" -FilePath ".\downloads\procdot.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -pprocdot -aoa "$SETUP_PATH\procdot.zip" -o"$TOOLS\procdot" | Out-Null
+
+# http://www.rohitab.com/apimonitor
+Get-FileFromUri -uri "http://www.rohitab.com/downloads/apimonitor-x86.exe" -FilePath ".\downloads\apimonitor32.exe"
+Get-FileFromUri -uri "http://www.rohitab.com/downloads/apimonitor-x64.exe" -FilePath ".\downloads\apimonitor64.exe"
+
+# https://gluonhq.com/products/javafx/
+Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\openjfx.zip" -o"$TOOLS" | Out-Null
+Move-Item $TOOLS\javafx-sdk-* $TOOLS\javafx-sdk
 
 # Remove unused
 Remove-Item -r $TOOLS\win32
