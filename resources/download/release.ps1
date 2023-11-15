@@ -36,6 +36,11 @@ Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path "$SETUP_PATH\binlex.zip" -
 # cmder
 Get-GitHubRelease -repo "cmderdev/cmder" -path "$SETUP_PATH\cmder.7z" -match cmder.7z
 
+# Recaf
+Get-GitHubRelease -repo "Col-E/Recaf" -path "$SETUP_PATH\recaf.jar" -match jar-with-dependencies.jar
+Copy-Item $SETUP_PATH\recaf.jar $TOOLS\lib\recaf.jar
+Set-Content -Encoding Ascii -Path "$TOOLS\bin\recaf.bat" "@echo off`njava --module-path $env:PATH_TO_FX --add-modules javafx.controls -jar C:\Tools\bin\recaf.jar"
+
 # dnSpy 32-bit
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "$SETUP_PATH\dnSpy32.zip" -match win32
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dnSpy32.zip" -o"$TOOLS\dnSpy32" | Out-Null
@@ -224,6 +229,10 @@ Move-Item $TOOLS\radare2-* $TOOLS\radare2
 Get-GitHubRelease -repo "rizinorg/cutter" -path "$SETUP_PATH\cutter.zip" -match Windows-x86_64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cutter.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\cutter-* $TOOLS\cutter
+
+# sidr
+Get-GitHubRelease -repo "strozfriedberg/sidr" -path "$SETUP_PATH\sidr.exe" -match sidr.exe
+Copy-Item $SETUP_PATH\sidr.exe $TOOLS\bin\
 
 # jadx
 Get-GitHubRelease -repo "skylot/jadx" -path "$SETUP_PATH\jadx.zip" -match jadx-1
