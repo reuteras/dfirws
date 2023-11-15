@@ -20,7 +20,7 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-c
 # Used from sysmon
 
 # Get Amazon Corretto
-Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"    
+Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
 # Install during start
 
 # Get Sysinternals Suite
