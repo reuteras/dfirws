@@ -12,9 +12,7 @@ function Copy-Fakenet {
 		mkdir "$DestinationPath"
 	}
 
-	Copy-Item -r C:\Tools\fakenet\configs\ "$DestinationPath"
-	Copy-Item -r C:\Tools\fakenet\defaultFiles\ "$DestinationPath"
-	Copy-Item -r C:\Tools\fakenet\listeners\ "$DestinationPath"
+	Copy-Item -r C:\Tools\fakenet\ "$DestinationPath"
 }
 
 function Copy-Node {
@@ -63,5 +61,6 @@ Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
 
 # Comment this line to see warnings from Python
 $env:PYTHONWARNINGS="ignore"
+$env:PATH_TO_FX="C:\Tools\javafx-sdk\lib"
 
 # Dynamicly added functions below
