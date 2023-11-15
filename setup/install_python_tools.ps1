@@ -1,6 +1,5 @@
 # Set variables
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
-$SETUP_PATH="C:\downloads"
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
@@ -127,6 +126,10 @@ python -m pip install -U https://github.com/DissectMalware/pyOneNote/archive/mas
 Set-Location "C:\venv\default\Scripts"
 curl -o "shellconv.py" "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
 curl -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
+curl -o "parseUSBs.py" "https://raw.githubusercontent.com/khyrenz/parseusbs/main/parseUSBs.py"
+(Get-Content .\parseUSBs.py -raw) -replace "#!/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\parseUSBs2.py"
+Copy-Item parseUSBs2.py parseUSBs.py
+Remove-Item parseUSBs2.py
 Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 
 deactivate
@@ -183,10 +186,57 @@ C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U setuptools wheel >> "C:\log\python.txt"
 
-python -m pip install -r https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt
-Set-Locations "C:\venv\pe2pic\Scripts"
+python -m pip install -r https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt 2>&1 >> "C:\log\python.txt"
+Set-Location "C:\venv\pe2pic\Scripts"
 curl -o "pe2pic.py" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py"
 deactivate
 Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
+
+# evt2sigma
+Write-DateLog "Install packages in venv evt2sigma in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\evt2sigma"
+C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+
+python -m pip install -r https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt 2>&1 >> "C:\log\python.txt"
+Set-Location "C:\venv\evt2sigma\Scripts"
+curl -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py"
+
+# scare
+Write-DateLog "Install packages in venv scare in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\scare"
+C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+
+Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
+Set-Location "C:\venv\scare\scare"
+(Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content  -Path ".\requirements2.txt"
+python -m pip install -r ./requirements2.txt 2>&1 >> "C:\log\python.txt"
+(Get-Content .\scare.py -raw) -replace "import readline","from pyreadline3 import Readline`nreadline = Readline()" | Set-Content -Path ".\scare2.py"
+Copy-Item scare2.py scare.py
+Remove-Item scare2.py
+Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
+deactivate
+
+# Zircolite
+Write-DateLog "Install packages in venv Zircolite in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\Zircolite"
+C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
+
+Copy-Item -Recurse "C:\git\Zircolite" "C:\venv\Zircolite"
+Set-Location "C:\venv\Zircolite\Zircolite"
+python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
+deactivate
+
+Set-Content "@echo off`nC:\venv\Zircolite\Scripts\python.exe C:\venv\Zircolite\Zircolite\zircolite.py" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.bat
+Set-Content "@echo off`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.bat
+Set-Content "@echo off`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.bat
+Set-Content "@echo off`nC:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.bat
+Set-Content "@echo off`nC:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.bat
+Set-Content "@echo off`nC:\venv\scare\Scripts\python.exe C:\venv\scare\scare\scare.py" -Encoding Ascii -Path C:\venv\default\Scripts\scare.bat
 
 Write-Output "" > C:\venv\done
