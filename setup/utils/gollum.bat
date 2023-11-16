@@ -1,1 +1,1 @@
-powershell -executionpolicy bypass -file $HOME\Documents\tools\utils\gollum.ps1
+powershell -executionpolicy bypass -file %USERPROFILE%\Documents\tools\utils\gollum.ps1
