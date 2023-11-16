@@ -218,6 +218,7 @@ Add-ToUserPath "C:\Tools\Zimmerman\SQLECmd"
 Add-ToUserPath "C:\Tools\Zimmerman\TimelineExplorer"
 Add-ToUserPath "C:\Tools\Zimmerman\XWFIM"
 Add-ToUserPath "C:\Tools\zstd"
+Add-ToUserPath "C:\Users\WDAGUtilityAccount\Documents\tools\utils"
 
 Write-DateLog "Add shortcuts (shorten link names first)"
 #& reg add "HKU\%1\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "link" /t REG_BINARY /d 00000000 /f
@@ -408,11 +409,14 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\Cobalt
 mkdir "$HOME\Desktop\dfirws\Network"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "C:\Tools\fakenet\fakenet.exe"
 mkdir "$HOME\Desktop\dfirws\OS"
+mkdir "$HOME\Desktop\dfirws\OS\Android"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\Android\apktool.bat.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\OS\Linux"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\Linux\elfparser-ng.lnk" -DestinationPath "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\Linux\xelfviewer.lnk" -DestinationPath "C:\Tools\XELFViewer\xelfviewer.exe"
 mkdir "$HOME\Desktop\dfirws\OS\macOS"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\macOS\dsstore.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "C:\git\Python-dsstore"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\macOS\machofile-cli.py.lnk" -DestinationPath "%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe" -WorkingDirectory "$HOME\Desktop"
 mkdir "$HOME\Desktop\dfirws\OS\Windows"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\Windows\Jumplist-Browser.lnk" -DestinationPath "C:\Tools\bin\JumplistBrowser.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\Windows\Prefetch-Browser.lnk" -DestinationPath "C:\Tools\bin\PrefetchBrowser.exe"
@@ -514,7 +518,7 @@ netsh firewall set opmode DISABLE 2>&1 | Out-Null
 Start-Process "C:\Program Files\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar C:\Tools\lib\gollum.war -S gollum C:\git\dfirws.wiki" -WindowStyle Hidden
 
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
-Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Documents\tools\jupyter.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Documents\tools\utils\jupyter.bat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "$HOME\Documents\tools\utils\gollum.bat"
 
 Write-DateLog "helpers.ps1 done"
