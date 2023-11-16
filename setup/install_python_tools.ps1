@@ -51,11 +51,14 @@ python -m pip install `
     elastic_transport>=8.1.2 `
     evtx `
     extract-msg `
+    python-magic `
+    python-magic-bin `
     fonttools `
     hachoir `
     idna>=3.2 `
     ijson `
     importlib-metadata>=6.5.0 `
+    jedi>=0.19.0 `
     jinja2 `
     jsbeautifier `
     keyring>=23.13.1 `
@@ -88,9 +91,11 @@ python -m pip install `
     prompt_toolkit>=3.0.35 `
     protobuf>=4.22.0 `
     protodeep `
+    ptpython>=3.0.23 `
     pycryptodome `
     pycryptodomex>=3.17.0 `
     pyelftools `
+    Pygments>=2.16.0 `
     pyOneNote `
     pyparsing>=2.4.6 `
     pypng `
@@ -109,7 +114,7 @@ python -m pip install `
     uncompyle6 `
     unicorn `
     unpy2exe `
-    urllib3>=2.0.6 `
+    urllib3>=2.0.7 `
     visidata>=2.11 `
     xlrd>=2.0.0 `
     XLMMacroDeobfuscator>=0.2.5 `
@@ -127,6 +132,9 @@ Set-Location "C:\venv\default\Scripts"
 curl -o "shellconv.py" "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
 curl -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
 curl -o "parseUSBs.py" "https://raw.githubusercontent.com/khyrenz/parseusbs/main/parseUSBs.py"
+curl -o "machofile-cli.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py"
+curl -o "machofile.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
+
 (Get-Content .\parseUSBs.py -raw) -replace "#!/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\parseUSBs2.py"
 Copy-Item parseUSBs2.py parseUSBs.py
 Remove-Item parseUSBs2.py
@@ -208,15 +216,15 @@ Write-DateLog "Install packages in venv scare in sandbox (needs older packages).
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
-python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+python -m pip install -U ptpython setuptools wheel >> "C:\log\python.txt"
 
 Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 (Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content  -Path ".\requirements2.txt"
 python -m pip install -r ./requirements2.txt 2>&1 >> "C:\log\python.txt"
-(Get-Content .\scare.py -raw) -replace "import readline","from pyreadline3 import Readline`nreadline = Readline()" | Set-Content -Path ".\scare2.py"
-Copy-Item scare2.py scare.py
-Remove-Item scare2.py
+(Get-Content .\scarelib.py -raw) -replace "print(splash)","splash = 'Simple Configurable Asm REPL && Emulator'`nprint(splash)" | Set-Content -Path ".\scarelib2.py"
+Copy-Item scarelib2.py scarelib.py
+Remove-Item scarelib2.py
 Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
 deactivate
 
@@ -225,18 +233,18 @@ Write-DateLog "Install packages in venv Zircolite in sandbox (needs older packag
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\Zircolite"
 C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
-python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
+python -m pip install -U ptpython setuptools wheel 2>&1 >> "C:\log\python.txt"
 
 Copy-Item -Recurse "C:\git\Zircolite" "C:\venv\Zircolite"
 Set-Location "C:\venv\Zircolite\Zircolite"
 python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
 deactivate
 
-Set-Content "@echo off`nC:\venv\Zircolite\Scripts\python.exe C:\venv\Zircolite\Zircolite\zircolite.py" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.bat
-Set-Content "@echo off`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.bat
-Set-Content "@echo off`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.bat
-Set-Content "@echo off`nC:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.bat
-Set-Content "@echo off`nC:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.bat
-Set-Content "@echo off`nC:\venv\scare\Scripts\python.exe C:\venv\scare\scare\scare.py" -Encoding Ascii -Path C:\venv\default\Scripts\scare.bat
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\Zircolite\Scripts\Activate.ps1`nC:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\dfir-unfurl\Scripts\Activate.ps1`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.ps1
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\dfir-unfurl\Scripts\Activate.ps1`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\evt2sigma\Scripts\Activate.ps1`nC:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.ps1
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\pe2pic\Scripts\Activate.ps1`nC:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\scare\Scripts\Activate.ps1`ncd C:\venv\scare\scare`nC:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
 
 Write-Output "" > C:\venv\done
