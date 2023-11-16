@@ -9,6 +9,10 @@ if (! (Get-Command git )) {
 
 New-Item -ItemType Directory -Force -Path mount\git > $null
 Set-Location mount\git
+if (! (Test-Path .\PatchaPalooza )) {
+    # Remove PatchaPalooza directory if it exists since we do a local patch
+    Remove-Item -Recurse -Force .\PatchaPalooza > $null 2>&1
+}
 
 $repourls = `
     "https://github.com/crypto2011/IDR.git", `
@@ -50,4 +54,10 @@ foreach ($repourl in $repourls) {
     }
 }
 
-Set-Location ..\..
+# Patch PatchaPalooza
+Set-Location PatchaPalooza
+(Get-Content .\PatchaPalooza.py -Raw) -replace "import termcolor","import termcolor`nimport colorama`ncolorama.init()" | Set-Content .\PatchaPalooza2.py
+Copy-Item .\PatchaPalooza2.py .\PatchaPalooza.py -Force
+Remove-Item .\PatchaPalooza2.py
+
+Set-Location ..\..\..
