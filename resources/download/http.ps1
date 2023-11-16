@@ -139,7 +139,7 @@ Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.6/python-3.11.6-amd
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downloads\npcap.exe"
 
 # https://www.wireshark.org/download.html
-Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-win64-4.0.10.exe" -FilePath ".\downloads\wireshark.exe"
+Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.0-x64.exe" -FilePath ".\downloads\wireshark.exe"
 
 # https://www.sqlite.org/download.html
 Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440000.zip" -FilePath ".\downloads\sqlite.zip"
@@ -170,14 +170,22 @@ Get-FileFromUri -uri "https://flatassembler.net/fasmw17331.zip" -FilePath ".\dow
 Get-FileFromUri -uri "https://procdot.com/download/procdot/binaries/procdot_1_22_57_windows.zip" -FilePath ".\downloads\procdot.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -pprocdot -aoa "$SETUP_PATH\procdot.zip" -o"$TOOLS\procdot" | Out-Null
 
+# https://www.graphviz.org/download/
+Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/9.0.0/windows_10_cmake_Release_graphviz-install-9.0.0-win64.exe" -FilePath ".\downloads\graphviz.exe"
+
 # http://www.rohitab.com/apimonitor
-Get-FileFromUri -uri "http://www.rohitab.com/downloads/apimonitor-x86.exe" -FilePath ".\downloads\apimonitor32.exe"
-Get-FileFromUri -uri "http://www.rohitab.com/downloads/apimonitor-x64.exe" -FilePath ".\downloads\apimonitor64.exe"
+Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x86.exe" -FilePath ".\downloads\apimonitor32.exe"
+Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe"
 
 # https://gluonhq.com/products/javafx/
 Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\openjfx.zip" -o"$TOOLS" | Out-Null
 Move-Item $TOOLS\javafx-sdk-* $TOOLS\javafx-sdk
+
+# https://bitbucket.org/iBotPeaches/apktool/downloads/
+Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" -FilePath ".\downloads\apktool.jar"
+Copy-Item ".\downloads\apktool.jar" "$TOOLS\bin\apktool.jar" -Force
+Copy-Item "setup\utils\apktool.bat" "$TOOLS\bin\apktool.bat" -Force
 
 # Remove unused
 Remove-Item -r $TOOLS\win32
