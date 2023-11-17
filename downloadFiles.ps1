@@ -3,10 +3,6 @@
 . .\resources\download\common.ps1
 
 # Check if sandbox is running
-if ( tasklist | findstr WindowsSandbox ) {
-    Write-DateLog "Sandbox can't be running during install or upgrade."
-    Exit
-}
 
 if ($args.Count -eq 0) {
     Write-DateLog "No arguments given. Will download all files."
@@ -14,6 +10,13 @@ if ($args.Count -eq 0) {
 } else {
     $all = $false
 }
+
+if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python") {
+    if ( tasklist | findstr WindowsSandbox ) {
+        Write-DateLog "Sandbox can't be running during install or upgrade."
+        Exit
+    }
+}    
 
 # Remove old files
 if ($all) {
