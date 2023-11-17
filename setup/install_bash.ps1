@@ -5,8 +5,8 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # This script runs in a Windows sandbox to uncompress zst files.
 Write-DateLog "Uncompress zst files for Git for Windows (bash)" > "C:\log\bash.txt" 2>&1
 
-mkdir "$TEMP" > $null 2>&1
-mkdir "$TOOLS" > $null 2>&1
+New-Item -ItemType Directory "$TEMP" > $null 2>&1
+New-Item -ItemType Directory "$TOOLS" > $null 2>&1
 
 Copy-Item "$SETUP_PATH\7zip.msi" "$TEMP\7zip.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\7zip.msi /qn /norestart"

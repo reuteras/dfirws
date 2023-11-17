@@ -5,7 +5,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # This script runs in a Windows sandbox to prebuild the venv environment.
 Write-DateLog "Install npm packages" >> "C:\log\npm.txt" 2>&1
 
-mkdir "$TEMP" > $null 2>&1
+New-Item -ItemType Directory "$TEMP" > $null 2>&1
 
 Copy-Item "$SETUP_PATH\7zip.msi" "$TEMP\7zip.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\7zip.msi /qn /norestart"
