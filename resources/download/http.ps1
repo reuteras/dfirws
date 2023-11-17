@@ -174,7 +174,6 @@ Get-FileFromUri -uri "https://procdot.com/download/procdot/binaries/procdot_1_22
 Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/9.0.0/windows_10_cmake_Release_graphviz-install-9.0.0-win64.exe" -FilePath ".\downloads\graphviz.exe"
 
 # http://www.rohitab.com/apimonitor
-Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x86.exe" -FilePath ".\downloads\apimonitor32.exe"
 Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe"
 
 # https://gluonhq.com/products/javafx/
