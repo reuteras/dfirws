@@ -120,8 +120,7 @@ python -m pip install `
     xxhash>=3.3.0 `
     yara-python 2>&1 >> "C:\log\python.txt"
 
-python -m pip install `
-    jupyterlab 2>&1 >> "C:\log\python.txt"
+python -m pip install jupyterlab 2>&1 >> "C:\log\python.txt"
 
 # Not compatible with Python 3.11:
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
@@ -142,9 +141,8 @@ Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 New-Item -ItemType Directory C:\tmp\rename > $null 2>&1
 Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pycache__,*.bat | ForEach-Object { Copy-Item $_ C:\tmp\test }
 Set-Location C:\tmp\test
-cmd /c "ren * *.py"
+Get-ChildItem | Rename-Item -newname  { $_.Name +".py" }
 Copy-Item * C:\venv\default\Scripts
-
 deactivate
 Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 
@@ -158,8 +156,7 @@ python -m pip install -U setuptools wheel >> "C:\log\python.txt"
 python -m pip install `
     dfir-unfurl `
     hexdump `
-    tomlkit `
-    wheel>=0.40.0 2>&1 >> "C:\log\python.txt"
+    tomlkit 2>&1 >> "C:\log\python.txt"
 
 Write-DateLog "Python venv dfir-unfurl done. Will update path and cache Cloudflare." >> "C:\log\python.txt"
 
@@ -234,9 +231,9 @@ python -m pip install -U ptpython setuptools wheel >> "C:\log\python.txt"
 
 Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
-(Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content  -Path ".\requirements2.txt"
+(Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content -Path ".\requirements2.txt" -Encoding ascii
 python -m pip install -r ./requirements2.txt 2>&1 >> "C:\log\python.txt"
-(Get-Content .\scarelib.py -raw) -replace "print(splash)","splash = 'Simple Configurable Asm REPL && Emulator'`nprint(splash)" | Set-Content -Path ".\scarelib2.py"
+(Get-Content .\scarelib.py -raw) -replace "print(splash)","splash = 'Simple Configurable Asm REPL && Emulator'`nprint(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
 Copy-Item scarelib2.py scarelib.py
 Remove-Item scarelib2.py
 Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
