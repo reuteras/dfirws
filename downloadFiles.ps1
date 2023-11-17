@@ -16,7 +16,7 @@ if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -co
         Write-DateLog "Sandbox can't be running during install or upgrade."
         Exit
     }
-}    
+}
 
 # Remove old files
 if ($all) {
