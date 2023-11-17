@@ -22,7 +22,7 @@ $folders = "local", "readonly", "readwrite"
 
 foreach ($folder in $folders) {
 	if (! (Test-Path .\$folder)) {
-		mkdir .\$folder
+		New-Item -ItemType Directory .\$folder
 	}
 }
 

@@ -1,7 +1,7 @@
 ﻿$SOURCE = "M:\IT\dfirws"
 
 if (! (Test-Path "$HOME\Documents\dfirws")) {
-	mkdir "$HOME\Documents\dfirws" > $null 2>&1
+	New-Item -ItemType Directory "$HOME\Documents\dfirws" > $null 2>&1
 } else {
 	Write-Output "Already installed! To reinstall delete the folder $HOME\Documents\dfirws and rerun the script."
 	Exit

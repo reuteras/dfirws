@@ -20,6 +20,6 @@ Copy-Item $SOURCE_DIRECTORY\README.md .\dfirws\
 Copy-Item $SOURCE_DIRECTORY\dfirws.wsb.template .\dfirws\
 
 if (! (Test-Path .\dfirws\local) ) {
-    mkdir .\dfirws\local
+    New-Item -ItemType Directory .\dfirws\local
 }
 Copy-Item $SOURCE_DIRECTORY\local\example-customize.ps1 .\dfirws\local
