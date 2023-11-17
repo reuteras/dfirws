@@ -65,7 +65,6 @@ python -m pip install `
     keystone-engine `
     LnkParse3 `
     lxml `
-    maldump `
     MarkupSafe>=2.1.3 `
     minidump `
     mkyara `
@@ -140,6 +139,12 @@ Copy-Item parseUSBs2.py parseUSBs.py
 Remove-Item parseUSBs2.py
 Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 
+New-Item -ItemType Directory C:\tmp\rename > $null 2>&1
+Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pycache__,*.bat | ForEach-Object { Copy-Item $_ C:\tmp\test }
+Set-Location C:\tmp\test
+cmd /c "ren * *.py"
+Copy-Item * C:\venv\default\Scripts
+
 deactivate
 Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 
@@ -206,10 +211,19 @@ Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\evt2s
 C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U setuptools wheel >> "C:\log\python.txt"
-
 python -m pip install -r https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt 2>&1 >> "C:\log\python.txt"
 Set-Location "C:\venv\evt2sigma\Scripts"
 curl -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py"
+
+# maldump
+Write-DateLog "Install packages in venv maldump in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\maldump"
+C:\venv\maldump\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel >> "C:\log\python.txt"
+python -m pip install -r https://raw.githubusercontent.com/NUKIB/maldump/master/maldump/requirements.txt 2>&1 >> "C:\log\python.txt"
+python -m pip install maldump 2>&1 >> "C:\log\python.txt"
+deactivate
 
 # scare
 Write-DateLog "Install packages in venv scare in sandbox (needs older packages)." >> "C:\log\python.txt"
@@ -246,5 +260,6 @@ Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\df
 Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\evt2sigma\Scripts\Activate.ps1`nC:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.ps1
 Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\pe2pic\Scripts\Activate.ps1`nC:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
 Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\scare\Scripts\Activate.ps1`ncd C:\venv\scare\scare`nC:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path C:\venv\default\Scripts\maldump.ps1
 
 Write-Output "" > C:\venv\done
