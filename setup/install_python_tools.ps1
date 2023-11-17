@@ -218,7 +218,7 @@ Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\maldu
 C:\venv\maldump\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U setuptools wheel >> "C:\log\python.txt"
-python -m pip install -r https://raw.githubusercontent.com/NUKIB/maldump/master/maldump/requirements.txt 2>&1 >> "C:\log\python.txt"
+python -m pip install -r https://raw.githubusercontent.com/NUKIB/maldump/master/requirements.txt 2>&1 >> "C:\log\python.txt"
 python -m pip install maldump 2>&1 >> "C:\log\python.txt"
 deactivate
 
