@@ -139,8 +139,8 @@ Remove-Item parseUSBs2.py
 Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 
 New-Item -ItemType Directory C:\tmp\rename > $null 2>&1
-Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pycache__,*.bat | ForEach-Object { Copy-Item $_ C:\tmp\test }
-Set-Location C:\tmp\test
+Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pycache__,*.bat | ForEach-Object { Copy-Item $_ C:\tmp\rename }
+Set-Location C:\tmp\rename
 Get-ChildItem | Rename-Item -newname  { $_.Name +".py" }
 Copy-Item * C:\venv\default\Scripts
 deactivate
