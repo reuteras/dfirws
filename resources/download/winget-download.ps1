@@ -39,6 +39,12 @@ winget download Obsidian.Obsidian -d .\tmp\winget > $null 2>&1
 Copy-Item .\tmp\winget\Obsidian*.exe .\downloads\obsidian.exe
 Clear-Tmp
 
+# PowerShell 7
+Clear-Tmp
+winget download Microsoft.PowerShell -d .\tmp\winget > $null 2>&1
+Copy-Item .\tmp\winget\PowerShell*.msi .\downloads\powershell.msi
+Clear-Tmp
+
 # Ruby
 Clear-Tmp
 winget download RubyInstallerTeam.Ruby.3.2 -d .\tmp\winget > $null 2>&1
