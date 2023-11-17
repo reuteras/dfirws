@@ -9,7 +9,7 @@ function Copy-Fakenet {
     )
 
 	if (!(Test-Path "$DestinationPath")) {
-		mkdir "$DestinationPath"
+		New-Item -ItemType Directory "$DestinationPath"
 	}
 
 	Copy-Item -r C:\Tools\fakenet\ "$DestinationPath"
@@ -21,7 +21,7 @@ function Copy-Node {
     )
 
 	if (!(Test-Path "$DestinationPath")) {
-		mkdir "$DestinationPath"
+		New-Item -ItemType Directory "$DestinationPath"
 	}
 
 	Copy-Item -r C:\Tools\node "$DestinationPath"
@@ -29,7 +29,7 @@ function Copy-Node {
 
 function Restore-Quarantine {
 	if (!(Test-Path "C:\ProgramData\Microsoft\Windows Defender" )) {
-		mkdir "C:\ProgramData\Microsoft\Windows Defender" > $null
+		New-Item -ItemType Directory "C:\ProgramData\Microsoft\Windows Defender" > $null
 	}
 
 
