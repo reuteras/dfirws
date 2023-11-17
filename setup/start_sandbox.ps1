@@ -363,12 +363,15 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Editors\Visual Studio Code.lnk" -D
 
 # File and apps
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\autoit-ripper.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\binlex.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\bulk_extractor64.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\densityscout.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Detect It Easy.lnk" -DestinationPath "$TOOLS\die\die.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\ezhexviewer.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\fq.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\lessmsi-gui.lnk" -DestinationPath "$TOOLS\lessmsi\lessmsi-gui.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\msidump.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\ripgrep (rg).lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\trid.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\Browser"
@@ -382,6 +385,12 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Database\sqlite3.ln
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Database\SQLiteWalker.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\Disk"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Disk\INDXRipper.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\INDXRipper\INDXRipper.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Disk\parseUSBs.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Disk\ntfs_parser.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\JavaScript"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\JavaScript\deobfuscator.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\JavaScript\js-beautify.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\JavaScript\jsdom.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\Log"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\chainsaw.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\Events-Ripper.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
@@ -390,15 +399,20 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\hayabusa.lnk" -
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\Microsoft LogParser (LogParser).lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\PowerSiem.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\Office and email"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\extract_msg.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\Mbox Viewer.lnk" -DestinationPath "$TOOLS\mboxviewer\mboxview64.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\MetadataPlus.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\bin\MetadataPlus.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\mraptor.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\msgviewer.lnk" -DestinationPath "$TOOLS\lib\msgviewer.jar"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\msodde.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\msoffcrypto-crack.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\msoffcrypto-tool.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\oledump.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\oleid.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\olevba.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\msgviewer.lnk" -DestinationPath "$TOOLS\pstwalker\pstwalker.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\pcode2code.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\pcodedmp.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\rtfdump.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\rtfobj.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\Structured Storage Viewer (SSView).lnk" -DestinationPath "$TOOLS\ssview\SSView.exe"
@@ -417,6 +431,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\4n4lDetector.lnk
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\capa.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation $TOOLS\capa\capa.exe
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\Debloat.lnk" -DestinationPath "$TOOLS\bin\debloat.exe"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\dll_to_exe.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\hachoir-tools.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\hollows_hunter.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation $TOOLS\bin\hollows_hunter.exe
 Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\pe2pic.bat.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 #Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\pe2shc.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation $TOOLS\bin\pe2shc.exe
@@ -434,6 +449,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\Trawler.lnk" -DestinationPath "
 
 # Malware tools
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Malware tools"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\maldump.exe (run maldump.ps1 first).lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\1768.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "$env:ProgramFiles\bin\BeaconHunter.exe"
@@ -442,6 +458,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\Cobalt
 # Network
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Network"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\fakenet\fakenet.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\scapy.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 
 # OS
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\OS"
@@ -472,6 +489,8 @@ New-Item -ItemType Directory "$HOME\Desktop\dfirws\Programming"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\java.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\node.lnk" -DestinationPath "$TOOLS\node\node.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Python.lnk" -DestinationPath "$VENV\default\Scripts\python.exe"
+new-item -ItemType Directory "$HOME\Desktop\dfirws\Programming\dotNET"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\dotNET\dotnetfile_dump.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Programming\Delphi"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Delphi\idr.lnk" -DestinationPath "$env:ProgramFiles\idr\bin\Idr.exe"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Programming\Go"
@@ -483,6 +502,8 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\jd-gui.lnk" -Dest
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Java\recaf.lnk" -DestinationPath "$TOOLS\bin\recaf.bat"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Programming\PowerShell"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\PowerShell\PowerDecode.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$GIT\PowerDecode"
+New-item -ItemType Directory "$HOME\Desktop\dfirws\Programming\Python"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Python\pydisasm.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 
 # Reverse Engineering
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Reverse Engineering"
@@ -503,6 +524,7 @@ New-Item -ItemType Directory "$HOME\Desktop\dfirws\Signatures and information"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Signatures and information\Online tools"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\Online tools\vt.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\evt2sigma.bat.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\mkyara.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\loki.lnk" -DestinationPath "$env:ProgramFiles\loki\loki.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\PatchaPalooza.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$GIT\PatchaPalooza"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Signatures and information\WinApiSearch64.lnk" -DestinationPath "$TOOLS\WinApiSearch\WinApiSearch64.exe"
@@ -516,13 +538,20 @@ New-Item -ItemType Directory "$HOME\Desktop\dfirws\Utilities"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\7-Zip.lnk" -DestinationPath "$env:ProgramFiles\7-Zip\7zFM.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\bash.lnk" -DestinationPath "$env:ProgramFiles\Git\bin\bash.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\cmder.lnk" -DestinationPath "$env:ProgramFiles\cmder\cmder.exe" -WorkingDirectory "$HOME\Desktop"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\CyberChef.lnk" -DestinationPath "$TOOLS\CyberChef\CyberChef.html"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\exiftool.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\exiftool\exiftool.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\floss.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\floss\floss.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\git.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$env:ProgramFiles\Git\cmd\git-gui.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Graphviz.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\pygmentize.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\time-decode.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\upx.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\visidata.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\zstd.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+New-Item -ItemType Directory "$HOME\Desktop\dfirws\Utilities\Crypto"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\chepy.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\CyberChef.lnk" -DestinationPath "$TOOLS\CyberChef\CyberChef.html"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\hash-id.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\name-that-hash.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 
 # "$HOME\Desktop\dfirws\Zimmerman"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Zimmerman.lnk" -DestinationPath "$TOOLS\Zimmerman"
@@ -536,17 +565,9 @@ if ($verb) {
     $verb.DoIt()
 }
 
-$pwsh = $shell.Namespace("$env:ProgramFiles\PowerShell\7")
-$pwshitem = $pwsh.Parsename('pwsh.exe')
-$pwshverb = $pwshitem.Verbs() | Where-Object { $_.Name -eq '&Pin to Start' }
-if ($pwshverb) {
-    $pwshverb.DoIt()
-}
-
 # TODO
 # Links to
 # - pip tools
-# - node tools
 
 & $SETUP_PATH\graphviz.exe /S /D='$env:ProgramFiles\graphviz'
 Add-ToUserPath "$env:ProgramFiles\graphviz\bin"
