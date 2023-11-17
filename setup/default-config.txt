@@ -2,6 +2,8 @@
 
 # Commands to install
 
+# Install apimonitor
+$WSDFIR_APIMONITOR="No"
 # Install extra tools for Git for Windows bash
 $WSDFIR_BASH_EXTRA="Yes"
 # Install BeaconHunter
