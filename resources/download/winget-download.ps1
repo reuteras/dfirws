@@ -1,7 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-Write-DateLog "Download tools via winget."
-
 # Local function
 function Clear-Tmp {
     if (Test-Path -Path .\tmp\winget) {

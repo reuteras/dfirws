@@ -1,7 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-Write-DateLog "Download Didier Stevens tools."
-
 New-Item -ItemType Directory -Force -Path $TOOLS\DidierStevens > $null
 New-Item -ItemType Directory -Force -Path $SETUP_PATH\DidierStevens > $null
 

@@ -1,7 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-Write-DateLog "Download releases from GitHub."
-
 New-Item -ItemType Directory -Force -Path $TOOLS\bin > $null
 New-Item -ItemType Directory -Force -Path $TOOLS\lib > $null
 

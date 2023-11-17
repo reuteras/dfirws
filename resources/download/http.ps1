@@ -1,7 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-Write-DateLog "Download files via HTTP."
-
 # Get uri for latest nuget - ugly
 $choco = Get-ChocolateyUrl chocolatey
 $nodejs = Get-DownloadUrlFromPage -url https://nodejs.org/en/download/ -regex 'https:[^"]+win-x64.zip'

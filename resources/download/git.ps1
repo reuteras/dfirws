@@ -1,7 +1,5 @@
 . $PSScriptRoot\common.ps1
 
-Write-DateLog "Download git repositories"
-
 if (! (Get-Command git )) {
     Write-DateLog "Need git to checkout git repositories."
     Exit
