@@ -6,7 +6,7 @@ if ($args.Count -eq 0) {
     Write-Output "   --apimonitor"
     Write-Output "   --autopsy"
     Write-Output "   --bashextra"
-    Write-Output "   --choco" 
+    Write-Output "   --choco"
     Write-Output "   --cmder"
     Write-Output "   --gitbash"
     Write-Output "   --golang"
