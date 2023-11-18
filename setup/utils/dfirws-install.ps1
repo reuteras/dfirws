@@ -2,22 +2,22 @@
 . $HOME\Documents\tools\wscommon.ps1
 
 if ($args.Count -eq 0) {
-    Write-Host "Need at least one argument. Available tools are: "
-    Write-Host "   --apimonitor"
-    Write-Host "   --autopsy"
-    Write-Host "   --bashextra"
-    Write-Host "   --choco" 
-    Write-Host "   --cmder"
-    Write-Host "   --gitbash"
-    Write-Host "   --golang"
-    Write-Host "   --libreoffice"
-    Write-Host "   --neo4j"
-    Write-Host "   --node"
-    Write-Host "   --pdfstreamdumper"
-    Write-Host "   --ruby"
-    Write-Host "   --vscode"
-    Write-Host "   --x64dbg"
-    Write-Host "   --zui"
+    Write-Output "Need at least one argument. Available tools are: "
+    Write-Output "   --apimonitor"
+    Write-Output "   --autopsy"
+    Write-Output "   --bashextra"
+    Write-Output "   --choco" 
+    Write-Output "   --cmder"
+    Write-Output "   --gitbash"
+    Write-Output "   --golang"
+    Write-Output "   --libreoffice"
+    Write-Output "   --neo4j"
+    Write-Output "   --node"
+    Write-Output "   --pdfstreamdumper"
+    Write-Output "   --ruby"
+    Write-Output "   --vscode"
+    Write-Output "   --x64dbg"
+    Write-Output "   --zui"
     exit
 }
 

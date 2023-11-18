@@ -96,7 +96,7 @@ function Install-BashExtra {
         ForEach-Object {
             $command = "tar.exe -x -vf /C/downloads/bash/" + $_.Name
             &"$env:ProgramFiles\Git\bin\bash.exe" -c "$command"
-        }    
+        }
 }
 
 function Install-Choco {
@@ -138,7 +138,7 @@ function Install-Neo4j {
 }
 
 function Install-Node {
-    Copy-Item -r "$TOOLS\node" $HOME\Desktop    
+    Copy-Item -r "$TOOLS\node" $HOME\Desktop
 }
 
 function Install-PDFStreamDumper {
