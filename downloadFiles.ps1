@@ -18,6 +18,13 @@ if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -co
     }
 }
 
+if ($all -eq $false) {
+    if (! (Test-Path "$TOOLS\bin" )) {
+        Write-DateLog "No tools directory found. You have to run this script without arguments first."
+        Exit
+    }
+}
+
 # Remove old files
 if ($all) {
     Remove-Item -r $TOOLS > $null 2>$1
