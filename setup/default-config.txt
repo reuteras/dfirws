@@ -12,13 +12,11 @@ $WSDFIR_BEACONHUNTER="Yes"
 $WSDFIR_CMDER="No"
 # Install git
 $WSDFIR_GIT="Yes"
-# Install OpenJDK 11 for neo4j
-$WSDFIR_JAVA_JDK11="No"
 # Install LibreOffice
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki
 $WSDFIR_LOKI="Yes"
-# Install neo4j - requires WSDFIR_JAVA_JDK11
+# Install neo4j
 $WSDFIR_NEO4J="No"
 # Install PDFStream Dumper
 $WSDFIR_PDFSTREAM="Yes"
