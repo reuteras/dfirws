@@ -14,17 +14,6 @@ Write-DateLog "start_sandbox.ps1"
 # Bypass the execution policy for the current session
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
-# Set variables
-$DATA = "C:\data"
-$GIT = "C:\git"
-$LOCAL_PATH = "C:\local"
-$NEO_JAVA = "C:\java"
-$PDFSTREAMDUMPER = "C:\Sandsprite\PDFStreamDumper"
-$SETUP_PATH = "C:\downloads"
-$TEMP = "C:\tmp"
-$TOOLS = "C:\Tools"
-$VENV = "C:\venv"
-
 # Create required directories
 New-Item -ItemType Directory "$TEMP"
 New-Item -ItemType Directory "$DATA"
@@ -62,24 +51,14 @@ Start-Process -Wait msiexec -ArgumentList "/i $TEMP\7zip.msi /qn /norestart"
 Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
 
-# Java 11 for NEO4J
-if ($WSDFIR_JAVA_JDK11 -eq "Yes") {
-    Copy-Item "$SETUP_PATH\microsoft-jdk-11.msi" "$TEMP\microsoft-jdk-11.msi"
-    Start-Process -Wait msiexec -ArgumentList "/i $TEMP\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
-}
-
-if (($WSDFIR_JAVA_JDK11 -eq "Yes") -and ($WSDFIR_NEO4J -eq "Yes")) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\neo4j.zip" -o"$env:ProgramFiles"
-    Move-Item $env:ProgramFiles\neo4j-community* $env:ProgramFiles\neo4j
-    Add-ToUserPath "$env:ProgramFiles\neo4j\bin"
-    & "$env:ProgramFiles\neo4j\bin\neo4j-admin" set-initial-password neo4j
-    Copy-Item -Recurse "$TOOLS\neo4j" "$env:ProgramFiles"
+# Install NEO4J
+if ($WSDFIR_NEO4J -eq "Yes") {
+    Install-Neo4j
 }
 
 # Install LibreOffice with custom arguments
 if ($WSDFIR_LIBREOFFICE -eq "Yes") {
-    Copy-Item "$SETUP_PATH\LibreOffice.msi" "$TEMP\LibreOffice.msi"
-    Start-Process -Wait msiexec -ArgumentList "/qb /i $TEMP\LibreOffice.msi /l* $TEMP\LibreOffice_install_log.txt REGISTER_ALL_MSO_TYPES=1 UI_LANGS=en_US ISCHECKFORPRODUCTUPDATES=0 REBOOTYESNO=No QUICKSTART=0 ADDLOCAL=ALL VC_REDIST=0 REMOVE=gm_o_Onlineupdate,gm_r_ex_Dictionary_Af,gm_r_ex_Dictionary_An,gm_r_ex_Dictionary_Ar,gm_r_ex_Dictionary_Be,gm_r_ex_Dictionary_Bg,gm_r_ex_Dictionary_Bn,gm_r_ex_Dictionary_Bo,gm_r_ex_Dictionary_Br,gm_r_ex_Dictionary_Pt_Br,gm_r_ex_Dictionary_Bs,gm_r_ex_Dictionary_Pt_Pt,gm_r_ex_Dictionary_Ca,gm_r_ex_Dictionary_Cs,gm_r_ex_Dictionary_Da,gm_r_ex_Dictionary_Nl,gm_r_ex_Dictionary_Et,gm_r_ex_Dictionary_Gd,gm_r_ex_Dictionary_Gl,gm_r_ex_Dictionary_Gu,gm_r_ex_Dictionary_He,gm_r_ex_Dictionary_Hi,gm_r_ex_Dictionary_Hu,gm_r_ex_Dictionary_Lt,gm_r_ex_Dictionary_Lv,gm_r_ex_Dictionary_Ne,gm_r_ex_Dictionary_No,gm_r_ex_Dictionary_Oc,gm_r_ex_Dictionary_Pl,gm_r_ex_Dictionary_Ro,gm_r_ex_Dictionary_Ru,gm_r_ex_Dictionary_Si,gm_r_ex_Dictionary_Sk,gm_r_ex_Dictionary_Sl,gm_r_ex_Dictionary_El,gm_r_ex_Dictionary_Es,gm_r_ex_Dictionary_Te,gm_r_ex_Dictionary_Th,gm_r_ex_Dictionary_Tr,gm_r_ex_Dictionary_Uk,gm_r_ex_Dictionary_Vi,gm_r_ex_Dictionary_Zu,gm_r_ex_Dictionary_Sq,gm_r_ex_Dictionary_Hr,gm_r_ex_Dictionary_De,gm_r_ex_Dictionary_Id,gm_r_ex_Dictionary_Is,gm_r_ex_Dictionary_Ko,gm_r_ex_Dictionary_Lo,gm_r_ex_Dictionary_Mn,gm_r_ex_Dictionary_Sr,gm_r_ex_Dictionary_Eo,gm_r_ex_Dictionary_It,gm_r_ex_Dictionary_Fr"
+    Install-LibreOffice
 }
 
 # Install Python
@@ -98,9 +77,7 @@ Copy-Item "$TOOLS\hxd\HxDSetup.exe" "$TEMP\HxDSetup.exe"
 
 # Install Git if specified
 if ($WSDFIR_GIT -eq "Yes") {
-    Copy-Item "$SETUP_PATH\git.exe" "$TEMP\git.exe"
-    Copy-Item "$HOME\Documents\tools\.bashrc" "$HOME\"
-    & "$TEMP\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh"
+    Install-GitBash
 }
 
 # Install Notepad++ and ComparePlus plugin if specified
@@ -110,29 +87,17 @@ Copy-Item "$SETUP_PATH\notepad++.exe" "$TEMP\notepad++.exe"
 
 # Install PDFStreamDumper if specified
 if ($WSDFIR_PDFSTREAM -eq "Yes") {
-    Copy-Item "$SETUP_PATH\PDFStreamDumper.exe" "$TEMP\PDFStreamDumper.exe"
-    & "$TEMP\PDFStreamDumper.exe" /verysilent
+    Install-PDFStreamDumper
 }
 
 # Install Visual Studio Code and PowerShell extension if specified
 if ($WSDFIR_VSCODE -eq "Yes") {
-    Copy-Item "$SETUP_PATH\vscode.exe" "$TEMP\vscode.exe"
-    Start-Process -Wait "$TEMP\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
-    if ($WSDFIR_VSCODE_POWERSHELL -eq "Yes") {
-        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "$SETUP_PATH\vscode\vscode-powershell.vsix"' -WindowStyle Hidden
-    }
-    if ($WSDFIR_VSCODE_PYTHON -eq "Yes") {
-        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "$SETUP_PATH\vscode\vscode-python.vsix"' -WindowStyle Hidden
-    }
-    if ($WSDFIR_VSCODE_SPELL -eq "Yes") {
-        Start-Process "$HOME\AppData\Local\Programs\Microsoft VS Code\bin\code" -ArgumentList '--install-extension "$SETUP_PATH\vscode\vscode-spell-checker.vsix"' -WindowStyle Hidden
-    }
+    Install-VSCode
 }
 
 # Install Zui if specified
 if ($WSDFIR_ZUI -eq "Yes") {
-    Copy-Item "$SETUP_PATH\zui.exe" "$TEMP\zui.exe"
-    & "$TEMP\zui.exe" /S /AllUsers
+    Install-Zui
 }
 
 # Set date and time format
@@ -257,9 +222,7 @@ Add-ToUserPath "$env:ProgramFiles\jadx\bin"
 
 # Add x64dbg if specified
 if ($WSDFIR_X64DBG -eq "Yes") {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\x64dbg.zip" -o"$env:ProgramFiles\x64dbg"
-    Add-ToUserPath "$env:ProgramFiles\x64dbg\release\x32"
-    Add-ToUserPath "$env:ProgramFiles\x64dbg\release\x64"
+    Install-X64dbg
 }
 
 # Configure PowerShell logging
@@ -268,11 +231,7 @@ Set-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\Pow
 
 # Add cmder
 if ($WSDFIR_CMDER -eq "Yes") {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cmder.7z" -o"$env:ProgramFiles\cmder"
-    Add-ToUserPath "$env:ProgramFiles\cmder"
-    Add-ToUserPath "$env:ProgramFiles\cmder\bin"
-    Write-Output "$VENV\default\scripts\activate.bat" | Out-File -Append -Encoding "ascii" $env:ProgramFiles\cmder\config\user_profile.cmd
-    & "$env:ProgramFiles\cmder\cmder.exe" /REGISTER ALL
+    Install-CMDer
 }
 
 # Add PersistenceSniper
@@ -282,9 +241,7 @@ if ($WSDFIR_PERSISTENCESNIPER -eq "Yes") {
 
 # Add apimonitor
 if ($WSDFIR_APIMONITOR -eq "Yes") {
-    Copy-Item "$SETUP_PATH\apimonitor64.exe" "$TEMP"
-    & $TEMP\apimonitor64.exe /s /v/qn
-    Add-ToUserPath "${env:ProgramFiles(x86)}\rohitab.com\API Monitor"
+    Install-Apimonitor
 }
 
 # Configure usage of new venv for PowerShell
@@ -296,13 +253,13 @@ Update-Wallpaper "$SETUP_PATH\dfirws.jpg"
 
 # Run install script for choco packages
 if ($WSDFIR_CHOCO -eq "Yes") {
-    & "$SETUP_PATH\choco\tools\chocolateyInstall.ps1"
+    Install-Choco
     # Add packages below
 }
 
 # Setup Node.js
 if ($WSDFIR_NODE -eq "Yes") {
-    Copy-Item -r "$TOOLS\node" $HOME\Desktop
+    Install-Node
 }
 
 # Run custom scripts
@@ -312,12 +269,7 @@ if (Test-Path "$LOCAL_PATH\customize.ps1") {
 
 # Install extra tools for Git-bash
 if ($WSDFIR_BASH_EXTRA -eq "Yes") {
-    Set-Location "$env:ProgramFiles\Git"
-    Get-ChildItem -Path $SETUP_PATH\bash -Include "*.tar" -Recurse |
-        ForEach-Object {
-            $command = "tar.exe -x -vf /C/downloads/bash/" + $_.Name
-            &"$env:ProgramFiles\Git\bin\bash.exe" -c "$command"
-        }
+    Install-BashExtra
 }
 
 # Set Notepad++ as default for many file types
@@ -535,6 +487,8 @@ Add-shortcut -SourceLnk "$HOME\Desktop\dfirws\Sysinternals.lnk" -DestinationPath
 
 # Utilities
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Utilities"
+New-Item -ItemType Directory "$HOME\Desktop\dfirws\Utilities\_dfirws"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\_dfirws\dfirws-install.ps1.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\7-Zip.lnk" -DestinationPath "$env:ProgramFiles\7-Zip\7zFM.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\bash.lnk" -DestinationPath "$env:ProgramFiles\Git\bin\bash.exe" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\cmder.lnk" -DestinationPath "$env:ProgramFiles\cmder\cmder.exe" -WorkingDirectory "$HOME\Desktop"
@@ -565,11 +519,9 @@ if ($verb) {
     $verb.DoIt()
 }
 
-# TODO
-# Links to
-# - pip tools
+& "$POWERSHELL_EXE" -Command "Set-ExecutionPolicy Bypass"
 
-& $SETUP_PATH\graphviz.exe /S /D='$env:ProgramFiles\graphviz'
+& "$SETUP_PATH\graphviz.exe" /S /D='$env:ProgramFiles\graphviz'
 Add-ToUserPath "$env:ProgramFiles\graphviz\bin"
 
 # Add plugins to Cutter
