@@ -213,6 +213,7 @@ Add-ToUserPath "$TOOLS\Zimmerman\SQLECmd"
 Add-ToUserPath "$TOOLS\Zimmerman\TimelineExplorer"
 Add-ToUserPath "$TOOLS\Zimmerman\XWFIM"
 Add-ToUserPath "$TOOLS\zstd"
+Add-ToUserPath "$VENV\maldump\Scripts"
 Add-ToUserPath "$HOME\Documents\tools\utils"
 
 # Shortcut for PowerShell
@@ -563,7 +564,7 @@ if ($WSDFIR_SYSMON -eq "Yes") {
 
 # Start Gollum for local wiki
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
-Start-Process "$env:ProgramFiles\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar $TOOLS\lib\gollum.war -S gollum $GIT\dfirws.wiki" -WindowStyle Hidden
+Start-Process "$env:ProgramFiles\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar $TOOLS\lib\gollum.war -S gollum --lenient-tag-lookup $GIT\dfirws.wiki" -WindowStyle Hidden
 
 # Don't ask about new apps
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
