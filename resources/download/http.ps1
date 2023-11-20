@@ -32,7 +32,8 @@ Get-FileFromUri -uri "https://sourceforge.net/projects/x64dbg/files/latest/downl
 # Get exiftool
 Get-FileFromUri -uri "https://sourceforge.net/projects/exiftool/files/latest/download" -FilePath ".\downloads\exiftool.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\exiftool.zip" -o"$TOOLS\exiftool" | Out-Null
-Move-Item "$TOOLS\exiftool\exiftool(-k).exe" $TOOLS\exiftool\exiftool.exe
+Copy-Item "$TOOLS\exiftool\exiftool(-k).exe" $TOOLS\exiftool\exiftool.exe
+Remove-Item "$TOOLS\exiftool\exiftool(-k).exe" -Force | Out-Null
 
 # Get pestudio
 Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio.zip" -FilePath ".\downloads\pestudio.zip"
@@ -142,6 +143,9 @@ Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.0-x64.ex
 # https://www.sqlite.org/download.html
 Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440000.zip" -FilePath ".\downloads\sqlite.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlite.zip" -o"$TOOLS\sqlite" | Out-Null
+if (Test-Path -Path $TOOLS\sqlite) {
+    Remove-Item -Recurse -Force $TOOLS\sqlite | Out-Null 2>&1
+}
 Move-Item $TOOLS\sqlite-* $TOOLS\sqlite
 
 # https://www.7-zip.org/download.html
@@ -150,6 +154,9 @@ Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downl
 # https://cert.at/en/downloads/software/software-densityscout
 Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\DensityScout.zip" -o"$TOOLS" | Out-Null
+if (Test-Path -Path $TOOLS\bin\densityscout.exe) {
+    Remove-Item -Recurse -Force $TOOLS\bin\densityscout.exe | Out-Null 2>&1
+}
 Move-Item $TOOLS\win64\densityscout.exe $TOOLS\bin\densityscout.exe
 
 # https://nmap.org/download.html
@@ -177,12 +184,19 @@ Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x6
 # https://gluonhq.com/products/javafx/
 Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\openjfx.zip" -o"$TOOLS" | Out-Null
+if (Test-Path -Path $TOOLS\javafx-sdk) {
+    Remove-Item -Recurse -Force $TOOLS\javafx-sdk | Out-Null 2>&1
+}
 Move-Item $TOOLS\javafx-sdk-* $TOOLS\javafx-sdk
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/
 Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" -FilePath ".\downloads\apktool.jar"
 Copy-Item ".\downloads\apktool.jar" "$TOOLS\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "$TOOLS\bin\apktool.bat" -Force
+
+# https://windows.php.net/download
+Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.2.12-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\php.zip" -o"$TOOLS\php" | Out-Null
 
 # Remove unused
 Remove-Item -r $TOOLS\win32
