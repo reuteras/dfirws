@@ -18,6 +18,8 @@ $WSDFIR_LIBREOFFICE="No"
 $WSDFIR_LOKI="Yes"
 # Install neo4j
 $WSDFIR_NEO4J="No"
+# Install Obsidian
+$WSDFIR_OBSIDIAN="No"
 # Install PDFStream Dumper
 $WSDFIR_PDFSTREAM="Yes"
 # Add PersistenceSniper

@@ -262,6 +262,11 @@ if ($WSDFIR_NODE -eq "Yes") {
     Install-Node
 }
 
+# Setup Obsidian
+if ($WSDFIR_OBSIDIAN -eq "Yes") {
+    Install-Obsidian
+}
+
 # Run custom scripts
 if (Test-Path "$LOCAL_PATH\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "$LOCAL_PATH\customize.ps1"

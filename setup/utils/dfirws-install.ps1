@@ -13,6 +13,7 @@ if ($args.Count -eq 0) {
     Write-Output "   --libreoffice"
     Write-Output "   --neo4j"
     Write-Output "   --node"
+    Write-Output "   --obsidian"
     Write-Output "   --pdfstreamdumper"
     Write-Output "   --ruby"
     Write-Output "   --vscode"
@@ -59,6 +60,10 @@ if ($args -contains "--neo4j") {
 
 if ($args -contains "--node") {
     Install-Node
+}
+
+if ($args -contains "--obsidian") {
+    Install-Obsidian
 }
 
 if ($args -contains "--pdfstreamdumper") {

@@ -141,6 +141,11 @@ function Install-Node {
     Copy-Item -r "$TOOLS\node" $HOME\Desktop
 }
 
+function Install-Obsidian {
+    Copy-Item "$SETUP_PATH\obsidian.exe" "$TEMP\obsidian.exe"
+    Start-Process -Wait "$TEMP\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+}
+
 function Install-PDFStreamDumper {
     Copy-Item "$SETUP_PATH\PDFStreamDumper.exe" "$TEMP\PDFStreamDumper.exe"
     & "$TEMP\PDFStreamDumper.exe" /verysilent
