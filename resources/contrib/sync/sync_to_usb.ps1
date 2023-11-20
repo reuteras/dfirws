@@ -11,9 +11,11 @@ Copy-Item dfirws.zip $CURRENT
 Remove-Item -Force dfirws.zip
 Set-Location "$CURRENT"
 
-Robocopy.exe $SOURCE_DIRECTORY\downloads .\dfirws\downloads /MIR /XF config.txt /MT:96
+Robocopy.exe $SOURCE_DIRECTORY\downloads .\dfirws\downloads /MIR /MT:96
 Robocopy.exe $SOURCE_DIRECTORY\mount .\dfirws\mount /MIR /MT:96
 Robocopy.exe $SOURCE_DIRECTORY\setup .\dfirws\setup /MIR /MT:96
+
+Remove-Item .\dfirws\setup\config.txt | Out-Null
 
 Copy-Item $SOURCE_DIRECTORY\createSandboxConfig.ps1 .\dfirws\
 Copy-Item $SOURCE_DIRECTORY\README.md .\dfirws\
