@@ -151,6 +151,11 @@ function Install-PDFStreamDumper {
     & "$TEMP\PDFStreamDumper.exe" /verysilent
 }
 
+function Install-Qemu {
+    Copy-Item "$SETUP_PATH\qemu.exe" "$TEMP\qemu.exe"
+    Start-Process -Wait "$TEMP\qemu.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'    
+}
+
 function  Install-Ruby {
     & "$SETUP_PATH\ruby.exe" /verysilent /allusers /dir="$env:ProgramFiles\ruby"
     Add-ToUserPath "$env:ProgramFiles\ruby\bin"

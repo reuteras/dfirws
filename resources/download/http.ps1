@@ -198,6 +198,14 @@ Copy-Item "setup\utils\apktool.bat" "$TOOLS\bin\apktool.bat" -Force
 Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.2.12-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\php.zip" -o"$TOOLS\php" | Out-Null
 
+# https://hashcat.net/hashcat/
+Get-FileFromUri -uri "https://hashcat.net/files/hashcat-6.2.6.7z" -FilePath ".\downloads\hashcat.7z"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hashcat.7z" -o"$TOOLS" | Out-Null
+if (Test-Path -Path $TOOLS\hashcat) {
+    Remove-Item -Recurse -Force $TOOLS\hashcat | Out-Null 2>&1
+}
+Move-Item $TOOLS\hashcat-* $TOOLS\hashcat
+
 # Remove unused
 Remove-Item -r $TOOLS\win32
 Remove-Item -r $TOOLS\win64

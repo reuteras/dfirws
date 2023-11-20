@@ -15,6 +15,7 @@ if ($args.Count -eq 0) {
     Write-Output "   --node"
     Write-Output "   --obsidian"
     Write-Output "   --pdfstreamdumper"
+    Write-Output "   --qemu"
     Write-Output "   --ruby"
     Write-Output "   --vscode"
     Write-Output "   --x64dbg"
@@ -68,6 +69,10 @@ if ($args -contains "--obsidian") {
 
 if ($args -contains "--pdfstreamdumper") {
     Install-PDFStreamDumper
+}
+
+if ($args -contains "--qemu") {
+    Install-Qemu
 }
 
 if ($args -contains "--ruby") {

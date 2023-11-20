@@ -139,9 +139,14 @@ Add-ToUserPath "$env:ProgramFiles\7-Zip"
 Add-ToUserPath "$env:ProgramFiles\bin"
 Add-ToUserPath "$env:ProgramFiles\Git\bin"
 Add-ToUserPath "$env:ProgramFiles\Git\usr\bin"
+Add-ToUserPath "$env:ProgramFiles\graphviz\bin"
+Add-ToUserPath "$env:ProgramFiles\hashcat"
 Add-ToUserPath "$env:ProgramFiles\hxd"
 Add-ToUserPath "$env:ProgramFiles\idr\bin"
+Add-ToUserPath "$env:ProgramFiles\jadx\bin"
+Add-ToUserPath "$env:ProgramFiles\loki"
 Add-ToUserPath "$env:ProgramFiles\Notepad++"
+Add-ToUserPath "$env:ProgramFiles\qemu"
 Add-ToUserPath "$GIT\ese-analyst"
 Add-ToUserPath "$GIT\Events-Ripper"
 Add-ToUserPath "$GIT\RegRipper3.0"
@@ -220,7 +225,6 @@ Copy-Item -Recurse -Force $GIT\IDR "$env:ProgramFiles"
 
 # Add jadx
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
-Add-ToUserPath "$env:ProgramFiles\jadx\bin"
 
 # Add x64dbg if specified
 if ($WSDFIR_X64DBG -eq "Yes") {
@@ -269,6 +273,11 @@ if ($WSDFIR_OBSIDIAN -eq "Yes") {
     Install-Obsidian
 }
 
+# Install Qemu
+if ($WSDFIR_QEMU -eq "Yes") {
+    Install-Qemu
+}
+
 # Run custom scripts
 if (Test-Path "$LOCAL_PATH\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "$LOCAL_PATH\customize.ps1"
@@ -298,7 +307,6 @@ if (($WSDFIR_W10_LOOPBACK -eq "Yes") -and ($WIN10)) {
 # Install Loki
 if ($WSDFIR_LOKI -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\loki.zip" -o"$env:ProgramFiles\"
-    Add-ToUserPath "$env:ProgramFiles\loki"
 } else {
     New-Item -ItemType Directory "$env:ProgramFiles\loki"
 }
@@ -514,6 +522,7 @@ New-Item -ItemType Directory "$HOME\Desktop\dfirws\Utilities\Crypto"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\chepy.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\CyberChef.lnk" -DestinationPath "$TOOLS\CyberChef\CyberChef.html"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\hash-id.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\hashcat.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$env:ProgramFiles\hashcat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\name-that-hash.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 
 # "$HOME\Desktop\dfirws\Zimmerman"
@@ -531,7 +540,6 @@ if ($verb) {
 & "$POWERSHELL_EXE" -Command "Set-ExecutionPolicy Bypass"
 
 & "$SETUP_PATH\graphviz.exe" /S /D='$env:ProgramFiles\graphviz'
-Add-ToUserPath "$env:ProgramFiles\graphviz\bin"
 
 # Add plugins to Cutter
 New-Item -ItemType Directory -Force -Path "$HOME\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
@@ -559,6 +567,8 @@ Start-Process "$env:ProgramFiles\Amazon Corretto\jdk*\bin\java.exe" -argumentlis
 
 # Don't ask about new apps
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
+
+Copy-Item -Recurse "$TOOLS\hashcat" "$env:ProgramFiles"
 
 # Add shortcuts to desktop for Jupyter and Gollum
 Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Documents\tools\utils\jupyter.bat"

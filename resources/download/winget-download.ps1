@@ -43,6 +43,12 @@ winget download Microsoft.PowerShell -d .\tmp\winget > $null 2>&1
 Copy-Item .\tmp\winget\PowerShell*.msi .\downloads\powershell.msi
 Clear-Tmp
 
+# Qemu
+Clear-Tmp
+winget download SoftwareFreedomConservancy.QEMU -d .\tmp\winget > $null 2>&1
+Copy-Item .\tmp\winget\QEMU*.exe .\downloads\qemu.exe
+Clear-Tmp
+
 # Ruby
 Clear-Tmp
 winget download RubyInstallerTeam.Ruby.3.2 -d .\tmp\winget > $null 2>&1

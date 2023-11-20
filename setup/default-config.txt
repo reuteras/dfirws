@@ -24,6 +24,8 @@ $WSDFIR_OBSIDIAN="No"
 $WSDFIR_PDFSTREAM="Yes"
 # Add PersistenceSniper
 $WSDFIR_PERSISTENCESNIPER="Yes"
+# Install Qemu
+$WSDFIR_QEMU="No"
 # Install Visual Studio Code
 $WSDFIR_VSCODE="Yes"
 # Install Visual Studio Code PowerShell extension
