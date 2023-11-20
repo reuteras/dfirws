@@ -233,7 +233,7 @@ Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 (Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content -Path ".\requirements2.txt" -Encoding ascii
 python -m pip install -r ./requirements2.txt 2>&1 >> "C:\log\python.txt"
-(Get-Content .\scarelib.py -raw) -replace "print(splash)","splash = 'Simple Configurable Asm REPL && Emulator'`nprint(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
+(Get-Content .\scarelib.py -raw) -replace "print\(splash\)","splash = 'Simple Configurable Asm REPL && Emulator'`nprint(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
 Copy-Item scarelib2.py scarelib.py
 Remove-Item scarelib2.py
 Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
@@ -251,12 +251,12 @@ Set-Location "C:\venv\Zircolite\Zircolite"
 python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
 deactivate
 
-Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\Zircolite\Scripts\Activate.ps1`nC:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
-Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\dfir-unfurl\Scripts\Activate.ps1`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.ps1
-Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\dfir-unfurl\Scripts\Activate.ps1`nC:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
-Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\evt2sigma\Scripts\Activate.ps1`nC:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.ps1
-Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\pe2pic\Scripts\Activate.ps1`nC:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
-Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\scare\Scripts\Activate.ps1`ncd C:\venv\scare\scare`nC:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
+Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
+Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.ps1
+Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
+Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.ps1
+Set-Content "C:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
+Set-Content "C:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
 Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path C:\venv\default\Scripts\maldump.ps1
 
 Write-Output "" > C:\venv\done
