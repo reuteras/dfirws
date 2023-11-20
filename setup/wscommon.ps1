@@ -153,7 +153,7 @@ function Install-PDFStreamDumper {
 
 function Install-Qemu {
     Copy-Item "$SETUP_PATH\qemu.exe" "$TEMP\qemu.exe"
-    Start-Process -Wait "$TEMP\qemu.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'    
+    Start-Process -Wait "$TEMP\qemu.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
 }
 
 function  Install-Ruby {
