@@ -378,7 +378,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\ms
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\oledump.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\oleid.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\olevba.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\msgviewer.lnk" -DestinationPath "$TOOLS\pstwalker\pstwalker.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\pstwalker.lnk" -DestinationPath "$TOOLS\pstwalker\pstwalker.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\pcode2code.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\pcodedmp.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\rtfdump.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
