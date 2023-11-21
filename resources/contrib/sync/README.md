@@ -14,18 +14,9 @@ This script copies files from the USB drive to an internal file server.
 
 Usage: Run **sync_from_usb.ps1** in PowerShell to sync files from the USB drive to the internal file server. Run it from the folder where you would like to share the files from.
 
-## install.ps1
+## dfirws.ps1
 
-This script installs the DFIRWS tools on the user's computer. If the tools are not already installed, it creates a dfirws directory in the user's *Documents* folder, copies the initial zip file from the internal file server, expands the zip file, and then runs update_and_run.ps1 to get the latest files.
+This script will install or update DFIRWS tools on the user's computer and starts the Windows Sandbox. It updates the *downloads*, *mount*, *setup*, and other required files from the internal file server. If the *dfirws.wsb* file does not exist, it runs **createSandboxConfig.ps1** to create the Windows Sandbox configuration file. Finally, it starts the Windows Sandbox if it's not already running.
 
-Usage: Run **install.ps1** in PowerShell to install the DFIRWS tools on the user's computer.
+Usage: Run **dfirws.ps1** in PowerShell to update the DFIRWS tools and start the Windows Sandbox.
 
-## update_and_run.ps1
-
-This script updates the installed DFIRWS tools on the user's computer and starts the Windows Sandbox. It updates the *downloads*, *mount*, *setup*, and other required files from the internal file server. If the *dfirws.wsb* file does not exist, it runs **createSandboxConfig.ps1** to create the Windows Sandbox configuration file. Finally, it starts the Windows Sandbox if it's not already running.
-
-Usage: Run **update_and_run.ps1** in PowerShell to update the DFIRWS tools and start the Windows Sandbox.
-
-## Source
-
-Most of the text was written by ChatGPT 4.0.
