@@ -9,7 +9,7 @@ if (! (Test-Path "$HOME\dfirws")) {
 	Set-Location "$HOME\dfirws"
 
 	Write-Output "Copy initial zip file"
-	Copy-Item 'M:\IT\dfirws\dfirws.zip' .
+	Copy-Item '$source\dfirws.zip' .
 	Write-Output "Expand zip"
 	tar -xf dfirws.zip > $null
 	Write-Output "Remove zip"
@@ -17,13 +17,13 @@ if (! (Test-Path "$HOME\dfirws")) {
 }
 
 Write-Output "Update downloads"
-Robocopy.exe /MT:96 /MIR 'M:\IT\dfirws\dfirws\downloads' "$HOME\dfirws\downloads"  > $null
+Robocopy.exe /MT:96 /MIR "$source\dfirws\downloads" "$HOME\dfirws\downloads"  > $null
 
 Write-Output "Update mount"
-Robocopy.exe /MT:96 /MIR 'M:\IT\dfirws\dfirws\mount' "$HOME\dfirws\mount" > $null
+Robocopy.exe /MT:96 /MIR "$source\dfirws\mount" "$HOME\dfirws\mount" > $null
 
 Write-Output "Update setup."
-Robocopy.exe /MT:96 /MIR 'M:\IT\dfirws\dfirws\setup' "$HOME\dfirws\setup" /XF "config.txt" > $null
+Robocopy.exe /MT:96 /MIR "$source\dfirws\setup" "$HOME\dfirws\setup" /XF "config.txt" > $null
 
 $folders = "local", "readonly", "readwrite"
 foreach ($folder in $folders) {
@@ -33,11 +33,11 @@ foreach ($folder in $folders) {
 }
 
 Write-Output "Update other files."
-cp 'M:\IT\dfirws\dfirws\README.md' "$HOME\dfirws\README.md" > $null
-cp 'M:\IT\dfirws\dfirws\createSandboxConfig.ps1' "$HOME\dfirws\createSandboxConfig.ps1" > $null
-cp 'M:\IT\dfirws\dfirws\dfirws.wsb.template' "$HOME\dfirws\dfirws.wsb.template" > $null
-cp 'M:\IT\dfirws\dfirws\setup\default-config.txt' "$HOME\dfirws\setup\default-config.txt" > $null
-cp 'M:\IT\dfirws\dfirws\local\example-customize.ps1' "$HOME\dfirws\local\example-customize.ps1" > $null
+Copy-Item "$source\dfirws\README.md" "$HOME\dfirws\README.md" > $null
+Copy-Item "$source\dfirws\createSandboxConfig.ps1" "$HOME\dfirws\createSandboxConfig.ps1" > $null
+Copy-Item "$source\dfirws\dfirws.wsb.template" "$HOME\dfirws\dfirws.wsb.template" > $null
+Copy-Item "$source\dfirws\setup\default-config.txt" "$HOME\dfirws\setup\default-config.txt" > $null
+Copy-Item "$source\dfirws\local\example-customize.ps1" "$HOME\dfirws\local\example-customize.ps1" > $null
 
 if ( -not (Test-Path -Path "$HOME\dfirws\dfirws.wsb" -PathType Leaf )) {
 	Write-Output "Create default dfirws.wsb"
@@ -49,7 +49,7 @@ if ( -not (Test-Path -Path "$HOME\dfirws\dfirws.wsb" -PathType Leaf )) {
 	}
 }
 
-if((Get-Process "WindowsSandbox" -ea SilentlyContinue) -eq $Null ){
+if($Null -eq (Get-Process "WindowsSandbox" -ea SilentlyContinue) ){
 	Write-Output "Starting sandbox."
 	& "$HOME\dfirws\dfirws.wsb"
 } else {
