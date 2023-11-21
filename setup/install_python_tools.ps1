@@ -38,7 +38,6 @@ python -m pip install `
     certifi>=2023.5.7 `
     chardet>=5.0.0 `
     charset_normalizer>=3.1.0 `
-    chepy[extras] `
     click>=8.1.5 `
     colorama `
     construct>=2.10.68 `
@@ -51,9 +50,8 @@ python -m pip install `
     elastic_transport>=8.1.2 `
     evtx `
     extract-msg `
-    python-magic `
-    python-magic-bin `
     fonttools `
+    frida `
     hachoir `
     idna>=3.2 `
     ijson `
@@ -63,6 +61,7 @@ python -m pip install `
     jsbeautifier `
     keyring>=23.13.1 `
     keystone-engine `
+    lief `
     LnkParse3 `
     lxml `
     MarkupSafe>=2.1.3 `
@@ -79,7 +78,6 @@ python -m pip install `
     oletools[full]>=0.60.1 `
     openpyxl `
     orjson `
-    pandas `
     pcode2code `
     pcodedmp `
     pefile `
@@ -98,12 +96,13 @@ python -m pip install `
     pyOneNote `
     pyparsing>=2.4.6 `
     pypng `
+    python-magic `
     python-magic-bin `
     pywin32 `
     pyzipper `
-    python-magic `
     regipy `
     requests `
+    rzpipe `
     setuptools `
     soupsieve>=2.4.1 `
     time-decode `
@@ -122,21 +121,25 @@ python -m pip install `
 
 python -m pip install jupyterlab 2>&1 >> "C:\log\python.txt"
 
+# For https://github.com/fr0gger/jupyter-collection that is available under C:\git\jupyter-collection
+python -m pip install graphviz networkx pandas msticpy bokeh pyvis matplotlib treelib textsearch ipywidgets deep_translator 2>&1 >> "C:\log\python.txt"
+
 # Not compatible with Python 3.11:
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
 
 python -m pip install -U https://github.com/DissectMalware/pyOneNote/archive/master.zip --force >> "C:\log\python.txt"
+
 Set-Location "C:\venv\default\Scripts"
 curl -o "shellconv.py" "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
 curl -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
 curl -o "parseUSBs.py" "https://raw.githubusercontent.com/khyrenz/parseusbs/main/parseUSBs.py"
 curl -o "machofile-cli.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py"
 curl -o "machofile.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
+Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 
 (Get-Content .\parseUSBs.py -raw) -replace "#!/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\parseUSBs2.py"
 Copy-Item parseUSBs2.py parseUSBs.py
 Remove-Item parseUSBs2.py
-Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 
 New-Item -ItemType Directory C:\tmp\rename > $null 2>&1
 Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pycache__,*.bat | ForEach-Object { Move-Item $_ C:\tmp\rename }
@@ -152,19 +155,15 @@ Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-
 C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U setuptools wheel >> "C:\log\python.txt"
-
 python -m pip install `
     dfir-unfurl `
     hexdump `
     tomlkit 2>&1 >> "C:\log\python.txt"
 
-Write-DateLog "Python venv dfir-unfurl done. Will update path and cache Cloudflare." >> "C:\log\python.txt"
-
+# Download each file and update the base.html content with the local path
 $baseHtmlPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\templates\base.html"
 $baseHtmlContent = Get-Content $baseHtmlPath -Raw
 $urls = [regex]::Matches($baseHtmlContent, 'https://cdnjs.cloudflare.com[^"]+')
-
-# Download each file and update the base.html content with the local path
 foreach ($url in $urls) {
     $fileName = $url.Value.Split("/")[-1]
     $staticPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\static\$fileName"
@@ -174,6 +173,8 @@ foreach ($url in $urls) {
 }
 Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
 deactivate
+Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.ps1
+Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
 Write-DateLog "Python venv dfir-unfurl cache done." >> "C:\log\python.txt"
 
 # pySigma
@@ -182,7 +183,6 @@ Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pySig
 C:\venv\pySigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U setuptools wheel >> "C:\log\python.txt"
-
 python -m pip install `
     pySigma>=0.9.6 `
     wheel>=0.41.3 2>&1 >> "C:\log\python.txt"
@@ -195,11 +195,11 @@ Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pe2pi
 C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U setuptools wheel >> "C:\log\python.txt"
-
 python -m pip install -r https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt 2>&1 >> "C:\log\python.txt"
 Set-Location "C:\venv\pe2pic\Scripts"
 curl -o "pe2pic.py" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py"
 deactivate
+Set-Content "C:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
 Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
 
 # evt2sigma
@@ -211,6 +211,9 @@ python -m pip install -U setuptools wheel >> "C:\log\python.txt"
 python -m pip install -r https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt 2>&1 >> "C:\log\python.txt"
 Set-Location "C:\venv\evt2sigma\Scripts"
 curl -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py"
+Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.ps1
+deactivate
+Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
 
 # maldump
 Write-DateLog "Install packages in venv maldump in sandbox (needs older packages)." >> "C:\log\python.txt"
@@ -221,6 +224,8 @@ python -m pip install -U setuptools wheel >> "C:\log\python.txt"
 python -m pip install -r https://raw.githubusercontent.com/NUKIB/maldump/v0.2.0/requirements.txt 2>&1 >> "C:\log\python.txt"
 python -m pip install maldump==0.2.0 2>&1 >> "C:\log\python.txt"
 deactivate
+Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path C:\venv\default\Scripts\maldump.ps1
+Write-DateLog "Python venv maldump done." >> "C:\log\python.txt"
 
 # scare
 Write-DateLog "Install packages in venv scare in sandbox (needs older packages)." >> "C:\log\python.txt"
@@ -228,7 +233,6 @@ Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\scare
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U ptpython setuptools wheel >> "C:\log\python.txt"
-
 Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 (Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content -Path ".\requirements2.txt" -Encoding ascii
@@ -238,6 +242,8 @@ Copy-Item scarelib2.py scarelib.py
 Remove-Item scarelib2.py
 Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
 deactivate
+Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
+Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 
 # Zircolite
 Write-DateLog "Install packages in venv Zircolite in sandbox (needs older packages)." >> "C:\log\python.txt"
@@ -245,18 +251,33 @@ Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\Zirco
 C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U ptpython setuptools wheel 2>&1 >> "C:\log\python.txt"
-
 Copy-Item -Recurse "C:\git\Zircolite" "C:\venv\Zircolite"
 Set-Location "C:\venv\Zircolite\Zircolite"
 python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
 deactivate
-
 Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
-Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.ps1
-Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
-Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.ps1
-Set-Content "C:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
-Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
-Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path C:\venv\default\Scripts\maldump.ps1
+Write-DateLog "Python venv Zircolite done." >> "C:\log\python.txt"
+
+# chepy
+Write-DateLog "Install packages in venv chepy in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\chepy"
+C:\venv\chepy\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
+python -m pip install chepy[extras] 2>&1 >> "C:\log\python.txt"
+deactivate
+Set-Content "C:\venv\chepy\Scripts\python.exe C:\venv\chepy\Scripts\chepy.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\chepy.ps1
+Write-DateLog "Python venv chepy done." >> "C:\log\python.txt"
+
+# ciphey - not supported with Python 3.11
+#Write-DateLog "Install packages in venv ciphey in sandbox (needs older packages)." >> "C:\log\python.txt"
+#Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\ciphey"
+#C:\venv\ciphey\Scripts\Activate.ps1 >> "C:\log\python.txt"
+#python -m pip install -U pip >> "C:\log\python.txt"
+#python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
+#python -m pip install ciphey 2>&1 >> "C:\log\python.txt"
+#deactivate
+#Set-Content "C:\venv\ciphey\Scripts\python.exe C:\venv\ciphey\Scripts\ciphey.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\ciphey.ps1
+#Write-DateLog "Python venv ciphey done." >> "C:\log\python.txt"
 
 Write-Output "" > C:\venv\done
