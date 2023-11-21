@@ -49,7 +49,7 @@ Get-Date > ".\log\jobs.txt"
 # The scripts git and http are needed by the Python script.
 # Most scripts need http.ps1.
 # Get GitHub password from user input
-if ($all -or $args -contains "--git" -or $args -contains "--http" -or $args -contains "--release" -or $args -contains "--didier") {
+if ($all -or $args -contains "--http" -or $args -contains "--release" -or $args -contains "--didier") {
     write-dateLog "Use GitHub token to avoid problems with rate limits."
     $GH_USER = Read-Host "Enter GitHub user name"
     $PASS = Read-Host "Enter GitHub token" -AsSecureString
