@@ -15,6 +15,7 @@ if (! (Test-Path .\PatchaPalooza )) {
 $repourls = `
     "https://github.com/crypto2011/IDR.git", `
     "https://github.com/cyberark/White-Phoenix.git", `
+    "https://github.com/fr0gger/jupyter-collection.git", `
     "https://github.com/gehaxelt/Python-dsstore.git", `
     "https://github.com/JavierYuste/radare2-deep-graph.git", `
     "https://github.com/joeavanzato/Trawler.git", `
