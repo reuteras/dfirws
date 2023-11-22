@@ -392,7 +392,6 @@ if ($WSDFIR_PDFSTREAM -eq "Yes") {
 }
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PDF\pdf-parser.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PDF\pdfid.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PDF\peepdf.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PDF\qpdf.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\PE"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\PE\4n4lDetector.lnk" -DestinationPath "$env:ProgramFiles\4n4lDetector\4N4LDetector.exe"
