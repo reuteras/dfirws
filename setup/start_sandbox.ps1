@@ -279,11 +279,6 @@ if ($WSDFIR_QEMU -eq "Yes") {
     Install-Qemu
 }
 
-# Run custom scripts
-if (Test-Path "$LOCAL_PATH\customize.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "$LOCAL_PATH\customize.ps1"
-}
-
 # Install extra tools for Git-bash
 if ($WSDFIR_BASH_EXTRA -eq "Yes") {
     Install-BashExtra
@@ -573,3 +568,12 @@ Copy-Item -Recurse "$TOOLS\hashcat" "$env:ProgramFiles"
 # Add shortcuts to desktop for Jupyter and Gollum
 Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Documents\tools\utils\jupyter.bat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "$HOME\Documents\tools\utils\gollum.bat"
+
+# Run custom scripts
+if (Test-Path "$LOCAL_PATH\customize.ps1") {
+    PowerShell.exe -ExecutionPolicy Bypass -File "$LOCAL_PATH\customize.ps1"
+}
+
+if (Test-Path "$LOCAL_PATH\customise.ps1") {
+    PowerShell.exe -ExecutionPolicy Bypass -File "$LOCAL_PATH\customise.ps1"
+}
