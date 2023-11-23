@@ -25,6 +25,9 @@ Get-GitHubRelease -repo "brimdata/zui" -path "$SETUP_PATH\zui.exe" -match Zui-Se
 # ripgrep
 Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "$SETUP_PATH\ripgrep.zip" -match x86_64-pc-windows-msvc
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ripgrep.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\ripgrep") {
+    Remove-Item "$TOOLS\ripgrep" -Recurse -Force
+}
 Move-Item $TOOLS\ripgrep-* $TOOLS\ripgrep
 
 # binlex
@@ -54,11 +57,17 @@ Get-GitHubRelease -repo "eneam/mboxviewer" -path "$SETUP_PATH\mboxviewer.zip" -m
 # zsdt
 Get-GitHubRelease -repo "facebook/zstd" -path "$SETUP_PATH\zstd.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\zstd") {
+    Remove-Item "$TOOLS\zstd" -Recurse -Force
+}
 Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
 
 # CyberChef
 Get-GitHubRelease -repo "gchq/CyberChef" -path "$SETUP_PATH\CyberChef.zip" -match CyberChef
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\CyberChef.zip" -o"$TOOLS\CyberChef" | Out-Null
+if (Test-Path "$TOOLS\CyberChef\CyberChef.html") {
+    Remove-Item "$TOOLS\CyberChef\CyberChef.html" -Force
+}
 Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
 
 # git
@@ -71,6 +80,9 @@ Copy-Item $SETUP_PATH\gollum.war $TOOLS\lib
 # redress
 Get-GitHubRelease -repo "goretk/redress" -path "$SETUP_PATH\redress.zip" -match windows.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\redress.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\redress") {
+    Remove-Item "$TOOLS\redress" -Recurse -Force
+}
 Move-Item $TOOLS\redress-* $TOOLS\redress
 
 # INDXRipper
@@ -123,6 +135,9 @@ Get-GitHubRelease -repo "horsicq/XELFViewer" -path "$SETUP_PATH\XELFViewer.zip" 
 # jd-gui
 Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "$SETUP_PATH\jd-gui.zip" -match jd-gui-windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jd-gui.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\jd-gui") {
+    Remove-Item "$TOOLS\jd-gui" -Recurse -Force
+}
 Move-Item $TOOLS\jd-gui* $TOOLS\jd-gui
 
 # jq
@@ -161,11 +176,17 @@ Get-GitHubRelease -repo "mandiant/flare-floss" -path "$SETUP_PATH\floss.zip" -ma
 # Flare-Fakenet-NG
 Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path "$SETUP_PATH\fakenet.zip" -match fakenet
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fakenet.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\fakenet") {
+    Remove-Item "$TOOLS\fakenet" -Recurse -Force
+}
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 
 # GoReSym
 Get-GitHubRelease -repo "mandiant/GoReSym" -path "$SETUP_PATH\GoReSym.zip" -match GoReSym-windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym" | Out-Null
+if (Test-Path "$TOOLS\GoReSym\GoReSym.exe") {
+    Remove-Item "$TOOLS\GoReSym\GoReSym.exe" -Force
+}
 Move-Item $TOOLS\GoReSym\GoReSym_win.exe $TOOLS\GoReSym\GoReSym.exe
 Remove-Item $TOOLS\GoReSym\GoReSym_lin
 Remove-Item $TOOLS\GoReSym\GoReSym_mac
@@ -173,11 +194,17 @@ Remove-Item $TOOLS\GoReSym\GoReSym_mac
 # Elfparser-ng
 Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "$SETUP_PATH\elfparser-ng.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\elfparser-ng.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\elfparser-ng") {
+    Remove-Item "$TOOLS\elfparser-ng" -Recurse -Force
+}
 Move-Item $TOOLS\elfparser-ng* $TOOLS\elfparser-ng
 
 # readpe
 Get-GitHubRelease -repo "mentebinaria/readpe" -path "$SETUP_PATH\readpe.zip" -match win.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\readpe.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\pev") {
+    Remove-Item "$TOOLS\pev" -Recurse -Force
+}
 Move-Item $TOOLS\pev* $TOOLS\pev
 
 # dsq
@@ -187,7 +214,17 @@ Get-GitHubRelease -repo "multiprocessio/dsq" -path "$SETUP_PATH\dsq.zip" -match 
 # Ghidra
 Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "$SETUP_PATH\ghidra.zip" -match ghidra
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\ghidra") {
+    Remove-Item "$TOOLS\ghidra" -Recurse -Force
+}
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
+
+# Ghidra GolangAnalyzerExtension
+Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "$SETUP_PATH\GolangAnalyzerExtension.zip" -match 10.4
+if (! (Test-Path "$TOOLS\ghidra_extensions")) {
+    New-Item -Path "$TOOLS\ghidra_extensions" -ItemType directory | Out-Null
+}
+Copy-Item "$SETUP_PATH\GolangAnalyzerExtension.zip" "$TOOLS\ghidra_extensions\GolangAnalyzerExtension.zip"
 
 # MetadataPlus
 Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path "$SETUP_PATH\MetadataPlus.exe" -match MetadataPlus
@@ -216,16 +253,25 @@ Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "$SETUP_PATH\vscode
 # qpdf
 Get-GitHubRelease -repo "qpdf/qpdf" -path "$SETUP_PATH\qpdf.zip" -match msvc64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\qpdf.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\qpdf") {
+    Remove-Item "$TOOLS\qpdf" -Recurse -Force
+}
 Move-Item $TOOLS\qpdf-* $TOOLS\qpdf
 
 # Radare2
 Get-GitHubRelease -repo "radareorg/radare2" -path "$SETUP_PATH\radare2.zip" -match w64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\radare2.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\radare2") {
+    Remove-Item "$TOOLS\radare2" -Recurse -Force
+}
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
 
 # Cutter
 Get-GitHubRelease -repo "rizinorg/cutter" -path "$SETUP_PATH\cutter.zip" -match Windows-x86_64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cutter.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\cutter") {
+    Remove-Item "$TOOLS\cutter" -Recurse -Force
+}
 Move-Item $TOOLS\cutter-* $TOOLS\cutter
 
 # sidr
@@ -249,6 +295,9 @@ Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "$SETUP_PATH\t
 # upx
 Get-GitHubRelease -repo "upx/upx" -path "$SETUP_PATH\upx.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\upx.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\upx") {
+    Remove-Item "$TOOLS\upx" -Recurse -Force
+}
 Move-Item $TOOLS\upx-* $TOOLS\upx
 
 # fq
@@ -266,10 +315,19 @@ Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path "$SETUP_PATH\chainsaw.zi
 # yara
 Get-GitHubRelease -repo "VirusTotal/yara" -path "$SETUP_PATH\yara.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\yara.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\bin\yara.exe") {
+    Remove-Item "$TOOLS\bin\yara.exe" -Force
+}
+if (Test-Path "$TOOLS\bin\yarac.exe") {
+    Remove-Item "$TOOLS\bin\yarac.exe" -Force
+}
 Move-Item $TOOLS\yara64.exe $TOOLS\bin\yara.exe
 Move-Item $TOOLS\yarac64.exe $TOOLS\bin\yarac.exe
 
 # hayabusa
 Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "$SETUP_PATH\hayabusa.zip" -match win-64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hayabusa.zip" -o"$TOOLS\hayabusa" | Out-Null
+if (Test-Path "$TOOLS\hayabusa\hayabusa.exe") {
+    Remove-Item "$TOOLS\hayabusa\hayabusa.exe" -Force
+}
 Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
