@@ -3,6 +3,8 @@
 
 # Source common functions
 . $HOME\Documents\tools\wscommon.ps1
+. $TEMP\default-config.ps1
+. $TEMP\config.ps1
 
 # Customize background image:
 # Update-Wallpaper "C:\local\image.jpg"
@@ -26,7 +28,37 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\Notepad++.lnk" -DestinationPath "$env:Pro
 # Add new path for user
 # Add-ToUserPath "C:\local\bin"
 
+# Configure Ghidra
+
+New-Item -Path "C:\Users\WDAGUtilityAccount\.ghidra\.ghidra_10.4_PUBLIC" -ItemType Directory -Force
+
+if ( $WSDFIR_DARK -eq "Yes") {
+    $GHIDRA_THEME = "Theme=Class\:generic.theme.builtin.FlatDarkTheme"
+} else {
+    $GHIDRA_THEME = "Theme=Class\:generic.theme.builtin.FlatLightTheme"
+}
+
+$GHIDRA_CONFIG = @"
+#User Preferences
+#Thu Nov 23 11:55:41 CET 2023
+GhidraShowWhatsNew=false
+LAST_USED_OPTIONS_CONFIG=Standard Defaults
+LastExtensionImportDirectory=C\:\\Tools\\ghidra_extensions
+LastNewProjectDirectory=C\:\\Users\\WDAGUtilityAccount
+ProjectDirectory=C\:\\Users\\WDAGUtilityAccount
+RECENT_0=C\:\\Tools\\ghidra_extensions
+RECENT_1=C\:\\Users\\WDAGUtilityAccount\\Desktop
+SHOW_TIPS=false
+$GHIDRA_THEME
+USER_AGREEMENT=ACCEPT
+"@
+
+$GHIDRA_CONFIG | Out-File -FilePath "C:\Users\WDAGUtilityAccount\.ghidra\.ghidra_10.4_PUBLIC\preferences" -Encoding ascii
+
 # Chocolately
 # You must have 'set SET WSDFIR_CHOCO="Yes"' in your setup\config.txt
 # To install a package named die.3.07.nupkg added to .\local and therefore available in C:\local in the sandbox do:
 # choco install die --version="3.7.0" --source="C:\local" -y
+
+# Start explorer in C:\Users\WDAGUtilityAccount\Desktop\dfirws - use search box for easy access to tools
+& "C:\Windows\explorer.exe" "C:\Users\WDAGUtilityAccount\Desktop\dfirws"
