@@ -141,7 +141,7 @@ Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downlo
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.0-x64.exe" -FilePath ".\downloads\wireshark.exe"
 
 # https://www.sqlite.org/download.html
-Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440000.zip" -FilePath ".\downloads\sqlite.zip"
+Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440100.zip" -FilePath ".\downloads\sqlite.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlite.zip" -o"$TOOLS\sqlite" | Out-Null
 if (Test-Path -Path $TOOLS\sqlite) {
     Remove-Item -Recurse -Force $TOOLS\sqlite | Out-Null 2>&1
