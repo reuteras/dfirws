@@ -33,6 +33,7 @@ python -m pip install `
     attrs>=22.2.0 `
     autoit-ripper `
     beautifulsoup4>=4.12.1 `
+    binary-refinery `
     cabarchive `
     capstone `
     certifi>=2023.5.7 `
@@ -95,6 +96,7 @@ python -m pip install `
     Pygments>=2.16.0 `
     pyOneNote `
     pyparsing>=2.4.6 `
+    pypdf>=3.17.1 `
     pypng `
     python-magic `
     python-magic-bin `
@@ -268,16 +270,5 @@ python -m pip install chepy[extras] 2>&1 >> "C:\log\python.txt"
 deactivate
 Set-Content "C:\venv\chepy\Scripts\python.exe C:\venv\chepy\Scripts\chepy.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\chepy.ps1
 Write-DateLog "Python venv chepy done." >> "C:\log\python.txt"
-
-# ciphey - not supported with Python 3.11
-#Write-DateLog "Install packages in venv ciphey in sandbox (needs older packages)." >> "C:\log\python.txt"
-#Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\ciphey"
-#C:\venv\ciphey\Scripts\Activate.ps1 >> "C:\log\python.txt"
-#python -m pip install -U pip >> "C:\log\python.txt"
-#python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
-#python -m pip install ciphey 2>&1 >> "C:\log\python.txt"
-#deactivate
-#Set-Content "C:\venv\ciphey\Scripts\python.exe C:\venv\ciphey\Scripts\ciphey.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\ciphey.ps1
-#Write-DateLog "Python venv ciphey done." >> "C:\log\python.txt"
 
 Write-Output "" > C:\venv\done
