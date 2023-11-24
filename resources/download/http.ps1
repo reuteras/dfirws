@@ -121,15 +121,15 @@ Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath 
 # https://learn.microsoft.com/en-us/java/openjdk/download
 Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.21-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
 
-# https://neo4j.com/download-center/#community
-Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.25-windows.zip" -FilePath ".\downloads\neo4j.zip"
+# https://neo4j.com/ddeployment-center/#community
+Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.28-windows.zip" -FilePath ".\downloads\neo4j.zip"
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\bulk_extractor.zip" -o"$TOOLS\bulk_extractor" | Out-Null
 
 # https://www.libreoffice.org/download/download-libreoffice/
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.2/win/x86_64/LibreOffice_7.6.2_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
+Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.3/win/x86_64/LibreOffice_7.6.3_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 
 # https://www.python.org/downloads/
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.6/python-3.11.6-amd64.exe" -FilePath ".\downloads\python3.exe"
