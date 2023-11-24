@@ -514,6 +514,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\upx.lnk" -DestinationPat
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\visidata.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\zstd.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Utilities\Crypto"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\ares.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\chepy.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\CyberChef.lnk" -DestinationPath "$TOOLS\CyberChef\CyberChef.html"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\hash-id.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
