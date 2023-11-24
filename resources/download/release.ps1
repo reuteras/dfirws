@@ -19,6 +19,12 @@ Get-GitHubRelease -repo "activescott/lessmsi" -path "$SETUP_PATH\lessmsi.zip" -m
 Get-GitHubRelease -repo "Apr4h/CobaltStrikeScan" -path "$SETUP_PATH\CobaltStrikeScan.exe" -match CobaltStrikeScan
 Copy-Item $SETUP_PATH\CobaltStrikeScan.exe $TOOLS\bin\
 
+# Ares
+Get-GitHubRelease -repo "bee-san/Ares" -path "$SETUP_PATH\ares.zip" -match windows
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ares.zip" -o"$TOOLS\ares" | Out-Null
+Copy-Item "$TOOLS\ares\ares.exe" "$TOOLS\bin\" -Force
+Remove-Item "$TOOLS\ares" -Force -Recurse
+
 # Brim/Zui
 Get-GitHubRelease -repo "brimdata/zui" -path "$SETUP_PATH\zui.exe" -match Zui-Setup
 
