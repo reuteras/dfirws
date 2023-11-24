@@ -118,4 +118,23 @@ Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
 Copy-Item .\mount\git\CapaExplorer\capaexplorer.py ./mount/Tools/ghidra/Ghidra/Features/Python/ghidra_scripts
 # done.txt is used to check last update in sandbox
 Write-Output "" > .\downloads\done.txt
-Write-DateLog "Downloads and preparations done."
+
+$warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
+    $_.Line -notmatch " INFO " -and
+    $_.Line -notmatch "This is taking longer than usual" -and
+    $_.Line -notmatch "Installing collected packages" -and
+    $_.Line -notmatch "pymispwarninglists"
+}
+
+$errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
+    $_.Line -notmatch "Error: no test specified" -and
+    $_.Line -notmatch "pretty.errors" -and
+    $_.Line -notmatch "Copied (replaced existing)" -and
+    $_.Line -notmatch "INFO"
+}
+
+if ($warnings -or $errors) {
+    Write-DateLog "Errors or warnings were found in the logs. Please check them."
+} else {
+    Write-DateLog "Downloads and preparations done."
+}
