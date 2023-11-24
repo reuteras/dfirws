@@ -65,7 +65,7 @@ function Get-FileFromUri {
     # Copy the temporary file to the final file path and remove the temporary file
     $result = rclone copyto --metadata --verbose --inplace --checksum $TmpFilePath $FilePath 2>&1 | Out-String
     Write-SynchronizedLog "$result"
-    Remove-Item $TmpFilePath
+    Remove-Item $TmpFilePath -Force | Out-Null
     $ProgressPreference = 'Continue'
 }
 
