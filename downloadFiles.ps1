@@ -78,15 +78,15 @@ if ($all -or $args -contains "--git") {
     .\resources\download\git.ps1
 }
 
+if ($all -or $args -contains "--release") {
+    Write-DateLog "Download releases from GitHub."
+    .\resources\download\release.ps1
+}
+
 if ($all -or $args -contains "--python") {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages."
     Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
-}
-
-if ($all -or $args -contains "--release") {
-    Write-DateLog "Download releases from GitHub."
-    .\resources\download\release.ps1
 }
 
 if ($all -or $args -contains "--didier") {
