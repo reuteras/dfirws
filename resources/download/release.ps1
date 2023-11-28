@@ -243,6 +243,7 @@ Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 
 # Ghidra GolangAnalyzerExtension
 Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "$SETUP_PATH\GolangAnalyzerExtension.zip" -match 10.4
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GolangAnalyzerExtension.zip" -o"$TOOLS\ghidra\Ghidra\Extensions" | Out-Null
 if (! (Test-Path "$TOOLS\ghidra_extensions")) {
     New-Item -Path "$TOOLS\ghidra_extensions" -ItemType directory | Out-Null
 }
