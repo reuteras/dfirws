@@ -105,7 +105,7 @@ function Get-DownloadUrl {
     }
 
     if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-        return $downloads -replace ' ', "`r`n" | findstr /R $match | findstr /R /V "darwin \.sig blockmap"
+        return $downloads -replace ' ', "`r`n" | findstr /R $match | findstr /R /V "darwin \.sig blockmap \.sha256"
     } else {
         return $downloads
     }
@@ -133,10 +133,11 @@ function Get-GitHubRelease {
 
     # If still no download URL is found, try getting the tarball URL
     if ( !$url ) {
+        $releases = "https://api.github.com/repos/$repo/releases/latest"
         if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-            $url = curl --silent -L https://api.github.com/repos/$repo/releases | findstr tarball | Select-Object -First 1 | ForEach-Object { ($_ -split "\s+")[2] } | ForEach-Object { ($_ -replace '[",]','') }
+            $url = (curl.exe --silent -L $releases | ConvertFrom-Json).zipball_url.ToString()
         } else {
-            $url = curl --silent -L -u "${GH_USER}:${GH_PASS}" https://api.github.com/repos/$repo/releases | findstr tarball | Select-Object -First 1 | ForEach-Object { ($_ -split "\s+")[2] } | ForEach-Object { ($_ -replace '[",]','') }
+            $url = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json).zipball_url.ToString()
         }
         if ( !$url) {
             Write-Error "Can't find a file to download for repo $repo."
