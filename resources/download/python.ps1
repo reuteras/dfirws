@@ -34,6 +34,7 @@ Stop-SandboxWhenDone "$ROOT_PATH\tmp\venv\done" $mutex | Out-Null
 rclone.exe sync --verbose --checksum "$ROOT_PATH\tmp\venv" "$ROOT_PATH\mount\venv"
 Remove-Item -Recurse -Force "$ROOT_PATH\tmp\venv" > $null 2>&1
 
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$ROOT_PATH\mount\venv\jep\dist\ghidrathon.zip" -o"$TOOLS\ghidra\Extensions" | Out-Null
 Copy-Item $SETUP_PATH\*.py "$ROOT_PATH\mount\venv\default\Scripts\"
 Copy-Item "$ROOT_PATH\mount\git\dotnetfile\examples\dotnetfile_dump.py" "$ROOT_PATH\mount\venv\default\Scripts\"
 Copy-Item "$ROOT_PATH\setup\utils\hash-id.py" "$ROOT_PATH\mount\venv\default\Scripts\"
