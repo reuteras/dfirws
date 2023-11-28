@@ -13,6 +13,11 @@
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
+      <HostFolder>C:\Users\reuteras\Documents\workspace\dfirws\mount\Tools</HostFolder>
+      <SandboxFolder>C:\Tools</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
       <HostFolder>__SANDBOX__mount\git</HostFolder>
       <SandboxFolder>C:\git</SandboxFolder>
       <ReadOnly>true</ReadOnly>
