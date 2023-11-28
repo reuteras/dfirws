@@ -29,6 +29,14 @@ Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.
 Get-FileFromUri -uri "https://sourceforge.net/projects/x64dbg/files/latest/download" -FilePath ".\downloads\x64dbg.zip"
 # Install during start
 
+# Gradle
+Get-FileFromUri -uri "https://services.gradle.org/distributions/gradle-8.4-bin.zip" -FilePath ".\downloads\gradle.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\gradle.zip" -o"$TOOLS" | Out-Null
+if (Test-Path -Path $TOOLS\gradle) {
+    Remove-Item -Recurse -Force $TOOLS\gradle | Out-Null 2>&1
+}
+Move-Item $TOOLS\gradle-* $TOOLS\gradle
+
 # Get exiftool
 Get-FileFromUri -uri "https://sourceforge.net/projects/exiftool/files/latest/download" -FilePath ".\downloads\exiftool.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\exiftool.zip" -o"$TOOLS\exiftool" | Out-Null
@@ -88,6 +96,10 @@ if (Test-Path -Path $TOOLS\__MACOSX) {
 Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -FilePath ".\downloads\WinApiSearch.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\WinApiSearch.zip" -o"$TOOLS\WinApiSearch" | Out-Null
 
+# capa_ghidra.py
+Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py"
+# Install during start
+
 # pdfstreamdumper
 Get-FileFromUri -uri "http://sandsprite.com/CodeStuff/PDFStreamDumper_Setup.exe" -FilePath ".\downloads\pdfstreamdumper.exe"
 # Install during start
@@ -116,6 +128,9 @@ Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath 
 
 # Dependence for ncat
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe"
+
+# Tools to compile and build
+Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe"
 
 # Update the following when new versions are released
 # https://learn.microsoft.com/en-us/java/openjdk/download
