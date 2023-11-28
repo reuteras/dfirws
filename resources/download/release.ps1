@@ -61,7 +61,7 @@ Get-GitHubRelease -repo "eneam/mboxviewer" -path "$SETUP_PATH\mboxviewer.zip" -m
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\mboxviewer.zip" -o"$TOOLS\mboxviewer" | Out-Null
 
 # zsdt
-Get-GitHubRelease -repo "facebook/zstd" -path "$SETUP_PATH\zstd.zip" -match win64
+Get-GitHubRelease -repo "facebook/zstd" -path "$SETUP_PATH\zstd.zip" -match win64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
 if (Test-Path "$TOOLS\zstd") {
     Remove-Item "$TOOLS\zstd" -Recurse -Force
@@ -175,6 +175,14 @@ Copy-Item $SETUP_PATH\msgviewer.jar $TOOLS\lib
 Get-GitHubRelease -repo "mandiant/capa" -path "$SETUP_PATH\capa-windows.zip" -match windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa" | Out-Null
 
+# capa-rules
+Get-GitHubRelease -repo "mandiant/capa-rules" -path "$SETUP_PATH\capa-rules.zip" -match Source
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-rules.zip" -o"$TOOLS" | Out-Null
+if (Test-Path $TOOLS\capa-rules) {
+    Remove-Item $TOOLS\capa-rules -Recurse -Force
+}
+Move-Item $TOOLS\mandiant-capa-rules-* $TOOLS\capa-rules
+
 # Flare-Floss
 Get-GitHubRelease -repo "mandiant/flare-floss" -path "$SETUP_PATH\floss.zip" -match windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\floss.zip" -o"$TOOLS\floss" | Out-Null
@@ -186,6 +194,14 @@ if (Test-Path "$TOOLS\fakenet") {
     Remove-Item "$TOOLS\fakenet" -Recurse -Force
 }
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
+
+# Ghidrathon
+Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "$SETUP_PATH\ghidrathon.zip" -match Source
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidrathon.zip" -o"$TOOLS" | Out-Null
+if (Test-Path $TOOLS\ghidrathon) {
+    Remove-Item $TOOLS\ghidrathon -Recurse -Force
+}
+Move-Item $TOOLS\mandiant-Ghidrathon* $TOOLS\ghidrathon
 
 # GoReSym
 Get-GitHubRelease -repo "mandiant/GoReSym" -path "$SETUP_PATH\GoReSym.zip" -match GoReSym-windows
