@@ -69,10 +69,6 @@ Get-FileFromUri -uri "https://www.mitec.cz/Downloads/SSView.zip" -FilePath ".\do
 Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/signature/signature.7z" -FilePath ".\downloads\signature.7z"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/total/total.7z" -FilePath ".\downloads\total.7z"
 
-# msidump
-Get-FileFromUri -uri "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py" -FilePath ".\downloads\msidump.py"
-# Add by install_python_tools.ps1
-
 # FullEventLogView
 Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\logview.zip" -o"$TOOLS\FullEventLogView" | Out-Null
