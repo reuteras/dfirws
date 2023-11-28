@@ -2,7 +2,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
-# This script runs in a Windows sandbox to prebuild the venv environment.
+# This script runs in a Windows sandbox to install node tools.
 Write-DateLog "Install npm packages" >> "C:\log\npm.txt" 2>&1
 
 New-Item -ItemType Directory "$TEMP" > $null 2>&1
