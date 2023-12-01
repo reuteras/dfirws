@@ -92,8 +92,9 @@ if (Test-Path -Path $TOOLS\__MACOSX) {
 Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -FilePath ".\downloads\WinApiSearch.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\WinApiSearch.zip" -o"$TOOLS\WinApiSearch" | Out-Null
 
+# Build of Ghidrathon for Ghidra currently not working so disabled.
 # capa_ghidra.py
-Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py"
+#Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py"
 # Install during start
 
 # pdfstreamdumper
