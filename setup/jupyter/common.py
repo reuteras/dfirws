@@ -6,7 +6,7 @@ import os
 import subprocess
 from pathlib import Path
 
-READONLY = Path(os.getenv("USERPROFILE") + "/Desktop/readonly")
+READONLY = Path("C:/Users/WDAGUtilityAccount/Desktop/readonly")
 
 
 def execute7z(zipPathInput, zipPassword, zipPathOutput):
@@ -17,7 +17,7 @@ def execute7z(zipPathInput, zipPassword, zipPathOutput):
             "x",
             zipPathInput,
             "-p{}".format(zipPassword),
-            "-o{}".format(zipPathOutput)
+            "-o{}".format(zipPathOutput),
         ]
     )
     process.wait()
