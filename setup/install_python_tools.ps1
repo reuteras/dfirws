@@ -187,7 +187,7 @@ python -m pip install `
     xlrd>=2.0.0 `
     XLMMacroDeobfuscator>=0.2.6 `
     xxhash>=3.3.0 `
-    yara-python >> "C:\log\python.txt" 2>&1 
+    yara-python >> "C:\log\python.txt" 2>&1
 
 # Not compatible with Python 3.11:
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
