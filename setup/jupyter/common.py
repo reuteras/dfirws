@@ -2,7 +2,6 @@
 # Common functions for notebooks
 #
 
-import os
 import subprocess
 from pathlib import Path
 
