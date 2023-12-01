@@ -571,7 +571,8 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Docu
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "$HOME\Documents\tools\utils\gollum.bat"
 
 New-Item -Path "$HOME/ghidra_scripts" -ItemType Directory -Force | Out-Null
-Copy-Item "$SETUP\capa_ghidra.py" "$HOME/ghidra_scripts/capa_ghidra.py"
+# Build of Ghidrathon for Ghidra currently not working so disabled.
+#Copy-Item "$SETUP_PATH\capa_ghidra.py" "$HOME/ghidra_scripts/capa_ghidra.py"
 
 # Run custom scripts
 if (Test-Path "$LOCAL_PATH\customize.ps1") {
