@@ -195,13 +195,14 @@ if (Test-Path "$TOOLS\fakenet") {
 }
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 
+# Build of Ghidrathon for Ghidra currently not working so disabled.
 # Ghidrathon
-Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "$SETUP_PATH\ghidrathon.zip" -match Source
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidrathon.zip" -o"$TOOLS" | Out-Null
-if (Test-Path $TOOLS\ghidrathon) {
-    Remove-Item $TOOLS\ghidrathon -Recurse -Force
-}
-Move-Item $TOOLS\mandiant-Ghidrathon* $TOOLS\ghidrathon
+#Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "$SETUP_PATH\ghidrathon.zip" -match Source
+#& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidrathon.zip" -o"$TOOLS" | Out-Null
+#if (Test-Path $TOOLS\ghidrathon) {
+#    Remove-Item $TOOLS\ghidrathon -Recurse -Force
+#}
+#Move-Item $TOOLS\mandiant-Ghidrathon* $TOOLS\ghidrathon
 
 # GoReSym
 Get-GitHubRelease -repo "mandiant/GoReSym" -path "$SETUP_PATH\GoReSym.zip" -match GoReSym-windows
@@ -243,7 +244,6 @@ Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
 
 # Ghidra GolangAnalyzerExtension
 Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "$SETUP_PATH\GolangAnalyzerExtension.zip" -match 10.4
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GolangAnalyzerExtension.zip" -o"$TOOLS\ghidra\Ghidra\Extensions" | Out-Null
 if (! (Test-Path "$TOOLS\ghidra_extensions")) {
     New-Item -Path "$TOOLS\ghidra_extensions" -ItemType directory | Out-Null
 }
