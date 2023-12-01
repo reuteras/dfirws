@@ -54,6 +54,8 @@ USER_AGREEMENT=ACCEPT
 "@
 
 $GHIDRA_CONFIG | Out-File -FilePath "C:\Users\WDAGUtilityAccount\.ghidra\.ghidra_10.4_PUBLIC\preferences" -Encoding ascii
+New-Item -Path "$HOME/.ghidra\.ghidra_10.4_PUBLIC\Extensions" -ItemType Directory -Force | Out-Null
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GolangAnalyzerExtension.zip" -o"$HOME/.ghidra/.ghidra_10.4_PUBLIC/Extensions" | Out-Null
 
 # Chocolately
 # You must have 'set SET WSDFIR_CHOCO="Yes"' in your setup\config.txt
