@@ -107,7 +107,7 @@ if ($all -or $args -contains "--zimmerman") {
 if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python") {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job > .\log\jobs.txt 2>&1
+    Get-Job | Receive-Job >> .\log\jobs.txt 2>&1
     Get-Job | Remove-Job | Out-Null
     Write-DateLog "Sandboxes done."
 }
