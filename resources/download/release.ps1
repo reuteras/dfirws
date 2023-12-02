@@ -289,6 +289,13 @@ if (Test-Path "$TOOLS\radare2") {
 }
 Move-Item $TOOLS\radare2-* $TOOLS\radare2
 
+# Iaito by Radareorg
+Get-GitHubRelease -repo "radareorg/iaito" -path "$SETUP_PATH\iaito.zip" -match iaito.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\iaito.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\__MACOSX") {
+    Remove-Item "$TOOLS\__MACOSX" -Recurse -Force
+}
+
 # Cutter
 Get-GitHubRelease -repo "rizinorg/cutter" -path "$SETUP_PATH\cutter.zip" -match Windows-x86_64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\cutter.zip" -o"$TOOLS" | Out-Null
