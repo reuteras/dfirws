@@ -3,6 +3,17 @@
 # Import common functions
 . $HOME\Documents\tools\wscommon.ps1
 
+# Create required directories
+New-Item -ItemType Directory "$TEMP"
+New-Item -ItemType Directory "$DATA"
+New-Item -ItemType Directory "$env:ProgramFiles\bin"
+New-Item -ItemType Directory "$HOME\Documents\WindowsPowerShell"
+New-Item -ItemType Directory "$HOME\Documents\PowerShell"
+New-Item -ItemType Directory "$env:ProgramFiles\PowerShell\Modules\PSDecode"
+New-Item -ItemType Directory "$HOME\Documents\jupyter"
+
+Write-DateLog "Start sandbox setup" > $TEMP\start_sandbox.log
+
 $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
 #$WIN11=(Get-ComputerInfo | Select-Object -expand OsName) -match 11
 
@@ -14,20 +25,12 @@ Write-DateLog "start_sandbox.ps1"
 # Bypass the execution policy for the current session
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
-# Create required directories
-New-Item -ItemType Directory "$TEMP"
-New-Item -ItemType Directory "$DATA"
-New-Item -ItemType Directory "$env:ProgramFiles\bin"
-New-Item -ItemType Directory "$HOME\Documents\WindowsPowerShell"
-New-Item -ItemType Directory "$HOME\Documents\PowerShell"
-New-Item -ItemType Directory "$env:ProgramFiles\PowerShell\Modules\PSDecode"
-New-Item -ItemType Directory "$HOME\Documents\jupyter"
-
 # Copy config files and import them
-Copy-Item "$HOME\Documents\tools\config.txt" $TEMP\config.ps1
 Copy-Item "$HOME\Documents\tools\default-config.txt" $TEMP\default-config.ps1
+Copy-Item "$HOME\Documents\tools\config.txt" $TEMP\config.ps1
 . $TEMP\default-config.ps1
 . $TEMP\config.ps1
+Write-DateLog "Config files copied and imported" >> $TEMP\start_sandbox.log
 
 # PowerShell
 Copy-Item "$HOME\Documents\tools\Microsoft.PowerShell_profile.ps1" "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
@@ -42,62 +45,76 @@ Copy-Item $HOME\Documents\tools\jupyter\*.ipynb "$HOME\Documents\jupyter\"
 Copy-Item   "$SETUP_PATH\powershell.msi" "$TEMP\powershell.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\powershell.msi /qn /norestart"
 $POWERSHELL_EXE = "$env:ProgramFiles\PowerShell\7\pwsh.exe"
+Write-DateLog "PowerShell installed" >> $TEMP\start_sandbox.log
 
 # Install 7-Zip
 Copy-Item "$SETUP_PATH\7zip.msi" "$TEMP\7zip.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\7zip.msi /qn /norestart"
+Write-DateLog "7-Zip installed" >> $TEMP\start_sandbox.log
 
 # Always install common Java.
 Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
+Write-DateLog "Java installed" >> $TEMP\start_sandbox.log
+
+# Install Python
+& "$SETUP_PATH\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+Write-DateLog "Python installed" >> $TEMP\start_sandbox.log
+
+# Install Visual C++ Redistributable 16 and 17
+Start-Process -Wait "$SETUP_PATH\vcredist_16_x64.exe" -ArgumentList "/passive /norestart"
+Start-Process -Wait "$SETUP_PATH\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
+Write-DateLog "Visual C++ Redistributable installed" >> $TEMP\start_sandbox.log
+
+# Install .NET 6
+Start-Process -Wait "$SETUP_PATH\dotnet6.exe" -ArgumentList "/install /quiet /norestart"
+Write-DateLog ".NET 6 installed" >> $TEMP\start_sandbox.log
+
+# Install HxD
+Copy-Item "$TOOLS\hxd\HxDSetup.exe" "$TEMP\HxDSetup.exe"
+& "$TEMP\HxDSetup.exe" /VERYSILENT /NORESTART
+Write-DateLog "HxD installed" >> $TEMP\start_sandbox.log
+
+# Install Notepad++ and ComparePlus plugin
+Copy-Item "$SETUP_PATH\notepad++.exe" "$TEMP\notepad++.exe"
+& "$TEMP\notepad++.exe" /S
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\comparePlus.zip" -o"$env:ProgramFiles\Notepad++\Plugins\ComparePlus"
+Write-DateLog "Notepad++ installed" >> $TEMP\start_sandbox.log
 
 # Install NEO4J
 if ($WSDFIR_NEO4J -eq "Yes") {
     Install-Neo4j
+    Write-DateLog "Neo4j installed" >> $TEMP\start_sandbox.log
 }
 
 # Install LibreOffice with custom arguments
 if ($WSDFIR_LIBREOFFICE -eq "Yes") {
     Install-LibreOffice
+    Write-DateLog "LibreOffice installed" >> $TEMP\start_sandbox.log
 }
-
-# Install Python
-& "$SETUP_PATH\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
-
-# Install Visual C++ Redistributable 16 and 17
-Start-Process -Wait "$SETUP_PATH\vcredist_16_x64.exe" -ArgumentList "/passive /norestart"
-Start-Process -Wait "$SETUP_PATH\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
-
-# Install .NET 6
-Start-Process -Wait "$SETUP_PATH\dotnet6.exe" -ArgumentList "/install /quiet /norestart"
-
-# Install HxD
-Copy-Item "$TOOLS\hxd\HxDSetup.exe" "$TEMP\HxDSetup.exe"
-& "$TEMP\HxDSetup.exe" /VERYSILENT /NORESTART
 
 # Install Git if specified
 if ($WSDFIR_GIT -eq "Yes") {
     Install-GitBash
+    Write-DateLog "Git installed" >> $TEMP\start_sandbox.log
 }
-
-# Install Notepad++ and ComparePlus plugin if specified
-Copy-Item "$SETUP_PATH\notepad++.exe" "$TEMP\notepad++.exe"
-& "$TEMP\notepad++.exe" /S
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\comparePlus.zip" -o"$env:ProgramFiles\Notepad++\Plugins\ComparePlus"
 
 # Install PDFStreamDumper if specified
 if ($WSDFIR_PDFSTREAM -eq "Yes") {
     Install-PDFStreamDumper
+    Write-DateLog "PDFStreamDumper installed" >> $TEMP\start_sandbox.log
 }
 
 # Install Visual Studio Code and PowerShell extension if specified
 if ($WSDFIR_VSCODE -eq "Yes") {
     Install-VSCode
+    Write-DateLog "Visual Studio Code installed" >> $TEMP\start_sandbox.log
 }
 
 # Install Zui if specified
 if ($WSDFIR_ZUI -eq "Yes") {
     Install-Zui
+    Write-DateLog "Zui installed" >> $TEMP\start_sandbox.log
 }
 
 # Set date and time format
@@ -105,10 +122,12 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortDate -val
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sLongDate -value "yyyy-MMMM-dddd"
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortTime -value "HH:mm"
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sTimeFormat -value "HH:mm:ss"
+Write-DateLog "Date and time format set" >> $TEMP\start_sandbox.log
 
 # Dark mode
 if ($WSDFIR_DARK -eq "Yes") {
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
+    Write-DateLog "Dark mode set" >> $TEMP\start_sandbox.log
 }
 
 # Show file extensions
@@ -120,17 +139,21 @@ reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hide
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hidden /t REG_DWORD /d 0 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowSuperHidden /t REG_DWORD /d 1 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v DontPrettyPath /t REG_DWORD /d 1 /f
+Write-DateLog "File extensions shown"
 
 # Add right-click context menu if specified
 if ($WSDFIR_RIGHTCLICK -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+    Write-DateLog "Right-click context menu added"
 }
 
 # Import registry settings
 reg import $HOME\Documents\tools\registry.reg
+Write-DateLog "Registry settings imported"
 
 # Restart Explorer process
 Stop-Process -ProcessName Explorer -Force
+Write-DateLog "Explorer restarted"
 
 # Add to PATH
 Write-DateLog "Add to PATH"
@@ -215,6 +238,7 @@ Add-ToUserPath "$TOOLS\Zimmerman\XWFIM"
 Add-ToUserPath "$TOOLS\zstd"
 Add-ToUserPath "$VENV\maldump\Scripts"
 Add-ToUserPath "$HOME\Documents\tools\utils"
+Write-DateLog "Added to PATH"
 
 # Shortcut for PowerShell
 Add-Shortcut -SourceLnk "$HOME\Desktop\PowerShell.lnk" -DestinationPath "$env:ProgramFiles\PowerShell\7\pwsh.exe" -WorkingDirectory "$HOME\Desktop"
@@ -226,10 +250,12 @@ Copy-Item -Recurse -Force $GIT\IDR "$env:ProgramFiles"
 
 # Add jadx
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
+Write-DateLog "jadx added"
 
 # Add x64dbg if specified
 if ($WSDFIR_X64DBG -eq "Yes") {
     Install-X64dbg
+    Write-DateLog "x64dbg added"
 }
 
 # Configure PowerShell logging
@@ -239,24 +265,29 @@ Set-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\Pow
 # Add cmder
 if ($WSDFIR_CMDER -eq "Yes") {
     Install-CMDer
+    Write-DateLog "cmder added"
 }
 
 # Add PersistenceSniper
 if ($WSDFIR_PERSISTENCESNIPER -eq "Yes") {
     Import-Module $GIT\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1
+    Write-DateLog "PersistenceSniper added"
 }
 
 # Add apimonitor
 if ($WSDFIR_APIMONITOR -eq "Yes") {
     Install-Apimonitor
+    Write-DateLog "apimonitor added"
 }
 
 # Configure usage of new venv for PowerShell
 (Get-ChildItem -File $VENV\default\Scripts\).Name | findstr /R /V "[\._]" | findstr /V activate | `
     ForEach-Object {Write-Output "function $_() { python $VENV\default\Scripts\$_ `$PsBoundParameters.Values + `$args }"} | Out-File -Append -Encoding "ascii" "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+Write-DateLog "New venv configured for PowerShell"
 
 # Signal that everything is done to start using the tools (mostly).
 Update-Wallpaper "$SETUP_PATH\dfirws.jpg"
+Write-DateLog "Wallpaper updated"
 
 # Run install script for choco packages
 if ($WSDFIR_CHOCO -eq "Yes") {
@@ -267,21 +298,25 @@ if ($WSDFIR_CHOCO -eq "Yes") {
 # Setup Node.js
 if ($WSDFIR_NODE -eq "Yes") {
     Install-Node
+    Write-DateLog "Node.js installed"
 }
 
 # Setup Obsidian
 if ($WSDFIR_OBSIDIAN -eq "Yes") {
     Install-Obsidian
+    Write-DateLog "Obsidian installed"
 }
 
 # Install Qemu
 if ($WSDFIR_QEMU -eq "Yes") {
     Install-Qemu
+    Write-DateLog "Qemu installed"
 }
 
 # Install extra tools for Git-bash
 if ($WSDFIR_BASH_EXTRA -eq "Yes") {
     Install-BashExtra
+    Write-DateLog "Extra tools for Git-bash installed"
 }
 
 # Set Notepad++ as default for many file types
@@ -294,15 +329,18 @@ cmd /c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+Write-DateLog "Notepad++ set as default for many file types"
 
 # Last commands
 if (($WSDFIR_W10_LOOPBACK -eq "Yes") -and ($WIN10)) {
     & "$HOME\Documents\tools\utils\devcon.exe" install $env:windir\inf\netloop.inf *msloop
+    Write-DateLog "Loopback adapter installed"
 }
 
 # Install Loki
 if ($WSDFIR_LOKI -eq "Yes") {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\loki.zip" -o"$env:ProgramFiles\"
+    Write-DateLog "Loki installed"
 } else {
     New-Item -ItemType Directory "$env:ProgramFiles\loki"
 }
@@ -310,6 +348,7 @@ if ($WSDFIR_LOKI -eq "Yes") {
 # Clean up
 Remove-Item $HOME\Desktop\PdfStreamDumper.exe.lnk
 
+Write-DateLog "Start creation of Desktop/dfirws" >> $TEMP\start_sandbox.log
 # Create directory for shortcuts to installed tools
 New-Item -ItemType Directory "$HOME\Desktop\dfirws"
 # $TOOLS\DidierStevens
@@ -476,6 +515,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk" -
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy64.lnk" -DestinationPath "$TOOLS\dnSpy64\dnSpy.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\fasm.lnk" -DestinationPath "$TOOLS\fasm\FASM.EXE"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Ghidra.lnk" -DestinationPath "$TOOLS\ghidra\ghidraRun.bat"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\iaito.lnk" -DestinationPath "$TOOLS\iaito\iaito.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\scare.bat.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 if ($WSDFIR_X64DBG -eq "Yes") {
@@ -523,6 +563,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Utilities\Crypto\name-that-hash.ln
 
 # "$HOME\Desktop\dfirws\Zimmerman"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Zimmerman.lnk" -DestinationPath "$TOOLS\Zimmerman"
+Write-DateLog "Creating shortcuts in $HOME\Desktop\dfirws done." >> $TEMP\start_sandbox.log
 
 # Pin to explorer
 $shell = new-object -com "Shell.Application"
@@ -532,10 +573,13 @@ $verb = $item.Verbs() | Where-Object { $_.Name -eq 'Pin to Quick access' }
 if ($verb) {
     $verb.DoIt()
 }
+Write-DateLog "Pinning $HOME\Desktop\dfirws to explorer done." >> $TEMP\start_sandbox.log
 
 & "$POWERSHELL_EXE" -Command "Set-ExecutionPolicy Bypass"
+Write-DateLog "Setting execution policy to Bypass done." >> $TEMP\start_sandbox.log
 
 & "$SETUP_PATH\graphviz.exe" /S /D='$env:ProgramFiles\graphviz'
+Write-DateLog "Installing Graphviz done." >> $TEMP\start_sandbox.log
 
 # Add plugins to Cutter
 New-Item -ItemType Directory -Force -Path "$HOME\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
@@ -545,26 +589,31 @@ Copy-Item $GIT\cutterref\cutterref.py "$HOME\AppData\Roaming\rizin\cutter\plugin
 Copy-Item -Recurse $GIT\cutterref\archs "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
 Copy-Item -Recurse $GIT\cutter-jupyter\icons "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
 Copy-Item -Recurse $GIT\capa-explorer\capa_explorer_plugin "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
+Write-DateLog "Installing Cutter plugins done." >> $TEMP\start_sandbox.log
 
 # Unzip signatures for loki and yara
 & "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\signature.7z" -o"$env:ProgramFiles\loki"
 Remove-Item "$env:ProgramFiles\loki\signature.yara"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\signature.7z" -o"$DATA"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\total.7z" -o"$DATA"
+Write-DateLog "Unzipping signatures for loki and yara done." >> $TEMP\start_sandbox.log
 
 # Start sysmon when installation is done
 if ($WSDFIR_SYSMON -eq "Yes") {
     & "$TOOLS\sysinternals\Sysmon64.exe" -accepteula -i "$WSDFIR_SYSMON_CONF"
 }
+Write-DateLog "Starting sysmon done." >> $TEMP\start_sandbox.log
 
 # Start Gollum for local wiki
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
 Start-Process "$env:ProgramFiles\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar $TOOLS\lib\gollum.war -S gollum --lenient-tag-lookup $GIT\dfirws.wiki" -WindowStyle Hidden
+Write-DateLog "Starting Gollum for local wiki done."
 
 # Don't ask about new apps
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
 
 Copy-Item -Recurse "$TOOLS\hashcat" "$env:ProgramFiles"
+Write-DateLog "Installing hashcat done." >> $TEMP\start_sandbox.log
 
 # Add shortcuts to desktop for Jupyter and Gollum
 Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Documents\tools\utils\jupyter.bat"
@@ -577,8 +626,11 @@ New-Item -Path "$HOME/ghidra_scripts" -ItemType Directory -Force | Out-Null
 # Run custom scripts
 if (Test-Path "$LOCAL_PATH\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "$LOCAL_PATH\customize.ps1"
+    Write-DateLog "Running customize scripts done." >> $TEMP\start_sandbox.log
 }
 
 if (Test-Path "$LOCAL_PATH\customise.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "$LOCAL_PATH\customise.ps1"
+    Write-DateLog "Running customise scripts done." >> $TEMP\start_sandbox.log
 }
+Write-DateLog "Installation done." >> $TEMP\start_sandbox.log
