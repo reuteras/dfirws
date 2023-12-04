@@ -11,6 +11,18 @@ Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "$SETUP_PATH\beaconhunter.
 Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "$SETUP_PATH\4n4lDetector.zip" -match 4n4lDetector
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\4n4lDetector.zip" -o"$TOOLS\4n4lDetector" | Out-Null
 
+# aLEAPP
+Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "$SETUP_PATH\aleapp.exe" -match aleapp.exe
+Copy-Item $SETUP_PATH\aleapp.exe $TOOLS\bin\
+Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "$SETUP_PATH\aleappGUI.exe" -match aleappGUI.exe
+Copy-Item $SETUP_PATH\aleappGUI.exe $TOOLS\bin\
+
+# iLEAPP
+Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "$SETUP_PATH\ileapp.exe" -match ileapp.exe
+Copy-Item $SETUP_PATH\ileapp.exe $TOOLS\bin\
+Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "$SETUP_PATH\ileappGUI.exe" -match ileappGUI.exe
+Copy-Item $SETUP_PATH\ileappGUI.exe $TOOLS\bin\
+
 # lessmsi
 Get-GitHubRelease -repo "activescott/lessmsi" -path "$SETUP_PATH\lessmsi.zip" -match lessmsi-v
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\lessmsi.zip" -o"$TOOLS\lessmsi" | Out-Null
@@ -27,6 +39,14 @@ Remove-Item "$TOOLS\ares" -Force -Recurse
 
 # Brim/Zui
 Get-GitHubRelease -repo "brimdata/zui" -path "$SETUP_PATH\zui.exe" -match Zui-Setup
+
+# RDP Cache Stitcher
+Get-GitHubRelease -repo "BSI-Bund/RdpCacheStitcher" -path "$SETUP_PATH\RdpCacheStitcher.zip" -match win64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\RdpCacheStitcher.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\RdpCacheStitcher") {
+    Remove-Item "$TOOLS\RdpCacheStitcher" -Recurse -Force
+}
+move-item $TOOLS\RdpCacheStitcher-* $TOOLS\RdpCacheStitcher
 
 # ripgrep
 Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "$SETUP_PATH\ripgrep.zip" -match x86_64-pc-windows-msvc
@@ -153,6 +173,10 @@ Copy-Item $SETUP_PATH\jq.exe $TOOLS\bin\
 # Jumplist Browser
 Get-GitHubRelease -repo "kacos2000/Jumplist-Browser" -path "$SETUP_PATH\JumplistBrowser.exe" -match JumplistBrowser.exe
 Copy-Item $SETUP_PATH\JumplistBrowser.exe $TOOLS\bin\
+
+# MFTBrowser
+Get-GitHubRelease -repo "kacos2000/MFT_Browser" -path "$SETUP_PATH\MFTBrowser.exe" -match MFTBrowser.exe
+Copy-Item $SETUP_PATH\MFTBrowser.exe $TOOLS\bin\
 
 # Prefetch Browser
 Get-GitHubRelease -repo "kacos2000/Prefetch-Browser" -path "$SETUP_PATH\PrefetchBrowser.exe" -match PrefetchBrowser.exe
@@ -311,6 +335,14 @@ Copy-Item $SETUP_PATH\sidr.exe $TOOLS\bin\
 # jadx
 Get-GitHubRelease -repo "skylot/jadx" -path "$SETUP_PATH\jadx.zip" -match jadx-1
 
+# Sleuthkit
+Get-GitHubRelease -repo "sleuthkit/sleuthkit" -path "$SETUP_PATH\sleuthkit.zip" -match win32.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sleuthkit.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\sleuthkit") {
+    Remove-Item "$TOOLS\sleuthkit" -Recurse -Force
+}
+Move-Item $TOOLS\sleuthkit-* $TOOLS\sleuthkit
+
 # debloat
 Get-GitHubRelease -repo "Squiblydoo/debloat" -path "$SETUP_PATH\debloat.zip" -match Windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\debloat.zip" -o"$TOOLS\bin" | Out-Null
@@ -329,6 +361,9 @@ if (Test-Path "$TOOLS\upx") {
     Remove-Item "$TOOLS\upx" -Recurse -Force
 }
 Move-Item $TOOLS\upx-* $TOOLS\upx
+
+# Velociraptor
+Get-GitHubRelease -repo "velocidex/velociraptor" -path "$SETUP_PATH\velociraptor.exe" -match windows-amd64.exe
 
 # fq
 Get-GitHubRelease -repo "wader/fq" -path "$SETUP_PATH\fq.zip" -match windows_amd64.zip
