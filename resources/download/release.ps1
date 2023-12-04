@@ -40,13 +40,13 @@ Remove-Item "$TOOLS\ares" -Force -Recurse
 # Brim/Zui
 Get-GitHubRelease -repo "brimdata/zui" -path "$SETUP_PATH\zui.exe" -match Zui-Setup
 
-# RDP Cache Stitcher
+# RDPCacheStitcher
 Get-GitHubRelease -repo "BSI-Bund/RdpCacheStitcher" -path "$SETUP_PATH\RdpCacheStitcher.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\RdpCacheStitcher.zip" -o"$TOOLS" | Out-Null
 if (Test-Path "$TOOLS\RdpCacheStitcher") {
     Remove-Item "$TOOLS\RdpCacheStitcher" -Recurse -Force
 }
-move-item $TOOLS\RdpCacheStitcher-* $TOOLS\RdpCacheStitcher
+move-item $TOOLS\RdpCacheStitcher_* $TOOLS\RdpCacheStitcher
 
 # ripgrep
 Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "$SETUP_PATH\ripgrep.zip" -match x86_64-pc-windows-msvc
