@@ -13,12 +13,17 @@ if (! (Test-Path .\PatchaPalooza )) {
 }
 
 $repourls = `
+    "https://github.com/ahmedkhlief/APT-Hunter.git", `
+    "https://github.com/ANSSI-FR/bmc-tools.git", `
+    "https://github.com/BSI-Bund/RdpCacheStitcher.git", `
     "https://github.com/crypto2011/IDR.git", `
     "https://github.com/cyberark/White-Phoenix.git", `
+    "https://github.com/ExeinfoASL/ASL.git", `
     "https://github.com/fr0gger/jupyter-collection.git", `
     "https://github.com/gehaxelt/Python-dsstore.git", `
     "https://github.com/JavierYuste/radare2-deep-graph.git", `
     "https://github.com/joeavanzato/Trawler.git", `
+    "https://github.com/keraattin/EmailAnalyzer.git", `
     "https://github.com/keydet89/Events-Ripper.git", `
     "https://github.com/keydet89/RegRipper3.0", `
     "https://github.com/last-byte/PersistenceSniper.git", `
@@ -27,6 +32,7 @@ $repourls = `
     "https://github.com/Malandrone/PowerDecode.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
+    "https://github.com/mattifestation/CimSweep.git", `
     "https://github.com/netspooky/scare.git", `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
@@ -34,6 +40,7 @@ $repourls = `
     "https://github.com/rizinorg/cutter-jupyter.git", `
     "https://github.com/Seabreg/Regshot.git", `
     "https://github.com/SigmaHQ/sigma.git", `
+    "https://github.com/swisscom/PowerSponse.git", `
     "https://github.com/volexity/one-extract.git", `
     "https://github.com/volexity/threat-intel.git", `
     "https://github.com/wagga40/Zircolite.git", `
@@ -59,5 +66,8 @@ Set-Location PatchaPalooza
 (Get-Content .\PatchaPalooza.py -Raw) -replace "import termcolor","import termcolor`nimport colorama`ncolorama.init()" | Set-Content .\PatchaPalooza2.py
 Copy-Item .\PatchaPalooza2.py .\PatchaPalooza.py -Force
 Remove-Item .\PatchaPalooza2.py
+Set-Location ..
 
-Set-Location ..\..\..
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
+
+Set-Location ..\..
