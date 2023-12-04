@@ -129,11 +129,14 @@ Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath 
 # Tools to compile and build
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe"
 
+# Artifacts Echange for Velociraptor
+Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/raw/gh-pages/exchange/artifact_exchange_v2.zip" -FilePath ".\downloads\artifact_exchange.zip"
+
 # Update the following when new versions are released
 # https://learn.microsoft.com/en-us/java/openjdk/download
 Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.21-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
 
-# https://neo4j.com/ddeployment-center/#community
+# https://neo4j.com/deployment-center/#community
 Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.28-windows.zip" -FilePath ".\downloads\neo4j.zip"
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor
@@ -153,7 +156,7 @@ Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downlo
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.0-x64.exe" -FilePath ".\downloads\wireshark.exe"
 
 # https://www.sqlite.org/download.html
-Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440100.zip" -FilePath ".\downloads\sqlite.zip"
+Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440200.zip" -FilePath ".\downloads\sqlite.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlite.zip" -o"$TOOLS\sqlite" | Out-Null
 if (Test-Path -Path $TOOLS\sqlite) {
     Remove-Item -Recurse -Force $TOOLS\sqlite | Out-Null 2>&1
@@ -217,6 +220,10 @@ if (Test-Path -Path $TOOLS\hashcat) {
     Remove-Item -Recurse -Force $TOOLS\hashcat | Out-Null 2>&1
 }
 Move-Item $TOOLS\hashcat-* $TOOLS\hashcat
+
+# https://www.winitor.com/download2
+Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio-9.56.zip" -FilePath ".\downloads\pestudio.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pestudio.zip" -o"$TOOLS" | Out-Null
 
 # Remove unused
 Remove-Item -r $TOOLS\win32
