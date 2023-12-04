@@ -105,7 +105,7 @@ function Get-DownloadUrl {
     }
 
     if ( ( Write-Output $downloads | Measure-Object -word ).Words -gt 1 ) {
-        return $downloads -replace ' ', "`r`n" | findstr /R $match | findstr /R /V "darwin \.sig blockmap \.sha256"
+        return $downloads -replace ' ', "`r`n" | findstr /R $match | findstr /R /V "darwin \.sig blockmap \.sha256 \.asc" | Select-Object -First 1
     } else {
         return $downloads
     }
