@@ -117,6 +117,7 @@ python -m pip install `
     neo4j `
     neo4j-driver `
     nest-asyncio>=1.5.7 `
+    netaddr `
     networkx `
     notebook-shim>=0.2.2 `
     numpy `
@@ -149,6 +150,7 @@ python -m pip install `
     pyparsing>=2.4.6 `
     pypdf>=3.17.1 `
     pypng `
+    python-dateutil `
     python-magic `
     python-magic-bin `
     pyvis `
@@ -182,10 +184,11 @@ python -m pip install `
     uncompyle6 `
     unicorn `
     unpy2exe `
-    urllib3>=2.0.7 `
+    urllib3>=2.1.0 `
     visidata>=2.11 `
     xlrd>=2.0.0 `
     XLMMacroDeobfuscator>=0.2.6 `
+    XlsxWriter>=3.1.8 `
     xxhash>=3.3.0 `
     yara-python >> "C:\log\python.txt" 2>&1
 
@@ -201,6 +204,7 @@ curl -o "machofile.py" "https://raw.githubusercontent.com/pstirparo/machofile/ma
 curl -o "msidump.py" "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py"
 
 Copy-Item $SETUP_PATH\msidump.py .\msidump.py
+Copy-Item "C:\git\bmc-tools\bmc-tools.py" "C:\venv\default\Scripts\bmc-tools.py"
 
 (Get-Content .\parseUSBs.py -raw) -replace "#!/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\parseUSBs2.py"
 Copy-Item parseUSBs2.py parseUSBs.py
@@ -367,5 +371,16 @@ python -m pip install chepy[extras] 2>&1 >> "C:\log\python.txt"
 deactivate
 Set-Content "C:\venv\chepy\Scripts\python.exe C:\venv\chepy\Scripts\chepy.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\chepy.ps1
 Write-DateLog "Python venv chepy done." >> "C:\log\python.txt"
+
+# dissect
+Write-DateLog "Install packages in venv dissect in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
+C:\venv\dissect\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
+python -m pip install acquire dissect flow.record 2>&1 >> "C:\log\python.txt"
+deactivate
+Set-Content "C:\venv\dissect\Scripts\python.exe C:\venv\dissect\Scripts\dissect.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\dissect.ps1
+Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 
 Write-Output "" > C:\venv\done
