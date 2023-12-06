@@ -14,6 +14,7 @@ if (! (Test-Path .\PatchaPalooza )) {
 
 $repourls = `
     "https://github.com/ahmedkhlief/APT-Hunter.git", `
+    "https://github.com/AndrewRathbun/DFIRArtifactMuseum.git", `
     "https://github.com/ANSSI-FR/bmc-tools.git", `
     "https://github.com/BSI-Bund/RdpCacheStitcher.git", `
     "https://github.com/crypto2011/IDR.git", `
@@ -37,6 +38,7 @@ $repourls = `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/reuteras/dfirws.wiki.git", `
+    "https://github.com/reuteras/dfirws-sample-files.git", `
     "https://github.com/rizinorg/cutter-jupyter.git", `
     "https://github.com/Seabreg/Regshot.git", `
     "https://github.com/SigmaHQ/sigma.git", `
