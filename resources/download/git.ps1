@@ -43,6 +43,7 @@ $repourls = `
     "https://github.com/Seabreg/Regshot.git", `
     "https://github.com/SigmaHQ/sigma.git", `
     "https://github.com/swisscom/PowerSponse.git", `
+    "https://github.com/thewhiteninja/deobshell.git", `
     "https://github.com/volexity/one-extract.git", `
     "https://github.com/volexity/threat-intel.git", `
     "https://github.com/wagga40/Zircolite.git", `
