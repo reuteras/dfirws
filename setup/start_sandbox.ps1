@@ -479,6 +479,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\Cobalt
 # Network
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Network"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\fakenet\fakenet.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\ipexpand.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Network\scapy.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 
 # OS
