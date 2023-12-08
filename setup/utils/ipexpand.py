@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-import sys
 import ipaddress
+import sys
 
 
 if len(sys.argv) < 2:
@@ -13,8 +13,8 @@ if len(sys.argv) < 2:
 for network in sys.argv[1:]:
     try:
         net = ipaddress.ip_network(network)
-    except:
-        print('ERROR: Invalid network range! Did you end with .1?')
+    except ValueError:
+        print("ERROR: Invalid network range! Did you end with .1?")
         sys.exit()
 
     for ip in net:
