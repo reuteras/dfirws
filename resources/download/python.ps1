@@ -36,6 +36,7 @@ Remove-Item -Recurse -Force "$ROOT_PATH\tmp\venv" > $null 2>&1
 #Copy-Item "$ROOT_PATH\mount\Tools\ghidra\Ghidra\Extensions\ghidrathon\lib\jep-4.1.1.jar" "$ROOT_PATH\mount\Tools\ghidra\Ghidra\Extensions\ghidrathon\lib\jep.jar"
 Copy-Item "$ROOT_PATH\mount\git\dotnetfile\examples\dotnetfile_dump.py" "$ROOT_PATH\mount\venv\default\Scripts\"
 Copy-Item "$ROOT_PATH\setup\utils\hash-id.py" "$ROOT_PATH\mount\venv\default\Scripts\"
+Copy-Item "$ROOT_PATH\setup\utils\ipexpand.py" "$ROOT_PATH\mount\venv\default\Scripts\"
 Copy-Item "$ROOT_PATH\setup\utils\powershell-cleanup.py" "$ROOT_PATH\mount\venv\default\Scripts\"
 
 Get-ChildItem -Path "$ROOT_PATH\mount\venv\default\Scripts" -Filter *.py | ForEach-Object {
