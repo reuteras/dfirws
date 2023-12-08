@@ -1,4 +1,5 @@
 .vscode/extensions.json
+config.ps1
 dfirws.zip
 downloads/*
 local/*
