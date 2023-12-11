@@ -28,7 +28,7 @@ $files = $webClient.DownloadString($folderUrl).Split("`n") | Select-String -Patt
 
 foreach ($file in $files) {
     $fileUrl = $folderUrl + $file
-    $savePath = Join-Path -Path "${PWD}${torsaveDirectory}" -ChildPath "${file}"
+    $savePath = Join-Path -Path "${torsaveDirectory}" -ChildPath "${file}"
     Write-Output "Downloading $fileUrl to $savePath"
     $webClient.DownloadFile("${fileUrl}", "${savePath}")
 }
