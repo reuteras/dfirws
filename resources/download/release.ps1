@@ -276,7 +276,7 @@ Copy-Item "$SETUP_PATH\GolangAnalyzerExtension.zip" "$TOOLS\ghidra_extensions\Go
 
 # Ghidra Cartographer plugin
 Get-GitHubRelease -repo "nccgroup/Cartographer" -path "$SETUP_PATH\Cartographer.zip" -match Cartographer.zip
-Move-Item "$SETUP_PATH\Cartographer.zip" "$TOOLS\ghidra_extensions\Cartographer.zip"
+Copy-Item "$SETUP_PATH\Cartographer.zip" "$TOOLS\ghidra_extensions\Cartographer.zip"
 
 # MetadataPlus
 Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path "$SETUP_PATH\MetadataPlus.exe" -match MetadataPlus
