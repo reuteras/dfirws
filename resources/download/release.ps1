@@ -198,6 +198,14 @@ Copy-Item $SETUP_PATH\msgviewer.jar $TOOLS\lib
 # capa
 Get-GitHubRelease -repo "mandiant/capa" -path "$SETUP_PATH\capa-windows.zip" -match windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-windows.zip" -o"$TOOLS\capa" | Out-Null
+# Temporary get Capa version 6.0.0 until the issue with the latest version not working with
+# capaexplorer for Ghidra is fixed.
+Get-FileFromUri -uri "https://github.com/mandiant/capa/releases/download/v6.0.0/capa-v6.0.0-windows.zip" -FilePath "$SETUP_PATH\capa-ghidra.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\capa-ghidra.zip" -o"$TOOLS\capa-ghidra" | Out-Null
+if (Test-Path "$TOOLS\capa-ghidra\capa-ghidra.exe") {
+    Remove-Item "$TOOLS\capa-ghidra\capa-ghidra.exe" -Force
+}
+Move-Item $TOOLS\capa-ghidra\capa.exe $TOOLS\capa-ghidra\capa-ghidra.exe
 
 # capa-rules
 Get-GitHubRelease -repo "mandiant/capa-rules" -path "$SETUP_PATH\capa-rules.zip" -match Source
