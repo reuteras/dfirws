@@ -39,6 +39,7 @@ Copy-Item "$HOME\Documents\tools\utils\PSDecode.psm1" "$env:ProgramFiles\PowerSh
 
 # Jupyter
 Copy-Item "$HOME\Documents\tools\jupyter\.jupyter" "$HOME\" -Recurse
+Copy-Item "$HOME\Documents\tools\jupyter\common.py" "$HOME\Documents\jupyter\"
 Copy-Item $HOME\Documents\tools\jupyter\*.ipynb "$HOME\Documents\jupyter\"
 
 # Install latest PowerShell
@@ -179,6 +180,7 @@ Add-ToUserPath "$GIT\Zircolite\bin"
 Add-ToUserPath "$TOOLS\bin"
 Add-ToUserPath "$TOOLS\bulk_extractor\win64"
 Add-ToUserPath "$TOOLS\capa"
+Add-ToUserPath "$TOOLS\capa-ghidra"
 Add-ToUserPath "$TOOLS\chainsaw"
 Add-ToUserPath "$TOOLS\cutter"
 Add-ToUserPath "$TOOLS\DB Browser for SQLite"
