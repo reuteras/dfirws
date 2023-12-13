@@ -7,7 +7,7 @@ if (! (Get-Command git )) {
 
 New-Item -ItemType Directory -Force -Path mount\git > $null
 Set-Location mount\git
-if (! (Test-Path .\PatchaPalooza )) {
+if (Test-Path .\PatchaPalooza) {
     # Remove PatchaPalooza directory if it exists since we do a local patch
     Remove-Item -Recurse -Force .\PatchaPalooza > $null 2>&1
 }
