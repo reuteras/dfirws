@@ -47,7 +47,7 @@ $repourls = `
     "https://github.com/volexity/one-extract.git", `
     "https://github.com/volexity/threat-intel.git", `
     "https://github.com/wagga40/Zircolite.git", `
-    "https://github.com/xaitax/PatchaPalooza.git", `
+    "https://github.com/reuteras/PatchaPalooza.git", `
     "https://github.com/Yamato-Security/hayabusa-rules.git", `
     "https://github.com/yossizap/cutterref.git"
 
