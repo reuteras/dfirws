@@ -73,7 +73,9 @@ python -m pip install `
     frida-tools `
     frozenlist>=1.3.3 `
     geoip2>=4.6.0 `
+    ghidriff `
     graphviz `
+    grip `
     hachoir `
     httpx>=0.25.1 `
     httpcore>=0.18.0 `
