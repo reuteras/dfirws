@@ -144,7 +144,7 @@ Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_ext
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\bulk_extractor.zip" -o"$TOOLS\bulk_extractor" | Out-Null
 
 # https://www.libreoffice.org/download/download-libreoffice/
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.3/win/x86_64/LibreOffice_7.6.3_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
+Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
 
 # https://www.python.org/downloads/
 Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe" -FilePath ".\downloads\python3.exe"
@@ -205,7 +205,7 @@ if (Test-Path -Path $TOOLS\javafx-sdk) {
 Move-Item $TOOLS\javafx-sdk-* $TOOLS\javafx-sdk
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/
-Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.0.jar" -FilePath ".\downloads\apktool.jar"
+Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.1.jar" -FilePath ".\downloads\apktool.jar"
 Copy-Item ".\downloads\apktool.jar" "$TOOLS\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "$TOOLS\bin\apktool.bat" -Force
 
