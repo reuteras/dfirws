@@ -3,6 +3,9 @@
 # Import common functions
 . $HOME\Documents\tools\wscommon.ps1
 
+# Start logging
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+
 # Create required directories
 New-Item -ItemType Directory "$TEMP"
 New-Item -ItemType Directory "$DATA"
@@ -16,9 +19,6 @@ Write-DateLog "Start sandbox setup" > $TEMP\start_sandbox.log
 
 $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
 #$WIN11=(Get-ComputerInfo | Select-Object -expand OsName) -match 11
-
-# Start logging
-$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 Write-DateLog "start_sandbox.ps1"
 
