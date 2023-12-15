@@ -62,5 +62,6 @@ Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
 # Comment this line to see warnings from Python
 $env:PYTHONWARNINGS="ignore"
 $env:PATH_TO_FX="C:\Tools\javafx-sdk\lib"
+$env:GHIDRA_INSTALL_DIR="C:\Tools\ghidra"
 
 # Dynamicly added functions below
