@@ -9,6 +9,11 @@ $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visuals
 $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
 $vscode_python_version=$vscode_tmp.Matches.Groups[1].Value
 
+# Get URI for Visual Studio Code mermaid extension - ugly
+$vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -regex '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+$vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+$vscode_mermaid_version=$vscode_tmp.Matches.Groups[1].Value
+
 # Get Visual Studio Code
 Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -FilePath ".\downloads\vscode.exe"
 # Install during start
@@ -119,6 +124,9 @@ Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip"
 
 # Visual Studio Code python extension
 Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix"
+
+# Visual Studio Code mermaid extension
+Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix"
 
 # Dependence for PE-bear
 Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"
