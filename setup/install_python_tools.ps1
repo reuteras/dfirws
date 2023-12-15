@@ -70,6 +70,7 @@ python -m pip install `
     folium>=0.13.0 `
     fonttools `
     frida `
+    frida-tools `
     frozenlist>=1.3.3 `
     geoip2>=4.6.0 `
     graphviz `
