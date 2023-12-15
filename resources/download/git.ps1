@@ -39,6 +39,7 @@ $repourls = `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/reuteras/dfirws.wiki.git", `
     "https://github.com/reuteras/dfirws-sample-files.git", `
+    "https://github.com/reuteras/MSRC.git", `
     "https://github.com/rizinorg/cutter-jupyter.git", `
     "https://github.com/Seabreg/Regshot.git", `
     "https://github.com/SigmaHQ/sigma.git", `
