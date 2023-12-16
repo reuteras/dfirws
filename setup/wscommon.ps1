@@ -167,16 +167,16 @@ function Install-VSCode {
     Copy-Item "$SETUP_PATH\vscode.exe" "$TEMP\vscode.exe"
     Start-Process -Wait "$TEMP\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
     if ($WSDFIR_VSCODE_POWERSHELL -eq "Yes") {
-        Invoke-Expression "& 'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension C:\downloads\vscode\vscode-powershell.vsix --force"
+        & "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "C:\downloads\vscode\vscode-powershell.vsix"
     }
     if ($WSDFIR_VSCODE_PYTHON -eq "Yes") {
-        Invoke-Expression "& 'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension C:\downloads\vscode\vscode-python.vsix --force"
+        & "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "C:\downloads\vscode\vscode-python.vsix"
     }
     if ($WSDFIR_VSCODE_SPELL -eq "Yes") {
-        Invoke-Expression "& 'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension C:\downloads\vscode\vscode-spell-checker.vsix --force"
+        & "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "C:\downloads\vscode\vscode-spell-checker.vsix"
     }
     if ($WSDFIR_VSCODE_MERMAID -eq "Yes") {
-        Invoke-Expression "& 'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension C:\downloads\vscode\vscode-mermaid.vsix --force"
+        & "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "C:\downloads\vscode\vscode-mermaid.vsix"
     }
 }
 
