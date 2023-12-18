@@ -406,6 +406,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\JavaScript\jsdom.ln
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\Log"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\chainsaw.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\Events-Ripper.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\evtx_dump.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\FullEventLogView.lnk" -DestinationPath "$TOOLS\FullEventLogView\FullEventLogView.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\hayabusa.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\Microsoft LogParser (LogParser).lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
@@ -643,8 +644,9 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Docu
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws wiki.lnk" -DestinationPath "$HOME\Documents\tools\utils\gollum.bat"
 
 New-Item -Path "$HOME/ghidra_scripts" -ItemType Directory -Force | Out-Null
-# Build of Ghidrathon for Ghidra currently not working so disabled.
-#Copy-Item "$SETUP_PATH\capa_ghidra.py" "$HOME/ghidra_scripts/capa_ghidra.py"
+if (Test-Path "$SETUP_PATH\capa_ghidra.py") {
+    Copy-Item "$SETUP_PATH\capa_ghidra.py" "$HOME/ghidra_scripts/capa_ghidra.py"
+}
 
 # Run custom scripts
 if (Test-Path "$LOCAL_PATH\customize.ps1") {
