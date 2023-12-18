@@ -32,8 +32,6 @@ Stop-SandboxWhenDone "$ROOT_PATH\tmp\venv\done" $mutex | Out-Null
 rclone.exe sync --verbose --checksum "$ROOT_PATH\tmp\venv" "$ROOT_PATH\mount\venv"
 Remove-Item -Recurse -Force "$ROOT_PATH\tmp\venv" > $null 2>&1
 
-# Build of Ghidrathon for Ghidra currently not working so disabled.
-#Copy-Item "$ROOT_PATH\mount\Tools\ghidra\Ghidra\Extensions\ghidrathon\lib\jep-4.1.1.jar" "$ROOT_PATH\mount\Tools\ghidra\Ghidra\Extensions\ghidrathon\lib\jep.jar"
 Copy-Item "$ROOT_PATH\mount\git\dotnetfile\examples\dotnetfile_dump.py" "$ROOT_PATH\mount\venv\default\Scripts\"
 Copy-Item "$ROOT_PATH\setup\utils\hash-id.py" "$ROOT_PATH\mount\venv\default\Scripts\"
 Copy-Item "$ROOT_PATH\setup\utils\ipexpand.py" "$ROOT_PATH\mount\venv\default\Scripts\"
