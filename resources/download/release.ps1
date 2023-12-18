@@ -228,13 +228,13 @@ if (Test-Path "$TOOLS\fakenet") {
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 
 # Build of Ghidrathon for Ghidra currently not working so disabled.
-# Ghidrathon
-#Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "$SETUP_PATH\ghidrathon.zip" -match Source
-#& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidrathon.zip" -o"$TOOLS" | Out-Null
-#if (Test-Path $TOOLS\ghidrathon) {
-#    Remove-Item $TOOLS\ghidrathon -Recurse -Force
-#}
-#Move-Item $TOOLS\mandiant-Ghidrathon* $TOOLS\ghidrathon
+# Ghidrathon source
+Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "$SETUP_PATH\ghidrathon.zip" -match Source
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidrathon.zip" -o"$TOOLS" | Out-Null
+if (Test-Path $TOOLS\ghidrathon) {
+    Remove-Item $TOOLS\ghidrathon -Recurse -Force
+}
+Move-Item $TOOLS\mandiant-Ghidrathon* $TOOLS\ghidrathon
 
 # GoReSym
 Get-GitHubRelease -repo "mandiant/GoReSym" -path "$SETUP_PATH\GoReSym.zip" -match GoReSym-windows
@@ -303,6 +303,10 @@ Copy-Item $SETUP_PATH\hindsight.exe $TOOLS\bin\
 # Hindsight GUI
 Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "$SETUP_PATH\hindsight_gui.exe" -match hindsight_gui.exe
 Copy-Item $SETUP_PATH\hindsight_gui.exe $TOOLS\bin\
+
+# evtx_dump
+Get-GitHubRelease -repo "omerbenamram/evtx" -path "$SETUP_PATH\evtx_dump.exe" -match exe
+Copy-Item $SETUP_PATH\evtx_dump.exe $TOOLS\bin\
 
 # ComparePlus plugin for Notepad++
 Get-GitHubRelease -repo "pnedev/comparePlus" -path "$SETUP_PATH\comparePlus.zip" -match x64.zip
