@@ -38,15 +38,18 @@ function Get-FileFromUri {
         try {
             # Attempt to download the file from the specified URI
             Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
-            if ($uri -contains "github.com") {
+            if ($uri -like "*github.com*") {
                 if ($GH_USER -eq "" -or $GH_PASS -eq "") {
                     curl.exe --silent -L --output $TmpFilePath $uri
                 } else {
                     curl.exe --silent -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $uri
                 }
+            } elseif ($uri -like "*marketplace.visualstudio.com*") {
+                curl.exe --silent -L --output $TmpFilePath $uri
             } else {
                 curl.exe --silent -L --user-agent "Wget x64" --output $TmpFilePath $uri
-            }        Write-SynchronizedLog "Downloaded $uri to $FilePath."
+            }
+            Write-SynchronizedLog "Downloaded $uri to $FilePath."
             break
         }
         catch {
