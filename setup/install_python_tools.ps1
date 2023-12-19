@@ -67,6 +67,7 @@ python -m pip install `
     evtx `
     extract-msg `
     filelock>=3.13.0 `
+    Flask>=2.3.1 `
     folium>=0.13.0 `
     fonttools `
     frida `
@@ -102,6 +103,7 @@ python -m pip install `
     lief>=0.13.2 `
     LnkParse3 `
     lxml `
+    Markdown>=3.5 `
     MarkupSafe>=2.1.3 `
     matplotlib `
     maxminddb>=2.5.0 `
@@ -189,6 +191,7 @@ python -m pip install `
     unpy2exe `
     urllib3>=2.1.0 `
     visidata>=2.11 `
+    werkzeug>=3.0.1 `
     xlrd>=2.0.0 `
     XLMMacroDeobfuscator>=0.2.6 `
     XlsxWriter>=3.1.8 `
@@ -198,6 +201,7 @@ python -m pip install `
 # Not compatible with Python 3.11:
 #     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
 
+Write-DateLog "Install extra scripts in venv." >> "C:\log\python.txt"
 Set-Location "C:\venv\default\Scripts"
 curl -o "shellconv.py" "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
 curl -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
@@ -221,39 +225,37 @@ Copy-Item * C:\venv\default\Scripts
 deactivate
 Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 
-# Build of Ghidrathon for Ghidra currently not working so disabled.
 # Install Visual Studio Build Tools.
-#Write-DateLog "Start installation of Visual Studio Build Tools." >> "C:\log\python.txt" 2>&1
-#Copy-Item "$SETUP_PATH\vs_BuildTools.exe" "$TEMP\vs_BuildTools.exe"
-#Set-Location $Temp
-#Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
-#Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
-#& 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat' >> "C:\log\python.txt" 2>&1
+Write-DateLog "Start installation of Visual Studio Build Tools." >> "C:\log\python.txt" 2>&1
+Copy-Item "$SETUP_PATH\vs_BuildTools.exe" "$TEMP\vs_BuildTools.exe"
+Set-Location $Temp
+Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
+Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+& 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat' >> "C:\log\python.txt" 2>&1
 
 # Install Java.
-#Write-DateLog "Start installation of Corretto Java." >> "C:\log\python.txt" 2>&1
-#Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
-#Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
-#Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
-#$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
+Write-DateLog "Start installation of Corretto Java." >> "C:\log\python.txt" 2>&1
+Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
+Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
+Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
 # jep
-#Write-DateLog "Install packages in venv jep in sandbox (needs older packages)." >> "C:\log\python.txt"
-#Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\jep"
-#C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
-#python -m pip install -U pip >> "C:\log\python.txt"
-#python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
-#python -m pip install NumPy flare-capa 2>&1 >> "C:\log\python.txt"
+Write-DateLog "Install packages in venv jep in sandbox (needs older packages)." >> "C:\log\python.txt"
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv --system-site-packages C:\venv\jep"
+C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
+python -m pip install NumPy flare-capa 2>&1 >> "C:\log\python.txt"
 
 # Build Ghidrathon for Gidhra
-#Write-DateLog "Build Ghidrathon for Ghidra."
-#Copy-Item -Recurse "C:\Tools\ghidrathon" "$TEMP"
-#Set-Location "$TEMP\ghidrathon"
-#& "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="C:\TOOLS\ghidra" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
-#New-Item -Path C:\venv\jep\dist -ItemType Directory -Force > $null 2>&1
-#Copy-Item $TEMP\ghidrathon\dist\ghidra* "C:\venv\jep\dist\ghidrathon.zip"
-#deactivate
-#Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
+Write-DateLog "Build Ghidrathon for Ghidra."
+Copy-Item -Recurse "C:\Tools\ghidrathon" "$TEMP"
+Set-Location "$TEMP\ghidrathon"
+& "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="C:\Tools\ghidra" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt" 2>&1
+Copy-Item $TEMP\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.zip" >> "C:\log\python.txt" 2>&1
+deactivate
+Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 
 # dfir-unfurl
 Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older packages)." >> "C:\log\python.txt"
