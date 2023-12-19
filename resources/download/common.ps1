@@ -45,7 +45,7 @@ function Get-FileFromUri {
                     curl.exe --silent -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $uri
                 }
             } elseif ($uri -like "*marketplace.visualstudio.com*") {
-                curl.exe --silent -L --output $TmpFilePath $uri
+                Invoke-WebRequest -uri $uri -outfile $TmpFilePath -RetryIntervalSec 20 -MaximumRetryCount 3
             } else {
                 curl.exe --silent -L --user-agent "Wget x64" --output $TmpFilePath $uri
             }
