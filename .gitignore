@@ -2,6 +2,7 @@
 config.ps1
 dfirws.zip
 downloads/*
+enrichment/*
 local/*
 log/*
 mount/*

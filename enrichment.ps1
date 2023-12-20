@@ -6,7 +6,7 @@
 # Set the currentDirectory to the current directory
 $currentDirectory = "${PWD}"
 
-$enrichmentDirectory = "${PWD}\downloads\enrichment"
+$enrichmentDirectory = "${PWD}\enrichment"
 
 # Create the enrichment directory if it doesn't exist
 if (-not (Test-Path -Path ${enrichmentDirectory})) {
