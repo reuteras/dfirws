@@ -22,6 +22,11 @@ Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user
 Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml"
 # Used from sysmon
 
+# Yara rules
+Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip" -FilePath ".\downloads\yara-forge-rules-core.zip"
+Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip" -FilePath ".\downloads\yara-forge-rules-extended.zip"
+Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\downloads\yara-forge-rules-full.zip"
+
 # Get Amazon Corretto
 Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
 # Install during start
@@ -71,6 +76,7 @@ Get-FileFromUri -uri "https://www.mitec.cz/Downloads/SSView.zip" -FilePath ".\do
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ssview.zip" -o"$TOOLS\ssview" | Out-Null
 
 # Get yara rules
+# Should be updated to use yara-forge instead - TODO
 Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/signature/signature.7z" -FilePath ".\downloads\signature.7z"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/reuteras/yara-rules/master/total/total.7z" -FilePath ".\downloads\total.7z"
 
