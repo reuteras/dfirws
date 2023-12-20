@@ -620,6 +620,9 @@ Write-DateLog "Installing Cutter plugins done." >> $TEMP\start_sandbox.log
 Remove-Item "$env:ProgramFiles\loki\signature.yara"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\signature.7z" -o"$DATA"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\total.7z" -o"$DATA"
+& "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-core.zip" -o"$DATA"
+& "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-extended.zip" -o"$DATA"
+& "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-full.zip" -o"$DATA"
 Write-DateLog "Unzipping signatures for loki and yara done." >> $TEMP\start_sandbox.log
 
 # Start sysmon when installation is done
