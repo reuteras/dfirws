@@ -24,7 +24,7 @@ python -m pip install -U setuptools wheel >> "C:\log\python.txt"
 # TODO: Get latest version of package
 python -m pip install https://github.com/msuhanov/dfir_ntfs/archive/1.1.18.tar.gz >> "C:\log\python.txt"
 
-python -m pip install `
+python -m pip install --prefer-binary `
     aiohttp[speedups] `
     aiosignal>=1.2.0 `
     annotated-types>=0.5.0 `
