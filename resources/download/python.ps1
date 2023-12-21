@@ -9,7 +9,6 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
 Write-DateLog "Start Sandbox to install Python pip packages for dfirws." > $ROOT_PATH\log\python.txt
 
-$mutexName = "Global\dfirwsMutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 if (! (Test-Path -Path $ROOT_PATH\tmp\venv )) {

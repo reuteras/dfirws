@@ -7,56 +7,56 @@ function Clear-Tmp {
     }
 }
 
-# Autopsy
+# Autopsy - available for installation via dfirws-install.ps1
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading Autopsy."
 winget download SleuthKit.Autopsy -d .\tmp\winget 2>&1 | Out-Null
 copy-item .\tmp\winget\Autopsy*.msi .\downloads\autopsy.msi
 Clear-Tmp
 
-# DotNet 6 runtime
+# DotNet 6 runtime - installed during startup
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading DotNet 6 runtime."
 winget download Microsoft.DotNet.Runtime.6 -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\Microsoft*.exe .\downloads\dotnet6.exe
 Clear-Tmp
 
-# GoLang
+# GoLang - available for installation via dfirws-install.ps1
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading GoLang."
 winget download Golang.Go -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\Go*.msi .\downloads\golang.msi
 Clear-Tmp
 
-# Microsoft LogParser
-Clear-Tmp
-Write-SynchronizedLog "winget: Downloading Microsoft LogParser."
-winget download Microsoft.LogParser -d .\tmp\winget 2>&1 | Out-Null
-Copy-Item .\tmp\winget\Log*.msi .\downloads\logparser.msi
-Clear-Tmp
+# Microsoft LogParser - available via git repo Events-Ripper
+#Clear-Tmp
+#Write-SynchronizedLog "winget: Downloading Microsoft LogParser."
+#winget download Microsoft.LogParser -d .\tmp\winget 2>&1 | Out-Null
+#Copy-Item .\tmp\winget\Log*.msi .\downloads\logparser.msi
+#Clear-Tmp
 
-# Obsidian
+# Obsidian - available for installation via dfirws-install.ps1
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading Obsidian."
 winget download Obsidian.Obsidian -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\Obsidian*.exe .\downloads\obsidian.exe
 Clear-Tmp
 
-# PowerShell 7
+# PowerShell 7 - installed during startup
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading PowerShell 7."
 winget download Microsoft.PowerShell -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\PowerShell*.msi .\downloads\powershell.msi
 Clear-Tmp
 
-# Qemu
+# Qemu - available for installation via dfirws-install.ps1
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading Qemu."
 winget download SoftwareFreedomConservancy.QEMU -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\QEMU*.exe .\downloads\qemu.exe
 Clear-Tmp
 
-# Ruby
+# Ruby - available for installation via dfirws-install.ps1
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading Ruby."
 winget download RubyInstallerTeam.Ruby.3.2 -d .\tmp\winget 2>&1 | Out-Null

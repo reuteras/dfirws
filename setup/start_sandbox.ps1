@@ -166,7 +166,7 @@ Add-ToUserPath "$env:ProgramFiles\Git\usr\bin"
 Add-ToUserPath "$env:ProgramFiles\graphviz\bin"
 Add-ToUserPath "$env:ProgramFiles\hashcat"
 Add-ToUserPath "$env:ProgramFiles\hxd"
-Add-ToUserPath "$env:ProgramFiles\idr\bin"
+Add-ToUserPath "$env:ProgramFiles\IDR\bin"
 Add-ToUserPath "$env:ProgramFiles\jadx\bin"
 Add-ToUserPath "$env:ProgramFiles\loki"
 Add-ToUserPath "$env:ProgramFiles\Notepad++"
@@ -412,7 +412,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\hayabusa.lnk" -
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\Microsoft LogParser (LogParser).lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Log\PowerSiem.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\Office and email"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\email-analyzer.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "C:\git\EmailAnalyzer"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\email-analyzer.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$GIT\EmailAnalyzer"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\extract_msg.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\Mbox Viewer.lnk" -DestinationPath "$TOOLS\mboxviewer\mboxview64.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\Office and email\MetadataPlus.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\bin\MetadataPlus.exe"
@@ -616,13 +616,11 @@ Copy-Item -Recurse $GIT\capa-explorer\capa_explorer_plugin "$HOME\AppData\Roamin
 Write-DateLog "Installing Cutter plugins done." >> $TEMP\start_sandbox.log
 
 # Unzip signatures for loki and yara
-& "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\signature.7z" -o"$env:ProgramFiles\loki"
-Remove-Item "$env:ProgramFiles\loki\signature.yara"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\signature.7z" -o"$DATA"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -pinfected "$SETUP_PATH\total.7z" -o"$DATA"
+Copy-Item $GIT\signature-base "$env:ProgramFiles\loki" -Recurse
 & "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-core.zip" -o"$DATA"
 & "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-extended.zip" -o"$DATA"
 & "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-full.zip" -o"$DATA"
+Copy-Item "$DATA\packages\full\yara-rules-full.yar" "$DATA\total.yara"
 Write-DateLog "Unzipping signatures for loki and yara done." >> $TEMP\start_sandbox.log
 
 # Start sysmon when installation is done

@@ -10,7 +10,6 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 Write-DateLog "Setup Node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
 Write-Output "" > .\log\npm.txt
 
-$mutexName = "Global\dfirwsMutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 if (! (Test-Path -Path "$ROOT_PATH\tmp" )) {

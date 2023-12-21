@@ -9,7 +9,7 @@ READONLY = Path("C:/Users/WDAGUtilityAccount/Desktop/readonly")
 
 
 def execute7z(zipPathInput, zipPassword, zipPathOutput):
-    """Excecute 7zip batch command using subprocess call"""
+    """Execute 7zip batch command using subprocess call"""
     process = subprocess.Popen(
         [
             r"7z.exe",

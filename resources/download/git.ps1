@@ -34,6 +34,7 @@ $repourls = `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
     "https://github.com/mattifestation/CimSweep.git", `
+    "https://github.com/Neo23x0/signature-base.git", `
     "https://github.com/netspooky/scare.git", `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `

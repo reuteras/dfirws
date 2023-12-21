@@ -37,7 +37,7 @@ Get-GitHubRelease -repo "bee-san/Ares" -path "$SETUP_PATH\ares.zip" -match windo
 Copy-Item "$TOOLS\ares\ares.exe" "$TOOLS\bin\" -Force
 Remove-Item "$TOOLS\ares" -Force -Recurse
 
-# Brim/Zui
+# Brim/Zui (Zq) - installed during start
 Get-GitHubRelease -repo "brimdata/zui" -path "$SETUP_PATH\zui.exe" -match Zui-Setup
 
 # RDPCacheStitcher
@@ -60,7 +60,7 @@ Move-Item $TOOLS\ripgrep-* $TOOLS\ripgrep
 Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path "$SETUP_PATH\binlex.zip" -match windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\binlex.zip" -o"$TOOLS\bin" | Out-Null
 
-# cmder
+# cmder - installed during start
 Get-GitHubRelease -repo "cmderdev/cmder" -path "$SETUP_PATH\cmder.7z" -match cmder.7z
 
 # Recaf
@@ -80,14 +80,6 @@ Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "$SETUP_PATH\dnSpy64.zip" -match w
 Get-GitHubRelease -repo "eneam/mboxviewer" -path "$SETUP_PATH\mboxviewer.zip" -match mbox-viewer.exe
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\mboxviewer.zip" -o"$TOOLS\mboxviewer" | Out-Null
 
-# zsdt
-Get-GitHubRelease -repo "facebook/zstd" -path "$SETUP_PATH\zstd.zip" -match win64.zip
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null
-if (Test-Path "$TOOLS\zstd") {
-    Remove-Item "$TOOLS\zstd" -Recurse -Force
-}
-Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
-
 # CyberChef
 Get-GitHubRelease -repo "gchq/CyberChef" -path "$SETUP_PATH\CyberChef.zip" -match CyberChef
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\CyberChef.zip" -o"$TOOLS\CyberChef" | Out-Null
@@ -96,7 +88,7 @@ if (Test-Path "$TOOLS\CyberChef\CyberChef.html") {
 }
 Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
 
-# git
+# git - installed during start
 Get-GitHubRelease -repo "git-for-windows/git" -path "$SETUP_PATH\git.exe" -match 64-bit.exe
 
 # Gollum
@@ -227,15 +219,6 @@ if (Test-Path "$TOOLS\fakenet") {
 }
 Move-Item $TOOLS\fakenet* $TOOLS\fakenet
 
-# Build of Ghidrathon for Ghidra currently not working so disabled.
-# Ghidrathon source
-Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "$SETUP_PATH\ghidrathon.zip" -match Source
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidrathon.zip" -o"$TOOLS" | Out-Null
-if (Test-Path $TOOLS\ghidrathon) {
-    Remove-Item $TOOLS\ghidrathon -Recurse -Force
-}
-Move-Item $TOOLS\mandiant-Ghidrathon* $TOOLS\ghidrathon
-
 # GoReSym
 Get-GitHubRelease -repo "mandiant/GoReSym" -path "$SETUP_PATH\GoReSym.zip" -match GoReSym-windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GoReSym.zip" -o"$TOOLS\GoReSym" | Out-Null
@@ -290,10 +273,10 @@ Copy-Item "$SETUP_PATH\Cartographer.zip" "$TOOLS\ghidra_extensions\Cartographer.
 Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path "$SETUP_PATH\MetadataPlus.exe" -match MetadataPlus
 Copy-Item $SETUP_PATH\MetadataPlus.exe $TOOLS\bin\
 
-# Loki
+# Loki - installed during start
 Get-GitHubRelease -repo "Neo23x0/Loki" -path "$SETUP_PATH\loki.zip" -match loki
 
-# Notepad++
+# Notepad++ - installed during start
 Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path "$SETUP_PATH\notepad++.exe" -match Installer.x64.exe
 
 # HindSight
@@ -308,10 +291,10 @@ Copy-Item $SETUP_PATH\hindsight_gui.exe $TOOLS\bin\
 Get-GitHubRelease -repo "omerbenamram/evtx" -path "$SETUP_PATH\evtx_dump.exe" -match exe
 Copy-Item $SETUP_PATH\evtx_dump.exe $TOOLS\bin\
 
-# ComparePlus plugin for Notepad++
+# ComparePlus plugin for Notepad++ - installed during start
 Get-GitHubRelease -repo "pnedev/comparePlus" -path "$SETUP_PATH\comparePlus.zip" -match x64.zip
 
-# Visual Studio Code powershell extension
+# Visual Studio Code powershell extension - installed during start
 Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "$SETUP_PATH\vscode\vscode-powershell.vsix" -match vsix
 
 # qpdf
@@ -349,7 +332,7 @@ Move-Item $TOOLS\cutter-* $TOOLS\cutter
 Get-GitHubRelease -repo "strozfriedberg/sidr" -path "$SETUP_PATH\sidr.exe" -match sidr.exe
 Copy-Item $SETUP_PATH\sidr.exe $TOOLS\bin\
 
-# jadx
+# jadx - installed during start
 Get-GitHubRelease -repo "skylot/jadx" -path "$SETUP_PATH\jadx.zip" -match jadx-1
 
 # Sleuthkit
@@ -372,7 +355,7 @@ Move-Item $TOOLS\qrtool-* $TOOLS\qrtool
 Get-GitHubRelease -repo "Squiblydoo/debloat" -path "$SETUP_PATH\debloat.zip" -match Windows
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\debloat.zip" -o"$TOOLS\bin" | Out-Null
 
-# Visual Studio Code spell checker extension
+# Visual Studio Code spell checker extension - installed during start
 Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "$SETUP_PATH\vscode\vscode-spell-checker.vsix" -match vsix
 
 # Thumbcacheviewer
@@ -387,7 +370,7 @@ if (Test-Path "$TOOLS\upx") {
 }
 Move-Item $TOOLS\upx-* $TOOLS\upx
 
-# Velociraptor
+# Velociraptor - available for manual installation
 Get-GitHubRelease -repo "velocidex/velociraptor" -path "$SETUP_PATH\velociraptor.exe" -match windows-amd64.exe
 
 # fq

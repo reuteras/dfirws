@@ -5,10 +5,12 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 $SETUP_PATH=".\downloads"
 $TEMP="C:\tmp"
 $TOOLS=".\mount\Tools"
+$mutexName = "Global\dfirwsMutex"
 
 $null=$SETUP_PATH
 $null=$TEMP
 $null=$TOOLS
+$null=$mutexName
 
 <#
 .SYNOPSIS

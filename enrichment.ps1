@@ -13,6 +13,16 @@ if (-not (Test-Path -Path ${enrichmentDirectory})) {
     New-Item -ItemType Directory -Path ${enrichmentDirectory} -Force | Out-Null
 }
 
+# Get the current date
+$DATE = Get-Date -Format "yyyy-MM-dd"
+
+# Read config file
+if (-not (Test-Path -Path "${PWD}\config.ps1")) {
+    Write-Output "Please create a config.ps1 to download Maxmind databases"
+} else {
+    . .\config.ps1
+}
+
 # Download Tor exit nodes
 $folderUrl = "https://collector.torproject.org/archive/exit-lists/"
 $torsaveDirectory = "${enrichmentDirectory}\tor"
@@ -22,7 +32,12 @@ if (-not (Test-Path -Path $torsaveDirectory)) {
     New-Item -ItemType Directory -Path $torsaveDirectory -Force | Out-Null
 }
 
-# Download all exit files
+
+#
+# TOR exit nodes
+#
+
+# Download all exit files for TOR
 $webClient = New-Object System.Net.WebClient
 $files = $webClient.DownloadString($folderUrl).Split("`n") | Select-String -Pattern '<a href="(exit[^"]+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
 
@@ -34,7 +49,9 @@ foreach ($file in $files) {
 }
 $webClient.Dispose()
 
-$DATE = Get-Date -Format "yyyy-MM-dd"
+#
+# MAC address lookup files
+#
 
 # Get manuf file for MAC address lookup
 $manufSaveDirectory = "${enrichmentDirectory}\manuf"
@@ -48,11 +65,9 @@ Write-Output "Downloading $manufUrl to $manufSavePath"
 Invoke-WebRequest -Uri $manufUrl -OutFile $manufSavePath
 Copy-Item -Path $manufSavePath -Destination "${manufSaveDirectory}\manuf-${DATE}.txt"
 
-if (-not (Test-Path -Path "${PWD}\config.ps1")) {
-    Write-Output "Please create a config.ps1 to download Maxmind databases"
-} else {
-    . .\config.ps1
-}
+#
+# Maxmind GeoLite2 databases
+#
 
 # Check if the Maxmind license key is set
 if (-not $MAXMIND_LICENSE_KEY) {
@@ -87,6 +102,10 @@ if (-not $MAXMIND_LICENSE_KEY) {
     Copy-Item -Path $savePath -Destination "${maxmindSaveDirectory}\GeoLite2-Country-${DATE}.tar.gz"
 }
 
+#
+# Download the latest version of Suricata rules
+#
+
 # Download the latest version of Suricata rules
 $suricataUrl = "https://rules.emergingthreats.net/open/suricata-5.0/emerging.rules.zip"
 $suricataSaveDirectory = "${enrichmentDirectory}\suricata"
@@ -100,6 +119,10 @@ $suricataSavePath = Join-Path -Path "${suricataSaveDirectory}" -ChildPath "emerg
 Write-Output "Downloading $suricataUrl to $suricataSavePath"
 Invoke-WebRequest -Uri $suricataUrl -OutFile $suricataSavePath
 Copy-Item -Path $suricataSavePath -Destination "${suricataSaveDirectory}\emerging-${DATE}.rules.zip"
+
+#
+# Download the latest version of Snort rules
+#
 
 # Download the latest version of Snort rules
 $snortUrl = "https://www.snort.org/downloads/community/community-rules.tar.gz"
@@ -115,7 +138,10 @@ Write-Output "Downloading $snortUrl to $snortSavePath"
 Invoke-WebRequest -Uri $snortUrl -OutFile $snortSavePath
 Copy-Item -Path $snortSavePath -Destination "${snortSaveDirectory}\community-rules-${DATE}.rules.tar.gz"
 
+#
 # Git repositories for enrichment
+#
+
 if (! (Get-Command git )) {
     Write-Output "Need git to checkout git repositories."
     Exit

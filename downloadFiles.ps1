@@ -3,19 +3,16 @@
 . .\resources\download\common.ps1
 
 # Check if sandbox is running
+if ( tasklist | findstr WindowsSandbox ) {
+    Write-DateLog "Sandbox can't be running during install or upgrade."
+    Exit
+}
 
 if ($args.Count -eq 0) {
     Write-DateLog "No arguments given. Will download all files."
     $all = $true
 } else {
     $all = $false
-}
-
-if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python") {
-    if ( tasklist | findstr WindowsSandbox ) {
-        Write-DateLog "Sandbox can't be running during install or upgrade."
-        Exit
-    }
 }
 
 if ($all -eq $false) {
@@ -46,8 +43,6 @@ if (! (Test-Path -Path ".\log" )) {
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
 
-# The scripts git and http are needed by the Python script.
-# Most scripts need http.ps1.
 # Get GitHub password from user input
 if ($all -or $args -contains "--http" -or $args -contains "--release" -or $args -contains "--didier") {
     write-dateLog "Use GitHub token to avoid problems with rate limits."
@@ -58,10 +53,8 @@ if ($all -or $args -contains "--http" -or $args -contains "--release" -or $args 
     $null = $GH_USER
 }
 
-if ($all -or $args -contains "--http") {
-    Write-DateLog "Download files via HTTP."
-    .\resources\download\http.ps1
-}
+Write-DateLog "Download files needed in Sandboxes."
+. .\resources\download\basic.ps1
 
 if ($all -or $args -contains "--bash") {
     Write-DateLog "Download packages for Git for Windows (bash)."
@@ -78,15 +71,20 @@ if ($all -or $args -contains "--git") {
     .\resources\download\git.ps1
 }
 
-if ($all -or $args -contains "--release") {
-    Write-DateLog "Download releases from GitHub."
-    .\resources\download\release.ps1
-}
-
 if ($all -or $args -contains "--python") {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages."
     Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+}
+
+if ($all -or $args -contains "--http") {
+    Write-DateLog "Download files via HTTP."
+    .\resources\download\http.ps1
+}
+
+if ($all -or $args -contains "--release") {
+    Write-DateLog "Download releases from GitHub."
+    .\resources\download\release.ps1
 }
 
 if ($all -or $args -contains "--didier") {

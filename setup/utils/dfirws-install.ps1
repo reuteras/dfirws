@@ -1,3 +1,5 @@
+# Script to install DFIRWS tools on demand
+
 # Import common functions
 . $HOME\Documents\tools\wscommon.ps1
 

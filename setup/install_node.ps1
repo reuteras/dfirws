@@ -25,9 +25,9 @@ Remove-Item -r -Force node-v*
 Write-DateLog "Init npm." >> "C:\log\npm.txt" 2>&1
 .\npm init -y  | Out-String -Stream >> "C:\log\npm.txt" 2>&1
 Write-DateLog "Add npm packages" >> "C:\log\npm.txt" 2>&1
-# Deobfuscate Javascript
+# Add Deobfuscator
 .\npm install --global deobfuscator | Out-String -Stream >> "C:\log\npm.txt" 2>&1
-# Create document
+# Add jsdom
 .\npm install --global jsdom | Out-String -Stream >> "C:\log\npm.txt" 2>&1
 # Add box-js
 .\npm install --global box-js | Out-String -Stream >> "C:\log\npm.txt" 2>&1

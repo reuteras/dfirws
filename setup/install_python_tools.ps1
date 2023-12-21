@@ -1,4 +1,4 @@
-# Set variables
+# Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
@@ -10,12 +10,15 @@ if (! (Test-Path "$TEMP")) {
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
-$PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
+$PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
 Get-ChildItem C:\venv\* -Recurse | Remove-Item -Force > $null 2>&1
 Start-Process "$SETUP_PATH\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
 Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
 
+#
+# venv default
+#
 Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\default"
 C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -30,39 +33,19 @@ poetry init `
     --description "Default Python venv for dfirws." `
     --author "dfirws" `
     --license "MIT" `
-    --no-interaction
+    --no-interaction >> "C:\log\python.txt"
 
+# Install packages with poetry
 poetry add `
     aiohttp[speedups] `
-    aiosignal>=1.2.0 `
-    annotated-types>=0.5.0 `
-    anyio>=4.0.0 `
-    async-timeout>=4.0.3 `
-    azure-core>=1.29.4 `
-    azure-identity>=1.14.1 `
-    azure-keyvault-secrets>=4.6.0 `
-    async-lru>=2.0.3 `
-    azure-mgmt-keyvault>=10.2.3 `
-    azure-monitor-query>=1.1.1 `
-    attrs>=22.2.0 `
     autoit-ripper `
-    Babel>=2.13.0 `
     beautifulsoup4>=4.12.1 `
     binary-refinery `
-    bleach>=6.0.0 `
-    bokeh `
     cabarchive `
     capstone `
     certifi>=2023.5.7 `
-    chardet>=5.0.0 `
-    charset_normalizer>=3.1.0 `
-    click>=8.1.5 `
     colorama `
-    comm>=0.1.4 `
-    construct>=2.10.68 `
-    contourpy>=1.1.1 `
     cryptography>=41.0.1 `
-    cycler>=0.12.0 `
     deep_translator `
     Deprecated>=1.2.13 `
     dnslib `
@@ -74,13 +57,11 @@ poetry add `
     elastic_transport>=8.1.2 `
     evtx `
     extract-msg `
-    filelock>=3.13.0 `
     Flask>=2.3.1 `
     folium>=0.13.0 `
     fonttools `
     frida `
     frida-tools `
-    frozenlist>=1.3.3 `
     geoip2>=4.6.0 `
     ghidriff `
     graphviz `
@@ -88,65 +69,43 @@ poetry add `
     hachoir `
     httpx>=0.25.1 `
     httpcore>=0.18.0 `
-    idna>=3.2 `
     ijson `
-    importlib-metadata>=6.5.0 `
     ipython>=8.18.0 `
     ipywidgets `
     jedi>=0.19.0 `
     jinja2 `
     jsbeautifier `
-    jsonpickle>=2.2.0 `
-    jsonschema>=4.19.2 `
-    jsonschema-specifications>=2023.6.1 `
     jupyterlab `
-    jupyter-client>=8.4.0 `
-    jupyter-core>=5.4.0 `
-    jupyter-lsp>=2.2.0 `
-    jupyter-server>=2.11.1 `
-    jupyterlab-server>=2.25.1 `
     keyring>=23.13.1 `
     keystone-engine `
-    kiwisolver>=1.4.4 `
     lief>=0.13.2 `
     LnkParse3 `
     lxml `
     Markdown>=3.5 `
-    MarkupSafe>=2.1.3 `
     matplotlib `
     maxminddb>=2.5.0 `
     minidump `
-    mistune>=3.0.1 `
     msal>=1.24.1 `
     msticpy `
     mkyara `
     msgpack `
     msoffcrypto-tool `
-    multidict>=6.0.0 `
     name-that-hash `
-    nbclient>=0.8.0 `
-    nbconvert>=7.10.0 `
-    nbformat>=5.6.1 `
     neo4j `
     neo4j-driver `
-    nest-asyncio>=1.5.7 `
     netaddr `
     networkx `
-    notebook-shim>=0.2.2 `
     numpy `
     olefile `
     oletools[full]>=0.60.1 `
     openpyxl `
     orjson `
-    packaging>=23.1 `
     pandas `
-    pandocfilters>=1.4.3 `
     pcode2code `
     pcodedmp `
     pefile `
     peutils `
     pillow `
-    platformdirs>=3.11.0 `
     ppdeep `
     prettytable>=3.5 `
     prompt_toolkit>=3.0.35 `
@@ -157,7 +116,6 @@ poetry add `
     pycryptodomex>=3.17.0 `
     pydantic>=2.5.1 `
     pyelftools `
-    Pygments>=2.16.0 `
     pyjwt>=2.7.0 `
     pyOneNote `
     pyparsing>=2.4.6 `
@@ -173,33 +131,25 @@ poetry add `
     PyYAML>=6.0 `
     pyzipper `
     pyzmq>=25.1.0 `
-    referencing>=0.30.2 `
     regipy `
     requests `
     rpds_py>=0.10.5 `
     rzpipe `
     setuptools `
-    sniffio>=1.2.0 `
-    soupsieve>=2.4.1 `
     termcolor>=2.2.0 `
     terminado>=0.17.1 `
     textsearch `
     time-decode `
     tldextract>=5.1.0 `
     tomlkit `
-    tornado>=6.3.2 `
     tqdm `
-    traitlets>=5.13.0 `
     treelib `
-    typing-extensions>=4.7.1 `
     tzdata>=2023.1 `
     tzlocal>=5.1 `
     unicorn `
     unpy2exe `
     urllib3>=2.1.0 `
     visidata>=2.11 `
-    werkzeug>=3.0.1 `
-    wrapt>=1.15.0 `
     xlrd>=2.0.0 `
     XLMMacroDeobfuscator>=0.2.6 `
     XlsxWriter>=3.1.8 `
@@ -218,7 +168,6 @@ curl -o "machofile-cli.py" "https://raw.githubusercontent.com/pstirparo/machofil
 curl -o "machofile.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
 curl -o "msidump.py" "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py"
 
-Copy-Item $SETUP_PATH\msidump.py .\msidump.py
 Copy-Item "C:\git\bmc-tools\bmc-tools.py" "C:\venv\default\Scripts\bmc-tools.py"
 
 (Get-Content .\parseUSBs.py -raw) -replace "#!/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\parseUSBs2.py"
@@ -233,7 +182,11 @@ Copy-Item * C:\venv\default\Scripts
 deactivate
 Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 
-# Install Visual Studio Build Tools.
+#
+# venv jep and tools needed for jep
+#
+
+# Install Visual Studio Build Tools for jep
 Write-DateLog "Start installation of Visual Studio Build Tools." >> "C:\log\python.txt" 2>&1
 Copy-Item "$SETUP_PATH\vs_BuildTools.exe" "$TEMP\vs_BuildTools.exe"
 Set-Location $Temp
@@ -241,7 +194,7 @@ Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force 
 Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
 & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' >> "C:\log\python.txt" 2>&1
 
-# Install Java.
+# Install Java for jep
 Write-DateLog "Start installation of Corretto Java." >> "C:\log\python.txt" 2>&1
 Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
@@ -276,7 +229,9 @@ Copy-Item $TEMP\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.z
 deactivate
 Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 
-# dfir-unfurl
+#
+# venv dfir-unfurl
+#
 Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-unfurl"
 C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -313,7 +268,9 @@ Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\
 Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
 Write-DateLog "Python venv dfir-unfurl cache done." >> "C:\log\python.txt"
 
-# pySigma
+#
+# venv pySigma
+#
 Write-DateLog "Install packages in venv pySigma in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pySigma"
 C:\venv\pySigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -334,8 +291,11 @@ poetry add `
 deactivate
 Write-DateLog "Python venv pySigma done." >> "C:\log\python.txt"
 
-# pe2pic
-Write-DateLog "Install packages in venv pe2pic in sandbox (needs older packages)." >> "C:\log\python.txt"
+#
+# venv pe2pic
+#
+
+Write-DateLog "Install packages in venv pe2pic in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pe2pic"
 C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
@@ -347,8 +307,11 @@ deactivate
 Set-Content "C:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
 Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
 
-# evt2sigma
-Write-DateLog "Install packages in venv evt2sigma in sandbox (needs older packages)." >> "C:\log\python.txt"
+#
+# venv evt2sigma
+#
+
+Write-DateLog "Install packages in venv evt2sigma in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\evt2sigma"
 C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
@@ -360,8 +323,11 @@ Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2
 deactivate
 Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
 
-# maldump
-Write-DateLog "Install packages in venv maldump in sandbox (needs older packages)." >> "C:\log\python.txt"
+#
+# venv maldump
+#
+
+Write-DateLog "Install packages in venv maldump in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\maldump"
 C:\venv\maldump\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
@@ -372,8 +338,11 @@ deactivate
 Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path C:\venv\default\Scripts\maldump.ps1
 Write-DateLog "Python venv maldump done." >> "C:\log\python.txt"
 
-# scare
-Write-DateLog "Install packages in venv scare in sandbox (needs older packages)." >> "C:\log\python.txt"
+#
+# venv scare
+#
+
+Write-DateLog "Install packages in venv scare in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
@@ -390,8 +359,11 @@ deactivate
 Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
 Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 
-# Zircolite
-Write-DateLog "Install packages in venv Zircolite in sandbox (needs older packages)." >> "C:\log\python.txt"
+#
+# venv Zircolite
+#
+
+Write-DateLog "Install packages in venv Zircolite in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\Zircolite"
 C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
@@ -403,8 +375,11 @@ deactivate
 Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
 Write-DateLog "Python venv Zircolite done." >> "C:\log\python.txt"
 
-# chepy
-Write-DateLog "Install packages in venv chepy in sandbox (needs older packages)." >> "C:\log\python.txt"
+#
+# venv chepy
+#
+
+Write-DateLog "Install packages in venv chepy in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\chepy"
 C:\venv\chepy\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
@@ -415,8 +390,11 @@ deactivate
 Set-Content "C:\venv\chepy\Scripts\python.exe C:\venv\chepy\Scripts\chepy.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\chepy.ps1
 Write-DateLog "Python venv chepy done." >> "C:\log\python.txt"
 
-# dissect
-Write-DateLog "Install packages in venv dissect in sandbox (needs older packages)." >> "C:\log\python.txt"
+#
+# venv dissect
+#
+
+Write-DateLog "Install packages in venv dissect in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
 C:\venv\dissect\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
