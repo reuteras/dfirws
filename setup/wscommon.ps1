@@ -15,6 +15,27 @@ $null=$LOCAL_PATH
 $null=$PDFSTREAMDUMPER
 
 # Declare helper functions
+
+
+<#
+.SYNOPSIS
+Adds a directory to the user's PATH environment variable.
+
+.DESCRIPTION
+The Add-ToUserPath function adds a specified directory to the user's PATH environment variable. This allows the user to run executables located in the specified directory from any location in the command prompt.
+
+.PARAMETER dir
+Specifies the directory to be added to the PATH environment variable. The directory must be a valid path.
+
+.EXAMPLE
+Add-ToUserPath -dir "C:\Program Files\MyApp"
+Adds the directory "C:\Program Files\MyApp" to the user's PATH environment variable.
+
+.NOTES
+Author: Your Name
+Date:   Current Date
+#>
+
 function Add-ToUserPath {
     param (
         [Parameter(Mandatory=$true)]
