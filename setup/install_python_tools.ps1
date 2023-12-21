@@ -248,7 +248,7 @@ Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
 Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
 $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
-# jep
+# jep venv
 Write-DateLog "Install packages in venv jep in sandbox (needs older packages)." >> "C:\log\python.txt"
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv --system-site-packages C:\venv\jep"
 C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -265,8 +265,7 @@ poetry init `
 
 poetry add `
     NumPy `
-    flare-capa `
-    jep 2>&1 >> "C:\log\python.txt"
+    flare-capa 2>&1 >> "C:\log\python.txt"
 
 # Build Ghidrathon for Gidhra
 Write-DateLog "Build Ghidrathon for Ghidra."
