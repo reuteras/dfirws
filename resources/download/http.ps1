@@ -2,15 +2,15 @@
 
 # Get uri for latest nuget - ugly
 $choco = Get-ChocolateyUrl chocolatey
-$nodejs = Get-DownloadUrlFromPage -url https://nodejs.org/en/download/ -regex 'https:[^"]+win-x64.zip'
+$nodejs = Get-DownloadUrlFromPage -url https://nodejs.org/en/download/ -RegEx 'https:[^"]+win-x64.zip'
 
 # Get URI for Visual Studio Code python extension - ugly
-$vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -regex '"AssetUri":"[^"]+python/([^/]+)/'
+$vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
 $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
 $vscode_python_version=$vscode_tmp.Matches.Groups[1].Value
 
 # Get URI for Visual Studio Code mermaid extension - ugly
-$vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -regex '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+$vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -RegEx '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
 $vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
 $vscode_mermaid_version=$vscode_tmp.Matches.Groups[1].Value
 
