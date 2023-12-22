@@ -30,7 +30,7 @@ Download-File -Uri "https://example.com/file.txt" -FilePath "C:\Downloads\file.t
 Downloads the file from the specified URI and saves it to the specified file path.
 
 .NOTES
-Author: Peter Reuterås
+Author: peter@reuteras.net
 Date:   2023-12-21
 #>
 function Get-FileFromUri {
@@ -115,7 +115,7 @@ $downloadUrl = Get-DownloadUrl -Releases $releases -Match $match
 Retrieves the download URL for the latest release of the specified GitHub repository that ends with ".zip".
 
 .NOTES
-Author: Peter Reuterås
+Author: peter@reuteras.net
 Date:   2023-12-21
 #>
 function Get-DownloadUrl {
@@ -240,7 +240,7 @@ Get-ChocolateyUrl -PackageName "example-package"
 This example retrieves the download URL for the "example-package" Chocolatey package.
 
 .NOTES
-Author: Peter Reuterås
+Author: peter@reuteras.net
 Date:   2023-12-21
 #>
 function Get-ChocolateyUrl {
@@ -316,7 +316,7 @@ Returns the download URL for the latest version of the "gcc" package from the MS
 System.String
 
 .NOTES
-Author: Peter Reuterås
+Author: peter@reuteras.net
 Date:  2023-12-21
 #>
 function Get-DownloadUrlMSYS {
@@ -368,7 +368,7 @@ Stop-SandboxWhenDone -path "C:\Temp\sample.txt" -Mutex $mutex
 This example stops the Windows Sandbox when the file "C:\Temp\sample.txt" exists and the mutex object $mutex is released.
 
 .NOTES
-Author: Peter Reuterås
+Author: peter@reuteras.net
 Date:   2023-12-21
 #>
 function Stop-SandboxWhenDone {
@@ -419,7 +419,7 @@ Write-SynchronizedLog -LogFile "C:\Logs\log.txt" -Message "This is a log message
 This example demonstrates how to use the Write-SynchronizedLog function to write a log message to the specified log file.
 
 .NOTES
-Author: Peter Reuterås
+Author: peter@reuteras.net
 Date:   2023-12-21
 #>
 function Write-SynchronizedLog {
