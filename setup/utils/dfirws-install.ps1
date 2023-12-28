@@ -12,7 +12,9 @@ if ($args.Count -eq 0) {
     Write-Output "   --cmder"
     Write-Output "   --gitbash"
     Write-Output "   --golang"
+    Write-Output "   --hashcat"
     Write-Output "   --libreoffice"
+    Write-Output "   --loki"
     Write-Output "   --neo4j"
     Write-Output "   --node"
     Write-Output "   --obsidian"
@@ -53,8 +55,16 @@ if ($args -contains "--golang") {
     Install-GoLang
 }
 
+if ($args -contains "--hashcat") {
+    Install-Hashcat
+}
+
 if ($args -contains "--libreoffice") {
     Install-LibreOffice
+}
+
+if ($args -contains "--loki") {
+    Install-Loki
 }
 
 if ($args -contains "--neo4j") {
