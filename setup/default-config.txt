@@ -12,10 +12,12 @@ $WSDFIR_BEACONHUNTER="Yes"
 $WSDFIR_CMDER="No"
 # Install git
 $WSDFIR_GIT="Yes"
+# Install hashcat
+$WSDFIR_HASHCAT="No"
 # Install LibreOffice
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki
-$WSDFIR_LOKI="Yes"
+$WSDFIR_LOKI="No"
 # Install neo4j
 $WSDFIR_NEO4J="No"
 # Install Obsidian
