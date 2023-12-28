@@ -44,6 +44,7 @@ $repourls = `
     "https://github.com/rizinorg/cutter-jupyter.git", `
     "https://github.com/Seabreg/Regshot.git", `
     "https://github.com/SigmaHQ/sigma.git", `
+    "https://github.com/StrangerealIntel/Shadow-Pulse.git", `
     "https://github.com/swisscom/PowerSponse.git", `
     "https://github.com/thewhiteninja/deobshell.git", `
     "https://github.com/volexity/one-extract.git", `
@@ -51,6 +52,7 @@ $repourls = `
     "https://github.com/wagga40/Zircolite.git", `
     "https://github.com/reuteras/PatchaPalooza.git", `
     "https://github.com/Yamato-Security/hayabusa-rules.git", `
+    "https://github.com/YosfanEilay/AuthLogParser.git", `
     "https://github.com/yossizap/cutterref.git"
 
 foreach ($repourl in $repourls) {
