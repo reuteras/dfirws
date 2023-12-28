@@ -637,7 +637,7 @@ REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "No
 # Install hashcat
 if ($WSDFIR_HASHCAT -eq "Yes") {
     Install-Hashcat
-    Write-DateLog "Installing hashcat done." >> $TEMP\start_sandbox.log    
+    Write-DateLog "Installing hashcat done." >> $TEMP\start_sandbox.log
 }
 
 # Add shortcuts to desktop for Jupyter and Gollum
