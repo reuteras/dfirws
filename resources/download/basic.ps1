@@ -19,6 +19,19 @@ Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath 
 # Get Amazon Corretto - installed during start
 Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
 
+# Ghidra - latest release
+Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "$SETUP_PATH\ghidra.zip" -match ghidra
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra.zip" -o"$TOOLS" | Out-Null
+if (Test-Path "$TOOLS\ghidra") {
+    Remove-Item "$TOOLS\ghidra" -Recurse -Force
+}
+New-Item -ItemType Directory -Force -Path $TOOLS\ghidra | Out-Null
+Move-Item $TOOLS\ghidra_* $TOOLS\ghidra\
+
+# Ghidra - older release
+Get-FileFromUri -uri "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip" -FilePath "$SETUP_PATH\ghidra_10.4_PUBLIC_20230928.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra_10.4_PUBLIC_20230928.zip" -o"$TOOLS\ghidra" | Out-Null
+
 # Ghidrathon source
 Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "$SETUP_PATH\ghidrathon.zip" -match Source
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidrathon.zip" -o"$TOOLS" | Out-Null
