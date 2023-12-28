@@ -103,6 +103,12 @@ if (Test-Path "$TOOLS\redress") {
 }
 Move-Item $TOOLS\redress-* $TOOLS\redress
 
+# h2database - available for manual installation
+Get-GitHubRelease -repo "h2database/h2database" -path "$SETUP_PATH\h2database.zip" -match bundle.jar
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\h2database.zip" -o"$TOOLS\h2database" | Out-Null
+Get-GitHubRelease -repo "h2database/h2database" -path "$SETUP_PATH\h2.pdf" -match h2.pdf
+Copy-Item $SETUP_PATH\h2.pdf $TOOLS\h2database
+
 # INDXRipper
 Get-GitHubRelease -repo "harelsegev/INDXRipper" -path "$SETUP_PATH\indxripper.zip" -match amd64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\indxripper.zip" -o"$TOOLS\INDXRipper" | Out-Null
