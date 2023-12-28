@@ -43,6 +43,7 @@ poetry add `
     binary-refinery `
     cabarchive `
     capstone `
+    cart `
     certifi>=2023.5.7 `
     colorama `
     cryptography>=41.0.1 `
