@@ -252,8 +252,10 @@ Copy-Item -Recurse -Force $GIT\IDR "$env:ProgramFiles"
 Write-DateLog "Tools copied" >> $TEMP\start_sandbox.log
 
 # Add jadx
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
-Write-DateLog "jadx added" >> $TEMP\start_sandbox.log
+if ($WSDFIR_JADX -eq "Yes") {
+    Install-Jadx
+    Write-DateLog "jadx added" >> $TEMP\start_sandbox.log
+}
 
 # Add x64dbg if specified
 if ($WSDFIR_X64DBG -eq "Yes") {

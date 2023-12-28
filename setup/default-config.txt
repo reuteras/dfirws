@@ -14,6 +14,8 @@ $WSDFIR_CMDER="No"
 $WSDFIR_GIT="Yes"
 # Install hashcat
 $WSDFIR_HASHCAT="No"
+# Install Jadx
+$WSDFIR_JADX="No"
 # Install LibreOffice
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki

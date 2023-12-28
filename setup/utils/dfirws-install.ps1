@@ -13,6 +13,7 @@ if ($args.Count -eq 0) {
     Write-Output "   --gitbash"
     Write-Output "   --golang"
     Write-Output "   --hashcat"
+    Write-Output "   --jadx"
     Write-Output "   --libreoffice"
     Write-Output "   --loki"
     Write-Output "   --neo4j"
@@ -61,6 +62,10 @@ if ($args -contains "--hashcat") {
 
 if ($args -contains "--libreoffice") {
     Install-LibreOffice
+}
+
+if ($args -contains "--jadx") {
+    Install-Jadx
 }
 
 if ($args -contains "--loki") {
