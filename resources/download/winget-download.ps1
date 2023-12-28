@@ -59,7 +59,7 @@ Clear-Tmp
 # Ruby - available for installation via dfirws-install.ps1
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading Ruby."
-winget download RubyInstallerTeam.Ruby.3.3 -d .\tmp\winget 2>&1 | Out-Null
+winget download RubyInstallerTeam.Ruby.3.2 -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\Ruby*.exe .\downloads\ruby.exe
 Clear-Tmp
 
