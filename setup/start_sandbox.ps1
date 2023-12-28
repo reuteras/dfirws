@@ -17,11 +17,6 @@ New-Item -ItemType Directory "$HOME\Documents\jupyter"
 
 Write-DateLog "Start sandbox setup" > $TEMP\start_sandbox.log
 
-$WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
-#$WIN11=(Get-ComputerInfo | Select-Object -expand OsName) -match 11
-
-Write-DateLog "start_sandbox.ps1"
-
 # Bypass the execution policy for the current session
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
@@ -132,7 +127,7 @@ if ($WSDFIR_DARK -eq "Yes") {
 }
 
 # Show file extensions
-Write-DateLog "Show file extensions"
+Write-DateLog "Show file extensions" >> $TEMP\start_sandbox.log
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\HideFileExt /v DefaultValue /t REG_DWORD /d 0 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL /v DefaultValue /t REG_DWORD /d 1 /f
@@ -140,24 +135,24 @@ reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hide
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hidden /t REG_DWORD /d 0 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowSuperHidden /t REG_DWORD /d 1 /f
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v DontPrettyPath /t REG_DWORD /d 1 /f
-Write-DateLog "File extensions shown"
+Write-DateLog "File extensions shown" >> $TEMP\start_sandbox.log
 
 # Add right-click context menu if specified
 if ($WSDFIR_RIGHTCLICK -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
-    Write-DateLog "Right-click context menu added"
+    Write-DateLog "Right-click context menu added" >> $TEMP\start_sandbox.log
 }
 
 # Import registry settings
 reg import $HOME\Documents\tools\registry.reg
-Write-DateLog "Registry settings imported"
+Write-DateLog "Registry settings imported" >> $TEMP\start_sandbox.log
 
 # Restart Explorer process
 Stop-Process -ProcessName Explorer -Force
-Write-DateLog "Explorer restarted"
+Write-DateLog "Explorer restarted" >> $TEMP\start_sandbox.log
 
 # Add to PATH
-Write-DateLog "Add to PATH"
+Write-DateLog "Add to PATH" >> $TEMP\start_sandbox.log
 Add-ToUserPath "$env:ProgramFiles\4n4lDetector"
 Add-ToUserPath "$env:ProgramFiles\7-Zip"
 Add-ToUserPath "$env:ProgramFiles\bin"
@@ -245,7 +240,7 @@ Add-ToUserPath "$TOOLS\Zimmerman\XWFIM"
 Add-ToUserPath "$TOOLS\zstd"
 Add-ToUserPath "$VENV\maldump\Scripts"
 Add-ToUserPath "$HOME\Documents\tools\utils"
-Write-DateLog "Added to PATH"
+Write-DateLog "Added to PATH" >> $TEMP\start_sandbox.log
 
 # Shortcut for PowerShell
 Add-Shortcut -SourceLnk "$HOME\Desktop\PowerShell.lnk" -DestinationPath "$env:ProgramFiles\PowerShell\7\pwsh.exe" -WorkingDirectory "$HOME\Desktop"
@@ -254,15 +249,16 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\PowerShell.lnk" -DestinationPath "$env:Pr
 Copy-Item "$SETUP_PATH\BeaconHunter.exe" "$env:ProgramFiles\bin"
 Copy-Item -Recurse -Force $TOOLS\4n4lDetector "$env:ProgramFiles"
 Copy-Item -Recurse -Force $GIT\IDR "$env:ProgramFiles"
+Write-DateLog "Tools copied" >> $TEMP\start_sandbox.log
 
 # Add jadx
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
-Write-DateLog "jadx added"
+Write-DateLog "jadx added" >> $TEMP\start_sandbox.log
 
 # Add x64dbg if specified
 if ($WSDFIR_X64DBG -eq "Yes") {
     Install-X64dbg
-    Write-DateLog "x64dbg added"
+    Write-DateLog "x64dbg added" >> $TEMP\start_sandbox.log
 }
 
 # Configure PowerShell logging
@@ -272,29 +268,29 @@ Set-ItemProperty -Path HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\Pow
 # Add cmder
 if ($WSDFIR_CMDER -eq "Yes") {
     Install-CMDer
-    Write-DateLog "cmder added"
+    Write-DateLog "cmder added" >> $TEMP\start_sandbox.log
 }
 
 # Add PersistenceSniper
 if ($WSDFIR_PERSISTENCESNIPER -eq "Yes") {
     Import-Module $GIT\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1
-    Write-DateLog "PersistenceSniper added"
+    Write-DateLog "PersistenceSniper added" >> $TEMP\start_sandbox.log
 }
 
 # Add apimonitor
 if ($WSDFIR_APIMONITOR -eq "Yes") {
     Install-Apimonitor
-    Write-DateLog "apimonitor added"
+    Write-DateLog "apimonitor added" >> $TEMP\start_sandbox.log
 }
 
 # Configure usage of new venv for PowerShell
 (Get-ChildItem -File $VENV\default\Scripts\).Name | findstr /R /V "[\._]" | findstr /V activate | `
     ForEach-Object {Write-Output "function $_() { python $VENV\default\Scripts\$_ `$PsBoundParameters.Values + `$args }"} | Out-File -Append -Encoding "ascii" "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-Write-DateLog "New venv configured for PowerShell"
+Write-DateLog "New venv configured for PowerShell" >> $TEMP\start_sandbox.log
 
 # Signal that everything is done to start using the tools (mostly).
 Update-Wallpaper "$SETUP_PATH\dfirws.jpg"
-Write-DateLog "Wallpaper updated"
+Write-DateLog "Wallpaper updated" >> $TEMP\start_sandbox.log
 
 # Run install script for choco packages
 if ($WSDFIR_CHOCO -eq "Yes") {
@@ -305,25 +301,25 @@ if ($WSDFIR_CHOCO -eq "Yes") {
 # Setup Node.js
 if ($WSDFIR_NODE -eq "Yes") {
     Install-Node
-    Write-DateLog "Node.js installed"
+    Write-DateLog "Node.js installed" >> $TEMP\start_sandbox.log
 }
 
 # Setup Obsidian
 if ($WSDFIR_OBSIDIAN -eq "Yes") {
     Install-Obsidian
-    Write-DateLog "Obsidian installed"
+    Write-DateLog "Obsidian installed" >> $TEMP\start_sandbox.log
 }
 
 # Install Qemu
 if ($WSDFIR_QEMU -eq "Yes") {
     Install-Qemu
-    Write-DateLog "Qemu installed"
+    Write-DateLog "Qemu installed" >> $TEMP\start_sandbox.log
 }
 
 # Install extra tools for Git-bash
 if ($WSDFIR_BASH_EXTRA -eq "Yes") {
     Install-BashExtra
-    Write-DateLog "Extra tools for Git-bash installed"
+    Write-DateLog "Extra tools for Git-bash installed" >> $TEMP\start_sandbox.log
 }
 
 # Set Notepad++ as default for many file types
@@ -336,20 +332,17 @@ cmd /c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-Write-DateLog "Notepad++ set as default for many file types"
+Write-DateLog "Notepad++ set as default for many file types" >> $TEMP\start_sandbox.log
 
 # Last commands
-if (($WSDFIR_W10_LOOPBACK -eq "Yes") -and ($WIN10)) {
-    & "$HOME\Documents\tools\utils\devcon.exe" install $env:windir\inf\netloop.inf *msloop
-    Write-DateLog "Loopback adapter installed"
+if ($WSDFIR_W10_LOOPBACK -eq "Yes") {
+    Install-W10Loopback
 }
 
 # Install Loki
 if ($WSDFIR_LOKI -eq "Yes") {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\loki.zip" -o"$env:ProgramFiles\"
-    Write-DateLog "Loki installed"
-} else {
-    New-Item -ItemType Directory "$env:ProgramFiles\loki"
+    Install-Loki
+    Write-DateLog "Loki installed" >> $TEMP\start_sandbox.log
 }
 
 # Clean up
@@ -618,13 +611,12 @@ Copy-Item -Recurse $GIT\cutter-jupyter\icons "$HOME\AppData\Roaming\rizin\cutter
 Copy-Item -Recurse $GIT\capa-explorer\capa_explorer_plugin "$HOME\AppData\Roaming\rizin\cutter\plugins\python"
 Write-DateLog "Installing Cutter plugins done." >> $TEMP\start_sandbox.log
 
-# Unzip signatures for loki and yara
-Copy-Item $GIT\signature-base "$env:ProgramFiles\loki" -Recurse
+# Unzip yara signatures
 & "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-core.zip" -o"$DATA"
 & "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-extended.zip" -o"$DATA"
 & "$env:ProgramFiles\7-Zip\7z.exe" x "$SETUP_PATH\yara-forge-rules-full.zip" -o"$DATA"
 Copy-Item "$DATA\packages\full\yara-rules-full.yar" "$DATA\total.yara"
-Write-DateLog "Unzipping signatures for loki and yara done." >> $TEMP\start_sandbox.log
+Write-DateLog "Unzipping signatures for yara done." >> $TEMP\start_sandbox.log
 
 # Start sysmon when installation is done
 if ($WSDFIR_SYSMON -eq "Yes") {
@@ -635,13 +627,16 @@ Write-DateLog "Starting sysmon done." >> $TEMP\start_sandbox.log
 # Start Gollum for local wiki
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
 Start-Process "$env:ProgramFiles\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar $TOOLS\lib\gollum.war -S gollum --lenient-tag-lookup $GIT\dfirws.wiki" -WindowStyle Hidden
-Write-DateLog "Starting Gollum for local wiki done."
+Write-DateLog "Starting Gollum for local wiki done." >> $TEMP\start_sandbox.log
 
 # Don't ask about new apps
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1
 
-Copy-Item -Recurse "$TOOLS\hashcat" "$env:ProgramFiles"
-Write-DateLog "Installing hashcat done." >> $TEMP\start_sandbox.log
+# Install hashcat
+if ($WSDFIR_HASHCAT -eq "Yes") {
+    Install-Hashcat
+    Write-DateLog "Installing hashcat done." >> $TEMP\start_sandbox.log    
+}
 
 # Add shortcuts to desktop for Jupyter and Gollum
 Add-Shortcut -SourceLnk "$HOME\Desktop\jupyter.lnk" -DestinationPath "$HOME\Documents\tools\utils\jupyter.bat"
