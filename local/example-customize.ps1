@@ -31,6 +31,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\Notepad++.lnk" -DestinationPath "$env:Pro
 # Configure Ghidra
 
 New-Item -Path "C:\Users\WDAGUtilityAccount\.ghidra\.ghidra_10.4_PUBLIC" -ItemType Directory -Force
+New-Item -Path "C:\Users\WDAGUtilityAccount\.ghidra\.ghidra_11.0_PUBLIC" -ItemType Directory -Force
 
 if ( $WSDFIR_DARK -eq "Yes") {
     $GHIDRA_THEME = "Theme=Class\:generic.theme.builtin.FlatDarkTheme"
@@ -54,6 +55,7 @@ USER_AGREEMENT=ACCEPT
 "@
 
 $GHIDRA_CONFIG | Out-File -FilePath "C:\Users\WDAGUtilityAccount\.ghidra\.ghidra_10.4_PUBLIC\preferences" -Encoding ascii
+$GHIDRA_CONFIG | Out-File -FilePath "C:\Users\WDAGUtilityAccount\.ghidra\.ghidra_11.0_PUBLIC\preferences" -Encoding ascii
 New-Item -Path "$HOME/.ghidra\.ghidra_10.4_PUBLIC\Extensions" -ItemType Directory -Force | Out-Null
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\GolangAnalyzerExtension.zip" -o"$HOME/.ghidra/.ghidra_10.4_PUBLIC/Extensions" | Out-Null
 
