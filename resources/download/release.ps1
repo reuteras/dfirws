@@ -249,14 +249,6 @@ Move-Item $TOOLS\pev* $TOOLS\pev
 Get-GitHubRelease -repo "multiprocessio/dsq" -path "$SETUP_PATH\dsq.zip" -match dsq-win
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dsq.zip" -o"$TOOLS\bin" | Out-Null
 
-# Ghidra
-Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "$SETUP_PATH\ghidra.zip" -match ghidra
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra.zip" -o"$TOOLS" | Out-Null
-if (Test-Path "$TOOLS\ghidra") {
-    Remove-Item "$TOOLS\ghidra" -Recurse -Force
-}
-Move-Item $TOOLS\ghidra_* $TOOLS\ghidra
-
 # Ghidra GolangAnalyzerExtension
 Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "$SETUP_PATH\GolangAnalyzerExtension.zip" -match 10.4
 if (! (Test-Path "$TOOLS\ghidra_extensions")) {
