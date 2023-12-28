@@ -129,7 +129,7 @@ Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/raw/gh-page
 Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.21-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
-Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.28-windows.zip" -FilePath ".\downloads\neo4j.zip"
+Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.29-windows.zip" -FilePath ".\downloads\neo4j.zip"
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip"
