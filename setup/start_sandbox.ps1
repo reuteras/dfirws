@@ -538,7 +538,10 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Cutter.lnk" -D
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk" -DestinationPath "$TOOLS\dnSpy32\dnSpy.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\dnSpy64.lnk" -DestinationPath "$TOOLS\dnSpy64\dnSpy.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\fasm.lnk" -DestinationPath "$TOOLS\fasm\FASM.EXE"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Ghidra.lnk" -DestinationPath "$TOOLS\ghidra\ghidraRun.bat"
+(Get-ChildItem C:\Tools\Ghidra\).Name | ForEach-Object {
+    $VERSION = $_
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "$TOOLS\ghidra\${VERSION}\ghidraRun.bat"
+}
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\iaito.lnk" -DestinationPath "$TOOLS\iaito\iaito.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\scare.bat.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
