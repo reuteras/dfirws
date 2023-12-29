@@ -156,7 +156,7 @@ if (Test-Path -Path $TOOLS\ntemp\readme.txt) {
 Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
 Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
 
-Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecookiesview.zip" -FilePath ".\downloads\iecookiesview.zip"
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecv.zip" -FilePath ".\downloads\iecookiesview.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\iecookiesview.zip" -o"$TOOLS\ntemp" | Out-Null
 if (Test-Path -Path $TOOLS\ntemp\readme.txt) {
     Copy-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\iecookiesview.txt"

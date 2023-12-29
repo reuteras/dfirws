@@ -133,7 +133,9 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "Error: no test specified" -and
     $_.Line -notmatch "pretty.errors" -and
     $_.Line -notmatch "Copied (replaced existing)" -and
-    $_.Line -notmatch "INFO"
+    $_.Line -notmatch "INFO" -and
+    $_.Line -notmatch "Downloaded " -and
+    $_.Line -notmatch " Compiling "
 }
 
 if ($warnings -or $errors) {
