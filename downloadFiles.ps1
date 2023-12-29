@@ -125,7 +125,7 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch " INFO " -and
     $_.Line -notmatch "This is taking longer than usual" -and
     $_.Line -notmatch "Installing collected packages" -and
-    $_.Line -notmatch "pymispwarninglists" -and 
+    $_.Line -notmatch "pymispwarninglists" -and
     $_.Line -notmatch "warning: be sure to add"
 }
 
