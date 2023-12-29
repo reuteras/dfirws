@@ -123,6 +123,71 @@ Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath 
 # Artifacts Echange for Velociraptor
 Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/raw/gh-pages/exchange/artifact_exchange_v2.zip" -FilePath ".\downloads\artifact_exchange.zip"
 
+# Mail Viewer
+Get-FileFromUri -uri "https://www.mitec.cz/Downloads/MailView.zip" -FilePath ".\downloads\mailview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\mailview.zip" -o"$TOOLS\MailView" | Out-Null
+
+# Volatility Workbench 3
+Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench.zip" -FilePath ".\downloads\volatilityworkbench.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\volatilityworkbench.zip" -o"$TOOLS\VolatilityWorkbench" | Out-Null
+
+# Volatility Workbench 2
+Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench-v2.1.zip" -FilePath ".\downloads\volatilityworkbench2.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\volatilityworkbench2.zip" -o"$TOOLS\VolatilityWorkbench2" | Out-Null
+
+# Volatility Workbench 2 Profiles
+Get-FileFromUri -uri "https://www.osforensics.com/downloads/Collection.zip" -FilePath ".\downloads\volatilityworkbench2profiles.zip"
+
+# Nirsoft tools
+New-Item -Path "$TOOLS\nirsoft" -ItemType Directory -Force | Out-Null
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/lastactivityview.zip" -FilePath ".\downloads\lastactivityview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\lastactivityview.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\lastactivityview.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/chromecookiesview.zip" -FilePath ".\downloads\chromecookiesview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chromecookiesview.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\chromecookiesview.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecookiesview.zip" -FilePath ".\downloads\iecookiesview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\iecookiesview.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\iecookiesview.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/mzcv-x64.zip" -FilePath ".\downloads\MZCookiesView.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\MZCookiesView.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\MZCookiesView.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/chromecacheview.zip" -FilePath ".\downloads\chromecacheview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\chromecacheview.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\chromecacheview.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/mzcacheview.zip" -FilePath ".\downloads\mzcacheview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\mzcacheview.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\mzcacheview.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecacheview.zip" -FilePath ".\downloads\iecacheview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\iecacheview.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\iecacheview.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
+Get-FileFromUri -uri "https://www.nirsoft.net/utils/browsinghistoryview-x64.zip" -FilePath ".\downloads\browsinghistoryview.zip"
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\browsinghistoryview.zip" -o"$TOOLS\ntemp" | Out-Null
+Rename-Item "$TOOLS\ntemp\readme.txt" "$TOOLS\ntemp\browsinghistoryview.txt"
+Copy-Item $TOOLS\ntemp\* $TOOLS\nirsoft\
+Remove-Item -Recurse -Force $TOOLS\ntemp | Out-Null 2>&1
+
 # Update the links below when new versions are released
 
 # https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start
