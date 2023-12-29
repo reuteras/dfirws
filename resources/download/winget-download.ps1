@@ -63,6 +63,13 @@ winget download RubyInstallerTeam.Ruby.3.2 -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\Ruby*.exe .\downloads\ruby.exe
 Clear-Tmp
 
+# Rust - available for installation via dfirws-install.ps1
+Clear-Tmp
+Write-SynchronizedLog "winget: Downloading Rust."
+winget download Rustlang.Rust.GNU -d .\tmp\winget 2>&1 | Out-Null
+Copy-Item .\tmp\winget\Rust*.msi .\downloads\rust.msi
+Clear-Tmp
+
 # VirusTotal CLI
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
@@ -70,3 +77,5 @@ winget download VirusTotal.vt-cli -d .\tmp\winget 2>&1 | Out-Null
 Copy-Item .\tmp\winget\vt-cli*.zip .\downloads\vt.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\vt.zip" -o"$TOOLS\bin" | Out-Null
 Clear-Tmp
+
+Write-SynchronizedLog "winget: Download complete."

@@ -40,6 +40,9 @@ if (Test-Path $TOOLS\ghidrathon) {
 }
 Move-Item $TOOLS\mandiant-Ghidrathon* $TOOLS\ghidrathon
 
+# git - installed during start
+Get-GitHubRelease -repo "git-for-windows/git" -path "$SETUP_PATH\git.exe" -match 64-bit.exe
+
 # zsdt
 Get-GitHubRelease -repo "facebook/zstd" -path "$SETUP_PATH\zstd.zip" -match win64.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"$TOOLS" | Out-Null

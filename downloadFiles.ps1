@@ -44,14 +44,12 @@ Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
 
 # Get GitHub password from user input
-if ($all -or $args -contains "--http" -or $args -contains "--release" -or $args -contains "--didier") {
-    write-dateLog "Use GitHub token to avoid problems with rate limits."
-    $GH_USER = Read-Host "Enter GitHub user name"
-    $PASS = Read-Host "Enter GitHub token" -AsSecureString
-    $GH_PASS =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
-    $null = $GH_PASS
-    $null = $GH_USER
-}
+write-dateLog "Use GitHub token to avoid problems with rate limits."
+$GH_USER = Read-Host "Enter GitHub user name"
+$PASS = Read-Host "Enter GitHub token" -AsSecureString
+$GH_PASS =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
+$null = $GH_PASS
+$null = $GH_USER
 
 Write-DateLog "Download files needed in Sandboxes."
 . .\resources\download\basic.ps1
@@ -75,6 +73,12 @@ if ($all -or $args -contains "--python") {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages."
     Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+}
+
+if ($all -or $args -contains "--rust") {
+    Write-Output "" > .\log\rust.txt
+    Write-DateLog "Setup Rust and install packages."
+    Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 }
 
 if ($all -or $args -contains "--http") {
@@ -102,7 +106,7 @@ if ($all -or $args -contains "--zimmerman") {
     .\resources\download\zimmerman.ps1
 }
 
-if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python") {
+if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python" -or $args -contains "--rust") {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job >> .\log\jobs.txt 2>&1
@@ -121,7 +125,8 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch " INFO " -and
     $_.Line -notmatch "This is taking longer than usual" -and
     $_.Line -notmatch "Installing collected packages" -and
-    $_.Line -notmatch "pymispwarninglists"
+    $_.Line -notmatch "pymispwarninglists" -and 
+    $_.Line -notmatch "warning: be sure to add"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {

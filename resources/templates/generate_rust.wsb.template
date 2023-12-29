@@ -1,0 +1,44 @@
+<Configuration>
+  <VGpu>Disable</VGpu>
+  <Networking>Default</Networking>
+  <AudioInput>Disable</AudioInput>
+  <VideoInput>Disable</VideoInput>
+  <ProtectedClient>Enable</ProtectedClient>
+  <PrinterRedirection>Disable</PrinterRedirection>
+  <ClipboardRedirection>Enable</ClipboardRedirection>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__setup</HostFolder>
+	    <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>C:\Users\reuteras\Documents\workspace\dfirws\mount\Tools</HostFolder>
+      <SandboxFolder>C:\Tools</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__mount\git</HostFolder>
+      <SandboxFolder>C:\git</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__downloads</HostFolder>
+      <SandboxFolder>C:\downloads</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__tmp\cargo</HostFolder>
+      <SandboxFolder>C:\cargo</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__log</HostFolder>
+      <SandboxFolder>C:\log</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+  <LogonCommand>
+    <Command>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -sta -WindowStyle Hidden -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install_rust_tools.ps1</Command>
+  </LogonCommand>
+</Configuration>

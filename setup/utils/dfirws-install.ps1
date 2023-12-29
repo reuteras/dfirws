@@ -22,6 +22,7 @@ if ($args.Count -eq 0) {
     Write-Output "   --pdfstreamdumper"
     Write-Output "   --qemu"
     Write-Output "   --ruby"
+    Write-Output "   --rust"
     Write-Output "   --vscode"
     Write-Output "   --x64dbg"
     Write-Output "   --zui"
@@ -94,6 +95,10 @@ if ($args -contains "--qemu") {
 
 if ($args -contains "--ruby") {
     Install-Ruby
+}
+
+if ($args -contains "--rust") {
+    Install-Rust
 }
 
 if ($args -contains "--vscode") {

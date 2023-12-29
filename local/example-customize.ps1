@@ -64,5 +64,9 @@ New-Item -Path "$HOME/.ghidra\.ghidra_10.4_PUBLIC\Extensions" -ItemType Director
 # To install a package named die.3.07.nupkg added to .\local and therefore available in C:\local in the sandbox do:
 # choco install die --version="3.7.0" --source="C:\local" -y
 
+# Install extra programs
+#Install-Ruby
+#Install-Rust
+
 # Start explorer in C:\Users\WDAGUtilityAccount\Desktop\dfirws - use search box for easy access to tools
 & "C:\Windows\explorer.exe" "C:\Users\WDAGUtilityAccount\Desktop\dfirws"

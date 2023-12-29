@@ -116,7 +116,7 @@ function Install-BashExtra {
     Get-ChildItem -Path $SETUP_PATH\bash -Include "*.tar" -Recurse |
         ForEach-Object {
             $command = "tar.exe -x -vf /C/downloads/bash/" + $_.Name
-            &"$env:ProgramFiles\Git\bin\bash.exe" -c "$command"
+            & "$env:ProgramFiles\Git\bin\bash.exe" -c "$command"
         }
 }
 
@@ -193,6 +193,11 @@ function Install-Qemu {
 function  Install-Ruby {
     & "$SETUP_PATH\ruby.exe" /verysilent /allusers /dir="$env:ProgramFiles\ruby"
     Add-ToUserPath "$env:ProgramFiles\ruby\bin"
+}
+
+function Install-Rust {
+    Copy-Item "$SETUP_PATH\rust.msi" "$TEMP\rust.msi"
+    Start-Process -Wait msiexec -ArgumentList "/i $TEMP\rust.msi INSTALLDIR=C:\Rust /qn /norestart"
 }
 
 function Install-VSCode {

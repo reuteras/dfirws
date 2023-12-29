@@ -88,9 +88,6 @@ if (Test-Path "$TOOLS\CyberChef\CyberChef.html") {
 }
 Move-Item $TOOLS\CyberChef\CyberChef_* $TOOLS\CyberChef\CyberChef.html
 
-# git - installed during start
-Get-GitHubRelease -repo "git-for-windows/git" -path "$SETUP_PATH\git.exe" -match 64-bit.exe
-
 # Gollum
 Get-GitHubRelease -repo "gollum/gollum" -path "$SETUP_PATH\gollum.war" -match gollum.war
 Copy-Item $SETUP_PATH\gollum.war $TOOLS\lib
