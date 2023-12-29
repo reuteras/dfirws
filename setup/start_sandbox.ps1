@@ -488,8 +488,8 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Malware tools\Cobalt Strike\Cobalt
 
 # Memory
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Memory"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Memory\Volatility Workbench 2.1.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$TOOLS\VolatilityWorkbench2" -Iconlocation "$TOOLS\VolatilityWorkbench2\VolatilityWorkbench.exe"
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Memory\Volatility Workbench 3.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$TOOLS\VolatilityWorkbench" -Iconlocation "$TOOLS\VolatilityWorkbench\VolatilityWorkbench.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Memory\Volatility Workbench 2.1.lnk" -DestinationPath "$TOOLS\VolatilityWorkbench2\VolatilityWorkbench.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Memory\Volatility Workbench 3.lnk" -DestinationPath "$TOOLS\VolatilityWorkbench\VolatilityWorkbench.exe"
 
 # Network
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Network"
