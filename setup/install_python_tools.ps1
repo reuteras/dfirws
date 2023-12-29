@@ -227,6 +227,9 @@ Write-DateLog "Build Ghidrathon for Ghidra."
 Copy-Item -Recurse "C:\Tools\ghidrathon" "$TEMP"
 Set-Location "$TEMP\ghidrathon"
 & "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="C:\Tools\ghidra\ghidra_10.4_PUBLIC" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
+if (! (Test-Path "C:\Tools\ghidra_extensions")) {
+    New-Item -ItemType Directory -Force -Path "C:\Tools\ghidra_extensions" > $null
+}
 Copy-Item $TEMP\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.zip" >> "C:\log\python.txt" 2>&1
 deactivate
 Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
