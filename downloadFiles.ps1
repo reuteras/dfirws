@@ -106,6 +106,13 @@ if ($all -or $args -contains "--zimmerman") {
     .\resources\download\zimmerman.ps1
 }
 
+if ($all -or $args -contains "--kape") {
+    if (Test-Path .\local\kape.zip) {
+        Write-DateLog "Download KAPE."
+        .\resources\download\kape.ps1
+    }
+}
+
 if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python" -or $args -contains "--rust") {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
