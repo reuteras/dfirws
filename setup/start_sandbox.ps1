@@ -196,6 +196,7 @@ Add-ToUserPath "$TOOLS\hayabusa"
 Add-ToUserPath "$TOOLS\imhex"
 Add-ToUserPath "$TOOLS\INDXRipper"
 Add-ToUserPath "$TOOLS\jd-gui"
+Add-ToUserPath "$TOOLS\KAPE"
 Add-ToUserPath "$TOOLS\MailView"
 Add-ToUserPath "$TOOLS\malcat\bin"
 Add-ToUserPath "$TOOLS\lessmsi"
@@ -472,10 +473,12 @@ New-Item -ItemType Directory "$HOME\Desktop\dfirws\Files and apps\RDP"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\RDP\bmc-tools.py.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\RDP\RdpCacheStitcher.lnk" -DestinationPath "$TOOLS\RdpCacheStitcher\RdpCacheStitcher.exe"
 
-
-
 # Incident response
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\IR"
+if (Test-Path "$TOOLS\KAPE\kape.exe") {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\gkape.lnk" -DestinationPath "$TOOLS\KAPE\gkape.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\KAPE\gkape.exe"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\kape.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
+}
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\Trawler.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 
 # Malware tools
