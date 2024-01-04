@@ -40,7 +40,6 @@ Copy-Item $HOME\Documents\tools\jupyter\*.ipynb "$HOME\Documents\jupyter\"
 # Install latest PowerShell
 Copy-Item   "$SETUP_PATH\powershell.msi" "$TEMP\powershell.msi"
 Start-Process -Wait msiexec -ArgumentList "/i $TEMP\powershell.msi /qn /norestart"
-$POWERSHELL_EXE = "$env:ProgramFiles\PowerShell\7\pwsh.exe"
 Write-DateLog "PowerShell installed" >> $TEMP\start_sandbox.log
 
 # Install 7-Zip
@@ -163,6 +162,7 @@ Add-ToUserPath "$env:ProgramFiles\hashcat"
 Add-ToUserPath "$env:ProgramFiles\hxd"
 Add-ToUserPath "$env:ProgramFiles\IDR\bin"
 Add-ToUserPath "$env:ProgramFiles\jadx\bin"
+Add-ToUserPath "$env:ProgramFiles\KAPE"
 Add-ToUserPath "$env:ProgramFiles\loki"
 Add-ToUserPath "$env:ProgramFiles\Notepad++"
 Add-ToUserPath "$env:ProgramFiles\qemu"
@@ -196,7 +196,6 @@ Add-ToUserPath "$TOOLS\hayabusa"
 Add-ToUserPath "$TOOLS\imhex"
 Add-ToUserPath "$TOOLS\INDXRipper"
 Add-ToUserPath "$TOOLS\jd-gui"
-Add-ToUserPath "$TOOLS\KAPE"
 Add-ToUserPath "$TOOLS\MailView"
 Add-ToUserPath "$TOOLS\malcat\bin"
 Add-ToUserPath "$TOOLS\lessmsi"
@@ -346,6 +345,12 @@ if ($WSDFIR_W10_LOOPBACK -eq "Yes") {
     Install-W10Loopback
 }
 
+# Install Kape
+if ($WSDFIR_KAPE -eq "Yes") {
+    Install-Kape
+    Write-DateLog "Kape installed" >> $TEMP\start_sandbox.log
+}
+
 # Install Loki
 if ($WSDFIR_LOKI -eq "Yes") {
     Install-Loki
@@ -475,10 +480,6 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Files and apps\RDP\RdpCacheStitche
 
 # Incident response
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\IR"
-if (Test-Path "$TOOLS\KAPE\kape.exe") {
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\gkape.lnk" -DestinationPath "$TOOLS\KAPE\gkape.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$TOOLS\KAPE\gkape.exe"
-    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\kape.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
-}
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\Trawler.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 
 # Malware tools

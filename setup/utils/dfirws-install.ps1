@@ -61,12 +61,16 @@ if ($args -contains "--hashcat") {
     Install-Hashcat
 }
 
-if ($args -contains "--libreoffice") {
-    Install-LibreOffice
-}
-
 if ($args -contains "--jadx") {
     Install-Jadx
+}
+
+if ($args -contains "--kape") {
+    Install-Kape
+}
+
+if ($args -contains "--libreoffice") {
+    Install-LibreOffice
 }
 
 if ($args -contains "--loki") {

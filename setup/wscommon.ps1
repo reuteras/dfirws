@@ -8,6 +8,7 @@ $SETUP_PATH = "C:\downloads"
 $TEMP = "C:\tmp"
 $TOOLS = "C:\Tools"
 $VENV = "C:\venv"
+$POWERSHELL_EXE = "$env:ProgramFiles\PowerShell\7\pwsh.exe"
 
 $null=$DATA
 $null=$GIT
@@ -150,6 +151,12 @@ function Install-Hashcat {
 
 function Install-Jadx {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\jadx.zip" -o"$env:ProgramFiles\jadx"
+}
+
+function Install-Kape {
+    Copy-Item -Recurse "$SETUP_PATH\KAPE" "$env:ProgramFiles"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\gkape.lnk" -DestinationPath "$env:ProgramFiles\KAPE\gkape.exe" -WorkingDirectory "$HOME\Desktop" -Iconlocation "$env:ProgramFiles\KAPE\gkape.exe"
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\IR\kape.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 }
 
 function Install-LibreOffice {
