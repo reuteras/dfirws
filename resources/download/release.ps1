@@ -323,6 +323,10 @@ if (Test-Path "$TOOLS\cutter") {
 }
 Move-Item $TOOLS\cutter-* $TOOLS\cutter
 
+# Perl by Strawberry
+Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "$SETUP_PATH\perl.zip" -match portable.zip
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\perl.zip" -o"$TOOLS\perl" | Out-Null
+
 # sidr
 Get-GitHubRelease -repo "strozfriedberg/sidr" -path "$SETUP_PATH\sidr.exe" -match sidr.exe
 Copy-Item $SETUP_PATH\sidr.exe $TOOLS\bin\

@@ -201,6 +201,7 @@ Add-ToUserPath "$TOOLS\malcat\bin"
 Add-ToUserPath "$TOOLS\lessmsi"
 Add-ToUserPath "$TOOLS\nmap"
 Add-ToUserPath "$TOOLS\node"
+Add-ToUserPath "$TOOLS\perl\perl\bin"
 Add-ToUserPath "$TOOLS\pestudio"
 Add-ToUserPath "$TOOLS\pev"
 Add-ToUserPath "$TOOLS\php"
@@ -530,6 +531,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\OS\Windows\Registry\RegShot.lnk" -
 New-Item -ItemType Directory "$HOME\Desktop\dfirws\Programming"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\java.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\node.lnk" -DestinationPath "$TOOLS\node\node.exe"
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\perl.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\php.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Programming\Python.lnk" -DestinationPath "$VENV\default\Scripts\python.exe"
 new-item -ItemType Directory "$HOME\Desktop\dfirws\Programming\dotNET"
@@ -558,6 +560,7 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\fasm.lnk" -Des
     $VERSION = $_
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "$TOOLS\ghidra\${VERSION}\ghidraRun.bat"
 }
+Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Ghidrathon.lnk" -DestinationPath "$HOME\Documents\tools\utils\ghidrathon.bat"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\iaito.lnk" -DestinationPath "$TOOLS\iaito\iaito.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\scare.bat.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
