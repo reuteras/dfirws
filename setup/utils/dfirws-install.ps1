@@ -14,6 +14,7 @@ if ($args.Count -eq 0) {
     Write-Output "   --golang"
     Write-Output "   --hashcat"
     Write-Output "   --jadx"
+    Write-Output "   --kape"
     Write-Output "   --libreoffice"
     Write-Output "   --loki"
     Write-Output "   --neo4j"
