@@ -343,7 +343,7 @@ if (Test-Path "$TOOLS\sleuthkit") {
 Move-Item $TOOLS\sleuthkit-* $TOOLS\sleuthkit
 
 # qrtool
-Get-GitHubRelease -repo "sorairolake/qrtool" -path "$SETUP_PATH\qrtool.zip" -match x86_64-pc-windows-msvc.zip
+Get-GitHubRelease -repo "sorairolake/qrtool" -path "$SETUP_PATH\qrtool.zip" -match x86_64-pc-windows-msvc
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\qrtool.zip" -o"$TOOLS" | Out-Null
 if (Test-Path "$TOOLS\qrtool") {
     Remove-Item "$TOOLS\qrtool" -Recurse -Force
