@@ -43,16 +43,20 @@ if (! (Test-Path -Path ".\log" )) {
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
 
-# Get GitHub password from user input
-write-dateLog "Use GitHub token to avoid problems with rate limits."
-$GH_USER = Read-Host "Enter GitHub user name"
-$PASS = Read-Host "Enter GitHub token" -AsSecureString
-$GH_PASS =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
-$null = $GH_PASS
-$null = $GH_USER
+if ($all -or $args -contains "--didier" -or $args -contains "--http" -or $args -contains "--release") {
+    # Get GitHub password from user input
+    write-dateLog "Use GitHub token to avoid problems with rate limits."
+    $GH_USER = Read-Host "Enter GitHub user name"
+    $PASS = Read-Host "Enter GitHub token" -AsSecureString
+    $GH_PASS =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
+    $null = $GH_PASS
+    $null = $GH_USER
+}
 
-Write-DateLog "Download files needed in Sandboxes."
-. .\resources\download\basic.ps1
+if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python" -or $args -contains "--rust") {
+    Write-DateLog "Download files needed in Sandboxes."
+    . .\resources\download\basic.ps1
+}
 
 if ($all -or $args -contains "--bash") {
     Write-DateLog "Download packages for Git for Windows (bash)."
