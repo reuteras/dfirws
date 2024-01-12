@@ -1,4 +1,4 @@
-# Script to download data to use for enchrichment.
+# Script to download data to use for enrichment.
 # Data included are:
 # - Tor exit nodes
 # - Maxmind GeoLite2 ASN database

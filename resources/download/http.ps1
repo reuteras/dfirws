@@ -19,7 +19,7 @@ Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user
 # Get SwiftOnSecurity sysmon config - used from Sysmon
 Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml"
 
-# Yara rules - unpacked during start from start_sanbox.ps1
+# Yara rules - unpacked during start from start_sandbox.ps1
 Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip" -FilePath ".\downloads\yara-forge-rules-core.zip"
 Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip" -FilePath ".\downloads\yara-forge-rules-extended.zip"
 Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\downloads\yara-forge-rules-full.zip"
@@ -120,7 +120,7 @@ Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath 
 # Dependence for ncat
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe"
 
-# Artifacts Echange for Velociraptor
+# Artifacts Exchange for Velociraptor
 Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/raw/gh-pages/exchange/artifact_exchange_v2.zip" -FilePath ".\downloads\artifact_exchange.zip"
 
 # Mail Viewer
