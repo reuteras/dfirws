@@ -296,7 +296,7 @@ Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio-9.
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pestudio.zip" -o"$TOOLS" | Out-Null
 
 # ELK
-$ELK_VERSION = "8.11.3"
+$ELK_VERSION = "8.11.4"
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
 Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip"
 Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip"
