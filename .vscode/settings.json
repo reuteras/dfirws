@@ -150,6 +150,8 @@
         "yara"
     ],
     "cSpell.enableFiletypes": [
-        "powershell"
+        "bat",
+        "powershell",
+        "shellscript"
     ]
 }
