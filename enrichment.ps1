@@ -32,7 +32,6 @@ if (-not (Test-Path -Path $torsaveDirectory)) {
     New-Item -ItemType Directory -Path $torsaveDirectory -Force | Out-Null
 }
 
-
 #
 # TOR exit nodes
 #
