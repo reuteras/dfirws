@@ -314,7 +314,7 @@ function Get-DownloadUrlFromPage {
             return ""
         }
     }
-    
+
     return $downloadUrl
 }
 
