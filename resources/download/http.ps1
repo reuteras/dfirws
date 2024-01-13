@@ -5,13 +5,27 @@ $choco = Get-ChocolateyUrl chocolatey
 
 # Get URI for Visual Studio Code python extension - ugly
 $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
-$vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
-$vscode_python_version=$vscode_tmp.Matches.Groups[1].Value
+
+if ("$vscode_python_string" -ne "") {
+    $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
+    $vscode_python_version=$vscode_tmp.Matches.Groups[1].Value
+    # Visual Studio Code python extension
+    Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix"
+} else {
+    Write-DateLog "ERROR: Could not get URI for Visual Studio Code python extension"
+}
 
 # Get URI for Visual Studio Code mermaid extension - ugly
 $vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -RegEx '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
-$vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
-$vscode_mermaid_version=$vscode_tmp.Matches.Groups[1].Value
+
+if ("$vscode_mermaid_string" -ne "") {
+    $vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+    $vscode_mermaid_version=$vscode_tmp.Matches.Groups[1].Value
+    # Visual Studio Code mermaid extension
+    Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix"
+} else {
+    Write-DateLog "ERROR: Could not get URI for Visual Studio Code mermaid extension"
+}
 
 # Get Visual Studio Code - installed during start
 Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -FilePath ".\downloads\vscode.exe"
@@ -107,12 +121,6 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_sc
 # chocolatey
 Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\choco.zip" -o"$SETUP_PATH\choco" | Out-Null
-
-# Visual Studio Code python extension
-Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix"
-
-# Visual Studio Code mermaid extension
-Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix"
 
 # Dependence for PE-bear
 Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"
