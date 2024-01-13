@@ -102,7 +102,7 @@ if ($all -or $args -contains "--didier") {
 
 if ($all -or $args -contains "--winget") {
     Write-DateLog "Download tools via winget."
-    .\resources\download\winget-download.ps1
+    .\resources\download\winget.ps1
 }
 
 if ($all -or $args -contains "--zimmerman") {
