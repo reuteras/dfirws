@@ -2,6 +2,9 @@
 
 . .\resources\download\common.ps1
 
+# Ensure configuration exists for rclone
+rclone.exe config touch | Out-Null
+
 # Check if sandbox is running
 if ( tasklist | findstr WindowsSandbox ) {
     Write-DateLog "Sandbox can't be running during install or upgrade."
