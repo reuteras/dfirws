@@ -287,15 +287,35 @@ function Get-DownloadUrlFromPage {
         [Parameter(Mandatory=$True)] [regex]$RegEx
     )
 
-    if ($Url -contains "github.com") {
-        if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-            return curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
-        } else {
-            return curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+    $downloadUrl = ""
+    $retries = 3
+
+    while ("$downloadUrl" -eq "") {
+        try {
+            if ($Url -contains "github.com") {
+                if ($GH_USER -eq "" -or $GH_PASS -eq "") {
+                    $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+                } else {
+                    $downloadUrl = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+                }
+            } else {
+                $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+            }
         }
-    } else {
-        return curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+        catch {
+            $downloadUrl = ""
+        }
+        if ("$downloadUrl" -eq "") {
+            Start-Sleep 60
+        }
+        $retries--
+        if ($retries -eq 0) {
+            Write-DateLog "Failed to get download URL from $Url."
+            return ""
+        }
     }
+    
+    return $downloadUrl
 }
 
 <#
