@@ -64,4 +64,4 @@ $env:PYTHONWARNINGS="ignore"
 $env:PATH_TO_FX="C:\Tools\javafx-sdk\lib"
 $env:GHIDRA_INSTALL_DIR="C:\Tools\ghidra"
 
-# Dynamicly added functions below
+# Dynamically added functions below

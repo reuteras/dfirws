@@ -370,7 +370,7 @@ Foreach ($webKey in $webKeyCollection)
 	
 	if ($null -eq $localFile -or $localFile.SHA1 -ne $webKey.SHA1)
 	{
-		#Needs to be downloaded since SHA is different or it doesnt exist
+		#Needs to be downloaded since SHA is different or it doesn't exist
 		$toDownload += $webKey
 	}
 }

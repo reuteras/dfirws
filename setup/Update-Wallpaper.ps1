@@ -36,7 +36,7 @@ $code = @'
 '@
 
 if ($error[0].exception -like "*Cannot add type. The type name 'Win32.Wallpaper' already exists.*") {
-    Write-Output "Win32.Wallpaer assemblies already loaded"
+    Write-Output "Win32.Wallpaper assemblies already loaded"
     Write-Output "Proceeding"
 } else {
     Add-Type $code

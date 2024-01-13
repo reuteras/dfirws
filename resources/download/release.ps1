@@ -126,7 +126,7 @@ Get-GitHubRelease -repo "hasherezade/pe-bear" -path "$SETUP_PATH\pebear.zip" -ma
 Get-GitHubRelease -repo "hasherezade/pe-sieve" -path "$SETUP_PATH\pe-sieve.exe" -match pe-sieve64.exe
 Copy-Item $SETUP_PATH\pe-sieve.exe $TOOLS\bin\
 
-# Flaged by MS AV - don't download at the moment since I don't want to force user to exclude files
+# Flagged by MS AV - don't download at the moment since I don't want to force user to exclude files
 # at the moment.
 #Get-GitHubRelease -repo "hasherezade/pe_to_shellcode" -path "$SETUP_PATH\pe2shc.exe" -match pe2shc.exe
 #Copy-Item $SETUP_PATH\pe2shc.exe $TOOLS\bin\

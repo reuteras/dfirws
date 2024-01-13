@@ -92,6 +92,7 @@
         "dword",
         "elfparser",
         "embeddedfile",
+        "emldump",
         "endswith",
         "eneam",
         "env",

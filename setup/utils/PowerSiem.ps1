@@ -16,7 +16,7 @@ Function Parse-Event {
             $XML = [xml]$entry.ToXml()
             $X = $XML.Event.EventData.Data
             For( $i=0; $i -lt $X.count; $i++ ){
-                $Entry = Add-Member -InputObject $entry -MemberType NoteProperty -Name "$($X[$i].name)" -Value $X[$i].'#text' -Force -Passthru
+                $Entry = Add-Member -InputObject $entry -MemberType NoteProperty -Name "$($X[$i].name)" -Value $X[$i].'#text' -Force -PassThru
             }
             $Entry
         }
