@@ -55,7 +55,7 @@ By default the sandbox will have clipboard redirection off as well as secure def
 The script will also create *./setup/config.txt*. Here you can select the tools that should always be available when you run the sandbox. All tools will be downloaded and can be installed later in the sandbox if needed. The difference will be the time it takes to start the sandbox, i.e. running an installer for a program on every start.
 Extra tools can be installed in a running **dfirws** sandbox with the script **dfirws-install.ps1**.
 
-If you like to run your own PowerShell code to customise **dfirws** you can change *local/customize.ps1*. Observe that the latest version of PowerShell will be installed when you start **dfirws** which at the moment is PowerShell 7 and that some things are different from earlier versions.
+If you like to run your own PowerShell code to customize **dfirws** you can change *local/customize.ps1*. Observe that the latest version of PowerShell will be installed when you start **dfirws** which at the moment is PowerShell 7 and that some things are different from earlier versions.
 
 ## Downloading tools
 
