@@ -211,7 +211,7 @@ function Install-VSCode {
     . $TEMP\default-config.ps1
     . $TEMP\config.ps1
     Copy-Item "$SETUP_PATH\vscode.exe" "$TEMP\vscode.exe"
-    Start-Process -Wait "$TEMP\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
+    Start-Process -Wait "$TEMP\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,!associatewithfiles,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
     if ($WSDFIR_VSCODE_POWERSHELL -eq "Yes") {
         & "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "C:\downloads\vscode\vscode-powershell.vsix"
     }
