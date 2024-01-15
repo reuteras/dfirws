@@ -2,6 +2,23 @@
 
 . .\resources\download\common.ps1
 
+# Ensure that we have the necessary tools installed
+
+if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
+    Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to the PATH."
+    Exit
+}
+
+if (! (Get-Command "rclone.exe" -ErrorAction SilentlyContinue)) {
+    Write-DateLog "Error: rclone.exe not found. Please install rclone and add it to the PATH."
+    Exit
+}
+
+if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
+    Write-DateLog "Error: 7z.exe not found. Please install 7-Zip and add it to the PATH."
+    Exit
+}
+
 # Ensure configuration exists for rclone
 rclone.exe config touch | Out-Null
 
