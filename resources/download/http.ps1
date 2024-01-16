@@ -237,7 +237,7 @@ Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downlo
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.2-x64.exe" -FilePath ".\downloads\wireshark.exe"
 
 # https://www.sqlite.org/download.html - SQLite
-Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3440200.zip" -FilePath ".\downloads\sqlite.zip"
+Get-FileFromUri -uri "https://sqlite.org/2023/sqlite-tools-win-x64-3450000.zip" -FilePath ".\downloads\sqlite.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlite.zip" -o"$TOOLS\sqlite" | Out-Null
 if (Test-Path -Path $TOOLS\sqlite) {
     Remove-Item -Recurse -Force $TOOLS\sqlite | Out-Null 2>&1
@@ -261,7 +261,7 @@ Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlitebrowser.zip" -o"$TOOLS\" | Out-Null
 
 # https://flatassembler.net/download.php - FASM
-Get-FileFromUri -uri "https://flatassembler.net/fasmw17331.zip" -FilePath ".\downloads\fasm.zip"
+Get-FileFromUri -uri "https://flatassembler.net/fasmw17332.zip" -FilePath ".\downloads\fasm.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fasm.zip" -o"$TOOLS\fasm" | Out-Null
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
@@ -283,7 +283,7 @@ if (Test-Path -Path $TOOLS\javafx-sdk) {
 Move-Item $TOOLS\javafx-sdk-* $TOOLS\javafx-sdk
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
-Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.1.jar" -FilePath ".\downloads\apktool.jar"
+Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.2.jar" -FilePath ".\downloads\apktool.jar"
 Copy-Item ".\downloads\apktool.jar" "$TOOLS\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "$TOOLS\bin\apktool.bat" -Force
 
@@ -300,7 +300,7 @@ if (Test-Path -Path $TOOLS\hashcat) {
 Move-Item $TOOLS\hashcat-* $TOOLS\hashcat
 
 # https://www.winitor.com/download2 - PEStudio
-Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio-9.56.zip" -FilePath ".\downloads\pestudio.zip"
+Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio-9.57.zip" -FilePath ".\downloads\pestudio.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pestudio.zip" -o"$TOOLS" | Out-Null
 
 # ELK
