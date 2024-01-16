@@ -186,6 +186,10 @@ Write-Output "java -Xmx3G -jar C:\Tools\lib\BCV.jar" | Out-File -Encoding "ascii
 Get-GitHubRelease -repo "leandrofroes/gftrace" -path "$SETUP_PATH\gftrace.zip" -match gftrace64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\gftrace.zip" -o"$TOOLS" | Out-Null
 
+# adalanche
+Get-GitHubRelease -repo "lkarlslund/adalanche" -path "$SETUP_PATH\adalanche.exe" -match adalanche-windows-x64
+Copy-Item $SETUP_PATH\adalanche.exe $TOOLS\bin\
+
 # MsgViewer
 Get-GitHubRelease -repo "lolo101/MsgViewer" -path "$SETUP_PATH\msgviewer.jar" -match msgviewer.jar
 Copy-Item $SETUP_PATH\msgviewer.jar $TOOLS\lib
