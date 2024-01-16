@@ -7,8 +7,15 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
 . $ScriptRoot\common.ps1
 
-Write-DateLog "Download packages for Git for Windows (bash)."
-Write-Output "" > .\log\bash.txt
+Write-DateLog "Download packages for Git for Windows (bash)." > $ROOT_PATH\log\bash.txt
+Write-DateLog "" >> $ROOT_PATH\log\bash.txt
+
+# Check current files
+if (Test-Path -Path "$ROOT_PATH\tools_downloaded.csv" ) {
+    $StartHASH = Get-FileHash -Path "$ROOT_PATH\tools_downloaded.csv" -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+} else {
+    $StartHASH = ""
+}
 
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
@@ -34,16 +41,20 @@ $packages = "bash-completion", `
 
 foreach ($package in $packages) {
     $url = Get-DownloadUrlMSYS "$package"
-    Get-FileFromUri -uri "$url" -FilePath ".\downloads\bash\$package.pkg.tar.zst"
+    Get-FileFromUri -uri "$url" -FilePath ".\downloads\bash\$package.pkg.tar.zst" -CheckURL "Yes"
 }
 
-(Get-Content $ROOT_PATH\resources\templates\generate_bash.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content $ROOT_PATH\tmp\generate_bash.wsb
+$FinalHASH = Get-FileHash -Path "$ROOT_PATH\tools_downloaded.csv" -Algorithm SHA256 | Select-Object -ExpandProperty Hash
 
-$mutex.WaitOne() | Out-Null
-& $ROOT_PATH\tmp\generate_bash.wsb
-Start-Sleep 10
-Remove-Item $ROOT_PATH\tmp\generate_bash.wsb
+if (Compare-Object $StartHASH $FinalHASH) {
+    (Get-Content $ROOT_PATH\resources\templates\generate_bash.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content $ROOT_PATH\tmp\generate_bash.wsb
 
-Stop-SandboxWhenDone "$ROOT_PATH\downloads\bash\done" $mutex
+    $mutex.WaitOne() | Out-Null
+    & $ROOT_PATH\tmp\generate_bash.wsb
+    Start-Sleep 10
+    Remove-Item $ROOT_PATH\tmp\generate_bash.wsb
 
-Write-DateLog "Git for Windows (bash) done."
+    Stop-SandboxWhenDone "$ROOT_PATH\downloads\bash\done" $mutex
+}
+
+Write-DateLog "Git for Windows (bash) done." >> $ROOT_PATH\log\bash.txt
