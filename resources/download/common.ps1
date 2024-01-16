@@ -267,9 +267,8 @@ function Get-ChocolateyUrl {
             Write-Error "Failed to get download URL for Chocolately package $PackageName."
             return ""
         }
-        
     }
-    
+
     return $Url
 }
 
