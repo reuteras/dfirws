@@ -36,8 +36,17 @@ Date:   2023-12-21
 function Get-FileFromUri {
     Param (
         [Parameter(Mandatory=$True)] [string]$Uri,
-        [Parameter(Mandatory=$True)] [string]$FilePath
+        [Parameter(Mandatory=$True)] [string]$FilePath,
+        [Parameter(Mandatory=$False)] [string]$CheckURL = ""
     )
+
+    # Check if the file has already been downloaded
+    if ($CheckURL -eq "Yes") {
+        if (Compare-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name) {
+            Write-SynchronizedLog "File $FilePath already downloaded."
+            return
+        }
+    }
 
     # Remove any leading '..' from the file path and set up temporary file path and final file path
     $CleanPath = $FilePath -replace "^..", ""
@@ -56,6 +65,7 @@ function Get-FileFromUri {
 
     # Set the number of retries for the download
     $retries = 3
+    $downloaded = $false
     $ProgressPreference = 'SilentlyContinue'
     while($true) {
         try {
@@ -73,6 +83,7 @@ function Get-FileFromUri {
                 curl.exe --silent -L --user-agent "Wget x64" --output $TmpFilePath $Uri
             }
             Write-SynchronizedLog "Downloaded $Uri to $FilePath."
+            $downloaded = $true
             break
         }
         catch {
@@ -92,6 +103,9 @@ function Get-FileFromUri {
     $result = rclone copyto --metadata --verbose --inplace --checksum $TmpFilePath $FilePath 2>&1 | Out-String
     Write-SynchronizedLog "$result"
     Remove-Item $TmpFilePath -Force | Out-Null
+    if ($downloaded) {
+        Update-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name -Path $FilePath
+    }
     $ProgressPreference = 'Continue'
 }
 
@@ -221,7 +235,7 @@ function Get-GitHubRelease {
 
     # Log the chosen URL and download the file
     Write-SynchronizedLog "Using $Url for $repo."
-    Get-FileFromUri -uri $Url -FilePath $path
+    Get-FileFromUri -uri $Url -FilePath $path -CheckURL "Yes"
 }
 
 <#
@@ -501,4 +515,89 @@ function Write-DateLog {
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $fullMessage = "$timestamp - $Message"
     Write-Output $fullMessage
+}
+
+# Comparison can only be done for the URL field since we don't have a hash for remote files
+function Compare-ToolsDownloaded {
+    param (
+        [Parameter(Mandatory=$True)] [string]$URL,
+        [Parameter(Mandatory=$True)] [string]$Name
+    )
+    if (Test-Path "$PSScriptRoot\..\..\tools_downloaded.csv") {
+        $toolsDownloaded = Import-Csv "$PSScriptRoot\..\..\tools_downloaded.csv"
+    } else {
+        $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] @()
+    }
+
+    $localFile = $toolsDownloaded | Where-Object { $_.Name-eq $Name }
+
+    # No local file found
+    if (!$localFile) {
+        return $false
+    }
+
+    # Is it the same URL?
+    if ($localFile.URL -eq $URL) {
+        return $true
+    } else {
+        return $false
+    }
+}
+
+# Update the tools_downloaded.csv file
+function Update-ToolsDownloaded {
+    param (
+        [Parameter(Mandatory=$True)] [string]$URL,
+        [Parameter(Mandatory=$True)] [string]$Name,
+        [Parameter(Mandatory=$True)] [string]$Path
+    )
+    if (Test-Path "$PSScriptRoot\..\..\tools_downloaded.csv") {
+        $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] (Import-Csv "$PSScriptRoot\..\..\tools_downloaded.csv")
+    } else {
+        $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] @()
+    }
+
+    $localFile = $toolsDownloaded | Where-Object { $_.Name-eq $Name }
+
+    # No local file found
+    if (!$localFile) {
+        $addNewTool = [PSCustomObject]@{
+            URL = $URL
+            Name = $Name
+            SHA256 = Get-FileHash -Path $Path -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+            Size = Get-Item $Path | Select-Object -ExpandProperty Length
+            Path = Resolve-Path -Path $Path
+        }
+
+        $toolsDownloaded.Add($addNewTool)
+    } else {
+        $localFile.URL = $URL
+    }
+
+    $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\tools_downloaded.csv" -NoTypeInformation
+}
+
+# Function to clear tmp directory
+function Clear-Tmp {
+    if (Test-Path -Path .\tmp\winget) {
+        Remove-Item -Recurse -Force .\tmp\winget > $null 2>&1
+    }
+}
+
+# Function to download via winget
+function Get-Winget {
+    param (
+        [Parameter(Mandatory=$True)] [string]$Name,
+        [Parameter(Mandatory=$True)] [string]$Path
+    )
+
+    $VERSION = (winget search "$Name") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[2] }
+
+    if (Compare-ToolsDownloaded -URL $VERSION -Name $Name) {
+        Write-SynchronizedLog "File $Name version $VERSION already downloaded."
+        return
+    }
+    winget download --disable-interactivity	"$Name" -d .\tmp\winget 2>&1 | Out-Null
+
+    Update-ToolsDownloaded -URL $VERSION -Name $Name -Path $Path
 }
