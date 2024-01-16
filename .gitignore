@@ -10,4 +10,5 @@ readonly/*
 readwrite/*
 setup/config.txt
 tmp/*
+tools_downloaded.csv
 *.wsb
