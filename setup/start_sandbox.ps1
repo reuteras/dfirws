@@ -561,7 +561,9 @@ Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\fasm.lnk" -Des
     $VERSION = $_
     Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "$TOOLS\ghidra\${VERSION}\ghidraRun.bat"
 }
-Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Ghidrathon.lnk" -DestinationPath "$HOME\Documents\tools\utils\ghidrathon.bat"
+if (Test-Path "$VENV\jep") {
+    Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\Ghidrathon.lnk" -DestinationPath "$HOME\Documents\tools\utils\ghidrathon.bat"
+}
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\iaito.lnk" -DestinationPath "$TOOLS\iaito\iaito.exe"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"
 Add-Shortcut -SourceLnk "$HOME\Desktop\dfirws\Reverse Engineering\scare.bat.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "$HOME\Desktop"

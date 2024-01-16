@@ -1,1 +1,6 @@
+# MaxMind GeoIP2 API key
 $MAXMIND_LICENSE_KEY="YOUR KEY"
+
+# Add jep and ghidrathon to the dfirws
+# Requires download of Visual Studio to build jep
+$INSTALL_JEP="No"

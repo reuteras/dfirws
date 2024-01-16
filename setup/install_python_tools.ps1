@@ -12,9 +12,12 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
 $PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
-Get-ChildItem C:\venv\* -Recurse | Remove-Item -Force > $null 2>&1
+Get-ChildItem C:\venv\* -Exclude config.ps1 -Recurse | Remove-Item -Force > $null 2>&1
 Start-Process "$SETUP_PATH\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
 Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+
+# Source config.ps1
+. C:\venv\config.ps1
 
 #
 # venv default
@@ -185,55 +188,58 @@ Copy-Item * C:\venv\default\Scripts
 deactivate
 Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 
-#
-# venv jep and tools needed for jep
-#
 
-# Install Visual Studio Build Tools for jep
-Write-DateLog "Start installation of Visual Studio Build Tools." >> "C:\log\python.txt" 2>&1
-Copy-Item "$SETUP_PATH\vs_BuildTools.exe" "$TEMP\vs_BuildTools.exe"
-Set-Location $Temp
-Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
-Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
-& 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' >> "C:\log\python.txt" 2>&1
+if ($INSTALL_JEP -eq "Yes") {
+    #
+    # venv jep and tools needed for jep
+    #
 
-# Install Java for jep
-Write-DateLog "Start installation of Corretto Java." >> "C:\log\python.txt" 2>&1
-Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
-Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
-Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
-$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
+    # Install Visual Studio Build Tools for jep
+    Write-DateLog "Start installation of Visual Studio Build Tools." >> "C:\log\python.txt" 2>&1
+    Copy-Item "$SETUP_PATH\vs_BuildTools.exe" "$TEMP\vs_BuildTools.exe"
+    Set-Location $Temp
+    Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
+    Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+    & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' >> "C:\log\python.txt" 2>&1
 
-# jep venv
-Write-DateLog "Install packages in venv jep in sandbox (needs older packages)." >> "C:\log\python.txt"
-Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv --system-site-packages C:\venv\jep"
-C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
-Set-Location "C:\venv\jep"
-python -m pip install -U pip >> "C:\log\python.txt"
-python -m pip install -U poetry 2>&1 >> "C:\log\python.txt"
+    # Install Java for jep
+    Write-DateLog "Start installation of Corretto Java." >> "C:\log\python.txt" 2>&1
+    Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
+    Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
+    Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+    $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
-poetry init `
-    --name jepvenv `
-    --description "Python venv for jep." `
-    --author "dfirws" `
-    --license "MIT" `
-    --no-interaction
+    # jep venv
+    Write-DateLog "Install packages in venv jep in sandbox (needs older packages)." >> "C:\log\python.txt"
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv --system-site-packages C:\venv\jep"
+    C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\jep"
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -U poetry 2>&1 >> "C:\log\python.txt"
 
-poetry add `
-    NumPy `
-    flare-capa 2>&1 >> "C:\log\python.txt"
+    poetry init `
+        --name jepvenv `
+        --description "Python venv for jep." `
+        --author "dfirws" `
+        --license "MIT" `
+        --no-interaction
 
-# Build Ghidrathon for Gidhra
-Write-DateLog "Build Ghidrathon for Ghidra."
-Copy-Item -Recurse "C:\Tools\ghidrathon" "$TEMP"
-Set-Location "$TEMP\ghidrathon"
-& "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="C:\Tools\ghidra\ghidra_10.4_PUBLIC" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
-if (! (Test-Path "C:\Tools\ghidra_extensions")) {
-    New-Item -ItemType Directory -Force -Path "C:\Tools\ghidra_extensions" > $null
+    poetry add `
+        NumPy `
+        flare-capa 2>&1 >> "C:\log\python.txt"
+
+    # Build Ghidrathon for Gidhra
+    Write-DateLog "Build Ghidrathon for Ghidra."
+    Copy-Item -Recurse "C:\Tools\ghidrathon" "$TEMP"
+    Set-Location "$TEMP\ghidrathon"
+    & "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="C:\Tools\ghidra\ghidra_10.4_PUBLIC" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
+    if (! (Test-Path "C:\Tools\ghidra_extensions")) {
+        New-Item -ItemType Directory -Force -Path "C:\Tools\ghidra_extensions" > $null
+    }
+    Copy-Item $TEMP\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.zip" >> "C:\log\python.txt" 2>&1
+    deactivate
+    Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 }
-Copy-Item $TEMP\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.zip" >> "C:\log\python.txt" 2>&1
-deactivate
-Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 
 #
 # venv dfir-unfurl

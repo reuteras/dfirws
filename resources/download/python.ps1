@@ -19,6 +19,8 @@ if (Test-Path -Path $ROOT_PATH\tmp\venv\done ) {
     Remove-Item $ROOT_PATH\tmp\venv\done > $null
 }
 
+Copy-Item "$ROOT_PATH\config.ps1" "$ROOT_PATH\tmp\venv\config.ps1"
+
 (Get-Content $ROOT_PATH\resources\templates\generate_venv.wsb.template).replace('__SANDBOX__', $ROOT_PATH) | Set-Content $ROOT_PATH\tmp\generate_venv.wsb
 
 $mutex.WaitOne() | Out-Null

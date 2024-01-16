@@ -19,6 +19,11 @@ if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
     Exit
 }
 
+if (! (Test-Path -Path ".\config.ps1")) {
+    Copy-Item ".\config.ps1.template" ".\config.ps1"
+    Write-DateLog "INFO: config.ps1 not found. Created from default config.ps1.template. Please check values."
+}
+
 # Ensure configuration exists for rclone
 rclone.exe config touch | Out-Null
 
