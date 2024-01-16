@@ -5,13 +5,13 @@
 $nodejs = Get-DownloadUrlFromPage -url https://nodejs.org/en/download/ -RegEx 'https:[^"]+win-x64.zip'
 
 # https://www.7-zip.org/download.html - 7-Zip - installed during start
-Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downloads\7zip.msi"
+Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downloads\7zip.msi" -CheckURL "Yes"
 
 # https://www.python.org/downloads/ - Python - installed during start
-Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe" -FilePath ".\downloads\python3.exe"
+Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe" -FilePath ".\downloads\python3.exe" -CheckURL "Yes"
 
 # nodejs - installed via sandbox during download and setup of tools for dfirws
-Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip"
+Get-FileFromUri -uri "$nodejs" -FilePath ".\downloads\nodejs.zip" -CheckURL "Yes"
 
 # Tools to compile and build - version 2019
 Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe"
@@ -29,7 +29,7 @@ New-Item -ItemType Directory -Force -Path $TOOLS\ghidra | Out-Null
 Move-Item $TOOLS\ghidra_* $TOOLS\ghidra\
 
 # Ghidra - older release
-Get-FileFromUri -uri "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip" -FilePath "$SETUP_PATH\ghidra_10.4_PUBLIC_20230928.zip"
+Get-FileFromUri -uri "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip" -FilePath "$SETUP_PATH\ghidra_10.4_PUBLIC_20230928.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\ghidra_10.4_PUBLIC_20230928.zip" -o"$TOOLS\ghidra" | Out-Null
 
 # Ghidrathon source
