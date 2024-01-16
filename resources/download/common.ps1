@@ -248,14 +248,28 @@ function Get-ChocolateyUrl {
         [Parameter(Mandatory=$True)] [string]$PackageName
     )
 
-    # Scrape the download URL from the Chocolatey package page
-    $Url = curl --silent https://community.chocolatey.org/packages/$PackageName | findstr /C:"Download the raw" | findstr ">Download<" | ForEach-Object { ($_ -split '"' )[1] }
+    $retries = 3
+    $Url = ""
 
-    if (!$Url) {
-        Write-Error "Couldn't find download url for Chocolately package $PackageName."
-        Exit
+    while ($Url -eq "") {
+        try {
+            # Scrape the download URL from the Chocolatey package page
+            $Url = curl --silent https://community.chocolatey.org/packages/$PackageName | findstr /C:"Download the raw" | findstr ">Download<" | ForEach-Object { ($_ -split '"' )[1] }
+        }
+        catch {
+            $Url = ""
+        }
+        if ($Url -eq "") {
+            Start-Sleep 60
+        }
+        $retries--
+        if ($retries -eq 0) {
+            Write-Error "Failed to get download URL for Chocolately package $PackageName."
+            return ""
+        }
+        
     }
-
+    
     return $Url
 }
 
