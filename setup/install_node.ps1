@@ -34,5 +34,5 @@ Write-DateLog "Add npm packages" >> "C:\log\npm.txt" 2>&1
 
 Get-Job | Receive-Job
 
-Write-DateLog "Node installation done."
+Write-DateLog "Node installation done." >> "C:\log\npm.txt" 2>&1
 Write-Output "" > $TOOLS\node\done
