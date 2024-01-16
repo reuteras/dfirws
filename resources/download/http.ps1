@@ -218,26 +218,26 @@ Remove-Item -Force $TOOLS\nirsoft\readme.txt | Out-Null 2>&1
 # Update the links below when new versions are released
 
 # https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start
-Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.21-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi"
+Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.21-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes"
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
-Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.29-windows.zip" -FilePath ".\downloads\neo4j.zip"
+Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.29-windows.zip" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes"
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
-Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip"
+Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\bulk_extractor.zip" -o"$TOOLS\bulk_extractor" | Out-Null
 
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi"
+Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes"
 
 # https://npcap.com/#download - Npcap - available for manual installation
-Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downloads\npcap.exe"
+Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
 
 # https://www.wireshark.org/download.html - Wireshark - available for manual installation
-Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.2-x64.exe" -FilePath ".\downloads\wireshark.exe"
+Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.2-x64.exe" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
 
 # https://www.sqlite.org/download.html - SQLite
-Get-FileFromUri -uri "https://sqlite.org/2024/sqlite-tools-win-x64-3450000.zip" -FilePath ".\downloads\sqlite.zip"
+Get-FileFromUri -uri "https://sqlite.org/2024/sqlite-tools-win-x64-3450000.zip" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlite.zip" -o"$TOOLS\sqlite" | Out-Null
 if (Test-Path -Path $TOOLS\sqlite) {
     Remove-Item -Recurse -Force $TOOLS\sqlite | Out-Null 2>&1
@@ -245,7 +245,7 @@ if (Test-Path -Path $TOOLS\sqlite) {
 Move-Item $TOOLS\sqlite-* $TOOLS\sqlite
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
-Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip"
+Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\DensityScout.zip" -o"$TOOLS" | Out-Null
 if (Test-Path -Path $TOOLS\bin\densityscout.exe) {
     Remove-Item -Recurse -Force $TOOLS\bin\densityscout.exe | Out-Null 2>&1
@@ -253,29 +253,29 @@ if (Test-Path -Path $TOOLS\bin\densityscout.exe) {
 Move-Item $TOOLS\win64\densityscout.exe $TOOLS\bin\densityscout.exe
 
 # https://nmap.org/download.html - Nmap
-Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.94-setup.exe" -FilePath ".\downloads\nmap.exe"
+Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.94-setup.exe" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\nmap.exe" -o"$TOOLS\nmap" | Out-Null
 
 # https://sqlitebrowser.org/dl/ - DB Browser for SQLite
-Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.12.2-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip"
+Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.12.2-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sqlitebrowser.zip" -o"$TOOLS\" | Out-Null
 
 # https://flatassembler.net/download.php - FASM
-Get-FileFromUri -uri "https://flatassembler.net/fasmw17332.zip" -FilePath ".\downloads\fasm.zip"
+Get-FileFromUri -uri "https://flatassembler.net/fasmw17332.zip" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\fasm.zip" -o"$TOOLS\fasm" | Out-Null
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
-Get-FileFromUri -uri "https://procdot.com/download/procdot/binaries/procdot_1_22_57_windows.zip" -FilePath ".\downloads\procdot.zip"
+Get-FileFromUri -uri "https://procdot.com/download/procdot/binaries/procdot_1_22_57_windows.zip" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -pprocdot -aoa "$SETUP_PATH\procdot.zip" -o"$TOOLS\procdot" | Out-Null
 
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
-Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/9.0.0/windows_10_cmake_Release_graphviz-install-9.0.0-win64.exe" -FilePath ".\downloads\graphviz.exe"
+Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/9.0.0/windows_10_cmake_Release_graphviz-install-9.0.0-win64.exe" -FilePath ".\downloads\graphviz.exe" -CheckURL "Yes"
 
 # http://www.rohitab.com/apimonitor - API Monitor - installed during start
-Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe"
+Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe" -CheckURL "Yes"
 
 # https://gluonhq.com/products/javafx/ - JavaFX
-Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip"
+Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\openjfx.zip" -o"$TOOLS" | Out-Null
 if (Test-Path -Path $TOOLS\javafx-sdk) {
     Remove-Item -Recurse -Force $TOOLS\javafx-sdk | Out-Null 2>&1
@@ -283,16 +283,16 @@ if (Test-Path -Path $TOOLS\javafx-sdk) {
 Move-Item $TOOLS\javafx-sdk-* $TOOLS\javafx-sdk
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
-Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.2.jar" -FilePath ".\downloads\apktool.jar"
+Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.1.jar" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes"
 Copy-Item ".\downloads\apktool.jar" "$TOOLS\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "$TOOLS\bin\apktool.bat" -Force
 
 # https://windows.php.net/download - PHP
-Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.1-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip"
+Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.1-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\php.zip" -o"$TOOLS\php" | Out-Null
 
 # https://hashcat.net/hashcat/ - hashcat
-Get-FileFromUri -uri "https://hashcat.net/files/hashcat-6.2.6.7z" -FilePath ".\downloads\hashcat.7z"
+Get-FileFromUri -uri "https://hashcat.net/files/hashcat-6.2.6.7z" -FilePath ".\downloads\hashcat.7z" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\hashcat.7z" -o"$TOOLS" | Out-Null
 if (Test-Path -Path $TOOLS\hashcat) {
     Remove-Item -Recurse -Force $TOOLS\hashcat | Out-Null 2>&1
@@ -300,23 +300,23 @@ if (Test-Path -Path $TOOLS\hashcat) {
 Move-Item $TOOLS\hashcat-* $TOOLS\hashcat
 
 # https://www.winitor.com/download2 - PEStudio
-Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio-9.57.zip" -FilePath ".\downloads\pestudio.zip"
+Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio-9.57.zip" -FilePath ".\downloads\pestudio.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pestudio.zip" -o"$TOOLS" | Out-Null
 
 # ELK
 $ELK_VERSION = "8.11.4"
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/logstash/logstash-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\logstash.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elastic-agent.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\filebeat.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\metricbeat.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\packetbeat.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\heartbeat.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\auditbeat.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\winlogbeat.zip"
-Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/functionbeat/functionbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\functionbeat.zip"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/logstash/logstash-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\logstash.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elastic-agent.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\filebeat.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\metricbeat.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\packetbeat.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\heartbeat.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\auditbeat.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\winlogbeat.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/functionbeat/functionbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\functionbeat.zip" -CheckURL "Yes"
 
 # Remove unused files and directories
 Remove-Item -r $TOOLS\win32
