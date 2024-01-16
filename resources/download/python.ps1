@@ -45,4 +45,4 @@ Get-ChildItem -Path "$ROOT_PATH\mount\venv\default\Scripts" -Filter *.py | ForEa
     }
 }
 
-Write-DateLog "Pip packages done."
+Write-DateLog "Pip packages done." >> $ROOT_PATH\log\python.txt

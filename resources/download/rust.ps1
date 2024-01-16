@@ -7,7 +7,7 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
 . $ScriptRoot\common.ps1
 
-Write-DateLog "Start Sandbox to install Rust based tools for dfirws." > $ROOT_PATH\log\python.txt
+Write-DateLog "Start Sandbox to install Rust based tools for dfirws." > $ROOT_PATH\log\rust.txt
 
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
@@ -35,4 +35,4 @@ Stop-SandboxWhenDone "$ROOT_PATH\tmp\cargo\done" $mutex | Out-Null
 rclone.exe sync --verbose --checksum "$ROOT_PATH\tmp\cargo" "$ROOT_PATH\mount\Tools\cargo"
 Remove-Item -Recurse -Force "$ROOT_PATH\tmp\cargo" > $null 2>&1
 
-Write-DateLog "Rust tools done."
+Write-DateLog "Rust tools done." >> $ROOT_PATH\log\rust.txt

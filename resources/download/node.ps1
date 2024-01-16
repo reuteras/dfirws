@@ -8,7 +8,7 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 . $ScriptRoot\common.ps1
 
 Write-DateLog "Setup Node and install npm packages in Sandbox." > $ROOT_PATH\log\npm.txt
-Write-Output "" > .\log\npm.txt
+Write-DateLog "" > $ROOT_PATH\log\npm.txt
 
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
@@ -38,4 +38,4 @@ Stop-SandboxWhenDone "$ROOT_PATH\tmp\node\done" $mutex | Out-Null
 rclone.exe sync --verbose --checksum "$ROOT_PATH\tmp\node" "$ROOT_PATH\mount\Tools\node"
 Remove-Item -Recurse -Force "$ROOT_PATH\tmp\node" > $null 2>&1
 
-Write-DateLog "Node and npm packages done."
+Write-DateLog "Node and npm packages done." >> $ROOT_PATH\log\npm.txt 2>&1
