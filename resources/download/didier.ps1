@@ -113,4 +113,4 @@ foreach ($Tool in $DidierStevensBeta) {
   Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath .\downloads\DidierStevens\$Tool
 }
 
-xcopy /E $SETUP_PATH\DidierStevens $TOOLS\DidierStevens | Out-Null
+rclone.exe sync --verbose --checksum $SETUP_PATH\DidierStevens $TOOLS\DidierStevens 2>&1 | Out-Null
