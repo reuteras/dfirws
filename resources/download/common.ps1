@@ -43,7 +43,7 @@ function Get-FileFromUri {
     # Check if the file has already been downloaded
     if ($CheckURL -eq "Yes") {
         if (Compare-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name) {
-            Write-SynchronizedLog "File $FilePath already downloaded."
+            Write-SynchronizedLog "File $FilePath already downloaded according to tools_downloaded.csv."
             return
         }
     }
@@ -52,59 +52,99 @@ function Get-FileFromUri {
     $CleanPath = $FilePath -replace "^..", ""
     $TmpFilePath= "$PSScriptRoot\..\..\tmp\$CleanPath"
     $FilePath = "$PSScriptRoot\..\..\$CleanPath"
+    $retries = 3
+    $downloaded = $false
+    $ProgressPreference = 'SilentlyContinue'
 
     # Ensure the directory for the final file path exists
-    If (! ( Test-Path ([System.IO.FileInfo]$FilePath).DirectoryName ) ) {
+    If (! ( Test-Path ([System.IO.FileInfo]$FilePath).DirectoryName )) {
         New-Item ([System.IO.FileInfo]$FilePath).DirectoryName -force -type directory | Out-Null
     }
 
     # Ensure the directory for the temporary file path exists
-    If (! ( Test-Path ([System.IO.FileInfo]$TmpFilePath).DirectoryName ) ) {
+    If (! ( Test-Path ([System.IO.FileInfo]$TmpFilePath).DirectoryName )) {
         New-Item ([System.IO.FileInfo]$TmpFilePath).DirectoryName -force -type directory | Out-Null
     }
 
-    # Set the number of retries for the download
-    $retries = 3
-    $downloaded = $false
-    $ProgressPreference = 'SilentlyContinue'
+    $stringAsStream = [System.IO.MemoryStream]::new()
+    $writer = [System.IO.StreamWriter]::new($stringAsStream)
+    $writer.write("$Uri")
+    $writer.Flush()
+    $stringAsStream.Position = 0
+    $UriHash = $(Get-FileHash -InputStream $stringAsStream -Algorithm SHA256 | Select-Object -ExpandProperty Hash)
+
+    if (! (Test-Path "$PSScriptRoot\..\..\downloads\.etag\${UriHash}")) {
+        New-Item "$PSScriptRoot\..\..\downloads\.etag\${UriHash}" -type file | Out-Null
+        $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
+    }
+
+    # Attempt to download the file from the specified URI
     while($true) {
         try {
-            # Attempt to download the file from the specified URI
             Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
+            
             if ($Uri -like "*github.com*") {
+                # Download from GitHub
                 if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-                    curl.exe --silent -L --output $TmpFilePath $Uri
+                    if (Test-Path $FilePath) {
+                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -L --output $TmpFilePath $Uri
+                    } else {
+                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -L --output $TmpFilePath $Uri
+                    }
                 } else {
-                    curl.exe --silent -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $Uri
+                    if (Test-Path $FilePath) {
+                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $Uri
+                    } else {
+                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $Uri
+                    }
                 }
             } elseif ($Uri -like "*marketplace.visualstudio.com*") {
+                # Download from Visual Studio Marketplace
                 Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 20 -MaximumRetryCount 3
+            } elseif ($Uri -like "*sourceforge.net*") {
+                # Download from SourceForge
+                if (Test-Path $FilePath) {
+                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -L --user-agent "Wget x64" --output $TmpFilePath $Uri
+                } else {
+                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -L --user-agent "Wget x64" --output $TmpFilePath $Uri
+                }
             } else {
-                curl.exe --silent -L --user-agent "Wget x64" --output $TmpFilePath $Uri
+                # Download from other source.
+                if (Test-Path $FilePath) {
+                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -L --output $TmpFilePath $Uri
+                } else {
+                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -L --output $TmpFilePath $Uri
+                }
             }
-            Write-SynchronizedLog "Downloaded $Uri to $FilePath."
-            $downloaded = $true
+
+            if (Test-Path $TmpFilePath) {
+                Write-SynchronizedLog "Downloaded $Uri to $FilePath."
+                $downloaded = $true
+            }
             break
         }
         catch {
-            $exceptionMessage = $_.Exception.Message
-            Write-SynchronizedLog "Failed to download '$Uri': $exceptionMessage"
             if ($retries -gt 0) {
                 $retries--
                 Write-SynchronizedLog "Waiting 10 seconds before retrying. Retries left: $retries"
                 Start-Sleep -Seconds 10
             } else {
                 $exception = $_.Exception
+                $exceptionMessage = $_.Exception.Message
+                Write-SynchronizedLog "Failed to download '$Uri': $exceptionMessage"    
                 throw $exception
             }
         }
     }
-    # Copy the temporary file to the final file path and remove the temporary file
-    $result = rclone copyto --metadata --verbose --inplace --checksum $TmpFilePath $FilePath 2>&1 | Out-String
-    Write-SynchronizedLog "$result"
-    Remove-Item $TmpFilePath -Force | Out-Null
+
     if ($downloaded) {
+        # Copy the temporary file to the final file path and remove the temporary file
+        $result = rclone copyto --metadata --verbose --inplace --checksum $TmpFilePath $FilePath 2>&1 | Out-String
+        Write-SynchronizedLog "$result"
+        Remove-Item $TmpFilePath -Force | Out-Null
         Update-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name -Path $FilePath
+    } else {
+        Write-SynchronizedLog "Already downloaded $Uri according to etag."
     }
     $ProgressPreference = 'Continue'
 }
@@ -591,13 +631,15 @@ function Get-Winget {
         [Parameter(Mandatory=$True)] [string]$Path
     )
 
-    $VERSION = (winget search "$Name") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[2] }
+    $VERSION = (winget search "$Name") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
 
     if (Compare-ToolsDownloaded -URL $VERSION -Name $Name) {
         Write-SynchronizedLog "File $Name version $VERSION already downloaded."
         return
     }
     winget download --disable-interactivity	"$Name" -d .\tmp\winget 2>&1 | Out-Null
+    Remove-Item .\tmp\winget\*.yaml -Force > $null 2>&1
 
-    Update-ToolsDownloaded -URL $VERSION -Name $Name -Path $Path
+    $FileName = Get-ChildItem .\tmp\winget\ | Select-Object -Last 1 -ExpandProperty FullName
+    Update-ToolsDownloaded -URL $VERSION -Name $Name -Path $FileName
 }
