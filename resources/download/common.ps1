@@ -569,7 +569,7 @@ function Compare-ToolsDownloaded {
         $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] @()
     }
 
-    $localFile = $toolsDownloaded | Where-Object { $_.Name-eq $AppName }
+    $localFile = $toolsDownloaded | Where-Object { $_.Name -eq $AppName }
 
     # No local file found
     if (!$localFile) {
@@ -598,7 +598,7 @@ function Update-ToolsDownloaded {
         $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] @()
     }
 
-    $localFile = $toolsDownloaded | Where-Object { $_.Name-eq $Name }
+    $localFile = $toolsDownloaded | Where-Object { $_.Name -eq $Name }
 
     # No local file found
     if (!$localFile) {
