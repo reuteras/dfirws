@@ -10,7 +10,7 @@ if ("$vscode_python_string" -ne "") {
     $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
     $vscode_python_version=$vscode_tmp.Matches.Groups[1].Value
     # Visual Studio Code python extension
-    Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix"
+    Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix" -CheckURL "Yes"
 } else {
     Write-DateLog "ERROR: Could not get URI for Visual Studio Code python extension"
 }
@@ -22,7 +22,7 @@ if ("$vscode_mermaid_string" -ne "") {
     $vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
     $vscode_mermaid_version=$vscode_tmp.Matches.Groups[1].Value
     # Visual Studio Code mermaid extension
-    Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix"
+    Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix" -CheckURL "Yes"
 } else {
     Write-DateLog "ERROR: Could not get URI for Visual Studio Code mermaid extension"
 }
