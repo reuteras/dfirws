@@ -13,9 +13,9 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 Write-DateLog "Install Rust tools in Sandbox." >> "C:\log\rust.txt"
 
 Write-DateLog "Install GitBash (in the background)." >> "C:\log\rust.txt"
-Install-GitBash
+Install-GitBash >> "C:\log\rust.txt"
 Write-DateLog "Install Rust." >> "C:\log\rust.txt"
-Install-Rust
+Install-Rust >> "C:\log\rust.txt"
 
 # Set PATH to include Rust and Git
 $env:PATH="C:\Rust\bin;$env:ProgramFiles\Git\bin;$env:ProgramFiles\Git\usr\bin;$env:PATH"
