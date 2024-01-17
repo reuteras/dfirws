@@ -3,7 +3,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
 # This script runs in a Windows sandbox to uncompress zst files.
-Write-DateLog "Uncompress zst files for Git for Windows (bash)" >> "C:\log\bash.txt" 2>&1
+Write-DateLog "Uncompress zst files for Git for Windows (bash)" >> "C:\log\bash.txt"
 
 New-Item -ItemType Directory "$TEMP" > $null 2>&1
 New-Item -ItemType Directory "$TOOLS" > $null 2>&1
@@ -17,16 +17,24 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 
 # Update path
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-Start-Process -Wait "$env:ProgramFiles\7-Zip\7z.exe" -ArgumentList "x -aoa $SETUP_PATH\zstd.zip -o$TOOLS\zstd"
+Start-Process -Wait "$env:ProgramFiles\7-Zip\7z.exe" -ArgumentList "x -aoa $SETUP_PATH\zstd.zip -o$TOOLS"
 Get-Job | Receive-Job | Out-Default >> "C:\log\bash.txt" 2>&1
+Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
 
-Set-Location C:\bash
-Remove-Item -Force *.tar
-Get-ChildItem -Include * |
+Set-Location "C:\bash"
+Get-ChildItem | Where-Object Extension -Like '*.zst' |
     ForEach-Object {
-        Start-Process -Wait "$TOOLS\zstd\zstd.exe" -ArgumentList "-d $_"
+        Write-DateLog "Uncompressing $($_.Name)" >> "C:\log\bash.txt"
+        & "$TOOLS\zstd\zstd.exe" --force --rm --decompress "$_" >> "C:\log\bash.txt"
     }
 
-Get-Job | Receive-Job | Out-Default >> "C:\log\bash.txt" 2>&1
-Write-DateLog "Uncompress of zst files done." >> "C:\log\bash.txt" 2>&1
+# Some files are compressed with xz even if they have zst extension
+Get-ChildItem | Where-Object Extension -Like '*.zst' |
+    ForEach-Object {
+        Write-DateLog "Uncompressing $($_.Name)" >> "C:\log\bash.txt"
+        & "$env:ProgramFiles\7-Zip\7z.exe" x "$_" -o"." >> "C:\log\bash.txt"
+        Remove-Item "$_" -Force >> "C:\log\bash.txt"
+    }
+
+Write-DateLog "Uncompress of zst files done." >> "C:\log\bash.txt"
 Write-Output "" > C:\bash\done
