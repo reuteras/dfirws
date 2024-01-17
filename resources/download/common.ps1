@@ -627,15 +627,15 @@ function Get-Winget {
         [Parameter(Mandatory=$True)] [string]$AppName
     )
 
-    $VERSION = (winget search "$Name") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
+    $VERSION = (winget search "$AppName") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
 
-    if (Compare-ToolsDownloaded -URL $VERSION -AppName $Name) {
-        Write-SynchronizedLog "File $Name version $VERSION already downloaded."
+    if (Compare-ToolsDownloaded -URL $VERSION -AppName $AppName) {
+        Write-SynchronizedLog "File $AppName version $VERSION already downloaded."
         return
     }
-    winget download --disable-interactivity	"$Name" -d .\tmp\winget 2>&1 | Out-Null
+    winget download --disable-interactivity	"$AppName" -d .\tmp\winget 2>&1 | Out-Null
     Remove-Item .\tmp\winget\*.yaml -Force > $null 2>&1
 
     $FileName = Get-ChildItem .\tmp\winget\ | Select-Object -Last 1 -ExpandProperty FullName
-    Update-ToolsDownloaded -URL $VERSION -Name $Name -Path $FileName
+    Update-ToolsDownloaded -URL $VERSION -Name $AppName -Path $FileName
 }
