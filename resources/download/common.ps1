@@ -76,6 +76,8 @@ function Get-FileFromUri {
     if (! (Test-Path "$PSScriptRoot\..\..\downloads\.etag\${UriHash}")) {
         New-Item "$PSScriptRoot\..\..\downloads\.etag\${UriHash}" -type file | Out-Null
         $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
+    } else {
+        $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
     }
 
     # Attempt to download the file from the specified URI
@@ -83,40 +85,32 @@ function Get-FileFromUri {
         try {
             Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
 
-            if ($Uri -like "*github.com*") {
-                # Download from GitHub
-                if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-                    if (Test-Path $FilePath) {
-                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -L --output $TmpFilePath $Uri
-                    } else {
-                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -L --output $TmpFilePath $Uri
-                    }
-                } else {
-                    if (Test-Path $FilePath) {
-                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $Uri
-                    } else {
-                        curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -u "${GH_USER}:${GH_PASS}" -L --output $TmpFilePath $Uri
-                    }
-                }
-            } elseif ($Uri -like "*marketplace.visualstudio.com*") {
-                # Download from Visual Studio Marketplace
-                Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 20 -MaximumRetryCount 3
-            } elseif ($Uri -like "*sourceforge.net*") {
-                # Download from SourceForge
-                if (Test-Path $FilePath) {
-                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -L --user-agent "Wget x64" --output $TmpFilePath $Uri
-                } else {
-                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -L --user-agent "Wget x64" --output $TmpFilePath $Uri
-                }
+            $ETAG_FLAG = "--etag-compare $ETAG_FILE --etag-save $ETAG_FILE"
+
+            if (Test-Path $FilePath) {
+                $Z_FLAG = "-z $FilePath"
             } else {
-                # Download from other source.
-                if (Test-Path $FilePath) {
-                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -z $FilePath -L --output $TmpFilePath $Uri
-                } else {
-                    curl.exe --etag-compare "$ETAG_FILE" --etag-save "$ETAG_FILE" --silent -L --output $TmpFilePath $Uri
-                }
+                $Z_FLAG = ""
             }
 
+            if ($Uri -like "*github.com*" -and "" -ne $GH_USER -and "" -ne $GH_PASS) {
+                $GH_FLAG = "-u ${GH_USER}:${GH_PASS}"
+            } else {
+                $GH_FLAG = ""
+            }
+            
+            if ($Uri -like "*sourceforge.net*") {
+                $UA_FLAG = '--user-agent "Wget x64"'
+            } else {
+                $UA_FLAG = ""
+            }
+
+            if ($Uri -like "*marketplace.visualstudio.com*") {
+                # Download from Visual Studio Marketplace
+                Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 20 -MaximumRetryCount 3
+            } else {
+                Invoke-Expression -Command "curl.exe $ETAG_FLAG $Z_FLAG $GH_FLAG $UA_FLAG --silent -L --output $TmpFilePath $Uri"
+            }   
             if (Test-Path $TmpFilePath) {
                 Write-SynchronizedLog "Downloaded $Uri to $FilePath."
                 $downloaded = $true

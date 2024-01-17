@@ -54,7 +54,7 @@ Move-Item $TOOLS\zstd-* $TOOLS\zstd | Out-Null
 # Rust - available for installation via dfirws-install.ps1
 Clear-Tmp
 Write-SynchronizedLog "winget: Downloading Rust."
-Get-WinGet	Rustlang.Rust.GNU .\downloads\rust.msi
+Get-WinGet	Rustlang.Rust.GNU
 if (Test-Path .\tmp\winget\Rust*.msi) {
     Copy-Item .\tmp\winget\Rust*.msi .\downloads\rust.msi
 }
