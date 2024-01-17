@@ -98,7 +98,7 @@ function Get-FileFromUri {
             } else {
                 $GH_FLAG = ""
             }
-            
+
             if ($Uri -like "*sourceforge.net*") {
                 $UA_FLAG = '--user-agent "Wget x64"'
             } else {
@@ -109,8 +109,12 @@ function Get-FileFromUri {
                 # Download from Visual Studio Marketplace
                 Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 20 -MaximumRetryCount 3
             } else {
-                Invoke-Expression -Command "curl.exe $ETAG_FLAG $Z_FLAG $GH_FLAG $UA_FLAG --silent -L --output $TmpFilePath $Uri"
-            }   
+                $CMD = "curl.exe"
+                $FLAGS = @()
+                (Write-Output "$ETAG_FLAG $Z_FLAG $GH_FLAG $UA_FLAG --silent -L --output $TmpFilePath $Uri").split(" ") | ForEach-Object {if ("" -ne $_ ) {$FLAGS += $_}}
+                & $CMD $FLAGS
+                Get-Job | Remove-Job | Out-Null
+            }
             if (Test-Path $TmpFilePath) {
                 Write-SynchronizedLog "Downloaded $Uri to $FilePath."
                 $downloaded = $true

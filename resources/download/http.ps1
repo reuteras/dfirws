@@ -299,10 +299,6 @@ if (Test-Path -Path $TOOLS\hashcat) {
 }
 Move-Item $TOOLS\hashcat-* $TOOLS\hashcat
 
-# https://www.winitor.com/download2 - PEStudio
-Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio-9.57.zip" -FilePath ".\downloads\pestudio.zip" -CheckURL "Yes"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\pestudio.zip" -o"$TOOLS" | Out-Null
-
 # ELK
 $ELK_VERSION = "8.11.4"
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
