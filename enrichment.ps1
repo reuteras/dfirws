@@ -44,7 +44,7 @@ foreach ($file in $files) {
     $fileUrl = $folderUrl + $file
     $savePath = Join-Path -Path "${torsaveDirectory}" -ChildPath "${file}"
     Write-Output "Downloading $fileUrl to $savePath"
-    $webClient.DownloadFile("${fileUrl}", "${savePath}")
+    curl --silent -L -z $savePath -o $savePath $fileUrl
 }
 $webClient.Dispose()
 
@@ -71,6 +71,8 @@ Copy-Item -Path $manufSavePath -Destination "${manufSaveDirectory}\manuf-${DATE}
 # Check if the Maxmind license key is set
 if (-not $MAXMIND_LICENSE_KEY) {
     Write-Output "Please set the MAXMIND_LICENSE_KEY variable in config.ps1 if you want to download Maxmind databases"
+} elseif ($MAXMIND_LICENSE_KEY -eq "YOUR KEY") {
+    Write-Output "Please enter your key for the MAXMIND_LICENSE_KEY variable in config.ps1."
 } else {
     $maxmindSaveDirectory = "${enrichmentDirectory}\maxmind"
 
