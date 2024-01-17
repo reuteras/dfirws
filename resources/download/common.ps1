@@ -561,6 +561,9 @@ function Compare-ToolsDownloaded {
         [Parameter(Mandatory=$True)] [string]$URL,
         [Parameter(Mandatory=$True)] [string]$AppName
     )
+    # Bad linter...
+    $null=$AppName
+
     if (Test-Path "$PSScriptRoot\..\..\tools_downloaded.csv") {
         $toolsDownloaded = Import-Csv "$PSScriptRoot\..\..\tools_downloaded.csv"
     } else {
