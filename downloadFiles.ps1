@@ -47,18 +47,33 @@ if ($all -eq $false) {
     }
 }
 
-# Remove old files
-if ($all) {
-    Remove-Item -r $TOOLS > $null 2>$1
-    New-Item -ItemType Directory $TOOLS > $null 2>$1
-    New-Item -ItemType Directory $TOOLS\bin > $null 2>$1
-    New-Item -ItemType Directory $TOOLS\lib > $null 2>$1
-    New-Item -ItemType Directory $TOOLS\Zimmerman > $null 2>$1
-}
+# Remove old temp files
 Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
 
-if (!(Test-Path .\downloads)) {
-    New-Item -ItemType Directory -Force -Path .\downloads > $null 2>&1
+# Create directories
+if (!(Test-Path "$SETUP_PATH")) {
+    New-Item -ItemType Directory -Force -Path "$SETUP_PATH" > $null 2>&1
+}
+
+if (!(Test-Path "$SETUP_PATH\.etag")) {
+    New-Item -ItemType Directory -Force -Path "$SETUP_PATH\.etag" > $null 2>&1
+}
+
+
+if (!(Test-Path "$TOOLS")) {
+    New-Item -ItemType Directory -Force -Path "$TOOLS" > $null 2>&1
+}
+
+if (!(Test-Path "$TOOLS\bin")) {
+    New-Item -ItemType Directory -Force -Path "$TOOLS\bin" > $null 2>&1
+}
+
+if (!(Test-Path "$TOOLS\lib")) {
+    New-Item -ItemType Directory -Force -Path "$TOOLS\lib" > $null 2>&1
+}
+
+if (!(Test-Path "$TOOLS\Zimmerman")) {
+    New-Item -ItemType Directory -Force -Path "$TOOLS\Zimmerman" > $null 2>&1
 }
 
 # Ensure that we have a log directory and a clean log files
@@ -68,7 +83,7 @@ if (! (Test-Path -Path ".\log" )) {
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
 
-if ($all -or $args -contains "--didier" -or $args -contains "--http" -or $args -contains "--release") {
+if ($all -or $args -contains "--bash" -or $args -contains "--didier" -or $args -contains "--http" -or $args -contains "--release") {
     # Get GitHub password from user input
     write-dateLog "Use GitHub token to avoid problems with rate limits."
     $GH_USER = Read-Host "Enter GitHub user name"
