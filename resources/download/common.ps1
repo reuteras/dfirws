@@ -42,7 +42,7 @@ function Get-FileFromUri {
 
     # Check if the file has already been downloaded
     if ($CheckURL -eq "Yes") {
-        if (Compare-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name) {
+        if (Compare-ToolsDownloaded -URL $Uri -AppName ([System.IO.FileInfo]$FilePath).Name) {
             Write-SynchronizedLog "File $FilePath already downloaded according to tools_downloaded.csv."
             return
         }
@@ -82,7 +82,7 @@ function Get-FileFromUri {
     while($true) {
         try {
             Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
-            
+
             if ($Uri -like "*github.com*") {
                 # Download from GitHub
                 if ($GH_USER -eq "" -or $GH_PASS -eq "") {
@@ -131,7 +131,7 @@ function Get-FileFromUri {
             } else {
                 $exception = $_.Exception
                 $exceptionMessage = $_.Exception.Message
-                Write-SynchronizedLog "Failed to download '$Uri': $exceptionMessage"    
+                Write-SynchronizedLog "Failed to download '$Uri': $exceptionMessage"
                 throw $exception
             }
         }
@@ -561,7 +561,7 @@ function Write-DateLog {
 function Compare-ToolsDownloaded {
     param (
         [Parameter(Mandatory=$True)] [string]$URL,
-        [Parameter(Mandatory=$True)] [string]$Name
+        [Parameter(Mandatory=$True)] [string]$AppName
     )
     if (Test-Path "$PSScriptRoot\..\..\tools_downloaded.csv") {
         $toolsDownloaded = Import-Csv "$PSScriptRoot\..\..\tools_downloaded.csv"
@@ -569,7 +569,7 @@ function Compare-ToolsDownloaded {
         $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] @()
     }
 
-    $localFile = $toolsDownloaded | Where-Object { $_.Name-eq $Name }
+    $localFile = $toolsDownloaded | Where-Object { $_.Name-eq $AppName }
 
     # No local file found
     if (!$localFile) {
@@ -586,6 +586,7 @@ function Compare-ToolsDownloaded {
 
 # Update the tools_downloaded.csv file
 function Update-ToolsDownloaded {
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory=$True)] [string]$URL,
         [Parameter(Mandatory=$True)] [string]$Name,
@@ -614,7 +615,9 @@ function Update-ToolsDownloaded {
         $localFile.URL = $URL
     }
 
-    $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\tools_downloaded.csv" -NoTypeInformation
+    if($PSCmdlet.ShouldProcess($file.Name)) {
+        $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\tools_downloaded.csv" -NoTypeInformation
+    }
 }
 
 # Function to clear tmp directory
@@ -627,13 +630,12 @@ function Clear-Tmp {
 # Function to download via winget
 function Get-Winget {
     param (
-        [Parameter(Mandatory=$True)] [string]$Name,
-        [Parameter(Mandatory=$True)] [string]$Path
+        [Parameter(Mandatory=$True)] [string]$AppName
     )
 
     $VERSION = (winget search "$Name") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
 
-    if (Compare-ToolsDownloaded -URL $VERSION -Name $Name) {
+    if (Compare-ToolsDownloaded -URL $VERSION -AppName $Name) {
         Write-SynchronizedLog "File $Name version $VERSION already downloaded."
         return
     }
