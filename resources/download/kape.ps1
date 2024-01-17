@@ -10,15 +10,17 @@ if (test-path .\local\kape.zip) {
     Exit
 }
 
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\local\kape.zip" -o"$SETUP_PATH" | Out-Null
-if (Test-Path "$SETUP_PATH\Get-KAPEUpdate.ps1") {
-    Remove-Item "$SETUP_PATH\Get-KAPEUpdate.ps1"  -Force
+if (! (Test-Path -Path "$SETUP_PATH\KAPE" )) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\local\kape.zip" -o"$SETUP_PATH" | Out-Null
+    if (Test-Path "$SETUP_PATH\Get-KAPEUpdate.ps1") {
+        Remove-Item "$SETUP_PATH\Get-KAPEUpdate.ps1"  -Force
+    }
 }
 
 $CURRENT_DIR = $PWD
 
 # Download KAPE-EZToolsAncillaryUpdater
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AndrewRathbun/KAPE-EZToolsAncillaryUpdater/main/KAPE-EZToolsAncillaryUpdater.ps1" -OutFile "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" -UseBasicParsing
+curl --silent -L -z "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" -o "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" "https://raw.githubusercontent.com/AndrewRathbun/KAPE-EZToolsAncillaryUpdater/main/KAPE-EZToolsAncillaryUpdater.ps1"
 Set-Location "$SETUP_PATH\KAPE"
 & .\KAPE-EZToolsAncillaryUpdater.ps1 -silent *> $CURRENT_DIR\log\kape.txt
 Set-Location $CURRENT_DIR
