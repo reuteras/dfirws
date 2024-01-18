@@ -40,10 +40,10 @@ if (-not (Test-Path -Path $torsaveDirectory)) {
 $webClient = New-Object System.Net.WebClient
 $files = $webClient.DownloadString($folderUrl).Split("`n") | Select-String -Pattern '<a href="(exit[^"]+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
 
+Write-Output "Downloading TOR exit files"
 foreach ($file in $files) {
     $fileUrl = $folderUrl + $file
     $savePath = Join-Path -Path "${torsaveDirectory}" -ChildPath "${file}"
-    Write-Output "Downloading $fileUrl to $savePath"
     curl --silent -L -z $savePath -o $savePath $fileUrl
 }
 $webClient.Dispose()
@@ -60,7 +60,7 @@ if (-not (Test-Path -Path $manufSaveDirectory)) {
 
 $manufUrl = "https://www.wireshark.org/download/automated/data/manuf"
 $manufSavePath = Join-Path -Path "${manufSaveDirectory}" -ChildPath "manuf.txt"
-Write-Output "Downloading $manufUrl to $manufSavePath"
+Write-Output "Downloading $manufUrl"
 Invoke-WebRequest -Uri $manufUrl -OutFile $manufSavePath
 Copy-Item -Path $manufSavePath -Destination "${manufSaveDirectory}\manuf-${DATE}.txt"
 
@@ -101,6 +101,55 @@ if (-not $MAXMIND_LICENSE_KEY) {
     Write-Output "Downloading GeoLite2-Country.tar.gz"
     Invoke-WebRequest -Uri $folderUrl -OutFile $savePath
     Copy-Item -Path $savePath -Destination "${maxmindSaveDirectory}\GeoLite2-Country-${DATE}.tar.gz"
+
+    # Unpack latest Maxmind GeoLite2 databases
+    $maxmindUnpackDirectory = "${maxmindSaveDirectory}\unpack"
+    if (-not (Test-Path -Path $maxmindUnpackDirectory)) {
+        New-Item -ItemType Directory -Path $maxmindUnpackDirectory -Force | Out-Null
+    }
+
+    $maxmindASNUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-ASN"
+    if (-not (Test-Path -Path $maxmindASNUnpackDirectory)) {
+        New-Item -ItemType Directory -Path $maxmindASNUnpackDirectory -Force | Out-Null
+    }
+
+    $maxmindCityUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-City"
+    if (-not (Test-Path -Path $maxmindCityUnpackDirectory)) {
+        New-Item -ItemType Directory -Path $maxmindCityUnpackDirectory -Force | Out-Null
+    }
+
+    $maxmindCountryUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-Country"
+    if (-not (Test-Path -Path $maxmindCountryUnpackDirectory)) {
+        New-Item -ItemType Directory -Path $maxmindCountryUnpackDirectory -Force | Out-Null
+    }
+
+    Write-Output "Unpacking Maxmind GeoLite2 databases"
+
+    $maxmindASNUnpackPath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-ASN.tar.gz"
+    tar xzf $maxmindASNUnpackPath -C $maxmindASNUnpackDirectory
+
+    $maxmindCityUnpackPath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-City.tar.gz"
+    tar xzf $maxmindCityUnpackPath -C $maxmindCityUnpackDirectory
+
+    $maxmindCountryUnpackPath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-Country.tar.gz"
+    tar xzf $maxmindCountryUnpackPath -C $maxmindCountryUnpackDirectory
+
+    Write-Output "Copying Maxmind GeoLite2 databases to maxmind_current"
+    $maxmindCurrentDirectory = "${enrichmentDirectory}\maxmind_current"
+    if (-not (Test-Path -Path $maxmindCurrentDirectory)) {
+        New-Item -ItemType Directory -Path $maxmindCurrentDirectory -Force | Out-Null
+    } else {
+        Remove-Item -Path $maxmindCurrentDirectory -Recurse -Force
+        New-Item -ItemType Directory -Path $maxmindCurrentDirectory -Force | Out-Null
+    }
+
+    $maxmindUnpackFiles = Get-ChildItem -Path $maxmindUnpackDirectory -Recurse -Filter "*.mmdb"
+    foreach ($maxmindUnpackFile in $maxmindUnpackFiles) {
+        Copy-Item -Path $maxmindUnpackFile -Destination "${maxmindCurrentDirectory}"
+    }
+
+    # Remove unpack directory
+    Remove-Item -Path $maxmindUnpackDirectory -Recurse -Force
 }
 
 #
@@ -117,7 +166,7 @@ if (-not (Test-Path -Path $suricataSaveDirectory)) {
 }
 
 $suricataSavePath = Join-Path -Path "${suricataSaveDirectory}" -ChildPath "emerging.rules.zip"
-Write-Output "Downloading $suricataUrl to $suricataSavePath"
+Write-Output "Downloading $suricataUrl"
 Invoke-WebRequest -Uri $suricataUrl -OutFile $suricataSavePath
 Copy-Item -Path $suricataSavePath -Destination "${suricataSaveDirectory}\emerging-${DATE}.rules.zip"
 
@@ -135,7 +184,7 @@ if (-not (Test-Path -Path $snortSaveDirectory)) {
 }
 
 $snortSavePath = Join-Path -Path "${snortSaveDirectory}" -ChildPath "community-rules.tar.gz"
-Write-Output "Downloading $snortUrl to $snortSavePath"
+Write-Output "Downloading $snortUrl"
 Invoke-WebRequest -Uri $snortUrl -OutFile $snortSavePath
 Copy-Item -Path $snortSavePath -Destination "${snortSaveDirectory}\community-rules-${DATE}.rules.tar.gz"
 
