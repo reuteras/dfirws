@@ -39,11 +39,23 @@ Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/downl
 Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\downloads\yara-forge-rules-full.zip"
 
 # Get Sysinternals Suite
-Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sysinternals.zip" -o"$TOOLS\sysinternals" | Out-Null
+# Change download of Sysinternals to download of individual tools from live.sysinternals.com since
+# the zip file is behind a Cloudflare captcha at the moment.
+# Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip"
+#& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\sysinternals.zip" -o"$TOOLS\sysinternals" | Out-Null
+if (!(Test-Path -Path $TOOLS\sysinternals)) {
+    New-Item -Path $TOOLS\sysinternals -ItemType Directory -Force | Out-Null
+}
 
-# Get x64dbg - installed during start
-Get-FileFromUri -uri "https://sourceforge.net/projects/x64dbg/files/latest/download" -FilePath ".\downloads\x64dbg.zip"
+$folderUrl = "https://live.sysinternals.com/tools/"
+$webClient = New-Object System.Net.WebClient
+$files = $webClient.DownloadString($folderUrl).Split("<br>") | Select-String -Pattern '<A HREF="(/tools[^"]+)"' | ForEach-Object { if ($_.Matches.Groups[1].Value -ne "/tools/ARM64/") { ($_.Matches.Groups[1].Value  -split("/"))[2] }}
+foreach ($file in $files) {
+    $fileUrl = $folderUrl + $file
+    $savePath = Join-Path -Path "$TOOLS\sysinternals" -ChildPath "${file}"
+    curl --silent -L -z $savePath -o $savePath $fileUrl
+}
+$webClient.Dispose()
 
 # Gradle - is used during download and setup of tools for dfirws
 Get-FileFromUri -uri "https://services.gradle.org/distributions/gradle-8.4-bin.zip" -FilePath ".\downloads\gradle.zip"
@@ -54,7 +66,8 @@ if (Test-Path -Path $TOOLS\gradle) {
 Move-Item $TOOLS\gradle-* $TOOLS\gradle
 
 # Get exiftool
-Get-FileFromUri -uri "https://sourceforge.net/projects/exiftool/files/latest/download" -FilePath ".\downloads\exiftool.zip"
+$EXIFTOOL_VERSION = Get-DownloadUrlFromPage -url https://exiftool.org/index.html -RegEx 'exiftool-[^zip]+.zip'
+Get-FileFromUri -uri "https://exiftool.org/$EXIFTOOL_VERSION" -FilePath ".\downloads\exiftool.zip"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\exiftool.zip" -o"$TOOLS\exiftool" | Out-Null
 Copy-Item "$TOOLS\exiftool\exiftool(-k).exe" $TOOLS\exiftool\exiftool.exe
 Remove-Item "$TOOLS\exiftool\exiftool(-k).exe" -Force | Out-Null
@@ -288,7 +301,7 @@ Copy-Item ".\downloads\apktool.jar" "$TOOLS\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "$TOOLS\bin\apktool.bat" -Force
 
 # https://windows.php.net/download - PHP
-Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.1-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.2-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\php.zip" -o"$TOOLS\php" | Out-Null
 
 # https://hashcat.net/hashcat/ - hashcat
