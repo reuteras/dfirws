@@ -407,3 +407,6 @@ if (Test-Path "$TOOLS\hayabusa\hayabusa.exe") {
     Remove-Item "$TOOLS\hayabusa\hayabusa.exe" -Force
 }
 Move-Item $TOOLS\hayabusa\hayabusa-* $TOOLS\hayabusa\hayabusa.exe
+
+# Get x64dbg - installed during start
+Get-GitHubRelease -repo "x64dbg/x64dbg" -path "$SETUP_PATH\x64dbg.zip" -match snapshot
