@@ -19,8 +19,7 @@ if (! (Test-Path -Path "$SETUP_PATH\KAPE" )) {
 
 $CURRENT_DIR = $PWD
 
-# Download KAPE-EZToolsAncillaryUpdater
-curl --silent -L -z "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" -o "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" "https://raw.githubusercontent.com/AndrewRathbun/KAPE-EZToolsAncillaryUpdater/main/KAPE-EZToolsAncillaryUpdater.ps1"
+Copy-Item ".\resources\external\KAPE-EZToolsAncillaryUpdater.ps1" "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" -Force
 Set-Location "$SETUP_PATH\KAPE"
 & .\KAPE-EZToolsAncillaryUpdater.ps1 -silent *> $CURRENT_DIR\log\kape.txt
 Set-Location $CURRENT_DIR
