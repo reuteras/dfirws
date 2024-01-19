@@ -195,6 +195,8 @@ Copy-Item -Path $snortSavePath -Destination "${snortSaveDirectory}\community-rul
 if (! (Get-Command git )) {
     Write-Output "Need git to checkout git repositories."
     Exit
+} else {
+    Write-Output "Updating git repositories."
 }
 
 $gitSaveDirectory = "${enrichmentDirectory}\git"
@@ -217,12 +219,10 @@ foreach ($repourl in $repourls) {
     $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\.git$" }
     if ( Test-Path -Path $repo ) {
         Set-Location $repo
-        $result = git pull 2>&1
-        Write-Output "${repourl}: $result"
+        git pull 2>&1 | Out-Null
         Set-Location ..
     } else {
-        $result = git clone $repourl 2>&1
-        Write-Output "${repourl}: $result"
+        git clone $repourl 2>&1 | Out-Null
     }
 }
 
