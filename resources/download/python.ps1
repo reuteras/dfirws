@@ -26,7 +26,7 @@ foreach ($venv in $venvs) {
 foreach ($venv in $venvs) {
     if (Test-Path -Path $ROOT_PATH\mount\venv\$venv\$venv.txt ) {
         Copy-Item "$ROOT_PATH\mount\venv\$venv\$venv.txt" "$ROOT_PATH\tmp\mount\venv\$venv\$venv.txt"
-    }    
+    }
 }
 
 if (Test-Path -Path $ROOT_PATH\mount\venv\default\done ) {
