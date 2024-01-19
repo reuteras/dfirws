@@ -1,9 +1,33 @@
 # Download and update files for the sandbox
 
+param(
+    [Parameter(HelpMessage = 'Update Bash.')]
+    [Switch]$Bash,
+    [Parameter(HelpMessage = 'Update Didier Stevens tools.')]
+    [Switch]$Didier,
+    [Parameter(HelpMessage = 'Update git repositories.')]
+    [Switch]$Git,
+    [Parameter(HelpMessage = 'Update files downloaded via HTTP.')]
+    [Switch]$Http,
+    [Parameter(HelpMessage = 'Update KAPE.')]
+    [Switch]$Kape,
+    [Parameter(HelpMessage = 'Update Node.')]
+    [Switch]$Node,
+    [Parameter(HelpMessage = 'Update Python.')]
+    [Switch]$Python,
+    [Parameter(HelpMessage = 'Update releases from GitHub.')]
+    [Switch]$Release,
+    [Parameter(HelpMessage = 'Update Rust.')]
+    [Switch]$Rust,
+    [Parameter(HelpMessage = 'Update files downloaded via winget.')]
+    [Switch]$Winget,
+    [Parameter(HelpMessage = 'Update Zimmerman tools.')]
+    [Switch]$Zimmerman
+    )
+
 . .\resources\download\common.ps1
 
 # Ensure that we have the necessary tools installed
-
 if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
     Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to the PATH."
     Exit
@@ -28,16 +52,16 @@ if (! (Test-Path -Path ".\config.ps1")) {
 rclone.exe config touch | Out-Null
 
 # Check if sandbox is running
-if ( tasklist | findstr WindowsSandbox ) {
+if ( tasklist | Select-String "WindowsSandbox" ) {
     Write-DateLog "Sandbox can't be running during install or upgrade."
     Exit
 }
 
-if ($args.Count -eq 0) {
+if ($Bash.IsPresent -or $Didier.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
+    $all = $false
+} else {
     Write-DateLog "No arguments given. Will download all files."
     $all = $true
-} else {
-    $all = $false
 }
 
 if ($all -eq $false) {
@@ -83,7 +107,7 @@ if (! (Test-Path -Path ".\log" )) {
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
 
-if ($all -or $args -contains "--bash" -or $args -contains "--didier" -or $args -contains "--http" -or $args -contains "--release") {
+if ($all -or $Bash -or $Didier -or $Http -or $Python -or $Release) {
     # Get GitHub password from user input
     write-dateLog "Use GitHub token to avoid problems with rate limits."
     $GH_USER = Read-Host "Enter GitHub user name"
@@ -93,71 +117,71 @@ if ($all -or $args -contains "--bash" -or $args -contains "--didier" -or $args -
     $null = $GH_USER
 }
 
-if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python" -or $args -contains "--rust") {
+if ($all -or $Bash -or $Node -or $python -or $Rust) {
     Write-DateLog "Download files needed in Sandboxes."
-    . .\resources\download\basic.ps1
+    .\resources\download\basic.ps1
 }
 
-if ($all -or $args -contains "--bash") {
-    Write-DateLog "Download packages for Git for Windows (bash)."
+if ($all -or $Bash) {
+    Write-DateLog "Download packages for Git for Windows (Bash)."
     Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 }
 
-if ($all -or $args -contains "--node") {
+if ($all -or $Node) {
     Write-DateLog "Setup Node and install npm packages."
     Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 }
 
-if ($all -or $args -contains "--git") {
+if ($all -or $Git) {
     Write-DateLog "Download git repositories"
     .\resources\download\git.ps1
 }
 
-if ($all -or $args -contains "--python") {
+if ($all -or $python) {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages."
     Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 }
 
-if ($all -or $args -contains "--rust") {
+if ($all -or $Rust) {
     Write-Output "" > .\log\rust.txt
     Write-DateLog "Setup Rust and install packages."
     Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
 }
 
-if ($all -or $args -contains "--http") {
+if ($all -or $Http) {
     Write-DateLog "Download files via HTTP."
     .\resources\download\http.ps1
 }
 
-if ($all -or $args -contains "--release") {
+if ($all -or $Release) {
     Write-DateLog "Download releases from GitHub."
     .\resources\download\release.ps1
 }
 
-if ($all -or $args -contains "--didier") {
+if ($all -or $Didier) {
     Write-DateLog "Download Didier Stevens tools."
     .\resources\download\didier.ps1
 }
 
-if ($all -or $args -contains "--winget") {
+if ($all -or $winget) {
     Write-DateLog "Download tools via winget."
     .\resources\download\winget.ps1
 }
 
-if ($all -or $args -contains "--zimmerman") {
+if ($all -or $Zimmerman) {
     Write-DateLog "Download Zimmerman tools."
     .\resources\download\zimmerman.ps1
 }
 
-if ($all -or $args -contains "--kape") {
+if ($all -or $Kape) {
     if (Test-Path .\local\kape.zip) {
         Write-DateLog "Download KAPE."
         .\resources\download\kape.ps1
     }
 }
 
-if ($all -or $args -contains "--bash" -or $args -contains "--node" -or $args -contains "--python" -or $args -contains "--rust") {
+if ($all -or $bash -or $Node -or $python -or $Rust) {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job >> .\log\jobs.txt 2>&1
@@ -186,6 +210,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "Copied (replaced existing)" -and
     $_.Line -notmatch "INFO" -and
     $_.Line -notmatch "Downloaded " -and
+    $_.Line -notmatch "/cffi/error.py" -and
     $_.Line -notmatch " Compiling "
 }
 
