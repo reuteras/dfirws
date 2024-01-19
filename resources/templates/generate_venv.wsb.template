@@ -28,7 +28,7 @@
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
-      <HostFolder>__SANDBOX__tmp\venv</HostFolder>
+      <HostFolder>__SANDBOX__mount\venv</HostFolder>
       <SandboxFolder>C:\venv</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
