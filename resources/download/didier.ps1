@@ -1,7 +1,6 @@
 . $PSScriptRoot\common.ps1
 
 New-Item -ItemType Directory -Force -Path $TOOLS\DidierStevens > $null
-New-Item -ItemType Directory -Force -Path $SETUP_PATH\DidierStevens > $null
 
 $DidierStevensSuite = `
     "1768.json", `
@@ -101,7 +100,7 @@ $DidierStevensSuite = `
     "zipdump.py"
 
 foreach ($Tool in $DidierStevensSuite) {
-  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/$Tool -FilePath .\downloads\DidierStevens\$Tool
+  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/$Tool -FilePath $TOOLS\DidierStevens\$Tool
 }
 
 $DidierStevensBeta = "metatool.py", `
@@ -110,7 +109,5 @@ $DidierStevensBeta = "metatool.py", `
     "xlsbdump.py"
 
 foreach ($Tool in $DidierStevensBeta) {
-  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath .\downloads\DidierStevens\$Tool
+  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath $TOOLS\DidierStevens\$Tool
 }
-
-rclone.exe sync --verbose --checksum $SETUP_PATH\DidierStevens $TOOLS\DidierStevens 2>&1 | Out-Null
