@@ -25,6 +25,7 @@ $repourls = `
     "https://github.com/JavierYuste/radare2-deep-graph.git", `
     "https://github.com/joeavanzato/Trawler.git", `
     "https://github.com/JPCERTCC/ToolAnalysisResultSheet.git", `
+    "https://github.com/KasperskyLab/iShutdown.git", `
     "https://github.com/keraattin/EmailAnalyzer.git", `
     "https://github.com/keydet89/Events-Ripper.git", `
     "https://github.com/keydet89/RegRipper3.0", `
