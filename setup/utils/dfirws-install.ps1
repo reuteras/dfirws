@@ -25,9 +25,10 @@ if ($args.Count -eq 0) {
     Write-Output "   --ruby"
     Write-Output "   --rust"
     Write-Output "   --vscode"
+    Write-Output "   --wireshark"
     Write-Output "   --x64dbg"
     Write-Output "   --zui"
-    exit
+    Exit
 }
 
 if ($args -contains "--apimonitor") {
@@ -108,6 +109,10 @@ if ($args -contains "--rust") {
 
 if ($args -contains "--vscode") {
     Install-VSCode
+}
+
+if ($args -contains "--wireshark") {
+    Install-Wireshark
 }
 
 if ($args -contains "--x64dbg") {

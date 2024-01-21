@@ -122,6 +122,8 @@ Write-DateLog "Date and time format set" >> $TEMP\start_sandbox.log
 # Dark mode
 if ($WSDFIR_DARK -eq "Yes") {
     Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
+    New-Item -Path "$env:USERPROFILE\AppData\Roaming\Notepad++" -ItemType Directory -Force | Out-Null
+    Copy-Item "$env:USERPROFILE\Documents\tools\configurations\notepad++_dark.xml" "$env:USERPROFILE\AppData\Roaming\Notepad++\config.xml" -Force
     Write-DateLog "Dark mode set" >> $TEMP\start_sandbox.log
 }
 
