@@ -257,6 +257,15 @@ function Install-W10Loopback {
     }
 }
 
+function Install-Wireshark {
+    Write-Output "Installing Wireshark"
+    Copy-Item "$SETUP_PATH\wireshark.exe" "$TEMP\wireshark.exe"
+    Start-Process -Wait "$TEMP\wireshark.exe" -ArgumentList "/S /desktopicon=yes /quicklaunchicon=yes"
+    New-Item -Path "$env:USERPROFILE\AppData\Roaming\Wireshark" -Force -Type Directory | Out-Null
+    Set-Content '"C:/enrichment/maxmind_current"' -Encoding Ascii -Path "$env:USERPROFILE\AppData\Roaming\Wireshark\maxmind_db_paths"
+    Add-ToUserPath "$env:ProgramFiles\Wireshark"
+}
+
 function Install-X64dbg {
     Write-Output "Installing x64dbg"
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\x64dbg.zip" -o"$env:ProgramFiles\x64dbg"
