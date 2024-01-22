@@ -262,7 +262,9 @@ function Install-Wireshark {
     Copy-Item "$SETUP_PATH\wireshark.exe" "$TEMP\wireshark.exe"
     Start-Process -Wait "$TEMP\wireshark.exe" -ArgumentList "/S /desktopicon=yes /quicklaunchicon=yes"
     New-Item -Path "$env:USERPROFILE\AppData\Roaming\Wireshark" -Force -Type Directory | Out-Null
-    Set-Content '"C:/enrichment/maxmind_current"' -Encoding Ascii -Path "$env:USERPROFILE\AppData\Roaming\Wireshark\maxmind_db_paths"
+    if (Test-Path "C:\enrichment\maxmind_current") {
+        Set-Content '"C:/enrichment/maxmind_current"' -Encoding Ascii -Path "$env:USERPROFILE\AppData\Roaming\Wireshark\maxmind_db_paths"
+    }
     Add-ToUserPath "$env:ProgramFiles\Wireshark"
 }
 
