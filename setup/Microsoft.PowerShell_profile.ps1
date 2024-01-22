@@ -61,7 +61,11 @@ Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
 
 # Comment this line to see warnings from Python
 $env:PYTHONWARNINGS="ignore"
+
+# Find last version of Ghidra
+$env:GHIDRA_INSTALL_DIR=(Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1)
+
+# Set environment variables
 $env:PATH_TO_FX="C:\Tools\javafx-sdk\lib"
-$env:GHIDRA_INSTALL_DIR="C:\Tools\ghidra"
 
 # Dynamically added functions below
