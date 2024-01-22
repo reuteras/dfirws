@@ -247,6 +247,8 @@ Add-ToUserPath "$TOOLS\Zimmerman\XWFIM"
 Add-ToUserPath "$TOOLS\zstd"
 Add-ToUserPath "$VENV\maldump\Scripts"
 Add-ToUserPath "$HOME\Documents\tools\utils"
+$env:GHIDRA_INSTALL_DIR=(Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1)
+Add-ToUserPath "$env:GHIDRA_INSTALL_DIR"
 Write-DateLog "Added to PATH" >> $TEMP\start_sandbox.log
 
 # Shortcut for PowerShell
