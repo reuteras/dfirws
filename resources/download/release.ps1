@@ -257,12 +257,13 @@ Get-GitHubRelease -repo "multiprocessio/dsq" -path "$SETUP_PATH\dsq.zip" -match 
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "$SETUP_PATH\dsq.zip" -o"$TOOLS\bin" | Out-Null
 
 # Ghidra GolangAnalyzerExtension
-Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "$SETUP_PATH\GolangAnalyzerExtension.zip" -match 10.4
+Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "$SETUP_PATH\GolangAnalyzerExtension_10_4.zip" -match 10.4
+Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "$SETUP_PATH\GolangAnalyzerExtension_11_0.zip" -match 11.0
 if (! (Test-Path "$TOOLS\ghidra_extensions")) {
     New-Item -Path "$TOOLS\ghidra_extensions" -ItemType directory | Out-Null
 }
-Copy-Item "$SETUP_PATH\GolangAnalyzerExtension.zip" "$TOOLS\ghidra_extensions\GolangAnalyzerExtension.zip"
-
+Copy-Item "$SETUP_PATH\GolangAnalyzerExtension_10_4.zip" "$TOOLS\ghidra_extensions\GolangAnalyzerExtension_10_4.zip"
+Copy-Item "$SETUP_PATH\GolangAnalyzerExtension_11_0.zip" "$TOOLS\ghidra_extensions\GolangAnalyzerExtension_11_0.zip"
 
 # Ghidra Cartographer plugin
 Get-GitHubRelease -repo "nccgroup/Cartographer" -path "$SETUP_PATH\Cartographer.zip" -match Cartographer.zip
