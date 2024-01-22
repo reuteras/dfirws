@@ -59,9 +59,12 @@ function Restore-Quarantine {
 Set-Alias gdiff "$env:ProgramFiles\Git\usr\bin\diff.exe"
 Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
 
+# Python
 # Comment this line to see warnings from Python
 $env:PYTHONWARNINGS="ignore"
-
+# Fix encoding issues - https://discuss.python.org/t/unicodeencodeerror-charmap-codec-cant-encode-characters-in-position-0-14-character-maps-to-undefined/12814/3
+$env:PYTHONIOENCODING=”utf-8”
+$env:PYTHONUTF8=”1”
 # Find last version of Ghidra
 $env:GHIDRA_INSTALL_DIR=(Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1)
 
