@@ -1,5 +1,7 @@
 # Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+$GHIDRA_INSTALL_DIR = "C:\Tools\ghidra\ghidra_11.0_PUBLIC"
+
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
@@ -213,6 +215,7 @@ if ($INSTALL_JEP -eq "Yes") {
     # Check if jep or ghidrathon has been updated
     & "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > $TEMP\jep.txt
     ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> $TEMP\jep.txt
+    $GHIDRA_INSTALL_DIR >> $TEMP\jep.txt
 
     if (Test-Path "C:\venv\jep\jep.txt") {
         $CURRENT_VENV = "C:\venv\jep\jep.txt"
@@ -261,7 +264,7 @@ if ($INSTALL_JEP -eq "Yes") {
         Write-DateLog "Build Ghidrathon for Ghidra."
         Copy-Item -Recurse "C:\Tools\ghidrathon" "$TEMP"
         Set-Location "$TEMP\ghidrathon"
-        & "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="C:\Tools\ghidra\ghidra_10.4_PUBLIC" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
+        & "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
         if (! (Test-Path "C:\Tools\ghidra_extensions")) {
             New-Item -ItemType Directory -Force -Path "C:\Tools\ghidra_extensions" > $null
         }
