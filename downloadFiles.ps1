@@ -211,6 +211,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "INFO" -and
     $_.Line -notmatch "Downloaded " -and
     $_.Line -notmatch "/cffi/error.py" -and
+    $_.Line -notmatch "github/workflows" -and
     $_.Line -notmatch " Compiling "
 }
 
