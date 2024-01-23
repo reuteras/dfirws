@@ -192,7 +192,9 @@ if ($all -or $bash -or $Node -or $python -or $Rust) {
 Copy-Item "README.md" ".\downloads\" -Force
 Copy-Item ".\resources\images\dfirws.jpg" .\downloads\ -Force
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force
-Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" "./mount/Tools/ghidra/ghidra_10.4_PUBLIC/Ghidra/Features/Python/ghidra_scripts"
+foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name | findstr PUBLIC) {
+    Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts"
+}
 # done.txt is used to check last update in sandbox
 Write-Output "" > ".\downloads\done.txt"
 
