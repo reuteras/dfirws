@@ -82,9 +82,8 @@ function Get-FileFromUri {
     if (! (Test-Path "$PSScriptRoot\..\..\downloads\.etag\${UriHash}")) {
         New-Item "$PSScriptRoot\..\..\downloads\.etag\${UriHash}" -type file | Out-Null
     }
-    
+
     $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
-    
 
     # Attempt to download the file from the specified URI
     while($true) {
