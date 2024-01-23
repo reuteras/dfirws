@@ -1,6 +1,6 @@
-. $PSScriptRoot\common.ps1
+. "$PSScriptRoot\common.ps1"
 
-New-Item -ItemType Directory -Force -Path $TOOLS\DidierStevens > $null
+New-Item -ItemType Directory -Force -Path "${TOOLS}\DidierStevens" | Out-Null
 
 $DidierStevensSuite = `
     "1768.json", `
@@ -99,8 +99,8 @@ $DidierStevensSuite = `
     "xorsearch.py", `
     "zipdump.py"
 
-foreach ($Tool in $DidierStevensSuite) {
-  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/$Tool -FilePath $TOOLS\DidierStevens\$Tool
+foreach ($Tool in ${DidierStevensSuite}) {
+  Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"-
 }
 
 $DidierStevensBeta = "metatool.py", `
@@ -108,6 +108,6 @@ $DidierStevensBeta = "metatool.py", `
     "pngdump.py", `
     "xlsbdump.py"
 
-foreach ($Tool in $DidierStevensBeta) {
-  Get-FileFromUri -uri https://raw.githubusercontent.com/DidierStevens/Beta/master/$Tool -FilePath $TOOLS\DidierStevens\$Tool
+foreach ($Tool in ${DidierStevensBeta}) {
+  Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/Beta/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"
 }

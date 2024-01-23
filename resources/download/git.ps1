@@ -1,15 +1,15 @@
-. $PSScriptRoot\common.ps1
+. "$PSScriptRoot\common.ps1"
 
 if (! (Get-Command git )) {
     Write-DateLog "Need git to checkout git repositories."
     Exit
 }
 
-New-Item -ItemType Directory -Force -Path mount\git > $null
+New-Item -ItemType Directory -Force -Path mount\git | Out-Null
 Set-Location mount\git
 if (Test-Path .\PatchaPalooza) {
     # Remove PatchaPalooza directory if it exists since we do a local patch
-    Remove-Item -Recurse -Force .\PatchaPalooza > $null 2>&1
+    Remove-Item -Recurse -Force .\PatchaPalooza 2>&1 | Out-Null
 }
 
 $repourls = `
@@ -60,14 +60,14 @@ $repourls = `
 
 foreach ($repourl in $repourls) {
     $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\.git$" }
-    if ( Test-Path -Path $repo ) {
-        Set-Location $repo
-        $result = git pull 2>&1
-        Write-SynchronizedLog "$result"
+    if ( Test-Path -Path "${repo}" ) {
+        Set-Location "${repo}"
+        ${result} = git pull 2>&1
+        Write-SynchronizedLog "${result}"
         Set-Location ..
     } else {
-        $result = git clone $repourl 2>&1
-        Write-SynchronizedLog "$result"
+        $result = git clone "${repourl}" 2>&1
+        Write-SynchronizedLog "${result}"
     }
 }
 
@@ -78,6 +78,6 @@ Copy-Item .\PatchaPalooza2.py .\PatchaPalooza.py -Force
 Remove-Item .\PatchaPalooza2.py
 Set-Location ..
 
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..

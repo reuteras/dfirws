@@ -10,8 +10,10 @@ deactivate
 & "${VENV}\jep\Scripts\Activate.ps1"
 $env:PYTHONPATH="${VENV}\jep\Lib\site-packages;C:\Program Files\Python311\Lib"
 
-if (!(Test-Path -Path "${HOME}\.ghidra\.ghidra_11.0_PUBLIC\Extensions\ghidrathon")) {
-    & "$env:programfiles\7-Zip\7z.exe" x -o"${HOME}\.ghidra\.ghidra_11.0_PUBLIC\Extensions" "$TOOLS\ghidra_extensions\ghidrathon.zip"
+$LATEST_GHIDRA_RELEASE = (Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1).Split("\")[-1]
+
+if (!(Test-Path -Path "${HOME}\.ghidra\.${LATEST_GHIDRA_RELEASE}\Extensions\ghidrathon")) {
+    & "$env:programfiles\7-Zip\7z.exe" x -o"${HOME}\.ghidra\.${LATEST_GHIDRA_RELEASE}\Extensions" "${TOOLS}\ghidra_extensions\ghidrathon.zip"
 }
 
-& "${TOOLS}\ghidra\ghidra_11.0_PUBLIC\ghidraRun.bat"
+& "${TOOLS}\ghidra\${LATEST_GHIDRA_RELEASE}\ghidraRun.bat"

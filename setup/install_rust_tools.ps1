@@ -1,10 +1,10 @@
 # Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
-. C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
+. "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 
-if (! (Test-Path "$TEMP")) {
-    New-Item -ItemType Directory -Force -Path "$TEMP" > $null
+if (! (Test-Path "${TEMP}")) {
+    New-Item -ItemType Directory -Force -Path "${TEMP}" > $null
 }
 
 Write-Output "Get-Content C:\log\rust.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
@@ -18,7 +18,7 @@ Write-DateLog "Install Rust." >> "C:\log\rust.txt"
 Install-Rust >> "C:\log\rust.txt"
 
 # Set PATH to include Rust and Git
-$env:PATH="C:\Rust\bin;$env:ProgramFiles\Git\bin;$env:ProgramFiles\Git\usr\bin;$env:PATH"
+$env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
 
 # Install Rust tools
 Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
