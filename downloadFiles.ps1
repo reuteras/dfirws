@@ -1,27 +1,27 @@
 # Download and update files for the sandbox
 
 param(
-    [Parameter(HelpMessage = 'Update Bash.')]
+    [Parameter(HelpMessage = "Update Bash.")]
     [Switch]$Bash,
-    [Parameter(HelpMessage = 'Update Didier Stevens tools.')]
+    [Parameter(HelpMessage = "Update Didier Stevens tools.")]
     [Switch]$Didier,
-    [Parameter(HelpMessage = 'Update git repositories.')]
+    [Parameter(HelpMessage = "Update git repositories.")]
     [Switch]$Git,
-    [Parameter(HelpMessage = 'Update files downloaded via HTTP.')]
+    [Parameter(HelpMessage = "Update files downloaded via HTTP.")]
     [Switch]$Http,
-    [Parameter(HelpMessage = 'Update KAPE.')]
+    [Parameter(HelpMessage = "Update KAPE.")]
     [Switch]$Kape,
-    [Parameter(HelpMessage = 'Update Node.')]
+    [Parameter(HelpMessage = "Update Node.")]
     [Switch]$Node,
-    [Parameter(HelpMessage = 'Update Python.')]
+    [Parameter(HelpMessage = "Update Python.")]
     [Switch]$Python,
-    [Parameter(HelpMessage = 'Update releases from GitHub.')]
+    [Parameter(HelpMessage = "Update releases from GitHub.")]
     [Switch]$Release,
-    [Parameter(HelpMessage = 'Update Rust.')]
+    [Parameter(HelpMessage = "Update Rust.")]
     [Switch]$Rust,
-    [Parameter(HelpMessage = 'Update files downloaded via winget.')]
+    [Parameter(HelpMessage = "Update files downloaded via winget.")]
     [Switch]$Winget,
-    [Parameter(HelpMessage = 'Update Zimmerman tools.')]
+    [Parameter(HelpMessage = "Update Zimmerman tools.")]
     [Switch]$Zimmerman
     )
 
@@ -29,23 +29,23 @@ param(
 
 # Ensure that we have the necessary tools installed
 if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to the PATH."
+    Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to PATH."
     Exit
 }
 
 if (! (Get-Command "rclone.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: rclone.exe not found. Please install rclone and add it to the PATH."
+    Write-DateLog "Error: rclone.exe not found. Please install rclone and add it to PATH."
     Exit
 }
 
 if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: 7z.exe not found. Please install 7-Zip and add it to the PATH."
+    Write-DateLog "Error: 7z.exe not found. Please install 7-Zip and add it to PATH."
     Exit
 }
 
 if (! (Test-Path -Path ".\config.ps1")) {
     Copy-Item ".\config.ps1.template" ".\config.ps1"
-    Write-DateLog "INFO: config.ps1 not found. Created from default config.ps1.template. Please check values."
+    Write-DateLog "INFO: config.ps1 not found. Created new from default config.ps1.template. Please check values."
 }
 
 # Ensure configuration exists for rclone
@@ -72,32 +72,32 @@ if ($all -eq $false) {
 }
 
 # Remove old temp files
-Remove-Item -Recurse -Force .\tmp\downloads\ > $null 2>&1
+Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
 
 # Create directories
 if (!(Test-Path "$SETUP_PATH")) {
-    New-Item -ItemType Directory -Force -Path "$SETUP_PATH" > $null 2>&1
+    New-Item -ItemType Directory -Force -Path "$SETUP_PATH" 2>&1 | Out-Null
 }
 
 if (!(Test-Path "$SETUP_PATH\.etag")) {
-    New-Item -ItemType Directory -Force -Path "$SETUP_PATH\.etag" > $null 2>&1
+    New-Item -ItemType Directory -Force -Path "$SETUP_PATH\.etag" 2>&1 | Out-Null
 }
 
 
 if (!(Test-Path "$TOOLS")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS" > $null 2>&1
+    New-Item -ItemType Directory -Force -Path "$TOOLS" 2>&1 | Out-Null
 }
 
 if (!(Test-Path "$TOOLS\bin")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS\bin" > $null 2>&1
+    New-Item -ItemType Directory -Force -Path "$TOOLS\bin" 2>&1 | Out-Null
 }
 
 if (!(Test-Path "$TOOLS\lib")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS\lib" > $null 2>&1
+    New-Item -ItemType Directory -Force -Path "$TOOLS\lib" 2>&1 | Out-Null
 }
 
 if (!(Test-Path "$TOOLS\Zimmerman")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS\Zimmerman" > $null 2>&1
+    New-Item -ItemType Directory -Force -Path "$TOOLS\Zimmerman" 2>&1 | Out-Null
 }
 
 # Ensure that we have a log directory and a clean log files
@@ -175,7 +175,7 @@ if ($all -or $Zimmerman) {
 }
 
 if ($all -or $Kape) {
-    if (Test-Path .\local\kape.zip) {
+    if (Test-Path ".\local\kape.zip") {
         Write-DateLog "Download KAPE."
         .\resources\download\kape.ps1
     }
@@ -184,17 +184,17 @@ if ($all -or $Kape) {
 if ($all -or $bash -or $Node -or $python -or $Rust) {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job >> .\log\jobs.txt 2>&1
+    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
     Get-Job | Remove-Job | Out-Null
     Write-DateLog "Sandboxes done."
 }
 
-Copy-Item README.md .\downloads\
-Copy-Item .\resources\images\dfirws.jpg .\downloads\
-Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\"
-Copy-Item .\mount\git\CapaExplorer\capaexplorer.py ./mount/Tools/ghidra/ghidra_10.4_PUBLIC/Ghidra/Features/Python/ghidra_scripts
+Copy-Item "README.md" ".\downloads\" -Force
+Copy-Item ".\resources\images\dfirws.jpg" .\downloads\ -Force
+Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force
+Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" "./mount/Tools/ghidra/ghidra_10.4_PUBLIC/Ghidra/Features/Python/ghidra_scripts"
 # done.txt is used to check last update in sandbox
-Write-Output "" > .\downloads\done.txt
+Write-Output "" > ".\downloads\done.txt"
 
 $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
     $_.Line -notmatch " INFO " -and
