@@ -1,12 +1,12 @@
 # Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
-$GHIDRA_INSTALL_DIR = "C:\Tools\ghidra\ghidra_11.0_PUBLIC"
+$GHIDRA_INSTALL_DIR = (Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1)
 
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
 
-if (! (Test-Path "$TEMP")) {
-    New-Item -ItemType Directory -Force -Path "$TEMP" > $null
+if (! (Test-Path "${TEMP}")) {
+    New-Item -ItemType Directory -Force -Path "${TEMP}" | Out-Null
 }
 
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
@@ -14,8 +14,8 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
 $PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
-Start-Process "$SETUP_PATH\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
-Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+Start-Process "${SETUP_PATH}\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
+Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
 
 # Source config.ps1
 . C:\venv\default\config.ps1
@@ -24,7 +24,7 @@ Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
 # venv default
 #
 Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.txt"
-Get-ChildItem C:\venv\default\* -Exclude config.ps1 -Recurse | Remove-Item -Force 2>&1 > $null
+Get-ChildItem C:\venv\default\* -Exclude config.ps1 -Recurse | Remove-Item -Force 2>&1 | Out-null
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\default"
 C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Set-Location "C:\venv\default\"
@@ -194,7 +194,7 @@ foreach ($iShutdown in @("iShutdown_detect.py", "iShutdown_parse.py", "iShutdown
 Copy-Item parseUSBs2.py parseUSBs.py
 Remove-Item parseUSBs2.py
 
-New-Item -ItemType Directory C:\tmp\rename > $null 2>&1
+New-Item -ItemType Directory C:\tmp\rename 2>&1 | Out-null
 Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pycache__,*.bat | ForEach-Object { Move-Item $_ C:\tmp\rename }
 Set-Location C:\tmp\rename
 Get-ChildItem | Rename-Item -newname  { $_.Name +".py" }
@@ -213,9 +213,9 @@ if ($INSTALL_JEP -eq "Yes") {
     #
 
     # Check if jep or ghidrathon has been updated
-    & "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > $TEMP\jep.txt
-    ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> $TEMP\jep.txt
-    $GHIDRA_INSTALL_DIR >> $TEMP\jep.txt
+    & "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\jep.txt
+    ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${TEMP}\jep.txt
+    $GHIDRA_INSTALL_DIR >> ${TEMP}\jep.txt
 
     if (Test-Path "C:\venv\jep\jep.txt") {
         $CURRENT_VENV = "C:\venv\jep\jep.txt"
@@ -227,22 +227,22 @@ if ($INSTALL_JEP -eq "Yes") {
         Write-DateLog "jep or ghidrathon has been updated. Update jep." >> "C:\log\python.txt"
 
         # Install Visual Studio Build Tools for jep
-        Write-DateLog "Start installation of Visual Studio Build Tools." >> "C:\log\python.txt" 2>&1
-        Copy-Item "$SETUP_PATH\vs_BuildTools.exe" "$TEMP\vs_BuildTools.exe"
-        Set-Location $Temp
+        Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
+        Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${TEMP}\vs_BuildTools.exe"
+        Set-Location ${TEMP}
         Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
-        Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
-        & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' >> "C:\log\python.txt" 2>&1
+        Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
+        & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
 
         # Install Java for jep
-        Write-DateLog "Start installation of Corretto Java." >> "C:\log\python.txt" 2>&1
-        Copy-Item "$SETUP_PATH\corretto.msi" "$TEMP\corretto.msi"
-        Start-Process -Wait msiexec -ArgumentList "/i $TEMP\corretto.msi /qn /norestart"
-        Get-Job | Receive-Job >> "C:\log\python.txt" 2>&1
+        Write-DateLog "Start installation of Corretto Java." 2>&1 >> "C:\log\python.txt"
+        Copy-Item "${SETUP_PATH}\corretto.msi" "${TEMP}\corretto.msi"
+        Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\corretto.msi /qn /norestart"
+        Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
         $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
         # jep venv
-        Get-ChildItem C:\venv\jep\* -Exclude jep.txt -Recurse | Remove-Item -Force 2>&1 > $null
+        Get-ChildItem C:\venv\jep\* -Exclude jep.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
         Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv --system-site-packages C:\venv\jep"
         C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
         Set-Location "C:\venv\jep"
@@ -262,14 +262,14 @@ if ($INSTALL_JEP -eq "Yes") {
 
         # Build Ghidrathon for Gidhra
         Write-DateLog "Build Ghidrathon for Ghidra."
-        Copy-Item -Recurse "C:\Tools\ghidrathon" "$TEMP"
-        Set-Location "$TEMP\ghidrathon"
+        Copy-Item -Recurse "C:\Tools\ghidrathon" "${TEMP}"
+        Set-Location "${TEMP}\ghidrathon"
         & "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
         if (! (Test-Path "C:\Tools\ghidra_extensions")) {
-            New-Item -ItemType Directory -Force -Path "C:\Tools\ghidra_extensions" > $null
+            New-Item -ItemType Directory -Force -Path "C:\Tools\ghidra_extensions" | Out-Null
         }
-        Copy-Item $TEMP\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
-        Copy-Item $TEMP\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
+        Copy-Item ${TEMP}\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
+        Copy-Item ${TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
     } else {
@@ -281,7 +281,7 @@ if ($INSTALL_JEP -eq "Yes") {
 #
 # venv dfir-unfurl
 #
-& "$PYTHON_BIN" -m pip index versions dfir-unfurl 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > $TEMP\dfir-unfurl.txt
+& "$PYTHON_BIN" -m pip index versions dfir-unfurl 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\dfir-unfurl.txt
 
 if (Test-Path "C:\venv\dfir-unfurl\dfir-unfurl.txt") {
     $CURRENT_VENV = "C:\venv\dfir-unfurl\dfir-unfurl.txt"
@@ -291,7 +291,7 @@ if (Test-Path "C:\venv\dfir-unfurl\dfir-unfurl.txt") {
 
 if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\dfir-unfurl\* -Exclude dfir-unfurl.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\dfir-unfurl\* -Exclude dfir-unfurl.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-unfurl"
     C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt"
     Set-Location "C:\venv\dfir-unfurl"
@@ -322,7 +322,7 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
         $baseHtmlContent = $baseHtmlContent.Replace($url.Value, "/static/$fileName")
     }
     Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
-    Copy-Item $TEMP\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item ${TEMP}\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.ps1
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
@@ -336,7 +336,7 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
 # venv pySigma
 #
 
-& "$PYTHON_BIN" -m pip index versions pySigma 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > $TEMP\pySigma.txt
+& "$PYTHON_BIN" -m pip index versions pySigma 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\pySigma.txt
 
 if (Test-Path "C:\venv\pySigma\pySigma.txt") {
     $CURRENT_VENV = "C:\venv\pySigma\pySigma.txt"
@@ -346,7 +346,7 @@ if (Test-Path "C:\venv\pySigma\pySigma.txt") {
 
 if ((Get-FileHash C:\tmp\pySigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv pySigma in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\pySigma\* -Exclude pySigma.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\pySigma\* -Exclude pySigma.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pySigma"
     C:\venv\pySigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
     Set-Location "C:\venv\pySigma"
@@ -364,7 +364,7 @@ if ((Get-FileHash C:\tmp\pySigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash
         pySigma>=0.9.6 `
         wheel>=0.41.3 2>&1 >> "C:\log\python.txt"
 
-    Copy-Item $TEMP\pySigma.txt "C:\venv\pySigma\pySigma.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item ${TEMP}\pySigma.txt "C:\venv\pySigma\pySigma.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv pySigma done." >> "C:\log\python.txt"
 } else {
@@ -391,7 +391,7 @@ if (Test-Path "C:\venv\pe2pic\pe2pic.txt") {
 
 if ((Get-FileHash C:\tmp\pe2pic.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv pe2pic in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\pe2pic\* -Exclude pe2pic.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\pe2pic\* -Exclude pe2pic.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pe2pic"
     C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
@@ -426,7 +426,7 @@ if (Test-Path "C:\venv\evt2sigma\evt2sigma.txt") {
 
 if ((Get-FileHash C:\tmp\evt2sigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv evt2sigma in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\evt2sigma\* -Exclude evt2sigma.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\evt2sigma\* -Exclude evt2sigma.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\evt2sigma"
     C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
@@ -448,7 +448,7 @@ if ((Get-FileHash C:\tmp\evt2sigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
 
 if (! (Test-Path "C:\venv\maldump\Scripts\maldump.exe")) {
     Write-DateLog "Install packages in venv maldump in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\maldump\* -Exclude maldump.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\maldump\* -Exclude maldump.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\maldump"
     C:\venv\maldump\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
@@ -474,7 +474,7 @@ if (Test-Path "C:\venv\scare\scare\.git\ORIG_HEAD") {
 
 if ((Get-FileHash C:\git\scare\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv scare in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\scare\* -Exclude scare.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\scare\* -Exclude scare.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\scare"
     C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
@@ -508,7 +508,7 @@ if (Test-Path "C:\venv\Zircolite\Zircolite\.git\ORIG_HEAD") {
 
 if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv Zircolite in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\Zircolite\* -Exclude Zircolite.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\Zircolite\* -Exclude Zircolite.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\Zircolite"
     C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
@@ -528,7 +528,7 @@ S    deactivate
 # venv chepy
 #
 
-& "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > $TEMP\chepy.txt
+& "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\chepy.txt
 
 if (Test-Path "C:\venv\chepy\chepy.txt") {
     $CURRENT_VENV = "C:\venv\chepy\chepy.txt"
@@ -538,7 +538,7 @@ if (Test-Path "C:\venv\chepy\chepy.txt") {
 
 if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv chepy in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\chepy\* -Exclude chepy.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\chepy\* -Exclude chepy.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\chepy"
     C:\venv\chepy\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
@@ -558,9 +558,9 @@ if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) 
 # venv dissect
 #
 
-& "$PYTHON_BIN" -m pip index versions dissect 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > $TEMP\dissect.txt
-& "$PYTHON_BIN" -m pip index versions acquire 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> $TEMP\dissect.txt
-& "$PYTHON_BIN" -m pip index versions flow.record 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> $TEMP\dissect.txt
+& "$PYTHON_BIN" -m pip index versions dissect 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\dissect.txt
+& "$PYTHON_BIN" -m pip index versions acquire 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${TEMP}\dissect.txt
+& "$PYTHON_BIN" -m pip index versions flow.record 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${TEMP}\dissect.txt
 
 if (Test-Path "C:\venv\dissect\dissect.txt") {
     $CURRENT_VENV = "C:\venv\dissect\dissect.txt"
@@ -570,7 +570,7 @@ if (Test-Path "C:\venv\dissect\dissect.txt") {
 
 if ((Get-FileHash C:\tmp\dissect.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Install packages in venv dissect in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\dissect\* -Exclude dissect.txt -Recurse | Remove-Item -Force 2>&1 > $null
+    Get-ChildItem C:\venv\dissect\* -Exclude dissect.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
     C:\venv\dissect\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
