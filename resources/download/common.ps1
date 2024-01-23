@@ -41,7 +41,7 @@ function Get-FileFromUri {
     )
 
     # Check if the file has already been downloaded
-    if ($CheckURL -eq "Yes") {
+    if ((Test-Path -Path "$FilePath") -and $CheckURL -eq "Yes") {
         if (Compare-ToolsDownloaded -URL $Uri -AppName ([System.IO.FileInfo]$FilePath).Name) {
             Write-SynchronizedLog "File $FilePath already downloaded according to tools_downloaded.csv."
             return
@@ -73,12 +73,18 @@ function Get-FileFromUri {
     $stringAsStream.Position = 0
     $UriHash = $(Get-FileHash -InputStream $stringAsStream -Algorithm SHA256 | Select-Object -ExpandProperty Hash)
 
+    # Remove etag if file doesn't exist
+    if (! (Test-Path "$FilePath")) {
+        Remove-Item -Force "$PSScriptRoot\..\..\downloads\.etag\${UriHash}" -ErrorAction SilentlyContinue
+    }
+
+    # Create empty etag file if it doesn't exist
     if (! (Test-Path "$PSScriptRoot\..\..\downloads\.etag\${UriHash}")) {
         New-Item "$PSScriptRoot\..\..\downloads\.etag\${UriHash}" -type file | Out-Null
-        $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
-    } else {
-        $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
     }
+    
+    $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
+    
 
     # Attempt to download the file from the specified URI
     while($true) {
