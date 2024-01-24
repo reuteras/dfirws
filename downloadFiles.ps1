@@ -25,7 +25,7 @@ param(
     [Switch]$Zimmerman
     )
 
-. .\resources\download\common.ps1
+. ".\resources\download\common.ps1"
 
 # Ensure that we have the necessary tools installed
 if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
@@ -65,7 +65,7 @@ if ($Bash.IsPresent -or $Didier.IsPresent -or $Git.IsPresent -or $Http.IsPresent
 }
 
 if ($all -eq $false) {
-    if (! (Test-Path "$TOOLS\bin" )) {
+    if (! (Test-Path "${TOOLS}\bin" )) {
         Write-DateLog "No tools directory found. You have to run this script without arguments first."
         Exit
     }
@@ -75,29 +75,29 @@ if ($all -eq $false) {
 Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
 
 # Create directories
-if (!(Test-Path "$SETUP_PATH")) {
-    New-Item -ItemType Directory -Force -Path "$SETUP_PATH" 2>&1 | Out-Null
+if (!(Test-Path "${SETUP_PATH}")) {
+    New-Item -ItemType Directory -Force -Path "${SETUP_PATH}" 2>&1 | Out-Null
 }
 
-if (!(Test-Path "$SETUP_PATH\.etag")) {
-    New-Item -ItemType Directory -Force -Path "$SETUP_PATH\.etag" 2>&1 | Out-Null
+if (!(Test-Path "${SETUP_PATH}\.etag")) {
+    New-Item -ItemType Directory -Force -Path "${SETUP_PATH}\.etag" 2>&1 | Out-Null
 }
 
 
-if (!(Test-Path "$TOOLS")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS" 2>&1 | Out-Null
+if (!(Test-Path "${TOOLS}")) {
+    New-Item -ItemType Directory -Force -Path "${TOOLS}" 2>&1 | Out-Null
 }
 
-if (!(Test-Path "$TOOLS\bin")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS\bin" 2>&1 | Out-Null
+if (!(Test-Path "${TOOLS}\bin")) {
+    New-Item -ItemType Directory -Force -Path "${TOOLS}\bin" 2>&1 | Out-Null
 }
 
-if (!(Test-Path "$TOOLS\lib")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS\lib" 2>&1 | Out-Null
+if (!(Test-Path "${TOOLS}\lib")) {
+    New-Item -ItemType Directory -Force -Path "${TOOLS}\lib" 2>&1 | Out-Null
 }
 
-if (!(Test-Path "$TOOLS\Zimmerman")) {
-    New-Item -ItemType Directory -Force -Path "$TOOLS\Zimmerman" 2>&1 | Out-Null
+if (!(Test-Path "${TOOLS}\Zimmerman")) {
+    New-Item -ItemType Directory -Force -Path "${TOOLS}\Zimmerman" 2>&1 | Out-Null
 }
 
 # Ensure that we have a log directory and a clean log files
@@ -124,12 +124,12 @@ if ($all -or $Bash -or $Node -or $python -or $Rust) {
 
 if ($all -or $Bash) {
     Write-DateLog "Download packages for Git for Windows (Bash)."
-    Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+    Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $Node) {
     Write-DateLog "Setup Node and install npm packages."
-    Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+    Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $Git) {
@@ -140,13 +140,13 @@ if ($all -or $Git) {
 if ($all -or $python) {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages."
-    Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+    Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $Rust) {
     Write-Output "" > .\log\rust.txt
     Write-DateLog "Setup Rust and install packages."
-    Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList $PSScriptRoot | Out-Null
+    Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $Http) {
