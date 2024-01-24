@@ -199,7 +199,6 @@ Add-ToUserPath "${TOOLS}\imhex"
 Add-ToUserPath "${TOOLS}\INDXRipper"
 Add-ToUserPath "${TOOLS}\jd-gui"
 Add-ToUserPath "${TOOLS}\MailView"
-Add-ToUserPath "${TOOLS}\malcat\bin"
 Add-ToUserPath "${TOOLS}\lessmsi"
 Add-ToUserPath "${TOOLS}\nmap"
 Add-ToUserPath "${TOOLS}\node"
@@ -362,6 +361,12 @@ if ("${WSDFIR_LOKI}" -eq "Yes") {
     Write-DateLog "Loki installed" >> "${TEMP}\start_sandbox.log"
 }
 
+# Install malcat
+if ("${WSDFIR_MALCAT}" -eq "Yes") {
+    Install-Malcat
+    Write-DateLog "malcat installed" >> "${TEMP}\start_sandbox.log"
+}
+
 # Clean up
 Remove-Item "${HOME}\Desktop\PdfStreamDumper.exe.lnk"
 
@@ -376,7 +381,7 @@ New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Editors"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Bytecode Viewer.lnk" -DestinationPath "${TOOLS}\bin\bcv.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\HxD.lnk" -DestinationPath "${env:ProgramFiles}\HxD\HxD.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\ImHex.lnk" -DestinationPath "${TOOLS}\imhex\imhex-gui.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Malcat.lnk" -DestinationPath "${TOOLS}\Malcat\bin\malcat.exe"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Malcat.lnk" -DestinationPath "${env:ProgramFiles}\malcat\bin\malcat.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Notepad++.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Visual Studio Code.lnk" -DestinationPath "${HOME}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 
@@ -569,6 +574,8 @@ if (Test-Path "${VENV}\jep") {
     Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Ghidrathon.lnk" -DestinationPath "${HOME}\Documents\tools\utils\ghidrathon.bat"
 }
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\iaito.lnk" -DestinationPath "${TOOLS}\iaito\iaito.exe"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\ImHex.lnk" -DestinationPath "${TOOLS}\imhex\imhex-gui.exe"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Malcat.lnk" -DestinationPath "${env:ProgramFiles}\malcat\bin\malcat.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\radare2.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\scare.bat.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 if ("${WSDFIR_X64DBG}" -eq "Yes") {

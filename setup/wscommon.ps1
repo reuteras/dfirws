@@ -182,6 +182,12 @@ function Install-Loki {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\loki.zip" -o"${env:ProgramFiles}\"
     Copy-Item $GIT\signature-base "${env:ProgramFiles}\loki" -Recurse
 }
+
+function Install-Malcat {
+    Write-Output "Installing Malcat"
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\malcat.zip" -o"${env:ProgramFiles}\malcat" | Out-Null
+    Add-ToUserPath "${env:ProgramFiles}\malcat\bin"
+}
 function Install-Neo4j {
     Write-Output "Installing Neo4j"
     Copy-Item "${SETUP_PATH}\microsoft-jdk-11.msi" "${TEMP}\microsoft-jdk-11.msi"

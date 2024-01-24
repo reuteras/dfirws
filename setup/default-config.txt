@@ -22,6 +22,8 @@ $WSDFIR_KAPE="No"
 $WSDFIR_LIBREOFFICE="No"
 # Install Loki
 $WSDFIR_LOKI="No"
+# Install malcat
+$WSDFIR_MALCAT="Yes"
 # Install neo4j
 $WSDFIR_NEO4J="No"
 # Install Obsidian
