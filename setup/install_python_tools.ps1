@@ -361,8 +361,7 @@ if ((Get-FileHash C:\tmp\pySigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash
         --no-interaction
 
     poetry add `
-        pySigma>=0.9.6 `
-        wheel>=0.41.3 2>&1 >> "C:\log\python.txt"
+        pySigma>=0.9.6 2>&1 >> "C:\log\python.txt"
 
     Copy-Item ${TEMP}\pySigma.txt "C:\venv\pySigma\pySigma.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
@@ -594,6 +593,45 @@ if ((Get-FileHash C:\tmp\dissect.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash
     Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "dissect has not been updated, don't update dissect venv." >> "C:\log\python.txt"
+}
+
+
+#
+# venv ghidrecomp
+#
+
+& "$PYTHON_BIN" -m pip index versions ghidrecomp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\ghidrecomp.txt
+
+if (Test-Path "C:\venv\ghidrecomp\ghidrecomp.txt") {
+    $CURRENT_VENV = "C:\venv\ghidrecomp\ghidrecomp.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+if ((Get-FileHash C:\tmp\ghidrecomp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+    Write-DateLog "Install ghidrecomp in venv ghidrecomp in sandbox." >> "C:\log\python.txt"
+    Get-ChildItem C:\venv\ghidrecomp\* -Exclude ghidrecomp.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\ghidrecomp"
+    C:\venv\ghidrecomp\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\ghidrecomp"
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -U poetry >> "C:\log\python.txt"
+
+    poetry init `
+        --name ghidrecompvenv `
+        --description "Python venv for ghidrecomp." `
+        --author "dfirws" `
+        --license "MIT" `
+        --no-interaction
+
+    poetry add `
+        ghidrecomp 2>&1 >> "C:\log\python.txt"
+
+    Copy-Item ${TEMP}\ghidrecomp.txt "C:\venv\ghidrecomp\ghidrecomp.txt" -Force 2>&1 >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv ghidrecomp done." >> "C:\log\python.txt"
+} else {
+    Write-DateLog "ghidrecomp has not been updated, don't update ghidrecomp venv." >> "C:\log\python.txt"
 }
 
 Write-Output "" > C:\venv\default\done
