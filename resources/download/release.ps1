@@ -68,6 +68,10 @@ Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match jar
 Copy-Item ${SETUP_PATH}\recaf.jar ${TOOLS}\lib\recaf.jar
 Set-Content -Encoding Ascii -Path "${TOOLS}\bin\recaf.bat" "@echo off`njava --module-path $env:PATH_TO_FX --add-modules javafx.controls -jar C:\Tools\bin\recaf.jar"
 
+# Dumpbin from Visual Studio
+Get-GitHubRelease -repo "Delphier/dumpbin" -path "${SETUP_PATH}\dumpbin.zip" -match dumpbin
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dumpbin.zip" -o"${TOOLS}\dumpbin" | Out-Null
+
 # dnSpy 32-bit
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy32.zip" -match win32
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dnSpy32.zip" -o"${TOOLS}\dnSpy32" | Out-Null
