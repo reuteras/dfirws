@@ -558,6 +558,7 @@ if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) 
 #
 
 & "$PYTHON_BIN" -m pip index versions dissect 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\dissect.txt
+& "$PYTHON_BIN" -m pip index versions dissect.target 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\dissect.txt
 & "$PYTHON_BIN" -m pip index versions acquire 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${TEMP}\dissect.txt
 & "$PYTHON_BIN" -m pip index versions flow.record 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${TEMP}\dissect.txt
 
@@ -585,6 +586,7 @@ if ((Get-FileHash C:\tmp\dissect.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash
     poetry add `
         acquire `
         dissect `
+        dissect.target[yara] `
         flow.record >> "C:\log\python.txt"
 
     Copy-Item C:\tmp\dissect.txt "C:\venv\dissect\dissect.txt" -Force 2>&1 >> "C:\log\python.txt"
