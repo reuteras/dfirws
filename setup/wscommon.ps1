@@ -1,10 +1,10 @@
 # Set variables
 $DATA = "C:\data"
 $ENRICHMENT = "C:\enrichment"
-$GIT = "C:\git"
+$GIT_PATH = "C:\git"
 $LOCAL_PATH = "C:\local"
 $NEO_JAVA = "C:\java"
-$PDFSTREAMDUMPER = "C:\Sandsprite\PDFStreamDumper"
+$PDFSTREAMDUMPER_PATH = "C:\Sandsprite\PDFStreamDumper"
 $RUST_DIR = "C:\Rust"
 $SETUP_PATH = "C:\downloads"
 $TEMP = "C:\tmp"
@@ -13,9 +13,9 @@ $VENV = "C:\venv"
 $POWERSHELL_EXE = "${env:ProgramFiles}\PowerShell\7\pwsh.exe"
 
 $null="${DATA}"
-$null="${GIT}"
+$null="${GIT_PATH}"
 $null="${LOCAL_PATH}"
-$null="${PDFSTREAMDUMPER}"
+$null="${PDFSTREAMDUMPER_PATH}"
 $null="${RUST_DIR}"
 
 # Declare helper functions
@@ -65,7 +65,8 @@ function Add-Shortcut {
         [string]$DestinationPath,
         [string]$WorkingDirectory,
         [string]$Iconlocation,
-        [switch]$IconArrayLocation
+        [switch]$IconArrayLocation,
+        [string]$Arguments
     )
     $WshShell = New-Object -comObject WScript.Shell
     $Shortcut = ${WshShell}.CreateShortcut("${SourceLnk}")
@@ -77,6 +78,9 @@ function Add-Shortcut {
             ${IconArrayLocation} = 0
         }
         ${Shortcut}.Iconlocation = "${Iconlocation}, ${IconArrayLocation}"
+    }
+    if ($Null -ne ${Arguments}) {
+        ${Shortcut}.Arguments = "${Arguments}"
     }
     ${Shortcut}.TargetPath = "${DestinationPath}"
     ${Shortcut}.Save()
@@ -113,7 +117,8 @@ function Install-Apimonitor {
 
 function Install-Autopsy {
     Write-Output "Installing Autopsy"
-    msiexec.exe /i "${SETUP_PATH}\autopsy.msi" /qn /norestart
+    Copy-Item "${SETUP_PATH}\autopsy.msi" "${TEMP}\autopsy.msi"
+    Start-Process -Wait msiexec.exe -ArgumentList "/i ${TEMP}\autopsy.msi /qn /norestart"
 }
 
 function Install-BashExtra {
@@ -180,7 +185,7 @@ function Install-LibreOffice {
 function Install-Loki {
     Write-Output "Installing Loki"
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\loki.zip" -o"${env:ProgramFiles}\"
-    Copy-Item $GIT\signature-base "${env:ProgramFiles}\loki" -Recurse
+    Copy-Item ${GIT_PATH}\signature-base "${env:ProgramFiles}\loki" -Recurse
 }
 
 function Install-Malcat {
