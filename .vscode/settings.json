@@ -495,7 +495,8 @@
         "zipfs",
         "Zircolite",
         "zsdt",
-        "zstd"
+        "zstd",
+        "zui"
     ],
     "cSpell.enableFiletypes": [
         "bat",
