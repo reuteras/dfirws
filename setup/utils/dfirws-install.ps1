@@ -1,124 +1,122 @@
 # Script to install DFIRWS tools on demand
 
+param (
+    [switch]$ApiMonitor,
+    [switch]$Autopsy,
+    [switch]$BashExtra,
+    [switch]$Choco,
+    [switch]$CMDer,
+    [switch]$GitBash,
+    [switch]$GoLang,
+    [switch]$Hashcat,
+    [switch]$Jadx,
+    [switch]$Kape,
+    [switch]$LibreOffice,
+    [switch]$Loki,
+    [switch]$Neo4j,
+    [switch]$Node,
+    [switch]$Obsidian,
+    [switch]$PDFStreamDumper,
+    [switch]$Qemu,
+    [switch]$Ruby,
+    [switch]$Rust,
+    [switch]$VSCode,
+    [switch]$Wireshark,
+    [switch]$X64Dbg,
+    [switch]$Zui
+)
+
 # Import common functions
 . $HOME\Documents\tools\wscommon.ps1
 
-if ($args.Count -eq 0) {
-    Write-Output "Need at least one argument. Available tools are: "
-    Write-Output "   --apimonitor"
-    Write-Output "   --autopsy"
-    Write-Output "   --bashextra"
-    Write-Output "   --choco"
-    Write-Output "   --cmder"
-    Write-Output "   --gitbash"
-    Write-Output "   --golang"
-    Write-Output "   --hashcat"
-    Write-Output "   --jadx"
-    Write-Output "   --kape"
-    Write-Output "   --libreoffice"
-    Write-Output "   --loki"
-    Write-Output "   --neo4j"
-    Write-Output "   --node"
-    Write-Output "   --obsidian"
-    Write-Output "   --pdfstreamdumper"
-    Write-Output "   --qemu"
-    Write-Output "   --ruby"
-    Write-Output "   --rust"
-    Write-Output "   --vscode"
-    Write-Output "   --wireshark"
-    Write-Output "   --x64dbg"
-    Write-Output "   --zui"
-    Exit
-}
-
-if ($args -contains "--apimonitor") {
+if ($ApiMonitor.IsPresent) {
     Install-Apimonitor
 }
 
-if ($args -contains "--autopsy") {
+if ($Autopsy.IsPresent) {
     Install-Autopsy
 }
 
-if ($args -contains "--bashextra") {
+if ($BashExtra.IsPresent) {
     Install-BashExtra
 }
 
-if ($args -contains "--choco") {
+if ($Choco.IsPresent) {
     Install-Choco
 }
 
-if ($args -contains "--cmder") {
+if ($CMDer.IsPresent) {
     Install-CMDer
 }
 
-if ($args -contains "--gitbash") {
+if ($GitBash.IsPresent) {
     Install-GitBash
 }
 
-if ($args -contains "--golang") {
+if ($GoLang.IsPresent) {
     Install-GoLang
 }
 
-if ($args -contains "--hashcat") {
+if ($Hashcat.IsPresent) {
     Install-Hashcat
 }
 
-if ($args -contains "--jadx") {
+if ($Jadx.IsPresent) {
     Install-Jadx
 }
 
-if ($args -contains "--kape") {
+if ($Kape.IsPresent) {
     Install-Kape
 }
 
-if ($args -contains "--libreoffice") {
+if ($LibreOffice.IsPresent) {
     Install-LibreOffice
 }
 
-if ($args -contains "--loki") {
+if ($Loki) {
     Install-Loki
 }
 
-if ($args -contains "--neo4j") {
+if ($Neo4j) {
     Install-Neo4j
 }
 
-if ($args -contains "--node") {
+if ($Node) {
     Install-Node
 }
 
-if ($args -contains "--obsidian") {
+if ($Obsidian) {
     Install-Obsidian
 }
 
-if ($args -contains "--pdfstreamdumper") {
+if ($PDFStreamDumper) {
     Install-PDFStreamDumper
 }
 
-if ($args -contains "--qemu") {
+if ($Qemu) {
     Install-Qemu
 }
 
-if ($args -contains "--ruby") {
+if ($Ruby) {
     Install-Ruby
 }
 
-if ($args -contains "--rust") {
+if ($Rust) {
     Install-Rust
 }
 
-if ($args -contains "--vscode") {
+if ($VSCode) {
     Install-VSCode
 }
 
-if ($args -contains "--wireshark") {
+if ($Wireshark) {
     Install-Wireshark
 }
 
-if ($args -contains "--x64dbg") {
+if ($X64dbg) {
     Install-X64dbg
 }
 
-if ($args -contains "--zui") {
+if ($Zui) {
     Install-Zui
 }
