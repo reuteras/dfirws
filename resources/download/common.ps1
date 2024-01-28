@@ -2,11 +2,15 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # Variables used by the script
-$SETUP_PATH=".\downloads"
-$TEMP="C:\tmp"
-$TOOLS=".\mount\Tools"
+$CONFIGURATION_FILES = ".\setup\configurations"
+$SETUP_PATH = ".\downloads"
+$TEMP = "C:\tmp"
+$TOOLS = ".\mount\Tools"
+$SANDBOX_TOOLS = "C:\Tools"
 $mutexName = "Global\dfirwsMutex"
 
+$null=$CONFIGURATION_FILES
+$null=$SANDBOX_TOOLS
 $null=$SETUP_PATH
 $null=$TEMP
 $null=$TOOLS
