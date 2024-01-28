@@ -138,7 +138,7 @@ function Install-BashExtra {
         Copy-Item "${LOCAL_PATH}\.zcompdump" "${HOME}\.zcompdump"
     } else {
         Copy-Item "${LOCAL_PATH}\.zcompdump.default" "${HOME}\.zcompdump"
-    } 
+    }
 }
 
 function Install-Choco {
