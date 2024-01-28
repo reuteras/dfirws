@@ -7,9 +7,8 @@ New-Item -ItemType Directory -Force -Path ${TOOLS}\lib > $null
 Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "${SETUP_PATH}\beaconhunter.zip" -match BeaconHunter.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\beaconhunter.zip" -o"${SETUP_PATH}\" | Out-Null
 
-# 4n4lDetector
+# 4n4lDetector - installed in sandbox
 Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "${SETUP_PATH}\4n4lDetector.zip" -match 4n4lDetector
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\4n4lDetector.zip" -o"${TOOLS}\4n4lDetector" | Out-Null
 
 # aLEAPP
 Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleapp.exe" -match aleapp.exe
@@ -66,7 +65,7 @@ Get-GitHubRelease -repo "cmderdev/cmder" -path "${SETUP_PATH}\cmder.7z" -match c
 # Recaf
 Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match jar-with-dependencies.jar
 Copy-Item ${SETUP_PATH}\recaf.jar ${TOOLS}\lib\recaf.jar
-Set-Content -Encoding Ascii -Path "${TOOLS}\bin\recaf.bat" "@echo off`njava --module-path $env:PATH_TO_FX --add-modules javafx.controls -jar C:\Tools\bin\recaf.jar"
+Set-Content -Encoding Ascii -Path "${TOOLS}\bin\recaf.bat" "@echo off`njava --module-path ${SANDBOX_TOOLS}\javafx-sdk\lib --add-modules javafx.controls -jar C:\Tools\lib\recaf.jar"
 
 # Dumpbin from Visual Studio
 Get-GitHubRelease -repo "Delphier/dumpbin" -path "${SETUP_PATH}\dumpbin.zip" -match dumpbin
@@ -156,6 +155,7 @@ Get-GitHubRelease -repo "horsicq/DIE-engine" -path "${SETUP_PATH}\die.zip" -matc
 # XELFViewer
 Get-GitHubRelease -repo "horsicq/XELFViewer" -path "${SETUP_PATH}\XELFViewer.zip" -match win64_portable
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\XELFViewer.zip" -o"${TOOLS}\XELFViewer" | Out-Null
+Copy-Item "${CONFIGURATION_FILES}\xelfviewer.ini" "${TOOLS}\XELFViewer\xelfviewer.ini"
 
 # jd-gui
 Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "${SETUP_PATH}\jd-gui.zip" -match jd-gui-windows
@@ -406,7 +406,7 @@ Move-Item ${TOOLS}\yara64.exe ${TOOLS}\bin\yara.exe
 Move-Item ${TOOLS}\yarac64.exe ${TOOLS}\bin\yarac.exe
 
 # hayabusa
-Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match win-64
+Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match windows-64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}\hayabusa" | Out-Null
 if (Test-Path "${TOOLS}\hayabusa\hayabusa.exe") {
     Remove-Item "${TOOLS}\hayabusa\hayabusa.exe" -Force
