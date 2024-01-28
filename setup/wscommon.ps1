@@ -129,6 +129,16 @@ function Install-BashExtra {
             $command = "tar.exe -x -vf /C/downloads/bash/" + $_.Name
             & "${env:ProgramFiles}\Git\bin\bash.exe" -c "$command"
         }
+    if (Test-Path "${LOCAL_PATH}\.zshrc") {
+        Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc"
+    } else {
+        Copy-Item "${LOCAL_PATH}\.zshrc.default" "${HOME}\.zshrc"
+    }
+    if (Test-Path "${LOCAL_PATH}\.zcompdump") {
+        Copy-Item "${LOCAL_PATH}\.zcompdump" "${HOME}\.zcompdump"
+    } else {
+        Copy-Item "${LOCAL_PATH}\.zcompdump.default" "${HOME}\.zcompdump"
+    } 
 }
 
 function Install-Choco {
@@ -150,6 +160,11 @@ function Install-GitBash {
     Copy-Item "${SETUP_PATH}\git.exe" "${TEMP}\git.exe"
     Copy-Item "${HOME}\Documents\tools\.bashrc" "${HOME}\"
     & "${TEMP}\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh"
+    if (Test-Path "${LOCAL_PATH}\.bashrc") {
+        Copy-Item "${LOCAL_PATH}\.bashrc" "${HOME}\.bashrc"
+    } else {
+        Copy-Item "${LOCAL_PATH}\.bashrc.default" "${HOME}\.bashrc"
+    }
 }
 
 function Install-GoLang {
@@ -162,6 +177,7 @@ function Install-GoLang {
 function Install-Hashcat {
     Write-Output "Installing Hashcat"
     Copy-Item -Recurse "$TOOLS\hashcat" "${env:ProgramFiles}"
+    Add-ToUserPath "${env:ProgramFiles}\hashcat"
 }
 
 function Install-Jadx {
