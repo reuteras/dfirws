@@ -74,7 +74,7 @@ Remove-Item "${TOOLS}\exiftool\exiftool(-k).exe" -Force | Out-Null
 
 # Get pestudio
 Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio.zip" -FilePath ".\downloads\pestudio.zip"
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pestudio.zip" -o"${TOOLS}\pestudio" | Out-Null
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pestudio.zip" -o"${TOOLS}" | Out-Null
 
 # Get HxD
 Get-FileFromUri -uri "https://mh-nexus.de/downloads/HxDSetup.zip" -FilePath ".\downloads\hxd.zip"
@@ -110,6 +110,9 @@ Get-FileFromUri -uri "https://www.staff.hs-mittweida.de/~pawlaszc/fqlite/downloa
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fqlite.zip" -o"${TOOLS}" | Out-Null
 if (Test-Path -Path ${TOOLS}\__MACOSX) {
     Remove-Item -Recurse -Force ${TOOLS}\__MACOSX | Out-Null 2>&1
+}
+if (Test-Path -Path "${TOOLS}\fqlite\.DS_Store") {
+    Remove-Item -Recurse -Force "${TOOLS}\fqlite\.DS_Store" | Out-Null 2>&1
 }
 
 # Win API Search
