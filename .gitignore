@@ -4,6 +4,11 @@ dfirws.zip
 downloads/*
 enrichment/*
 local/*
+!local/.bashrc.default
+!local/.zcompdump.default
+!local/.zshrc.default
+!local/example-customize.ps1
+!local/Microsoft.PowerShell_profile.ps1.default
 log/*
 mount/*
 readonly/*
