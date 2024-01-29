@@ -233,10 +233,10 @@ Remove-Item -Force ${TOOLS}\nirsoft\readme.txt | Out-Null 2>&1
 # Update the links below when new versions are released
 
 # https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start
-Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.21-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes"
+Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.22-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes"
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
-Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.29-windows.zip" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.30-windows.zip" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes"
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes"
@@ -246,7 +246,7 @@ Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_ext
 Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes"
 
 # https://npcap.com/#download - Npcap - available for manual installation
-Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.78.exe" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
+Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.79.exe" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
 
 # https://www.wireshark.org/download.html - Wireshark - available for manual installation
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.2-x64.exe" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
@@ -290,7 +290,7 @@ Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generi
 Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe" -CheckURL "Yes"
 
 # https://gluonhq.com/products/javafx/ - JavaFX
-Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.1/openjfx-21.0.1_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\openjfx.zip" -o"${TOOLS}" | Out-Null
 if (Test-Path -Path ${TOOLS}\javafx-sdk) {
     Remove-Item -Recurse -Force ${TOOLS}\javafx-sdk | Out-Null 2>&1
@@ -298,7 +298,7 @@ if (Test-Path -Path ${TOOLS}\javafx-sdk) {
 Move-Item ${TOOLS}\javafx-sdk-* ${TOOLS}\javafx-sdk
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
-Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.1.jar" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes"
+Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes"
 Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "${TOOLS}\bin\apktool.bat" -Force
 
