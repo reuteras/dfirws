@@ -557,7 +557,7 @@ if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) 
 # venv dissect
 #
 
-# Build every time beacuse of to many dependencies to check in dissect.target
+# Build every time because of to many dependencies to check in dissect.target
 Write-DateLog "Install packages in venv dissect in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
 Get-ChildItem C:\venv\dissect\* -Exclude dissect.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
