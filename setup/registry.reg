@@ -84,10 +84,22 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\AccessEnum]
 "EulaAccepted"=dword:00000001
 
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Active Directory Explorer]
+"EulaAccepted"=dword:00000001
+
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\ADInsight]
 "EulaAccepted"=dword:00000001
 
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\AdRestore]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Autologon]
+"EulaAccepted"=dword:00000001
+
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Autoruns]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\BGInfo]
 "EulaAccepted"=dword:00000001
 
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\CacheSet]
@@ -96,7 +108,16 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\ClockRes]
 "EulaAccepted"=dword:00000001
 
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Contig]
+"EulaAccepted"=dword:00000001
+
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Coreinfo]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\CPUSTRES]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Ctrl2cap]
 "EulaAccepted"=dword:00000001
 
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\DbgView]
@@ -117,6 +138,12 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\DiskView]
 "EulaAccepted"=dword:00000001
 
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Du]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\EFSDump]
+"EulaAccepted"=dword:00000001
+
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\FindLinks]
 "EulaAccepted"=dword:00000001
 
@@ -135,6 +162,24 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\ListDLLs]
 "EulaAccepted"=dword:00000001
 
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\LiveKd]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\LoadOrder]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\LogonSessions]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Movefile]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\NotMyFault]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\nTestlimit]
+"EulaAccepted"=dword:00000001
+
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\NTFSInfo]
 "EulaAccepted"=dword:00000001
 
@@ -151,6 +196,9 @@ Windows Registry Editor Version 5.00
 "EulaAccepted"=dword:00000001
 
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Process Explorer]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\Process Monitor]
 "EulaAccepted"=dword:00000001
 
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\PsExec]
@@ -180,7 +228,13 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\PsPasswd]
 "EulaAccepted"=dword:00000001
 
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\PsPing]
+"EulaAccepted"=dword:00000001
+
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\PsService]
+"EulaAccepted"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Sysinternals\PsShutdown]
 "EulaAccepted"=dword:00000001
 
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\PsSuspend]
