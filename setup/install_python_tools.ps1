@@ -557,46 +557,29 @@ if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) 
 # venv dissect
 #
 
-& "$PYTHON_BIN" -m pip index versions dissect 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\dissect.txt
-& "$PYTHON_BIN" -m pip index versions dissect.target 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\dissect.txt
-& "$PYTHON_BIN" -m pip index versions acquire 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${TEMP}\dissect.txt
-& "$PYTHON_BIN" -m pip index versions flow.record 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${TEMP}\dissect.txt
+# Build every time beacuse of to many dependencies to check in dissect.target
+Write-DateLog "Install packages in venv dissect in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
+Get-ChildItem C:\venv\dissect\* -Exclude dissect.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
+C:\venv\dissect\Scripts\Activate.ps1 >> "C:\log\python.txt"
+python -m pip install -U pip >> "C:\log\python.txt"
+python -m pip install -U poetry >> "C:\log\python.txt"
 
-if (Test-Path "C:\venv\dissect\dissect.txt") {
-    $CURRENT_VENV = "C:\venv\dissect\dissect.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
+poetry init `
+    --name dissectvenv `
+    --description "Python venv for dissect." `
+    --author "dfirws" `
+    --license "MIT" `
+    --no-interaction
 
-if ((Get-FileHash C:\tmp\dissect.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv dissect in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\dissect\* -Exclude dissect.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
-    C:\venv\dissect\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
+poetry add `
+    acquire `
+    dissect `
+    dissect.target[yara] `
+    flow.record >> "C:\log\python.txt"
 
-    poetry init `
-        --name dissectvenv `
-        --description "Python venv for dissect." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
-
-    poetry add `
-        acquire `
-        dissect `
-        dissect.target[yara] `
-        flow.record >> "C:\log\python.txt"
-
-    Copy-Item C:\tmp\dissect.txt "C:\venv\dissect\dissect.txt" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Set-Content "C:\venv\dissect\Scripts\python.exe C:\venv\dissect\Scripts\dissect.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\dissect.ps1
-    Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "dissect has not been updated, don't update dissect venv." >> "C:\log\python.txt"
-}
-
+deactivate
+Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 
 #
 # venv ghidrecomp
