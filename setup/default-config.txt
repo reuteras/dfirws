@@ -30,8 +30,6 @@ $WSDFIR_NEO4J="No"
 $WSDFIR_OBSIDIAN="No"
 # Install PDFStream Dumper
 $WSDFIR_PDFSTREAM="Yes"
-# Add PersistenceSniper
-$WSDFIR_PERSISTENCESNIPER="Yes"
 # Install Qemu
 $WSDFIR_QEMU="No"
 # Install Visual Studio Code
