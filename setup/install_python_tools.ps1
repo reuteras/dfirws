@@ -44,58 +44,32 @@ poetry init `
 poetry add `
     aiohttp[speedups] `
     autoit-ripper `
-    beautifulsoup4>=4.12.1 `
     binary-refinery `
     cabarchive `
-    capstone `
     cart `
-    certifi>=2023.5.7 `
-    colorama `
-    cryptography>=41.0.1 `
     deep_translator `
-    Deprecated>=1.2.13 `
     dnslib `
-    dnspython>=2.4.1 `
     docx2txt `
     dotnetfile `
     dpkt `
     elasticsearch[async] `
-    elastic_transport>=8.1.2 `
     evtx `
     extract-msg `
-    Flask>=2.3.1 `
-    folium>=0.13.0 `
-    fonttools `
-    frida `
+    flatten_json `
     frida-tools `
-    geoip2>=4.6.0 `
     ghidriff `
     graphviz `
     grip `
     hachoir `
-    httpx>=0.25.1 `
-    httpcore>=0.18.0 `
-    ijson `
-    ipython>=8.18.0 `
-    ipywidgets `
-    jedi>=0.19.0 `
-    jinja2 `
     jsbeautifier `
     jupyterlab `
-    keyring>=23.13.1 `
     keystone-engine `
-    lief>=0.13.2 `
+    lief `
     LnkParse3 `
-    lxml `
-    Markdown>=3.5 `
     matplotlib `
-    maxminddb>=2.5.0 `
     minidump `
-    msal>=1.24.1 `
     msticpy `
     mkyara `
-    msgpack `
-    msoffcrypto-tool `
     name-that-hash `
     neo4j `
     neo4j-driver `
@@ -103,63 +77,38 @@ poetry add `
     networkx `
     numpy `
     olefile `
-    oletools[full]>=0.60.1 `
+    oletools[full] `
     openpyxl `
     orjson `
-    pandas `
     pcode2code `
-    pcodedmp `
-    pefile `
     peutils `
-    pillow `
     ppdeep `
-    prettytable>=3.5 `
-    prompt_toolkit>=3.0.35 `
-    protobuf>=4.22.0 `
+    prettytable `
     protodeep `
-    ptpython>=3.0.23 `
-    pycryptodome `
-    pycryptodomex>=3.17.0 `
-    pydantic>=2.5.1 `
-    pyelftools `
-    pyjwt>=2.7.0 `
+    ptpython `
     pyOneNote `
-    pyparsing>=2.4.6 `
-    pypdf>=3.17.1 `
+    pypdf `
+    PyPDF2 `
     pypng `
-    python-dateutil `
     python-magic `
     python-magic-bin `
     pyvis `
-    pywin32-ctypes>=0.2.1 `
-    pywin32 `
-    pywinpty>=2.0.11 `
-    PyYAML>=6.0 `
     pyzipper `
-    pyzmq>=25.1.0 `
     regipy `
-    requests `
-    rpds_py>=0.10.5 `
     rzpipe `
     setuptools `
-    termcolor>=2.2.0 `
-    terminado>=0.17.1 `
+    termcolor `
     textsearch `
     time-decode `
-    tldextract>=5.1.0 `
     tomlkit `
-    tqdm `
     treelib `
-    tzdata>=2023.1 `
-    tzlocal>=5.1 `
     unicorn `
     unpy2exe `
-    urllib3>=2.1.0 `
-    visidata>=2.11 `
-    xlrd>=2.0.0 `
-    XLMMacroDeobfuscator>=0.2.6 `
-    XlsxWriter>=3.1.8 `
-    xxhash>=3.3.0 `
+    visidata `
+    xlrd `
+    XLMMacroDeobfuscator `
+    XlsxWriter `
+    xxhash `
     yara-python >> "C:\log\python.txt"
 
 # Not compatible with Python 3.11:
@@ -515,8 +464,8 @@ if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRE
     Copy-Item -Recurse "C:\git\Zircolite" "C:\venv\Zircolite"
     Set-Location "C:\venv\Zircolite\Zircolite"
     python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
-S    deactivate
-    Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
+    deactivate
+    Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py -- `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
     Write-DateLog "Python venv Zircolite done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "Zircolite already up to date." >> "C:\log\python.txt"
