@@ -31,7 +31,6 @@ $repourls = `
     "https://github.com/keydet89/RegRipper3.0", `
     "https://github.com/last-byte/PersistenceSniper.git", `
     "https://github.com/last-byte/PersistenceSniper.wiki.git", `
-    "https://github.com/MacDue/ssdeep-windows-32_64.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
@@ -46,6 +45,7 @@ $repourls = `
     "https://github.com/reuteras/MSRC.git", `
     "https://github.com/rizinorg/cutter-jupyter.git", `
     "https://github.com/Seabreg/Regshot.git", `
+    "https://github.com/SigmaHQ/legacy-sigmatools.git", `
     "https://github.com/SigmaHQ/sigma.git", `
     "https://github.com/StrangerealIntel/Shadow-Pulse.git", `
     "https://github.com/swisscom/PowerSponse.git", `
