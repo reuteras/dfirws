@@ -56,7 +56,7 @@ function Add-ToUserPath {
         Write-Output "Added ${dir} to PATH"
         return
     }
-    Write-Error "${dir} is already in PATH"
+    Write-Output "${dir} is already in PATH"
 }
 
 function Add-Shortcut {
@@ -229,6 +229,18 @@ function Install-Obsidian {
     Write-Output "Installing Obsidian"
     Copy-Item "${SETUP_PATH}\obsidian.exe" "${TEMP}\obsidian.exe"
     Start-Process -Wait "${TEMP}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+}
+
+function Install-OhMyPosh {
+    Write-Output "Installing OhMyPosh"
+    Copy-Item "${SETUP_PATH}\oh-my-posh.exe" "${TEMP}\oh-my-posh.exe"
+    Start-Process -Wait "${TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
+    Set-Location "${TEMP}"
+    New-Item -ItemType Directory -Force -Path "${TEMP}\patched-fonts\Meslo" | Out-Null
+    Copy-Item ${TOOLS}\fonts\Meslo\MesloLGMNerdFontMono* "${TEMP}\patched-fonts\Meslo\"
+    Copy-Item "${SETUP_PATH}\install-fonts.ps1" "${TEMP}\install-fonts.ps1"
+    & ".\install-fonts.ps1" "Meslo" | Out-Null
+    Copy-Item "C:\local\Powershell.lnk" "C:\Users\WDAGUtilityAccount\Desktop\Powershell.lnk" -Force
 }
 
 function Install-PDFStreamDumper {
