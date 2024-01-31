@@ -44,7 +44,7 @@ Set-PSReadLineOption -EditMode Vi
 
 # Add icons to dir and ls.
 if (-not(Get-Module -ListAvailable Terminal-Icons)) {
-    Import-Module -Name Terminal-Icons 
+    Import-Module -Name Terminal-Icons
 }
 
 #
@@ -78,7 +78,7 @@ if (Test-Path "C:\Tools\cargo\autocomplete") {
 
 #
 # Functions to help in dfirws
-#	
+#
 
 function Copy-Fakenet {
 	Param (
