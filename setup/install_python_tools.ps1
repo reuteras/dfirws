@@ -273,50 +273,11 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
     Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
     Copy-Item ${TEMP}\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
-    Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_app.ps1
-    Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\unfurl_cli.ps1
+    Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_app.ps1"
+    Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_cli.ps1"
     Write-DateLog "Python venv dfir-unfurl cache done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "dfir-unfurl has not been updated, don't update dfir-unfurl venv." >> "C:\log\python.txt"
-}
-
-
-#
-# venv pySigma
-#
-
-& "$PYTHON_BIN" -m pip index versions pySigma 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\pySigma.txt
-
-if (Test-Path "C:\venv\pySigma\pySigma.txt") {
-    $CURRENT_VENV = "C:\venv\pySigma\pySigma.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
-
-if ((Get-FileHash C:\tmp\pySigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv pySigma in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\pySigma\* -Exclude pySigma.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pySigma"
-    C:\venv\pySigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    Set-Location "C:\venv\pySigma"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
-
-    poetry init `
-        --name pySigmavenv `
-        --description "Python venv for pySigma." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
-
-    poetry add `
-        pySigma>=0.9.6 2>&1 >> "C:\log\python.txt"
-
-    Copy-Item ${TEMP}\pySigma.txt "C:\venv\pySigma\pySigma.txt" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Write-DateLog "Python venv pySigma done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "pySigma has not been updated, don't update pySigma venv." >> "C:\log\python.txt"
 }
 
 
@@ -381,7 +342,7 @@ if ((Get-FileHash C:\tmp\evt2sigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 >> "C:\log\python.txt"
     Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
-    Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\evt2sigma.ps1
+    Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
     Copy-Item "C:\tmp\evt2sigma.txt" "C:\venv\evt2sigma\evt2sigma.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
@@ -405,7 +366,7 @@ if (! (Test-Path "C:\venv\maldump\Scripts\maldump.exe")) {
     python -m pip install maldump==0.2.0 2>&1 >> "C:\log\python.txt"
     Copy-Item "C:\tmp\maldump.txt" "C:\venv\maldump\maldump.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
-    Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path C:\venv\default\Scripts\maldump.ps1
+    Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path "C:\venv\default\Scripts\maldump.ps1"
     Write-DateLog "Python venv maldump done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "maldump already installed." >> "C:\log\python.txt"
@@ -437,7 +398,7 @@ if ((Get-FileHash C:\git\scare\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_V
     Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
     Copy-Item C:\tmp\scare.txt "C:\venv\scare\scare.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
-    Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\scare.ps1
+    Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
     Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "scare already up to date." >> "C:\log\python.txt"
@@ -476,7 +437,7 @@ if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRE
 # venv chepy
 #
 
-& "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\chepy.txt
+& "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\chepy.txt"
 
 if (Test-Path "C:\venv\chepy\chepy.txt") {
     $CURRENT_VENV = "C:\venv\chepy\chepy.txt"
@@ -493,9 +454,9 @@ if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) 
     python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
     python -m pip install `
         chepy[extras] 2>&1 >> "C:\log\python.txt"
-    Copy-Item C:\tmp\chepy.txt "C:\venv\chepy\chepy.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item "${TEMP}\chepy.txt" "C:\venv\chepy\chepy.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
-    Set-Content "C:\venv\chepy\Scripts\python.exe C:\venv\chepy\Scripts\chepy.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\chepy.ps1
+    Set-Content "C:\venv\chepy\Scripts\python.exe C:\venv\chepy\Scripts\chepy.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\chepy.ps1"
     Write-DateLog "Python venv chepy done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "chepy has not been updated, don't update chepy venv." >> "C:\log\python.txt"
@@ -534,7 +495,7 @@ Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 # venv ghidrecomp
 #
 
-& "$PYTHON_BIN" -m pip index versions ghidrecomp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\ghidrecomp.txt
+& "$PYTHON_BIN" -m pip index versions ghidrecomp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\ghidrecomp.txt"
 
 if (Test-Path "C:\venv\ghidrecomp\ghidrecomp.txt") {
     $CURRENT_VENV = "C:\venv\ghidrecomp\ghidrecomp.txt"
@@ -561,11 +522,50 @@ if ((Get-FileHash C:\tmp\ghidrecomp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).H
     poetry add `
         ghidrecomp 2>&1 >> "C:\log\python.txt"
 
-    Copy-Item ${TEMP}\ghidrecomp.txt "C:\venv\ghidrecomp\ghidrecomp.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item "${TEMP}\ghidrecomp.txt" "C:\venv\ghidrecomp\ghidrecomp.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv ghidrecomp done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "ghidrecomp has not been updated, don't update ghidrecomp venv." >> "C:\log\python.txt"
 }
+
+#
+# venv sigma-cli
+#
+
+& "$PYTHON_BIN" -m pip index versions sigma-cli 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\sigma-cli.txt"
+
+if (Test-Path "C:\venv\sigma-cli\sigma-cli.txt") {
+    $CURRENT_VENV = "C:\venv\sigma-cli\sigma-cli.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+if ((Get-FileHash C:\tmp\sigma-cli.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+    Write-DateLog "Install packages in venv sigma-cli in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
+    Get-ChildItem C:\venv\sigma-cli\* -Exclude sigma-cli.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\sigma-cli"
+    C:\venv\sigma-cli\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\sigma-cli"
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -U poetry >> "C:\log\python.txt"
+
+    poetry init `
+        --name sigmaclivenv `
+        --description "Python venv for sigma-cli." `
+        --author "dfirws" `
+        --license "MIT" `
+        --no-interaction
+
+    poetry add `
+        sigma-cli 2>&1 >> "C:\log\python.txt"
+
+    Copy-Item "${TEMP}\sigma-cli.txt" "C:\venv\sigma-cli\sigma-cli.txt" -Force 2>&1 >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv sigma-cli done." >> "C:\log\python.txt"
+} else {
+    Write-DateLog "sigma-cli has not been updated, don't update sigma-cli venv." >> "C:\log\python.txt"
+}
+
 
 Write-Output "" > C:\venv\default\done
