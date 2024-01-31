@@ -237,7 +237,7 @@ function Install-OhMyPosh {
     Start-Process -Wait "${TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
     Set-Location "${TEMP}"
     New-Item -ItemType Directory -Force -Path "${TEMP}\patched-fonts\Meslo" | Out-Null
-    Copy-Item ${TOOLS}\fonts\Meslo\MesloLGMNerdFontMono* "${TEMP}\patched-fonts\Meslo\"
+    Copy-Item ${TOOLS}\fonts\Meslo\MesloLGMNerdFont-* "${TEMP}\patched-fonts\Meslo\"
     Copy-Item "${SETUP_PATH}\install-fonts.ps1" "${TEMP}\install-fonts.ps1"
     & ".\install-fonts.ps1" "Meslo" | Out-Null
     Copy-Item "C:\local\Powershell.lnk" "C:\Users\WDAGUtilityAccount\Desktop\Powershell.lnk" -Force
