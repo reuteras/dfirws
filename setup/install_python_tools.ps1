@@ -1,6 +1,6 @@
 # Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
-$GHIDRA_INSTALL_DIR = (Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1)
+$GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\" | Select-String PUBLIC -Raw | Select-Object -Last 1)
 
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
@@ -211,13 +211,13 @@ if ($INSTALL_JEP -eq "Yes") {
 
         # Build Ghidrathon for Gidhra
         Write-DateLog "Build Ghidrathon for Ghidra."
-        Copy-Item -Recurse "C:\Tools\ghidrathon" "${TEMP}"
+        Copy-Item -Recurse "${TOOLS}\ghidrathon" "${TEMP}"
         Set-Location "${TEMP}\ghidrathon"
         & "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
-        if (! (Test-Path "C:\Tools\ghidra_extensions")) {
-            New-Item -ItemType Directory -Force -Path "C:\Tools\ghidra_extensions" | Out-Null
+        if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
+            New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
         }
-        Copy-Item ${TEMP}\ghidrathon\dist\ghidra* "C:\Tools\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
+        Copy-Item ${TEMP}\ghidrathon\dist\ghidra* "${TOOLS}\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
         Copy-Item ${TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
