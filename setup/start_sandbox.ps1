@@ -32,8 +32,8 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
     Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
     Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 } else {
-    Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1.default" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-    Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1.default" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+    Copy-Item "${LOCAL_PATH}\default-Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+    Copy-Item "${LOCAL_PATH}\default-Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 }
 
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode"
@@ -255,6 +255,8 @@ Add-ToUserPath "${TOOLS}\Zimmerman\SQLECmd"
 Add-ToUserPath "${TOOLS}\Zimmerman\XWFIM"
 Add-ToUserPath "${TOOLS}\zstd"
 Add-ToUserPath "${VENV}\maldump\Scripts"
+Add-ToUserPath "${VENV}\sigma-cli\Scripts"
+Add-ToUserPath "${HOME}\AppData\Local\Programs\oh-my-posh\bin"
 Add-ToUserPath "${HOME}\Documents\tools\utils"
 $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
 Add-ToUserPath "${TOOLS}\ghidra\${GHIDRA_INSTALL_DIR}"
@@ -733,6 +735,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\evt2s
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\mkyara.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\loki.lnk" -DestinationPath "${env:ProgramFiles}\loki\loki.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\PatchaPalooza.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\PatchaPalooza" -Arguments "-NoExit -command .\PatchaPalooza.py -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\sigma-cli (This is the Sigma command line interface using the pySigma library to manage, list and convert Sigma rules into query languages).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sigma.exe. --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\WinApiSearch64.lnk" -DestinationPath "${TOOLS}\WinApiSearch\WinApiSearch64.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\yara.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command yara.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\yarac.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command yarac.exe -h"
