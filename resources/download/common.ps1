@@ -630,8 +630,12 @@ function Update-ToolsDownloaded {
 
 # Function to clear tmp directory
 function Clear-Tmp {
-    if (Test-Path -Path .\tmp\winget) {
-        Remove-Item -Recurse -Force .\tmp\winget > $null 2>&1
+    param (
+        [Parameter(Mandatory=$True)] [string]$Folder
+    )
+
+    if (Test-Path -Path ".\tmp\${Folder}") {
+        Remove-Item -Recurse -Force ".\tmp\${Folder}" > $null 2>&1
     }
 }
 
@@ -646,6 +650,8 @@ function Get-Winget {
     if (Compare-ToolsDownloaded -URL $VERSION -AppName $AppName) {
         Write-SynchronizedLog "File $AppName version $VERSION already downloaded."
         return
+    } else {
+        Write-SynchronizedLog "Downloading $AppName version $VERSION."
     }
     winget download --disable-interactivity	"$AppName" -d .\tmp\winget 2>&1 | Out-Null
     Remove-Item .\tmp\winget\*.yaml -Force > $null 2>&1
