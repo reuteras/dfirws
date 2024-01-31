@@ -19,10 +19,10 @@ param(
     [Switch]$maldump,
     [Parameter(HelpMessage = "Switch to venv pe2pic.")]
     [Switch]$pe2pic,
-    [Parameter(HelpMessage = "Switch to venv pySigma.")]
-    [Switch]$pySigma,
     [Parameter(HelpMessage = "Switch to venv scare.")]
     [Switch]$scare,
+    [Parameter(HelpMessage = "Switch to venv sigma-cli.")]
+    [Switch]$sigma,
     [Parameter(HelpMessage = "Switch to venv Zircolite.")]
     [Switch]$zircolite
 )
@@ -47,10 +47,10 @@ if ($chepy) {
     $venv = "maldump"
 } elseif ($pe2pic) {
     $venv = "pe2pic"
-} elseif ($pySigma) {
-    $venv = "pySigma"
 } elseif ($scare) {
     $venv = "scare"
+} elseif ($sigma) {
+    $venv = "sigma-cli"
 } elseif ($zircolite) {
     $venv = "Zircolite"
 } else {
