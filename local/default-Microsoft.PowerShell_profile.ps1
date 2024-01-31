@@ -47,20 +47,26 @@ if (-not(Get-Module -ListAvailable Terminal-Icons)) {
     Import-Module -Name Terminal-Icons 
 }
 
+# Make sure that there is a tmp directory in $HOME
+if (-not(Test-Path "${HOME}\tmp")) {
+	New-Item -ItemType Directory "${HOME}\tmp"
+}
+
 #
 # Init oh-my-posh and set theme
 #
 # The default themes are available in the directory $env:POSH_THEMES_PATH
 #
 
-# Uncomment the lines below to use oh-my-posh
-
-USE_OH_MY_POSH = "Yes"
+# Change "No" to "Yes" below to use oh-my-posh
+USE_OH_MY_POSH = "No"
 
 if ( ${USE_OH_MY_POSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
-	oh-my-posh init pwsh --config "${env:USERPROFILE}\Documents\tools\configurations\powerlevel10k_rainbow.omp.json" | Invoke-Expression
-	Invoke-Expression -Command $(oh-my-posh completion powershell | Out-String)
+	oh-my-posh init pwsh --config "${env:USERPROFILE}\Documents\tools\configurations\powerlevel10k_rainbow.omp.json" > "${HOME}\tmp\oh-my-posh-init.ps1"
+	& "${HOME}\tmp\oh-my-posh-init.ps1"
+	& oh-my-posh completion powershell > "${HOME}\tmp\oh-my-posh-completion.ps1"
+	& "${HOME}\tmp\oh-my-posh-completion.ps1"
 	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
 
 	# Use posh-git: https://github.com/dahlbyk/posh-git
