@@ -17,7 +17,7 @@ $env:PYTHONUTF8 = "1"
 # Set environment variables
 $env:PATH_TO_FX = "C:\Tools\javafx-sdk\lib"
 $env:POSH_THEMES_PATH = "${HOME}\AppData\Local\Programs\oh-my-posh\themes"
-$env:PSModulePath = "$env:PSModulePath;C:\Tools\powershell-modules"
+$env:PSModulePath = "$env:PSModulePath;C:\Downloads\powershell-modules"
 # Find last version of Ghidra
 $env:GHIDRA_INSTALL_DIR = (Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1)
 
@@ -59,7 +59,7 @@ if (-not(Test-Path "${HOME}\tmp")) {
 #
 
 # Change "No" to "Yes" below to use oh-my-posh
-USE_OH_MY_POSH = "No"
+$USE_OH_MY_POSH = "No"
 
 if ( ${USE_OH_MY_POSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
