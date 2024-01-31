@@ -79,11 +79,11 @@ if ($all -or $Rust) {
     Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe"
 
     # Rust - available for installation via dfirws-install.ps1
-    Clear-Tmp
+    Clear-Tmp winget
     Write-SynchronizedLog "winget: Downloading Rust."
     Get-WinGet "Rustlang.Rust.GNU"
     if (Test-Path .\tmp\winget\Rust*.msi) {
         Copy-Item .\tmp\winget\Rust*.msi ".\downloads\rust.msi"
     }
-    Clear-Tmp
+    Clear-Tmp winget
 }
