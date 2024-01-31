@@ -4,7 +4,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 
 if (! (Test-Path "${TEMP}")) {
-    New-Item -ItemType Directory -Force -Path "${TEMP}" > $null
+    New-Item -ItemType Directory -Force -Path "${TEMP}" | Out-Null
 }
 
 Write-Output "Get-Content C:\log\rust.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
@@ -17,12 +17,31 @@ Install-GitBash >> "C:\log\rust.txt"
 Write-DateLog "Install Rust." >> "C:\log\rust.txt"
 Install-Rust >> "C:\log\rust.txt"
 
+# Alternative install method for Rust
+#Set-Location "${HOME}" >> "C:\log\rust.txt"
+#curl -o "rustup-init.exe" "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe" >> "C:\log\rust.txt"
+#& ".\rustup-init.exe" --default-host x86_64-pc-windows-gnu -y >> "C:\log\rust.txt"
+#$env:PATH="${env:HOME}\.cargo\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
+
 # Set PATH to include Rust and Git
 $env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
 
 # Install Rust tools
 Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" dfir-toolkit 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+
+if (!(Test-Path "C:\cargo\autocomplete")) {
+    New-Item -ItemType Directory -Force -Path "C:\cargo\autocomplete" | Out-Null
+}
+
+$env:PATH="${env:PATH};C:\cargo\bin"
+(Get-ChildItem "C:\cargo\bin").Name | ForEach-Object { & "$_" --autocomplete powershell > "C:\cargo\autocomplete\$_.ps1"} 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+
+cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+cargo install --root "C:\cargo" usnjrnl 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+# https://github.com/janstarke/regview
+# https://github.com/janstarke/ntdsextract2
+
 Write-DateLog "Rust: Done installing Rust based tools in sandbox." >> "C:\log\rust.txt"
 
 Write-Output "" > "C:\cargo\done"
