@@ -13,7 +13,7 @@ Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downl
 # Packages used in NodeJS sandbox
 #
 
-if ($Node) {
+if ($all -or $Node) {
     $nodejs = Get-DownloadUrlFromPage -url "https://nodejs.org/en/download/" -RegEx 'https:[^"]+win-x64.zip'
 
     # nodejs - installed via sandbox during download and setup of tools for dfirws
@@ -24,7 +24,7 @@ if ($Node) {
 # Packages used in Python sandbox
 #
 
-if ($Python) {
+if ($all -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
     Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe" -FilePath ".\downloads\python3.exe" -CheckURL "Yes"
 
@@ -60,7 +60,7 @@ if ($Python) {
 # Packages used in Bash sandbox
 #
 
-if ($Bash) {
+if ($all -or $Bash) {
     # zsdt
     Get-GitHubRelease -repo "facebook/zstd" -path "${SETUP_PATH}\zstd.zip" -match "win64.zip"
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"${TOOLS}" | Out-Null
@@ -74,7 +74,7 @@ if ($Bash) {
 # Packages used in Rust sandbox
 #
 
-if ($Rust) {
+if ($all -or $Rust) {
     # git - installed during start
     Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe"
 
