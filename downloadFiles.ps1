@@ -13,6 +13,8 @@ param(
     [Switch]$Kape,
     [Parameter(HelpMessage = "Update Node.")]
     [Switch]$Node,
+    [Parameter(HelpMessage = "Update PowerShell and modules.")]
+    [Switch]$PowerShell,
     [Parameter(HelpMessage = "Update Python.")]
     [Switch]$Python,
     [Parameter(HelpMessage = "Update releases from GitHub.")]
@@ -57,7 +59,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
     Exit
 }
 
-if ($Bash.IsPresent -or $Didier.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
+if ($Bash.IsPresent -or $Didier.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all files."
@@ -179,6 +181,11 @@ if ($all -or $Kape) {
         Write-DateLog "Download KAPE."
         .\resources\download\kape.ps1
     }
+}
+
+if ($all -or $PowerShell) {
+    Write-DateLog "Download PowerShell and modules."
+    .\resources\download\powershell.ps1
 }
 
 if ($all -or $bash -or $Node -or $python -or $Rust) {
