@@ -68,3 +68,12 @@ $WSDFIR_RIGHTCLICK="Yes"
 
 # Dark mode
 $WSDFIR_DARK="Yes"
+
+# Use oh-my-posh
+$WSDFIR_OHMYPOSH="No"
+$WSDFIR_FONT_DIRNAME = "Meslo"
+$WSDFIR_FONT_FILENAME_PREFIX = "MesloLGMNerdFont"
+$WSDFIR_fontName = "MesloLGM Nerd Font Mono"
+# Get the value for $WSDFIR_fontSize from the output of the following command:
+# lnkparse.exe -a "${HOME}\Desktop\PowerShell.lnk" | rg "Font size"
+$WSDFIR_fontSize = 1179648
