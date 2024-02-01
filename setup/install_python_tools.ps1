@@ -86,6 +86,7 @@ poetry add `
     prettytable `
     protodeep `
     ptpython `
+    pwncat `
     pyOneNote `
     pypdf `
     PyPDF2 `
