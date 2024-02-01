@@ -236,11 +236,10 @@ function Install-OhMyPosh {
     Copy-Item "${SETUP_PATH}\oh-my-posh.exe" "${TEMP}\oh-my-posh.exe"
     Start-Process -Wait "${TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
     Set-Location "${TEMP}"
-    New-Item -ItemType Directory -Force -Path "${TEMP}\patched-fonts\Meslo" | Out-Null
-    Copy-Item ${TOOLS}\fonts\Meslo\MesloLGMNerdFont-* "${TEMP}\patched-fonts\Meslo\"
+    New-Item -ItemType Directory -Force -Path "${TEMP}\patched-fonts\${WSDFIR_FONT_DIRNAME}" | Out-Null
+    Copy-Item ${TOOLS}\fonts\${WSDFIR_FONT_DIRNAME}\${WSDFIR_FONT_FILENAME_PREFIX}-* "${TEMP}\patched-fonts\${WSDFIR_FONT_DIRNAME}\"
     Copy-Item "${SETUP_PATH}\install-fonts.ps1" "${TEMP}\install-fonts.ps1"
-    & ".\install-fonts.ps1" "Meslo" | Out-Null
-    Copy-Item "C:\local\Powershell.lnk" "C:\Users\WDAGUtilityAccount\Desktop\Powershell.lnk" -Force
+    & ".\install-fonts.ps1" "${WSDFIR_FONT_DIRNAME}" | Out-Null
 }
 
 function Install-PDFStreamDumper {
