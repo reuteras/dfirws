@@ -243,7 +243,7 @@ Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_ext
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\bulk_extractor.zip" -o"${TOOLS}\bulk_extractor" | Out-Null
 
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
-Get-FileFromUri -uri "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes"
+Get-FileFromUri -uri "https://gemmei.ftp.acc.umu.se/mirror/documentfoundation.org/libreoffice/stable/24.2.0/win/x86_64/LibreOffice_24.2.0_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes"
 
 # https://npcap.com/#download - Npcap - available for manual installation
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.79.exe" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
@@ -254,10 +254,6 @@ Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.2-x64.ex
 # https://www.sqlite.org/download.html - SQLite
 Get-FileFromUri -uri "https://sqlite.org/2024/sqlite-tools-win-x64-3450100.zip" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
-if (Test-Path -Path ${TOOLS}\sqlite) {
-    Remove-Item -Recurse -Force ${TOOLS}\sqlite | Out-Null 2>&1
-}
-Move-Item ${TOOLS}\sqlite-* ${TOOLS}\sqlite
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
 Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip" -CheckURL "Yes"
