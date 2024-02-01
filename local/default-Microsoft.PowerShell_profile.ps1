@@ -1,7 +1,11 @@
 # Always start with Python venv
-if ( Test-Path C:\venv ) {
+if ( Test-Path "C:\venv\default\Scripts\Activate.ps1" ) {
     C:\venv\default\Scripts\Activate.ps1
 }
+
+# Source config files
+. "${TEMP}\default-config.ps1"
+. "${TEMP}\config.ps1"
 
 # Make Windows be more like Linux
 Set-Alias gdiff "$env:ProgramFiles\Git\usr\bin\diff.exe"
@@ -49,7 +53,7 @@ if (-not(Get-Module -ListAvailable Terminal-Icons)) {
 
 # Make sure that there is a tmp directory in $HOME
 if (-not(Test-Path "${HOME}\tmp")) {
-	New-Item -ItemType Directory "${HOME}\tmp"
+	New-Item -ItemType Directory "${HOME}\tmp" | Out-Null
 }
 
 #
@@ -58,10 +62,7 @@ if (-not(Test-Path "${HOME}\tmp")) {
 # The default themes are available in the directory $env:POSH_THEMES_PATH
 #
 
-# Change "No" to "Yes" below to use oh-my-posh
-$USE_OH_MY_POSH = "No"
-
-if ( ${USE_OH_MY_POSH} -eq "Yes" ) {
+if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
 	oh-my-posh init pwsh --config "${env:USERPROFILE}\Documents\tools\configurations\powerlevel10k_rainbow.omp.json" > "${HOME}\tmp\oh-my-posh-init.ps1"
 	& "${HOME}\tmp\oh-my-posh-init.ps1"
