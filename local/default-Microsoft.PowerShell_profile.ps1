@@ -3,6 +3,8 @@ if ( Test-Path "C:\venv\default\Scripts\Activate.ps1" ) {
     C:\venv\default\Scripts\Activate.ps1
 }
 
+. "${HOME}\Documents\tools\wscommon.ps1"
+
 # Source config files
 . "${TEMP}\default-config.ps1"
 . "${TEMP}\config.ps1"
