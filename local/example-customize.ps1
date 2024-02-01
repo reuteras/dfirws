@@ -67,7 +67,6 @@ foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
 # Install extra programs
 #Install-Ruby
 #Install-Rust
-#Install-OhMyPosh
 
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools
 & "C:\Windows\explorer.exe" "${HOME}\Desktop\dfirws"
