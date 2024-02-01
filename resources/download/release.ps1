@@ -383,8 +383,9 @@ if (Test-Path "${TOOLS}\upx") {
 }
 Move-Item ${TOOLS}\upx-* ${TOOLS}\upx
 
-# Velociraptor - available for manual installation
+# Velociraptor
 Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match windows-amd64.exe
+Copy-Item "${SETUP_PATH}\velociraptor.exe" "${TOOLS}\bin\" -Force
 
 # fq
 Get-GitHubRelease -repo "wader/fq" -path "${SETUP_PATH}\fq.zip" -match windows_amd64.zip
