@@ -38,9 +38,9 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
 
 if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
     $consoleFontRegPath = "HKCU:\Console"
+    Install-OhMyPosh
     Set-ItemProperty -Path "${consoleFontRegPath}" -Name "FaceName" -Value "${WSDFIR_fontName}"
     Set-ItemProperty -Path "${consoleFontRegPath}" -Name "FontSize" -Value "${WSDFIR_fontSize}"
-    Install-OhMyPosh
 }
 
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode"
@@ -991,6 +991,9 @@ if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
 if (Test-Path "${LOCAL_PATH}\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1"
     Write-DateLog "Running customize scripts done." >> "${TEMP}\start_sandbox.log"
+} else {
+    Write-DateLog "No customize scripts found running example-customize.ps1." >> "${TEMP}\start_sandbox.log"
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\example-customize.ps1"
 }
 
 if (Test-Path "${LOCAL_PATH}\customise.ps1") {
