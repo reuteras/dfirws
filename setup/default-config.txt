@@ -70,6 +70,8 @@ $WSDFIR_RIGHTCLICK="Yes"
 $WSDFIR_DARK="Yes"
 
 # Use oh-my-posh
+# There are problemes with Nerdfonts on some versions of Windows.
+# For me it works on Windows 11 23H2 but not on Windows 11 22H2.
 $WSDFIR_OHMYPOSH="No"
 $WSDFIR_FONT_DIRNAME = "Meslo"
 $WSDFIR_FONT_FILENAME_PREFIX = "MesloLGMNerdFont"
