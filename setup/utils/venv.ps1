@@ -29,6 +29,10 @@ param(
 
 $venv = "default"
 
+if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
+	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
+}
+
 if ($chepy) {
     $venv = "chepy"
 } elseif ($default) {

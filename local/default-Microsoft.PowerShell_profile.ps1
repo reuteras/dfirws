@@ -1,8 +1,3 @@
-# Always start with Python venv
-if ( Test-Path "C:\venv\default\Scripts\Activate.ps1" ) {
-    C:\venv\default\Scripts\Activate.ps1
-}
-
 . "${HOME}\Documents\tools\wscommon.ps1"
 
 # Source config files
@@ -77,6 +72,9 @@ if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 		Import-Module posh-git
 	}
 }
+
+# Always start with Python venv default
+venv.ps1
 
 # Add autocomplete for commands
 if (Test-Path "C:\Tools\cargo\autocomplete") {
