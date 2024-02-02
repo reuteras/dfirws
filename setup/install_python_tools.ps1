@@ -208,7 +208,8 @@ if ($INSTALL_JEP -eq "Yes") {
 
         poetry add `
             NumPy `
-            flare-capa >> "C:\log\python.txt"
+            flare-capa `
+            jep >> "C:\log\python.txt"
 
         # Build Ghidrathon for Gidhra
         Write-DateLog "Build Ghidrathon for Ghidra."
@@ -399,7 +400,7 @@ if ((Get-FileHash C:\git\scare\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_V
     Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
     Copy-Item C:\tmp\scare.txt "C:\venv\scare\scare.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
-    Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
+    Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe -- C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
     Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "scare already up to date." >> "C:\log\python.txt"
@@ -439,6 +440,7 @@ if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRE
 #
 
 & "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\chepy.txt"
+& "$PYTHON_BIN" -m pip index versions scapy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\chepy.txt"
 
 if (Test-Path "C:\venv\chepy\chepy.txt") {
     $CURRENT_VENV = "C:\venv\chepy\chepy.txt"
@@ -457,7 +459,8 @@ if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) 
         chepy[extras] 2>&1 >> "C:\log\python.txt"
     Copy-Item "${TEMP}\chepy.txt" "C:\venv\chepy\chepy.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
-    Set-Content "C:\venv\chepy\Scripts\python.exe C:\venv\chepy\Scripts\chepy.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\chepy.ps1"
+    Copy-Item "C:\venv\chepy\Scripts\chepy.exe" "C:\venv\default\Scripts\chepy.exe" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item "C:\venv\chepy\Scripts\scapy.exe" "C:\venv\default\Scripts\scapy.exe" -Force 2>&1 >> "C:\log\python.txt"
     Write-DateLog "Python venv chepy done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "chepy has not been updated, don't update chepy venv." >> "C:\log\python.txt"
@@ -487,7 +490,8 @@ poetry add `
     acquire `
     dissect `
     dissect.target[yara] `
-    flow.record >> "C:\log\python.txt"
+    flow.record `
+    geoip2 >> "C:\log\python.txt"
 
 deactivate
 Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
