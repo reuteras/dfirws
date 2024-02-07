@@ -12,7 +12,7 @@ function Wait-VMReady {
     vmrun.exe -T ws -gu dfirws -gp password  getGuestIPAddress "${VM_VMX}" -wait | Out-Null
 
     Write-Output "Waiting for the VM to be ready (interactive logon done)"
-    while ( vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWindow -interactive "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Write-Output Hi" 2>&1 | Select-String "Error" ) { 
+    while ( vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWindow -interactive "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Write-Output Hi" 2>&1 | Select-String "Error" ) {
         Start-Sleep 5
     }
 
