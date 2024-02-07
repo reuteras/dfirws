@@ -51,6 +51,8 @@ $repourls = `
     "https://github.com/swisscom/PowerSponse.git", `
     "https://github.com/thewhiteninja/deobshell.git", `
     "https://github.com/TrimarcJake/BlueTuxedo.git", `
+    "https://github.com/ufrisk/LeechCore.wiki.git", `
+    "https://github.com/ufrisk/MemProcFS.wiki.git", `
     "https://github.com/volexity/one-extract.git", `
     "https://github.com/volexity/threat-intel.git", `
     "https://github.com/wagga40/Zircolite.git", `
