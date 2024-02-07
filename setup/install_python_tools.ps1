@@ -1,12 +1,12 @@
 # Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+
+. "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
+
 $GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\" | findstr.exe PUBLIC | Select-Object -Last 1)
 
-
-. C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
-
-if (! (Test-Path "${TEMP}")) {
-    New-Item -ItemType Directory -Force -Path "${TEMP}" | Out-Null
+if (! (Test-Path "${WSDFIR_TEMP}")) {
+    New-Item -ItemType Directory -Force -Path "${WSDFIR_TEMP}" | Out-Null
 }
 
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
@@ -163,9 +163,9 @@ if ($INSTALL_JEP -eq "Yes") {
     #
 
     # Check if jep or ghidrathon has been updated
-    & "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\jep.txt
-    ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${TEMP}\jep.txt
-    $GHIDRA_INSTALL_DIR >> ${TEMP}\jep.txt
+    & "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\jep.txt
+    ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${WSDFIR_TEMP}\jep.txt
+    $GHIDRA_INSTALL_DIR >> ${WSDFIR_TEMP}\jep.txt
 
     if (Test-Path "C:\venv\jep\jep.txt") {
         $CURRENT_VENV = "C:\venv\jep\jep.txt"
@@ -178,16 +178,16 @@ if ($INSTALL_JEP -eq "Yes") {
 
         # Install Visual Studio Build Tools for jep
         #Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
-        #Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${TEMP}\vs_BuildTools.exe"
-        #Set-Location ${TEMP}
+        #Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${WSDFIR_TEMP}\vs_BuildTools.exe"
+        #Set-Location ${WSDFIR_TEMP}
         #Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
         #Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
         #& 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
 
         # Install Java for jep
         #Write-DateLog "Start installation of Corretto Java." 2>&1 >> "C:\log\python.txt"
-        #Copy-Item "${SETUP_PATH}\corretto.msi" "${TEMP}\corretto.msi"
-        #Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\corretto.msi /qn /norestart"
+        #Copy-Item "${SETUP_PATH}\corretto.msi" "${WSDFIR_TEMP}\corretto.msi"
+        #Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\corretto.msi /qn /norestart"
         #Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
         #$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
@@ -213,16 +213,16 @@ if ($INSTALL_JEP -eq "Yes") {
 
         # Build Ghidrathon for Gidhra
         Write-DateLog "Build Ghidrathon for Ghidra."
-        Copy-Item -Recurse "${TOOLS}\ghidrathon" "${TEMP}"
-        Set-Location "${TEMP}\ghidrathon"
+        Copy-Item -Recurse "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
+        Set-Location "${WSDFIR_TEMP}\ghidrathon"
         #& "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
         python -m pip install -r requirements.txt >> "C:\log\python.txt"
         python ghidrathon_configure.py "${GHIDRA_INSTALL_DIR}" >> "C:\log\python.txt"
         if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
             New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
         }
-        Copy-Item ${TEMP}\ghidrathon\dist\ghidra* "${TOOLS}\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
-        Copy-Item ${TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
+        Copy-Item ${WSDFIR_TEMP}\ghidrathon\dist\ghidra* "${TOOLS}\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
+        Copy-Item ${WSDFIR_TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
     } else {
@@ -234,7 +234,7 @@ if ($INSTALL_JEP -eq "Yes") {
 #
 # venv dfir-unfurl
 #
-& "$PYTHON_BIN" -m pip index versions dfir-unfurl 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${TEMP}\dfir-unfurl.txt
+& "$PYTHON_BIN" -m pip index versions dfir-unfurl 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\dfir-unfurl.txt
 
 if (Test-Path "C:\venv\dfir-unfurl\dfir-unfurl.txt") {
     $CURRENT_VENV = "C:\venv\dfir-unfurl\dfir-unfurl.txt"
@@ -275,7 +275,7 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
         $baseHtmlContent = $baseHtmlContent.Replace($url.Value, "/static/$fileName")
     }
     Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
-    Copy-Item ${TEMP}\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item ${WSDFIR_TEMP}\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_app.ps1"
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_cli.ps1"
@@ -439,8 +439,8 @@ if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRE
 # venv chepy
 #
 
-& "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\chepy.txt"
-& "$PYTHON_BIN" -m pip index versions scapy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\chepy.txt"
+& "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\chepy.txt"
+& "$PYTHON_BIN" -m pip index versions scapy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\chepy.txt"
 
 if (Test-Path "C:\venv\chepy\chepy.txt") {
     $CURRENT_VENV = "C:\venv\chepy\chepy.txt"
@@ -457,7 +457,7 @@ if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) 
     python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
     python -m pip install `
         chepy[extras] 2>&1 >> "C:\log\python.txt"
-    Copy-Item "${TEMP}\chepy.txt" "C:\venv\chepy\chepy.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item "${WSDFIR_TEMP}\chepy.txt" "C:\venv\chepy\chepy.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Copy-Item "C:\venv\chepy\Scripts\chepy.exe" "C:\venv\default\Scripts\chepy.exe" -Force 2>&1 >> "C:\log\python.txt"
     Copy-Item "C:\venv\chepy\Scripts\scapy.exe" "C:\venv\default\Scripts\scapy.exe" -Force 2>&1 >> "C:\log\python.txt"
@@ -527,7 +527,7 @@ Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 # venv ghidrecomp
 #
 
-& "$PYTHON_BIN" -m pip index versions ghidrecomp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\ghidrecomp.txt"
+& "$PYTHON_BIN" -m pip index versions ghidrecomp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\ghidrecomp.txt"
 
 if (Test-Path "C:\venv\ghidrecomp\ghidrecomp.txt") {
     $CURRENT_VENV = "C:\venv\ghidrecomp\ghidrecomp.txt"
@@ -554,7 +554,7 @@ if ((Get-FileHash C:\tmp\ghidrecomp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).H
     poetry add `
         ghidrecomp 2>&1 >> "C:\log\python.txt"
 
-    Copy-Item "${TEMP}\ghidrecomp.txt" "C:\venv\ghidrecomp\ghidrecomp.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item "${WSDFIR_TEMP}\ghidrecomp.txt" "C:\venv\ghidrecomp\ghidrecomp.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv ghidrecomp done." >> "C:\log\python.txt"
 } else {
@@ -565,7 +565,7 @@ if ((Get-FileHash C:\tmp\ghidrecomp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).H
 # venv sigma-cli
 #
 
-& "$PYTHON_BIN" -m pip index versions sigma-cli 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${TEMP}\sigma-cli.txt"
+& "$PYTHON_BIN" -m pip index versions sigma-cli 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\sigma-cli.txt"
 
 if (Test-Path "C:\venv\sigma-cli\sigma-cli.txt") {
     $CURRENT_VENV = "C:\venv\sigma-cli\sigma-cli.txt"
@@ -592,7 +592,7 @@ if ((Get-FileHash C:\tmp\sigma-cli.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
     poetry add `
         sigma-cli 2>&1 >> "C:\log\python.txt"
 
-    Copy-Item "${TEMP}\sigma-cli.txt" "C:\venv\sigma-cli\sigma-cli.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item "${WSDFIR_TEMP}\sigma-cli.txt" "C:\venv\sigma-cli\sigma-cli.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv sigma-cli done." >> "C:\log\python.txt"
 } else {

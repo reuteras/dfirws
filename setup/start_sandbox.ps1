@@ -11,14 +11,14 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # Create required directories
-foreach ($dir in @("${TEMP}", "${DATA}", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${HOME}\Documents\jupyter")) {
+foreach ($dir in @("${WSDFIR_TEMP}", "${DATA}", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${HOME}\Documents\jupyter")) {
     if (-not (Test-Path -Path $dir)) {
         New-Item -ItemType Directory -Path $dir | Out-Null
     }
 }
 
-Write-DateLog "Start sandbox setup" | Tee-Object -FilePath "${TEMP}\start_sandbox.log"
-Write-DateLog "Save env to C:\tmp\env.txt" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Start sandbox setup" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
+Write-DateLog "Save env to C:\tmp\env.txt" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 Get-ChildItem env: | Out-File -FilePath "C:\tmp\env.txt" -Encoding "utf8"
 Write-Output "$env:Path" | Out-File -FilePath "C:\tmp\path.txt" -Encoding "utf8"
 
@@ -26,17 +26,17 @@ Write-Output "$env:Path" | Out-File -FilePath "C:\tmp\path.txt" -Encoding "utf8"
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
 # Copy config files and import them
-if (-not (Test-Path "${TEMP}\default-config.ps1")) {
-    Copy-Item "${HOME}\Documents\tools\default-config.txt" "${TEMP}\default-config.ps1" -Force
+if (-not (Test-Path "${WSDFIR_TEMP}\default-config.ps1")) {
+    Copy-Item "${HOME}\Documents\tools\default-config.txt" "${WSDFIR_TEMP}\default-config.ps1" -Force
 }
 
-if (-not (Test-Path "${TEMP}\config.ps1")) {
-    Copy-Item "${HOME}\Documents\tools\config.txt" "${TEMP}\config.ps1" -Force
+if (-not (Test-Path "${WSDFIR_TEMP}\config.ps1")) {
+    Copy-Item "${HOME}\Documents\tools\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
 }
 
-. "${TEMP}\default-config.ps1"
-. "${TEMP}\config.ps1"
-Write-DateLog "Config files copied and imported" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+. "${WSDFIR_TEMP}\default-config.ps1"
+. "${WSDFIR_TEMP}\config.ps1"
+Write-DateLog "Config files copied and imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # PowerShell
 if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
@@ -62,78 +62,78 @@ Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter
 Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force
 
 # Install latest PowerShell
-Copy-Item   "${SETUP_PATH}\powershell.msi" "${TEMP}\powershell.msi" -Force
-Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\powershell.msi /qn /norestart"
-Write-DateLog "PowerShell installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Copy-Item   "${SETUP_PATH}\powershell.msi" "${WSDFIR_TEMP}\powershell.msi" -Force
+Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\powershell.msi /qn /norestart"
+Write-DateLog "PowerShell installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install 7-Zip
-Copy-Item "${SETUP_PATH}\7zip.msi" "${TEMP}\7zip.msi" -Force
-Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\7zip.msi /qn /norestart"
-Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Copy-Item "${SETUP_PATH}\7zip.msi" "${WSDFIR_TEMP}\7zip.msi" -Force
+Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\7zip.msi /qn /norestart"
+Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Always install common Java.
-Copy-Item "${SETUP_PATH}\corretto.msi" "${TEMP}\corretto.msi" -Force
-Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\corretto.msi /qn /norestart"
-Write-DateLog "Java installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Copy-Item "${SETUP_PATH}\corretto.msi" "${WSDFIR_TEMP}\corretto.msi" -Force
+Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\corretto.msi /qn /norestart"
+Write-DateLog "Java installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Python
 & "${SETUP_PATH}\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
-Write-DateLog "Python installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Python installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Visual C++ Redistributable 16 and 17
 Start-Process -Wait "${SETUP_PATH}\vcredist_16_x64.exe" -ArgumentList "/passive /norestart"
 Start-Process -Wait "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
-Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install .NET 6
 Start-Process -Wait "${SETUP_PATH}\dotnet6.exe" -ArgumentList "/install /quiet /norestart"
-Write-DateLog ".NET 6 installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog ".NET 6 installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install HxD
-Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${TEMP}\HxDSetup.exe" -Force
-& "${TEMP}\HxDSetup.exe" /VERYSILENT /NORESTART
-Write-DateLog "HxD installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${WSDFIR_TEMP}\HxDSetup.exe" -Force
+& "${WSDFIR_TEMP}\HxDSetup.exe" /VERYSILENT /NORESTART
+Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Notepad++ and ComparePlus plugin
-Copy-Item "${SETUP_PATH}\notepad++.exe" "${TEMP}\notepad++.exe" -Force
-& "${TEMP}\notepad++.exe" /S  | Out-Null
+Copy-Item "${SETUP_PATH}\notepad++.exe" "${WSDFIR_TEMP}\notepad++.exe" -Force
+& "${WSDFIR_TEMP}\notepad++.exe" /S  | Out-Null
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
-Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install NEO4J
 if ("${WSDFIR_NEO4J}" -eq "Yes") {
     Install-Neo4j
-    Write-DateLog "Neo4j installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Neo4j installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install LibreOffice with custom arguments
 if ("${WSDFIR_LIBREOFFICE}" -eq "Yes") {
     Install-LibreOffice
-    Write-DateLog "LibreOffice installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "LibreOffice installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Git if specified
 if ("${WSDFIR_GIT}" -eq "Yes") {
     Install-GitBash
-    Write-DateLog "Git installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Git installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install PDFStreamDumper if specified
 if ("${WSDFIR_PDFSTREAM}" -eq "Yes") {
     Install-PDFStreamDumper
-    Write-DateLog "PDFStreamDumper installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "PDFStreamDumper installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Visual Studio Code and PowerShell extension if specified
 if ("${WSDFIR_VSCODE}" -eq "Yes") {
     Install-VSCode
-    Write-DateLog "Visual Studio Code installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Visual Studio Code installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Zui if specified
 if ("${WSDFIR_ZUI}" -eq "Yes") {
     Install-Zui
-    Write-DateLog "Zui installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Zui installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Set date and time format
@@ -141,18 +141,18 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortDate -val
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sLongDate -value "yyyy-MMMM-dddd" | Out-Null
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortTime -value "HH:mm" | Out-Null
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sTimeFormat -value "HH:mm:ss" | Out-Null
-Write-DateLog "Date and time format set" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Date and time format set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Dark mode
 if ("${WSDFIR_DARK}" -eq "Yes") {
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0 | Out-Null
     New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++" -ItemType Directory -Force | Out-Null
     Copy-Item "${env:USERPROFILE}\Documents\tools\configurations\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
-    Write-DateLog "Dark mode set" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Dark mode set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Show file extensions
-Write-DateLog "Show file extensions" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Show file extensions" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 {
     reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f
     reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\HideFileExt /v DefaultValue /t REG_DWORD /d 0 /f
@@ -162,24 +162,24 @@ Write-DateLog "Show file extensions" | Tee-Object -FilePath "${TEMP}\start_sandb
     reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowSuperHidden /t REG_DWORD /d 1 /f
     reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v DontPrettyPath /t REG_DWORD /d 1 /f
 } | Out-Null
-Write-DateLog "File extensions shown" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "File extensions shown" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Add right-click context menu if specified
 if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve | Out-Null
-    Write-DateLog "Right-click context menu added" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Right-click context menu added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Import registry settings
 reg import "${HOME}\Documents\tools\registry.reg" | Out-Null
-Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Restart Explorer process
 Stop-Process -ProcessName "Explorer" -Force
-Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Add to PATH
-Write-DateLog "Add to PATH" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 Add-ToUserPath "${env:ProgramFiles}\4n4lDetector"
 Add-ToUserPath "${env:ProgramFiles}\7-Zip"
@@ -282,7 +282,7 @@ Add-ToUserPath "${HOME}\Documents\tools\utils"
 $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
 Add-ToUserPath "${TOOLS}\ghidra\${GHIDRA_INSTALL_DIR}"
 
-Write-DateLog "Added to PATH" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Added to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 Write-Output "$env:Path" | Out-File -FilePath "C:\tmp\path_updated.txt" -Encoding "utf8"
 
 # Shortcut for PowerShell
@@ -291,18 +291,18 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env
 # Copy tools
 Copy-Item -Force "${SETUP_PATH}\BeaconHunter.exe" "${env:ProgramFiles}\bin"
 Copy-Item -Recurse -Force "${GIT_PATH}\IDR" "${env:ProgramFiles}"
-Write-DateLog "Tools copied" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Tools copied" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Add jadx
 if ("${WSDFIR_JADX}" -eq "Yes") {
     Install-Jadx
-    Write-DateLog "jadx added" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "jadx added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Add x64dbg if specified
 if ("${WSDFIR_X64DBG}" -eq "Yes") {
     Install-X64dbg
-    Write-DateLog "x64dbg added" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "x64dbg added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Configure PowerShell logging
@@ -312,7 +312,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\Po
 # Add cmder
 if ("${WSDFIR_CMDER}" -eq "Yes") {
     Install-CMDer
-    Write-DateLog "cmder added" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "cmder added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Add PersistenceSniper
@@ -321,7 +321,7 @@ Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.
 # Add apimonitor
 if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
     Install-Apimonitor
-    Write-DateLog "apimonitor added" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "apimonitor added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Configure usage of new venv for PowerShell
@@ -329,11 +329,11 @@ if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
     ForEach-Object {
         Write-Output "function $_() { python ${VENV}\default\Scripts\$_ `$PsBoundParameters.Values + `$args }"
     } | Out-File -Append -Encoding "ascii" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile_2.ps1"
-Write-DateLog "New venv configured for PowerShell" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "New venv configured for PowerShell" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Signal that everything is done to start using the tools (mostly).
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
-Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Run install script for choco packages
 if ("${WSDFIR_CHOCO}" -eq "Yes") {
@@ -344,25 +344,25 @@ if ("${WSDFIR_CHOCO}" -eq "Yes") {
 # Setup Node.js
 if ("${WSDFIR_NODE}" -eq "Yes") {
     Install-Node
-    Write-DateLog "Node.js installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Node.js installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Setup Obsidian
 if ("${WSDFIR_OBSIDIAN}" -eq "Yes") {
     Install-Obsidian
-    Write-DateLog "Obsidian installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Obsidian installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Qemu
 if ("${WSDFIR_QEMU}" -eq "Yes") {
     Install-Qemu
-    Write-DateLog "Qemu installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Qemu installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install extra tools for Git-bash
 if ("${WSDFIR_BASH_EXTRA}" -eq "Yes") {
     Install-BashExtra
-    Write-DateLog "Extra tools for Git-bash installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Extra tools for Git-bash installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Set Notepad++ as default for many file types
@@ -375,7 +375,7 @@ cmd /q /c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /q /c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /q /c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
 cmd /q /c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Last commands
 if ("${WSDFIR_W10_LOOPBACK}" -eq "Yes") {
@@ -385,25 +385,25 @@ if ("${WSDFIR_W10_LOOPBACK}" -eq "Yes") {
 # Install Kape
 if ("${WSDFIR_KAPE}" -eq "Yes") {
     Install-Kape
-    Write-DateLog "Kape installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Kape installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Loki
 if ("${WSDFIR_LOKI}" -eq "Yes") {
     Install-Loki
-    Write-DateLog "Loki installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Loki installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install malcat
 if ("${WSDFIR_MALCAT}" -eq "Yes") {
     Install-Malcat
-    Write-DateLog "malcat installed" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "malcat installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Clean up
 Remove-Item "${HOME}\Desktop\PdfStreamDumper.exe.lnk"
 
-Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 # Create directory for shortcuts to installed tools
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws" | Out-Null
 
@@ -966,7 +966,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\TimelineExplorer.lnk" 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\VSCMount.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\VSCMount.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\WxTCmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\WxTCmd.exe"
 
-Write-DateLog "Creating shortcuts in ${HOME}\Desktop\dfirws done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Creating shortcuts in ${HOME}\Desktop\dfirws done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Pin to explorer
 $shell = new-object -com "Shell.Application"
@@ -976,13 +976,13 @@ $verb = ${item}.Verbs() | Where-Object { $_.Name -eq 'Pin to Quick access' }
 if ("${verb}") {
     ${verb}.DoIt()
 }
-Write-DateLog "Pinning ${HOME}\Desktop\dfirws to explorer done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Pinning ${HOME}\Desktop\dfirws to explorer done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 & "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy Bypass"
-Write-DateLog "Setting execution policy to Bypass done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Setting execution policy to Bypass done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 & "${SETUP_PATH}\graphviz.exe" /S /D="${env:ProgramFiles}\graphviz"
-Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Add plugins to Cutter
 New-Item -ItemType Directory -Force -Path "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
@@ -992,25 +992,25 @@ Copy-Item "${GIT_PATH}\cutterref\cutterref.py" "${HOME}\AppData\Roaming\rizin\cu
 Copy-Item -Recurse "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
 Copy-Item -Recurse "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
 Copy-Item -Recurse "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python"
-Write-DateLog "Installing Cutter plugins done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Installing Cutter plugins done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Unzip yara signatures
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\yara-forge-rules-core.zip" -o"${DATA}" | Out-Null
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\yara-forge-rules-extended.zip" -o"${DATA}" | Out-Null
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\yara-forge-rules-full.zip" -o"${DATA}" | Out-Null
 Copy-Item "${DATA}\packages\full\yara-rules-full.yar" "${DATA}\total.yara" -Force
-Write-DateLog "Unzipping signatures for yara done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Unzipping signatures for yara done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Start sysmon when installation is done
 if ("${WSDFIR_SYSMON}" -eq "Yes") {
     & "${TOOLS}\sysinternals\Sysmon64.exe" -accepteula -i "${WSDFIR_SYSMON_CONF}" | Out-Null
 }
-Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Start Gollum for local wiki
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
 Start-Process "${env:ProgramFiles}\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar ${TOOLS}\lib\gollum.war -S gollum --lenient-tag-lookup ${GIT_PATH}\dfirws.wiki" -WindowStyle Hidden
-Write-DateLog "Starting Gollum for local wiki done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Starting Gollum for local wiki done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Don't ask about new apps
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1 | Out-Null
@@ -1018,7 +1018,7 @@ REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "No
 # Install hashcat
 if ("${WSDFIR_HASHCAT}" -eq "Yes") {
     Install-Hashcat
-    Write-DateLog "Installing hashcat done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Installing hashcat done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Add shortcuts to desktop for Jupyter and Gollum
@@ -1033,15 +1033,15 @@ if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
 # Run custom scripts
 if (Test-Path "${LOCAL_PATH}\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1"
-    Write-DateLog "Running customize scripts done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Running customize scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 } else {
-    Write-DateLog "No customize scripts found running example-customize.ps1." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "No customize scripts found running example-customize.ps1." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\example-customize.ps1"
 }
 
 if (Test-Path "${LOCAL_PATH}\customise.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1"
-    Write-DateLog "Running customise scripts done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Running customise scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Copy and extract files that need be in writeable locations
@@ -1057,4 +1057,4 @@ Copy-Item -Recurse "${TOOLS}\Zimmerman\TimelineExplorer" "${env:ProgramFiles}\" 
 Copy-Item -Recurse "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\" -Force
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 
-Write-DateLog "Installation done." | Tee-Object -FilePath "${TEMP}\start_sandbox.log" -Append
+Write-DateLog "Installation done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append

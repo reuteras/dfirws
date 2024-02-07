@@ -5,10 +5,10 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # This script runs in a Windows sandbox to install node tools.
 Write-DateLog "Install npm packages" 2>&1 >> "C:\log\npm.txt"
 
-New-Item -ItemType Directory "${TEMP}" 2>&1 | Out-Null
+New-Item -ItemType Directory "${WSDFIR_TEMP}" 2>&1 | Out-Null
 
-Copy-Item "${SETUP_PATH}\7zip.msi" "${TEMP}\7zip.msi"
-Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\7zip.msi /qn /norestart"
+Copy-Item "${SETUP_PATH}\7zip.msi" "${WSDFIR_TEMP}\7zip.msi"
+Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\7zip.msi /qn /norestart"
 Get-Job | Receive-Job
 
 Write-Output "Get-Content C:\log\npm.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"

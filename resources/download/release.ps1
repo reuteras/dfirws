@@ -1,4 +1,4 @@
-. $PSScriptRoot\common.ps1
+. "${PSScriptRoot}\common.ps1"
 
 New-Item -ItemType Directory -Force -Path ${TOOLS}\bin > $null
 New-Item -ItemType Directory -Force -Path ${TOOLS}\lib > $null

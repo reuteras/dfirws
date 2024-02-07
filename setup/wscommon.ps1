@@ -8,6 +8,7 @@ $PDFSTREAMDUMPER_PATH = "C:\Sandsprite\PDFStreamDumper"
 $RUST_DIR = "C:\Rust"
 $SETUP_PATH = "C:\downloads"
 $TEMP = "C:\tmp"
+$WSDFIR_TEMP = "C:\tmp"
 $TOOLS = "C:\Tools"
 $VENV = "C:\venv"
 $POWERSHELL_EXE = "${env:ProgramFiles}\PowerShell\7\pwsh.exe"
@@ -17,6 +18,7 @@ $null="${GIT_PATH}"
 $null="${LOCAL_PATH}"
 $null="${PDFSTREAMDUMPER_PATH}"
 $null="${RUST_DIR}"
+$null="${WSDFIR_TEMP}"
 
 # Declare helper functions
 

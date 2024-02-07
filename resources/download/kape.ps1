@@ -1,6 +1,6 @@
 # Install and update kape if kape.zip is present
 
-. $PSScriptRoot\common.ps1
+. "${PSScriptRoot}\common.ps1"
 
 if (test-path .\local\kape.zip) {
     Write-DateLog "kape.zip found. Will add and update Kape for dfirws."

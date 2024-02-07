@@ -5,7 +5,7 @@ param (
 $ScriptRoot = "$ScriptRoot\resources\download"
 ${ROOT_PATH} = Resolve-Path "$ScriptRoot\..\..\"
 
-. $ScriptRoot\common.ps1
+. "${ScriptRoot}\common.ps1"
 
 Write-DateLog "Setup Node and install npm packages in Sandbox." > ${ROOT_PATH}\log\npm.txt
 Write-DateLog "" > ${ROOT_PATH}\log\npm.txt

@@ -3,7 +3,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 
-if (! (Test-Path "${TEMP}")) {
+if (! (Test-Path "${WSDFIR_TEMP}")) {
     New-Item -ItemType Directory -Force -Path "${TEMP}" | Out-Null
 }
 
