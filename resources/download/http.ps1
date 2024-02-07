@@ -314,7 +314,7 @@ if (Test-Path -Path ${TOOLS}\hashcat) {
 Move-Item ${TOOLS}\hashcat-* ${TOOLS}\hashcat
 
 # ELK
-$ELK_VERSION = "8.12.0"
+$ELK_VERSION = "8.12.1"
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
 Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes"
 Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes"
