@@ -79,6 +79,9 @@ Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy32.zip" -match
 Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy64.zip" -match win64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dnSpy64.zip" -o"${TOOLS}\dnSpy64" | Out-Null
 
+# Dokany - available for manual installation
+Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.zip" -match Dokan_x64.msi
+
 # mboxviewer
 Get-GitHubRelease -repo "eneam/mboxviewer" -path "${SETUP_PATH}\mboxviewer.zip" -match mbox-viewer.exe
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mboxviewer.zip" -o"${TOOLS}\mboxviewer" | Out-Null
@@ -330,7 +333,7 @@ Get-GitHubRelease -repo "rizinorg/cutter" -path "${SETUP_PATH}\cutter.zip" -matc
 if (Test-Path "${TOOLS}\cutter") {
     Remove-Item "${TOOLS}\cutter" -Recurse -Force
 }
-Move-Item ${TOOLS}\cutter-* ${TOOLS}\cutter
+Move-Item ${TOOLS}\Cutter-* ${TOOLS}\cutter
 
 # MesloLGS NF font - installed during start
 Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Meslo.zip" -match Meslo.zip
@@ -374,6 +377,10 @@ Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP
 # Thumbcacheviewer
 Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "${SETUP_PATH}\thumbcacheviewer.zip" -match viewer_64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\thumbcacheviewer.zip" -o"${TOOLS}\thumbcacheviewer" | Out-Null
+
+# MemProcFS
+Get-GitHubRelease -repo "ufrisk/MemProcFS" -path "${SETUP_PATH}\memprocfs.zip" -match win_x64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\memprocfs.zip" -o"${TOOLS}\MemProcFS" | Out-Null
 
 # upx
 Get-GitHubRelease -repo "upx/upx" -path "${SETUP_PATH}\upx.zip" -match win64
