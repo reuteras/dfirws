@@ -46,7 +46,7 @@ if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
 }
 
 if (! (Test-Path -Path ".\config.ps1")) {
-    Copy-Item ".\config.ps1.template" ".\config.ps1"
+    Copy-Item ".\config.ps1.template" ".\config.ps1" -Force
     Write-DateLog "INFO: config.ps1 not found. Created new from default config.ps1.template. Please check values."
 }
 
@@ -200,7 +200,7 @@ Copy-Item "README.md" ".\downloads\" -Force
 Copy-Item ".\resources\images\dfirws.jpg" .\downloads\ -Force
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force
 foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name | findstr PUBLIC) {
-    Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts"
+    Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
 }
 # done.txt is used to check last update in sandbox
 Write-Output "" > ".\downloads\done.txt"
