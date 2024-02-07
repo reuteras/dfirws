@@ -230,6 +230,9 @@ Remove-Item -Recurse -Force ${TOOLS}\ntemp | Out-Null 2>&1
 
 Remove-Item -Force ${TOOLS}\nirsoft\readme.txt | Out-Null 2>&1
 
+# Get winpmem
+Get-FileFromUri -uri "https://github.com/Velocidex/c-aff4/raw/master/tools/pmem/resources/winpmem/winpmem_64.sys" -FilePath ".\downloads\winpmem_64.sys"
+
 # Update the links below when new versions are released
 
 # https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start
