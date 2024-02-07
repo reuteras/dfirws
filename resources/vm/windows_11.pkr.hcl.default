@@ -1,0 +1,163 @@
+
+variable "autounattend" {
+  type    = string
+  default = "./resources/vm/answer_files/Autounattend.xml"
+}
+
+variable "disk_size" {
+  type    = string
+  default = "300000"
+}
+
+variable "disk_type_id" {
+  type    = string
+  default = "1"
+}
+
+variable "headless" {
+  type    = string
+  default = "false"
+}
+
+variable "username" {
+  type    = string
+  default = "dfirws"
+}
+
+variable "password" {
+  type    = string
+  default = "password"
+}
+
+variable "iso_checksum" {
+  type    = string
+  default = "sha256:ISO_HASH"
+}
+
+variable "iso_url_local" {
+  type    = string
+  default = "iso/ISO_FILENAME"
+}
+
+variable "iso_url_remote" {
+  type    = string
+  default = "ISO_LINK"
+}
+
+variable "memory" {
+  type    = string
+  default = "16384"
+}
+
+variable "restart_timeout" {
+  type    = string
+  default = "5m"
+}
+
+variable "vhv_enable" {
+  type    = string
+  default = "false"
+}
+
+variable "virtio_win_iso" {
+  type    = string
+  default = "~/virtio-win.iso"
+}
+
+variable "vm_name" {
+  type    = string
+  default = "Windows_11_dfirws_64-bit"
+}
+
+variable "winrm_timeout" {
+  type    = string
+  default = "6h"
+}
+
+source "vmware-iso" "windows_11" {
+  boot_command      = [ "a<wait>a<wait>a" ]
+  boot_wait         = "-1s"
+  communicator      = "winrm"
+  cpus              = 4
+  disk_adapter_type = "lsisas1068"
+  disk_size         = "${var.disk_size}"
+  disk_type_id      = "${var.disk_type_id}"
+  floppy_files      = [
+                        "${var.autounattend}",
+                        "./resources/vm/scripts/fixnetwork.ps1",
+                        "./resources/vm/scripts/disable-defender.ps1",
+                        "./resources/vm/scripts/disable-screensaver.ps1",
+                        "./resources/vm/scripts/disable-winrm.ps1",
+                        "./resources/vm/scripts/enable-winrm.ps1",
+                        "./resources/vm/scripts/microsoft-updates.bat",
+                        "./resources/vm/scripts/win-updates.ps1"
+                    ]
+  guest_os_type     = "windows11-64"
+  headless          = "${var.headless}"
+  iso_checksum      = "${var.iso_checksum}"
+  iso_urls          = [
+                        "${var.iso_url_local}",
+                        "${var.iso_url_remote}"
+                    ]
+  memory            = "${var.memory}"
+  output_directory  = "Windows_11_dfirws_64-bit.vmwarevm"
+  shutdown_command  = "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\""
+  version           = 21
+  vm_name           = "${var.vm_name}"
+  vmx_data          = {
+                        "RemoteDisplay.vnc.enabled" = "false"
+                        "RemoteDisplay.vnc.port"    = "5900"
+                        "Firmware"                  = "efi"
+                        "Annotation"                = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.username}|0D|0APassword: ${var.password}|0D|0A|0D|0AWindows 11 with dfirws installed.",
+                    }
+  vnc_port_max                   = 5980
+  vnc_port_min                   = 5900
+  winrm_username                 = "${var.username}"
+  winrm_password                 = "${var.password}"
+  winrm_timeout                  = "${var.winrm_timeout}"
+}
+
+build {
+  sources = ["source.vmware-iso.windows_11"]
+
+  provisioner "windows-shell" {
+    execute_command = "{{ .Vars }} cmd /c \"{{ .Path }}\""
+    remote_path     = "/tmp/script.bat"
+    scripts         = ["./resources/vm/scripts/enable-rdp.bat"]
+  }
+
+  provisioner "powershell" {
+    scripts = ["./resources/vm/scripts/vm-guest-tools.ps1"]
+  }
+
+  provisioner "windows-restart" {
+    restart_timeout = "${var.restart_timeout}"
+  }
+
+  provisioner "powershell" {
+    scripts = ["./resources/vm/scripts/set-powerplan.ps1"]
+  }
+
+  provisioner "windows-shell" {
+    execute_command = "{{ .Vars }} cmd /c \"{{ .Path }}\""
+    remote_path     = "/tmp/script.bat"
+    scripts         = [
+      "./resources/vm/scripts/compile-dotnet-assemblies.bat",
+      "./resources/vm/scripts/set-winrm-automatic.bat"
+    ]
+  }
+
+  post-processor "shell-local" {
+    inline = ["vmrun -T ws snapshot Windows_11_dfirws_64-bit.vmwarevm/Windows_11_dfirws_64-bit.vmx Installed"]
+  }
+}
+
+packer {
+  required_version = ">= 1.7.0"
+  required_plugins {
+    vmware = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/vmware"
+    }
+  }
+}
