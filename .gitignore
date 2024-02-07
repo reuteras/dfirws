@@ -9,7 +9,6 @@ local/*
 !local/.zshrc.default
 !local/example-customize.ps1
 !local/default-Microsoft.PowerShell_profile.ps1
-!local/PowerShell.lnk
 log/*
 mount/*
 readonly/*
@@ -18,10 +17,8 @@ setup/config.txt
 tmp/*
 tools_downloaded.csv
 *.wsb
-vm/floppy
-vm/packer_cache
-vm/iso/*
-!vm/iso/.keepme
-vm/tmp/*
-vm/Windows_11_dfirws_64-bit.vmwarevm
-vm/windows_11.pkr.hcl
+packer_cache
+iso/*
+!iso/.keepme
+Windows_11_dfirws_64-bit.vmwarevm
+windows_11.pkr.hcl
