@@ -18,7 +18,9 @@ $networkListManager = [Activator]::CreateInstance([Type]::GetTypeFromCLSID([Guid
 $connections = $networkListManager.GetNetworkConnections()
 
 $connections |ForEach-Object {
-	Write-Output $_.GetNetwork().GetName()"category was previously set to"$_.GetNetwork().GetCategory()
+	$status = $_.GetNetwork().GetName() + "category was previously set to" + $_.GetNetwork().GetCategory()
+	Write-Output "$status"
 	$_.GetNetwork().SetCategory(1)
-	Write-Output $_.GetNetwork().GetName()"changed to category"$_.GetNetwork().GetCategory()
+	$status = $_.GetNetwork().GetName() + "changed to category" + $_.GetNetwork().GetCategory()
+	Write-Output "$status"
 }
