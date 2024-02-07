@@ -20,7 +20,7 @@ $env:PATH_TO_FX = "C:\Tools\javafx-sdk\lib"
 $env:POSH_THEMES_PATH = "${HOME}\AppData\Local\Programs\oh-my-posh\themes"
 $env:PSModulePath = "$env:PSModulePath;C:\Downloads\powershell-modules"
 # Find last version of Ghidra
-$env:GHIDRA_INSTALL_DIR = (Get-ChildItem C:\Tools\ghidra\ | Select-String PUBLIC -Raw | Select-Object -Last 1)
+$env:GHIDRA_INSTALL_DIR = (Get-ChildItem C:\Tools\ghidra\ | findstr.exe PUBLIC | Select-Object -Last 1)
 
 # Autosuggestions with PSReadLine
 if (-not(Get-Module -ListAvailable PSReadLine)) {
@@ -28,7 +28,7 @@ if (-not(Get-Module -ListAvailable PSReadLine)) {
 }
 
 # History
-Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionSource History 2>&1 | Out-Null
 
 # https://techcommunity.microsoft.com/t5/itops-talk-blog/autocomplete-in-powershell/ba-p/2604524
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
@@ -61,9 +61,9 @@ if (-not(Test-Path "${HOME}\tmp")) {
 
 if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
-	oh-my-posh init pwsh --config "${env:USERPROFILE}\Documents\tools\configurations\powerlevel10k_rainbow.omp.json" > "${HOME}\tmp\oh-my-posh-init.ps1"
+	& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${env:USERPROFILE}\Documents\tools\configurations\powerlevel10k_rainbow.omp.json" > "${HOME}\tmp\oh-my-posh-init.ps1"
 	& "${HOME}\tmp\oh-my-posh-init.ps1"
-	& oh-my-posh completion powershell > "${HOME}\tmp\oh-my-posh-completion.ps1"
+	& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" completion powershell > "${HOME}\tmp\oh-my-posh-completion.ps1"
 	& "${HOME}\tmp\oh-my-posh-completion.ps1"
 	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
 
@@ -74,7 +74,7 @@ if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 }
 
 # Always start with Python venv default
-venv.ps1
+& "venv.ps1"
 
 # Add autocomplete for commands
 if (Test-Path "C:\Tools\cargo\autocomplete") {
@@ -96,7 +96,7 @@ function Copy-Fakenet {
 		New-Item -ItemType Directory "$DestinationPath"
 	}
 
-	Copy-Item -r C:\Tools\fakenet\ "$DestinationPath"
+	Copy-Item -r C:\Tools\fakenet\ "$DestinationPath" -Force
 }
 
 function Copy-Node {
@@ -108,7 +108,7 @@ function Copy-Node {
 		New-Item -ItemType Directory "$DestinationPath"
 	}
 
-	Copy-Item -r C:\Tools\node "$DestinationPath"
+	Copy-Item -r C:\Tools\node "$DestinationPath" -Force
 }
 
 function Restore-Quarantine {
@@ -129,10 +129,10 @@ function Restore-Quarantine {
 			Write-Output "Zip file didn't contain directory Quarantine."
 			return
 		}
-		Copy-Item -r "C:\tmp\Quarantine" "C:\ProgramData\Microsoft\Windows Defender"
+		Copy-Item -r "C:\tmp\Quarantine" "C:\ProgramData\Microsoft\Windows Defender" -Force
 		return
 	} elseif (Test-Path "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine" ) {
-		Copy-Item -r "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine" "C:\ProgramData\Microsoft\Windows Defender"
+		Copy-Item -r "C:\Users\WDAGUtilityAccount\Desktop\readonly\Quarantine" "C:\ProgramData\Microsoft\Windows Defender" -Force
 		return
 	}
 
