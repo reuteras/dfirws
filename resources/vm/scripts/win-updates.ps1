@@ -168,7 +168,7 @@ function Install-WindowsUpdate() {
     Invoke-ContinueRestartOrEnd
 }
 
-function Invoke-WindowsUpdates() {
+function Invoke-WindowsUpdate() {
     LogWrite "Checking For Windows Updates"
     $Username = $env:USERDOMAIN + "\" + $env:USERNAME
     LogWrite "Script: $script:ScriptPath `nScript User: $Username `nStarted: $(Get-Date)"
