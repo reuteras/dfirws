@@ -28,52 +28,34 @@ if ($NoDownload.IsPresent) {
 
     # Search for download links
     $ProgressPreference = "SilentlyContinue"
-    $totalFound = foreach ($url in $urls) {
 
     Write-Output "Processing $url"
     try {
-        $content = Invoke-WebRequest -Uri $url -ErrorAction Stop -ConnectionTimeoutSeconds 10
+        $content = Invoke-WebRequest -Uri $url -ErrorAction Stop -ConnectionTimeoutSeconds 10 -UserAgent "curl"
         $downloadLinks = $content.links | Where-Object { `
-                $_.'aria-label' -match 'Download' `
+            $_.'aria-label' -match 'Download' `
                 -and $_.outerHTML -match 'fwlink' `
                 -and $_.outerHTML -match 'en-US' `
                 -and $_.outerHTML -match 'ISO 64' `
                 -or $_.'aria-label' -match '64-bit edition' }
-        $count = $downloadLinks.href.Count
-        $totalCount += $count
-        Write-Output ("Processing {0}, Found {1} Download(s)..." -f $url, $count) -ForegroundColor Green
         foreach ($DownloadLink in $downloadLinks) {
             $org_link = $DownloadLink.href
             $real_link = $(curl "$org_link" -L -I -o NUL -w '%{url_effective}' -s)
-            [PSCustomObject]@{
-                Title  = $url.split('/')[5].replace('-', ' ').replace('download ', '')
-                Name   = $DownloadLink.'aria-label'.Replace('Download ', '')
-                Tag    = $DownloadLink.'data-bi-tags'.Split('&')[3].split(';')[1]
-                Format = $DownloadLink.'data-bi-tags'.Split('-')[1].ToUpper()
-                Link   = $real_link
-            }
-
-            # Get filename part from the link
-            $filename = $real_link.Split("/")[-1]
-
-            # Check if the iso file is already downloaded
-            if (! (Test-Path -Path "iso\$filename")) {
-                # Download the iso file
-                Set-Location tmp
-                Remove-Item -Force -ErrorAction SilentlyContinue *
-                curl -O --retry 10 --retry-all-errors $real_link
-                Set-Location ..
-            }
         }
 
-        #Output total downloads found and exports result to the $outputFile path specified
-        Write-Output ("Found a total of {0} Downloads" -f $totalCount) -ForegroundColor Green
-        $totalFound | Sort-Object Title, Name, Tag, Format | Export-Csv -NoTypeInformation -Encoding UTF8 -Delimiter ';' -Path $outputFile
-    }
-        catch {
-            Write-Output ("ERROR: Url {0} is not accessible. Exiting" -f $url)
-            Exit
+        # Get filename part from the link
+        $filename = $real_link.Split("/")[-1]
+
+        # Check if the iso file is already downloaded
+        if (! (Test-Path -Path "iso\$filename")) {
+            # Download the iso file
+            Set-Location tmp
+            curl -O --retry 10 --retry-all-errors $real_link
+            Set-Location ..
         }
+    } catch {
+        Write-Output ("ERROR: Url {0} is not accessible. Exiting" -f $url)
+        Exit
     }
 
     # Copy iso file to iso directory
