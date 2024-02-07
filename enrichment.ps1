@@ -62,7 +62,7 @@ $manufUrl = "https://www.wireshark.org/download/automated/data/manuf"
 $manufSavePath = Join-Path -Path "${manufSaveDirectory}" -ChildPath "manuf.txt"
 Write-Output "Downloading ${manufUrl}"
 Invoke-WebRequest -Uri "${manufUrl}" -OutFile "${manufSavePath}"
-Copy-Item -Path "${manufSavePath}" -Destination "${manufSaveDirectory}\manuf-${DATE}.txt"
+Copy-Item -Path "${manufSavePath}" -Destination "${manufSaveDirectory}\manuf-${DATE}.txt" -Force
 
 #
 # Maxmind GeoLite2 databases
@@ -86,21 +86,21 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
     $savePath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-ASN.tar.gz"
     Write-Output "Downloading GeoLite2-ASN.tar.gz"
     Invoke-WebRequest -Uri "${folderUrl}" -OutFile "${savePath}"
-    Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-ASN-${DATE}.tar.gz"
+    Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-ASN-${DATE}.tar.gz" -Force
 
     # Download Maxmind GeoLite2 City database
     $folderUrl = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz"
     $savePath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-City.tar.gz"
     Write-Output "Downloading GeoLite2-City.tar.gz"
     Invoke-WebRequest -Uri "${folderUrl}" -OutFile "${savePath}"
-    Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-City-${DATE}.tar.gz"
+    Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-City-${DATE}.tar.gz" -Force
 
     # Download Maxmind GeoLite2 Country database
     $folderUrl = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz"
     $savePath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-Country.tar.gz"
     Write-Output "Downloading GeoLite2-Country.tar.gz"
     Invoke-WebRequest -Uri "${folderUrl}" -OutFile "${savePath}"
-    Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-Country-${DATE}.tar.gz"
+    Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-Country-${DATE}.tar.gz" -Force
 
     # Unpack latest Maxmind GeoLite2 databases
     $maxmindUnpackDirectory = "${maxmindSaveDirectory}\unpack"
@@ -145,7 +145,7 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
 
     $maxmindUnpackFiles = Get-ChildItem -Path "${maxmindUnpackDirectory}" -Recurse -Filter "*.mmdb"
     foreach ($maxmindUnpackFile in $maxmindUnpackFiles) {
-        Copy-Item -Path "${maxmindUnpackFile}" -Destination "${maxmindCurrentDirectory}"
+        Copy-Item -Path "${maxmindUnpackFile}" -Destination "${maxmindCurrentDirectory}" -Force
     }
 
     # Remove unpack directory
@@ -168,7 +168,7 @@ if (-not (Test-Path -Path "${suricataSaveDirectory}")) {
 $suricataSavePath = Join-Path -Path "${suricataSaveDirectory}" -ChildPath "emerging.rules.zip"
 Write-Output "Downloading $suricataUrl"
 Invoke-WebRequest -Uri "${suricataUrl}" -OutFile "${suricataSavePath}"
-Copy-Item -Path "${suricataSavePath}" -Destination "${suricataSaveDirectory}\emerging-${DATE}.rules.zip"
+Copy-Item -Path "${suricataSavePath}" -Destination "${suricataSaveDirectory}\emerging-${DATE}.rules.zip" -Force
 
 #
 # Download the latest version of Snort rules
@@ -186,7 +186,7 @@ if (-not (Test-Path -Path "${snortSaveDirectory}")) {
 $snortSavePath = Join-Path -Path "${snortSaveDirectory}" -ChildPath "community-rules.tar.gz"
 Write-Output "Downloading $snortUrl"
 Invoke-WebRequest -Uri "${snortUrl}" -OutFile "${snortSavePath}"
-Copy-Item -Path "${snortSavePath}" -Destination "${snortSaveDirectory}\community-rules-${DATE}.rules.tar.gz"
+Copy-Item -Path "${snortSavePath}" -Destination "${snortSaveDirectory}\community-rules-${DATE}.rules.tar.gz" -Force
 
 #
 # Git repositories for enrichment
