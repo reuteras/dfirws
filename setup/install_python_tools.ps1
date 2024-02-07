@@ -1,6 +1,6 @@
 # Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
-$GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\" | Select-String PUBLIC -Raw | Select-Object -Last 1)
+$GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\" | findstr.exe PUBLIC | Select-Object -Last 1)
 
 
 . C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1
@@ -177,19 +177,19 @@ if ($INSTALL_JEP -eq "Yes") {
         Write-DateLog "jep or ghidrathon has been updated. Update jep." >> "C:\log\python.txt"
 
         # Install Visual Studio Build Tools for jep
-        Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
-        Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${TEMP}\vs_BuildTools.exe"
-        Set-Location ${TEMP}
-        Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
-        Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
-        & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
+        #Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
+        #Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${TEMP}\vs_BuildTools.exe"
+        #Set-Location ${TEMP}
+        #Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
+        #Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
+        #& 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
 
         # Install Java for jep
-        Write-DateLog "Start installation of Corretto Java." 2>&1 >> "C:\log\python.txt"
-        Copy-Item "${SETUP_PATH}\corretto.msi" "${TEMP}\corretto.msi"
-        Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\corretto.msi /qn /norestart"
-        Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
-        $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
+        #Write-DateLog "Start installation of Corretto Java." 2>&1 >> "C:\log\python.txt"
+        #Copy-Item "${SETUP_PATH}\corretto.msi" "${TEMP}\corretto.msi"
+        #Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\corretto.msi /qn /norestart"
+        #Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
+        #$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
         # jep venv
         Get-ChildItem C:\venv\jep\* -Exclude jep.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
@@ -215,7 +215,9 @@ if ($INSTALL_JEP -eq "Yes") {
         Write-DateLog "Build Ghidrathon for Ghidra."
         Copy-Item -Recurse "${TOOLS}\ghidrathon" "${TEMP}"
         Set-Location "${TEMP}\ghidrathon"
-        & "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
+        #& "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
+        python -m pip install -r requirements.txt >> "C:\log\python.txt"
+        python ghidrathon_configure.py "${GHIDRA_INSTALL_DIR}" >> "C:\log\python.txt"
         if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
             New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
         }
@@ -366,7 +368,6 @@ if (! (Test-Path "C:\venv\maldump\Scripts\maldump.exe")) {
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r https://raw.githubusercontent.com/NUKIB/maldump/v0.2.0/requirements.txt 2>&1 >> "C:\log\python.txt"
     python -m pip install maldump==0.2.0 2>&1 >> "C:\log\python.txt"
-    Copy-Item "C:\tmp\maldump.txt" "C:\venv\maldump\maldump.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path "C:\venv\default\Scripts\maldump.ps1"
     Write-DateLog "Python venv maldump done." >> "C:\log\python.txt"
@@ -398,7 +399,6 @@ if ((Get-FileHash C:\git\scare\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_V
     Copy-Item scarelib2.py scarelib.py
     Remove-Item scarelib2.py
     Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
-    Copy-Item C:\tmp\scare.txt "C:\venv\scare\scare.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe -- C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
     Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
@@ -492,6 +492,33 @@ poetry add `
     dissect.target[yara] `
     flow.record `
     geoip2 >> "C:\log\python.txt"
+
+Copy-Item "C:\venv\dissect\Scripts\acquire-decrypt.exe" "C:\venv\default\Scripts\acquire-decrypt.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\acquire.exe" "C:\venv\default\Scripts\acquire.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\asdf-dd.exe" "C:\venv\default\Scripts\asdf-dd.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\asdf-meta.exe" "C:\venv\default\Scripts\asdf-meta.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\asdf-repair.exe" "C:\venv\default\Scripts\asdf-repair.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\asdf-verify.exe" "C:\venv\default\Scripts\asdf-verify.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\dump-nskeyedarchiver.exe" "C:\venv\default\Scripts\dump-nskeyedarchiver.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\envelope-decrypt.exe" "C:\venv\default\Scripts\envelope-decrypt.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\keyring.exe" "C:\venv\default\Scripts\keyring.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\parse-lnk.exe" "C:\venv\default\Scripts\parse-lnk.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\pip.exe" "C:\venv\default\Scripts\pip.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\pygmentize.exe" "C:\venv\default\Scripts\pygmentize.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\rdump.exe" "C:\venv\default\Scripts\rdump.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\rgeoip.exe" "C:\venv\default\Scripts\rgeoip.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-build-pluginlist.exe" "C:\venv\default\Scripts\target-build-pluginlist.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-dd.exe" "C:\venv\default\Scripts\target-dd.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-dump.exe" "C:\venv\default\Scripts\target-dump.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-fs.exe" "C:\venv\default\Scripts\target-fs.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-info.exe" "C:\venv\default\Scripts\target-info.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-mount.exe" "C:\venv\default\Scripts\target-mount.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-query.exe" "C:\venv\default\Scripts\target-query.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-reg.exe" "C:\venv\default\Scripts\target-reg.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\target-shell.exe" "C:\venv\default\Scripts\target-shell.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\thumbcache-extract-indexed.exe" "C:\venv\default\Scripts\thumbcache-extract-indexed.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\thumbcache-extract.exe" "C:\venv\default\Scripts\thumbcache-extract.exe" -Force 2>&1 >> "C:\log\python.txt"
+Copy-Item "C:\venv\dissect\Scripts\vma-extract.exe" "C:\venv\default\Scripts\vma-extract.exe" -Force 2>&1 >> "C:\log\python.txt"
 
 deactivate
 Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
