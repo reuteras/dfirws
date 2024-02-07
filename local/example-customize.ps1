@@ -52,7 +52,7 @@ USER_AGREEMENT=ACCEPT
 "@
 
 foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
-    New-Item -Path "${HOME}\.ghidra\.${version}" -ItemType Directory -Force
+    New-Item -Path "${HOME}\.ghidra\.${version}" -ItemType Directory -Force | Out-Null
     ${GHIDRA_CONFIG} | Out-File -FilePath "${HOME}\.ghidra\.${version}\preferences" -Encoding ascii
 }
 
