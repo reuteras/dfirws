@@ -134,6 +134,11 @@ if ($all -or $Node) {
     Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
+if ($all -or $Release) {
+    Write-DateLog "Download releases from GitHub."
+    .\resources\download\release.ps1
+}
+
 if ($all -or $Git) {
     Write-DateLog "Download git repositories"
     .\resources\download\git.ps1
@@ -154,11 +159,6 @@ if ($all -or $Rust) {
 if ($all -or $Http) {
     Write-DateLog "Download files via HTTP."
     .\resources\download\http.ps1
-}
-
-if ($all -or $Release) {
-    Write-DateLog "Download releases from GitHub."
-    .\resources\download\release.ps1
 }
 
 if ($all -or $Didier) {

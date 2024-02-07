@@ -29,7 +29,7 @@ if ($NoDownload.IsPresent) {
     # Search for download links
     $ProgressPreference = "SilentlyContinue"
     $totalFound = foreach ($url in $urls) {
-    
+
     Write-Output "Processing $url"
     try {
         $content = Invoke-WebRequest -Uri $url -ErrorAction Stop -ConnectionTimeoutSeconds 10
@@ -93,7 +93,7 @@ if (! ($NoCreateVM.IsPresent)) {
     } else {
         Write-Output "Using previous ISO file: $filename"
     }
-    
+
     # Make sure the iso file is downloaded
     if (! (Test-Path -Path "iso\$filename")) {
         Write-Output "ERROR: ISO file not found. Exiting"

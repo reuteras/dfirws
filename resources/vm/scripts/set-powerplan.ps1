@@ -4,7 +4,7 @@ Try {
   $HighPerf = powercfg -l | ForEach-Object{if($_.contains("High performance")) {$_.split()[3]}}
 
   # $HighPerf cannot be $null, we try activate this power profile with powercfg
-  # 
+  #
   if ($null -eq $HighPerf)
   {
     throw "Error: HighPerf is null"
