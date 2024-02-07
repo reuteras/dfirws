@@ -6,6 +6,10 @@ param($script:RestartRequired=0,
 
 $LogFile = "C:\Windows\Temp\win-updates.log"
 
+# Linter bugs...
+$null = $script:MaxCycles
+$null = $MaxUpdatesPerCycle
+
 function LogWrite {
    Param ([string]$LogString)
    $now = Get-Date -format s
@@ -56,7 +60,7 @@ function Invoke-ContinueRestartOrEnd() {
     }
 }
 
-function Install-WindowsUpdates() {
+function Install-WindowsUpdate() {
     $script:Cycles++
     LogWrite "Evaluating Available Updates with limit of $($MaxUpdatesPerCycle):"
     $UpdatesToDownload = New-Object -ComObject 'Microsoft.Update.UpdateColl'
@@ -232,7 +236,7 @@ if ($BeginWithRestart) {
 
 Invoke-WindowsUpdates
 if ($script:MoreUpdates -eq 1) {
-    Install-WindowsUpdates
+    Install-WindowsUpdate
 } else {
     Invoke-ContinueRestartOrEnd
 }
