@@ -70,10 +70,10 @@ if ($NoDownload.IsPresent) {
 
 if (! ($NoCreateVM.IsPresent)) {
     if ($filename -eq "") {
-        Write-Output "ERROR: No previous ISO file found. Exiting"
+        Write-Output "ERROR: No ISO file found. Exiting"
         Exit
     } else {
-        Write-Output "Using previous ISO file: $filename"
+        Write-Output "Using ISO file: $filename"
     }
 
     # Make sure the iso file is downloaded
