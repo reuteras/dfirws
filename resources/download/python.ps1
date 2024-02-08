@@ -21,6 +21,25 @@ if (Test-Path -Path "${ROOT_PATH}\mount\venv\default\done") {
 
 Copy-Item "${ROOT_PATH}\config.ps1" "${ROOT_PATH}\mount\venv\default\config.ps1"
 
+if (! (Test-Path "${ROOT_PATH}\downloads\python3.exe")) {
+    Write-Output "ERROR: Python3 not found. Exiting" >> "${ROOT_PATH}\log\python.txt"
+    Exit
+}
+
+$python3_hash = (Get-FileHash -Path "${ROOT_PATH}\downloads\python3.exe" -Algorithm SHA256).Hash
+
+if (Test-Path -Path "${ROOT_PATH}\mount\venv\python3_hash.txt") {
+    $python3_hash_venv = Get-Content "${ROOT_PATH}\mount\venv\python3_hash.txt"
+    if ("${python3_hash}" -ne "${python3_hash_venv}") {
+        Write-Output "Python3 hash changed. Remove venv and build new." >> "${ROOT_PATH}\log\python.txt"
+        Remove-Item "${ROOT_PATH}\mount\venv" -Recurse -Force | Out-Null
+        New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\venv" | Out-Null
+        Write-Output "${python3_hash}" > "${ROOT_PATH}\mount\venv\python3_hash.txt"
+    }
+} else {
+    Write-Output $python3_hash > "${ROOT_PATH}\mount\venv\python3_hash.txt"
+}
+
 (Get-Content ${ROOT_PATH}\resources\templates\generate_venv.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}") | Set-Content "${ROOT_PATH}\tmp\generate_venv.wsb"
 
 $mutex.WaitOne() | Out-Null
