@@ -1,14 +1,19 @@
-if (!( Test-Path "C:\Windows\Temp\7z2301-x64.msi")) {
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.7-zip.org/a/7z2301-x64.msi', 'C:\Windows\Temp\7z2301-x64.msi')
- }
+$7Z_MSI_NAME = "7z2301-x64.msi"
+$7z_MSI_URL = "https://www.7-zip.org/a/${7Z_MSI_NAME}"
 
-if (!(Test-Path "C:\Windows\Temp\7z2301-x64.msi")) {
-    Start-Sleep 5; [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.7-zip.org/a/7z2301-x64.msi', 'C:\Windows\Temp\7z2301-x64.msi')
+Write-Output "Install VMware Tools"
+
+Write-Output "Download 7-Zip MSI and install it. Needed to unzip VMware tools."
+
+while (!( Test-Path "C:\Windows\Temp\${7Z_MSI_NAME}")) {
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    (New-Object System.Net.WebClient).DownloadFile("${7Z_MSI_URL}", "C:\Windows\Temp\${7Z_MSI_NAME}")
+    Start-Sleep 5
 }
 
-cmd /c msiexec /qb /i C:\Windows\Temp\7z2301-x64.msi
+Start-Process -Wait msiexec -ArgumentList "/i C:\Windows\Temp\${7Z_MSI_NAME} /qn /norestart"
 
-Write-Output "Using VMware"
+Write-Output "Download VMware Tools"
 
 if (Test-Path "C:\Users\dfirws\windows.iso") {
     Move-Item -force C:\Users\dfirws\windows.iso C:\Windows\Temp
@@ -34,7 +39,9 @@ if (!(Test-Path "C:\Windows\Temp\windows.iso")) {
         (New-Object System.Net.WebClient).DownloadFile('https://softwareupdate.vmware.com/cds/vmw-desktop/ws/15.5.5/16285975/windows/packages/tools-windows.tar', 'C:\Windows\Temp\vmware-tools.tar')
 }
 
-cmd /c "C:\PROGRA~1\7-Zip\7z.exe" x C:\Windows\Temp\vmware-tools.tar -oC:\Windows\Temp
+Write-Output "Unzip VMware TAR"
+
+& "C:\PROGRA~1\7-Zip\7z.exe" x C:\Windows\Temp\vmware-tools.tar -oC:\Windows\Temp | Out-Null
 
 Move-Item c:\windows\temp\VMware-tools-windows-*.iso c:\windows\temp\windows.iso
 
@@ -47,14 +54,14 @@ if (Test-Path "C:\Program Files (x86)\VMWare") {
 }
 
 Write-Output "Unzip VMware ISO"
-cmd /c "C:\PROGRA~1\7-Zip\7z.exe" x "C:\Windows\Temp\windows.iso" -o"C:\Windows\Temp\VMWare"
+& "C:\PROGRA~1\7-Zip\7z.exe" x "C:\Windows\Temp\windows.iso" -o"C:\Windows\Temp\VMWare" | Out-Null
 
 Write-Output "Install VMware Tools"
-cmd /c C:\Windows\Temp\VMWare\setup.exe /S /v"/qn REBOOT=R\"
+Start-Process -Wait "C:\Windows\Temp\VMWare\setup.exe" -ArgumentList '/S /v"/qn REBOOT=R\"'
 
 Write-Output "Remove temp files"
-#Remove-Item -Force "C:\Windows\Temp\vmware-tools.tar"
-#Remove-Item -Force "C:\Windows\Temp\windows.iso"
-#Remove-Item -Force -Recurse "C:\Windows\Temp\VMware"
+Remove-Item -Force "C:\Windows\Temp\vmware-tools.tar"
+Remove-Item -Force "C:\Windows\Temp\windows.iso"
+Remove-Item -Force -Recurse "C:\Windows\Temp\VMware"
 
 Exit 0
