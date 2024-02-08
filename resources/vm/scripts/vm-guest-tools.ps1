@@ -5,10 +5,7 @@ Write-Output "Install VMware Tools"
 
 Write-Output "Download 7-Zip MSI Needed to unzip VMware tools."
 
-while (!( Test-Path "C:\Windows\Temp\${7Z_MSI_NAME}")) {
-    curl.exe -L -o "C:\Windows\Temp\${7Z_MSI_NAME}" -s --retry 10 --retry-all-errors "${7Z_MSI_URL}"
-    Start-Sleep 5
-}
+curl.exe -L -o "C:\Windows\Temp\${7Z_MSI_NAME}" -s --retry 10 --retry-all-errors "${7Z_MSI_URL}"
 
 Write-Output "Install 7-Zip MSI"
 Start-Process -Wait msiexec -ArgumentList "/i C:\Windows\Temp\${7Z_MSI_NAME} /qn /norestart"
