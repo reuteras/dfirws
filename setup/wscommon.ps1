@@ -128,8 +128,8 @@ function Install-BashExtra {
     Set-Location "${env:ProgramFiles}\Git" | Out-Null
     Get-ChildItem -Path ${SETUP_PATH}\bash -Include "*.tar" -Recurse |
         ForEach-Object {
-            $command = "tar.exe -x -vf /C/downloads/bash/" + $_.Name
-            Start-Process -FilePath "${env:ProgramFiles}\Git\bin\bash.exe" -ArgumentList "-c $command" -NoNewWindow
+            $command = "tar.exe -x --overwrite -f /C/downloads/bash/" + $_.Name
+            Start-Process -NoNewWindow -FilePath "${env:ProgramFiles}\Git\bin\bash.exe" -ArgumentList "-c '$command'"
         }
     if (Test-Path "${LOCAL_PATH}\.zshrc") {
         Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc" -Force
