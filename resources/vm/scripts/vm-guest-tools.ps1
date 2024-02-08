@@ -6,8 +6,7 @@ Write-Output "Install VMware Tools"
 Write-Output "Download 7-Zip MSI and install it. Needed to unzip VMware tools."
 
 while (!( Test-Path "C:\Windows\Temp\${7Z_MSI_NAME}")) {
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    (New-Object System.Net.WebClient).DownloadFile("${7Z_MSI_URL}", "C:\Windows\Temp\${7Z_MSI_NAME}")
+    curl.exe -L -o "C:\Windows\Temp\${7Z_MSI_NAME}" -s --retry 10 --retry-all-errors "${7Z_MSI_URL}"
     Start-Sleep 5
 }
 
@@ -33,10 +32,10 @@ if (!(Test-Path "C:\Windows\Temp\windows.iso")) {
         $nextUriSubdirectory = $nextUriSubdirectory.TrimEnd("`r?`n")
         $newestVMwareToolsURL = "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/$newestVersion/$nextURISubdirectory/windows/packages/tools-windows.tar"
         Write-Output "The latest version of VMware tools has been determined to be downloadable from $newestVMwareToolsURL"
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile("$newestVMwareToolsURL", 'C:\Windows\Temp\vmware-tools.tar')
+        curl.exe -L -o "C:\Windows\Temp\vmware-tools.tar" -s --retry 10 --retry-all-errors "$newestVMwareToolsURL"
     } Catch {
         Write-Output "Unable to determine the latest version of VMware tools. Falling back to hardcoded URL."
-        (New-Object System.Net.WebClient).DownloadFile('https://softwareupdate.vmware.com/cds/vmw-desktop/ws/15.5.5/16285975/windows/packages/tools-windows.tar', 'C:\Windows\Temp\vmware-tools.tar')
+        curl.exe -L -o "C:\Windows\Temp\vmware-tools.tar" -s --retry 10 --retry-all-errors "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/15.5.5/16285975/windows/packages/tools-windows.tar"
 }
 
 Write-Output "Unzip VMware TAR"
