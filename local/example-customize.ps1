@@ -43,10 +43,10 @@ ${GHIDRA_CONFIG} = @"
 GhidraShowWhatsNew=false
 LAST_USED_OPTIONS_CONFIG=Standard Defaults
 LastExtensionImportDirectory=C\:\\Tools\\ghidra_extensions
-LastNewProjectDirectory=C\:\\Users\\WDAGUtilityAccount
-ProjectDirectory=C\:\\Users\\WDAGUtilityAccount
+LastNewProjectDirectory=C\:\\Users\\${USERNAME}
+ProjectDirectory=C\:\\Users\\${USERNAME}
 RECENT_0=C\:\\Tools\\ghidra_extensions
-RECENT_1=C\:\\Users\\WDAGUtilityAccount\\Desktop
+RECENT_1=C\:\\Users\\${USERNAME}\\Desktop
 SHOW_TIPS=false
 ${GHIDRA_THEME}
 USER_AGREEMENT=ACCEPT
