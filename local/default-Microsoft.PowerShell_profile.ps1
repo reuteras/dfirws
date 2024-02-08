@@ -28,7 +28,9 @@ if (-not(Get-Module -ListAvailable PSReadLine)) {
 }
 
 # History
-Set-PSReadLineOption -PredictionSource History 2>&1 | Out-Null
+if (Get-PSReadLineOption | Get-Member | findstr PredictionSource) {
+	Set-PSReadLineOption -PredictionSource History | Out-Null
+}
 
 # https://techcommunity.microsoft.com/t5/itops-talk-blog/autocomplete-in-powershell/ba-p/2604524
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
@@ -74,7 +76,7 @@ if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 }
 
 # Always start with Python venv default
-& "venv.ps1"
+& "${env:USERPROFILE}\Documents\tools\utils\venv.ps1"
 
 # Add autocomplete for commands
 if (Test-Path "C:\Tools\cargo\autocomplete") {
