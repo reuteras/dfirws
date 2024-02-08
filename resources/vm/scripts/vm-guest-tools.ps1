@@ -35,12 +35,12 @@ if (!(Test-Path "C:\Windows\Temp\windows.iso")) {
         curl.exe -L -o "C:\Windows\Temp\vmware-tools.tar" -s --retry 10 --retry-all-errors "$newestVMwareToolsURL"
     } Catch {
         Write-Output "Unable to determine the latest version of VMware tools. Falling back to hardcoded URL."
-        curl.exe -L -o "C:\Windows\Temp\vmware-tools.tar" -s --retry 10 --retry-all-errors "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/15.5.5/16285975/windows/packages/tools-windows.tar"
+        curl.exe -L -o "C:\Windows\Temp\vmware-tools.tar" -s --retry 10 --retry-all-errors "https://softwareupdate.vmware.com/cds/vmw-desktop/ws/17.5.0/22583795//windows/packages/tools-windows.tar"
 }
 
 Write-Output "Unzip VMware TAR"
 
-& "C:\PROGRA~1\7-Zip\7z.exe" x C:\Windows\Temp\vmware-tools.tar -oC:\Windows\Temp | Out-Null
+& "C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\vmware-tools.tar -oC:\Windows\Temp | Out-Null
 
 Move-Item c:\windows\temp\VMware-tools-windows-*.iso c:\windows\temp\windows.iso
 
@@ -53,7 +53,7 @@ if (Test-Path "C:\Program Files (x86)\VMWare") {
 }
 
 Write-Output "Unzip VMware ISO"
-& "C:\PROGRA~1\7-Zip\7z.exe" x "C:\Windows\Temp\windows.iso" -o"C:\Windows\Temp\VMWare" | Out-Null
+& "C:\Program Files\7-Zip\7z.exe" x "C:\Windows\Temp\windows.iso" -o"C:\Windows\Temp\VMWare" | Out-Null
 
 Write-Output "Install VMware Tools"
 Start-Process -Wait "C:\Windows\Temp\VMWare\setup.exe" -ArgumentList '/S /v"/qn REBOOT=R\"'
