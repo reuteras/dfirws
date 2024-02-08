@@ -76,31 +76,33 @@ function Get-FileFromUri {
     $writer.Flush()
     $stringAsStream.Position = 0
     $UriHash = $(Get-FileHash -InputStream $stringAsStream -Algorithm SHA256 | Select-Object -ExpandProperty Hash)
+    $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
 
     # Remove etag if file doesn't exist
     if (! (Test-Path "$FilePath")) {
-        Remove-Item -Force "$PSScriptRoot\..\..\downloads\.etag\${UriHash}" -ErrorAction SilentlyContinue
+        Remove-Item -Force "${ETAG_FILE}" -ErrorAction SilentlyContinue
     }
 
-    # Create empty etag file if it doesn't exist
-    if (! (Test-Path "$PSScriptRoot\..\..\downloads\.etag\${UriHash}")) {
-        New-Item "$PSScriptRoot\..\..\downloads\.etag\${UriHash}" -type file | Out-Null
+    if ("Yes" -eq "${CheckURL}") {
+        $ETAG_FLAG = ""
+        $Z_FLAG = ""
+    } else {
+        if (Test-Path "${ETAG_FILE}") {
+            $ETAG_FLAG = "--etag-compare ${ETAG_FILE} --etag-save ${ETAG_FILE}"
+        } else {
+            $ETAG_FLAG = "--etag-save ${ETAG_FILE}"
+        }
+        if (Test-Path $FilePath) {
+            $Z_FLAG = "-z $FilePath"
+        } else {
+            $Z_FLAG = ""
+        }
     }
-
-    $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
 
     # Attempt to download the file from the specified URI
     while($true) {
         try {
             Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
-
-            $ETAG_FLAG = "--etag-compare $ETAG_FILE --etag-save $ETAG_FILE"
-
-            if (Test-Path $FilePath) {
-                $Z_FLAG = "-z $FilePath"
-            } else {
-                $Z_FLAG = ""
-            }
 
             if ($Uri -like "*github.com*" -and "" -ne $GH_USER -and "" -ne $GH_PASS) {
                 $GH_FLAG = "-u ${GH_USER}:${GH_PASS}"
@@ -125,6 +127,12 @@ function Get-FileFromUri {
             if (Test-Path $TmpFilePath) {
                 Write-SynchronizedLog "Downloaded $Uri to $FilePath."
                 $downloaded = $true
+                # Check if size of ETAG file is less then 10 bytes and remove it if it is
+                if (Test-Path $ETAG_FILE) {
+                    if ((Get-Item $ETAG_FILE).length -lt 10) {
+                        Remove-Item -Force $ETAG_FILE
+                    }
+                }
             }
             break
         }
@@ -149,7 +157,7 @@ function Get-FileFromUri {
         Remove-Item $TmpFilePath -Force | Out-Null
         Update-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name -Path $FilePath
     } else {
-        Write-SynchronizedLog "Already downloaded $Uri according to etag."
+        Write-SynchronizedLog "Already downloaded $Uri according to etag (${ETAG_FILE})."
     }
     $ProgressPreference = 'Continue'
 }
