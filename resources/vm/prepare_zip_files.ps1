@@ -2,7 +2,6 @@ if (!(Test-Path -Path ".\tmp")) {
     New-Item -ItemType Directory -Path ".\tmp" -Force | Out-Null
 }
 
-Write-Output "Creating zip files for the VM"
 Write-Output "Creating zip for git"
 Set-Location ".\mount"
 & "${env:ProgramFiles}\7-Zip\7z.exe" a "..\tmp\git.zip" "git" | Out-Null
