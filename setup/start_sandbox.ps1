@@ -367,14 +367,14 @@ if ("${WSDFIR_BASH_EXTRA}" -eq "Yes") {
 
 # Set Notepad++ as default for many file types
 # Use %VARIABLE% in cmd.exe
-cmd /q /c Ftype xmlfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-cmd /q /c Ftype chmfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-cmd /q /c Ftype cmdfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-cmd /q /c Ftype htafile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-cmd /q /c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-cmd /q /c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-cmd /q /c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
-cmd /q /c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype xmlfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype chmfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype cmdfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype htafile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
 Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Last commands
