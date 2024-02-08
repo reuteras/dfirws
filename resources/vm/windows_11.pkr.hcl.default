@@ -89,7 +89,9 @@ source "vmware-iso" "windows_11" {
                         "./resources/vm/scripts/disable-screensaver.ps1",
                         "./resources/vm/scripts/disable-winrm.ps1",
                         "./resources/vm/scripts/enable-winrm.ps1",
+                        "./resources/vm/scripts/install-vm-guest-tools.bat",
                         "./resources/vm/scripts/microsoft-updates.bat",
+                        "./resources/vm/scripts/vm-guest-tools.ps1",
                         "./resources/vm/scripts/win-updates.ps1"
                     ]
   guest_os_type     = "windows11-64"
@@ -123,11 +125,21 @@ build {
   provisioner "windows-shell" {
     execute_command = "{{ .Vars }} cmd /c \"{{ .Path }}\""
     remote_path     = "/tmp/script.bat"
-    scripts         = ["./resources/vm/scripts/enable-rdp.bat"]
+    scripts         = [
+      "./resources/vm/scripts/enable-rdp.bat",
+      ]
   }
 
-  provisioner "powershell" {
-    scripts = ["./resources/vm/scripts/vm-guest-tools.ps1"]
+  provisioner "windows-restart" {
+    restart_timeout = "${var.restart_timeout}"
+  }
+
+  provisioner "windows-shell" {
+    execute_command = "{{ .Vars }} cmd /c \"{{ .Path }}\""
+    remote_path     = "/tmp/script.bat"
+    scripts         = [
+      "./resources/vm/scripts/install-vm-guest-tools.bat",
+      ]
   }
 
   provisioner "windows-restart" {
