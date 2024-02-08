@@ -26,7 +26,7 @@ if ($all -or $Node) {
 
 if ($all -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
-    Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.7/python-3.11.7-amd64.exe" -FilePath ".\downloads\python3.exe" -CheckURL "Yes"
+    Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.8/python-3.11.8-amd64.exe" -FilePath ".\downloads\python3.exe" -CheckURL "Yes"
 
     # Get Amazon Corretto - installed during start
     Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
