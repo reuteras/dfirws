@@ -3,7 +3,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 
-$GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\" | findstr.exe PUBLIC | Select-Object -Last 1)
+$GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\").FullName | findstr.exe PUBLIC | Select-Object -Last 1
 
 if (! (Test-Path "${WSDFIR_TEMP}")) {
     New-Item -ItemType Directory -Force -Path "${WSDFIR_TEMP}" | Out-Null
@@ -177,19 +177,19 @@ if ($INSTALL_JEP -eq "Yes") {
         Write-DateLog "jep or ghidrathon has been updated. Update jep." >> "C:\log\python.txt"
 
         # Install Visual Studio Build Tools for jep
-        #Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
-        #Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${WSDFIR_TEMP}\vs_BuildTools.exe"
-        #Set-Location ${WSDFIR_TEMP}
-        #Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
-        #Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
-        #& 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
+        Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
+        Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${WSDFIR_TEMP}\vs_BuildTools.exe"
+        Set-Location ${WSDFIR_TEMP}
+        Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
+        Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
+        & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
 
         # Install Java for jep
-        #Write-DateLog "Start installation of Corretto Java." 2>&1 >> "C:\log\python.txt"
-        #Copy-Item "${SETUP_PATH}\corretto.msi" "${WSDFIR_TEMP}\corretto.msi"
-        #Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\corretto.msi /qn /norestart"
-        #Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
-        #$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
+        Write-DateLog "Start installation of Corretto Java." 2>&1 >> "C:\log\python.txt"
+        Copy-Item "${SETUP_PATH}\corretto.msi" "${WSDFIR_TEMP}\corretto.msi"
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\corretto.msi /qn /norestart"
+        Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
+        $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
         # jep venv
         Get-ChildItem C:\venv\jep\* -Exclude jep.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
@@ -208,20 +208,19 @@ if ($INSTALL_JEP -eq "Yes") {
 
         poetry add `
             NumPy `
-            flare-capa `
-            jep >> "C:\log\python.txt"
+            flare-capa >> "C:\log\python.txt"
 
         # Build Ghidrathon for Gidhra
         Write-DateLog "Build Ghidrathon for Ghidra."
-        Copy-Item -Recurse "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
+        Copy-Item -Recurse -Force "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
         Set-Location "${WSDFIR_TEMP}\ghidrathon"
         #& "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
         python -m pip install -r requirements.txt >> "C:\log\python.txt"
-        python ghidrathon_configure.py "${GHIDRA_INSTALL_DIR}" >> "C:\log\python.txt"
+        python ".\ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" 2>&1 >> "C:\log\python.txt"
         if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
             New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
         }
-        Copy-Item ${WSDFIR_TEMP}\ghidrathon\dist\ghidra* "${TOOLS}\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
+        Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
         Copy-Item ${WSDFIR_TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
