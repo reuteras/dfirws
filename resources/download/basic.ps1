@@ -46,11 +46,7 @@ if ($all -or $Python) {
 
     # Ghidrathon source
     Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "${SETUP_PATH}\ghidrathon.zip" -match "Source"
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidrathon.zip" -o"${TOOLS}" | Out-Null
-    if (Test-Path "${TOOLS}\ghidrathon") {
-        Remove-Item "${TOOLS}\ghidrathon" -Recurse -Force
-    }
-    Move-Item ${TOOLS}\mandiant-Ghidrathon* "${TOOLS}\ghidrathon"
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidrathon.zip" -o"${TOOLS}\ghidrathon" | Out-Null
 
     # Tools to compile and build - version 2019
     Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe"
