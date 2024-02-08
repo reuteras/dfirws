@@ -3,21 +3,17 @@ $7z_MSI_URL = "https://www.7-zip.org/a/${7Z_MSI_NAME}"
 
 Write-Output "Install VMware Tools"
 
-Write-Output "Download 7-Zip MSI and install it. Needed to unzip VMware tools."
+Write-Output "Download 7-Zip MSI Needed to unzip VMware tools."
 
 while (!( Test-Path "C:\Windows\Temp\${7Z_MSI_NAME}")) {
     curl.exe -L -o "C:\Windows\Temp\${7Z_MSI_NAME}" -s --retry 10 --retry-all-errors "${7Z_MSI_URL}"
     Start-Sleep 5
 }
 
+Write-Output "Install 7-Zip MSI"
 Start-Process -Wait msiexec -ArgumentList "/i C:\Windows\Temp\${7Z_MSI_NAME} /qn /norestart"
 
 Write-Output "Download VMware Tools"
-
-if (Test-Path "C:\Users\dfirws\windows.iso") {
-    Move-Item -force C:\Users\dfirws\windows.iso C:\Windows\Temp
-}
-
 if (!(Test-Path "C:\Windows\Temp\windows.iso")) {
     Try {
         # Disabling the progress bar speeds up IWR https://github.com/PowerShell/PowerShell/issues/2138
