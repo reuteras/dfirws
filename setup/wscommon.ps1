@@ -165,7 +165,7 @@ function Install-Choco {
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-choco.txt" | Out-Null
     } else {
         Write-Output "Chocolatey is already installed"
-    }    
+    }
 }
 
 function Install-CMDer {
