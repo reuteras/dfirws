@@ -66,7 +66,9 @@ poetry add `
     keystone-engine `
     lief `
     LnkParse3 `
+    malwareconfig `
     matplotlib `
+    mwcp `
     minidump `
     msticpy `
     mkyara `
@@ -98,6 +100,7 @@ poetry add `
     regipy `
     rzpipe `
     setuptools `
+    shodan `
     termcolor `
     textsearch `
     time-decode `
