@@ -11,16 +11,13 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # Create required directories
-foreach ($dir in @("${WSDFIR_TEMP}", "${DATA}", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${HOME}\Documents\jupyter")) {
+foreach ($dir in @("${WSDFIR_TEMP}", "${DATA}", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
     if (-not (Test-Path -Path $dir)) {
         New-Item -ItemType Directory -Path $dir | Out-Null
     }
 }
 
 Write-DateLog "Start sandbox setup" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
-Write-DateLog "Save env to C:\tmp\env.txt" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-Get-ChildItem env: | Out-File -FilePath "C:\tmp\env.txt" -Encoding "utf8"
-Write-Output "$env:Path" | Out-File -FilePath "C:\tmp\path.txt" -Encoding "utf8"
 
 # Bypass the execution policy for the current session
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
@@ -234,6 +231,7 @@ Add-ToUserPath "${TOOLS}\imhex"
 Add-ToUserPath "${TOOLS}\INDXRipper"
 Add-ToUserPath "${TOOLS}\jd-gui"
 Add-ToUserPath "${TOOLS}\MailView"
+Add-ToUserPath "${TOOLS}\MemProcFS"
 Add-ToUserPath "${TOOLS}\lessmsi"
 Add-ToUserPath "${TOOLS}\nmap"
 Add-ToUserPath "${TOOLS}\node"
@@ -283,7 +281,6 @@ $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" 
 Add-ToUserPath "${TOOLS}\ghidra\${GHIDRA_INSTALL_DIR}"
 
 Write-DateLog "Added to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-Write-Output "$env:Path" | Out-File -FilePath "C:\tmp\path_updated.txt" -Encoding "utf8"
 
 # Shortcut for PowerShell
 Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
@@ -325,11 +322,11 @@ if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
 }
 
 # Configure usage of new venv for PowerShell
-(Get-ChildItem -File ${VENV}\default\Scripts\).Name | findstr /R /V "[\._]" | findstr /V activate | `
-    ForEach-Object {
-        Write-Output "function $_() { python ${VENV}\default\Scripts\$_ `$PsBoundParameters.Values + `$args }"
-    } | Out-File -Append -Encoding "ascii" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile_2.ps1"
-Write-DateLog "New venv configured for PowerShell" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+#(Get-ChildItem -File ${VENV}\default\Scripts\).Name | findstr /R /V "[\._]" | findstr /V activate | `
+#    ForEach-Object {
+#        Write-Output "function $_() { python ${VENV}\default\Scripts\$_ `$PsBoundParameters.Values + `$args }"
+#    } | Out-File -Append -Encoding "ascii" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile_2.ps1"
+#Write-DateLog "New venv configured for PowerShell" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Signal that everything is done to start using the tools (mostly).
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
@@ -704,6 +701,8 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\Coba
 
 # Memory
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Dokany (runs dfirws-install -Dokany).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Dokany"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk"  -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command MemProcFS.exe -Dokany"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 2.1.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench2\VolatilityWorkbench.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 3.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench\VolatilityWorkbench.exe"
 
@@ -1058,3 +1057,5 @@ Copy-Item -Recurse "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\" -Force
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 
 Write-DateLog "Installation done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+Exit 0
