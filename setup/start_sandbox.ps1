@@ -703,7 +703,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\Coba
 # Memory
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Dokany (runs dfirws-install -Dokany).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Dokany"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk"  -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command MemProcFS.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk"  -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command MemProcFS.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 2.1.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench2\VolatilityWorkbench.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 3.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench\VolatilityWorkbench.exe"
 
