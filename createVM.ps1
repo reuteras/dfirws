@@ -5,8 +5,8 @@ param (
     [Switch]$NoCreateVM,
     [Parameter(HelpMessage = "Don't install dfirws the VM.")]
     [Switch]$NoInstall,
-    [Parameter(HelpMessage = "Run Windows 11 debloat.")]
-    [Switch]$Debloat
+    [Parameter(HelpMessage = "Dont' run Windows 11 customization.")]
+    [Switch]$NoCustomize
 )
 
 if (-not (Test-Path -Path "tmp")) {
@@ -111,3 +111,14 @@ if ($Debloat.IsPresent) {
     & ".\resources\vm\debloat.ps1"
 }
 
+if (! ($NoCustomize.IsPresent)) {
+    if (Test-Path -Path ".\local\customize-vm.ps1") {
+        Write-Output "Running the local/customize-vm.ps1 script"
+        & ".\resources\vm\customize-vm.ps1" -CustomizeFile "customize-vm.ps1"
+    } else {
+        Write-Output "Running the local/example-customize-vm.ps1 script"
+        & ".\resources\vm\customize-vm.ps1" -CustomizeFile "example-customize-vm.ps1"
+    }
+}
+
+Write-Output "Done"

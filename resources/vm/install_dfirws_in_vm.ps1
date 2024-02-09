@@ -15,7 +15,6 @@ function Wait-VMReady {
     while ( vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWindow -interactive "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -Command "Write-Output Hi" 2>&1 | Select-String "Error" ) {
         Start-Sleep 5
     }
-
 }
 
 Write-Output "Starting the VM"
@@ -25,25 +24,23 @@ Wait-VMReady
 
 Write-Output "Add shared folder and mark as read-only"
 $DFIRWS_PATH = Resolve-Path "."
-Write-Output "DFIRWS_PATH: ${DFIRWS_PATH}"
 
 Write-Output "Enabling shared folders"
 vmrun.exe -T ws enableSharedFolders "${VM_VMX}"
 
 Write-Output "Adding shared folder dfirws for installation of dfirws"
 vmrun.exe -T ws addSharedFolder "${VM_VMX}" "dfirws" "${DFIRWS_PATH}"
-Write-Output "Marking shared folder dfirws as read-only"
-vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "dfirws" "${DFIRWS_PATH}" readonly
+vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "dfirws" "${DFIRWS_PATH}" "readonly"
 
 Write-Output "Adding shared folder readonly for later analyses."
 vmrun.exe -T ws addSharedFolder "${VM_VMX}" "readonly" "${DFIRWS_PATH}\readonly"
 Write-Output "Marking shared folder readonly as read-only"
-vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "readonly" "${DFIRWS_PATH}\readonly" readonly
+vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "readonly" "${DFIRWS_PATH}\readonly" "readonly"
 
 Write-Output "Adding shared folder readwrite for later analyses."
 vmrun.exe -T ws addSharedFolder "${VM_VMX}" "readwrite" "${DFIRWS_PATH}\readwrite"
 Write-Output "Marking shared folder readwrite as read-write"
-vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "readwrite" "${DFIRWS_PATH}\readwrite" readwrite
+vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "readwrite" "${DFIRWS_PATH}\readwrite" "readwrite"
 
 Write-Output "Copy files to VM. This will take a while."
 vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWindow -interactive "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -File "\\vmware-host\Shared Folders\dfirws\resources\vm\copy_files_to_vm.ps1"
@@ -53,6 +50,7 @@ vmrun.exe -T ws stop "${VM_VMX}" soft
 
 Write-Output "Creating snapshot 'DFIRWS copied to VM'"
 vmrun.exe -T ws snapshot "${VM_VMX}" "DFIRWS copied"
+Start-Sleep 5
 
 Write-Output "Starting the VM"
 vmrun.exe -T ws start "${VM_VMX}" gui

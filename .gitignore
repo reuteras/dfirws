@@ -8,6 +8,7 @@ local/*
 !local/.zcompdump.default
 !local/.zshrc.default
 !local/example-customize.ps1
+!local/example-customize-vm.ps1
 !local/default-Microsoft.PowerShell_profile.ps1
 log/*
 mount/*
