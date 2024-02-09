@@ -80,7 +80,7 @@ Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy64.zip" -match
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dnSpy64.zip" -o"${TOOLS}\dnSpy64" | Out-Null
 
 # Dokany - available for manual installation
-Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.zip" -match Dokan_x64.msi
+Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.msi" -match Dokan_x64.msi
 
 # mboxviewer
 Get-GitHubRelease -repo "eneam/mboxviewer" -path "${SETUP_PATH}\mboxviewer.zip" -match mbox-viewer.exe
@@ -229,6 +229,10 @@ if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
 }
 Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_10_4.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_10_4.zip"
 Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_11_0.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_11_0.zip"
+
+# Ghidra btighidra
+Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match ghidra
+Copy-Item "${SETUP_PATH}\btighidra.zip" "${TOOLS}\ghidra_extensions\btighidra.zip"
 
 # Ghidra Cartographer plugin
 Get-GitHubRelease -repo "nccgroup/Cartographer" -path "${SETUP_PATH}\Cartographer.zip" -match Cartographer.zip
