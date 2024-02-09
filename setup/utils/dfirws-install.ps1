@@ -6,6 +6,7 @@ param (
     [switch]$BashExtra,
     [switch]$Choco,
     [switch]$CMDer,
+    [switch]$Dokany,
     [switch]$GitBash,
     [switch]$GoLang,
     [switch]$Hashcat,
@@ -48,6 +49,10 @@ if ($Choco.IsPresent) {
 
 if ($CMDer.IsPresent) {
     Install-CMDer
+}
+
+if ($Dokany.IsPresent) {
+    Install-Dokany
 }
 
 if ($GitBash.IsPresent) {
