@@ -71,7 +71,8 @@ Two different configurations will be created:
 - dfirws.wsb - network disabled
 - network_dfirws.wsb - network enabled
 
-You can copy the file *config.ps1.template* to *config.ps1* and change the settings to your liking. The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub (can be entered manually if you don't like to save them in a file). There is also a setting that controls if the Python virtual environment should be built (needed for Ghidrathon). There is a requirement for Visual Studio which is a rather large download.
+You can copy the file *config.ps1.template* to *config.ps1* and change the settings to your liking. The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub (can be entered manually if you don't like to save them in a file).
+There is also a setting that controls if the Python *jep* virtual environment should be built (needed for Ghidrathon). There is a requirement for Visual Studio which is a rather large download.
 
 ## Download tools and enrichment data
 
@@ -101,7 +102,8 @@ The quickest way to use the tool is to start a sandbox by clicking on **dfirws.w
 
 By default the sandbox will have clipboard redirection off as well as secure defaults for other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
 
-To customize the sandbox you can copy *local/default-config.txt* to *local/config.txt* and change the settings to your liking. The file *local/config.txt* is used by the scripts to specify which tools to install when the sandbox starts. Every tool will still be downloaded and can be installed later in the sandbox if needed. The difference will be the time it takes to start the sandbox, i.e. running an installer for a program on every start.
+To customize the sandbox you can copy *local/default-config.txt* to *local/config.txt* and change the settings to your liking. The file *local/config.txt* is used by the scripts to specify which tools to install when the sandbox starts. Every tool will still be downloaded and can be installed later in the sandbox if needed.
+The difference will be the time it takes to start the sandbox, i.e. running an installer for a program on every start.
 
 Extra tools can be installed in a running **dfirws** sandbox with the script **dfirws-install.ps1**. To list available tools run **Get-Help dfirws-install.ps1**. To install a tool run **dfirws-install.ps1 -<tool>**.
 
@@ -115,7 +117,14 @@ More usage information is available in the [wiki](https://github.com/reuteras/df
 
 ## Usage and configuration of the VM
 
-You can create VM by running **.\createVM.ps1**.  Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 ISO and create a VM with the tools installed. The VM will be created in the root folder. The VM will be created with 4 cores and 16 GB of memory. The VM will be created with a 300 GB sparse disk. The VM will be created with a bridged network adapter. The VM will be created with a user named *dfirws* and a password *password*. You can change the settings in by copying *local/default-variables.pkr.hcl* to *local/variables.pkr.hcl* and change the settings to your liking. The file *local/variables.pkr.hcl* is then used by the scripts to specify which settings to use when creating the VM. You can change setting for autounattend to change the default keyboard to US (Swedish is the default).
+You can create VM by running **.\createVM.ps1**.  Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO and create a VM with the tools installed. The VM will be created in the root folder.
+
+- The VM will be created with 4 cores and 16 GB of memory.
+- The VM will be created with a 300 GB sparse disk (space is not preallocated).
+- The VM will be created with a NAT network adapter.
+- The VM will be created with a user named *dfirws* with password *password*.
+
+You can change the settings by copying *local/default-variables.pkr.hcl* to *local/variables.pkr.hcl* and modify the settings to your liking. You can for example change setting for autounattend to change the default keyboard to US (Swedish is the default).
 
 ## Update
 
