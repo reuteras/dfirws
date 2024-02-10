@@ -40,7 +40,7 @@ if (Test-Path "${HOME}\dfirws\dfirws.ps1" ) {
 Copy-Item "${source}\dfirws\README.md" "${HOME}\dfirws\README.md" | Out-Null
 Copy-Item "${source}\dfirws\createSandboxConfig.ps1" "${HOME}\dfirws\createSandboxConfig.ps1" | Out-Null
 Copy-Item "${source}\dfirws\dfirws.wsb.template" "${HOME}\dfirws\dfirws.wsb.template" | Out-Null
-Copy-Item "${source}\dfirws\setup\default-config.txt" "${HOME}\dfirws\setup\default-config.txt" | Out-Null
+Copy-Item "${source}\dfirws\local\default-config.txt" "${HOME}\dfirws\local\default-config.txt" | Out-Null
 Copy-Item "${source}\dfirws\local\example-customize.ps1" "${HOME}\dfirws\local\example-customize.ps1" | Out-Null
 Copy-Item "${source}\dfirws\local\.bashrc.default" "${HOME}\dfirws\local\" | Out-Null
 Copy-Item "${source}\dfirws\local\.zcompdump.default" "${HOME}\dfirws\local\" | Out-Null
@@ -50,16 +50,6 @@ Copy-Item "${source}\dfirws\local\default-Microsoft.PowerShell_profile.ps1" "${H
 if ( -not (Test-Path -Path "${HOME}\dfirws\dfirws.wsb" -PathType Leaf )) {
 	Write-Output "Create default dfirws.wsb"
 	(Get-Content "${HOME}\dfirws\dfirws.wsb.template").replace("__SANDBOX__", "${HOME}\dfirws") | Set-Content "${HOME}\dfirws\dfirws.wsb"
-}
-
-if (! (Test-Path -Path "${HOME}\dfirws\setup\config.txt")) {
-		Copy-Item "${HOME}\dfirws\setup\default-config.txt" "${HOME}\dfirws\setup\config.txt"
-		Write-Output "Created ${HOME}\dfirws\tools\config.txt. You can use it to customize tools to install based on your needs."
-}
-
-if (! (Test-Path -Path "${HOME}\dfirws\local\customize.ps1")) {
-		Copy-Item "${HOME}\dfirws\local\example-customize.ps1" "${HOME}\dfirws\local\customize.ps1"
-		Write-Output "Created ${HOME}\dfirws\local\customize.ps1. You can use it to create shortcuts and run custom PowerShell code on startup."
 }
 
 if($Null -eq (Get-Process "WindowsSandbox" -ea SilentlyContinue) ){
