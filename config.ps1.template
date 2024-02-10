@@ -1,6 +1,18 @@
+# This file contains usernames and keys to download tools that should not be
+# available in the sandbox or VM when doing analysis.
+
 # MaxMind GeoIP2 API key
-$MAXMIND_LICENSE_KEY="YOUR KEY"
+$MAXMIND_LICENSE_KEY = "YOUR KEY"
 
 # Add jep and ghidrathon to the dfirws
 # Requires download of Visual Studio to build jep
-$INSTALL_JEP="No"
+$INSTALL_JEP = "No"
+
+# GitHub API username and token
+$GITHUB_USERNAME = "YOUR GITHUB USERNAME"
+$GITHUB_TOKEN = "YOUR GITHUB TOKEN"
+
+$null = $MAXMIND_LICENSE_KEY
+$null = $GITHUB_USERNAME
+$null = $GITHUB_TOKEN
+$null = $INSTALL_JEP

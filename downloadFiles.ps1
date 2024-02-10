@@ -29,6 +29,12 @@ param(
 
 . ".\resources\download\common.ps1"
 
+if (Test-Path ".\config.ps1") {
+    . ".\config.ps1"
+} else {
+    . ".\config.ps1.template"
+}
+
 # Ensure that we have the necessary tools installed
 if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
     Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to PATH."
@@ -111,12 +117,17 @@ Get-Date > ".\log\jobs.txt"
 
 if ($all -or $Bash -or $Didier -or $Http -or $Python -or $Release) {
     # Get GitHub password from user input
-    write-dateLog "Use GitHub token to avoid problems with rate limits."
-    $GH_USER = Read-Host "Enter GitHub user name"
-    $PASS = Read-Host "Enter GitHub token" -AsSecureString
-    $GH_PASS =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
-    $null = $GH_PASS
-    $null = $GH_USER
+    if ($GITHUB_USERNAME -ne "YOUR GITHUB USERNAME" -and $GITHUB_TOKEN -ne "YOUR GITHUB TOKEN") {
+        $GH_USER = "${GITHUB_USERNAME}"
+        $GH_PASS = "${GITHUB_TOKEN}"
+    } else {
+        Write-DateLog "Use GitHub username and token to avoid problems with rate limits on GitHub."
+        $GH_USER = Read-Host "Enter GitHub user name"
+        $PASS = Read-Host "Enter GitHub token" -AsSecureString
+        $GH_PASS =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
+        $null = $GH_PASS
+        $null = $GH_USER
+    }
 }
 
 if ($all -or $Bash -or $Node -or $python -or $Rust) {

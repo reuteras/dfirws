@@ -9,10 +9,10 @@ if (-not (Test-Path -Path "C:\tmp")) {
     New-Item -ItemType Directory -Path "C:\tmp"
 }
 
-if (Test-Path ".\setup\config.txt") {
-    Copy-Item -Force -Path ".\setup\config.txt" -Destination "C:\tmp\config.ps1"
+if (Test-Path ".\local\config.txt") {
+    Copy-Item -Force -Path ".\local\config.txt" -Destination "C:\tmp\config.ps1"
 } else {
-    Copy-Item -Force -Path ".\setup\default-config.txt" -Destination "C:\tmp\config.ps1"
+    Copy-Item -Force -Path ".\local\default-config.txt" -Destination "C:\tmp\config.ps1"
 }
 
 . "C:\tmp\config.ps1"
