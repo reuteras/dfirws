@@ -182,6 +182,17 @@ function Install-CMDer {
     }
 }
 
+
+function Install-Docker {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-docker.txt")) {
+        Write-Output "Installing Docker"
+        Copy-Item "${SETUP_PATH}\docker.exe" "${TEMP}\docker.exe" -Force
+        Start-Process -Wait "${TEMP}\docker.exe" -ArgumentList 'install --quiet --accept-license'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-docker.txt" | Out-Null
+    } else {
+        Write-Output "Docker is already installed"
+    }
+}
 function Install-Dokany {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dokany.txt")) {
         Write-Output "Installing Dokany"

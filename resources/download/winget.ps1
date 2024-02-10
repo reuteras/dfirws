@@ -9,6 +9,15 @@ if (Test-Path .\tmp\winget\Autopsy*.msi) {
 }
 Clear-Tmp winget
 
+# Docker Desktop - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading Docker Desktop."
+Get-WinGet "Docker.DockerDesktop"
+if (Test-Path .\tmp\winget\Docker*.exe) {
+    Copy-Item .\tmp\winget\Docker*.exe ".\downloads\docker.exe"
+}
+Clear-Tmp winget
+
 # DotNet 6 runtime - installed during startup
 Clear-Tmp winget
 Write-SynchronizedLog "winget: Downloading DotNet 6 runtime."

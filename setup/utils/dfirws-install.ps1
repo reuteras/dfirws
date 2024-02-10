@@ -6,6 +6,7 @@ param (
     [switch]$BashExtra,
     [switch]$Choco,
     [switch]$CMDer,
+    [switch]$Docker,
     [switch]$Dokany,
     [switch]$GitBash,
     [switch]$GoLang,
@@ -49,6 +50,10 @@ if ($Choco.IsPresent) {
 
 if ($CMDer.IsPresent) {
     Install-CMDer
+}
+
+if ($Docker.IsPresent) {
+    Install-Docker
 }
 
 if ($Dokany.IsPresent) {
