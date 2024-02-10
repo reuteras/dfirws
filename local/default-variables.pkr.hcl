@@ -10,7 +10,7 @@ variable "cpus" {
 
 variable "disk_size" {
   type    = string
-  default = "300000"
+  default = "307200"
 }
 
 variable "disk_type_id" {
