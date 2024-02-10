@@ -86,12 +86,18 @@ if (! ($NoCreateVM.IsPresent)) {
     $hash = (Get-FileHash -Path iso\$filename -Algorithm SHA256).Hash
 
     # Change the strings ISO_HASH, ISO_FILENAME and ISO_LINK in the file windows_11.pkr.hcl.default to the actual values and save in windows_11.pkr.hcl
-    (Get-Content ".\resources\vm\windows_11.pkr.hcl.default") -replace 'ISO_HASH', $hash | Set-Content "windows_11.pkr.hcl"
-    (Get-Content ".\windows_11.pkr.hcl") -replace 'ISO_FILENAME', $filename | Set-Content "windows_11.pkr.hcl"
-    (Get-Content ".\windows_11.pkr.hcl") -replace 'ISO_LINK', $real_link | Set-Content "windows_11.pkr.hcl"
+    (Get-Content ".\resources\vm\windows_11.pkr.hcl.default") -replace 'ISO_HASH', $hash | Set-Content ".\tmp\windows_11.pkr.hcl"
+    (Get-Content ".\tmp\windows_11.pkr.hcl") -replace 'ISO_FILENAME', $filename | Set-Content ".\tmp\windows_11.pkr.hcl"
+    (Get-Content ".\tmp\windows_11.pkr.hcl") -replace 'ISO_LINK', $real_link | Set-Content ".\tmp\windows_11.pkr.hcl"
 
     if (Get-Command packer.exe -ErrorAction SilentlyContinue) {
-        packer build windows_11.pkr.hcl
+        if (Test-Path ".\local\variables.pkr.hcl") {
+            Write-Output "Running packer build windows_11.pkr.hcl with local/variables.pkr.hcl"
+            packer build -var-file=".\local/variables.pkr.hcl" ".\tmp\windows_11.pkr.hcl"
+        } else {
+            Write-Output "Running packer build windows_11.pkr.hcl"
+            packer build -var-file=".\local/default-variables.pkr.hcl" ".\tmp\windows_11.pkr.hcl"
+        }
     } else {
         Write-Output "Packer is not installed. Please install packer and then rerun the command."
         Write-Output "Download packer from https://developer.hashicorp.com/packer/install"
