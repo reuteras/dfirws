@@ -1,6 +1,6 @@
-[![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
-
 # dfirws: DFIR in Windows
+
+[![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 DFIRWS is a solution to do DFIR work in Windows. The tool has been enhanced since its start and now have the following parts.
 
