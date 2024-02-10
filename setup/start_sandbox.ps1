@@ -23,15 +23,14 @@ Write-DateLog "Start sandbox setup" | Tee-Object -FilePath "${WSDFIR_TEMP}\start
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
 # Copy config files and import them
-if (-not (Test-Path "${WSDFIR_TEMP}\default-config.ps1")) {
-    Copy-Item "${HOME}\Documents\tools\default-config.txt" "${WSDFIR_TEMP}\default-config.ps1" -Force
-}
-
 if (-not (Test-Path "${WSDFIR_TEMP}\config.ps1")) {
-    Copy-Item "${HOME}\Documents\tools\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
+    if (Test-Path "${LOCAL_PATH}\config.txt") {
+        Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
+    } else {
+        Copy-Item "${LOCAL_PATH}\default-config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
+    }
 }
 
-. "${WSDFIR_TEMP}\default-config.ps1"
 . "${WSDFIR_TEMP}\config.ps1"
 Write-DateLog "Config files copied and imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
