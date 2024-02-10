@@ -127,4 +127,11 @@ if (! ($NoCustomize.IsPresent)) {
     }
 }
 
+Write-Output "Removing temporary files"
+foreach ($file in "tmp\windows_11.pkr.hcl", ".\tmp\git.zip", ".\tmp\tools.zip", ".\tmp\venv.zip", ".\tmp\${filename}") {
+    if (Test-Path -Path $file) {
+        Remove-Item -Path $file -Force
+    }
+}
+
 Write-Output "Done"

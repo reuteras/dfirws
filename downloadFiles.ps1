@@ -216,6 +216,10 @@ foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name |
 # done.txt is used to check last update in sandbox
 Write-Output "" > ".\downloads\done.txt"
 
+# Remove temp files
+Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
+Remove-Item -Recurse -Force .\tmp\mount\ 2>&1 | Out-Null
+
 $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
     $_.Line -notmatch " INFO " -and
     $_.Line -notmatch "This is taking longer than usual" -and
