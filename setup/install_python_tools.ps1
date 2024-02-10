@@ -66,7 +66,6 @@ poetry add `
     keystone-engine `
     lief `
     LnkParse3 `
-    malwareconfig `
     matplotlib `
     minidump `
     msticpy `

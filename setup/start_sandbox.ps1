@@ -691,7 +691,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Shadow-pulse (csv with inform
 
 # Malware tools
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\malconf (RATDecoders).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command malconf.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command maldump.exe -h"
 
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike" | Out-Null
