@@ -1,7 +1,6 @@
 . "${HOME}\Documents\tools\wscommon.ps1"
 
 # Source config files
-. "${WSDFIR_TEMP}\default-config.ps1"
 . "${WSDFIR_TEMP}\config.ps1"
 
 # Make Windows be more like Linux
