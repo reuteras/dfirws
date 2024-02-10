@@ -23,6 +23,8 @@ param(
     [Switch]$scare,
     [Parameter(HelpMessage = "Switch to venv sigma-cli.")]
     [Switch]$sigma,
+    [Parameter(HelpMessage = "Switch to venv mwcp.")]
+    [Switch]$mwcp,
     [Parameter(HelpMessage = "Switch to venv Zircolite.")]
     [Switch]$zircolite
 )
@@ -55,6 +57,8 @@ if ($chepy) {
     $venv = "scare"
 } elseif ($sigma) {
     $venv = "sigma-cli"
+} elseif ($mwcp) {
+    $venv = "mwcp"
 } elseif ($zircolite) {
     $venv = "Zircolite"
 } else {

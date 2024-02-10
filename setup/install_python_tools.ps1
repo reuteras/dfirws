@@ -68,7 +68,6 @@ poetry add `
     LnkParse3 `
     malwareconfig `
     matplotlib `
-    mwcp `
     minidump `
     msticpy `
     mkyara `
@@ -599,6 +598,45 @@ if ((Get-FileHash C:\tmp\sigma-cli.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
     Write-DateLog "Python venv sigma-cli done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "sigma-cli has not been updated, don't update sigma-cli venv." >> "C:\log\python.txt"
+}
+
+
+#
+# venv mwcp
+#
+
+& "$PYTHON_BIN" -m pip index versions mwcp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\mwcp.txt"
+
+if (Test-Path "C:\venv\mwcp\mwcp.txt") {
+    $CURRENT_VENV = "C:\venv\mwcp\mwcp.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+if ((Get-FileHash C:\tmp\mwcp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+    Write-DateLog "Install packages in venv mwcp in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
+    Get-ChildItem C:\venv\mwcp\* -Exclude mwcp.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\mwcp"
+    C:\venv\mwcp\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\mwcp"
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -U poetry >> "C:\log\python.txt"
+
+    poetry init `
+        --name sigmaclivenv `
+        --description "Python venv for mwcp." `
+        --author "dfirws" `
+        --license "MIT" `
+        --no-interaction
+
+    poetry add `
+        mwcp 2>&1 >> "C:\log\python.txt"
+
+    Copy-Item "${WSDFIR_TEMP}\mwcp.txt" "C:\venv\mwcp\mwcp.txt" -Force 2>&1 >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv mwcp done." >> "C:\log\python.txt"
+} else {
+    Write-DateLog "mwcp has not been updated, don't update mwcp venv." >> "C:\log\python.txt"
 }
 
 
