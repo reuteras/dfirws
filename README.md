@@ -87,10 +87,10 @@ More usage information is available in the [wiki](https://github.com/reuteras/df
 
 ## Update
 
-Update scripts used to create the sandbox (i.e. this code) by running **git pull** and then update the tools by running **.\downloadFiles.ps1** again. Check *./setup/default-config.txt* for changed configuration options. You can also select to update parts of the included tools based on how they are downloaded. To update Python tools run:
+Update scripts used to create the sandbox (i.e. this code) by running **git pull** and then update the tools by running **.\downloadFiles.ps1** again. Check *./local/default-config.txt* for changed configuration options. You can also select to update parts of the included tools based on how they are downloaded. To update Python tools run:
 
 ```PowerShell
-.\downloadFiles.ps1 --python
+.\downloadFiles.ps1 -Python
 ```
 
 ## Documentation
