@@ -94,7 +94,7 @@ Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
 Get-WinGet "VirusTotal.vt-cli"
 if (Test-Path .\tmp\winget\vt-cli*.zip) {
     Copy-Item .\tmp\winget\vt-cli*.zip ".\downloads\vt.zip"
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH\vt.zip}" -o"${TOOLS}\bin" | Out-Null
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
 }
 Clear-Tmp winget
 
