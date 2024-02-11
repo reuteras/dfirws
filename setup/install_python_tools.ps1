@@ -639,4 +639,42 @@ if ((Get-FileHash C:\tmp\mwcp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
 }
 
 
+#
+# venv rexi
+#
+
+& "$PYTHON_BIN" -m pip index versions rexi 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\rexi.txt"
+
+if (Test-Path "C:\venv\rexi\rexi.txt") {
+    $CURRENT_VENV = "C:\venv\rexi\rexi.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+if ((Get-FileHash C:\tmp\rexi.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+    Write-DateLog "Install packages in venv rexi in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
+    Get-ChildItem C:\venv\rexi\* -Exclude rexi.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\rexi"
+    C:\venv\rexi\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\rexi"
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -U poetry >> "C:\log\python.txt"
+
+    poetry init `
+        --name sigmaclivenv `
+        --description "Python venv for rexi." `
+        --author "dfirws" `
+        --license "MIT" `
+        --no-interaction
+
+    poetry add `
+        rexi 2>&1 >> "C:\log\python.txt"
+
+    Copy-Item "${WSDFIR_TEMP}\rexi.txt" "C:\venv\rexi\rexi.txt" -Force 2>&1 >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv rexi done." >> "C:\log\python.txt"
+} else {
+    Write-DateLog "rexi has not been updated, don't update rexi venv." >> "C:\log\python.txt"
+}
+
 Write-Output "" > C:\venv\default\done

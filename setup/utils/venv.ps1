@@ -19,6 +19,8 @@ param(
     [Switch]$maldump,
     [Parameter(HelpMessage = "Switch to venv pe2pic.")]
     [Switch]$pe2pic,
+    [Parameter(HelpMessage = "Switch to venv rexi.")]
+    [Switch]$rexi,
     [Parameter(HelpMessage = "Switch to venv scare.")]
     [Switch]$scare,
     [Parameter(HelpMessage = "Switch to venv sigma-cli.")]
@@ -53,6 +55,8 @@ if ($chepy) {
     $venv = "maldump"
 } elseif ($pe2pic) {
     $venv = "pe2pic"
+} elseif ($rexi) {
+    $venv = "rexi"
 } elseif ($scare) {
     $venv = "scare"
 } elseif ($sigma) {
