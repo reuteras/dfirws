@@ -68,10 +68,10 @@ dfirws-install.ps1 -Wireshark
 dfirws-install.ps1 -X64dbg
 dfirws-install.ps1 -Zui
 
-# wsl.exe --set-default-version 2
-wsl.exe --install -d Kali-Linux --no-launch
-wsl.exe --set-version Kali-Linux 2
-dfirws-install.ps1 -Docker
+# Problems with virtualization in Workstation
+#wsl.exe --install -d Kali-Linux --no-launch
+#wsl.exe --set-version Kali-Linux 2
+#dfirws-install.ps1 -Docker
 
 Write-Output "Install Meslo font for Oh-My-Posh"
 oh-my-posh.exe font install Meslo

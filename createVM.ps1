@@ -112,23 +112,23 @@ if (! ($NoCreateVM.IsPresent)) {
 }
 
 if (! ($NoInstall.IsPresent)) {
-    Write-Output "Create zip files for the VM to speed up the installation"
+    Write-Output "Create zip files for the VM to speed up installation"
     & ".\resources\vm\prepare_zip_files.ps1"
-    Write-Output "Running the install_dfirws_in_vm.ps1 script for the VM"
+    Write-Output "Running install_dfirws_in_vm.ps1 script"
     & ".\resources\vm\install_dfirws_in_vm.ps1"
 }
 
 if ($Debloat.IsPresent) {
-    Write-Output "Running the debloat.ps1 script"
+    Write-Output "Running debloat.ps1 script"
     & ".\resources\vm\debloat.ps1"
 }
 
 if (! ($NoCustomize.IsPresent)) {
     if (Test-Path -Path ".\local\customize-vm.ps1") {
-        Write-Output "Running the local/customize-vm.ps1 script"
+        Write-Output "Running local/customize-vm.ps1 script"
         & ".\resources\vm\customize-vm.ps1" -CustomizeFile "customize-vm.ps1"
     } else {
-        Write-Output "Running the local/example-customize-vm.ps1 script"
+        Write-Output "Running local/example-customize-vm.ps1 script"
         & ".\resources\vm\customize-vm.ps1" -CustomizeFile "example-customize-vm.ps1"
     }
 }
