@@ -111,10 +111,6 @@ source "vmware-iso" "windows_11" {
                         "Firmware"                  = "efi"
                         "Annotation"                = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.username}|0D|0APassword: ${var.password}|0D|0A|0D|0AWindows 11 with dfirws installed.",
                     }
-  vmx_data_post     = {
-                        "vvtd.enable"               = "TRUE"
-                        "vhv.enable"                = "TRUE"
-                    }
   vnc_port_max                   = 5980
   vnc_port_min                   = 5900
   winrm_username                 = "${var.username}"
