@@ -2,7 +2,7 @@
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-DFIRWS is a solution to do DFIR work in Windows. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or VM. 
+DFIRWS is a solution to do DFIR work in Windows. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or VM.
 
 DFIRWS has been enhanced since its start and now have the following main parts.
 
@@ -43,7 +43,8 @@ winget install Rclone.Rclone
 Set-executionPolicy -ExecutionPolicy Bypass
 ```
 
-3. *Windows Sandbox:* The Windows Sandbox feature must be enabled on the host. This is true even if you only like to build and run the DFIRWS tools in a VM. The Sandbox feature is used to build some tools when you run the **downloadFiles.ps1** script. You can enable the Sandbox feature by using the **Add and remove Windows features** in Windows and add *Windows Sandbox*. An alternative way is to open a Windows terminal as administrator and run:
+3. *Windows Sandbox:* The Windows Sandbox feature must be enabled on the host. This is true even if you only like to build and run the DFIRWS tools in a VM. The Sandbox feature is used to build some tools when you run the **downloadFiles.ps1** script.
+You can enable the Sandbox feature by using the **Add and remove Windows features** in Windows and add *Windows Sandbox*. An alternative way is to open a Windows terminal as administrator and run:
 
 ```PowerShell
 Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
