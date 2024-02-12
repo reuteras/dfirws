@@ -61,7 +61,7 @@ if ($NoDownload.IsPresent) {
 
     # Copy iso file to iso directory
     if (-not (Test-Path -Path "iso")) {
-        New-Item -ItemType Directory -Path "iso"
+        New-Item -ItemType Directory -Path "iso" | Out-Null
     }
 
     if (! (Test-Path -Path "iso\$filename")) {

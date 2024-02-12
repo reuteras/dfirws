@@ -1009,10 +1009,12 @@ if ("${WSDFIR_SYSMON}" -eq "Yes") {
 }
 Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Start Gollum for local wiki
+# Start Gollum for local wiki if running in sandbox
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
-Start-Process "${env:ProgramFiles}\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar ${TOOLS}\lib\gollum.war -S gollum --lenient-tag-lookup ${GIT_PATH}\dfirws.wiki" -WindowStyle Hidden
-Write-DateLog "Starting Gollum for local wiki done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+if (Test-Path "C:\Users\WDAGUtilityAccount"){
+    Start-Process "${env:ProgramFiles}\Amazon Corretto\jdk*\bin\java.exe" -argumentlist "-jar ${TOOLS}\lib\gollum.war -S gollum --lenient-tag-lookup ${GIT_PATH}\dfirws.wiki" -WindowStyle Hidden
+    Write-DateLog "Starting Gollum for local wiki done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 
 # Don't ask about new apps
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1 | Out-Null

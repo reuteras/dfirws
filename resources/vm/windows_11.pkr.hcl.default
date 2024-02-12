@@ -109,6 +109,8 @@ source "vmware-iso" "windows_11" {
                         "RemoteDisplay.vnc.enabled" = "false"
                         "RemoteDisplay.vnc.port"    = "5900"
                         "Firmware"                  = "efi"
+                        "vvtd.enable"               = "TRUE"
+                        "vhv.enable"                = "TRUE"
                         "Annotation"                = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.username}|0D|0APassword: ${var.password}|0D|0A|0D|0AWindows 11 with dfirws installed.",
                     }
   vnc_port_max                   = 5980

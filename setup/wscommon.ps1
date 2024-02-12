@@ -134,6 +134,9 @@ function Install-Autopsy {
 }
 
 function Install-BashExtra {
+    if (!Test-Path "${env:ProgramFiles}\dfirws\installed-gitbash.txt") {
+        Install-GitBash
+    }
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-bash-extras.txt")) {
         Write-Output "Installing Bash extras"
         Set-Location "${env:ProgramFiles}\Git" | Out-Null
@@ -451,7 +454,7 @@ function Install-Wireshark {
 function Install-X64dbg {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-x64dbg.txt")) {
         Write-Output "Installing x64dbg"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\x64dbg.zip" -o"${env:ProgramFiles}\x64dbg"
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\x64dbg.zip" -o"${env:ProgramFiles}\x64dbg" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\x64dbg\release\x32"
         Add-ToUserPath "${env:ProgramFiles}\x64dbg\release\x64"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-x64dbg.txt" | Out-Null

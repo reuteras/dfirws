@@ -1,5 +1,7 @@
 Write-Output "Customizing the VM"
 
+. "${HOME}\Documents\tools\wscommon.ps1"
+
 $OriginalPref = $ProgressPreference # Default is 'Continue'
 $ProgressPreference = "SilentlyContinue"
 
@@ -66,6 +68,11 @@ dfirws-install.ps1 -Wireshark
 dfirws-install.ps1 -X64dbg
 dfirws-install.ps1 -Zui
 
+# wsl.exe --set-default-version 2
+wsl.exe --install -d Kali-Linux --no-launch
+wsl.exe --set-version Kali-Linux 2
+dfirws-install.ps1 -Docker
+
 Write-Output "Install Meslo font for Oh-My-Posh"
 oh-my-posh.exe font install Meslo
 
@@ -73,7 +80,7 @@ Write-Output "Add auto start shortcut to open dfirws folder"
 Add-Shortcut "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\dfirws.lnk" -DestinationPath "${HOME}\Desktop\dfirws"
 
 Write-Output "Set Windows Theme to Dark"
-c:\Windows\Resources\Themes\themeB.theme
+& "c:\Windows\Resources\Themes\themeB.theme" || Write-Output "ERROR: Failed to set theme to dark"
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 
 $ProgressPreference = $OriginalPref
