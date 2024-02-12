@@ -134,7 +134,7 @@ function Install-Autopsy {
 }
 
 function Install-BashExtra {
-    if (!Test-Path "${env:ProgramFiles}\dfirws\installed-gitbash.txt") {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-gitbash.txt")) {
         Install-GitBash
     }
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-bash-extras.txt")) {
