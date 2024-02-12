@@ -45,7 +45,7 @@ variable "restart_timeout" {
 
 variable "output_directory" {
   type    = string
-  default = "~/Windows_11_dfirws_64-bit.vmwarevm"
+  default = "Windows_11_dfirws_64-bit.vmwarevm"
 }
 
 variable "vm_name" {
