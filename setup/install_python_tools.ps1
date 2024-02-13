@@ -671,6 +671,7 @@ if ((Get-FileHash C:\tmp\rexi.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
         rexi 2>&1 >> "C:\log\python.txt"
 
     Copy-Item "${WSDFIR_TEMP}\rexi.txt" "C:\venv\rexi\rexi.txt" -Force 2>&1 >> "C:\log\python.txt"
+    Copy-Item "C:\venv\rexi\Scripts\rexi.exe" "C:\venv\default\Scripts\rexi.exe" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv rexi done." >> "C:\log\python.txt"
 } else {
