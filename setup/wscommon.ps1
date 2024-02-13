@@ -258,11 +258,15 @@ function Install-Jadx {
 
 function Install-Kape {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-kape.txt")) {
-        Write-Output "Installing Kape"
-        Copy-Item -Recurse "${SETUP_PATH}\KAPE" "${env:ProgramFiles}" -Force
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\gkape.lnk" -DestinationPath "${env:ProgramFiles}\KAPE\gkape.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\KAPE\gkape.exe"
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\kape.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "${HOME}\Desktop"
-        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-kape.txt" | Out-Null
+        if (Test-Path "${SETUP_PATH}\KAPE" ) {
+           Write-Output "Installing Kape"
+            Copy-Item -Recurse "${SETUP_PATH}\KAPE" "${env:ProgramFiles}" -Force
+            Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\gkape.lnk" -DestinationPath "${env:ProgramFiles}\KAPE\gkape.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\KAPE\gkape.exe"
+            Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\kape.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "${HOME}\Desktop"
+            New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-kape.txt" | Out-Null
+        } else {
+            Write-Output "KAPE not found in ${SETUP_PATH}"
+        }
     } else {
         Write-Output "Kape is already installed"
     }
