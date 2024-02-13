@@ -136,7 +136,7 @@ More usage information is available in the [wiki](https://github.com/reuteras/df
 
 ## Usage and configuration of the VM
 
-You can create a VM with the dfirws tools installed by running **.\createVM.ps1**. Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO from Microsoft and create a VM with the tools installed. The VM will be created in the root folder of the checked out repo.
+You can create a VM with the dfirws tools installed by running **.\createVM.ps1**. Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO from Microsoft and create a VM with the tools installed. The VM will be created  in the root folder of the checked out repository.
 
 - The VM will be created with 4 cores and 16 GB of memory.
 - The VM will be created with a 300 GB sparse disk (space is not preallocated).
