@@ -80,7 +80,7 @@ Write-Output "Add auto start shortcut to open dfirws folder"
 Add-Shortcut "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\dfirws.lnk" -DestinationPath "${HOME}\Desktop\dfirws"
 
 Write-Output "Set Windows Theme to Dark"
-& "c:\Windows\Resources\Themes\themeB.theme" || Write-Output "ERROR: Failed to set theme to dark"
+Start-Process -Wait "c:\Windows\Resources\Themes\themeB.theme"
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 
 $ProgressPreference = $OriginalPref
