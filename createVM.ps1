@@ -1,9 +1,36 @@
+<#
+.SYNOPSIS
+    Create a Windows 11 VM with dfirws installed.
+
+.DESCRIPTION
+    This script will download the Windows 11 ISO file, create a VM with Windows 11 installed, install dfirws in the VM and run Windows 11 customization.
+
+.PARAMETER NoDownload
+    Don't download the ISO file (when already downloaded).
+
+.PARAMETER NoCreateVM
+    Don't create the VM (VM already created and Windows is installed).
+
+.PARAMETER NoInstall
+    Don't install dfirws in the VM (install script already finished).
+
+.PARAMETER NoCustomize
+    Dont' run Windows 11 customization.
+
+.NOTES
+    File Name      : createVM.ps1
+    Author         : Peter R
+
+.LINK
+    https://github.com/reuteras/dfirws
+#>
+
 param (
-    [Parameter(HelpMessage = "Don't download the ISO file.")]
+    [Parameter(HelpMessage = "Don't download the ISO file (when already downloaded).")]
     [Switch]$NoDownload,
-    [Parameter(HelpMessage = "Don't create the VM.")]
+    [Parameter(HelpMessage = "Don't create the VM (VM already created and Windows is installed).")]
     [Switch]$NoCreateVM,
-    [Parameter(HelpMessage = "Don't install dfirws the VM.")]
+    [Parameter(HelpMessage = "Don't install dfirws in the VM (install script already finished).")]
     [Switch]$NoInstall,
     [Parameter(HelpMessage = "Dont' run Windows 11 customization.")]
     [Switch]$NoCustomize
@@ -59,7 +86,6 @@ if ($NoDownload.IsPresent) {
         Exit
     }
 
-    # Copy iso file to iso directory
     if (-not (Test-Path -Path "iso")) {
         New-Item -ItemType Directory -Path "iso" | Out-Null
     }
@@ -77,13 +103,11 @@ if (! ($NoCreateVM.IsPresent)) {
         Write-Output "Using ISO file: $filename"
     }
 
-    # Make sure the iso file is downloaded
     if (! (Test-Path -Path "iso\$filename")) {
         Write-Output "ERROR: ISO file not found. Exiting"
         Exit
     }
 
-    # Get hash of the downloaded file from the iso directory
     $hash = (Get-FileHash -Path iso\$filename -Algorithm SHA256).Hash
 
     if ( "" -eq $real_link ) {
