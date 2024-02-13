@@ -1,4 +1,26 @@
-# Download and update files for the sandbox
+<#
+
+.SYNOPSIS
+    Download files and prepare the sandbox.
+
+.DESCRIPTION
+    This script downloads files and prepares the sandbox for DFIRWS.
+
+.EXAMPLE
+    .\downloadFiles.ps1
+    This will download all files needed for DFIRWS.
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Python
+    This will download or update packages for Python.
+
+.NOTES
+    File Name      : downloadFiles.ps1
+    Author         : Peter R
+
+.LINK
+    https://github.com/reuteras/dfirws
+#>
 
 param(
     [Parameter(HelpMessage = "Update Bash.")]
@@ -21,18 +43,26 @@ param(
     [Switch]$Release,
     [Parameter(HelpMessage = "Update Rust.")]
     [Switch]$Rust,
-    [Parameter(HelpMessage = "Update files downloaded via winget.")]
+    [Parameter(HelpMessage = "Update tools downloaded via winget.")]
     [Switch]$Winget,
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
     [Switch]$Zimmerman
     )
 
-. ".\resources\download\common.ps1"
+if (Test-Path ".\resources\download\common.ps1") {
+    . ".\resources\download\common.ps1"
+} else {
+    Write-DateLog "Error: common.ps1 not found. Please check your installation."
+    Exit
+}
 
 if (Test-Path ".\config.ps1") {
     . ".\config.ps1"
-} else {
+} elseif (Test-Path ".\config.ps1.template") {
     . ".\config.ps1.template"
+} else {
+    Write-DateLog "Error: Neither config.ps1 nor config.ps1.template found. Please check your installation."
+    Exit
 }
 
 # Ensure that we have the necessary tools installed
@@ -51,11 +81,6 @@ if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
     Exit
 }
 
-if (! (Test-Path -Path ".\config.ps1")) {
-    Copy-Item ".\config.ps1.template" ".\config.ps1" -Force
-    Write-DateLog "INFO: config.ps1 not found. Created new from default config.ps1.template. Please check values."
-}
-
 # Ensure configuration exists for rclone
 rclone.exe config touch | Out-Null
 
@@ -68,7 +93,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
 if ($Bash.IsPresent -or $Didier.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
-    Write-DateLog "No arguments given. Will download all files."
+    Write-DateLog "No arguments given. Will download all tools for dfirws."
     $all = $true
 }
 
@@ -91,7 +116,6 @@ if (!(Test-Path "${SETUP_PATH}\.etag")) {
     New-Item -ItemType Directory -Force -Path "${SETUP_PATH}\.etag" 2>&1 | Out-Null
 }
 
-
 if (!(Test-Path "${TOOLS}")) {
     New-Item -ItemType Directory -Force -Path "${TOOLS}" 2>&1 | Out-Null
 }
@@ -108,7 +132,6 @@ if (!(Test-Path "${TOOLS}\Zimmerman")) {
     New-Item -ItemType Directory -Force -Path "${TOOLS}\Zimmerman" 2>&1 | Out-Null
 }
 
-# Ensure that we have a log directory and a clean log files
 if (! (Test-Path -Path ".\log" )) {
     New-Item -ItemType Directory -Force -Path ".\log" > $null
 }
@@ -130,7 +153,7 @@ if ($all -or $Bash -or $Didier -or $Http -or $Python -or $Release) {
     }
 }
 
-if ($all -or $Bash -or $Node -or $python -or $Rust) {
+if ($all -or $Bash -or $Node -or $Python -or $Rust) {
     Write-DateLog "Download files needed in Sandboxes."
     .\resources\download\basic.ps1
 }
@@ -155,7 +178,7 @@ if ($all -or $Git) {
     .\resources\download\git.ps1
 }
 
-if ($all -or $python) {
+if ($all -or $Python) {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages."
     Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
@@ -177,7 +200,7 @@ if ($all -or $Didier) {
     .\resources\download\didier.ps1
 }
 
-if ($all -or $winget) {
+if ($all -or $Winget) {
     Write-DateLog "Download tools via winget."
     .\resources\download\winget.ps1
 }
@@ -199,7 +222,7 @@ if ($all -or $PowerShell) {
     .\resources\download\powershell.ps1
 }
 
-if ($all -or $bash -or $Node -or $python -or $Rust) {
+if ($all -or $bash -or $Node -or $Python -or $Rust) {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
@@ -240,7 +263,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
 }
 
 if ($warnings -or $errors) {
-    Write-DateLog "Errors or warnings were found in the logs. Please check them."
+    Write-DateLog "Errors or warnings were found in log files. Please check the log files for details."
 } else {
     Write-DateLog "Downloads and preparations done."
 }
