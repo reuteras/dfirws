@@ -639,6 +639,7 @@
         "vmmap",
         "vmrun",
         "vmwarevm",
+        "VMX",
         "volatilityworkbench",
         "Volumeid",
         "vsix",
