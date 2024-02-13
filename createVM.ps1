@@ -133,6 +133,9 @@ if (! ($NoCustomize.IsPresent)) {
     }
 }
 
+Write-Output "Remove shared folder dfirws"
+vmrun.exe -T ws removeSharedFolder "${VM_VMX}" "dfirws"
+
 Write-Output "Removing temporary files"
 foreach ($file in "tmp\windows_11.pkr.hcl", ".\tmp\git.zip", ".\tmp\tools.zip", ".\tmp\venv.zip", ".\tmp\${filename}") {
     if (Test-Path -Path $file) {
