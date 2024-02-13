@@ -1,7 +1,19 @@
-# Script to download data to use for enrichment.
-# Data included are:
-# - Tor exit nodes
-# - Maxmind GeoLite2 ASN database
+<#
+.SYNOPSIS
+    Script to download data to use for enrichment.
+
+.DESCRIPTION
+    This script downloads data to use for enrichment. Data included are:
+    - Tor exit nodes
+    - Maxmind GeoLite2 ASN database
+
+.NOTES
+    File Name      : enrichment.ps1
+    Author         : Peter R
+
+.LINK
+    https://github.com/reuteras/dfirws
+#>
 
 # Set the currentDirectory to the current directory
 $currentDirectory = "${PWD}"
