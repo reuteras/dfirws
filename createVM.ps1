@@ -133,8 +133,16 @@ if (! ($NoCustomize.IsPresent)) {
     }
 }
 
+Write-Output "Starting the VM to remove shared folder dfirws"
+vmrun.exe -T ws start "${VM_VMX}" gui
+
+vmrun.exe -T ws -gu dfirws -gp password  getGuestIPAddress "${VM_VMX}" -wait | Out-Null
+
 Write-Output "Remove shared folder dfirws"
 vmrun.exe -T ws removeSharedFolder "${VM_VMX}" "dfirws"
+
+Write-Output "Shutting down the VM"
+vmrun.exe -T ws stop "${VM_VMX}" soft
 
 Write-Output "Removing temporary files"
 foreach ($file in "tmp\windows_11.pkr.hcl", ".\tmp\git.zip", ".\tmp\tools.zip", ".\tmp\venv.zip", ".\tmp\${filename}") {
