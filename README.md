@@ -136,7 +136,7 @@ More usage information is available in the [wiki](https://github.com/reuteras/df
 
 ## Usage and configuration of the VM
 
-You can create VM by running **.\createVM.ps1**.  Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO and create a VM with the tools installed. The VM will be created in the root folder.
+You can create a VM with the dfirws tools installed by running **.\createVM.ps1**. Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO from Microsoft and create a VM with the tools installed. The VM will be created in the root folder of the checked out repo.
 
 - The VM will be created with 4 cores and 16 GB of memory.
 - The VM will be created with a 300 GB sparse disk (space is not preallocated).
@@ -144,6 +144,8 @@ You can create VM by running **.\createVM.ps1**.  Currently only VMWare Workstat
 - The VM will be created with a user named *dfirws* with password *password*.
 
 You can change the settings by copying *local/default-variables.pkr.hcl* to *local/variables.pkr.hcl* and modify the settings to your liking. You can for example change setting for autounattend to change the default keyboard to US (Swedish is the default).
+
+Currently there is now way to update the tolls in the VM. You have to delete the VM and run **.\createVM.ps1** again.
 
 ## Update
 
