@@ -40,7 +40,7 @@ vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "readonly" "${DFIRWS_PATH}\read
 Write-Output "Adding shared folder readwrite for later analyses."
 vmrun.exe -T ws addSharedFolder "${VM_VMX}" "readwrite" "${DFIRWS_PATH}\readwrite"
 Write-Output "Marking shared folder readwrite as read-write"
-vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "readwrite" "${DFIRWS_PATH}\readwrite" "writeable"
+vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "readwrite" "${DFIRWS_PATH}\readwrite" "writable"
 
 Write-Output "Copy files to VM. This will take a while."
 vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWindow -interactive "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -File "\\vmware-host\Shared Folders\dfirws\resources\vm\copy_files_to_vm.ps1"
