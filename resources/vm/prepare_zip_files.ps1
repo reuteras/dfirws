@@ -3,6 +3,13 @@ if (!(Test-Path -Path ".\tmp")) {
 }
 
 Write-Output "Creating zip for git"
+
+foreach ($zip in ("git.zip", "tools.zip", "venv.zip")) {
+    if (Test-Path ".\tmp\$zip") {
+        Remove-Item ".\tmp\$zip" -Force
+    }
+}
+
 Set-Location ".\mount"
 & "${env:ProgramFiles}\7-Zip\7z.exe" a "..\tmp\git.zip" "git" | Out-Null
 Write-Output "Creating zip for Tools"
