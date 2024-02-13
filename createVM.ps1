@@ -33,7 +33,9 @@ param (
     [Parameter(HelpMessage = "Don't install dfirws in the VM (install script already finished).")]
     [Switch]$NoInstall,
     [Parameter(HelpMessage = "Dont' run Windows 11 customization.")]
-    [Switch]$NoCustomize
+    [Switch]$NoCustomize,
+    [Parameter(HelpMessage = "VMX file for the VM.")]
+    [string]$VM_VMX = ".\Windows_11_dfirws_64-bit.vmwarevm\Windows_11_dfirws_64-bit.vmx"
 )
 
 if (-not (Test-Path -Path "tmp")) {
