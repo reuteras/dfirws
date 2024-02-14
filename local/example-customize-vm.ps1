@@ -73,9 +73,6 @@ dfirws-install.ps1 -Zui
 #wsl.exe --set-version Kali-Linux 2
 #dfirws-install.ps1 -Docker
 
-Write-Output "Install Meslo font for Oh-My-Posh"
-oh-my-posh.exe font install Meslo
-
 Write-Output "Add auto start shortcut to open dfirws folder"
 Add-Shortcut "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\dfirws.lnk" -DestinationPath "${HOME}\Desktop\dfirws"
 
