@@ -16,21 +16,27 @@ if (! (Test-Path "${HOME}\dfirws")) {
 	Remove-Item dfirws.zip
 }
 
+$folders = "local", "readonly", "readwrite", "local\defaults", "local\tabby", "local\vscode"
+foreach ($folder in $folders) {
+	if (! (Test-Path "${HOME}\dfirws\$folder")) {
+		mkdir "${HOME}\dfirws\$folder" | Out-Null
+	}
+}
+
 Write-Output "Update downloads"
 Robocopy.exe /MT:96 /MIR "${source}\dfirws\downloads" "${HOME}\dfirws\downloads"  | Out-Null
+
+Write-Output "Update enrichments"
+Robocopy.exe /MT:96 /MIR "${source}\dfirws\enrichment" "${HOME}\dfirws\enrichment"  | Out-Null
+
+Write-Output "Update local defaults"
+Robocopy.exe /MT:96 /MIR "${source}\dfirws\local\defaults" "${HOME}\dfirws\local\defaults"  | Out-Null
 
 Write-Output "Update mount"
 Robocopy.exe /MT:96 /MIR "${source}\dfirws\mount" "${HOME}\dfirws\mount" | Out-Null
 
 Write-Output "Update setup."
 Robocopy.exe /MT:96 /MIR "${source}\dfirws\setup" "${HOME}\dfirws\setup" /XF "config.txt" | Out-Null
-
-$folders = "local", "readonly", "readwrite"
-foreach ($folder in $folders) {
-	if (! (Test-Path "${HOME}\dfirws\$folder")) {
-		mkdir "${HOME}\dfirws\$folder" | Out-Null
-	}
-}
 
 Write-Output "Update other files."
 if (Test-Path "${HOME}\dfirws\dfirws.ps1" ) {
@@ -39,13 +45,6 @@ if (Test-Path "${HOME}\dfirws\dfirws.ps1" ) {
 
 Copy-Item "${source}\dfirws\README.md" "${HOME}\dfirws\README.md" | Out-Null
 Copy-Item "${source}\dfirws\createSandboxConfig.ps1" "${HOME}\dfirws\createSandboxConfig.ps1" | Out-Null
-Copy-Item "${source}\dfirws\dfirws.wsb.template" "${HOME}\dfirws\dfirws.wsb.template" | Out-Null
-Copy-Item "${source}\dfirws\local\default-config.txt" "${HOME}\dfirws\local\default-config.txt" | Out-Null
-Copy-Item "${source}\dfirws\local\example-customize.ps1" "${HOME}\dfirws\local\example-customize.ps1" | Out-Null
-Copy-Item "${source}\dfirws\local\.bashrc.default" "${HOME}\dfirws\local\" | Out-Null
-Copy-Item "${source}\dfirws\local\.zcompdump.default" "${HOME}\dfirws\local\" | Out-Null
-Copy-Item "${source}\dfirws\local\.zshrc.default" "${HOME}\dfirws\local\" | Out-Null
-Copy-Item "${source}\dfirws\local\default-Microsoft.PowerShell_profile.ps1" "${HOME}\dfirws\local\" | Out-Null
 
 if ( -not (Test-Path -Path "${HOME}\dfirws\dfirws.wsb" -PathType Leaf )) {
 	Write-Output "Create default dfirws.wsb"
