@@ -341,8 +341,6 @@ Move-Item ${TOOLS}\Cutter-* ${TOOLS}\cutter
 
 # MesloLGS NF font - installed during start
 Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Meslo.zip" -match Meslo.zip
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\Meslo.zip" -o"${TOOLS}\fonts\Meslo" | Out-Null
-Get-FileFromUri -uri "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.ps1" -FilePath ".\downloads\install-fonts.ps1"
 
 # Perl by Strawberry
 Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "${SETUP_PATH}\perl.zip" -match portable.zip
