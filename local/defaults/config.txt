@@ -45,6 +45,10 @@ $WSDFIR_VSCODE_PYTHON="Yes"
 $WSDFIR_VSCODE_SPELL="Yes"
 # Install Visual Studio Code Mermaid extension
 $WSDFIR_VSCODE_MERMAID="Yes"
+# Install Visual Studio Code Shellcheck extension
+$WSDFIR_VSCODE_SHELLCHECK="Yes"
+# Install Visual Studio Code ruff extension
+$WSDFIR_VSCODE_RUFF="Yes"
 # Install Windows loopback adapter on Windows 10. Doesn't work on Windows 11 at the moment.
 $WSDFIR_W10_LOOPBACK="No"
 # Install Zui 
@@ -77,3 +81,7 @@ $WSDFIR_DARK="Yes"
 # For me it works on Windows 11 23H2 but not on Windows 11 22H2.
 $WSDFIR_OHMYPOSH="No"
 $WSDFIR_FONT_NAME = "Meslo"
+$WSDFIR_FONT_FULL_NAME = "Consolas, 'Courier New', monospace"
+#$WSDFIR_FONT_FULL_NAME = "MesloLGM Nerd Font Mono"
+# If you use oh-my-posh, set tabby to Yes
+$WSDFIR_TABBY="No"

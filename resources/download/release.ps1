@@ -86,6 +86,10 @@ Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.msi" -mat
 Get-GitHubRelease -repo "eneam/mboxviewer" -path "${SETUP_PATH}\mboxviewer.zip" -match mbox-viewer.exe
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mboxviewer.zip" -o"${TOOLS}\mboxviewer" | Out-Null
 
+# Tabby
+Get-GitHubRelease -repo "eugeny/tabby" -path "${SETUP_PATH}\tabby.zip" -match portable-x64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\tabby.zip" -o"${TOOLS}\tabby" | Out-Null
+
 # CyberChef
 Get-GitHubRelease -repo "gchq/CyberChef" -path "${SETUP_PATH}\CyberChef.zip" -match CyberChef
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\CyberChef.zip" -o"${TOOLS}\CyberChef" | Out-Null
@@ -307,6 +311,9 @@ Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zi
 
 # Visual Studio Code powershell extension - installed during start
 Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match vsix
+
+# vscode-shellcheck
+Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match vsix
 
 # qpdf
 Get-GitHubRelease -repo "qpdf/qpdf" -path "${SETUP_PATH}\qpdf.zip" -match msvc64.zip

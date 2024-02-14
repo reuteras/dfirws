@@ -27,6 +27,18 @@ if ("$vscode_mermaid_string" -ne "") {
     Write-DateLog "ERROR: Could not get URI for Visual Studio Code mermaid extension"
 }
 
+# Get URI for Visual Studio Code ruff extension - ugly
+$vscode_ruff_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff -RegEx '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
+
+if ("$vscode_ruff_string" -ne "") {
+    $vscode_tmp = $vscode_ruff_string | Select-String -Pattern '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
+    $vscode_ruff_version = $vscode_tmp.Matches.Groups[1].Value
+    # Visual Studio Code ruff extension
+    Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/charliermarsh/vsextensions/ruff/$vscode_ruff_version/vspackage" -FilePath ".\downloads\vscode\vscode-ruff.vsix" -CheckURL "Yes"
+} else {
+    Write-DateLog "ERROR: Could not get URI for Visual Studio Code ruff extension"
+}
+
 # Get Visual Studio Code - installed during start
 Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -FilePath ".\downloads\vscode.exe"
 
