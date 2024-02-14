@@ -339,8 +339,12 @@ if (Test-Path "${TOOLS}\cutter") {
 }
 Move-Item ${TOOLS}\Cutter-* ${TOOLS}\cutter
 
-# MesloLGS NF font - installed during start
+# Nerd fonts - installed during start
+# Add some example fonts
+Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\JetBrainsMono.zip" -match JetBrainsMono.zip
+Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\LiberationMono.zip" -match LiberationMono.zip
 Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Meslo.zip" -match Meslo.zip
+Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Terminus.zip" -match Terminus.zip
 
 # Perl by Strawberry
 Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "${SETUP_PATH}\perl.zip" -match portable.zip
