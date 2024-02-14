@@ -44,10 +44,7 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
 }
 
 if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
-    $consoleFontRegPath = "HKCU:\Console"
     Install-OhMyPosh
-    Set-ItemProperty -Path "${consoleFontRegPath}" -Name "FaceName" -Value "${WSDFIR_fontName}"
-    Set-ItemProperty -Path "${consoleFontRegPath}" -Name "FontSize" -Value "${WSDFIR_fontSize}"
 }
 
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force

@@ -76,9 +76,4 @@ $WSDFIR_DARK="Yes"
 # There are problems with Nerdfonts on some versions of Windows.
 # For me it works on Windows 11 23H2 but not on Windows 11 22H2.
 $WSDFIR_OHMYPOSH="No"
-$WSDFIR_FONT_DIRNAME = "Meslo"
-$WSDFIR_FONT_FILENAME_PREFIX = "MesloLGMNerdFont"
-$WSDFIR_fontName = "MesloLGM Nerd Font Mono"
-# Get the value for $WSDFIR_fontSize from the output of the following command:
-# lnkparse.exe -a "${HOME}\Desktop\PowerShell.lnk" | rg "Font size"
-$WSDFIR_fontSize = 1179648
+$WSDFIR_FONT_NAME = "Meslo"
