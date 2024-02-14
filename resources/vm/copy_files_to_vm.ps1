@@ -12,7 +12,7 @@ if (-not (Test-Path -Path "C:\tmp")) {
 if (Test-Path ".\local\config.txt") {
     Copy-Item -Force -Path ".\local\config.txt" -Destination "C:\tmp\config.ps1"
 } else {
-    Copy-Item -Force -Path ".\local\default-config.txt" -Destination "C:\tmp\config.ps1"
+    Copy-Item -Force -Path ".\local\defaults\config.txt" -Destination "C:\tmp\config.ps1"
 }
 
 . "C:\tmp\config.ps1"
