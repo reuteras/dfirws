@@ -44,7 +44,7 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
 }
 
 if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
-    Install-OhMyPosh
+    Install-OhMyPosh | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force
@@ -95,37 +95,37 @@ Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start
 
 # Install NEO4J
 if ("${WSDFIR_NEO4J}" -eq "Yes") {
-    Install-Neo4j
+    Install-Neo4j | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Neo4j installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install LibreOffice with custom arguments
 if ("${WSDFIR_LIBREOFFICE}" -eq "Yes") {
-    Install-LibreOffice
+    Install-LibreOffice | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "LibreOffice installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Git if specified
 if ("${WSDFIR_GIT}" -eq "Yes") {
-    Install-GitBash
+    Install-GitBash | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Git installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install PDFStreamDumper if specified
 if ("${WSDFIR_PDFSTREAM}" -eq "Yes") {
-    Install-PDFStreamDumper
+    Install-PDFStreamDumper | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "PDFStreamDumper installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Visual Studio Code and PowerShell extension if specified
 if ("${WSDFIR_VSCODE}" -eq "Yes") {
-    Install-VSCode
+    Install-VSCode | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Visual Studio Code installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Zui if specified
 if ("${WSDFIR_ZUI}" -eq "Yes") {
-    Install-Zui
+    Install-Zui | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Zui installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -288,13 +288,13 @@ Write-DateLog "Tools copied" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbo
 
 # Add jadx
 if ("${WSDFIR_JADX}" -eq "Yes") {
-    Install-Jadx
+    Install-Jadx | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "jadx added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Add x64dbg if specified
 if ("${WSDFIR_X64DBG}" -eq "Yes") {
-    Install-X64dbg
+    Install-X64dbg | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "x64dbg added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -304,7 +304,7 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\Po
 
 # Add cmder
 if ("${WSDFIR_CMDER}" -eq "Yes") {
-    Install-CMDer
+    Install-CMDer | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "cmder added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -313,7 +313,7 @@ Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.
 
 # Add apimonitor
 if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
-    Install-Apimonitor
+    Install-Apimonitor | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "apimonitor added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -330,31 +330,31 @@ Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_s
 
 # Run install script for choco packages
 if ("${WSDFIR_CHOCO}" -eq "Yes") {
-    Install-Choco
+    Install-Choco | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     # Add packages below
 }
 
 # Setup Node.js
 if ("${WSDFIR_NODE}" -eq "Yes") {
-    Install-Node
+    Install-Node | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Node.js installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Setup Obsidian
 if ("${WSDFIR_OBSIDIAN}" -eq "Yes") {
-    Install-Obsidian
+    Install-Obsidian | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Obsidian installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Qemu
 if ("${WSDFIR_QEMU}" -eq "Yes") {
-    Install-Qemu
+    Install-Qemu | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Qemu installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install extra tools for Git-bash
 if ("${WSDFIR_BASH_EXTRA}" -eq "Yes") {
-    Install-BashExtra
+    Install-BashExtra | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Extra tools for Git-bash installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -372,24 +372,24 @@ Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FileP
 
 # Last commands
 if ("${WSDFIR_W10_LOOPBACK}" -eq "Yes") {
-    Install-W10Loopback
+    Install-W10Loopback | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Kape
 if ("${WSDFIR_KAPE}" -eq "Yes") {
-    Install-Kape
+    Install-Kape | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Kape installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Loki
 if ("${WSDFIR_LOKI}" -eq "Yes") {
-    Install-Loki
+    Install-Loki | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Loki installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install malcat
 if ("${WSDFIR_MALCAT}" -eq "Yes") {
-    Install-Malcat
+    Install-Malcat | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "malcat installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -1015,7 +1015,7 @@ REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "No
 
 # Install hashcat
 if ("${WSDFIR_HASHCAT}" -eq "Yes") {
-    Install-Hashcat
+    Install-Hashcat | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Installing hashcat done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 

@@ -346,7 +346,7 @@ function Install-OhMyPosh {
         Write-Output "Installing OhMyPosh"
         Copy-Item "${SETUP_PATH}\oh-my-posh.exe" "${TEMP}\oh-my-posh.exe" -Force
         Start-Process -Wait "${TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
-        oh-my-posh.exe font install "${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip"
+        & "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" font install --user "${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
     } else {
         Write-Output "OhMyPosh is already installed"
