@@ -346,11 +346,7 @@ function Install-OhMyPosh {
         Write-Output "Installing OhMyPosh"
         Copy-Item "${SETUP_PATH}\oh-my-posh.exe" "${TEMP}\oh-my-posh.exe" -Force
         Start-Process -Wait "${TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
-        Set-Location "${TEMP}"
-        New-Item -ItemType Directory -Force -Path "${TEMP}\patched-fonts\${WSDFIR_FONT_DIRNAME}" | Out-Null
-        Copy-Item ${TOOLS}\fonts\${WSDFIR_FONT_DIRNAME}\${WSDFIR_FONT_FILENAME_PREFIX}-* "${TEMP}\patched-fonts\${WSDFIR_FONT_DIRNAME}\" -Force
-        Copy-Item "${SETUP_PATH}\install-fonts.ps1" "${TEMP}\install-fonts.ps1" -Force
-        & ".\install-fonts.ps1" "${WSDFIR_FONT_DIRNAME}" | Out-Null
+        oh-my-posh.exe font install "${SETUP_PATH}\Meslo.zip"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
     } else {
         Write-Output "OhMyPosh is already installed"
