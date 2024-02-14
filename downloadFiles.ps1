@@ -138,6 +138,11 @@ if (! (Test-Path -Path ".\log" )) {
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
 
+# Moved file to downloads
+if (Test-Path ".\tools_downloaded.csv") {
+    Move-Item -Path ".\tools_downloaded.csv" -Destination ".\downloads\tools_downloaded.csv" -Force
+}
+
 if ($all -or $Bash -or $Didier -or $Http -or $Python -or $Release) {
     # Get GitHub password from user input
     if ($GITHUB_USERNAME -ne "YOUR GITHUB USERNAME" -and $GITHUB_TOKEN -ne "YOUR GITHUB TOKEN") {

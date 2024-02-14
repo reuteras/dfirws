@@ -148,12 +148,12 @@ function Install-BashExtra {
         if (Test-Path "${LOCAL_PATH}\.zshrc") {
             Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc" -Force
         } else {
-            Copy-Item "${LOCAL_PATH}\.zshrc.default" "${HOME}\.zshrc" -Force
+            Copy-Item "${LOCAL_PATH}\defaults\.zshrc" "${HOME}\.zshrc" -Force
         }
         if (Test-Path "${LOCAL_PATH}\.zcompdump") {
             Copy-Item "${LOCAL_PATH}\.zcompdump" "${HOME}\.zcompdump" -Force
         } else {
-            Copy-Item "${LOCAL_PATH}\.zcompdump.default" "${HOME}\.zcompdump" -Force
+            Copy-Item "${LOCAL_PATH}\defaults\.zcompdump" "${HOME}\.zcompdump" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-bash-extras.txt" | Out-Null
     } else {
@@ -215,7 +215,7 @@ function Install-GitBash {
         if (Test-Path "${LOCAL_PATH}\.bashrc") {
             Copy-Item "${LOCAL_PATH}\.bashrc" "${HOME}\.bashrc" -Force
         } else {
-            Copy-Item "${LOCAL_PATH}\.bashrc.default" "${HOME}\.bashrc" -Force
+            Copy-Item "${LOCAL_PATH}\defaults\.bashrc" "${HOME}\.bashrc" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-gitbash.txt" | Out-Null
     } else {
@@ -413,6 +413,23 @@ function Install-VSCode {
         }
         if ($WSDFIR_VSCODE_MERMAID -eq "Yes") {
             & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-mermaid.vsix" 2>&1 | Out-Null
+        }
+        if ($WSDFIR_VSCODE_RUFF -eq "Yes") {
+            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-ruff.vsix" 2>&1 | Out-Null
+        }
+        if ($WSDFIR_VSCODE_SHELLCHECK -eq "Yes") {
+            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" 2>&1 | Out-Null
+        }
+        if (Test-Path "${HOME}\.vscode\argv.json") {
+            (Get-Content "${HOME}\.vscode\argv.json").Replace('"enable-crash-reporter": true,"', '"enable-crash-reporter": false,"') | Set-Content "${HOME}\.vscode\argv.json" -Force
+        }
+        if (!(Test-Path "${HOME}\AppData\Roaming\Code\User")) {
+            New-Item -Path "${HOME}\AppData\Roaming\Code\User" -ItemType Directory -Force | Out-Null
+        }
+        if (Test-Path "${LOCAL_PATH}\vscode\settings.json") {
+            Copy-Item "${LOCAL_PATH}\vscode\settings.json" "${HOME}\AppData\Roaming\Code\User\settings.json" -Force
+        } else {
+            (Get-Content "${LOCAL_PATH}\defaults\vscode\settings.json").Replace("FONT_NAME", "${WSDFIR_FONT_FULL_NAME}") | Set-Content "${HOME}\AppData\Roaming\Code\User\settings.json" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-vscode.txt" | Out-Null
     } else {

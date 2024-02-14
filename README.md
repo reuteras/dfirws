@@ -113,7 +113,7 @@ Enrichment data can be downloaded by running:
 
 ## Usage and configuration of the sandbox
 
-The quickest way to use the tool is to start a sandbox by clicking on **dfirws.wsb** or running **./dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
+The quickest way to use the tool is to start a sandbox by clicking on **dfirws.wsb** or running **.\dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
 
 The goal for startup time is set to around two minutes on a computer with a Intel Core i7 and the default configuration. The following is an example screen of the sandbox running after start.
 
@@ -125,12 +125,12 @@ You can use the search field to find the tools you like to use. See example belo
 
 By default the sandbox will have clipboard redirection off as well as secure defaults for other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
 
-To customize the sandbox you can copy *local/default-config.txt* to *local/config.txt* and change the settings to your liking. The file *local/config.txt* is used by the scripts to specify which tools to install when the sandbox starts. Every tool will still be downloaded and can be installed later in the sandbox if needed.
+To customize the sandbox you can copy *local\defaults\config.txt* to *local\config.txt* and change the settings to your liking. The file *local\config.txt* is used by the scripts to specify which tools to install when the sandbox starts. Every tool will still be downloaded and can be installed later in the sandbox if needed.
 The difference will be the time it takes to start the sandbox, i.e. running an installer for a program on every start.
 
 Extra tools can be installed in a running **dfirws** sandbox with the script **dfirws-install.ps1**. To list available tools run **Get-Help dfirws-install.ps1**. To install a tool run **dfirws-install.ps1 -<tool>**.
 
-If you like to run your own PowerShell code to customize **dfirws** you can copy *local/customize.ps1* to *local/customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** which at the moment is PowerShell 7 and that some things are different from earlier versions of PowerShell.
+If you like to run your own PowerShell code to customize **dfirws** you can copy *local\defaults\customize.ps1* to *local\customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** which at the moment is PowerShell 7 and that some things are different from earlier versions of PowerShell.
 
 More usage information is available in the [wiki](https://github.com/reuteras/dfirws/wiki). A local copy of the wiki is available by clicking on the **dfirws wiki** link on the desktop.
 
@@ -143,13 +143,13 @@ You can create a VM with the dfirws tools installed by running **.\createVM.ps1*
 - The VM will be created with a NAT network adapter.
 - The VM will be created with a user named *dfirws* with password *password*.
 
-You can change the settings by copying *local/default-variables.pkr.hcl* to *local/variables.pkr.hcl* and modify the settings to your liking. You can for example change setting for autounattend to change the default keyboard to US (Swedish is the default).
+You can change the settings by copying *local\default\variables.pkr.hcl* to *local\variables.pkr.hcl* and modify the settings to your liking. You can for example change setting for autounattend to change the default keyboard to US (Swedish is the default).
 
 Currently there is now way to update the tolls in the VM. You have to delete the VM and run **.\createVM.ps1** again.
 
 ## Update
 
-Update scripts used to create the sandbox (i.e. this code) by running **git pull** and then update the tools by running **.\downloadFiles.ps1** again. Check *./local/default-config.txt* for changed and added configuration options. You can also opt to only update parts of the included tools. To update Python tools run:
+Update scripts used to create the sandbox (i.e. this code) by running **git pull** and then update the tools by running **.\downloadFiles.ps1** again. Check *.\local\defaults\config.txt* for changed and added configuration options. You can also opt to only update parts of the included tools. To update Python tools run:
 
 ```PowerShell
 .\downloadFiles.ps1 -Python

@@ -128,7 +128,7 @@ if (! ($NoCreateVM.IsPresent)) {
             packer build -var-file=".\local\variables.pkr.hcl" ".\tmp\windows_11.pkr.hcl"
         } else {
             Write-Output "Running packer build windows_11.pkr.hcl"
-            packer build -var-file=".\local\default-variables.pkr.hcl" ".\tmp\windows_11.pkr.hcl"
+            packer build -var-file=".\local\defaults\variables.pkr.hcl" ".\tmp\windows_11.pkr.hcl"
         }
     } else {
         Write-Output "Packer is not installed. Please install packer and then rerun the command."
@@ -154,8 +154,8 @@ if (! ($NoCustomize.IsPresent)) {
         Write-Output "Running local/customize-vm.ps1 script"
         & ".\resources\vm\customize-vm.ps1" -CustomizeFile "customize-vm.ps1"
     } else {
-        Write-Output "Running local/example-customize-vm.ps1 script"
-        & ".\resources\vm\customize-vm.ps1" -CustomizeFile "example-customize-vm.ps1"
+        Write-Output "Running local/defaults/customize-vm.ps1 script"
+        & ".\resources\vm\customize-vm.ps1" -CustomizeFile "defaults\customize-vm.ps1"
     }
 }
 

@@ -27,7 +27,7 @@ if (-not (Test-Path "${WSDFIR_TEMP}\config.ps1")) {
     if (Test-Path "${LOCAL_PATH}\config.txt") {
         Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
     } else {
-        Copy-Item "${LOCAL_PATH}\default-config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
+        Copy-Item "${LOCAL_PATH}\defaults\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
     }
 }
 
@@ -39,8 +39,8 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
     Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force
     Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force
 } else {
-    Copy-Item "${LOCAL_PATH}\default-Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force
-    Copy-Item "${LOCAL_PATH}\default-Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force
+    Copy-Item "${LOCAL_PATH}\defaults\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force
+    Copy-Item "${LOCAL_PATH}\defaults\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force
 }
 
 if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
@@ -252,6 +252,7 @@ Add-ToUserPath "${TOOLS}\ssview"
 Add-ToUserPath "${TOOLS}\systeminformer\x64"
 Add-ToUserPath "${TOOLS}\systeminformer\x86"
 Add-ToUserPath "${TOOLS}\sysinternals"
+Add-ToUserPath "${TOOLS}\tabby"
 Add-ToUserPath "${TOOLS}\thumbcacheviewer"
 Add-ToUserPath "${TOOLS}\trid"
 Add-ToUserPath "${TOOLS}\upx"
@@ -279,7 +280,11 @@ Add-ToUserPath "${TOOLS}\ghidra\${GHIDRA_INSTALL_DIR}"
 Write-DateLog "Added to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Shortcut for PowerShell
-Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
+if ("$WSDFIR_TABBY" -eq "Yes") {
+    Add-Shortcut -SourceLnk "${HOME}\Desktop\Tabby.lnk" -DestinationPath "${TOOLS}\tabby\Tabby.exe" -WorkingDirectory "${HOME}\Desktop" -IconPath "${TOOLS}\tabby\Tabby.exe"
+} else {
+    Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
+}
 
 # Copy tools
 Copy-Item -Force "${SETUP_PATH}\BeaconHunter.exe" "${env:ProgramFiles}\bin"
@@ -927,6 +932,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Graphviz.lnk" -Destina
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\pwncat.py (Fancy reverse and bind shell handler).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pwncat.py --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\pygmentize.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\rexi.exe (Terminal UI for Regex Testing).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command rexi.exe --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\tabby.lnk" -DestinationPath "${TOOLS}\tabby\Tabby.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\tabby\Tabby.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\time-decode.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\upx.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\visidata.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
@@ -1028,13 +1034,22 @@ if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
     Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force
 }
 
+if (!(Test-Path "${HOME}\AppData\Roaming\tabby")) {
+    New-Item -Path "${HOME}\AppData\Roaming\tabby" -ItemType Directory -Force | Out-Null
+    if (Test-Path "${LOCAL_PATH}\tabby\config.yaml") {
+        Copy-Item "${LOCAL_PATH}\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
+    } else {
+        Copy-Item "${LOCAL_PATH}\defaults\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
+    }
+}
+
 # Run custom scripts
 if (Test-Path "${LOCAL_PATH}\customize.ps1") {
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1"
     Write-DateLog "Running customize scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 } else {
-    Write-DateLog "No customize scripts found running example-customize.ps1." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\example-customize.ps1"
+    Write-DateLog "No customize scripts found, running defaults\customize-sandbox.ps1." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1"
 }
 
 if (Test-Path "${LOCAL_PATH}\customise.ps1") {

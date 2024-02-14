@@ -11,8 +11,8 @@ Write-DateLog "Download packages for Git for Windows (bash)." > "${ROOT_PATH}\lo
 Write-DateLog "" >> "${ROOT_PATH}\log\bash.txt"
 
 # Check current files
-if (Test-Path -Path "${ROOT_PATH}\tools_downloaded.csv" ) {
-    ${StartHASH} = Get-FileHash -Path "${ROOT_PATH}\tools_downloaded.csv" -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+if (Test-Path -Path "${ROOT_PATH}\downloads\tools_downloaded.csv" ) {
+    ${StartHASH} = Get-FileHash -Path "${ROOT_PATH}\downloads\tools_downloaded.csv" -Algorithm SHA256 | Select-Object -ExpandProperty Hash
 } else {
     ${StartHASH} = ""
 }
@@ -44,7 +44,7 @@ foreach ($package in $packages) {
     Get-FileFromUri -uri "${url}" -FilePath ".\downloads\bash\${package}.pkg.tar.zst" -CheckURL "Yes"
 }
 
-$FinalHASH = Get-FileHash -Path "${ROOT_PATH}\tools_downloaded.csv" -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+$FinalHASH = Get-FileHash -Path "${ROOT_PATH}\downloads\tools_downloaded.csv" -Algorithm SHA256 | Select-Object -ExpandProperty Hash
 
 if (Compare-Object $StartHASH $FinalHASH) {
     (Get-Content ${ROOT_PATH}\resources\templates\generate_bash.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}") | Set-Content "${ROOT_PATH}\tmp\generate_bash.wsb"

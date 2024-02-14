@@ -9,7 +9,6 @@ Remove-Item -Recurse -Force "log" 2>&1 | Out-Null
 Remove-Item -Recurse -Force "mount" 2>&1 | Out-Null
 Remove-Item -Recurse -Force "packer_cache" 2>&1 | Out-Null
 Remove-Item -Recurse -Force "tmp" 2>&1 | Out-Null
-Remove-Item -Force ".\tools_downloaded.csv" 2>&1 | Out-Null
 Remove-Item -Force ".\windows_11.pkr.hcl" 2>&1 | Out-Null
 
 if ($All.IsPresent) {

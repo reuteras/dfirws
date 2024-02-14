@@ -1,6 +1,6 @@
 param (
     [Parameter(HelpMessage = "Path to customize file.")]
-    [string]$CustomizeFile = ".\example-customize-vm.ps1",
+    [string]$CustomizeFile = ".\defaults\customize-vm.ps1",
     [Parameter(HelpMessage = "Path to the VMX file.")]
     [string]$VM_VMX = ".\Windows_11_dfirws_64-bit.vmwarevm\Windows_11_dfirws_64-bit.vmx"
 )

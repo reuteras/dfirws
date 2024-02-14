@@ -579,8 +579,8 @@ function Compare-ToolsDownloaded {
     # Bad linter...
     $null=$AppName
 
-    if (Test-Path "$PSScriptRoot\..\..\tools_downloaded.csv") {
-        $toolsDownloaded = Import-Csv "$PSScriptRoot\..\..\tools_downloaded.csv"
+    if (Test-Path "$PSScriptRoot\..\..\downloads\tools_downloaded.csv") {
+        $toolsDownloaded = Import-Csv "$PSScriptRoot\..\..\downloads\tools_downloaded.csv"
     } else {
         $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] @()
     }
@@ -608,8 +608,8 @@ function Update-ToolsDownloaded {
         [Parameter(Mandatory=$True)] [string]$Name,
         [Parameter(Mandatory=$True)] [string]$Path
     )
-    if (Test-Path "$PSScriptRoot\..\..\tools_downloaded.csv") {
-        $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] (Import-Csv "$PSScriptRoot\..\..\tools_downloaded.csv")
+    if (Test-Path "$PSScriptRoot\..\..\downloads\tools_downloaded.csv") {
+        $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] (Import-Csv "$PSScriptRoot\..\..\downloads\tools_downloaded.csv")
     } else {
         $toolsDownloaded = [System.Collections.Generic.List[PSCustomObject]] @()
     }
@@ -632,7 +632,7 @@ function Update-ToolsDownloaded {
     }
 
     if($PSCmdlet.ShouldProcess($file.Name)) {
-        $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\tools_downloaded.csv" -NoTypeInformation
+        $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\downloads\tools_downloaded.csv" -NoTypeInformation
     }
 }
 

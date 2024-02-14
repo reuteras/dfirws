@@ -1,0 +1,23 @@
+{
+    "editor.inlineSuggest.enabled": true,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "shellcheck.exclude": [
+        "SC1017",
+        "SC1103"
+    ],
+    "git.confirmSync": false,
+    "terminal.integrated.automationProfile.windows": {},
+    "terminal.integrated.defaultProfile.windows": "Windows PowerShell",
+    "terminal.integrated.fontFamily": "FONT_NAME",
+    "powershell.codeFormatting.autoCorrectAliases": true,
+    "powershell.codeFormatting.pipelineIndentationStyle": "IncreaseIndentationForFirstPipeline",
+    "cSpell.userWords": [
+        "dfirws"
+    ],
+    "window.openFilesInNewWindow": "on",
+    "window.openFoldersInNewWindow": "on",
+    "workbench.editor.enablePreview": false,
+    "markdown-mermaid.lightModeTheme": "dark"
+}
