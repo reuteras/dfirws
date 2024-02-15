@@ -92,6 +92,8 @@
           "invert_powerline": true,
           "powerline_symbol": "\ue0b2",
           "properties": {
+            "home_enabled": true,
+            "always_enabled": true,
             "display_mode": "always",
             "fetch_version": false,
             "fetch_virtual_env": true
