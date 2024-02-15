@@ -56,15 +56,19 @@ if (-not(Test-Path "${HOME}\tmp")) {
 
 #
 # Init oh-my-posh and set theme
-#
-# The default themes are available in the directory $env:POSH_THEMES_PATH
-#
+##
 
 if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
-	& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${env:USERPROFILE}\Documents\tools\configurations\powerlevel10k_rainbow.omp.json" > "${HOME}\tmp\oh-my-posh-init.ps1"
+	if ("${WSDFIR_TABBY}" -eq "Yes") {
+		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_POWERLINE}" > "${HOME}\tmp\oh-my-posh-init.ps1"
+	} else {
+		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_PLAIN}" > "${HOME}\tmp\oh-my-posh-init.ps1"
+	}
+	if (!(Test-Path "${HOME}\tmp\oh-my-posh-completion.ps1")) {
+		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" completion powershell > "${HOME}\tmp\oh-my-posh-completion.ps1"
+	}
 	& "${HOME}\tmp\oh-my-posh-init.ps1"
-	& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" completion powershell > "${HOME}\tmp\oh-my-posh-completion.ps1"
 	& "${HOME}\tmp\oh-my-posh-completion.ps1"
 	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
 
