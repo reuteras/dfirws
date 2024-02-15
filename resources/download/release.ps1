@@ -162,7 +162,14 @@ Get-GitHubRelease -repo "horsicq/DIE-engine" -path "${SETUP_PATH}\die.zip" -matc
 # XELFViewer
 Get-GitHubRelease -repo "horsicq/XELFViewer" -path "${SETUP_PATH}\XELFViewer.zip" -match win64_portable
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\XELFViewer.zip" -o"${TOOLS}\XELFViewer" | Out-Null
-Copy-Item "${CONFIGURATION_FILES}\xelfviewer.ini" "${TOOLS}\XELFViewer\xelfviewer.ini"
+if (Test-Path "${LOCAL_PATH}\XELFViewer") {
+    Remove-Item "${LOCAL_PATH}\XELFViewer" -Recurse -Force
+}
+if (Test-Path "${CONFIGURATION_FILES}\xelfviewer.ini") {
+    Copy-Item "${CONFIGURATION_FILES}\xelfviewer.ini" "${TOOLS}\XELFViewer\xelfviewer.ini"
+} else {
+    Copy-Item "${CONFIGURATION_FILES}\defaults\xelfviewer.ini" "${TOOLS}\XELFViewer\xelfviewer.ini"
+}
 
 # jd-gui
 Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "${SETUP_PATH}\jd-gui.zip" -match jd-gui-windows

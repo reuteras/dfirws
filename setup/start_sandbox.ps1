@@ -140,7 +140,11 @@ Write-DateLog "Date and time format set" | Tee-Object -FilePath "${WSDFIR_TEMP}\
 if ("${WSDFIR_DARK}" -eq "Yes") {
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0 | Out-Null
     New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++" -ItemType Directory -Force | Out-Null
-    Copy-Item "${env:USERPROFILE}\Documents\tools\configurations\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+    if (Test-Path "${LOCAL_PATH}\notepad++_dark.xml") {
+        Copy-Item "${LOCAL_PATH}\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+    } else {
+        Copy-Item "${LOCAL_PATH}\defaults\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+    }
     Write-DateLog "Dark mode set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -1059,7 +1063,12 @@ if (Test-Path "${LOCAL_PATH}\customise.ps1") {
 
 # Copy and extract files that need be in writeable locations
 Copy-Item -Recurse "${TOOLS}\Zimmerman\Hasher" "${env:ProgramFiles}\" -Force
-Copy-Item -Recurse "${HOME}\Documents\tools\configurations\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
+if (Test-Path "${LOCAL_PATH}\Hasher.ini") {
+    Copy-Item "${LOCAL_PATH}\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
+} else {
+    Copy-Item "${LOCAL_PATH}\defaults\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
+}
+
 Copy-Item -Recurse "${TOOLS}\Zimmerman\iisGeolocate" "${env:ProgramFiles}\" -Force
 if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
     Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force

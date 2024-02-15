@@ -2,7 +2,7 @@
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # Variables used by the script
-$CONFIGURATION_FILES = ".\setup\configurations"
+$CONFIGURATION_FILES = ".\local"
 $SETUP_PATH = ".\downloads"
 $WSDFIR_TEMP = "C:\tmp"
 $TOOLS = ".\mount\Tools"
