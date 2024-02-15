@@ -3,7 +3,7 @@
 # Root directory for the installation
 $WSDFIR_ROOT="C:\"
 
-# Commands to install
+# Tools to install
 
 # Install apimonitor
 $WSDFIR_APIMONITOR="No"
@@ -80,8 +80,19 @@ $WSDFIR_DARK="Yes"
 # There are problems with Nerdfonts on some versions of Windows.
 # For me it works on Windows 11 23H2 but not on Windows 11 22H2.
 $WSDFIR_OHMYPOSH="No"
-$WSDFIR_FONT_NAME = "Meslo"
-$WSDFIR_FONT_FULL_NAME = "Consolas, 'Courier New', monospace"
-#$WSDFIR_FONT_FULL_NAME = "MesloLGM Nerd Font Mono"
+
+# Configuration for oh-my-posh when using powerline10k compatible font
+$WSDFIR_OHMYPOSH_CONFIG_POWERLINE="defaults\posh\dfirws-powerlevel10k.omp.json"
+
+# Configuration for oh-my-posh when using simple font
+$WSDFIR_OHMYPOSH_CONFIG_PLAIN="${defaults\posh\dfirws.minimal.omp.json}"
+
+# Font name to use with oh-my-posh
+$WSDFIR_FONT_NAME="Meslo"
+
+# Full name used by Visual Studio Code
+$WSDFIR_FONT_FULL_NAME="Consolas, 'Courier New', monospace"
+#$WSDFIR_FONT_FULL_NAME="MesloLGM Nerd Font Mono"
+
 # If you use oh-my-posh, set tabby to Yes
 $WSDFIR_TABBY="No"
