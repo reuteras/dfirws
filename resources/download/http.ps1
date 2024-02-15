@@ -264,7 +264,7 @@ Get-FileFromUri -uri "https://gemmei.ftp.acc.umu.se/mirror/documentfoundation.or
 Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.79.exe" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
 
 # https://www.wireshark.org/download.html - Wireshark - available for manual installation
-Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.2-x64.exe" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
+Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.3-x64.exe" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
 
 # https://www.sqlite.org/download.html - SQLite
 Get-FileFromUri -uri "https://sqlite.org/2024/sqlite-tools-win-x64-3450100.zip" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
