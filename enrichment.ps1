@@ -218,6 +218,8 @@ if (-not (Test-Path -Path "${gitSaveDirectory}")) {
 Set-Location "${gitSaveDirectory}"
 
 $repourls = `
+    "https://github.com/securityscorecard/SSC-Threat-Intel-IoCs.git", `
+    "https://github.com/volexity/threat-intel", `
     "https://github.com/X4BNet/lists_vpn.git", `
     "https://github.com/X4BNet/lists_torexit.git", `
     "https://github.com/X4BNet/lists_stopforumspam.git", `
