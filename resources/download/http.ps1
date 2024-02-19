@@ -146,8 +146,12 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_sc
 #& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\resource_hacker.zip" -o"${TOOLS}\resource_hacker" | Out-Null
 
 # chocolatey
-Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\choco.zip" -o"${SETUP_PATH}\choco" | Out-Null
+if ("" -eq $choco) {
+    Write-DateLog "ERROR: Could not get URI for Chocolatey"
+} else {
+    Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\choco.zip" -o"${SETUP_PATH}\choco" | Out-Null
+}
 
 # Dependence for PE-bear
 Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"
