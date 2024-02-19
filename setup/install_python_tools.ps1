@@ -215,13 +215,12 @@ if ($INSTALL_JEP -eq "Yes") {
         Write-DateLog "Build Ghidrathon for Ghidra."
         Copy-Item -Recurse -Force "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
         Set-Location "${WSDFIR_TEMP}\ghidrathon"
-        #& "$TOOLS\gradle\bin\gradle.bat" -PGHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" -PPYTHON_BIN="C:\venv\jep\Scripts\python.exe" >> "C:\log\python.txt"
         python -m pip install -r requirements.txt >> "C:\log\python.txt"
-        python ".\ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" 2>&1 >> "C:\log\python.txt"
+        python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug >> "C:\log\python.txt"
         if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
             New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
         }
-        Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\ghidrathon.zip" 2>&1 >> "C:\log\python.txt"
+        Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 >> "C:\log\python.txt"
         Copy-Item ${WSDFIR_TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"

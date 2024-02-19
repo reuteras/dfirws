@@ -1034,7 +1034,9 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
 
 New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
-if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
+if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
+    Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force
+}if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
     Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force
 }
 
