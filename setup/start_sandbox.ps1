@@ -334,6 +334,11 @@ if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
 #Write-DateLog "New venv configured for PowerShell" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Signal that everything is done to start using the tools (mostly).
+if ("${WSDFIR_DARK}" -eq "Yes") {
+    Start-Process -Wait "c:\Windows\Resources\Themes\themeB.theme"
+    taskkill /f /im systemsettings.exe
+}
+
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
