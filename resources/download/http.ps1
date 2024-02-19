@@ -314,7 +314,7 @@ Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "${TOOLS}\bin\apktool.bat" -Force
 
 # https://windows.php.net/download - PHP
-Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.2-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.3-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\php.zip" -o"${TOOLS}\php" | Out-Null
 
 # https://hashcat.net/hashcat/ - hashcat
