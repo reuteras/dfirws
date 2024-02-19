@@ -146,7 +146,7 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_sc
 #& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\resource_hacker.zip" -o"${TOOLS}\resource_hacker" | Out-Null
 
 # chocolatey
-if ("" -eq $choco) {
+if ("" -eq "$choco") {
     Write-DateLog "ERROR: Could not get URI for Chocolatey"
 } else {
     Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
