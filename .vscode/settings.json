@@ -592,6 +592,7 @@
         "Sysmon",
         "sysmonconfig",
         "SYSTEMINFORMER",
+        "systemsettings",
         "tabsmenu",
         "taskkill",
         "tasklist",
