@@ -262,14 +262,14 @@ if (Test-Path "${TOOLS}\fakenet") {
 Move-Item ${TOOLS}\fakenet* ${TOOLS}\fakenet
 
 # GoReSym
-Get-GitHubRelease -repo "mandiant/GoReSym" -path "${SETUP_PATH}\GoReSym.zip" -match GoReSym-windows
+Get-GitHubRelease -repo "mandiant/GoReSym" -path "${SETUP_PATH}\GoReSym.zip" -match GoReSym.zip
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\GoReSym.zip" -o"${TOOLS}\GoReSym" | Out-Null
 if (Test-Path "${TOOLS}\GoReSym\GoReSym.exe") {
     Remove-Item "${TOOLS}\GoReSym\GoReSym.exe" -Force
 }
 Move-Item ${TOOLS}\GoReSym\GoReSym_win.exe ${TOOLS}\GoReSym\GoReSym.exe
-Remove-Item ${TOOLS}\GoReSym\GoReSym_lin
-Remove-Item ${TOOLS}\GoReSym\GoReSym_mac
+Remove-Item ${TOOLS}\GoReSym\GoReSym_lin -Force
+Remove-Item ${TOOLS}\GoReSym\GoReSym_mac -Force
 
 # Elfparser-ng
 Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "${SETUP_PATH}\elfparser-ng.zip" -match win64
