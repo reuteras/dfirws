@@ -131,7 +131,8 @@ if (Test-Path -Path "${TOOLS}\fqlite\.DS_Store") {
 Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -FilePath ".\downloads\WinApiSearch.zip"
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinApiSearch.zip" -o"${TOOLS}\WinApiSearch" | Out-Null
 
-# capa_ghidra.py - installed during start
+# Capa integration with Ghidra - installed during start
+Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_explorer.py" -FilePath ".\downloads\capa_explorer.py"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py"
 
 # pdfstreamdumper - installed during start
@@ -146,8 +147,12 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_sc
 #& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\resource_hacker.zip" -o"${TOOLS}\resource_hacker" | Out-Null
 
 # chocolatey
-Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\choco.zip" -o"${SETUP_PATH}\choco" | Out-Null
+if ("" -eq "$choco") {
+    Write-DateLog "ERROR: Could not get URI for Chocolatey"
+} else {
+    Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\choco.zip" -o"${SETUP_PATH}\choco" | Out-Null
+}
 
 # Dependence for PE-bear
 Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"
@@ -314,7 +319,7 @@ Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force
 Copy-Item "setup\utils\apktool.bat" "${TOOLS}\bin\apktool.bat" -Force
 
 # https://windows.php.net/download - PHP
-Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.2-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://windows.php.net/downloads/releases/php-8.3.3-nts-Win32-vs16-x64.zip" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\php.zip" -o"${TOOLS}\php" | Out-Null
 
 # https://hashcat.net/hashcat/ - hashcat
@@ -326,7 +331,7 @@ if (Test-Path -Path ${TOOLS}\hashcat) {
 Move-Item ${TOOLS}\hashcat-* ${TOOLS}\hashcat
 
 # ELK
-$ELK_VERSION = "8.12.1"
+$ELK_VERSION = "8.12.2"
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
 Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes"
 Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes"

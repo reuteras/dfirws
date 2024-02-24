@@ -334,6 +334,11 @@ if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
 #Write-DateLog "New venv configured for PowerShell" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Signal that everything is done to start using the tools (mostly).
+if ("${WSDFIR_DARK}" -eq "Yes") {
+    Start-Process -Wait "c:\Windows\Resources\Themes\themeB.theme"
+    taskkill /f /im systemsettings.exe
+}
+
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
@@ -484,6 +489,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\ImHex.lnk" -DestinationP
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Malcat.lnk" -DestinationPath "${env:ProgramFiles}\malcat\bin\malcat.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Notepad++.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-install -Obsidian).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Obsidian"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Visual Studio code (runs dfirws-install -VSCode).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -VSCode"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Visual Studio Code.lnk" -DestinationPath "${HOME}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 
 # File and apps
@@ -1034,7 +1040,9 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
 
 New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
-if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
+if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
+    Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force
+}if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
     Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force
 }
 
