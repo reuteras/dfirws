@@ -16,6 +16,7 @@ $repourls = `
     "https://github.com/ahmedkhlief/APT-Hunter.git", `
     "https://github.com/AndrewRathbun/DFIRArtifactMuseum.git", `
     "https://github.com/ANSSI-FR/bmc-tools.git", `
+    "https://github.com/Bert-JanP/Incident-Response-Powershell.git", `
     "https://github.com/BSI-Bund/RdpCacheStitcher.git", `
     "https://github.com/crypto2011/IDR.git", `
     "https://github.com/cyberark/White-Phoenix.git", `
@@ -32,6 +33,7 @@ $repourls = `
     "https://github.com/last-byte/PersistenceSniper.git", `
     "https://github.com/last-byte/PersistenceSniper.wiki.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
+    "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
     "https://github.com/mattifestation/CimSweep.git", `
