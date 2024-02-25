@@ -591,6 +591,8 @@ if ((Get-FileHash C:\tmp\sigma-cli.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
     poetry add `
         sigma-cli 2>&1 >> "C:\log\python.txt"
 
+    sigma plugin install --force-install sqlite windows sysmon elasticsearch splunk 2>&1 >> "C:\log\python.txt"
+
     Copy-Item "${WSDFIR_TEMP}\sigma-cli.txt" "C:\venv\sigma-cli\sigma-cli.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv sigma-cli done." >> "C:\log\python.txt"
