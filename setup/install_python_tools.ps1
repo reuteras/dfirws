@@ -623,7 +623,7 @@ if ((Get-FileHash C:\tmp\mwcp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     python -m pip install -U poetry >> "C:\log\python.txt"
 
     poetry init `
-        --name sigmaclivenv `
+        --name mwcpvenv `
         --description "Python venv for mwcp." `
         --author "dfirws" `
         --license "MIT" `
