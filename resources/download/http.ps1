@@ -300,7 +300,7 @@ Get-FileFromUri -uri "https://procdot.com/download/procdot/binaries/procdot_1_22
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
 
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
-Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/9.0.0/windows_10_cmake_Release_graphviz-install-9.0.0-win64.exe" -FilePath ".\downloads\graphviz.exe" -CheckURL "Yes"
+Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/10.0.1/windows_10_cmake_Release_graphviz-install-10.0.1-win64.exe" -FilePath ".\downloads\graphviz.exe" -CheckURL "Yes"
 
 # http://www.rohitab.com/apimonitor - API Monitor - installed during start
 Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe" -CheckURL "Yes"
