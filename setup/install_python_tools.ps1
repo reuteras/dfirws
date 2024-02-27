@@ -44,7 +44,6 @@ poetry init `
 poetry add `
     aiohttp[speedups] `
     autoit-ripper `
-    binary-refinery `
     cabarchive `
     cart `
     deep_translator `
@@ -662,7 +661,7 @@ if ((Get-FileHash C:\tmp\rexi.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     python -m pip install -U poetry >> "C:\log\python.txt"
 
     poetry init `
-        --name sigmaclivenv `
+        --name rexivenv `
         --description "Python venv for rexi." `
         --author "dfirws" `
         --license "MIT" `
@@ -677,6 +676,45 @@ if ((Get-FileHash C:\tmp\rexi.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
     Write-DateLog "Python venv rexi done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "rexi has not been updated, don't update rexi venv." >> "C:\log\python.txt"
+}
+
+
+#
+# venv binary-refinery
+#
+
+& "$PYTHON_BIN" -m pip index versions binary-refinery 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\binary-refinery.txt"
+
+if (Test-Path "C:\venv\binary-refinery\binary-refinery.txt") {
+    $CURRENT_VENV = "C:\venv\binary-refinery\binary-refinery.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+if ((Get-FileHash C:\tmp\binary-refinery.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+    Write-DateLog "Install packages in venv binary-refinery in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
+    Get-ChildItem C:\venv\binary-refinery\* -Exclude binary-refinery.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\binary-refinery"
+    C:\venv\binary-refinery\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\binary-refinery"
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -U poetry >> "C:\log\python.txt"
+
+    poetry init `
+        --name binaryrefineryvenv `
+        --description "Python venv for binary-refinery." `
+        --author "dfirws" `
+        --license "MIT" `
+        --no-interaction
+
+    poetry add `
+        binary-refinery[all] 2>&1 >> "C:\log\python.txt"
+
+    Copy-Item "${WSDFIR_TEMP}\binary-refinery.txt" "C:\venv\binary-refinery\binary-refinery.txt" -Force 2>&1 >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv binary-refinery done." >> "C:\log\python.txt"
+} else {
+    Write-DateLog "binary-refinery has not been updated, don't update binary-refinery venv." >> "C:\log\python.txt"
 }
 
 Write-Output "" > C:\venv\default\done

@@ -1,6 +1,8 @@
 # Script to switch between virtual environments
 
 param(
+    [Parameter(HelpMessage = "Switch to venv binary-refinery.")]
+    [Switch]$binaryrefinery,
     [Parameter(HelpMessage = "Switch to venv chepy.")]
     [Switch]$chepy,
     [Parameter(HelpMessage = "Switch to venv default.")]
@@ -37,7 +39,9 @@ if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
 }
 
-if ($chepy) {
+if ($binaryrefinery) {
+    $venv = "binary-refinery"
+} elseif ($chepy) {
     $venv = "chepy"
 } elseif ($default) {
     $venv = "default"
