@@ -219,12 +219,12 @@ if ($INSTALL_JEP -eq "Yes") {
 
         python -m pip install -r requirements.txt >> "C:\log\python.txt"
         python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug >> "C:\log\python.txt"
-        
+
         if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
             New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
         }
         Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 >> "C:\log\python.txt"
-        
+
         Copy-Item ${WSDFIR_TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
@@ -278,10 +278,10 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
         Invoke-WebRequest -Uri $url.Value -OutFile $staticPath
         $baseHtmlContent = $baseHtmlContent.Replace($url.Value, "/static/$fileName")
     }
-    
+
     Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
     Copy-Item ${WSDFIR_TEMP}\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 >> "C:\log\python.txt"
-    
+
     deactivate
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_app.ps1"
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_cli.ps1"
@@ -313,14 +313,14 @@ if ((Get-FileHash C:\tmp\pe2pic.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash)
     Get-ChildItem C:\venv\pe2pic\* -Exclude pe2pic.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pe2pic"
     C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    
+
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r "C:\tmp\pe2pic_requirements.txt" 2>&1 >> "C:\log\python.txt"
-    
+
     Copy-Item "C:\tmp\pe2pic.py" "C:\venv\pe2pic\Scripts\pe2pic.py"
     Copy-Item "C:\tmp\pe2pic.txt" "C:\venv\pe2pic\pe2pic.txt" -Force 2>&1 >> "C:\log\python.txt"
-    
+
     deactivate
     Set-Content "C:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
     Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
@@ -351,14 +351,14 @@ if ((Get-FileHash C:\tmp\evt2sigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
     Get-ChildItem C:\venv\evt2sigma\* -Exclude evt2sigma.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\evt2sigma"
     C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    
+
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 >> "C:\log\python.txt"
-    
+
     Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
     Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
-    
+
     Copy-Item "C:\tmp\evt2sigma.txt" "C:\venv\evt2sigma\evt2sigma.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
@@ -376,14 +376,14 @@ if (! (Test-Path "C:\venv\maldump\Scripts\maldump.exe")) {
     Get-ChildItem C:\venv\maldump\* -Exclude maldump.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\maldump"
     C:\venv\maldump\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    
+
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r https://raw.githubusercontent.com/NUKIB/maldump/v0.2.0/requirements.txt 2>&1 >> "C:\log\python.txt"
     python -m pip install maldump==0.2.0 2>&1 >> "C:\log\python.txt"
-    
+
     deactivate
-    
+
     Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path "C:\venv\default\Scripts\maldump.ps1"
     Write-DateLog "Python venv maldump done." >> "C:\log\python.txt"
 } else {
@@ -404,23 +404,23 @@ if ((Get-FileHash C:\git\scare\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_V
     Get-ChildItem C:\venv\scare\* -Exclude scare.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\scare"
     C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    
+
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U ptpython setuptools wheel >> "C:\log\python.txt"
-    
+
     Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
     Set-Location "C:\venv\scare\scare"
-    
+
     (Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content -Path ".\requirements2.txt" -Encoding ascii
     python -m pip install -r ./requirements2.txt 2>&1 >> "C:\log\python.txt"
-    
+
     (Get-Content .\scarelib.py -raw) -replace "print\(splash\)","splash = 'Simple Configurable Asm REPL && Emulator'`n    print(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
     Copy-Item scarelib2.py scarelib.py
     Remove-Item scarelib2.py
     Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
-    
+
     deactivate
-    
+
     Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe -- C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
     Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 } else {
@@ -446,12 +446,12 @@ if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRE
     C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U ptpython setuptools wheel 2>&1 >> "C:\log\python.txt"
-    
+
     Copy-Item -Recurse "C:\git\Zircolite" "C:\venv\Zircolite"
     Set-Location "C:\venv\Zircolite\Zircolite"
-    
+
     python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
-    
+
     deactivate
     Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py -- `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
     Write-DateLog "Python venv Zircolite done." >> "C:\log\python.txt"
