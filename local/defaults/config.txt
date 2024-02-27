@@ -76,6 +76,9 @@ $WSDFIR_RIGHTCLICK="Yes"
 # Dark mode
 $WSDFIR_DARK="Yes"
 
+# Hide taskbar
+$WSDFIR_HIDE_TASKBAR="Yes"
+
 # Use oh-my-posh
 # There are problems with Nerdfonts on some versions of Windows.
 # For me it works on Windows 11 23H2 but not on Windows 11 22H2.

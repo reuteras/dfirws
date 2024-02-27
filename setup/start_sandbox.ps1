@@ -1030,6 +1030,12 @@ netsh firewall set opmode DISABLE 2>&1 | Out-Null
 # Don't ask about new apps
 REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1 | Out-Null
 
+# Hide the taskbar
+if ("${WSDFIR_HIDE_TASKBAR}" -eq "Yes") {
+    # From https://www.itechtics.com/hide-show-taskbar/#from-windows-powershell
+    &{$p='HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3';$v=(Get-ItemProperty -Path $p).Settings;$v[8]=3;&Set-ItemProperty -Path $p -Name Settings -Value $v;&Stop-Process -f -ProcessName explorer}
+}
+
 # Install hashcat
 if ("${WSDFIR_HASHCAT}" -eq "Yes") {
     Install-Hashcat | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
