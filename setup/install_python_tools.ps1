@@ -149,6 +149,7 @@ Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pyca
 Set-Location C:\tmp\rename
 Get-ChildItem | Rename-Item -newname  { $_.Name +".py" }
 Copy-Item * C:\venv\default\Scripts
+
 deactivate
 Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 
@@ -196,6 +197,7 @@ if ($INSTALL_JEP -eq "Yes") {
         Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv --system-site-packages C:\venv\jep"
         C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
         Set-Location "C:\venv\jep"
+
         python -m pip install -U pip >> "C:\log\python.txt"
         python -m pip install -U poetry 2>&1 >> "C:\log\python.txt"
 
@@ -214,12 +216,15 @@ if ($INSTALL_JEP -eq "Yes") {
         Write-DateLog "Build Ghidrathon for Ghidra."
         Copy-Item -Recurse -Force "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
         Set-Location "${WSDFIR_TEMP}\ghidrathon"
+
         python -m pip install -r requirements.txt >> "C:\log\python.txt"
         python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug >> "C:\log\python.txt"
+        
         if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
             New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
         }
         Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 >> "C:\log\python.txt"
+        
         Copy-Item ${WSDFIR_TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
@@ -241,11 +246,12 @@ if (Test-Path "C:\venv\dfir-unfurl\dfir-unfurl.txt") {
 }
 
 if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs older packages)." >> "C:\log\python.txt"
+    Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
     Get-ChildItem C:\venv\dfir-unfurl\* -Exclude dfir-unfurl.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dfir-unfurl"
     C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt"
     Set-Location "C:\venv\dfir-unfurl"
+
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U poetry >> "C:\log\python.txt"
 
@@ -272,8 +278,10 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
         Invoke-WebRequest -Uri $url.Value -OutFile $staticPath
         $baseHtmlContent = $baseHtmlContent.Replace($url.Value, "/static/$fileName")
     }
+    
     Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
     Copy-Item ${WSDFIR_TEMP}\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 >> "C:\log\python.txt"
+    
     deactivate
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_app.ps1"
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_cli.ps1"
@@ -305,11 +313,14 @@ if ((Get-FileHash C:\tmp\pe2pic.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash)
     Get-ChildItem C:\venv\pe2pic\* -Exclude pe2pic.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pe2pic"
     C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r "C:\tmp\pe2pic_requirements.txt" 2>&1 >> "C:\log\python.txt"
+    
     Copy-Item "C:\tmp\pe2pic.py" "C:\venv\pe2pic\Scripts\pe2pic.py"
     Copy-Item "C:\tmp\pe2pic.txt" "C:\venv\pe2pic\pe2pic.txt" -Force 2>&1 >> "C:\log\python.txt"
+    
     deactivate
     Set-Content "C:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
     Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
@@ -340,11 +351,14 @@ if ((Get-FileHash C:\tmp\evt2sigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
     Get-ChildItem C:\venv\evt2sigma\* -Exclude evt2sigma.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\evt2sigma"
     C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 >> "C:\log\python.txt"
+    
     Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
     Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
+    
     Copy-Item "C:\tmp\evt2sigma.txt" "C:\venv\evt2sigma\evt2sigma.txt" -Force 2>&1 >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
@@ -358,15 +372,18 @@ if ((Get-FileHash C:\tmp\evt2sigma.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Ha
 #
 
 if (! (Test-Path "C:\venv\maldump\Scripts\maldump.exe")) {
-    Write-DateLog "Install packages in venv maldump in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
+    Write-DateLog "Install packages in venv maldump in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
     Get-ChildItem C:\venv\maldump\* -Exclude maldump.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\maldump"
     C:\venv\maldump\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U setuptools wheel >> "C:\log\python.txt"
     python -m pip install -r https://raw.githubusercontent.com/NUKIB/maldump/v0.2.0/requirements.txt 2>&1 >> "C:\log\python.txt"
     python -m pip install maldump==0.2.0 2>&1 >> "C:\log\python.txt"
+    
     deactivate
+    
     Set-Content "`$ErrorActionPreference= 'silentlycontinue'`ndeactivate`nC:\venv\maldump\Scripts\Activate.ps1" -Encoding Ascii -Path "C:\venv\default\Scripts\maldump.ps1"
     Write-DateLog "Python venv maldump done." >> "C:\log\python.txt"
 } else {
@@ -383,21 +400,27 @@ if (Test-Path "C:\venv\scare\scare\.git\ORIG_HEAD") {
 }
 
 if ((Get-FileHash C:\git\scare\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv scare in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
+    Write-DateLog "Install packages in venv scare in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
     Get-ChildItem C:\venv\scare\* -Exclude scare.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\scare"
     C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U ptpython setuptools wheel >> "C:\log\python.txt"
+    
     Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
     Set-Location "C:\venv\scare\scare"
+    
     (Get-Content .\requirements.txt -raw) -replace "capstone","capstone`npyreadline3" | Set-Content -Path ".\requirements2.txt" -Encoding ascii
     python -m pip install -r ./requirements2.txt 2>&1 >> "C:\log\python.txt"
+    
     (Get-Content .\scarelib.py -raw) -replace "print\(splash\)","splash = 'Simple Configurable Asm REPL && Emulator'`n    print(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
     Copy-Item scarelib2.py scarelib.py
     Remove-Item scarelib2.py
     Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
+    
     deactivate
+    
     Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe -- C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
     Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 } else {
@@ -416,15 +439,19 @@ if (Test-Path "C:\venv\Zircolite\Zircolite\.git\ORIG_HEAD") {
 }
 
 if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv Zircolite in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
+    Write-DateLog "Install packages in venv Zircolite in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
     Get-ChildItem C:\venv\Zircolite\* -Exclude Zircolite.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+
     Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\Zircolite"
     C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
     python -m pip install -U pip >> "C:\log\python.txt"
     python -m pip install -U ptpython setuptools wheel 2>&1 >> "C:\log\python.txt"
+    
     Copy-Item -Recurse "C:\git\Zircolite" "C:\venv\Zircolite"
     Set-Location "C:\venv\Zircolite\Zircolite"
+    
     python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
+    
     deactivate
     Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py -- `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
     Write-DateLog "Python venv Zircolite done." >> "C:\log\python.txt"
@@ -434,43 +461,11 @@ if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRE
 
 
 #
-# venv chepy
-#
-
-& "$PYTHON_BIN" -m pip index versions chepy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\chepy.txt"
-& "$PYTHON_BIN" -m pip index versions scapy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\chepy.txt"
-
-if (Test-Path "C:\venv\chepy\chepy.txt") {
-    $CURRENT_VENV = "C:\venv\chepy\chepy.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
-
-if ((Get-FileHash C:\tmp\chepy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv chepy in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\chepy\* -Exclude chepy.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\chepy"
-    C:\venv\chepy\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U setuptools wheel 2>&1 >> "C:\log\python.txt"
-    python -m pip install `
-        chepy[extras] 2>&1 >> "C:\log\python.txt"
-    Copy-Item "${WSDFIR_TEMP}\chepy.txt" "C:\venv\chepy\chepy.txt" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Copy-Item "C:\venv\chepy\Scripts\chepy.exe" "C:\venv\default\Scripts\chepy.exe" -Force 2>&1 >> "C:\log\python.txt"
-    Copy-Item "C:\venv\chepy\Scripts\scapy.exe" "C:\venv\default\Scripts\scapy.exe" -Force 2>&1 >> "C:\log\python.txt"
-    Write-DateLog "Python venv chepy done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "chepy has not been updated, don't update chepy venv." >> "C:\log\python.txt"
-}
-
-
-#
 # venv dissect
 #
 
 # Build every time because of to many dependencies to check in dissect.target
-Write-DateLog "Install packages in venv dissect in sandbox (needs specific version of packages)." >> "C:\log\python.txt"
+Write-DateLog "Install packages in venv dissect in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
 Get-ChildItem C:\venv\dissect\* -Exclude dissect.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
 C:\venv\dissect\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -521,200 +516,61 @@ Copy-Item "C:\venv\dissect\Scripts\vma-extract.exe" "C:\venv\default\Scripts\vma
 deactivate
 Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 
-#
-# venv ghidrecomp
-#
 
-& "$PYTHON_BIN" -m pip index versions ghidrecomp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\ghidrecomp.txt"
+foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "mwcp", "rexi", "sigma-cli", "toolong") {
+    #
+    # Create simple venv for each tool in list above
+    #
 
-if (Test-Path "C:\venv\ghidrecomp\ghidrecomp.txt") {
-    $CURRENT_VENV = "C:\venv\ghidrecomp\ghidrecomp.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
+    & "$PYTHON_BIN" -m pip index versions ${virtualenv} 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\${virtualenv}.txt"
 
-if ((Get-FileHash C:\tmp\ghidrecomp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install ghidrecomp in venv ghidrecomp in sandbox." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\ghidrecomp\* -Exclude ghidrecomp.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\ghidrecomp"
-    C:\venv\ghidrecomp\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    Set-Location "C:\venv\ghidrecomp"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
+    if (Test-Path "C:\venv\${virtualenv}\${virtualenv}.txt") {
+        $CURRENT_VENV = "C:\venv\${virtualenv}\${virtualenv}.txt"
+    } else {
+        $CURRENT_VENV = "C:\Progress.ps1"
+    }
 
-    poetry init `
-        --name ghidrecompvenv `
-        --description "Python venv for ghidrecomp." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
+    if ((Get-FileHash "C:\tmp\${virtualenv}.txt").Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+        Write-DateLog "Install packages in venv ${virtualenv} in sandbox ((needs specific versions of packages)." >> "C:\log\python.txt"
+        Get-ChildItem C:\venv\${virtualenv}\* -Exclude ${virtualenv}.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+        Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\${virtualenv}"
+        & "C:\venv\${virtualenv}\Scripts\Activate.ps1" >> "C:\log\python.txt"
+        Set-Location "C:\venv\${virtualenv}"
+        python -m pip install -U pip >> "C:\log\python.txt"
+        python -m pip install -U poetry >> "C:\log\python.txt"
 
-    poetry add `
-        ghidrecomp 2>&1 >> "C:\log\python.txt"
+        poetry init `
+            --name "${virtualenv}venv" `
+            --description "Python venv for ${virtualenv}." `
+            --author "dfirws" `
+            --license "MIT" `
+            --no-interaction
 
-    Copy-Item "${WSDFIR_TEMP}\ghidrecomp.txt" "C:\venv\ghidrecomp\ghidrecomp.txt" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Write-DateLog "Python venv ghidrecomp done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "ghidrecomp has not been updated, don't update ghidrecomp venv." >> "C:\log\python.txt"
-}
+        if ("${virtualenv}" -eq "binary-refinery") {
+            poetry add `
+                binary-refinery[all] 2>&1 >> "C:\log\python.txt"
+        } elseif ("${virtualenv}" -eq "chepy") {
+            python -m pip install `
+                chepy[extras] 2>&1 >> "C:\log\python.txt"
+        } else {
+            poetry add `
+                "${virtualenv}" 2>&1 >> "C:\log\python.txt"
+        }
 
-#
-# venv sigma-cli
-#
+        Copy-Item "${WSDFIR_TEMP}\${virtualenv}.txt" "C:\venv\${virtualenv}\${virtualenv}.txt" -Force 2>&1 >> "C:\log\python.txt"
 
-& "$PYTHON_BIN" -m pip index versions sigma-cli 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\sigma-cli.txt"
+        # Custom code for each tool
+        if ("${virtualenv}" -eq "rexi") {
+            Copy-Item "C:\venv\rexi\Scripts\rexi.exe" "C:\venv\default\Scripts\rexi.exe" -Force 2>&1 >> "C:\log\python.txt"
+        } elseif ("${virtualenv}" -eq "sigma-cli") {
+            sigma plugin install --force-install sqlite windows sysmon elasticsearch splunk 2>&1 >> "C:\log\python.txt"
+        }
 
-if (Test-Path "C:\venv\sigma-cli\sigma-cli.txt") {
-    $CURRENT_VENV = "C:\venv\sigma-cli\sigma-cli.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
-
-if ((Get-FileHash C:\tmp\sigma-cli.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv sigma-cli in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\sigma-cli\* -Exclude sigma-cli.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\sigma-cli"
-    C:\venv\sigma-cli\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    Set-Location "C:\venv\sigma-cli"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
-
-    poetry init `
-        --name sigmaclivenv `
-        --description "Python venv for sigma-cli." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
-
-    poetry add `
-        sigma-cli 2>&1 >> "C:\log\python.txt"
-
-    sigma plugin install --force-install sqlite windows sysmon elasticsearch splunk 2>&1 >> "C:\log\python.txt"
-
-    Copy-Item "${WSDFIR_TEMP}\sigma-cli.txt" "C:\venv\sigma-cli\sigma-cli.txt" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Write-DateLog "Python venv sigma-cli done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "sigma-cli has not been updated, don't update sigma-cli venv." >> "C:\log\python.txt"
-}
-
-
-#
-# venv mwcp
-#
-
-& "$PYTHON_BIN" -m pip index versions mwcp 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\mwcp.txt"
-
-if (Test-Path "C:\venv\mwcp\mwcp.txt") {
-    $CURRENT_VENV = "C:\venv\mwcp\mwcp.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
-
-if ((Get-FileHash C:\tmp\mwcp.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv mwcp in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\mwcp\* -Exclude mwcp.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\mwcp"
-    C:\venv\mwcp\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    Set-Location "C:\venv\mwcp"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
-
-    poetry init `
-        --name mwcpvenv `
-        --description "Python venv for mwcp." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
-
-    poetry add `
-        mwcp 2>&1 >> "C:\log\python.txt"
-
-    Copy-Item "${WSDFIR_TEMP}\mwcp.txt" "C:\venv\mwcp\mwcp.txt" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Write-DateLog "Python venv mwcp done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "mwcp has not been updated, don't update mwcp venv." >> "C:\log\python.txt"
-}
-
-
-#
-# venv rexi
-#
-
-& "$PYTHON_BIN" -m pip index versions rexi 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\rexi.txt"
-
-if (Test-Path "C:\venv\rexi\rexi.txt") {
-    $CURRENT_VENV = "C:\venv\rexi\rexi.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
-
-if ((Get-FileHash C:\tmp\rexi.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv rexi in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\rexi\* -Exclude rexi.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\rexi"
-    C:\venv\rexi\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    Set-Location "C:\venv\rexi"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
-
-    poetry init `
-        --name rexivenv `
-        --description "Python venv for rexi." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
-
-    poetry add `
-        rexi 2>&1 >> "C:\log\python.txt"
-
-    Copy-Item "${WSDFIR_TEMP}\rexi.txt" "C:\venv\rexi\rexi.txt" -Force 2>&1 >> "C:\log\python.txt"
-    Copy-Item "C:\venv\rexi\Scripts\rexi.exe" "C:\venv\default\Scripts\rexi.exe" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Write-DateLog "Python venv rexi done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "rexi has not been updated, don't update rexi venv." >> "C:\log\python.txt"
-}
-
-
-#
-# venv binary-refinery
-#
-
-& "$PYTHON_BIN" -m pip index versions binary-refinery 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\binary-refinery.txt"
-
-if (Test-Path "C:\venv\binary-refinery\binary-refinery.txt") {
-    $CURRENT_VENV = "C:\venv\binary-refinery\binary-refinery.txt"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
-
-if ((Get-FileHash C:\tmp\binary-refinery.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv binary-refinery in sandbox (needs older packages that conflicts with oletools)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\binary-refinery\* -Exclude binary-refinery.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\binary-refinery"
-    C:\venv\binary-refinery\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    Set-Location "C:\venv\binary-refinery"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
-
-    poetry init `
-        --name binaryrefineryvenv `
-        --description "Python venv for binary-refinery." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
-
-    poetry add `
-        binary-refinery[all] 2>&1 >> "C:\log\python.txt"
-
-    Copy-Item "${WSDFIR_TEMP}\binary-refinery.txt" "C:\venv\binary-refinery\binary-refinery.txt" -Force 2>&1 >> "C:\log\python.txt"
-    deactivate
-    Write-DateLog "Python venv binary-refinery done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "binary-refinery has not been updated, don't update binary-refinery venv." >> "C:\log\python.txt"
+        deactivate
+        Write-DateLog "Python venv ${virtualenv} done." >> "C:\log\python.txt"
+    } else {
+        Write-DateLog "${virtualenv} has not been updated, don't update ${virtualenv} venv." >> "C:\log\python.txt"
+    }
 }
 
 Write-Output "" > C:\venv\default\done
