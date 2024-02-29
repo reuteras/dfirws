@@ -285,11 +285,40 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
     deactivate
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_app.ps1"
     Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_cli.ps1"
-    Write-DateLog "Python venv dfir-unfurl cache done." >> "C:\log\python.txt"
+    Write-DateLog "Python venv dfir-unfurl done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "dfir-unfurl has not been updated, don't update dfir-unfurl venv." >> "C:\log\python.txt"
 }
 
+
+#
+# venv aspose
+#
+& "$PYTHON_BIN" -m pip index versions Aspose.Email-for-Python-via-Net 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\aspose.txt
+
+if (Test-Path "C:\venv\aspose\aspose.txt") {
+    $CURRENT_VENV = "C:\venv\aspose\aspose.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+if ((Get-FileHash C:\tmp\aspose.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+    Write-DateLog "Install packages in venv aspose in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+    Get-ChildItem C:\venv\aspose\* -Exclude aspose.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\aspose"
+    C:\venv\aspose\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\aspose"
+
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -U Aspose.Email-for-Python-via-Net >> "C:\log\python.txt"
+
+    Copy-Item ${WSDFIR_TEMP}\aspose.txt "C:\venv\aspose\aspose.txt" -Force 2>&1 >> "C:\log\python.txt"
+
+    deactivate
+    Write-DateLog "Python venv aspose done." >> "C:\log\python.txt"
+} else {
+    Write-DateLog "aspose has not been updated, don't update aspose venv." >> "C:\log\python.txt"
+}
 
 #
 # venv pe2pic
