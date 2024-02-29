@@ -44,6 +44,8 @@ function Get-FileFromUri {
         [Parameter(Mandatory=$False)] [string]$CheckURL = ""
     )
 
+    Write-SynchronizedLog "Downloading $Uri to $FilePath. CheckURL: $CheckURL."
+
     # Check if the file has already been downloaded
     if ((Test-Path -Path "$FilePath") -and $CheckURL -eq "Yes") {
         if (Compare-ToolsDownloaded -URL $Uri -AppName ([System.IO.FileInfo]$FilePath).Name) {
@@ -117,7 +119,7 @@ function Get-FileFromUri {
             }
 
             if ($Uri -like "*marketplace.visualstudio.com*") {
-                Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 20 -MaximumRetryCount 3
+                Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 5 -MaximumRetryCount 3
             } else {
                 $CMD = "curl.exe"
                 $FLAGS = @()
@@ -327,6 +329,7 @@ function Get-ChocolateyUrl {
             $Url = ""
         }
         if ($Url -eq "") {
+            Write-DateLog "Failed to get download URL for Chocolately package $PackageName."
             Start-Sleep 60
         }
         $retries--

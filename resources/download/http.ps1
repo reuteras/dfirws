@@ -1,7 +1,17 @@
 . "$PSScriptRoot\common.ps1"
 
 # Get uri for latest nuget - ugly
-$choco = Get-ChocolateyUrl chocolatey
+if ("$WSDFIR_CHOCO" -eq "Yes") {
+    Write-DateLog "Get URI for Chocolatey"
+    $choco = Get-ChocolateyUrl chocolatey
+    # chocolatey
+    if ("" -eq "$choco") {
+        Write-DateLog "ERROR: Could not get URI for Chocolatey"
+    } else {
+        Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\choco.zip" -o"${SETUP_PATH}\choco" | Out-Null
+    }
+}
 
 # Get URI for Visual Studio Code python extension - ugly
 $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
@@ -145,14 +155,6 @@ Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_sc
 # Resource Hacker - not used since Microsoft AV detects it as PUA
 #Get-FileFromUri -uri "https://www.angusj.com/resourcehacker/resource_hacker.zip" -FilePath ".\downloads\resource_hacker.zip"
 #& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\resource_hacker.zip" -o"${TOOLS}\resource_hacker" | Out-Null
-
-# chocolatey
-if ("" -eq "$choco") {
-    Write-DateLog "ERROR: Could not get URI for Chocolatey"
-} else {
-    Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\choco.zip" -o"${SETUP_PATH}\choco" | Out-Null
-}
 
 # Dependence for PE-bear
 Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"

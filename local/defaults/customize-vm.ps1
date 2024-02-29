@@ -57,7 +57,9 @@ taskkill /f /im OneDrive.exe | Out-Null
 
 Write-Output "Install extra apps"
 dfirws-install.ps1 -Autopsy
+dfirws-install.ps1 -BinaryNinja
 dfirws-install.ps1 -Dokany
+dfirws-install.ps1 -Gpg4win
 dfirws-install.ps1 -Kape
 dfirws-install.ps1 -LibreOffice
 dfirws-install.ps1 -Loki
