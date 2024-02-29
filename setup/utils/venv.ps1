@@ -1,6 +1,8 @@
 # Script to switch between virtual environments
 
 param(
+    [Parameter(HelpMessage = "Switch to venv aspose.")]
+    [Switch]$aspose,
     [Parameter(HelpMessage = "Switch to venv binary-refinery.")]
     [Switch]$binaryrefinery,
     [Parameter(HelpMessage = "Switch to venv chepy.")]
@@ -17,8 +19,12 @@ param(
     [Switch]$ghidrecomp,
     [Parameter(HelpMessage = "Switch to venv jep.")]
     [Switch]$jep,
+    [Parameter(HelpMessage = "Switch to venv jpterm.")]
+    [Switch]$jpterm,
     [Parameter(HelpMessage = "Switch to venv maldump.")]
     [Switch]$maldump,
+    [Parameter(HelpMessage = "Switch to venv mwcp.")]
+    [Switch]$mwcp,
     [Parameter(HelpMessage = "Switch to venv pe2pic.")]
     [Switch]$pe2pic,
     [Parameter(HelpMessage = "Switch to venv rexi.")]
@@ -27,8 +33,8 @@ param(
     [Switch]$scare,
     [Parameter(HelpMessage = "Switch to venv sigma-cli.")]
     [Switch]$sigma,
-    [Parameter(HelpMessage = "Switch to venv mwcp.")]
-    [Switch]$mwcp,
+    [Parameter(HelpMessage = "Switch to venv toolong.")]
+    [Switch]$toolong,
     [Parameter(HelpMessage = "Switch to venv Zircolite.")]
     [Switch]$zircolite
 )
@@ -39,7 +45,9 @@ if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
 }
 
-if ($binaryrefinery) {
+if ($aspose) {
+    $venv = "aspose"
+} elseif ($binaryrefinery) {
     $venv = "binary-refinery"
 } elseif ($chepy) {
     $venv = "chepy"
@@ -55,8 +63,12 @@ if ($binaryrefinery) {
     $venv = "ghidrecomp"
 } elseif ($jep) {
     $venv = "jep"
+} elseif ($jpterm) {
+    $venv = "jpterm"
 } elseif ($maldump) {
     $venv = "maldump"
+} elseif ($mwcp) {
+    $venv = "mwcp"
 } elseif ($pe2pic) {
     $venv = "pe2pic"
 } elseif ($rexi) {
@@ -65,8 +77,8 @@ if ($binaryrefinery) {
     $venv = "scare"
 } elseif ($sigma) {
     $venv = "sigma-cli"
-} elseif ($mwcp) {
-    $venv = "mwcp"
+} elseif ($toolong) {
+    $venv = "toolong"
 } elseif ($zircolite) {
     $venv = "Zircolite"
 } else {
