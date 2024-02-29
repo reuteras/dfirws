@@ -26,6 +26,10 @@ Copy-Item ${SETUP_PATH}\ileappGUI.exe ${TOOLS}\bin\
 Get-GitHubRelease -repo "activescott/lessmsi" -path "${SETUP_PATH}\lessmsi.zip" -match lessmsi-v
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\lessmsi.zip" -o"${TOOLS}\lessmsi" | Out-Null
 
+# fx
+Get-GitHubRelease -repo "antonmedv/fx" -path "${SETUP_PATH}\fx.exe" -match fx_windows_amd64.exe
+Copy-Item ${SETUP_PATH}\fx.exe ${TOOLS}\bin\
+
 # CobaltStrikeScan
 Get-GitHubRelease -repo "Apr4h/CobaltStrikeScan" -path "${SETUP_PATH}\CobaltStrikeScan.exe" -match CobaltStrikeScan
 Copy-Item ${SETUP_PATH}\CobaltStrikeScan.exe ${TOOLS}\bin\
@@ -397,6 +401,10 @@ Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP
 # Thumbcacheviewer
 Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "${SETUP_PATH}\thumbcacheviewer.zip" -match viewer_64
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\thumbcacheviewer.zip" -o"${TOOLS}\thumbcacheviewer" | Out-Null
+
+# gron
+Get-GitHubRelease -repo "tomnomnom/gron" -path "${SETUP_PATH}\gron.zip" -match gron-windows-amd64
+& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\gron.zip" -o"${TOOLS}\bin" | Out-Null
 
 # MemProcFS
 Get-GitHubRelease -repo "ufrisk/MemProcFS" -path "${SETUP_PATH}\memprocfs.zip" -match win_x64
