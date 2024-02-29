@@ -1,28 +1,29 @@
 import sys
 
 try:
-  from aspose.email.storage.pst import PersonalStorage
-  from aspose.email import MsgSaveOptions, MailMessageSaveType
-except ImportError:
-  try:
-    sys.path.append("C:/venv/aspose/lib/site-packages")
-    from aspose.email.storage.pst import PersonalStorage
     from aspose.email import MsgSaveOptions, MailMessageSaveType
-  except ImportError:
-    print("Please install aspose libraries for Python")
-    sys.exit()
+    from aspose.email.storage.pst import PersonalStorage
+except ImportError:
+    try:
+      sys.path.append("C:/venv/aspose/lib/site-packages")
+      from aspose.email import MsgSaveOptions, MailMessageSaveType
+      from aspose.email.storage.pst import PersonalStorage
+    except ImportError:
+        print("Please install aspose libraries for Python")
+        sys.exit()
+
 import string
 from pathlib import Path
 
 if len(sys.argv) != 2 or sys.argv[1] == "--help" or sys.argv[1] == "-h":
-  print("Usage: pst-extract.py <PST_FILE>")
-  sys.exit()
+    print("Usage: pst-extract.py <PST_FILE>")
+    sys.exit()
 
 PST_FILE = sys.argv[1]
 
 if not Path(PST_FILE).is_file():
-  print("No such PST file:", PST_FILE)
-  sys.exit()
+    print("No such PST file:", PST_FILE)
+    sys.exit()
 
 pst = PersonalStorage.from_file(PST_FILE)
 attachment_nr = 1
@@ -44,11 +45,11 @@ def save_msg(msg):
     global msg_nr
     global valid_chars
     if (msg.subject):
-      file_path = str(msg_nr) + "-" + msg.subject + ".msg"
-      subject = msg.subject
+        file_path = str(msg_nr) + "-" + msg.subject + ".msg"
+        subject = msg.subject
     else:
-      file_path = str(msg_nr) + "-NO-SUBJECT.msg"
-      subject = "NO-SUBJECT"
+        file_path = str(msg_nr) + "-NO-SUBJECT.msg"
+        subject = "NO-SUBJECT"
     file_path = ''.join(c for c in file_path if c in valid_chars)
     print("Saving msg file for message %s as: %s" % (subject, file_path))
     msg_save_options = MsgSaveOptions(MailMessageSaveType.outlook_message_format_unicode)
@@ -58,30 +59,30 @@ def save_msg(msg):
 
 # Save every attachment for the current message
 def save_attachments(msg):
-  global attachment_nr
-  if (msg.subject):
-    subject = msg.subject
-  else:
-    subject = "NO-SUBJECT"
-  print("Working on attachments in message with subject:", subject) 
-  for attachment in msg.attachments:
-    if (attachment.display_name):
-      file_path = str(attachment_nr) + "-" + attachment.display_name
-      file_name = attachment.display_name
-    elif (attachment.long_file_name):
-      file_path = str(attachment_nr) + "-" + attachment.long_file_name
-      file_name = attachment.long_file_name
-    elif (attachment.file_name):
-      file_path = str(attachment_nr) + "-" + attachment.file_name
-      file_name = attachment.file_name
+    global attachment_nr
+    if (msg.subject):
+      subject = msg.subject
     else:
-      file_path = str(attachment_nr) + "-unknown.dat" 
-      file_name = "unknown.dat"
+      subject = "NO-SUBJECT"
+    print("Working on attachments in message with subject:", subject) 
+    for attachment in msg.attachments:
+        if (attachment.display_name):
+            file_path = str(attachment_nr) + "-" + attachment.display_name
+            file_name = attachment.display_name
+        elif (attachment.long_file_name):
+            file_path = str(attachment_nr) + "-" + attachment.long_file_name
+            file_name = attachment.long_file_name
+        elif (attachment.file_name):
+            file_path = str(attachment_nr) + "-" + attachment.file_name
+            file_name = attachment.file_name
+        else:
+            file_path = str(attachment_nr) + "-unknown.dat" 
+            file_name = "unknown.dat"
     print("Saving original %s attachment as %s" % (file_name, file_path))
     attachment_nr = attachment_nr + 1
     with open(file_path, "wb") as file:
-      file.write(attachment.binary_data)
+        file.write(attachment.binary_data)
 
 # Start with enumerating folders in the root folder
 for folder in pst.root_folder.enumerate_folders():
-  handle_folder(folder)
+    handle_folder(folder)
