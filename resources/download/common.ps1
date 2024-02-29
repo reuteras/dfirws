@@ -119,7 +119,7 @@ function Get-FileFromUri {
             }
 
             if ($Uri -like "*marketplace.visualstudio.com*") {
-                Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 5 -MaximumRetryCount 3
+                Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 10 -ConnectionTimeoutSeconds 20 -OperationTimeoutSeconds 30 -MaximumRetryCount 3
             } else {
                 $CMD = "curl.exe"
                 $FLAGS = @()
@@ -329,7 +329,7 @@ function Get-ChocolateyUrl {
             $Url = ""
         }
         if ($Url -eq "") {
-            Write-DateLog "Failed to get download URL for Chocolately package $PackageName."
+            Write-SynchronizedLog "Failed to get download URL for Chocolately package $PackageName."
             Start-Sleep 60
         }
         $retries--
