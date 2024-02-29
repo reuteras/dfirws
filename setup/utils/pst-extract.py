@@ -54,10 +54,13 @@ def save_msg(msg):
         subject = "NO-SUBJECT"
     file_path = "".join(c for c in file_path if c in valid_chars)
     print("Saving msg file for message %s as: %s" % (subject, file_path))
-    msg_save_options = MsgSaveOptions(MailMessageSaveType.outlook_message_format_unicode)
+    msg_save_options = MsgSaveOptions(
+        MailMessageSaveType.outlook_message_format_unicode
+    )
     msg_save_options.preserve_original_dates = True
     msg.save(file_path, msg_save_options)
     msg_nr = msg_nr + 1
+
 
 # Save every attachment for the current message
 def save_attachments(msg):
@@ -67,7 +70,7 @@ def save_attachments(msg):
         subject = msg.subject
     else:
         subject = "NO-SUBJECT"
-    print("Working on attachments in message with subject:", subject) 
+    print("Working on attachments in message with subject:", subject)
     for attachment in msg.attachments:
         if attachment.display_name:
             file_path = str(attachment_nr) + "-" + attachment.display_name
