@@ -245,6 +245,18 @@ function Install-GoLang {
     }
 }
 
+function Install-Gpg4win {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-gpg4win.txt")) {
+        Write-Output "Installing Gpg4win"
+        Copy-Item "${SETUP_PATH}\gpg4win.exe" "${TEMP}\gpg4win.exe" -Force
+        Start-Process -Wait "${TEMP}\gpg4win.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-gpg4win.txt" | Out-Null
+    } else {
+        Write-Output "Gpg4win is already installed"
+    }
+
+}
+
 function Install-Hashcat {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-hashcat.txt")) {
         Write-Output "Installing Hashcat"

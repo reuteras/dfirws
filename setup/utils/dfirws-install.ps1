@@ -11,6 +11,7 @@ param (
     [switch]$Dokany,
     [switch]$GitBash,
     [switch]$GoLang,
+    [switch]$Gpg4win,
     [switch]$Hashcat,
     [switch]$Jadx,
     [switch]$Kape,
@@ -71,6 +72,10 @@ if ($GitBash.IsPresent) {
 
 if ($GoLang.IsPresent) {
     Install-GoLang
+}
+
+if ($Gpg4win.IsPresent) {
+    Install-Gpg4win
 }
 
 if ($Hashcat.IsPresent) {
