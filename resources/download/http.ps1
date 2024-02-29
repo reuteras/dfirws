@@ -250,6 +250,12 @@ Remove-Item -Force ${TOOLS}\nirsoft\readme.txt | Out-Null 2>&1
 # Get winpmem
 Get-FileFromUri -uri "https://github.com/Velocidex/c-aff4/raw/master/tools/pmem/resources/winpmem/winpmem_64.sys" -FilePath ".\downloads\winpmem_64.sys"
 
+# Binary Ninja - manual installation
+Get-FileFromUri -uri "https://cdn.binary.ninja/installers/BinaryNinja-free.exe" -FilePath ".\downloads\binaryninja.exe"
+
+# gpg4win
+Get-FileFromUri -uri "https://files.gpg4win.org/gpg4win-latest.exe" -FilePath ".\downloads\gpg4win.exe"
+
 # Update the links below when new versions are released
 
 # https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start

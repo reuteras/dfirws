@@ -45,6 +45,7 @@
         "beautifulsoup",
         "Bginfo",
         "bigendianunicode",
+        "binaryninja",
         "binaryrefinery",
         "binaryrefineryvenv",
         "bindkey",

@@ -160,6 +160,17 @@ function Install-BashExtra {
     }
 }
 
+function Install-BinaryNinja {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-binaryninja.txt")) {
+        Write-Output "Installing Binary Ninja"
+        Copy-Item "${SETUP_PATH}\binaryninja.exe" "${TEMP}\binaryninja.exe" -Force
+        Start-Process -Wait "${TEMP}\binaryninja.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-binaryninja.txt" | Out-Null
+    } else {
+        Write-Output "Binary Ninja is already installed"
+    }
+
+}
 function Install-Choco {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-choco.txt")) {
         Write-Output "Installing Chocolatey"

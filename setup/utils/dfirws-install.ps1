@@ -4,6 +4,7 @@ param (
     [switch]$ApiMonitor,
     [switch]$Autopsy,
     [switch]$BashExtra,
+    [switch]$BinaryNinja,
     [switch]$Choco,
     [switch]$CMDer,
     [switch]$Docker,
@@ -42,6 +43,10 @@ if ($Autopsy.IsPresent) {
 
 if ($BashExtra.IsPresent) {
     Install-BashExtra
+}
+
+if ($BinaryNinja.IsPresent) {
+    Install-BinaryNinja
 }
 
 if ($Choco.IsPresent) {
