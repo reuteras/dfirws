@@ -5,9 +5,9 @@ try:
     from aspose.email.storage.pst import PersonalStorage
 except ImportError:
     try:
-      sys.path.append("C:/venv/aspose/lib/site-packages")
-      from aspose.email import MsgSaveOptions, MailMessageSaveType
-      from aspose.email.storage.pst import PersonalStorage
+        sys.path.append("C:/venv/aspose/lib/site-packages")
+        from aspose.email import MsgSaveOptions, MailMessageSaveType
+        from aspose.email.storage.pst import PersonalStorage
     except ImportError:
         print("Please install aspose libraries for Python")
         sys.exit()
@@ -30,6 +30,7 @@ attachment_nr = 1
 msg_nr = 1
 valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
 
+
 # Handle a messages in folder and call the function recursively for every subfolder
 def handle_folder(current):
     print("Working on folder:", current.retrieve_full_path())
@@ -40,17 +41,18 @@ def handle_folder(current):
         save_attachments(mapi)
         save_msg(mapi)
 
+
 # Save msg file for current message
 def save_msg(msg):
     global msg_nr
     global valid_chars
-    if (msg.subject):
+    if msg.subject:
         file_path = str(msg_nr) + "-" + msg.subject + ".msg"
         subject = msg.subject
     else:
         file_path = str(msg_nr) + "-NO-SUBJECT.msg"
         subject = "NO-SUBJECT"
-    file_path = ''.join(c for c in file_path if c in valid_chars)
+    file_path = "".join(c for c in file_path if c in valid_chars)
     print("Saving msg file for message %s as: %s" % (subject, file_path))
     msg_save_options = MsgSaveOptions(MailMessageSaveType.outlook_message_format_unicode)
     msg_save_options.preserve_original_dates = True
@@ -60,28 +62,31 @@ def save_msg(msg):
 # Save every attachment for the current message
 def save_attachments(msg):
     global attachment_nr
-    if (msg.subject):
-      subject = msg.subject
+    global valid_chars
+    if msg.subject:
+        subject = msg.subject
     else:
-      subject = "NO-SUBJECT"
+        subject = "NO-SUBJECT"
     print("Working on attachments in message with subject:", subject) 
     for attachment in msg.attachments:
-        if (attachment.display_name):
+        if attachment.display_name:
             file_path = str(attachment_nr) + "-" + attachment.display_name
             file_name = attachment.display_name
-        elif (attachment.long_file_name):
+        elif attachment.long_file_name:
             file_path = str(attachment_nr) + "-" + attachment.long_file_name
             file_name = attachment.long_file_name
-        elif (attachment.file_name):
+        elif attachment.file_name:
             file_path = str(attachment_nr) + "-" + attachment.file_name
             file_name = attachment.file_name
         else:
-            file_path = str(attachment_nr) + "-unknown.dat" 
+            file_path = str(attachment_nr) + "-unknown.dat"
             file_name = "unknown.dat"
+    file_path = "".join(c for c in file_path if c in valid_chars)
     print("Saving original %s attachment as %s" % (file_name, file_path))
     attachment_nr = attachment_nr + 1
     with open(file_path, "wb") as file:
         file.write(attachment.binary_data)
+
 
 # Start with enumerating folders in the root folder
 for folder in pst.root_folder.enumerate_folders():
