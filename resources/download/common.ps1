@@ -323,7 +323,6 @@ function Get-ChocolateyUrl {
     while ($Url -eq "") {
         try {
             # Scrape the download URL from the Chocolatey package page
-            Write-Host "https://community.chocolatey.org/packages/$PackageName"
             $Url = curl --silent "https://community.chocolatey.org/packages/$PackageName" | findstr /C:"Download the raw" | findstr ">Download<" | ForEach-Object { ($_ -split '"' )[1] }
             return $Url
         }

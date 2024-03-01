@@ -1,6 +1,6 @@
 param(
-    [Parameter(HelpMessage = "Don't update Chocolatey via http.")]
-    [Switch]$NoChocolatey,
+    #[Parameter(HelpMessage = "Don't update Chocolatey via http.")]
+    #[Switch]$NoChocolatey,
     [Parameter(HelpMessage = "Don't update Visual Studio Code Extensions via http.")]
     [Switch]$NoVSCodeExtensions
 )
