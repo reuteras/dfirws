@@ -323,13 +323,15 @@ function Get-ChocolateyUrl {
     while ($Url -eq "") {
         try {
             # Scrape the download URL from the Chocolatey package page
-            $Url = curl --silent https://community.chocolatey.org/packages/$PackageName | findstr /C:"Download the raw" | findstr ">Download<" | ForEach-Object { ($_ -split '"' )[1] }
+            Write-Host "https://community.chocolatey.org/packages/$PackageName"
+            $Url = curl --silent "https://community.chocolatey.org/packages/$PackageName" | findstr /C:"Download the raw" | findstr ">Download<" | ForEach-Object { ($_ -split '"' )[1] }
+            return $Url
         }
         catch {
             $Url = ""
         }
         if ($Url -eq "") {
-            Write-SynchronizedLog "Failed to get download URL for Chocolately package $PackageName."
+            Write-SynchronizedLog "Failed to get download URL for Chocolately package $PackageName. Sleeping for 60 seconds."
             Start-Sleep 60
         }
         $retries--

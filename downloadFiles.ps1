@@ -31,6 +31,10 @@ param(
     [Switch]$Git,
     [Parameter(HelpMessage = "Update files downloaded via HTTP.")]
     [Switch]$Http,
+    [Parameter(HelpMessage = "Don't update Chocolatey via http.")]
+    [Switch]$HttpNoChocolatey,
+    [Parameter(HelpMessage = "Don't update Visual Studio Code Extensions via http.")]
+    [Switch]$HttpNoVSCodeExtensions,
     [Parameter(HelpMessage = "Update KAPE.")]
     [Switch]$Kape,
     [Parameter(HelpMessage = "Update Node.")]
@@ -197,7 +201,15 @@ if ($all -or $Rust) {
 
 if ($all -or $Http) {
     Write-DateLog "Download files via HTTP."
-    .\resources\download\http.ps1
+    $HTTP_ARGS = ""
+    if ($HttpNoChocolatey) {
+        $HTTP_ARGS += "-NoChocolatey "
+    }
+    if ($HttpNoVSCodeExtensions) {
+        $HTTP_ARGS += "-NoVSCodeExtensions "
+    }
+#    .\resources\download\http.ps1 -NoChocolatey -NoVSCodeExtensions
+    powershell -noprofile .\resources\download\http.ps1 $HTTP_ARGS
 }
 
 if ($all -or $Didier) {
