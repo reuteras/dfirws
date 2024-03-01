@@ -345,10 +345,10 @@ Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Run install script for choco packages
-if ("${WSDFIR_CHOCO}" -eq "Yes") {
-    Install-Choco | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    # Add packages below
-}
+#if ("${WSDFIR_CHOCO}" -eq "Yes") {
+#    Install-Choco | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+#    # Add packages below
+#}
 
 # Setup Node.js
 if ("${WSDFIR_NODE}" -eq "Yes") {

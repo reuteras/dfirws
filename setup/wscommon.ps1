@@ -171,15 +171,15 @@ function Install-BinaryNinja {
     }
 
 }
-function Install-Choco {
-    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-choco.txt")) {
-        Write-Output "Installing Chocolatey"
-        & "${SETUP_PATH}\choco\tools\chocolateyInstall.ps1"
-        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-choco.txt" | Out-Null
-    } else {
-        Write-Output "Chocolatey is already installed"
-    }
-}
+#function Install-Choco {
+#    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-choco.txt")) {
+#        Write-Output "Installing Chocolatey"
+#        & "${SETUP_PATH}\choco\tools\chocolateyInstall.ps1"
+#        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-choco.txt" | Out-Null
+#    } else {
+#        Write-Output "Chocolatey is already installed"
+#    }
+#}
 
 function Install-CMDer {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-cmder.txt")) {
