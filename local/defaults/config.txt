@@ -54,10 +54,9 @@ $WSDFIR_W10_LOOPBACK="No"
 # Install Zui 
 $WSDFIR_ZUI="No"
 
-# Chocolatey
-
+# Chocolatey - functionality is disabled
 # Install Chocolatey - must be "Yes" to install any packages
-$WSDFIR_CHOCO="No"
+#$WSDFIR_CHOCO="No"
 
 # Links on Desktop
 # Moved to local\customize.ps1

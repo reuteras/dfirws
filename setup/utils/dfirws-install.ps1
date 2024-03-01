@@ -51,7 +51,8 @@ if ($BinaryNinja.IsPresent) {
 }
 
 if ($Choco.IsPresent) {
-    Install-Choco
+    Write-Output "Installation of Chocolatey is disabled."
+    #Install-Choco
 }
 
 if ($CMDer.IsPresent) {
