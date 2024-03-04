@@ -119,7 +119,7 @@ function Get-FileFromUri {
             }
 
             if ($Uri -like "*marketplace.visualstudio.com*") {
-                Invoke-WebRequest -uri $Uri -outfile $TmpFilePath -RetryIntervalSec 10 -ConnectionTimeoutSeconds 20 -OperationTimeoutSeconds 30 -MaximumRetryCount 3
+                Invoke-WebRequest -uri "${Uri}" -outfile "${TmpFilePath}"
             } else {
                 $CMD = "curl.exe"
                 $FLAGS = @()
@@ -154,7 +154,17 @@ function Get-FileFromUri {
 
     if ($downloaded) {
         # Copy the temporary file to the final file path and remove the temporary file
-        $result = rclone copyto --metadata --verbose --inplace --checksum $TmpFilePath $FilePath 2>&1 | Out-String
+        try {
+            $result = rclone --log-level ERROR copyto --metadata --inplace --checksum "${TmpFilePath}" "${FilePath}" | Out-String
+            if ("" -eq $result) {
+                $result = "OK status from rclone copyto '${TmpFilePath}' '${FilePath}'."
+            }
+        }
+        catch {
+            $exception = $_.Exception
+            $exceptionMessage = $_.Exception.Message
+            Write-SynchronizedLog "Failed to rclone copyto '${TmpFilePath}' '${FilePath}': $exceptionMessage"
+        }
         Write-SynchronizedLog "$result"
         Remove-Item $TmpFilePath -Force | Out-Null
         Update-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name -Path $FilePath
@@ -538,7 +548,7 @@ function Write-SynchronizedLog {
         $result = $logMutex.WaitOne()
         $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         $fullMessage = "$timestamp - $Message"
-        Add-Content -Path $LogFile -Value $fullMessage
+        Add-Content -Path $LogFile -Value $fullMessage | Out-Null
     }
     finally {
         $result = $logMutex.ReleaseMutex()
