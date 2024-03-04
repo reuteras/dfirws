@@ -736,6 +736,10 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\1768
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "${env:ProgramFiles}\bin\BeaconHunter.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\CobaltStrikeScan.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 
+# Gootloader
+New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Gootloader" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Gootloader\Gootloader (Mandiant).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT}\gootloader"
+
 # Memory
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Dokany (runs dfirws-install -Dokany).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Dokany"
