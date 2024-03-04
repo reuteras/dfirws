@@ -5,7 +5,7 @@ param (
     [switch]$Autopsy,
     [switch]$BashExtra,
     [switch]$BinaryNinja,
-    [switch]$Choco,
+#    [switch]$Choco,
     [switch]$CMDer,
     [switch]$Docker,
     [switch]$Dokany,
@@ -50,10 +50,10 @@ if ($BinaryNinja.IsPresent) {
     Install-BinaryNinja
 }
 
-if ($Choco.IsPresent) {
-    Write-Output "Installation of Chocolatey is disabled."
-    #Install-Choco
-}
+#if ($Choco.IsPresent) {
+#    Write-Output "Installation of Chocolatey is disabled."
+#    #Install-Choco
+#}
 
 if ($CMDer.IsPresent) {
     Install-CMDer
