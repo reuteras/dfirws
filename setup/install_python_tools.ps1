@@ -94,7 +94,6 @@ poetry add `
     python-magic-bin `
     pyvis `
     pyzipper `
-    regipy `
     rzpipe `
     setuptools `
     shodan `
@@ -111,9 +110,6 @@ poetry add `
     XlsxWriter `
     xxhash `
     yara-python >> "C:\log\python.txt"
-
-# Not compatible with Python 3.11:
-#     regipy[full]>=3.1.6 - https://github.com/astanin/python-tabulate
 
 Write-DateLog "Install extra scripts in venv." >> "C:\log\python.txt"
 Set-Location "C:\venv\default\Scripts"
@@ -155,10 +151,30 @@ Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 
 
 #
-# venv jep
+# Venvs that needs Visual Studio Build Tools
 #
 
-if ($INSTALL_JEP -eq "Yes") {
+& "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\visualstudio.txt
+& "$PYTHON_BIN" -m pip index versions regipy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${WSDFIR_TEMP}\visualstudio.txt
+((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${WSDFIR_TEMP}\visualstudio.txt
+$GHIDRA_INSTALL_DIR >> ${WSDFIR_TEMP}\visualstudio.txt
+
+if (Test-Path "C:\venv\visualstudio.txt") {
+    $CURRENT_VENV = "C:\venv\visualstudio.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+
+if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\visualstudio.txt").Hash) {
+    # Install Visual Studio Build Tools
+    Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
+    Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${WSDFIR_TEMP}\vs_BuildTools.exe"
+    Set-Location ${WSDFIR_TEMP}
+    Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
+    Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
+    & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
+
     #
     # venv jep and tools needed for jep
     #
@@ -176,14 +192,6 @@ if ($INSTALL_JEP -eq "Yes") {
 
     if ((Get-FileHash C:\tmp\jep.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
         Write-DateLog "jep or ghidrathon has been updated. Update jep." >> "C:\log\python.txt"
-
-        # Install Visual Studio Build Tools for jep
-        Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 >> "C:\log\python.txt"
-        Copy-Item "${SETUP_PATH}\vs_BuildTools.exe" "${WSDFIR_TEMP}\vs_BuildTools.exe"
-        Set-Location ${WSDFIR_TEMP}
-        Start-Process -Wait ".\vs_BuildTools.exe" -ArgumentList "-p --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Component.Windows11SDK.22000 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --installPath C:\BuildTools"
-        Get-Job | Receive-Job 2>&1 >> "C:\log\python.txt"
-        & 'C:\BuildTools\Common7\Tools\VsDevCmd.bat' 2>&1 >> "C:\log\python.txt"
 
         # Install Java for jep
         Write-DateLog "Start installation of Corretto Java." 2>&1 >> "C:\log\python.txt"
@@ -225,12 +233,43 @@ if ($INSTALL_JEP -eq "Yes") {
         }
         Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 >> "C:\log\python.txt"
 
-        Copy-Item ${WSDFIR_TEMP}\jep.txt "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
+        Copy-Item "${WSDFIR_TEMP}\jep.txt" "C:\venv\jep\jep.txt" -Force 2>&1 >> "C:\log\python.txt"
         deactivate
         Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
     } else {
         Write-DateLog "Neither jep or ghidrathon has been updated, don't build jep." >> "C:\log\python.txt"
     }
+
+
+    #
+    # venv regipy
+    #
+    & "$PYTHON_BIN" -m pip index regipy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\regipy.txt
+
+    if (Test-Path "C:\venv\regipy\regipy.txt") {
+        $CURRENT_VENV = "C:\venv\regipy\regipy.txt"
+    } else {
+        $CURRENT_VENV = "C:\Progress.ps1"
+    }
+
+    if ((Get-FileHash C:\tmp\regipy.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+        Write-DateLog "Install packages in venv regipy in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+        Get-ChildItem C:\venv\regipy\* -Exclude regipy.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+        Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\regipy"
+        C:\venv\regipy\Scripts\Activate.ps1 >> "C:\log\python.txt"
+        Set-Location "C:\venv\regipy"
+
+        python -m pip install -U pip >> "C:\log\python.txt"
+        python -m pip install -U regipy>=4.0.0 click tabulate libfwsi-python >> "C:\log\python.txt"
+
+        Copy-Item "${WSDFIR_TEMP}\regipy.txt" "C:\venv\regipy\regipy.txt" -Force 2>&1 >> "C:\log\python.txt"
+
+        deactivate
+        Write-DateLog "Python venv regipy done." >> "C:\log\python.txt"
+    } else {
+        Write-DateLog "regipy has not been updated, don't update regipy venv." >> "C:\log\python.txt"
+    }
+    Copy-Item "${WSDFIR_TEMP}\visualstudio.txt" "C:\venv\visualstudio.txt" -Force 2>&1 >> "C:\log\python.txt"
 }
 
 
