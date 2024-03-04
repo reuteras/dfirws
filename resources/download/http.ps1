@@ -63,11 +63,6 @@ Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user
 # Get SwiftOnSecurity sysmon config - used from Sysmon
 Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml"
 
-# Yara rules - unpacked during start from start_sandbox.ps1
-Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip" -FilePath ".\downloads\yara-forge-rules-core.zip"
-Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip" -FilePath ".\downloads\yara-forge-rules-extended.zip"
-Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\downloads\yara-forge-rules-full.zip"
-
 # Get Sysinternals Suite
 # Change download of Sysinternals to download of individual tools from live.sysinternals.com since
 # the zip file is behind a Cloudflare captcha at the moment.

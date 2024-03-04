@@ -240,4 +240,21 @@ foreach ($repourl in $repourls) {
     }
 }
 
+# Yara rules
+Write-Output "Downloading Yara rules"
+$yaraSaveDirectory = "${enrichmentDirectory}\yara"
+if (-not (Test-Path -Path "${yaraSaveDirectory}")) {
+    New-Item -ItemType Directory -Path "${yaraSaveDirectory}" -Force | Out-Null
+}
+Set-Location "${yaraSaveDirectory}"
+
+Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip" -FilePath ".\enrichment\yara\yara-forge-rules-core.zip"
+Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip" -FilePath ".\enrichment\yara\yara-forge-rules-extended.zip"
+Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\enrichment\yara\yara-forge-rules-full.zip"
+
+# Unzip yara signatures
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-core.zip" -o"${yaraSaveDirectory}" | Out-Null
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-extended.zip" -o"${yaraSaveDirectory}" | Out-Null
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-full.zip" -o"${yaraSaveDirectory}" | Out-Null
+
 Set-Location "${currentDirectory}"

@@ -1,5 +1,4 @@
 # Set variables
-$DATA = "C:\data"
 $ENRICHMENT = "C:\enrichment"
 $GIT_PATH = "C:\git"
 $LOCAL_PATH = "C:\local"
@@ -12,7 +11,6 @@ $TOOLS = "C:\Tools"
 $VENV = "C:\venv"
 $POWERSHELL_EXE = "${env:ProgramFiles}\PowerShell\7\pwsh.exe"
 
-$null="${DATA}"
 $null="${GIT_PATH}"
 $null="${LOCAL_PATH}"
 $null="${PDFSTREAMDUMPER_PATH}"

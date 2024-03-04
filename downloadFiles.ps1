@@ -23,10 +23,14 @@
 #>
 
 param(
+    [Parameter(HelpMessage = "Download all tools for dfirws.")]
+    [Switch]$AllTools,
     [Parameter(HelpMessage = "Update Bash.")]
     [Switch]$Bash,
     [Parameter(HelpMessage = "Update Didier Stevens tools.")]
     [Switch]$Didier,
+    [Parameter(HelpMessage = "Update enrichment.")]
+    [Switch]$Enrichment,
     [Parameter(HelpMessage = "Update git repositories.")]
     [Switch]$Git,
     [Parameter(HelpMessage = "Update files downloaded via HTTP.")]
@@ -94,10 +98,15 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
     Exit
 }
 
-if ($Bash.IsPresent -or $Didier.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
+if ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
+    $all = $true
+}
+
+if ($AllTools.IsPresent) {
+    Write-DateLog "Download all tools for dfirws."
     $all = $true
 }
 
@@ -245,6 +254,11 @@ if ($all -or $bash -or $Node -or $Python -or $Rust) {
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
     Get-Job | Remove-Job | Out-Null
     Write-DateLog "Sandboxes done."
+}
+
+if ($Enrichment.IsPresent) {
+    Write-DateLog "Download enrichment data."
+    .\resources\download\enrichment.ps1
 }
 
 Copy-Item "README.md" ".\downloads\" -Force

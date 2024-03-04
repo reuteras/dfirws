@@ -11,7 +11,7 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # Create required directories
-foreach ($dir in @("${WSDFIR_TEMP}", "${DATA}", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
+foreach ($dir in @("${WSDFIR_TEMP}", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
     if (-not (Test-Path -Path $dir)) {
         New-Item -ItemType Directory -Path $dir | Out-Null
     }
@@ -1066,13 +1066,6 @@ Copy-Item -Recurse "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\rizin\
 Copy-Item -Recurse "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
 Copy-Item -Recurse "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python"
 Write-DateLog "Installing Cutter plugins done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
-# Unzip yara signatures
-& "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\yara-forge-rules-core.zip" -o"${DATA}" | Out-Null
-& "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\yara-forge-rules-extended.zip" -o"${DATA}" | Out-Null
-& "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\yara-forge-rules-full.zip" -o"${DATA}" | Out-Null
-Copy-Item "${DATA}\packages\full\yara-rules-full.yar" "${DATA}\total.yara" -Force
-Write-DateLog "Unzipping signatures for yara done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Start sysmon when installation is done
 if ("${WSDFIR_SYSMON}" -eq "Yes") {
