@@ -110,8 +110,8 @@ function Write-DateLog {
 function Install-Apimonitor {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-apimonitor.txt")) {
         Write-Output "Installing API Monitor"
-        Copy-Item "${SETUP_PATH}\apimonitor64.exe" "${TEMP}" -Force
-        & ${TEMP}\apimonitor64.exe /s /v/qn
+        Copy-Item "${SETUP_PATH}\apimonitor64.exe" "${WSDFIR_TEMP}" -Force
+        & ${WSDFIR_TEMP}\apimonitor64.exe /s /v/qn
         Add-ToUserPath "${env:ProgramFiles(x86)}\rohitab.com\API Monitor"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-apimonitor.txt" | Out-Null
     } else {
@@ -122,8 +122,8 @@ function Install-Apimonitor {
 function Install-Autopsy {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-autopsy.txt")) {
         Write-Output "Installing Autopsy"
-        Copy-Item "${SETUP_PATH}\autopsy.msi" "${TEMP}\autopsy.msi" -Force
-        Start-Process -Wait msiexec.exe -ArgumentList "/i ${TEMP}\autopsy.msi /qn /norestart"
+        Copy-Item "${SETUP_PATH}\autopsy.msi" "${WSDFIR_TEMP}\autopsy.msi" -Force
+        Start-Process -Wait msiexec.exe -ArgumentList "/i ${WSDFIR_TEMP}\autopsy.msi /qn /norestart"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-autopsy.txt" | Out-Null
     } else {
         Write-Output "Autopsy is already installed"
@@ -161,8 +161,8 @@ function Install-BashExtra {
 function Install-BinaryNinja {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-binaryninja.txt")) {
         Write-Output "Installing Binary Ninja"
-        Copy-Item "${SETUP_PATH}\binaryninja.exe" "${TEMP}\binaryninja.exe" -Force
-        Start-Process -Wait "${TEMP}\binaryninja.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Copy-Item "${SETUP_PATH}\binaryninja.exe" "${WSDFIR_TEMP}\binaryninja.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\binaryninja.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-binaryninja.txt" | Out-Null
     } else {
         Write-Output "Binary Ninja is already installed"
@@ -197,8 +197,8 @@ function Install-CMDer {
 function Install-Docker {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-docker.txt")) {
         Write-Output "Installing Docker"
-        Copy-Item "${SETUP_PATH}\docker.exe" "${TEMP}\docker.exe" -Force
-        Start-Process -Wait "${TEMP}\docker.exe" -ArgumentList 'install --quiet --accept-license'
+        Copy-Item "${SETUP_PATH}\docker.exe" "${WSDFIR_TEMP}\docker.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\docker.exe" -ArgumentList 'install --quiet --accept-license'
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-docker.txt" | Out-Null
     } else {
         Write-Output "Docker is already installed"
@@ -207,8 +207,8 @@ function Install-Docker {
 function Install-Dokany {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dokany.txt")) {
         Write-Output "Installing Dokany"
-        Copy-Item "${SETUP_PATH}\dokany.msi" "${TEMP}\dokany.msi" -Force
-        Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\dokany.msi /qn /norestart"
+        Copy-Item "${SETUP_PATH}\dokany.msi" "${WSDFIR_TEMP}\dokany.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\dokany.msi /qn /norestart"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-dokany.txt" | Out-Null
     } else {
         Write-Output "Dokany is already installed"
@@ -218,8 +218,8 @@ function Install-Dokany {
 function Install-GitBash {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-gitbash.txt")) {
         Write-Output "Installing Git Bash"
-        Copy-Item "${SETUP_PATH}\git.exe" "${TEMP}\git.exe" -Force
-        & "${TEMP}\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh" | Out-Null
+        Copy-Item "${SETUP_PATH}\git.exe" "${WSDFIR_TEMP}\git.exe" -Force
+        & "${WSDFIR_TEMP}\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh" | Out-Null
         if (Test-Path "${LOCAL_PATH}\.bashrc") {
             Copy-Item "${LOCAL_PATH}\.bashrc" "${HOME}\.bashrc" -Force
         } else {
@@ -234,8 +234,8 @@ function Install-GitBash {
 function Install-GoLang {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-golang.txt")) {
         Write-Output "Installing GoLang"
-        Copy-Item "${SETUP_PATH}\golang.msi" "${TEMP}\golang.msi" -Force
-        Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\golang.msi /qn /norestart"
+        Copy-Item "${SETUP_PATH}\golang.msi" "${WSDFIR_TEMP}\golang.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\golang.msi /qn /norestart"
         Add-ToUserPath "${env:ProgramFiles}\Go\bin"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-golang.txt" | Out-Null
     } else {
@@ -246,8 +246,8 @@ function Install-GoLang {
 function Install-Gpg4win {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-gpg4win.txt")) {
         Write-Output "Installing Gpg4win"
-        Copy-Item "${SETUP_PATH}\gpg4win.exe" "${TEMP}\gpg4win.exe" -Force
-        Start-Process -Wait "${TEMP}\gpg4win.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Copy-Item "${SETUP_PATH}\gpg4win.exe" "${WSDFIR_TEMP}\gpg4win.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\gpg4win.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-gpg4win.txt" | Out-Null
     } else {
         Write-Output "Gpg4win is already installed"
@@ -295,8 +295,8 @@ function Install-Kape {
 function Install-LibreOffice {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-libreoffice.txt")) {
         Write-Output "Installing LibreOffice"
-        Copy-Item "${SETUP_PATH}\LibreOffice.msi" "${TEMP}\LibreOffice.msi" -Force
-        Start-Process -Wait msiexec -ArgumentList "/qb /i ${TEMP}\LibreOffice.msi /l* ${TEMP}\LibreOffice_install_log.txt REGISTER_ALL_MSO_TYPES=1 UI_LANGS=en_US ISCHECKFORPRODUCTUPDATES=0 REBOOTYESNO=No QUICKSTART=0 ADDLOCAL=ALL VC_REDIST=0 REMOVE=gm_o_Onlineupdate,gm_r_ex_Dictionary_Af,gm_r_ex_Dictionary_An,gm_r_ex_Dictionary_Ar,gm_r_ex_Dictionary_Be,gm_r_ex_Dictionary_Bg,gm_r_ex_Dictionary_Bn,gm_r_ex_Dictionary_Bo,gm_r_ex_Dictionary_Br,gm_r_ex_Dictionary_Pt_Br,gm_r_ex_Dictionary_Bs,gm_r_ex_Dictionary_Pt_Pt,gm_r_ex_Dictionary_Ca,gm_r_ex_Dictionary_Cs,gm_r_ex_Dictionary_Da,gm_r_ex_Dictionary_Nl,gm_r_ex_Dictionary_Et,gm_r_ex_Dictionary_Gd,gm_r_ex_Dictionary_Gl,gm_r_ex_Dictionary_Gu,gm_r_ex_Dictionary_He,gm_r_ex_Dictionary_Hi,gm_r_ex_Dictionary_Hu,gm_r_ex_Dictionary_Lt,gm_r_ex_Dictionary_Lv,gm_r_ex_Dictionary_Ne,gm_r_ex_Dictionary_No,gm_r_ex_Dictionary_Oc,gm_r_ex_Dictionary_Pl,gm_r_ex_Dictionary_Ro,gm_r_ex_Dictionary_Ru,gm_r_ex_Dictionary_Si,gm_r_ex_Dictionary_Sk,gm_r_ex_Dictionary_Sl,gm_r_ex_Dictionary_El,gm_r_ex_Dictionary_Es,gm_r_ex_Dictionary_Te,gm_r_ex_Dictionary_Th,gm_r_ex_Dictionary_Tr,gm_r_ex_Dictionary_Uk,gm_r_ex_Dictionary_Vi,gm_r_ex_Dictionary_Zu,gm_r_ex_Dictionary_Sq,gm_r_ex_Dictionary_Hr,gm_r_ex_Dictionary_De,gm_r_ex_Dictionary_Id,gm_r_ex_Dictionary_Is,gm_r_ex_Dictionary_Ko,gm_r_ex_Dictionary_Lo,gm_r_ex_Dictionary_Mn,gm_r_ex_Dictionary_Sr,gm_r_ex_Dictionary_Eo,gm_r_ex_Dictionary_It,gm_r_ex_Dictionary_Fr"
+        Copy-Item "${SETUP_PATH}\LibreOffice.msi" "${WSDFIR_TEMP}\LibreOffice.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/qb /i ${WSDFIR_TEMP}\LibreOffice.msi /l* ${WSDFIR_TEMP}\LibreOffice_install_log.txt REGISTER_ALL_MSO_TYPES=1 UI_LANGS=en_US ISCHECKFORPRODUCTUPDATES=0 REBOOTYESNO=No QUICKSTART=0 ADDLOCAL=ALL VC_REDIST=0 REMOVE=gm_o_Onlineupdate,gm_r_ex_Dictionary_Af,gm_r_ex_Dictionary_An,gm_r_ex_Dictionary_Ar,gm_r_ex_Dictionary_Be,gm_r_ex_Dictionary_Bg,gm_r_ex_Dictionary_Bn,gm_r_ex_Dictionary_Bo,gm_r_ex_Dictionary_Br,gm_r_ex_Dictionary_Pt_Br,gm_r_ex_Dictionary_Bs,gm_r_ex_Dictionary_Pt_Pt,gm_r_ex_Dictionary_Ca,gm_r_ex_Dictionary_Cs,gm_r_ex_Dictionary_Da,gm_r_ex_Dictionary_Nl,gm_r_ex_Dictionary_Et,gm_r_ex_Dictionary_Gd,gm_r_ex_Dictionary_Gl,gm_r_ex_Dictionary_Gu,gm_r_ex_Dictionary_He,gm_r_ex_Dictionary_Hi,gm_r_ex_Dictionary_Hu,gm_r_ex_Dictionary_Lt,gm_r_ex_Dictionary_Lv,gm_r_ex_Dictionary_Ne,gm_r_ex_Dictionary_No,gm_r_ex_Dictionary_Oc,gm_r_ex_Dictionary_Pl,gm_r_ex_Dictionary_Ro,gm_r_ex_Dictionary_Ru,gm_r_ex_Dictionary_Si,gm_r_ex_Dictionary_Sk,gm_r_ex_Dictionary_Sl,gm_r_ex_Dictionary_El,gm_r_ex_Dictionary_Es,gm_r_ex_Dictionary_Te,gm_r_ex_Dictionary_Th,gm_r_ex_Dictionary_Tr,gm_r_ex_Dictionary_Uk,gm_r_ex_Dictionary_Vi,gm_r_ex_Dictionary_Zu,gm_r_ex_Dictionary_Sq,gm_r_ex_Dictionary_Hr,gm_r_ex_Dictionary_De,gm_r_ex_Dictionary_Id,gm_r_ex_Dictionary_Is,gm_r_ex_Dictionary_Ko,gm_r_ex_Dictionary_Lo,gm_r_ex_Dictionary_Mn,gm_r_ex_Dictionary_Sr,gm_r_ex_Dictionary_Eo,gm_r_ex_Dictionary_It,gm_r_ex_Dictionary_Fr"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-libreoffice.txt" | Out-Null
     } else {
         Write-Output "LibreOffice is already installed"
@@ -327,8 +327,8 @@ function Install-Malcat {
 function Install-Neo4j {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neo4j.txt")) {
         Write-Output "Installing Neo4j"
-        Copy-Item "${SETUP_PATH}\microsoft-jdk-11.msi" "${TEMP}\microsoft-jdk-11.msi" -Force
-        Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
+        Copy-Item "${SETUP_PATH}\microsoft-jdk-11.msi" "${WSDFIR_TEMP}\microsoft-jdk-11.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}"
         Move-Item ${env:ProgramFiles}\neo4j-community* ${env:ProgramFiles}\neo4j
         Add-ToUserPath "${env:ProgramFiles}\neo4j\bin"
@@ -353,8 +353,8 @@ function Install-Node {
 function Install-Obsidian {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-obsidian.txt")) {
         Write-Output "Installing Obsidian"
-        Copy-Item "${SETUP_PATH}\obsidian.exe" "${TEMP}\obsidian.exe" -Force
-        Start-Process -Wait "${TEMP}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Copy-Item "${SETUP_PATH}\obsidian.exe" "${WSDFIR_TEMP}\obsidian.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-obsidian.txt" | Out-Null
     } else {
         Write-Output "Obsidian is already installed"
@@ -364,8 +364,8 @@ function Install-Obsidian {
 function Install-OhMyPosh {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-ohmyposh.txt")) {
         Write-Output "Installing OhMyPosh"
-        Copy-Item "${SETUP_PATH}\oh-my-posh.exe" "${TEMP}\oh-my-posh.exe" -Force
-        Start-Process -Wait "${TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
+        Copy-Item "${SETUP_PATH}\oh-my-posh.exe" "${WSDFIR_TEMP}\oh-my-posh.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
         & "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" font install --user "${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
     } else {
@@ -376,8 +376,8 @@ function Install-OhMyPosh {
 function Install-PDFStreamDumper {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-pdfstreamdumper.txt")) {
         Write-Output "Installing PDFStreamDumper"
-        Copy-Item "${SETUP_PATH}\PDFStreamDumper.exe" "${TEMP}\PDFStreamDumper.exe" -Force
-        & "${TEMP}\PDFStreamDumper.exe" /verysilent
+        Copy-Item "${SETUP_PATH}\PDFStreamDumper.exe" "${WSDFIR_TEMP}\PDFStreamDumper.exe" -Force
+        & "${WSDFIR_TEMP}\PDFStreamDumper.exe" /verysilent
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-pdfstreamdumper.txt" | Out-Null
     } else {
         Write-Output "PDFStreamDumper is already installed"
@@ -387,8 +387,8 @@ function Install-PDFStreamDumper {
 function Install-Qemu {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-qemu.txt")) {
         Write-Output "Installing Qemu"
-        Copy-Item "${SETUP_PATH}\qemu.exe" "${TEMP}\qemu.exe" -Force
-        Start-Process -Wait "${TEMP}\qemu.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Copy-Item "${SETUP_PATH}\qemu.exe" "${WSDFIR_TEMP}\qemu.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\qemu.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-qemu.txt" | Out-Null
     } else {
         Write-Output "Qemu is already installed"
@@ -409,8 +409,8 @@ function  Install-Ruby {
 function Install-Rust {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-rust.txt")) {
         Write-Output "Installing Rust"
-        Copy-Item "${SETUP_PATH}\rust.msi" "${TEMP}\rust.msi"
-        Start-Process -Wait msiexec -ArgumentList "/i ${TEMP}\rust.msi INSTALLDIR=${RUST_DIR} /qn /norestart"
+        Copy-Item "${SETUP_PATH}\rust.msi" "${WSDFIR_TEMP}\rust.msi"
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\rust.msi INSTALLDIR=${RUST_DIR} /qn /norestart"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-rust.txt" | Out-Null
     } else {
         Write-Output "Rust is already installed"
@@ -420,8 +420,8 @@ function Install-Rust {
 function Install-VSCode {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vscode.txt")) {
         Write-Output "Installing Visual Studio Code"
-        Copy-Item "${SETUP_PATH}\vscode.exe" "${TEMP}\vscode.exe" -Force
-        Start-Process -Wait "${TEMP}\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,!associatewithfiles,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
+        Copy-Item "${SETUP_PATH}\vscode.exe" "${WSDFIR_TEMP}\vscode.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,!associatewithfiles,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
         if ($WSDFIR_VSCODE_POWERSHELL -eq "Yes") {
             & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-powershell.vsix" 2>&1 | Out-Null
         }
@@ -475,8 +475,8 @@ function Install-W10Loopback {
 function Install-Wireshark {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-wireshark.txt")) {
         Write-Output "Installing Wireshark"
-        Copy-Item "${SETUP_PATH}\wireshark.exe" "${TEMP}\wireshark.exe" -Force
-        Start-Process -Wait "${TEMP}\wireshark.exe" -ArgumentList "/S /desktopicon=yes /quicklaunchicon=yes"
+        Copy-Item "${SETUP_PATH}\wireshark.exe" "${WSDFIR_TEMP}\wireshark.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\wireshark.exe" -ArgumentList "/S /desktopicon=yes /quicklaunchicon=yes"
         New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark" -Force -Type Directory | Out-Null
         if (Test-Path "${ENRICHMENT}\maxmind_current") {
             Set-Content '"C:/enrichment/maxmind_current"' -Encoding Ascii -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark\maxmind_db_paths"
@@ -502,8 +502,8 @@ function Install-X64dbg {
 function Install-Zui {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-zui.txt")) {
         Write-Output "Installing Zui"
-        Copy-Item "${SETUP_PATH}\zui.exe" "${TEMP}\zui.exe" -Force
-        & "${TEMP}\zui.exe" /S /AllUsers
+        Copy-Item "${SETUP_PATH}\zui.exe" "${WSDFIR_TEMP}\zui.exe" -Force
+        & "${WSDFIR_TEMP}\zui.exe" /S /AllUsers
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-zui.txt" | Out-Null
     } else {
         Write-Output "Zui is already installed"
