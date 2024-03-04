@@ -33,6 +33,7 @@ $repourls = `
     "https://github.com/last-byte/PersistenceSniper.git", `
     "https://github.com/last-byte/PersistenceSniper.wiki.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
+    "https://github.com/mandiant/gootloader.git", `
     "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
@@ -59,6 +60,7 @@ $repourls = `
     "https://github.com/volexity/threat-intel.git", `
     "https://github.com/wagga40/Zircolite.git", `
     "https://github.com/reuteras/PatchaPalooza.git", `
+    "https://github.com/The-DFIR-Report/Sigma-Rules.git", `
     "https://github.com/Yamato-Security/hayabusa-rules.git", `
     "https://github.com/YosfanEilay/AuthLogParser.git", `
     "https://github.com/yossizap/cutterref.git"
