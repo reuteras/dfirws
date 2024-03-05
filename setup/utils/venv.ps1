@@ -27,6 +27,10 @@ param(
     [Switch]$mwcp,
     [Parameter(HelpMessage = "Switch to venv pe2pic.")]
     [Switch]$pe2pic,
+    [Parameter(HelpMessage = "Switch to venv peepdf3.")]
+    [Switch]$peepdf3,
+    [Parameter(HelpMessage = "Switch to venv regipy.")]
+    [Switch]$regipy,
     [Parameter(HelpMessage = "Switch to venv rexi.")]
     [Switch]$rexi,
     [Parameter(HelpMessage = "Switch to venv scare.")]
@@ -71,6 +75,10 @@ if ($aspose) {
     $venv = "mwcp"
 } elseif ($pe2pic) {
     $venv = "pe2pic"
+} elseif ($peepdf3) {
+    $venv = "peepdf3"
+} elseif ($regipy) {
+    $venv = "regipy"
 } elseif ($rexi) {
     $venv = "rexi"
 } elseif ($scare) {

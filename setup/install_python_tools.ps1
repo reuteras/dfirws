@@ -585,7 +585,7 @@ deactivate
 Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 
 
-foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "mwcp", "rexi", "sigma-cli", "toolong") {
+foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "mwcp", "peepdf3", "rexi", "sigma-cli", "toolong") {
     #
     # Create simple venv for each tool in list above
     #
@@ -620,6 +620,9 @@ foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "mwc
         } elseif ("${virtualenv}" -eq "chepy") {
             python -m pip install `
                 chepy[extras] 2>&1 >> "C:\log\python.txt"
+        } elseif ("${virtualenv}" -eq "peepdf3") {
+            poetry add `
+                peepdf-3 pyreadline3 stpyv8 2>&1 >> "C:\log\python.txt"
         } else {
             poetry add `
                 "${virtualenv}" 2>&1 >> "C:\log\python.txt"
