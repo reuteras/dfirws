@@ -155,10 +155,6 @@ Get-FileFromUri -uri "http://sandsprite.com/CodeStuff/PDFStreamDumper_Setup.exe"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/yossizap/x64dbgcutter/master/x64dbgcutter.py" -FilePath ".\downloads\x64dbgcutter.py"
 Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_scripts/master/scripts/cutter_stackstrings.py" -FilePath ".\downloads\cutter_stackstrings.py"
 
-# Resource Hacker - not used since Microsoft AV detects it as PUA
-#Get-FileFromUri -uri "https://www.angusj.com/resourcehacker/resource_hacker.zip" -FilePath ".\downloads\resource_hacker.zip"
-#& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\resource_hacker.zip" -o"${TOOLS}\resource_hacker" | Out-Null
-
 # Dependence for PE-bear
 Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe"
 
