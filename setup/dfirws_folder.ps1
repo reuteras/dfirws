@@ -630,7 +630,7 @@ Write-DateLog "Creating shortcuts in ${HOME}\Desktop\dfirws done." | Tee-Object 
 $shell = new-object -com "Shell.Application"
 $folder = ${shell}.Namespace("${HOME}\Desktop")
 $item = ${folder}.Parsename('dfirws')
-$verb = ${item}.Verbs() | Where-Object { $_.Name -eq 'Pin to Quick access' }
+$verb = ${item}.Verbs() | Where-Object { $_.Name -like 'Pin to *Quick access' }
 if ("${verb}") {
     ${verb}.DoIt()
 }
