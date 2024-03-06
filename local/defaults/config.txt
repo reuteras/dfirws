@@ -32,11 +32,11 @@ $WSDFIR_NEO4J="No"
 # Install Obsidian
 $WSDFIR_OBSIDIAN="No"
 # Install PDFStream Dumper
-$WSDFIR_PDFSTREAM="Yes"
+$WSDFIR_PDFSTREAM="No"
 # Install Qemu
 $WSDFIR_QEMU="No"
 # Install Visual Studio Code
-$WSDFIR_VSCODE="Yes"
+$WSDFIR_VSCODE="No"
 # Install Visual Studio Code PowerShell extension
 $WSDFIR_VSCODE_POWERSHELL="Yes"
 # Install Visual Studio Code Python extension
@@ -58,9 +58,6 @@ $WSDFIR_ZUI="No"
 # Install Chocolatey - must be "Yes" to install any packages
 #$WSDFIR_CHOCO="No"
 
-# Links on Desktop
-# Moved to local\customize.ps1
-
 # Run sysmon
 $WSDFIR_SYSMON="Yes"
 
@@ -79,9 +76,10 @@ $WSDFIR_DARK="Yes"
 $WSDFIR_HIDE_TASKBAR="Yes"
 
 # Use oh-my-posh
-# There are problems with Nerdfonts on some versions of Windows.
-# For me it works on Windows 11 23H2 but not on Windows 11 22H2.
 $WSDFIR_OHMYPOSH="No"
+
+# If you use oh-my-posh, set tabby to Yes to have full support for powerline10k and fonts
+$WSDFIR_TABBY="No"
 
 # Configuration for oh-my-posh when using powerline10k compatible font
 $WSDFIR_OHMYPOSH_CONFIG_POWERLINE="defaults\posh\dfirws-powerlevel10k.omp.json"
@@ -95,6 +93,3 @@ $WSDFIR_FONT_NAME="Meslo"
 # Full name used by Visual Studio Code
 $WSDFIR_FONT_FULL_NAME="Consolas, 'Courier New', monospace"
 #$WSDFIR_FONT_FULL_NAME="MesloLGM Nerd Font Mono"
-
-# If you use oh-my-posh, set tabby to Yes
-$WSDFIR_TABBY="No"
