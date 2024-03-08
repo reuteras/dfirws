@@ -155,6 +155,7 @@ Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 #
 
 & "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\visualstudio.txt
+& "$PYTHON_BIN" -m pip index pdfalyzer 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\visualstudio.txt
 & "$PYTHON_BIN" -m pip index versions regipy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${WSDFIR_TEMP}\visualstudio.txt
 ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${WSDFIR_TEMP}\visualstudio.txt
 $GHIDRA_INSTALL_DIR >> ${WSDFIR_TEMP}\visualstudio.txt
@@ -239,6 +240,37 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
     } else {
         Write-DateLog "Neither jep or ghidrathon has been updated, don't build jep." >> "C:\log\python.txt"
     }
+
+
+    #
+    # venv pdfalyzer
+    #
+    & "$PYTHON_BIN" -m pip index pdfalyzer 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\pdfalyzer.txt
+
+    if (Test-Path "C:\venv\pdfalyzer\pdfalyzer.txt") {
+        $CURRENT_VENV = "C:\venv\pdfalyzer\pdfalyzer.txt"
+    } else {
+        $CURRENT_VENV = "C:\Progress.ps1"
+    }
+
+    if ((Get-FileHash C:\tmp\pdfalyzer.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+        Write-DateLog "Install packages in venv pdfalyzer in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+        Get-ChildItem C:\venv\pdfalyzer\* -Exclude pdfalyzer.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+        Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\pdfalyzer"
+        C:\venv\pdfalyzer\Scripts\Activate.ps1 >> "C:\log\python.txt"
+        Set-Location "C:\venv\pdfalyzer"
+
+        python -m pip install -U pip >> "C:\log\python.txt"
+        python -m pip install -U pdfalyzer >> "C:\log\python.txt"
+
+        Copy-Item "${WSDFIR_TEMP}\pdfalyzer.txt" "C:\venv\pdfalyzer\pdfalyzer.txt" -Force 2>&1 >> "C:\log\python.txt"
+
+        deactivate
+        Write-DateLog "Python venv pdfalyzer done." >> "C:\log\python.txt"
+    } else {
+        Write-DateLog "pdfalyzer has not been updated, don't update pdfalyzer venv." >> "C:\log\python.txt"
+    }
+    Copy-Item "${WSDFIR_TEMP}\visualstudio.txt" "C:\venv\visualstudio.txt" -Force 2>&1 >> "C:\log\python.txt"
 
 
     #
@@ -585,7 +617,7 @@ deactivate
 Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 
 
-foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "mwcp", "peepdf3", "rexi", "sigma-cli", "toolong") {
+foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "malwarebazaar", "mwcp", "peepdf3", "rexi", "sigma-cli", "toolong") {
     #
     # Create simple venv for each tool in list above
     #
@@ -620,6 +652,9 @@ foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "mwc
         } elseif ("${virtualenv}" -eq "chepy") {
             python -m pip install `
                 chepy[extras] 2>&1 >> "C:\log\python.txt"
+        } elseif ("${virtualenv}" -eq "malwarebazaar") {
+            python -m pip install `
+                malwarebazaar 2>&1 >> "C:\log\python.txt"
         } elseif ("${virtualenv}" -eq "peepdf3") {
             poetry add `
                 peepdf-3 pyreadline3 stpyv8 2>&1 >> "C:\log\python.txt"
