@@ -26,6 +26,7 @@ Robocopy.exe $SOURCE_DIRECTORY\downloads .\dfirws\downloads /MIR /MT:96
 Robocopy.exe $SOURCE_DIRECTORY\enrichment .\dfirws\enrichment /MIR /MT:96
 Robocopy.exe $SOURCE_DIRECTORY\local\defaults .\dfirws\local\defaults /MIR /MT:96
 Robocopy.exe $SOURCE_DIRECTORY\mount .\dfirws\mount /MIR /MT:96
+Robocopy.exe $SOURCE_DIRECTORY\resources .\dfirws\resources /MIR /MT:96
 Robocopy.exe $SOURCE_DIRECTORY\setup .\dfirws\setup /MIR /MT:96
 
 Copy-Item $SOURCE_DIRECTORY\createSandboxConfig.ps1 .\dfirws\

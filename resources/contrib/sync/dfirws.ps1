@@ -35,20 +35,22 @@ Robocopy.exe /MT:96 /MIR "${source}\dfirws\local\defaults" "${HOME}\dfirws\local
 Write-Output "Update mount"
 Robocopy.exe /MT:96 /MIR "${source}\dfirws\mount" "${HOME}\dfirws\mount" | Out-Null
 
+Write-Output "Update resources"
+Robocopy.exe /MT:96 /MIR "${source}\dfirws\resources" "${HOME}\dfirws\resources" | Out-Null
+
 Write-Output "Update setup."
 Robocopy.exe /MT:96 /MIR "${source}\dfirws\setup" "${HOME}\dfirws\setup" /XF "config.txt" | Out-Null
 
 Write-Output "Update other files."
-if (Test-Path "${HOME}\dfirws\dfirws.ps1" ) {
-	Copy-Item "${source}\dfirws.ps1" "${HOME}\dfirws\dfirws.ps1" | Out-Null
+if (Test-Path "${PWD}\dfirws.ps1" ) {
+	Copy-Item "${source}\dfirws.ps1" "${PWD}\dfirws.ps1" | Out-Null
 }
 
 Copy-Item "${source}\dfirws\README.md" "${HOME}\dfirws\README.md" | Out-Null
-Copy-Item "${source}\dfirws\createSandboxConfig.ps1" "${HOME}\dfirws\createSandboxConfig.ps1" | Out-Null
 
 if ( -not (Test-Path -Path "${HOME}\dfirws\dfirws.wsb" -PathType Leaf )) {
 	Write-Output "Create default dfirws.wsb"
-	(Get-Content "${HOME}\dfirws\dfirws.wsb.template").replace("__SANDBOX__", "${HOME}\dfirws") | Set-Content "${HOME}\dfirws\dfirws.wsb"
+	(Get-Content "${HOME}\dfirws\resources\templates\dfirws.wsb.template").replace("__SANDBOX__", "${HOME}\dfirws") | Set-Content "${HOME}\dfirws\dfirws.wsb"
 }
 
 if($Null -eq (Get-Process "WindowsSandbox" -ea SilentlyContinue) ){
