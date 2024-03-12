@@ -279,7 +279,7 @@ Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.79.exe" -FilePath ".\downlo
 Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.3-x64.exe" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
 
 # https://www.sqlite.org/download.html - SQLite
-Get-FileFromUri -uri "https://sqlite.org/2024/sqlite-tools-win-x64-3450100.zip" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
+Get-FileFromUri -uri "https://sqlite.org/2024/sqlite-tools-win-x64-3450200.zip" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
