@@ -248,17 +248,17 @@ if ($all -or $PowerShell) {
     .\resources\download\powershell.ps1
 }
 
+if ($Enrichment.IsPresent) {
+    Write-DateLog "Download enrichment data."
+    .\resources\download\enrichment.ps1
+}
+
 if ($all -or $bash -or $Node -or $Python -or $Rust) {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
     Get-Job | Remove-Job | Out-Null
     Write-DateLog "Sandboxes done."
-}
-
-if ($Enrichment.IsPresent) {
-    Write-DateLog "Download enrichment data."
-    .\resources\download\enrichment.ps1
 }
 
 Copy-Item "README.md" ".\downloads\" -Force
