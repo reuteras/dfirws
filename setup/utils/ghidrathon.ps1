@@ -11,7 +11,7 @@ deactivate
 $env:PYTHONPATH="${VENV}\jep\Lib\site-packages;C:\Program Files\Python311\Lib"
 
 $LATEST_GHIDRA_RELEASE = (Get-ChildItem C:\Tools\ghidra\).Name | findstr.exe PUBLIC | Select-Object -Last 1
-$LATEST_GHIDRATHON = (Get-ChildItem C:\Tools\ghidra_extensions\).FullName | Select-Object -Last 1
+$LATEST_GHIDRATHON = (Get-ChildItem C:\Tools\ghidra_extensions\).FullName | findstr.exe Ghidrathon | Select-Object -Last 1
 
 if (!(Test-Path -Path "${HOME}\.ghidra\.${LATEST_GHIDRA_RELEASE}\Extensions\ghidrathon")) {
     & "$env:programfiles\7-Zip\7z.exe" x -o"${HOME}\.ghidra\.${LATEST_GHIDRA_RELEASE}\Extensions" "${LATEST_GHIDRATHON}" | Out-Null
