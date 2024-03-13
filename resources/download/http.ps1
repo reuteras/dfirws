@@ -1,23 +1,9 @@
 param(
-    #[Parameter(HelpMessage = "Don't update Chocolatey via http.")]
-    #[Switch]$NoChocolatey,
     [Parameter(HelpMessage = "Don't update Visual Studio Code Extensions via http.")]
     [Switch]$NoVSCodeExtensions
 )
 
 . "$PSScriptRoot\common.ps1"
-
-# Get uri for latest nuget - ugly and disabled due to problems with the download
-#if (! $NoChocolatey.IsPresent) {
-#    $choco = Get-ChocolateyUrl "chocolatey"
-#    # chocolatey
-#    if ("" -eq "$choco") {
-#        Write-DateLog "ERROR: Could not get URI for Chocolatey"
-#    } else {
-#        Get-FileFromUri -uri "$choco" -FilePath ".\downloads\choco.zip"
-#        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\choco.zip" -o"${SETUP_PATH}\choco" | Out-Null
-#    }
-#}
 
 if (! $NoVSCodeExtensions.IsPresent) {
     # Get URI for Visual Studio Code python extension - ugly
@@ -257,6 +243,26 @@ Get-FileFromUri -uri "https://cdn.binary.ninja/installers/BinaryNinja-free.exe" 
 # gpg4win
 Get-FileFromUri -uri "https://files.gpg4win.org/gpg4win-latest.exe" -FilePath ".\downloads\gpg4win.exe"
 
+# Firefox
+Get-FileFromUri -uri "https://download.mozilla.org/?product=firefox-msi-latest-ssl&os=win64&lang=en-US" -FilePath ".\downloads\firefox.msi"
+
+# Tor browser
+$TorBrowserUrl = Get-DownloadUrlFromPage -Url "https://www.torproject.org/download/" -RegEx '/dist/[^"]+exe'
+Get-FileFromUri -uri "https://www.torproject.org$TorBrowserUrl" -FilePath ".\downloads\torbrowser.exe"
+
+# DCode
+$DCodeUrl = Get-DownloadUrlFromPage -Url "https://www.digital-detective.net/dcode/" -RegEx "https://www.digital-detective.net/download/download[^']+"
+Get-FileFromUri -uri "${DCodeURL}" -FilePath ".\downloads\dcode.zip"
+if (Test-Path -Path ${SETUP_PATH}\dcode) {
+    Remove-Item -Recurse -Force ${SETUP_PATH}\dcode | Out-Null 2>&1
+}
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dcode.zip" -o"${SETUP_PATH}\dcode" | Out-Null
+Move-Item ${SETUP_PATH}\dcode\Dcode-* "${SETUP_PATH}\dcode\dcode.exe" | Out-Null
+
+# HFS - HTTP File Server
+Get-FileFromUri -uri "https://rejetto.com/hfs/download" -FilePath ".\downloads\hfs.exe"
+Copy-Item ".\downloads\hfs.exe" "${TOOLS}\bin\hfs.exe" -Force
+
 # Update the links below when new versions are released
 
 # https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start
@@ -336,6 +342,11 @@ if (Test-Path -Path ${TOOLS}\hashcat) {
     Remove-Item -Recurse -Force ${TOOLS}\hashcat | Out-Null 2>&1
 }
 Move-Item ${TOOLS}\hashcat-* ${TOOLS}\hashcat
+
+# https://www.maltego.com/downloads/ - Maltego
+Get-FileFromUri -uri "https://downloads.maltego.com/maltego-v4/windows/MaltegoSetup.v4.6.0.exe" -FilePath ".\downloads\maltego.exe" -CheckURL "Yes"
+
+
 
 # ELK
 $ELK_VERSION = "8.12.2"
