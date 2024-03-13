@@ -305,56 +305,6 @@ function Get-GitHubRelease {
 
 <#
 .SYNOPSIS
-Function to get the download URL for a Chocolatey package.
-
-.DESCRIPTION
-This function retrieves the download URL for a specified Chocolatey package.
-
-.PARAMETER PackageName
-The name of the Chocolatey package.
-
-.EXAMPLE
-Get-ChocolateyUrl -PackageName "example-package"
-
-This example retrieves the download URL for the "example-package" Chocolatey package.
-
-.NOTES
-Author: peter@reuteras.net
-Date:   2023-12-21
-#>
-function Get-ChocolateyUrl {
-    Param (
-        [Parameter(Mandatory=$True)] [string]$PackageName
-    )
-
-    $retries = 3
-    $Url = ""
-
-    while ($Url -eq "") {
-        try {
-            # Scrape the download URL from the Chocolatey package page
-            $Url = curl --silent "https://community.chocolatey.org/packages/$PackageName" | findstr /C:"Download the raw" | findstr ">Download<" | ForEach-Object { ($_ -split '"' )[1] }
-            return $Url
-        }
-        catch {
-            $Url = ""
-        }
-        if ($Url -eq "") {
-            Write-SynchronizedLog "Failed to get download URL for Chocolately package $PackageName. Sleeping for 60 seconds."
-            Start-Sleep 60
-        }
-        $retries--
-        if ($retries -eq 0) {
-            Write-Error "Failed to get download URL for Chocolately package $PackageName."
-            return ""
-        }
-    }
-
-    return $Url
-}
-
-<#
-.SYNOPSIS
 Retrieves the download URL from a web page based on a specified regular expression pattern.
 
 .DESCRIPTION
