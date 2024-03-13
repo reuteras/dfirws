@@ -9,6 +9,15 @@ if (Test-Path .\tmp\winget\Autopsy*.msi) {
 }
 Clear-Tmp winget
 
+# Chrome - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading Chrome."
+Get-WinGet "Google.Chrome"
+if (Test-Path .\tmp\winget\Google*.exe) {
+    Copy-Item .\tmp\winget\Google*.exe ".\downloads\chrome.exe"
+}
+Clear-Tmp winget
+
 # Docker Desktop - available for installation via dfirws-install.ps1
 Clear-Tmp winget
 Write-SynchronizedLog "winget: Downloading Docker Desktop."
@@ -67,6 +76,15 @@ Write-SynchronizedLog "winget: Downloading PowerShell 7."
 Get-WinGet "Microsoft.PowerShell"
 if (Test-Path .\tmp\winget\PowerShell*.msi) {
     Copy-Item .\tmp\winget\PowerShell*.msi ".\downloads\powershell.msi"
+}
+Clear-Tmp winget
+
+# Putty - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading Putty."
+Get-WinGet "PuTTY.PuTTY"
+if (Test-Path .\tmp\winget\PuTTY*.msi) {
+    Copy-Item .\tmp\winget\PuTTY*.msi ".\downloads\putty.msi"
 }
 Clear-Tmp winget
 
