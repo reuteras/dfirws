@@ -169,15 +169,17 @@ function Install-BinaryNinja {
     }
 
 }
-#function Install-Choco {
-#    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-choco.txt")) {
-#        Write-Output "Installing Chocolatey"
-#        & "${SETUP_PATH}\choco\tools\chocolateyInstall.ps1"
-#        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-choco.txt" | Out-Null
-#    } else {
-#        Write-Output "Chocolatey is already installed"
-#    }
-#}
+
+function Install-Chrome {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-chrome.txt")) {
+        Write-Output "Installing Chrome"
+        Copy-Item "${SETUP_PATH}\chrome.exe" "${WSDFIR_TEMP}\chrome.exe" -Force
+        & "${WSDFIR_TEMP}\chrome.exe"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-chrome.txt" | Out-Null
+    } else {
+        Write-Output "Chrome is already installed"
+    }
+}
 
 function Install-CMDer {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-cmder.txt")) {
@@ -193,6 +195,16 @@ function Install-CMDer {
     }
 }
 
+function  Install-DCode {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dcode.txt")) {
+        Write-Output "Installing DCode"
+        Copy-Item "${SETUP_PATH}\\dcode\dcode.exe" "${WSDFIR_TEMP}\dcode.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\dcode.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-dcode.txt" | Out-Null
+    } else {
+        Write-Output "DCode is already installed"
+    }
+}
 
 function Install-Docker {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-docker.txt")) {
@@ -212,6 +224,16 @@ function Install-Dokany {
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-dokany.txt" | Out-Null
     } else {
         Write-Output "Dokany is already installed"
+    }
+}
+
+function Install-Firefox {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-firefox.txt")) {
+        Write-Output "Installing Firefox"
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\firefox.msi /qn /norestart"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-firefox.txt" | Out-Null
+    } else {
+        Write-Output "Firefox is already installed"
     }
 }
 
@@ -324,6 +346,16 @@ function Install-Malcat {
         Write-Output "Malcat is already installed"
     }
 }
+
+function Install-Maltego {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-maltego.txt")) {
+        Write-Output "Installing Maltego"
+        Start-Process -Wait "${SETUP_PATH}\maltego.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-maltego.txt" | Out-Null
+    } else {
+        Write-Output "Maltego is already installed"
+    }
+}
 function Install-Neo4j {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neo4j.txt")) {
         Write-Output "Installing Neo4j"
@@ -384,6 +416,16 @@ function Install-PDFStreamDumper {
     }
 }
 
+function Install-PuTTY {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-putty.txt")) {
+        Write-Output "Installing PuTTY"
+        Copy-Item "${SETUP_PATH}\putty.msi" "${WSDFIR_TEMP}\putty.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\putty.msi /qn /norestart"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-putty.txt" | Out-Null
+    } else {
+        Write-Output "PuTTY is already installed"
+    }
+}
 function Install-Qemu {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-qemu.txt")) {
         Write-Output "Installing Qemu"
@@ -414,6 +456,17 @@ function Install-Rust {
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-rust.txt" | Out-Null
     } else {
         Write-Output "Rust is already installed"
+    }
+}
+
+function Install-Tor {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-tor.txt")) {
+        Write-Output "Installing Tor"
+        Copy-Item "${SETUP_PATH}\torbrowser.exe" "${WSDFIR_TEMP}\torbrowser.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\torbrowser.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-tor.txt" | Out-Null
+    } else {
+        Write-Output "Tor is already installed"
     }
 }
 
