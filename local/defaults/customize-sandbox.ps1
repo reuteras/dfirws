@@ -59,11 +59,6 @@ foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
 #New-Item -Path "${HOME}/.ghidra\.ghidra_10.4_PUBLIC\Extensions" -ItemType Directory -Force | Out-Null
 #& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\GolangAnalyzerExtension.zip" -o"${HOME}/.ghidra/.ghidra_10.4_PUBLIC/Extensions" | Out-Null
 
-# Chocolately
-# You must have 'set SET WSDFIR_CHOCO="Yes"' in your setup\config.txt
-# To install a package named die.3.07.nupkg added to .\local and therefore available in C:\local in the sandbox do:
-# choco install die --version="3.7.0" --source="C:\local" -y
-
 # Install extra programs
 #Install-Ruby
 #Install-Rust
