@@ -349,12 +349,6 @@ if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
     Write-DateLog "apimonitor added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
-# Run install script for choco packages
-#if ("${WSDFIR_CHOCO}" -eq "Yes") {
-#    Install-Choco | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-#    # Add packages below
-#}
-
 # Setup Node.js
 if ("${WSDFIR_NODE}" -eq "Yes") {
     Install-Node | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
@@ -510,6 +504,36 @@ Copy-Item -Recurse "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\" -Force
 Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
 
+# Copy shortcuts to Start menu
+if ("${WSDFIR_START_MENU}" -eq "Yes") {
+    ${sourceDir} = "${HOME}\Desktop\dfirws"
+    ${DestinationDir} = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
+
+    if (-not (Test-Path -Path ${DestinationDir})) {
+        New-Item -ItemType Directory -Path ${DestinationDir}
+    }
+
+    # Find all files in the source directory, including subdirectories
+    $files = Get-ChildItem -Path ${sourceDir} -Recurse -File
+
+    foreach ($file in $files) {
+        $newFolderName = "dfirws - " + $file.DirectoryName.Replace($sourceDir, '').TrimStart('\').Replace('\', ' - ').Replace('\', ' - ').Replace('\', ' - ')
+        $newFolderPath = Join-Path -Path $DestinationDir -ChildPath $newFolderName
+        
+        # Ensure the new folder exists
+        if (-not (Test-Path -Path $newFolderPath)) {
+            New-Item -ItemType Directory -Path $newFolderPath
+        }
+    
+        # Define the new file path within the new folder structure
+        $newFilePath = Join-Path -Path $newFolderPath -ChildPath $file.Name
+    
+        # Copy the file to the new location
+        Copy-Item -Path $file.FullName -Destination $newFilePath
+    }
+
+    Write-DateLog "Files have been copied to the destination directory: ${DestinationDir}"
+}
 
 #
 # Run custom scripts
