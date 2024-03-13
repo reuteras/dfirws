@@ -54,10 +54,6 @@ $WSDFIR_W10_LOOPBACK="No"
 # Install Zui 
 $WSDFIR_ZUI="No"
 
-# Chocolatey - functionality is disabled
-# Install Chocolatey - must be "Yes" to install any packages
-#$WSDFIR_CHOCO="No"
-
 # Run sysmon
 $WSDFIR_SYSMON="Yes"
 
@@ -74,6 +70,9 @@ $WSDFIR_DARK="Yes"
 
 # Hide taskbar
 $WSDFIR_HIDE_TASKBAR="Yes"
+
+# Copy dfirws folder to start menu
+$WSDFIR_START_MENU="Yes"
 
 # Use oh-my-posh
 $WSDFIR_OHMYPOSH="No"
