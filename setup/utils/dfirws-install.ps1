@@ -5,10 +5,12 @@ param (
     [switch]$Autopsy,
     [switch]$BashExtra,
     [switch]$BinaryNinja,
-#    [switch]$Choco,
+    [switch]$Chrome,
     [switch]$CMDer,
+    [switch]$DCode,
     [switch]$Docker,
     [switch]$Dokany,
+    [switch]$Firefox,
     [switch]$GitBash,
     [switch]$GoLang,
     [switch]$Gpg4win,
@@ -17,14 +19,17 @@ param (
     [switch]$Kape,
     [switch]$LibreOffice,
     [switch]$Loki,
+    [switch]$Maltego,
     [switch]$Neo4j,
     [switch]$Node,
     [switch]$Obsidian,
     [switch]$OhMyPosh,
     [switch]$PDFStreamDumper,
+    [switch]$PuTTY,
     [switch]$Qemu,
     [switch]$Ruby,
     [switch]$Rust,
+    [switch]$Tor,
     [switch]$VSCode,
     [switch]$Wireshark,
     [switch]$X64Dbg,
@@ -50,13 +55,16 @@ if ($BinaryNinja.IsPresent) {
     Install-BinaryNinja
 }
 
-#if ($Choco.IsPresent) {
-#    Write-Output "Installation of Chocolatey is disabled."
-#    #Install-Choco
-#}
+if ($Chrome.IsPresent) {
+    Install-Chrome
+}
 
 if ($CMDer.IsPresent) {
     Install-CMDer
+}
+
+if ($DCode.IsPresent) {
+    Install-DCode
 }
 
 if ($Docker.IsPresent) {
@@ -65,6 +73,10 @@ if ($Docker.IsPresent) {
 
 if ($Dokany.IsPresent) {
     Install-Dokany
+}
+
+if ($Firefox.IsPresent) {
+    Install-Firefox
 }
 
 if ($GitBash.IsPresent) {
@@ -99,6 +111,10 @@ if ($Loki.IsPresent) {
     Install-Loki
 }
 
+if ($Maltego.IsPresent) {
+    Install-Maltego
+}
+
 if ($Neo4j.IsPresent) {
     Install-Neo4j
 }
@@ -119,6 +135,10 @@ if ($PDFStreamDumper.IsPresent) {
     Install-PDFStreamDumper
 }
 
+if ($PuTTY.IsPresent) {
+    Install-PuTTY
+}
+
 if ($Qemu.IsPresent) {
     Install-Qemu
 }
@@ -129,6 +149,10 @@ if ($Ruby.IsPresent) {
 
 if ($Rust.IsPresent) {
     Install-Rust
+}
+
+if ($Tor.IsPresent) {
+    Install-Tor
 }
 
 if ($VSCode.IsPresent) {
