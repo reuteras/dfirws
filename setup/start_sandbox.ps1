@@ -519,15 +519,15 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
     foreach ($file in $files) {
         $newFolderName = "dfirws - " + $file.DirectoryName.Replace($sourceDir, '').TrimStart('\').Replace('\', ' - ').Replace('\', ' - ').Replace('\', ' - ')
         $newFolderPath = Join-Path -Path $DestinationDir -ChildPath $newFolderName
-        
+
         # Ensure the new folder exists
         if (-not (Test-Path -Path $newFolderPath)) {
             New-Item -ItemType Directory -Path $newFolderPath
         }
-    
+
         # Define the new file path within the new folder structure
         $newFilePath = Join-Path -Path $newFolderPath -ChildPath $file.Name
-    
+
         # Copy the file to the new location
         Copy-Item -Path $file.FullName -Destination $newFilePath
     }
