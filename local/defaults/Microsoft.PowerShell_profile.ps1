@@ -127,17 +127,17 @@ function Restore-Quarantine {
 		return
 	}
 
-	if (Test-Path "C:\Users\${USERNAME}\Desktop\readonly\Quarantine.zip") {
+	if (Test-Path "C:\Users\${env:USERNAME}\Desktop\readonly\Quarantine.zip") {
 		Remove-Item -r -Force "C:\tmp\Quarantine" > $null 2>&1
-		& "$env:ProgramFiles\7-Zip\7z.exe" x "C:\Users\${USERNAME}\Desktop\readonly\Quarantine.zip" -oc:\tmp > $null
+		& "$env:ProgramFiles\7-Zip\7z.exe" x "C:\Users\${env:USERNAME}\Desktop\readonly\Quarantine.zip" -oc:\tmp > $null
 		if (!(Test-Path "C:\tmp\Quarantine")) {
 			Write-Output "Zip file didn't contain directory Quarantine."
 			return
 		}
 		Copy-Item -r "C:\tmp\Quarantine" "C:\ProgramData\Microsoft\Windows Defender" -Force
 		return
-	} elseif (Test-Path "C:\Users\${USERNAME}\Desktop\readonly\Quarantine" ) {
-		Copy-Item -r "C:\Users\${USERNAME}\Desktop\readonly\Quarantine" "C:\ProgramData\Microsoft\Windows Defender" -Force
+	} elseif (Test-Path "C:\Users\${env:USERNAME}\Desktop\readonly\Quarantine" ) {
+		Copy-Item -r "C:\Users\${env:USERNAME}\Desktop\readonly\Quarantine" "C:\ProgramData\Microsoft\Windows Defender" -Force
 		return
 	}
 
