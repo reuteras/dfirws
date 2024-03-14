@@ -232,13 +232,13 @@ if (Test-Path ${TOOLS}\capa-rules) {
 Move-Item ${TOOLS}\mandiant-capa-rules-* ${TOOLS}\capa-rules
 
 # Ghidra GolangAnalyzerExtension
-Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_10_4.zip" -match 10.4
-Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_11_0.zip" -match 11.0
+Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_10.4.zip" -match 10.4_
+Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" -match 11.0.1_
 if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
     New-Item -Path "${TOOLS}\ghidra_extensions" -ItemType directory | Out-Null
 }
-Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_10_4.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_10_4.zip"
-Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_11_0.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_11_0.zip"
+Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_10.4.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_10.4.zip"
+Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_11.0.1.zip"
 
 # Ghidra btighidra
 Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match ghidra
