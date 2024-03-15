@@ -65,3 +65,16 @@ foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
 
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools
 & "C:\Windows\explorer.exe" "${HOME}\Desktop\dfirws"
+
+# Automation example
+# Have a script that collects Quarantine files from a client and stores them in Quarantine.zip.
+# If a file with that name exits in the readonly folder use Restore-Quarantine to restore the files and maldump to extract the malware file from the store.
+if (Test-Path "${HOME}\Desktop\readonly\Quarantine.zip") {
+    . 'C:\Users\WDAGUtilityAccount\Documents\PowerShell\Microsoft.PowerShell_profile.ps1'
+    Set-Location "${HOME}\Desktop\"
+    Restore-Quarantine
+    C:\venv\maldump\Scripts\maldump.exe -a C:\
+    if (Test-Path "${HOME}\Desktop\quarantine.tar") {
+        tar xvf ".\quarantine.tar"
+    }
+}
