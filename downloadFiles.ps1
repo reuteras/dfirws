@@ -266,6 +266,7 @@ Write-Output "" > ".\downloads\done.txt"
 
 # Remove temp files
 Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
+Remove-Item -Recurse -Force .\tmp\enrichment 2>&1 | Out-Null
 Remove-Item -Recurse -Force .\tmp\mount\ 2>&1 | Out-Null
 
 $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
