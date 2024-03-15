@@ -25,6 +25,10 @@ param(
 
 $startDirectory = Get-Location
 
+if ($DryRun.IsPresent) {
+    Write-Output "Dry run enabled."
+}
+
 try {
     foreach ($folder in "ipinfo", "manuf", "maxmind", "snort", "suricata") {
         $directory = "${startDirectory}\enrichment\${folder}"
