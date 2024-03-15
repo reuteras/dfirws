@@ -540,7 +540,7 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
 #
 
 if (Test-Path "${LOCAL_PATH}\customize.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1"
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Running customize scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 } else {
     Write-DateLog "No customize scripts found, running defaults\customize-sandbox.ps1." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
@@ -548,7 +548,7 @@ if (Test-Path "${LOCAL_PATH}\customize.ps1") {
 }
 
 if (Test-Path "${LOCAL_PATH}\customise.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1"
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Running customise scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
