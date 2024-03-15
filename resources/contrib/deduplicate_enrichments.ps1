@@ -26,7 +26,7 @@ param(
 $startDirectory = Get-Location
 
 try {
-    foreach ($folder in "manuf", "maxmind", "snort", "suricata") {
+    foreach ($folder in "ipinfo", "manuf", "maxmind", "snort", "suricata") {
         $directory = "${startDirectory}\enrichment\${folder}"
         if (-not (Test-Path "${directory}")) {
             Write-Output "Directory ${directory} does not exist."
@@ -38,7 +38,7 @@ try {
         Get-ChildItem *-2* | Get-FileHash | Group-Object -Property Hash | `
             Where-Object { $_.Count -gt 1 } | ForEach-Object { $_.Group | Select-Object -Skip 1 } | `
             ForEach-Object {
-                if ($DryRun) {
+                if ($DryRun.IsPresent) {
                     Write-Output "Would remove $(${_}.Path)"
                 } else {
                     Remove-Item $_.Path -Force

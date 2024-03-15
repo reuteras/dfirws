@@ -259,6 +259,7 @@
         "iopub",
         "ipexpand",
         "ipgrep",
+        "IPINFO",
         "ipynb",
         "ipython",
         "ipywidgets",

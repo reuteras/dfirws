@@ -76,6 +76,30 @@ Write-Output "Downloading ${manufUrl}"
 Invoke-WebRequest -Uri "${manufUrl}" -OutFile "${manufSavePath}"
 Copy-Item -Path "${manufSavePath}" -Destination "${manufSaveDirectory}\manuf-${DATE}.txt" -Force
 
+
+#
+# IPinfo.io Free IP to Country + IP to ASN databases
+#
+
+if (-not "${IPINFO_API_KEY}") {
+    Write-Output "Please set the IPINFO_API_KEY variable in config.ps1 if you want to download IPinfo databases"
+} elseif ($IPINFO_API_KEY -eq "YOUR KEY") {
+    Write-Output "Please enter your key for the IPINFO_API_KEY variable in config.ps1 if you like to download databases from IPinfo."
+} else {
+    $IPinfoSaveDirectory = "${enrichmentDirectory}\ipinfo"
+    if (-not (Test-Path -Path "${IPinfoSaveDirectory}")) {
+        New-Item -ItemType Directory -Path "${IPinfoSaveDirectory}" -Force | Out-Null
+    }
+
+    # Download IPinfo.io Free IP to Country database
+    $folderUrl = "https://ipinfo.io/data/free/country_asn.mmdb?token=${IPINFO_API_KEY}"
+    $savePath = Join-Path -Path "${IPinfoSaveDirectory}" -ChildPath "country_asn.mmdb"
+    Write-Output "Downloading country_asn.mmdb from IPinfo.io"
+    Invoke-WebRequest -Uri "${folderUrl}" -OutFile "${savePath}"
+    Copy-Item -Path "${savePath}" -Destination "${IPinfoSaveDirectory}\country_asn-${DATE}.mmdb" -Force
+}
+
+
 #
 # Maxmind GeoLite2 databases
 #
