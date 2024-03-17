@@ -21,6 +21,8 @@ param(
     [Switch]$jep,
     [Parameter(HelpMessage = "Switch to venv jpterm.")]
     [Switch]$jpterm,
+    [Parameter(HelpMessage = "Switch to venv magika.")]
+    [Switch]$magika,
     [Parameter(HelpMessage = "Switch to venv maldump.")]
     [Switch]$maldump,
     [Parameter(HelpMessage = "Switch to venv mwcp.")]
@@ -69,6 +71,8 @@ if ($aspose) {
     $venv = "jep"
 } elseif ($jpterm) {
     $venv = "jpterm"
+} elseif ($magika) {
+    $venv = "magika"
 } elseif ($maldump) {
     $venv = "maldump"
 } elseif ($mwcp) {
