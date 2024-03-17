@@ -181,6 +181,23 @@ function Install-Chrome {
     }
 }
 
+function Install-ClamAV {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-clamav.txt")) {
+        Write-Output "Installing ClamAV"
+        Copy-Item "${SETUP_PATH}\clamav.msi" "${WSDFIR_TEMP}\clamav.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\clamav.msi /qn /norestart"
+        Add-ToUserPath "${env:ProgramFiles}\ClamAV"
+        (Get-Content 'C:\Program Files\ClamAV\conf_examples\clamd.conf.sample').Replace("Example", "#Example") | Out-File -FilePath 'C:\Program Files\ClamAV\clamd.conf' -Encoding "ascii"
+        (Get-Content 'C:\Program Files\ClamAV\conf_examples\freshclam.conf.sample').Replace("Example", "#Example") | Out-File -FilePath 'C:\Program Files\ClamAV\freshclam.conf' -Encoding "ascii"
+        Write-Output 'DatabaseDirectory "C:\Tools\ClamAV\db"' | Out-File -Append 'C:\Program Files\ClamAV\clamd.conf'
+        Write-Output 'DatabaseDirectory "C:\Tools\ClamAV\db"' | Out-File -Append 'C:\Program Files\ClamAV\freshclam.conf'
+
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-clamav.txt" | Out-Null
+    } else {
+        Write-Output "ClamAV is already installed"
+    }
+}
+
 function Install-CMDer {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-cmder.txt")) {
         Write-Output "Installing Cmder"

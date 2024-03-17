@@ -31,6 +31,8 @@ param(
     [Switch]$Didier,
     [Parameter(HelpMessage = "Update enrichment.")]
     [Switch]$Enrichment,
+    [Parameter(HelpMessage = "Update ClamAV databases with Freshclam.")]
+    [Switch]$Freshclam,
     [Parameter(HelpMessage = "Update git repositories.")]
     [Switch]$Git,
     [Parameter(HelpMessage = "Update files downloaded via HTTP.")]
@@ -96,7 +98,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
     Exit
 }
 
-if ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
+if ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
@@ -169,7 +171,7 @@ if ($all -or $Bash -or $Didier -or $Http -or $Python -or $Release) {
     }
 }
 
-if ($all -or $Bash -or $Node -or $Python -or $Rust) {
+if ($all -or $Bash -or $Freshclam -or $Node -or $Python -or $Rust) {
     Write-DateLog "Download files needed in Sandboxes."
     .\resources\download\basic.ps1
 }
@@ -177,6 +179,11 @@ if ($all -or $Bash -or $Node -or $Python -or $Rust) {
 if ($all -or $Bash) {
     Write-DateLog "Download packages for Git for Windows (Bash)."
     Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+}
+
+if ($all -or $Freshclam) {
+    Write-DateLog "Download freshclam databases."
+    Start-Job -FilePath .\resources\download\freshclam.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $Node) {
@@ -247,7 +254,7 @@ if ($Enrichment.IsPresent) {
     .\resources\download\enrichment.ps1
 }
 
-if ($all -or $bash -or $Node -or $Python -or $Rust) {
+if ($all -or $bash -or $Freshclam -or $Node -or $Python -or $Rust) {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"

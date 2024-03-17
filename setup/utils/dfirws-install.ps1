@@ -6,6 +6,7 @@ param (
     [switch]$BashExtra,
     [switch]$BinaryNinja,
     [switch]$Chrome,
+    [switch]$ClamAV,
     [switch]$CMDer,
     [switch]$DCode,
     [switch]$Docker,
@@ -57,6 +58,10 @@ if ($BinaryNinja.IsPresent) {
 
 if ($Chrome.IsPresent) {
     Install-Chrome
+}
+
+if ($ClamAV.IsPresent) {
+    Install-ClamAV
 }
 
 if ($CMDer.IsPresent) {

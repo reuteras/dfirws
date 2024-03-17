@@ -9,28 +9,18 @@
   <MappedFolders>
     <MappedFolder>
       <HostFolder>__SANDBOX__setup</HostFolder>
-	    <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
+	  <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
       <HostFolder>__SANDBOX__mount\Tools</HostFolder>
       <SandboxFolder>C:\Tools</SandboxFolder>
-      <ReadOnly>true</ReadOnly>
-    </MappedFolder>
-    <MappedFolder>
-      <HostFolder>__SANDBOX__mount\git</HostFolder>
-      <SandboxFolder>C:\git</SandboxFolder>
-      <ReadOnly>true</ReadOnly>
+      <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>
       <HostFolder>__SANDBOX__downloads</HostFolder>
       <SandboxFolder>C:\downloads</SandboxFolder>
       <ReadOnly>true</ReadOnly>
-    </MappedFolder>
-    <MappedFolder>
-      <HostFolder>__SANDBOX__tmp\cargo</HostFolder>
-      <SandboxFolder>C:\cargo</SandboxFolder>
-      <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>
       <HostFolder>__SANDBOX__log</HostFolder>
@@ -39,6 +29,6 @@
     </MappedFolder>
   </MappedFolders>
   <LogonCommand>
-    <Command>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -sta -WindowStyle Hidden -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install_rust_tools.ps1</Command>
+    <Command>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -sta -WindowStyle Hidden -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install_freshclam.ps1</Command>
   </LogonCommand>
 </Configuration>

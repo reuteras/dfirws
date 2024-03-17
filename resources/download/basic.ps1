@@ -10,6 +10,15 @@
 Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downloads\7zip.msi" -CheckURL "Yes"
 
 #
+# Packages used in freshclam sandbox
+#
+
+if ($all -or $Freshclam) {
+    # ClamAV - installed during start
+    Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi"
+}
+
+#
 # Packages used in NodeJS sandbox
 #
 

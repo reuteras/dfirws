@@ -315,6 +315,16 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Shadow-pulse (csv with inform
 
 # Malware tools
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -ClamAV"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clambc.exe (Bytecode Testing Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clambc.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamconf.exe (Configuration Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamconf.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamd.exe (Daemon).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamdscan.exe (Daemon Client).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamdscan.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamdtop.exe (Monitoring Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamdtop.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamscan.exe (Scanner).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamscan.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamsubmit.exe (Malware and False Positive Reporting Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamsubmit.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\freshclam.exe (Database Updater).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command freshclam.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\sigtool.exe (Signature Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sigtool.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command maldump.exe -h"
 
 # Malware tools - Cobalt Strike
