@@ -174,14 +174,15 @@ Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_s
 
 # Set Notepad++ as default for many file types
 # Use %VARIABLE% in cmd.exe
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype xmlfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype chmfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype cmdfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype htafile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype jsefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype jsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype vbefile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
-Start-Process cmd -NoNewWindow -ArgumentList '/c Ftype vbsfile="%ProgramFiles%\Notepad++\notepad++.exe" "%%*"'
+cmd /c "Ftype xmlfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype chmfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype cmdfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype htafile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype jsefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype jsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype txtfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype vbefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+cmd /c "Ftype vbsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
 Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Disable firewall to enable local web services
@@ -537,20 +538,21 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
     Write-DateLog "Files have been copied to the destination directory: ${DestinationDir}"
 }
 
+
 #
 # Run custom scripts
 #
 
 if (Test-Path "${LOCAL_PATH}\customize.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Running customize scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Running customize script." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 } else {
     Write-DateLog "No customize scripts found, running defaults\customize-sandbox.ps1." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1"
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 if (Test-Path "${LOCAL_PATH}\customise.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Running customise scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 

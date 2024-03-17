@@ -78,3 +78,8 @@ if (Test-Path "${HOME}\Desktop\readonly\Quarantine.zip") {
         tar xvf ".\quarantine.tar"
     }
 }
+
+# You can access the arguments used to start the sandbox like this
+# Write-Output @args | Out-File -FilePath "${HOME}\Desktop\args.txt" -Encoding ascii
+
+# Add your own customizations here
