@@ -31,6 +31,7 @@ param (
     [switch]$Ruby,
     [switch]$Rust,
     [switch]$Tor,
+    [switch]$Veracrypt,
     [switch]$VSCode,
     [switch]$Wireshark,
     [switch]$X64Dbg,
@@ -158,6 +159,10 @@ if ($Rust.IsPresent) {
 
 if ($Tor.IsPresent) {
     Install-Tor
+}
+
+if ($Veracrypt.IsPresent) {
+    Install-Veracrypt
 }
 
 if ($VSCode.IsPresent) {

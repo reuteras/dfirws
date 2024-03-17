@@ -487,6 +487,19 @@ function Install-Tor {
     }
 }
 
+function Install-Veracrypt {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-veracrypt.txt")) {
+        Write-Output "Installing Veracrypt"
+        Copy-Item "${SETUP_PATH}\veracrypt.msi" "${WSDFIR_TEMP}\veracrypt.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\veracrypt.msi /qn /norestart ACCEPTLICENSE=YES"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-veracrypt.txt" | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\VeraCrypt"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\veracrypt.lnk" -DestinationPath "${env:ProgramFiles}\VeraCrypt\VeraCrypt.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\VeraCrypt\VeraCrypt.exe"
+    } else {
+        Write-Output "Veracrypt is already installed"
+    }
+}
+
 function Install-VSCode {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vscode.txt")) {
         Write-Output "Installing Visual Studio Code"

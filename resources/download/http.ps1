@@ -263,6 +263,10 @@ Move-Item ${SETUP_PATH}\dcode\Dcode-* "${SETUP_PATH}\dcode\dcode.exe" | Out-Null
 Get-FileFromUri -uri "https://rejetto.com/hfs/download" -FilePath ".\downloads\hfs.exe"
 Copy-Item ".\downloads\hfs.exe" "${TOOLS}\bin\hfs.exe" -Force
 
+# Veracrypt - manual installation
+$VeracryptUrl = Get-DownloadUrlFromPage -Url "https://www.veracrypt.fr/en/Downloads.html" -RegEx 'https://[^"]+VeraCrypt_Setup[^"]+.msi'
+Get-FileFromUri -uri "${VeracryptUrl}" -FilePath ".\downloads\veracrypt.msi"
+
 # Update the links below when new versions are released
 
 # https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start
