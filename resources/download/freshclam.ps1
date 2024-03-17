@@ -26,6 +26,6 @@ $mutex.WaitOne() | Out-Null
 Start-Sleep 10
 Remove-Item "${ROOT_PATH}\tmp\generate_freshclam.wsb" | Out-Null
 
-Stop-SandboxWhenDone "${ROOT_PATH}\mount\ClamAV\done" $mutex | Out-Null
+Stop-SandboxWhenDone "${ROOT_PATH}\mount\Tools\ClamAV\done" $mutex | Out-Null
 
 Write-DateLog "Freshclam update done." >> "${ROOT_PATH}\log\freshclam.txt"

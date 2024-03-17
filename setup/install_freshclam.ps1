@@ -19,4 +19,4 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\freshclam.exe")) {
 & 'C:\Program Files\ClamAV\freshclam.exe' --no-dns | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
 
 Write-DateLog "Freshclam update done." | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
-Write-Output "" > "${ROOT_PATH}\ClamAV\done"
+Write-Output "" > "${TOOLS}\ClamAV\done"
