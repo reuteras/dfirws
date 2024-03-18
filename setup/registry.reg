@@ -112,6 +112,13 @@ Windows Registry Editor Version 5.00
 @="powershell -noexit file-magic '%1'"
 
 
+; gron
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\17menu]
+"MUIVerb"="gron"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\17menu\command]
+@="powershell -noexit gron '%1' | gron -u"
+
 ; magika
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\18menu]
 "MUIVerb"="magika"
