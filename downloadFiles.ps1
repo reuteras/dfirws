@@ -181,11 +181,6 @@ if ($all -or $Bash) {
     Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
-if ($all -or $Freshclam) {
-    Write-DateLog "Download freshclam databases."
-    Start-Job -FilePath .\resources\download\freshclam.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
-}
-
 if ($all -or $Node) {
     Write-DateLog "Setup Node and install npm packages."
     Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
@@ -247,6 +242,11 @@ if ($all -or $Kape) {
 if ($all -or $PowerShell) {
     Write-DateLog "Download PowerShell and modules."
     .\resources\download\powershell.ps1
+}
+
+if ($Freshclam) {
+    Write-DateLog "Download freshclam databases."
+    Start-Job -FilePath .\resources\download\freshclam.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($Enrichment.IsPresent) {
