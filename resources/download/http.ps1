@@ -267,30 +267,36 @@ Copy-Item ".\downloads\hfs.exe" "${TOOLS}\bin\hfs.exe" -Force
 $VeracryptUrl = Get-DownloadUrlFromPage -Url "https://www.veracrypt.fr/en/Downloads.html" -RegEx 'https://[^"]+VeraCrypt_Setup[^"]+.msi'
 Get-FileFromUri -uri "${VeracryptUrl}" -FilePath ".\downloads\veracrypt.msi"
 
-# Update the links below when new versions are released
-
-# https://learn.microsoft.com/en-us/java/openjdk/download - Microsoft OpenJDK - installed during start
-Get-FileFromUri -uri "https://aka.ms/download-jdk/microsoft-jdk-11.0.22-windows-x64.msi" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes"
+# Microsoft OpenJDK 11 - installed during start
+$MicrosoftJDKUrl = get-downloadUrlFromPage -url "https://learn.microsoft.com/en-us/java/openjdk/download" -RegEx 'https://aka.ms/download-jdk/microsoft-jdk-11.[.0-9]+-windows-x64.msi'
+Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes"
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
-Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-4.4.30-windows.zip" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes"
+$NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'
+Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes"
+
+# https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
+$LibreOfficeVersion = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
+Get-FileFromUri -uri "${LibreOfficeVersion}" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes"
+
+# https://npcap.com/#download - Npcap - available for manual installation
+$NpcapVersion = Get-DownloadUrlFromPage -Url "https://npcap.com/" -RegEx 'dist/npcap-[.0-9]+.exe'
+Get-FileFromUri -uri "https://npcap.com/dist/${NpcapVersion}" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
+
+# https://www.wireshark.org/download.html - Wireshark - available for manual installation
+$WiresharkVersion = Get-DownloadUrlFromPage -Url "https://wireshark.org/" -RegEx 'https://[^"]+/win64/Wireshark-4.2.[0-9]+-x64.exe'
+Get-FileFromUri -uri "${WiresharkVersion}" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
+
+# https://www.sqlite.org/download.html - SQLite
+$SQLiteVersion = Get-DownloadUrlFromPage -Url "https://sqlite.org/download.html" -RegEx '[0-9]+/sqlite-tools-win-x64-[^"]+.zip'
+Get-FileFromUri -uri "https://sqlite.org/${SQLiteVersion}" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
+
+# Update the links below when new versions are released
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
 Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes"
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\bulk_extractor.zip" -o"${TOOLS}\bulk_extractor" | Out-Null
-
-# https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
-Get-FileFromUri -uri "https://gemmei.ftp.acc.umu.se/mirror/documentfoundation.org/libreoffice/stable/24.2.1/win/x86_64/LibreOffice_24.2.1_Win_x86-64.msi" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes"
-
-# https://npcap.com/#download - Npcap - available for manual installation
-Get-FileFromUri -uri "https://npcap.com/dist/npcap-1.79.exe" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
-
-# https://www.wireshark.org/download.html - Wireshark - available for manual installation
-Get-FileFromUri -uri "https://1.eu.dl.wireshark.org/win64/Wireshark-4.2.3-x64.exe" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
-
-# https://www.sqlite.org/download.html - SQLite
-Get-FileFromUri -uri "https://sqlite.org/2024/sqlite-tools-win-x64-3450200.zip" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
 Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip" -CheckURL "Yes"

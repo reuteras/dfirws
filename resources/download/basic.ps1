@@ -35,7 +35,13 @@ if ($all -or $Node) {
 
 if ($all -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
-    Get-FileFromUri -uri "https://www.python.org/ftp/python/3.11.8/python-3.11.8-amd64.exe" -FilePath ".\downloads\python3.exe" -CheckURL "Yes"
+    Clear-Tmp winget
+    Write-SynchronizedLog "winget: Downloading Python."
+    Get-WinGet "Python.Python.3.11"
+    if (Test-Path .\tmp\winget\Python*.exe) {
+        Copy-Item .\tmp\winget\Python*.exe ".\downloads\python3.exe"
+    }
+    Clear-Tmp winget
 
     # Get Amazon Corretto - installed during start
     Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
