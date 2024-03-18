@@ -119,12 +119,21 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\18menu\command]
 @="powershell -noexit magika '%1'"
 
+
 ; PE-Bear
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu]
 "MUIVerb"="PE-Bear"
 
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu\command]
 @="powershell PE-Bear '%1'"
+
+
+; sigcheck
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\21menu]
+"MUIVerb"="sigcheck"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\21menu\command]
+@="powershell -noexit sigcheck64 '%1'"
 
 
 ; trid
