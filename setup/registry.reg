@@ -74,6 +74,67 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu\command]
 @="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA1 | format-list;get-filehash -literalpath '%1' -algorithm SHA256 | format-list;get-filehash -literalpath '%1' -algorithm SHA384 | format-list;get-filehash -literalpath '%1' -algorithm SHA512 | format-list;get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list;get-filehash -literalpath '%1' -algorithm MD5 | format-list;get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list"
 
+
+[HKEY_CLASSES_ROOT\*\shell\investigate]
+"MUIVerb"="Investigate"
+"SubCommands"=""
+
+
+; capa
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu]
+"MUIVerb"="capa"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu\command]
+@="powershell -noexit capa '%1'"
+
+
+; Detect-It-Easy
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\12menu]
+"MUIVerb"="Detect-It-Easy"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\12menu\command]
+@="powershell die '%1'"
+
+
+; file
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\14menu]
+"MUIVerb"="file"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\14menu\command]
+@="powershell -noexit file '%1'"
+
+
+; file-magic
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\16menu]
+"MUIVerb"="file-magic"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\16menu\command]
+@="powershell -noexit file-magic '%1'"
+
+
+; magika
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\18menu]
+"MUIVerb"="magika"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\18menu\command]
+@="powershell -noexit magika '%1'"
+
+; PE-Bear
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu]
+"MUIVerb"="PE-Bear"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu\command]
+@="powershell PE-Bear '%1'"
+
+
+; trid
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\22menu]
+"MUIVerb"="trid"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\22menu\command]
+@="powershell -noexit trid '%1'"
+
+
 ; Disable check for new versions of DB Browser for SQLite
 [HKEY_CURRENT_USER\Software\sqlitebrowser\sqlitebrowser\checkversion]
 "enabled"="false"
