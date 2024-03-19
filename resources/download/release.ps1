@@ -105,7 +105,7 @@ $status = Get-GitHubRelease -repo "Delphier/dumpbin" -path "${SETUP_PATH}\dumpbi
 if ($status) {
     if (Test-Path "${TOOLS}\dumpbin") {
         Remove-Item "${TOOLS}\dumpbin" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dumpbin.zip" -o"${TOOLS}\dumpbin" | Out-Null
 }
 
@@ -123,7 +123,7 @@ $status = Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy64.z
 if ($status) {
     if (Test-Path "${TOOLS}\dnSpy64") {
         Remove-Item "${TOOLS}\dnSpy64" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dnSpy64.zip" -o"${TOOLS}\dnSpy64" | Out-Null
 }
 
@@ -144,7 +144,7 @@ $status = Get-GitHubRelease -repo "eugeny/tabby" -path "${SETUP_PATH}\tabby.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\tabby") {
         Remove-Item "${TOOLS}\tabby" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\tabby.zip" -o"${TOOLS}\tabby" | Out-Null
 }
 
@@ -216,7 +216,7 @@ $status = Get-GitHubRelease -repo "hasherezade/pe-bear" -path "${SETUP_PATH}\peb
 if ($status) {
     if (Test-Path "${TOOLS}\pebear") {
         Remove-Item "${TOOLS}\pebear" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pebear.zip" -o"${TOOLS}\pebear" | Out-Null
 }
 
@@ -252,7 +252,7 @@ $status = Get-GitHubRelease -repo "hfiref0x/WinObjEx64" -path "${SETUP_PATH}\Win
 if ($status) {
     if (Test-Path "${TOOLS}\WinObjEx64") {
         Remove-Item "${TOOLS}\WinObjEx64" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinObjEx64.zip" -o"${TOOLS}\WinObjEx64" | Out-Null
 }
 
@@ -261,7 +261,7 @@ $status = Get-GitHubRelease -repo "horsicq/DIE-engine" -path "${SETUP_PATH}\die.
 if ($status) {
     if (Test-Path "${TOOLS}\die") {
         Remove-Item "${TOOLS}\die" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\die.zip" -o"${TOOLS}\die" | Out-Null
 }
 
@@ -325,7 +325,7 @@ $status = Get-GitHubRelease -repo "leandrofroes/gftrace" -path "${SETUP_PATH}\gf
 if ($status) {
     if (Test-Path "${TOOLS}\gftrace64") {
         Remove-Item "${TOOLS}\gftrace64" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\gftrace.zip" -o"${TOOLS}" | Out-Null
 }
 
@@ -407,7 +407,7 @@ $status = Get-GitHubRelease -repo "mandiant/flare-floss" -path "${SETUP_PATH}\fl
 if ($status) {
     if (Test-Path "${TOOLS}\floss") {
         Remove-Item "${TOOLS}\floss" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\floss.zip" -o"${TOOLS}\floss" | Out-Null
 }
 
@@ -552,7 +552,7 @@ $status = Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "$
 if ($status) {
     if (Test-Path "${TOOLS}\perl") {
         Remove-Item "${TOOLS}\perl" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\perl.zip" -o"${TOOLS}\perl" | Out-Null
 }
 
@@ -599,7 +599,7 @@ $status = Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "${S
 if ($status) {
     if (Test-Path "${TOOLS}\thumbcacheviewer") {
         Remove-Item "${TOOLS}\thumbcacheviewer" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\thumbcacheviewer.zip" -o"${TOOLS}\thumbcacheviewer" | Out-Null
 }
 
@@ -614,7 +614,7 @@ $status = Get-GitHubRelease -repo "ufrisk/MemProcFS" -path "${SETUP_PATH}\mempro
 if ($status) {
     if (Test-Path "${TOOLS}\MemProcFS") {
         Remove-Item "${TOOLS}\MemProcFS" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\memprocfs.zip" -o"${TOOLS}\MemProcFS" | Out-Null
 }
 
@@ -645,7 +645,7 @@ $status = Get-GitHubRelease -repo "WerWolv/ImHex" -path "${SETUP_PATH}\imhex.zip
 if ($status) {
     if (Test-Path "${TOOLS}\imhex") {
         Remove-Item "${TOOLS}\imhex" -Recurse -Force
-    }    
+    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\imhex.zip" -o"${TOOLS}\imhex" | Out-Null
 }
 
