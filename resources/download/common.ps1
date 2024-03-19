@@ -67,7 +67,7 @@ function Get-FileFromUri {
     } else {
         $filePathHash = ""
     }
-            
+
     # Remove any leading '..' from the file path and set up temporary file path and final file path
     $CleanPath = $FilePath -replace "^..", ""
     $TmpFilePath= "$PSScriptRoot\..\..\tmp\$CleanPath"

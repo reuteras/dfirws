@@ -1,12 +1,13 @@
+---
 version: 7
-profiles: []
-groups: []
+profiles: [ ]
+groups: [ ]
 configSync:
-  parts: {}
+  parts: { }
 hotkeys:
   toggle-window:
     - Ctrl-Space
-  copy-current-path: []
+  copy-current-path: [ ]
   ctrl-c:
     - Ctrl-C
   copy:
@@ -16,7 +17,7 @@ hotkeys:
     - Shift-Insert
   select-all:
     - Ctrl-Shift-A
-  clear: []
+  clear: [ ]
   zoom-in:
     - Ctrl-=
     - Ctrl-Shift-=
@@ -53,21 +54,21 @@ hotkeys:
     - Alt-PageDown
   scroll-to-bottom:
     - Ctrl-PageDown
-  restart-telnet-session: []
-  restart-ssh-session: []
-  launch-winscp: []
-  settings-tab: {}
+  restart-telnet-session: [ ]
+  restart-ssh-session: [ ]
+  launch-winscp: [ ]
+  settings-tab: { }
   settings:
     - Ctrl-,
   serial:
     - Alt-K
-  restart-serial-session: []
+  restart-serial-session: [ ]
   new-tab:
     - Ctrl-Shift-T
   new-window:
     - Ctrl-Shift-N
-  profile: {}
-  profile-selectors: {}
+  profile: { }
+  profile-selectors: { }
   toggle-fullscreen:
     - F11
     - Alt-Enter
@@ -75,7 +76,7 @@ hotkeys:
     - Ctrl-Shift-W
   reopen-tab:
     - Ctrl-Shift-Z
-  toggle-last-tab: []
+  toggle-last-tab: [ ]
   rename-tab:
     - Ctrl-Shift-R
   next-tab:
@@ -90,10 +91,10 @@ hotkeys:
     - Ctrl-Shift-PageDown
   rearrange-panes:
     - Ctrl-Shift
-  duplicate-tab: []
-  restart-tab: []
-  reconnect-tab: []
-  disconnect-tab: []
+  duplicate-tab: [ ]
+  restart-tab: [ ]
+  reconnect-tab: [ ]
+  disconnect-tab: [ ]
   explode-tab:
     - Ctrl-Shift-.
   combine-tabs:
@@ -118,22 +119,22 @@ hotkeys:
     - Alt-9
   tab-10:
     - Alt-0
-  tab-11: []
-  tab-12: []
-  tab-13: []
-  tab-14: []
-  tab-15: []
-  tab-16: []
-  tab-17: []
-  tab-18: []
-  tab-19: []
-  tab-20: []
+  tab-11: [ ]
+  tab-12: [ ]
+  tab-13: [ ]
+  tab-14: [ ]
+  tab-15: [ ]
+  tab-16: [ ]
+  tab-17: [ ]
+  tab-18: [ ]
+  tab-19: [ ]
+  tab-20: [ ]
   split-right:
     - Ctrl-Shift-S
   split-bottom:
     - Ctrl-Shift-D
-  split-left: []
-  split-top: []
+  split-left: [ ]
+  split-top: [ ]
   pane-nav-right:
     - Ctrl-Alt-Right
   pane-nav-down:
@@ -146,22 +147,22 @@ hotkeys:
     - Ctrl-Alt-[
   pane-nav-next:
     - Ctrl-Alt-]
-  pane-nav-1: []
-  pane-nav-2: []
-  pane-nav-3: []
-  pane-nav-4: []
-  pane-nav-5: []
-  pane-nav-6: []
-  pane-nav-7: []
-  pane-nav-8: []
-  pane-nav-9: []
+  pane-nav-1: [ ]
+  pane-nav-2: [ ]
+  pane-nav-3: [ ]
+  pane-nav-4: [ ]
+  pane-nav-5: [ ]
+  pane-nav-6: [ ]
+  pane-nav-7: [ ]
+  pane-nav-8: [ ]
+  pane-nav-9: [ ]
   pane-maximize:
     - Ctrl-Alt-Enter
-  close-pane: []
-  pane-increase-vertical: []
-  pane-decrease-vertical: []
-  pane-increase-horizontal: []
-  pane-decrease-horizontal: []
+  close-pane: [ ]
+  pane-increase-vertical: [ ]
+  pane-decrease-vertical: [ ]
+  pane-increase-horizontal: [ ]
+  pane-decrease-horizontal: [ ]
   switch-profile:
     - Ctrl-Alt-T
   profile-selector:
@@ -169,7 +170,7 @@ hotkeys:
   command-selector:
     - Ctrl-Shift-P
 terminal:
-  searchOptions: {}
+  searchOptions: { }
   colorScheme:
     name: Tabby Default
     foreground: '#cacaca'
@@ -194,20 +195,20 @@ terminal:
       - '#ffffff'
   font: MesloLGM Nerd Font
   profile: local:powershell
-ssh: {}
-clickableLinks: {}
-accessibility: {}
+ssh: { }
+clickableLinks: { }
+accessibility: { }
 appearance:
   colorSchemeMode: auto
-hacks: {}
-providerBlacklist: []
-commandBlacklist: []
+hacks: { }
+providerBlacklist: [ ]
+commandBlacklist: [ ]
 language: en-US
 enableAnalytics: false
 enableWelcomeTab: false
-pluginBlacklist: []
+pluginBlacklist: [ ]
 enableAutomaticUpdates: false
 profileDefaults:
   ssh:
     disableDynamicTitle: true
-profileBlacklist: []
+profileBlacklist: [ ]
