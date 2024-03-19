@@ -60,8 +60,8 @@ foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
 #& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\GolangAnalyzerExtension.zip" -o"${HOME}/.ghidra/.ghidra_10.4_PUBLIC/Extensions" | Out-Null
 
 # Install extra programs
-#Install-Ruby
-#Install-Rust
+#Install-Obsidian
+#Install-Maltego
 
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools
 & "C:\Windows\explorer.exe" "${HOME}\Desktop\dfirws"

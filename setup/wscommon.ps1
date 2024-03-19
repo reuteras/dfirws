@@ -265,6 +265,8 @@ function Install-GitBash {
             Copy-Item "${LOCAL_PATH}\defaults\.bashrc" "${HOME}\.bashrc" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-gitbash.txt" | Out-Null
+        Set-Alias gdiff "$env:ProgramFiles\Git\usr\bin\diff.exe"
+	    Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
     } else {
         Write-Output "Git Bash is already installed"
     }

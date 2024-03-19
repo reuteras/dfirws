@@ -3,10 +3,6 @@
 # Source config files
 . "${WSDFIR_TEMP}\config.ps1"
 
-# Make Windows be more like Linux
-Set-Alias gdiff "$env:ProgramFiles\Git\usr\bin\diff.exe"
-Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
-
 # Python
 # Comment this line to see warnings from Python
 $env:PYTHONWARNINGS = "ignore"
@@ -41,9 +37,6 @@ Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 # Use Vi keybindings
 Set-PSReadLineOption -EditMode Vi
 
-# Other options:
-# Set-PSReadLineOption -PredictionViewStyle ListView
-
 # Add icons to dir and ls.
 if (-not(Get-Module -ListAvailable Terminal-Icons)) {
     Import-Module -Name Terminal-Icons
@@ -60,16 +53,19 @@ if (-not(Test-Path "${HOME}\tmp")) {
 
 if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
-	if ("${WSDFIR_TABBY}" -eq "Yes") {
-		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_POWERLINE}" > "${HOME}\tmp\oh-my-posh-init.ps1"
-	} else {
-		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_PLAIN}" > "${HOME}\tmp\oh-my-posh-init.ps1"
+	if (!(Test-Path "${HOME}\tmp\oh-my-posh-init.ps1")) {
+		if ("${WSDFIR_TABBY}" -eq "Yes") {
+			& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_POWERLINE}" > "${HOME}\tmp\oh-my-posh-init.ps1"
+		} else {
+			& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_PLAIN}" > "${HOME}\tmp\oh-my-posh-init.ps1"
+		}
 	}
+
 	if (!(Test-Path "${HOME}\tmp\oh-my-posh-completion.ps1")) {
 		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" completion powershell > "${HOME}\tmp\oh-my-posh-completion.ps1"
 	}
 	& "${HOME}\tmp\oh-my-posh-init.ps1"
-	& "${HOME}\tmp\oh-my-posh-completion.ps1"
+	. "${HOME}\tmp\oh-my-posh-completion.ps1"
 	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
 
 	# Use posh-git: https://github.com/dahlbyk/posh-git
