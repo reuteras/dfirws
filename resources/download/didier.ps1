@@ -100,7 +100,7 @@ $DidierStevensSuite = `
     "zipdump.py"
 
 foreach ($Tool in ${DidierStevensSuite}) {
-  Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"-
+    $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"-
 }
 
 $DidierStevensBeta = "metatool.py", `
@@ -109,5 +109,7 @@ $DidierStevensBeta = "metatool.py", `
     "xlsbdump.py"
 
 foreach ($Tool in ${DidierStevensBeta}) {
-  Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/Beta/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"
+  $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/Beta/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"
 }
+
+$null = $status

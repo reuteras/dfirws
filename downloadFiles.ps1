@@ -11,8 +11,16 @@
     This will download all files needed for DFIRWS.
 
 .EXAMPLE
+    .\downloadFiles.ps1 -AllTools -Enrichment
+    This will download all files needed for DFIRWS and update enrichments.
+
+.EXAMPLE
     .\downloadFiles.ps1 -Python
-    This will download or update packages for Python.
+    This will download and update packages for Python but no other files.
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Freshclam
+    This will download and update ClamAV databases with Freshclam.
 
 .NOTES
     File Name      : downloadFiles.ps1
@@ -156,7 +164,7 @@ if (Test-Path ".\tools_downloaded.csv") {
     Move-Item -Path ".\tools_downloaded.csv" -Destination ".\downloads\tools_downloaded.csv" -Force
 }
 
-if ($all -or $Bash -or $Didier -or $Http -or $Python -or $Release) {
+if ($all -or $Bash.IsPresent -or $Didier.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
     # Get GitHub password from user input
     if ($GITHUB_USERNAME -ne "YOUR GITHUB USERNAME" -and $GITHUB_TOKEN -ne "YOUR GITHUB TOKEN") {
         $GH_USER = "${GITHUB_USERNAME}"
@@ -169,46 +177,50 @@ if ($all -or $Bash -or $Didier -or $Http -or $Python -or $Release) {
         $null = $GH_PASS
         $null = $GH_USER
     }
+    if (("" -eq $GH_USER) -or ("" -eq $GH_PASS)) {
+        Write-DateLog "Error: No GitHub username or token given. Can't continue."
+        Exit
+    }
 }
 
-if ($all -or $Bash -or $Freshclam -or $Node -or $Python -or $Rust) {
+if ($all -or $Bash.IsPresent -or $Freshclam.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Download files needed in Sandboxes."
     .\resources\download\basic.ps1
 }
 
-if ($all -or $Bash) {
+if ($all -or $Bash.IsPresent) {
     Write-DateLog "Download packages for Git for Windows (Bash)."
     Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
-if ($all -or $Node) {
+if ($all -or $Node.IsPresent) {
     Write-DateLog "Setup Node and install npm packages."
     Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
-if ($all -or $Release) {
+if ($all -or $Release.IsPresent) {
     Write-DateLog "Download releases from GitHub."
     .\resources\download\release.ps1
 }
 
-if ($all -or $Git) {
+if ($all -or $Git.IsPresent) {
     Write-DateLog "Download git repositories"
     .\resources\download\git.ps1
 }
 
-if ($all -or $Python) {
+if ($all -or $Python.IsPresent) {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages."
     Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
-if ($all -or $Rust) {
+if ($all -or $Rust.IsPresent) {
     Write-Output "" > .\log\rust.txt
     Write-DateLog "Setup Rust and install packages."
     Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
-if ($all -or $Http) {
+if ($all -or $Http.IsPresent) {
     Write-DateLog "Download files via HTTP."
     $HTTP_ARGS = ""
     if ($HttpNoVSCodeExtensions) {
@@ -217,34 +229,34 @@ if ($all -or $Http) {
     powershell -noprofile .\resources\download\http.ps1 $HTTP_ARGS
 }
 
-if ($all -or $Didier) {
+if ($all -or $Didier.IsPresent) {
     Write-DateLog "Download Didier Stevens tools."
     .\resources\download\didier.ps1
 }
 
-if ($all -or $Winget) {
+if ($all -or $Winget.IsPresent) {
     Write-DateLog "Download tools via winget."
     .\resources\download\winget.ps1
 }
 
-if ($all -or $Zimmerman) {
+if ($all -or $Zimmerman.IsPresent) {
     Write-DateLog "Download Zimmerman tools."
     .\resources\download\zimmerman.ps1
 }
 
-if ($all -or $Kape) {
+if ($all -or $Kape.IsPresent) {
     if (Test-Path ".\local\kape.zip") {
         Write-DateLog "Download KAPE."
         .\resources\download\kape.ps1
     }
 }
 
-if ($all -or $PowerShell) {
+if ($all -or $PowerShell.IsPresent) {
     Write-DateLog "Download PowerShell and modules."
     .\resources\download\powershell.ps1
 }
 
-if ($Freshclam) {
+if ($Freshclam.IsPresent) {
     Write-DateLog "Download freshclam databases."
     Start-Job -FilePath .\resources\download\freshclam.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
@@ -254,7 +266,7 @@ if ($Enrichment.IsPresent) {
     .\resources\download\enrichment.ps1
 }
 
-if ($all -or $bash -or $Freshclam -or $Node -or $Python -or $Rust) {
+if ($all -or $bash.IsPresent -or $Freshclam.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Wait for sandboxes."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
@@ -262,19 +274,27 @@ if ($all -or $bash -or $Freshclam -or $Node -or $Python -or $Rust) {
     Write-DateLog "Sandboxes done."
 }
 
-Copy-Item "README.md" ".\downloads\" -Force
-Copy-Item ".\resources\images\dfirws.jpg" .\downloads\ -Force
-Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force
+Copy-Item "README.md" ".\downloads\" -Force | Out-Null
+Copy-Item ".\resources\images\dfirws.jpg" .\downloads\ -Force | Out-Null
+Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force | Out-Null
+
 foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name | findstr PUBLIC) {
     Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
 }
+
 # done.txt is used to check last update in sandbox
 Write-Output "" > ".\downloads\done.txt"
 
 # Remove temp files
-Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
-Remove-Item -Recurse -Force .\tmp\enrichment 2>&1 | Out-Null
-Remove-Item -Recurse -Force .\tmp\mount\ 2>&1 | Out-Null
+if (Test-Path ".\tmp\downloads") {
+    Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
+}
+if (Test-Path ".\tmp\enrichment") {
+    Remove-Item -Recurse -Force .\tmp\enrichment 2>&1 | Out-Null
+}
+if (Test-Path ".\tmp\mount") {
+    Remove-Item -Recurse -Force .\tmp\mount\ 2>&1 | Out-Null
+}
 
 $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
     $_.Line -notmatch " INFO " -and

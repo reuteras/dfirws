@@ -39,7 +39,7 @@ Clear-Tmp winget
 # GoLang - available for installation via dfirws-install.ps1
 Clear-Tmp winget
 Write-SynchronizedLog "winget: Downloading GoLang."
-Get-WinGet Golang.Go
+Get-WinGet "GoLang.Go"
 if (Test-Path .\tmp\winget\Go*.msi) {
     Copy-Item .\tmp\winget\Go*.msi ".\downloads\golang.msi"
 }

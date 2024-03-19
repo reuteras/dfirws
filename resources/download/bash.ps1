@@ -41,7 +41,7 @@ $packages = "bash-completion", `
 
 foreach ($package in $packages) {
     $url = Get-DownloadUrlMSYS "${package}"
-    Get-FileFromUri -uri "${url}" -FilePath ".\downloads\bash\${package}.pkg.tar.zst" -CheckURL "Yes"
+    $status = Get-FileFromUri -uri "${url}" -FilePath ".\downloads\bash\${package}.pkg.tar.zst" -CheckURL "Yes"
 }
 
 $FinalHASH = Get-FileHash -Path "${ROOT_PATH}\downloads\tools_downloaded.csv" -Algorithm SHA256 | Select-Object -ExpandProperty Hash
@@ -58,3 +58,5 @@ if (Compare-Object $StartHASH $FinalHASH) {
 }
 
 Write-DateLog "Git for Windows (bash) done." >> "${ROOT_PATH}\log\bash.txt"
+
+$null = $status

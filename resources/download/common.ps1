@@ -29,8 +29,14 @@ The URI of the file to be downloaded.
 .PARAMETER FilePath
 The file path where the downloaded file will be saved.
 
+.PARAMETER CheckURL
+Specifies whether to check the URL for the file in the tools_downloaded.csv file.
+
+.OUTPUTS
+System.Boolean - Returns $true if the file was successfully downloaded and saved, $false otherwise.
+
 .EXAMPLE
-Download-File -Uri "https://example.com/file.txt" -FilePath "C:\Downloads\file.txt"
+Get-FileFromUri -Uri "https://example.com/file.txt" -FilePath "C:\Downloads\file.txt"
 Downloads the file from the specified URI and saves it to the specified file path.
 
 .NOTES
@@ -46,14 +52,22 @@ function Get-FileFromUri {
 
     Write-SynchronizedLog "Downloading $Uri to $FilePath. CheckURL: $CheckURL."
 
+    $fileDownloadedOrChanged = $false
+
     # Check if the file has already been downloaded
     if ((Test-Path -Path "$FilePath") -and $CheckURL -eq "Yes") {
         if (Compare-ToolsDownloaded -URL $Uri -AppName ([System.IO.FileInfo]$FilePath).Name) {
             Write-SynchronizedLog "File $FilePath already downloaded according to tools_downloaded.csv."
-            return
+            return $false
         }
     }
 
+    if (Test-Path -Path "$FilePath") {
+        $filePathHash = Get-FileHash -Path $FilePath -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+    } else {
+        $filePathHash = ""
+    }
+            
     # Remove any leading '..' from the file path and set up temporary file path and final file path
     $CleanPath = $FilePath -replace "^..", ""
     $TmpFilePath= "$PSScriptRoot\..\..\tmp\$CleanPath"
@@ -152,6 +166,16 @@ function Get-FileFromUri {
         }
     }
 
+    if (Test-Path $TmpFilePath) {
+        $TmpFilePathHash = Get-FileHash -Path $TmpFilePath -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+    } else {
+        $TmpFilePathHash = ""
+    }
+
+    if ($TmpFilePathHash -ne $filePathHash) {
+        $fileDownloadedOrChanged = $true
+    }
+
     if ($downloaded) {
         # Copy the temporary file to the final file path and remove the temporary file
         try {
@@ -172,6 +196,8 @@ function Get-FileFromUri {
         Write-SynchronizedLog "Already downloaded $Uri according to etag (${ETAG_FILE})."
     }
     $ProgressPreference = 'Continue'
+
+    return $fileDownloadedOrChanged
 }
 
 <#
@@ -287,11 +313,8 @@ function Get-GitHubRelease {
     # If still no download URL is found, try getting the tarball URL
     if ( !$Url ) {
         $releases = "https://api.github.com/repos/$repo/releases/latest"
-        if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-            $Url = (curl.exe --silent -L $releases | ConvertFrom-Json).zipball_url.ToString()
-        } else {
-            $Url = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json).zipball_url.ToString()
-        }
+        $Url = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json).zipball_url.ToString()
+
         if ( !$Url) {
             Write-Error "Can't find a file to download for repo $repo."
             Exit
@@ -300,7 +323,7 @@ function Get-GitHubRelease {
 
     # Log the chosen URL and download the file
     Write-SynchronizedLog "Using $Url for $repo."
-    Get-FileFromUri -uri $Url -FilePath $path -CheckURL "Yes"
+    return Get-FileFromUri -uri $Url -FilePath $path -CheckURL "Yes"
 }
 
 <#
@@ -498,7 +521,7 @@ function Write-SynchronizedLog {
         $result = $logMutex.WaitOne()
         $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         $fullMessage = "$timestamp - $Message"
-        Add-Content -Path $LogFile -Value $fullMessage | Out-Null
+        Add-Content -Path $LogFile -Value $fullMessage 2>&1 | Out-Null
     }
     finally {
         $result = $logMutex.ReleaseMutex()
@@ -617,7 +640,7 @@ function Get-Winget {
         [Parameter(Mandatory=$True)] [string]$AppName
     )
 
-    $VERSION = (winget search "$AppName") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
+    $VERSION = (winget search --exact --id "$AppName") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
 
     if (Compare-ToolsDownloaded -URL $VERSION -AppName $AppName) {
         Write-SynchronizedLog "File $AppName version $VERSION already downloaded."
@@ -625,7 +648,7 @@ function Get-Winget {
     } else {
         Write-SynchronizedLog "Downloading $AppName version $VERSION."
     }
-    winget download --disable-interactivity	"$AppName" -d .\tmp\winget 2>&1 | Out-Null
+    winget download --disable-interactivity	--exact --id "$AppName" -d .\tmp\winget 2>&1 | Out-Null
     Remove-Item .\tmp\winget\*.yaml -Force > $null 2>&1
 
     $FileName = Get-ChildItem .\tmp\winget\ | Select-Object -Last 1 -ExpandProperty FullName

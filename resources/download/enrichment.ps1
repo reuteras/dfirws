@@ -272,9 +272,11 @@ if (-not (Test-Path -Path "${yaraSaveDirectory}")) {
 }
 Set-Location "${yaraSaveDirectory}"
 
-Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip" -FilePath ".\enrichment\yara\yara-forge-rules-core.zip"
-Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip" -FilePath ".\enrichment\yara\yara-forge-rules-extended.zip"
-Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\enrichment\yara\yara-forge-rules-full.zip"
+$status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip" -FilePath ".\enrichment\yara\yara-forge-rules-core.zip"
+$status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip" -FilePath ".\enrichment\yara\yara-forge-rules-extended.zip"
+$status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\enrichment\yara\yara-forge-rules-full.zip"
+
+$null = $status
 
 # Unzip yara signatures
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-core.zip" -o"${yaraSaveDirectory}" | Out-Null
