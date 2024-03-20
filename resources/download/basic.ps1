@@ -23,10 +23,10 @@ if ($all -or $Freshclam) {
 #
 
 if ($all -or $Node) {
-    $nodejs = Get-DownloadUrlFromPage -url "https://nodejs.org/en/download/" -RegEx 'https:[^"]+win-x64.zip'
+    $NodeJSVersion = (Get-DownloadUrlFromPage -url "https://nodejs.org/en/download/prebuilt-binaries" -RegEx 'Active LTS[^W]+versionWithPrefix[^,]+').Split(",")[3].Split(":")[1].Replace('\"', '')
 
     # nodejs - installed via sandbox during download and setup of tools for dfirws
-    $status = Get-FileFromUri -uri "${nodejs}" -FilePath ".\downloads\nodejs.zip" -CheckURL "Yes"
+    $status = Get-FileFromUri -uri "https://nodejs.org/dist/${NodeJSVersion}/node-${NodeJSVersion}-win-x64.zip" -FilePath ".\downloads\nodejs.zip" -CheckURL "Yes"
 }
 
 #
