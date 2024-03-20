@@ -11,12 +11,12 @@ Write-DateLog "Start Sandbox to install ClamAV and run freshclam." > "${ROOT_PAT
 
 $mutex = New-Object System.Threading.Mutex($false, ${mutexName})
 
-if (! (Test-Path -Path "${ROOT_PATH}\mount\ClamAV   ")) {
-    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\ClamAV" | Out-Null
+if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\ClamAV   ")) {
+    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\ClamAV" | Out-Null
 }
 
-if (Test-Path -Path "${ROOT_PATH}\mount\ClamAV\done") {
-    Remove-Item "${ROOT_PATH}\mount\ClamAV\done" | Out-Null
+if (Test-Path -Path "${ROOT_PATH}\mount\Tools\ClamAV\done") {
+    Remove-Item "${ROOT_PATH}\mount\Tools\ClamAV\done" | Out-Null
 }
 
 (Get-Content ${ROOT_PATH}\resources\templates\generate_freshclam.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}") | Set-Content "${ROOT_PATH}\tmp\generate_freshclam.wsb"
