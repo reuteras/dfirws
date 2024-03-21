@@ -17,6 +17,8 @@ param(
     [Switch]$evt2sigma,
     [Parameter(HelpMessage = "Switch to venv ghidrecomp.")]
     [Switch]$ghidrecomp,
+    [Parameter(HelpMessage = "Switch to venv ingestr.")]
+    [Switch]$ingestr,
     [Parameter(HelpMessage = "Switch to venv jep.")]
     [Switch]$jep,
     [Parameter(HelpMessage = "Switch to venv jpterm.")]
@@ -67,6 +69,8 @@ if ($aspose) {
     $venv = "evt2sigma"
 } elseif ($ghidrecomp) {
     $venv = "ghidrecomp"
+} elseif ($ingestr) {
+    $venv = "ingestr"
 } elseif ($jep) {
     $venv = "jep"
 } elseif ($jpterm) {
