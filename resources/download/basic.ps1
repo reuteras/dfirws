@@ -55,6 +55,7 @@ if ($all -or $Python) {
         }
         New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra" | Out-Null
         Move-Item ${TOOLS}\ghidra_* "${TOOLS}\ghidra\"
+        Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force
     }
 
     # Ghidra - older release
