@@ -1,159 +1,297 @@
 Windows Registry Editor Version 5.00
 
+; Based on the following registry file:
 ; Created by: Shawn Brink
 ; Created on: March 5th 2017
 ; Tutorial: https://www.tenforums.com/tutorials/78681-file-hash-context-menu-add-windows-8-windows-10-a.html
 
 
+;
+; Add "Hash" to the context menu of all files
+;
+
 [HKEY_CLASSES_ROOT\*\shell\hash]
 "MUIVerb"="Hash"
 "SubCommands"=""
-
 
 ; SHA1
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\01menu]
 "MUIVerb"="SHA1"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\01menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA1 | format-list"
-
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA1 | format-list"
 
 ; SHA256
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\02menu]
 "MUIVerb"="SHA256"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\02menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA256 | format-list"
-
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA256 | format-list"
 
 ; SHA384
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\03menu]
 "MUIVerb"="SHA384"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\03menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA384 | format-list"
-
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA384 | format-list"
 
 ; SHA512
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\04menu]
 "MUIVerb"="SHA512"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\04menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA512 | format-list"
-
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA512 | format-list"
 
 ; MACTripleDES
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\05menu]
 "MUIVerb"="MACTripleDES"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\05menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list"
-
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list"
 
 ; MD5
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\06menu]
 "MUIVerb"="MD5"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\06menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm MD5 | format-list"
-
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm MD5 | format-list"
 
 ; RIPEMD160
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\07menu]
 "MUIVerb"="RIPEMD160"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\07menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list"
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list"
 
+; ssdeep.py
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu]
+"MUIVerb"="ssdeep.py"
+
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu\command]
+@="pwsh -NoExit -Command ssdeep.py '%1'"
 
 ; Allget-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list
-[HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu]
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\09menu]
 "CommandFlags"=dword:00000020
 "MUIVerb"="Show all"
 
-[HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu\command]
-@="powershell -noexit get-filehash -literalpath '%1' -algorithm SHA1 | format-list;get-filehash -literalpath '%1' -algorithm SHA256 | format-list;get-filehash -literalpath '%1' -algorithm SHA384 | format-list;get-filehash -literalpath '%1' -algorithm SHA512 | format-list;get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list;get-filehash -literalpath '%1' -algorithm MD5 | format-list;get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list"
+[HKEY_CLASSES_ROOT\*\shell\hash\shell\09menu\command]
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA1 | format-list;get-filehash -literalpath '%1' -algorithm SHA256 | format-list;get-filehash -literalpath '%1' -algorithm SHA384 | format-list;get-filehash -literalpath '%1' -algorithm SHA512 | format-list;get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list;get-filehash -literalpath '%1' -algorithm MD5 | format-list;get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list;ssdeep.py '%1'"
 
+;
+; Add "dfirws investigate" to the context menu of all files
+;
 
 [HKEY_CLASSES_ROOT\*\shell\investigate]
-"MUIVerb"="Investigate"
+"MUIVerb"="dfirws investigate"
 "SubCommands"=""
-
 
 ; capa
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu]
 "MUIVerb"="capa"
 
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu\command]
-@="powershell -noexit capa '%1'"
+@="pwsh -NoExit -Command capa '%1'"
 
+; clamscan (disabled here - added via reg/clamav.reg)
+;[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu]
+;"MUIVerb"="clamscan"
+;
+;[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu\command]
+;@="pwsh -NoExit -Command clamscan '%1'"
 
 ; Detect-It-Easy
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\12menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu]
 "MUIVerb"="Detect-It-Easy"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\12menu\command]
-@="powershell die '%1'"
-
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu\command]
+@="pwsh -Command die '%1'"
 
 ; file
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\14menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\30menu]
 "MUIVerb"="file"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\14menu\command]
-@="powershell -noexit file '%1'"
-
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\30menu\command]
+@="pwsh -NoExit -Command file '%1'"
 
 ; file-magic
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\16menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\40menu]
 "MUIVerb"="file-magic"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\16menu\command]
-@="powershell -noexit file-magic '%1'"
-
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\40menu\command]
+@="pwsh -NoExit -Command file-magic '%1'"
 
 ; gron
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\17menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\50menu]
 "MUIVerb"="gron"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\17menu\command]
-@="powershell -noexit gron '%1' | gron -u"
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\50menu\command]
+@="pwsh -NoExit -Command gron '%1' | gron -u"
 
 ; magika
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\18menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\60menu]
 "MUIVerb"="magika"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\18menu\command]
-@="powershell -noexit magika '%1'"
-
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\60menu\command]
+@="pwsh -NoExit -Command magika '%1'"
 
 ; PE-Bear
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\70menu]
 "MUIVerb"="PE-Bear"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu\command]
-@="powershell PE-Bear '%1'"
-
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\70menu\command]
+@="pwsh -Command PE-Bear '%1'"
 
 ; sigcheck
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\21menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\80menu]
 "MUIVerb"="sigcheck"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\21menu\command]
-@="powershell -noexit sigcheck64 '%1'"
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\80menu\command]
+@="pwsh -NoExit -Command -Command sigcheck64 '%1'"
 
+; strings.py
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\90menu]
+"MUIVerb"="strings.py"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\90menu\command]
+@="pwsh -NoExit -Command strings.py '%1'"
 
 ; trid
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\22menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\100menu]
 "MUIVerb"="trid"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\22menu\command]
-@="powershell -noexit trid '%1'"
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\100menu\command]
+@="pwsh -NoExit -Command -Command trid '%1'"
 
+;
+; Add "dfirws exe" to the context menu of exefile files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe]
+"MUIVerb"="dfirws exe"
+"SubCommands"=""
+
+; capa
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\00menuexe]
+"MUIVerb"="capa"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\00menuexe\command]
+@="pwsh -NoExit -Command capa '%1'"
+
+; cutter
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\03menuexe]
+"MUIVerb"="cutter"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\03menuexe\command]
+@="pwsh -Command cutter '%1'"
+
+; ExeinfoPE
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\10menuexe]
+"MUIVerb"="ExeinfoPE"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\10menuexe\command]
+@="pwsh -Command exeinfope.exe '%1'"
+
+; ezhexviewer
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\14menuexe]
+"MUIVerb"="ezhexviewer"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\14menuexe\command]
+@="pwsh -Command ezhexviewer.exe '%1'"
+
+; HxD
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\17menuexe]
+"MUIVerb"="HxD"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\17menuexe\command]
+@="pwsh -Command HxD.exe '%1'"
+
+; PE-bear
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\20menuexe]
+"MUIVerb"="PE-bear"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\20menuexe\command]
+@="pwsh -Command pe-bear.exe '%1'"
+
+; rizin
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\30menuexe]
+"MUIVerb"="rizin"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\30menuexe\command]
+@="pwsh -NoExit -Command rizin '%1'"
+
+
+;
+; Add "dfirws json" to the context menu of .json files (jsonfiles)
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json]
+"MUIVerb"="dfirws json"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\01menu]
+"MUIVerb"="gron"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\01menu\command]
+@="pwsh -NoExit -Command gron '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\05menu]
+"MUIVerb"="jq"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\05menu\command]
+@="pwsh -NoExit -Command jq '.' '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\10menu]
+"MUIVerb"="vd"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\10menu\command]
+@="pwsh -NoExit -Command vd '.' '%1'"
+
+;
+; Add "dfirws lnk" to the context menu of .lnk files (lnkfiles)
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk]
+"MUIVerb"="dfirws lnk"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\01menu]
+"MUIVerb"="lnkparse"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\01menu\command]
+@="pwsh -NoExit -Command lnkparse '%1'"
+
+;
+; Add "dfirws PST" to the context menu of .pst files (Exchange PST files)
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst]
+"MUIVerb"="dfirws PST"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\01menu]
+"MUIVerb"="pst-extract.py"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\01menu\command]
+@="pwsh -NoExit -Command pst-extract.py '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\05menu]
+"MUIVerb"="pstwalker"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\05menu\command]
+@="pwsh -Command pstwalker '%1'"
+
+;
+; Registry configurations
+;
 
 ; Disable check for new versions of DB Browser for SQLite
 [HKEY_CURRENT_USER\Software\sqlitebrowser\sqlitebrowser\checkversion]
 "enabled"="false"
+
+;
+; Accept EULA for Sysinternals tools
+;
 
 [HKEY_CURRENT_USER\SOFTWARE\Sysinternals\AccessChk]
 "EulaAccepted"=dword:00000001

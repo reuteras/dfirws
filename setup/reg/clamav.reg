@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+; clamscan
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu]
+"MUIVerb"="clamscan"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu\command]
+@="pwsh -NoExit -Command clamscan '%1'"
