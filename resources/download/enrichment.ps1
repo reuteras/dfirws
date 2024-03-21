@@ -211,7 +211,7 @@ Copy-Item -Path "${suricataSavePath}" -Destination "${suricataSaveDirectory}\eme
 #
 
 # Download the latest version of Snort rules
-$snortUrl = "https://www.snort.org/downloads/community/community-rules.tar.gz"
+$snortUrl = "https://www.snort.org/downloads/community/snort3-community-rules.tar.gz"
 $snortSaveDirectory = "${enrichmentDirectory}\snort"
 
 # Create the save directory for snort if it doesn't exist
