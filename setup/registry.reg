@@ -89,6 +89,7 @@ Windows Registry Editor Version 5.00
 ; capa
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu]
 "MUIVerb"="capa"
+"Icon"="C:\\Tools\\capa\\capa.exe"
 
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu\command]
 @="pwsh -NoExit -Command capa '%1'"
@@ -103,6 +104,7 @@ Windows Registry Editor Version 5.00
 ; Detect-It-Easy
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu]
 "MUIVerb"="Detect-It-Easy"
+"Icon"="C:\\Tools\\die\\die.exe"
 
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu\command]
 @="pwsh -Command die '%1'"
@@ -138,6 +140,7 @@ Windows Registry Editor Version 5.00
 ; PE-Bear
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\70menu]
 "MUIVerb"="PE-Bear"
+"Icon"="C:\\Tools\\pebear\\PE-bear.exe"
 
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\70menu\command]
 @="pwsh -Command PE-Bear '%1'"
@@ -174,6 +177,7 @@ Windows Registry Editor Version 5.00
 ; capa
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\00menuexe]
 "MUIVerb"="capa"
+"Icon"="C:\\Tools\\capa\\capa.exe"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\00menuexe\command]
 @="pwsh -NoExit -Command capa '%1'"
@@ -181,6 +185,7 @@ Windows Registry Editor Version 5.00
 ; cutter
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\03menuexe]
 "MUIVerb"="cutter"
+"Icon"="C:\\Tools\\Cutter\\cutter.exe"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\03menuexe\command]
 @="pwsh -Command cutter '%1'"
@@ -188,6 +193,7 @@ Windows Registry Editor Version 5.00
 ; ExeinfoPE
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\10menuexe]
 "MUIVerb"="ExeinfoPE"
+"Icon"="C:\\Tools\\exeinfope\\exeinfope.exe"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\10menuexe\command]
 @="pwsh -Command exeinfope.exe '%1'"
@@ -202,6 +208,7 @@ Windows Registry Editor Version 5.00
 ; HxD
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\17menuexe]
 "MUIVerb"="HxD"
+"Icon"="C:\\Program Files\\hxd\\HxD.exe"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\17menuexe\command]
 @="pwsh -Command HxD.exe '%1'"
@@ -209,6 +216,7 @@ Windows Registry Editor Version 5.00
 ; PE-bear
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\20menuexe]
 "MUIVerb"="PE-bear"
+"Icon"="C:\\Tools\\pebear\\pe-bear.exe"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\20menuexe\command]
 @="pwsh -Command pe-bear.exe '%1'"
@@ -219,6 +227,18 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\30menuexe\command]
 @="pwsh -NoExit -Command rizin '%1'"
+
+
+;
+; Add "Open in Ghidra" to the context menu of .gpr files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.gpr\shell\ghidra]
+"MUIVerb"="Open in Ghidra"
+"Icon"="C:\\Tools\\ghidra\\ghidra.ico"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.gpr\shell\ghidra\command]
+@="pwsh -Command ghidraRun.bat '%1'"
 
 
 ;
@@ -277,9 +297,11 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\05menu]
 "MUIVerb"="pstwalker"
+"Icon"="C:\\Tools\\pstwalker\\pstwalker.exe"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\05menu\command]
 @="pwsh -Command pstwalker '%1'"
+
 
 ;
 ; Registry configurations
