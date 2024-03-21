@@ -215,7 +215,7 @@ function Install-CMDer {
 function  Install-DCode {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dcode.txt")) {
         Write-Output "Installing DCode"
-        Copy-Item "${SETUP_PATH}\\dcode\dcode.exe" "${WSDFIR_TEMP}\dcode.exe" -Force
+        Copy-Item "${SETUP_PATH}\dcode\dcode.exe" "${WSDFIR_TEMP}\dcode.exe" -Force
         Start-Process -Wait "${WSDFIR_TEMP}\dcode.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-dcode.txt" | Out-Null
     } else {
