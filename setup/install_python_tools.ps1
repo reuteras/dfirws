@@ -240,7 +240,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
         Write-DateLog "Neither jep or ghidrathon has been updated, don't build jep." >> "C:\log\python.txt"
     }
 
-    
+
     #
     # venv regipy
     #
@@ -276,7 +276,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
     #
 
     foreach ($virtualenv in "ingestr", "pdfalyzer") {
- 
+
         & "$PYTHON_BIN" -m pip index "${virtualenv}" 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> "${WSDFIR_TEMP}\visualstudio.txt"
         & "$PYTHON_BIN" -m pip index "${virtualenv}" 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\${virtualenv}.txt"
 
