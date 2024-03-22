@@ -150,7 +150,7 @@ Windows Registry Editor Version 5.00
 "MUIVerb"="sigcheck"
 
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\80menu\command]
-@="pwsh -NoExit -Command -Command sigcheck64 '%1'"
+@="pwsh -NoExit -Command sigcheck64 '%1'"
 
 ; strings.py
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\90menu]
@@ -164,7 +164,7 @@ Windows Registry Editor Version 5.00
 "MUIVerb"="trid"
 
 [HKEY_CLASSES_ROOT\*\shell\investigate\shell\100menu\command]
-@="pwsh -NoExit -Command -Command trid '%1'"
+@="pwsh -NoExit -Command trid '%1'"
 
 ;
 ; Add "dfirws exe" to the context menu of exefile files
@@ -240,6 +240,33 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\Software\Classes\.gpr\shell\ghidra\command]
 @="pwsh -Command ghidraRun.bat '%1'"
 
+;
+; Add "dfirws js" to the context menu of .js files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js]
+"MUIVerb"="dfirws js"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\00menu]
+"MUIVerb"="box-js.cmd --preprocess --no-kill --no-shell-error --timeout 60"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\00menu\command]
+@="pwsh -NoExit -Command box-js.cmd --preprocess --no-kill --no-shell-error --timeout 60 '%1'"
+
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\10menu]
+"MUIVerb"="js-beautify"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\10menu\command]
+@="pwsh -NoExit -Command js-beautify '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\20menu]
+"MUIVerb"="synchrony"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\20menu\command]
+@="pwsh -NoExit -Command synchrony '%1'"
+
 
 ;
 ; Add "dfirws json" to the context menu of .json files (jsonfiles)
@@ -250,9 +277,15 @@ Windows Registry Editor Version 5.00
 "SubCommands"=""
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\01menu]
-"MUIVerb"="gron"
+"MUIVerb"="fx"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\01menu\command]
+@="pwsh -NoExit -Command fx '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\03menu]
+"MUIVerb"="gron"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\03menu\command]
 @="pwsh -NoExit -Command gron '%1'"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\05menu]
@@ -280,6 +313,64 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\01menu\command]
 @="pwsh -NoExit -Command lnkparse '%1'"
+
+;
+; Add "dfirws msg" to the context menu of .msg files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg]
+"MUIVerb"="dfirws msg"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu]
+"MUIVerb"="extract_msg.exe --dump-stdout"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu\command]
+@="pwsh -NoExit -Command extract_msg.exe --dump-stdout '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\05menu]
+"MUIVerb"="msgviewer"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\05menu\command]
+@="pwsh -Command C:\\Tools\\lib\\msgviewer.jar '%1'"
+
+;
+; Add "dfirws pdf" to the context menu of .pdf files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf]
+"MUIVerb"="dfirws pdf"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\01menu]
+"MUIVerb"="pdf-parser.py"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\01menu\command]
+@="pwsh -NoExit -Command pdf-parser.py --stat '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\05menu]
+"MUIVerb"="pdfid.py"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\05menu\command]
+@="pwsh -NoExit -Command pdfid.py '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu]
+"MUIVerb"="peepdf"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu\command]
+@="pwsh -NoExit -Command peepdf '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu]
+"MUIVerb"="peepdf -i"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu\command]
+@="pwsh -NoExit -Command peepdf -i '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\15menu]
+"MUIVerb"="qpdf --json"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\15menu\command]
+@="pwsh -NoExit -Command qpdf --json '%1' | fx"
 
 ;
 ; Add "dfirws PST" to the context menu of .pst files (Exchange PST files)
