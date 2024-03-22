@@ -163,7 +163,40 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
 reg import "${HOME}\Documents\tools\registry.reg" | Out-Null
 Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Signal that everything is done to start using the tools (mostly).
+foreach ($extension in "doc", "docm", "docx", "dot", "dotm", "dotx", "xls", "xlsm", "xlsx", "xlt", "xltm", "xltx", "ppt", "pptm", "pptx", "pot", "potm", "potx") {
+    $registry_file = @"
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}]
+"MUIVerb"="dfirws office"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\01menu]
+"MUIVerb"="mraptor"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\01menu\command]
+@="pwsh -NoExit -Command mraptor '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\11menu]
+"MUIVerb"="oleid"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\11menu\command]
+@="pwsh -NoExit -Command oleid '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\21menu]
+"MUIVerb"="olevba"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\21menu\command]
+@="pwsh -NoExit -Command olevba '%1'"
+
+"@
+
+    $registry_file | Out-File -FilePath "${WSDFIR_TEMP}\${extension}.reg" -Encoding ascii
+    reg import "${WSDFIR_TEMP}\${extension}.reg" | Out-Null
+    remove-item "${WSDFIR_TEMP}\${extension}.reg"
+}
+
+# Set dark theme if selected
 if ("${WSDFIR_DARK}" -eq "Yes") {
     Start-Process -Wait "c:\Windows\Resources\Themes\themeB.theme"
     taskkill /f /im systemsettings.exe
