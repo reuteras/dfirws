@@ -372,6 +372,9 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
 }
 
+# Foxit Reader - manual installation
+$status = Get-FileFromUri -uri "https://www.foxit.com/downloads/latest.html?product=Foxit-Reader&platform=Windows&version=&package_type=&language=English&distID=" -FilePath ".\downloads\foxitreader.exe"
+
 # Update the links below when new versions are released
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor

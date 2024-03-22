@@ -12,6 +12,7 @@ param (
     [switch]$Docker,
     [switch]$Dokany,
     [switch]$Firefox,
+    [switch]$FoxitReader,
     [switch]$GitBash,
     [switch]$GoLang,
     [switch]$Gpg4win,
@@ -83,6 +84,10 @@ if ($Dokany.IsPresent) {
 
 if ($Firefox.IsPresent) {
     Install-Firefox
+}
+
+if ($FoxitReader.IsPresent) {
+    Install-FoxitReader
 }
 
 if ($GitBash.IsPresent) {

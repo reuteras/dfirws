@@ -254,6 +254,17 @@ function Install-Firefox {
     }
 }
 
+function Install-FoxitReader {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-foxitreader.txt")) {
+        Write-Output "Installing Foxit Reader"
+        Copy-Item "${SETUP_PATH}\foxitreader.exe" "${WSDFIR_TEMP}\foxitreader.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\foxitreader.exe" -ArgumentList '/SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-foxitreader.txt" | Out-Null
+    } else {
+        Write-Output "Foxit Reader is already installed"
+    }
+
+}
 function Install-GitBash {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-gitbash.txt")) {
         Write-Output "Installing Git Bash"
