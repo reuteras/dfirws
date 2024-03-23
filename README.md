@@ -6,14 +6,13 @@ DFIRWS is a solution to do DFIR work in Windows. To avoid having to download and
 
 DFIRWS has been enhanced since its start and now have the following main parts.
 
-- **downloadFiles.ps1** - download, update and prepare tools to use for DFIR work.
-- **enrichment.ps1** - download data for later enrichment. Currently downloads data from TOR, MaxMind (if you have a key) and a couple of other sources.
+- **downloadFiles.ps1** - download, update and prepare tools to use for DFIR work. Also downloads enrichment data and updates ClamAV signatures.
 - **createSandboxConfig.ps1** - create Windows Sandbox configuration files for the tools.
   - **dfirws.wsb** - Windows Sandbox configuration file with network disabled.
   - **network_dfirws.wsb** - Windows Sandbox configuration file with network enabled.
 - **createVM.ps1** - create a Windows 11 VM with the tools installed.
 
-DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough currently I only test it on Windows 11. The VM only creates a Windows 11 VM and currently only uses VMWare Workstation.
+DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough currently only tested on Windows 11. The VM only creates a Windows 11 VM and currently only uses VMWare Workstation.
 
 **Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. The reason is that at least Windows Defender will some time classify some tools as malware. Even though I try to exclude those tools I've found that a file can be classified as malware one day and not the next. The choice is yours.
 
@@ -85,9 +84,7 @@ Copy the file *config.ps1.template* to *config.ps1*.
 cp config.ps1.template config.ps1
 ```
 
-The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub. The MaxMind token is only used if you would like the **enrichment.ps1** script. If you prefer not to save the GitHub token in the *config.ps1* file you can enter it manually every time you run **downloadFiles.ps1**.
-
-There is also a setting that controls if the Python *jep* virtual environment should be built (needed for Ghidrathon). There is a requirement for Visual Studio to build this virtual environment which is a rather large download and therefore optional.
+The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub. If you prefer not to save the GitHub token in *config.ps1* file you can enter it manually when you run **downloadFiles.ps1**.
 
 ## Download tools and enrichment data
 
@@ -99,16 +96,22 @@ Download programs and prepare them for use by running:
 .\downloadFiles.ps1
 ```
 
-If you like to have a more detailed view off the progress during the download (or update) you can run the **PowerShell** variant of **tail -f** after starting **.\downloadFiles.ps1**.
-
-```PowerShell
-Get-Content .\log\log.txt -Wait
-```
-
 Enrichment data can be downloaded by running:
 
 ```PowerShell
-.\enrichment.ps1
+.\downloadFiles.ps1 -Enrichment
+```
+
+ClamAV signatures can be downloaded with freshclam by running:
+
+```PowerShell
+.\downloadFiles.ps1 -Freshclam
+```
+
+To simplify the download of tools, enrichment data and ClamAV signatures you can run the following command:
+
+```PowerShell
+.\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
 ```
 
 ## Usage and configuration of the sandbox
@@ -130,7 +133,7 @@ The difference will be the time it takes to start the sandbox, i.e. running an i
 
 Extra tools can be installed in a running **dfirws** sandbox with the script **dfirws-install.ps1**. To list available tools run **Get-Help dfirws-install.ps1**. To install a tool run **dfirws-install.ps1 -<tool>**.
 
-If you like to run your own PowerShell code to customize **dfirws** you can copy *local\defaults\customize.ps1* to *local\customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** which at the moment is PowerShell 7 and that some things are different from earlier versions of PowerShell.
+If you like to run your own PowerShell code to customize **dfirws** you can copy *local\defaults\customize-sandbox.ps1* to *local\customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** and that version will be used to run the script. Currently this is PowerShell 7.4.x and some things are different from earlier versions of PowerShell.
 
 More usage information is available in the [wiki](https://github.com/reuteras/dfirws/wiki). A local copy of the wiki is available by clicking on the **dfirws wiki** link on the desktop.
 
