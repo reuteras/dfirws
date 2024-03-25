@@ -22,6 +22,10 @@
     .\downloadFiles.ps1 -Freshclam
     This will download and update ClamAV databases with Freshclam.
 
+.EXAMPLE
+    .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
+    This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
+
 .NOTES
     File Name      : downloadFiles.ps1
     Author         : Peter R
@@ -102,19 +106,17 @@ rclone.exe config touch | Out-Null
 
 # Check if sandbox is running
 if ( tasklist | Select-String "WindowsSandbox" ) {
-    Write-DateLog "Sandbox can't be running during install or upgrade."
+    Write-DateLog "Sandbox can't be running while updating."
     Exit
-}
-
-if ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
-    $all = $false
-} else {
-    Write-DateLog "No arguments given. Will download all tools for dfirws."
-    $all = $true
 }
 
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
+    $all = $true
+} elseif ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
+    $all = $false
+} else {
+    Write-DateLog "No arguments given. Will download all tools for dfirws."
     $all = $true
 }
 
@@ -159,7 +161,7 @@ if (! (Test-Path -Path ".\log" )) {
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
 
-# Moved file to downloads
+# Moved tools_downloaded.csv to downloads
 if (Test-Path ".\tools_downloaded.csv") {
     Move-Item -Path ".\tools_downloaded.csv" -Destination ".\downloads\tools_downloaded.csv" -Force
 }
@@ -184,7 +186,7 @@ if ($all -or $Bash.IsPresent -or $Didier.IsPresent -or $Http.IsPresent -or $Pyth
 }
 
 if ($all -or $Bash.IsPresent -or $Freshclam.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
-    Write-DateLog "Download files needed in Sandboxes."
+    Write-DateLog "Download common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
 }
 
@@ -194,6 +196,7 @@ if ($all -or $Bash.IsPresent) {
 }
 
 if ($all -or $Node.IsPresent) {
+    Write-Output "" > .\log\node.txt
     Write-DateLog "Setup Node and install npm packages."
     Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
@@ -204,19 +207,19 @@ if ($all -or $Release.IsPresent) {
 }
 
 if ($all -or $Git.IsPresent) {
-    Write-DateLog "Download git repositories"
+    Write-DateLog "Download and update git repositories"
     .\resources\download\git.ps1
 }
 
 if ($all -or $Python.IsPresent) {
     Write-Output "" > .\log\python.txt
-    Write-DateLog "Setup Python and install packages."
+    Write-DateLog "Setup Python and install packages in virtual environments."
     Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $Rust.IsPresent) {
     Write-Output "" > .\log\rust.txt
-    Write-DateLog "Setup Rust and install packages."
+    Write-DateLog "Setup Rust and install packages with cargo."
     Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
@@ -246,7 +249,7 @@ if ($all -or $Zimmerman.IsPresent) {
 
 if ($all -or $Kape.IsPresent) {
     if (Test-Path ".\local\kape.zip") {
-        Write-DateLog "Download KAPE."
+        Write-DateLog "Download and update KAPE and related tools."
         .\resources\download\kape.ps1
     }
 }
@@ -257,7 +260,7 @@ if ($all -or $PowerShell.IsPresent) {
 }
 
 if ($Freshclam.IsPresent) {
-    Write-DateLog "Download freshclam databases."
+    Write-DateLog "Download and update ClamAV databases with freshclam."
     Start-Job -FilePath .\resources\download\freshclam.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
@@ -267,7 +270,7 @@ if ($Enrichment.IsPresent) {
 }
 
 if ($all -or $bash.IsPresent -or $Freshclam.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
-    Write-DateLog "Wait for sandboxes."
+    Write-DateLog "Wait for sandboxes to finish."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
     Get-Job | Remove-Job | Out-Null
@@ -282,7 +285,7 @@ foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name |
     Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
 }
 
-# done.txt is used to check last update in sandbox
+# done.txt is used to display last update in sandbox with bginfo
 Write-Output "" > ".\downloads\done.txt"
 
 # Remove temp files
