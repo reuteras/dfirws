@@ -323,6 +323,12 @@ Windows Registry Editor Version 5.00
 "SubCommands"=""
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu]
+"MUIVerb"="extract_msg.exe"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu\command]
+@="pwsh -NoExit -Command extract_msg.exe '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu]
 "MUIVerb"="extract_msg.exe --dump-stdout"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu\command]
