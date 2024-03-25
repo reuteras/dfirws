@@ -53,7 +53,7 @@ poetry add `
     dpkt `
     elasticsearch[async] `
     evtx `
-    extract-msg `
+    extract-msg>=0.48.4 `
     flatten_json `
     frida-tools `
     ghidriff `
