@@ -1,8 +1,17 @@
 Windows Registry Editor Version 5.00
 
-; clamscan
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu]
-"MUIVerb"="clamscan"
+; clamscan file
+[HKEY_CLASSES_ROOT\*\shell\clamscan]
+"MUIVerb"="dfirws - clamscan file"
+"Position"="Top"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu\command]
+[HKEY_CLASSES_ROOT\*\shell\clamscan\command]
 @="pwsh -NoExit -Command clamscan '%1'"
+
+; clamscan folder
+[HKEY_CLASSES_ROOT\Directory\shell\clamscan]
+"MUIVerb"="dfirws - clamscan folder recursively"
+"Position"="Top"
+
+[HKEY_CLASSES_ROOT\Directory\shell\clamscan\command]
+@="pwsh -NoExit -Command clamscan --recursive=yes '%1'"

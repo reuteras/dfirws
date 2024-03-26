@@ -43,26 +43,12 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\04menu\command]
 @="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA512 | format-list"
 
-; MACTripleDES
-[HKEY_CLASSES_ROOT\*\shell\hash\shell\05menu]
-"MUIVerb"="MACTripleDES"
-
-[HKEY_CLASSES_ROOT\*\shell\hash\shell\05menu\command]
-@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list"
-
 ; MD5
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\06menu]
 "MUIVerb"="MD5"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\06menu\command]
 @="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm MD5 | format-list"
-
-; RIPEMD160
-[HKEY_CLASSES_ROOT\*\shell\hash\shell\07menu]
-"MUIVerb"="RIPEMD160"
-
-[HKEY_CLASSES_ROOT\*\shell\hash\shell\07menu\command]
-@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list"
 
 ; ssdeep.py
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu]
@@ -71,13 +57,13 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\08menu\command]
 @="pwsh -NoExit -Command ssdeep.py '%1'"
 
-; Allget-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list
+; Get all hashes
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\09menu]
 "CommandFlags"=dword:00000020
 "MUIVerb"="Show all"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\09menu\command]
-@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA1 | format-list;get-filehash -literalpath '%1' -algorithm SHA256 | format-list;get-filehash -literalpath '%1' -algorithm SHA384 | format-list;get-filehash -literalpath '%1' -algorithm SHA512 | format-list;get-filehash -literalpath '%1' -algorithm MACTripleDES | format-list;get-filehash -literalpath '%1' -algorithm MD5 | format-list;get-filehash -literalpath '%1' -algorithm RIPEMD160 | format-list;ssdeep.py '%1'"
+@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA1 | format-list;get-filehash -literalpath '%1' -algorithm SHA256 | format-list;get-filehash -literalpath '%1' -algorithm SHA384 | format-list;get-filehash -literalpath '%1' -algorithm SHA512 | format-list;get-filehash -literalpath '%1' -algorithm MD5 | format-list;ssdeep.py '%1'"
 
 ;
 ; Add "dfirws investigate" to the context menu of all files
@@ -299,43 +285,44 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\msgviewer\command]
 @="pwsh -Command C:\\Tools\\lib\\msgviewer.jar '%1'"
 
+
 ;
-; Add "dfirws pdf" to the context menu of .pdf files
+; Add "dfirws - PDF" to the context menu of .pdf files
 ;
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf]
 "MUIVerb"="dfirws - PDF"
 "Position"="Top"
 "SubCommands"=""
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdf-parser]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\pdfparser]
 "MUIVerb"="pdf-parser.py"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdf-parser\command]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\pdfparser\command]
 @="pwsh -NoExit -Command pdf-parser.py --stat '%1'"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdfid]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\pdfid]
 "MUIVerb"="pdfid.py"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdfid\command]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\pdfid\command]
 @="pwsh -NoExit -Command pdfid.py '%1'"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\peepdf]
 "MUIVerb"="peepdf"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf\command]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\peepdf\command]
 @="pwsh -NoExit -Command peepdf '%1'"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf-i]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\peepdfi]
 "MUIVerb"="peepdf -i"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf-i\command]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\peepdfi\command]
 @="pwsh -NoExit -Command peepdf -i '%1'"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\qpdf]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\qpdf]
 "MUIVerb"="qpdf --json"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\qpdf\command]
+[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\pdf\shell\qpdf\command]
 @="pwsh -NoExit -Command qpdf --json '%1' | fx"
 
 
@@ -360,6 +347,18 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\pstwalker\command]
 @="pwsh -Command pstwalker '%1'"
+
+;
+; Pwsh in current folder
+;
+
+; pwsh in current folder
+[HKEY_CLASSES_ROOT\Directory\shell\pwsh]
+"MUIVerb"="dfirws - pwsh in selected folder"
+"Position"="Top"
+
+[HKEY_CLASSES_ROOT\Directory\shell\pwsh\command]
+@="pwsh -NoExit -Command pwsh -WorkingDirectory '%1'"
 
 
 ;
