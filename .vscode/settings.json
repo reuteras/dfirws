@@ -195,6 +195,7 @@
         "filebeat",
         "filebrowser",
         "filehash",
+        "filemagic",
         "filemenu",
         "findstr",
         "fixnetwork",

@@ -11,7 +11,8 @@ Windows Registry Editor Version 5.00
 ;
 
 [HKEY_CLASSES_ROOT\*\shell\hash]
-"MUIVerb"="Hash"
+"MUIVerb"="dfirws - Hash"
+"Position"="Top"
 "SubCommands"=""
 
 ; SHA1
@@ -83,150 +84,282 @@ Windows Registry Editor Version 5.00
 ;
 
 [HKEY_CLASSES_ROOT\*\shell\investigate]
-"MUIVerb"="dfirws investigate"
+"MUIVerb"="dfirws - Investigate"
+"Position"="Top"
 "SubCommands"=""
 
 ; capa
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\capa]
 "MUIVerb"="capa"
 "Icon"="C:\\Tools\\capa\\capa.exe"
 
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\10menu\command]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\capa\command]
 @="pwsh -NoExit -Command capa '%1'"
 
 ; clamscan (disabled here - added via reg/clamav.reg)
-;[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu]
+;[HKEY_CLASSES_ROOT\*\shell\investigate\shell\clamscan]
 ;"MUIVerb"="clamscan"
 ;
-;[HKEY_CLASSES_ROOT\*\shell\investigate\shell\15menu\command]
+;[HKEY_CLASSES_ROOT\*\shell\investigate\shell\clamscan\command]
 ;@="pwsh -NoExit -Command clamscan '%1'"
 
-; Detect-It-Easy
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu]
-"MUIVerb"="Detect-It-Easy"
-"Icon"="C:\\Tools\\die\\die.exe"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\20menu\command]
-@="pwsh -Command die '%1'"
-
-; file
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\30menu]
-"MUIVerb"="file"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\30menu\command]
-@="pwsh -NoExit -Command file '%1'"
-
-; file-magic
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\40menu]
-"MUIVerb"="file-magic"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\40menu\command]
-@="pwsh -NoExit -Command file-magic '%1'"
-
-; gron
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\50menu]
-"MUIVerb"="gron"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\50menu\command]
-@="pwsh -NoExit -Command gron '%1' | gron -u"
-
-; magika
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\60menu]
-"MUIVerb"="magika"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\60menu\command]
-@="pwsh -NoExit -Command magika '%1'"
-
-; PE-Bear
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\70menu]
-"MUIVerb"="PE-Bear"
-"Icon"="C:\\Tools\\pebear\\PE-bear.exe"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\70menu\command]
-@="pwsh -Command PE-Bear '%1'"
-
-; sigcheck
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\80menu]
-"MUIVerb"="sigcheck"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\80menu\command]
-@="pwsh -NoExit -Command sigcheck64 '%1'"
-
-; strings.py
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\90menu]
-"MUIVerb"="strings.py"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\90menu\command]
-@="pwsh -NoExit -Command strings.py '%1'"
-
-; trid
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\100menu]
-"MUIVerb"="trid"
-
-[HKEY_CLASSES_ROOT\*\shell\investigate\shell\100menu\command]
-@="pwsh -NoExit -Command trid '%1'"
-
-;
-; Add "dfirws exe" to the context menu of exefile files
-;
-
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe]
-"MUIVerb"="dfirws exe"
-"SubCommands"=""
-
-; capa
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\00menuexe]
-"MUIVerb"="capa"
-"Icon"="C:\\Tools\\capa\\capa.exe"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\00menuexe\command]
-@="pwsh -NoExit -Command capa '%1'"
-
 ; cutter
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\03menuexe]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\cutter]
 "MUIVerb"="cutter"
 "Icon"="C:\\Tools\\Cutter\\cutter.exe"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\03menuexe\command]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\cutter\command]
 @="pwsh -Command cutter '%1'"
 
+; Detect-It-Easy
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\die]
+"MUIVerb"="Detect-It-Easy"
+"Icon"="C:\\Tools\\die\\die.exe"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\die\command]
+@="pwsh -Command die '%1'"
+
 ; ExeinfoPE
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\10menuexe]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\exeinfope]
 "MUIVerb"="ExeinfoPE"
 "Icon"="C:\\Tools\\exeinfope\\exeinfope.exe"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\10menuexe\command]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\exeinfope\command]
 @="pwsh -Command exeinfope.exe '%1'"
 
 ; ezhexviewer
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\14menuexe]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\ezhexviewer]
 "MUIVerb"="ezhexviewer"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\14menuexe\command]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\ezhexviewer\command]
 @="pwsh -Command ezhexviewer.exe '%1'"
 
+; file
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\file]
+"MUIVerb"="file"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\file\command]
+@="pwsh -NoExit -Command file '%1'"
+
+; file-magic
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\filemagic]
+"MUIVerb"="file-magic"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\filemagic\command]
+@="pwsh -NoExit -Command file-magic '%1'"
+
+; fx
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\fx]
+"MUIVerb"="fx"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\fx\command]
+@="pwsh -NoExit -Command fx '%1'"
+
+; gron
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\gron]
+"MUIVerb"="gron"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\gron\command]
+@="pwsh -NoExit -Command gron '%1' | gron -u"
+
 ; HxD
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\17menuexe]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\hxd]
 "MUIVerb"="HxD"
 "Icon"="C:\\Program Files\\hxd\\HxD.exe"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\17menuexe\command]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\hxd\command]
 @="pwsh -Command HxD.exe '%1'"
 
-; PE-bear
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\20menuexe]
-"MUIVerb"="PE-bear"
-"Icon"="C:\\Tools\\pebear\\pe-bear.exe"
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\jq]
+"MUIVerb"="jq"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\20menuexe\command]
-@="pwsh -Command pe-bear.exe '%1'"
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\jq\command]
+@="pwsh -NoExit -Command jq '.' '%1'"
+
+; magika
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\magika]
+"MUIVerb"="magika"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\magika\command]
+@="pwsh -NoExit -Command magika '%1'"
+
+; PE-Bear
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\pebear]
+"MUIVerb"="PE-Bear"
+"Icon"="C:\\Tools\\pebear\\PE-bear.exe"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\pebear\command]
+@="pwsh -Command PE-Bear '%1'"
 
 ; rizin
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\30menuexe]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\rizin]
 "MUIVerb"="rizin"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\exefile\shell\exe\shell\30menuexe\command]
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\rizin\command]
 @="pwsh -NoExit -Command rizin '%1'"
+
+; sigcheck
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\sigcheck]
+"MUIVerb"="sigcheck"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\sigcheck\command]
+@="pwsh -NoExit -Command sigcheck64 '%1'"
+
+; strings.py
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\strings]
+"MUIVerb"="strings.py"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\strings\command]
+@="pwsh -NoExit -Command strings.py '%1'"
+
+; trid
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\trid]
+"MUIVerb"="trid"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\trid\command]
+@="pwsh -NoExit -Command trid '%1'"
+
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\vd]
+"MUIVerb"="vd"
+
+[HKEY_CLASSES_ROOT\*\shell\investigate\shell\vd\command]
+@="pwsh -NoExit -Command vd '.' '%1'"
+
+
+;
+; Add "dfirws js" to the context menu of .js files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js]
+"MUIVerb"="dfirws - js"
+"Position"="Top"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\box-js]
+"MUIVerb"="box-js.cmd --preprocess --no-kill --no-shell-error --timeout 60"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\box-js\command]
+@="pwsh -NoExit -Command box-js.cmd --preprocess --no-kill --no-shell-error --timeout 60 '%1'"
+
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\js-beautify]
+"MUIVerb"="js-beautify"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\js-beautify\command]
+@="pwsh -NoExit -Command js-beautify '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\synchrony]
+"MUIVerb"="synchrony"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\synchrony\command]
+@="pwsh -NoExit -Command synchrony '%1'"
+
+
+;
+; Add "dfirws lnk" to the context menu of .lnk files (lnkfiles)
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk]
+"MUIVerb"="dfirws - lnk"
+"Position"="Top"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\lnkparse]
+"MUIVerb"="lnkparse"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\lnkparse\command]
+@="pwsh -NoExit -Command lnkparse '%1'"
+
+
+;
+; Add "dfirws msg" to the context menu of .msg files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg]
+"MUIVerb"="dfirws - msg"
+"Position"="Top"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\extract_msg]
+"MUIVerb"="extract_msg.exe"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\extract_msg\command]
+@="pwsh -NoExit -Command extract_msg.exe '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\extract_msg_out]
+"MUIVerb"="extract_msg.exe --dump-stdout"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\extract_msg_out\command]
+@="pwsh -NoExit -Command extract_msg.exe --dump-stdout '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\msgviewer]
+"MUIVerb"="msgviewer"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\msgviewer\command]
+@="pwsh -Command C:\\Tools\\lib\\msgviewer.jar '%1'"
+
+;
+; Add "dfirws pdf" to the context menu of .pdf files
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf]
+"MUIVerb"="dfirws - PDF"
+"Position"="Top"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdf-parser]
+"MUIVerb"="pdf-parser.py"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdf-parser\command]
+@="pwsh -NoExit -Command pdf-parser.py --stat '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdfid]
+"MUIVerb"="pdfid.py"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\pdfid\command]
+@="pwsh -NoExit -Command pdfid.py '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf]
+"MUIVerb"="peepdf"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf\command]
+@="pwsh -NoExit -Command peepdf '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf-i]
+"MUIVerb"="peepdf -i"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\peepdf-i\command]
+@="pwsh -NoExit -Command peepdf -i '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\qpdf]
+"MUIVerb"="qpdf --json"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\qpdf\command]
+@="pwsh -NoExit -Command qpdf --json '%1' | fx"
+
+
+;
+; Add "dfirws PST" to the context menu of .pst files (Exchange PST files)
+;
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst]
+"MUIVerb"="dfirws - PST"
+"Position"="Top"
+"SubCommands"=""
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\pst-extract]
+"MUIVerb"="pst-extract.py"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\pst-extract\command]
+@="pwsh -NoExit -Command pst-extract.py '%1'"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\pstwalker]
+"MUIVerb"="pstwalker"
+"Icon"="C:\\Tools\\pstwalker\\pstwalker.exe"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\pstwalker\command]
+@="pwsh -Command pstwalker '%1'"
 
 
 ;
@@ -235,169 +368,11 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.gpr\shell\ghidra]
 "MUIVerb"="Open in Ghidra"
+"Position"="Top"
 "Icon"="C:\\Tools\\ghidra\\ghidra.ico"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\.gpr\shell\ghidra\command]
 @="pwsh -Command ghidraRun.bat '%1'"
-
-;
-; Add "dfirws js" to the context menu of .js files
-;
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js]
-"MUIVerb"="dfirws js"
-"SubCommands"=""
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\00menu]
-"MUIVerb"="box-js.cmd --preprocess --no-kill --no-shell-error --timeout 60"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\00menu\command]
-@="pwsh -NoExit -Command box-js.cmd --preprocess --no-kill --no-shell-error --timeout 60 '%1'"
-
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\10menu]
-"MUIVerb"="js-beautify"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\10menu\command]
-@="pwsh -NoExit -Command js-beautify '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\20menu]
-"MUIVerb"="synchrony"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.js\shell\js\shell\20menu\command]
-@="pwsh -NoExit -Command synchrony '%1'"
-
-
-;
-; Add "dfirws json" to the context menu of .json files (jsonfiles)
-;
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json]
-"MUIVerb"="dfirws json"
-"SubCommands"=""
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\01menu]
-"MUIVerb"="fx"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\01menu\command]
-@="pwsh -NoExit -Command fx '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\03menu]
-"MUIVerb"="gron"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\03menu\command]
-@="pwsh -NoExit -Command gron '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\05menu]
-"MUIVerb"="jq"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\05menu\command]
-@="pwsh -NoExit -Command jq '.' '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\10menu]
-"MUIVerb"="vd"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.json\shell\json\shell\10menu\command]
-@="pwsh -NoExit -Command vd '.' '%1'"
-
-;
-; Add "dfirws lnk" to the context menu of .lnk files (lnkfiles)
-;
-
-[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk]
-"MUIVerb"="dfirws lnk"
-"SubCommands"=""
-
-[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\01menu]
-"MUIVerb"="lnkparse"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\01menu\command]
-@="pwsh -NoExit -Command lnkparse '%1'"
-
-;
-; Add "dfirws msg" to the context menu of .msg files
-;
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg]
-"MUIVerb"="dfirws msg"
-"SubCommands"=""
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu]
-"MUIVerb"="extract_msg.exe"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\01menu\command]
-@="pwsh -NoExit -Command extract_msg.exe '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\03menu]
-"MUIVerb"="extract_msg.exe --dump-stdout"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\03menu\command]
-@="pwsh -NoExit -Command extract_msg.exe --dump-stdout '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\05menu]
-"MUIVerb"="msgviewer"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.msg\shell\msg\shell\05menu\command]
-@="pwsh -Command C:\\Tools\\lib\\msgviewer.jar '%1'"
-
-;
-; Add "dfirws pdf" to the context menu of .pdf files
-;
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf]
-"MUIVerb"="dfirws pdf"
-"SubCommands"=""
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\01menu]
-"MUIVerb"="pdf-parser.py"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\01menu\command]
-@="pwsh -NoExit -Command pdf-parser.py --stat '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\05menu]
-"MUIVerb"="pdfid.py"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\05menu\command]
-@="pwsh -NoExit -Command pdfid.py '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu]
-"MUIVerb"="peepdf"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu\command]
-@="pwsh -NoExit -Command peepdf '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu]
-"MUIVerb"="peepdf -i"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\10menu\command]
-@="pwsh -NoExit -Command peepdf -i '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\15menu]
-"MUIVerb"="qpdf --json"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pdf\shell\pdf\shell\15menu\command]
-@="pwsh -NoExit -Command qpdf --json '%1' | fx"
-
-;
-; Add "dfirws PST" to the context menu of .pst files (Exchange PST files)
-;
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst]
-"MUIVerb"="dfirws PST"
-"SubCommands"=""
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\01menu]
-"MUIVerb"="pst-extract.py"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\01menu\command]
-@="pwsh -NoExit -Command pst-extract.py '%1'"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\05menu]
-"MUIVerb"="pstwalker"
-"Icon"="C:\\Tools\\pstwalker\\pstwalker.exe"
-
-[HKEY_LOCAL_MACHINE\Software\Classes\.pst\shell\pst\shell\05menu\command]
-@="pwsh -Command pstwalker '%1'"
 
 
 ;

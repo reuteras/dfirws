@@ -171,22 +171,22 @@ Windows Registry Editor Version 5.00
 "MUIVerb"="dfirws office"
 "SubCommands"=""
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\01menu]
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\mraptor]
 "MUIVerb"="mraptor"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\01menu\command]
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\mraptor\command]
 @="pwsh -NoExit -Command mraptor '%1'"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\11menu]
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\oleid]
 "MUIVerb"="oleid"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\11menu\command]
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\oleid\command]
 @="pwsh -NoExit -Command oleid '%1'"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\21menu]
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\olevba]
 "MUIVerb"="olevba"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\21menu\command]
+[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\olevba\command]
 @="pwsh -NoExit -Command olevba '%1'"
 
 "@
