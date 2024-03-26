@@ -45,6 +45,15 @@ if (Test-Path .\tmp\winget\Go*.msi) {
 }
 Clear-Tmp winget
 
+# IrfanView - installed during startup
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading IrfanView."
+Get-WinGet "IrfanSkiljan.IrfanView"
+if (Test-Path .\tmp\winget\IrfanView*.exe) {
+    Copy-Item .\tmp\winget\IrfanView*.exe ".\downloads\irfanview.exe"
+}
+Clear-Tmp winget
+
 # Microsoft LogParser - available via git repo Events-Ripper
 #Clear-Tmp winget
 #Write-SynchronizedLog "winget: Downloading Microsoft LogParser."

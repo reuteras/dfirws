@@ -113,6 +113,10 @@ Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 & "${WSDFIR_TEMP}\HxDSetup.exe" /VERYSILENT /NORESTART
 Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
+# Install IrfanView
+& "${SETUP_PATH}\irfanview.exe" /silent /assoc=2 | Out-Null
+Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 # Install Notepad++ and ComparePlus plugin
 Copy-Item "${SETUP_PATH}\notepad++.exe" "${WSDFIR_TEMP}\notepad++.exe" -Force
 & "${WSDFIR_TEMP}\notepad++.exe" /S  | Out-Null
