@@ -433,6 +433,16 @@ if ($status) {
     Remove-Item "${TOOLS}\GoReSym\GoReSym_mac" -Force
 }
 
+# mmdbinspect
+$status = Get-GitHubRelease -repo "maxmind/mmdbinspect" -path "${SETUP_PATH}\mmdbinspect.zip" -match "windows_amd64.zip"
+if ($status) {
+    if (Test-Path "${TOOLS}\mmdbinspect") {
+        Remove-Item "${TOOLS}\mmdbinspect" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mmdbinspect.zip" -o"${TOOLS}" | Out-Null
+    Move-Item "${TOOLS}\mmdbinspect_*" "${TOOLS}\mmdbinspect"
+}
+
 # Elfparser-ng
 $status = Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "${SETUP_PATH}\elfparser-ng.zip" -match "win64"
 if ($status) {
