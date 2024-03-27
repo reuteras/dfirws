@@ -1,36 +1,36 @@
 . "${PSScriptRoot}\common.ps1"
 
 # BeaconHunter - copied to program files during startup
-$status = Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "${SETUP_PATH}\beaconhunter.zip" -match BeaconHunter.zip
+$status = Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "${SETUP_PATH}\beaconhunter.zip" -match "BeaconHunter.zip"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\beaconhunter.zip" -o"${SETUP_PATH}\" | Out-Null
 }
 
 # 4n4lDetector - installed in sandbox during startup
-$status =  Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "${SETUP_PATH}\4n4lDetector.zip" -match 4n4lDetector
+$status =  Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "${SETUP_PATH}\4n4lDetector.zip" -match "4n4lDetector"
 
 # aLEAPP
-$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleapp.exe" -match aleapp.exe
+$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleapp.exe" -match "aleapp.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\aleapp.exe ${TOOLS}\bin\
 }
-$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleappGUI.exe" -match aleappGUI.exe
+$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleappGUI.exe" -match "aleappGUI.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\aleappGUI.exe ${TOOLS}\bin\
 }
 
 # iLEAPP
-$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileapp.exe" -match ileapp.exe
+$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileapp.exe" -match "ileapp.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\ileapp.exe ${TOOLS}\bin\
 }
-$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileappGUI.exe" -match ileappGUI.exe
+$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileappGUI.exe" -match "ileappGUI.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\ileappGUI.exe ${TOOLS}\bin\
 }
 
 # lessmsi
-$status = Get-GitHubRelease -repo "activescott/lessmsi" -path "${SETUP_PATH}\lessmsi.zip" -match lessmsi-v
+$status = Get-GitHubRelease -repo "activescott/lessmsi" -path "${SETUP_PATH}\lessmsi.zip" -match "lessmsi-v"
 if ($status) {
     if (Test-Path "${TOOLS}\lessmsi") {
         Remove-Item "${TOOLS}\lessmsi" -Recurse -Force
@@ -39,19 +39,19 @@ if ($status) {
 }
 
 # fx
-$status = Get-GitHubRelease -repo "antonmedv/fx" -path "${SETUP_PATH}\fx.exe" -match fx_windows_amd64.exe
+$status = Get-GitHubRelease -repo "antonmedv/fx" -path "${SETUP_PATH}\fx.exe" -match "fx_windows_amd64.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\fx.exe ${TOOLS}\bin\
 }
 
 # CobaltStrikeScan
-$status = Get-GitHubRelease -repo "Apr4h/CobaltStrikeScan" -path "${SETUP_PATH}\CobaltStrikeScan.exe" -match CobaltStrikeScan
+$status = Get-GitHubRelease -repo "Apr4h/CobaltStrikeScan" -path "${SETUP_PATH}\CobaltStrikeScan.exe" -match "CobaltStrikeScan"
 if ($status) {
     Copy-Item ${SETUP_PATH}\CobaltStrikeScan.exe ${TOOLS}\bin\
 }
 
 # Ares
-$status = Get-GitHubRelease -repo "bee-san/Ares" -path "${SETUP_PATH}\ares.zip" -match windows
+$status = Get-GitHubRelease -repo "bee-san/Ares" -path "${SETUP_PATH}\ares.zip" -match "windows"
 if ($status) {
     if (Test-Path "${TOOLS}\ares") {
         Remove-Item "${TOOLS}\ares" -Recurse -Force
@@ -62,10 +62,10 @@ if ($status) {
 }
 
 # Brim/Zui (Zq) - installed during start
-$status =  Get-GitHubRelease -repo "brimdata/zui" -path "${SETUP_PATH}\zui.exe" -match Zui-Setup
+$status =  Get-GitHubRelease -repo "brimdata/zui" -path "${SETUP_PATH}\zui.exe" -match "exe$"
 
 # RDPCacheStitcher
-$status = Get-GitHubRelease -repo "BSI-Bund/RdpCacheStitcher" -path "${SETUP_PATH}\RdpCacheStitcher.zip" -match win64
+$status = Get-GitHubRelease -repo "BSI-Bund/RdpCacheStitcher" -path "${SETUP_PATH}\RdpCacheStitcher.zip" -match "win64"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\RdpCacheStitcher.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\RdpCacheStitcher") {
@@ -75,7 +75,7 @@ if ($status) {
 }
 
 # ripgrep
-$status = Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "${SETUP_PATH}\ripgrep.zip" -match x86_64-pc-windows-msvc
+$status = Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "${SETUP_PATH}\ripgrep.zip" -match "x86_64-pc-windows-msvc.zip$"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ripgrep.zip" -o"${TOOLS}" | Out-Null
 if ($status) {
     if (Test-Path "${TOOLS}\ripgrep") {
@@ -85,23 +85,23 @@ if ($status) {
 }
 
 # binlex
-$status = Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path "${SETUP_PATH}\binlex.zip" -match windows
+$status = Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path "${SETUP_PATH}\binlex.zip" -match "windows"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\binlex.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 # cmder - installed during start
-$status =  Get-GitHubRelease -repo "cmderdev/cmder" -path "${SETUP_PATH}\cmder.7z" -match cmder.7z
+$status =  Get-GitHubRelease -repo "cmderdev/cmder" -path "${SETUP_PATH}\cmder.7z" -match "cmder.7z"
 
 # Recaf
-$status = Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match jar-with-dependencies.jar
+$status = Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match "jar-with-dependencies.jar"
 if ($status) {
     Copy-Item ${SETUP_PATH}\recaf.jar ${TOOLS}\lib\recaf.jar
     Set-Content -Encoding Ascii -Path "${TOOLS}\bin\recaf.bat" "@echo off`njava --module-path ${SANDBOX_TOOLS}\javafx-sdk\lib --add-modules javafx.controls -jar C:\Tools\lib\recaf.jar"
 }
 
 # Dumpbin from Visual Studio
-$status = Get-GitHubRelease -repo "Delphier/dumpbin" -path "${SETUP_PATH}\dumpbin.zip" -match dumpbin
+$status = Get-GitHubRelease -repo "Delphier/dumpbin" -path "${SETUP_PATH}\dumpbin.zip" -match "dumpbin"
 if ($status) {
     if (Test-Path "${TOOLS}\dumpbin") {
         Remove-Item "${TOOLS}\dumpbin" -Recurse -Force
@@ -110,7 +110,7 @@ if ($status) {
 }
 
 # dnSpy 32-bit
-$status = Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy32.zip" -match win32
+$status = Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy32.zip" -match "win32"
 if ($status) {
     if (Test-Path "${TOOLS}\dnSpy32") {
         Remove-Item "${TOOLS}\dnSpy32" -Recurse -Force
@@ -119,7 +119,7 @@ if ($status) {
 }
 
 # dnSpy 64-bit
-$status = Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy64.zip" -match win64
+$status = Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy64.zip" -match "win64"
 if ($status) {
     if (Test-Path "${TOOLS}\dnSpy64") {
         Remove-Item "${TOOLS}\dnSpy64" -Recurse -Force
@@ -128,10 +128,10 @@ if ($status) {
 }
 
 # Dokany - available for manual installation
-$status =  Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.msi" -match Dokan_x64.msi
+$status =  Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.msi" -match "Dokan_x64.msi"
 
 # mboxviewer
-$status = Get-GitHubRelease -repo "eneam/mboxviewer" -path "${SETUP_PATH}\mboxviewer.zip" -match mbox-viewer.exe
+$status = Get-GitHubRelease -repo "eneam/mboxviewer" -path "${SETUP_PATH}\mboxviewer.zip" -match "mbox-viewer.exe"
 if ($status) {
     if (Test-Path "${TOOLS}\mboxviewer") {
         Remove-Item "${TOOLS}\mboxviewer" -Recurse -Force
@@ -140,7 +140,7 @@ if ($status) {
 }
 
 # Tabby
-$status = Get-GitHubRelease -repo "eugeny/tabby" -path "${SETUP_PATH}\tabby.zip" -match portable-x64
+$status = Get-GitHubRelease -repo "eugeny/tabby" -path "${SETUP_PATH}\tabby.zip" -match "portable-x64"
 if ($status) {
     if (Test-Path "${TOOLS}\tabby") {
         Remove-Item "${TOOLS}\tabby" -Recurse -Force
@@ -149,7 +149,7 @@ if ($status) {
 }
 
 # CyberChef
-$status = Get-GitHubRelease -repo "gchq/CyberChef" -path "${SETUP_PATH}\CyberChef.zip" -match CyberChef
+$status = Get-GitHubRelease -repo "gchq/CyberChef" -path "${SETUP_PATH}\CyberChef.zip" -match "CyberChef"
 if ($status) {
     if (Test-Path "${TOOLS}\CyberChef") {
         Remove-Item "${TOOLS}\CyberChef" -Recurse -Force
@@ -158,17 +158,17 @@ if ($status) {
     if (Test-Path "${TOOLS}\CyberChef\CyberChef.html") {
         Remove-Item "${TOOLS}\CyberChef\CyberChef.html" -Force
     }
-    Move-Item ${TOOLS}\CyberChef\CyberChef_* ${TOOLS}\CyberChef\CyberChef.html
+    Move-Item "${TOOLS}\CyberChef\CyberChef_*" "${TOOLS}\CyberChef\CyberChef.html"
 }
 
 # Gollum
-$status = Get-GitHubRelease -repo "gollum/gollum" -path "${SETUP_PATH}\gollum.war" -match gollum.war
+$status = Get-GitHubRelease -repo "gollum/gollum" -path "${SETUP_PATH}\gollum.war" -match "gollum.war"
 if ($status) {
     Copy-Item ${SETUP_PATH}\gollum.war ${TOOLS}\lib
 }
 
 # redress
-$status = Get-GitHubRelease -repo "goretk/redress" -path "${SETUP_PATH}\redress.zip" -match windows.zip
+$status = Get-GitHubRelease -repo "goretk/redress" -path "${SETUP_PATH}\redress.zip" -match "windows.zip"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\redress.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\redress") {
@@ -178,20 +178,20 @@ if ($status) {
 }
 
 # h2database - available for manual installation
-$status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2database.zip" -match bundle.jar
+$status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2database.zip" -match "bundle.jar"
 if ($status) {
     if (Test-Path "${TOOLS}\h2database") {
         Remove-Item "${TOOLS}\h2database" -Recurse -Force
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\h2database.zip" -o"${TOOLS}\h2database" | Out-Null
 }
-$status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2.pdf" -match h2.pdf
+$status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2.pdf" -match "h2.pdf"
 if ($status) {
     Copy-Item ${SETUP_PATH}\h2.pdf ${TOOLS}\h2database
 }
 
 # INDXRipper
-$status = Get-GitHubRelease -repo "harelsegev/INDXRipper" -path "${SETUP_PATH}\indxripper.zip" -match amd64.zip
+$status = Get-GitHubRelease -repo "harelsegev/INDXRipper" -path "${SETUP_PATH}\indxripper.zip" -match "amd64.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\INDXRipper") {
         Remove-Item "${TOOLS}\INDXRipper" -Recurse -Force
@@ -200,19 +200,19 @@ if ($status) {
 }
 
 # dll_to_exe
-$status = Get-GitHubRelease -repo "hasherezade/dll_to_exe" -path "${SETUP_PATH}\dll_to_exe.exe" -match dll_to_exe.exe
+$status = Get-GitHubRelease -repo "hasherezade/dll_to_exe" -path "${SETUP_PATH}\dll_to_exe.exe" -match "dll_to_exe.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\dll_to_exe.exe ${TOOLS}\bin
 }
 
 # HollowsHunter
-$status = Get-GitHubRelease -repo "hasherezade/hollows_hunter" -path "${SETUP_PATH}\hollows_hunter.exe" -match hollows_hunter64.exe
+$status = Get-GitHubRelease -repo "hasherezade/hollows_hunter" -path "${SETUP_PATH}\hollows_hunter.exe" -match "hollows_hunter64.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\hollows_hunter.exe ${TOOLS}\bin\
 }
 
 # PE-bear
-$status = Get-GitHubRelease -repo "hasherezade/pe-bear" -path "${SETUP_PATH}\pebear.zip" -match x64_win_vs19.zip
+$status = Get-GitHubRelease -repo "hasherezade/pe-bear" -path "${SETUP_PATH}\pebear.zip" -match "x64_win_vs19.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\pebear") {
         Remove-Item "${TOOLS}\pebear" -Recurse -Force
@@ -221,34 +221,34 @@ if ($status) {
 }
 
 # PE-sieve
-$status = Get-GitHubRelease -repo "hasherezade/pe-sieve" -path "${SETUP_PATH}\pe-sieve.exe" -match pe-sieve64.exe
+$status = Get-GitHubRelease -repo "hasherezade/pe-sieve" -path "${SETUP_PATH}\pe-sieve.exe" -match "pe-sieve64.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\pe-sieve.exe ${TOOLS}\bin\
 }
 
 # PE-utils
-$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\dll_load32.exe" -match dll_load32.exe
+$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\dll_load32.exe" -match "dll_load32.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\dll_load32.exe ${TOOLS}\bin\
 }
 
-$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\dll_load64.exe" -match dll_load64.exe
+$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\dll_load64.exe" -match "dll_load64.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\dll_load64.exe ${TOOLS}\bin\
 }
 
-$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\kdb_check.exe" -match kdb_check.exe
+$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\kdb_check.exe" -match "kdb_check.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\kdb_check.exe ${TOOLS}\bin\
 }
 
-$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\pe_check.exe" -match pe_check.exe
+$status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\pe_check.exe" -match "pe_check.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\pe_check.exe ${TOOLS}\bin\
 }
 
 # WinObjEx64
-$status = Get-GitHubRelease -repo "hfiref0x/WinObjEx64" -path "${SETUP_PATH}\WinObjEx64.zip" -match 2
+$status = Get-GitHubRelease -repo "hfiref0x/WinObjEx64" -path "${SETUP_PATH}\WinObjEx64.zip" -match "WinobjEx64"
 if ($status) {
     if (Test-Path "${TOOLS}\WinObjEx64") {
         Remove-Item "${TOOLS}\WinObjEx64" -Recurse -Force
@@ -257,7 +257,7 @@ if ($status) {
 }
 
 # Detect It Easy
-$status = Get-GitHubRelease -repo "horsicq/DIE-engine" -path "${SETUP_PATH}\die.zip" -match die_win64_portable
+$status = Get-GitHubRelease -repo "horsicq/DIE-engine" -path "${SETUP_PATH}\die.zip" -match "die_win64_portable"
 if ($status) {
     if (Test-Path "${TOOLS}\die") {
         Remove-Item "${TOOLS}\die" -Recurse -Force
@@ -266,7 +266,7 @@ if ($status) {
 }
 
 # XELFViewer
-$status = Get-GitHubRelease -repo "horsicq/XELFViewer" -path "${SETUP_PATH}\XELFViewer.zip" -match win64_portable
+$status = Get-GitHubRelease -repo "horsicq/XELFViewer" -path "${SETUP_PATH}\XELFViewer.zip" -match "win64_portable"
 if ($status) {
     if (Test-Path "${TOOLS}\XELFViewer") {
         Remove-Item "${TOOLS}\XELFViewer" -Recurse -Force
@@ -280,7 +280,7 @@ if ($status) {
 }
 
 # jd-gui
-$status = Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "${SETUP_PATH}\jd-gui.zip" -match jd-gui-windows
+$status = Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "${SETUP_PATH}\jd-gui.zip" -match "jd-gui-windows"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jd-gui.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\jd-gui") {
@@ -290,38 +290,38 @@ if ($status) {
 }
 
 # jq
-$status = Get-GitHubRelease -repo "jqlang/jq" -path "${SETUP_PATH}\jq.exe" -match win64
+$status = Get-GitHubRelease -repo "jqlang/jq" -path "${SETUP_PATH}\jq.exe" -match "win64"
 if ($status) {
     Copy-Item ${SETUP_PATH}\jq.exe ${TOOLS}\bin\
 }
 
 # Jumplist Browser
-$status = Get-GitHubRelease -repo "kacos2000/Jumplist-Browser" -path "${SETUP_PATH}\JumplistBrowser.exe" -match JumplistBrowser.exe
+$status = Get-GitHubRelease -repo "kacos2000/Jumplist-Browser" -path "${SETUP_PATH}\JumplistBrowser.exe" -match "JumplistBrowser.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\JumplistBrowser.exe ${TOOLS}\bin\
 }
 
 # MFTBrowser
-$status = Get-GitHubRelease -repo "kacos2000/MFT_Browser" -path "${SETUP_PATH}\MFTBrowser.exe" -match MFTBrowser.exe
+$status = Get-GitHubRelease -repo "kacos2000/MFT_Browser" -path "${SETUP_PATH}\MFTBrowser.exe" -match "MFTBrowser.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\MFTBrowser.exe ${TOOLS}\bin\
 }
 
 # Prefetch Browser
-$status = Get-GitHubRelease -repo "kacos2000/Prefetch-Browser" -path "${SETUP_PATH}\PrefetchBrowser.exe" -match PrefetchBrowser.exe
+$status = Get-GitHubRelease -repo "kacos2000/Prefetch-Browser" -path "${SETUP_PATH}\PrefetchBrowser.exe" -match "PrefetchBrowser.exe"
 if ($status) {
     Copy-Item ${SETUP_PATH}\PrefetchBrowser.exe ${TOOLS}\bin\
 }
 
 # bytecode-viewer
-$status = Get-GitHubRelease -repo "Konloch/bytecode-viewer" -path "${SETUP_PATH}\BCV.jar" -match Bytecode
+$status = Get-GitHubRelease -repo "Konloch/bytecode-viewer" -path "${SETUP_PATH}\BCV.jar" -match "Bytecode"
 if ($status) {
     Copy-Item ${SETUP_PATH}\BCV.jar ${TOOLS}\lib
     Write-Output "java -Xmx3G -jar C:\Tools\lib\BCV.jar" | Out-File -Encoding "ascii" ${TOOLS}\bin\bcv.bat
 }
 
 # gftrace
-$status = Get-GitHubRelease -repo "leandrofroes/gftrace" -path "${SETUP_PATH}\gftrace.zip" -match gftrace64
+$status = Get-GitHubRelease -repo "leandrofroes/gftrace" -path "${SETUP_PATH}\gftrace.zip" -match "gftrace64"
 if ($status) {
     if (Test-Path "${TOOLS}\gftrace64") {
         Remove-Item "${TOOLS}\gftrace64" -Recurse -Force
@@ -330,19 +330,19 @@ if ($status) {
 }
 
 # adalanche
-$status = Get-GitHubRelease -repo "lkarlslund/adalanche" -path "${SETUP_PATH}\adalanche.exe" -match adalanche-windows-x64
+$status = Get-GitHubRelease -repo "lkarlslund/adalanche" -path "${SETUP_PATH}\adalanche.exe" -match "adalanche-windows-x64"
 if ($status) {
     Copy-Item ${SETUP_PATH}\adalanche.exe ${TOOLS}\bin\
 }
 
 # MsgViewer
-$status = Get-GitHubRelease -repo "lolo101/MsgViewer" -path "${SETUP_PATH}\msgviewer.jar" -match msgviewer.jar
+$status = Get-GitHubRelease -repo "lolo101/MsgViewer" -path "${SETUP_PATH}\msgviewer.jar" -match "msgviewer.jar"
 if ($status) {
     Copy-Item ${SETUP_PATH}\msgviewer.jar ${TOOLS}\lib
 }
 
 # capa
-$status = Get-GitHubRelease -repo "mandiant/capa" -path "${SETUP_PATH}\capa-windows.zip" -match windows
+$status = Get-GitHubRelease -repo "mandiant/capa" -path "${SETUP_PATH}\capa-windows.zip" -match "windows"
 if ($status) {
     if (Test-Path "${TOOLS}\capa") {
         Remove-Item "${TOOLS}\capa" -Recurse -Force
@@ -365,7 +365,7 @@ if ($status) {
 }
 
 # capa-rules
-$status = Get-GitHubRelease -repo "mandiant/capa-rules" -path "${SETUP_PATH}\capa-rules.zip" -match Source
+$status = Get-GitHubRelease -repo "mandiant/capa-rules" -path "${SETUP_PATH}\capa-rules.zip" -match "Source"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-rules.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\capa-rules") {
@@ -380,30 +380,30 @@ if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
 }
 
 # Ghidra GolangAnalyzerExtension
-$status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_10.4.zip" -match 10.4_
+$status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_10.4.zip" -match "10.4_"
 if ($status) {
     Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_10.4.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_10.4.zip"
 }
 
-$status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" -match 11.0.1_
+$status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" -match "11.0.1_"
 if ($status) {
     Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_11.0.1.zip"
 }
 
 # Ghidra btighidra
-$status = Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match ghidra
+$status = Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match "ghidra"
 if ($status) {
     Copy-Item "${SETUP_PATH}\btighidra.zip" "${TOOLS}\ghidra_extensions\btighidra.zip"
 }
 
 # Ghidra Cartographer plugin
-$status = Get-GitHubRelease -repo "nccgroup/Cartographer" -path "${SETUP_PATH}\Cartographer.zip" -match Cartographer.zip
+$status = Get-GitHubRelease -repo "nccgroup/Cartographer" -path "${SETUP_PATH}\Cartographer.zip" -match "Cartographer.zip"
 if ($status) {
     Copy-Item "${SETUP_PATH}\Cartographer.zip" "${TOOLS}\ghidra_extensions\Cartographer.zip"
 }
 
 # Flare-Floss
-$status = Get-GitHubRelease -repo "mandiant/flare-floss" -path "${SETUP_PATH}\floss.zip" -match windows
+$status = Get-GitHubRelease -repo "mandiant/flare-floss" -path "${SETUP_PATH}\floss.zip" -match "windows"
 if ($status) {
     if (Test-Path "${TOOLS}\floss") {
         Remove-Item "${TOOLS}\floss" -Recurse -Force
@@ -412,7 +412,7 @@ if ($status) {
 }
 
 # Flare-Fakenet-NG
-$status = Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path "${SETUP_PATH}\fakenet.zip" -match fakenet
+$status = Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path "${SETUP_PATH}\fakenet.zip" -match "fakenet"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fakenet.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\fakenet") {
@@ -422,7 +422,7 @@ if ($status) {
 }
 
 # GoReSym
-$status = Get-GitHubRelease -repo "mandiant/GoReSym" -path "${SETUP_PATH}\GoReSym.zip" -match GoReSym.zip
+$status = Get-GitHubRelease -repo "mandiant/GoReSym" -path "${SETUP_PATH}\GoReSym.zip" -match "GoReSym.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\GoReSym") {
         Remove-Item "${TOOLS}\GoReSym" -Recurse -Force
@@ -434,7 +434,7 @@ if ($status) {
 }
 
 # Elfparser-ng
-$status = Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "${SETUP_PATH}\elfparser-ng.zip" -match win64
+$status = Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "${SETUP_PATH}\elfparser-ng.zip" -match "win64"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\elfparser-ng.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\elfparser-ng") {
@@ -444,7 +444,7 @@ if ($status) {
 }
 
 # readpe
-$status = Get-GitHubRelease -repo "mentebinaria/readpe" -path "${SETUP_PATH}\readpe.zip" -match win.zip
+$status = Get-GitHubRelease -repo "mentebinaria/readpe" -path "${SETUP_PATH}\readpe.zip" -match "win.zip"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\readpe.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\pev") {
@@ -454,52 +454,52 @@ if ($status) {
 }
 
 # dsq
-$status = Get-GitHubRelease -repo "multiprocessio/dsq" -path "${SETUP_PATH}\dsq.zip" -match dsq-win
+$status = Get-GitHubRelease -repo "multiprocessio/dsq" -path "${SETUP_PATH}\dsq.zip" -match "dsq-win"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dsq.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 # MetadataPlus
-$status = Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path "${SETUP_PATH}\MetadataPlus.exe" -match MetadataPlus
+$status = Get-GitHubRelease -repo "nccgroup/MetadataPlus" -path "${SETUP_PATH}\MetadataPlus.exe" -match "MetadataPlus"
 if ($status) {
     Copy-Item ${SETUP_PATH}\MetadataPlus.exe ${TOOLS}\bin\
 }
 
 # Loki - installed during start
-$status =  Get-GitHubRelease -repo "Neo23x0/Loki" -path "${SETUP_PATH}\loki.zip" -match loki
+$status =  Get-GitHubRelease -repo "Neo23x0/Loki" -path "${SETUP_PATH}\loki.zip" -match "loki"
 
 # Notepad++ - installed during start
-$status =  Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path "${SETUP_PATH}\notepad++.exe" -match Installer.x64.exe
+$status =  Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path "${SETUP_PATH}\notepad++.exe" -match "Installer.x64.exe$"
 
 # HindSight
-$status = Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "${SETUP_PATH}\hindsight.exe" -match hindsight.exe
+$status = Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "${SETUP_PATH}\hindsight.exe" -match "hindsight.exe"
 if ($status) {
     Copy-Item "${SETUP_PATH}\hindsight.exe" "${TOOLS}\bin"
 }
 
 # Hindsight GUI
-$status = Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "${SETUP_PATH}\hindsight_gui.exe" -match hindsight_gui.exe
+$status = Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "${SETUP_PATH}\hindsight_gui.exe" -match "hindsight_gui.exe"
 if ($status) {
     Copy-Item "${SETUP_PATH}\hindsight_gui.exe" "${TOOLS}\bin"
 }
 
 # evtx_dump
-$status = Get-GitHubRelease -repo "omerbenamram/evtx" -path "${SETUP_PATH}\evtx_dump.exe" -match exe
+$status = Get-GitHubRelease -repo "omerbenamram/evtx" -path "${SETUP_PATH}\evtx_dump.exe" -match "exe"
 if ($status) {
     Copy-Item "${SETUP_PATH}\evtx_dump.exe" "${TOOLS}\bin"
 }
 
 # ComparePlus plugin for Notepad++ - installed during start
-$status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zip" -match x64.zip
+$status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zip" -match "x64.zip"
 
 # Visual Studio Code powershell extension - installed during start
-$status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match vsix
+$status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix"
 
 # vscode-shellcheck
-$status =  Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match vsix
+$status =  Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match "vsix"
 
 # qpdf
-$status = Get-GitHubRelease -repo "qpdf/qpdf" -path "${SETUP_PATH}\qpdf.zip" -match msvc64.zip
+$status = Get-GitHubRelease -repo "qpdf/qpdf" -path "${SETUP_PATH}\qpdf.zip" -match "msvc64.zip"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qpdf.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\qpdf") {
@@ -509,7 +509,7 @@ if ($status) {
 }
 
 # Radare2
-$status = Get-GitHubRelease -repo "radareorg/radare2" -path "${SETUP_PATH}\radare2.zip" -match w64.zip
+$status = Get-GitHubRelease -repo "radareorg/radare2" -path "${SETUP_PATH}\radare2.zip" -match "w64.zip"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\radare2.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\radare2") {
@@ -519,7 +519,7 @@ if ($status) {
 }
 
 # Iaito by Radareorg
-$status = Get-GitHubRelease -repo "radareorg/iaito" -path "${SETUP_PATH}\iaito.zip" -match iaito.zip
+$status = Get-GitHubRelease -repo "radareorg/iaito" -path "${SETUP_PATH}\iaito.zip" -match "iaito.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\iaito") {
         Remove-Item "${TOOLS}\iaito" -Recurse -Force
@@ -531,7 +531,7 @@ if ($status) {
 }
 
 # Cutter
-$status = Get-GitHubRelease -repo "rizinorg/cutter" -path "${SETUP_PATH}\cutter.zip" -match Windows-x86_64.zip
+$status = Get-GitHubRelease -repo "rizinorg/cutter" -path "${SETUP_PATH}\cutter.zip" -match "Windows-x86_64.zip"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cutter.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\cutter") {
@@ -542,13 +542,13 @@ if ($status) {
 
 # Nerd fonts - installed during start
 # Add some example fonts
-$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\JetBrainsMono.zip" -match JetBrainsMono.zip
-$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\LiberationMono.zip" -match LiberationMono.zip
-$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Meslo.zip" -match Meslo.zip
-$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Terminus.zip" -match Terminus.zip
+$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\JetBrainsMono.zip" -match "JetBrainsMono.zip"
+$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\LiberationMono.zip" -match "LiberationMono.zip"
+$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Meslo.zip" -match "Meslo.zip"
+$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Terminus.zip" -match "Terminus.zip"
 
 # Perl by Strawberry
-$status = Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "${SETUP_PATH}\perl.zip" -match portable.zip
+$status = Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "${SETUP_PATH}\perl.zip" -match "portable.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\perl") {
         Remove-Item "${TOOLS}\perl" -Recurse -Force
@@ -557,16 +557,16 @@ if ($status) {
 }
 
 # sidr
-$status = Get-GitHubRelease -repo "strozfriedberg/sidr" -path "${SETUP_PATH}\sidr.exe" -match sidr.exe
+$status = Get-GitHubRelease -repo "strozfriedberg/sidr" -path "${SETUP_PATH}\sidr.exe" -match "sidr.exe"
 if ($status) {
     Copy-Item "${SETUP_PATH}\sidr.exe" "${TOOLS}\bin"
 }
 
 # jadx - installed during start
-$status =  Get-GitHubRelease -repo "skylot/jadx" -path "${SETUP_PATH}\jadx.zip" -match jadx-1
+$status =  Get-GitHubRelease -repo "skylot/jadx" -path "${SETUP_PATH}\jadx.zip" -match "jadx-1"
 
 # Sleuthkit
-$status = Get-GitHubRelease -repo "sleuthkit/sleuthkit" -path "${SETUP_PATH}\sleuthkit.zip" -match win32.zip
+$status = Get-GitHubRelease -repo "sleuthkit/sleuthkit" -path "${SETUP_PATH}\sleuthkit.zip" -match "win32.zip$"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sleuthkit.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\sleuthkit") {
@@ -576,7 +576,7 @@ if ($status) {
 }
 
 # qrtool
-$status = Get-GitHubRelease -repo "sorairolake/qrtool" -path "${SETUP_PATH}\qrtool.zip" -match x86_64-pc-windows-msvc
+$status = Get-GitHubRelease -repo "sorairolake/qrtool" -path "${SETUP_PATH}\qrtool.zip" -match "x86_64-pc-windows-msvc"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qrtool.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\qrtool") {
@@ -586,16 +586,16 @@ if ($status) {
 }
 
 # debloat
-$status = Get-GitHubRelease -repo "Squiblydoo/debloat" -path "${SETUP_PATH}\debloat.zip" -match Windows
+$status = Get-GitHubRelease -repo "Squiblydoo/debloat" -path "${SETUP_PATH}\debloat.zip" -match "Windows"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\debloat.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 # Visual Studio Code spell checker extension - installed during start
-$status =  Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" -match vsix
+$status =  Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" -match "vsix"
 
 # Thumbcacheviewer
-$status = Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "${SETUP_PATH}\thumbcacheviewer.zip" -match viewer_64
+$status = Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "${SETUP_PATH}\thumbcacheviewer.zip" -match "viewer_64"
 if ($status) {
     if (Test-Path "${TOOLS}\thumbcacheviewer") {
         Remove-Item "${TOOLS}\thumbcacheviewer" -Recurse -Force
@@ -604,13 +604,13 @@ if ($status) {
 }
 
 # gron
-$status = Get-GitHubRelease -repo "tomnomnom/gron" -path "${SETUP_PATH}\gron.zip" -match gron-windows-amd64
+$status = Get-GitHubRelease -repo "tomnomnom/gron" -path "${SETUP_PATH}\gron.zip" -match "gron-windows-amd64"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\gron.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 # MemProcFS
-$status = Get-GitHubRelease -repo "ufrisk/MemProcFS" -path "${SETUP_PATH}\memprocfs.zip" -match win_x64
+$status = Get-GitHubRelease -repo "ufrisk/MemProcFS" -path "${SETUP_PATH}\memprocfs.zip" -match "win_x64"
 if ($status) {
     if (Test-Path "${TOOLS}\MemProcFS") {
         Remove-Item "${TOOLS}\MemProcFS" -Recurse -Force
@@ -619,7 +619,7 @@ if ($status) {
 }
 
 # upx
-$status = Get-GitHubRelease -repo "upx/upx" -path "${SETUP_PATH}\upx.zip" -match win64
+$status = Get-GitHubRelease -repo "upx/upx" -path "${SETUP_PATH}\upx.zip" -match "win64"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\upx.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\upx") {
@@ -629,19 +629,19 @@ if ($status) {
 }
 
 # Velociraptor
-$status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match windows-amd64.exe
+$status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match "windows-amd64.exe"
 if ($status) {
     Copy-Item "${SETUP_PATH}\velociraptor.exe" "${TOOLS}\bin\" -Force
 }
 
 # fq
-$status = Get-GitHubRelease -repo "wader/fq" -path "${SETUP_PATH}\fq.zip" -match windows_amd64.zip
+$status = Get-GitHubRelease -repo "wader/fq" -path "${SETUP_PATH}\fq.zip" -match "windows_amd64.zip"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fq.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 # imhex
-$status = Get-GitHubRelease -repo "WerWolv/ImHex" -path "${SETUP_PATH}\imhex.zip" -match Portable-NoGPU-x86_64.zip
+$status = Get-GitHubRelease -repo "WerWolv/ImHex" -path "${SETUP_PATH}\imhex.zip" -match "Portable-NoGPU-x86_64.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\imhex") {
         Remove-Item "${TOOLS}\imhex" -Recurse -Force
@@ -650,7 +650,7 @@ if ($status) {
 }
 
 # chainsaw
-$status = Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path "${SETUP_PATH}\chainsaw.zip" -match x86_64-pc-windows-msvc
+$status = Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path "${SETUP_PATH}\chainsaw.zip" -match "x86_64-pc-windows-msvc"
 if ($status) {
     if (Test-Path "${TOOLS}\chainsaw") {
         Remove-Item "${TOOLS}\chainsaw" -Recurse -Force
@@ -659,7 +659,7 @@ if ($status) {
 }
 
 # yara
-$status = Get-GitHubRelease -repo "VirusTotal/yara" -path "${SETUP_PATH}\yara.zip" -match win64
+$status = Get-GitHubRelease -repo "VirusTotal/yara" -path "${SETUP_PATH}\yara.zip" -match "win64"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\yara.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\bin\yara.exe") {
@@ -673,7 +673,7 @@ if ($status) {
 }
 
 # hayabusa
-$status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match windows-64
+$status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match "windows-64"
 if ($status) {
     if (Test-Path "${TOOLS}\hayabusa") {
         Remove-Item "${TOOLS}\hayabusa" -Recurse -Force
@@ -683,4 +683,4 @@ if ($status) {
 }
 
 # Get x64dbg - installed during start
-$status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match snapshot
+$status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match "snapshot"

@@ -15,7 +15,7 @@ $status = Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePat
 
 if ($all -or $Freshclam) {
     # ClamAV - installed during start
-    $status = Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi"
+    $status = Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi$"
 }
 
 #
@@ -47,7 +47,7 @@ if ($all -or $Python) {
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
 
     # Ghidra - latest release
-    $status = Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "${SETUP_PATH}\ghidra.zip" -match "ghidra"
+    $status = Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "${SETUP_PATH}\ghidra.zip" -match "_PUBLIC_"
     if ($status) {
         & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidra.zip" -o"${TOOLS}" | Out-Null
         if (Test-Path "${TOOLS}\ghidra") {
@@ -65,7 +65,7 @@ if ($all -or $Python) {
     }
 
     # Ghidrathon source
-    $status = Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "${SETUP_PATH}\ghidrathon.zip" -match "Source"
+    $status = Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "${SETUP_PATH}\ghidrathon.zip" -match "Ghidrathon"
     if ($status) {
         if (Test-Path "${TOOLS}\ghidrathon") {
             Remove-Item "${TOOLS}\ghidrathon" -Recurse -Force
@@ -83,7 +83,7 @@ if ($all -or $Python) {
 
 if ($all -or $Bash) {
     # zsdt
-    $status = Get-GitHubRelease -repo "facebook/zstd" -path "${SETUP_PATH}\zstd.zip" -match "win64.zip"
+    $status = Get-GitHubRelease -repo "facebook/zstd" -path "${SETUP_PATH}\zstd.zip" -match "win64.zip$"
     if ($status) {
         & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"${TOOLS}" | Out-Null
         if (Test-Path "${TOOLS}\zstd") {
