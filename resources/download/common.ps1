@@ -295,19 +295,51 @@ function Get-GitHubRelease {
     Param (
         [Parameter(Mandatory=$True)] [string]$repo,
         [Parameter(Mandatory=$True)] [string]$path,
-        [Parameter(Mandatory=$True)] [string]$match
+        [Parameter(Mandatory=$True)] [string]$match,
+        [Parameter(Mandatory=$False)] [string]$version = "latest"
     )
 
-    # Construct the URL to get the latest release information
-    $releases = "https://api.github.com/repos/$repo/releases/latest"
+    $Url = ""
 
-    # Get the download URL by matching the specified regex pattern
-    $Url = Get-DownloadUrl -Releases $releases -Match $match
+    if ($version -eq "latest") {
+        Write-SynchronizedLog "Getting the latest release for $repo."
+    
+        # Construct the URL to get the latest release information
+        $releasesURL = "https://api.github.com/repos/$repo/releases/latest"
 
-    # If no download URL is found, try without "latest"
-    if ( !$Url ) {
-        $releases = "https://api.github.com/repos/$repo/releases"
-        $Url = Get-DownloadUrl -Releases $releases -Match $match
+        # Get the download URL by matching the specified regex pattern
+        $latest_release = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releasesURL | ConvertFrom-Json
+
+        foreach ($asset in $latest_release.assets) {
+            if ($asset.browser_download_url -match $match) {
+                $Url = $asset.browser_download_url
+                Write-Output "Found download URL: $Url"
+            }
+        }
+    }
+    
+    if (!$Url) {
+        if ($version -eq "latest") {
+            Write-SynchronizedLog "No download URL found for $repo. Trying without 'latest'."
+            }
+        $releasesURL = "https://api.github.com/repos/$repo/releases"
+        $releases = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$releasesURL" | ConvertFrom-Json
+
+        :releaseLoop foreach ($release in $releases) {
+            foreach ($asset in $release.assets) {
+                if ($asset.browser_download_url -match $match) {
+                    if ($release.tag_name -eq $version) {
+                        $Url = $asset.browser_download_url
+                        Write-Output "Found download URL: $Url"
+                        break releaseLoop
+                    } elseif ($version -eq "latest") {
+                        $Url = $asset.browser_download_url
+                        Write-Output "Found download URL: $Url"
+                        break releaseLoop
+                    }
+                }
+            }
+        }
     }
 
     # If still no download URL is found, try getting the tarball URL
@@ -318,6 +350,8 @@ function Get-GitHubRelease {
         if ( !$Url) {
             Write-Error "Can't find a file to download for repo $repo."
             Exit
+        } else {
+            Write-SynchronizedLog "Using tarball URL for $repo."
         }
     }
 
