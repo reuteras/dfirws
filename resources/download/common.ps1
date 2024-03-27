@@ -303,7 +303,7 @@ function Get-GitHubRelease {
 
     if ($version -eq "latest") {
         Write-SynchronizedLog "Getting the latest release for $repo."
-    
+
         # Construct the URL to get the latest release information
         $releasesURL = "https://api.github.com/repos/$repo/releases/latest"
 
@@ -317,7 +317,7 @@ function Get-GitHubRelease {
             }
         }
     }
-    
+
     if (!$Url) {
         if ($version -eq "latest") {
             Write-SynchronizedLog "No download URL found for $repo. Trying without 'latest'."
