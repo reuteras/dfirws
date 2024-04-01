@@ -13,6 +13,7 @@ $DidierStevensSuite = `
     "cs-analyze-processdump.py", `
     "cs-decrypt-metadata.py", `
     "cs-extract-key.py", `
+    "csv-stats.py", `
     "cut-bytes.py", `
     "decode-vbe.py", `
     "decoder_add1.py", `
