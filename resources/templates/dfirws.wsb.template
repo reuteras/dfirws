@@ -10,7 +10,7 @@
   <MappedFolders>
     <MappedFolder>
       <HostFolder>__SANDBOX__\setup</HostFolder>
-	    <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
+      <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
@@ -43,15 +43,20 @@
       <SandboxFolder>C:\venv</SandboxFolder>
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
-	  <MappedFolder>
+    <MappedFolder>
       <HostFolder>__SANDBOX__\readonly</HostFolder>
       <SandboxFolder>C:\Users\WDAGUtilityAccount\Desktop\readonly</SandboxFolder>
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
-	  <MappedFolder>
+    <MappedFolder>
       <HostFolder>__SANDBOX__\readwrite</HostFolder>
       <SandboxFolder>C:\Users\WDAGUtilityAccount\Desktop\readwrite</SandboxFolder>
       <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__\mount\golang</HostFolder>
+      <SandboxFolder>C:\Users\WDAGUtilityAccount\go</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
     </MappedFolder>
   </MappedFolders>
   <LogonCommand>
