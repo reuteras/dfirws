@@ -10,6 +10,10 @@ Save-Module -Name Terminal-Icons -Path .\tmp\powershell -Force
 Write-SynchronizedLog "powershell: Downloading posh-git."
 Save-Module -Name posh-git -Path .\tmp\powershell -Force
 
+# ImportExcel
+Write-SynchronizedLog "powershell: Downloading ImportExcel."
+Save-Module -Name ImportExcel -Path .\tmp\powershell -Force
+
 rclone.exe sync --verbose --checksum ".\tmp\powershell" ".\downloads\powershell-modules" 2>&1 | Out-Null
 Clear-Tmp powershell
 
