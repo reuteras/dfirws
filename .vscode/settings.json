@@ -121,6 +121,7 @@
         "CYBERCHEF",
         "datetime",
         "dateutil",
+        "dbeaver",
         "dbg",
         "dbgcutter",
         "dbgview",
