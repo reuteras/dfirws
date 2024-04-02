@@ -60,10 +60,10 @@ Windows Registry Editor Version 5.00
 ; Get all hashes
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\09menu]
 "CommandFlags"=dword:00000020
-"MUIVerb"="Show all"
+"MUIVerb"="Show all with sigs.py and ssdeep.py"
 
 [HKEY_CLASSES_ROOT\*\shell\hash\shell\09menu\command]
-@="pwsh -NoExit -Command get-filehash -literalpath '%1' -algorithm SHA1 | format-list;get-filehash -literalpath '%1' -algorithm SHA256 | format-list;get-filehash -literalpath '%1' -algorithm SHA384 | format-list;get-filehash -literalpath '%1' -algorithm SHA512 | format-list;get-filehash -literalpath '%1' -algorithm MD5 | format-list;ssdeep.py '%1'"
+@="pwsh -NoExit -Command sigs.py '%1' ; ssdeep.py '%1'"
 
 ;
 ; Add "dfirws investigate" to the context menu of all files
