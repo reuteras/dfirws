@@ -4,7 +4,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 
 if (! (Test-Path "${WSDFIR_TEMP}")) {
-    New-Item -ItemType Directory -Force -Path "${TEMP}" | Out-Null
+    New-Item -ItemType Directory -Force -Path "${WSDFIR_TEMP}" | Out-Null
 }
 
 Write-Output "Get-Content C:\log\rust.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
@@ -37,6 +37,7 @@ if (!(Test-Path "C:\cargo\autocomplete")) {
 $env:PATH="${env:PATH};C:\cargo\bin"
 (Get-ChildItem "C:\cargo\bin").Name | ForEach-Object { & "$_" --autocomplete powershell > "C:\cargo\autocomplete\$_.ps1"} 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
+Write-DateLog "Rust: Install mft2bodyfile, usnjrnl in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" usnjrnl 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 # https://github.com/janstarke/regview

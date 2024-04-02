@@ -12,9 +12,14 @@ Write-DateLog "Start Sandbox to install Rust based tools for dfirws." > "${ROOT_
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 ${CURRENT_VERSION_DFIR_TOOLKIT} = (curl --silent -L "https://crates.io/api/v1/crates/dfir-toolkit" | ConvertFrom-Json).crate.max_stable_version
+#${CURRENT_VERSION_APPX} = (curl --silent -L "https://crates.io/api/v1/crates/APPX" | ConvertFrom-Json).crate.max_stable_version
+
 
 if (Test-Path -Path "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" ) {
     ${STATUS} = (Get-Content "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" | Select-String -Pattern "dfir-toolkit ${CURRENT_VERSION_DFIR_TOOLKIT}").Matches.Success
+    #if (! ${STATUS}) {
+    #    ${STATUS} = (Get-Content "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" | Select-String -Pattern "APPX ${CURRENT_VERSION_JNV}").Matches.Success
+    #}
 } else {
     ${STATUS} = $false
 }
