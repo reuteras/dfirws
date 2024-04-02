@@ -125,4 +125,13 @@ if (Test-Path .\tmp\winget\vt-cli*.zip) {
 }
 Clear-Tmp winget
 
+# WinMerge - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading WinMerge."
+Get-WinGet "WinMerge.WinMerge"
+if (Test-Path .\tmp\winget\WinMerge*.exe) {
+    Copy-Item .\tmp\winget\WinMerge*.exe ".\downloads\winmerge.exe"
+}
+Clear-Tmp winget
+
 Write-SynchronizedLog "winget: Download complete."

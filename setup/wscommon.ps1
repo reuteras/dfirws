@@ -561,6 +561,19 @@ function Install-W10Loopback {
     }
 }
 
+function Install-WinMerge {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-winmerge.txt")) {
+        Write-Output "Installing WinMerge"
+        Copy-Item "${SETUP_PATH}\winmerge.exe" "${WSDFIR_TEMP}\winmerge.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\winmerge.exe" -ArgumentList '/verysilent /norestart /DIR="C:\Program Files\WinMerge" /Tasks=desktopicon,quicklaunchicon'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-winmerge.txt" | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\WinMerge"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\winmerge.lnk" -DestinationPath "${env:ProgramFiles}\WinMerge\WinMergeU.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\WinMerge\WinMergeU.exe"
+    } else {
+        Write-Output "WinMerge is already installed"
+    }
+}
+
 function Install-Wireshark {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-wireshark.txt")) {
         Write-Output "Installing Wireshark"

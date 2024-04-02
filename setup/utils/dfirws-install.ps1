@@ -35,6 +35,7 @@ param (
     [switch]$Veracrypt,
     [switch]$VLC,
     [switch]$VSCode,
+    [switch]$WinMerge,
     [switch]$Wireshark,
     [switch]$X64Dbg,
     [switch]$Zui
@@ -177,6 +178,10 @@ if ($VLC.IsPresent) {
 
 if ($VSCode.IsPresent) {
     Install-VSCode
+}
+
+if ($WinMerge.IsPresent) {
+    Install-WinMerge
 }
 
 if ($Wireshark.IsPresent) {

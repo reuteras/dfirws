@@ -723,6 +723,7 @@
         "windir",
         "winget",
         "winlogbeat",
+        "winmerge",
         "Winobj",
         "winpmem",
         "winscp",
