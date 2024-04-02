@@ -94,6 +94,22 @@ if ($all -or $Bash) {
 }
 
 #
+# Pages used in Go sandbox
+#
+
+if ($all -or $Go) {
+    # GoLang - available for installation via dfirws-install.ps1
+    Clear-Tmp winget
+    Write-SynchronizedLog "winget: Downloading GoLang."
+    Get-WinGet "GoLang.Go"
+    if (Test-Path .\tmp\winget\Go*.msi) {
+        Copy-Item .\tmp\winget\Go*.msi ".\downloads\golang.msi"
+    }
+    Clear-Tmp winget
+}
+
+
+#
 # Packages used in Rust sandbox
 #
 
