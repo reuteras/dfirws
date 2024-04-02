@@ -80,6 +80,7 @@ dfirws-install.ps1 -Qemu
 dfirws-install.ps1 -Ruby
 dfirws-install.ps1 -Rust
 dfirws-install.ps1 -Tor
+dfirws-install.ps1 -VLC
 dfirws-install.ps1 -VSCode
 dfirws-install.ps1 -Wireshark
 dfirws-install.ps1 -X64dbg

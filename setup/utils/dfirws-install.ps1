@@ -33,6 +33,7 @@ param (
     [switch]$Rust,
     [switch]$Tor,
     [switch]$Veracrypt,
+    [switch]$VLC,
     [switch]$VSCode,
     [switch]$Wireshark,
     [switch]$X64Dbg,
@@ -168,6 +169,10 @@ if ($Tor.IsPresent) {
 
 if ($Veracrypt.IsPresent) {
     Install-Veracrypt
+}
+
+if ($VLC.IsPresent) {
+    Install-VLC
 }
 
 if ($VSCode.IsPresent) {

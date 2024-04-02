@@ -115,6 +115,15 @@ if (Test-Path .\tmp\winget\Ruby*.exe) {
 }
 Clear-Tmp winget
 
+# VideoLAN VLC - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading VLC."
+Get-WinGet "VideoLAN.VLC"
+if (Test-Path .\tmp\winget\VLC*.msi) {
+    Copy-Item .\tmp\winget\VLC*.msi ".\downloads\vlc.msi"
+}
+Clear-Tmp winget
+
 # VirusTotal CLI
 Clear-Tmp winget
 Write-SynchronizedLog "winget: Downloading VirusTotal CLI."

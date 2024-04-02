@@ -493,6 +493,19 @@ function Install-Veracrypt {
     }
 }
 
+function Install-VLC {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vlc.txt")) {
+        Write-Output "Installing VLC"
+        Copy-Item "${SETUP_PATH}\vlc.msi" "${WSDFIR_TEMP}\vlc.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\vlc.msi /qn /norestart"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-vlc.txt" | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\VideoLAN\VLC"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\vlc.lnk" -DestinationPath "${env:ProgramFiles}\VideoLAN\VLC\vlc.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\VideoLAN\VLC\vlc.exe"
+    } else {
+        Write-Output "VLC is already installed"
+    }
+}
+
 function Install-VSCode {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vscode.txt")) {
         Write-Output "Installing Visual Studio Code"
