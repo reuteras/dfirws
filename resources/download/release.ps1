@@ -691,6 +691,9 @@ if ($status) {
     Move-Item ${TOOLS}\yarac64.exe ${TOOLS}\bin\yarac.exe
 }
 
+# Get x64dbg - installed during start
+$status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match "snapshot"
+
 # hayabusa
 $status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match "windows-64"
 if ($status) {
@@ -701,5 +704,5 @@ if ($status) {
     Move-Item ${TOOLS}\hayabusa\hayabusa-* ${TOOLS}\hayabusa\hayabusa.exe
 }
 
-# Get x64dbg - installed during start
-$status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match "snapshot"
+# zaproxy - available for installation with dfirws-install.ps1
+$status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.exe" -match "windows.exe"

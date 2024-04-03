@@ -9,6 +9,15 @@ if (Test-Path .\tmp\winget\Autopsy*.msi) {
 }
 Clear-Tmp winget
 
+# Burp suite - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading Burp Suite."
+Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}"
+if (Test-Path .\tmp\winget\Burp*.exe) {
+    Copy-Item .\tmp\winget\Burp*.exe ".\downloads\burp.exe"
+}
+Clear-Tmp winget
+
 # Chrome - available for installation via dfirws-install.ps1
 Clear-Tmp winget
 Write-SynchronizedLog "winget: Downloading Chrome."

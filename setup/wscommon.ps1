@@ -150,6 +150,19 @@ function Install-BinaryNinja {
     }
 }
 
+function Install-BurpSuite {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-burpsuite.txt")) {
+        Write-Output "Installing Burp Suite"
+        Copy-Item "${SETUP_PATH}\burp.exe" "${WSDFIR_TEMP}\burp.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\burp.exe" -ArgumentList '-q'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-burpsuite.txt" | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\BurpSuiteCommunity"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\burp.lnk" -DestinationPath "${env:ProgramFiles}\BurpSuiteCommunity\BurpSuiteCommunity.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\BurpSuiteCommunity\BurpSuiteCommunity.exe"
+    } else {
+        Write-Output "Burp Suite is already installed"
+    }
+}
+
 function Install-Chrome {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-chrome.txt")) {
         Write-Output "Installing Chrome"
@@ -599,6 +612,19 @@ function Install-X64dbg {
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-x64dbg.txt" | Out-Null
     } else {
         Write-Output "x64dbg is already installed"
+    }
+}
+
+function Install-ZAProxy {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-zaproxy.txt")) {
+        Write-Output "Installing ZAProxy"
+        Copy-Item "${SETUP_PATH}\zaproxy.exe" "${WSDFIR_TEMP}\zaproxy.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\zaproxy.exe" -ArgumentList '-q'
+        Add-ToUserPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\zaproxy.lnk" -DestinationPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.ico"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-zaproxy.txt" | Out-Null
+    } else {
+        Write-Output "ZAProxy is already installed"
     }
 }
 function Install-Zui {

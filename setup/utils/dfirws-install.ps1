@@ -5,6 +5,7 @@ param (
     [switch]$Autopsy,
     [switch]$BashExtra,
     [switch]$BinaryNinja,
+    [switch]$BurpSuite,
     [switch]$Chrome,
     [switch]$ClamAV,
     [switch]$CMDer,
@@ -38,6 +39,7 @@ param (
     [switch]$WinMerge,
     [switch]$Wireshark,
     [switch]$X64Dbg,
+    [switch]$ZAProxy,
     [switch]$Zui
 )
 
@@ -58,6 +60,10 @@ if ($BashExtra.IsPresent) {
 
 if ($BinaryNinja.IsPresent) {
     Install-BinaryNinja
+}
+
+if ($BurpSuite.IsPresent) {
+    Install-BurpSuite
 }
 
 if ($Chrome.IsPresent) {
@@ -190,6 +196,10 @@ if ($Wireshark.IsPresent) {
 
 if ($X64dbg.IsPresent) {
     Install-X64dbg
+}
+
+if ($ZAProxy.IsPresent) {
+    Install-ZAProxy
 }
 
 if ($Zui.IsPresent) {
