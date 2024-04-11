@@ -385,29 +385,29 @@ if ($status) {
 
 # Folder for Ghidra extensions
 if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
-    New-Item -Path "${TOOLS}\ghidra_extensions" -ItemType directory | Out-Null
+    New-Item -Path "${TOOLS}\ghidra_extensions" -ItemType Directory | Out-Null
 }
 
 # Ghidra GolangAnalyzerExtension
 $status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_10.4.zip" -match "10.4_"
-if ($status) {
+if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_10.4.zip")) {
     Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_10.4.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_10.4.zip"
 }
 
 $status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" -match "11.0.1_"
-if ($status) {
+if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_11.0.1.zip")) {
     Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_11.0.1.zip"
 }
 
 # Ghidra btighidra
 $status = Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match "ghidra"
-if ($status) {
+if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\btighidra.zip")) {
     Copy-Item "${SETUP_PATH}\btighidra.zip" "${TOOLS}\ghidra_extensions\btighidra.zip"
 }
 
 # Ghidra Cartographer plugin
 $status = Get-GitHubRelease -repo "nccgroup/Cartographer" -path "${SETUP_PATH}\Cartographer.zip" -match "Cartographer.zip"
-if ($status) {
+if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\Cartographer.zip")) {
     Copy-Item "${SETUP_PATH}\Cartographer.zip" "${TOOLS}\ghidra_extensions\Cartographer.zip"
 }
 
