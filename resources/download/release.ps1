@@ -648,7 +648,7 @@ if ($status) {
 }
 
 # Velociraptor
-$status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match "windows-amd64.exe"
+$status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match "windows-amd64.exe$"
 if ($status) {
     Copy-Item "${SETUP_PATH}\velociraptor.exe" "${TOOLS}\bin\" -Force
 }
