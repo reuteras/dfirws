@@ -19,6 +19,7 @@ $repourls = `
     "https://github.com/Bert-JanP/Incident-Response-Powershell.git", `
     "https://github.com/BSI-Bund/RdpCacheStitcher.git", `
     "https://github.com/crypto2011/IDR.git", `
+    "https://github.com/CVEProject/cvelistV5.git", `
     "https://github.com/cyberark/White-Phoenix.git", `
     "https://github.com/ExeinfoASL/ASL.git", `
     "https://github.com/fr0gger/jupyter-collection.git", `
