@@ -9,5 +9,5 @@ useDefault = true
 [allowlist]
 description = "Allow secrets in variables files"
 paths = [
-  '''/github/workspace/local/defaults/variables.pkr.hcl'''
+  '''**/github/workspace/local/defaults/variables.pkr.hcl'''
 ]
