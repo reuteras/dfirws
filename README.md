@@ -28,7 +28,7 @@ DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 ev
 
 ## Preparation
 
-1. *Programs:* You need to have the programs **7-zip**, **Git** and **Rclone** installed on your computer to be able to use DFIRWS. If you miss any of the tools you can install them with **winget** by typing the following commands.
+1. *Programs:* You need to have the programs **7-ZIP**, **Git** and **Rclone** installed on your computer to be able to use DFIRWS. If you miss any of the tools you can install them with **winget** by typing the following commands.
 
 ```PowerShell
 winget install 7zip.7zip
