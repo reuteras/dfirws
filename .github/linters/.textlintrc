@@ -1,0 +1,13 @@
+{
+  "filters": {
+    "comments": true
+    "allowlist": {
+      "allow": [
+      "ignored-word",
+      ]
+    }
+  },
+  "rules": {
+    "terminology": true
+  }
+}
