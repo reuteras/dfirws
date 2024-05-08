@@ -6,12 +6,3 @@
     "terminology": true
   }
 }
-{
-    "filters": {
-        "allowlist": {
-            "allow": [
-                "zip"
-            ]
-        }
-    }
-}
