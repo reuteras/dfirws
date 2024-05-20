@@ -666,6 +666,17 @@ if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fq.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
+# Zircolite
+$status = Get-GitHubRelease -repo "wagga40/zircolite" -path "${SETUP_PATH}\zircolite.7z" -match "zircolite"
+if ($status) {
+    if (Test-Path "${TOOLS}\zircolite") {
+        Remove-Item "${TOOLS}\zircolite" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\zircolite.7z" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\zircolite_* ${TOOLS}\zircolite
+    Move-Item ${TOOLS}\zircolite\zircolite_*.exe ${TOOLS}\zircolite\zircolite.exe
+}
+
 # imhex
 $status = Get-GitHubRelease -repo "WerWolv/ImHex" -path "${SETUP_PATH}\imhex.zip" -match "Portable-NoGPU-x86_64.zip"
 if ($status) {
