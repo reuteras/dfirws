@@ -496,6 +496,7 @@ if (! (Test-Path "C:\venv\maldump\Scripts\maldump.exe")) {
     Write-DateLog "maldump already installed." >> "C:\log\python.txt"
 }
 
+
 #
 # venv scare
 #
@@ -531,38 +532,6 @@ if ((Get-FileHash C:\git\scare\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_V
     Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 } else {
     Write-DateLog "scare already up to date." >> "C:\log\python.txt"
-}
-
-
-#
-# venv Zircolite
-#
-
-if (Test-Path "C:\venv\Zircolite\Zircolite\.git\ORIG_HEAD") {
-    $CURRENT_VENV = "C:\venv\Zircolite\Zircolite\.git\ORIG_HEAD"
-} else {
-    $CURRENT_VENV = "C:\Progress.ps1"
-}
-
-if ((Get-FileHash C:\git\Zircolite\.git\ORIG_HEAD).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-    Write-DateLog "Install packages in venv Zircolite in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-    Get-ChildItem C:\venv\Zircolite\* -Exclude Zircolite.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
-
-    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\Zircolite"
-    C:\venv\Zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U ptpython setuptools wheel 2>&1 >> "C:\log\python.txt"
-
-    Copy-Item -Recurse "C:\git\Zircolite" "C:\venv\Zircolite"
-    Set-Location "C:\venv\Zircolite\Zircolite"
-
-    python -m pip install -r requirements.txt 2>&1 >> "C:\log\python.txt"
-
-    deactivate
-    Set-Content "C:\venv\Zircolite\Scripts\ptpython.exe C:\venv\Zircolite\Zircolite\zircolite.py -- `$args" -Encoding Ascii -Path C:\venv\default\Scripts\zircolite.ps1
-    Write-DateLog "Python venv Zircolite done." >> "C:\log\python.txt"
-} else {
-    Write-DateLog "Zircolite already up to date." >> "C:\log\python.txt"
 }
 
 

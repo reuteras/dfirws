@@ -42,9 +42,7 @@ param(
     [Parameter(HelpMessage = "Switch to venv sigma-cli.")]
     [Switch]$sigma,
     [Parameter(HelpMessage = "Switch to venv toolong.")]
-    [Switch]$toolong,
-    [Parameter(HelpMessage = "Switch to venv Zircolite.")]
-    [Switch]$zircolite
+    [Switch]$toolong
 )
 
 $venv = "default"
@@ -95,8 +93,6 @@ if ($aspose) {
     $venv = "sigma-cli"
 } elseif ($toolong) {
     $venv = "toolong"
-} elseif ($zircolite) {
-    $venv = "Zircolite"
 } else {
     $venv = "default"
 }
