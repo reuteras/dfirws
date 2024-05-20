@@ -4,7 +4,7 @@ This folder contains a set of PowerShell scripts designed to synchronize, instal
 
 ## sync_to_usb.ps1
 
-This script synchronizes files from the workspace directory (*$HOME\Documents\workspace\dfirws*) to a USB drive. It compresses the *downloads*, *mount*, and *setup* directories into a zip file, copies the compressed file to the USB drive, and then syncs the directories and required files to the USB drive.
+This script synchronizes files from the workspace directory (*$HOME\Documents\workspace\dfirws*) to a USB drive. It compresses the *downloads*, *mount*, and *setup* directories into a ZIP file, copies the compressed file to the USB drive, and then syncs the directories and required files to the USB drive.
 
 Usage: Run **sync_to_usb.ps1** from the USB drive in PowerShell to sync files to the USB drive.
 
