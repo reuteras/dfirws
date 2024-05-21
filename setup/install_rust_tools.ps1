@@ -27,8 +27,9 @@ Install-Rust >> "C:\log\rust.txt"
 $env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
 
 # Install Rust tools
-Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
-cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+# Currently disabled due to issues with the Rust compiler
+#Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
+#cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 if (!(Test-Path "C:\cargo\autocomplete")) {
     New-Item -ItemType Directory -Force -Path "C:\cargo\autocomplete" | Out-Null
@@ -40,6 +41,8 @@ $env:PATH="${env:PATH};C:\cargo\bin"
 Write-DateLog "Rust: Install mft2bodyfile, usnjrnl in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" usnjrnl 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+# Requires gcc to compile
+#cargo install --root "C:\cargo" CuTE-tui 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 # https://github.com/janstarke/regview
 # https://github.com/janstarke/ntdsextract2
 
