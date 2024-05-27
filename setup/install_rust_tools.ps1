@@ -28,8 +28,8 @@ $env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\u
 
 # Install Rust tools
 # Currently disabled due to issues with the Rust compiler
-#Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
-#cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
+cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 if (!(Test-Path "C:\cargo\autocomplete")) {
     New-Item -ItemType Directory -Force -Path "C:\cargo\autocomplete" | Out-Null
