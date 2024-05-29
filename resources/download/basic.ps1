@@ -7,7 +7,7 @@
 #
 
 # https://www.7-zip.org/download.html - 7-Zip - installed during start
-$status = Get-FileFromUri -uri "https://www.7-zip.org/a/7z2301-x64.msi" -FilePath ".\downloads\7zip.msi" -CheckURL "Yes"
+$status = Get-FileFromUri -uri "https://www.7-zip.org/a/7z2406-x64.msi" -FilePath ".\downloads\7zip.msi" -CheckURL "Yes"
 
 #
 # Packages used in freshclam sandbox
