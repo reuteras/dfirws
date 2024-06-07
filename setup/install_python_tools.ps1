@@ -123,6 +123,9 @@ curl -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalk
 curl -o "CanaryTokenScanner.py" "https://raw.githubusercontent.com/0xNslabs/CanaryTokenScanner/main/CanaryTokenScanner.py"
 curl -o "sigs.py" "https://raw.githubusercontent.com/clausing/scripts/master/sigs.py"
 
+# Install dependencies for rat_king_parser
+python -m pip install -r "https://raw.githubusercontent.com/jeFF0Falltrades/rat_king_parser/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
+
 if (Test-Path "C:\git\bmc-tools\bmc-tools.py") {
     Copy-Item "C:\git\bmc-tools\bmc-tools.py" "C:\venv\default\Scripts\bmc-tools.py"
 }
