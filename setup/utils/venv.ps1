@@ -7,6 +7,8 @@ param(
     [Switch]$binaryrefinery,
     [Parameter(HelpMessage = "Switch to venv chepy.")]
     [Switch]$chepy,
+    [Parameter(HelpMessage = "Switch to venv csvkit.")]
+    [Switch]$csvkit,
     [Parameter(HelpMessage = "Switch to venv default.")]
     [Switch]$default,
     [Parameter(HelpMessage = "Switch to venv dfir-unfurl.")]
@@ -57,6 +59,8 @@ if ($aspose) {
     $venv = "binary-refinery"
 } elseif ($chepy) {
     $venv = "chepy"
+} elseif ($csvkit) {
+    $venv = "csvkit"
 } elseif ($default) {
     $venv = "default"
 } elseif ($unfurl) {

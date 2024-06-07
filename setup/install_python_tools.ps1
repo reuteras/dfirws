@@ -592,7 +592,7 @@ deactivate
 Write-DateLog "Python venv dissect done." >> "C:\log\python.txt"
 
 
-foreach ($virtualenv in "binary-refinery", "chepy", "ghidrecomp", "jpterm", "magika", "malwarebazaar", "mwcp", "peepdf3", "rexi", "sigma-cli", "toolong") {
+foreach ($virtualenv in "binary-refinery", "chepy", "csvkit", "ghidrecomp", "jpterm", "magika", "malwarebazaar", "mwcp", "peepdf3", "rexi", "sigma-cli", "toolong") {
     #
     # Create simple venv for each tool in list above
     #
