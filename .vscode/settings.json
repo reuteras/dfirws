@@ -118,6 +118,7 @@
         "CPUSTRES",
         "Creds",
         "cscript",
+        "csvkit",
         "ctypes",
         "CURRENTUSER",
         "customise",
