@@ -52,21 +52,27 @@ $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurit
 # Get Sysinternals Suite
 # Change download of Sysinternals to download of individual tools from live.sysinternals.com since
 # the zip file is behind a Cloudflare captcha at the moment.
-# Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip"
-#& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
-if (!(Test-Path -Path ${TOOLS}\sysinternals)) {
-    New-Item -Path ${TOOLS}\sysinternals -ItemType Directory -Force | Out-Null
-}
+$status = Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip"
 
-$folderUrl = "https://live.sysinternals.com/tools/"
-$webClient = New-Object System.Net.WebClient
-$files = $webClient.DownloadString($folderUrl).Split("<br>") | Select-String -Pattern '<A HREF="(/tools[^"]+)"' | ForEach-Object { if ($_.Matches.Groups[1].Value -ne "/tools/ARM64/") { ($_.Matches.Groups[1].Value  -split("/"))[2] }}
-foreach ($file in $files) {
-    $fileUrl = $folderUrl + $file
-    $savePath = Join-Path -Path "${TOOLS}\sysinternals" -ChildPath "${file}"
-    curl --silent -L -z $savePath -o $savePath $fileUrl
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\sysinternals") {
+        Remove-Item -Recurse -Force "${TOOLS}\sysinternals" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
 }
-$webClient.Dispose()
+#if (!(Test-Path -Path ${TOOLS}\sysinternals)) {
+#    New-Item -Path ${TOOLS}\sysinternals -ItemType Directory -Force | Out-Null
+#}
+
+#$folderUrl = "https://live.sysinternals.com/tools/"
+#$webClient = New-Object System.Net.WebClient
+#$files = $webClient.DownloadString($folderUrl).Split("<br>") | Select-String -Pattern '<A HREF="(/tools[^"]+)"' | ForEach-Object { if ($_.Matches.Groups[1].Value -ne "/tools/ARM64/") { ($_.Matches.Groups[1].Value  -split("/"))[2] }}
+#foreach ($file in $files) {
+#    $fileUrl = $folderUrl + $file
+#    $savePath = Join-Path -Path "${TOOLS}\sysinternals" -ChildPath "${file}"
+#    curl --silent -L -z $savePath -o $savePath $fileUrl
+#}
+#$webClient.Dispose()
 
 # Gradle - is used during download and setup of tools for dfirws
 #Get-FileFromUri -uri "https://services.gradle.org/distributions/gradle-8.4-bin.zip" -FilePath ".\downloads\gradle.zip"
