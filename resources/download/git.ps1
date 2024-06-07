@@ -63,6 +63,7 @@ $repourls = `
     "https://github.com/wagga40/Zircolite.git", `
     "https://github.com/reuteras/PatchaPalooza.git", `
     "https://github.com/The-DFIR-Report/Sigma-Rules.git", `
+    "https://github.com/xaitax/TotalRecall.git", `
     "https://github.com/Yamato-Security/hayabusa-rules.git", `
     "https://github.com/YosfanEilay/AuthLogParser.git", `
     "https://github.com/yossizap/cutterref.git"
