@@ -30,7 +30,7 @@ $repourls = `
     "https://github.com/KasperskyLab/iShutdown.git", `
     "https://github.com/keraattin/EmailAnalyzer.git", `
     "https://github.com/keydet89/Events-Ripper.git", `
-    "https://github.com/keydet89/RegRipper3.0", `
+    "https://github.com/keydet89/RegRipper4.0", `
     "https://github.com/last-byte/PersistenceSniper.git", `
     "https://github.com/last-byte/PersistenceSniper.wiki.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
