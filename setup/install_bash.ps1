@@ -32,7 +32,7 @@ Get-ChildItem | Where-Object Extension -Like '*.zst' |
 Get-ChildItem | Where-Object Extension -Like '*.zst' |
     ForEach-Object {
         Write-DateLog "Uncompressing $($_.Name)" >> "C:\log\bash.txt"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x "$_" -o"." >> "C:\log\bash.txt"
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x "$_" -o"."
         Remove-Item "$_" -Force >> "C:\log\bash.txt"
     }
 
