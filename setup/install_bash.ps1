@@ -25,7 +25,7 @@ Set-Location "C:\bash"
 Get-ChildItem | Where-Object Extension -Like '*.zst' |
     ForEach-Object {
         Write-DateLog "Uncompressing $($_.Name)" >> "C:\log\bash.txt"
-        & "${TOOLS}\zstd\zstd.exe" --force --rm --decompress "$_" >> "C:\log\bash.txt"
+        & "${TOOLS}\zstd\zstd.exe" --force --rm --decompress "$_"
     }
 
 # Some files are compressed with xz even if they have zst extension
