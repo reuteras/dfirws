@@ -83,10 +83,14 @@ if ($status) {
 #Move-Item ${TOOLS}\gradle-* ${TOOLS}\gradle
 
 # Get exiftool
-$EXIFTOOL_VERSION = Get-DownloadUrlFromPage -url https://exiftool.org/index.html -RegEx 'exiftool-[^zip]+.zip'
+$EXIFTOOL_VERSION = Get-DownloadUrlFromPage -url https://exiftool.org/index.html -RegEx 'exiftool-[^zip]+_64.zip'
 $status = Get-FileFromUri -uri "https://exiftool.org/$EXIFTOOL_VERSION" -FilePath ".\downloads\exiftool.zip"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\exiftool.zip" -o"${TOOLS}\exiftool" | Out-Null
+    if (Test-Path -Path "${TOOLS}\exiftool") {
+        Remove-Item -Recurse -Force "${TOOLS}\exiftool" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\exiftool.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\exiftool-* "${TOOLS}\exiftool" -Force
     Copy-Item "${TOOLS}\exiftool\exiftool(-k).exe" ${TOOLS}\exiftool\exiftool.exe
     Remove-Item "${TOOLS}\exiftool\exiftool(-k).exe" -Force | Out-Null
 }
