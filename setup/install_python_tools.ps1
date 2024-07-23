@@ -548,16 +548,8 @@ Get-ChildItem C:\venv\dissect\* -Exclude dissect.txt -Recurse | Remove-Item -For
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\dissect"
 C:\venv\dissect\Scripts\Activate.ps1 >> "C:\log\python.txt"
 python -m pip install -U pip >> "C:\log\python.txt"
-python -m pip install -U poetry >> "C:\log\python.txt"
 
-poetry init `
-    --name dissectvenv `
-    --description "Python venv for dissect." `
-    --author "dfirws" `
-    --license "MIT" `
-    --no-interaction
-
-poetry add `
+pip install `
     acquire `
     dissect `
     dissect.target[yara] `
@@ -572,7 +564,6 @@ Copy-Item "C:\venv\dissect\Scripts\asdf-repair.exe" "C:\venv\default\Scripts\asd
 Copy-Item "C:\venv\dissect\Scripts\asdf-verify.exe" "C:\venv\default\Scripts\asdf-verify.exe" -Force 2>&1 >> "C:\log\python.txt"
 Copy-Item "C:\venv\dissect\Scripts\dump-nskeyedarchiver.exe" "C:\venv\default\Scripts\dump-nskeyedarchiver.exe" -Force 2>&1 >> "C:\log\python.txt"
 Copy-Item "C:\venv\dissect\Scripts\envelope-decrypt.exe" "C:\venv\default\Scripts\envelope-decrypt.exe" -Force 2>&1 >> "C:\log\python.txt"
-Copy-Item "C:\venv\dissect\Scripts\keyring.exe" "C:\venv\default\Scripts\keyring.exe" -Force 2>&1 >> "C:\log\python.txt"
 Copy-Item "C:\venv\dissect\Scripts\parse-lnk.exe" "C:\venv\default\Scripts\parse-lnk.exe" -Force 2>&1 >> "C:\log\python.txt"
 Copy-Item "C:\venv\dissect\Scripts\pip.exe" "C:\venv\default\Scripts\pip.exe" -Force 2>&1 >> "C:\log\python.txt"
 Copy-Item "C:\venv\dissect\Scripts\pygmentize.exe" "C:\venv\default\Scripts\pygmentize.exe" -Force 2>&1 >> "C:\log\python.txt"
