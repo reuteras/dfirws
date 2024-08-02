@@ -713,7 +713,7 @@ if ($status) {
 $status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match "snapshot"
 
 # hayabusa
-$status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match "windows-64"
+$status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match "win-x64"
 if ($status) {
     if (Test-Path "${TOOLS}\hayabusa") {
         Remove-Item "${TOOLS}\hayabusa" -Recurse -Force
