@@ -601,15 +601,15 @@ if ($status) {
     Move-Item ${TOOLS}\sleuthkit-* "${TOOLS}\sleuthkit"
 }
 
-# qrtool
-$status = Get-GitHubRelease -repo "sorairolake/qrtool" -path "${SETUP_PATH}\qrtool.zip" -match "x86_64-pc-windows-msvc"
-if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qrtool.zip" -o"${TOOLS}" | Out-Null
-    if (Test-Path "${TOOLS}\qrtool") {
-        Remove-Item "${TOOLS}\qrtool" -Recurse -Force
-    }
-    Move-Item ${TOOLS}\qrtool-* "${TOOLS}\qrtool"
-}
+# qrtool - Removed from GitHub
+#$status = Get-GitHubRelease -repo "sorairolake/qrtool" -path "${SETUP_PATH}\qrtool.zip" -match "x86_64-pc-windows-msvc"
+#if ($status) {
+#    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qrtool.zip" -o"${TOOLS}" | Out-Null
+#    if (Test-Path "${TOOLS}\qrtool") {
+#        Remove-Item "${TOOLS}\qrtool" -Recurse -Force
+#    }
+#    Move-Item ${TOOLS}\qrtool-* "${TOOLS}\qrtool"
+#}
 
 # debloat
 $status = Get-GitHubRelease -repo "Squiblydoo/debloat" -path "${SETUP_PATH}\debloat.zip" -match "Windows"

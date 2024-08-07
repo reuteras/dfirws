@@ -100,7 +100,8 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\magika (A tool li
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\msidump.py (a tool that analyzes malicious MSI installation packages, extracts files, streams, binary data and incorporates YARA scanner).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command msidump.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Qemu (runs dfirws-install -Qemu).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dfirws-install.ps1 -Qemu"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\qemu-img (QEMU disk image utility).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command qemu-img.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\qrtool.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command qrtool -h"
+# Removed qrtool.lnk since project removed from GitHub
+#Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\qrtool.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command qrtool -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\ripgrep (rg).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command rg -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\trid (File Identifier).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command trid.exe -?"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\WinMerge (runs dfirws-install -WinMerge).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dfirws-install.ps1 -WinMerge"
