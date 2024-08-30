@@ -324,6 +324,9 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "/cffi/error.py" -and
     $_.Line -notmatch "github/workflows" -and
     $_.Line -notmatch " Compiling " -and
+    $_.Line -notmatch "create mode " -and
+    $_.Line -notmatch "delete mode " -and
+    $_.Line -notmatch "rename " -and
     $_.Line -notmatch "origin/main Updating"
 }
 
