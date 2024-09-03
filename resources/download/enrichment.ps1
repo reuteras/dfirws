@@ -283,4 +283,16 @@ $null = $status
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-extended.zip" -o"${yaraSaveDirectory}" | Out-Null
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-full.zip" -o"${yaraSaveDirectory}" | Out-Null
 
+# Get CVE data
+Write-Output "Downloading CVE data"
+$cveSaveDirectory = "${enrichmentDirectory}\cve"
+if (-not (Test-Path -Path "${cveSaveDirectory}")) {
+    New-Item -ItemType Directory -Path "${cveSaveDirectory}" -Force | Out-Null
+}
+Set-Location "${cveSaveDirectory}"
+
+$status = Get-FileFromUri -uri "https://cve.mitre.org/data/downloads/allitems.csv" -FilePath ".\enrichment\cve\allitems.csv"
+
+$status = Get-GitHubRelease -repo "CVEProject/cvelistV5" -path "all_CVEs_at_midnight.zip.zip" -match ".\enrichment\cve\all_CVEs_at_midnight.zip.zip$"
+
 Set-Location "${currentDirectory}"

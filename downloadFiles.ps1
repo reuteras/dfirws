@@ -313,6 +313,9 @@ if (Test-Path ".\tmp\enrichment") {
 if (Test-Path ".\tmp\mount") {
     Remove-Item -Recurse -Force .\tmp\mount\ 2>&1 | Out-Null
 }
+if (Test-Path ".\tmp\msys2") {
+    Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
+}
 
 $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
     $_.Line -notmatch " INFO " -and
