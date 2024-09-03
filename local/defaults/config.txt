@@ -39,6 +39,8 @@ $WSDFIR_QEMU="No"
 $WSDFIR_VSCODE="No"
 # Install Visual Studio Code PowerShell extension
 $WSDFIR_VSCODE_POWERSHELL="Yes"
+# Install Visual Studio Code C/C++ extension
+$WSDFIR_VSCODE_C="Yes"
 # Install Visual Studio Code Python extension
 $WSDFIR_VSCODE_PYTHON="Yes"
 # Install Visual Studio Code Spell Checker extension

@@ -6,6 +6,17 @@ param(
 . "$PSScriptRoot\common.ps1"
 
 if (! $NoVSCodeExtensions.IsPresent) {
+    # Get URI for Visual Studio Code C++ extension - ugly
+    $vscode_cpp_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
+
+    if ("$vscode_cpp_string" -ne "") {
+        $vscode_tmp = $vscode_cpp_string | Select-String -Pattern '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
+        $vscode_cpp_version = $vscode_tmp.Matches.Groups[1].Value
+        # Visual Studio Code C++ extension
+        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/cpptools/$vscode_cpp_version/vspackage?targetPlatform=win32-x64" -FilePath ".\downloads\vscode\vscode-cpp.vsix" -CheckURL "Yes"
+    } else {
+        Write-DateLog "ERROR: Could not get URI for Visual Studio Code C++ extension"
+    }
     # Get URI for Visual Studio Code python extension - ugly
     $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
 

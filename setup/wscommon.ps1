@@ -4,6 +4,7 @@ $GIT_PATH = "C:\git"
 $LOCAL_PATH = "C:\local"
 $NEO_JAVA = "C:\java"
 $PDFSTREAMDUMPER_PATH = "C:\Sandsprite\PDFStreamDumper"
+$MSYS2_DIR = "C:\msys64"
 $RUST_DIR = "C:\Rust"
 $SETUP_PATH = "C:\downloads"
 $WSDFIR_TEMP = "C:\tmp"
@@ -14,6 +15,7 @@ $POWERSHELL_EXE = "${env:ProgramFiles}\PowerShell\7\pwsh.exe"
 $null="${GIT_PATH}"
 $null="${LOCAL_PATH}"
 $null="${PDFSTREAMDUMPER_PATH}"
+$null="${MSYS2_DIR}"
 $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
@@ -524,6 +526,9 @@ function Install-VSCode {
         Write-Output "Installing Visual Studio Code"
         Copy-Item "${SETUP_PATH}\vscode.exe" "${WSDFIR_TEMP}\vscode.exe" -Force
         Start-Process -Wait "${WSDFIR_TEMP}\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,!associatewithfiles,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
+        if ($WSDFIR_VSCODE_C -eq "Yes") {
+            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-cpp.vsix" 2>&1 | Out-Null
+        }
         if ($WSDFIR_VSCODE_POWERSHELL -eq "Yes") {
             & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-powershell.vsix" 2>&1 | Out-Null
         }

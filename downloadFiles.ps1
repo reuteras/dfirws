@@ -55,6 +55,8 @@ param(
     [Switch]$HttpNoVSCodeExtensions,
     [Parameter(HelpMessage = "Update KAPE.")]
     [Switch]$Kape,
+    [Parameter(HelpMessage = "Update MSYS2.")]
+    [Switch]$MSYS2,
     [Parameter(HelpMessage = "Update Node.")]
     [Switch]$Node,
     [Parameter(HelpMessage = "Update PowerShell and modules.")]
@@ -115,7 +117,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
@@ -187,7 +189,7 @@ if ($all -or $Bash.IsPresent -or $Didier.IsPresent -or $GoLang.IsPresent -or $Ht
     }
 }
 
-if ($all -or $Bash.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
+if ($all -or $Bash.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Download common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
 }
@@ -195,6 +197,11 @@ if ($all -or $Bash.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or 
 if ($all -or $Bash.IsPresent) {
     Write-DateLog "Download packages for Git for Windows (Bash)."
     Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+}
+
+if ($all -or $MSYS2.IsPresent) {
+    Write-DateLog "Download MSYS2."
+    Start-Job -FilePath .\resources\download\msys2.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $Node.IsPresent) {
@@ -277,7 +284,7 @@ if ($Enrichment.IsPresent) {
     .\resources\download\enrichment.ps1
 }
 
-if ($all -or $bash.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
+if ($all -or $bash.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Wait for sandboxes to finish."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
@@ -324,6 +331,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "pretty.errors" -and
     $_.Line -notmatch "Copied (replaced existing)" -and
     $_.Line -notmatch "INFO" -and
+    $_.Line -notmatch "perl-Error" -and
     $_.Line -notmatch "Downloaded " -and
     $_.Line -notmatch "/cffi/error.py" -and
     $_.Line -notmatch "github/workflows" -and
@@ -331,7 +339,12 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "create mode " -and
     $_.Line -notmatch "delete mode " -and
     $_.Line -notmatch "rename " -and
-    $_.Line -notmatch "origin/main Updating"
+    $_.Line -notmatch "origin/main Updating" -and
+    $_.Line -notmatch "libgpg-error" -and
+    $_.Line -notmatch ": No data" -and
+    $_.Line -notmatch "could not be locally" -and
+    $_.Line -notmatch "via WKD" -and
+    $_.Line -notmatch "ERROR: 9DD0D4217D75"
 }
 
 if ($warnings -or $errors) {

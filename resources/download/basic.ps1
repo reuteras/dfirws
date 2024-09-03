@@ -77,6 +77,12 @@ if ($all -or $Python) {
     $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe"
 }
 
+# MSYS2
+$status = Get-FileFromUri -uri "https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe" -FilePath "${SETUP_PATH}\msys2.exe" -CheckURL "No"
+if ($status) {
+    Copy-Item "${SETUP_PATH}\msys2.exe" "${TOOLS}\bin\msys2.exe"
+}
+
 #
 # Packages used in Bash sandbox
 #

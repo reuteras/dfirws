@@ -1,0 +1,34 @@
+<Configuration>
+  <VGpu>Disable</VGpu>
+  <Networking>Enable</Networking>
+  <AudioInput>Disable</AudioInput>
+  <VideoInput>Disable</VideoInput>
+  <ProtectedClient>Enable</ProtectedClient>
+  <PrinterRedirection>Disable</PrinterRedirection>
+  <ClipboardRedirection>Disable</ClipboardRedirection>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__setup</HostFolder>
+	    <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__downloads</HostFolder>
+      <SandboxFolder>C:\downloads</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__log</HostFolder>
+      <SandboxFolder>C:\log</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__tmp\msys64</HostFolder>
+      <SandboxFolder>C:\msys64</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+  <LogonCommand>
+    <Command>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -sta -WindowStyle Hidden -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install_msys2.ps1</Command>
+  </LogonCommand>
+</Configuration>
