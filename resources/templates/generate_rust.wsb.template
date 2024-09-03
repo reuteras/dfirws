@@ -6,6 +6,7 @@
   <ProtectedClient>Enable</ProtectedClient>
   <PrinterRedirection>Disable</PrinterRedirection>
   <ClipboardRedirection>Enable</ClipboardRedirection>
+  <MemoryInMB>16384</MemoryInMB>
   <MappedFolders>
     <MappedFolder>
       <HostFolder>__SANDBOX__setup</HostFolder>
@@ -30,6 +31,11 @@
     <MappedFolder>
       <HostFolder>__SANDBOX__tmp\cargo</HostFolder>
       <SandboxFolder>C:\cargo</SandboxFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
+      <HostFolder>__SANDBOX__mount\msys64</HostFolder>
+      <SandboxFolder>C:\msys64</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>

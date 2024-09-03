@@ -12,8 +12,8 @@ Write-DateLog "Start Sandbox to install Rust based tools for dfirws." > "${ROOT_
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 # Requires gcc to compile
-#${CURRENT_VERSION_DFIR_TOOLKIT} = (curl --silent -L "https://crates.io/api/v1/crates/dfir-toolkit" | ConvertFrom-Json).crate.max_stable_version
-#${CURRENT_VERSION_CUTE_TUI} = (curl --silent -L "https://crates.io/api/v1/crates/cute-tui" | ConvertFrom-Json).crate.max_stable_version
+${CURRENT_VERSION_DFIR_TOOLKIT} = (curl --silent -L "https://crates.io/api/v1/crates/dfir-toolkit" | ConvertFrom-Json).crate.max_stable_version
+${CURRENT_VERSION_CUTE_TUI} = (curl --silent -L "https://crates.io/api/v1/crates/cute-tui" | ConvertFrom-Json).crate.max_stable_version
 ${CURRENT_VERSION_MFT2BODYFILE} = (curl --silent -L "https://crates.io/api/v1/crates/mft2bodyfile" | ConvertFrom-Json).crate.max_stable_version
 ${CURRENT_VERSION_USNJRNL} = (curl --silent -L "https://crates.io/api/v1/crates/usnjrnl" | ConvertFrom-Json).crate.max_stable_version
 
@@ -21,10 +21,10 @@ ${CURRENT_VERSION_USNJRNL} = (curl --silent -L "https://crates.io/api/v1/crates/
 ${STATUS} = $true
 
 if (Test-Path -Path "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" ) {
-    #${STATUS} = (Get-Content "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" | Select-String -Pattern "dfir-toolkit ${CURRENT_VERSION_DFIR_TOOLKIT}").Matches.Success
-    #if (${STATUS}) {
-    #    ${STATUS} = (Get-Content "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" | Select-String -Pattern "CuTE-tui ${CURRENT_VERSION_CUTE_TUI}").Matches.Success
-    #}
+    ${STATUS} = (Get-Content "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" | Select-String -Pattern "dfir-toolkit ${CURRENT_VERSION_DFIR_TOOLKIT}").Matches.Success
+    if (${STATUS}) {
+        ${STATUS} = (Get-Content "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" | Select-String -Pattern "CuTE-tui ${CURRENT_VERSION_CUTE_TUI}").Matches.Success
+    }
     if (${STATUS}) {
         ${STATUS} = (Get-Content "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" | Select-String -Pattern "mft2bodyfile ${CURRENT_VERSION_MFT2BODYFILE}").Matches.Success
     }

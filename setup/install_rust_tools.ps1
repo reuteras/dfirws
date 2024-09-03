@@ -24,12 +24,12 @@ Install-Rust >> "C:\log\rust.txt"
 #$env:PATH="${env:HOME}\.cargo\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
 
 # Set PATH to include Rust and Git
-$env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
+$env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH};${MSYS2_DIR};${MSYS2_DIR}\ucrt64\bin;${MSYS2_DIR}\usr\bin"
 
 # Install Rust tools
 # Currently disabled due to issues with the Rust compiler
-#Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
-#cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
+cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 if (!(Test-Path "C:\cargo\autocomplete")) {
     New-Item -ItemType Directory -Force -Path "C:\cargo\autocomplete" | Out-Null
@@ -42,7 +42,7 @@ Write-DateLog "Rust: Install mft2bodyfile, usnjrnl in sandbox." >> "C:\log\rust.
 cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" usnjrnl 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 # Requires gcc to compile
-#cargo install --root "C:\cargo" CuTE-tui 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+cargo install --root "C:\cargo" CuTE-tui 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 # https://github.com/janstarke/regview
 # https://github.com/janstarke/ntdsextract2
 
