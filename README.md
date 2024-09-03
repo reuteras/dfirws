@@ -88,7 +88,7 @@ The file *config.ps1* is used by the scripts to specify token for MaxMind and Gi
 
 ## Download tools and enrichment data
 
-Before using a sandbox or creating a VM all the tools has to be downloaded and prepared for use in DFIRWS. Sandboxes will be started to run and install packages for Python, bash, Rust and NodeJS. Since Windows only allows on running Sandbox at the time you have to close any running sandbox before running **downloadFiles.ps1**.
+Before using a sandbox or creating a VM all the tools has to be downloaded and prepared for use in DFIRWS. Sandboxes will be started to run and install packages for Python, bash, Rust and Node.js. Since Windows only allows on running Sandbox at the time you have to close any running sandbox before running **downloadFiles.ps1**.
 
 Download programs and prepare them for use by running:
 
