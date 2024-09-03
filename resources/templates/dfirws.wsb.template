@@ -34,7 +34,7 @@
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
-      <HostFolder>__SANDBOX__tmp\msys64</HostFolder>
+      <HostFolder>__SANDBOX__\mount\msys64</HostFolder>
       <SandboxFolder>C:\msys64</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
