@@ -293,6 +293,6 @@ Set-Location "${cveSaveDirectory}"
 
 $status = Get-FileFromUri -uri "https://cve.mitre.org/data/downloads/allitems.csv" -FilePath ".\enrichment\cve\allitems.csv"
 
-$status = Get-GitHubRelease -repo "CVEProject/cvelistV5" -path "all_CVEs_at_midnight.zip.zip" -match ".\enrichment\cve\all_CVEs_at_midnight.zip.zip$"
+$status = Get-GitHubRelease -repo "CVEProject/cvelistV5" -path ".\enrichment\cve\all_CVEs_at_midnight.zip.zip" -match "all_CVEs_at_midnight.zip.zip$"
 
 Set-Location "${currentDirectory}"
