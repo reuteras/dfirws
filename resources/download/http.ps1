@@ -491,7 +491,7 @@ $status = Get-FileFromUri -uri "https://downloads.maltego.com/maltego-v4/windows
 
 
 # ELK
-$ELK_VERSION = "8.14.3"
+$ELK_VERSION = "8.15.0"
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes"
