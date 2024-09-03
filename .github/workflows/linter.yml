@@ -36,8 +36,11 @@ jobs:
           DEFAULT_BRANCH: main
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_GITLEAKS: false
+          VALIDATE_JSCPD: false
+          VALIDATE_JSON_PRETTIER: false
+          VALIDATE_MARKDOWN_PRETTIER: false
           VALIDATE_PYTHON_ISORT: false
           VALIDATE_PYTHON_PYLINT: false
           VALIDATE_SHELL_SHFMT: false
-          VALIDATE_JSCPD: false
+          VALIDATE_YAML_PRETTIER: false
           FILTER_REGEX_EXCLUDE: hash-id\.py|PSDecode\.psm1|PowerSiem\.ps1|Get-ZimmermanTools\.ps1

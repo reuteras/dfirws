@@ -28,7 +28,7 @@ DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 ev
 
 ## Preparation
 
-1. *Programs:* You need to have the programs **7-zip**, **Git** and **Rclone** installed on your computer to be able to use DFIRWS. If you miss any of the tools you can install them with **winget** by typing the following commands.
+1. *Programs:* You need to have the programs `7-zip`, `git` and `rclone` installed on your computer to be able to use DFIRWS. If you miss any of the tools you can install them with **winget** by typing the following commands.
 
 ```PowerShell
 winget install 7zip.7zip
@@ -60,7 +60,7 @@ The token is needed to avoid problems with rate limiting on GitHub since most of
 
 ## Installation and configuration
 
-Start a PowerShell terminal as your regular user and checkout the code from GitHub with the **git** command.
+Start a PowerShell terminal as your regular user and checkout the code from GitHub with the `git` command.
 
 ```PowerShell
 git clone https://github.com/reuteras/dfirws.git
@@ -152,7 +152,7 @@ Currently there is now way to update the tolls in the VM. You have to delete the
 
 ## Update
 
-Update scripts used to create the sandbox (i.e. this code) by running **git pull** and then update the tools by running **.\downloadFiles.ps1** again. Check *.\local\defaults\config.txt* for changed and added configuration options. You can also opt to only update parts of the included tools. To update Python tools run:
+Update scripts used to create the sandbox (i.e. this code) by running `git pull` and then update the tools by running **.\downloadFiles.ps1** again. Check *.\local\defaults\config.txt* for changed and added configuration options. You can also opt to only update parts of the included tools. To update Python tools run:
 
 ```PowerShell
 .\downloadFiles.ps1 -Python
