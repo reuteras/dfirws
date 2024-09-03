@@ -312,7 +312,11 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "This is taking longer than usual" -and
     $_.Line -notmatch "Installing collected packages" -and
     $_.Line -notmatch "pymispwarninglists" -and
-    $_.Line -notmatch "warning: be sure to add"
+    $_.Line -notmatch "warning: be sure to add" -and
+    $_.Line -notmatch "create mode " -and
+    $_.Line -notmatch "delete mode " -and
+    $_.Line -notmatch "rename " -and
+    $_.Line -notmatch "origin/main Updating"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
