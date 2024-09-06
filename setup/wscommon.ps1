@@ -305,7 +305,7 @@ function Install-Gpg4win {
 function Install-Hashcat {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-hashcat.txt")) {
         Write-Output "Installing Hashcat"
-        Copy-Item -Recurse "${SETUP_PATH}\hashcat" "${env:ProgramFiles}" -Force
+        Copy-Item -Recurse "${TOOLS}\hashcat" "${env:ProgramFiles}" -Force
         Add-ToUserPath "${env:ProgramFiles}\hashcat"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-hashcat.txt" | Out-Null
     } else {
