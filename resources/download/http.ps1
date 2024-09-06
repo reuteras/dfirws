@@ -381,7 +381,7 @@ $NpcapVersion = Get-DownloadUrlFromPage -Url "https://npcap.com/" -RegEx 'dist/n
 $status = Get-FileFromUri -uri "https://npcap.com/dist/${NpcapVersion}" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
 
 # https://www.wireshark.org/download.html - Wireshark - available for manual installation
-$WiresharkVersion = Get-DownloadUrlFromPage -Url "https://wireshark.org/" -RegEx 'https://[^"]+/win64/Wireshark-4.2.[0-9]+-x64.exe'
+$WiresharkVersion = Get-DownloadUrlFromPage -Url "https://wireshark.org/" -RegEx 'https://[^"]+/win64/Wireshark-4.4.[0-9]+-x64.exe'
 $status = Get-FileFromUri -uri "${WiresharkVersion}" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
 
 # https://www.sqlite.org/download.html - SQLite
@@ -419,7 +419,7 @@ if ($status) {
 }
 
 # https://nmap.org/download.html - Nmap
-$status = Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.94-setup.exe" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes"
+$status = Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.95-setup.exe" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\nmap") {
         Remove-Item -Recurse -Force "${TOOLS}\nmap" | Out-Null 2>&1
@@ -428,7 +428,7 @@ if ($status) {
 }
 
 # https://sqlitebrowser.org/dl/ - DB Browser for SQLite
-$status = Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.12.2-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes"
+$status = Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.13.0-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\DB Browser for SQLite") {
         Remove-Item -Recurse -Force "${TOOLS}\DB Browser for SQLite" | Out-Null 2>&1
@@ -461,7 +461,7 @@ $status = Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packa
 $status = Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe" -CheckURL "Yes"
 
 # https://gluonhq.com/products/javafx/ - JavaFX
-$status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
+$status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.4/openjfx-21.0.4_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\javafx-sdk") {
         Remove-Item -Recurse -Force "${TOOLS}\javafx-sdk" | Out-Null 2>&1
@@ -498,11 +498,11 @@ if ($status) {
 }
 
 # https://www.maltego.com/downloads/ - Maltego
-$status = Get-FileFromUri -uri "https://downloads.maltego.com/maltego-v4/windows/MaltegoSetup.v4.6.0.exe" -FilePath ".\downloads\maltego.exe" -CheckURL "Yes"
+$status = Get-FileFromUri -uri "https://downloads.maltego.com/maltego-v4/windows/MaltegoSetup.v4.8.0.exe" -FilePath ".\downloads\maltego.exe" -CheckURL "Yes"
 
 
 # ELK
-$ELK_VERSION = "8.15.0"
+$ELK_VERSION = "8.15.1"
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes"
