@@ -294,6 +294,19 @@ function Install-Dokany {
     }
 }
 
+function Install-Fibratus {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-fibratus.txt")) {
+        Write-Output "Installing Fibratus"
+        Copy-Item "${SETUP_PATH}\fibratus.msi" "${WSDFIR_TEMP}\fibratus.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\fibratus.msi /qn /norestart"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-fibratus.txt" | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\Fibratus\bin"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\fibratus documentation (needs internet access).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command ${HOME}\Documents\tools\utils\start_fibratus.bat"
+    } else {
+        Write-Output "Fibratus is already installed"
+    }
+}
+
 function Install-Firefox {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-firefox.txt")) {
         Write-Output "Installing Firefox"

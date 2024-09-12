@@ -12,6 +12,7 @@ param (
     [switch]$DCode,
     [switch]$Docker,
     [switch]$Dokany,
+    [switch]$Fibratus,
     [switch]$Firefox,
     [switch]$FoxitReader,
     [switch]$GitBash,
@@ -88,6 +89,10 @@ if ($Docker.IsPresent) {
 
 if ($Dokany.IsPresent) {
     Install-Dokany
+}
+
+if ($Fibratus.IsPresent) {
+    Install-Fibratus
 }
 
 if ($Firefox.IsPresent) {

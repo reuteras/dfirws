@@ -15,7 +15,7 @@ Write-Output "Get-Content C:\log\npm.txt -Wait" | Out-File -FilePath "C:\Progres
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
 # Update path
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") + ";C:\Tools\node"
 &"${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\nodejs.zip" -o"${TOOLS}\node" 2>&1 >> "C:\log\npm.txt"
 Set-Location "${TOOLS}\node\node-*"
 Move-Item * ..
@@ -23,14 +23,16 @@ Move-Item * ..
 Set-Location "${TOOLS}\node"
 Remove-Item -r -Force node-v*
 Write-DateLog "Init npm." 2>&1 >> "C:\log\npm.txt"
-.\npm init -y  | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
+npm init -y  | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
 Write-DateLog "Add npm packages" 2>&1 >> "C:\log\npm.txt"
-# Add Deobfuscator
-.\npm install --global deobfuscator | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
-# Add jsdom
-.\npm install --global jsdom | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
-# Add box-js
-.\npm install --global box-js | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
+Write-DateLog "Install deobfuscator" 2>&1 >> "C:\log\npm.txt"
+npm install --global deobfuscator | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
+Write-DateLog "Install docsify" 2>&1 >> "C:\log\npm.txt"
+npm install --global docsify-cli | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
+Write-DateLog "Install jsdom" 2>&1 >> "C:\log\npm.txt"
+npm install --global jsdom | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
+Write-DateLog "Install box-js" 2>&1 >> "C:\log\npm.txt"
+npm install --global box-js | Out-String -Stream 2>&1 >> "C:\log\npm.txt"
 
 Get-Job | Receive-Job
 

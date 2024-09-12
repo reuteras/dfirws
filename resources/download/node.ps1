@@ -10,7 +10,7 @@ ${ROOT_PATH} = Resolve-Path "$ScriptRoot\..\..\"
 Write-DateLog "Setup Node and install npm packages in Sandbox." > ${ROOT_PATH}\log\npm.txt
 Write-DateLog "" > ${ROOT_PATH}\log\npm.txt
 
-$node_packages = @("box-js", "deobfuscator", "jsdom")
+$node_packages = @("box-js", "deobfuscator", "docsify-cli", "jsdom")
 
 if (! (Test-Path -Path "${ROOT_PATH}\tmp" )) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp" | Out-Null

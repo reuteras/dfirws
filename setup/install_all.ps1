@@ -14,6 +14,7 @@ Write-SynchronizedLog ([string](dfirws-install.ps1 -CMDer))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -DCode))
 #dfirws-install.ps1 -Docker
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Dokany))
+Write-SynchronizedLog ([string](dfirws-install.ps1 -Fibratus))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Firefox))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -FoxitReader))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -GitBash))

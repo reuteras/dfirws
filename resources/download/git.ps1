@@ -46,6 +46,7 @@ $repourls = `
     "https://github.com/netspooky/scare.git", `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
+    "https://github.com/rabbitstack/fibratus.git", `
     "https://github.com/reuteras/dfirws.wiki.git", `
     "https://github.com/reuteras/dfirws-sample-files.git", `
     "https://github.com/reuteras/MSRC.git", `

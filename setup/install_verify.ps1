@@ -236,6 +236,7 @@ Test-Command 4N4LDetector PE32
 $jaccessinspector_executable = (Get-ChildItem 'C:\Program Files\Amazon Corretto' -Recurse -Filter jaccessinspector.exe).FullName
 Test-Command $jaccessinspector_executable PE32
 Test-Command 'C:\Program Files\AuthLogParser\MasterParser.ps1' CRLF
+Test-Command fibratus PE32
 Test-Command git PE32
 Test-Command gxl2dot PE32
 Test-Command hasher PE32
