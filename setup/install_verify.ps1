@@ -9,7 +9,7 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
 
 # Verify that the file command is installed
 
-try { 
+try {
     Get-Command -ErrorAction Stop file.exe | Out-Null
 }
 catch {
