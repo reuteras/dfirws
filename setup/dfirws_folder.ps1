@@ -643,6 +643,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\veracrypt (runs
 
 # Utilities - Media
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Media" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\ffmpeg.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ffmpeg --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\VLC (runs dfirws-install -VLC).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -VLC"
 
 # Zimmerman

@@ -74,6 +74,16 @@ if ($status) {
     Move-Item ${TOOLS}\RdpCacheStitcher_* "${TOOLS}\RdpCacheStitcher"
 }
 
+# ffmpeg
+$status = Get-GitHubRelease -repo "BtbN/FFmpeg-Builds" -path "${SETUP_PATH}\ffmpeg.zip" -match "win64-gpl-7"
+if ($status) {
+    if (Test-Path "${TOOLS}\ffmpeg") {
+        Remove-Item "${TOOLS}\ffmpeg" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ffmpeg.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\ffmpeg-* "${TOOLS}\ffmpeg"
+}
+
 # ripgrep
 $status = Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "${SETUP_PATH}\ripgrep.zip" -match "x86_64-pc-windows-msvc.zip$"
 & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ripgrep.zip" -o"${TOOLS}" | Out-Null

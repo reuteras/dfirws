@@ -88,6 +88,7 @@ Test-Command dll_load64 PE32      # C:\Tools\bin\dll_load64.exe
 Test-Command dll_to_exe PE32      # C:\Tools\bin\dll_to_exe.exe
 Test-Command dsq PE32      # C:\Tools\bin\dsq.exe
 Test-Command evtx_dump PE32      # C:\Tools\bin\evtx_dump.exe
+Test-Command ffmpeg PE32      # C:\Tools\ffmpeg\bin\ffmpeg.exe
 Test-Command fq PE32      # C:\Tools\bin\fq.exe
 Test-Command fx PE32      # C:\Tools\bin\fx.exe
 Test-Command gron PE32      # C:\Tools\bin\gron.exe
