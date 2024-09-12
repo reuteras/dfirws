@@ -111,6 +111,8 @@ Test-Command velociraptor PE32      # C:\Tools\bin\velociraptor.exe
 Test-Command vt PE32      # C:\Tools\bin\vt.exe
 Test-Command yara PE32      # C:\Tools\bin\yara.exe
 Test-Command yarac PE32      # C:\Tools\bin\yarac.exe
+Test-Command yq PE32      # C:\Tools\bin\yq.exe
+Test-Command yr PE32      # C:\Tools\bin\yr.exe
 Test-Command bulk_extractor64 PE32      # C:\Tools\bulk_extractor\win64\bulk_extractor64.exe
 Test-Command capa PE32      # C:\Tools\capa\capa.exe
 Test-Command capa-ghidra PE32      # C:\Tools\capa-ghidra\capa-ghidra.exe

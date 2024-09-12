@@ -718,6 +718,22 @@ if ($status) {
     Move-Item ${TOOLS}\yarac64.exe ${TOOLS}\bin\yarac.exe
 }
 
+# yara-x
+$status = Get-GitHubRelease -repo "VirusTotal/yara-x" -path "${SETUP_PATH}\yara-x.zip" -match "x86_64-pc-windows-msvc"
+if ($status) {
+    if (Test-Path "${TOOLS}\bin\yr.exe") {
+        Remove-Item "${TOOLS}\bin\yr.exe" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\yara-x.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\yr.exe ${TOOLS}\bin\yr.exe
+}
+
+# yq
+$status = Get-GitHubRelease -repo "mikefarah/yq" -path "${SETUP_PATH}\yq.exe" -match "yq_windows_amd64.exe"
+if ($status) {
+    Copy-Item "${SETUP_PATH}\yq.exe" "${TOOLS}\bin"
+}
+
 # Get x64dbg - installed during start
 $status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match "snapshot/snapshot"
 
