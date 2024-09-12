@@ -264,7 +264,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
         Set-Location "C:\venv\regipy"
 
         python -m pip install -U pip >> "C:\log\python.txt"
-        python -m pip install -U regipy>=4.0.0 click tabulate libfwsi-python >> "C:\log\python.txt"
+        python -m pip install -U regipy>=4.0.0 click libfwsi-python python-evtx tabulate >> "C:\log\python.txt"
 
         Copy-Item "${WSDFIR_TEMP}\regipy.txt" "C:\venv\regipy\regipy.txt" -Force 2>&1 >> "C:\log\python.txt"
 
