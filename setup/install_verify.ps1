@@ -133,6 +133,7 @@ Test-Command mft2bodyfile PE32      # C:\Tools\cargo\bin\mft2bodyfile.exe
 Test-Command pf2bodyfile PE32      # C:\Tools\cargo\bin\pf2bodyfile.exe
 Test-Command pol_export PE32      # C:\Tools\cargo\bin\pol_export.exe
 Test-Command regdump PE32      # C:\Tools\cargo\bin\regdump.exe
+Test-Command sshniff PE32      # C:\Tools\cargo\bin\sshniff.exe
 Test-Command ts2date PE32      # C:\Tools\cargo\bin\ts2date.exe
 Test-Command usnjrnl_dump PE32      # C:\Tools\cargo\bin\usnjrnl_dump.exe
 Test-Command zip2bodyfile PE32      # C:\Tools\cargo\bin\zip2bodyfile.exe

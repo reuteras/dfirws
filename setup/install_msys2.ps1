@@ -24,7 +24,7 @@ $env:MSYSTEM = 'UCRT64'
 & "C:\msys64\usr\bin\bash.exe" -lc 'pacman-key --populate' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 & "C:\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 & "C:\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-& "C:\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syu git mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-autotools mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-make vim' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+& "C:\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syu git ncurses ncurses-devel mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-autotools mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-make vim' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
 Write-DateLog "MSYS2 installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 Write-Output "" > "C:\msys64\done"

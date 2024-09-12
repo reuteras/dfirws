@@ -340,6 +340,7 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "create mode " -and
     $_.Line -notmatch "delete mode " -and
     $_.Line -notmatch "rename " -and
+    $_.Line -notmatch "reinstalling" -and
     $_.Line -notmatch "origin/main Updating"
 }
 
@@ -363,7 +364,8 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "via WKD" -and
     $_.Line -notmatch "ERROR: 9DD0D4217D75" -and
     $_.Line -notmatch "usr\\share\\man\\man3" -and
-    $_.Line -notmatch "gpg-error.exe"
+    $_.Line -notmatch "gpg-error.exe" -and
+    $_.Line -notmatch "gpg-error"
 }
 
 if ($warnings -or $errors) {

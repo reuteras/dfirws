@@ -17,17 +17,10 @@ Install-GitBash >> "C:\log\rust.txt"
 Write-DateLog "Install Rust." >> "C:\log\rust.txt"
 Install-Rust >> "C:\log\rust.txt"
 
-# Alternative install method for Rust
-#Set-Location "${HOME}" >> "C:\log\rust.txt"
-#curl -o "rustup-init.exe" "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe" >> "C:\log\rust.txt"
-#& ".\rustup-init.exe" --default-host x86_64-pc-windows-gnu -y >> "C:\log\rust.txt"
-#$env:PATH="${env:HOME}\.cargo\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
-
 # Set PATH to include Rust and Git
 $env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH};${MSYS2_DIR};${MSYS2_DIR}\ucrt64\bin;${MSYS2_DIR}\usr\bin"
 
 # Install Rust tools
-# Currently disabled due to issues with the Rust compiler
 Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
@@ -43,8 +36,12 @@ cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "
 cargo install --root "C:\cargo" usnjrnl 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 # Requires gcc to compile
 cargo install --root "C:\cargo" CuTE-tui 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
-# https://github.com/janstarke/regview
-# https://github.com/janstarke/ntdsextract2
+
+Set-Location "C:\tmp"
+git clone https://github.com/CrzPhil/SSHniff.git
+Set-Location "C:\tmp\SSHniff\sshniff"
+cargo build --release
+Copy-Item ".\target\release\sshniff.exe" "C:\cargo\bin\sshniff.exe"
 
 Write-DateLog "Rust: Done installing Rust based tools in sandbox." >> "C:\log\rust.txt"
 

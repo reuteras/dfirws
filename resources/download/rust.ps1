@@ -17,7 +17,6 @@ ${CURRENT_VERSION_CUTE_TUI} = (curl --silent -L "https://crates.io/api/v1/crates
 ${CURRENT_VERSION_MFT2BODYFILE} = (curl --silent -L "https://crates.io/api/v1/crates/mft2bodyfile" | ConvertFrom-Json).crate.max_stable_version
 ${CURRENT_VERSION_USNJRNL} = (curl --silent -L "https://crates.io/api/v1/crates/usnjrnl" | ConvertFrom-Json).crate.max_stable_version
 
-
 ${STATUS} = $true
 
 if (Test-Path -Path "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" ) {
