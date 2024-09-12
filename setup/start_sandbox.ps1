@@ -253,12 +253,10 @@ Add-ToUserPath "${TOOLS}\perl\perl\bin"
 Add-ToUserPath "${env:ProgramFiles}\4n4lDetector"
 Add-ToUserPath "${env:ProgramFiles}\7-Zip"
 Add-ToUserPath "${env:ProgramFiles}\bin"
-Add-ToUserPath "${env:ProgramFiles}\ClamAV"
 Add-ToUserPath "${env:ProgramFiles}\Git\bin"
 Add-ToUserPath "${env:ProgramFiles}\Git\cmd"
 Add-ToUserPath "${env:ProgramFiles}\Git\usr\bin"
 Add-ToUserPath "${env:ProgramFiles}\graphviz\bin"
-Add-ToUserPath "${env:ProgramFiles}\hashcat"
 Add-ToUserPath "${env:ProgramFiles}\Hasher"
 Add-ToUserPath "${env:ProgramFiles}\hxd"
 Add-ToUserPath "${env:ProgramFiles}\IDR\bin"
@@ -293,7 +291,7 @@ Add-ToUserPath "${TOOLS}\DB Browser for SQLite"
 Add-ToUserPath "${TOOLS}\dbeaver"
 Add-ToUserPath "${TOOLS}\DidierStevens"
 Add-ToUserPath "${TOOLS}\die"
-Add-ToUserPath "${TOOLS}\dumpbin\x64"
+Add-ToUserPath "${TOOLS}\dumpbin"
 Add-ToUserPath "${TOOLS}\elfparser-ng\Release"
 Add-ToUserPath "${TOOLS}\ExeinfoPE"
 Add-ToUserPath "${TOOLS}\exiftool"
@@ -305,6 +303,7 @@ Add-ToUserPath "${TOOLS}\gftrace64"
 Add-ToUserPath "${TOOLS}\GoReSym"
 Add-ToUserPath "${TOOLS}\h2database"
 Add-ToUserPath "${TOOLS}\hayabusa"
+Add-ToUserPath "${TOOLS}\hfs"
 Add-ToUserPath "${TOOLS}\imhex"
 Add-ToUserPath "${TOOLS}\INDXRipper"
 Add-ToUserPath "${TOOLS}\jd-gui"
@@ -321,7 +320,7 @@ Add-ToUserPath "${TOOLS}\php"
 Add-ToUserPath "${TOOLS}\procdot\win64"
 Add-ToUserPath "${TOOLS}\pstwalker"
 Add-ToUserPath "${TOOLS}\qpdf\bin"
-#Add-ToUserPath "${TOOLS}\qrtool"
+Add-ToUserPath "${TOOLS}\qrtool"
 Add-ToUserPath "${TOOLS}\radare2\bin"
 Add-ToUserPath "${TOOLS}\RdpCacheStitcher"
 Add-ToUserPath "${TOOLS}\redress"
@@ -611,6 +610,19 @@ if ("${WSDFIR_SYSMON}" -eq "Yes") {
     & "${TOOLS}\sysinternals\Sysmon64.exe" -accepteula -i "${WSDFIR_SYSMON_CONF}" | Out-Null
 }
 Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+if (Test-Path "C:\log\log.txt") {
+    Write-SynchronizedLog "Running install_all.ps1 script."
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
+    & "${HOME}\Documents\tools\install_all.ps1" | Out-Null
+    Write-SynchronizedLog "Running install_verify.ps1 script."
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
+    & "${HOME}\Documents\tools\install_verify.ps1" | Out-Null
+    Get-Job | Wait-Job | Out-Null
+    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
+    Get-Job | Remove-Job | Out-Null
+    Write-Output "" > "C:\log\verify_done"
+}
 
 Write-DateLog "Installation done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 

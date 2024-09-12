@@ -89,6 +89,59 @@ function Write-DateLog {
     Write-Output "${fullMessage}"
 }
 
+function Write-SynchronizedLog {
+    param (
+        [Parameter(Mandatory=$True)] [string]$Message,
+        [Parameter(Mandatory=$false)] [string]$LogFile = "C:\log\verify.txt"
+    )
+
+    $logMutex = New-Object -TypeName 'System.Threading.Mutex' -ArgumentList $false, 'Global\verifyLogMutex'
+
+    try {
+        $result = $logMutex.WaitOne()
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $fullMessage = "$timestamp - $Message"
+        Add-Content -Path $LogFile -Value $fullMessage 2>&1 | Out-Null
+    }
+    finally {
+        $result = $logMutex.ReleaseMutex()
+    }
+
+    if (!$result) {
+        Write-Debug "Error"
+    }
+}
+
+# Function to verify a command exists and is of a certain type
+function Test-Command {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $name,
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $type
+    )
+
+    try {
+        $command = Get-Command -ErrorAction Stop $name
+    }
+    catch {
+        Write-SynchronizedLog "ERROR: $name does not exist"
+        return
+    }
+
+    if ( file $command.Path | Where-Object {$_ -match $type}) {
+        Write-SynchronizedLog "SUCCESS: $name exists and type matches $type"
+    } else {
+        $actual_type = file $command.Path
+        Write-SynchronizedLog "ERROR: $name exists but is not of type $type. Type is $actual_type"
+    }
+}
+
 # Functions to help install programs
 function Install-Apimonitor {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-apimonitor.txt")) {
@@ -168,8 +221,10 @@ function Install-BurpSuite {
 function Install-Chrome {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-chrome.txt")) {
         Write-Output "Installing Chrome"
-        Copy-Item "${SETUP_PATH}\chrome.exe" "${WSDFIR_TEMP}\chrome.exe" -Force
-        & "${WSDFIR_TEMP}\chrome.exe"
+        Copy-Item "${SETUP_PATH}\chrome.msi" "${WSDFIR_TEMP}\chrome.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\chrome.msi /qn /norestart"
+        & "${WSDFIR_TEMP}\chrome.msi" /quiet /norestart
+        Add-ToUserPath "${env:ProgramFiles}\Google\Chrome\Application"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-chrome.txt" | Out-Null
     } else {
         Write-Output "Chrome is already installed"
@@ -196,7 +251,7 @@ function Install-ClamAV {
 function Install-CMDer {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-cmder.txt")) {
         Write-Output "Installing Cmder"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cmder.7z" -o"${env:ProgramFiles}\cmder"
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cmder.7z" -o"${env:ProgramFiles}\cmder" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\cmder"
         Add-ToUserPath "${env:ProgramFiles}\cmder\bin"
         Write-Output "$VENV\default\scripts\activate.bat" | Out-File -Append -Encoding "ascii" ${env:ProgramFiles}\cmder\config\user_profile.cmd
@@ -316,7 +371,7 @@ function Install-Hashcat {
 function Install-Jadx {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-jadx.txt")) {
         Write-Output "Installing Jadx"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jadx.zip" -o"${env:ProgramFiles}\jadx"
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jadx.zip" -o"${env:ProgramFiles}\jadx" | Out-Null
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-jadx.txt" | Out-Null
     } else {
         Write-Output "Jadx is already installed"
@@ -386,11 +441,10 @@ function Install-Neo4j {
         Write-Output "Installing Neo4j"
         Copy-Item "${SETUP_PATH}\microsoft-jdk-11.msi" "${WSDFIR_TEMP}\microsoft-jdk-11.msi" -Force
         Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}"
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}" | Out-Null
         Move-Item ${env:ProgramFiles}\neo4j-community* ${env:ProgramFiles}\neo4j
         Add-ToUserPath "${env:ProgramFiles}\neo4j\bin"
-        & "${env:ProgramFiles}\neo4j\bin\neo4j-admin" set-initial-password neo4j
-        Copy-Item -Recurse "$TOOLS\neo4j" "${env:ProgramFiles}" -Force
+        pwsh.exe -Command { $env:PATH="C:\java\bin;$env:PATH"; $env:JAVA_HOME="C:\java" ; & "${env:ProgramFiles}\neo4j\bin\neo4j-admin" set-initial-password neo4j | Out-Null}
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-neo4j.txt" | Out-Null
     } else {
         Write-Output "Neo4j is already installed"
@@ -423,7 +477,7 @@ function Install-OhMyPosh {
         Write-Output "Installing OhMyPosh"
         Copy-Item "${SETUP_PATH}\oh-my-posh.exe" "${WSDFIR_TEMP}\oh-my-posh.exe" -Force
         Start-Process -Wait "${WSDFIR_TEMP}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
-        & "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" font install --user "${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip"
+        & "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" font install "${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
     } else {
         Write-Output "OhMyPosh is already installed"
@@ -446,6 +500,7 @@ function Install-PuTTY {
         Write-Output "Installing PuTTY"
         Copy-Item "${SETUP_PATH}\putty.msi" "${WSDFIR_TEMP}\putty.msi" -Force
         Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\putty.msi /qn /norestart"
+        Add-ToUserPath "${env:ProgramFiles}\PuTTY"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-putty.txt" | Out-Null
     } else {
         Write-Output "PuTTY is already installed"
@@ -637,6 +692,7 @@ function Install-Zui {
         Write-Output "Installing Zui"
         Copy-Item "${SETUP_PATH}\zui.exe" "${WSDFIR_TEMP}\zui.exe" -Force
         & "${WSDFIR_TEMP}\zui.exe" /S /AllUsers
+        Add-ToUserPath "${env:ProgramFiles}\Zui"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-zui.txt" | Out-Null
     } else {
         Write-Output "Zui is already installed"

@@ -69,6 +69,8 @@ param(
     [Switch]$Rust,
     [Parameter(HelpMessage = "Update tools downloaded via winget.")]
     [Switch]$Winget,
+    [Parameter(HelpMessage = "Verify that tools are available.")]
+    [Switch]$Verify,
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
     [Switch]$Zimmerman
     )
@@ -117,7 +119,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
@@ -317,6 +319,18 @@ if (Test-Path ".\tmp\msys2") {
     Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
 }
 
+# Verify that tools are available
+if ($Verify.IsPresent) {
+    Write-DateLog "Verify that tools are available."
+    Start-Job -FilePath .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    Write-DateLog "Wait for verify sandbox to finish."
+    Get-Job | Wait-Job | Out-Null
+    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
+    Get-Job | Remove-Job | Out-Null
+    Write-DateLog "Verify done."
+}
+
+# Check for errors and warnings in log files
 $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
     $_.Line -notmatch " INFO " -and
     $_.Line -notmatch "This is taking longer than usual" -and
@@ -347,7 +361,9 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch ": No data" -and
     $_.Line -notmatch "could not be locally" -and
     $_.Line -notmatch "via WKD" -and
-    $_.Line -notmatch "ERROR: 9DD0D4217D75"
+    $_.Line -notmatch "ERROR: 9DD0D4217D75" -and
+    $_.Line -notmatch "usr\\share\\man\\man3" -and
+    $_.Line -notmatch "gpg-error.exe"
 }
 
 if ($warnings -or $errors) {
