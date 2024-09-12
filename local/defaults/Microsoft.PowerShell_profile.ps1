@@ -48,6 +48,9 @@ if (-not(Test-Path "${HOME}\tmp")) {
 	New-Item -ItemType Directory "${HOME}\tmp" | Out-Null
 }
 
+# Aliases
+Set-Alias di dfirws-install.ps1
+
 #
 # Init oh-my-posh and set theme
 ##
