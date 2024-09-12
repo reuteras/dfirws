@@ -97,6 +97,7 @@ poetry add `
     rzpipe `
     setuptools `
     shodan `
+    stego-lsb `
     termcolor `
     textsearch `
     time-decode `

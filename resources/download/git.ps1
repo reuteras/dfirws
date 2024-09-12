@@ -56,6 +56,7 @@ $repourls = `
     "https://github.com/SigmaHQ/sigma.git", `
     "https://github.com/StrangerealIntel/Shadow-Pulse.git", `
     "https://github.com/swisscom/PowerSponse.git", `
+    "https://github.com/techchipnet/HiddenWave.git", `
     "https://github.com/thewhiteninja/deobshell.git", `
     "https://github.com/TrimarcJake/BlueTuxedo.git", `
     "https://github.com/ufrisk/LeechCore.wiki.git", `

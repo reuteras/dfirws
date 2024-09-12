@@ -74,6 +74,7 @@ Test-Command gdb PE32
 
 # First generated with the command below and then cleaned manually.
 # foreach ($name in (Get-ChildItem C:\Tools\ -Filter *.exe -Recurse) ) {"Test-Command", $name.name.Split('.')[0], "PE32      #", $name.FullName  -join " " }
+Test-Command Audacity PE32
 Test-Command adalanche PE32      # C:\Tools\bin\adalanche.exe
 Test-Command aleapp PE32      # C:\Tools\bin\aleapp.exe
 Test-Command aleappGUI PE32      # C:\Tools\bin\aleappGUI.exe

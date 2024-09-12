@@ -50,6 +50,16 @@ if ($status) {
     Copy-Item ${SETUP_PATH}\CobaltStrikeScan.exe ${TOOLS}\bin\
 }
 
+# Audacity
+$status = Get-GitHubRelease -repo "audacity/audacity" -path "${SETUP_PATH}\audacity.zip" -match "64bit.zip"
+if ($status) {
+    if (Test-Path "${TOOLS}\audacity") {
+        Remove-Item "${TOOLS}\audacity" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\audacity.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\audacity-* "${TOOLS}\audacity"
+}
+
 # Ares
 $status = Get-GitHubRelease -repo "bee-san/Ares" -path "${SETUP_PATH}\ares.zip" -match "windows"
 if ($status) {
