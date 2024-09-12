@@ -546,6 +546,15 @@ if ($status) {
     }
 }
 
+# hfs
+$status = Get-GitHubRelease -repo "rejetto/hfs" -path "${SETUP_PATH}\hfs.zip" -match "hfs-windows-x64"
+if ($status) {
+    if (Test-Path "${TOOLS}\hfs") {
+        Remove-Item "${TOOLS}\hfs" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hfs.zip" -o"${TOOLS}\hfs" | Out-Null
+}
+
 # obsidian-mitre-attack
 $status = Get-GitHubRelease -repo "reuteras/obsidian-mitre-attack" -path "${SETUP_PATH}\obsidian-mitre-attack.zip" -match "release.zip"
 if ($status) {
@@ -601,15 +610,15 @@ if ($status) {
     Move-Item ${TOOLS}\sleuthkit-* "${TOOLS}\sleuthkit"
 }
 
-# qrtool - Removed from GitHub
-#$status = Get-GitHubRelease -repo "sorairolake/qrtool" -path "${SETUP_PATH}\qrtool.zip" -match "x86_64-pc-windows-msvc"
-#if ($status) {
-#    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qrtool.zip" -o"${TOOLS}" | Out-Null
-#    if (Test-Path "${TOOLS}\qrtool") {
-#        Remove-Item "${TOOLS}\qrtool" -Recurse -Force
-#    }
-#    Move-Item ${TOOLS}\qrtool-* "${TOOLS}\qrtool"
-#}
+# qrtool
+$status = Get-GitHubRelease -repo "sorairolake/qrtool" -path "${SETUP_PATH}\qrtool.zip" -match "x86_64-pc-windows-msvc"
+if ($status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qrtool.zip" -o"${TOOLS}" | Out-Null
+    if (Test-Path "${TOOLS}\qrtool") {
+        Remove-Item "${TOOLS}\qrtool" -Recurse -Force
+    }
+    Move-Item ${TOOLS}\qrtool-* "${TOOLS}\qrtool"
+}
 
 # debloat
 $status = Get-GitHubRelease -repo "Squiblydoo/debloat" -path "${SETUP_PATH}\debloat.zip" -match "Windows"

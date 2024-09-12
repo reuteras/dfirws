@@ -355,10 +355,6 @@ if ($status) {
     Move-Item ${SETUP_PATH}\dcode\Dcode-* "${SETUP_PATH}\dcode\dcode.exe" | Out-Null
 }
 
-# HFS - HTTP File Server
-$status = Get-FileFromUri -uri "https://rejetto.com/hfs/download" -FilePath ".\downloads\hfs.exe"
-Copy-Item ".\downloads\hfs.exe" "${TOOLS}\bin\hfs.exe" -Force
-
 # Veracrypt - manual installation
 $VeracryptUrl = Get-DownloadUrlFromPage -Url "https://www.veracrypt.fr/en/Downloads.html" -RegEx 'https://[^"]+VeraCrypt_Setup[^"]+.msi'
 $status = Get-FileFromUri -uri "${VeracryptUrl}" -FilePath ".\downloads\veracrypt.msi"
