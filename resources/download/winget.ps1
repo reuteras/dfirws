@@ -22,8 +22,8 @@ Clear-Tmp winget
 Clear-Tmp winget
 Write-SynchronizedLog "winget: Downloading Chrome."
 Get-WinGet "Google.Chrome"
-if (Test-Path .\tmp\winget\Google*.exe) {
-    Copy-Item .\tmp\winget\Google*.exe ".\downloads\chrome.exe"
+if (Test-Path .\tmp\winget\Google*.msi) {
+    Copy-Item .\tmp\winget\Google*.msi ".\downloads\chrome.msi"
 }
 Clear-Tmp winget
 
