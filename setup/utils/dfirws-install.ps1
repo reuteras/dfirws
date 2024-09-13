@@ -16,6 +16,7 @@ param (
     [switch]$Firefox,
     [switch]$FoxitReader,
     [switch]$GitBash,
+    [switch]$GoogleEarth,
     [switch]$GoLang,
     [switch]$Gpg4win,
     [switch]$Hashcat,
@@ -28,6 +29,7 @@ param (
     [switch]$Node,
     [switch]$Obsidian,
     [switch]$OhMyPosh,
+    [switch]$OSFMount,
     [switch]$PDFStreamDumper,
     [switch]$PuTTY,
     [switch]$Qemu,
@@ -111,6 +113,10 @@ if ($GoLang.IsPresent) {
     Install-GoLang
 }
 
+if ($GoogleEarth.IsPresent) {
+    Install-GoogleEarth
+}
+
 if ($Gpg4win.IsPresent) {
     Install-Gpg4win
 }
@@ -153,6 +159,10 @@ if ($Obsidian.IsPresent) {
 
 if ($OhMyPosh.IsPresent) {
     Install-OhMyPosh
+}
+
+if ($OSFMount.IsPresent) {
+    Install-OSFMount
 }
 
 if ($PDFStreamDumper.IsPresent) {

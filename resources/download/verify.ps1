@@ -7,6 +7,8 @@ $ROOT_PATH = Resolve-Path "$ScriptRoot\..\..\"
 
 . "${ScriptRoot}\common.ps1"
 
+Write-Output "" > "${ROOT_PATH}\log\verify.txt"
+
 Write-SynchronizedLog "Verify installed tools."
 Write-SynchronizedLog ""
 

@@ -53,7 +53,6 @@ Test-Command $Maltego_Executable PE32
 Test-Command neo4j ASCII
 Test-Command node PE32
 Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe" PE32
-Test-Command "C:\Program Files\OSFMount\OSFMount.exe" PE32
 #Test-Command oh-my-posh PE32
 Test-Command "C:\Sandsprite\PDFStreamDumper\PDFStreamDumper.exe" PE32
 Test-Command putty PE32
@@ -427,6 +426,7 @@ Test-Command C:\venv\pe2pic\Scripts\pe2pic.py Python
 Test-Command C:\venv\scare\Scripts\scare.py Python
 
 # Downloads only files
-Test-Command C:\downloads\openvpn.msi PE32
+Test-Command C:\downloads\openvpn.msi "MSI Installer"
+Test-Command C:\downloads\osfmount.exe PE32
 Test-Command C:\downloads\tailscale.exe PE32
-Test-Command C:\downloads\wireguard.msi PE32
+Test-Command C:\downloads\wireguard.msi "MSI Installer"

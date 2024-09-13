@@ -358,7 +358,7 @@ function Install-GoLang {
     }
 }
 
-function Install-GoogleEearth {
+function Install-GoogleEarth {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-googleearth.txt")) {
         Write-Output "Installing Google Earth"
         Copy-Item "${SETUP_PATH}\googleearth.exe" "${WSDFIR_TEMP}\googleearth.exe" -Force
@@ -500,7 +500,7 @@ function Install-OSFMount {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-osfmount.txt")) {
         Write-Output "Installing OSFMount"
         Copy-Item "${SETUP_PATH}\osfmount.exe" "${WSDFIR_TEMP}\osfmount.exe" -Force
-        Start-Process -Wait "${WSDFIR_TEMP}\osfmount.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Start-Process -Wait "${WSDFIR_TEMP}\osfmount.exe" -ArgumentList '/S /V"/qn /suppressmsgboxes REBOOT=ReallySuppress"'
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-osfmount.txt" | Out-Null
     } else {
         Write-Output "OSFMount is already installed"
