@@ -35,7 +35,7 @@
     </MappedFolder>
     <MappedFolder>
       <HostFolder>__SANDBOX__\mount\msys64</HostFolder>
-      <SandboxFolder>C:\msys64</SandboxFolder>
+      <SandboxFolder>C:\msys64_readonly</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>

@@ -25,6 +25,7 @@ param (
     [switch]$LibreOffice,
     [switch]$Loki,
     [switch]$Maltego,
+    [switch]$Msys2,
     [switch]$Neo4j,
     [switch]$Node,
     [switch]$Obsidian,
@@ -143,6 +144,10 @@ if ($Loki.IsPresent) {
 
 if ($Maltego.IsPresent) {
     Install-Maltego
+}
+
+if ($Msys2.IsPresent) {
+    Install-Msys2
 }
 
 if ($Neo4j.IsPresent) {

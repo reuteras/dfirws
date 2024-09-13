@@ -181,4 +181,17 @@ if (Test-Path .\tmp\winget\tailscale*.exe) {
 }
 Clear-Tmp winget
 
+# Rclone
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading Rclone."
+Get-WinGet "Rclone.Rclone"
+if (Test-Path .\tmp\winget\rclone*.zip) {
+    Copy-Item .\tmp\winget\rclone*.zip ".\downloads\rclone.zip"
+    if (Test-Path "${TOOLS}\rclone") {
+        Remove-Item -Recurse -Force "${TOOLS}\rclone" | Out-Null
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\rclone.zip" -o"${TOOLS}\" | Out-Null
+    Move-Item "${TOOLS}\rclone-*" "${TOOLS}\rclone" -Force
+}
+
 Write-SynchronizedLog "winget: Download complete."

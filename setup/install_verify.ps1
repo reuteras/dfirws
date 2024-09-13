@@ -193,6 +193,7 @@ Test-Command pstwalker PE32      # C:\Tools\pstwalker\pstwalker.exe
 Test-Command qpdf PE32      # C:\Tools\qpdf\bin\qpdf.exe
 Test-Command qrtool PE32      # C:\Tools\qrtool\qrtool.exe
 Test-Command radare2 PE32      # C:\Tools\radare2\bin\radare2.exe
+Test-Command rclone PE32      # C:\Tools\rclone\rclone.exe
 Test-Command RdpCacheStitcher PE32      # C:\Tools\RdpCacheStitcher\RdpCacheStitcher.exe
 Test-Command redress PE32      # C:\Tools\redress\redress.exe
 Test-Command rg PE32      # C:\Tools\ripgrep\rg.exe

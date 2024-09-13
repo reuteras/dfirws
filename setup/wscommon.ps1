@@ -460,6 +460,20 @@ function Install-Maltego {
         Write-Output "Maltego is already installed"
     }
 }
+
+function  Install-Msys2 {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-msys2.txt")) {
+        Write-Output "Installing MSYS2"
+        Robocopy.exe /MT:96 /MIR /NP /NS /NC /NFL /NDL "C:\msys64_readonly" "C:\msys64"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (MSYS2-version).lnk" -DestinationPath "C:\msys64\usr\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
+        if (!(Test-Path "C:\msys64\tmp")) {
+            New-Item -ItemType Directory -Path "C:\msys64\tmp" | Out-Null
+        }
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-msys2.txt" | Out-Null
+    } else {
+        Write-Output "MSYS2 is already installed"
+    }
+}
 function Install-Neo4j {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neo4j.txt")) {
         Write-Output "Installing Neo4j"
