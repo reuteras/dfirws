@@ -54,13 +54,6 @@ if (Test-Path .\tmp\winget\IrfanView*.exe) {
 }
 Clear-Tmp winget
 
-# Microsoft LogParser - available via git repo Events-Ripper
-#Clear-Tmp winget
-#Write-SynchronizedLog "winget: Downloading Microsoft LogParser."
-#Get-WinGet Microsoft.LogParser
-#Copy-Item .\tmp\winget\Log*.msi .\downloads\logparser.msi
-#Clear-Tmp winget
-
 # Obsidian - available for installation via dfirws-install.ps1
 Clear-Tmp winget
 Write-SynchronizedLog "winget: Downloading Obsidian."
@@ -140,6 +133,51 @@ Write-SynchronizedLog "winget: Downloading WinMerge."
 Get-WinGet "WinMerge.WinMerge"
 if (Test-Path .\tmp\winget\WinMerge*.exe) {
     Copy-Item .\tmp\winget\WinMerge*.exe ".\downloads\winmerge.exe"
+}
+Clear-Tmp winget
+
+# OpenVPN - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading OpenVPN."
+Get-WinGet "OpenVPNTechnologies.OpenVPNConnect"
+if (Test-Path .\tmp\winget\OpenVPN*.msi) {
+    Copy-Item .\tmp\winget\OpenVPN*.msi ".\downloads\openvpn.msi"
+}
+Clear-Tmp winget
+
+# Google Earth Pro - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading Google Earth Pro."
+Get-WinGet "Google.EarthPro"
+if (Test-Path .\tmp\winget\Google*.exe) {
+    Copy-Item .\tmp\winget\Google*.exe ".\downloads\googleearth.exe"
+}
+Clear-Tmp winget
+
+# Passmark OSFMount - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading OSFMount."
+Get-WinGet "PassmarkSoftware.OSFMount"
+if (Test-Path .\tmp\winget\OSFMount*.exe) {
+    Copy-Item .\tmp\winget\OSFMount*.exe ".\downloads\osfmount.exe"
+}
+Clear-Tmp winget
+
+# WireGuard.WireGuard - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading WireGuard."
+Get-WinGet "WireGuard.WireGuard"
+if (Test-Path .\tmp\winget\wireguard*.msi) {
+    Copy-Item .\tmp\winget\wireguard*.msi ".\downloads\wireguard.msi"
+}
+Clear-Tmp winget
+
+# tailscale - available for installation via dfirws-install.ps1
+Clear-Tmp winget
+Write-SynchronizedLog "winget: Downloading Tailscale."
+Get-WinGet "tailscale.tailscale"
+if (Test-Path .\tmp\winget\tailscale*.exe) {
+    Copy-Item .\tmp\winget\tailscale*.exe ".\downloads\tailscale.exe"
 }
 Clear-Tmp winget
 

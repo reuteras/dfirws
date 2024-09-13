@@ -358,6 +358,17 @@ function Install-GoLang {
     }
 }
 
+function Install-GoogleEearth {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-googleearth.txt")) {
+        Write-Output "Installing Google Earth"
+        Copy-Item "${SETUP_PATH}\googleearth.exe" "${WSDFIR_TEMP}\googleearth.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\googleearth.exe" -ArgumentList 'OMAHA=1'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-googleearth.txt" | Out-Null
+    } else {
+        Write-Output "Google Earth is already installed"
+    }
+}
+
 function Install-Gpg4win {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-gpg4win.txt")) {
         Write-Output "Installing Gpg4win"
@@ -485,6 +496,16 @@ function Install-Obsidian {
     }
 }
 
+function Install-OSFMount {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-osfmount.txt")) {
+        Write-Output "Installing OSFMount"
+        Copy-Item "${SETUP_PATH}\osfmount.exe" "${WSDFIR_TEMP}\osfmount.exe" -Force
+        Start-Process -Wait "${WSDFIR_TEMP}\osfmount.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-osfmount.txt" | Out-Null
+    } else {
+        Write-Output "OSFMount is already installed"
+    }
+}
 function Install-OhMyPosh {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-ohmyposh.txt")) {
         Write-Output "Installing OhMyPosh"

@@ -40,6 +40,7 @@ Test-Command $Dokany_Executable PE32
 Test-Command "C:\Program Files\Mozilla Firefox\firefox.exe" PE32
 Test-Command "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" PE32
 Test-Command go.exe PE32
+Test-Command "C:\Program Files\Google\Google Earth Pro\client\googleearth.exe" PE32
 Test-Command gpg PE32
 Test-Command hashcat PE32
 $Jadx_Library = (Get-ChildItem 'C:\Program Files\Jadx\' -Recurse -Filter *.jar).FullName
@@ -52,6 +53,7 @@ Test-Command $Maltego_Executable PE32
 Test-Command neo4j ASCII
 Test-Command node PE32
 Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe" PE32
+Test-Command "C:\Program Files\OSFMount\OSFMount.exe" PE32
 #Test-Command oh-my-posh PE32
 Test-Command "C:\Sandsprite\PDFStreamDumper\PDFStreamDumper.exe" PE32
 Test-Command putty PE32
@@ -105,6 +107,7 @@ Test-Command kdb_check PE32      # C:\Tools\bin\kdb_check.exe
 Test-Command MetadataPlus PE32      # C:\Tools\bin\MetadataPlus.exe
 Test-Command MFTBrowser PE32      # C:\Tools\bin\MFTBrowser.exe
 Test-Command msys2 PE32      # C:\Tools\bin\msys2.exe
+Test-Command ngrok PE32      # C:\Tools\bin\ngrok.exe
 Test-Command pe_check PE32      # C:\Tools\bin\pe_check.exe
 Test-Command pe-sieve PE32      # C:\Tools\bin\pe-sieve.exe
 Test-Command PrefetchBrowser PE32      # C:\Tools\bin\PrefetchBrowser.exe
@@ -422,3 +425,8 @@ Test-Command C:\venv\jep\Scripts\readelf.py Python
 Test-Command C:\venv\mwcp\Scripts\readelf.py Python
 Test-Command C:\venv\pe2pic\Scripts\pe2pic.py Python
 Test-Command C:\venv\scare\Scripts\scare.py Python
+
+# Downloads only files
+Test-Command C:\downloads\openvpn.msi PE32
+Test-Command C:\downloads\tailscale.exe PE32
+Test-Command C:\downloads\wireguard.msi PE32

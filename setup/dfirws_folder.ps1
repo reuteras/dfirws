@@ -358,8 +358,12 @@ New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Network" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\fakenet\fakenet.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\hfs.exe.lnk" -DestinationPath "${TOOLS}\hfs\hfs.exe" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\ipexpand.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\ngrok.exe.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ngrok.exe --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\openvpn installer.lnk" -DestinationPath "${SETUP_PATH}\openvpn.msi"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\PuTTY (runs dfirws-install -PuTTY).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -PuTTY"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\scapy.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\tailscale installer.lnk" -DestinationPath "${SETUP_PATH}\tailscale.exe"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\wireguard installer.lnk" -DestinationPath "${SETUP_PATH}\wireguard.msi"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Wireshark (runs dfirws-install -Wireshark).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Wireshark"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Zui (runs dfirws-install -Zui).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Zui"
 
@@ -642,8 +646,14 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\protodump.lnk" 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\sigs.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sigs.py --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\veracrypt (runs dfirws-install -Veracrypt).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Veracrypt"
 
+# Utilities - CTF
+New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\CTF" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\CTF\HiddenWave (and ExWave).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\HiddenWave" -Arguments "-NoExit -command dir"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\CTF\stegolsb.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command stegolsb --help"
+
 # Utilities - Media
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Media" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\Audacity.lnk" -DestinationPath "${TOOLS}\Audacity\audacity.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\ffmpeg.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ffmpeg --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\VLC (runs dfirws-install -VLC).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -VLC"
 
