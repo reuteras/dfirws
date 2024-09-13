@@ -464,7 +464,7 @@ function Install-Maltego {
 function  Install-Msys2 {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-msys2.txt")) {
         Write-Output "Installing MSYS2"
-        Robocopy.exe /MT:96 /MIR /NP /NS /NC /NFL /NDL "C:\msys64_readonly" "C:\msys64"
+        Robocopy.exe /MT:96 /MIR /NP /NS /NC /NFL /NDL "C:\msys64_readonly" "C:\msys64" | Out-Null
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (MSYS2-version).lnk" -DestinationPath "C:\msys64\usr\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
         if (!(Test-Path "C:\msys64\tmp")) {
             New-Item -ItemType Directory -Path "C:\msys64\tmp" | Out-Null
