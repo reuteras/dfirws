@@ -342,6 +342,7 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "rename " -and
     $_.Line -notmatch "reinstalling" -and
     $_.Line -notmatch "origin/main Updating" -and
+    $_.Line -notmatch "new branch" -and
     $_.Line -notmatch "core_perl"
 }
 
