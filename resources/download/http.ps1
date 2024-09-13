@@ -367,6 +367,17 @@ $status = Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\micro
 $NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'
 $status = Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes"
 
+
+# https://ngrok.com/download - ngrok - installed during start
+$NgrokURK = Get-DownloadUrlFromPage -Url "https://ngrok.com/download" -RegEx 'https://bin.equinox.io/c/[^/]+/ngrok-v[0-9]+-stable-windows-amd64.zip'
+$status = Get-FileFromUri -uri "${NgrokURK}" -FilePath ".\downloads\ngrok.zip"
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\bin\ngrok.exe") {
+        Remove-Item -Force "${TOOLS}\bin\ngrok.exe" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ngrok.zip" -o"${TOOLS}\bin" | Out-Null
+}
+
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
 $LibreOfficeVersionDownloadPage = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
 $LibreOfficeVersion = Get-DownloadUrlFromPage -Url "${LibreOfficeVersionDownloadPage}" -RegEx 'https://[^"]+.msi'
@@ -392,6 +403,9 @@ if ($status) {
 
 # Foxit Reader - manual installation
 $status = Get-FileFromUri -uri "https://www.foxit.com/downloads/latest.html?product=Foxit-Reader&platform=Windows&version=&package_type=&language=English&distID=" -FilePath ".\downloads\foxitreader.exe"
+
+# OpenVPN - manual installation
+$status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi"
 
 # Update the links below when new versions are released
 
