@@ -53,7 +53,7 @@ Get-WinGet "RubyInstallerTeam.Ruby.3.2" "Ruby*.exe" "ruby.exe"
 
 # VideoLAN VLC - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading VLC."
-Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc.exe"
+Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe"
 
 # VirusTotal CLI
 Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
