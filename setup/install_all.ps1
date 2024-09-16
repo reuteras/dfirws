@@ -11,6 +11,7 @@ Write-SynchronizedLog ([string](dfirws-install.ps1 -BurpSuite))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Chrome))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -ClamAV))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -CMDer))
+Write-SynchronizedLog ([string](dfirws-install.ps1 -Dbeaver))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -DCode))
 #dfirws-install.ps1 -Docker
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Dokany))
