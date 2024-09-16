@@ -106,6 +106,7 @@ Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${W
 
 # Install .NET 6
 Start-Process -Wait "${SETUP_PATH}\dotnet6.exe" -ArgumentList "/install /quiet /norestart"
+Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
 Write-DateLog ".NET 6 installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install HxD
@@ -255,12 +256,12 @@ Add-ToUserPath "${MSYS2_DIR}\usr\bin"
 Add-ToUserPath "${TOOLS}\perl\perl\bin"
 Add-ToUserPath "${env:ProgramFiles}\4n4lDetector"
 Add-ToUserPath "${env:ProgramFiles}\7-Zip"
+Add-ToUserPath "${env:ProgramFiles}\BeaconHunter"
 Add-ToUserPath "${env:ProgramFiles}\bin"
 Add-ToUserPath "${env:ProgramFiles}\Git\bin"
 Add-ToUserPath "${env:ProgramFiles}\Git\cmd"
 Add-ToUserPath "${env:ProgramFiles}\Git\usr\bin"
 Add-ToUserPath "${env:ProgramFiles}\graphviz\bin"
-Add-ToUserPath "${env:ProgramFiles}\Hasher"
 Add-ToUserPath "${env:ProgramFiles}\hxd"
 Add-ToUserPath "${env:ProgramFiles}\IDR\bin"
 Add-ToUserPath "${env:ProgramFiles}\iisGeolocate"
@@ -279,6 +280,7 @@ Add-ToUserPath "${GIT_PATH}\iShutdown"
 Add-ToUserPath "${GIT_PATH}\RegRipper4.0"
 Add-ToUserPath "${GIT_PATH}\Regshot"
 Add-ToUserPath "${GIT_PATH}\Trawler"
+Add-ToUserPath "${GIT_PATH}\White-Phoenix"
 Add-ToUserPath "${HOME}\Go\bin"
 Add-ToUserPath "${TOOLS}\audacity"
 Add-ToUserPath "${TOOLS}\bin"
@@ -288,8 +290,7 @@ Add-ToUserPath "${TOOLS}\capa-ghidra"
 Add-ToUserPath "${TOOLS}\cargo\bin"
 Add-ToUserPath "${TOOLS}\chainsaw"
 Add-ToUserPath "${TOOLS}\cutter"
-Add-ToUserPath "${TOOLS}\DB Browser for SQLite"
-Add-ToUserPath "${TOOLS}\dbeaver"
+Add-ToUserPath "${TOOLS}\sqlitebrowser"
 Add-ToUserPath "${TOOLS}\DidierStevens"
 Add-ToUserPath "${TOOLS}\die"
 Add-ToUserPath "${TOOLS}\dumpbin"
@@ -343,15 +344,15 @@ Add-ToUserPath "${TOOLS}\VolatilityWorkbench"
 Add-ToUserPath "${TOOLS}\WinApiSearch"
 Add-ToUserPath "${TOOLS}\WinObjEx64"
 Add-ToUserPath "${TOOLS}\XELFViewer"
-Add-ToUserPath "${TOOLS}\Zimmerman"
-Add-ToUserPath "${TOOLS}\Zimmerman\EvtxECmd"
-Add-ToUserPath "${TOOLS}\Zimmerman\EZViewer"
-Add-ToUserPath "${TOOLS}\Zimmerman\JumpListExplorer"
-Add-ToUserPath "${TOOLS}\Zimmerman\MFTExplorer"
-Add-ToUserPath "${TOOLS}\Zimmerman\RECmd"
-Add-ToUserPath "${TOOLS}\Zimmerman\SDBExplorer"
-Add-ToUserPath "${TOOLS}\Zimmerman\SQLECmd"
-Add-ToUserPath "${TOOLS}\Zimmerman\XWFIM"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\EvtxECmd"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\EZViewer"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\JumpListExplorer"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\MFTExplorer"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\RECmd"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\SDBExplorer"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\SQLECmd"
+Add-ToUserPath "${TOOLS}\Zimmerman\net6\XWFIM"
 Add-ToUserPath "${TOOLS}\zircolite"
 Add-ToUserPath "${TOOLS}\zircolite\bin"
 Add-ToUserPath "${TOOLS}\zstd"
@@ -499,14 +500,16 @@ if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
     Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force
 }
 
+# TODO Verify Robocopy destinations
+
 # Add plugins to Cutter
 New-Item -ItemType Directory -Force -Path "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
 Copy-Item "${GIT_PATH}\radare2-deep-graph\cutter\graphs_plugin_grid.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
 Copy-Item "${SETUP_PATH}\x64dbgcutter.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
 Copy-Item "${GIT_PATH}\cutterref\cutterref.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
-Copy-Item -Recurse "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
-Copy-Item -Recurse "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
-Copy-Item -Recurse "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python"
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\archs"
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\icons"
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin"
 Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 
@@ -515,34 +518,34 @@ Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}
 #
 
 # BeaconHunter
-Copy-Item -Force "${SETUP_PATH}\BeaconHunter.exe" "${env:ProgramFiles}\bin"
+Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter"
 
 # IDR
-Copy-Item -Recurse -Force "${GIT_PATH}\IDR" "${env:ProgramFiles}"
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\IDR" "${env:ProgramFiles}\IDR"
 
 # Jupyter
-Copy-Item "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\" -Recurse -Force
+Robocopy.exe /MT:96 /MIR "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\.jupyter"
 Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter\" -Force
 Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force
 
 # Zimmerman tools
-Copy-Item -Recurse "${TOOLS}\Zimmerman\Hasher" "${env:ProgramFiles}\" -Force
-if (Test-Path "${LOCAL_PATH}\Hasher.ini") {
-    Copy-Item "${LOCAL_PATH}\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
-} else {
-    Copy-Item "${LOCAL_PATH}\defaults\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
-}
+#Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\Hasher" "${env:ProgramFiles}\Hasher"
+#if (Test-Path "${LOCAL_PATH}\Hasher.ini") {
+#    Copy-Item "${LOCAL_PATH}\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
+#} else {
+#    Copy-Item "${LOCAL_PATH}\defaults\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
+#}
 
-Copy-Item -Recurse "${TOOLS}\Zimmerman\iisGeolocate" "${env:ProgramFiles}\" -Force
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\iisGeolocate" "${env:ProgramFiles}\iisGeolocate"
 if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
     Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force
 }
-Copy-Item -Recurse "${TOOLS}\Zimmerman\RegistryExplorer" "${env:ProgramFiles}\" -Force
-Copy-Item -Recurse "${TOOLS}\Zimmerman\ShellBagsExplorer" "${env:ProgramFiles}\" -Force
-Copy-Item -Recurse "${TOOLS}\Zimmerman\TimelineExplorer" "${env:ProgramFiles}\" -Force
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\RegistryExplorer" "${env:ProgramFiles}\RegistryExplorer"
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\ShellBagsExplorer" "${env:ProgramFiles}\ShellBagsExplorer"
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\TimelineExplorer" "${env:ProgramFiles}\TimelineExplorer"
 
 # AuthLogParser
-Copy-Item -Recurse "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\" -Force
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLogParser"
 
 # 4n4lDetector
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
