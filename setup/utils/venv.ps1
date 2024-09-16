@@ -44,7 +44,9 @@ param(
     [Parameter(HelpMessage = "Switch to venv sigma-cli.")]
     [Switch]$sigma,
     [Parameter(HelpMessage = "Switch to venv toolong.")]
-    [Switch]$toolong
+    [Switch]$toolong,
+    [Parameter(HelpMessage = "Switch to venv white-phoenix.")]
+    [Switch]$whitephoenix
 )
 
 $venv = "default"
@@ -97,6 +99,8 @@ if ($aspose) {
     $venv = "sigma-cli"
 } elseif ($toolong) {
     $venv = "toolong"
+} elseif ($whitephoenix) {
+    $venv = "white-phoenix"
 } else {
     $venv = "default"
 }
