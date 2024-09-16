@@ -166,6 +166,7 @@ if (! (Test-Path -Path ".\log" )) {
 }
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\jobs.txt"
+Get-Date > ".\log\verify.txt"
 
 # Moved tools_downloaded.csv to downloads
 if (Test-Path ".\tools_downloaded.csv") {
