@@ -114,7 +114,7 @@ poetry add `
 
 Write-DateLog "Install extra scripts in venv." >> "C:\log\python.txt"
 Set-Location "C:\venv\default\Scripts"
-curl -o "machofile-cli.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py"
+curl "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py" | Where-Object { $_ -NotMatch "/usr/bin/python" } > machofile-cli.py
 curl -o "machofile.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
 curl -o "msidump.py" "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py"
 curl -o "parseUSBs.py" "https://raw.githubusercontent.com/khyrenz/parseusbs/main/parseUSBs.py"
@@ -212,25 +212,25 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
         Set-Location "C:\venv\jep"
 
         python -m pip install -U pip >> "C:\log\python.txt"
-        python -m pip install -U poetry 2>&1 >> "C:\log\python.txt"
+        #python -m pip install -U poetry 2>&1 >> "C:\log\python.txt"
 
-        poetry init `
-            --name jepvenv `
-            --description "Python venv for jep." `
-            --author "dfirws" `
-            --license "MIT" `
-            --no-interaction
+        #poetry init `
+        #    --name jepvenv `
+        #    --description "Python venv for jep." `
+        #    --author "dfirws" `
+        #    --license "MIT" `
+        #    --no-interaction
 
-        poetry add `
-            NumPy `
-            flare-capa >> "C:\log\python.txt"
+        #poetry add `
+        #    NumPy `
+        #    flare-capa >> "C:\log\python.txt"
 
         # Build Ghidrathon for Gidhra
         Write-DateLog "Build Ghidrathon for Ghidra."
         Copy-Item -Recurse -Force "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
         Set-Location "${WSDFIR_TEMP}\ghidrathon"
 
-        python -m pip install -r requirements.txt >> "C:\log\python.txt"
+        python -m pip install -r requirements.txt NumPy flare-capa >> "C:\log\python.txt"
         python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug >> "C:\log\python.txt"
 
         if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
@@ -316,6 +316,35 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
 
 
 #
+# venv white-phoenix
+#
+curl -o "${WSDFIR_TEMP}\white-phoenix.txt" "https://raw.githubusercontent.com/cyberark/White-Phoenix/main/requirements.txt" >> "C:\log\python.txt"
+Get-Content "${WSDFIR_TEMP}\white-phoenix.txt" >> "C:\log\python.txt"
+if (Test-Path "C:\venv\white-phoenix\white-phoenix.txt") {
+    $CURRENT_VENV = "C:\venv\white-phoenix\white-phoenix.txt"
+} else {
+    $CURRENT_VENV = "C:\Progress.ps1"
+}
+
+if ((Get-FileHash ${WSDFIR_TEMP}\white-phoenix.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
+    Write-DateLog "Install packages in venv white-phoenix in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+    Get-ChildItem C:\venv\white-phoenix\* -Exclude white-phoenix.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
+    Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\white-phoenix"
+    C:\venv\white-phoenix\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\white-phoenix"
+
+    python -m pip install -U pip >> "C:\log\python.txt"
+    python -m pip install -r "${WSDFIR_TEMP}\white-phoenix.txt" >> "C:\log\python.txt"
+
+    Copy-Item "${WSDFIR_TEMP}\white-phoenix.txt" "C:\venv\white-phoenix\white-phoenix.txt" -Force 2>&1 >> "C:\log\python.txt"
+
+    deactivate
+    Write-DateLog "Python venv white-phoenix done." >> "C:\log\python.txt"
+} else {
+    Write-DateLog "white-phoenix has not been updated, don't update white-phoenix venv." >> "C:\log\python.txt"
+}
+
+#
 # venv dfir-unfurl
 #
 & "$PYTHON_BIN" -m pip index versions dfir-unfurl 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\dfir-unfurl.txt
@@ -334,18 +363,11 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
     Set-Location "C:\venv\dfir-unfurl"
 
     python -m pip install -U pip >> "C:\log\python.txt"
-    python -m pip install -U poetry >> "C:\log\python.txt"
 
-    poetry init `
-        --name dfir-unfurlvenv `
-        --description "Python venv for dfir-unfurl." `
-        --author "dfirws" `
-        --license "MIT" `
-        --no-interaction
-
-    poetry add `
-        dfir-unfurl `
+    python -m pip install -U `
+        dfir-unfurl[ui] `
         hexdump `
+        maclookup `
         tomlkit >> "C:\log\python.txt"
 
     # Download each file and update the base.html content with the local path
@@ -601,7 +623,7 @@ foreach ($virtualenv in "binary-refinery", "chepy", "csvkit", "ghidrecomp", "jpt
     }
 
     if ((Get-FileHash "C:\tmp\${virtualenv}.txt").Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-        Write-DateLog "Install packages in venv ${virtualenv} in sandbox ((needs specific versions of packages)." >> "C:\log\python.txt"
+        Write-DateLog "Install packages in venv ${virtualenv} in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
         Get-ChildItem C:\venv\${virtualenv}\* -Exclude ${virtualenv}.txt -Recurse | Remove-Item -Force 2>&1 | Out-null
         Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\${virtualenv}"
         & "C:\venv\${virtualenv}\Scripts\Activate.ps1" >> "C:\log\python.txt"
@@ -617,8 +639,8 @@ foreach ($virtualenv in "binary-refinery", "chepy", "csvkit", "ghidrecomp", "jpt
             --no-interaction
 
         if ("${virtualenv}" -eq "binary-refinery") {
-            poetry add `
-                binary-refinery[all] 2>&1 >> "C:\log\python.txt"
+            python -m pip install `
+                binary-refinery[all] | ForEach-Object { "$_" } 2>&1 >> "C:\log\python.txt"
         } elseif ("${virtualenv}" -eq "chepy") {
             python -m pip install `
                 chepy[extras] 2>&1 >> "C:\log\python.txt"
