@@ -685,16 +685,16 @@ function Get-Winget {
             return
         }
     }
-    
+
     Write-SynchronizedLog "Downloading $AppName version $VERSION."
-    
+
     winget download --disable-interactivity	--exact --id "$AppName" -d .\tmp\winget 2>&1 | Out-Null
     Remove-Item .\tmp\winget\*.yaml -Force > $null 2>&1
 
     $FileName = Get-ChildItem .\tmp\winget\ | Select-Object -Last 1 -ExpandProperty FullName
     Update-ToolsDownloaded -URL $VERSION -Name $AppName -Path $FileName
 
-    Get-ChildItem .\tmp\winget\ | ForEach-Object { 
+    Get-ChildItem .\tmp\winget\ | ForEach-Object {
         if ($_.Name -ne ".\tmp\winget\$TmpFileName") {
             if (! (Copy-Item $_.FullName ".\downloads\$DownloadName" -Force )) {
                 Write-SynchronizedLog "Failed to download $AppName version $VERSION."

@@ -37,7 +37,7 @@ if ($all -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
     Write-SynchronizedLog "winget: Downloading Python."
     Get-WinGet "Python.Python.3.11" "Python*.exe" "python3.exe"
-    
+
     # Get Amazon Corretto - installed during start
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
 
