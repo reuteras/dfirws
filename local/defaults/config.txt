@@ -9,8 +9,6 @@ $WSDFIR_ROOT="C:\"
 $WSDFIR_APIMONITOR="No"
 # Install extra tools for Git for Windows bash
 $WSDFIR_BASH_EXTRA="Yes"
-# Install BeaconHunter
-$WSDFIR_BEACONHUNTER="Yes"
 # Install cmder
 $WSDFIR_CMDER="No"
 # Install git
