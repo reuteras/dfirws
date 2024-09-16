@@ -3,7 +3,7 @@
 # BeaconHunter - copied to program files during startup
 $status = Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "${SETUP_PATH}\beaconhunter.zip" -match "BeaconHunter.zip"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\beaconhunter.zip" -o"${SETUP_PATH}\" | Out-Null
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\beaconhunter.zip" -o"${TOOLS}\BeaconHunter" | Out-Null
 }
 
 # 4n4lDetector - installed in sandbox during startup
