@@ -437,13 +437,13 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\nmap.exe" -o"${TOOLS}\nmap" | Out-Null
 }
 
-# https://sqlitebrowser.org/dl/ - DB Browser for SQLite
-$status = Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-3.13.0-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes"
+# https://download.sqlitebrowser.org/ - DB Browser for SQLite
+$status = Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-v3.13.0-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\DB Browser for SQLite") {
         Remove-Item -Recurse -Force "${TOOLS}\DB Browser for SQLite" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\" | Out-Null
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\sqlitebrowser" | Out-Null
 }
 
 # https://flatassembler.net/download.php - FASM
