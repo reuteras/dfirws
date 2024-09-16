@@ -84,13 +84,4 @@ Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi"
 Write-SynchronizedLog "winget: Downloading Tailscale."
 Get-WinGet "tailscale.tailscale" "tailscale*.exe" "tailscale.exe"
 
-# Rclone
-Write-SynchronizedLog "winget: Downloading Rclone."
-Get-WinGet "Rclone.Rclone" "rclone*.zip" "rclone.zip"
-if (Test-Path "${TOOLS}\rclone") {
-    Remove-Item -Recurse -Force "${TOOLS}\rclone" | Out-Null
-}
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\rclone.zip" -o"${TOOLS}\" | Out-Null
-Move-Item "${TOOLS}\rclone-*" "${TOOLS}\rclone" -Force
-
 Write-SynchronizedLog "winget: Download complete."
