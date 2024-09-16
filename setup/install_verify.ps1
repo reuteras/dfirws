@@ -34,6 +34,8 @@ Test-Command BurpSuiteCommunity PE32
 Test-Command chrome PE32
 Test-Command clamscan PE32
 Test-Command Cmder PE32
+Test-Command "C:\Program Files\dbeaver\dbeaver-cli.exe" PE32
+Test-Command "C:\Program Files\dbeaver\dbeaver.exe" PE32
 Test-Command "C:\Program Files (x86)\Digital Detective\DCode v5\DCode.exe" PE32
 $Dokany_Executable = (Get-ChildItem 'C:\Program Files\Dokan\' -Recurse -Filter dokanctl.exe).FullName | Select-Object -Last 1
 Test-Command $Dokany_Executable PE32
@@ -143,8 +145,6 @@ Test-Command zip2bodyfile PE32      # C:\Tools\cargo\bin\zip2bodyfile.exe
 Test-Command chainsaw PE32      # C:\Tools\chainsaw\chainsaw.exe
 Test-Command cutter PE32      # C:\Tools\cutter\cutter.exe
 Test-Command rizin PE32      # C:\Tools\cutter\rizin.exe
-Test-Command dbeaver-cli PE32      # C:\Tools\dbeaver\dbeaver-cli.exe
-Test-Command dbeaver PE32      # C:\Tools\dbeaver\dbeaver.exe
 Test-Command js-file PE32      # C:\Tools\DidierStevens\js-file.exe
 Test-Command die PE32      # C:\Tools\die\die.exe
 Test-Command diec PE32      # C:\Tools\die\diec.exe
@@ -200,6 +200,7 @@ Test-Command rg PE32      # C:\Tools\ripgrep\rg.exe
 Test-Command blkcalc PE32      # C:\Tools\sleuthkit\bin\blkcalc.exe
 Test-Command sqldiff PE32      # C:\Tools\sqlite\sqldiff.exe
 Test-Command sqlite3 PE32      # C:\Tools\sqlite\sqlite3.exe
+Test-Command "C:\Tools\sqlitebrowser\DB Browser for SQLite.exe" PE32
 Test-Command SSView PE32      # C:\Tools\ssview\SSView.exe
 Test-Command autorunsc64 PE32      # C:\Tools\sysinternals\autorunsc64.exe
 Test-Command procdump64 PE32      # C:\Tools\sysinternals\procdump64.exe
@@ -220,7 +221,6 @@ Test-Command MFTECmd PE32      # C:\Tools\Zimmerman\MFTECmd.exe
 Test-Command PECmd PE32      # C:\Tools\Zimmerman\PECmd.exe
 Test-Command RBCmd PE32      # C:\Tools\Zimmerman\RBCmd.exe
 Test-Command SQLECmd PE32      # C:\Tools\Zimmerman\SQLECmd\SQLECmd.exe
-Test-Command XWFIM PE32      # C:\Tools\Zimmerman\XWFIM\XWFIM.exe
 Test-Command zircolite PE32      # C:\Tools\zircolite\zircolite.exe
 Test-Command evtx_dump_win PE32      # C:\Tools\zircolite\bin\evtx_dump_win.exe
 Test-Command zstd PE32      # C:\Tools\zstd\zstd.exe
@@ -244,7 +244,6 @@ Test-Command 'C:\Program Files\AuthLogParser\MasterParser.ps1' CRLF
 Test-Command fibratus PE32
 Test-Command git PE32
 Test-Command gxl2dot PE32
-Test-Command hasher PE32
 Test-Command idr PE32
 Test-Command iisGeolocate PE32
 Test-Command "C:\Program Files\IrfanView\i_view64.exe" PE32
@@ -343,6 +342,7 @@ Test-Command C:\venv\default\Scripts\visidata.exe PE32
 Test-Command C:\venv\default\Scripts\vma-extract.exe PE32
 Test-Command C:\venv\default\Scripts\wsdump.exe PE32
 Test-Command C:\venv\default\Scripts\xlmdeobfuscator.exe PE32
+Test-Command C:\venv\dfir-unfurl\Scripts\flask.exe PE32
 Test-Command C:\venv\dfir-unfurl\Scripts\unfurl.exe PE32
 Test-Command C:\venv\dissect\Scripts\acquire.exe PE32
 Test-Command C:\venv\dissect\Scripts\thumbcache-extract.exe PE32
@@ -385,6 +385,7 @@ Test-Command C:\venv\scare\Scripts\ptpython.exe PE32
 Test-Command C:\venv\sigma-cli\Scripts\sigma.exe PE32
 Test-Command C:\venv\toolong\Scripts\markdown-it.exe PE32
 Test-Command C:\venv\toolong\Scripts\tl.exe PE32
+Test-Command C:\venv\white-phoenix\Scripts\f2py.exe PE32
 
 # foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -filter *.py)) {"Test-Command", $name.Fullname, "Python"  -join " " }
 Test-Command C:\venv\binary-refinery\Scripts\dumpsig.py Python
