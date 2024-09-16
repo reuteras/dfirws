@@ -149,6 +149,8 @@ function Install-Apimonitor {
         Copy-Item "${SETUP_PATH}\apimonitor64.exe" "${WSDFIR_TEMP}" -Force
         & ${WSDFIR_TEMP}\apimonitor64.exe /s /v/qn
         Add-ToUserPath "${env:ProgramFiles(x86)}\rohitab.com\API Monitor"
+        Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\apimonitor-x86.lnk" -DestinationPath "${env:ProgramFiles(x86)}\rohitab.com\API Monitor\apimonitor-x86.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\apimonitor-x64.lnk" -DestinationPath "${env:ProgramFiles(x86)}\rohitab.com\API Monitor\apimonitor-x64.exe"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-apimonitor.txt" | Out-Null
     } else {
         Write-Output "API Monitor is already installed"
@@ -199,6 +201,8 @@ function Install-BinaryNinja {
         Write-Output "Installing Binary Ninja"
         Copy-Item "${SETUP_PATH}\binaryninja.exe" "${WSDFIR_TEMP}\binaryninja.exe" -Force
         Start-Process -Wait "${WSDFIR_TEMP}\binaryninja.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Copy-Item "C:\Users\WDAGUtilityAccount\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Binary Ninja\Binary Ninja.lnk" "${HOME}\Desktop\dfirws\Reverse Engineering\Binary Ninja.lnk" -Force
+        Copy-Item "C:\Users\WDAGUtilityAccount\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Binary Ninja\Binary Ninja.lnk" "${HOME}\Desktop\Binary Ninja.lnk" -Force
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-binaryninja.txt" | Out-Null
     } else {
         Write-Output "Binary Ninja is already installed"
@@ -242,6 +246,15 @@ function Install-ClamAV {
         Write-Output 'DatabaseDirectory "C:\Tools\ClamAV\db"' | Out-File -Append 'C:\Program Files\ClamAV\clamd.conf'
         Write-Output 'DatabaseDirectory "C:\Tools\ClamAV\db"' | Out-File -Append 'C:\Program Files\ClamAV\freshclam.conf'
         reg import "${HOME}\Documents\tools\reg\clamav.reg" | Out-Null
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clambc.exe (Bytecode Testing Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clambc.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamconf.exe (Configuration Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamconf.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamd.exe (Daemon).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamd.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamdscan.exe (Daemon Client).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamdscan.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamdtop.exe (Monitoring Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamdtop.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamscan.exe (Scanner).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamscan.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamsubmit.exe (Malware and False Positive Reporting Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamsubmit.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\freshclam.exe (Database Updater).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command freshclam.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\sigtool.exe (Signature Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sigtool.exe -h"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-clamav.txt" | Out-Null
     } else {
         Write-Output "ClamAV is already installed"
@@ -254,6 +267,8 @@ function Install-CMDer {
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cmder.7z" -o"${env:ProgramFiles}\cmder" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\cmder"
         Add-ToUserPath "${env:ProgramFiles}\cmder\bin"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\cmder.lnk" -DestinationPath "${env:ProgramFiles}\cmder\cmder.exe" -WorkingDirectory "${HOME}\Desktop"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\cmder.lnk" -DestinationPath "${env:ProgramFiles}\cmder\cmder.exe" -WorkingDirectory "${HOME}\Desktop"
         Write-Output "$VENV\default\scripts\activate.bat" | Out-File -Append -Encoding "ascii" ${env:ProgramFiles}\cmder\config\user_profile.cmd
         & "${env:ProgramFiles}\cmder\cmder.exe" /REGISTER ALL
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-cmder.txt" | Out-Null
@@ -271,6 +286,19 @@ function  Install-DCode {
     } else {
         Write-Output "DCode is already installed"
     }
+}
+
+function Install-Dbeaver {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dbeaver.txt")) {
+        Write-Output "Installing DBeaver"
+        Robocopy.exe /MT:96 /MIR "${TOOLS}\dbeaver" "${env:ProgramFiles}\dbeaver" | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\dbeaver"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-dbeaver.txt" | Out-Null
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dbeaver (Universal Database Tool).lnk" -DestinationPath "${env:ProgramFiles}\dbeaver\dbeaver.exe"
+    } else {
+        Write-Output "DBeaver is already installed"
+    }
+
 }
 
 function Install-Docker {
@@ -301,7 +329,7 @@ function Install-Fibratus {
         Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\fibratus.msi /qn /norestart"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-fibratus.txt" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\Fibratus\bin"
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\fibratus documentation (needs internet access).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command ${HOME}\Documents\tools\utils\start_fibratus.bat"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\fibratus documentation (needs internet access).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command ${HOME}\Documents\tools\utils\start_fibratus.bat"
     } else {
         Write-Output "Fibratus is already installed"
     }
@@ -386,6 +414,7 @@ function Install-Hashcat {
         Write-Output "Installing Hashcat"
         Copy-Item -Recurse "${TOOLS}\hashcat" "${env:ProgramFiles}" -Force
         Add-ToUserPath "${env:ProgramFiles}\hashcat"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${env:ProgramFiles}\hashcat"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-hashcat.txt" | Out-Null
     } else {
         Write-Output "Hashcat is already installed"
@@ -396,6 +425,7 @@ function Install-Jadx {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-jadx.txt")) {
         Write-Output "Installing Jadx"
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jadx.zip" -o"${env:ProgramFiles}\jadx" | Out-Null
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\jadx-gui.lnk" -DestinationPath "${env:ProgramFiles}\jadx\bin\jadx-gui.bat"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-jadx.txt" | Out-Null
     } else {
         Write-Output "Jadx is already installed"
@@ -408,7 +438,7 @@ function Install-Kape {
            Write-Output "Installing Kape"
             Copy-Item -Recurse "${SETUP_PATH}\KAPE" "${env:ProgramFiles}" -Force
             Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\gkape.lnk" -DestinationPath "${env:ProgramFiles}\KAPE\gkape.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\KAPE\gkape.exe"
-            Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\kape.lnk" -DestinationPath "$POWERSHELL_EXE" -WorkingDirectory "${HOME}\Desktop"
+            Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\kape (Krolls Artifact Parser and Extractor).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command kape --help"
             New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-kape.txt" | Out-Null
         } else {
             Write-Output "KAPE not found in ${SETUP_PATH}"
@@ -434,6 +464,8 @@ function Install-Loki {
         Write-Output "Installing Loki"
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\loki.zip" -o"${env:ProgramFiles}\" | Out-Null
         Copy-Item ${GIT_PATH}\signature-base "${env:ProgramFiles}\loki" -Recurse -Force
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\loki.lnk" -DestinationPath "${env:ProgramFiles}\loki\loki.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\loki.lnk" -DestinationPath "${env:ProgramFiles}\loki\loki.exe"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-loki.txt" | Out-Null
     } else {
         Write-Output "Loki is already installed"
@@ -455,6 +487,9 @@ function Install-Maltego {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-maltego.txt")) {
         Write-Output "Installing Maltego"
         Start-Process -Wait "${SETUP_PATH}\maltego.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Copy-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
+        Copy-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\" -Force
+        Copy-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Maltego Java Config.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-maltego.txt" | Out-Null
     } else {
         Write-Output "Maltego is already installed"
@@ -464,7 +499,7 @@ function Install-Maltego {
 function  Install-Msys2 {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-msys2.txt")) {
         Write-Output "Installing MSYS2"
-        Robocopy.exe /MT:96 /MIR /NP /NS /NC /NFL /NDL "C:\msys64_readonly" "C:\msys64" | Out-Null
+        Robocopy.exe /MT:96 /MIR "${TOOLS}\msys64" "C:\msys64" | Out-Null
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (MSYS2-version).lnk" -DestinationPath "C:\msys64\usr\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
         if (!(Test-Path "C:\msys64\tmp")) {
             New-Item -ItemType Directory -Path "C:\msys64\tmp" | Out-Null
@@ -537,6 +572,7 @@ function Install-PDFStreamDumper {
         Write-Output "Installing PDFStreamDumper"
         Copy-Item "${SETUP_PATH}\PDFStreamDumper.exe" "${WSDFIR_TEMP}\PDFStreamDumper.exe" -Force
         & "${WSDFIR_TEMP}\PDFStreamDumper.exe" /verysilent
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfstreamdumper.lnk" -DestinationPath "${PDFSTREAMDUMPER_PATH}\PDFStreamDumper.exe"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-pdfstreamdumper.txt" | Out-Null
     } else {
         Write-Output "PDFStreamDumper is already installed"
@@ -549,6 +585,12 @@ function Install-PuTTY {
         Copy-Item "${SETUP_PATH}\putty.msi" "${WSDFIR_TEMP}\putty.msi" -Force
         Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\putty.msi /qn /norestart"
         Add-ToUserPath "${env:ProgramFiles}\PuTTY"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\pageant.lnk" -DestinationPath "${env:ProgramFiles}\PuTTY\pageant.exe" -WorkingDirectory "${HOME}\Desktop"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\plink.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command plink.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\pscp.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pscp.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\psftp.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command psftp.exe -h"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\putty.lnk" -DestinationPath "${env:ProgramFiles}\PuTTY\putty.exe" -WorkingDirectory "${HOME}\Desktop"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\puttygen.lnk" -DestinationPath "${env:ProgramFiles}\PuTTY\puttygen.exe" -WorkingDirectory "${HOME}\Desktop"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-putty.txt" | Out-Null
     } else {
         Write-Output "PuTTY is already installed"
@@ -559,6 +601,7 @@ function Install-Qemu {
         Write-Output "Installing Qemu"
         Copy-Item "${SETUP_PATH}\qemu.exe" "${WSDFIR_TEMP}\qemu.exe" -Force
         Start-Process -Wait "${WSDFIR_TEMP}\qemu.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\qemu-img (QEMU disk image utility).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command qemu-img.exe -h"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-qemu.txt" | Out-Null
     } else {
         Write-Output "Qemu is already installed"
@@ -614,8 +657,7 @@ function Install-Veracrypt {
 function Install-VLC {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vlc.txt")) {
         Write-Output "Installing VLC"
-        Copy-Item "${SETUP_PATH}\vlc.msi" "${WSDFIR_TEMP}\vlc.msi" -Force
-        Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\vlc.msi /qn /norestart"
+        Start-Process -Wait "${SETUP_PATH}\vlc_installer.exe" -ArgumentList "/L=1033 /S"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-vlc.txt" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\VideoLAN\VLC"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\vlc.lnk" -DestinationPath "${env:ProgramFiles}\VideoLAN\VLC\vlc.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\VideoLAN\VLC\vlc.exe"
@@ -662,6 +704,7 @@ function Install-VSCode {
             (Get-Content "${LOCAL_PATH}\defaults\vscode\settings.json").Replace("FONT_NAME", "${WSDFIR_FONT_FULL_NAME}") | Set-Content "${HOME}\AppData\Roaming\Code\User\settings.json" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-vscode.txt" | Out-Null
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Visual Studio Code.lnk" -DestinationPath "${HOME}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
     } else {
         Write-Output "Visual Studio Code is already installed"
     }
@@ -717,6 +760,10 @@ function Install-X64dbg {
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\x64dbg.zip" -o"${env:ProgramFiles}\x64dbg" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\x64dbg\release\x32"
         Add-ToUserPath "${env:ProgramFiles}\x64dbg\release\x64"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\x32dbg.lnk" -DestinationPath "${env:ProgramFiles}\x64dbg\release\x32\x32dbg.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\x64dbg.lnk" -DestinationPath "${env:ProgramFiles}\x64dbg\release\x64\x64dbg.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\x32dbg.lnk" -DestinationPath "${env:ProgramFiles}\x64dbg\release\x32\x32dbg.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\x64dbg.lnk" -DestinationPath "${env:ProgramFiles}\x64dbg\release\x64\x64dbg.exe"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-x64dbg.txt" | Out-Null
     } else {
         Write-Output "x64dbg is already installed"
