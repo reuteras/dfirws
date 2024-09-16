@@ -16,6 +16,8 @@ Write-DateLog "Install GitBash (in the background)." >> "C:\log\rust.txt"
 Install-GitBash >> "C:\log\rust.txt"
 Write-DateLog "Install Rust." >> "C:\log\rust.txt"
 Install-Rust >> "C:\log\rust.txt"
+Write-DateLog "Install MSYS2." >> "C:\log\rust.txt"
+Install-MSYS2 >> "C:\log\rust.txt"
 
 # Set PATH to include Rust and Git
 $env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH};${MSYS2_DIR};${MSYS2_DIR}\ucrt64\bin;${MSYS2_DIR}\usr\bin"
