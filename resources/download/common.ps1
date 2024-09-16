@@ -671,20 +671,38 @@ function Clear-Tmp {
 # Function to download via winget
 function Get-Winget {
     param (
-        [Parameter(Mandatory=$True)] [string]$AppName
+        [Parameter(Mandatory=$true)] [string]$AppName,
+        [Parameter(Mandatory=$true)] [string]$TmpFileName,
+        [Parameter(Mandatory=$true)] [string]$DownloadName
     )
 
     $VERSION = (winget search --exact --id "$AppName") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
 
-    if (Compare-ToolsDownloaded -URL $VERSION -AppName $AppName) {
-        Write-SynchronizedLog "File $AppName version $VERSION already downloaded."
-        return
-    } else {
-        Write-SynchronizedLog "Downloading $AppName version $VERSION."
+    Clear-Tmp winget
+    if (Test-Path ".\downloads\$DownloadName") {
+        if (Compare-ToolsDownloaded -URL $VERSION -AppName $AppName) {
+            Write-SynchronizedLog "File $AppName version $VERSION already downloaded."
+            return
+        }
     }
+    
+    Write-SynchronizedLog "Downloading $AppName version $VERSION."
+    
     winget download --disable-interactivity	--exact --id "$AppName" -d .\tmp\winget 2>&1 | Out-Null
     Remove-Item .\tmp\winget\*.yaml -Force > $null 2>&1
 
     $FileName = Get-ChildItem .\tmp\winget\ | Select-Object -Last 1 -ExpandProperty FullName
     Update-ToolsDownloaded -URL $VERSION -Name $AppName -Path $FileName
+
+    Get-ChildItem .\tmp\winget\ | ForEach-Object { 
+        if ($_.Name -ne ".\tmp\winget\$TmpFileName") {
+            if (! (Copy-Item $_.FullName ".\downloads\$DownloadName" -Force )) {
+                Write-SynchronizedLog "Failed to download $AppName version $VERSION."
+                Write-SynchronizedLog "Content of .\tmp\winget:"
+                Get-ChildItem .\tmp\winget\ | ForEach-Object { Write-SynchronizedLog $_.Name }
+            }
+        }
+    }
+
+    Clear-Tmp winget
 }

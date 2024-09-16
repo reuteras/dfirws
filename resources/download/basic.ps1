@@ -35,14 +35,9 @@ if ($all -or $Node) {
 
 if ($all -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
-    Clear-Tmp winget
     Write-SynchronizedLog "winget: Downloading Python."
-    Get-WinGet "Python.Python.3.11"
-    if (Test-Path .\tmp\winget\Python*.exe) {
-        Copy-Item .\tmp\winget\Python*.exe ".\downloads\python3.exe"
-    }
-    Clear-Tmp winget
-
+    Get-WinGet "Python.Python.3.11" "Python*.exe" "python3.exe"
+    
     # Get Amazon Corretto - installed during start
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi"
 
@@ -105,13 +100,8 @@ if ($all -or $Bash) {
 
 if ($all -or $Go) {
     # GoLang - available for installation via dfirws-install.ps1
-    Clear-Tmp winget
     Write-SynchronizedLog "winget: Downloading GoLang."
-    Get-WinGet "GoLang.Go"
-    if (Test-Path .\tmp\winget\Go*.msi) {
-        Copy-Item .\tmp\winget\Go*.msi ".\downloads\golang.msi"
-    }
-    Clear-Tmp winget
+    Get-WinGet "GoLang.Go" "Go*.msi" "golang.msi"
 }
 
 
@@ -124,11 +114,6 @@ if ($all -or $Rust) {
     $status = Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe"
 
     # Rust - available for installation via dfirws-install.ps1
-    Clear-Tmp winget
     Write-SynchronizedLog "winget: Downloading Rust."
-    Get-WinGet "Rustlang.Rust.GNU"
-    if (Test-Path .\tmp\winget\Rust*.msi) {
-        Copy-Item .\tmp\winget\Rust*.msi ".\downloads\rust.msi"
-    }
-    Clear-Tmp winget
+    Get-WinGet "Rustlang.Rust.GNU" "Rust*.msi" "rust.msi"
 }
