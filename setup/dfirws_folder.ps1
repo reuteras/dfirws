@@ -18,60 +18,52 @@ Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cs-analyze-process
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cs-decrypt-metadata.py (Cobalt Strike - RSA decrypt metadata).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command cs-decrypt-metadata.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cs-extract-key.py (Extract cryptographic keys from Cobalt Strike beacon process dump).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command cs-extract-key.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\csv-stats.py (Tool to produce statistics for CSV files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command csv-stats.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cut-bytes.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command cut-bytes.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decode-vbe.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decode-vbe.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decoder_add1.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decoder_add1.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decoder_ah.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decoder_ah.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decoder_chr.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decoder_chr.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decoder_rol1.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decoder_rol1.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decoder_xor1.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decoder_xor1.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decompress_rtf.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decompress_rtf.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\defuzzer.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command defuzzer.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cut-bytes.py (Cut a section of bytes out of a file).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command cut-bytes.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decode-vbe.py (Decode VBE script).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decode-vbe.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decompress_rtf.py (Tool to decompress compressed RTF).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command decompress_rtf.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\defuzzer.py (Merge 3 or more fuzzed files back to original).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command defuzzer.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\disitool.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command disitool.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\emldump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command emldump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\file-magic.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command file-magic.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\find-file-in-file.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command find-file-in-file.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\format-bytes.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command format-bytes.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\hash.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command hash.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\headtail.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command headtail.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\emldump.py (EML dump utility).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command emldump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\file-magic.py (Essentially a wrapper for file (libmagic)).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command file-magic.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\find-file-in-file.py (Find if a file is present in another file).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command find-file-in-file.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\format-bytes.py (This is essentially a wrapper for the struct module).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command format-bytes.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\hash.py (This is essentially a wrapper for the hashlib module).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command hash.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\headtail.py (Output head and tail of input).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command headtail.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\hex-to-bin.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command hex-to-bin.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\jpegdump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command jpegdump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\jpegdump.py (JPEG file analysis tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command jpegdump.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\js-ascii.exe.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command js-ascii.exe -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\js-file.exe.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command js-file.exe -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\metatool.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command metatool.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\msoffcrypto-crack.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command msoffcrypto-crack.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\metatool.py (Tool for Metasploit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command metatool.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\msoffcrypto-crack.py (Crack MS Office document password).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command msoffcrypto-crack.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\myjson-filter.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command myjson-filter.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\myjson-transform.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command myjson-transform.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\nsrl.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command nsrl.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\numbers-to-hex.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command numbers-to-hex.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\numbers-to-string.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command numbers-to-string.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\oledump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oledump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\onedump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command onedump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdf-parser.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdf-parser.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdfid.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdfid.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdftool.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdftool.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pecheck.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pecheck.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\numbers-to-hex.py (Program to convert decimal numbers into hex numbers).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command numbers-to-hex.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\numbers-to-string.py (Program to convert numbers into a string).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command numbers-to-string.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\oledump.py (Analyze OLE files (Compound Binary Files)).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oledump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\onedump.py (Dump tool for OneNote files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command onedump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdf-parser.py (pdf-parser, use it to parse a PDF document).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdf-parser.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdfid.py (Tool to test a PDF file).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdfid.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdftool.py (Tool to process PDFs).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdftool.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pecheck.py (Tool for displaying PE file info).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pecheck.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pngdump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pngdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\process-binary-file.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command process-binary-file.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\process-text-file.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command process-text-file.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\python-per-line.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command python-per-line.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\re-search.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command re-search.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\reextra.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command reextra.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\rtfdump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command rtfdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\sets.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sets.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\sortcanon.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sortcanon.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\split-overlap.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command split-overlap.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\split.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command split.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\ssdeep.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ssdeep.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\strings.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command strings.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\teeplus.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command teeplus.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\translate.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command translate.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\what-is-new.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command what-is-new.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xlsbdump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xlsbdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xmldump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xmldump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xor-kpa.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xor-kpa.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xorsearch.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xorsearch.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\zipdump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zipdump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\python-per-line.py (Program to evaluate a Python expression for each line in the provided text file(s)).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command python-per-line.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\re-search.py (Program to use Python's re.findall on files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command re-search.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\rtfdump.py (Analyze RTF files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command rtfdump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\sets.py (Set operations on 2 (or 1) files: union, intersection, subtraction, exclusive or, sample, join, unique, product, substitute, sort).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sets.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\sortcanon.py (Sort with canonicalization function).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command sortcanon.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\split-overlap.py (Split file with overlap).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command split-overlap.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\split.py (Split a text file into X number of files (2 by default)).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command split.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\ssdeep.py (ssdeep tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ssdeep.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\strings.py (Strings command in Python).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command strings.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\teeplus.py (Save binary data while piping it from stdin to stdout. Like the tee command, but plus).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command teeplus.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\translate.py (Translate bytes according to a Python expression).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command translate.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\what-is-new.py (Tool to monitor new items).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command what-is-new.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xlsbdump.py (XLSB parser).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xlsbdump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xmldump.py (This is essentially a wrapper for xml.etree.ElementTree).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xmldump.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xor-kpa.py (XOR known-plaintext attack).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xor-kpa.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xorsearch.py (Bruteforce a file for encodings and search).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command xorsearch.py -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\zipdump.py (ZIP dump utility).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zipdump.py -h"
 
 # Editors
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Editors" | Out-Null
@@ -125,7 +117,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dsq (com
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\h2 database.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${TOOLS}\h2database"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite.lnk" -DestinationPath "${TOOLS}\fqlite\run.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\ingestr (is a cli that allows you to ingest data from any source into any destination).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ingestr --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\SQLECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\SQLECmd\SQLECmd.exe" -Arguments "-NoExit -command SQLECmd.exe --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\SQLECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\SQLECmd\SQLECmd.exe" -Arguments "-NoExit -command SQLECmd.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqldiff.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\sqlite\sqlite3.exe" -Arguments "-NoExit -command sqldiff.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqlite3.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\sqlite\sqlite3.exe" -Arguments "-NoExit -command sqlite3.exe -help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqlite3_analyzer (Analyze the SQLite3 database file and report detailing size and storage efficiency).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\sqlite\sqlite3.exe" -Arguments "-NoExit -command sqlite3_analyzer"
@@ -138,7 +130,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\mactime2 (re
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\mft2bodyfile (parses an MFT file (and optionally the corresponding UsnJrnl) to bodyfile - dfir-toolkit - janstarke).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command mft2bodyfile.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\MFTBrowser.lnk" -DestinationPath "${TOOLS}\bin\MFTBrowser.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\ntfs_parser.py (Extract information from NTFS metadata files, volumes, and shadow copies).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ntfs_parser.py -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\parseUSBs.py (Registry parser, to extract USB connection artifacts from SYSTEM, SOFTWARE, and NTUSER.dat hives).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command parseUSBs.py -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\parseUSBs.py (Registry parser, to extract USB connection artifacts from SYSTEM, SOFTWARE, and NTUSER.dat hives).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command venv.ps1 -regipy ; parseUSBs.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\blkcalc (Calculates where data in the unallocated space image (from blkls) exists in the original image. This is used when evidence is found in unallocated space - sleuthkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command blkcalc.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\blkcat (Extracts the contents of a given data unit - sleuthkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command blkcat.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\blkls (Lists the details about data units and can extract the unallocated space of the file system - sleuthkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command blkls.exe -h"
@@ -234,7 +226,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\zipdump.ln
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\PDF" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -FoxitReader"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdf-parser.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdf-parser.py -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfalyze.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdfalyze -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfalyze.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command venv.ps1 -pdfalyzer ; pdfalyze -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfid.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdfid.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfstreamdumper install (runs dfirws-install -LibreOffice).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -PDFStreamDumper"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdftool.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdftool.py -h"
@@ -254,7 +246,7 @@ Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\pe2pic.ps1.lnk
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\PE-bear.lnk" -DestinationPath "${TOOLS}\pebear\PE-bear.exe"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\PE-sieve (Scans a given process, recognizes and dumps a variety of in-memory implants).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\bin\pe-sieve.exe" -Arguments "-NoExit -command pe-sieve.exe /help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\pestudio.lnk" -DestinationPath "${TOOLS}\pestudio\pestudio.exe"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\pescan.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${TOOLS}\pev" -Arguments "-NoExit -command pescan.exe -h"
+Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\pescan.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${TOOLS}\pev" -Arguments "-NoExit -command pescan.exe --help"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\readpe - PE Utils.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${TOOLS}\pev" -Arguments "-NoExit -command readpe.exe --help"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\shellconv.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command shellconv.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\WinObjEx64.lnk" -DestinationPath "${TOOLS}\WinObjEx64\WinObjEx64.exe"
@@ -330,7 +322,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\Coba
 
 # Malware tools - Gootloader
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Gootloader" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Gootloader\Gootloader (Mandiant).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\gootloader"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Gootloader\Gootloader (Mandiant).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\gootloader" -Arguments "-NoExit -command dir"
 
 # Memory
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
@@ -368,7 +360,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Linux\xelfviewer.lnk" -Destin
 # OS - macOS
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\macOS" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\macOS\dsstore.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\Python-dsstore" -Arguments "-NoExit -command cat .\README.md"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\macOS\machofile-cli.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\macOS\machofile-cli.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command machofile-cli.py -h"
 
 # OS - Windows
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows" | Out-Null
@@ -426,20 +418,20 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Delphi\idr.lnk" -Des
 
 # Programming - Go
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Go" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Install\GoLang (runs dfirws-install -GoLang).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -GoLang"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\GoLang (runs dfirws-install -GoLang).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -GoLang"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\gftrace.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command gftrace"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\GoReSym.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command GoReSym.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\Redress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Redress.exe -h"
 
 # Programming - Java
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Java" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Install\Jadx (runs dfirws-install -Jadx).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Jadx"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\Jadx (runs dfirws-install -Jadx).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Jadx"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\jd-gui.lnk" -DestinationPath "${TOOLS}\jd-gui\jd-gui.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\recaf (The modern Java bytecode editor).lnk" -DestinationPath "${TOOLS}\bin\recaf.bat" -Arguments "-NoExit -command recaf.bat" -Iconlocation "${TOOLS}\lib\recaf.jar"
 
 # Programming - Node
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Node" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Install\Node (runs dfirws-install -Node).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Node"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Node\Node (runs dfirws-install -Node).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Node"
 
 # Programming - PowerShell
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\PowerShell" | Out-Null
@@ -452,11 +444,11 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Python\pydisasm.lnk"
 
 # Programming - Ruby
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Ruby" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Install\Ruby (runs dfirws-install -Ruby).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Ruby"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Ruby\Ruby (runs dfirws-install -Ruby).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Ruby"
 
 # Programming - Rust
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Rust" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Install\Rust (runs dfirws-install -Rust).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Rust"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Rust\Rust (runs dfirws-install -Rust).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Rust"
 
 # Reverse Engineering
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Reverse Engineering" | Out-Null
@@ -599,7 +591,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\jupyter notebook.lnk" 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\mmdbinspect (Tool for GeoIP lookup).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command mmdbinspect --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\pwncat.py (Fancy reverse and bind shell handler).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pwncat.py --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\pygmentize.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pygmentize --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\rclone.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command rclone --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\rexi.exe (Terminal UI for Regex Testing).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command rexi.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\tabby.lnk" -DestinationPath "${TOOLS}\tabby\Tabby.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\tabby\Tabby.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\time-decode.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command time-decode --help"
@@ -644,28 +635,28 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\VLC (runs dfirws
 
 # Zimmerman
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Zimmerman" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\AmcacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\AmcacheParser.exe" -Arguments "-NoExit -command AmcacheParser.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\AppCompatCacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\AppCompatCacheParser.exe" -Arguments "-NoExit -command AppCompatCacheParser.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\bstrings.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\bstrings.exe" -Arguments "-NoExit -command bstrings.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\EvtxECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\EvtxECmd\EvtxECmd.exe" -Arguments "-NoExit -command EvtxECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\AmcacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\AmcacheParser.exe" -Arguments "-NoExit -command AmcacheParser.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\AppCompatCacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\AppCompatCacheParser.exe" -Arguments "-NoExit -command AppCompatCacheParser.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\bstrings.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\bstrings.exe" -Arguments "-NoExit -command bstrings.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\EvtxECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\EvtxECmd\EvtxECmd.exe" -Arguments "-NoExit -command EvtxECmd.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\EZViewer.lnk" -DestinationPath "${TOOLS}\Zimmerman\net6\EZViewer\EZViewer.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\iisGeolocate.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\iisGeolocate\iisGeolocate.exe" -Arguments "-NoExit -command iisGeolocate.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\JLECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\JLECmd.exe" -Arguments "-NoExit -command JLECmd.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\LECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\LECmd.exe" -Arguments "-NoExit -command LECmd.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\MFTECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\MFTECmd.exe" -Arguments "-NoExit -command MFTECmd.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\PECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\PECmd.exe" -Arguments "-NoExit -command PECmd.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\RBCmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\RBCmd.exe" -Arguments "-NoExit -command RBCmd.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\RecentFileCacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\RecentFileCacheParser.exe" -Arguments "-NoExit -command RecentFileCacheParser.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\JLECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\JLECmd.exe" -Arguments "-NoExit -command JLECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\LECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\LECmd.exe" -Arguments "-NoExit -command LECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\MFTECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\MFTECmd.exe" -Arguments "-NoExit -command MFTECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\PECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\PECmd.exe" -Arguments "-NoExit -command PECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\RBCmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\RBCmd.exe" -Arguments "-NoExit -command RBCmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\RecentFileCacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\RecentFileCacheParser.exe" -Arguments "-NoExit -command RecentFileCacheParser.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\RegistryExplorer.lnk" -DestinationPath "${env:ProgramFiles}\RegistryExplorer\RegistryExplorer.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\rla.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\rla.exe" -Arguments "-NoExit -command rla.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\SBECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\SBECmd.exe" -Arguments "-NoExit -command SBECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\rla.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\rla.exe" -Arguments "-NoExit -command rla.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\SBECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\SBECmd.exe" -Arguments "-NoExit -command SBECmd.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\ShellBagsExplorer.lnk" -DestinationPath "${env:ProgramFiles}\ShellBagsExplorer\ShellBagsExplorer.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\SrumECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\SrumECmd.exe" -Arguments "-NoExit -command SrumECmd.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\SumECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\SumECmd.exe" -Arguments "-NoExit -command SumECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\SrumECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\SrumECmd.exe" -Arguments "-NoExit -command SrumECmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\SumECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\SumECmd.exe" -Arguments "-NoExit -command SumECmd.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\TimeApp.lnk" -DestinationPath "${TOOLS}\Zimmerman\TimeApp.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\TimelineExplorer.lnk" -DestinationPath "${env:ProgramFiles}\TimelineExplorer\TimelineExplorer.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\VSCMount.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\VSCMount.exe" -Arguments "-NoExit -command VSCMount.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\WxTCmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\WxTCmd.exe" -Arguments "-NoExit -command WxTCmd.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\VSCMount.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\VSCMount.exe" -Arguments "-NoExit -command VSCMount.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\WxTCmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\WxTCmd.exe" -Arguments "-NoExit -command WxTCmd.exe -h"
 
 Write-DateLog "Creating shortcuts in ${HOME}\Desktop\dfirws done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
