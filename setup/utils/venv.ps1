@@ -31,6 +31,8 @@ param(
     [Switch]$maldump,
     [Parameter(HelpMessage = "Switch to venv mwcp.")]
     [Switch]$mwcp,
+    [Parameter(HelpMessage = "Switch to venv pdfalyzer.")]
+    [Switch]$pdfalyzer,
     [Parameter(HelpMessage = "Switch to venv pe2pic.")]
     [Switch]$pe2pic,
     [Parameter(HelpMessage = "Switch to venv peepdf3.")]
@@ -85,6 +87,8 @@ if ($aspose) {
     $venv = "maldump"
 } elseif ($mwcp) {
     $venv = "mwcp"
+} elseif ($pdfalyzer) {
+    $venv = "pdfalyzer"    
 } elseif ($pe2pic) {
     $venv = "pe2pic"
 } elseif ($peepdf3) {
