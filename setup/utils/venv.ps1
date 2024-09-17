@@ -88,7 +88,7 @@ if ($aspose) {
 } elseif ($mwcp) {
     $venv = "mwcp"
 } elseif ($pdfalyzer) {
-    $venv = "pdfalyzer"    
+    $venv = "pdfalyzer"
 } elseif ($pe2pic) {
     $venv = "pe2pic"
 } elseif ($peepdf3) {
