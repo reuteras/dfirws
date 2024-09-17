@@ -114,15 +114,22 @@ poetry add `
 
 Write-DateLog "Install extra scripts in venv." >> "C:\log\python.txt"
 Set-Location "C:\venv\default\Scripts"
-curl "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py" | Where-Object { $_ -NotMatch "/usr/bin/python" } > machofile-cli.py
+curl -o "machofile-cli.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py"
 curl -o "machofile.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
 curl -o "msidump.py" "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py"
-curl -o "parseUSBs.py" "https://raw.githubusercontent.com/khyrenz/parseusbs/main/parseUSBs.py"
 curl -o "shellconv.py" "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
 curl -o "smtpsmug.py" "https://raw.githubusercontent.com/hannob/smtpsmug/main/smtpsmug"
 curl -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
 curl -o "CanaryTokenScanner.py" "https://raw.githubusercontent.com/0xNslabs/CanaryTokenScanner/main/CanaryTokenScanner.py"
 curl -o "sigs.py" "https://raw.githubusercontent.com/clausing/scripts/master/sigs.py"
+
+(Get-Content .\machofile-cli.py -raw) -replace "#!/usr/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\machofile-cli2.py"
+Copy-Item machofile-cli2.py machofile-cli.py
+Remove-Item machofile-cli2.py
+
+(Get-Content .\machofile.py -raw) -replace "#!/usr/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\machofile2.py"
+Copy-Item machofile2.py machofile.py
+Remove-Item machofile2.py
 
 # Install dependencies for rat_king_parser
 python -m pip install -r "https://raw.githubusercontent.com/jeFF0Falltrades/rat_king_parser/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
@@ -140,10 +147,6 @@ foreach ($iShutdown in @("iShutdown_detect.py", "iShutdown_parse.py", "iShutdown
         Copy-Item "C:\git\iShutdown\$iShutdown" "C:\venv\default\Scripts\$iShutdown"
     }
 }
-
-(Get-Content .\parseUSBs.py -raw) -replace "#!/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\parseUSBs2.py"
-Copy-Item parseUSBs2.py parseUSBs.py
-Remove-Item parseUSBs2.py
 
 New-Item -ItemType Directory C:\tmp\rename 2>&1 | Out-null
 Get-ChildItem C:\venv\default\Scripts\ -Exclude *.exe,*.py,*.ps1,activate,__pycache__,*.bat | ForEach-Object { Move-Item $_ C:\tmp\rename }
@@ -268,6 +271,13 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
         python -m pip install -U regipy>=4.0.0 click libfwsi-python python-evtx tabulate >> "C:\log\python.txt"
 
         Copy-Item "${WSDFIR_TEMP}\regipy.txt" "C:\venv\regipy\regipy.txt" -Force 2>&1 >> "C:\log\python.txt"
+
+        # Download parseUSBs.py and update shebang
+        Set-Location "C:\venv\regipy\Scripts"
+        curl -o "parseUSBs.py" "https://raw.githubusercontent.com/khyrenz/parseusbs/main/parseUSBs.py"
+        (Get-Content .\parseUSBs.py -raw) -replace "#!/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\parseUSBs2.py"
+        Copy-Item parseUSBs2.py parseUSBs.py
+        Remove-Item parseUSBs2.py
 
         deactivate
         Write-DateLog "Python venv regipy done." >> "C:\log\python.txt"
