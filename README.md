@@ -4,7 +4,7 @@
 
 DFIRWS is a solution to do DFIR work in Windows. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or VM.
 
-DFIRWS has been enhanced since its start and now have the following main parts.
+DFIRWS has been enhanced since its start and now contains the following main parts.
 
 - **downloadFiles.ps1** - download, update and prepare tools to use for DFIR work. Also downloads enrichment data and updates ClamAV signatures.
 - **createSandboxConfig.ps1** - create Windows Sandbox configuration files for the tools.
@@ -12,9 +12,9 @@ DFIRWS has been enhanced since its start and now have the following main parts.
   - **network_dfirws.wsb** - Windows Sandbox configuration file with network enabled.
 - **createVM.ps1** - create a Windows 11 VM with the tools installed.
 
-DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough currently only tested on Windows 11. The VM only creates a Windows 11 VM and currently only uses VMWare Workstation.
+DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough it's currently only tested on Windows 11. The VM only creates a Windows 11 VM and currently works with VMWare Workstation.
 
-**Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. The reason is that at least Windows Defender will some time classify some tools as malware. Even though I try to exclude those tools I've found that a file can be classified as malware one day and not the next. The choice is yours.
+**Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. The reason is that at least Windows Defender will some time classify tools as malware. Even though I try to exclude those tools I've found that a file can be classified as malware one day and not the next. The choice is yours.
 
 ## Table of contents
 
@@ -42,7 +42,7 @@ winget install Rclone.Rclone
 Set-executionPolicy -ExecutionPolicy Bypass
 ```
 
-3. *Windows Sandbox:* The Windows Sandbox feature must be enabled on the host. This is true even if you only like to build and run the DFIRWS tools in a VM. The Sandbox feature is used to build some tools when you run the **downloadFiles.ps1** script.
+3. *Windows Sandbox:* The Windows Sandbox feature must be enabled on the host. This is true even if you only like to build and run the DFIRWS tools in a VM. The Sandbox feature is used to build and download tools when you run the **downloadFiles.ps1** script.
 You can enable the Sandbox feature by using the **Add and remove Windows features** in Windows and add *Windows Sandbox*. An alternative way is to open a Windows terminal as administrator and run:
 
 ```PowerShell
@@ -112,6 +112,18 @@ To simplify the download of tools, enrichment data and ClamAV signatures you can
 
 ```PowerShell
 .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
+```
+
+To verify you can run the following command:
+
+```PowerShell
+.\downloadFiles.ps1 -Verify
+```
+
+Or run everything in one go:
+
+```PowerShell
+.\downloadFiles.ps1 -AllTools -Enrichment -Freshclam -Verify
 ```
 
 ## Usage and configuration of the sandbox
