@@ -12,8 +12,8 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 
 Write-DateLog "Install Rust tools in Sandbox." >> "C:\log\rust.txt"
 
-Write-DateLog "Install GitBash (in the background)." >> "C:\log\rust.txt"
-Install-GitBash >> "C:\log\rust.txt"
+Write-DateLog "Install Git (in the background)." >> "C:\log\rust.txt"
+Install-Git >> "C:\log\rust.txt"
 Write-DateLog "Install Rust." >> "C:\log\rust.txt"
 Install-Rust >> "C:\log\rust.txt"
 Write-DateLog "Install MSYS2." >> "C:\log\rust.txt"

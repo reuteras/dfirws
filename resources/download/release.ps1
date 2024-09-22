@@ -177,6 +177,16 @@ if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\tabby.zip" -o"${TOOLS}\tabby" | Out-Null
 }
 
+# zstd
+$status = Get-GitHubRelease -repo "facebook/zstd" -path "${SETUP_PATH}\zstd.zip" -match "win64.zip$"
+if ($status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"${TOOLS}" | Out-Null
+    if (Test-Path "${TOOLS}\zstd") {
+        Remove-Item "${TOOLS}\zstd" -Recurse -Force
+    }
+    Move-Item ${TOOLS}\zstd-* "${TOOLS}\zstd" | Out-Null
+}
+
 # CyberChef
 $status = Get-GitHubRelease -repo "gchq/CyberChef" -path "${SETUP_PATH}\CyberChef.zip" -match "CyberChef"
 if ($status) {

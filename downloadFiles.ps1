@@ -37,8 +37,6 @@
 param(
     [Parameter(HelpMessage = "Download all tools for dfirws.")]
     [Switch]$AllTools,
-    [Parameter(HelpMessage = "Update Bash.")]
-    [Switch]$Bash,
     [Parameter(HelpMessage = "Update Didier Stevens tools.")]
     [Switch]$Didier,
     [Parameter(HelpMessage = "Update enrichment.")]
@@ -119,7 +117,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Bash.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
@@ -173,7 +171,7 @@ if (Test-Path ".\tools_downloaded.csv") {
     Move-Item -Path ".\tools_downloaded.csv" -Destination ".\downloads\tools_downloaded.csv" -Force
 }
 
-if ($all -or $Bash.IsPresent -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
+if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
     # Get GitHub password from user input
     if ($GITHUB_USERNAME -ne "YOUR GITHUB USERNAME" -and $GITHUB_TOKEN -ne "YOUR GITHUB TOKEN") {
         $GH_USER = "${GITHUB_USERNAME}"
@@ -192,14 +190,9 @@ if ($all -or $Bash.IsPresent -or $Didier.IsPresent -or $GoLang.IsPresent -or $Ht
     }
 }
 
-if ($all -or $Bash.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
+if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Download common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
-}
-
-if ($all -or $Bash.IsPresent) {
-    Write-DateLog "Download packages for Git for Windows (Bash)."
-    Start-Job -FilePath .\resources\download\bash.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
 if ($all -or $MSYS2.IsPresent) {
@@ -287,7 +280,7 @@ if ($Enrichment.IsPresent) {
     .\resources\download\enrichment.ps1
 }
 
-if ($all -or $bash.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
+if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Wait for sandboxes to finish."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"

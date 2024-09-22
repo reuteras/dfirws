@@ -402,7 +402,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-insta
 # Programming and Development
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\java.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\msys2 (runs dfirws-install -MSYS2).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -MSYS2"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\node.lnk" -DestinationPath "${TOOLS}\node\node.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\perl.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\php.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"

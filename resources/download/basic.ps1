@@ -78,21 +78,6 @@ if ($status) {
     Copy-Item "${SETUP_PATH}\msys2.exe" "${TOOLS}\bin\msys2.exe"
 }
 
-#
-# Packages used in Bash sandbox
-#
-
-if ($all -or $Bash) {
-    # zsdt
-    $status = Get-GitHubRelease -repo "facebook/zstd" -path "${SETUP_PATH}\zstd.zip" -match "win64.zip$"
-    if ($status) {
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"${TOOLS}" | Out-Null
-        if (Test-Path "${TOOLS}\zstd") {
-            Remove-Item "${TOOLS}\zstd" -Recurse -Force
-        }
-        Move-Item ${TOOLS}\zstd-* "${TOOLS}\zstd" | Out-Null
-    }
-}
 
 #
 # Pages used in Go sandbox

@@ -12,8 +12,8 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 
 Write-DateLog "Install Golang tools in Sandbox." >> "C:\log\golang.txt"
 
-Write-DateLog "Install GitBash (in the background)." >> "C:\log\golang.txt"
-Install-GitBash >> "C:\log\golang.txt"
+Write-DateLog "Install Git (in the background)." >> "C:\log\golang.txt"
+Install-Git >> "C:\log\golang.txt"
 Write-DateLog "Install Golang." >> "C:\log\golang.txt"
 Install-GoLang >> "C:\log\golang.txt"
 

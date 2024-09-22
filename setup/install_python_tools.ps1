@@ -12,6 +12,13 @@ if (! (Test-Path "${WSDFIR_TEMP}")) {
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
+Write-DateLog "Install Git." >> "C:\log\python.txt"
+Add-ToUserPath "${env:ProgramFiles}\Git\bin"
+Add-ToUserPath "${env:ProgramFiles}\Git\cmd"
+Add-ToUserPath "${env:ProgramFiles}\Git\usr\bin"
+Install-Git >> "C:\log\python.txt"
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
+
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
 $PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
 Start-Process "${SETUP_PATH}\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
@@ -31,7 +38,7 @@ Set-Location "C:\venv\default\"
 python -m pip install -U pip >> "C:\log\python.txt"
 python -m pip install -U poetry >> "C:\log\python.txt"
 # TODO: Get latest version of package
-python -m pip install https://github.com/msuhanov/dfir_ntfs/archive/1.1.18.tar.gz >> "C:\log\python.txt"
+python -m pip install https://github.com/msuhanov/dfir_ntfs/archive/1.1.18.tar.gz | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 poetry init `
     --name default `
@@ -131,8 +138,8 @@ Remove-Item machofile-cli2.py
 Copy-Item machofile2.py machofile.py
 Remove-Item machofile2.py
 
-# Install dependencies for rat_king_parser
-python -m pip install -r "https://raw.githubusercontent.com/jeFF0Falltrades/rat_king_parser/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
+# Install rat_king_parser
+python -m pip install "git+https://github.com/jeFF0Falltrades/rat_king_parser.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 if (Test-Path "C:\git\bmc-tools\bmc-tools.py") {
     Copy-Item "C:\git\bmc-tools\bmc-tools.py" "C:\venv\default\Scripts\bmc-tools.py"
@@ -162,8 +169,10 @@ Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 # Venvs that needs Visual Studio Build Tools
 #
 
-& "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\visualstudio.txt
-& "$PYTHON_BIN" -m pip index versions regipy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> ${WSDFIR_TEMP}\visualstudio.txt
+Get-LatestPipVersion jep > ${WSDFIR_TEMP}\visualstudio.txt
+Get-LatestPipVersion regipy >> ${WSDFIR_TEMP}\visualstudio.txt
+Get-LatestPipVersion ingestr >> ${WSDFIR_TEMP}\visualstudio.txt
+Get-LatestPipVersion pdfalyzer >> ${WSDFIR_TEMP}\visualstudio.txt
 ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${WSDFIR_TEMP}\visualstudio.txt
 $GHIDRA_INSTALL_DIR >> ${WSDFIR_TEMP}\visualstudio.txt
 
@@ -188,7 +197,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
     #
 
     # Check if jep or ghidrathon has been updated
-    & "$PYTHON_BIN" -m pip index versions jep 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\jep.txt
+    Get-LatestPipVersion jep > ${WSDFIR_TEMP}\jep.txt
     ((curl.exe --silent -L "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${WSDFIR_TEMP}\jep.txt
     $GHIDRA_INSTALL_DIR >> ${WSDFIR_TEMP}\jep.txt
 
@@ -252,7 +261,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
     #
     # venv regipy
     #
-    & "$PYTHON_BIN" -m pip index regipy 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\regipy.txt
+   Get-LatestPipVersion regipy > ${WSDFIR_TEMP}\regipy.txt
 
     if (Test-Path "C:\venv\regipy\regipy.txt") {
         $CURRENT_VENV = "C:\venv\regipy\regipy.txt"
@@ -292,8 +301,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
 
     foreach ($virtualenv in "ingestr", "pdfalyzer") {
 
-        & "$PYTHON_BIN" -m pip index "${virtualenv}" 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 >> "${WSDFIR_TEMP}\visualstudio.txt"
-        & "$PYTHON_BIN" -m pip index "${virtualenv}" 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\${virtualenv}.txt"
+       Get-LatestPipVersion "${virtualenv}" > "${WSDFIR_TEMP}\${virtualenv}.txt"
 
         if (Test-Path "C:\venv\${virtualenv}\${virtualenv}.txt") {
             $CURRENT_VENV = "C:\venv\${virtualenv}\${virtualenv}.txt"
@@ -320,8 +328,10 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "C:\venv\vis
         }
 
         # Save current versions
-        Copy-Item "${WSDFIR_TEMP}\visualstudio.txt" "C:\venv\visualstudio.txt" -Force 2>&1 >> "C:\log\python.txt"
+        Copy-Item "${WSDFIR_TEMP}\${virtualenv}.txt" "C:\venv\${virtualenv}\${virtualenv}.txt" -Force 2>&1 >> "C:\log\python.txt"
     }
+} else {
+    Write-DateLog "Visual Studio Build Tools or pypi packages requiring it has not been updated, don't update venvs needing Visual Studio Build Tools." >> "C:\log\python.txt"
 }
 
 
@@ -357,7 +367,7 @@ if ((Get-FileHash ${WSDFIR_TEMP}\white-phoenix.txt).Hash -ne (Get-FileHash $CURR
 #
 # venv dfir-unfurl
 #
-& "$PYTHON_BIN" -m pip index versions dfir-unfurl 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\dfir-unfurl.txt
+Get-LatestPipVersion dfir-unfurl > ${WSDFIR_TEMP}\dfir-unfurl.txt
 
 if (Test-Path "C:\venv\dfir-unfurl\dfir-unfurl.txt") {
     $CURRENT_VENV = "C:\venv\dfir-unfurl\dfir-unfurl.txt"
@@ -407,7 +417,7 @@ if ((Get-FileHash C:\tmp\dfir-unfurl.txt).Hash -ne (Get-FileHash $CURRENT_VENV).
 #
 # venv aspose
 #
-& "$PYTHON_BIN" -m pip index versions Aspose.Email-for-Python-via-Net 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > ${WSDFIR_TEMP}\aspose.txt
+Get-LatestPipVersion Aspose.Email-for-Python-via-Net > ${WSDFIR_TEMP}\aspose.txt
 
 if (Test-Path "C:\venv\aspose\aspose.txt") {
     $CURRENT_VENV = "C:\venv\aspose\aspose.txt"
@@ -624,7 +634,7 @@ foreach ($virtualenv in "binary-refinery", "chepy", "csvkit", "ghidrecomp", "jpt
     # Create simple venv for each tool in list above
     #
 
-    & "$PYTHON_BIN" -m pip index versions ${virtualenv} 2>&1 | findstr "Available versions:" | ForEach-Object { $_.split(" ")[2] } | ForEach-Object { $_.split(",")[0] } | Select-Object -Last 1 > "${WSDFIR_TEMP}\${virtualenv}.txt"
+   Get-LatestPipVersion ${virtualenv} > "${WSDFIR_TEMP}\${virtualenv}.txt"
 
     if (Test-Path "C:\venv\${virtualenv}\${virtualenv}.txt") {
         $CURRENT_VENV = "C:\venv\${virtualenv}\${virtualenv}.txt"

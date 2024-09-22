@@ -3,7 +3,6 @@
 param (
     [switch]$ApiMonitor,
     [switch]$Autopsy,
-    [switch]$BashExtra,
     [switch]$BinaryNinja,
     [switch]$BurpSuite,
     [switch]$Chrome,
@@ -16,7 +15,7 @@ param (
     [switch]$Fibratus,
     [switch]$Firefox,
     [switch]$FoxitReader,
-    [switch]$GitBash,
+    [switch]$Git,
     [switch]$GoogleEarth,
     [switch]$GoLang,
     [switch]$Gpg4win,
@@ -26,7 +25,6 @@ param (
     [switch]$LibreOffice,
     [switch]$Loki,
     [switch]$Maltego,
-    [switch]$Msys2,
     [switch]$Neo4j,
     [switch]$Node,
     [switch]$Obsidian,
@@ -57,10 +55,6 @@ if ($ApiMonitor.IsPresent) {
 
 if ($Autopsy.IsPresent) {
     Install-Autopsy
-}
-
-if ($BashExtra.IsPresent) {
-    Install-BashExtra
 }
 
 if ($BinaryNinja.IsPresent) {
@@ -111,8 +105,8 @@ if ($FoxitReader.IsPresent) {
     Install-FoxitReader
 }
 
-if ($GitBash.IsPresent) {
-    Install-GitBash
+if ($Git.IsPresent) {
+    Install-Git
 }
 
 if ($GoLang.IsPresent) {
@@ -149,10 +143,6 @@ if ($Loki.IsPresent) {
 
 if ($Maltego.IsPresent) {
     Install-Maltego
-}
-
-if ($Msys2.IsPresent) {
-    Install-Msys2
 }
 
 if ($Neo4j.IsPresent) {

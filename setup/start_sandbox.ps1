@@ -418,12 +418,6 @@ if ("${WSDFIR_QEMU}" -eq "Yes") {
     Write-DateLog "Qemu installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
-# Install extra tools for Git-bash
-if ("${WSDFIR_BASH_EXTRA}" -eq "Yes") {
-    Install-BashExtra | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Extra tools for Git-bash installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
 # Install Kape
 if ("${WSDFIR_KAPE}" -eq "Yes") {
     Install-Kape | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
@@ -456,7 +450,7 @@ if ("${WSDFIR_LIBREOFFICE}" -eq "Yes") {
 
 # Install Git if specified
 if ("${WSDFIR_GIT}" -eq "Yes") {
-    Install-GitBash | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Install-Git | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     Write-DateLog "Git installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -588,6 +582,23 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
     Write-DateLog "Files have been copied to the destination directory: ${DestinationDir}"
 }
 
+
+#
+# Config for bash and zsh
+#
+if (Test-Path "${LOCAL_PATH}\.zshrc") {
+    Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc" -Force
+} else {
+    Copy-Item "${LOCAL_PATH}\defaults\.zshrc" "${HOME}\.zshrc" -Force
+}
+if (Test-Path "${LOCAL_PATH}\.zcompdump") {
+    Copy-Item "${LOCAL_PATH}\.zcompdump" "${HOME}\.zcompdump" -Force
+} else {
+    Copy-Item "${LOCAL_PATH}\defaults\.zcompdump" "${HOME}\.zcompdump" -Force
+}
+
+# Always install MSYS2
+Install-MSYS2 | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 #
 # Run custom scripts

@@ -407,7 +407,6 @@ Test-Command C:\venv\default\Scripts\jsonpointer.py Python
 Test-Command C:\venv\default\Scripts\machofile.py Python
 Test-Command C:\venv\default\Scripts\msidump.py Python
 Test-Command C:\venv\default\Scripts\ntfs_parser.py Python
-Test-Command C:\venv\default\Scripts\parseUSBs.py Python
 Test-Command C:\venv\default\Scripts\priweavepng.py Python
 Test-Command C:\venv\default\Scripts\pwncat.py Python
 Test-Command C:\venv\default\Scripts\runxlrd.py Python
@@ -424,6 +423,7 @@ Test-Command C:\venv\ingestr\Scripts\jp.py Python
 Test-Command C:\venv\jep\Scripts\readelf.py Python
 Test-Command C:\venv\mwcp\Scripts\readelf.py Python
 Test-Command C:\venv\pe2pic\Scripts\pe2pic.py Python
+Test-Command C:\venv\regipy\Scripts\parseUSBs.py Python
 Test-Command C:\venv\scare\Scripts\scare.py Python
 
 # Downloads only files
