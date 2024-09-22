@@ -45,9 +45,6 @@ if ($all -or $Python) {
     $status = Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "${SETUP_PATH}\ghidra.zip" -match "_PUBLIC_"
     if ($status) {
         & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidra.zip" -o"${TOOLS}" | Out-Null
-        if (Test-Path "${TOOLS}\ghidra") {
-            Remove-Item "${TOOLS}\ghidra" -Recurse -Force
-        }
         New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra" | Out-Null
         Move-Item ${TOOLS}\ghidra_1* "${TOOLS}\ghidra\"
         Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force

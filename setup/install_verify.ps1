@@ -159,6 +159,7 @@ Test-Command C:\Tools\fqlite\fqlite_next.jar JAR
 Test-Command FullEventLogView PE32      # C:\Tools\FullEventLogView\FullEventLogView.exe
 Test-Command gftrace PE32      # C:\Tools\gftrace64\gftrace.exe
 Test-Command ghidraRun ASCII
+Test-Command "C:\Tools\ghidra\ghidra_10.4_PUBLIC\" directory
 Test-Command GoReSym PE32      # C:\Tools\GoReSym\GoReSym.exe
 Test-Command C:\Tools\hashcat\hashcat.exe PE32
 Test-Command hayabusa PE32      # C:\Tools\hayabusa\hayabusa.exe
