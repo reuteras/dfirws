@@ -359,7 +359,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "could not be locally" -and
     $_.Line -notmatch "via WKD" -and
     $_.Line -notmatch "ERROR: 9DD0D4217D75" -and
-    $_.Line -notmatch "usr\\share\\man\\man3" -and
+    $_.Line -notmatch "msys64\\usr\\" -and
     $_.Line -notmatch "gpg-error.exe" -and
     $_.Line -notmatch "gpg: error reading key: Network error" -and
     $_.Line -notmatch "gpg-error"
