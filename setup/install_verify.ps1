@@ -107,7 +107,7 @@ Test-Command JumplistBrowser PE32      # C:\Tools\bin\JumplistBrowser.exe
 Test-Command kdb_check PE32      # C:\Tools\bin\kdb_check.exe
 Test-Command MetadataPlus PE32      # C:\Tools\bin\MetadataPlus.exe
 Test-Command MFTBrowser PE32      # C:\Tools\bin\MFTBrowser.exe
-Test-Command msys2 PE32      # C:\Tools\bin\msys2.exe
+Test-Command msys2 PE32
 Test-Command ngrok PE32      # C:\Tools\bin\ngrok.exe
 Test-Command pe_check PE32      # C:\Tools\bin\pe_check.exe
 Test-Command pe-sieve PE32      # C:\Tools\bin\pe-sieve.exe
@@ -432,3 +432,6 @@ Test-Command C:\downloads\openvpn.msi "MSI Installer"
 Test-Command C:\downloads\osfmount.exe PE32
 Test-Command C:\downloads\tailscale.exe PE32
 Test-Command C:\downloads\wireguard.msi "MSI Installer"
+
+# Verify length of file names in Start Menu
+(Get-ChildItem "C:\ProgramData\Microsoft\Windows\Start Menu\Programs" -Recurse).FullName | ForEach-Object { if ($_.Length -gt 250) {$message = "ERROR: Folder name to long " + ${_}.Length + " " + $_ ; Write-Output $message} }
