@@ -421,58 +421,6 @@ function Get-DownloadUrlFromPage {
 
 <#
 .SYNOPSIS
-Get the download URL for a package from the MSYS repository.
-
-.DESCRIPTION
-The Get-DownloadUrlMSYS function retrieves the download URL for a specific package from the MSYS repository. It searches for the package name in the repository, filters out any signature files, and returns the URL of the latest version of the package.
-
-.PARAMETER PackageName
-The name of the package to retrieve the download URL for.
-
-.EXAMPLE
-Get-DownloadUrlMSYS -PackageName "gcc"
-Returns the download URL for the latest version of the "gcc" package from the MSYS repository.
-
-.OUTPUTS
-System.String
-
-.NOTES
-Author: peter@reuteras.net
-Date:  2023-12-21
-#>
-function Get-DownloadUrlMSYS {
-    param (
-        [Parameter(Mandatory=$True)] [string]$PackageName
-    )
-
-    $base = "https://repo.msys2.org/msys/x86_64/"
-    $PackageName = '"' + $PackageName + "-[0-9]"
-    $Url = curl --silent -L $base |
-        findstr "$PackageName" |
-        findstr /v ".sig" |
-        ForEach-Object { ($_ -split '"')[1]} |
-        ForEach-Object {
-            if ($_ -match '(.+)-([0-9.]+)-([0-9]+)-(.+)\.pkg\.tar\.zst') {
-                [PSCustomObject]@{
-                    FileName    = $_
-                    Name        = $matches[1]
-                    Version     = [System.Version]::Parse($matches[2])
-                    Release     = [int]::Parse($matches[3])
-                    Architecture = $matches[4]
-                }
-            } else {
-                [PSCustomObject]@{
-                    FileName    = $_
-                }
-            }
-        } |
-        Sort-Object -Property Version, Release -Descending |
-        Select-Object -First 1
-    return $base + $Url.FileName
-}
-
-<#
-.SYNOPSIS
 Stops the Windows Sandbox when a specific condition is met.
 
 .DESCRIPTION
