@@ -23,8 +23,8 @@
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>
-      <HostFolder>__SANDBOX__tmp\msys64</HostFolder>
-      <SandboxFolder>C:\msys64</SandboxFolder>
+      <HostFolder>__SANDBOX__tmp\Tools</HostFolder>
+      <SandboxFolder>C:\Tools</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
   </MappedFolders>
