@@ -4,7 +4,7 @@ $GIT_PATH = "C:\git"
 $LOCAL_PATH = "C:\local"
 $NEO_JAVA = "C:\java"
 $PDFSTREAMDUMPER_PATH = "C:\Sandsprite\PDFStreamDumper"
-$MSYS2_DIR = "C:\msys64"
+$MSYS2_DIR = "C:\Tools\msys64"
 $RUST_DIR = "C:\Rust"
 $SETUP_PATH = "C:\downloads"
 $WSDFIR_TEMP = "C:\tmp"
@@ -38,6 +38,19 @@ function Add-ToUserPath {
         return
     }
     Write-Output "${dir} is already in PATH"
+}
+
+function Add-MultipleToUserPath {
+    param (
+        [Parameter(Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string[]]
+        $dirs
+    )
+
+    $path = [Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
+    [Environment]::SetEnvironmentVariable("PATH", "${path}" + ";${dirs}", [EnvironmentVariableTarget]::User)
+    Write-Output "Added ${dirs} to PATH"
 }
 
 function Add-Shortcut {
@@ -355,20 +368,16 @@ function Install-FoxitReader {
 }
 function Install-Git {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-git.txt")) {
-        Write-Output "Installing Git Bash"
-        Copy-Item "${SETUP_PATH}\git.exe" "${WSDFIR_TEMP}\git.exe" -Force
-        & "${WSDFIR_TEMP}\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh" | Out-Null
+        Write-Output "Installing Git"
+        & "${SETUP_PATH}\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh" | Out-Null
         if (Test-Path "${LOCAL_PATH}\.bashrc") {
             Copy-Item "${LOCAL_PATH}\.bashrc" "${HOME}\.bashrc" -Force
         } else {
             Copy-Item "${LOCAL_PATH}\defaults\.bashrc" "${HOME}\.bashrc" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-git.txt" | Out-Null
-        Remove-Item "${WSDFIR_TEMP}\git.exe" -Force | Out-Null
-        Set-Alias gdiff "$env:ProgramFiles\Git\usr\bin\diff.exe"
-	    Set-Alias gfind "$env:ProgramFiles\Git\usr\bin\find.exe"
     } else {
-        Write-Output "Git Bash is already installed"
+        Write-Output "Git is already installed"
     }
 }
 
@@ -498,19 +507,6 @@ function Install-Maltego {
     }
 }
 
-function  Install-Msys2 {
-    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-msys2.txt")) {
-        Write-Output "Installing MSYS2"
-        & "C:\Windows\system32\robocopy.exe" /MT:96 /MIR "${TOOLS}\msys64" "C:\msys64" | Out-Null
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (MSYS2-version).lnk" -DestinationPath "C:\msys64\usr\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
-        if (!(Test-Path "C:\msys64\tmp")) {
-            New-Item -ItemType Directory -Path "C:\msys64\tmp" | Out-Null
-        }
-        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-msys2.txt" | Out-Null
-    } else {
-        Write-Output "MSYS2 is already installed"
-    }
-}
 function Install-Neo4j {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neo4j.txt")) {
         Write-Output "Installing Neo4j"

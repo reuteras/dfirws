@@ -11,26 +11,23 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 # Create required directories
-foreach ($dir in @("${WSDFIR_TEMP}", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
+foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
     if (-not (Test-Path -Path $dir)) {
-        New-Item -ItemType Directory -Path $dir | Out-Null
+        New-Item -ItemType Directory -Path $dir -Force | Out-Null
     }
 }
 
-Write-DateLog "Start sandbox setup" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
+Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
 
 # Set the execution policy to Bypass for default PowerShell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
 # Copy config files and import them
-if (-not (Test-Path "${WSDFIR_TEMP}\config.ps1")) {
-    if (Test-Path "${LOCAL_PATH}\config.txt") {
-        Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
-    } else {
-        Copy-Item "${LOCAL_PATH}\defaults\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
-    }
+if (Test-Path "${LOCAL_PATH}\config.txt") {
+    Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
+} else {
+    Copy-Item "${LOCAL_PATH}\defaults\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
 }
-
 . "${WSDFIR_TEMP}\config.ps1"
 Write-DateLog "Config files copied and imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
@@ -46,32 +43,25 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force
 
 # Install latest PowerShell and set execution policy to Bypass
-Copy-Item   "${SETUP_PATH}\powershell.msi" "${WSDFIR_TEMP}\powershell.msi" -Force
-Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\powershell.msi /qn /norestart"
-Write-DateLog "PowerShell installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\powershell.msi /qn /norestart"
 & "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy Bypass"
-Write-DateLog "Setting execution policy to Bypass for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "PowerShell installed and execution policy set to Bypass for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Shortcut for PowerShell or Tabby
 if ("$WSDFIR_TABBY" -eq "Yes") {
     Add-Shortcut -SourceLnk "${HOME}\Desktop\Tabby.lnk" -DestinationPath "${TOOLS}\tabby\Tabby.exe" -WorkingDirectory "${HOME}\Desktop" -IconPath "${TOOLS}\tabby\Tabby.exe"
+    # Copy config for Tabby
+    if (!(Test-Path "${HOME}\AppData\Roaming\tabby")) {
+        New-Item -Path "${HOME}\AppData\Roaming\tabby" -ItemType Directory -Force | Out-Null
+        if (Test-Path "${LOCAL_PATH}\tabby\config.yaml") {
+            Copy-Item "${LOCAL_PATH}\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
+        } else {
+            Copy-Item "${LOCAL_PATH}\defaults\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
+        }
+    }
 } else {
     Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
 }
-
-# Copy config for Tabby
-if (!(Test-Path "${HOME}\AppData\Roaming\tabby")) {
-    New-Item -Path "${HOME}\AppData\Roaming\tabby" -ItemType Directory -Force | Out-Null
-    if (Test-Path "${LOCAL_PATH}\tabby\config.yaml") {
-        Copy-Item "${LOCAL_PATH}\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
-    } else {
-        Copy-Item "${LOCAL_PATH}\defaults\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
-    }
-}
-
-# Configure PowerShell logging
-New-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -Force | Out-Null
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -Name "EnableScriptBlockLogging" -Value 1 -Force | Out-Null
 
 # Install OhMyPosh
 if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
@@ -86,13 +76,11 @@ Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.
 #
 
 # Install 7-Zip
-Copy-Item "${SETUP_PATH}\7zip.msi" "${WSDFIR_TEMP}\7zip.msi" -Force
-Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\7zip.msi /qn /norestart"
+Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
 Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Always install common Java.
-Copy-Item "${SETUP_PATH}\corretto.msi" "${WSDFIR_TEMP}\corretto.msi" -Force
-Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\corretto.msi /qn /norestart"
+Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
 Write-DateLog "Java installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Python
@@ -106,7 +94,7 @@ Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${W
 
 # Install .NET 6
 Start-Process -Wait "${SETUP_PATH}\dotnet6.exe" -ArgumentList "/install /quiet /norestart"
-Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
+Start-Process "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
 Write-DateLog ".NET 6 installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install HxD
@@ -119,8 +107,7 @@ Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandb
 Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Notepad++ and ComparePlus plugin
-Copy-Item "${SETUP_PATH}\notepad++.exe" "${WSDFIR_TEMP}\notepad++.exe" -Force
-& "${WSDFIR_TEMP}\notepad++.exe" /S  | Out-Null
+& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
 Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
@@ -147,17 +134,6 @@ if ("${WSDFIR_DARK}" -eq "Yes") {
     Write-DateLog "Dark mode set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
-# Show file extensions
-Write-DateLog "Show file extensions" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f | Out-Null
-reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\HideFileExt /v DefaultValue /t REG_DWORD /d 0 /f | Out-Null
-reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL /v DefaultValue /t REG_DWORD /d 1 /f | Out-Null
-reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f | Out-Null
-reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Hidden /t REG_DWORD /d 0 /f | Out-Null
-reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowSuperHidden /t REG_DWORD /d 1 /f | Out-Null
-reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v DontPrettyPath /t REG_DWORD /d 1 /f | Out-Null
-Write-DateLog "File extensions shown" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
 # Add right-click context menu if specified
 if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve | Out-Null
@@ -165,7 +141,7 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
 }
 
 # Import registry settings
-reg import "${HOME}\Documents\tools\registry.reg" | Out-Null
+reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
 Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 foreach ($extension in "doc", "docm", "docx", "dot", "dotm", "dotx", "xls", "xlsm", "xlsx", "xlt", "xltm", "xltx", "ppt", "pptm", "pptx", "pot", "potm", "potx") {
@@ -200,6 +176,7 @@ Windows Registry Editor Version 5.00
     reg import "${WSDFIR_TEMP}\${extension}.reg" | Out-Null
     remove-item "${WSDFIR_TEMP}\${extension}.reg"
 }
+Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set dark theme if selected
 if ("${WSDFIR_DARK}" -eq "Yes") {
@@ -211,7 +188,6 @@ Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set Notepad++ as default for many file types
-# Use %VARIABLE% in cmd.exe
 cmd /c "Ftype xmlfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
 cmd /c "Ftype chmfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
 cmd /c "Ftype cmdfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
@@ -225,9 +201,6 @@ Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FileP
 
 # Disable firewall to enable local web services
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
-
-# Don't ask about new apps
-REG ADD "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Explorer" /v "NoNewAppAlert" /t REG_DWORD /d 1 | Out-Null
 
 # Hide the taskbar
 if ("${WSDFIR_HIDE_TASKBAR}" -eq "Yes") {
@@ -249,128 +222,130 @@ Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_
 #
 
 Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
-Add-ToUserPath "${MSYS2_DIR}"
-Add-ToUserPath "${MSYS2_DIR}\ucrt64\bin"
-Add-ToUserPath "${MSYS2_DIR}\usr\bin"
-Add-ToUserPath "${TOOLS}\perl\perl\bin"
-Add-ToUserPath "${env:ProgramFiles}\4n4lDetector"
-Add-ToUserPath "${env:ProgramFiles}\7-Zip"
-Add-ToUserPath "${env:ProgramFiles}\BeaconHunter"
-Add-ToUserPath "${env:ProgramFiles}\bin"
-Add-ToUserPath "${env:ProgramFiles}\Git\bin"
-Add-ToUserPath "${env:ProgramFiles}\Git\cmd"
-Add-ToUserPath "${env:ProgramFiles}\Git\usr\bin"
-Add-ToUserPath "${env:ProgramFiles}\graphviz\bin"
-Add-ToUserPath "${env:ProgramFiles}\hxd"
-Add-ToUserPath "${env:ProgramFiles}\IDR\bin"
-Add-ToUserPath "${env:ProgramFiles}\iisGeolocate"
-Add-ToUserPath "${env:ProgramFiles}\jadx\bin"
-Add-ToUserPath "${env:ProgramFiles}\KAPE"
-Add-ToUserPath "${env:ProgramFiles}\loki"
-Add-ToUserPath "${env:ProgramFiles}\Notepad++"
-Add-ToUserPath "${env:ProgramFiles}\RegistryExplorer"
-Add-ToUserPath "${env:ProgramFiles}\ShellBagsExplorer"
-Add-ToUserPath "${env:ProgramFiles}\TimelineExplorer"
-Add-ToUserPath "${env:ProgramFiles}\qemu"
-Add-ToUserPath "${RUST_DIR}\bin"
-Add-ToUserPath "${GIT_PATH}\ese-analyst"
-Add-ToUserPath "${GIT_PATH}\Events-Ripper"
-Add-ToUserPath "${GIT_PATH}\iShutdown"
-Add-ToUserPath "${GIT_PATH}\RegRipper4.0"
-Add-ToUserPath "${GIT_PATH}\Regshot"
-Add-ToUserPath "${GIT_PATH}\Trawler"
-Add-ToUserPath "${GIT_PATH}\White-Phoenix"
-Add-ToUserPath "${HOME}\Go\bin"
-Add-ToUserPath "${TOOLS}\audacity"
-Add-ToUserPath "${TOOLS}\bin"
-Add-ToUserPath "${TOOLS}\bulk_extractor\win64"
-Add-ToUserPath "${TOOLS}\capa"
-Add-ToUserPath "${TOOLS}\capa-ghidra"
-Add-ToUserPath "${TOOLS}\cargo\bin"
-Add-ToUserPath "${TOOLS}\chainsaw"
-Add-ToUserPath "${TOOLS}\cutter"
-Add-ToUserPath "${TOOLS}\sqlitebrowser"
-Add-ToUserPath "${TOOLS}\DidierStevens"
-Add-ToUserPath "${TOOLS}\die"
-Add-ToUserPath "${TOOLS}\dumpbin"
-Add-ToUserPath "${TOOLS}\elfparser-ng\Release"
-Add-ToUserPath "${TOOLS}\ExeinfoPE"
-Add-ToUserPath "${TOOLS}\exiftool"
-Add-ToUserPath "${TOOLS}\fakenet"
-Add-ToUserPath "${TOOLS}\fasm"
-Add-ToUserPath "${TOOLS}\ffmpeg\bin"
-Add-ToUserPath "${TOOLS}\floss"
-Add-ToUserPath "${TOOLS}\FullEventLogView"
-Add-ToUserPath "${TOOLS}\gftrace64"
-Add-ToUserPath "${TOOLS}\GoReSym"
-Add-ToUserPath "${TOOLS}\h2database"
-Add-ToUserPath "${TOOLS}\hayabusa"
-Add-ToUserPath "${TOOLS}\hfs"
-Add-ToUserPath "${TOOLS}\imhex"
-Add-ToUserPath "${TOOLS}\INDXRipper"
-Add-ToUserPath "${TOOLS}\jd-gui"
-Add-ToUserPath "${TOOLS}\MailView"
-Add-ToUserPath "${TOOLS}\MemProcFS"
-Add-ToUserPath "${TOOLS}\mmdbinspect"
-Add-ToUserPath "${TOOLS}\lessmsi"
-Add-ToUserPath "${TOOLS}\nmap"
-Add-ToUserPath "${TOOLS}\node"
-Add-ToUserPath "${TOOLS}\pebear"
-Add-ToUserPath "${TOOLS}\pestudio"
-Add-ToUserPath "${TOOLS}\pev"
-Add-ToUserPath "${TOOLS}\php"
-Add-ToUserPath "${TOOLS}\procdot\win64"
-Add-ToUserPath "${TOOLS}\pstwalker"
-Add-ToUserPath "${TOOLS}\qpdf\bin"
-Add-ToUserPath "${TOOLS}\qrtool"
-Add-ToUserPath "${TOOLS}\radare2\bin"
-Add-ToUserPath "${TOOLS}\RdpCacheStitcher"
-Add-ToUserPath "${TOOLS}\redress"
-Add-ToUserPath "${TOOLS}\ripgrep"
-Add-ToUserPath "${TOOLS}\scdbg"
-Add-ToUserPath "${TOOLS}\sleuthkit\bin"
-Add-ToUserPath "${TOOLS}\sqlite"
-Add-ToUserPath "${TOOLS}\ssview"
-Add-ToUserPath "${TOOLS}\systeminformer\x64"
-Add-ToUserPath "${TOOLS}\systeminformer\x86"
-Add-ToUserPath "${TOOLS}\sysinternals"
-Add-ToUserPath "${TOOLS}\tabby"
-Add-ToUserPath "${TOOLS}\thumbcacheviewer"
-Add-ToUserPath "${TOOLS}\trid"
-Add-ToUserPath "${TOOLS}\upx"
-Add-ToUserPath "${TOOLS}\VolatilityWorkbench"
-Add-ToUserPath "${TOOLS}\WinApiSearch"
-Add-ToUserPath "${TOOLS}\WinObjEx64"
-Add-ToUserPath "${TOOLS}\XELFViewer"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\EvtxECmd"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\EZViewer"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\JumpListExplorer"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\MFTExplorer"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\RECmd"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\SDBExplorer"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\SQLECmd"
-Add-ToUserPath "${TOOLS}\Zimmerman\net6\XWFIM"
-Add-ToUserPath "${TOOLS}\zircolite"
-Add-ToUserPath "${TOOLS}\zircolite\bin"
-Add-ToUserPath "${TOOLS}\zstd"
-Add-ToUserPath "${VENV}\ingestr\Scripts"
-Add-ToUserPath "${VENV}\jpterm\Scripts"
-Add-ToUserPath "${VENV}\magika\Scripts"
-Add-ToUserPath "${VENV}\maldump\Scripts"
-Add-ToUserPath "${VENV}\peepdf3\Scripts"
-Add-ToUserPath "${VENV}\regipy\Scripts"
-Add-ToUserPath "${VENV}\sigma-cli\Scripts"
-Add-ToUserPath "${VENV}\toolong\Scripts"
-Add-ToUserPath "${HOME}\AppData\Local\Programs\oh-my-posh\bin"
-Add-ToUserPath "${HOME}\Documents\tools\utils"
-
 $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
-Add-ToUserPath "${TOOLS}\ghidra\${GHIDRA_INSTALL_DIR}"
-Write-DateLog "Added to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-& "${HOME}\Documents\tools\dfirws_folder.ps1"
+$ADD_TO_PATH = @("${MSYS2_DIR}", `
+    "${MSYS2_DIR}\ucrt64\bin", `
+    "${MSYS2_DIR}\usr\bin"
+	"${TOOLS}\perl\perl\bin"
+	"${env:ProgramFiles}\4n4lDetector"
+	"${env:ProgramFiles}\7-Zip"
+	"${env:ProgramFiles}\BeaconHunter"
+	"${env:ProgramFiles}\bin"
+	"${env:ProgramFiles}\Git\bin"
+	"${env:ProgramFiles}\Git\cmd"
+	"${env:ProgramFiles}\Git\usr\bin"
+	"${env:ProgramFiles}\graphviz\bin"
+	"${env:ProgramFiles}\hxd"
+	"${env:ProgramFiles}\IDR\bin"
+	"${env:ProgramFiles}\iisGeolocate"
+	"${env:ProgramFiles}\jadx\bin"
+	"${env:ProgramFiles}\KAPE"
+	"${env:ProgramFiles}\loki"
+	"${env:ProgramFiles}\Notepad++"
+	"${env:ProgramFiles}\RegistryExplorer"
+	"${env:ProgramFiles}\ShellBagsExplorer"
+	"${env:ProgramFiles}\TimelineExplorer"
+	"${env:ProgramFiles}\qemu"
+	"${RUST_DIR}\bin"
+	"${GIT_PATH}\ese-analyst"
+	"${GIT_PATH}\Events-Ripper"
+	"${GIT_PATH}\iShutdown"
+	"${GIT_PATH}\RegRipper4.0"
+	"${GIT_PATH}\Regshot"
+	"${GIT_PATH}\Trawler"
+	"${GIT_PATH}\White-Phoenix"
+	"${HOME}\Go\bin"
+	"${TOOLS}\audacity"
+	"${TOOLS}\bin"
+	"${TOOLS}\bulk_extractor\win64"
+	"${TOOLS}\capa"
+	"${TOOLS}\capa-ghidra"
+	"${TOOLS}\cargo\bin"
+	"${TOOLS}\chainsaw"
+	"${TOOLS}\cutter"
+	"${TOOLS}\sqlitebrowser"
+	"${TOOLS}\DidierStevens"
+	"${TOOLS}\die"
+	"${TOOLS}\dumpbin"
+	"${TOOLS}\elfparser-ng\Release"
+	"${TOOLS}\ExeinfoPE"
+	"${TOOLS}\exiftool"
+	"${TOOLS}\fakenet"
+	"${TOOLS}\fasm"
+	"${TOOLS}\ffmpeg\bin"
+	"${TOOLS}\floss"
+	"${TOOLS}\FullEventLogView"
+	"${TOOLS}\gftrace64"
+    "${TOOLS}\ghidra\${GHIDRA_INSTALL_DIR}"
+	"${TOOLS}\GoReSym"
+	"${TOOLS}\h2database"
+	"${TOOLS}\hayabusa"
+	"${TOOLS}\hfs"
+	"${TOOLS}\imhex"
+	"${TOOLS}\INDXRipper"
+	"${TOOLS}\jd-gui"
+	"${TOOLS}\MailView"
+	"${TOOLS}\MemProcFS"
+	"${TOOLS}\mmdbinspect"
+	"${TOOLS}\lessmsi"
+	"${TOOLS}\nmap"
+	"${TOOLS}\node"
+	"${TOOLS}\pebear"
+	"${TOOLS}\pestudio"
+	"${TOOLS}\pev"
+	"${TOOLS}\php"
+	"${TOOLS}\procdot\win64"
+	"${TOOLS}\pstwalker"
+	"${TOOLS}\qpdf\bin"
+	"${TOOLS}\qrtool"
+	"${TOOLS}\radare2\bin"
+	"${TOOLS}\RdpCacheStitcher"
+	"${TOOLS}\redress"
+	"${TOOLS}\ripgrep"
+	"${TOOLS}\scdbg"
+	"${TOOLS}\sleuthkit\bin"
+	"${TOOLS}\sqlite"
+	"${TOOLS}\ssview"
+	"${TOOLS}\systeminformer\x64"
+	"${TOOLS}\systeminformer\x86"
+	"${TOOLS}\sysinternals"
+	"${TOOLS}\tabby"
+	"${TOOLS}\thumbcacheviewer"
+	"${TOOLS}\trid"
+	"${TOOLS}\upx"
+	"${TOOLS}\VolatilityWorkbench"
+	"${TOOLS}\WinApiSearch"
+	"${TOOLS}\WinObjEx64"
+	"${TOOLS}\XELFViewer"
+	"${TOOLS}\Zimmerman\net6"
+	"${TOOLS}\Zimmerman\net6\EvtxECmd"
+	"${TOOLS}\Zimmerman\net6\EZViewer"
+	"${TOOLS}\Zimmerman\net6\JumpListExplorer"
+	"${TOOLS}\Zimmerman\net6\MFTExplorer"
+	"${TOOLS}\Zimmerman\net6\RECmd"
+	"${TOOLS}\Zimmerman\net6\SDBExplorer"
+	"${TOOLS}\Zimmerman\net6\SQLECmd"
+	"${TOOLS}\Zimmerman\net6\XWFIM"
+	"${TOOLS}\zircolite"
+	"${TOOLS}\zircolite\bin"
+	"${TOOLS}\zstd"
+	"${VENV}\ingestr\Scripts"
+	"${VENV}\jpterm\Scripts"
+	"${VENV}\magika\Scripts"
+	"${VENV}\maldump\Scripts"
+	"${VENV}\peepdf3\Scripts"
+	"${VENV}\regipy\Scripts"
+	"${VENV}\sigma-cli\Scripts"
+	"${VENV}\toolong\Scripts"
+	"${HOME}\AppData\Local\Programs\oh-my-posh\bin"
+	"${HOME}\Documents\tools\utils")
+
+$ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"
+Add-MultipleToUserPath $ADD_TO_PATH_STRING
+
+Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\dfirws_folder.ps1" -NoNewWindow
 
 #
 # Install tools
@@ -432,7 +407,7 @@ if ("${WSDFIR_LOKI}" -eq "Yes") {
 
 # Install malcat
 if ("${WSDFIR_MALCAT}" -eq "Yes") {
-    Install-Malcat | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Install-Malcat | Out-Null
     Write-DateLog "malcat installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -450,7 +425,7 @@ if ("${WSDFIR_LIBREOFFICE}" -eq "Yes") {
 
 # Install Git if specified
 if ("${WSDFIR_GIT}" -eq "Yes") {
-    Install-Git | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Start-Process "${POWERSHELL_EXE}" -ArgumentList "-Command Install-Git" -NoNewWindow
     Write-DateLog "Git installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
@@ -521,14 +496,6 @@ Robocopy.exe /MT:96 /MIR "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\.ju
 Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter\" -Force
 Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force
 
-# Zimmerman tools
-#Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\Hasher" "${env:ProgramFiles}\Hasher"
-#if (Test-Path "${LOCAL_PATH}\Hasher.ini") {
-#    Copy-Item "${LOCAL_PATH}\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
-#} else {
-#    Copy-Item "${LOCAL_PATH}\defaults\Hasher.ini" "${env:ProgramFiles}\Hasher\Hasher.ini" -Force
-#}
-
 Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\iisGeolocate" "${env:ProgramFiles}\iisGeolocate"
 if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
     Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force
@@ -543,45 +510,12 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLo
 # 4n4lDetector
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 
-
 #
 # Add shortcuts to desktop for Jupyter and Gollum
 #
 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
-
-# Copy shortcuts to Start menu
-if ("${WSDFIR_START_MENU}" -eq "Yes") {
-    ${sourceDir} = "${HOME}\Desktop\dfirws"
-    ${DestinationDir} = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
-
-    if (-not (Test-Path -Path ${DestinationDir})) {
-        New-Item -ItemType Directory -Path ${DestinationDir}
-    }
-
-    # Find all files in the source directory, including subdirectories
-    $files = Get-ChildItem -Path ${sourceDir} -Recurse -File
-
-    foreach ($file in $files) {
-        $newFolderName = "dfirws - " + $file.DirectoryName.Replace($sourceDir, '').TrimStart('\').Replace('\', ' - ').Replace('\', ' - ').Replace('\', ' - ')
-        $newFolderPath = Join-Path -Path $DestinationDir -ChildPath $newFolderName
-
-        # Ensure the new folder exists
-        if (-not (Test-Path -Path $newFolderPath)) {
-            New-Item -ItemType Directory -Path $newFolderPath
-        }
-
-        # Define the new file path within the new folder structure
-        $newFilePath = Join-Path -Path $newFolderPath -ChildPath $file.Name
-
-        # Copy the file to the new location
-        Copy-Item -Path $file.FullName -Destination $newFilePath
-    }
-
-    Write-DateLog "Files have been copied to the destination directory: ${DestinationDir}"
-}
-
 
 #
 # Config for bash and zsh
@@ -596,9 +530,6 @@ if (Test-Path "${LOCAL_PATH}\.zcompdump") {
 } else {
     Copy-Item "${LOCAL_PATH}\defaults\.zcompdump" "${HOME}\.zcompdump" -Force
 }
-
-# Always install MSYS2
-Install-MSYS2 | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 #
 # Run custom scripts
@@ -637,6 +568,12 @@ if (Test-Path "C:\log\log.txt") {
     Get-Job | Remove-Job | Out-Null
     Write-Output "" > "C:\log\verify_done"
 }
+
+# Wait for all jobs to finish and clean up
+Get-Job | Wait-Job | Out-Null
+Get-Job | Receive-Job 2>&1 | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Get-Job | Remove-Job | Out-Null
+Remove-Item "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 
 Write-DateLog "Installation done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
