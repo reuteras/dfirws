@@ -425,7 +425,7 @@ if ($status) {
 }
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
-$procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip' 
+$procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip'
 $status = Get-FileFromUri -uri "https://procdot.com/${procdot_path}" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\procdot") {
@@ -443,7 +443,7 @@ $status = Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r1
 
 # https://gluonhq.com/products/javafx/ - JavaFX 21
 $javafx_version = Get-DownloadUrlFromPage -url "https://gluonhq.com/products/javafx/" -RegEx '21\.[^" ]+'
-$status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/$javafx_version/openjfx-$javafx_version_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
+$status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/${javafx_version}/openjfx-${javafx_version}_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\javafx-sdk") {
         Remove-Item -Recurse -Force "${TOOLS}\javafx-sdk" | Out-Null 2>&1

@@ -624,7 +624,7 @@ function Get-Winget {
         [Parameter(Mandatory=$true)] [string]$DownloadName
     )
 
-    $VERSION = (winget search --exact --id "$AppName") -match '^(\p{L}|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
+    $VERSION = (winget search --exact --id "$AppName") -match '^([A-Z0-9]+|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
 
     Clear-Tmp winget
     if (Test-Path ".\downloads\$DownloadName") {
