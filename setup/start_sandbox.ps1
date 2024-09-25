@@ -22,6 +22,10 @@ Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEM
 # Set the execution policy to Bypass for default PowerShell
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
+# Install 7-Zip first - needed for other installations
+Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
+Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 # Copy config files and import them
 if (Test-Path "${LOCAL_PATH}\config.txt") {
     Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
@@ -42,8 +46,8 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
 
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force
 
-# Install latest PowerShell and set execution policy to Bypass
-Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\powershell.msi /qn /norestart"
+# Link latest PowerShell and set execution policy to Bypass
+New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value "${TOOLS}\pwsh" -Force | Out-Null
 & "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy Bypass"
 Write-DateLog "PowerShell installed and execution policy set to Bypass for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
@@ -75,12 +79,8 @@ Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.
 # Install base tools
 #
 
-# Install 7-Zip
-Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
-Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
 # Always install common Java.
-Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
+Start-Process msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
 Write-DateLog "Java installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Python
@@ -88,14 +88,12 @@ Write-DateLog "Java installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sand
 Write-DateLog "Python installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Visual C++ Redistributable 16 and 17
-Start-Process -Wait "${SETUP_PATH}\vcredist_16_x64.exe" -ArgumentList "/passive /norestart"
 Start-Process -Wait "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
 Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install .NET 6
-Start-Process -Wait "${SETUP_PATH}\dotnet6.exe" -ArgumentList "/install /quiet /norestart"
-Start-Process "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
-Write-DateLog ".NET 6 installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
+Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install HxD
 Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${WSDFIR_TEMP}\HxDSetup.exe" -Force
