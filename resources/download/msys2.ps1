@@ -40,6 +40,9 @@ Remove-Item "${ROOT_PATH}\tmp\generate_msys2.wsb" | Out-Null
 # Wait for MSYS2 to finish
 Stop-SandboxWhenDone "${ROOT_PATH}\tmp\Tools\msys64\done" $mutex | Out-Null
 
+# Change tmp directory
+Write-Output "C:/tmp/msys2 /tmp ntfs auto 0 0" >> "${ROOT_PATH}\tmp\Tools\msys64\etc\fstab"
+
 # Copy MSYS2 to Tools
 rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\Tools\msys64" "${ROOT_PATH}\mount\Tools\msys64"
 Write-DateLog "MSYS2 and packages done." >> ${ROOT_PATH}\log\msys2.txt 2>&1
