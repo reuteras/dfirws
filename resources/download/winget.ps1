@@ -16,10 +16,6 @@ Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi"
 Write-SynchronizedLog "winget: Downloading Docker Desktop."
 Get-WinGet "Docker.DockerDesktop" "Docker*.exe" "docker.exe"
 
-# DotNet 6 runtime - installed during startup
-Write-SynchronizedLog "winget: Downloading DotNet 6 runtime."
-Get-WinGet "Microsoft.DotNet.Runtime.6" Microsoft*.exe "dotnet6.exe"
-
 # DotNet 6 Desktop runtime - installed during startup
 Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe"
 
