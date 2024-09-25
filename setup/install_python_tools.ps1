@@ -16,7 +16,7 @@ Write-DateLog "Install Git." >> "C:\log\python.txt"
 Add-ToUserPath "${env:ProgramFiles}\Git\bin"
 Add-ToUserPath "${env:ProgramFiles}\Git\cmd"
 Add-ToUserPath "${env:ProgramFiles}\Git\usr\bin"
-Install-Git >> "C:\log\python.txt"
+Install-Git | Out-Null
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
 
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"

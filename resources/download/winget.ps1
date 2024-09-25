@@ -82,7 +82,7 @@ Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi"
 
 # Wireshark - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Wireshark."
-Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.exe" "wireshark.exe"
+Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.msi" "wireshark.msi"
 
 # tailscale - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Tailscale."

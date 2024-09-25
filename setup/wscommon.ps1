@@ -751,15 +751,17 @@ function Install-WinMerge {
 function Install-Wireshark {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-wireshark.txt")) {
         Write-Output "Installing Wireshark"
-        Copy-Item "${SETUP_PATH}\wireshark.exe" "${WSDFIR_TEMP}\wireshark.exe" -Force
-        Start-Process -Wait "${WSDFIR_TEMP}\wireshark.exe" -ArgumentList "/S /desktopicon=yes /quicklaunchicon=yes"
+        #Copy-Item "${SETUP_PATH}\wireshark.msi" "${WSDFIR_TEMP}\wireshark.msi" -Force
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\wireshark.msi /qn /norestart"
         New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark" -Force -Type Directory | Out-Null
         if (Test-Path "${ENRICHMENT}\maxmind_current") {
             Set-Content '"C:/enrichment/maxmind_current"' -Encoding Ascii -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark\maxmind_db_paths"
         }
         Add-ToUserPath "${env:ProgramFiles}\Wireshark"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Wireshark.lnk" -DestinationPath "${env:ProgramFiles}\Wireshark\Wireshark.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\Wireshark\Wireshark.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\Wireshark.lnk" -DestinationPath "${env:ProgramFiles}\Wireshark\Wireshark.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\Wireshark\Wireshark.exe"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-wireshark.txt" | Out-Null
-        Remove-Item "${WSDFIR_TEMP}\wireshark.exe" -Force | Out-Null
+        #Remove-Item "${WSDFIR_TEMP}\wireshark.msi" -Force | Out-Null
     } else {
         Write-Output "Wireshark is already installed"
     }
