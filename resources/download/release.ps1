@@ -429,6 +429,15 @@ if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_
     Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_11.0.1.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_11.0.1.zip"
 }
 
+# Microsoft PowerShell
+$status = Get-GitHubRelease -repo "PowerShell/PowerShell" -path "${SETUP_PATH}\pwsh.zip" -match "win-x64.zip"
+if ($status) {
+    if (Test-Path "${TOOLS}\pwsh") {
+        Remove-Item "${TOOLS}\pwsh" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pwsh.zip" -o"${TOOLS}\pwsh" | Out-Null
+}
+
 # Ghidra btighidra
 $status = Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match "ghidra"
 if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\btighidra.zip")) {
