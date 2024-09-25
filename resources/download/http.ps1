@@ -61,8 +61,6 @@ $status = Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win3
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml"
 
 # Get Sysinternals Suite
-# Change download of Sysinternals to download of individual tools from live.sysinternals.com since
-# the zip file is behind a Cloudflare captcha at the moment.
 $status = Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip"
 
 if ($status) {
@@ -71,27 +69,6 @@ if ($status) {
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
 }
-#if (!(Test-Path -Path ${TOOLS}\sysinternals)) {
-#    New-Item -Path ${TOOLS}\sysinternals -ItemType Directory -Force | Out-Null
-#}
-
-#$folderUrl = "https://live.sysinternals.com/tools/"
-#$webClient = New-Object System.Net.WebClient
-#$files = $webClient.DownloadString($folderUrl).Split("<br>") | Select-String -Pattern '<A HREF="(/tools[^"]+)"' | ForEach-Object { if ($_.Matches.Groups[1].Value -ne "/tools/ARM64/") { ($_.Matches.Groups[1].Value  -split("/"))[2] }}
-#foreach ($file in $files) {
-#    $fileUrl = $folderUrl + $file
-#    $savePath = Join-Path -Path "${TOOLS}\sysinternals" -ChildPath "${file}"
-#    curl --silent -L -z $savePath -o $savePath $fileUrl
-#}
-#$webClient.Dispose()
-
-# Gradle - is used during download and setup of tools for dfirws
-#Get-FileFromUri -uri "https://services.gradle.org/distributions/gradle-8.4-bin.zip" -FilePath ".\downloads\gradle.zip"
-#& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\gradle.zip" -o"${TOOLS}" | Out-Null
-#if (Test-Path -Path ${TOOLS}\gradle) {
-#    Remove-Item -Recurse -Force ${TOOLS}\gradle | Out-Null 2>&1
-#}
-#Move-Item ${TOOLS}\gradle-* ${TOOLS}\gradle
 
 # Get exiftool
 $EXIFTOOL_VERSION = Get-DownloadUrlFromPage -url https://exiftool.org/index.html -RegEx 'exiftool-[^zip]+_64.zip'
@@ -255,15 +232,6 @@ if ($status) {
     Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
 }
 
-# Microsoft Defender is flagging this as malware
-#Get-FileFromUri -uri "https://www.nirsoft.net/utils/chromecookiesview.zip" -FilePath ".\downloads\chromecookiesview.zip"
-#& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\chromecookiesview.zip" -o"${TOOLS}\ntemp" | Out-Null
-#if (Test-Path -Path ${TOOLS}\ntemp\readme.txt) {
-#    Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\chromecookiesview.txt"
-#}
-#Copy-Item ${TOOLS}\ntemp\* ${TOOLS}\nirsoft\
-#Remove-Item -Recurse -Force ${TOOLS}\ntemp | Out-Null 2>&1
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecv.zip" -FilePath ".\downloads\iecookiesview.zip"
 if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\iecookiesview.zip" -o"${TOOLS}\ntemp" | Out-Null
@@ -387,10 +355,6 @@ $status = Get-FileFromUri -uri "${LibreOfficeVersion}" -FilePath ".\downloads\Li
 $NpcapVersion = Get-DownloadUrlFromPage -Url "https://npcap.com/" -RegEx 'dist/npcap-[.0-9]+.exe'
 $status = Get-FileFromUri -uri "https://npcap.com/dist/${NpcapVersion}" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes"
 
-# https://www.wireshark.org/download.html - Wireshark - available for manual installation
-$WiresharkVersion = Get-DownloadUrlFromPage -Url "https://wireshark.org/" -RegEx 'https://[^"]+/win64/Wireshark-4.4.[0-9]+-x64.exe'
-$status = Get-FileFromUri -uri "${WiresharkVersion}" -FilePath ".\downloads\wireshark.exe" -CheckURL "Yes"
-
 # https://www.sqlite.org/download.html - SQLite
 $SQLiteVersion = Get-DownloadUrlFromPage -Url "https://sqlite.org/download.html" -RegEx '[0-9]+/sqlite-tools-win-x64-[^"]+.zip'
 $status = Get-FileFromUri -uri "https://sqlite.org/${SQLiteVersion}" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
@@ -410,7 +374,8 @@ $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3
 # Update the links below when new versions are released
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
-$status = Get-FileFromUri -uri "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes"
+$digitalcorpora_url = Get-DownloadUrlFromPage -url "https://downloads.digitalcorpora.org/downloads/bulk_extractor" -RegEx "[^']+windows.zip"
+$status = Get-FileFromUri -uri "${digitalcorpora_url}" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\bulk_extractor") {
         Remove-Item -Recurse -Force "${TOOLS}\bulk_extractor" | Out-Null 2>&1
@@ -419,7 +384,8 @@ if ($status) {
 }
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
-$status = Get-FileFromUri -uri "https://cert.at/media/files/downloads/software/densityscout/files/densityscout_build_45_windows.zip" -FilePath ".\downloads\DensityScout.zip" -CheckURL "Yes"
+$densityscout_url = Get-DownloadUrlFromPage -url "https://cert.at/en/downloads/software/software-densityscout" -RegEx '[^"]+windows.zip'
+$status = Get-FileFromUri -uri "${densityscout_url}" -FilePath ".\downloads\DensityScout.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\bin\densityscout.exe") {
         Remove-Item -Recurse -Force "${TOOLS}\bin\densityscout.exe" | Out-Null 2>&1
@@ -429,7 +395,8 @@ if ($status) {
 }
 
 # https://nmap.org/download.html - Nmap
-$status = Get-FileFromUri -uri "https://nmap.org/dist/nmap-7.95-setup.exe" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes"
+$nmap_url = Get-DownloadUrlFromPage -url "https://nmap.org/download.html" -RegEx 'https[^"]+setup.exe'
+$status = Get-FileFromUri -uri "${nmap_url}" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\nmap") {
         Remove-Item -Recurse -Force "${TOOLS}\nmap" | Out-Null 2>&1
@@ -438,7 +405,8 @@ if ($status) {
 }
 
 # https://download.sqlitebrowser.org/ - DB Browser for SQLite
-$status = Get-FileFromUri -uri "https://download.sqlitebrowser.org/DB.Browser.for.SQLite-v3.13.0-win64.zip" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes"
+$sqlitebrowser_version = Get-DownloadUrlFromPage -url "https://download.sqlitebrowser.org/" -RegEx 'DB[^"]+win64.zip'
+$status = Get-FileFromUri -uri "https://download.sqlitebrowser.org/${sqlitebrowser_version}" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\DB Browser for SQLite") {
         Remove-Item -Recurse -Force "${TOOLS}\DB Browser for SQLite" | Out-Null 2>&1
@@ -447,7 +415,8 @@ if ($status) {
 }
 
 # https://flatassembler.net/download.php - FASM
-$status = Get-FileFromUri -uri "https://flatassembler.net/fasmw17332.zip" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes"
+$flatassembler_version = Get-DownloadUrlFromPage -url "https://flatassembler.net/download.php" -RegEx 'fasmw[^"]+zip'
+$status = Get-FileFromUri -uri "https://flatassembler.net/${flatassembler_version}" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\fasm") {
         Remove-Item -Recurse -Force "${TOOLS}\fasm" | Out-Null 2>&1
@@ -456,7 +425,8 @@ if ($status) {
 }
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
-$status = Get-FileFromUri -uri "https://procdot.com/download/procdot/binaries/procdot_1_22_57_windows.zip" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes"
+$procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip' 
+$status = Get-FileFromUri -uri "https://procdot.com/${procdot_path}" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\procdot") {
         Remove-Item -Recurse -Force "${TOOLS}\procdot" | Out-Null 2>&1
@@ -465,13 +435,15 @@ if ($status) {
 }
 
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
-$status = Get-FileFromUri -uri "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/10.0.1/windows_10_cmake_Release_graphviz-install-10.0.1-win64.exe" -FilePath ".\downloads\graphviz.exe" -CheckURL "Yes"
+$graphviz_url = Get-DownloadUrlFromPage -url "https://www.graphviz.org/download/" -RegEx 'https://[^"]+win64.exe'
+$status = Get-FileFromUri -uri "${graphviz_url}" -FilePath ".\downloads\graphviz.exe" -CheckURL "Yes"
 
 # http://www.rohitab.com/apimonitor - API Monitor - installed during start
 $status = Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe" -CheckURL "Yes"
 
-# https://gluonhq.com/products/javafx/ - JavaFX
-$status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/21.0.4/openjfx-21.0.4_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
+# https://gluonhq.com/products/javafx/ - JavaFX 21
+$javafx_version = Get-DownloadUrlFromPage -url "https://gluonhq.com/products/javafx/" -RegEx '21\.[^" ]+'
+$status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/$javafx_version/openjfx-$javafx_version_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\javafx-sdk") {
         Remove-Item -Recurse -Force "${TOOLS}\javafx-sdk" | Out-Null 2>&1
@@ -481,13 +453,14 @@ if ($status) {
 }
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
-$status = Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.9.3.jar" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes"
+$apktool_version = Get-DownloadUrlFromPage -url "https://bitbucket.org/iBotPeaches/apktool/downloads/" -RegEx 'apktool_[^"]+'
+$status = Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/${apktool_version}" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes"
 if ($status) {
     Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force
     Copy-Item "setup\utils\apktool.bat" "${TOOLS}\bin\apktool.bat" -Force
 }
 
-# https://windows.php.net/download - PHP
+# https://windows.php.net/download - PHP 8
 $PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/downloads/releases/php-8.[.0-9]+-nts-Win32-vs16-x64.zip'
 $status = Get-FileFromUri -uri "https://windows.php.net${PHP_URL}" -FilePath ".\downloads\php.zip" -CheckURL "Yes"
 if ($status) {
@@ -498,7 +471,8 @@ if ($status) {
 }
 
 # https://hashcat.net/hashcat/ - hashcat
-$status = Get-FileFromUri -uri "https://hashcat.net/files/hashcat-6.2.6.7z" -FilePath ".\downloads\hashcat.7z" -CheckURL "Yes"
+$hashcat_version = Get-DownloadUrlFromPage -url "https://hashcat.net/hashcat/" -RegEx 'fil[^"]+\.7z'
+$status = Get-FileFromUri -uri "https://hashcat.net/${hashcat_version}" -FilePath ".\downloads\hashcat.7z" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\hashcat") {
         Remove-Item -Recurse -Force "${TOOLS}\hashcat" | Out-Null 2>&1
@@ -507,12 +481,8 @@ if ($status) {
     Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
 }
 
-# https://www.maltego.com/downloads/ - Maltego
-$status = Get-FileFromUri -uri "https://downloads.maltego.com/maltego-v4/windows/MaltegoSetup.v4.8.0.exe" -FilePath ".\downloads\maltego.exe" -CheckURL "Yes"
-
-
 # ELK
-$ELK_VERSION = "8.15.1"
+$ELK_VERSION = ((curl.exe --silent -L "https://api.github.com/repos/elastic/elasticsearch/releases/latest" | ConvertFrom-Json).tag_name).Replace("v", "")
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes"

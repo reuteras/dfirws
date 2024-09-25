@@ -6,8 +6,9 @@
 # Packages used in all sandboxes
 #
 
-# https://www.7-zip.org/download.html - 7-Zip - installed during start
-$status = Get-FileFromUri -uri "https://www.7-zip.org/a/7z2408-x64.msi" -FilePath ".\downloads\7zip.msi" -CheckURL "Yes"
+# 7-Zip - installed during startup
+Write-SynchronizedLog "winget: Downloading 7-Zip."
+Get-WinGet "7zip.7zip" "7z*.msi" "7zip.msi"
 
 #
 # Packages used in freshclam sandbox

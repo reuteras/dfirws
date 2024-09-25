@@ -23,6 +23,10 @@ Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.
 Write-SynchronizedLog "winget: Downloading IrfanView."
 Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe"
 
+# Maltego - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Maltego."
+Get-WinGet "Maltego.Maltego" "Maltego*.exe" "maltego.exe"
+
 # Obsidian - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Obsidian."
 Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe"
@@ -75,6 +79,10 @@ Get-WinGet "PassmarkSoftware.OSFMount" "OSFMount*.exe" "osfmount.exe"
 # WireGuard.WireGuard - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading WireGuard."
 Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi"
+
+# Wireshark - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Wireshark."
+Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.exe" "wireshark.exe"
 
 # tailscale - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Tailscale."
