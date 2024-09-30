@@ -335,6 +335,14 @@ $status = Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\micro
 $NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'
 $status = Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes"
 
+# recbin
+$status = Get-FileFromUri -uri "https://github.com/keydet89/Tools/raw/refs/heads/master/exe/recbin.exe" -FilePath ".\downloads\recbin.exe"
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\bin\recbin.exe") {
+        Remove-Item -Force "${TOOLS}\bin\recbin.exe" | Out-Null 2>&1
+    }
+    Move-Item ".\downloads\recbin.exe" "${TOOLS}\bin\recbin.exe"
+}
 
 # https://ngrok.com/download - ngrok - installed during start
 $NgrokURK = Get-DownloadUrlFromPage -Url "https://ngrok.com/download" -RegEx 'https://bin.equinox.io/c/[^/]+/ngrok-v[0-9]+-stable-windows-amd64.zip'

@@ -293,7 +293,11 @@ Copy-Item ".\resources\images\dfirws.jpg" .\downloads\ -Force | Out-Null
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force | Out-Null
 
 foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name | findstr PUBLIC) {
-    Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
+    if (Test-Path ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\") {
+        Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
+    } elseif (Test-Path ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Jython\") {
+        Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Jython\ghidra_scripts" -Force
+    }
 }
 
 # done.txt is used to display last update in sandbox with bginfo
