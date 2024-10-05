@@ -344,6 +344,15 @@ if ($status) {
     Move-Item ".\downloads\recbin.exe" "${TOOLS}\bin\recbin.exe"
 }
 
+# capa Explorer web
+$status = Get-FileFromUri -uri "https://mandiant.github.io/capa/explorer/capa-explorer-web.zip" -FilePath ".\downloads\capa-explorer-web.zip"
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\capa-explorer-web") {
+        Remove-Item -Recurse -Force "${TOOLS}\capa-explorer-web" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
+}
+
 # https://ngrok.com/download - ngrok - installed during start
 $NgrokURK = Get-DownloadUrlFromPage -Url "https://ngrok.com/download" -RegEx 'https://bin.equinox.io/c/[^/]+/ngrok-v[0-9]+-stable-windows-amd64.zip'
 $status = Get-FileFromUri -uri "${NgrokURK}" -FilePath ".\downloads\ngrok.zip"
