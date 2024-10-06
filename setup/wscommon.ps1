@@ -398,7 +398,7 @@ function Install-Hashcat {
         Copy-Item -Recurse "${TOOLS}\hashcat" "${env:ProgramFiles}" -Force
         Add-ToUserPath "${env:ProgramFiles}\hashcat"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${env:ProgramFiles}\hashcat"
-        if ((Get-WmiObject Win32_Processor).Manufacturer -eq "GenuineIntel") {
+        if ((Get-CimInstance Win32_Processor).Manufacturer -eq "GenuineIntel") {
             Start-Process -Wait "${SETUP_PATH}\intel_driver.exe" -ArgumentList '--s --a /quiet /norestart'
             Write-Output "Intel CPU detected. Intel driver installed"
         } else {
