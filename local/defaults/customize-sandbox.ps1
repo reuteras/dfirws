@@ -49,8 +49,8 @@ if (Test-Path "${LOCAL_PATH}\NppMarkdownPanel.ini") {
     Copy-Item "${LOCAL_PATH}\defaults\NppMarkdownPanel.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\NppMarkdownPanel.ini" -Force
 }
 # Add US English dictionary
-Copy-Item "${GIT_PATH}\dictionaries\en\\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
-Copy-Item "${GIT_PATH}\dictionaries\en\\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
+Copy-Item "${GIT_PATH}\dictionaries\en\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
+Copy-Item "${GIT_PATH}\dictionaries\en\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
 
 # Add new path for user
 # Add-ToUserPath "C:\local\bin"
