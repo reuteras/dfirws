@@ -25,6 +25,33 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\Notepad++.lnk" -DestinationPath "${env:
 #Add-Shortcut -SourceLnk "${HOME}\Desktop\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
 #Add-Shortcut -SourceLnk "${HOME}\Desktop\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
 
+# Configure Notepad++
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DSpellCheck.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\DSpellCheck" | Out-Null
+& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\NppMarkdownPanel.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\NppMarkdownPanel" | Out-Null
+New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell" -ItemType Directory -Force | Out-Null
+if ("${WSDFIR_DARK}" -eq "Yes") {
+    if (Test-Path "${LOCAL_PATH}\notepad++_dark.xml") {
+        Copy-Item "${LOCAL_PATH}\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+    } else {
+        Copy-Item "${LOCAL_PATH}\defaults\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+    }
+    Write-DateLog "Dark mode set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
+if (Test-Path "${LOCAL_PATH}\DSpellCheck.ini") {
+    Copy-Item "${LOCAL_PATH}\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
+} else {
+    Copy-Item "${LOCAL_PATH}\defaults\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
+}
+if (Test-Path "${LOCAL_PATH}\NppMarkdownPanel.ini") {
+    Copy-Item "${LOCAL_PATH}\NppMarkdownPanel.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\NppMarkdownPanel.ini" -Force
+} else {
+    Copy-Item "${LOCAL_PATH}\defaults\NppMarkdownPanel.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\NppMarkdownPanel.ini" -Force
+}
+# Add US English dictionary
+Copy-Item "${GIT_PATH}\dictionaries\en\\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
+Copy-Item "${GIT_PATH}\dictionaries\en\\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
+
 # Add new path for user
 # Add-ToUserPath "C:\local\bin"
 

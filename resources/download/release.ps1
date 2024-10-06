@@ -544,8 +544,14 @@ if ($status) {
     Copy-Item "${SETUP_PATH}\evtx_dump.exe" "${TOOLS}\bin"
 }
 
+#Plugins for Notepad++ - installed during start
+
 # ComparePlus plugin for Notepad++ - installed during start
 $status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zip" -match "x64.zip"
+# DSpellCheck plugin for Notepad++ - installed during start
+$status =  Get-GitHubRelease -repo "Predelnik/DSpellCheck" -path "${SETUP_PATH}\DSpellCheck.zip" -match "x64.zip"
+# NppMarkdownPanel plugin for Notepad++ - installed during start
+$status =  Get-GitHubRelease -repo "mohzy83/NppMarkdownPanel" -path "${SETUP_PATH}\NppMarkdownPanel.zip" -match "x64.zip"
 
 # Visual Studio Code powershell extension - installed during start
 $status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix"

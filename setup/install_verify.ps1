@@ -436,6 +436,9 @@ Test-Command C:\downloads\openvpn.msi "MSI Installer"
 Test-Command C:\downloads\osfmount.exe PE32
 Test-Command C:\downloads\tailscale.exe PE32
 Test-Command C:\downloads\wireguard.msi "MSI Installer"
+Test-Command C:\downloads\comparePlus.zip "Zip archive data"
+Test-Command C:\downloads\DSpellCheck.zip "Zip archive data"
+Test-Command C:\downloads\NppMarkdownPanel.zip "Zip archive data"
 
 # Verify length of file names in Start Menu
 (Get-ChildItem "C:\ProgramData\Microsoft\Windows\Start Menu\Programs" -Recurse).FullName | ForEach-Object { if ($_.Length -gt 250) {$message = "ERROR: Folder name to long " + ${_}.Length + " " + $_ ; Write-Output $message} }

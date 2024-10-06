@@ -104,9 +104,8 @@ Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandb
 & "${SETUP_PATH}\irfanview.exe" /silent /assoc=2 | Out-Null
 Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Install Notepad++ and ComparePlus plugin
+# Install Notepad++ and plugins
 & "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
 Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 #
@@ -123,13 +122,6 @@ Write-DateLog "Date and time format set" | Tee-Object -FilePath "${WSDFIR_TEMP}\
 # Dark mode
 if ("${WSDFIR_DARK}" -eq "Yes") {
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0 | Out-Null
-    New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++" -ItemType Directory -Force | Out-Null
-    if (Test-Path "${LOCAL_PATH}\notepad++_dark.xml") {
-        Copy-Item "${LOCAL_PATH}\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
-    } else {
-        Copy-Item "${LOCAL_PATH}\defaults\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
-    }
-    Write-DateLog "Dark mode set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Add right-click context menu if specified
