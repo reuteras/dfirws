@@ -498,6 +498,10 @@ if ($status) {
     Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
 }
 
+# Drivers for hashcat
+$intel_driver = Get-DownloadUrlFromPage -url "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-cpu-runtime-for-opencl-applications-with-sycl-support.html" -RegEx 'https://[^"]+\.exe'
+$status = Get-FileFromUri -uri "${intel_driver}" -FilePath ".\downloads\intel_driver.exe" -CheckURL "Yes"
+
 # ELK
 $ELK_VERSION = ((curl.exe --silent -L "https://api.github.com/repos/elastic/elasticsearch/releases/latest" | ConvertFrom-Json).tag_name).Replace("v", "")
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
