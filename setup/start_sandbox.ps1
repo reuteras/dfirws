@@ -309,6 +309,7 @@ $ADD_TO_PATH = @("${MSYS2_DIR}", `
 	"${TOOLS}\systeminformer\x86"
 	"${TOOLS}\sysinternals"
 	"${TOOLS}\tabby"
+	"${TOOLS}\takajo"
 	"${TOOLS}\thumbcacheviewer"
 	"${TOOLS}\trid"
 	"${TOOLS}\upx"

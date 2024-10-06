@@ -398,6 +398,12 @@ function Install-Hashcat {
         Copy-Item -Recurse "${TOOLS}\hashcat" "${env:ProgramFiles}" -Force
         Add-ToUserPath "${env:ProgramFiles}\hashcat"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${env:ProgramFiles}\hashcat"
+        if ((Get-WmiObject Win32_Processor).Manufacturer -eq "GenuineIntel") {
+            Start-Process -Wait "${SETUP_PATH}\intel_driver.exe" -ArgumentList '--s --a /quiet /norestart'
+            Write-Output "Intel CPU detected. Intel driver installed"
+        } else {
+            Write-Output "AMD CPU detected. You have to download the driver from AMD's website"
+        }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-hashcat.txt" | Out-Null
     } else {
         Write-Output "Hashcat is already installed"

@@ -111,6 +111,7 @@ Test-Command msys2 PE32
 Test-Command ngrok PE32      # C:\Tools\bin\ngrok.exe
 Test-Command pe_check PE32      # C:\Tools\bin\pe_check.exe
 Test-Command pe-sieve PE32      # C:\Tools\bin\pe-sieve.exe
+Test-Command recbin PE32      # C:\Tools\bin\recbin.exe
 Test-Command PrefetchBrowser PE32      # C:\Tools\bin\PrefetchBrowser.exe
 Test-Command sidr PE32      # C:\Tools\bin\sidr.exe
 Test-Command velociraptor PE32      # C:\Tools\bin\velociraptor.exe
@@ -148,22 +149,23 @@ Test-Command rizin PE32      # C:\Tools\cutter\rizin.exe
 Test-Command js-file PE32      # C:\Tools\DidierStevens\js-file.exe
 Test-Command die PE32      # C:\Tools\die\die.exe
 Test-Command diec PE32      # C:\Tools\die\diec.exe
-Test-Command C:\Tools\dnSpy64\bin\dnSpy.dll PE32
+Test-Command "C:\Tools\capa-explorer-web\index.html" HTML
+Test-Command "C:\Tools\dnSpy64\bin\dnSpy.dll" PE32
 Test-Command dumpbin PE32      # C:\Tools\dumpbin\dumpbin.exe
 Test-Command elfparser-ng PE32      # C:\Tools\elfparser-ng\Release\elfparser-ng.exe
 Test-Command exiftool PE32      # C:\Tools\exiftool\exiftool.exe
 Test-Command fakenet PE32      # C:\Tools\fakenet\fakenet.exe
 Test-Command FASM PE32      # C:\Tools\fasm\FASM.EXE
 Test-Command floss PE32      # C:\Tools\floss\floss.exe
-Test-Command C:\Tools\fqlite\fqlite_next.jar JAR
+Test-Command "C:\Tools\fqlite\fqlite_next.jar" JAR
 Test-Command FullEventLogView PE32      # C:\Tools\FullEventLogView\FullEventLogView.exe
 Test-Command gftrace PE32      # C:\Tools\gftrace64\gftrace.exe
 Test-Command ghidraRun ASCII
 Test-Command "C:\Tools\ghidra\ghidra_10.4_PUBLIC\ghidraRun" ASCII
 Test-Command GoReSym PE32      # C:\Tools\GoReSym\GoReSym.exe
-Test-Command C:\Tools\hashcat\hashcat.exe PE32
+Test-Command "C:\Tools\hashcat\hashcat.exe" PE32
 Test-Command hayabusa PE32      # C:\Tools\hayabusa\hayabusa.exe
-Test-Command C:\Tools\iaito\iaito.exe PE32
+Test-Command "C:\Tools\iaito\iaito.exe" PE32
 Test-Command imhex-gui PE32      # C:\Tools\imhex\imhex-gui.exe
 Test-Command imhex PE32      # C:\Tools\imhex\imhex.exe
 Test-Command INDXRipper PE32      # C:\Tools\INDXRipper\INDXRipper.exe
@@ -171,16 +173,16 @@ Test-Command jd-gui PE32      # C:\Tools\jd-gui\jd-gui.exe
 Test-Command lessmsi-gui PE32      # C:\Tools\lessmsi\lessmsi-gui.exe
 Test-Command lessmsi PE32      # C:\Tools\lessmsi\lessmsi.exe
 Test-Command MailView PE32      # C:\Tools\MailView\MailView.exe
-Test-Command C:\Tools\mboxviewer\mboxview64.exe PE32 # GUI not in path
+Test-Command "C:\Tools\mboxviewer\mboxview64.exe" PE32 # GUI not in path
 Test-Command MemProcFS PE32      # C:\Tools\MemProcFS\MemProcFS.exe
 Test-Command mmdbinspect PE32      # C:\Tools\mmdbinspect\mmdbinspect.exe
-Test-Command C:\Tools\nirsoft\BrowsingHistoryView.exe PE32
-Test-Command C:\Tools\nirsoft\ChromeCacheView.exe PE32
-Test-Command C:\Tools\nirsoft\IECacheView.exe PE32
-Test-Command C:\Tools\nirsoft\iecv.exe PE32
-Test-Command C:\Tools\nirsoft\LastActivityView.exe PE32
-Test-Command C:\Tools\nirsoft\MZCacheView.exe PE32
-Test-Command C:\Tools\nirsoft\mzcv.exe PE32
+Test-Command "C:\Tools\nirsoft\BrowsingHistoryView.exe" PE32
+Test-Command "C:\Tools\nirsoft\ChromeCacheView.exe" PE32
+Test-Command "C:\Tools\nirsoft\IECacheView.exe" PE32
+Test-Command "C:\Tools\nirsoft\iecv.exe" PE32
+Test-Command "C:\Tools\nirsoft\LastActivityView.exe" PE32
+Test-Command "C:\Tools\nirsoft\MZCacheView.exe" PE32
+Test-Command "C:\Tools\nirsoft\mzcv.exe" PE32
 Test-Command ncat PE32      # C:\Tools\nmap\ncat.exe
 Test-Command nmap PE32      # C:\Tools\nmap\nmap.exe
 Test-Command node PE32      # C:\Tools\node\node.exe
@@ -201,6 +203,7 @@ Test-Command blkcalc PE32      # C:\Tools\sleuthkit\bin\blkcalc.exe
 Test-Command sqldiff PE32      # C:\Tools\sqlite\sqldiff.exe
 Test-Command sqlite3 PE32      # C:\Tools\sqlite\sqlite3.exe
 Test-Command "C:\Tools\sqlitebrowser\DB Browser for SQLite.exe" PE32
+Test-Command "C:\Tools\takajo\takajo.exe" PE32
 Test-Command SSView PE32      # C:\Tools\ssview\SSView.exe
 Test-Command autorunsc64 PE32      # C:\Tools\sysinternals\autorunsc64.exe
 Test-Command procdump64 PE32      # C:\Tools\sysinternals\procdump64.exe
@@ -428,6 +431,7 @@ Test-Command C:\venv\regipy\Scripts\parseUSBs.py Python
 Test-Command C:\venv\scare\Scripts\scare.py Python
 
 # Downloads only files
+Test-Command C:\downloads\intel_driver.exe PE32
 Test-Command C:\downloads\openvpn.msi "MSI Installer"
 Test-Command C:\downloads\osfmount.exe PE32
 Test-Command C:\downloads\tailscale.exe PE32

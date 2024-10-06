@@ -789,6 +789,16 @@ if ($status) {
     Move-Item ${TOOLS}\hayabusa\hayabusa-* ${TOOLS}\hayabusa\hayabusa.exe
 }
 
+# takajo
+$status = Get-GitHubRelease -repo "Yamato-Security/takajo" -path "${SETUP_PATH}\takajo.zip" -match "win-x64"
+if ($status) {
+    if (Test-Path "${TOOLS}\takajo") {
+        Remove-Item "${TOOLS}\takajo" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\takajo.zip" -o"${TOOLS}\takajo" | Out-Null
+    Move-Item ${TOOLS}\takajo\takajo-* "${TOOLS}\takajo\takajo.exe"
+}
+
 # zaproxy - available for installation with dfirws-install.ps1
 $status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.exe" -match "windows.exe"
 
