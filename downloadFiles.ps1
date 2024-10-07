@@ -357,6 +357,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "create mode " -and
     $_.Line -notmatch "delete mode " -and
     $_.Line -notmatch "rename " -and
+    $_.Line -notmatch "new branch" -and
     $_.Line -notmatch "origin/main Updating" -and
     $_.Line -notmatch "libgpg-error" -and
     $_.Line -notmatch ": No data" -and
