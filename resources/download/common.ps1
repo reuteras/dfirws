@@ -16,6 +16,10 @@ $null=$WSDFIR_TEMP
 $null=$TOOLS
 $null=$mutexName
 
+if (!(Test-Path variable:GIT_FILE)) {
+    $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
+}
+
 <#
 .SYNOPSIS
 Function to download a file from a given URI and save it to a specified file path.
@@ -47,7 +51,8 @@ function Get-FileFromUri {
     Param (
         [Parameter(Mandatory=$True)] [string]$Uri,
         [Parameter(Mandatory=$True)] [string]$FilePath,
-        [Parameter(Mandatory=$False)] [string]$CheckURL = ""
+        [Parameter(Mandatory=$False)] [string]$CheckURL = "",
+        [Parameter(Mandatory=$False)] [string]$check = ""
     )
 
     Write-SynchronizedLog "Downloading $Uri to $FilePath. CheckURL: $CheckURL."
@@ -177,6 +182,15 @@ function Get-FileFromUri {
     }
 
     if ($downloaded) {
+        # Check if downloaded file is the correct type with help of $GIT_CHECK and the value of $check
+        if ($check -ne "" ) {
+            $FILE_TYPE = & "$GIT_FILE" -b "$TmpFilePath"
+            if (!($FILE_TYPE | Select-String -Pattern $check -Quiet)) {
+                Write-SynchronizedLog "Error: Received file, ${FilePath}, is not the correct type. Type: $FILE_TYPE"
+                Remove-Item $TmpFilePath -Force | Out-Null
+                return $false
+            }
+        }
         # Copy the temporary file to the final file path and remove the temporary file
         try {
             $result = rclone --log-level ERROR copyto --metadata --inplace --checksum "${TmpFilePath}" "${FilePath}" | Out-String
@@ -194,6 +208,7 @@ function Get-FileFromUri {
         Update-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name -Path $FilePath
     } else {
         Write-SynchronizedLog "Already downloaded $Uri according to etag (${ETAG_FILE})."
+        return $false
     }
     $ProgressPreference = 'Continue'
 
@@ -296,7 +311,8 @@ function Get-GitHubRelease {
         [Parameter(Mandatory=$True)] [string]$repo,
         [Parameter(Mandatory=$True)] [string]$path,
         [Parameter(Mandatory=$True)] [string]$match,
-        [Parameter(Mandatory=$False)] [string]$version = "latest"
+        [Parameter(Mandatory=$False)] [string]$version = "latest",
+        [Parameter(Mandatory=$False)] [string]$check = ""
     )
 
     $Url = ""
@@ -357,7 +373,7 @@ function Get-GitHubRelease {
 
     # Log the chosen URL and download the file
     Write-SynchronizedLog "Using $Url for $repo."
-    return Get-FileFromUri -uri $Url -FilePath $path -CheckURL "Yes"
+    return Get-FileFromUri -uri $Url -FilePath $path -CheckURL "Yes" -check $check
 }
 
 <#
@@ -621,7 +637,8 @@ function Get-Winget {
     param (
         [Parameter(Mandatory=$true)] [string]$AppName,
         [Parameter(Mandatory=$true)] [string]$TmpFileName,
-        [Parameter(Mandatory=$true)] [string]$DownloadName
+        [Parameter(Mandatory=$true)] [string]$DownloadName,
+        [Parameter(Mandatory=$false)] [string]$check = ""
     )
 
     $VERSION = (winget search --exact --id "$AppName") -match '^([A-Z0-9]+|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
@@ -637,20 +654,28 @@ function Get-Winget {
     Write-SynchronizedLog "Downloading $AppName version $VERSION."
 
     winget download --disable-interactivity	--exact --id "$AppName" -d .\tmp\winget 2>&1 | Out-Null
-    Remove-Item .\tmp\winget\*.yaml -Force > $null 2>&1
+    Remove-Item .\tmp\winget\*.yaml -Force 2>&1 | Out-Null
 
     $FileName = Get-ChildItem .\tmp\winget\ | Select-Object -Last 1 -ExpandProperty FullName
+
+    if ($check -ne "" ) {
+        $FILE_TYPE = & "$GIT_FILE" -b "$FileName"
+        if (!($FILE_TYPE | Select-String -Pattern $check -Quiet)) {
+            Write-SynchronizedLog "Error: Downloaded file, ${FileName}, is not the correct type. Type: $FILE_TYPE"
+            Remove-Item $FileName -Force | Out-Null
+            return $false
+        }
+    }
+
     Update-ToolsDownloaded -URL $VERSION -Name $AppName -Path $FileName
 
     Get-ChildItem .\tmp\winget\ | ForEach-Object {
         if ($_.Name -ne ".\tmp\winget\$TmpFileName") {
-            if (! (Copy-Item $_.FullName ".\downloads\$DownloadName" -Force )) {
-                Write-SynchronizedLog "Failed to download $AppName version $VERSION."
-                Write-SynchronizedLog "Content of .\tmp\winget:"
-                Get-ChildItem .\tmp\winget\ | ForEach-Object { Write-SynchronizedLog $_.Name }
-            }
+            Copy-Item $_.FullName ".\downloads\$DownloadName" -Force
         }
     }
 
     Clear-Tmp winget
+
+    return $true
 }
