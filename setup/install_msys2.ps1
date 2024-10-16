@@ -3,6 +3,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 
 # This script runs in a Windows sandbox to install msys2 tools.
+Write-Output "Install MSYS2."
 Write-DateLog "Install MSYS2" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
 New-Item -ItemType Directory "${WSDFIR_TEMP}" 2>&1 | ForEach-Object{ "$_" } | Out-Null
@@ -27,4 +28,9 @@ $env:MSYSTEM = 'UCRT64'
 & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syu bc binutils cpio expect git gnu-netcat mingw-w64-ucrt-x86_64-autotools mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-make mingw-w64-ucrt-x86_64-toolchain nasm ncurses ncurses-devel pv rsync tree zsh vim' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
 Write-DateLog "MSYS2 installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+
+if (Test-Path -Path "${TOOLS}\Debug") {
+    Read-Host "Press Enter to continue"
+}
+
 Write-Output "" > "C:\Tools\msys64\done"

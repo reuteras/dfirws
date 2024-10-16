@@ -20,6 +20,10 @@ if (Test-Path -Path "${ROOT_PATH}\tmp\Tools" ) {
 
 New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Tools" | Out-Null
 
+if (! (Test-Path -Path "${ROOT_PATH}\Tools\Debug" )) {
+    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Tools\Debug" | Out-Null
+}
+
 # Create install directory for MSYS2
 if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\msys64" )) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\msys64" | Out-Null
