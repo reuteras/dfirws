@@ -10,17 +10,14 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
 # Start logging
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
-# Create required directories
-foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
-    if (-not (Test-Path -Path $dir)) {
-        New-Item -ItemType Directory -Path $dir -Force | Out-Null
-    }
-}
-
 Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
 
+if (Test-Path "C:\log\log.txt") {
+	Add-Shortcut -SourceLnk "${HOME}\Desktop\progress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Get-Content C:\log\verify.txt -Wait"
+}
+
 # Set the execution policy to Bypass for default PowerShell
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
 # Install 7-Zip first - needed for other installations
 Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
@@ -28,28 +25,28 @@ Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_san
 
 # Copy config files and import them
 if (Test-Path "${LOCAL_PATH}\config.txt") {
-    Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
+    Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force | Out-Null
 } else {
-    Copy-Item "${LOCAL_PATH}\defaults\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force
+    Copy-Item "${LOCAL_PATH}\defaults\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force | Out-Null
 }
 . "${WSDFIR_TEMP}\config.ps1"
 Write-DateLog "Config files copied and imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # PowerShell
 if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
-    Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force
-    Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force
+    Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
+    Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
 } else {
-    Copy-Item "${LOCAL_PATH}\defaults\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force
-    Copy-Item "${LOCAL_PATH}\defaults\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force
+    Copy-Item "${LOCAL_PATH}\defaults\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
+    Copy-Item "${LOCAL_PATH}\defaults\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
 }
 
-Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force
+Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force | Out-Null
 
 # Link latest PowerShell and set execution policy to Bypass
 New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value "${TOOLS}\pwsh" -Force | Out-Null
-& "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy Bypass"
-Write-DateLog "PowerShell installed and execution policy set to Bypass for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+& "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy -Scope CurrentUser Unrestricted"
+Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Shortcut for PowerShell or Tabby
 if ("$WSDFIR_TABBY" -eq "Yes") {
@@ -58,9 +55,9 @@ if ("$WSDFIR_TABBY" -eq "Yes") {
     if (!(Test-Path "${HOME}\AppData\Roaming\tabby")) {
         New-Item -Path "${HOME}\AppData\Roaming\tabby" -ItemType Directory -Force | Out-Null
         if (Test-Path "${LOCAL_PATH}\tabby\config.yaml") {
-            Copy-Item "${LOCAL_PATH}\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
+            Copy-Item "${LOCAL_PATH}\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force | Out-Null
         } else {
-            Copy-Item "${LOCAL_PATH}\defaults\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force
+            Copy-Item "${LOCAL_PATH}\defaults\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force | Out-Null
         }
     }
 } else {
@@ -178,16 +175,18 @@ Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set Notepad++ as default for many file types
-cmd /c "Ftype xmlfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype chmfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype cmdfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype htafile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype jsefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype jsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype txtfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype vbefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-cmd /c "Ftype vbsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+if (!(Test-Path "C:\log\log.txt")) {
+	cmd /c "Ftype xmlfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype chmfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype cmdfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype htafile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype jsefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype jsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype txtfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype vbefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	cmd /c "Ftype vbsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
+	Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 
 # Disable firewall to enable local web services
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
@@ -454,21 +453,21 @@ Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${WSDFIR_TEMP}
 
 New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
 if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
-    Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force
+    Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force | Out-Null
 }if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
-    Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force
+    Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force | Out-Null
 }
 
 # TODO Verify Robocopy destinations
 
 # Add plugins to Cutter
 New-Item -ItemType Directory -Force -Path "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
-Copy-Item "${GIT_PATH}\radare2-deep-graph\cutter\graphs_plugin_grid.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
-Copy-Item "${SETUP_PATH}\x64dbgcutter.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
-Copy-Item "${GIT_PATH}\cutterref\cutterref.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\archs"
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\icons"
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin"
+Copy-Item "${GIT_PATH}\radare2-deep-graph\cutter\graphs_plugin_grid.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force | Out-Null
+Copy-Item "${SETUP_PATH}\x64dbgcutter.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force | Out-Null
+Copy-Item "${GIT_PATH}\cutterref\cutterref.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force | Out-Null
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\archs" | Out-Null
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\icons" | Out-Null
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin" | Out-Null
 Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 
@@ -477,26 +476,26 @@ Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}
 #
 
 # BeaconHunter
-Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter"
+Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter" | Out-Null
 
 # IDR
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\IDR" "${env:ProgramFiles}\IDR"
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\IDR" "${env:ProgramFiles}\IDR" | Out-Null
 
 # Jupyter
-Robocopy.exe /MT:96 /MIR "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\.jupyter"
-Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter\" -Force
-Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force
+Robocopy.exe /MT:96 /MIR "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\.jupyter" | Out-Null
+Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter\" -Force | Out-Null
+Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force | Out-Null
 
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\iisGeolocate" "${env:ProgramFiles}\iisGeolocate"
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\iisGeolocate" "${env:ProgramFiles}\iisGeolocate" | Out-Null
 if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
-    Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force
+    Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force | Out-Null
 }
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\RegistryExplorer" "${env:ProgramFiles}\RegistryExplorer"
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\ShellBagsExplorer" "${env:ProgramFiles}\ShellBagsExplorer"
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\TimelineExplorer" "${env:ProgramFiles}\TimelineExplorer"
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\RegistryExplorer" "${env:ProgramFiles}\RegistryExplorer" | Out-Null
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\ShellBagsExplorer" "${env:ProgramFiles}\ShellBagsExplorer" | Out-Null
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\TimelineExplorer" "${env:ProgramFiles}\TimelineExplorer" | Out-Null
 
 # AuthLogParser
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLogParser"
+Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLogParser" | Out-Null
 
 # 4n4lDetector
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
@@ -512,14 +511,14 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HO
 # Config for bash and zsh
 #
 if (Test-Path "${LOCAL_PATH}\.zshrc") {
-    Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc" -Force
+    Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc" -Force | Out-Null
 } else {
-    Copy-Item "${LOCAL_PATH}\defaults\.zshrc" "${HOME}\.zshrc" -Force
+    Copy-Item "${LOCAL_PATH}\defaults\.zshrc" "${HOME}\.zshrc" -Force | Out-Null
 }
 if (Test-Path "${LOCAL_PATH}\.zcompdump") {
-    Copy-Item "${LOCAL_PATH}\.zcompdump" "${HOME}\.zcompdump" -Force
+    Copy-Item "${LOCAL_PATH}\.zcompdump" "${HOME}\.zcompdump" -Force | Out-Null
 } else {
-    Copy-Item "${LOCAL_PATH}\defaults\.zcompdump" "${HOME}\.zcompdump" -Force
+    Copy-Item "${LOCAL_PATH}\defaults\.zcompdump" "${HOME}\.zcompdump" -Force | Out-Null
 }
 
 #
