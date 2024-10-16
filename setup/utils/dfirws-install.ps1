@@ -15,6 +15,7 @@ param (
     [switch]$Fibratus,
     [switch]$Firefox,
     [switch]$FoxitReader,
+    [switch]$FQLite,
     [switch]$Git,
     [switch]$GoogleEarth,
     [switch]$GoLang,
@@ -103,6 +104,10 @@ if ($Firefox.IsPresent) {
 
 if ($FoxitReader.IsPresent) {
     Install-FoxitReader
+}
+
+if ($FQLite.IsPresent) {
+    Install-FQLite
 }
 
 if ($Git.IsPresent) {
