@@ -17,6 +17,8 @@ param(
     [Switch]$dissect,
     [Parameter(HelpMessage = "Switch to venv evt2sigma.")]
     [Switch]$evt2sigma,
+    [Parameter(HelpMessage = "Switch to venv flare-floss.")]
+    [Switch]$floss,
     [Parameter(HelpMessage = "Switch to venv ghidrecomp.")]
     [Switch]$ghidrecomp,
     [Parameter(HelpMessage = "Switch to venv ingestr.")]
@@ -73,6 +75,8 @@ if ($aspose) {
     $venv = "dissect"
 } elseif ($evt2sigma) {
     $venv = "evt2sigma"
+} elseif ($floss) {
+    $venv = "flare-floss"
 } elseif ($ghidrecomp) {
     $venv = "ghidrecomp"
 } elseif ($ingestr) {
