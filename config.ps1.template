@@ -15,8 +15,12 @@ $GITHUB_TOKEN = "YOUR GITHUB TOKEN"
 $BURP_SUITE_EDITION = "Community"
 # $BURP_SUITE_EDITION = "Professional"
 
+# Path to file.exe from Git
+$GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
+
 $null = $IPINFO_API_KEY
 $null = $BURP_SUITE_EDITION
+$null = $GIT_FILE
 $null = $GITHUB_USERNAME
 $null = $GITHUB_TOKEN
 $null = $MAXMIND_LICENSE_KEY
