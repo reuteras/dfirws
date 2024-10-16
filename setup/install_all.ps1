@@ -3,8 +3,8 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 
 Write-SynchronizedLog "Install all tools in the sandbox."
+Write-OutPut "Install all tools in the sandbox."
 Write-SynchronizedLog ([string](dfirws-install.ps1 -ApiMonitor))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -Autopsy))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -BinaryNinja))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -BurpSuite))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Chrome))
@@ -17,6 +17,7 @@ Write-SynchronizedLog ([string](dfirws-install.ps1 -Dokany))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Fibratus))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Firefox))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -FoxitReader))
+Write-SynchronizedLog ([string](dfirws-install.ps1 -FQLite))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Git))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -GoogleEarth))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -GoLang))
@@ -45,5 +46,10 @@ Write-SynchronizedLog ([string](dfirws-install.ps1 -Wireshark))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -X64Dbg))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -ZAProxy))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Zui))
+Write-SynchronizedLog ([string](dfirws-install.ps1 -Autopsy))
+
+if (Test-Path -Path "${TOOLS}\Debug") {
+    Read-Host "Press Enter to continue"
+}
 
 exit 0
