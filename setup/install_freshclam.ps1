@@ -16,7 +16,12 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\freshclam.exe")) {
     Start-Sleep -Seconds 1
 }
 
-& 'C:\Program Files\ClamAV\freshclam.exe' --no-dns | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+& 'C:\Program Files\ClamAV\freshclam.exe' --no-dns --quiet | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
 
 Write-DateLog "Freshclam update done." | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+
+if (Test-Path -Path "${TOOLS}\Debug") {
+    Read-Host "Press Enter to continue"
+}
+
 Write-Output "" > "${TOOLS}\ClamAV\done"
