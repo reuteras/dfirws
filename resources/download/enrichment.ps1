@@ -257,10 +257,10 @@ foreach ($repourl in $repourls) {
     $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\.git$" }
     if ( Test-Path -Path "${repo}" ) {
         Set-Location "${repo}"
-        git pull 2>&1 | Out-Null
+        git pull 2>&1 | ForEach-Object{ "$_" } | Out-Null
         Set-Location ..
     } else {
-        git clone "${repourl}" 2>&1 | Out-Null
+        git clone "${repourl}" 2>&1 | ForEach-Object{ "$_" } | Out-Null
     }
 }
 
