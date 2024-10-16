@@ -36,6 +36,7 @@ $repourls = `
     "https://github.com/last-byte/PersistenceSniper.wiki.git", `
     "https://github.com/LibreOffice/dictionaries.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
+    "https://github.com/mandiant/flare-floss.git", `
     "https://github.com/mandiant/gootloader.git", `
     "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
