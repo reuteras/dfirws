@@ -224,7 +224,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "$CURRENT_VE
         if (Test-Path "C:\venv\jep") {
             Get-ChildItem C:\venv\jep\ -Exclude jep.txt | Remove-Item -Force -Recurse 2>&1 | ForEach-Object{ "$_" } | Out-null
         }
-        
+
         # Set environment variables for Visual Studio Build Tools
         $env:DISTUTILS_USE_SDK=1
         $env:MSSdk=1
@@ -232,7 +232,7 @@ if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "$CURRENT_VE
         $env:INCLUDE = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\include" + ";C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0" + $env:INCLUDE
         C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat amd64 >> "C:\log\python.txt"
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")+ ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
- 
+
         Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\jep"
         C:\venv\jep\Scripts\Activate.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
         Set-Location "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -669,7 +669,7 @@ foreach ($virtualenv in "binary-refinery", "chepy", "csvkit", "ghidrecomp", "jpt
     } else {
         Get-LatestPipVersion ${virtualenv} > "${WSDFIR_TEMP}\${virtualenv}.txt"
     }
-    
+
     if (Test-Path "C:\venv\${virtualenv}\${virtualenv}.txt") {
         $CURRENT_VENV = "C:\venv\${virtualenv}\${virtualenv}.txt"
     } else {
