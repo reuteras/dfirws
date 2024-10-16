@@ -101,7 +101,23 @@ $DidierStevensSuite = `
     "zipdump.py"
 
 foreach ($Tool in ${DidierStevensSuite}) {
-    $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"-
+    $extension = [System.IO.Path]::GetExtension($Tool)
+    if ($extension -eq ".exe") {
+        $checkString = "PE32"
+    } elseif ($extension -eq ".dll") {
+        $checkString = "PE32"
+    } elseif ($extension -eq ".py") {
+        $checkString = "(Python script|^$)"
+    } elseif ($extension -eq ".def") {
+        $checkString = "magic text fragment"
+    } elseif ($extension -eq ".json") {
+        $checkString = "JSON text data"
+    } elseif ($extension -eq "") {
+        $checkString = "ASCII text"
+    } else {
+        $checkString = "ASCII text"
+    }
+    $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}" -check "${checkString}"
 }
 
 $DidierStevensBeta = "metatool.py", `
@@ -110,7 +126,7 @@ $DidierStevensBeta = "metatool.py", `
     "xlsbdump.py"
 
 foreach ($Tool in ${DidierStevensBeta}) {
-  $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/Beta/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}"
+  $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/Beta/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}" -check "Python script"
 }
 
 $null = $status
