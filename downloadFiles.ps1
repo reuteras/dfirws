@@ -39,6 +39,8 @@ param(
     [Switch]$AllTools,
     [Parameter(HelpMessage = "Update Didier Stevens tools.")]
     [Switch]$Didier,
+    [Parameter(HelpMessage = "Debug downloads.")]
+    [Switch]$DebugDownloads,
     [Parameter(HelpMessage = "Update enrichment.")]
     [Switch]$Enrichment,
     [Parameter(HelpMessage = "Update ClamAV databases with Freshclam.")]
@@ -159,6 +161,10 @@ if (!(Test-Path "${TOOLS}\Zimmerman")) {
     New-Item -ItemType Directory -Force -Path "${TOOLS}\Zimmerman" 2>&1 | Out-Null
 }
 
+if (Test-Path "${TOOLS}\Debug") {
+    Remove-Item -Recurse -Force "${TOOLS}\Debug" 2>&1 | Out-Null
+}
+
 if (! (Test-Path -Path ".\log" )) {
     New-Item -ItemType Directory -Force -Path ".\log" > $null
 }
@@ -169,6 +175,11 @@ Get-Date > ".\log\verify.txt"
 # Moved tools_downloaded.csv to downloads
 if (Test-Path ".\tools_downloaded.csv") {
     Move-Item -Path ".\tools_downloaded.csv" -Destination ".\downloads\tools_downloaded.csv" -Force
+}
+
+if ($DebugDownloads.IsPresent) {
+    Write-DateLog "Debug mode enabled."
+    New-Item -ItemType Directory -Force -Path "${TOOLS}\Debug" 2>&1 | Out-Null
 }
 
 if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
@@ -200,15 +211,15 @@ if ($all -or $MSYS2.IsPresent) {
     Start-Job -FilePath .\resources\download\msys2.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
 }
 
+if ($all -or $Release.IsPresent) {
+    Write-DateLog "Download releases from GitHub."
+    .\resources\download\release.ps1
+}
+
 if ($all -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
     Write-DateLog "Setup Node and install npm packages."
     Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
-}
-
-if ($all -or $Release.IsPresent) {
-    Write-DateLog "Download releases from GitHub."
-    .\resources\download\release.ps1
 }
 
 if ($all -or $Git.IsPresent) {
@@ -341,6 +352,7 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "reinstalling" -and
     $_.Line -notmatch "origin/main Updating" -and
     $_.Line -notmatch "new branch" -and
+    $_.Line -notmatch "warnings.py" -and
     $_.Line -notmatch "core_perl"
 }
 
@@ -367,6 +379,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "msys64\\usr\\" -and
     $_.Line -notmatch "gpg-error.exe" -and
     $_.Line -notmatch "gpg: error reading key: Network error" -and
+    $_.Line -notmatch "ERROR: Could not update key:" -and
     $_.Line -notmatch "gpg-error"
 }
 
