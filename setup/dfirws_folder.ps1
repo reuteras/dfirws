@@ -114,7 +114,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\DB Brows
 Add-SHortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dbeaver (runs dfirws-install -DBeaver).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dfirws-install.ps1 -DBeaver"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dsq (commandline SQL engine for data files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dsq -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\h2 database.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${TOOLS}\h2database"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite.lnk" -DestinationPath "${TOOLS}\fqlite\run.bat"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite (runs dfirws-install -FQLite).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dfirws-install.ps1 -FQLite"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\ingestr (is a cli that allows you to ingest data from any source into any destination).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ingestr --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\SQLECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\SQLECmd\SQLECmd.exe" -Arguments "-NoExit -command SQLECmd.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqldiff.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\sqlite\sqlite3.exe" -Arguments "-NoExit -command sqldiff.exe --help"
@@ -584,7 +584,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\cmder (runs dfirws-ins
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\DCode (runs dfirws-install -DCode).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -DCode"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Docker"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\exiftool.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\exiftool\exiftool.exe" -Arguments "-NoExit -command exiftool --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\floss.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\floss\floss.exe" -Arguments "-NoExit -command floss --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\floss.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\floss\floss.exe" -Arguments "-NoExit -command venv.ps1 -floss ; floss --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\git.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\Git\cmd\git-gui.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Graphviz.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dot -?"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\jpterm (Jupyter in the terminal).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command jpterm --help"
@@ -686,14 +686,14 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
 
         # Ensure the new folder exists
         if (-not (Test-Path -Path $newFolderPath)) {
-            New-Item -ItemType Directory -Path $newFolderPath
+            New-Item -ItemType Directory -Path $newFolderPath | Out-Null
         }
 
         # Define the new file path within the new folder structure
         $newFilePath = Join-Path -Path $newFolderPath -ChildPath $file.Name
 
         # Copy the file to the new location
-        Copy-Item -Path $file.FullName -Destination $newFilePath
+        Copy-Item -Path $file.FullName -Destination $newFilePath | Out-Null
     }
 
     Write-DateLog "Files have been copied to the destination directory: ${DestinationDir}"
