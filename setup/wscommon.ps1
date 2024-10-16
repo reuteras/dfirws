@@ -19,6 +19,13 @@ $null="${MSYS2_DIR}"
 $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
+# Create required directories
+foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
+    if (-not (Test-Path -Path $dir)) {
+        New-Item -ItemType Directory -Path $dir -Force | Out-Null
+    }
+}
+
 # Declare helper functions
 
 # Adds a directory to the user's PATH environment variable.
@@ -114,7 +121,7 @@ function Write-SynchronizedLog {
         $result = $logMutex.WaitOne()
         $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         $fullMessage = "$timestamp - $Message"
-        Add-Content -Path $LogFile -Value $fullMessage 2>&1 | Out-Null
+        Add-Content -Path $LogFile -Value $fullMessage 2>&1 | ForEach-Object{ "$_" } | Out-Null
     }
     finally {
         $result = $logMutex.ReleaseMutex()
@@ -188,6 +195,10 @@ function Install-Autopsy {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-autopsy.txt")) {
         Write-Output "Installing Autopsy"
         Start-Process -Wait msiexec.exe -ArgumentList "/i ${SETUP_PATH}\autopsy.msi /qn /norestart"
+        if (!(Test-Path "${HOME}\Desktop\dfirws\Forensics")) {
+            New-Item -ItemType Directory -Path "${HOME}\Desktop\dfirws\Forensics" | Out-Null
+        }
+        Copy-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Autopsy\Autopsy*.lnk" "${HOME}\Desktop\dfirws\Forensics\Autopsy.lnk" -Force
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-autopsy.txt" | Out-Null
     } else {
         Write-Output "Autopsy is already installed"
@@ -213,6 +224,7 @@ function Install-BurpSuite {
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-burpsuite.txt" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\BurpSuiteCommunity"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\burp.lnk" -DestinationPath "${env:ProgramFiles}\BurpSuiteCommunity\BurpSuiteCommunity.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\BurpSuiteCommunity\BurpSuiteCommunity.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\burp.lnk" -DestinationPath "${env:ProgramFiles}\BurpSuiteCommunity\BurpSuiteCommunity.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\BurpSuiteCommunity\BurpSuiteCommunity.exe"
     } else {
         Write-Output "Burp Suite is already installed"
     }
@@ -222,7 +234,6 @@ function Install-Chrome {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-chrome.txt")) {
         Write-Output "Installing Chrome"
         Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\chrome.msi /qn /norestart"
-        & "${WSDFIR_TEMP}\chrome.msi" /quiet /norestart
         Add-ToUserPath "${env:ProgramFiles}\Google\Chrome\Application"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-chrome.txt" | Out-Null
     } else {
@@ -232,6 +243,7 @@ function Install-Chrome {
 
 function Install-ClamAV {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-clamav.txt")) {
+        $env:Path = "C:\Windows\System32;" + [System.Environment]::GetEnvironmentVariable("Path", "User")
         Write-Output "Installing ClamAV"
         Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\clamav.msi /qn /norestart"
         Add-ToUserPath "${env:ProgramFiles}\ClamAV"
@@ -239,7 +251,10 @@ function Install-ClamAV {
         (Get-Content 'C:\Program Files\ClamAV\conf_examples\freshclam.conf.sample').Replace("Example", "#Example") | Out-File -FilePath 'C:\Program Files\ClamAV\freshclam.conf' -Encoding "ascii"
         Write-Output 'DatabaseDirectory "C:\Tools\ClamAV\db"' | Out-File -Append 'C:\Program Files\ClamAV\clamd.conf'
         Write-Output 'DatabaseDirectory "C:\Tools\ClamAV\db"' | Out-File -Append 'C:\Program Files\ClamAV\freshclam.conf'
-        reg import "${HOME}\Documents\tools\reg\clamav.reg" | Out-Null
+        cmd /c "reg import C:\Users\WDAGUtilityAccount\Documents\tools\reg\clamav.reg"
+        if (!(Test-Path "${HOME}\Desktop\dfirws\Malware tools")) {
+            New-Item -ItemType Directory -Path "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
+        }
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clambc.exe (Bytecode Testing Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clambc.exe -h"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamconf.exe (Configuration Tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamconf.exe -h"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamd.exe (Daemon).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command clamd.exe -h"
@@ -345,13 +360,27 @@ function Install-FoxitReader {
     }
 
 }
+
+function Install-FQLite {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-fqlite.txt")) {
+        Write-Output "Installing FQLite"
+        Start-Process -Wait "${SETUP_PATH}\fqlite.exe" -ArgumentList '/qn /norestart'
+        if (Test-Path "C:\Users\WDAGUtilityAccount\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk") {
+            Copy-Item "C:\Users\WDAGUtilityAccount\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite.lnk" -Force
+            Copy-Item "C:\Users\WDAGUtilityAccount\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\fqlite.lnk" -Force
+        }
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-fqlite.txt" | Out-Null
+    } else {
+        Write-Output "FQLite is already installed"
+    }
+}
 function Install-Git {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-git.txt")) {
         Write-Output "Installing Git"
         & "${SETUP_PATH}\git.exe" /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh" | Out-Null
         if (Test-Path "${LOCAL_PATH}\.bashrc") {
             Copy-Item "${LOCAL_PATH}\.bashrc" "${HOME}\.bashrc" -Force
-        } else {
+        } elseif (Test-Path "${LOCAL_PATH}\defaults\.bashrc") {
             Copy-Item "${LOCAL_PATH}\defaults\.bashrc" "${HOME}\.bashrc" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-git.txt" | Out-Null
@@ -487,11 +516,12 @@ function Install-Maltego {
 function Install-Neo4j {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neo4j.txt")) {
         Write-Output "Installing Neo4j"
+        $env:Path = "C:\Windows\System32;" + [System.Environment]::GetEnvironmentVariable("Path", "User")
         Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}" | Out-Null
         Move-Item ${env:ProgramFiles}\neo4j-community* ${env:ProgramFiles}\neo4j
         Add-ToUserPath "${env:ProgramFiles}\neo4j\bin"
-        pwsh.exe -Command { $env:PATH="C:\java\bin;$env:PATH"; $env:JAVA_HOME="C:\java" ; & "${env:ProgramFiles}\neo4j\bin\neo4j-admin" set-initial-password neo4j | Out-Null}
+        cmd /c "set PATH=C:\java\bin;%PATH% && set JAVA_HOME=C:\java && ""%ProgramFiles%\neo4j\bin\neo4j-admin"" set-initial-password neo4j"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-neo4j.txt" | Out-Null
     } else {
         Write-Output "Neo4j is already installed"
