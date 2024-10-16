@@ -5,7 +5,7 @@
   <VideoInput>Disable</VideoInput>
   <ProtectedClient>Enable</ProtectedClient>
   <PrinterRedirection>Disable</PrinterRedirection>
-  <ClipboardRedirection>Disable</ClipboardRedirection>
+  <ClipboardRedirection>Enable</ClipboardRedirection>
   <MemoryInMB>8192</MemoryInMB>
   <MappedFolders>
     <MappedFolder>
@@ -65,6 +65,6 @@
     </MappedFolder>
   </MappedFolders>
   <LogonCommand>
-    <Command>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -sta -WindowStyle Hidden -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\start_sandbox.ps1</Command>
+    <Command>powershell -executionpolicy unrestricted -command "start powershell { -sta -WindowStyle Normal -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\start_sandbox.ps1}"</Command>
   </LogonCommand>
 </Configuration>

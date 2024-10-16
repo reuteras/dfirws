@@ -29,6 +29,6 @@
     </MappedFolder>
   </MappedFolders>
   <LogonCommand>
-    <Command>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -sta -WindowStyle Hidden -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install_freshclam.ps1</Command>
+    <Command>powershell -executionpolicy unrestricted -command "start powershell { -sta -WindowStyle Normal -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install_freshclam.ps1}"</Command>
   </LogonCommand>
 </Configuration>
