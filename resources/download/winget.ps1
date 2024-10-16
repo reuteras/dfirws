@@ -2,90 +2,93 @@
 
 # Autopsy - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Autopsy."
-Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi"
+$status = Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi" -check "Composite Document File V2 Document"
 
 # Burp suite - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Burp Suite."
-Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe"
+$status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe" -check "PE32"
 
 # Chrome - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Chrome."
-Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi"
+$status = Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi" -check "Composite Document File V2 Document"
 
 # Docker Desktop - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Docker Desktop."
-Get-WinGet "Docker.DockerDesktop" "Docker*.exe" "docker.exe"
+$status = Get-WinGet "Docker.DockerDesktop" "Docker*.exe" "docker.exe" -check "PE32"
 
 # DotNet 6 Desktop runtime - installed during startup
-Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe"
+Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
+$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
 
 # IrfanView - installed during startup
 Write-SynchronizedLog "winget: Downloading IrfanView."
-Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe"
+$status = Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe" -check "PE32"
 
 # Maltego - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Maltego."
-Get-WinGet "Maltego.Maltego" "Maltego*.exe" "maltego.exe"
+$status = Get-WinGet "Maltego.Maltego" "Maltego*.exe" "maltego.exe" -check "PE32"
 
 # Obsidian - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Obsidian."
-Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe"
+$status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "PE32"
 
 # oh-my-posh - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading oh-my-posh."
-Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.exe" "oh-my-posh.exe"
+$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.exe" "oh-my-posh.exe" -check "PE32"
 
 # PowerShell 7 - installed during startup
 Write-SynchronizedLog "winget: Downloading PowerShell 7."
-Get-WinGet "Microsoft.PowerShell" "PowerShell*.msi" "powershell.msi"
+$status = Get-WinGet "Microsoft.PowerShell" "PowerShell*.msi" "powershell.msi" -check "Composite Document File V2 Document"
 
 # Putty - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Putty."
-Get-WinGet "PuTTY.PuTTY" "PuTTY*.msi" "putty.msi"
+$status = Get-WinGet "PuTTY.PuTTY" "PuTTY*.msi" "putty.msi" -check "Composite Document File V2 Document"
 
 # Qemu - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Qemu."
-Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe"
+$status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -check "PE32"
 
 # Ruby - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Ruby."
-Get-WinGet "RubyInstallerTeam.Ruby.3.2" "Ruby*.exe" "ruby.exe"
+$status = Get-WinGet "RubyInstallerTeam.Ruby.3.2" "Ruby*.exe" "ruby.exe" -check "PE32"
 
 # VideoLAN VLC - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading VLC."
-Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe"
+$status = Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe" -check "PE32"
 
 # VirusTotal CLI
 Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
-Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip"
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
+$status = Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip" -check "Zip archive data"
+if ($status) {
+ & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
+}
 
 # WinMerge - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading WinMerge."
-Get-WinGet "WinMerge.WinMerge" "WinMerge*.exe" "winmerge.exe"
+$status = Get-WinGet "WinMerge.WinMerge" "WinMerge*.exe" "winmerge.exe" -check "PE32"
 
 # OpenVPN - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading OpenVPN."
-Get-WinGet "OpenVPNTechnologies.OpenVPNConnect" "OpenVPN*.msi" "openvpn.msi"
+$status = Get-WinGet "OpenVPNTechnologies.OpenVPNConnect" "OpenVPN*.msi" "openvpn.msi" -check "Composite Document File V2 Document"
 
 # Google Earth Pro - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Google Earth Pro."
-Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe"
+$status = Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe" -check "PE32"
 
 # Passmark OSFMount - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading OSFMount."
-Get-WinGet "PassmarkSoftware.OSFMount" "OSFMount*.exe" "osfmount.exe"
+$status = Get-WinGet "PassmarkSoftware.OSFMount" "OSFMount*.exe" "osfmount.exe" -check "PE32"
 
 # WireGuard.WireGuard - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading WireGuard."
-Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi"
+$status = Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi" -check "Composite Document File V2 Document"
 
 # Wireshark - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Wireshark."
-Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.msi" "wireshark.msi"
+$status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.msi" "wireshark.msi" -check "Composite Document File V2 Document"
 
 # tailscale - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Tailscale."
-Get-WinGet "tailscale.tailscale" "tailscale*.exe" "tailscale.exe"
+$status = Get-WinGet "tailscale.tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
 
 Write-SynchronizedLog "winget: Download complete."
