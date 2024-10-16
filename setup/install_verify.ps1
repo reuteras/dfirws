@@ -26,10 +26,10 @@ Test-Command HxD PE32
 
 Test-Command apimonitor-x86.exe PE32
 Test-Command apimonitor-x64.exe PE32
-$Autopsy_Executable = (Get-ChildItem 'C:\Program Files\autopsy*\bin' -Filter autopsy64.exe -Recurse).FullName
-Test-Command $Autopsy_Executable PE32
-$BinaryNinja_Executable = (Get-ChildItem C:\Users\WDAGUtilityAccount\AppData\Local\Vector35\ -Recurse -Filter binaryninja.exe).FullName
-Test-Command $BinaryNinja_Executable PE32
+$AutopsyExecutable = (Get-ChildItem "C:\Program Files\Autopsy*" -Include autopsy64.exe -Recurse).FullName
+Test-Command $AutopsyExecutable PE32
+$BinaryNinjaExecutable = (Get-ChildItem C:\Users\WDAGUtilityAccount\AppData\Local\Vector35\ -Recurse -Include binaryninja.exe).FullName
+Test-Command $BinaryNinjaExecutable PE32
 Test-Command BurpSuiteCommunity PE32
 Test-Command chrome PE32
 Test-Command clamscan PE32
@@ -37,21 +37,21 @@ Test-Command Cmder PE32
 Test-Command "C:\Program Files\dbeaver\dbeaver-cli.exe" PE32
 Test-Command "C:\Program Files\dbeaver\dbeaver.exe" PE32
 Test-Command "C:\Program Files (x86)\Digital Detective\DCode v5\DCode.exe" PE32
-$Dokany_Executable = (Get-ChildItem 'C:\Program Files\Dokan\' -Recurse -Filter dokanctl.exe).FullName | Select-Object -Last 1
-Test-Command $Dokany_Executable PE32
+$DokanyExecutable = (Get-ChildItem 'C:\Program Files\Dokan\' -Recurse -Include dokanctl.exe).FullName | Select-Object -Last 1
+Test-Command $DokanyExecutable PE32
 Test-Command "C:\Program Files\Mozilla Firefox\firefox.exe" PE32
 Test-Command "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" PE32
 Test-Command go.exe PE32
 Test-Command "C:\Program Files\Google\Google Earth Pro\client\googleearth.exe" PE32
 Test-Command gpg PE32
 Test-Command hashcat PE32
-$Jadx_Library = (Get-ChildItem 'C:\Program Files\Jadx\' -Recurse -Filter *.jar).FullName
-Test-Command $Jadx_Library JAR
+$JadxLibrary = (Get-ChildItem 'C:\Program Files\Jadx\' -Recurse -Include *.jar).FullName
+Test-Command $JadxLibrary JAR
 Test-Command kape PE32
 Test-Command "C:\Program Files (x86)\LibreOffice\program\soffice.exe" PE32
 Test-Command loki PE32
-$Maltego_Executable = (Get-ChildItem 'C:\Program Files (x86)\Paterva\Maltego\' -Filter maltego.exe -Recurse).FullName
-Test-Command $Maltego_Executable PE32
+$MaltegoExecutable = (Get-ChildItem 'C:\Program Files (x86)\Paterva\Maltego\' -Include maltego.exe -Recurse).FullName
+Test-Command $MaltegoExecutable PE32
 Test-Command neo4j ASCII
 Test-Command node PE32
 Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe" PE32
@@ -76,7 +76,7 @@ Test-Command gcc PE32
 Test-Command gdb PE32
 
 # First generated with the command below and then cleaned manually.
-# foreach ($name in (Get-ChildItem C:\Tools\ -Filter *.exe -Recurse) ) {"Test-Command", $name.name.Split('.')[0], "PE32      #", $name.FullName  -join " " }
+# foreach ($name in (Get-ChildItem C:\Tools\ -Include *.exe -Recurse) ) {"Test-Command", $name.name.Split('.')[0], "PE32      #", $name.FullName  -join " " }
 Test-Command Audacity PE32
 Test-Command adalanche PE32      # C:\Tools\bin\adalanche.exe
 Test-Command aleapp PE32      # C:\Tools\bin\aleapp.exe
@@ -157,7 +157,7 @@ Test-Command exiftool PE32      # C:\Tools\exiftool\exiftool.exe
 Test-Command fakenet PE32      # C:\Tools\fakenet\fakenet.exe
 Test-Command FASM PE32      # C:\Tools\fasm\FASM.EXE
 Test-Command floss PE32      # C:\Tools\floss\floss.exe
-Test-Command "C:\Tools\fqlite\fqlite_next.jar" JAR
+Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\fqlite\fqlite.exe" PE32
 Test-Command FullEventLogView PE32      # C:\Tools\FullEventLogView\FullEventLogView.exe
 Test-Command gftrace PE32      # C:\Tools\gftrace64\gftrace.exe
 Test-Command ghidraRun ASCII
@@ -241,8 +241,8 @@ Test-Command trawler CRLF
 
 Test-Command BeaconHunter PE32
 Test-Command 4N4LDetector PE32
-$jaccessinspector_executable = (Get-ChildItem 'C:\Program Files\Amazon Corretto' -Recurse -Filter jaccessinspector.exe).FullName
-Test-Command $jaccessinspector_executable PE32
+$jaccessinspectorExecutable = (Get-ChildItem 'C:\Program Files\Amazon Corretto' -Recurse -Include jaccessinspector.exe).FullName
+Test-Command $jaccessinspectorExecutable PE32
 Test-Command 'C:\Program Files\AuthLogParser\MasterParser.ps1' CRLF
 Test-Command fibratus PE32
 Test-Command git PE32
@@ -254,7 +254,7 @@ Test-Command malcat PE32
 Test-Command notepad++ PE32
 Test-Command python PE32
 
-# foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -filter *.exe -Exclude python.exe,pip.exe,pip3.exe,pip3.11.exe,poetry.exe,virtualenv.exe,pythonw.exe,pkginfo.exe,doesitcache.exe,dulwich.exe,keyring.exe,pyproject-build.exe,normalizer.exe,pygmentize.exe,wheel.exe)) {"Test-Command", $name.Fullname, "PE32"  -join " " }
+# foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -Include *.exe -Exclude python.exe,pip.exe,pip3.exe,pip3.11.exe,poetry.exe,virtualenv.exe,pythonw.exe,pkginfo.exe,doesitcache.exe,dulwich.exe,keyring.exe,pyproject-build.exe,normalizer.exe,pygmentize.exe,wheel.exe)) {"Test-Command", $name.Fullname, "PE32"  -join " " }
 Test-Command C:\venv\binary-refinery\Scripts\binref.exe PE32
 Test-Command C:\venv\chepy\Scripts\chepy.exe PE32
 Test-Command C:\venv\chepy\Scripts\markdown_py.exe PE32
@@ -271,7 +271,6 @@ Test-Command C:\venv\default\Scripts\asdf-verify.exe PE32
 Test-Command C:\venv\default\Scripts\autoit-ripper.exe PE32
 Test-Command C:\venv\default\Scripts\bokeh.exe PE32
 Test-Command C:\venv\default\Scripts\cart.exe PE32
-Test-Command C:\venv\default\Scripts\cmark.exe PE32
 Test-Command C:\venv\default\Scripts\deep-translator.exe PE32
 Test-Command C:\venv\default\Scripts\dt.exe PE32
 Test-Command C:\venv\default\Scripts\dump-nskeyedarchiver.exe PE32
@@ -352,14 +351,10 @@ Test-Command C:\venv\dissect\Scripts\thumbcache-extract.exe PE32
 Test-Command C:\venv\dissect\Scripts\vma-extract.exe PE32
 Test-Command C:\venv\ghidrecomp\Scripts\ghidrecomp.exe PE32
 Test-Command C:\venv\ingestr\Scripts\ingestr.exe PE32
-Test-Command C:\venv\ingestr\Scripts\tqdm.exe PE32
-Test-Command C:\venv\ingestr\Scripts\typer.exe PE32
 Test-Command C:\venv\jep\Scripts\capa.exe PE32
 Test-Command C:\venv\jep\Scripts\f2py.exe PE32
 Test-Command C:\venv\jep\Scripts\markdown-it.exe PE32
 Test-Command C:\venv\jep\Scripts\numpy-config.exe PE32
-Test-Command C:\venv\jep\Scripts\tabulate.exe PE32
-Test-Command C:\venv\jep\Scripts\tqdm.exe PE32
 Test-Command C:\venv\jpterm\Scripts\httpx.exe PE32
 Test-Command C:\venv\jpterm\Scripts\jpterm.exe PE32
 Test-Command C:\venv\jpterm\Scripts\jupyter.exe PE32
@@ -390,7 +385,7 @@ Test-Command C:\venv\toolong\Scripts\markdown-it.exe PE32
 Test-Command C:\venv\toolong\Scripts\tl.exe PE32
 Test-Command C:\venv\white-phoenix\Scripts\f2py.exe PE32
 
-# foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -filter *.py)) {"Test-Command", $name.Fullname, "Python"  -join " " }
+# foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -Include *.py)) {"Test-Command", $name.Fullname, "Python"  -join " " }
 Test-Command C:\venv\binary-refinery\Scripts\dumpsig.py Python
 Test-Command C:\venv\binary-refinery\Scripts\evtx_dump.py Python
 Test-Command C:\venv\binary-refinery\Scripts\evtx_info.py Python
@@ -423,7 +418,6 @@ Test-Command C:\venv\default\Scripts\vba_extract.py Python
 Test-Command C:\venv\default\Scripts\vd.py Python
 Test-Command C:\venv\default\Scripts\vsc_mount.py Python
 Test-Command C:\venv\evt2sigma\Scripts\evt2sigma.py Python
-Test-Command C:\venv\ingestr\Scripts\jp.py Python
 Test-Command C:\venv\jep\Scripts\readelf.py Python
 Test-Command C:\venv\mwcp\Scripts\readelf.py Python
 Test-Command C:\venv\pe2pic\Scripts\pe2pic.py Python
