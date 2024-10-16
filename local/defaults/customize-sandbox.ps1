@@ -36,7 +36,7 @@ if ("${WSDFIR_DARK}" -eq "Yes") {
     } else {
         Copy-Item "${LOCAL_PATH}\defaults\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
     }
-    Write-DateLog "Dark mode set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Copied Notepad++ config" >> "${WSDFIR_TEMP}\start_sandbox.log"
 }
 if (Test-Path "${LOCAL_PATH}\DSpellCheck.ini") {
     Copy-Item "${LOCAL_PATH}\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
