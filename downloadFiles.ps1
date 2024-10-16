@@ -216,6 +216,15 @@ if ($all -or $Release.IsPresent) {
     .\resources\download\release.ps1
 }
 
+if ($all -or $Http.IsPresent) {
+    Write-DateLog "Download files via HTTP."
+    $HTTP_ARGS = ""
+    if ($HttpNoVSCodeExtensions) {
+        $HTTP_ARGS += "-NoVSCodeExtensions "
+    }
+    powershell -noprofile .\resources\download\http.ps1 $HTTP_ARGS
+}
+
 if ($all -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
     Write-DateLog "Setup Node and install npm packages."
@@ -243,15 +252,6 @@ if ($all -or $Rust.IsPresent) {
     Write-Output "" > .\log\rust.txt
     Write-DateLog "Setup Rust and install packages with cargo."
     Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
-}
-
-if ($all -or $Http.IsPresent) {
-    Write-DateLog "Download files via HTTP."
-    $HTTP_ARGS = ""
-    if ($HttpNoVSCodeExtensions) {
-        $HTTP_ARGS += "-NoVSCodeExtensions "
-    }
-    powershell -noprofile .\resources\download\http.ps1 $HTTP_ARGS
 }
 
 if ($all -or $Didier.IsPresent) {
