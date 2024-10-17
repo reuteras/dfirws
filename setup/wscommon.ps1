@@ -649,6 +649,24 @@ function Install-Veracrypt {
     }
 }
 
+function Install-VisualStudioBuildTools {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vsbuildtools.txt")) {
+        if (!(Test-Path "${TOOLS}\VSLayout")) {
+            Write-Output "You need to download the Visual Studio Build Tools with the command '.\downloadFiles.ps1 -VisualStudioBuildTools' first."
+            return
+        }
+        Write-Output "Installing Visual Studio Build Tools"
+        Set-Location "${TOOLS}\VSLayout"
+        Start-Process -Wait ".\vs_buildtools.exe" -ArgumentList "--noweb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-vsbuildtools.txt" | Out-Null
+        Copy-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop"
+        Copy-Item "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop\dfirws\Programming"
+        Write-Output "Visual Studio Build Tools installed"
+    } else {
+        Write-Output "Visual Studio Build Tools is already installed"
+    }
+}
+
 function Install-VLC {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vlc.txt")) {
         Write-Output "Installing VLC"

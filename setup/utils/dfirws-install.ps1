@@ -38,6 +38,7 @@ param (
     [switch]$Rust,
     [switch]$Tor,
     [switch]$Veracrypt,
+    [switch]$VisualStudioBuildTools,
     [switch]$VLC,
     [switch]$VSCode,
     [switch]$WinMerge,
@@ -196,6 +197,10 @@ if ($Tor.IsPresent) {
 
 if ($Veracrypt.IsPresent) {
     Install-Veracrypt
+}
+
+if ($VisualStudioBuildTools.IsPresent) {
+    Install-VisualStudioBuildTools
 }
 
 if ($VLC.IsPresent) {

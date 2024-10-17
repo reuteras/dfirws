@@ -71,6 +71,8 @@ param(
     [Switch]$Winget,
     [Parameter(HelpMessage = "Verify that tools are available.")]
     [Switch]$Verify,
+    [Parameter(HelpMessage = "Install and Update Visual Studio buildtools.")]
+    [Switch]$VisualStudioBuildTools,
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
     [Switch]$Zimmerman
     )
@@ -119,7 +121,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
@@ -204,6 +206,13 @@ if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Py
 if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Download common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
+}
+
+if ($VisualStudioBuildTools.IsPresent) {
+    Write-DateLog "Download or update Visual Studio buildtools."
+    Start-Job -FilePath .\resources\download\visualstudiobuildtools.ps1 -WorkingDirectory $PWD -ArgumentList ${PSScriptRoot} | Out-Null
+    Get-Job | Wait-Job | Out-Null
+    Get-Job | Receive-Job 2>&1 | ForEach-Object { "$_" } >> ".\log\jobs.txt"
 }
 
 if ($all -or $MSYS2.IsPresent) {
