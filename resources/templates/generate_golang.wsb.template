@@ -39,6 +39,6 @@
     </MappedFolder>
   </MappedFolders>
   <LogonCommand>
-    <Command>powershell -executionpolicy unrestricted -command "start powershell { -sta -WindowStyle Normal -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install_golang_tools.ps1}"</Command>
+    <Command>powershell -executionpolicy unrestricted -command "start powershell { -sta -WindowStyle Normal -noprofile -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\install\install_golang_tools.ps1}"</Command>
   </LogonCommand>
 </Configuration>

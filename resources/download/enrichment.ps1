@@ -5,7 +5,17 @@
 .DESCRIPTION
     This script downloads data to use for enrichment. Data included are:
     - Tor exit nodes
+    - MAC address lookup files
+    - IPinfo.io Free IP to Country + IP to ASN databases
     - Maxmind GeoLite2 ASN database
+    - Maxmind GeoLite2 City database
+    - Maxmind GeoLite2 Country database
+    - Suricata rules
+    - Snort rules
+    - Git repositories for enrichment
+    - Yara rules
+    - CVE data
+
 
 .NOTES
     File Name      : enrichment.ps1

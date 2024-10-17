@@ -335,7 +335,7 @@ $ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"
 Add-MultipleToUserPath $ADD_TO_PATH_STRING
 
 Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\dfirws_folder.ps1" -NoNewWindow
+Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\utils\dfirws_folder.ps1" -NoNewWindow
 
 #
 # Install tools
@@ -549,10 +549,10 @@ Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\sta
 if (Test-Path "C:\log\log.txt") {
     Write-SynchronizedLog "Running install_all.ps1 script."
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
-    & "${HOME}\Documents\tools\install_all.ps1" | Out-Null
+    & "${HOME}\Documents\tools\install\install_all.ps1" | Out-Null
     Write-SynchronizedLog "Running install_verify.ps1 script."
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
-    & "${HOME}\Documents\tools\install_verify.ps1" | Out-Null
+    & "${HOME}\Documents\tools\install\install_verify.ps1" | Out-Null
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
     Get-Job | Remove-Job | Out-Null

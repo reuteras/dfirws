@@ -39,6 +39,6 @@
     </MappedFolder>
   </MappedFolders>
   <LogonCommand>
-    <Command>powershell -executionpolicy unrestricted -command "start powershell { -sta -WindowStyle Normal -NoProfile -ExecutionPolicy unrestricted -File C:\Users\WDAGUtilityAccount\Documents\tools\install_python_tools.ps1}"</Command>
+    <Command>powershell -executionpolicy unrestricted -command "start powershell { -sta -WindowStyle Normal -NoProfile -ExecutionPolicy unrestricted -File C:\Users\WDAGUtilityAccount\Documents\tools\install\install_python_tools.ps1}"</Command>
   </LogonCommand>
 </Configuration>
