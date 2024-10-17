@@ -661,7 +661,7 @@ function Install-Veracrypt {
     }
 }
 
-function Install-VisualStudioBuildTools {
+function Install-VisualStudioBuildTool {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vsbuildtools.txt")) {
         if (!(Test-Path "${TOOLS}\VSLayout")) {
             Write-Output "You need to download the Visual Studio Build Tools with the command '.\downloadFiles.ps1 -VisualStudioBuildTools' first."

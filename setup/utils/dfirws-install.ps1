@@ -205,7 +205,7 @@ if ($Veracrypt.IsPresent) {
 }
 
 if ($VisualStudioBuildTools.IsPresent) {
-    Install-VisualStudioBuildTools
+    Install-VisualStudioBuildTool
 }
 
 if ($VLC.IsPresent) {

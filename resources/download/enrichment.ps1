@@ -187,7 +187,7 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
     if (Test-Path -Path ".\mount\Tools\logboost") {
         Copy-Item -Path "${maxmindCurrentDirectory}\*.mmdb" -Destination ".\mount\Tools\logboost\"  -Force
     }
-    
+
     # Remove unpack directory
     Remove-Item -Path "${maxmindUnpackDirectory}" -Recurse -Force
 }
