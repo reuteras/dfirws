@@ -328,6 +328,15 @@ if ($status) {
     Move-Item ${TOOLS}\jd-gui* "${TOOLS}\jd-gui"
 }
 
+# LogBoost
+$status = Get-GitHubRelease -repo "joeavanzato/logboost" -path "${SETUP_PATH}\logboost.rar" -match "logboost_release" -check "RAR archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\logboost") {
+        Remove-Item "${TOOLS}\logboost" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logboost.rar" -o"${TOOLS}\logboost" | Out-Null
+}
+
 # jq
 $status = Get-GitHubRelease -repo "jqlang/jq" -path "${SETUP_PATH}\jq.exe" -match "win64" -check "PE32"
 if ($status) {

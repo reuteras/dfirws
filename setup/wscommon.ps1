@@ -476,6 +476,18 @@ function Install-LibreOffice {
     }
 }
 
+function Install-LogBoost {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-logboost.txt")) {
+        Write-Output "Installing LogBoost"
+        Copy-Item -Recurse "${TOOLS}\logboost" "${env:ProgramFiles}" -Force | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\logboost"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\logboost.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${env:ProgramFiles}\logboost" -Arguments "-NoExit -command logboost.exe -h"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-logboost.txt" | Out-Null
+    } else {
+        Write-Output "LogBoost is already installed"
+    }
+}
+
 function Install-Loki {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-loki.txt")) {
         Write-Output "Installing Loki"

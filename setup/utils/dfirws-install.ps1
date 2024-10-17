@@ -24,6 +24,7 @@ param (
     [switch]$Jadx,
     [switch]$Kape,
     [switch]$LibreOffice,
+    [switch]$LogBoost,
     [switch]$Loki,
     [switch]$Maltego,
     [switch]$Neo4j,
@@ -141,6 +142,10 @@ if ($Kape.IsPresent) {
 
 if ($LibreOffice.IsPresent) {
     Install-LibreOffice
+}
+
+if ($LogBoost.IsPresent) {
+    Install-LogBoost
 }
 
 if ($Loki.IsPresent) {

@@ -55,6 +55,8 @@ param(
     [Switch]$HttpNoVSCodeExtensions,
     [Parameter(HelpMessage = "Update KAPE.")]
     [Switch]$Kape,
+    [Parameter(HelpMessage = "Update Threat Intel for LogBoost.")]
+    [Switch]$LogBoost,
     [Parameter(HelpMessage = "Update MSYS2.")]
     [Switch]$MSYS2,
     [Parameter(HelpMessage = "Update Node.")]
@@ -121,7 +123,7 @@ if ( tasklist | Select-String "WindowsSandbox" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
@@ -171,6 +173,7 @@ if (! (Test-Path -Path ".\log" )) {
     New-Item -ItemType Directory -Force -Path ".\log" > $null
 }
 Get-Date > ".\log\log.txt"
+Get-Date > ".\log\logboost.txt"
 Get-Date > ".\log\jobs.txt"
 Get-Date > ".\log\verify.txt"
 
@@ -203,7 +206,7 @@ if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Py
     }
 }
 
-if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
+if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Download common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
 }
@@ -300,7 +303,12 @@ if ($Enrichment.IsPresent) {
     .\resources\download\enrichment.ps1
 }
 
-if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
+if ($all -or $LogBoost.IsPresent) {
+    Write-DateLog "Update Threat Intel for LogBoost."
+    Start-Job -FilePath .\resources\download\logboost.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+}
+
+if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
     Write-DateLog "Wait for sandboxes to finish."
     Get-Job | Wait-Job | Out-Null
     Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
@@ -389,6 +397,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "gpg-error.exe" -and
     $_.Line -notmatch "gpg: error reading key: Network error" -and
     $_.Line -notmatch "ERROR: Could not update key:" -and
+    $_.Line -notmatch "Error Getting File from" -and
     $_.Line -notmatch "gpg-error"
 }
 

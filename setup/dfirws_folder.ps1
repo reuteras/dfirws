@@ -408,6 +408,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\node.lnk" -Destinati
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\perl.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\php.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Python.lnk" -DestinationPath "${VENV}\default\Scripts\python.exe"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Visual Studio Buildtools (runs dfirws-install -VisualStudioBuildTools).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -VisualStudioBuildTools"
 
 # Programming - dotNET
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\dotNET" | Out-Null
