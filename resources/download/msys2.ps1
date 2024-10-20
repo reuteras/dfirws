@@ -20,7 +20,7 @@ if (Test-Path -Path "${ROOT_PATH}\tmp\Tools" ) {
 
 New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Tools" | Out-Null
 
-if (! (Test-Path -Path "${ROOT_PATH}\Tools\Debug" )) {
+if (Test-Path -Path "${ROOT_PATH}\Tools\Debug" ) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Tools\Debug" | Out-Null
 }
 
@@ -43,6 +43,11 @@ Remove-Item "${ROOT_PATH}\tmp\generate_msys2.wsb" | Out-Null
 
 # Wait for MSYS2 to finish
 Stop-SandboxWhenDone "${ROOT_PATH}\tmp\Tools\msys64\done" $mutex | Out-Null
+
+# Remove debug directory - use -recurse if there is any file created in the directory
+if (Test-Path -Path "${ROOT_PATH}\tmp\Tools\Debug" ) {
+    Remove-Item -Recurse -Force "${ROOT_PATH}\tmp\Tools\Debug" | Out-Null
+}
 
 # Change tmp directory
 Write-Output "C:/tmp/msys2 /tmp ntfs auto 0 0" >> "${ROOT_PATH}\tmp\Tools\msys64\etc\fstab"
