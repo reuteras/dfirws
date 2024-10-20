@@ -90,3 +90,6 @@ $WSDFIR_FONT_NAME="Meslo"
 # Full name used by Visual Studio Code
 $WSDFIR_FONT_FULL_NAME="Consolas, 'Courier New', monospace"
 #$WSDFIR_FONT_FULL_NAME="MesloLGM Nerd Font Mono"
+
+# Windows version (10 or 11 - Get-ComputerInfo is to slow)
+$WINDOWS_VERSION = "11"

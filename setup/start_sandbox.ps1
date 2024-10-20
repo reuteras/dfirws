@@ -129,6 +129,9 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
 
 # Import registry settings
 reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
+if ($WINDOWS_VERSION -eq "10") {
+	reg import "${HOME}\Documents\tools\reg\right-click-win10.reg" | Out-Null
+}
 Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 foreach ($extension in "doc", "docm", "docx", "dot", "dotm", "dotx", "xls", "xlsm", "xlsx", "xlt", "xltm", "xltx", "ppt", "pptm", "pptx", "pot", "potm", "potx") {
