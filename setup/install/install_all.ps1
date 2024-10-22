@@ -4,6 +4,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 Write-SynchronizedLog "Install all tools in the sandbox."
 Write-OutPut "Install all tools in the sandbox."
+Write-SynchronizedLog ([string](dfirws-install.ps1 -Obsidian))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -ApiMonitor))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -BinaryNinja))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -BurpSuite))
@@ -31,12 +32,6 @@ Write-SynchronizedLog ([string](dfirws-install.ps1 -Loki))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Maltego))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Neo4j))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Node))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -Obsidian))
-# Obsidian often fails to install, so try again if it fails the first time.
-if (!(Test-Path "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe")) {
-    Remove-Item -Force "C:\Program Files\dfirws\installed-obsidian.txt"
-    Write-SynchronizedLog ([string](dfirws-install.ps1 -Obsidian))
-}
 #Write-SynchronizedLog ([string](dfirws-install.ps1 -OhMyPosh))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -PDFStreamDumper))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -PuTTY))
