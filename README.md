@@ -21,12 +21,12 @@ DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 ev
 - [Preparation](#preparation)
 - [Installation and configuration](#installation-and-configuration)
 - [Download tools and enrichment data](#download-tools-and-enrichment-data)
-- [Usage and configuration of the sandbox](#usage-sandbox)
-- [Usage and configuration of the VM](#usage-vm)
+- [Usage and configuration of the sandbox](#usage-and-configuration-of-the-sandbox)
+- [Usage and configuration of the VM](#usage-and-configuration-of-the-vm)
 - [Update](#update)
 - [Documentation](#documentation)
 
-## Preparation {#preparation}
+## Preparation
 
 1. *Programs:* You need to have the programs `7-zip`, `git` and `rclone` installed on your computer to be able to use DFIRWS. If you miss any of the tools you can install them with **winget** by typing the following commands.
 
@@ -58,7 +58,7 @@ The token is needed to avoid problems with rate limiting on GitHub since most of
 
 5. *MaxMind token (optional):* If you like to use MaxMind data you need a token from [https://www.maxmind.com/en/geolite2/signup](https://www.maxmind.com/en/geolite2/signup).
 
-## Installation and configuration {#installation-and-configuration}
+## Installation and configuration
 
 Start a PowerShell terminal as your regular user and checkout the code from GitHub with the `git` command.
 
@@ -136,8 +136,9 @@ Personally I run the following command to download everything and cache Visual S
 
 ```PowerShell
 .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam -Verify -VisualStudioBuildTools
+```
 
-## Usage and configuration of the sandbox {#usage-sandbox}
+## Usage and configuration of the sandbox
 
 The quickest way to use the DFIRWS is to start a sandbox by clicking on **dfirws.wsb** or running **.\dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
 
@@ -149,9 +150,7 @@ You can use the search field in **explorer** to find the tools you like to use. 
 
 ![Search for tools](./resources/images/search.png)
 
-By default the sandbox will have clipboard redirection off as well as secure defaults for other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. 
-
-More information about [Windows Sandbox configuration][wsc].
+By default the sandbox will have clipboard redirection off as well as secure defaults for other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
 
 To customize the sandbox you can copy *local\defaults\config.txt* to *local\config.txt* and change the settings to your liking. The file *local\config.txt* is used by the scripts to specify which tools to install when the sandbox starts. Every tool will still be downloaded and can be installed later in the sandbox if needed.
 The difference will be the time it takes to start the sandbox, i.e. running an installer for a program on every start.
@@ -162,7 +161,7 @@ If you like to run your own PowerShell code to customize **dfirws** you can copy
 
 More usage information is available in the [wiki](https://github.com/reuteras/dfirws/wiki). A local copy of the wiki is available by clicking on the **dfirws wiki** link on the desktop.
 
-## Usage and configuration of the VM {#usage-vm}
+## Usage and configuration of the VM
 
 You can create a VM with the dfirws tools installed by running **.\createVM.ps1**. Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO from Microsoft and create a VM with the tools installed. The VM will be created  in the root folder of the checked out repository.
 
@@ -175,7 +174,7 @@ You can change the settings by copying *local\default\variables.pkr.hcl* to *loc
 
 Currently there is now way to update the tolls in the VM. You have to delete the VM and run **.\createVM.ps1** again.
 
-## Update {#update}
+## Update
 
 Update scripts used to create the sandbox (i.e. this code) by running `git pull` and then update the tools by running **.\downloadFiles.ps1** again. Check *.\local\defaults\config.txt* for changed and added configuration options. You can also opt to only update parts of the included tools. To update Python tools run:
 
@@ -185,7 +184,7 @@ Update scripts used to create the sandbox (i.e. this code) by running `git pull`
 
 To see available options run **Get-Help .\downloadFiles.ps1**.
 
-## Documentation {#documentation}
+## Documentation
 
 More information about installed tools are available in the GitHub [wiki][wid].
 
