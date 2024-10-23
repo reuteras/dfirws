@@ -1,4 +1,4 @@
-# dfirws: DFIR in Windows
+# dfirws: DFIR in Windows Sandbox
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
