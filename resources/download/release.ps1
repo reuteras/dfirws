@@ -804,7 +804,8 @@ if ($status) {
     if (Test-Path "${TOOLS}\hayabusa") {
         Remove-Item "${TOOLS}\hayabusa" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}\hayabusa" | Out-Null
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\hayabusa-* ${TOOLS}\hayabusa
     Move-Item ${TOOLS}\hayabusa\hayabusa-* ${TOOLS}\hayabusa\hayabusa.exe
 }
 
