@@ -2,19 +2,19 @@
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-DFIRWS is a solution to do DFIR work in Windows. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or VM.
+DFIRWS is a solution to do DFIR work in a Windows Sandbox. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or in a VM (only VMWare Workstation at the moment).
 
 DFIRWS has been enhanced since its start and now contains the following main parts.
 
-- **downloadFiles.ps1** - download, update and prepare tools to use for DFIR work. Also downloads enrichment data and updates ClamAV signatures.
+- **downloadFiles.ps1** - download, update and prepare tools to use for DFIR work. Also downloads enrichment data and updates ClamAV signatures. The script can also be used to verify the downloaded files and cache a local copy of Visual Studio Build Tools.
 - **createSandboxConfig.ps1** - create Windows Sandbox configuration files for the tools.
   - **dfirws.wsb** - Windows Sandbox configuration file with network disabled.
   - **network_dfirws.wsb** - Windows Sandbox configuration file with network enabled.
 - **createVM.ps1** - create a Windows 11 VM with the tools installed.
 
-DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough it's currently only tested on Windows 11. The VM only creates a Windows 11 VM and currently works with VMWare Workstation.
+DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough it's currently only tested on Windows 11. The VM only creates a Windows 11 VM and currently only works with VMWare Workstation.
 
-**Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. The reason is that at least Windows Defender will some time classify tools as malware. Even though I try to exclude those tools I've found that a file can be classified as malware one day and not the next. The choice is yours.
+**Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. I don't want to have to recommend this but the reason is that at least Windows Defender will some time classify tools as malware even though they are not. Even though I try to exclude those tools I've found that a file can be classified as malware one day and not the next. The choice is yours.
 
 ## Table of contents
 
@@ -54,7 +54,7 @@ For more information about Windows Sandbox look at the Microsoft page [Windows S
 4. *GitHub classic token:* You also need a GitHub account to create a classic GitHub token. If you have a GitHub account you can create a token at [https://github.com/settings/tokens](https://github.com/settings/tokens). Select *Generate new token (classic)*. Give the token a name and change the default expiration. The token doesn't need any added rights.
 Remember to save the token in your password manager since you can't get the value again.
 
-The token is needed to avoid problems with rate limiting on GitHub since most of the tools are downloaded from there and you will be blocked otherwise.
+The token is needed to avoid problems with rate limiting on GitHub since most of the tools are downloaded from there and you will be blocked otherwise and the downloads will fail.
 
 5. *MaxMind token (optional):* If you like to use MaxMind data you need a token from [https://www.maxmind.com/en/geolite2/signup](https://www.maxmind.com/en/geolite2/signup).
 
@@ -73,7 +73,7 @@ Create the configuration files for the sandbox by running:
 .\createSandboxConfig.ps1
 ```
 
-Two different configurations will be created:
+Two different configurations for sandboxes will be created:
 
 - dfirws.wsb - network disabled
 - network_dfirws.wsb - network enabled
@@ -88,7 +88,7 @@ The file *config.ps1* is used by the scripts to specify token for MaxMind and Gi
 
 ## Download tools and enrichment data
 
-Before using a sandbox or creating a VM all the tools has to be downloaded and prepared for use in DFIRWS. Sandboxes will be started to run and install packages for Python, bash, Rust and Node.js. Since Windows only allows on running Sandbox at the time you have to close any running sandbox before running **downloadFiles.ps1**.
+Before using a sandbox or creating a VM all the tools has to be downloaded and prepared for use in DFIRWS. Sandboxes will be started to run and install packages for Python, bash, Rust, Node.js and more. Since Windows only allows one running Sandbox at the time you have to close any running sandbox before running **downloadFiles.ps1**.
 
 Download programs and prepare them for use by running:
 
@@ -126,15 +126,26 @@ Or run everything in one go:
 .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam -Verify
 ```
 
+If you like to cache a local copy of Visual Studio Build Tools you can run. **Important: The Visual Studio Build Tools downloader runs on the host and not in a sandbox!**
+
+```PowerShell
+.\downloadFiles.ps1 -VisualStudioBuildTools
+```
+
+Personally I run the following command to download everything and cache Visual Studio Build Tools:
+
+```PowerShell
+.\downloadFiles.ps1 -AllTools -Enrichment -Freshclam -Verify -VisualStudioBuildTools
+
 ## Usage and configuration of the sandbox
 
-The quickest way to use the tool is to start a sandbox by clicking on **dfirws.wsb** or running **.\dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
+The quickest way to use the DFIRWS is to start a sandbox by clicking on **dfirws.wsb** or running **.\dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
 
-The goal for startup time is set to around two minutes on a computer with a Intel Core i7 and the default configuration. The following is an example screen of the sandbox running after start.
+The goal for startup time is set to around one minute on a computer with a Intel Core i7 and the default configuration. The following is an example screen of the sandbox running after start.
 
 ![Screen when installation is done](./resources/images/screen.png)
 
-You can use the search field to find the tools you like to use. See example below.
+You can use the search field in **explorer** to find the tools you like to use. See example below.
 
 ![Search for tools](./resources/images/search.png)
 
