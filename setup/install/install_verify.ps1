@@ -352,6 +352,7 @@ Test-Command C:\venv\dissect\Scripts\thumbcache-extract.exe PE32
 Test-Command C:\venv\dissect\Scripts\vma-extract.exe PE32
 Test-Command C:\venv\ghidrecomp\Scripts\ghidrecomp.exe PE32
 Test-Command C:\venv\ingestr\Scripts\ingestr.exe PE32
+Test-Command C:\venv\jep\Lib\site-packages\jep\jep.dll PE32
 Test-Command C:\venv\jep\Scripts\capa.exe PE32
 Test-Command C:\venv\jep\Scripts\f2py.exe PE32
 Test-Command C:\venv\jep\Scripts\markdown-it.exe PE32
