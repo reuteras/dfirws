@@ -171,12 +171,12 @@ Write-DateLog "Python venv default done." >> "C:\log\python.txt"
 #
 
 # Get current versions to check if they have been updated and needs to be reinstalled
-Get-LatestPipVersion ingestr > ${WSDFIR_TEMP}\visualstudio.txt
-Get-LatestPipVersion jep >> ${WSDFIR_TEMP}\visualstudio.txt
-Get-LatestPipVersion pdfalyzer >> ${WSDFIR_TEMP}\visualstudio.txt
-Get-LatestPipVersion regipy >> ${WSDFIR_TEMP}\visualstudio.txt
-((C:\Windows\System32\curl.exe -L --silent "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${WSDFIR_TEMP}\visualstudio.txt
-$GHIDRA_INSTALL_DIR >> ${WSDFIR_TEMP}\visualstudio.txt
+Get-LatestPipVersion ingestr > "${WSDFIR_TEMP}\visualstudio.txt"
+Get-LatestPipVersion jep >> "${WSDFIR_TEMP}\visualstudio.txt"
+Get-LatestPipVersion pdfalyzer >> "${WSDFIR_TEMP}\visualstudio.txt"
+Get-LatestPipVersion regipy >> "${WSDFIR_TEMP}\visualstudio.txt"
+((C:\Windows\System32\curl.exe -L --silent "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> "${WSDFIR_TEMP}\visualstudio.txt"
+$GHIDRA_INSTALL_DIR >> "${WSDFIR_TEMP}\visualstudio.txt"
 
 if (Test-Path "C:\venv\visualstudio.txt") {
     $CURRENT_VENV = "C:\venv\visualstudio.txt"
@@ -184,7 +184,7 @@ if (Test-Path "C:\venv\visualstudio.txt") {
     $CURRENT_VENV = "C:\Progress.ps1"
 }
 
-if ((Get-FileHash "C:\tmp\visualstudio.txt").Hash -ne (Get-FileHash "$CURRENT_VENV").Hash) {
+if ((Get-FileHash "${WSDFIR_TEMP}\visualstudio.txt").Hash -ne (Get-FileHash "$CURRENT_VENV").Hash) {
     # Install Visual Studio Build Tools
     Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     # https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2019
