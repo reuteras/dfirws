@@ -389,13 +389,14 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "new branch" -and
     $_.Line -notmatch "origin/main Updating" -and
     $_.Line -notmatch "libgpg-error" -and
-    $_.Line -notmatch ": No data" -and
     $_.Line -notmatch "could not be locally" -and
     $_.Line -notmatch "via WKD" -and
     $_.Line -notmatch "ERROR: 9DD0D4217D75" -and
     $_.Line -notmatch "msys64\\usr\\" -and
     $_.Line -notmatch "gpg-error.exe" -and
     $_.Line -notmatch "gpg: error reading key: Network error" -and
+    $_.Line -notmatch "gpg: error reading key: No data" -and
+    $_.Line -notmatch "gpg: error reading key: general error" -and
     $_.Line -notmatch "ERROR: Could not update key:" -and
     $_.Line -notmatch "Error Getting File from" -and
     $_.Line -notmatch "gpg-error"
