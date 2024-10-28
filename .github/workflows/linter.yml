@@ -11,7 +11,8 @@ on:
   pull_request:
     branches: [main]
 
-permissions: read-all
+permissions:
+  contents: read
 
 # A workflow run is made up of one or more jobs that can run sequentially
 # or in parallel
@@ -27,6 +28,9 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job
     # can access it
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
     # Runs a single command using the runners shell
       - name: Lint Code Base
