@@ -342,8 +342,8 @@ if ($status) {
 }
 
 # https://ngrok.com/download - ngrok - installed during start
-$NgrokURK = Get-DownloadUrlFromPage -Url "https://ngrok.com/download" -RegEx 'https://bin.equinox.io/c/[^/]+/ngrok-v[0-9]+-stable-windows-amd64.zip'
-$status = Get-FileFromUri -uri "${NgrokURK}" -FilePath ".\downloads\ngrok.zip" -CheckURL "Yes" -check "Zip archive data"
+$NgrokURL = Get-DownloadUrlFromPage -Url "https://download.ngrok.com/windows?tab=download" -RegEx 'https://bin.equinox.io/c/[^/]+/ngrok-v[0-9]+-stable-windows-amd64.zip'
+$status = Get-FileFromUri -uri "${NgrokURL}" -FilePath ".\downloads\ngrok.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\bin\ngrok.exe") {
         Remove-Item -Force "${TOOLS}\bin\ngrok.exe" | Out-Null 2>&1
