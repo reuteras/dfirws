@@ -402,7 +402,9 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "gpg-error"
 }
 
-if ($warnings -or $errors) {
+$failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed"
+
+if ($warnings -or $errors -or $failed) {
     Write-DateLog "Errors or warnings were found in log files. Please check the log files for details."
 } else {
     Write-DateLog "Downloads and preparations done."
