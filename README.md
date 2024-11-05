@@ -86,8 +86,6 @@ cp config.ps1.template config.ps1
 
 The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub. If you prefer not to save the GitHub token in *config.ps1* file you can enter it manually when you run **downloadFiles.ps1**. Another safer alternative is to use your password manager and enter the cli command to get the token from the password manager. Examples for 1Password are available in the file *config.ps1.template*.
 
-```PowerShell
-
 ## Download tools and enrichment data
 
 Before using a sandbox or creating a VM all the tools has to be downloaded and prepared for use in DFIRWS. Sandboxes will be started to run and install packages for Python, bash, Rust, Node.js and more. Since Windows only allows one running Sandbox at the time you have to close any running sandbox before running **downloadFiles.ps1**.
