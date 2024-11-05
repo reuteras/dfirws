@@ -1,15 +1,21 @@
 # This file contains usernames and keys to download tools that should not be
 # available in the sandbox or VM when doing analysis.
+# You can use the `op` command to read the values from 1Password or similar tools
+# for your password manager of choice.
 
 # MaxMind GeoIP2 API key
 $MAXMIND_LICENSE_KEY = "YOUR KEY"
+# $MAXMIND_LICENSE_KEY = op read op://Private/MaxMind/api
 
 # IPinfo.io API key
 $IPINFO_API_KEY = "YOUR KEY"
+# $IPINFO_API_KEY = op read op://Private/IPinfo/api
 
 # GitHub API username and token
 $GITHUB_USERNAME = "YOUR GITHUB USERNAME"
+# $GITHUB_USERNAME = op read op://Private/github.com/username
 $GITHUB_TOKEN = "YOUR GITHUB TOKEN"
+# $GITHUB_TOKEN = op read op://Private/github.com/API-password
 
 # Burp Suite edition
 $BURP_SUITE_EDITION = "Community"

@@ -51,7 +51,7 @@ Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All 
 
 For more information about Windows Sandbox look at the Microsoft page [Windows Sandbox][wsa].
 
-4. *GitHub classic token:* You also need a GitHub account to create a classic GitHub token. If you have a GitHub account you can create a token at [https://github.com/settings/tokens](https://github.com/settings/tokens). Select *Generate new token (classic)*. Give the token a name and change the default expiration. The token doesn't need any added rights.
+4. *GitHub token:* You also need a GitHub account to create a GitHub token. If you have a GitHub account you can create a token at [https://github.com/settings/tokens](https://github.com/settings/tokens). Select *Generate new token (Fine grained or classic)*. Give the token a name and change the default expiration. The token doesn't need any added rights.
 Remember to save the token in your password manager since you can't get the value again.
 
 The token is needed to avoid problems with rate limiting on GitHub since most of the tools are downloaded from there and you will be blocked otherwise and the downloads will fail.
@@ -84,7 +84,9 @@ Copy the file *config.ps1.template* to *config.ps1*.
 cp config.ps1.template config.ps1
 ```
 
-The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub. If you prefer not to save the GitHub token in *config.ps1* file you can enter it manually when you run **downloadFiles.ps1**.
+The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub. If you prefer not to save the GitHub token in *config.ps1* file you can enter it manually when you run **downloadFiles.ps1**. Another safer alternative is to use your password manager and enter the cli command to get the token from the password manager. Examples for 1Password are available in the file *config.ps1.template*.
+
+```PowerShell
 
 ## Download tools and enrichment data
 
