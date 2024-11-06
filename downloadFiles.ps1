@@ -402,7 +402,9 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "gpg-error"
 }
 
-$failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed"
+$failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
+    $_.Line -notmatch "A connection attempt failed because the connected party did not"
+}
 
 if ($warnings -or $errors -or $failed) {
     Write-DateLog "Errors or warnings were found in log files. Please check the log files for details."
