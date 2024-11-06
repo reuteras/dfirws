@@ -38,13 +38,6 @@ if (-not (Test-Path -Path "${enrichmentDirectory}")) {
 # Get the current date
 $DATE = Get-Date -Format "yyyy-MM-dd"
 
-# Read config file
-if (-not (Test-Path -Path "${PWD}\config.ps1")) {
-    Write-Output "Please create a config.ps1 to download Maxmind databases"
-} else {
-    . ".\config.ps1"
-}
-
 # Download Tor exit nodes
 $folderUrl = "https://collector.torproject.org/archive/exit-lists/"
 $torsaveDirectory = "${enrichmentDirectory}\tor"
