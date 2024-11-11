@@ -26,7 +26,6 @@ param (
     [switch]$LibreOffice,
     [switch]$LogBoost,
     [switch]$Loki,
-    [switch]$Maltego,
     [switch]$Neo4j,
     [switch]$Node,
     [switch]$Obsidian,
@@ -150,10 +149,6 @@ if ($LogBoost.IsPresent) {
 
 if ($Loki.IsPresent) {
     Install-Loki
-}
-
-if ($Maltego.IsPresent) {
-    Install-Maltego
 }
 
 if ($Neo4j.IsPresent) {

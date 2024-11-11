@@ -654,24 +654,24 @@ function Install-Malcat {
     }
 }
 
-function Install-Maltego {
-    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-maltego.txt")) {
-        Write-Output "Installing Maltego"
-        Start-Process -Wait "${SETUP_PATH}\maltego.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
-        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
-        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\" -Force
-        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego Java Config.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
-        if (Test-Path "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk") {
-            Remove-Item "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk" -Force
-        }
-        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - OSINT\Maltego (runs dfirws-install -Maltego).lnk") {
-            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - OSINT\Maltego (runs dfirws-install -Maltego).lnk" -Force
-        }
-        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-maltego.txt" | Out-Null
-    } else {
-        Write-Output "Maltego is already installed"
-    }
-}
+#function Install-Maltego {
+#    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-maltego.txt")) {
+#        Write-Output "Installing Maltego"
+#        Start-Process -Wait "${SETUP_PATH}\maltego.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+#        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
+#        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\" -Force
+#        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego Java Config.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
+#        if (Test-Path "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk") {
+#            Remove-Item "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk" -Force
+#        }
+#        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - OSINT\Maltego (runs dfirws-install -Maltego).lnk") {
+#            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - OSINT\Maltego (runs dfirws-install -Maltego).lnk" -Force
+#        }
+#        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-maltego.txt" | Out-Null
+#    } else {
+#        Write-Output "Maltego is already installed"
+#    }
+#}
 
 function Install-Neo4j {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neo4j.txt")) {

@@ -50,8 +50,8 @@ Test-Command $JadxLibrary JAR
 Test-Command kape PE32
 Test-Command "C:\Program Files (x86)\LibreOffice\program\soffice.exe" PE32
 Test-Command loki PE32
-$MaltegoExecutable = (Get-ChildItem 'C:\Program Files (x86)\Paterva\Maltego\' -Include maltego.exe -Recurse).FullName
-Test-Command $MaltegoExecutable PE32
+#$MaltegoExecutable = (Get-ChildItem 'C:\Program Files (x86)\Paterva\Maltego\' -Include maltego.exe -Recurse).FullName
+#Test-Command $MaltegoExecutable PE32
 Test-Command neo4j ASCII
 Test-Command node PE32
 Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe" PE32

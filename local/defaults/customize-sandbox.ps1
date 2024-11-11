@@ -88,7 +88,6 @@ foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
 
 # Install extra programs
 #Install-Obsidian
-#Install-Maltego
 
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools
 & "C:\Windows\explorer.exe" "${HOME}\Desktop\dfirws"

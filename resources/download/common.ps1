@@ -133,6 +133,8 @@ function Get-FileFromUri {
 
             if ($Uri -like "*sourceforge.net*") {
                 $UA_FLAG = '--user-agent "Wget x64"'
+            } elseif ($Uri -like "*.amazonaws.com*") {
+                $UA_FLAG = '--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"'
             } else {
                 $UA_FLAG = ""
             }

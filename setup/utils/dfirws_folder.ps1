@@ -403,8 +403,8 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-Unicode.lnk" -DestinationPath "${GIT_PATH}\Regshot\Regshot-x64-Unicode.exe"
 
 # OSINT
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OSINT" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Maltego"
+#New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OSINT" | Out-Null
+#Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Maltego"
 
 # Programming and Development
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming" | Out-Null

@@ -70,7 +70,6 @@ dfirws-install.ps1 -Jadx
 dfirws-install.ps1 -Kape
 dfirws-install.ps1 -LibreOffice
 dfirws-install.ps1 -Loki
-dfirws-install.ps1 -Maltego
 dfirws-install.ps1 -Node
 dfirws-install.ps1 -Obsidian
 dfirws-install.ps1 -OhMyPosh

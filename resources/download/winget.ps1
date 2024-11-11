@@ -24,10 +24,6 @@ $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotne
 Write-SynchronizedLog "winget: Downloading IrfanView."
 $status = Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe" -check "PE32"
 
-# Maltego - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Maltego."
-$status = Get-WinGet "Maltego.Maltego" "Maltego*.exe" "maltego.exe" -check "PE32"
-
 # Obsidian - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Obsidian."
 $status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "PE32"
