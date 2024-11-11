@@ -342,8 +342,8 @@ if ($status) {
 }
 
 # https://www.maltego.com/downloads/ - Maltego - manual installation
-$MaltegoURL = Get-DownloadUrlFromPage -Url "https://www.maltego.com/downloads/" -RegEx 'https://[^"]+.exe'
-$status = Get-FileFromUri -uri "${MaltegoURL}" -FilePath ".\downloads\maltego.exe" -CheckURL "Yes" -check "PE32"
+#$MaltegoURL = Get-DownloadUrlFromPage -Url "https://www.maltego.com/downloads/" -RegEx 'https://[^"]+.exe'
+#$status = Get-FileFromUri -uri "${MaltegoURL}" -FilePath ".\downloads\maltego.exe" -CheckURL "Yes" -check "PE32"
 
 # https://ngrok.com/download - ngrok - installed during start
 $NgrokURL = Get-DownloadUrlFromPage -Url "https://download.ngrok.com/windows?tab=download" -RegEx 'https://bin.equinox.io/c/[^/]+/ngrok-v[0-9]+-stable-windows-amd64.zip'

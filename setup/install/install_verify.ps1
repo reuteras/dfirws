@@ -173,6 +173,7 @@ Test-Command jd-gui PE32      # C:\Tools\jd-gui\jd-gui.exe
 Test-Command lessmsi-gui PE32      # C:\Tools\lessmsi\lessmsi-gui.exe
 Test-Command lessmsi PE32      # C:\Tools\lessmsi\lessmsi.exe
 Test-Command "C:\Tools\LogBoost\LogBoost.exe" PE32
+Test-Command "C:\Tools\LogBoost\threats.db" "SQLite"
 Test-Command MailView PE32      # C:\Tools\MailView\MailView.exe
 Test-Command "C:\Tools\mboxviewer\mboxview64.exe" PE32 # GUI not in path
 Test-Command MemProcFS PE32      # C:\Tools\MemProcFS\MemProcFS.exe
