@@ -2,7 +2,7 @@
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-DFIRWS is a solution to do DFIR work in a Windows Sandbox. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or in a VM (only VMWare Workstation at the moment).
+DFIRWS is a solution to do DFIR work in a Windows Sandbox. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or in a VM (only VMWare Workstation at the moment). Therefore the tools is suitable in environment without internet access.
 
 DFIRWS has been enhanced since its start and now contains the following main parts.
 
