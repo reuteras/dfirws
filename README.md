@@ -39,7 +39,7 @@ winget install Rclone.Rclone
 2. *PowerShell:* If you haven't enabled the option to run PowerShell scripts you have to start a Windows Terminal or PowerShell prompt as administrator and run
 
 ```PowerShell
-Set-executionPolicy -ExecutionPolicy Bypass
+Set-ExecutionPolicy -ExecutionPolicy Bypass
 ```
 
 3. *Windows Sandbox:* The Windows Sandbox feature must be enabled on the host. This is true even if you only like to build and run the DFIRWS tools in a VM. The Sandbox feature is used to build and download tools when you run the **downloadFiles.ps1** script.
