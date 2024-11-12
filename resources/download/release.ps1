@@ -1,5 +1,25 @@
 . "${PSScriptRoot}\common.ps1"
 
+# artemis
+$status = Get-GitHubRelease -repo "puffyCid/artemis" -path "${SETUP_PATH}\artemis.zip" -match "x86_64-pc-windows-msvc.zip$" -check "Zip archive data"
+if ($status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\artemis.zip" -o"${TOOLS}" | Out-Null
+    if (Test-Path "${TOOLS}\artemis") {
+        Remove-Item "${TOOLS}\artemis" -Recurse -Force
+    }
+    Move-Item ${TOOLS}\artemis-* "${TOOLS}\artemis"
+}
+
+# godap
+$status = Get-GitHubRelease -repo "Macmod/godap" -path "${SETUP_PATH}\godap.zip" -match "windows-amd64.zip$" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\godap") {
+        Remove-Item "${TOOLS}\godap" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\godap.zip" -o"${TOOLS}\godap" | Out-Null
+    Move-Item ${TOOLS}\godap-* "${TOOLS}\godap"
+}
+
 # BeaconHunter - copied to program files during startup
 $status = Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "${SETUP_PATH}\beaconhunter.zip" -match "BeaconHunter.zip" -check "Zip archive data"
 if ($status) {
@@ -620,7 +640,8 @@ if ($status) {
         Remove-Item "${TOOLS}\obsidian-mitre-attack" -Recurse -Force
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\obsidian-mitre-attack.zip" -o"${TOOLS}" | Out-Null
-    move-item "${TOOLS}\MITRE" "${TOOLS}\obsidian-mitre-attack"
+    Move-Item "${TOOLS}\MITRE" "${TOOLS}\obsidian-mitre-attack"
+    Remove-Item "${TOOLS}\README.md" -Force
 }
 
 # Cutter
