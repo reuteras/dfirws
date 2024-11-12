@@ -571,6 +571,6 @@ Get-Job | Receive-Job 2>&1 | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.
 Get-Job | Remove-Job | Out-Null
 Remove-Item "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 
-Write-DateLog "Installation done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Setup done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 Exit 0
