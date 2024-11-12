@@ -27,6 +27,8 @@ param(
     [Switch]$jep,
     [Parameter(HelpMessage = "Switch to venv jpterm.")]
     [Switch]$jpterm,
+    [Parameter(HelpMessage = "Switch to venv litecli.")]
+    [Switch]$litecli,
     [Parameter(HelpMessage = "Switch to venv magika.")]
     [Switch]$magika,
     [Parameter(HelpMessage = "Switch to venv maldump.")]
@@ -85,6 +87,8 @@ if ($aspose) {
     $venv = "jep"
 } elseif ($jpterm) {
     $venv = "jpterm"
+} elseif ($litecli) {
+    $venv = "litecli"
 } elseif ($magika) {
     $venv = "magika"
 } elseif ($maldump) {

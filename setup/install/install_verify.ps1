@@ -77,6 +77,7 @@ Test-Command gdb PE32
 
 # First generated with the command below and then cleaned manually.
 # foreach ($name in (Get-ChildItem C:\Tools\ -Include *.exe -Recurse) ) {"Test-Command", $name.name.Split('.')[0], "PE32      #", $name.FullName  -join " " }
+Test-Command artemis PE32      # C:\Tools\artemis\artemis.exe
 Test-Command Audacity PE32
 Test-Command adalanche PE32      # C:\Tools\bin\adalanche.exe
 Test-Command aleapp PE32      # C:\Tools\bin\aleapp.exe
@@ -162,6 +163,7 @@ Test-Command FullEventLogView PE32      # C:\Tools\FullEventLogView\FullEventLog
 Test-Command gftrace PE32      # C:\Tools\gftrace64\gftrace.exe
 Test-Command ghidraRun ASCII
 Test-Command "C:\Tools\ghidra\ghidra_10.4_PUBLIC\ghidraRun" ASCII
+Test-Command godap PE32      # C:\Tools\godap\godap.exe
 Test-Command GoReSym PE32      # C:\Tools\GoReSym\GoReSym.exe
 Test-Command "C:\Tools\hashcat\hashcat.exe" PE32
 Test-Command hayabusa PE32      # C:\Tools\hayabusa\hayabusa.exe
@@ -232,6 +234,7 @@ Test-Command zstd PE32      # C:\Tools\zstd\zstd.exe
 
 # Test some git repositories
 
+Test-Command dhparser PE32
 Test-Command ese2csv PE32
 Test-Command evtxparse PE32
 Test-Command C:\git\iShutdown\Win\iShutdown_detect.exe PE32
@@ -364,6 +367,7 @@ Test-Command C:\venv\jpterm\Scripts\jupyter.exe PE32
 Test-Command C:\venv\jpterm\Scripts\markdown-it.exe PE32
 Test-Command C:\venv\jpterm\Scripts\rich-click.exe PE32
 Test-Command C:\venv\jpterm\Scripts\vimg.exe PE32
+Test-Command C:\venv\litecli\Scripts\litecli.exe PE32
 Test-Command C:\venv\magika\Scripts\magika.exe PE32
 Test-Command C:\venv\magika\Scripts\tqdm.exe PE32
 Test-Command C:\venv\maldump\Scripts\maldump.exe PE32

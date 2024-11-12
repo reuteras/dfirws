@@ -116,6 +116,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dsq (com
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\h2 database.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${TOOLS}\h2database"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite (runs dfirws-install -FQLite).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -FQLite"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\ingestr (is a cli that allows you to ingest data from any source into any destination).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ingestr --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\litecli (SQLite CLI with autocompletion and syntax highlighting).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command venv.ps1 -litecli; litecli --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Neo4j"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\SQLECmd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\SQLECmd\SQLECmd.exe" -Arguments "-NoExit -command SQLECmd.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqldiff.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\sqlite\sqlite3.exe" -Arguments "-NoExit -command sqldiff.exe --help"
@@ -272,6 +273,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\RDP\RdpCacheStitc
 
 # Forensics
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Forensics" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\artemis.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command artemis.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\Autopsy (runs dfirws-install -Autopsy).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Autopsy"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\venv-dissect.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ${HOME}\Documents\tools\utils\venv.ps1 -Dissect"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\acquire-decrypt.exe (dissect).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command acquire-decrypt.exe -h"
@@ -316,6 +318,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Shadow-pulse (csv with inform
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -ClamAV"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files - venv).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ${HOME}\Documents\tools\utils\venv.ps1 -csvkit"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\defender-detectionhistory-parser (dhparser).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dhparser -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command maldump.exe -h"
 
 # Malware tools - Cobalt Strike
@@ -592,6 +595,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-in
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\exiftool.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\exiftool\exiftool.exe" -Arguments "-NoExit -command exiftool --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\floss.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\floss\floss.exe" -Arguments "-NoExit -command venv.ps1 -floss ; floss --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\git.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\Git\cmd\git-gui.exe"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\godap (LDAP tool).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command godap --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Google Earth (runs dfirws-install -GoogleEarth).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -GoogleEarth"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Graphviz.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dot -?"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\jpterm (Jupyter in the terminal).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command jpterm --help"
