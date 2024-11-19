@@ -23,7 +23,7 @@ $repourls = `
     "https://github.com/ExeinfoASL/ASL.git", `
     "https://github.com/fr0gger/jupyter-collection.git", `
     "https://github.com/gehaxelt/Python-dsstore.git", `
-    "https://github.com/import-pandas-as-numpy/chainsaw-rules"
+    "https://github.com/import-pandas-as-numpy/chainsaw-rules", `
     "https://github.com/JavierYuste/radare2-deep-graph.git", `
     "https://github.com/jeFF0Falltrades/rat_king_parser.git", `
     "https://github.com/jklepsercyber/defender-detectionhistory-parser.git", `
