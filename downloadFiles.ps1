@@ -403,7 +403,8 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
 }
 
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
-    $_.Line -notmatch "A connection attempt failed because the connected party did not"
+    $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
+    $_.Line -notmatch "ucrt64/share"
 }
 
 if ($warnings -or $errors -or $failed) {
