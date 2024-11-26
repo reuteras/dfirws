@@ -820,13 +820,12 @@ if ($status) {
 $status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match "snapshot/snapshot" -check "Zip archive data"
 
 # hayabusa
-$status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match "win-x64" -check "Zip archive data"
+$status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match "win-x64.zip" -check "Zip archive data"
 if ($status) {
     if (Test-Path "${TOOLS}\hayabusa") {
         Remove-Item "${TOOLS}\hayabusa" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}" | Out-Null
-    Move-Item ${TOOLS}\hayabusa-* ${TOOLS}\hayabusa
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}\hayabusa" | Out-Null
     Move-Item ${TOOLS}\hayabusa\hayabusa-* ${TOOLS}\hayabusa\hayabusa.exe
 }
 
