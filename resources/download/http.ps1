@@ -287,7 +287,7 @@ if (Test-Path -Path "${TOOLS}\nirsoft\readme.txt") {
 $status = Get-FileFromUri -uri "https://github.com/Velocidex/c-aff4/raw/master/tools/pmem/resources/winpmem/winpmem_64.sys" -FilePath ".\downloads\winpmem_64.sys" -check "PE32"
 
 # Binary Ninja - manual installation
-$status = Get-FileFromUri -uri "https://cdn.binary.ninja/installers/BinaryNinja-free.exe" -FilePath ".\downloads\binaryninja.exe" -check "PE32"
+$status = Get-FileFromUri -uri "https://cdn.binary.ninja/installers/binaryninja_free_win64.exe" -FilePath ".\downloads\binaryninja.exe" -check "PE32"
 
 # gpg4win
 $status = Get-FileFromUri -uri "https://files.gpg4win.org/gpg4win-latest.exe" -FilePath ".\downloads\gpg4win.exe" -check "PE32"
