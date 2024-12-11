@@ -46,7 +46,7 @@ Test-Command "C:\Program Files\Google\Google Earth Pro\client\googleearth.exe" P
 Test-Command gpg PE32
 Test-Command hashcat PE32
 $JadxLibrary = (Get-ChildItem 'C:\Program Files\Jadx\' -Recurse -Include *.jar).FullName
-Test-Command $JadxLibrary JAR
+Test-Command $JadxLibrary "Zip archive data"
 Test-Command kape PE32
 Test-Command "C:\Program Files (x86)\LibreOffice\program\soffice.exe" PE32
 Test-Command loki PE32

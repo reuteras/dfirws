@@ -154,10 +154,10 @@ function Test-Command {
         return
     }
 
-    if ( file $command.Path | Where-Object {$_ -match $type}) {
+    if ( & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path | Where-Object {$_ -match $type}) {
         Write-SynchronizedLog "SUCCESS: $name exists and type matches $type"
     } else {
-        $actual_type = file $command.Path
+        $actual_type = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
         Write-SynchronizedLog "ERROR: $name exists but is not of type $type. Type is $actual_type"
     }
 }
