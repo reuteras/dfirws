@@ -393,7 +393,6 @@ Test-Command C:\venv\toolong\Scripts\tl.exe PE32
 Test-Command C:\venv\white-phoenix\Scripts\f2py.exe PE32
 
 # foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -Include *.py)) {"Test-Command", $name.Fullname, "Python"  -join " " }
-Test-Command C:\venv\binary-refinery\Scripts\dumpsig.py Python
 Test-Command C:\venv\binary-refinery\Scripts\evtx_dump.py Python
 Test-Command C:\venv\binary-refinery\Scripts\evtx_info.py Python
 Test-Command C:\venv\binary-refinery\Scripts\readelf.py Python

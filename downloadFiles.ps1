@@ -115,7 +115,7 @@ if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
 rclone.exe config touch | Out-Null
 
 # Check if sandbox is running
-if ( tasklist | Select-String "WindowsSandbox" ) {
+if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
     Write-DateLog "Sandbox can't be running while updating."
     Exit
 }

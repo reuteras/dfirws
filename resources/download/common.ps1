@@ -467,10 +467,12 @@ function Stop-SandboxWhenDone {
 
     while ($true) {
         $status = Get-Process WindowsSandboxClient 2> $null
-        if ($status) {
+        $status_new = Get-Process WindowsSandboxRemoteSession 2> $null
+        if ($status -or $status_new) {
             if ( Test-Path $path ) {
                 if($PSCmdlet.ShouldProcess($file.Name)) {
-                    (Get-Process WindowsSandboxClient).Kill()
+                    (Get-Process WindowsSandboxClient).Kill() 2> $null
+                    (Get-Process WindowsSandboxRemoteSession).Kill() 2> $null
                     Remove-Item -Force "$path"
                     Start-Sleep 1
                     $mutex.ReleaseMutex()
