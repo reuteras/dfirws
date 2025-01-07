@@ -41,15 +41,9 @@ python -m pip install -U poetry 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.
 # TODO: Get latest version of package
 python -m pip install https://github.com/msuhanov/dfir_ntfs/archive/1.1.19.tar.gz 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
-poetry init `
-    --name default `
-    --description "Default Python venv for dfirws." `
-    --author "dfirws" `
-    --license "MIT" `
-    --no-interaction >> "C:\log\python.txt"
 
-# Install packages with poetry
-poetry add `
+# Install packages with pip
+python -m pip install -U `
     aiohttp[speedups] `
     autoit-ripper `
     cabarchive `
