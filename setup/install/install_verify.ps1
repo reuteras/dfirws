@@ -109,7 +109,6 @@ Test-Command kdb_check PE32      # C:\Tools\bin\kdb_check.exe
 Test-Command MetadataPlus PE32      # C:\Tools\bin\MetadataPlus.exe
 Test-Command MFTBrowser PE32      # C:\Tools\bin\MFTBrowser.exe
 Test-Command msys2 PE32
-Test-Command ngrok PE32      # C:\Tools\bin\ngrok.exe
 Test-Command pe_check PE32      # C:\Tools\bin\pe_check.exe
 Test-Command pe-sieve PE32      # C:\Tools\bin\pe-sieve.exe
 Test-Command recbin PE32      # C:\Tools\bin\recbin.exe
