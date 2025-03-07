@@ -1,0 +1,524 @@
+{
+  "tools": [
+    {
+      "name": "Neo4j",
+      "description": "Graph database platform",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}"
+      },
+      "destination": {
+        "path": "downloads/neo4j.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Elasticsearch",
+      "description": "Search and analytics engine",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip"
+      },
+      "destination": {
+        "path": "downloads/elasticsearch.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Kibana",
+      "description": "Data visualization dashboard for Elasticsearch",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip"
+      },
+      "destination": {
+        "path": "downloads/kibana.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Logstash",
+      "description": "Data processing pipeline for Elasticsearch",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "https://artifacts.elastic.co/downloads/logstash/logstash-${ELK_VERSION}-windows-x86_64.zip"
+      },
+      "destination": {
+        "path": "downloads/logstash.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Elastic Agent",
+      "description": "Single agent for Elastic Stack",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-${ELK_VERSION}-windows-x86_64.zip"
+      },
+      "destination": {
+        "path": "downloads/elastic-agent.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Filebeat",
+      "description": "Log file shipper for Elasticsearch",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${ELK_VERSION}-windows-x86_64.zip"
+      },
+      "destination": {
+        "path": "downloads/filebeat.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "jq",
+      "description": "JSON processor",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "jqlang/jq",
+        "match": "win64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/jq.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/jq.exe",
+          "destination": "${TOOLS}/bin/"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "yq",
+      "description": "YAML processor",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "mikefarah/yq",
+        "match": "yq_windows_amd64.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/yq.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/yq.exe",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "fq",
+      "description": "Binary data processor",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "wader/fq",
+        "match": "windows_amd64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/fq.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/fq.zip",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "LogBoost",
+      "description": "Advanced log analysis tool",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "joeavanzato/logboost",
+        "match": "logboost_release"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/logboost.rar"
+      },
+      "validation": {
+        "type": "RAR archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/logboost"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/logboost.rar",
+          "destination": "${TOOLS}/logboost"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "FullEventLogView",
+      "description": "Windows event log viewer",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/fulleventlogview-x64.zip"
+      },
+      "destination": {
+        "path": "downloads/logview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/FullEventLogView"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/logview.zip",
+          "destination": "${TOOLS}/FullEventLogView"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "ripgrep",
+      "description": "Fast search tool",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "BurntSushi/ripgrep",
+        "match": "x86_64-pc-windows-msvc.zip$"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/ripgrep.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ripgrep.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ripgrep"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/ripgrep-*",
+          "destination": "${TOOLS}/ripgrep"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "gron",
+      "description": "Makes JSON greppable",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "tomnomnom/gron",
+        "match": "gron-windows-amd64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/gron.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/gron.zip",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "dsq",
+      "description": "SQL for JSON/CSV/Excel/etc",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "multiprocessio/dsq",
+        "match": "dsq-win"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/dsq.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/dsq.zip",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "evtx_dump",
+      "description": "Windows Event Log parser",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "omerbenamram/evtx",
+        "match": "exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/evtx_dump.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/evtx_dump.exe",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "APT-Hunter",
+      "description": "Threat hunting tool",
+      "type": "git",
+      "category": "analysis",
+      "source": {
+        "repo": "https://github.com/ahmedkhlief/APT-Hunter.git"
+      },
+      "condition": "$all -or $Git"
+    },
+    {
+      "name": "Trawler",
+      "description": "Log analysis tool",
+      "type": "git",
+      "category": "analysis",
+      "source": {
+        "repo": "https://github.com/joeavanzato/Trawler.git"
+      },
+      "condition": "$all -or $Git"
+    },
+    {
+      "name": "Hayabusa",
+      "description": "Windows event log fast forensics",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "Yamato-Security/hayabusa",
+        "match": "win-x64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/hayabusa.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/hayabusa"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/hayabusa.zip",
+          "destination": "${TOOLS}/hayabusa"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/hayabusa/hayabusa-*",
+          "destination": "${TOOLS}/hayabusa/hayabusa.exe"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Zircolite",
+      "description": "Standalone SIGMA-based detection tool",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "wagga40/zircolite",
+        "match": "zircolite"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/zircolite.7z"
+      },
+      "validation": {
+        "type": "7-zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/zircolite"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/zircolite.7z",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/zircolite_*",
+          "destination": "${TOOLS}/zircolite"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/zircolite/zircolite_*.exe",
+          "destination": "${TOOLS}/zircolite/zircolite.exe"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Chainsaw",
+      "description": "Rapidly search and hunt through Windows event logs",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "WithSecureLabs/chainsaw",
+        "match": "x86_64-pc-windows-msvc"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/chainsaw.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/chainsaw"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/chainsaw.zip",
+          "destination": "${TOOLS}"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "DCode",
+      "description": "Timestamp decoder",
+      "type": "http",
+      "category": "analysis",
+      "source": {
+        "url": "${DCodeURL}"
+      },
+      "destination": {
+        "path": "downloads/dcode.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${SETUP_PATH}/dcode"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/dcode.zip",
+          "destination": "${SETUP_PATH}/dcode"
+        },
+        {
+          "action": "move",
+          "source": "${SETUP_PATH}/dcode/Dcode-*",
+          "destination": "${SETUP_PATH}/dcode/dcode.exe"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Fibratus",
+      "description": "Windows kernel exploration and tracing tool",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "rabbitstack/fibratus",
+        "match": "fibratus-[.0-9]+-amd64.msi$"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/fibratus.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Velociraptor",
+      "description": "Digital forensics and incident response tool",
+      "type": "github",
+      "category": "analysis",
+      "source": {
+        "repo": "velocidex/velociraptor",
+        "match": "windows-amd64.exe$"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/velociraptor.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/velociraptor.exe",
+          "destination": "${TOOLS}/bin/"
+        }
+      ],
+      "condition": "$all -or $Release"
+    }
+  ]
+}

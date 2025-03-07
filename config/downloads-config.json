@@ -1,0 +1,1583 @@
+{
+  "tools": [
+    {
+      "name": "Python",
+      "description": "Programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Python.Python.3.11"
+      },
+      "destination": {
+        "path": "downloads/python3.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "NodeJS",
+      "description": "JavaScript runtime",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://nodejs.org/dist/${NodeJSVersion}/node-${NodeJSVersion}-win-x64.zip"
+      },
+      "destination": {
+        "path": "downloads/nodejs.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Node"
+    },
+    {
+      "name": "GoLang",
+      "description": "Go programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "GoLang.Go"
+      },
+      "destination": {
+        "path": "downloads/golang.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Go"
+    },
+    {
+      "name": "Rust",
+      "description": "Rust programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Rustlang.Rust.GNU"
+      },
+      "destination": {
+        "path": "downloads/rust.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Rust"
+    },
+    {
+      "name": "Visual Studio Code",
+      "description": "Code editor",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://update.code.visualstudio.com/latest/win32-x64-user/stable"
+      },
+      "destination": {
+        "path": "downloads/vscode.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Git",
+      "description": "Version control system",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "git-for-windows/git",
+        "match": "64-bit.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/git.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Rust"
+    },
+    {
+      "name": "MSYS2",
+      "description": "Software distribution and building platform for Windows",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/msys2.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/msys2.exe",
+          "destination": "${TOOLS}/bin/msys2.exe"
+        }
+      ],
+      "condition": "$all -or $MSYS2"
+    },
+    {
+      "name": "Amazon Corretto JDK",
+      "description": "Java Development Kit",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi"
+      },
+      "destination": {
+        "path": "downloads/corretto.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "Visual Studio Build Tools",
+      "description": "Tools to compile and build",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://aka.ms/vs/16/release/vs_BuildTools.exe"
+      },
+      "destination": {
+        "path": "downloads/vs_BuildTools.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "VS Code C++ Extension",
+      "description": "C++ extension for Visual Studio Code",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/cpptools/$vscode_cpp_version/vspackage?targetPlatform=win32-x64"
+      },
+      "destination": {
+        "path": "downloads/vscode/vscode-cpp.vsix"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "VS Code Python Extension",
+      "description": "Python extension for Visual Studio Code",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage"
+      },
+      "destination": {
+        "path": "downloads/vscode/vscode-python.vsix"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "VS Code PowerShell Extension",
+      "description": "PowerShell extension for Visual Studio Code",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "PowerShell/vscode-powershell",
+        "match": "vsix"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/vscode/vscode-powershell.vsix"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Microsoft PowerShell",
+      "description": "PowerShell Core",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "PowerShell/PowerShell",
+        "match": "win-x64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/pwsh.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/pwsh"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/pwsh.zip",
+          "destination": "${TOOLS}/pwsh"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "PowerShell 7",
+      "description": "Latest PowerShell version",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Microsoft.PowerShell"
+      },
+      "destination": {
+        "path": "downloads/powershell.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "DotNet 6 Desktop Runtime",
+      "description": ".NET 6 Desktop Runtime",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Microsoft.DotNet.DesktopRuntime.6"
+      },
+      "destination": {
+        "path": "downloads/dotnet6desktop.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "PHP",
+      "description": "PHP scripting language",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://windows.php.net${PHP_URL}"
+      },
+      "destination": {
+        "path": "downloads/php.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/php"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/php.zip",
+          "destination": "${TOOLS}/php"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Ruby",
+      "description": "Ruby programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "RubyInstallerTeam.Ruby.3.2"
+      },
+      "destination": {
+        "path": "downloads/ruby.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Perl",
+      "description": "Perl programming language",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "StrawberryPerl/Perl-Dist-Strawberry",
+        "match": "portable.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/perl.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/perl"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/perl.zip",
+          "destination": "${TOOLS}/perl"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Docker Desktop",
+      "description": "Containerization platform",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Docker.DockerDesktop"
+      },
+      "destination": {
+        "path": "downloads/docker.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Wireshark",
+      "description": "Network protocol analyzer",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "WiresharkFoundation.Wireshark"
+      },
+      "destination": {
+        "path": "downloads/wireshark.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Npcap",
+      "description": "Packet capture library for Windows",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://npcap.com/${NpcapVersion}"
+      },
+      "destination": {
+        "path": "downloads/npcap.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "nmap",
+      "description": "Network discovery and security auditing tool",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "${nmap_url}"
+      },
+      "destination": {
+        "path": "downloads/nmap.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/nmap"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/nmap.exe",
+          "destination": "${TOOLS}/nmap"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Burp Suite",
+      "description": "Web vulnerability scanner",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}"
+      },
+      "destination": {
+        "path": "downloads/burp.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "OpenVPN",
+      "description": "Virtual private network application",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi"
+      },
+      "destination": {
+        "path": "downloads/openvpn.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "OpenVPN via WinGet",
+      "description": "Virtual private network application",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "OpenVPNTechnologies.OpenVPNConnect"
+      },
+      "destination": {
+        "path": "downloads/openvpn.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "WireGuard",
+      "description": "Modern VPN protocol",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "WireGuard.WireGuard"
+      },
+      "destination": {
+        "path": "downloads/wireguard.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Tailscale",
+      "description": "Zero config VPN",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "Tailscale.Tailscale"
+      },
+      "destination": {
+        "path": "downloads/tailscale.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Procdot",
+      "description": "Visual process and network analyzer",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://procdot.com/${procdot_path}"
+      },
+      "destination": {
+        "path": "downloads/procdot.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/procdot"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/procdot.zip",
+          "destination": "${TOOLS}/procdot"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "zaproxy",
+      "description": "OWASP Zed Attack Proxy",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "zaproxy/zaproxy",
+        "match": "windows.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/zaproxy.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Flare-Fakenet-NG",
+      "description": "Next generation dynamic network analysis tool",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "mandiant/flare-fakenet-ng",
+        "match": "fakenet"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/fakenet.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/fakenet.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/fakenet"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/fakenet*",
+          "destination": "${TOOLS}/fakenet"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "hfs",
+      "description": "HTTP File Server",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "rejetto/hfs",
+        "match": "hfs-windows-x64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/hfs.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/hfs"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/hfs.zip",
+          "destination": "${TOOLS}/hfs"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Putty",
+      "description": "SSH and telnet client",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "PuTTY.PuTTY"
+      },
+      "destination": {
+        "path": "downloads/putty.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Graphviz",
+      "description": "Graph visualization software",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "${graphviz_url}"
+      },
+      "destination": {
+        "path": "downloads/graphviz.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "mmdbinspect",
+      "description": "Tool to inspect MaxMind DB files",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "maxmind/mmdbinspect",
+        "match": "windows_amd64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/mmdbinspect.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/mmdbinspect"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/mmdbinspect.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/mmdbinspect_*",
+          "destination": "${TOOLS}/mmdbinspect"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "HindSight",
+      "description": "Web browser forensics tool",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "obsidianforensics/hindsight",
+        "match": "hindsight.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/hindsight.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/hindsight.exe",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "HindSight GUI",
+      "description": "Web browser forensics tool (GUI version)",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "obsidianforensics/hindsight",
+        "match": "hindsight_gui.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/hindsight_gui.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/hindsight_gui.exe",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "ChromeCacheView",
+      "description": "View the content of Chrome web browser cache",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/chromecacheview.zip"
+      },
+      "destination": {
+        "path": "downloads/chromecacheview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/chromecacheview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/chromecacheview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "MozillaCacheView",
+      "description": "View the content of Firefox web browser cache",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/mzcacheview.zip"
+      },
+      "destination": {
+        "path": "downloads/mzcacheview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/mzcacheview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/mzcacheview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "IECacheView",
+      "description": "View the content of Internet Explorer web browser cache",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/iecacheview.zip"
+      },
+      "destination": {
+        "path": "downloads/iecacheview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/iecacheview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/iecacheview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "BrowsingHistoryView",
+      "description": "View browsing history of multiple browsers",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/browsinghistoryview-x64.zip"
+      },
+      "destination": {
+        "path": "downloads/browsinghistoryview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/browsinghistoryview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/browsinghistoryview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "IECookiesView",
+      "description": "View Internet Explorer cookies",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/iecv.zip"
+      },
+      "destination": {
+        "path": "downloads/iecookiesview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/iecookiesview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/iecookiesview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "MozillaCookiesView",
+      "description": "View Mozilla Firefox cookies",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/mzcv-x64.zip"
+      },
+      "destination": {
+        "path": "downloads/MZCookiesView.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/MZCookiesView.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/MZCookiesView.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Ghidra",
+      "description": "Software reverse engineering framework",
+      "type": "http",
+      "category": "reversing",
+      "source": {
+        "url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/ghidra_10.4_PUBLIC_20230928.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ghidra"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ghidra.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ghidra_10.4_PUBLIC_20230928.zip",
+          "destination": "${TOOLS}/ghidra"
+        }
+      ],
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "Ghidrathon",
+      "description": "Python 3 scripting for Ghidra",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/Ghidrathon",
+        "match": "Ghidrathon"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/ghidrathon.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ghidrathon"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ghidrathon.zip",
+          "destination": "${TOOLS}/ghidrathon"
+        }
+      ],
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "x64dbg",
+      "description": "Open-source x64/x32 debugger for Windows",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "x64dbg/x64dbg",
+        "match": "snapshot/snapshot"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/x64dbg.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "dnSpy 32-bit",
+      "description": ".NET debugger and assembly editor (32-bit)",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "dnSpyEx/dnSpy",
+        "match": "win32"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/dnSpy32.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/dnSpy32"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/dnSpy32.zip",
+          "destination": "${TOOLS}/dnSpy32"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "dnSpy 64-bit",
+      "description": ".NET debugger and assembly editor (64-bit)",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "dnSpyEx/dnSpy",
+        "match": "win64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/dnSpy64.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/dnSpy64"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/dnSpy64.zip",
+          "destination": "${TOOLS}/dnSpy64"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Radare2",
+      "description": "Reverse engineering framework",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "radareorg/radare2",
+        "match": "w64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/radare2.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/radare2.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/radare2"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/radare2-*",
+          "destination": "${TOOLS}/radare2"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Cutter",
+      "description": "Free and open-source GUI for Radare2",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "rizinorg/cutter",
+        "match": "Windows-x86_64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/cutter.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/cutter.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/cutter"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/Cutter-*",
+          "destination": "${TOOLS}/cutter"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Iaito",
+      "description": "Qt and C++ GUI for Radare2",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "radareorg/iaito",
+        "match": "iaito.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/iaito.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/iaito"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/iaito.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/__MACOSX"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "PEStudio",
+      "description": "Malware initial assessment tool",
+      "type": "http",
+      "category": "reversing",
+      "source": {
+        "url": "https://www.winitor.com/tools/pestudio/current/pestudio.zip"
+      },
+      "destination": {
+        "path": "downloads/pestudio.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/pestudio"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/pestudio.zip",
+          "destination": "${TOOLS}"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "PE-bear",
+      "description": "PE file reverse engineering tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "hasherezade/pe-bear",
+        "match": "x64_win_vs19.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/pebear.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/pebear"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/pebear.zip",
+          "destination": "${TOOLS}/pebear"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "PE-sieve",
+      "description": "Process scanner for malicious implants",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "hasherezade/pe-sieve",
+        "match": "pe-sieve64.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/pe-sieve.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/pe-sieve.exe",
+          "destination": "${TOOLS}/bin/"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Detect It Easy",
+      "description": "Program for determining file types",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "horsicq/DIE-engine",
+        "match": "die_win64_portable"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/die.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/die"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/die.zip",
+          "destination": "${TOOLS}/die"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "XELFViewer",
+      "description": "ELF file viewer and editor",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "horsicq/XELFViewer",
+        "match": "win64_portable"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/XELFViewer.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/XELFViewer"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/XELFViewer.zip",
+          "destination": "${TOOLS}/XELFViewer"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "ImHex",
+      "description": "Hex editor for reverse engineers",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "WerWolv/ImHex",
+        "match": "Portable-NoGPU-x86_64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/imhex.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/imhex"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/imhex.zip",
+          "destination": "${TOOLS}/imhex"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "capa",
+      "description": "Identifies capabilities in executable files",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/capa",
+        "match": "windows"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/capa-windows.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/capa"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/capa-windows.zip",
+          "destination": "${TOOLS}/capa"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "capa-rules",
+      "description": "Rules for the capa tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/capa-rules",
+        "match": "Source"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/capa-rules.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/capa-rules.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/capa-rules"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/mandiant-capa-rules-*",
+          "destination": "${TOOLS}/capa-rules"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Flare-Floss",
+      "description": "Automatically extracts obfuscated strings",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/flare-floss",
+        "match": "windows"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/floss.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/floss"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/floss.zip",
+          "destination": "${TOOLS}/floss"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "GoReSym",
+      "description": "Go symbol recovery tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/GoReSym",
+        "match": "windows.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/GoReSym.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/GoReSym"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/GoReSym.zip",
+          "destination": "${TOOLS}/GoReSym"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "upx",
+      "description": "Ultimate Packer for eXecutables",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "upx/upx",
+        "match": "win64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/upx.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/upx.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/upx"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/upx-*",
+          "destination": "${TOOLS}/upx"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "jadx",
+      "description": "Dex to Java decompiler",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "skylot/jadx",
+        "match": "jadx-1"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/jadx.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "jd-gui",
+      "description": "Java decompiler GUI",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "java-decompiler/jd-gui",
+        "match": "jd-gui-windows"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/jd-gui.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/jd-gui.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/jd-gui"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/jd-gui*",
+          "destination": "${TOOLS}/jd-gui"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "API Monitor",
+      "description": "Monitor and control API calls",
+      "type": "http",
+      "category": "reversing",
+      "source": {
+        "url": "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe"
+      },
+      "destination": {
+        "path": "downloads/apimonitor64.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "YARA",
+      "description": "Pattern matching tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "VirusTotal/yara",
+        "match": "win64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/yara.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/yara.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/bin/yara.exe"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/bin/yarac.exe"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/yara64.exe",
+          "destination": "${TOOLS}/bin/yara.exe"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/yarac64.exe",
+          "destination": "${TOOLS}/bin/yarac.exe"
+        }
+      ],
+      "condition": "$all -or $Release"
+    }
+  ]
+}

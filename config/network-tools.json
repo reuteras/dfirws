@@ -1,0 +1,583 @@
+{
+  "tools": [
+    {
+      "name": "Wireshark",
+      "description": "Network protocol analyzer",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "WiresharkFoundation.Wireshark"
+      },
+      "destination": {
+        "path": "downloads/wireshark.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Npcap",
+      "description": "Packet capture library for Windows",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://npcap.com/${NpcapVersion}"
+      },
+      "destination": {
+        "path": "downloads/npcap.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "nmap",
+      "description": "Network discovery and security auditing tool",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "${nmap_url}"
+      },
+      "destination": {
+        "path": "downloads/nmap.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/nmap"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/nmap.exe",
+          "destination": "${TOOLS}/nmap"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Burp Suite",
+      "description": "Web vulnerability scanner",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}"
+      },
+      "destination": {
+        "path": "downloads/burp.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "OpenVPN",
+      "description": "Virtual private network application",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi"
+      },
+      "destination": {
+        "path": "downloads/openvpn.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "OpenVPN via WinGet",
+      "description": "Virtual private network application",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "OpenVPNTechnologies.OpenVPNConnect"
+      },
+      "destination": {
+        "path": "downloads/openvpn.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "WireGuard",
+      "description": "Modern VPN protocol",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "WireGuard.WireGuard"
+      },
+      "destination": {
+        "path": "downloads/wireguard.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Tailscale",
+      "description": "Zero config VPN",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "Tailscale.Tailscale"
+      },
+      "destination": {
+        "path": "downloads/tailscale.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Procdot",
+      "description": "Visual process and network analyzer",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://procdot.com/${procdot_path}"
+      },
+      "destination": {
+        "path": "downloads/procdot.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/procdot"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/procdot.zip",
+          "destination": "${TOOLS}/procdot"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "zaproxy",
+      "description": "OWASP Zed Attack Proxy",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "zaproxy/zaproxy",
+        "match": "windows.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/zaproxy.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Flare-Fakenet-NG",
+      "description": "Next generation dynamic network analysis tool",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "mandiant/flare-fakenet-ng",
+        "match": "fakenet"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/fakenet.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/fakenet.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/fakenet"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/fakenet*",
+          "destination": "${TOOLS}/fakenet"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "hfs",
+      "description": "HTTP File Server",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "rejetto/hfs",
+        "match": "hfs-windows-x64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/hfs.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/hfs"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/hfs.zip",
+          "destination": "${TOOLS}/hfs"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Putty",
+      "description": "SSH and telnet client",
+      "type": "winget",
+      "category": "network",
+      "source": {
+        "id": "PuTTY.PuTTY"
+      },
+      "destination": {
+        "path": "downloads/putty.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Graphviz",
+      "description": "Graph visualization software",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "${graphviz_url}"
+      },
+      "destination": {
+        "path": "downloads/graphviz.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "mmdbinspect",
+      "description": "Tool to inspect MaxMind DB files",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "maxmind/mmdbinspect",
+        "match": "windows_amd64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/mmdbinspect.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/mmdbinspect"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/mmdbinspect.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/mmdbinspect_*",
+          "destination": "${TOOLS}/mmdbinspect"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "HindSight",
+      "description": "Web browser forensics tool",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "obsidianforensics/hindsight",
+        "match": "hindsight.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/hindsight.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/hindsight.exe",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "HindSight GUI",
+      "description": "Web browser forensics tool (GUI version)",
+      "type": "github",
+      "category": "network",
+      "source": {
+        "repo": "obsidianforensics/hindsight",
+        "match": "hindsight_gui.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/hindsight_gui.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/hindsight_gui.exe",
+          "destination": "${TOOLS}/bin"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "ChromeCacheView",
+      "description": "View the content of Chrome web browser cache",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/chromecacheview.zip"
+      },
+      "destination": {
+        "path": "downloads/chromecacheview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/chromecacheview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/chromecacheview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "MozillaCacheView",
+      "description": "View the content of Firefox web browser cache",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/mzcacheview.zip"
+      },
+      "destination": {
+        "path": "downloads/mzcacheview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/mzcacheview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/mzcacheview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "IECacheView",
+      "description": "View the content of Internet Explorer web browser cache",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/iecacheview.zip"
+      },
+      "destination": {
+        "path": "downloads/iecacheview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/iecacheview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/iecacheview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "BrowsingHistoryView",
+      "description": "View browsing history of multiple browsers",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/browsinghistoryview-x64.zip"
+      },
+      "destination": {
+        "path": "downloads/browsinghistoryview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/browsinghistoryview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/browsinghistoryview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "IECookiesView",
+      "description": "View Internet Explorer cookies",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/iecv.zip"
+      },
+      "destination": {
+        "path": "downloads/iecookiesview.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/iecookiesview.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/iecookiesview.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "MozillaCookiesView",
+      "description": "View Mozilla Firefox cookies",
+      "type": "http",
+      "category": "network",
+      "source": {
+        "url": "https://www.nirsoft.net/utils/mzcv-x64.zip"
+      },
+      "destination": {
+        "path": "downloads/MZCookiesView.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/MZCookiesView.zip",
+          "destination": "${TOOLS}/ntemp"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/readme.txt",
+          "destination": "${TOOLS}/ntemp/MZCookiesView.txt"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/ntemp/*",
+          "destination": "${TOOLS}/nirsoft"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ntemp"
+        }
+      ],
+      "condition": "$all -or $Http"
+    }
+  ]
+}

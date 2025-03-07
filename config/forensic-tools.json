@@ -1,0 +1,413 @@
+{
+  "tools": [
+    {
+      "name": "Artemis",
+      "description": "Forensic collection framework for Windows, macOS, and Linux",
+      "type": "github",
+      "category": "forensics",
+      "source": {
+        "repo": "puffyCid/artemis",
+        "match": "x86_64-pc-windows-msvc.zip$"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/artemis.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/artemis.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/artemis"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/artemis-*",
+          "destination": "${TOOLS}/artemis"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Volatility Workbench",
+      "description": "Memory forensics tool",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://www.osforensics.com/downloads/VolatilityWorkbench.zip"
+      },
+      "destination": {
+        "path": "downloads/volatilityworkbench.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/VolatilityWorkbench"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/volatilityworkbench.zip",
+          "destination": "${TOOLS}/VolatilityWorkbench"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Volatility Workbench 2",
+      "description": "Memory forensics tool (v2)",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://www.osforensics.com/downloads/VolatilityWorkbench-v2.1.zip"
+      },
+      "destination": {
+        "path": "downloads/volatilityworkbench2.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/VolatilityWorkbench2"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/volatilityworkbench2.zip",
+          "destination": "${TOOLS}/VolatilityWorkbench2"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Volatility Workbench Profiles",
+      "description": "Memory profiles for Volatility Workbench",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://www.osforensics.com/downloads/Collection.zip"
+      },
+      "destination": {
+        "path": "downloads/volatilityworkbench2profiles.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "ExifTool",
+      "description": "Read, write and edit metadata",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://exiftool.org/index.html",
+        "pattern": "exiftool-[^zip]+_64.zip",
+        "variable": "EXIFTOOL_VERSION",
+        "url_template": "https://exiftool.org/$EXIFTOOL_VERSION"
+      },
+      "destination": {
+        "path": "downloads/exiftool.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/exiftool"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/exiftool.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/exiftool-*",
+          "destination": "${TOOLS}/exiftool"
+        },
+        {
+          "action": "copy",
+          "source": "${TOOLS}/exiftool/exiftool(-k).exe",
+          "destination": "${TOOLS}/exiftool/exiftool.exe"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/exiftool/exiftool(-k).exe"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Sysinternals Suite",
+      "description": "Advanced system utilities",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://download.sysinternals.com/files/SysinternalsSuite.zip"
+      },
+      "destination": {
+        "path": "downloads/sysinternals.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/sysinternals"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/sysinternals.zip",
+          "destination": "${TOOLS}/sysinternals"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "PEStudio",
+      "description": "Malware initial assessment tool",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://www.winitor.com/tools/pestudio/current/pestudio.zip"
+      },
+      "destination": {
+        "path": "downloads/pestudio.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/pestudio"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/pestudio.zip",
+          "destination": "${TOOLS}"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "CyberChef",
+      "description": "Data analysis web app",
+      "type": "github",
+      "category": "forensics",
+      "source": {
+        "repo": "gchq/CyberChef",
+        "match": "CyberChef"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/CyberChef.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/CyberChef"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/CyberChef.zip",
+          "destination": "${TOOLS}/CyberChef"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/CyberChef/CyberChef.html"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/CyberChef/CyberChef_*",
+          "destination": "${TOOLS}/CyberChef/CyberChef.html"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "HxD",
+      "description": "Hex editor",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://mh-nexus.de/downloads/HxDSetup.zip"
+      },
+      "destination": {
+        "path": "downloads/hxd.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/hxd"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/hxd.zip",
+          "destination": "${TOOLS}/hxd"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Bulk Extractor",
+      "description": "Digital forensics extraction tool",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://downloads.digitalcorpora.org/downloads/bulk_extractor",
+        "pattern": "[^']+windows.zip",
+        "variable": "digitalcorpora_url"
+      },
+      "destination": {
+        "path": "downloads/bulk_extractor.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/bulk_extractor"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/bulk_extractor.zip",
+          "destination": "${TOOLS}/bulk_extractor"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "DensityScout",
+      "description": "Identify packed executables",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://cert.at/en/downloads/software/software-densityscout",
+        "pattern": "[^\"]+windows.zip",
+        "variable": "densityscout_url"
+      },
+      "destination": {
+        "path": "downloads/DensityScout.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/bin/densityscout.exe"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/DensityScout.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/win64/densityscout.exe",
+          "destination": "${TOOLS}/bin/densityscout.exe"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "TrID File Identifier",
+      "description": "File type identification tool",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://mark0.net/download/trid_w32.zip"
+      },
+      "destination": {
+        "path": "downloads/trid.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/trid.zip",
+          "destination": "${TOOLS}/trid"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "TrID Definitions",
+      "description": "TrID file type definitions",
+      "type": "http",
+      "category": "forensics",
+      "source": {
+        "url": "https://mark0.net/download/triddefs.zip"
+      },
+      "destination": {
+        "path": "downloads/triddefs.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/triddefs.zip",
+          "destination": "${TOOLS}/trid"
+        }
+      ],
+      "dependencies": ["TrID File Identifier"],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Autopsy",
+      "description": "Digital forensics platform",
+      "type": "winget",
+      "category": "forensics",
+      "source": {
+        "id": "SleuthKit.Autopsy"
+      },
+      "destination": {
+        "path": "downloads/autopsy.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "KAPE",
+      "description": "Kroll Artifact Parser and Extractor",
+      "type": "custom",
+      "category": "forensics",
+      "handler": "resources/download/kape.ps1",
+      "enabled": true,
+      "condition": "$all -or $Kape"
+    },
+    {
+      "name": "Zimmerman Tools",
+      "description": "Eric Zimmerman's digital forensics tools",
+      "type": "custom",
+      "category": "forensics",
+      "handler": "resources/download/zimmerman.ps1",
+      "enabled": true,
+      "condition": "$all -or $Zimmerman"
+    }
+  ]
+}

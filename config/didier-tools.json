@@ -1,0 +1,19 @@
+{
+  "tools": [
+    {
+      "name": "Didier Stevens Tools",
+      "description": "Suite of security tools by Didier Stevens",
+      "type": "didier",
+      "category": "forensics",
+      "enabled": true,
+      "handler": "resources/download/didier.ps1",
+      "condition": "$all -or $Didier",
+      "post_download": [
+        {
+          "action": "mkdir",
+          "path": "${TOOLS}/DidierStevens"
+        }
+      ]
+    }
+  ]
+}

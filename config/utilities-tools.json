@@ -1,0 +1,484 @@
+{
+  "tools": [
+    {
+      "name": "7-Zip",
+      "description": "File archiver with high compression ratio",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://www.7-zip.org/${7zip_path}"
+      },
+      "destination": {
+        "path": "downloads/7zip.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all"
+    },
+    {
+      "name": "Notepad++",
+      "description": "Text and source code editor",
+      "type": "github",
+      "category": "utilities",
+      "source": {
+        "repo": "notepad-plus-plus/notepad-plus-plus",
+        "match": "Installer.x64.exe$"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/notepad++.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "ComparePlus for Notepad++",
+      "description": "Comparison plugin for Notepad++",
+      "type": "github",
+      "category": "utilities",
+      "source": {
+        "repo": "pnedev/comparePlus",
+        "match": "x64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/comparePlus.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "DSpellCheck for Notepad++",
+      "description": "Spell checking plugin for Notepad++",
+      "type": "github",
+      "category": "utilities",
+      "source": {
+        "repo": "Predelnik/DSpellCheck",
+        "match": "x64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/DSpellCheck.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "NppMarkdownPanel for Notepad++",
+      "description": "Markdown preview panel for Notepad++",
+      "type": "github",
+      "category": "utilities",
+      "source": {
+        "repo": "mohzy83/NppMarkdownPanel",
+        "match": "x64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/NppMarkdownPanel.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "WinMerge",
+      "description": "Visual diff and merge tool",
+      "type": "winget",
+      "category": "utilities",
+      "source": {
+        "id": "WinMerge.WinMerge"
+      },
+      "destination": {
+        "path": "downloads/winmerge.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "HxD",
+      "description": "Hex editor",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://mh-nexus.de/downloads/HxDSetup.zip"
+      },
+      "destination": {
+        "path": "downloads/hxd.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/hxd"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/hxd.zip",
+          "destination": "${TOOLS}/hxd"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Terminal-Icons",
+      "description": "PowerShell module for file and folder icons",
+      "type": "powershell-module",
+      "category": "utilities",
+      "source": {
+        "name": "Terminal-Icons"
+      },
+      "destination": {
+        "path": "downloads/powershell-modules/Terminal-Icons"
+      },
+      "condition": "$all -or $Powershell"
+    },
+    {
+      "name": "posh-git",
+      "description": "PowerShell module for Git integration",
+      "type": "powershell-module",
+      "category": "utilities",
+      "source": {
+        "name": "posh-git"
+      },
+      "destination": {
+        "path": "downloads/powershell-modules/posh-git"
+      },
+      "condition": "$all -or $Powershell"
+    },
+    {
+      "name": "ImportExcel",
+      "description": "PowerShell module for Excel manipulation",
+      "type": "powershell-module",
+      "category": "utilities",
+      "source": {
+        "name": "ImportExcel"
+      },
+      "destination": {
+        "path": "downloads/powershell-modules/ImportExcel"
+      },
+      "condition": "$all -or $Powershell"
+    },
+    {
+      "name": "Sysinternals Suite",
+      "description": "Advanced system utilities",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://download.sysinternals.com/files/SysinternalsSuite.zip"
+      },
+      "destination": {
+        "path": "downloads/sysinternals.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/sysinternals"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/sysinternals.zip",
+          "destination": "${TOOLS}/sysinternals"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "SQLite",
+      "description": "Embedded SQL database engine",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://sqlite.org/${SQLiteVersion}"
+      },
+      "destination": {
+        "path": "downloads/sqlite.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/sqlite"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/sqlite.zip",
+          "destination": "${TOOLS}/sqlite"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "DB Browser for SQLite",
+      "description": "Visual database browser for SQLite",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://download.sqlitebrowser.org/${sqlitebrowser_version}"
+      },
+      "destination": {
+        "path": "downloads/sqlitebrowser.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/DB Browser for SQLite"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/sqlitebrowser.zip",
+          "destination": "${TOOLS}/sqlitebrowser"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "DBeaver",
+      "description": "Universal database tool",
+      "type": "github",
+      "category": "utilities",
+      "source": {
+        "repo": "dbeaver/dbeaver",
+        "match": "win32.win32.x86_64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/dbeaver.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/dbeaver"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/dbeaver.zip",
+          "destination": "${TOOLS}"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "h2database",
+      "description": "Java SQL database",
+      "type": "github",
+      "category": "utilities",
+      "source": {
+        "repo": "h2database/h2database",
+        "match": "bundle.jar"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/h2database.zip"
+      },
+      "validation": {
+        "type": "Java archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/h2database"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/h2database.zip",
+          "destination": "${TOOLS}/h2database"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Obsidian",
+      "description": "Knowledge base and note-taking application",
+      "type": "winget",
+      "category": "utilities",
+      "source": {
+        "id": "Obsidian.Obsidian"
+      },
+      "destination": {
+        "path": "downloads/obsidian.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "oh-my-posh",
+      "description": "Prompt theme engine for PowerShell",
+      "type": "winget",
+      "category": "utilities",
+      "source": {
+        "id": "JanDeDobbeleer.OhMyPosh"
+      },
+      "destination": {
+        "path": "downloads/oh-my-posh.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "IrfanView",
+      "description": "Image viewer and editor",
+      "type": "winget",
+      "category": "utilities",
+      "source": {
+        "id": "IrfanSkiljan.IrfanView"
+      },
+      "destination": {
+        "path": "downloads/irfanview.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "ffmpeg",
+      "description": "Audio and video processing tool",
+      "type": "github",
+      "category": "utilities",
+      "source": {
+        "repo": "BtbN/FFmpeg-Builds",
+        "match": "win64-gpl-7"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/ffmpeg.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ffmpeg"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ffmpeg.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/ffmpeg-*",
+          "destination": "${TOOLS}/ffmpeg"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "LibreOffice",
+      "description": "Office suite",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "${LibreOfficeVersion}"
+      },
+      "destination": {
+        "path": "downloads/LibreOffice.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Foxit Reader",
+      "description": "PDF reader",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://www.foxit.com/downloads/latest.html?product=Foxit-Reader&platform=Windows&version=&package_type=&language=English&distID="
+      },
+      "destination": {
+        "path": "downloads/foxitreader.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Chrome",
+      "description": "Web browser",
+      "type": "winget",
+      "category": "utilities",
+      "source": {
+        "id": "Google.Chrome"
+      },
+      "destination": {
+        "path": "downloads/chrome.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Firefox",
+      "description": "Web browser",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://download.mozilla.org/?product=firefox-msi-latest-ssl&os=win64&lang=en-US"
+      },
+      "destination": {
+        "path": "downloads/firefox.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Tor Browser",
+      "description": "Privacy-focused web browser",
+      "type": "http",
+      "category": "utilities",
+      "source": {
+        "url": "https://www.torproject.org${TorBrowserUrl}"
+      },
+      "destination": {
+        "path": "downloads/torbrowser.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "VLC",
+      "description": "Media player",
+      "type": "winget",
+      "category": "utilities",
+      "source": {
+        "id": "VideoLAN.VLC"
+      },
+      "destination": {
+        "path": "downloads/vlc_installer.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    }
+  ]
+}

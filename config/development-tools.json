@@ -1,0 +1,352 @@
+{
+  "tools": [
+    {
+      "name": "Python",
+      "description": "Programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Python.Python.3.11"
+      },
+      "destination": {
+        "path": "downloads/python3.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "NodeJS",
+      "description": "JavaScript runtime",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://nodejs.org/dist/${NodeJSVersion}/node-${NodeJSVersion}-win-x64.zip"
+      },
+      "destination": {
+        "path": "downloads/nodejs.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Node"
+    },
+    {
+      "name": "GoLang",
+      "description": "Go programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "GoLang.Go"
+      },
+      "destination": {
+        "path": "downloads/golang.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Go"
+    },
+    {
+      "name": "Rust",
+      "description": "Rust programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Rustlang.Rust.GNU"
+      },
+      "destination": {
+        "path": "downloads/rust.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Rust"
+    },
+    {
+      "name": "Visual Studio Code",
+      "description": "Code editor",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://update.code.visualstudio.com/latest/win32-x64-user/stable"
+      },
+      "destination": {
+        "path": "downloads/vscode.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Git",
+      "description": "Version control system",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "git-for-windows/git",
+        "match": "64-bit.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/git.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Rust"
+    },
+    {
+      "name": "MSYS2",
+      "description": "Software distribution and building platform for Windows",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/msys2.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/msys2.exe",
+          "destination": "${TOOLS}/bin/msys2.exe"
+        }
+      ],
+      "condition": "$all -or $MSYS2"
+    },
+    {
+      "name": "Amazon Corretto JDK",
+      "description": "Java Development Kit",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi"
+      },
+      "destination": {
+        "path": "downloads/corretto.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "Visual Studio Build Tools",
+      "description": "Tools to compile and build",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://aka.ms/vs/16/release/vs_BuildTools.exe"
+      },
+      "destination": {
+        "path": "downloads/vs_BuildTools.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "VS Code C++ Extension",
+      "description": "C++ extension for Visual Studio Code",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/cpptools/$vscode_cpp_version/vspackage?targetPlatform=win32-x64"
+      },
+      "destination": {
+        "path": "downloads/vscode/vscode-cpp.vsix"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "VS Code Python Extension",
+      "description": "Python extension for Visual Studio Code",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage"
+      },
+      "destination": {
+        "path": "downloads/vscode/vscode-python.vsix"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "VS Code PowerShell Extension",
+      "description": "PowerShell extension for Visual Studio Code",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "PowerShell/vscode-powershell",
+        "match": "vsix"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/vscode/vscode-powershell.vsix"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Microsoft PowerShell",
+      "description": "PowerShell Core",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "PowerShell/PowerShell",
+        "match": "win-x64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/pwsh.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/pwsh"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/pwsh.zip",
+          "destination": "${TOOLS}/pwsh"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "PowerShell 7",
+      "description": "Latest PowerShell version",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Microsoft.PowerShell"
+      },
+      "destination": {
+        "path": "downloads/powershell.msi"
+      },
+      "validation": {
+        "type": "Composite Document File V2 Document"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "DotNet 6 Desktop Runtime",
+      "description": ".NET 6 Desktop Runtime",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Microsoft.DotNet.DesktopRuntime.6"
+      },
+      "destination": {
+        "path": "downloads/dotnet6desktop.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "PHP",
+      "description": "PHP scripting language",
+      "type": "http",
+      "category": "development",
+      "source": {
+        "url": "https://windows.php.net${PHP_URL}"
+      },
+      "destination": {
+        "path": "downloads/php.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/php"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/php.zip",
+          "destination": "${TOOLS}/php"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "Ruby",
+      "description": "Ruby programming language",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "RubyInstallerTeam.Ruby.3.2"
+      },
+      "destination": {
+        "path": "downloads/ruby.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "Perl",
+      "description": "Perl programming language",
+      "type": "github",
+      "category": "development",
+      "source": {
+        "repo": "StrawberryPerl/Perl-Dist-Strawberry",
+        "match": "portable.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/perl.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/perl"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/perl.zip",
+          "destination": "${TOOLS}/perl"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Docker Desktop",
+      "description": "Containerization platform",
+      "type": "winget",
+      "category": "development",
+      "source": {
+        "id": "Docker.DockerDesktop"
+      },
+      "destination": {
+        "path": "downloads/docker.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Winget"
+    }
+  ]
+}

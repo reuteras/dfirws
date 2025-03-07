@@ -1,0 +1,656 @@
+{
+  "tools": [
+    {
+      "name": "Ghidra",
+      "description": "Software reverse engineering framework",
+      "type": "http",
+      "category": "reversing",
+      "source": {
+        "url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/ghidra_10.4_PUBLIC_20230928.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ghidra"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ghidra.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ghidra_10.4_PUBLIC_20230928.zip",
+          "destination": "${TOOLS}/ghidra"
+        }
+      ],
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "Ghidrathon",
+      "description": "Python 3 scripting for Ghidra",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/Ghidrathon",
+        "match": "Ghidrathon"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/ghidrathon.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/ghidrathon"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/ghidrathon.zip",
+          "destination": "${TOOLS}/ghidrathon"
+        }
+      ],
+      "condition": "$all -or $Python"
+    },
+    {
+      "name": "x64dbg",
+      "description": "Open-source x64/x32 debugger for Windows",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "x64dbg/x64dbg",
+        "match": "snapshot/snapshot"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/x64dbg.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "dnSpy 32-bit",
+      "description": ".NET debugger and assembly editor (32-bit)",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "dnSpyEx/dnSpy",
+        "match": "win32"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/dnSpy32.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/dnSpy32"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/dnSpy32.zip",
+          "destination": "${TOOLS}/dnSpy32"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "dnSpy 64-bit",
+      "description": ".NET debugger and assembly editor (64-bit)",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "dnSpyEx/dnSpy",
+        "match": "win64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/dnSpy64.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/dnSpy64"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/dnSpy64.zip",
+          "destination": "${TOOLS}/dnSpy64"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Radare2",
+      "description": "Reverse engineering framework",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "radareorg/radare2",
+        "match": "w64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/radare2.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/radare2.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/radare2"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/radare2-*",
+          "destination": "${TOOLS}/radare2"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Cutter",
+      "description": "Free and open-source GUI for Radare2",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "rizinorg/cutter",
+        "match": "Windows-x86_64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/cutter.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/cutter.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/cutter"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/Cutter-*",
+          "destination": "${TOOLS}/cutter"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Iaito",
+      "description": "Qt and C++ GUI for Radare2",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "radareorg/iaito",
+        "match": "iaito.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/iaito.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/iaito"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/iaito.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/__MACOSX"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "PEStudio",
+      "description": "Malware initial assessment tool",
+      "type": "http",
+      "category": "reversing",
+      "source": {
+        "url": "https://www.winitor.com/tools/pestudio/current/pestudio.zip"
+      },
+      "destination": {
+        "path": "downloads/pestudio.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/pestudio"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/pestudio.zip",
+          "destination": "${TOOLS}"
+        }
+      ],
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "PE-bear",
+      "description": "PE file reverse engineering tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "hasherezade/pe-bear",
+        "match": "x64_win_vs19.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/pebear.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/pebear"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/pebear.zip",
+          "destination": "${TOOLS}/pebear"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "PE-sieve",
+      "description": "Process scanner for malicious implants",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "hasherezade/pe-sieve",
+        "match": "pe-sieve64.exe"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/pe-sieve.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "post_download": [
+        {
+          "action": "copy",
+          "source": "${SETUP_PATH}/pe-sieve.exe",
+          "destination": "${TOOLS}/bin/"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Detect It Easy",
+      "description": "Program for determining file types",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "horsicq/DIE-engine",
+        "match": "die_win64_portable"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/die.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/die"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/die.zip",
+          "destination": "${TOOLS}/die"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "XELFViewer",
+      "description": "ELF file viewer and editor",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "horsicq/XELFViewer",
+        "match": "win64_portable"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/XELFViewer.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/XELFViewer"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/XELFViewer.zip",
+          "destination": "${TOOLS}/XELFViewer"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "ImHex",
+      "description": "Hex editor for reverse engineers",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "WerWolv/ImHex",
+        "match": "Portable-NoGPU-x86_64.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/imhex.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/imhex"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/imhex.zip",
+          "destination": "${TOOLS}/imhex"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "capa",
+      "description": "Identifies capabilities in executable files",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/capa",
+        "match": "windows"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/capa-windows.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/capa"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/capa-windows.zip",
+          "destination": "${TOOLS}/capa"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "capa-rules",
+      "description": "Rules for the capa tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/capa-rules",
+        "match": "Source"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/capa-rules.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/capa-rules.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/capa-rules"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/mandiant-capa-rules-*",
+          "destination": "${TOOLS}/capa-rules"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "Flare-Floss",
+      "description": "Automatically extracts obfuscated strings",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/flare-floss",
+        "match": "windows"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/floss.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/floss"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/floss.zip",
+          "destination": "${TOOLS}/floss"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "GoReSym",
+      "description": "Go symbol recovery tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "mandiant/GoReSym",
+        "match": "windows.zip"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/GoReSym.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "delete",
+          "path": "${TOOLS}/GoReSym"
+        },
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/GoReSym.zip",
+          "destination": "${TOOLS}/GoReSym"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "upx",
+      "description": "Ultimate Packer for eXecutables",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "upx/upx",
+        "match": "win64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/upx.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/upx.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/upx"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/upx-*",
+          "destination": "${TOOLS}/upx"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "jadx",
+      "description": "Dex to Java decompiler",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "skylot/jadx",
+        "match": "jadx-1"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/jadx.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "jd-gui",
+      "description": "Java decompiler GUI",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "java-decompiler/jd-gui",
+        "match": "jd-gui-windows"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/jd-gui.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/jd-gui.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/jd-gui"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/jd-gui*",
+          "destination": "${TOOLS}/jd-gui"
+        }
+      ],
+      "condition": "$all -or $Release"
+    },
+    {
+      "name": "API Monitor",
+      "description": "Monitor and control API calls",
+      "type": "http",
+      "category": "reversing",
+      "source": {
+        "url": "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe"
+      },
+      "destination": {
+        "path": "downloads/apimonitor64.exe"
+      },
+      "validation": {
+        "type": "PE32"
+      },
+      "condition": "$all -or $Http"
+    },
+    {
+      "name": "YARA",
+      "description": "Pattern matching tool",
+      "type": "github",
+      "category": "reversing",
+      "source": {
+        "repo": "VirusTotal/yara",
+        "match": "win64"
+      },
+      "destination": {
+        "path": "${SETUP_PATH}/yara.zip"
+      },
+      "validation": {
+        "type": "Zip archive data"
+      },
+      "post_download": [
+        {
+          "action": "extract",
+          "source": "${SETUP_PATH}/yara.zip",
+          "destination": "${TOOLS}"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/bin/yara.exe"
+        },
+        {
+          "action": "delete",
+          "path": "${TOOLS}/bin/yarac.exe"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/yara64.exe",
+          "destination": "${TOOLS}/bin/yara.exe"
+        },
+        {
+          "action": "move",
+          "source": "${TOOLS}/yarac64.exe",
+          "destination": "${TOOLS}/bin/yarac.exe"
+        }
+      ],
+      "condition": "$all -or $Release"
+    }
+  ]
+}

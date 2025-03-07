@@ -1,0 +1,49 @@
+{
+  "tools": [
+    {
+      "name": "Git Repositories",
+      "description": "Clones various DFIR-related Git repositories",
+      "type": "custom",
+      "category": "forensics",
+      "handler": "resources/download/git.ps1",
+      "enabled": true,
+      "condition": "$all -or $Git"
+    },
+    {
+      "name": "PowerShell Modules",
+      "description": "Downloads and installs useful PowerShell modules",
+      "type": "custom",
+      "category": "utilities",
+      "handler": "resources/download/powershell.ps1",
+      "enabled": true,
+      "condition": "$all -or $Powershell"
+    },
+    {
+      "name": "Basic Tools",
+      "description": "Downloads basic tools required for all sandboxes",
+      "type": "custom",
+      "category": "utilities",
+      "handler": "resources/download/basic.ps1",
+      "enabled": true,
+      "condition": "$all"
+    },
+    {
+      "name": "WinGet Packages",
+      "description": "Downloads tools available via WinGet",
+      "type": "custom",
+      "category": "utilities",
+      "handler": "resources/download/winget.ps1",
+      "enabled": true,
+      "condition": "$all -or $Winget"
+    },
+    {
+      "name": "HTTP Download Tools",
+      "description": "Downloads tools from HTTP sources",
+      "type": "custom",
+      "category": "utilities",
+      "handler": "resources/download/http.ps1",
+      "enabled": true,
+      "condition": "$all -or $Http"
+    }
+  ]
+}
