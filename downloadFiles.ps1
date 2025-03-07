@@ -1,286 +1,396 @@
-<#
+#Requires -Version 5.1
 
+<#
 .SYNOPSIS
-    Download files and prepare the sandbox.
+    Downloads and prepares Digital Forensics and Incident Response tools for use in Windows Sandbox.
 
 .DESCRIPTION
-    This script downloads files and prepares the sandbox for DFIRWS.
+    This script downloads and prepares various tools needed for Digital Forensics and 
+    Incident Response (DFIR) work in a Windows Sandbox environment. It can also prepare
+    tools for use in a VM. The tools are downloaded and organized to enable offline 
+    DFIR work without requiring internet access in the sandbox or VM.
+
+.PARAMETER AllTools
+    Downloads and updates all tools.
+
+.PARAMETER Didier
+    Updates Didier Stevens tools.
+
+.PARAMETER DebugDownloads
+    Enables debug mode for downloads.
+
+.PARAMETER Enrichment
+    Downloads and updates enrichment data like threat intelligence feeds.
+
+.PARAMETER Freshclam
+    Updates ClamAV virus databases using Freshclam.
+
+.PARAMETER Git
+    Updates git repositories.
+
+.PARAMETER GoLang
+    Updates GoLang and related packages.
+
+.PARAMETER Http
+    Updates files downloaded via HTTP.
+
+.PARAMETER HttpNoVSCodeExtensions
+    Skip updating Visual Studio Code Extensions.
+
+.PARAMETER Kape
+    Updates KAPE and related tools.
+
+.PARAMETER LogBoost
+    Updates Threat Intel for LogBoost.
+
+.PARAMETER MSYS2
+    Updates MSYS2 environment.
+
+.PARAMETER Node
+    Updates Node.js and npm packages.
+
+.PARAMETER PowerShell
+    Updates PowerShell and modules.
+
+.PARAMETER Python
+    Updates Python and packages in virtual environments.
+
+.PARAMETER Release
+    Updates releases from GitHub.
+
+.PARAMETER Rust
+    Updates Rust and cargo packages.
+
+.PARAMETER Winget
+    Updates tools installed via winget.
+
+.PARAMETER Verify
+    Verifies that all tools are available and properly installed.
+
+.PARAMETER VisualStudioBuildTools
+    Downloads and updates Visual Studio Build Tools.
+
+.PARAMETER Zimmerman
+    Updates Zimmerman tools.
 
 .EXAMPLE
     .\downloadFiles.ps1
-    This will download all files needed for DFIRWS.
+    Downloads all files needed for DFIRWS.
 
 .EXAMPLE
     .\downloadFiles.ps1 -AllTools -Enrichment
-    This will download all files needed for DFIRWS and update enrichments.
+    Downloads all files needed for DFIRWS and updates enrichment data.
 
 .EXAMPLE
     .\downloadFiles.ps1 -Python
-    This will download and update packages for Python but no other files.
-
-.EXAMPLE
-    .\downloadFiles.ps1 -Freshclam
-    This will download and update ClamAV databases with Freshclam.
+    Downloads and updates only Python packages.
 
 .EXAMPLE
     .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
-    This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
-
-.NOTES
-    File Name      : downloadFiles.ps1
-    Author         : Peter R
+    Downloads all files, enrichment data, and updates ClamAV databases.
 
 .LINK
     https://github.com/reuteras/dfirws
 #>
 
+[CmdletBinding()]
 param(
-    [Parameter(HelpMessage = "Download all tools for dfirws.")]
+    [Parameter(HelpMessage = "Download all tools for DFIRWS")]
     [Switch]$AllTools,
-    [Parameter(HelpMessage = "Update Didier Stevens tools.")]
+    
+    [Parameter(HelpMessage = "Update Didier Stevens tools")]
     [Switch]$Didier,
-    [Parameter(HelpMessage = "Debug downloads.")]
+    
+    [Parameter(HelpMessage = "Debug downloads")]
     [Switch]$DebugDownloads,
-    [Parameter(HelpMessage = "Update enrichment.")]
+    
+    [Parameter(HelpMessage = "Update enrichment data")]
     [Switch]$Enrichment,
-    [Parameter(HelpMessage = "Update ClamAV databases with Freshclam.")]
+    
+    [Parameter(HelpMessage = "Update ClamAV databases with Freshclam")]
     [Switch]$Freshclam,
-    [Parameter(HelpMessage = "Update git repositories.")]
+    
+    [Parameter(HelpMessage = "Update git repositories")]
     [Switch]$Git,
-    [Parameter(HelpMessage = "Update GoLang.")]
+    
+    [Parameter(HelpMessage = "Update GoLang")]
     [Switch]$GoLang,
-    [Parameter(HelpMessage = "Update files downloaded via HTTP.")]
+    
+    [Parameter(HelpMessage = "Update files downloaded via HTTP")]
     [Switch]$Http,
-    [Parameter(HelpMessage = "Don't update Visual Studio Code Extensions via http.")]
+    
+    [Parameter(HelpMessage = "Don't update Visual Studio Code Extensions via HTTP")]
     [Switch]$HttpNoVSCodeExtensions,
-    [Parameter(HelpMessage = "Update KAPE.")]
+    
+    [Parameter(HelpMessage = "Update KAPE")]
     [Switch]$Kape,
-    [Parameter(HelpMessage = "Update Threat Intel for LogBoost.")]
+    
+    [Parameter(HelpMessage = "Update Threat Intel for LogBoost")]
     [Switch]$LogBoost,
-    [Parameter(HelpMessage = "Update MSYS2.")]
+    
+    [Parameter(HelpMessage = "Update MSYS2")]
     [Switch]$MSYS2,
-    [Parameter(HelpMessage = "Update Node.")]
+    
+    [Parameter(HelpMessage = "Update Node.js")]
     [Switch]$Node,
-    [Parameter(HelpMessage = "Update PowerShell and modules.")]
+    
+    [Parameter(HelpMessage = "Update PowerShell and modules")]
     [Switch]$PowerShell,
-    [Parameter(HelpMessage = "Update Python.")]
+    
+    [Parameter(HelpMessage = "Update Python")]
     [Switch]$Python,
-    [Parameter(HelpMessage = "Update releases from GitHub.")]
+    
+    [Parameter(HelpMessage = "Update releases from GitHub")]
     [Switch]$Release,
-    [Parameter(HelpMessage = "Update Rust.")]
+    
+    [Parameter(HelpMessage = "Update Rust")]
     [Switch]$Rust,
-    [Parameter(HelpMessage = "Update tools downloaded via winget.")]
+    
+    [Parameter(HelpMessage = "Update tools downloaded via winget")]
     [Switch]$Winget,
-    [Parameter(HelpMessage = "Verify that tools are available.")]
+    
+    [Parameter(HelpMessage = "Verify that tools are available")]
     [Switch]$Verify,
-    [Parameter(HelpMessage = "Install and Update Visual Studio buildtools.")]
+    
+    [Parameter(HelpMessage = "Install and Update Visual Studio buildtools")]
     [Switch]$VisualStudioBuildTools,
-    [Parameter(HelpMessage = "Update Zimmerman tools.")]
+    
+    [Parameter(HelpMessage = "Update Zimmerman tools")]
     [Switch]$Zimmerman
-    )
+)
 
+#region Initialization
+
+# Set the preference to suppress progress bars
+$ProgressPreference = "SilentlyContinue"
+
+# Source the common functions
 if (Test-Path ".\resources\download\common.ps1") {
     . ".\resources\download\common.ps1"
 } else {
-    Write-DateLog "Error: common.ps1 not found. Please check your installation."
-    Exit
+    Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Error: common.ps1 not found. Please check your installation."
+    Exit 1
 }
 
+# Load configuration
 if (Test-Path ".\config.ps1") {
     . ".\config.ps1"
 } elseif (Test-Path ".\config.ps1.template") {
     . ".\config.ps1.template"
 } else {
     Write-DateLog "Error: Neither config.ps1 nor config.ps1.template found. Please check your installation."
-    Exit
+    Exit 1
 }
 
-# Ensure that we have the necessary tools installed
-if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to PATH."
-    Exit
-}
+#endregion Initialization
 
-if (! (Get-Command "rclone.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: rclone.exe not found. Please install rclone and add it to PATH."
-    Exit
-}
+#region Prerequisite Checks
 
-if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: 7z.exe not found. Please install 7-Zip and add it to PATH."
-    Exit
-}
-
-# Ensure configuration exists for rclone
-rclone.exe config touch | Out-Null
-
-# Check if sandbox is running
-if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
-    Write-DateLog "Sandbox can't be running while updating."
-    Exit
-}
-
-if ($AllTools.IsPresent) {
-    Write-DateLog "Download all tools for dfirws."
-    $all = $true
-} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
-    $all = $false
-} else {
-    Write-DateLog "No arguments given. Will download all tools for dfirws."
-    $all = $true
-}
-
-if ($all -eq $false) {
-    if (! (Test-Path "${TOOLS}\bin" )) {
-        Write-DateLog "No tools directory found. You have to run this script without arguments first."
-        Exit
+# Check for required executables
+$requiredTools = @("git.exe", "rclone.exe", "7z.exe")
+foreach ($tool in $requiredTools) {
+    if (!(Get-Command $tool -ErrorAction SilentlyContinue)) {
+        Write-DateLog "Error: $tool not found. Please install it and add it to PATH."
+        Exit 1
     }
 }
 
-# Remove old temp files
-Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
+# Ensure rclone configuration exists
+rclone.exe config touch | Out-Null
 
-# Create directories
-if (!(Test-Path "${SETUP_PATH}")) {
-    New-Item -ItemType Directory -Force -Path "${SETUP_PATH}" 2>&1 | Out-Null
+# Check if sandbox is running
+if (Get-Process -Name "WindowsSandboxClient", "WindowsSandboxRemote" -ErrorAction SilentlyContinue) {
+    Write-DateLog "Error: Sandbox can't be running while updating. Please close the sandbox and try again."
+    Exit 1
 }
 
-if (!(Test-Path "${SETUP_PATH}\.etag")) {
-    New-Item -ItemType Directory -Force -Path "${SETUP_PATH}\.etag" 2>&1 | Out-Null
+#endregion Prerequisite Checks
+
+#region Parameter Handling
+
+# Determine if we're updating all tools or specific ones
+if ($AllTools.IsPresent) {
+    Write-DateLog "Downloading all tools for DFIRWS."
+    $all = $true
+} elseif ($PSBoundParameters.Count -gt 0) {
+    # At least one parameter is specified
+    $all = $false
+} else {
+    Write-DateLog "No arguments given. Will download all tools for DFIRWS."
+    $all = $true
 }
 
-if (!(Test-Path "${TOOLS}")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}" 2>&1 | Out-Null
+# Check if tools directory exists for partial updates
+if ($all -eq $false) {
+    if (!(Test-Path "${TOOLS}\bin")) {
+        Write-DateLog "No tools directory found. You have to run this script without arguments first."
+        Exit 1
+    }
 }
 
-if (!(Test-Path "${TOOLS}\bin")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\bin" 2>&1 | Out-Null
+#endregion Parameter Handling
+
+#region Directory Setup
+
+# Clean up old temp files
+Remove-Item -Recurse -Force .\tmp\downloads\ -ErrorAction SilentlyContinue | Out-Null
+
+# Create necessary directories
+$directories = @(
+    "${SETUP_PATH}",
+    "${SETUP_PATH}\.etag",
+    "${TOOLS}",
+    "${TOOLS}\bin",
+    "${TOOLS}\lib",
+    "${TOOLS}\Zimmerman",
+    ".\log"
+)
+
+foreach ($dir in $directories) {
+    if (!(Test-Path $dir)) {
+        New-Item -ItemType Directory -Force -Path $dir | Out-Null
+    }
 }
 
-if (!(Test-Path "${TOOLS}\lib")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\lib" 2>&1 | Out-Null
-}
-
-if (!(Test-Path "${TOOLS}\Zimmerman")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\Zimmerman" 2>&1 | Out-Null
-}
-
+# Remove Debug directory if it exists
 if (Test-Path "${TOOLS}\Debug") {
-    Remove-Item -Recurse -Force "${TOOLS}\Debug" 2>&1 | Out-Null
+    Remove-Item -Recurse -Force "${TOOLS}\Debug" -ErrorAction SilentlyContinue | Out-Null
 }
 
-if (! (Test-Path -Path ".\log" )) {
-    New-Item -ItemType Directory -Force -Path ".\log" > $null
+# Create Debug directory if debug mode is enabled
+if ($DebugDownloads.IsPresent) {
+    Write-DateLog "Debug mode enabled."
+    New-Item -ItemType Directory -Force -Path "${TOOLS}\Debug" | Out-Null
 }
-Get-Date > ".\log\log.txt"
-Get-Date > ".\log\logboost.txt"
-Get-Date > ".\log\jobs.txt"
-Get-Date > ".\log\verify.txt"
 
-# Moved tools_downloaded.csv to downloads
+# Initialize log files
+$logFiles = @(
+    ".\log\log.txt",
+    ".\log\logboost.txt",
+    ".\log\jobs.txt",
+    ".\log\verify.txt"
+)
+
+foreach ($file in $logFiles) {
+    Get-Date > $file
+}
+
+# Move tools_downloaded.csv to downloads if needed
 if (Test-Path ".\tools_downloaded.csv") {
     Move-Item -Path ".\tools_downloaded.csv" -Destination ".\downloads\tools_downloaded.csv" -Force
 }
 
-if ($DebugDownloads.IsPresent) {
-    Write-DateLog "Debug mode enabled."
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\Debug" 2>&1 | Out-Null
-}
+#endregion Directory Setup
 
+#region GitHub Authentication
+
+# Set up GitHub authentication if needed
 if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
-    # Get GitHub password from user input
+    # Get GitHub credentials
     if ($GITHUB_USERNAME -ne "YOUR GITHUB USERNAME" -and $GITHUB_TOKEN -ne "YOUR GITHUB TOKEN") {
-        $GH_USER = "${GITHUB_USERNAME}"
-        $GH_PASS = "${GITHUB_TOKEN}"
+        $GH_USER = $GITHUB_USERNAME
+        $GH_PASS = $GITHUB_TOKEN
     } else {
         Write-DateLog "Use GitHub username and token to avoid problems with rate limits on GitHub."
         $GH_USER = Read-Host "Enter GitHub user name"
         $PASS = Read-Host "Enter GitHub token" -AsSecureString
-        $GH_PASS =[Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
-        $null = $GH_PASS
-        $null = $GH_USER
+        $GH_PASS = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($PASS))
     }
-    if (("" -eq $GH_USER) -or ("" -eq $GH_PASS)) {
+    
+    if ([string]::IsNullOrWhiteSpace($GH_USER) -or [string]::IsNullOrWhiteSpace($GH_PASS)) {
         Write-DateLog "Error: No GitHub username or token given. Can't continue."
-        Exit
+        Exit 1
     }
 }
 
-if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Ruby.IsPresent -or $Rust.IsPresent) {
-    Write-DateLog "Download common files needed in Sandboxes for installation."
+#endregion GitHub Authentication
+
+#region Download and Update Tools
+
+# Download common files needed for installations in sandboxes
+if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
+    Write-DateLog "Downloading common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
 }
 
+# Visual Studio Build Tools
 if ($VisualStudioBuildTools.IsPresent) {
     Write-DateLog "Download or update Visual Studio buildtools."
-    Start-Job -FilePath .\resources\download\visualstudiobuildtools.ps1 -WorkingDirectory $PWD -ArgumentList ${PSScriptRoot} | Out-Null
-    Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job 2>&1 | ForEach-Object { "$_" } >> ".\log\jobs.txt"
+    .\resources\download\visualstudiobuildtools.ps1 | Out-Null
 }
 
+# MSYS2
 if ($all -or $MSYS2.IsPresent) {
     Write-DateLog "Download MSYS2."
-    Start-Job -FilePath .\resources\download\msys2.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\msys2.ps1 | Out-Null
 }
 
+# GitHub Releases
 if ($all -or $Release.IsPresent) {
     Write-DateLog "Download releases from GitHub."
     .\resources\download\release.ps1
 }
 
+# HTTP Downloads
 if ($all -or $Http.IsPresent) {
     Write-DateLog "Download files via HTTP."
-    $HTTP_ARGS = ""
-    if ($HttpNoVSCodeExtensions) {
-        $HTTP_ARGS += "-NoVSCodeExtensions "
-    }
-    powershell -noprofile .\resources\download\http.ps1 $HTTP_ARGS
+    $httpArgs = if ($HttpNoVSCodeExtensions) { "-NoVSCodeExtensions" } else { "" }
+    powershell -noprofile .\resources\download\http.ps1 $httpArgs
 }
 
+# Node.js
 if ($all -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
     Write-DateLog "Setup Node and install npm packages."
-    Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\node.ps1 | Out-Null
 }
 
+# Git Repositories
 if ($all -or $Git.IsPresent) {
     Write-DateLog "Download and update git repositories"
     .\resources\download\git.ps1
 }
 
+# GoLang
 if ($all -or $GoLang.IsPresent) {
     Write-Output "" > .\log\golang.txt
     Write-DateLog "Setup GoLang and install packages."
-    Start-Job -FilePath .\resources\download\go.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\go.ps1 | Out-Null
 }
 
+# Python
 if ($all -or $Python.IsPresent) {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages in virtual environments."
-    Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\python.ps1 | Out-Null
 }
 
+# Rust
 if ($all -or $Rust.IsPresent) {
     Write-Output "" > .\log\rust.txt
     Write-DateLog "Setup Rust and install packages with cargo."
-    Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\rust.ps1 | Out-Null
 }
 
+# Didier Stevens Tools
 if ($all -or $Didier.IsPresent) {
     Write-DateLog "Download Didier Stevens tools."
     .\resources\download\didier.ps1
 }
 
+# Winget Packages
 if ($all -or $Winget.IsPresent) {
     Write-DateLog "Download tools via winget."
     .\resources\download\winget.ps1
 }
 
+# Zimmerman Tools
 if ($all -or $Zimmerman.IsPresent) {
     Write-DateLog "Download Zimmerman tools."
     .\resources\download\zimmerman.ps1
 }
 
+# KAPE
 if ($all -or $Kape.IsPresent) {
     if (Test-Path ".\local\kape.zip") {
         Write-DateLog "Download and update KAPE and related tools."
@@ -288,39 +398,41 @@ if ($all -or $Kape.IsPresent) {
     }
 }
 
+# PowerShell
 if ($all -or $PowerShell.IsPresent) {
     Write-DateLog "Download PowerShell and modules."
     .\resources\download\powershell.ps1
 }
 
+# ClamAV
 if ($Freshclam.IsPresent) {
     Write-DateLog "Download and update ClamAV databases with freshclam."
-    Start-Job -FilePath .\resources\download\freshclam.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\freshclam.ps1 | Out-Null
 }
 
+# Enrichment Data
 if ($Enrichment.IsPresent) {
     Write-DateLog "Download enrichment data."
     .\resources\download\enrichment.ps1
 }
 
+# LogBoost
 if ($all -or $LogBoost.IsPresent) {
     Write-DateLog "Update Threat Intel for LogBoost."
-    Start-Job -FilePath .\resources\download\logboost.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\logboost.ps1 | Out-Null
 }
 
-if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
-    Write-DateLog "Wait for sandboxes to finish."
-    Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
-    Get-Job | Remove-Job | Out-Null
-    Write-DateLog "Sandboxes done."
-}
+#endregion Download and Update Tools
 
+#region File Cleanup and Configuration
+
+# Copy necessary files
 Copy-Item "README.md" ".\downloads\" -Force | Out-Null
-Copy-Item ".\resources\images\dfirws.jpg" .\downloads\ -Force | Out-Null
+Copy-Item ".\resources\images\dfirws.jpg" ".\downloads\" -Force | Out-Null
 Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force | Out-Null
 
-foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name | findstr PUBLIC) {
+# Copy capaexplorer.py to Ghidra directories
+foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name | Where-Object { $_ -match "PUBLIC" }) {
     if (Test-Path ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\") {
         Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
     } elseif (Test-Path ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Jython\") {
@@ -328,31 +440,31 @@ foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name |
     }
 }
 
-# done.txt is used to display last update in sandbox with bginfo
+# Create done.txt to track last update in sandbox
 Write-Output "" > ".\downloads\done.txt"
 
-# Remove temp files
-if (Test-Path ".\tmp\downloads") {
-    Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
-}
-if (Test-Path ".\tmp\enrichment") {
-    Remove-Item -Recurse -Force .\tmp\enrichment 2>&1 | Out-Null
-}
-if (Test-Path ".\tmp\mount") {
-    Remove-Item -Recurse -Force .\tmp\mount\ 2>&1 | Out-Null
-}
-if (Test-Path ".\tmp\msys2") {
-    Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
+# Clean up temporary files
+$tempDirs = @(
+    ".\tmp\downloads\",
+    ".\tmp\enrichment",
+    ".\tmp\mount\",
+    ".\tmp\msys2\"
+)
+
+foreach ($dir in $tempDirs) {
+    if (Test-Path $dir) {
+        Remove-Item -Recurse -Force $dir -ErrorAction SilentlyContinue | Out-Null
+    }
 }
 
-# Verify that tools are available
+#endregion File Cleanup and Configuration
+
+#region Verification and Error Checking
+
+# Verify tools
 if ($Verify.IsPresent) {
     Write-DateLog "Verify that tools are available."
-    Start-Job -FilePath .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
-    Write-DateLog "Wait for verify sandbox to finish."
-    Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
-    Get-Job | Remove-Job | Out-Null
+    .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download | Out-Null
     Write-DateLog "Verify done."
 }
 
@@ -399,6 +511,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "gpg: error reading key: general error" -and
     $_.Line -notmatch "ERROR: Could not update key:" -and
     $_.Line -notmatch "Error Getting File from" -and
+    $_.Line -notmatch "Adding thiserror" -and
     $_.Line -notmatch "gpg-error"
 }
 
@@ -407,8 +520,11 @@ $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Whe
     $_.Line -notmatch "ucrt64/share"
 }
 
+# Output final status
 if ($warnings -or $errors -or $failed) {
     Write-DateLog "Errors or warnings were found in log files. Please check the log files for details."
 } else {
     Write-DateLog "Downloads and preparations done."
 }
+
+#endregion Verification and Error Checking
