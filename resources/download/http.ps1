@@ -3,7 +3,7 @@ param(
     [Switch]$NoVSCodeExtensions
 )
 
-. "$PSScriptRoot\common.ps1"
+. ".\resources\download\common.ps1"
 
 if (! $NoVSCodeExtensions.IsPresent) {
     # Get URI for Visual Studio Code C++ extension - ugly
@@ -113,7 +113,7 @@ if ($status) {
 }
 
 # Get malcat - installed during start
-$status = Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win64_lite.zip" -FilePath ".\downloads\malcat.zip" -check "Zip archive data"
+$status = Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win313_lite.zip" -FilePath ".\downloads\malcat.zip" -check "Zip archive data"
 
 # Get ssview
 $status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/SSView.zip" -FilePath ".\downloads\ssview.zip" -check "Zip archive data"

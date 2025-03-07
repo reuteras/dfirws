@@ -70,8 +70,9 @@ if ($NoDownload.IsPresent) {
                 -or $_.'aria-label' -match '64-bit edition' }
         foreach ($DownloadLink in $downloadLinks) {
             $org_link = $DownloadLink.href
-            $real_link = $(curl "$org_link" -L -I -o NUL -w '%{url_effective}' -s)
+            $real_link = $(curl "$org_link" -L -I -o NUL -w '%{url_effective}' -s) -replace "es-es", "en-us"
         }
+        Write-Output "Will use link $real_link."
 
         # Get filename part from the link
         $filename = $real_link.Split("/")[-1]

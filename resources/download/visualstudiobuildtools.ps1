@@ -1,10 +1,6 @@
-param (
-    [String] $ScriptRoot=$PSScriptRoot
-)
+Write-Output $PWD
 
-$ScriptRoot = "$ScriptRoot\resources\download"
-
-. "${ScriptRoot}\common.ps1"
+. ".\resources\download\common.ps1"
 
 # ImportExcel
 Write-SynchronizedLog "Download Visual Studio buildtools."

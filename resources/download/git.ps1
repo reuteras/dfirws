@@ -1,4 +1,4 @@
-. "$PSScriptRoot\common.ps1"
+. ".\resources\download\common.ps1"
 
 if (! (Get-Command git )) {
     Write-DateLog "Need git to checkout git repositories."

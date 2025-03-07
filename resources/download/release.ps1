@@ -1,4 +1,4 @@
-. "${PSScriptRoot}\common.ps1"
+. ".\resources\download\common.ps1"
 
 # artemis
 $status = Get-GitHubRelease -repo "puffyCid/artemis" -path "${SETUP_PATH}\artemis.zip" -match "x86_64-pc-windows-msvc.zip$" -check "Zip archive data"
@@ -134,7 +134,7 @@ if ($status) {
 $status =  Get-GitHubRelease -repo "cmderdev/cmder" -path "${SETUP_PATH}\cmder.7z" -match "cmder.7z" -check "7-zip archive data"
 
 # Recaf
-$status = Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match "jar-with-dependencies.jar" -check "Zip archive data"
+$status = Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match "jar-with-dependencies.jar" -check "Java archive data \(JAR\)"
 if ($status) {
     Copy-Item ${SETUP_PATH}\recaf.jar ${TOOLS}\lib\recaf.jar
     Set-Content -Encoding Ascii -Path "${TOOLS}\bin\recaf.bat" "@echo off`njava --module-path ${SANDBOX_TOOLS}\javafx-sdk\lib --add-modules javafx.controls -jar C:\Tools\lib\recaf.jar"

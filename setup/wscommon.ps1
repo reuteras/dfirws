@@ -19,6 +19,8 @@ $null="${MSYS2_DIR}"
 $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
+Set-DnsClientServerAddress -InterfaceIndex (Get-NetAdapter | Select-Object InterfaceIndex).InterfaceIndex -ServerAddresses 8.8.8.8
+
 # Create required directories
 foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
     if (-not (Test-Path -Path $dir)) {
@@ -897,7 +899,7 @@ function Install-VisualStudioBuildTool {
             return
         }
         Write-Output "Installing Visual Studio Build Tools"
-        Start-Process -Wait "${TOOLS}\VSLayout\vs_buildtools.exe" -ArgumentList "--noweb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
+        Start-Process -Wait "${TOOLS}\VSLayout\vs_buildtools.exe" -ArgumentList "--noWeb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop\dfirws\Programming"
         if (Test-Path "${HOME}\Desktop\dfirws\Programming\Visual Studio Buildtools (runs dfirws-install -VisualStudioBuildTools).lnk") {

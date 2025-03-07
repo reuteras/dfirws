@@ -1,6 +1,6 @@
 # Script to download files needed in sandboxes during download.
 
-. "$PSScriptRoot\common.ps1"
+. ".\resources\download\common.ps1"
 
 #
 # Packages used in all sandboxes
@@ -71,9 +71,11 @@ if ($all -or $Python) {
 }
 
 # MSYS2
-$status = Get-FileFromUri -uri "https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe" -FilePath "${SETUP_PATH}\msys2.exe" -CheckURL "No" -check "PE32"
-if ($status) {
-    Copy-Item "${SETUP_PATH}\msys2.exe" "${TOOLS}\bin\msys2.exe"
+if ($all -or $MSYS2) {
+    $status = Get-FileFromUri -uri "https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe" -FilePath "${SETUP_PATH}\msys2.exe" -CheckURL "No" -check "PE32"
+    if ($status) {
+        Copy-Item "${SETUP_PATH}\msys2.exe" "${TOOLS}\bin\msys2.exe"
+    }
 }
 
 

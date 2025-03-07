@@ -1,4 +1,4 @@
-. "${PSScriptRoot}\common.ps1"
+. ".\resources\download\common.ps1"
 
 # Autopsy - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Autopsy."
@@ -85,6 +85,6 @@ $status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.msi" "wireshark
 
 # tailscale - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Tailscale."
-$status = Get-WinGet "tailscale.tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
+$status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
 
 Write-SynchronizedLog "winget: Download complete."

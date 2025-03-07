@@ -95,6 +95,8 @@ if (Test-Path ".\config.ps1") {
     Exit
 }
 
+$ProgressPreference = "SilentlyContinue"
+
 # Ensure that we have the necessary tools installed
 if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
     Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to PATH."
@@ -213,14 +215,12 @@ if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent 
 
 if ($VisualStudioBuildTools.IsPresent) {
     Write-DateLog "Download or update Visual Studio buildtools."
-    Start-Job -FilePath .\resources\download\visualstudiobuildtools.ps1 -WorkingDirectory $PWD -ArgumentList ${PSScriptRoot} | Out-Null
-    Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job 2>&1 | ForEach-Object { "$_" } >> ".\log\jobs.txt"
+    .\resources\download\visualstudiobuildtools.ps1 | Out-Null
 }
 
 if ($all -or $MSYS2.IsPresent) {
     Write-DateLog "Download MSYS2."
-    Start-Job -FilePath .\resources\download\msys2.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\msys2.ps1 | Out-Null
 }
 
 if ($all -or $Release.IsPresent) {
@@ -240,7 +240,7 @@ if ($all -or $Http.IsPresent) {
 if ($all -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
     Write-DateLog "Setup Node and install npm packages."
-    Start-Job -FilePath .\resources\download\node.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\node.ps1 | Out-Null
 }
 
 if ($all -or $Git.IsPresent) {
@@ -251,19 +251,19 @@ if ($all -or $Git.IsPresent) {
 if ($all -or $GoLang.IsPresent) {
     Write-Output "" > .\log\golang.txt
     Write-DateLog "Setup GoLang and install packages."
-    Start-Job -FilePath .\resources\download\go.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\go.ps1 | Out-Null
 }
 
 if ($all -or $Python.IsPresent) {
     Write-Output "" > .\log\python.txt
     Write-DateLog "Setup Python and install packages in virtual environments."
-    Start-Job -FilePath .\resources\download\python.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\python.ps1 | Out-Null
 }
 
 if ($all -or $Rust.IsPresent) {
     Write-Output "" > .\log\rust.txt
     Write-DateLog "Setup Rust and install packages with cargo."
-    Start-Job -FilePath .\resources\download\rust.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\rust.ps1 | Out-Null
 }
 
 if ($all -or $Didier.IsPresent) {
@@ -295,7 +295,7 @@ if ($all -or $PowerShell.IsPresent) {
 
 if ($Freshclam.IsPresent) {
     Write-DateLog "Download and update ClamAV databases with freshclam."
-    Start-Job -FilePath .\resources\download\freshclam.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
+    .\resources\download\freshclam.ps1 | Out-Null
 }
 
 if ($Enrichment.IsPresent) {
@@ -305,15 +305,7 @@ if ($Enrichment.IsPresent) {
 
 if ($all -or $LogBoost.IsPresent) {
     Write-DateLog "Update Threat Intel for LogBoost."
-    Start-Job -FilePath .\resources\download\logboost.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
-}
-
-if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent) {
-    Write-DateLog "Wait for sandboxes to finish."
-    Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
-    Get-Job | Remove-Job | Out-Null
-    Write-DateLog "Sandboxes done."
+    .\resources\download\logboost.ps1 | Out-Null
 }
 
 Copy-Item "README.md" ".\downloads\" -Force | Out-Null
@@ -348,11 +340,7 @@ if (Test-Path ".\tmp\msys2") {
 # Verify that tools are available
 if ($Verify.IsPresent) {
     Write-DateLog "Verify that tools are available."
-    Start-Job -FilePath .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download -ArgumentList ${PSScriptRoot} | Out-Null
-    Write-DateLog "Wait for verify sandbox to finish."
-    Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
-    Get-Job | Remove-Job | Out-Null
+    .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download | Out-Null
     Write-DateLog "Verify done."
 }
 
@@ -399,6 +387,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "gpg: error reading key: general error" -and
     $_.Line -notmatch "ERROR: Could not update key:" -and
     $_.Line -notmatch "Error Getting File from" -and
+    $_.Line -notmatch "Adding thiserror" -and
     $_.Line -notmatch "gpg-error"
 }
 

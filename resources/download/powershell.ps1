@@ -1,4 +1,4 @@
-. "${PSScriptRoot}\common.ps1"
+. ".\resources\download\common.ps1"
 
 Clear-Tmp powershell
 

@@ -1,15 +1,8 @@
-param (
-    [String] $ScriptRoot=$PSScriptRoot
-)
+. ".\resources\download\common.ps1"
 
-${ScriptRoot} = "${ScriptRoot}\resources\download"
-${ROOT_PATH} = Resolve-Path "${ScriptRoot}\..\..\"
-
-. "${ScriptRoot}\common.ps1"
+${ROOT_PATH} = "${PWD}"
 
 Write-DateLog "Start Sandbox to install GoLang based tools for dfirws." > "${ROOT_PATH}\log\golang.txt"
-
-$mutex = New-Object System.Threading.Mutex($false, $mutexName)
 
 $STATUS = $false
 
@@ -35,16 +28,21 @@ if (! ${STATUS}) {
         Remove-Item "${ROOT_PATH}\tmp\golang\done" | Out-Null
     }
 
-    (Get-Content "${ROOT_PATH}\resources\templates\generate_golang.wsb.template").replace("__SANDBOX__", "${ROOT_PATH}") | Set-Content "${ROOT_PATH}\tmp\generate_golang.wsb"
+    (Get-Content "${ROOT_PATH}\resources\templates\generate_golang.wsb.template").replace("__SANDBOX__", "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_golang.wsb"
+    Start-Process "${ROOT_PATH}\tmp\generate_golang.wsb"
 
-    $mutex.WaitOne() | Out-Null
-    & "${ROOT_PATH}\tmp\generate_golang.wsb"
-    Start-Sleep 10
-    Remove-Item "${ROOT_PATH}\tmp\generate_golang.wsb" | Out-Null
+    do {
+        Start-Sleep 10
+        if (Test-Path -Path "${ROOT_PATH}\tmp\golang\done" ) {
+            Stop-Sandbox
+            Remove-Item "${ROOT_PATH}\tmp\generate_golang.wsb" | Out-Null
+            Start-Sleep 1
+        }
+    } while (
+        tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)"
+    )
 
-    Stop-SandboxWhenDone "${ROOT_PATH}\tmp\golang\done" $mutex | Out-Null
-
-    rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\golang" "${ROOT_PATH}\mount\golang"
+    rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\golang" "${ROOT_PATH}\mount\golang" >> "${ROOT_PATH}\log\golang.txt" 2>&1
     Remove-Item -Recurse -Force "${ROOT_PATH}\tmp\golang" 2>&1 | Out-Null
 
     Write-DateLog "GoLang tools done." >> "${ROOT_PATH}\log\golang.txt"

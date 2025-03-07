@@ -7,14 +7,12 @@ $SETUP_PATH = ".\downloads"
 $WSDFIR_TEMP = "C:\tmp"
 $TOOLS = ".\mount\Tools"
 $SANDBOX_TOOLS = "C:\Tools"
-$mutexName = "Global\dfirwsMutex"
 
 $null=$CONFIGURATION_FILES
 $null=$SANDBOX_TOOLS
 $null=$SETUP_PATH
 $null=$WSDFIR_TEMP
 $null=$TOOLS
-$null=$mutexName
 
 if (!(Test-Path variable:GIT_FILE)) {
     $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
@@ -187,7 +185,8 @@ function Get-FileFromUri {
         # Check if downloaded file is the correct type with help of $GIT_CHECK and the value of $check
         if ($check -ne "" ) {
             $FILE_TYPE = & "$GIT_FILE" -b "$TmpFilePath"
-            if (!($FILE_TYPE | Select-String -Pattern $check -Quiet)) {
+            # Check if the file type is correct - Git file returns "data" for some zip files
+            if (!(($FILE_TYPE | Select-String -Pattern $check -Quiet) -or ($check -eq "Zip archive data" -and $FILE_TYPE -eq "data"))) {
                 Write-SynchronizedLog "Error: Received file, ${FilePath}, is not the correct type. Type: $FILE_TYPE"
                 Remove-Item $TmpFilePath -Force | Out-Null
                 return $false
@@ -437,57 +436,6 @@ function Get-DownloadUrlFromPage {
     return $downloadUrl
 }
 
-<#
-.SYNOPSIS
-Stops the Windows Sandbox when a specific condition is met.
-
-.DESCRIPTION
-The Stop-SandboxWhenDone function is used to stop the Windows Sandbox when a specific condition is met. It continuously checks for the presence of the Windows Sandbox process and a specified file path. If both conditions are met, it terminates the Windows Sandbox process, removes the specified file, releases the mutex, and exits the function.
-
-.PARAMETER path
-Specifies the path of the file that needs to exist in order to stop the Windows Sandbox.
-
-.PARAMETER Mutex
-Specifies the mutex object that is used to synchronize access to shared resources.
-
-.EXAMPLE
-Stop-SandboxWhenDone -path "C:\Temp\sample.txt" -Mutex $mutex
-This example stops the Windows Sandbox when the file "C:\Temp\sample.txt" exists and the mutex object $mutex is released.
-
-.NOTES
-Author: peter@reuteras.net
-Date:   2023-12-21
-#>
-function Stop-SandboxWhenDone {
-    [CmdletBinding(SupportsShouldProcess)]
-    param (
-        [Parameter(Mandatory=$True)] [string]$path,
-        [Parameter(Mandatory=$True)] [System.Threading.Mutex] $Mutex
-    )
-
-    while ($true) {
-        $status = Get-Process WindowsSandboxClient 2> $null
-        $status_new = Get-Process WindowsSandboxRemoteSession 2> $null
-        if ($status -or $status_new) {
-            if ( Test-Path $path ) {
-                if($PSCmdlet.ShouldProcess($file.Name)) {
-                    (Get-Process WindowsSandboxClient).Kill() 2> $null
-                    (Get-Process WindowsSandboxRemoteSession).Kill() 2> $null
-                    Remove-Item -Force "$path"
-                    Start-Sleep 1
-                    $mutex.ReleaseMutex()
-                    $mutex.Dispose()
-                    return
-                }
-            }
-            Start-Sleep 1
-        } else {
-            $mutex.ReleaseMutex()
-            $mutex.Dispose()
-            return
-        }
-    }
-}
 
 <#
 .SYNOPSIS
@@ -704,4 +652,10 @@ function Get-Winget {
     Clear-Tmp winget
 
     return $true
+}
+
+function Stop-Sandbox {
+    Stop-Process -Name WindowsSandboxClient -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name WindowsSandboxRemoteSession -Force -ErrorAction SilentlyContinue
+    Start-Sleep 1
 }

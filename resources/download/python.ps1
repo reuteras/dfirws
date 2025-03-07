@@ -1,17 +1,10 @@
-param (
-    [String] $ScriptRoot=$PSScriptRoot
-)
+. ".\resources\download\common.ps1"
 
-${ScriptRoot} = "${ScriptRoot}\resources\download"
-${ROOT_PATH} = Resolve-Path "${ScriptRoot}\..\..\"
-
-. "${ScriptRoot}\common.ps1"
+$ROOT_PATH = "${PWD}"
 
 Write-DateLog "Start Sandbox to install Python pip packages for dfirws." > "${ROOT_PATH}\log\python.txt"
 
-$mutex = New-Object System.Threading.Mutex($false, ${mutexName})
-
-if (! (Test-Path -Path "${ROOT_PATH}\mount\venv")) {
+if (! (Test-Path -Path "${ROOT_PATH}\mount\venv\")) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\venv" | Out-Null
 }
 
@@ -19,7 +12,7 @@ if (Test-Path -Path "${ROOT_PATH}\mount\venv\default\done") {
     Remove-Item "${ROOT_PATH}\mount\venv\default\done" | Out-Null
 }
 
-Copy-Item "${ROOT_PATH}\config.ps1" "${ROOT_PATH}\mount\venv\default\config.ps1"
+Copy-Item "${ROOT_PATH}\config.ps1" "${ROOT_PATH}\mount\venv\config.ps1"
 
 if (! (Test-Path "${ROOT_PATH}\downloads\python3.exe")) {
     Write-Output "ERROR: Python3 not found. Exiting" >> "${ROOT_PATH}\log\python.txt"
@@ -40,14 +33,20 @@ if (Test-Path -Path "${ROOT_PATH}\mount\venv\python3_hash.txt") {
     Write-Output $python3_hash > "${ROOT_PATH}\mount\venv\python3_hash.txt"
 }
 
-(Get-Content ${ROOT_PATH}\resources\templates\generate_venv.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}") | Set-Content "${ROOT_PATH}\tmp\generate_venv.wsb"
+(Get-Content ${ROOT_PATH}\resources\templates\generate_venv.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_venv.wsb"
 
-$mutex.WaitOne() | Out-Null
-& "${ROOT_PATH}\tmp\generate_venv.wsb"
-Start-Sleep 10
-Remove-Item "${ROOT_PATH}\tmp\generate_venv.wsb" | Out-Null
+Start-Process "${ROOT_PATH}\tmp\generate_venv.wsb"
 
-Stop-SandboxWhenDone "${ROOT_PATH}\mount\venv\default\done" $mutex | Out-Null
+do {
+    Start-Sleep 10
+    if (Test-Path -Path "${ROOT_PATH}\mount\venv\default\done" ) {
+        Stop-Sandbox
+        Remove-Item  -Force "${ROOT_PATH}\tmp\generate_venv.wsb" | Out-Null
+        break
+    }
+} while (
+    tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)"
+)
 
 Copy-Item "${ROOT_PATH}\setup\utils\hash-id.py" "${ROOT_PATH}\mount\venv\default\Scripts\"
 Copy-Item "${ROOT_PATH}\setup\utils\ipexpand.py" "${ROOT_PATH}\mount\venv\default\Scripts\"

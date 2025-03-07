@@ -1,4 +1,4 @@
-. "$PSScriptRoot\common.ps1"
+. ".\resources\download\common.ps1"
 
 New-Item -ItemType Directory -Force -Path "${TOOLS}\DidierStevens" | Out-Null
 

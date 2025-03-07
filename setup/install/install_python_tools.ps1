@@ -31,7 +31,7 @@ Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 #
 Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.txt"
 if (Test-Path "C:\venv\default") {
-    Get-ChildItem C:\venv\default\ -Exclude config.ps1 | Remove-Item -Force -Recurse 2>&1 | ForEach-Object{ "$_" } | Out-null
+    Remove-Item -Force -Recurse "C:\venv\default\" 2>&1 | ForEach-Object{ "$_" } | Out-null
 }
 Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\default"
 C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -703,7 +703,7 @@ foreach ($virtualenv in "binary-refinery", "chepy", "csvkit", "ghidrecomp", "jpt
             poetry add `
                 peepdf-3 pyreadline3 stpyv8 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
         } else {
-            poetry add `
+            python -m pip install`
                 "${virtualenv}" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
         }
 
