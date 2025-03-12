@@ -19,7 +19,11 @@ $null="${MSYS2_DIR}"
 $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
-Set-DnsClientServerAddress -InterfaceIndex (Get-NetAdapter | Select-Object InterfaceIndex).InterfaceIndex -ServerAddresses 8.8.8.8
+$dns = C:\Windows\System32\ipconfig /all | Select-String -Pattern "8.8.8.8"
+if ($null -ne $dns) {
+    C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=8.8.8.8 index=1
+    C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=1.1.1.1 index=2
+}
 
 # Create required directories
 foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
@@ -534,12 +538,7 @@ function Install-Hashcat {
         Copy-Item -Recurse "${TOOLS}\hashcat" "${env:ProgramFiles}" -Force
         Add-ToUserPath "${env:ProgramFiles}\hashcat"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${env:ProgramFiles}\hashcat"
-        if ((Get-CimInstance Win32_Processor).Manufacturer -eq "GenuineIntel") {
-            Start-Process -Wait "${SETUP_PATH}\intel_driver.exe" -ArgumentList '--s --a /quiet /norestart'
-            Write-Output "Intel CPU detected. Intel driver installed"
-        } else {
-            Write-Output "AMD CPU detected. You have to download the driver from AMD's website"
-        }
+        #Start-Process -Wait "${SETUP_PATH}\intel_driver.exe" -ArgumentList '--s --a /quiet /norestart'
         if (Test-Path "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat (runs dfirws-install -Hashcat).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat (runs dfirws-install -Hashcat).lnk" -Force
         }
@@ -898,7 +897,12 @@ function Install-VisualStudioBuildTool {
             Write-Output "You need to download the Visual Studio Build Tools with the command '.\downloadFiles.ps1 -VisualStudioBuildTools' first."
             return
         }
+
+        reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 1 /f
+        "`n" | CiTool.exe -r
+        
         Write-Output "Installing Visual Studio Build Tools"
+        
         Start-Process -Wait "${TOOLS}\VSLayout\vs_buildtools.exe" -ArgumentList "--noWeb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop\dfirws\Programming"

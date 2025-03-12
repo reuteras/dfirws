@@ -17,9 +17,11 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 Write-DateLog "Install Git." >> "C:\log\python.txt"
 Add-ToUserPath "${env:ProgramFiles}\Git\bin" | Out-Null
 Add-ToUserPath "${env:ProgramFiles}\Git\cmd" | Out-Null
-#Add-ToUserPath "${env:ProgramFiles}\Git\usr\bin" | Out-Null
 Install-Git | Out-Null
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
+
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 1 /f
+"`n" | CiTool.exe -r
 
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
 $PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"

@@ -175,6 +175,7 @@
         "dnslib",
         "DNSPY",
         "dnspython",
+        "dnsserver",
         "Dobbeleer",
         "docmanager",
         "docsify",

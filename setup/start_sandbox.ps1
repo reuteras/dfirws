@@ -171,7 +171,7 @@ Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\s
 # Set dark theme if selected
 if ("${WSDFIR_DARK}" -eq "Yes") {
     Start-Process -Wait "c:\Windows\Resources\Themes\themeB.theme"
-    taskkill /f /im systemsettings.exe
+	Stop-Process -Name SystemSettings
 }
 
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"

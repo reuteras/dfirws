@@ -30,23 +30,43 @@ if ($status) {
 $status =  Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "${SETUP_PATH}\4n4lDetector.zip" -match "4n4lDetector" -check "Zip archive data"
 
 # aLEAPP
-$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleapp.exe" -match "aleapp.exe" -check "PE32"
+$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleapp.zip" -match "aleapp-.*Windows.zip" -check "Zip archive data"
 if ($status) {
-    Copy-Item ${SETUP_PATH}\aleapp.exe ${TOOLS}\bin\
+    if (Test-Path "${TOOLS}\aleapp") {
+        Remove-Item "${TOOLS}\aleapp" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\aleapp.zip" -o"${TOOLS}\aleapp" | Out-Null
+    Copy-Item ${TOOLS}\aleapp\aleapp.exe ${TOOLS}\bin\
+    Remove-Item "${TOOLS}\aleapp" -Recurse -Force
 }
-$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleappGUI.exe" -match "aleappGUI.exe" -check "PE32"
+$status = Get-GitHubRelease -repo "abrignoni/aLEAPP" -path "${SETUP_PATH}\aleappGUI.zip" -match "aleappGUI-.*Windows.zip" -check "Zip archive data"
 if ($status) {
-    Copy-Item ${SETUP_PATH}\aleappGUI.exe ${TOOLS}\bin\
+    if (Test-Path "${TOOLS}\aleappGUI") {
+        Remove-Item "${TOOLS}\aleappGUI" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\aleappGUI.zip" -o"${TOOLS}\aleappGUI" | Out-Null
+    Copy-Item ${TOOLS}\aleappGUI\aleappGUI.exe ${TOOLS}\bin\
+    Remove-Item "${TOOLS}\aleappGUI" -Recurse -Force
 }
 
 # iLEAPP
-$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileapp.exe" -match "ileapp.exe" -check "PE32"
+$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileapp.zip" -match "ileapp-.*Windows.zip" -check "Zip archive data"
 if ($status) {
-    Copy-Item ${SETUP_PATH}\ileapp.exe ${TOOLS}\bin\
+    if (Test-Path "${TOOLS}\ileapp") {
+        Remove-Item "${TOOLS}\ileapp" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ileapp.zip" -o"${TOOLS}\ileapp" | Out-Null
+    Copy-Item ${TOOLS}\ileapp\ileapp.exe ${TOOLS}\bin\
+    Remove-Item "${TOOLS}\ileapp" -Recurse -Force
 }
-$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileappGUI.exe" -match "ileappGUI.exe" -check "PE32"
+$status = Get-GitHubRelease -repo "abrignoni/iLEAPP" -path "${SETUP_PATH}\ileappGUI.zip" -match "ileappGUI-.*Windows.zip" -check "Zip archive data"
 if ($status) {
-    Copy-Item ${SETUP_PATH}\ileappGUI.exe ${TOOLS}\bin\
+    if (Test-Path "${TOOLS}\ileappGUI") {
+        Remove-Item "${TOOLS}\ileappGUI" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ileappGUI.zip" -o"${TOOLS}\ileappGUI" | Out-Null
+    Copy-Item ${TOOLS}\ileappGUI\ileappGUI.exe ${TOOLS}\bin\
+    Remove-Item "${TOOLS}\ileappGUI" -Recurse -Force
 }
 
 # lessmsi
