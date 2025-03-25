@@ -855,8 +855,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\takajo") {
         Remove-Item "${TOOLS}\takajo" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\takajo.zip" -o"${TOOLS}" | Out-Null
-    Move-Item ${TOOLS}\takajo-* ${TOOLS}\takajo
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\takajo.zip" -o"${TOOLS}\takajo" | Out-Null
     Move-Item ${TOOLS}\takajo\takajo-* "${TOOLS}\takajo\takajo.exe"
 }
 

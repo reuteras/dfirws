@@ -7,6 +7,9 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
     . '\\vmware-host\Shared Folders\dfirws\setup\wscommon.ps1'
 }
 
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
+"`n" | CiTool.exe -r
+
 # Start logging
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 

@@ -82,11 +82,11 @@ if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 & "${env:USERPROFILE}\Documents\tools\utils\venv.ps1"
 
 # Add autocomplete for commands
-if (Test-Path "C:\Tools\cargo\autocomplete") {
-    Get-ChildItem "C:\Tools\cargo\autocomplete" *.ps1 | ForEach-Object {
-        . $_.FullName
-    }
-}
+#if (Test-Path "C:\Tools\cargo\autocomplete") {
+#    Get-ChildItem "C:\Tools\cargo\autocomplete" *.ps1 | ForEach-Object {
+#        . $_.FullName
+#    }
+#}
 
 #
 # Functions to help in dfirws

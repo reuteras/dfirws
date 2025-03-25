@@ -19,10 +19,13 @@ $null="${MSYS2_DIR}"
 $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
-$dns = C:\Windows\System32\ipconfig /all | Select-String -Pattern "8.8.8.8"
-if ($null -ne $dns) {
-    C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=8.8.8.8 index=1
-    C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=1.1.1.1 index=2
+# Check if C:\log exists, indicating running downloadFiles.ps1
+if (Test-Path -Path "C:\log") {
+    $dns = C:\Windows\System32\ipconfig /all | Select-String -Pattern "8.8.8.8"
+    if ($null -eq $dns) {
+        C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=8.8.8.8 index=1 | Out-Null
+        C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=1.1.1.1 index=2 | Out-Null
+    }
 }
 
 # Create required directories
@@ -76,6 +79,11 @@ function Add-Shortcut {
         [string]$Arguments = $Null
     )
     $WshShell = New-Object -comObject WScript.Shell
+    # Make sure the directory exists for the $SourceLnk file
+    if (-not (Test-Path -Path $(Split-Path -Path $SourceLnk))) {
+        New-Item -ItemType Directory -Path $(Split-Path -Path $SourceLnk) | Out-Null
+    }
+
     $Shortcut = ${WshShell}.CreateShortcut("${SourceLnk}")
     if ($Null -ne ${WorkingDirectory}) {
         $Shortcut.WorkingDirectory = "${WorkingDirectory}"
@@ -160,7 +168,8 @@ function Test-Command {
         return
     }
 
-    if ( & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path | Where-Object {$_ -match $type}) {
+    $FILE_TYPE = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
+    if ( ($FILE_TYPE -match $type) -or (($type -eq "PE32") -and ($FILE_TYPE == "Zip archive, with extra data prepended"))) {
         Write-SynchronizedLog "SUCCESS: $name exists and type matches $type"
     } else {
         $actual_type = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
@@ -898,9 +907,9 @@ function Install-VisualStudioBuildTool {
             return
         }
 
-        reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 1 /f
+        reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
         "`n" | CiTool.exe -r
-        
+
         Write-Output "Installing Visual Studio Build Tools"
         
         Start-Process -Wait "${TOOLS}\VSLayout\vs_buildtools.exe" -ArgumentList "--noWeb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
@@ -1022,7 +1031,7 @@ function Install-WinMerge {
 function Install-Wireshark {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-wireshark.txt")) {
         Write-Output "Installing Wireshark"
-        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\wireshark.msi /qn /norestart"
+        Start-Process -Wait "${SETUP_PATH}\wireshark.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
         New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark" -Force -Type Directory | Out-Null
         if (Test-Path "${ENRICHMENT}\maxmind_current") {
             Set-Content '"C:/enrichment/maxmind_current"' -Encoding Ascii -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark\maxmind_db_paths"

@@ -40,7 +40,9 @@ Write-SynchronizedLog ([string](dfirws-install.ps1 -Ruby))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Rust))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Tor))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -Veracrypt))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -VisualStudioBuildTools))
+if (Test-Path -Path C:\venv\visualstudio.txt) {
+    Write-SynchronizedLog ([string](dfirws-install.ps1 -VisualStudioBuildTools))
+}
 Write-SynchronizedLog ([string](dfirws-install.ps1 -VLC))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -VSCode))
 Write-SynchronizedLog ([string](dfirws-install.ps1 -WinMerge))

@@ -388,7 +388,8 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "ERROR: Could not update key:" -and
     $_.Line -notmatch "Error Getting File from" -and
     $_.Line -notmatch "Adding thiserror" -and
-    $_.Line -notmatch "gpg-error"
+    $_.Line -notmatch "gpg-error" -and
+    $_.Line -notmatch "gpg: error reading key: Try again later"
 }
 
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {

@@ -23,7 +23,7 @@
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>
-      <HostFolder>__SANDBOX__tmp\Tools</HostFolder>
+      <HostFolder>__SANDBOX__mount\Tools</HostFolder>
       <SandboxFolder>C:\Tools</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>

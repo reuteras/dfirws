@@ -24,9 +24,13 @@ $BURP_SUITE_EDITION = "Community"
 # Path to file.exe from Git
 $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
 
+# Install Visual Studio Build Tools
+# $HAVE_VISUAL_STUDIO_BUILD_TOOLS = $false
+
 $null = $IPINFO_API_KEY
 $null = $BURP_SUITE_EDITION
 $null = $GIT_FILE
 $null = $GITHUB_USERNAME
 $null = $GITHUB_TOKEN
 $null = $MAXMIND_LICENSE_KEY
+$null = $HAVE_VISUAL_STUDIO_BUILD_TOOLS

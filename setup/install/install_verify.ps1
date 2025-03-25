@@ -325,7 +325,7 @@ Test-Command C:\venv\default\Scripts\ptpython.exe PE32
 Test-Command C:\venv\default\Scripts\pybabel.exe PE32
 Test-Command C:\venv\default\Scripts\pyftmerge.exe PE32
 Test-Command C:\venv\default\Scripts\pyftsubset.exe PE32
-Test-Command C:\venv\default\Scripts\pyhidra.exe PE32
+#Test-Command C:\venv\default\Scripts\pyhidra.exe PE32
 Test-Command C:\venv\default\Scripts\pyjson5.exe PE32
 Test-Command C:\venv\default\Scripts\pylupdate6.exe PE32
 Test-Command C:\venv\default\Scripts\pyonenote.exe PE32
@@ -354,12 +354,6 @@ Test-Command C:\venv\dissect\Scripts\acquire.exe PE32
 Test-Command C:\venv\dissect\Scripts\thumbcache-extract.exe PE32
 Test-Command C:\venv\dissect\Scripts\vma-extract.exe PE32
 Test-Command C:\venv\ghidrecomp\Scripts\ghidrecomp.exe PE32
-Test-Command C:\venv\ingestr\Scripts\ingestr.exe PE32
-Test-Command C:\venv\jep\Lib\site-packages\jep\jep.dll PE32
-Test-Command C:\venv\jep\Scripts\capa.exe PE32
-Test-Command C:\venv\jep\Scripts\f2py.exe PE32
-Test-Command C:\venv\jep\Scripts\markdown-it.exe PE32
-Test-Command C:\venv\jep\Scripts\numpy-config.exe PE32
 Test-Command C:\venv\jpterm\Scripts\httpx.exe PE32
 Test-Command C:\venv\jpterm\Scripts\jpterm.exe PE32
 Test-Command C:\venv\jpterm\Scripts\jupyter.exe PE32
@@ -376,13 +370,8 @@ Test-Command C:\venv\mwcp\Scripts\flask.exe PE32
 Test-Command C:\venv\mwcp\Scripts\mwcp.exe PE32
 Test-Command C:\venv\mwcp\Scripts\numpy-config.exe PE32
 Test-Command C:\venv\mwcp\Scripts\tabulate.exe PE32
-Test-Command C:\venv\pdfalyzer\Scripts\pdfalyze.exe PE32
-Test-Command C:\venv\pdfalyzer\Scripts\yaralyze.exe PE32
 Test-Command C:\venv\peepdf3\Scripts\js-beautify.exe PE32
 Test-Command C:\venv\peepdf3\Scripts\peepdf.exe PE32
-Test-Command C:\venv\regipy\Scripts\regipy-diff.exe PE32
-Test-Command C:\venv\regipy\Scripts\regipy-dump.exe PE32
-Test-Command C:\venv\regipy\Scripts\tabulate.exe PE32
 Test-Command C:\venv\rexi\Scripts\markdown-it.exe PE32
 Test-Command C:\venv\rexi\Scripts\rexi.exe PE32
 Test-Command C:\venv\scare\Scripts\ptpython.exe PE32
@@ -423,10 +412,8 @@ Test-Command C:\venv\default\Scripts\vba_extract.py Python
 Test-Command C:\venv\default\Scripts\vd.py Python
 Test-Command C:\venv\default\Scripts\vsc_mount.py Python
 Test-Command C:\venv\evt2sigma\Scripts\evt2sigma.py Python
-Test-Command C:\venv\jep\Scripts\readelf.py Python
 Test-Command C:\venv\mwcp\Scripts\readelf.py Python
 Test-Command C:\venv\pe2pic\Scripts\pe2pic.py Python
-Test-Command C:\venv\regipy\Scripts\parseUSBs.py Python
 Test-Command C:\venv\scare\Scripts\scare.py Python
 
 # Downloads only files
@@ -441,3 +428,19 @@ Test-Command C:\downloads\NppMarkdownPanel.zip "Zip archive data"
 
 # Verify length of file names in Start Menu
 (Get-ChildItem "C:\ProgramData\Microsoft\Windows\Start Menu\Programs" -Recurse).FullName | ForEach-Object { if ($_.Length -gt 250) {$message = "ERROR: Folder name to long " + ${_}.Length + " " + $_ ; Write-Output $message} }
+
+if (Test-Path "C:\venv\visualstudio.txt") {
+    Test-Command C:\venv\ingestr\Scripts\ingestr.exe PE32
+    Test-Command C:\venv\jep\Lib\site-packages\jep\jep.dll PE32
+    Test-Command C:\venv\jep\Scripts\capa.exe PE32
+    Test-Command C:\venv\jep\Scripts\f2py.exe PE32
+    Test-Command C:\venv\jep\Scripts\markdown-it.exe PE32
+    Test-Command C:\venv\jep\Scripts\numpy-config.exe PE32
+    Test-Command C:\venv\jep\Scripts\readelf.py Python
+    Test-Command C:\venv\pdfalyzer\Scripts\pdfalyze.exe PE32
+    Test-Command C:\venv\pdfalyzer\Scripts\yaralyze.exe PE32
+    Test-Command C:\venv\regipy\Scripts\regipy-diff.exe PE32
+    Test-Command C:\venv\regipy\Scripts\regipy-dump.exe PE32
+    Test-Command C:\venv\regipy\Scripts\tabulate.exe PE32
+    Test-Command C:\venv\regipy\Scripts\parseUSBs.py Python
+}

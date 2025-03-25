@@ -81,10 +81,17 @@ $status = Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi" -che
 
 # Wireshark - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Wireshark."
-$status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.msi" "wireshark.msi" -check "Composite Document File V2 Document"
+$status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.exe" "wireshark.exe" -check "PE32"
 
 # tailscale - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Tailscale."
 $status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
+
+# uv - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading uv."
+$status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
+if ($status) {
+ & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
+}
 
 Write-SynchronizedLog "winget: Download complete."
