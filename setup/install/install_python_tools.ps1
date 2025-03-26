@@ -11,17 +11,13 @@ $env:UV_TOOL_BIN_DIR = "C:\venv\bin"
 $env:UV_TOOL_DIR = "C:\venv\uv"
 $env:UV_INSTALL_DIR = "C:\venv\pkg"
 $env:UV_CACHE_DIR = "C:\venv\cache"
+$env:UV_LINK_MODE = "copy"
 
 foreach ($dir in @($env:UV_TOOL_BIN_DIR, $env:UV_TOOL_DIR, $env:UV_INSTALL_DIR, $env:UV_CACHE_DIR)) {
     if (-not (Test-Path $dir)) {
         New-Item -ItemType Directory -Force -Path $dir | Out-Null
     }
 }
-
-$null = $UV_TOOL_BIN_DIR
-$null = $UV_TOOL_DIR
-$null = $UV_INSTALL_DIR
-$null = $UV_CACHE_DIR
 
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")+ ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 
@@ -60,8 +56,7 @@ Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
 
 uv tool install "https://github.com/msuhanov/dfir_ntfs/archive/1.1.19.tar.gz" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install "git+https://github.com/jeFF0Falltrades/rat_king_parser.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install "binary-refinery[extended]" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-#uv tool install --with "zipp>=3.20" "binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --with "zipp>=3.20" "binary-refinery[extended]" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "click, libfwsi-python, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
@@ -96,6 +91,7 @@ foreach ($package in `
     "oletools[full]", `
     "pcode2code", `
     "pdfalyzer", `
+    "pip", `
     "toolong", `
     "protodeep", `
     "ptpython", `
@@ -105,6 +101,12 @@ foreach ($package in `
     "rexi", `
     "shodan", `
     "sigma-cli", `
+        "pysigma-backend-elasticsearch", `
+        "pySigma-backend-loki", `
+        "pysigma-backend-splunk", `
+        "pysigma-backend-sqlite", `
+        "pysigma-pipeline-sysmon", `
+        "pysigma-pipeline-windows", `
     "stego-lsb", `
     "time-decode", `
     "unpy2exe", `
@@ -205,7 +207,7 @@ uv pip install -U `
 # venv white-phoenix
 #
 Write-DateLog "Install packages in venv white-phoenix in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-C:\Windows\System32\curl.exe -L --silent -o "${WSDFIR_TEMP}\white-phoenix.txt" "https://raw.githubusercontent.com/cyberark/White-Phoenix/main/requirements.txt" >> "C:\log\python.txt"
+C:\Windows\System32\curl.exe -L --silent -o "${WSDFIR_TEMP}\white-phoenix.txt" "https://raw.githubusercontent.com/cyberark/White-Phoenix/main/requirements.txt" 2>&1 >> "C:\log\python.txt"
 uv venv "C:\venv\white-phoenix" >> "C:\log\python.txt"
 C:\venv\white-phoenix\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Set-Location "C:\venv\white-phoenix"
@@ -237,10 +239,7 @@ foreach ($url in $urls) {
     Invoke-WebRequest -Uri $url.Value -OutFile $staticPath
     $baseHtmlContent = $baseHtmlContent.Replace($url.Value, "/static/$fileName")
 }
-
 Set-Content -Path $baseHtmlPath -Value $baseHtmlContent
-Copy-Item ${WSDFIR_TEMP}\dfir-unfurl.txt "C:\venv\dfir-unfurl\dfir-unfurl.txt" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
 deactivate
 Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_app.py" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_app.ps1"
 Set-Content "C:\venv\dfir-unfurl\Scripts\python.exe C:\venv\dfir-unfurl\Scripts\unfurl_cli.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\unfurl_cli.ps1"
@@ -249,12 +248,10 @@ Write-DateLog "Python venv dfir-unfurl done." >> "C:\log\python.txt"
 #
 # venv pe2pic
 #
-Set-Location "C:\tmp"
-
-C:\Windows\System32\curl.exe -L --silent -o "pe2pic.py" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py"
-C:\Windows\System32\curl.exe -L --silent -o "pe2pic_requirements.txt" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt"
-
 Write-DateLog "Install packages in venv pe2pic in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+Set-Location "C:\tmp"
+C:\Windows\System32\curl.exe -L --silent -o "pe2pic.py" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py" 2>&1 >> "C:\log\python.txt"
+C:\Windows\System32\curl.exe -L --silent -o "pe2pic_requirements.txt" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
 uv venv "C:\venv\pe2pic"
 C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install -r "C:\tmp\pe2pic_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -268,14 +265,13 @@ Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
 #
 Write-DateLog "Install packages in venv evt2sigma in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
 Set-Location "C:\tmp"
-C:\Windows\System32\curl.exe -L --silent -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py"
-C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt"
+C:\Windows\System32\curl.exe -L --silent -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py" 2>&1 >> "C:\log\python.txt"
+C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
 uv venv "C:\venv\evt2sigma"
 C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
 Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
-Copy-Item "C:\tmp\evt2sigma.txt" "C:\venv\evt2sigma\evt2sigma.txt" -Force 2>&1 >> "C:\log\python.txt"
 deactivate
 Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
 
@@ -289,7 +285,7 @@ Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install ptpython pyreadline3 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-python -m pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 (Get-Content .\scarelib.py -raw) -replace "print\(splash\)","splash = 'Simple Configurable Asm REPL && Emulator'`n    print(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
 Copy-Item scarelib2.py scarelib.py
 Remove-Item scarelib2.py
@@ -297,9 +293,6 @@ Copy-Item C:\venv\scare\scare\*.py "C:\venv\scare\Scripts"
 deactivate
 Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe -- C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
 Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
-
-# Custom code for each tool
-#sigma plugin install --force-install sqlite windows sysmon elasticsearch splunk 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 #
 # Venvs that needs Visual Studio Build Tools

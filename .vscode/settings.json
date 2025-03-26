@@ -637,6 +637,7 @@
         "pypng",
         "pyproject",
         "pyreadline",
+        "pysigma",
         "PYTHONIOENCODING",
         "PYTHONPATH",
         "PYTHONUTF",

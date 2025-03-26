@@ -4,16 +4,15 @@ $ROOT_PATH = "${PWD}"
 
 Write-DateLog "Start Sandbox to install Python packages for dfirws." > "${ROOT_PATH}\log\python.txt"
 
-if (! (Test-Path -Path "${ROOT_PATH}\mount\venv\")) {
-    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\venv" | Out-Null
-} elseif (Test-Path -Path "${ROOT_PATH}\mount\venv\default\done") {
-    Remove-Item "${ROOT_PATH}\mount\venv\default\done" | Out-Null
-}
-
 if (! (Test-Path "${ROOT_PATH}\mount\Tools\bin\uv.exe")) {
     Write-Output "ERROR: uv.exe not found. Exiting" >> "${ROOT_PATH}\log\python.txt"
     Exit
 }
+
+if (Test-Path -Path "${ROOT_PATH}\mount\venv\") {
+    Remove-Item -Recurse -Force -Path "${ROOT_PATH}\mount\venv" | Out-Null
+}
+New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\venv" | Out-Null
 
 (Get-Content ${ROOT_PATH}\resources\templates\generate_venv.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_venv.wsb"
 
