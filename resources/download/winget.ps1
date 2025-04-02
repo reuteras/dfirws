@@ -87,6 +87,14 @@ $status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.exe" "wireshark
 Write-SynchronizedLog "winget: Downloading Tailscale."
 $status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
 
+# Firefox - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Firefox."
+$status = Get-WinGet "Mozilla.Firefox" "Firefox*.exe" "firefox.exe" -check "PE32"
+
+# Foxit PDF Reader - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Foxit PDF Reader."
+$status = Get-WinGet "Foxit.FoxitReader" "Foxit*.exe" "foxitreader.exe" -check "PE32"
+
 # uv - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading uv."
 $status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"

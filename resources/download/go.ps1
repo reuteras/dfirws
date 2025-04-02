@@ -16,6 +16,8 @@ if (! ${STATUS}) {
     Write-DateLog "Install and update GoLang tools in Sandbox." >> "${ROOT_PATH}\log\golang.txt"
     if (! (Test-Path -Path "${ROOT_PATH}\tmp\golang" )) {
         New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\golang" | Out-Null
+    } elseif (Test-Path -Path "${ROOT_PATH}\tmp\golang\done" ) {
+        Remove-Item "${ROOT_PATH}\tmp\golang\done" | Out-Null
     }
 
     if (Test-Path -Path "${ROOT_PATH}\mount\golang" ) {
@@ -24,23 +26,9 @@ if (! ${STATUS}) {
 
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\golang" | Out-Null
 
-    if (Test-Path -Path "${ROOT_PATH}\tmp\golang\done" ) {
-        Remove-Item "${ROOT_PATH}\tmp\golang\done" | Out-Null
-    }
-
     (Get-Content "${ROOT_PATH}\resources\templates\generate_golang.wsb.template").replace("__SANDBOX__", "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_golang.wsb"
     Start-Process "${ROOT_PATH}\tmp\generate_golang.wsb"
-
-    do {
-        Start-Sleep 10
-        if (Test-Path -Path "${ROOT_PATH}\tmp\golang\done" ) {
-            Stop-Sandbox
-            Remove-Item "${ROOT_PATH}\tmp\generate_golang.wsb" | Out-Null
-            Start-Sleep 1
-        }
-    } while (
-        tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)"
-    )
+    Wait-Sandbox -WSBPath "${ROOT_PATH}\tmp\generate_golang.wsb" -WaitForPath "${ROOT_PATH}\tmp\golang\done"
 
     rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\golang" "${ROOT_PATH}\mount\golang" >> "${ROOT_PATH}\log\golang.txt" 2>&1
     Remove-Item -Recurse -Force "${ROOT_PATH}\tmp\golang" 2>&1 | Out-Null

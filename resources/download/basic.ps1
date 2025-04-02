@@ -2,10 +2,6 @@
 
 . ".\resources\download\common.ps1"
 
-#
-# Packages used in all sandboxes
-#
-
 # https://www.7-zip.org/download.html - 7-Zip - installed during start
 Write-SynchronizedLog "Downloading 7-Zip."
 $7zip_path = Get-DownloadUrlFromPage -url "https://www.7-zip.org/download.html" -RegEx '[^"]+x64.msi'
@@ -13,8 +9,6 @@ $status = Get-FileFromUri -uri "https://www.7-zip.org/${7zip_path}" -FilePath ".
 
 #
 # Packages used in freshclam sandbox
-#
-
 if ($all -or $Freshclam) {
     # ClamAV - installed during start
     $status = Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi$" -check "Composite Document File V2 Document"
@@ -22,8 +16,6 @@ if ($all -or $Freshclam) {
 
 #
 # Packages used in NodeJS sandbox
-#
-
 if ($all -or $Node) {
     $NodeJSVersion = (Get-DownloadUrlFromPage -url "https://nodejs.org/en/download/prebuilt-binaries" -RegEx 'https://nodejs.org/dist/(v[^/]+)').split('/')[4]
 
@@ -33,8 +25,6 @@ if ($all -or $Node) {
 
 #
 # Packages used in Python sandbox
-#
-
 if ($all -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
     Write-SynchronizedLog "winget: Downloading Python."
@@ -78,22 +68,16 @@ if ($all -or $MSYS2) {
     }
 }
 
-
 #
-# Pages used in Go sandbox
-#
-
+# Packages used in Go sandbox
 if ($all -or $Go) {
     # GoLang - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading GoLang."
     $status = Get-WinGet "GoLang.Go" "Go*.msi" "golang.msi" -check "Composite Document File V2 Document"
 }
 
-
 #
 # Packages used in Rust sandbox
-#
-
 if ($all -or $Rust) {
     # git - installed during start
     $status = Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe" -check "PE32"

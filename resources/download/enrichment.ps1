@@ -25,14 +25,36 @@
     https://github.com/reuteras/dfirws
 #>
 
-# Set the currentDirectory to the current directory
+# Set directories
 $currentDirectory = "${PWD}"
-
 $enrichmentDirectory = "${PWD}\enrichment"
+$cveSaveDirectory = "${enrichmentDirectory}\cve"
+$gitSaveDirectory = "${enrichmentDirectory}\git"
+$IPinfoSaveDirectory = "${enrichmentDirectory}\ipinfo"
+$manufSaveDirectory = "${enrichmentDirectory}\manuf"
+$maxmindCurrentDirectory = "${enrichmentDirectory}\maxmind_current"
+$maxmindSaveDirectory = "${enrichmentDirectory}\maxmind"
+$maxmindUnpackDirectory = "${maxmindSaveDirectory}\unpack"
+$snortSaveDirectory = "${enrichmentDirectory}\snort"
+$suricataSaveDirectory = "${enrichmentDirectory}\suricata"
+$torsaveDirectory = "${enrichmentDirectory}\tor"
+$yaraSaveDirectory = "${enrichmentDirectory}\yara"
+$maxmindASNUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-ASN"
+$maxmindCityUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-City"
+$maxmindCountryUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-Country"
 
-# Create the enrichment directory if it doesn't exist
-if (-not (Test-Path -Path "${enrichmentDirectory}")) {
-    New-Item -ItemType Directory -Path "${enrichmentDirectory}" -Force | Out-Null
+# Create directories if they don't exist
+Foreach ($directory in @($enrichmentDirectory, $cveSaveDirectory, $gitSaveDirectory, $IPinfoSaveDirectory, $manufSaveDirectory, $maxmindCurrentDirectory, $maxmindSaveDirectory, $maxmindUnpackDirectory, $maxmindASNUnpackDirectory, $maxmindCityUnpackDirectory, $maxmindCountryUnpackDirectory, $snortSaveDirectory, $suricataSaveDirectory, $torsaveDirectory, $yaraSaveDirectory)) {
+    if (-not (Test-Path -Path "${directory}")) {
+        New-Item -ItemType Directory -Path "${directory}" -Force | Out-Null
+    }
+}
+
+if (-not (Test-Path -Path "${maxmindCurrentDirectory}")) {
+    New-Item -ItemType Directory -Path "${maxmindCurrentDirectory}" -Force | Out-Null
+} else {
+    Remove-Item -Path "${maxmindCurrentDirectory}" -Recurse -Force
+    New-Item -ItemType Directory -Path "${maxmindCurrentDirectory}" -Force | Out-Null
 }
 
 # Get the current date
@@ -40,18 +62,9 @@ $DATE = Get-Date -Format "yyyy-MM-dd"
 
 # Download Tor exit nodes
 $folderUrl = "https://collector.torproject.org/archive/exit-lists/"
-$torsaveDirectory = "${enrichmentDirectory}\tor"
-
-# Create the save directory for tor if it doesn't exist
-if (-not (Test-Path -Path "$torsaveDirectory")) {
-    New-Item -ItemType Directory -Path "$torsaveDirectory" -Force | Out-Null
-}
 
 #
 # TOR exit nodes
-#
-
-# Download all exit files for TOR
 $webClient = New-Object System.Net.WebClient
 $files = $webClient.DownloadString($folderUrl).Split("`n") | Select-String -Pattern '<a href="(exit[^"]+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
 
@@ -64,36 +77,20 @@ foreach ($file in $files) {
 $webClient.Dispose()
 
 #
-# MAC address lookup files
-#
-
-# Get manuf file for MAC address lookup
-$manufSaveDirectory = "${enrichmentDirectory}\manuf"
-if (-not (Test-Path -Path "${manufSaveDirectory}")) {
-    New-Item -ItemType Directory -Path "${manufSaveDirectory}" -Force | Out-Null
-}
-
+# MAC address lookup files - manuf file
 $manufUrl = "https://www.wireshark.org/download/automated/data/manuf"
 $manufSavePath = Join-Path -Path "${manufSaveDirectory}" -ChildPath "manuf.txt"
 Write-Output "Downloading ${manufUrl}"
 Invoke-WebRequest -Uri "${manufUrl}" -OutFile "${manufSavePath}"
 Copy-Item -Path "${manufSavePath}" -Destination "${manufSaveDirectory}\manuf-${DATE}.txt" -Force
 
-
 #
 # IPinfo.io Free IP to Country + IP to ASN databases
-#
-
 if (-not "${IPINFO_API_KEY}") {
     Write-Output "Please set the IPINFO_API_KEY variable in config.ps1 if you want to download IPinfo databases"
 } elseif ($IPINFO_API_KEY -eq "YOUR KEY") {
     Write-Output "Please enter your key for the IPINFO_API_KEY variable in config.ps1 if you like to download databases from IPinfo."
 } else {
-    $IPinfoSaveDirectory = "${enrichmentDirectory}\ipinfo"
-    if (-not (Test-Path -Path "${IPinfoSaveDirectory}")) {
-        New-Item -ItemType Directory -Path "${IPinfoSaveDirectory}" -Force | Out-Null
-    }
-
     # Download IPinfo.io Free IP to Country database
     $folderUrl = "https://ipinfo.io/data/free/country_asn.mmdb?token=${IPINFO_API_KEY}"
     $savePath = Join-Path -Path "${IPinfoSaveDirectory}" -ChildPath "country_asn.mmdb"
@@ -102,10 +99,8 @@ if (-not "${IPINFO_API_KEY}") {
     Copy-Item -Path "${savePath}" -Destination "${IPinfoSaveDirectory}\country_asn-${DATE}.mmdb" -Force
 }
 
-
 #
 # Maxmind GeoLite2 databases
-#
 
 # Check if the Maxmind license key is set
 if (-not "${MAXMIND_LICENSE_KEY}") {
@@ -113,13 +108,6 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
 } elseif ($MAXMIND_LICENSE_KEY -eq "YOUR KEY") {
     Write-Output "Please enter your key for the MAXMIND_LICENSE_KEY variable in config.ps1."
 } else {
-    $maxmindSaveDirectory = "${enrichmentDirectory}\maxmind"
-
-    # Create the save directory for maxmind if it doesn't exist
-    if (-not (Test-Path -Path "${maxmindSaveDirectory}")) {
-        New-Item -ItemType Directory -Path "${maxmindSaveDirectory}" -Force | Out-Null
-    }
-
     # Download Maxmind GeoLite2 ASN database
     $folderUrl = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz"
     $savePath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-ASN.tar.gz"
@@ -142,26 +130,6 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
     Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-Country-${DATE}.tar.gz" -Force
 
     # Unpack latest Maxmind GeoLite2 databases
-    $maxmindUnpackDirectory = "${maxmindSaveDirectory}\unpack"
-    if (-not (Test-Path -Path "${maxmindUnpackDirectory}")) {
-        New-Item -ItemType Directory -Path "${maxmindUnpackDirectory}" -Force | Out-Null
-    }
-
-    $maxmindASNUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-ASN"
-    if (-not (Test-Path -Path "${maxmindASNUnpackDirectory}")) {
-        New-Item -ItemType Directory -Path "${maxmindASNUnpackDirectory}" -Force | Out-Null
-    }
-
-    $maxmindCityUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-City"
-    if (-not (Test-Path -Path "${maxmindCityUnpackDirectory}")) {
-        New-Item -ItemType Directory -Path "${maxmindCityUnpackDirectory}" -Force | Out-Null
-    }
-
-    $maxmindCountryUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-Country"
-    if (-not (Test-Path -Path "${maxmindCountryUnpackDirectory}")) {
-        New-Item -ItemType Directory -Path "${maxmindCountryUnpackDirectory}" -Force | Out-Null
-    }
-
     Write-Output "Unpacking Maxmind GeoLite2 databases"
 
     $maxmindASNUnpackPath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-ASN.tar.gz"
@@ -174,14 +142,6 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
     tar xzf "${maxmindCountryUnpackPath}" -C "${maxmindCountryUnpackDirectory}"
 
     Write-Output "Copying Maxmind GeoLite2 databases to maxmind_current"
-    $maxmindCurrentDirectory = "${enrichmentDirectory}\maxmind_current"
-    if (-not (Test-Path -Path "${maxmindCurrentDirectory}")) {
-        New-Item -ItemType Directory -Path "${maxmindCurrentDirectory}" -Force | Out-Null
-    } else {
-        Remove-Item -Path "${maxmindCurrentDirectory}" -Recurse -Force
-        New-Item -ItemType Directory -Path "${maxmindCurrentDirectory}" -Force | Out-Null
-    }
-
     $maxmindUnpackFiles = Get-ChildItem -Path "${maxmindUnpackDirectory}" -Recurse -Filter "*.mmdb"
     foreach ($maxmindUnpackFile in $maxmindUnpackFiles) {
         Copy-Item -Path "${maxmindUnpackFile}" -Destination "${maxmindCurrentDirectory}" -Force
@@ -197,17 +157,7 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
 
 #
 # Download the latest version of Suricata rules
-#
-
-# Download the latest version of Suricata rules
 $suricataUrl = "https://rules.emergingthreats.net/open/suricata-5.0/emerging.rules.zip"
-$suricataSaveDirectory = "${enrichmentDirectory}\suricata"
-
-# Create the save directory for suricata if it doesn't exist
-if (-not (Test-Path -Path "${suricataSaveDirectory}")) {
-    New-Item -ItemType Directory -Path "${suricataSaveDirectory}" -Force | Out-Null
-}
-
 $suricataSavePath = Join-Path -Path "${suricataSaveDirectory}" -ChildPath "emerging.rules.zip"
 Write-Output "Downloading $suricataUrl"
 Invoke-WebRequest -Uri "${suricataUrl}" -OutFile "${suricataSavePath}"
@@ -215,17 +165,7 @@ Copy-Item -Path "${suricataSavePath}" -Destination "${suricataSaveDirectory}\eme
 
 #
 # Download the latest version of Snort rules
-#
-
-# Download the latest version of Snort rules
 $snortUrl = "https://www.snort.org/downloads/community/snort3-community-rules.tar.gz"
-$snortSaveDirectory = "${enrichmentDirectory}\snort"
-
-# Create the save directory for snort if it doesn't exist
-if (-not (Test-Path -Path "${snortSaveDirectory}")) {
-    New-Item -ItemType Directory -Path "${snortSaveDirectory}" -Force | Out-Null
-}
-
 $snortSavePath = Join-Path -Path "${snortSaveDirectory}" -ChildPath "community-rules.tar.gz"
 Write-Output "Downloading $snortUrl"
 Invoke-WebRequest -Uri "${snortUrl}" -OutFile "${snortSavePath}"
@@ -233,21 +173,8 @@ Copy-Item -Path "${snortSavePath}" -Destination "${snortSaveDirectory}\community
 
 #
 # Git repositories for enrichment
-#
-
-if (! (Get-Command git )) {
-    Write-Output "Need git to checkout git repositories."
-    Exit
-} else {
-    Write-Output "Updating git repositories."
-}
-
-$gitSaveDirectory = "${enrichmentDirectory}\git"
-if (-not (Test-Path -Path "${gitSaveDirectory}")) {
-    New-Item -ItemType Directory -Path "${gitSaveDirectory}" -Force | Out-Null
-}
+Write-Output "Updating git repositories."
 Set-Location "${gitSaveDirectory}"
-
 $repourls = `
     "https://github.com/securityscorecard/SSC-Threat-Intel-IoCs.git", `
     "https://github.com/volexity/threat-intel", `
@@ -273,16 +200,10 @@ foreach ($repourl in $repourls) {
 
 # Yara rules
 Write-Output "Downloading Yara rules"
-$yaraSaveDirectory = "${enrichmentDirectory}\yara"
-if (-not (Test-Path -Path "${yaraSaveDirectory}")) {
-    New-Item -ItemType Directory -Path "${yaraSaveDirectory}" -Force | Out-Null
-}
 Set-Location "${yaraSaveDirectory}"
-
 $status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-core.zip" -FilePath ".\enrichment\yara\yara-forge-rules-core.zip"
 $status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-extended.zip" -FilePath ".\enrichment\yara\yara-forge-rules-extended.zip"
 $status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\enrichment\yara\yara-forge-rules-full.zip"
-
 $null = $status
 
 # Unzip yara signatures
@@ -292,14 +213,8 @@ $null = $status
 
 # Get CVE data
 Write-Output "Downloading CVE data"
-$cveSaveDirectory = "${enrichmentDirectory}\cve"
-if (-not (Test-Path -Path "${cveSaveDirectory}")) {
-    New-Item -ItemType Directory -Path "${cveSaveDirectory}" -Force | Out-Null
-}
 Set-Location "${cveSaveDirectory}"
-
 $status = Get-FileFromUri -uri "https://cve.mitre.org/data/downloads/allitems.csv" -FilePath ".\enrichment\cve\allitems.csv"
-
 $status = Get-GitHubRelease -repo "CVEProject/cvelistV5" -path ".\enrichment\cve\all_CVEs_at_midnight.zip.zip" -match "all_CVEs_at_midnight.zip.zip$"
 
 Set-Location "${currentDirectory}"

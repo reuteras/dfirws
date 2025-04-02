@@ -136,11 +136,11 @@ if ($status) {
 
 # ripgrep
 $status = Get-GitHubRelease -repo "BurntSushi/ripgrep" -path "${SETUP_PATH}\ripgrep.zip" -match "x86_64-pc-windows-msvc.zip$" -check "Zip archive data"
-& "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ripgrep.zip" -o"${TOOLS}" | Out-Null
 if ($status) {
     if (Test-Path "${TOOLS}\ripgrep") {
         Remove-Item "${TOOLS}\ripgrep" -Recurse -Force
     }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ripgrep.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\ripgrep-* "${TOOLS}\ripgrep"
 }
 
@@ -310,17 +310,14 @@ $status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\dl
 if ($status) {
     Copy-Item ${SETUP_PATH}\dll_load32.exe ${TOOLS}\bin\
 }
-
 $status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\dll_load64.exe" -match "dll_load64.exe" -check "PE32"
 if ($status) {
     Copy-Item ${SETUP_PATH}\dll_load64.exe ${TOOLS}\bin\
 }
-
 $status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\kdb_check.exe" -match "kdb_check.exe" -check "PE32"
 if ($status) {
     Copy-Item ${SETUP_PATH}\kdb_check.exe ${TOOLS}\bin\
 }
-
 $status = Get-GitHubRelease -repo "hasherezade/pe_utils" -path "${SETUP_PATH}\pe_check.exe" -match "pe_check.exe" -check "PE32"
 if ($status) {
     Copy-Item ${SETUP_PATH}\pe_check.exe ${TOOLS}\bin\
@@ -595,7 +592,6 @@ if ($status) {
 }
 
 #Plugins for Notepad++ - installed during start
-
 # ComparePlus plugin for Notepad++ - installed during start
 $status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zip" -match "x64.zip" -check "Zip archive data"
 # DSpellCheck plugin for Notepad++ - installed during start
@@ -605,7 +601,6 @@ $status =  Get-GitHubRelease -repo "mohzy83/NppMarkdownPanel" -path "${SETUP_PAT
 
 # Visual Studio Code powershell extension - installed during start
 $status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix" -check "Zip archive data"
-
 # vscode-shellcheck
 $status =  Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match "vsix" -check "Zip archive data"
 

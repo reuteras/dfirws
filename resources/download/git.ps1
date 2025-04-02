@@ -1,10 +1,5 @@
 . ".\resources\download\common.ps1"
 
-if (! (Get-Command git )) {
-    Write-DateLog "Need git to checkout git repositories."
-    Exit
-}
-
 New-Item -ItemType Directory -Force -Path mount\git | Out-Null
 Set-Location mount\git
 if (Test-Path .\PatchaPalooza) {

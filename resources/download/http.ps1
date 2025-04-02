@@ -292,9 +292,6 @@ $status = Get-FileFromUri -uri "https://cdn.binary.ninja/installers/binaryninja_
 # gpg4win
 $status = Get-FileFromUri -uri "https://files.gpg4win.org/gpg4win-latest.exe" -FilePath ".\downloads\gpg4win.exe" -check "PE32"
 
-# Firefox
-$status = Get-FileFromUri -uri "https://download.mozilla.org/?product=firefox-msi-latest-ssl&os=win64&lang=en-US" -FilePath ".\downloads\firefox.msi" -check "Composite Document File V2 Document"
-
 # Tor browser
 $TorBrowserUrl = Get-DownloadUrlFromPage -Url "https://www.torproject.org/download/" -RegEx '/dist/[^"]+exe'
 $status = Get-FileFromUri -uri "https://www.torproject.org$TorBrowserUrl" -FilePath ".\downloads\torbrowser.exe" -check "PE32"
@@ -360,13 +357,8 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
 }
 
-# Foxit Reader - manual installation
-$status = Get-FileFromUri -uri "https://www.foxit.com/downloads/latest.html?product=Foxit-Reader&platform=Windows&version=&package_type=&language=English&distID=" -FilePath ".\downloads\foxitreader.exe" -check "PE32"
-
 # OpenVPN - manual installation
 $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi" -check "Composite Document File V2 Document"
-
-# Update the links below when new versions are released
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
 $digitalcorpora_url = Get-DownloadUrlFromPage -url "https://downloads.digitalcorpora.org/downloads/bulk_extractor" -RegEx "[^']+windows.zip"
@@ -496,7 +488,6 @@ $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/pac
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\heartbeat.zip" -CheckURL "Yes" -check "Zip archive data"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\auditbeat.zip" -CheckURL "Yes" -check "Zip archive data"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\winlogbeat.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/functionbeat/functionbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\functionbeat.zip" -CheckURL "Yes" -check "Zip archive data"
 
 # Remove unused files and directories
 if (Test-Path -Path "${TOOLS}\win32") {

@@ -34,6 +34,9 @@ The file path where the downloaded file will be saved.
 .PARAMETER CheckURL
 Specifies whether to check the URL for the file in the tools_downloaded.csv file.
 
+.PARAMETER check
+Checks the file type of the downloaded file using the specified regex pattern.
+
 .OUTPUTS
 System.Boolean - Returns $true if the file was successfully downloaded and saved, $false otherwise.
 
@@ -132,7 +135,7 @@ function Get-FileFromUri {
             if ($Uri -like "*sourceforge.net*") {
                 $UA_FLAG = '--user-agent "Wget x64"'
             } elseif ($Uri -like "*.amazonaws.com*") {
-                $UA_FLAG = '--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"'
+                $UA_FLAG = '--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"'
             } else {
                 $UA_FLAG = ""
             }
@@ -140,10 +143,11 @@ function Get-FileFromUri {
             if ($Uri -like "*marketplace.visualstudio.com*") {
                 Invoke-WebRequest -uri "${Uri}" -outfile "${TmpFilePath}"
             } else {
-                $CMD = "curl.exe"
+                $CMD = "C:\Windows\system32\curl.exe"
                 $FLAGS = @()
-                (Write-Output "$ETAG_FLAG $Z_FLAG $GH_FLAG $UA_FLAG --silent -L --output $TmpFilePath $Uri").split(" ") | ForEach-Object {if ("" -ne $_ ) {$FLAGS += $_}}
-                & $CMD $FLAGS
+                (Write-Output "$ETAG_FLAG $Z_FLAG $GH_FLAG $UA_FLAG -L --silent --output $TmpFilePath $Uri").split(" ") | ForEach-Object {if ("" -ne $_ ) {$FLAGS += $_}}
+                $COMMAND_LINE = $CMD + " " + $FLAGS -join " "
+                Invoke-Expression $COMMAND_LINE
             }
             if (Test-Path $TmpFilePath) {
                 Write-SynchronizedLog "Downloaded $Uri to $FilePath."
@@ -296,6 +300,12 @@ function Get-DownloadUrl {
 .PARAMETER match
     Specifies the regex pattern used to match the desired download URL.
 
+.PARAMETER version
+    Specifies the version of the release to download. The default value is "latest".
+
+.PARAMETER check
+    Specifies a regex pattern to check the file type of the downloaded file.
+
 .EXAMPLE
     Get-GitHubRelease -repo "Microsoft/PowerShell" -path "C:\Downloads" -match ".*\.zip"
 
@@ -444,11 +454,11 @@ Function to write a synchronized log to a specified file.
 .DESCRIPTION
 This function writes a synchronized log to a specified file. It ensures that multiple threads or processes can write to the log file without conflicts.
 
-.PARAMETER LogFile
-The path to the log file where the log will be written.
-
 .PARAMETER Message
 The message to be written to the log file.
+
+.PARAMETER LogFile
+The path to the log file where the log will be written.
 
 .EXAMPLE
 Write-SynchronizedLog -LogFile "C:\Logs\log.txt" -Message "This is a log message"
@@ -654,8 +664,38 @@ function Get-Winget {
     return $true
 }
 
+# Function to wait for the sandbox to finish
+function Wait-Sandbox {
+    param (
+        [Parameter(Mandatory=$True)] [string]$WSBPath,
+        [Parameter(Mandatory=$True)] [string]$WaitForPath
+    )
+
+    $sandboxRunning = $true
+
+    while ($sandboxRunning) {
+        if (Test-Path -Path $WaitForPath) {
+            Write-SynchronizedLog "Sandbox finished."
+            $sandboxRunning = $false
+        } else {
+            Start-Sleep -Seconds 5
+        }
+    }
+
+    Stop-Sandbox
+
+    if (Test-Path -Path $WSBPath) {
+        Remove-Item -Force $WSBPath | Out-Null
+    }
+
+    if (Test-Path -Path $WaitForPath) {
+        Remove-Item -Force $WaitForPath | Out-Null
+    }
+}
+
+# Function to stop the sandbox
 function Stop-Sandbox {
     Stop-Process -Name WindowsSandboxClient -Force -ErrorAction SilentlyContinue
     Stop-Process -Name WindowsSandboxRemoteSession -Force -ErrorAction SilentlyContinue
-    Start-Sleep 1
+    Start-Sleep 5
 }
