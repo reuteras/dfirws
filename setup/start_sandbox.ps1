@@ -7,6 +7,7 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
     . '\\vmware-host\Shared Folders\dfirws\setup\wscommon.ps1'
 }
 
+# Ugly fix
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
 "`n" | CiTool.exe -r
 
@@ -329,7 +330,7 @@ $ADD_TO_PATH = @("${MSYS2_DIR}", `
 	"${TOOLS}\zircolite"
 	"${TOOLS}\zircolite\bin"
 	"${TOOLS}\zstd"
-	"${VENV}\ingestr\Scripts"
+	"${VENV}\bin"
 	"${VENV}\jpterm\Scripts"
 	"${VENV}\magika\Scripts"
 	"${VENV}\maldump\Scripts"
