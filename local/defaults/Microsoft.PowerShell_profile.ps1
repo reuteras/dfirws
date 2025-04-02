@@ -16,7 +16,6 @@ $env:POSH_THEMES_PATH = "${HOME}\AppData\Local\Programs\oh-my-posh\themes"
 $env:PSModulePath = "$env:PSModulePath;C:\Downloads\powershell-modules"
 # Find last version of Ghidra
 $env:GHIDRA_INSTALL_DIR = "C:\Tools\ghidra\" + ((Get-ChildItem C:\Tools\ghidra\ | C:\Windows\System32\findstr.exe PUBLIC | Select-Object -Last 1).Split(" ") | Select-Object -Last 1)
-$env:INGESTR_DISABLE_TELEMETRY = "true"
 
 # Autosuggestions with PSReadLine
 if (-not(Get-Module -ListAvailable PSReadLine)) {
