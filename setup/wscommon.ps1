@@ -169,7 +169,7 @@ function Test-Command {
     }
 
     $FILE_TYPE = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
-    if ( ($FILE_TYPE -match $type) -or (($type -eq "PE32") -and ($FILE_TYPE == "Zip archive, with extra data prepended"))) {
+    if ( ($FILE_TYPE -match $type) -or (($type -eq "PE32") -and ($FILE_TYPE == "Zip archive, with extra data prepended")) -or (($type -eq "Zip archive data") -and ($FILE_TYPE == "data"))) {
         Write-SynchronizedLog "SUCCESS: $name exists and type matches $type"
     } else {
         $actual_type = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
@@ -424,7 +424,7 @@ function Install-Fibratus {
 function Install-Firefox {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-firefox.txt")) {
         Write-Output "Installing Firefox"
-        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\firefox.msi /qn /norestart"
+        Start-Process -Wait "${SETUP_PATH}\firefox.exe" -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART"
         if (Test-Path "${HOME}\Desktop\dfirws\Utilities\Browsers\Firefox (runs dfirws-install -Firefox).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Utilities\Browsers\Firefox (runs dfirws-install -Firefox).lnk" -Force
         }
@@ -441,7 +441,7 @@ function Install-Firefox {
 function Install-FoxitReader {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-foxitreader.txt")) {
         Write-Output "Installing Foxit Reader"
-        Start-Process -Wait "${SETUP_PATH}\foxitreader.exe" -ArgumentList '/SP- /VERYSILENT /SUPPRESSMSGBOXES /NORESTART'
+        Start-Process -Wait "${SETUP_PATH}\foxitreader.exe" -ArgumentList '/quiet /DisableInternet'
         if (Test-Path "${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader).lnk" -Force
         }
@@ -663,25 +663,6 @@ function Install-Malcat {
         Write-Output "Malcat is already installed"
     }
 }
-
-#function Install-Maltego {
-#    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-maltego.txt")) {
-#        Write-Output "Installing Maltego"
-#        Start-Process -Wait "${SETUP_PATH}\maltego.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
-#        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
-#        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego.lnk" "${HOME}\Desktop\" -Force
-#        Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Maltego Java Config.lnk" "${HOME}\Desktop\dfirws\OSINT" -Force
-#        if (Test-Path "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk") {
-#            Remove-Item "${HOME}\Desktop\dfirws\OSINT\Maltego (runs dfirws-install -Maltego).lnk" -Force
-#        }
-#        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - OSINT\Maltego (runs dfirws-install -Maltego).lnk") {
-#            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - OSINT\Maltego (runs dfirws-install -Maltego).lnk" -Force
-#        }
-#        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-maltego.txt" | Out-Null
-#    } else {
-#        Write-Output "Maltego is already installed"
-#    }
-#}
 
 function Install-Neo4j {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neo4j.txt")) {
