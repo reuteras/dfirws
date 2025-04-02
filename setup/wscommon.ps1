@@ -169,7 +169,7 @@ function Test-Command {
     }
 
     $FILE_TYPE = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
-    if ( ($FILE_TYPE -match $type) -or (($type -eq "PE32") -and ($FILE_TYPE == "Zip archive, with extra data prepended")) -or (($type -eq "Zip archive data") -and ($FILE_TYPE == "data"))) {
+    if ( ($FILE_TYPE -match $type) -or (($type -eq "PE32") -and ($FILE_TYPE -eq "Zip archive, with extra data prepended")) -or (($type -eq "Zip archive data") -and ($FILE_TYPE -eq "data"))) {
         Write-SynchronizedLog "SUCCESS: $name exists and type matches $type"
     } else {
         $actual_type = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
@@ -892,7 +892,7 @@ function Install-VisualStudioBuildTool {
         "`n" | CiTool.exe -r
 
         Write-Output "Installing Visual Studio Build Tools"
-        
+
         Start-Process -Wait "${TOOLS}\VSLayout\vs_buildtools.exe" -ArgumentList "--noWeb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop\dfirws\Programming"

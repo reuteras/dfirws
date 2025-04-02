@@ -160,6 +160,7 @@ uv pip install -U `
     "acquire", `
     "aiohttp[speedups]", `
     "Aspose.Email-for-Python-via-Net", `
+    "compressed_rtf", `
     "dissect", `
     "dissect.target[yara]", `
     "flow.record", `
@@ -174,6 +175,7 @@ uv pip install -U `
     "keystone-engine", `
     "lief", `
     "matplotlib", `
+    "minidump", `
     "msoffcrypto-tool", `
     "msticpy", `
     "neo4j", `

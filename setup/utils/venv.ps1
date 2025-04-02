@@ -33,8 +33,6 @@ param(
     [Switch]$maldump,
     [Parameter(HelpMessage = "Switch to venv mwcp.")]
     [Switch]$mwcp,
-    [Parameter(HelpMessage = "Switch to venv pdfalyzer.")]
-    [Switch]$pdfalyzer,
     [Parameter(HelpMessage = "Switch to venv pe2pic.")]
     [Switch]$pe2pic,
     [Parameter(HelpMessage = "Switch to venv peepdf3.")]
@@ -47,8 +45,6 @@ param(
     [Switch]$scare,
     [Parameter(HelpMessage = "Switch to venv sigma-cli.")]
     [Switch]$sigma,
-    [Parameter(HelpMessage = "Switch to venv toolong.")]
-    [Switch]$toolong,
     [Parameter(HelpMessage = "Switch to venv white-phoenix.")]
     [Switch]$whitephoenix
 )
@@ -91,8 +87,6 @@ if ($aspose) {
     $venv = "maldump"
 } elseif ($mwcp) {
     $venv = "mwcp"
-} elseif ($pdfalyzer) {
-    $venv = "pdfalyzer"
 } elseif ($pe2pic) {
     $venv = "pe2pic"
 } elseif ($peepdf3) {

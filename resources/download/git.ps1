@@ -90,6 +90,11 @@ Copy-Item .\PatchaPalooza2.py .\PatchaPalooza.py -Force
 Remove-Item .\PatchaPalooza2.py
 Set-Location ..
 
+# Copy parseUSBs.exe to bin directory
+if (Test-Path -Path ".\parseusbs\parseusbs.exe") {
+    Copy-Item ".\parseusbs\parseusbs.exe" "..\mount\Tools\bin" -Force | Out-Null
+}
+
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
