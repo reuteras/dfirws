@@ -21,8 +21,6 @@ param(
     [Switch]$floss,
     [Parameter(HelpMessage = "Switch to venv ghidrecomp.")]
     [Switch]$ghidrecomp,
-    [Parameter(HelpMessage = "Switch to venv ingestr.")]
-    [Switch]$ingestr,
     [Parameter(HelpMessage = "Switch to venv jep.")]
     [Switch]$jep,
     [Parameter(HelpMessage = "Switch to venv jpterm.")]
@@ -81,8 +79,6 @@ if ($aspose) {
     $venv = "flare-floss"
 } elseif ($ghidrecomp) {
     $venv = "ghidrecomp"
-} elseif ($ingestr) {
-    $venv = "ingestr"
 } elseif ($jep) {
     $venv = "jep"
 } elseif ($jpterm) {
@@ -109,8 +105,6 @@ if ($aspose) {
     $venv = "scare"
 } elseif ($sigma) {
     $venv = "sigma-cli"
-} elseif ($toolong) {
-    $venv = "toolong"
 } elseif ($whitephoenix) {
     $venv = "white-phoenix"
 } else {
@@ -120,4 +114,11 @@ if ($aspose) {
 $ErrorActionPreference= "silentlycontinue"
 deactivate
 
-& "C:\venv\$venv\Scripts\Activate.ps1"
+if (Test-Path "C:\venv\$venv\Scripts\Activate.ps1") {
+    & "C:\venv\$venv\Scripts\Activate.ps1"
+} elseif (Test-Path "C:\venv\uv\$venv\bin\Activate.ps1") {
+    & "C:\venv\uv\$venv\bin\Activate.ps1"
+} else {
+    Write-Output "ERROR: Activate.ps1 not found. Exiting"
+    Exit
+}
