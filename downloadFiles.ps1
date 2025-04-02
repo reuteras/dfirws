@@ -230,11 +230,11 @@ if ($all -or $Release.IsPresent) {
 
 if ($all -or $Http.IsPresent) {
     Write-DateLog "Download files via HTTP."
-    $HTTP_ARGS = ""
     if ($HttpNoVSCodeExtensions) {
-        $HTTP_ARGS += "-NoVSCodeExtensions "
+        .\resources\download\http.ps1 -NoVSCodeExtensions
+    } else {
+        .\resources\download\http.ps1
     }
-    powershell -noprofile .\resources\download\http.ps1 $HTTP_ARGS
 }
 
 if ($all -or $Node.IsPresent) {
