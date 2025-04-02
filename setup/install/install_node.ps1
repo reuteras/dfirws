@@ -35,8 +35,6 @@ npm install --global jsdom | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >>
 Write-DateLog "Install box-js" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global box-js | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
-Get-Job | Receive-Job
-
 Write-DateLog "Node installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 if (Test-Path -Path "${TOOLS}\Debug") {

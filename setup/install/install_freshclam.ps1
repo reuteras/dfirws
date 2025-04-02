@@ -11,7 +11,6 @@ Write-Output "Get-Content C:\log\freshclam.txt -Wait" | Out-File -FilePath "C:\P
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
 Install-ClamAV
-
 while (-not (Test-Path -Path "C:\Program Files\ClamAV\freshclam.exe")) {
     Start-Sleep -Seconds 1
 }

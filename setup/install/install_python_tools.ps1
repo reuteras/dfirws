@@ -33,16 +33,14 @@ if (! (Test-Path "${WSDFIR_TEMP}")) {
 Write-Output "Get-Content C:\log\python.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
+# Ugly fix
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
+"`n" | CiTool.exe -r
+
 Write-DateLog "Install Git." >> "C:\log\python.txt"
 Install-Git | Out-Null
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine")
 git config --global --add safe.directory '*' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
-Write-DateLog "Fix speed issues in Windows 11 24H2." >> "C:\log\python.txt"
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
-"`n" | CiTool.exe -r
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f
-net user administrator /active:yes
 
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
 $PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
@@ -84,6 +82,7 @@ foreach ($package in `
     "malwarebazaar", `
     "minidump", `
     "mkyara", `
+    "msoffcrypto-tool", `
     "mwcp", `
     "name-that-hash", `
     "netaddr", `
@@ -92,13 +91,14 @@ foreach ($package in `
     "pcode2code", `
     "pdfalyzer", `
     "pip", `
-    "toolong", `
     "protodeep", `
     "ptpython", `
     "pwncat", `
+    "pyghidra", `
     "pyOneNote", `
     "pypng", `
     "rexi", `
+    "scapy", `
     "shodan", `
     "sigma-cli", `
         "pysigma-backend-elasticsearch", `
@@ -109,6 +109,7 @@ foreach ($package in `
         "pysigma-pipeline-windows", `
     "stego-lsb", `
     "time-decode", `
+    "toolong", `
     "unpy2exe", `
     "visidata", `
     "xlrd", `
@@ -128,14 +129,11 @@ C:\Windows\System32\curl.exe -L --silent -o "SQLiteWalker.py" "https://raw.githu
 C:\Windows\System32\curl.exe -L --silent -o "CanaryTokenScanner.py" "https://raw.githubusercontent.com/0xNslabs/CanaryTokenScanner/main/CanaryTokenScanner.py"
 C:\Windows\System32\curl.exe -L --silent -o "sigs.py" "https://raw.githubusercontent.com/clausing/scripts/master/sigs.py"
 
-(Get-Content .\machofile-cli.py -raw) -replace "#!/usr/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\machofile-cli2.py"
-Copy-Item machofile-cli2.py machofile-cli.py
-Remove-Item machofile-cli2.py
+# Copy executables to bin folder
+Copy-Item "C:\venv\uv\chepy\Scripts\pyjwt.exe" "C:\venv\bin\pyjwt.exe" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Copy-Item "C:\venv\uv\chepy\Scripts\scapy.exe" "C:\venv\bin\scapy.exe" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
-(Get-Content .\machofile.py -raw) -replace "#!/usr/bin/python","#!/usr/bin/env python" | Set-Content -Path ".\machofile2.py"
-Copy-Item machofile2.py machofile.py
-Remove-Item machofile2.py
-
+# Copy scripts to bin folder
 if (Test-Path "C:\git\bmc-tools\bmc-tools.py") {
     Copy-Item "C:\git\bmc-tools\bmc-tools.py" "C:\Tools\bin\bmc-tools.py"
 }
@@ -176,6 +174,7 @@ uv pip install -U `
     "keystone-engine", `
     "lief", `
     "matplotlib", `
+    "msoffcrypto-tool", `
     "msticpy", `
     "neo4j", `
     "neo4j-driver", `
@@ -184,6 +183,7 @@ uv pip install -U `
     "openpyxl", `
     "orjson", `
     "peutils", `
+    "pefile", `
     "ppdeep", `
     "prettytable", `
     "pypdf", `
@@ -226,7 +226,7 @@ uv pip install -U `
         dfir-unfurl[ui] `
         hexdump `
         maclookup `
-        tomlkit | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+        tomlkit | ForEach-Object{ "$_" } 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 # Download each file and update the base.html content with the local path
 $baseHtmlPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\templates\base.html"
@@ -284,7 +284,7 @@ uv venv "C:\venv\scare"
 Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
-uv pip install ptpython pyreadline3 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+uv pip install ptpython pyreadline3 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 (Get-Content .\scarelib.py -raw) -replace "print\(splash\)","splash = 'Simple Configurable Asm REPL && Emulator'`n    print(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
 Copy-Item scarelib2.py scarelib.py
@@ -301,7 +301,6 @@ Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 if ($HAVE_VISUAL_STUDIO_BUILD_TOOLS) {
 
     # Get current versions to check if they have been updated and needs to be reinstalled
-    Get-LatestPipVersion ingestr > "${WSDFIR_TEMP}\visualstudio.txt"
     Get-LatestPipVersion jep >> "${WSDFIR_TEMP}\visualstudio.txt"
     ((C:\Windows\System32\curl.exe -L --silent "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> "${WSDFIR_TEMP}\visualstudio.txt"
     $GHIDRA_INSTALL_DIR >> "${WSDFIR_TEMP}\visualstudio.txt"
@@ -388,52 +387,6 @@ if ($HAVE_VISUAL_STUDIO_BUILD_TOOLS) {
             Write-DateLog "Neither jep or ghidrathon has been updated, don't build jep." >> "C:\log\python.txt"
         }
 
-        #
-        # Standard venvs needing Visual Studio Build Tools
-        #
-
-        foreach ($virtualenv in "ingestr") {
-            Get-LatestPipVersion "${virtualenv}" > "${WSDFIR_TEMP}\${virtualenv}.txt"
-
-            if (Test-Path "C:\venv\${virtualenv}\${virtualenv}.txt") {
-                $CURRENT_VENV = "C:\venv\${virtualenv}\${virtualenv}.txt"
-            } else {
-                $CURRENT_VENV = "C:\Progress.ps1"
-            }
-
-            if ((Get-FileHash C:\tmp\${virtualenv}.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-                Write-DateLog "Install packages in venv ${virtualenv} in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-                if (Test-Path "C:\venv\${virtualenv}") {
-                    Get-ChildItem C:\venv\${virtualenv}\ -Exclude ${virtualenv}.txt | Remove-Item -Force -Recurse 2>&1 | ForEach-Object{ "$_" } | Out-null
-                }
-
-                # Set environment variables for Visual Studio Build Tools
-                $env:DISTUTILS_USE_SDK=1
-                $env:MSSdk=1
-                $env:LIB = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\shared\x64;" + $env:LIB
-                $env:INCLUDE = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\include" + ";C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0" + $env:INCLUDE
-                $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
-
-                Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\${virtualenv}"
-                & "C:\venv\${virtualenv}\Scripts\Activate.ps1" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-                Set-Location "C:\venv\${virtualenv}"
-
-                python -m pip install -U pip 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
-                Write-DateLog "Install ${virtualenv} in venv." >> "C:\log\python.txt"
-                python -m pip install -U "${virtualenv}" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
-                Copy-Item "${WSDFIR_TEMP}\${virtualenv}.txt" "C:\venv\${virtualenv}\${virtualenv}.txt" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
-                deactivate
-                Write-DateLog "Python venv ${virtualenv} done." >> "C:\log\python.txt"
-            } else {
-                Write-DateLog "${virtualenv} has not been updated, don't update ${virtualenv} venv." >> "C:\log\python.txt"
-            }
-
-            # Save current versions
-            Copy-Item "${WSDFIR_TEMP}\${virtualenv}.txt" "C:\venv\${virtualenv}\${virtualenv}.txt" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-        }
         Copy-Item "${WSDFIR_TEMP}\visualstudio.txt" "C:\venv\visualstudio.txt" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     } else {
         Write-DateLog "Visual Studio Build Tools or pypi packages requiring it has not been updated, don't update venvs needing Visual Studio Build Tools." >> "C:\log\python.txt"
