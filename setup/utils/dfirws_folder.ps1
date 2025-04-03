@@ -299,8 +299,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\target-reg.exe (dissec
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\target-shell.exe (dissect).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command target-shell.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\thumbcache-extract-indexed.exe (dissect).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command thumbcache-extract-indexed.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\thumbcache-extract.exe (dissect).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command thumbcache-extract.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\venv-binary-refinery.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ${HOME}\Documents\tools\utils\venv.ps1 -binaryrefinery ; binref -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\venv-dissect.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ${HOME}\Documents\tools\utils\venv.ps1 -Dissect"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\binary-refinery.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command binref -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\vma-extract.exe (dissect).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command vma-extract.exe -h"
 
 # Incident response
@@ -316,7 +315,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Shadow-pulse (csv with inform
 # Malware tools
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -ClamAV"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files - venv).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ${HOME}\Documents\tools\utils\venv.ps1 -csvkit"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command csv --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\defender-detectionhistory-parser (dhparser).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dhparser -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command maldump.exe -h"
 
@@ -345,7 +344,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\hfs.exe.lnk" -Destinatio
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\ipexpand.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ipexpand.py"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\openvpn installer.lnk" -DestinationPath "${SETUP_PATH}\openvpn.msi"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\PuTTY (runs dfirws-install -PuTTY).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -PuTTY"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\scapy.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command venv.ps1 -chepy; scapy -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\scapy.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command scapy -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\tailscale installer.lnk" -DestinationPath "${SETUP_PATH}\tailscale.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\wireguard installer.lnk" -DestinationPath "${SETUP_PATH}\wireguard.msi"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Wireshark (runs dfirws-install -Wireshark).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Wireshark"
