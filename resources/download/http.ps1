@@ -7,7 +7,7 @@ param(
 
 if (! $NoVSCodeExtensions.IsPresent) {
     # Get URI for Visual Studio Code C++ extension - ugly
-    $vscode_cpp_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
+    $vscode_cpp_string = Get-DownloadUrlFromPage -url "https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
 
     if ("$vscode_cpp_string" -ne "") {
         $vscode_tmp = $vscode_cpp_string | Select-String -Pattern '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'

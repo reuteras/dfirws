@@ -85,14 +85,14 @@ foreach ($repourl in $repourls) {
 
 # Patch PatchaPalooza
 Set-Location PatchaPalooza
-(Get-Content .\PatchaPalooza.py -Raw) -replace "import termcolor","import termcolor`nimport colorama`ncolorama.init()" | Set-Content .\PatchaPalooza2.py
+(Get-Content .\PatchaPalooza.py -Raw) -replace "import termcolor","import termcolor`nimport colorama`ncolorama.init()" -replace '^#!/usr/bin/.*', '#!/usr/bin/env python' | Set-Content .\PatchaPalooza2.py
 Copy-Item .\PatchaPalooza2.py .\PatchaPalooza.py -Force
 Remove-Item .\PatchaPalooza2.py
 Set-Location ..
 
 # Copy parseUSBs.exe to bin directory
 if (Test-Path -Path ".\parseusbs\parseusbs.exe") {
-    Copy-Item ".\parseusbs\parseusbs.exe" "..\mount\Tools\bin" -Force | Out-Null
+    Copy-Item ".\parseusbs\parseusbs.exe" "..\Tools\bin" -Force | Out-Null
 }
 
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
