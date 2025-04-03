@@ -193,6 +193,7 @@ uv pip install -U `
     "python-magic", `
     "python-magic-bin", `
     "pyvis", `
+    "pywin32", `
     "pyzipper", `
     "requests", `
     "rzpipe", `
