@@ -695,6 +695,9 @@ function Wait-Sandbox {
 
 # Function to stop the sandbox
 function Stop-Sandbox {
+    [CmdletBinding(SupportsShouldProcess)]
+    param (
+    )
     Stop-Process -Name WindowsSandboxClient -Force -ErrorAction SilentlyContinue
     Stop-Process -Name WindowsSandboxRemoteSession -Force -ErrorAction SilentlyContinue
     Start-Sleep 5
