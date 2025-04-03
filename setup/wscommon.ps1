@@ -441,7 +441,7 @@ function Install-Firefox {
 function Install-FoxitReader {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-foxitreader.txt")) {
         Write-Output "Installing Foxit Reader"
-        Start-Process -Wait "${SETUP_PATH}\foxitreader.exe" -ArgumentList '/quiet /DisableInternet'
+        & "${SETUP_PATH}\foxitreader.exe" /quiet /DisableInternet 2>&1 | Out-Null
         if (Test-Path "${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader).lnk" -Force
         }
