@@ -110,8 +110,8 @@ deactivate
 
 if (Test-Path "C:\venv\$venv\Scripts\Activate.ps1") {
     & "C:\venv\$venv\Scripts\Activate.ps1"
-} elseif (Test-Path "C:\venv\uv\$venv\bin\Activate.ps1") {
-    & "C:\venv\uv\$venv\bin\Activate.ps1"
+} elseif (Test-Path "C:\venv\uv\$venv\Scripts\Activate.ps1") {
+    & "C:\venv\uv\$venv\Scripts\Activate.ps1"
 } else {
     Write-Output "ERROR: Activate.ps1 not found. Exiting"
     Exit
