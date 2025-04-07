@@ -356,7 +356,7 @@ Test-Command C:\venv\bin\js-beautify.exe PE32
 Test-Command C:\venv\bin\peepdf.exe PE32
 Test-Command C:\venv\bin\rexi.exe PE32
 Test-Command C:\venv\scare\Scripts\ptpython.exe PE32
-Test-Command C:\venv\bin\sigma.exe PE32
+Test-Command C:\venv\default\Scripts\sigma.exe PE32
 Test-Command C:\venv\default\Scripts\markdown-it.exe PE32
 Test-Command C:\venv\bin\tl.exe PE32
 Test-Command C:\venv\white-phoenix\Scripts\f2py.exe PE32
