@@ -149,7 +149,7 @@ function Base64_Decode {
     if($b64_encoded_string -match '^TVqQ'){
         return [Byte[]][Convert]::FromBase64String($b64_encoded_string)
     }
-    
+
     try{
         $b64_decoded = [System.Convert]::FromBase64String($b64_encoded_string)
         }
@@ -158,7 +158,7 @@ function Base64_Decode {
         $ErrorMessage = $_.Exception.Message
         return $false
     }
-       
+
     $b64_decoded_ascii = [System.Text.Encoding]::ASCII.GetString($b64_decoded)
     if($b64_decoded_ascii -match '^(.\x00){8,}'){
         return [System.Text.Encoding]::UNICODE.GetString([System.Convert]::FromBase64String($b64_encoded_string))
@@ -177,16 +177,16 @@ function Replace_Quotes_FuncName
             [String]$Command
         )
        $str_format_pattern = [regex]"[\.&](\`"|')[a-zA-Z0-9]+(\`"|')\("
-       $matches = $str_format_pattern.Matches($Command) 
+       $matches = $str_format_pattern.Matches($Command)
 
        While ($matches.Count -gt 0){
             ForEach($match in $matches){
                 Write-Verbose "[Replace_Quotes_FuncName] Replacing: $($match)`tWith: $($match.ToString().replace('"','').replace(`"'`",`"`"))"
                 $Command = $Command.Replace($match, $match.ToString().replace('"','').replace("'",""))
                 }
-            $matches = $str_format_pattern.Matches($Command) 
+            $matches = $str_format_pattern.Matches($Command)
         }
-       
+
        return $Command
 
     }
@@ -200,16 +200,16 @@ function Replace_FuncParensWrappers
             [String]$Command
         )
        $str_format_pattern = [regex]"[\.&]\(('|`")[a-zA-Z-]+('|`")\)"
-       $matches = $str_format_pattern.Matches($Command) 
+       $matches = $str_format_pattern.Matches($Command)
 
        While ($matches.Count -gt 0){
             ForEach($match in $matches){
                 Write-Verbose "[Replace_FuncParensWrappers] Replacing: $($match)`tWith: $($match.ToString().replace('.','').replace('&','').replace("('",'').replace("')",'').replace('("','').replace('")',''))"
                 $Command = $Command.Replace($match, $match.ToString().replace('.','').replace('&','').replace("('",'').replace("')",'').replace('("','').replace('")',''))
                 }
-            $matches = $str_format_pattern.Matches($Command) 
+            $matches = $str_format_pattern.Matches($Command)
         }
-       
+
        return $Command
 
     }
@@ -224,7 +224,7 @@ function Clean_Func_Calls
         )
 
        $str_format_pattern = [regex]"\.['`"][a-zA-Z0-9``]+['`"]"
-       $matches = $str_format_pattern.Matches($Command) 
+       $matches = $str_format_pattern.Matches($Command)
 
        While ($matches.Count -gt 0){
             ForEach($match in $matches){
@@ -232,9 +232,9 @@ function Clean_Func_Calls
                 Write-Verbose "[Clean_Func_Calls] Replacing: $($match)`tWith: $($replaced_val)"
                 $Command = $Command.Replace($match, $replaced_val )
                 }
-            $matches = $str_format_pattern.Matches($Command) 
+            $matches = $str_format_pattern.Matches($Command)
         }
-       
+
        return $Command
 
     }
@@ -248,16 +248,16 @@ function Replace_Parens
             [String]$Command
         )
        $str_format_pattern = [regex]"[^a-zA-Z0-9.&(]\(\s*'[^']*'\)"
-       $matches = $str_format_pattern.Matches($Command) 
+       $matches = $str_format_pattern.Matches($Command)
 
        While ($matches.Count -gt 0){
             ForEach($match in $matches){
                 Write-Verbose "[Replace_Parens] Replacing: $($match)`tWith: $($match.ToString().replace('(','').replace(')',''))"
                 $Command = $Command.Replace($match, $match.ToString().replace('(','').replace(')',''))
                 }
-            $matches = $str_format_pattern.Matches($Command) 
+            $matches = $str_format_pattern.Matches($Command)
         }
-       
+
        return $Command
 
     }
@@ -294,7 +294,7 @@ function Replace_NonEscapes
 
         [System.Collections.ArrayList]$newCommand = $Command
         $idx_offset = 0
-        
+
         if($char_idx_arr.Length -gt 0){
             Write-Verbose "$($char_idx_arr.Length) Non-escape characters detected... Removing"
             }
@@ -323,10 +323,10 @@ function Replace_MultiLineEscapes
                 Write-Verbose "$($matches.Count) instances of multi-line escape characters detected... Removing"
             }
             ForEach($match in $matches){
-                
+
                 $Command = $Command.Replace($match, ' ')
                 }
-            $matches = $str_format_pattern.Matches($Command) 
+            $matches = $str_format_pattern.Matches($Command)
         }
     return $Command
 }
@@ -341,17 +341,17 @@ function Resolve_String_Formats
         )
        $str_format_pattern = [regex]"\(`"({\d+})+`"\s*-[fF]\s*(('[^']*'|\('[^']*'\))\s*,?\s*)*\)"
        #$str_format_pattern = [regex]"\(`"({\d+})+`"\s*-[fF]\s*('[^']*',?)+\)"
-       $matches = $str_format_pattern.Matches($Command) 
+       $matches = $str_format_pattern.Matches($Command)
 
        While ($matches.Count -gt 0){
             ForEach($match in $matches){
-                $resolved_string = IEX($match)
+                $resolved_string = Invoke-Expression($match)
                 Write-Verbose "[Resolve_String_Formats] Replacing: $($match)`tWith: $($resolved_string)"
                 $Command = $Command.Replace($match, "'$($resolved_string)'")
                 }
-            $matches = $str_format_pattern.Matches($Command) 
+            $matches = $str_format_pattern.Matches($Command)
         }
-       
+
        return $Command
     }
 
@@ -369,14 +369,14 @@ function Resolve_Replaces
 
        While ($matches.Count -gt 0){
             ForEach($match in $matches){
-                $resolved_string = IEX($match)
+                $resolved_string = Invoke-Expression($match)
                 $resolved_string = $resolved_string.replace("'","''")
                 Write-Verbose "[Resolve_Replaces] Replacing: $($match)`tWith: $($resolved_string)"
                 $Command = $Command.Replace($match, "'$($resolved_string)'")
                 }
-            $matches = $str_format_pattern.Matches($Command) 
+            $matches = $str_format_pattern.Matches($Command)
         }
-       
+
        return $Command
     }
 
@@ -417,7 +417,7 @@ function Code_Cleanup
             $new_command = Resolve_String_Formats($new_command)
             $new_command = Resolve_Replaces($new_command)
         }
-        
+
         return $new_command
 
     }
@@ -482,8 +482,8 @@ function Extract_Executables {
             [Parameter(Mandatory=$True)]
             [System.Text.RegularExpressions.MatchCollection]$exe_pattern_matches
          )
-    
-    $b64_decoded_exes = New-Object System.Collections.ArrayList  
+
+    $b64_decoded_exes = New-Object System.Collections.ArrayList
     forEach($match in $exe_pattern_matches){
         $b64_decoded = Base64_Decode($match)
         if($b64_decoded){
@@ -502,7 +502,7 @@ function Dump_Files {
          )
 
     Write-Host "Saving layers to $([System.IO.Path]::GetTempPath())"
-    
+
     ForEach ($layer in $layers)
         {
             $out_filename = "$([System.IO.Path]::GetTempPath())$($md5)_layer_$($layers.IndexOf($layer)+1).txt"
@@ -573,7 +573,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
 
 .PARAMETER timeout
     Sets the maximum number of seconds the decoder should be allowed to run before it is timed out and terminated. Default is 60 seconds.
-    
+
 .NOTES
     File Name  : PSDecode.psm1
     Author     : @R3MRUM
@@ -588,7 +588,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
     PSDecode -verbose -dump -beautify .\encoded_ps.ps1
 
 .EXAMPLE
-    Get-Content .\encoded_ps.ps1 | PSDecode 
+    Get-Content .\encoded_ps.ps1 | PSDecode
 .COMPONENT
 #>
 
@@ -631,7 +631,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
                 throw "Error reading: $($InputObject)"
             }
     }
-    
+
     Write-Verbose "Calculating MD5 of input"
     $md5 = Get_MD5($script_bytes)
     Write-Verbose "MD5: $($md5)"
@@ -673,13 +673,13 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
     $override_functions += $Invoke_Command_Override
     $override_functions += $Invoke_Item_Override
     $override_functions += $Get_Item_Override
-    
+
     if(!$x){
         $override_functions += $New_Object_Override
     }
-    
+
     $override_functions  = ($override_functions -join "`r`n") + "`r`n`r`n"
-    
+
     Write-Verbose 'Performing code cleanup on initial script'
     $clean_code = Code_Cleanup($encoded_script)
 
@@ -699,7 +699,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
     while($layers -notcontains ($encoded_script) -and -not [string]::IsNullOrEmpty($encoded_script)){
 
         $layers.Add($encoded_script)
-        
+
         $pinfo = New-Object System.Diagnostics.ProcessStartInfo
         $pinfo.FileName = "powershell"
         $pinfo.CreateNoWindow = $true
@@ -711,8 +711,8 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
             $pinfo.Arguments = "-EncodedCommand $($b64_decoder)"
         }
         else{
-            
-            $tmp_file = [System.IO.Path]::GetTempPath() + [GUID]::NewGuid().ToString() + ".ps1"; 
+
+            $tmp_file = [System.IO.Path]::GetTempPath() + [GUID]::NewGuid().ToString() + ".ps1";
             Write-Verbose "Output script is too large. Writing temp file to: $($tmp_file)"
             Base64_Decode($b64_decoder) | Out-File $tmp_file
             $pinfo.Arguments = "-File $($tmp_file)"
@@ -732,7 +732,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
             }
             break
         }
-        
+
         $encoded_script =$p.StandardOutput.ReadToEnd()
         $stderr = $p.StandardError.ReadToEnd()
 
@@ -751,7 +751,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
             $decoder = ($override_functions -join "`r`n`r`n") + "`r`n`r`n" + $encoded_script
             Write-Verbose 'Base64 encoding new decoder'
             $b64_decoder = Base64_Encode($decoder)
-            
+
         }
         ElseIf($p.ExitCode -eq 0 -and $action_matches.Count -gt 0){
             Write-Verbose 'Final layer processed. Successful exit with actions detected'
@@ -763,7 +763,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
         ElseIf($p.ExitCode -ne 0 -and $action_matches.Count -gt 0){
             Write-Verbose 'Final layer processed. Non-zero exit code with actions detected'
             ForEach($action in $action_matches){
-                $actions.Add($action.ToSring().Replace('%#','').Trim()) | Out-Null
+                $actions.Add($action.ToString().Replace('%#','').Trim()) | Out-Null
             }
             $err = $true
             Break
@@ -785,13 +785,13 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
         else{
             $str_fmt_res = $last_layer
         }
-        
+
         if($str_fmt_res -ne $last_layer){
             $layers.Add($str_fmt_res)
         }
 
         if($dump){
-            
+
             Dump_Files($layers)
         }
 
@@ -812,7 +812,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
 
         $heading = "`r`n`r`n" + "#"*30 + " Actions " + "#"*30
         Write-Host $heading
-         
+
         if($actions.Count -gt 0){
             for ($counter=0; $counter -lt $actions.Count; $counter++){
                 $line = "{0,5}. {1}" -f ($counter+1),$actions[$counter]
@@ -836,7 +836,7 @@ PSDecode will dump all of the decoded layers to the system's %TEMP% path. Filena
         $footer = "#"*30 + " Warning! " + "#"*31
         Write-Host -ForegroundColor Yellow $heading
         Write-Host -ForegroundColor Yellow "Exit code: $($p.ExitCode)"
-        Write-Host -ForegroundColor Yellow "Decoder script returned non-zero exit code but no error message was sent to stderr. This is likely the result of the malware intentionally terminating its own execuion rather than some kind of decoding failure"
+        Write-Host -ForegroundColor Yellow "Decoder script returned non-zero exit code but no error message was sent to stderr. This is likely the result of the malware intentionally terminating its own execution rather than some kind of decoding failure"
         Write-Host -ForegroundColor Yellow $footer
         }
     ElseIf($p.ExitCode -ne 0 -and $stderr){

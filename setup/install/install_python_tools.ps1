@@ -43,7 +43,6 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User") + ";" + 
 git config --global --add safe.directory '*' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
-$PYTHON_BIN="$env:ProgramFiles\Python311\python.exe"
 Start-Process "${SETUP_PATH}\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
 Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
@@ -100,13 +99,6 @@ foreach ($package in `
     "rexi", `
     "scapy", `
     "shodan", `
-    "sigma-cli", `
-        "pysigma-backend-elasticsearch", `
-        "pySigma-backend-loki", `
-        "pysigma-backend-splunk", `
-        "pysigma-backend-sqlite", `
-        "pysigma-pipeline-sysmon", `
-        "pysigma-pipeline-windows", `
     "stego-lsb", `
     "time-decode", `
     "toolong", `
@@ -131,7 +123,6 @@ C:\Windows\System32\curl.exe -L --silent -o "sigs.py" "https://raw.githubusercon
 
 # Copy executables to bin folder
 Copy-Item "C:\venv\uv\chepy\Scripts\pyjwt.exe" "C:\venv\bin\pyjwt.exe" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-Copy-Item "C:\venv\uv\chepy\Scripts\scapy.exe" "C:\venv\bin\scapy.exe" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 # Copy scripts to bin folder
 if (Test-Path "C:\git\bmc-tools\bmc-tools.py") {
@@ -198,6 +189,13 @@ uv pip install -U `
     "requests", `
     "rzpipe", `
     "setuptools", `
+    "sigma-cli", `
+        "pysigma-backend-elasticsearch", `
+        "pySigma-backend-loki", `
+        "pysigma-backend-splunk", `
+        "pysigma-backend-sqlite", `
+        "pysigma-pipeline-sysmon", `
+        "pysigma-pipeline-windows", `
     "termcolor", `
     "textsearch", `
     "tomlkit", `
@@ -229,7 +227,7 @@ uv pip install -U `
         dfir-unfurl[ui] `
         hexdump `
         maclookup `
-        tomlkit | ForEach-Object{ "$_" } 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+        tomlkit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 # Download each file and update the base.html content with the local path
 $baseHtmlPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\templates\base.html"
@@ -301,99 +299,52 @@ Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 # Venvs that needs Visual Studio Build Tools
 #
 
-if ($HAVE_VISUAL_STUDIO_BUILD_TOOLS) {
+if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") {
+    Write-Output "" >> "${WSDFIR_TEMP}\visualstudio.txt"
 
-    # Get current versions to check if they have been updated and needs to be reinstalled
-    Get-LatestPipVersion jep >> "${WSDFIR_TEMP}\visualstudio.txt"
-    ((C:\Windows\System32\curl.exe -L --silent "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> "${WSDFIR_TEMP}\visualstudio.txt"
-    $GHIDRA_INSTALL_DIR >> "${WSDFIR_TEMP}\visualstudio.txt"
-
-    if (Test-Path "C:\venv\visualstudio.txt") {
-        $CURRENT_VENV = "C:\venv\visualstudio.txt"
+    # Install Visual Studio Build Tools
+    Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    # https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2019
+    # https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2019
+    # https://wiki.python.org/moin/WindowsCompilers
+    if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") {
+        Start-Process -Wait "C:\Tools\VSLayout\vs_BuildTools.exe" -ArgumentList "--passive --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
     } else {
-        $CURRENT_VENV = "C:\Progress.ps1"
+        Start-Process -Wait "${SETUP_PATH}\vs_BuildTools.exe" -ArgumentList "--passive --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
     }
 
-    if ((Get-FileHash "${WSDFIR_TEMP}\visualstudio.txt").Hash -ne (Get-FileHash "$CURRENT_VENV").Hash) {
-        # Install Visual Studio Build Tools
-        Write-DateLog "Start installation of Visual Studio Build Tools." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-        # https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2019
-        # https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2019
-        # https://wiki.python.org/moin/WindowsCompilers
-        if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") {
-            "`n" | runas /user:administrator 'powershell -executionpolicy unrestricted -file C:\Users\WDAGUtilityAccount\Documents\tools\fix.ps1'
-        } else {
-            Start-Process -Wait "${SETUP_PATH}\vs_BuildTools.exe" -ArgumentList "--passive --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
-        }
-        C:\BuildTools\Common7\Tools\VsDevCmd.bat >> "C:\log\python.txt"
+    # Install Java for jep
+    Write-DateLog "Start installation of Corretto Java." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
+    Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
-        #
-        # venv jep and tools needed for jep
-        #
+    ## Set environment variables for Visual Studio Build Tools
+    $env:DISTUTILS_USE_SDK=1
+    $env:MSSdk=1
+    $env:LIB = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\shared\x64;" + $env:LIB
+    $env:INCLUDE = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\include" + ";C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0" + $env:INCLUDE
+    C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat amd64 >> "C:\log\python.txt"
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")+ ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
 
-        # Check if jep or ghidrathon has been updated
-        Get-LatestPipVersion jep > ${WSDFIR_TEMP}\jep.txt
-        ((C:\Windows\System32\curl.exe -L --silent "https://api.github.com/repos/mandiant/Ghidrathon/releases/latest" | ConvertFrom-Json).zipball_url.ToString()).Split("/")[-1] >> ${WSDFIR_TEMP}\jep.txt
-        $GHIDRA_INSTALL_DIR >> ${WSDFIR_TEMP}\jep.txt
+    Write-DateLog "Install Python packages in sandbox needing Visual Studio Build Tools." >> "C:\log\python.txt"
+    uv venv "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
 
-        if (Test-Path "C:\venv\jep\jep.txt") {
-            $CURRENT_VENV = "C:\venv\jep\jep.txt"
-        } else {
-            $CURRENT_VENV = "C:\Progress.ps1"
-        }
-
-        if ((Get-FileHash C:\tmp\jep.txt).Hash -ne (Get-FileHash $CURRENT_VENV).Hash) {
-            Write-DateLog "jep or ghidrathon has been updated. Update jep." >> "C:\log\python.txt"
-
-            # Install Java for jep
-            Write-DateLog "Start installation of Corretto Java." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
-            Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
-
-            # jep venv
-            if (Test-Path "C:\venv\jep") {
-                Get-ChildItem C:\venv\jep\ -Exclude jep.txt | Remove-Item -Force -Recurse 2>&1 | ForEach-Object{ "$_" } | Out-null
-            }
-
-            # Set environment variables for Visual Studio Build Tools
-            $env:DISTUTILS_USE_SDK=1
-            $env:MSSdk=1
-            $env:LIB = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\shared\x64;" + $env:LIB
-            $env:INCLUDE = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\include" + ";C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0" + $env:INCLUDE
-            C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat amd64 >> "C:\log\python.txt"
-            $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")+ ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
-
-            Start-Process -Wait -FilePath "$PYTHON_BIN" -ArgumentList "-m venv C:\venv\jep"
-            C:\venv\jep\Scripts\Activate.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            Set-Location "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
-            python -m pip install -U pip 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            python -m pip install -U setuptools 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            python -m pip install NumPy flare-capa 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
-            # Build Ghidrathon for Gidhra
-            Write-DateLog "Build Ghidrathon for Ghidra."
-            Copy-Item -Force -Recurse "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
-            Set-Location "${WSDFIR_TEMP}\ghidrathon"
-            python -m pip install -r requirements.txt NumPy flare-capa 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
-                New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
-            }
-            Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-
-            Copy-Item "${WSDFIR_TEMP}\jep.txt" "C:\venv\jep\jep.txt" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-            deactivate
-            Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
-        } else {
-            Write-DateLog "Neither jep or ghidrathon has been updated, don't build jep." >> "C:\log\python.txt"
-        }
-
-        Copy-Item "${WSDFIR_TEMP}\visualstudio.txt" "C:\venv\visualstudio.txt" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    } else {
-        Write-DateLog "Visual Studio Build Tools or pypi packages requiring it has not been updated, don't update venvs needing Visual Studio Build Tools." >> "C:\log\python.txt"
+    # Build Ghidrathon for Gidhra
+    Write-DateLog "Build Ghidrathon for Ghidra." >> "C:\log\python.txt"
+    Copy-Item -Force -Recurse "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
+    Set-Location "${WSDFIR_TEMP}\ghidrathon"
+    Get-Content requirements.txt >> "C:\log\python.txt"
+    uv pip install "jep==4.2.0" NumPy flare-capa 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    uv pip install -r requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
+        New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
     }
+    Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 }
 # End venvs needing Visual Studio Build Tools
 
