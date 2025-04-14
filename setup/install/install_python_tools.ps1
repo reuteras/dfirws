@@ -37,6 +37,14 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
 "`n" | CiTool.exe -r
 
+# Install Visual C++ Redistributable 16 and 17
+Start-Process -Wait "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
+Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+# Install .NET 6
+Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
+Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 Write-DateLog "Install Git." >> "C:\log\python.txt"
 Install-Git | Out-Null
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine")
