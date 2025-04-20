@@ -204,7 +204,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\takajo (is a 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\ToolAnalysisResultSheet (Summarizes the results of examining logs recorded in Windows upon execution common tools used by attackers that has infiltrated a network).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command ToolAnalysisResultSheet.ps1"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\toolong (tl - A terminal application to view, tail, merge, and search log files (plus JSONL)).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command tl.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\ts2date (replaces UNIX timestamps in a stream by a formatted date - dfir-toolkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ts2date.exe --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs - use zircolite.ps1).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zircolite.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zircolite.exe -h"
 
 # Files and apps - Office
 New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Office" | Out-Null
