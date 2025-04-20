@@ -30,7 +30,7 @@ $status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "
 
 # oh-my-posh - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading oh-my-posh."
-$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.exe" "oh-my-posh.exe" -check "PE32"
+$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.msi" "oh-my-posh.msi" -check "Composite Document File V2 Document"
 
 # PowerShell 7 - installed during startup
 Write-SynchronizedLog "winget: Downloading PowerShell 7."
