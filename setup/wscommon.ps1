@@ -740,7 +740,7 @@ function Install-OSFMount {
 function Install-OhMyPosh {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-ohmyposh.txt")) {
         Write-Output "Installing OhMyPosh"
-        Start-Process -Wait "${SETUP_PATH}\oh-my-posh.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\oh-my-posh.msi /qn /norestart"
         & "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" font install "${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
         if (Test-Path "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk" -Force
