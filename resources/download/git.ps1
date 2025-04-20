@@ -51,6 +51,7 @@ $repourls = `
     "https://github.com/reuteras/MSRC.git", `
     "https://github.com/rizinorg/cutter-jupyter.git", `
     "https://github.com/Seabreg/Regshot.git", `
+    "https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES.git", `
     "https://github.com/SigmaHQ/legacy-sigmatools.git", `
     "https://github.com/SigmaHQ/sigma.git", `
     "https://github.com/StrangerealIntel/Shadow-Pulse.git", `
