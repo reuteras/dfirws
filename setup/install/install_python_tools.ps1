@@ -303,6 +303,20 @@ deactivate
 Set-Content "cd C:\venv\scare\scare && C:\venv\scare\Scripts\ptpython.exe -- C:\venv\scare\scare\scare.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\scare.ps1"
 Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 
+
+#
+# venv zircolite
+#
+Write-DateLog "Install packages in venv zircolite in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+uv venv "C:\venv\zircolite"
+C:\venv\zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
+Copy-Item -Recurse "C:\git\zircolite" "C:\venv\zircolite"
+Set-Location "C:\venv\zircolite\zircolite"
+uv pip install -r .\requirements.full.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Copy-Item "C:\venv\zircolite\zircolite\zircolite.py" "C:\venv\zircolite\Scripts"
+deactivate
+Write-DateLog "Python venv zircolite done." >> "C:\log\python.txt"
+
 #
 # Venvs that needs Visual Studio Build Tools
 #
