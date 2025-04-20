@@ -1,29 +1,4 @@
-<#
-.SYNOPSIS
-    Script to download data to use for enrichment.
-
-.DESCRIPTION
-    This script downloads data to use for enrichment. Data included are:
-    - Tor exit nodes
-    - MAC address lookup files
-    - IPinfo.io Free IP to Country + IP to ASN databases
-    - Maxmind GeoLite2 ASN database
-    - Maxmind GeoLite2 City database
-    - Maxmind GeoLite2 Country database
-    - Suricata rules
-    - Snort rules
-    - Git repositories for enrichment
-    - Yara rules
-    - CVE data
-
-
-.NOTES
-    File Name      : enrichment.ps1
-    Author         : Peter R
-
-.LINK
-    https://github.com/reuteras/dfirws
-#>
+# Script to download data to use for enrichment.
 
 # Set directories
 $currentDirectory = "${PWD}"

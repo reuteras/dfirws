@@ -1,23 +1,4 @@
-<#
-
-.SYNOPSIS
-    Deduplicate enrichment folder.
-
-.DESCRIPTION
-    This script deduplicates the enrichment folder.
-
-.EXAMPLE
-    .\resources\contrib\deduplicate_enrichments.ps1
-    This will deduplicate the enrichment folder.
-
-.NOTES
-    File Name      : deduplicate_enrichments.ps1
-    Author         : Peter R
-
-.LINK
-    https://github.com/reuteras/dfirws
-#>
-
+# Deduplicate enrichment folder.
 param(
     [Parameter(HelpMessage = "Dry run.")]
     [Switch]$DryRun

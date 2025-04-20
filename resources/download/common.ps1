@@ -18,36 +18,7 @@ if (!(Test-Path variable:GIT_FILE)) {
     $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
 }
 
-<#
-.SYNOPSIS
-Function to download a file from a given URI and save it to a specified file path.
-
-.DESCRIPTION
-This function allows you to download a file from a specified URI and save it to a specified file path on your local machine.
-
-.PARAMETER Uri
-The URI of the file to be downloaded.
-
-.PARAMETER FilePath
-The file path where the downloaded file will be saved.
-
-.PARAMETER CheckURL
-Specifies whether to check the URL for the file in the tools_downloaded.csv file.
-
-.PARAMETER check
-Checks the file type of the downloaded file using the specified regex pattern.
-
-.OUTPUTS
-System.Boolean - Returns $true if the file was successfully downloaded and saved, $false otherwise.
-
-.EXAMPLE
-Get-FileFromUri -Uri "https://example.com/file.txt" -FilePath "C:\Downloads\file.txt"
-Downloads the file from the specified URI and saves it to the specified file path.
-
-.NOTES
-Author: peter@reuteras.net
-Date:   2023-12-21
-#>
+# Function to download a file from a given URI and save it to a specified file path.
 function Get-FileFromUri {
     Param (
         [Parameter(Mandatory=$True)] [string]$Uri,
@@ -220,29 +191,7 @@ function Get-FileFromUri {
     return $fileDownloadedOrChanged
 }
 
-<#
-.SYNOPSIS
-Retrieves the download URL for a GitHub release based on a provided regex match.
-
-.DESCRIPTION
-The Get-DownloadUrl function retrieves the download URL for a GitHub release by querying the GitHub API and filtering the results based on a provided regex match. It supports authentication using GitHub credentials.
-
-.PARAMETER releases
-The URL of the GitHub API endpoint that provides information about the releases.
-
-.PARAMETER match
-A regex pattern used to filter the download URLs. Only URLs that match the pattern will be returned.
-
-.EXAMPLE
-$releases = "https://api.github.com/repos/username/repo/releases/latest"
-$match = ".*\.zip$"
-$downloadUrl = Get-DownloadUrl -Releases $releases -Match $match
-Retrieves the download URL for the latest release of the specified GitHub repository that ends with ".zip".
-
-.NOTES
-Author: peter@reuteras.net
-Date:   2023-12-21
-#>
+# Retrieves the download URL for a GitHub release based on a provided regex match.
 function Get-DownloadUrl {
     Param (
         [Parameter(Mandatory=$True)] [string]$releases,
@@ -284,39 +233,7 @@ function Get-DownloadUrl {
     }
 }
 
-<#
-.SYNOPSIS
-    Retrieves the download URL for the latest release of a GitHub repository.
-
-.DESCRIPTION
-    The Get-GitHubRelease function retrieves the download URL for the latest release of a GitHub repository. It uses the GitHub API to fetch the release information and matches the specified regex pattern to find the download URL.
-
-.PARAMETER repo
-    Specifies the GitHub repository in the format "owner/repo".
-
-.PARAMETER path
-    Specifies the local file path where the downloaded file will be saved.
-
-.PARAMETER match
-    Specifies the regex pattern used to match the desired download URL.
-
-.PARAMETER version
-    Specifies the version of the release to download. The default value is "latest".
-
-.PARAMETER check
-    Specifies a regex pattern to check the file type of the downloaded file.
-
-.EXAMPLE
-    Get-GitHubRelease -repo "Microsoft/PowerShell" -path "C:\Downloads" -match ".*\.zip"
-
-    This example retrieves the download URL for the latest release of the "Microsoft/PowerShell" repository and saves the downloaded file to the "C:\Downloads" directory. It matches the download URL that ends with ".zip".
-
-.NOTES
-    - This function requires an internet connection to access the GitHub API.
-    - If the specified regex pattern does not match any download URL in the release information, the function will try to find the download URL without using the "latest" release.
-    - If no download URL is found, the function will try to get the tarball URL.
-    - If the tarball URL is also not found, an error will be displayed and the function will exit.
-#>
+# Retrieves the download URL for the latest release of a GitHub repository.
 function Get-GitHubRelease {
     Param (
         [Parameter(Mandatory=$True)] [string]$repo,
@@ -387,28 +304,7 @@ function Get-GitHubRelease {
     return Get-FileFromUri -uri $Url -FilePath $path -CheckURL "Yes" -check $check
 }
 
-<#
-.SYNOPSIS
-Retrieves the download URL from a web page based on a specified regular expression pattern.
-
-.DESCRIPTION
-The Get-DownloadUrlFromPage function retrieves the download URL from a web page by sending an HTTP request and parsing the response using a regular expression pattern. It supports authentication for GitHub URLs if the GH_USER and GH_PASS environment variables are set.
-
-.PARAMETER Url
-The URL of the web page from which to retrieve the download URL.
-
-.PARAMETER RegEx
-The regular expression pattern used to extract the download URL from the web page.
-
-.EXAMPLE
-Get-DownloadUrlFromPage -Url "https://example.com" -RegEx "href=\"(.*?)\""
-
-This example retrieves the download URL from the web page "https://example.com" using the regular expression pattern "href=\"(.*?)\"".
-
-.NOTES
-Author: Your Name
-Date:   Current Date
-#>
+# Retrieves the download URL from a web page based on a specified regular expression pattern.
 function Get-DownloadUrlFromPage {
     param (
         [Parameter(Mandatory=$True)] [string]$Url,
@@ -446,29 +342,7 @@ function Get-DownloadUrlFromPage {
     return $downloadUrl
 }
 
-
-<#
-.SYNOPSIS
-Function to write a synchronized log to a specified file.
-
-.DESCRIPTION
-This function writes a synchronized log to a specified file. It ensures that multiple threads or processes can write to the log file without conflicts.
-
-.PARAMETER Message
-The message to be written to the log file.
-
-.PARAMETER LogFile
-The path to the log file where the log will be written.
-
-.EXAMPLE
-Write-SynchronizedLog -LogFile "C:\Logs\log.txt" -Message "This is a log message"
-
-This example demonstrates how to use the Write-SynchronizedLog function to write a log message to the specified log file.
-
-.NOTES
-Author: peter@reuteras.net
-Date:   2023-12-21
-#>
+# Function to write a synchronized log to a specified file.
 function Write-SynchronizedLog {
     param (
         [Parameter(Mandatory=$True)] [string]$Message,
@@ -492,22 +366,7 @@ function Write-SynchronizedLog {
     }
 }
 
-<#
-.SYNOPSIS
-Write a log entry with a timestamp.
-
-.DESCRIPTION
-This function is used to write a log entry with a timestamp. It can be used to track the execution of a script or record important events.
-
-.PARAMETER Message
-The message to be logged.
-
-.EXAMPLE
-Write-LogEntry -Message "Script execution started."
-
-This example demonstrates how to use the Write-LogEntry function to write a log entry with a custom message.
-
-#>
+# Write a log entry with a timestamp.
 function Write-DateLog {
     param (
         [Parameter(Mandatory=$True)] [string]$Message
