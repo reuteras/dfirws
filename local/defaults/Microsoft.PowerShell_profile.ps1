@@ -57,18 +57,10 @@ Set-Alias di dfirws-install.ps1
 if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
 	if (!(Test-Path "${HOME}\tmp\oh-my-posh-init.ps1")) {
-		if ("${WSDFIR_TABBY}" -eq "Yes") {
-			& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_POWERLINE}" > "${HOME}\tmp\oh-my-posh-init.ps1"
-		} else {
-			& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG_PLAIN}" > "${HOME}\tmp\oh-my-posh-init.ps1"
-		}
-	}
-
-	if (!(Test-Path "${HOME}\tmp\oh-my-posh-completion.ps1")) {
-		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" completion powershell > "${HOME}\tmp\oh-my-posh-completion.ps1"
+		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG}" > "${HOME}\tmp\oh-my-posh-init.ps1"
 	}
 	& "${HOME}\tmp\oh-my-posh-init.ps1"
-	. "${HOME}\tmp\oh-my-posh-completion.ps1"
+
 	${env:VIRTUAL_ENV_DISABLE_PROMPT}=$true
 
 	# Use posh-git: https://github.com/dahlbyk/posh-git
@@ -79,13 +71,6 @@ if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 
 # Always start with Python venv default
 & "${env:USERPROFILE}\Documents\tools\utils\venv.ps1"
-
-# Add autocomplete for commands
-#if (Test-Path "C:\Tools\cargo\autocomplete") {
-#    Get-ChildItem "C:\Tools\cargo\autocomplete" *.ps1 | ForEach-Object {
-#        . $_.FullName
-#    }
-#}
 
 #
 # Functions to help in dfirws

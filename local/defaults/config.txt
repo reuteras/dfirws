@@ -75,14 +75,12 @@ $WSDFIR_START_MENU="Yes"
 # Use oh-my-posh
 $WSDFIR_OHMYPOSH="No"
 
-# If you use oh-my-posh, set tabby to Yes to have full support for powerline10k and fonts
-$WSDFIR_TABBY="No"
-
 # Configuration for oh-my-posh when using powerline10k compatible font
-$WSDFIR_OHMYPOSH_CONFIG_POWERLINE="defaults\posh\dfirws-powerlevel10k.omp.json"
+# Needs to be set manually for PowerShell
+#$WSDFIR_OHMYPOSH_CONFIG="defaults\posh\dfirws-powerlevel10k.omp.json"
 
 # Configuration for oh-my-posh when using simple font
-$WSDFIR_OHMYPOSH_CONFIG_PLAIN="defaults\posh\dfirws.minimal.omp.json"
+$WSDFIR_OHMYPOSH_CONFIG="defaults\posh\dfirws.minimal.omp.json"
 
 # Font name to use with oh-my-posh
 $WSDFIR_FONT_NAME="Meslo"
