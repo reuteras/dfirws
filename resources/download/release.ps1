@@ -208,15 +208,6 @@ if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mboxviewer.zip" -o"${TOOLS}\mboxviewer" | Out-Null
 }
 
-# Tabby
-$status = Get-GitHubRelease -repo "eugeny/tabby" -path "${SETUP_PATH}\tabby.zip" -match "portable-x64" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\tabby") {
-        Remove-Item "${TOOLS}\tabby" -Recurse -Force
-    }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\tabby.zip" -o"${TOOLS}\tabby" | Out-Null
-}
-
 # zstd
 $status = Get-GitHubRelease -repo "facebook/zstd" -path "${SETUP_PATH}\zstd.zip" -match "win64.zip$" -check "Zip archive data"
 if ($status) {

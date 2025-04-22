@@ -16,7 +16,7 @@ if (! (Test-Path .\dfirws\local) ) {
     New-Item -ItemType Directory .\dfirws\local
 }
 
-foreach ($folder in "tabby", "vscode") {
+foreach ($folder in "vscode") {
     if (! (Test-Path .\dfirws\local\$folder) ) {
         New-Item -ItemType Directory .\dfirws\local\$folder -Force
     }

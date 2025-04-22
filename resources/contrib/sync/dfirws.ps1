@@ -16,7 +16,7 @@ if (! (Test-Path "${HOME}\dfirws")) {
 	Remove-Item dfirws.zip
 }
 
-$folders = "local", "readonly", "readwrite", "local\defaults", "local\tabby", "local\vscode"
+$folders = "local", "readonly", "readwrite", "local\defaults", "local\vscode"
 foreach ($folder in $folders) {
 	if (! (Test-Path "${HOME}\dfirws\$folder")) {
 		mkdir "${HOME}\dfirws\$folder" | Out-Null

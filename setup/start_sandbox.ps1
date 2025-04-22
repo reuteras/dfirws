@@ -52,26 +52,16 @@ New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value 
 & "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy -Scope CurrentUser Unrestricted"
 Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Shortcut for PowerShell or Tabby
-if ("$WSDFIR_TABBY" -eq "Yes") {
-    Add-Shortcut -SourceLnk "${HOME}\Desktop\Tabby.lnk" -DestinationPath "${TOOLS}\tabby\Tabby.exe" -WorkingDirectory "${HOME}\Desktop" -IconPath "${TOOLS}\tabby\Tabby.exe"
-    # Copy config for Tabby
-    if (!(Test-Path "${HOME}\AppData\Roaming\tabby")) {
-        New-Item -Path "${HOME}\AppData\Roaming\tabby" -ItemType Directory -Force | Out-Null
-        if (Test-Path "${LOCAL_PATH}\tabby\config.yaml") {
-            Copy-Item "${LOCAL_PATH}\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force | Out-Null
-        } else {
-            Copy-Item "${LOCAL_PATH}\defaults\tabby\config.yaml" "${HOME}\AppData\Roaming\tabby\config.yaml" -Force | Out-Null
-        }
-    }
-} else {
-    Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
-}
+# Shortcut for PowerShell
+Enable-ExperimentalFeature PSFeedbackProvider
+Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
 
-# Install OhMyPosh
-if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
-    Install-OhMyPosh | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
+# Install Terminal and link to it
+Expand-Archive "${SETUP_PATH}\Terminal.zip" -DestinationPath "$env:ProgramFiles\Windows Terminal" -Force | Out-Null
+$TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
+$TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\wt.exe"
+Copy-Item "$LOCAL_PATH\defaults\Windows_Terminal.json" "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings\settings.json" -Force | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath $TERMINAL_INSTALL_LOCATION -WorkingDirectory "${HOME}\Desktop"
 
 # Add PersistenceSniper
 Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1
@@ -95,6 +85,11 @@ Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${W
 # Install .NET 6
 Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
 Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+# Install OhMyPosh
+if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
+    Install-OhMyPosh | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 
 # Install HxD
 Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${WSDFIR_TEMP}\HxDSetup.exe" -Force
@@ -309,7 +304,6 @@ $ADD_TO_PATH = @("${MSYS2_DIR}", `
 	"${TOOLS}\systeminformer\x64"
 	"${TOOLS}\systeminformer\x86"
 	"${TOOLS}\sysinternals"
-	"${TOOLS}\tabby"
 	"${TOOLS}\takajo"
 	"${TOOLS}\thumbcacheviewer"
 	"${TOOLS}\trid"

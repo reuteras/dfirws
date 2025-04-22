@@ -412,6 +412,9 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fasm.zip" -o"${TOOLS}\fasm" | Out-Null
 }
 
+# Terminal for Windows - automatically installed during start
+$status = Get-FileFromUri -uri "https://aka.ms/terminal-canary-zip-x64" -FilePath ".\downloads\terminal.zip" -CheckURL "Yes" -check "Zip archive data"
+
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
 $procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip'
 $status = Get-FileFromUri -uri "https://procdot.com/${procdot_path}" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes" -check "Zip archive data"

@@ -3,10 +3,10 @@
 #
 
 # Create directory for shortcuts to installed tools
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws" | Out-Null
 
 # DidierStevens
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\DidierStevens" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\DidierStevens" | Out-Null
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\1768.py (Analyze Cobalt Strike beacons).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command 1768.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\amsiscan.py (Scan input with AmsiScanBuffer).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command amsiscan.py -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\base64dump.py (Extract base64 strings from file).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command base64dump.py -h"
@@ -65,7 +65,7 @@ Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xorsearch.py (Brut
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\zipdump.py (ZIP dump utility).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zipdump.py -h"
 
 # Editors
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Editors" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Editors" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Bytecode Viewer.lnk" -DestinationPath "${POwERShell_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-w hidden -command ${TOOLS}\bin\bcv.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\HxD.lnk" -DestinationPath "${env:ProgramFiles}\HxD\HxD.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\ImHex.lnk" -DestinationPath "${TOOLS}\imhex\imhex-gui.exe"
@@ -75,7 +75,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-in
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Visual Studio code (runs dfirws-install -VSCode).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -VSCode"
 
 # Files and apps
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\autoit-ripper.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command autoit-ripper -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\binlex (A Binary Genetic Traits Lexer).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command binlex.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\bulk_extractor64.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command bulk_extractor64.exe -h"
@@ -96,7 +96,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\trid (File Identi
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\WinMerge (runs dfirws-install -WinMerge).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -WinMerge"
 
 # Files and apps - Browser
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Browser" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Browser" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\BrowsingHistoryView.lnk" -DestinationPath "${TOOLS}\nirsoft\BrowsingHistoryView.exe" -Iconlocation "${TOOLS}\nirsoft\BrowsingHistoryView.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\ChromeCacheView.lnk" -DestinationPath "${TOOLS}\nirsoft\ChromeCacheView.exe" -Iconlocation "${TOOLS}\nirsoft\ChromeCacheView.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight (Internet history forensics for Google Chrome and Chromium).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command hindsight.exe -h"
@@ -109,7 +109,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\MZCacheVi
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\MZCookiesView.lnk" -DestinationPath "${TOOLS}\nirsoft\mzcv.exe" -Iconlocation "${TOOLS}\nirsoft\mzcv.exe"
 
 # Files and apps - Database
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Database" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Database" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\DB Browser for SQLite.lnk" -DestinationPath "${TOOLS}\sqlitebrowser\DB Browser for SQLite.exe"
 Add-SHortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dbeaver (runs dfirws-install -DBeaver).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -DBeaver"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dsq (commandline SQL engine for data files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dsq -h"
@@ -124,7 +124,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqlite3_
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\SQLiteWalker.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command SQLiteWalker.py -h"
 
 # Files and apps - Disk
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Disk" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Disk" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\INDXRipper.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\INDXRipper\INDXRipper.exe" -Arguments "-NoExit -command INDXRipper.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\mactime2 (replacement for mactime - dfir-toolkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command mactime2.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\mft2bodyfile (parses an MFT file (and optionally the corresponding UsnJrnl) to bodyfile - dfir-toolkit - janstarke).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command mft2bodyfile.exe --help"
@@ -161,7 +161,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\tsk_loaddb (
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Disk\tsk_recover (Extracts the unallocated (or allocated) files from a disk image to a local directory) - sleuthkit.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command tsk_recover.exe -h"
 
 # Files and apps - Email
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Email" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Email" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\email-analyzer.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\EmailAnalyzer" -Arguments "-NoExit -command .\email-analyzer.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\emldump (A utility to parse and analyze EML files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command emldump.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\extract_msg.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command extract_msg -h"
@@ -172,14 +172,14 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\pst-extract
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\pstwalker.lnk" -DestinationPath "${TOOLS}\pstwalker\pstwalker.exe"
 
 # Files and apps - JavaScript
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\JavaScript" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\JavaScript" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\JavaScript\box-js (is a utility to analyze malicious JavaScript files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command box-js --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\JavaScript\deobfuscator (synchrony).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command synchrony --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\JavaScript\js-beautify (Javascript beautifier).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command js-beautify --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\JavaScript\jsdom (opens README in Notepad++).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command notepad++.exe C:\Tools\node\node_modules\jsdom\README.md"
 
 # Files and apps - Log
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Log" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Log" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\chainsaw (Rapidly work with Forensic Artefacts).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command chainsaw.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\cleanhive (merges logfiles into a hive file - dfir-toolkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command cleanhive.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\erip (Parse timeline-format events file - Events-Ripper).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command erip.exe -h"
@@ -207,7 +207,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\ts2date (repl
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zircolite.exe -h"
 
 # Files and apps - Office
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Office" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Office" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\LibreOffice (runs dfirws-install -LibreOffice).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -LibreOffice"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\MetadataPlus.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\bin\MetadataPlus.exe" -Arguments "-NoExit -command MetadataPlus.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\mraptor.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command mraptor -h"
@@ -226,7 +226,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\xlmdeobfus
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\zipdump.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zipdump.py -h"
 
 # Files and apps - PDF
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\PDF" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\PDF" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -FoxitReader"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdf-parser.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdf-parser.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfalyze.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pdfalyze -h"
@@ -237,7 +237,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\peepdf-3 (pee
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\qpdf.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command qpdf.exe --help"
 
 # Files and apps - PE
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\PE" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\PE" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\4n4lDetector.lnk" -DestinationPath "${env:ProgramFiles}\4n4lDetector\4N4LDetector.exe"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\capa.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\capa\capa.exe" -Arguments "-NoExit -command capa.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\capa Explorer Web.lnk" -DestinationPath "${TOOLS}\capa-explorer-web\index.html" -Iconlocation "${TOOLS}\capa\capa.exe"
@@ -256,7 +256,7 @@ Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\shellconv.py.l
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\WinObjEx64.lnk" -DestinationPath "${TOOLS}\WinObjEx64\WinObjEx64.exe"
 
 # Files and apps - Phone
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Phone" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Phone" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\aleapp (Android Logs, Events, and Protobuf Parser).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command aleapp.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\aleappGUI.lnk" -DestinationPath "${TOOLS}\bin\aleappGUI.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\ileapp (iOS Logs, Events, And Plists Parser).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ileapp.exe -h"
@@ -266,12 +266,12 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\iShutdown_s
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\iLEAPPGUI.lnk" -DestinationPath "${TOOLS}\bin\iLEAPPGUI.exe"
 
 # Files and apps - RDP
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\RDP" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\RDP" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\RDP\bmc-tools.py (RDP Bitmap Cache parser).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command bmc-tools.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\RDP\RdpCacheStitcher.lnk" -DestinationPath "${TOOLS}\RdpCacheStitcher\RdpCacheStitcher.exe"
 
 # Forensics
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Forensics" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Forensics" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\artemis.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command artemis.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\Autopsy (runs dfirws-install -Autopsy).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Autopsy"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\venv-dissect.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ${HOME}\Documents\tools\utils\venv.ps1 -Dissect"
@@ -303,7 +303,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\binary-refinery.lnk" -
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\vma-extract.exe (dissect).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command vma-extract.exe -h"
 
 # Incident response
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\IR" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\IR" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Kape (runs dfirws-install -Kape).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Kape"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Trawler.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Get-Help trawler"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\PersistenceSniper.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1 ; Get-Help -Name Find-AllPersistence"
@@ -313,31 +313,31 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\velociraptor.exe (Velocirapto
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Shadow-pulse (csv with information about ransomware groups).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command EZViewer.exe ${GIT_PATH}\Shadow-pulse\Ransomlist.csv"
 
 # Malware tools
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -ClamAV"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command csv --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\defender-detectionhistory-parser (dhparser).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dhparser -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command maldump.exe -h"
 
 # Malware tools - Cobalt Strike
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\1768.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command 1768.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "${env:ProgramFiles}\BeaconHunter\BeaconHunter.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\CobaltStrikeScan.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command CobaltStrikeScan.exe -h"
 
 # Malware tools - Gootloader
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Gootloader" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Gootloader" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Gootloader\Gootloader (Mandiant).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\gootloader" -Arguments "-NoExit -command dir"
 
 # Memory
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Dokany (runs dfirws-install -Dokany).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Dokany"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command MemProcFS.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 2.1.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench2\VolatilityWorkbench.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 3.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench\VolatilityWorkbench.exe"
 
 # Network
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Network" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Network" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Burp Suite (runs dfirws-install -BurpSuite).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -BurpSuite"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Fakenet.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\fakenet\fakenet.exe" -Arguments "-NoExit -command fakenet.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\hfs.exe.lnk" -DestinationPath "${TOOLS}\hfs\hfs.exe" -WorkingDirectory "${HOME}\Desktop"
@@ -352,24 +352,24 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-ins
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\Zui (runs dfirws-install -Zui).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Zui"
 
 # OS
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS" | Out-Null
 
 # OS- Android
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\Android" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Android" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Android\apktool.bat.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command apktool.bat -h"
 
 # OS - Linux
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\Linux" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Linux" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Linux\elfparser-ng.lnk" -DestinationPath "${TOOLS}\elfparser-ng\Release\elfparser-ng.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Linux\xelfviewer.lnk" -DestinationPath "${TOOLS}\XELFViewer\xelfviewer.exe"
 
 # OS - macOS
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\macOS" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\macOS" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\macOS\dsstore.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\Python-dsstore" -Arguments "-NoExit -command cat .\README.md"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\macOS\machofile-cli.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command machofile-cli.py -h"
 
 # OS - Windows
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\ese2csv.exe (Find and dump ESE databases).lnk" -DestinationPath "${POWERSHELL_EXE}" -Arguments "-NoExit -command ese2csv.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\fibratus (runs dfirws-install -Fibratus).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Fibratus"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Jumplist-Browser.lnk" -DestinationPath "${TOOLS}\bin\JumplistBrowser.exe"
@@ -382,12 +382,12 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Thumbcache Viewer.lnk
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\usnjrnl_dump (Parses Windows UsnJrnl files - dfir-toolkit - janstarke).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command usnjrnl_dump.exe --help"
 
 # OS - Windows - Active Directory (AD)
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\adalanche (Active Directory ACL Visualizer and Explorer).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command adalanche.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\CimSweep.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\CimSweep" -Arguments "-NoExit -command Import-Module .\CimSweep\CimSweep.psd1"
 
 # OS - Windows - Registry
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Registry" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Registry" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\hivescan (scans a registry hive file for deleted entries - dfir-toolkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command hivescan.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\pol_export (Exporter for Windows Registry Policy Files - dfir-toolkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pol_export.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\regdump (parses registry hive files and prints a bodyfile - dfir-toolkit).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command regdump.exe --help"
@@ -403,7 +403,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-Unicode.lnk" -DestinationPath "${GIT_PATH}\Regshot\Regshot-x64-Unicode.exe"
 
 # Programming and Development
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\java.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\node.lnk" -DestinationPath "${TOOLS}\node\node.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\perl.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop"
@@ -412,49 +412,49 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Python.lnk" -Destina
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Visual Studio Buildtools (runs dfirws-install -VisualStudioBuildTools).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -VisualStudioBuildTools"
 
 # Programming - dotNET
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\dotNET" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\dotNET" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\dotNET\dotnetfile_dump.py.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dotnetfile_dump.py -h"
 
 # Programming - Delphi
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Delphi" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Delphi" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Delphi\idr.lnk" -DestinationPath "${env:ProgramFiles}\idr\bin\Idr.exe"
 
 # Programming - Go
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Go" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Go" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\GoLang (runs dfirws-install -GoLang).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -GoLang"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\gftrace.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command gftrace"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\GoReSym.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command GoReSym.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\Redress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Redress.exe -h"
 
 # Programming - Java
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Java" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Java" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\Jadx (runs dfirws-install -Jadx).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Jadx"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\jd-gui.lnk" -DestinationPath "${TOOLS}\jd-gui\jd-gui.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\recaf (The modern Java bytecode editor).lnk" -DestinationPath "${TOOLS}\bin\recaf.bat" -Arguments "-NoExit -command recaf.bat" -Iconlocation "${TOOLS}\lib\recaf.jar"
 
 # Programming - Node
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Node" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Node" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Node\Node (runs dfirws-install -Node).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Node"
 
 # Programming - PowerShell
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\PowerShell" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\PowerShell" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\PowerShell\deobshell (main.py).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\deobshell" -Arguments "-NoExit -command .\main.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\PowerShell\PowerDecode.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\PowerDecode" -Arguments "-NoExit -command .\GUI.ps1"
 
 # Programming - Python
-New-item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Python" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Python" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Python\pydisasm.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command venv.ps1 -binaryrefinery ; pydisasm --help"
 
 # Programming - Ruby
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Ruby" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Ruby" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Ruby\Ruby (runs dfirws-install -Ruby).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Ruby"
 
 # Programming - Rust
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Rust" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Rust" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Rust\Rust (runs dfirws-install -Rust).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Rust"
 
 # Reverse Engineering
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Reverse Engineering" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Reverse Engineering" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Binary Ninja (runs dfirws-install -BinaryNinja).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -BinaryNinja"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Cutter.lnk" -DestinationPath "${TOOLS}\cutter\cutter.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk" -DestinationPath "${TOOLS}\dnSpy32\dnSpy.exe"
@@ -476,7 +476,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\scare.ps1.ln
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\X64dbg (runs dfirws-install -X64dbg).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -X64dbg"
 
 # Signatures and information
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Signatures and information" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Signatures and information" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\blyara.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command blyara -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\evt2sigma.ps1 (python package).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command evt2sigma.ps1 -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\loki (runs dfirws-install -Loki).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Loki"
@@ -490,14 +490,14 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\yq (i
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\yr (yara-x).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command yr.exe -h"
 
 # Signatures and information - Online tools
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Signatures and information\Online tools" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Signatures and information\Online tools" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\Online tools\bazaar.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command bazaar --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\Online tools\malware-bazaar-advanced-search (search.py).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\malware-bazaar-advanced-search"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\Online tools\shodan.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command shodan"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\Online tools\vt (A command-line tool for interacting with VirusTotal).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command vt help"
 
 # Sysinternals
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Sysinternals" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Sysinternals" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Sysinternals\accesschk64.exe.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command accesschk64.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Sysinternals\AccessEnum.exe.lnk" -DestinationPath "${TOOLS}\sysinternals\AccessEnum.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Sysinternals\ADExplorer64.exe.lnk" -DestinationPath "${TOOLS}\sysinternals\ADExplorer64.exe"
@@ -579,7 +579,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Sysinternals\Winobj64.exe.lnk" -
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Sysinternals\ZoomIt64.exe.lnk" -DestinationPath "${TOOLS}\sysinternals\ZoomIt64.exe"
 
 # Utilities
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\7-Zip.lnk" -DestinationPath "${env:ProgramFiles}\7-Zip\7zFM.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (Git-version).lnk" -DestinationPath "${env:ProgramFiles}\Git\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\cmder (runs dfirws-install -Cmder).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Cmder"
@@ -598,24 +598,23 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh (runs dfirw
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\pwncat.py (Fancy reverse and bind shell handler).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pwncat.py --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\pygmentize.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pygmentize --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\rexi.exe (Terminal UI for Regex Testing).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command rexi.exe --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\tabby.lnk" -DestinationPath "${TOOLS}\tabby\Tabby.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\tabby\Tabby.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\time-decode.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command time-decode --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\upx.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command upx"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\visidata (VisiData or vd is an interactive multitool for tabular data).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command visidata --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\zstd.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command zstd -h"
 
 # Utilities - _dfirws
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\_dfirws" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\_dfirws" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\_dfirws\dfirws-install.ps1.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command Get-Help dfirws-install.ps1"
 
 # Utilities - Browsers
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Browsers" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Browsers" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Chrome (runs dfirws-install -Chrome).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Chrome"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Firefox (runs dfirws-install -Firefox).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Firefox"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Tor Browser (runs dfirws-install -Tor).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Tor"
 
 # Utilities - Crypto
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Crypto" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Crypto" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\ares.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ares --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\chepy.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command venv.ps1 -chepy ; chepy -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\CyberChef.lnk" -DestinationPath "${TOOLS}\CyberChef\CyberChef.html"
@@ -629,18 +628,18 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\sigs.py.lnk" -D
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\veracrypt (runs dfirws-install -Veracrypt).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -Veracrypt"
 
 # Utilities - CTF
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\CTF" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\CTF" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\CTF\HiddenWave (and ExWave).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\HiddenWave" -Arguments "-NoExit -command dir"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\CTF\stegolsb.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command stegolsb --help"
 
 # Utilities - Media
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Media" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Media" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\Audacity.lnk" -DestinationPath "${TOOLS}\Audacity\audacity.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\ffmpeg.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ffmpeg --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\VLC (runs dfirws-install -VLC).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -VLC"
 
 # Zimmerman
-New-Item -ItemType Directory "${HOME}\Desktop\dfirws\Zimmerman" | Out-Null
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Zimmerman" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\AmcacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\AmcacheParser.exe" -Arguments "-NoExit -command AmcacheParser.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\AppCompatCacheParser.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\AppCompatCacheParser.exe" -Arguments "-NoExit -command AppCompatCacheParser.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\bstrings.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\bstrings.exe" -Arguments "-NoExit -command bstrings.exe -h"
@@ -679,7 +678,7 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
     ${DestinationDir} = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs"
 
     if (-not (Test-Path -Path ${DestinationDir})) {
-        New-Item -ItemType Directory -Path ${DestinationDir}
+        New-Item -Force -ItemType Directory -Path ${DestinationDir}
     }
 
     # Find all files in the source directory, including subdirectories
@@ -691,7 +690,7 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
 
         # Ensure the new folder exists
         if (-not (Test-Path -Path $newFolderPath)) {
-            New-Item -ItemType Directory -Path $newFolderPath | Out-Null
+            New-Item -Force -ItemType Directory -Path $newFolderPath | Out-Null
         }
 
         # Define the new file path within the new folder structure

@@ -209,7 +209,6 @@ Test-Command procdump64 PE32      # C:\Tools\sysinternals\procdump64.exe
 Test-Command procexp64 PE32      # C:\Tools\sysinternals\procexp64.exe
 Test-Command pskill64 PE32      # C:\Tools\sysinternals\pskill64.exe
 Test-Command ZoomIt64 PE32      # C:\Tools\sysinternals\ZoomIt64.exe
-Test-Command Tabby PE32      # C:\Tools\tabby\Tabby.exe
 Test-Command thumbcache_viewer PE32      # C:\Tools\thumbcacheviewer\thumbcache_viewer.exe
 Test-Command trid PE32      # C:\Tools\trid\trid.exe
 Test-Command upx PE32      # C:\Tools\upx\upx.exe
