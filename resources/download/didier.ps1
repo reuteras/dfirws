@@ -55,6 +55,7 @@ $DidierStevensSuite = `
     "plugin_embeddedfile.py", `
     "plugin_hifo.py", `
     "plugin_http_heuristics.py", `
+    "plugin_hyperlink.py", `
     "plugin_jumplist.py", `
     "plugin_linear.py", `
     "plugin_list", `
