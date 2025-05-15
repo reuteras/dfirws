@@ -53,13 +53,18 @@ New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value 
 Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Shortcut for PowerShell
-Enable-ExperimentalFeature PSFeedbackProvider
+if ($PSVersionTable.PSVersion.Major -gt 7) {
+	Enable-ExperimentalFeature PSFeedbackProvider
+}
 Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
 
 # Install Terminal and link to it
 Expand-Archive "${SETUP_PATH}\Terminal.zip" -DestinationPath "$env:ProgramFiles\Windows Terminal" -Force | Out-Null
 $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
 $TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\wt.exe"
+if (! (Test-Path "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings")) {
+	New-Item -Path "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings" -ItemType Directory -Force | Out-Null
+}
 Copy-Item "$LOCAL_PATH\defaults\Windows_Terminal.json" "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings\settings.json" -Force | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath $TERMINAL_INSTALL_LOCATION -WorkingDirectory "${HOME}\Desktop"
 
