@@ -310,7 +310,7 @@ Test-Command C:\venv\bin\olevba.exe PE32
 Test-Command C:\venv\default\Scripts\parse-lnk.exe PE32
 Test-Command C:\venv\bin\pcode2code.exe PE32
 Test-Command C:\venv\bin\protodeep.exe PE32
-Test-Command C:\venv\bin\ptipython3.exe PE32
+Test-Command C:\venv\bin\ptipython.exe PE32
 Test-Command C:\venv\bin\ptpython.exe PE32
 Test-Command C:\venv\default\Scripts\pyftmerge.exe PE32
 Test-Command C:\venv\default\Scripts\pyftsubset.exe PE32
@@ -361,9 +361,9 @@ Test-Command C:\venv\bin\tl.exe PE32
 Test-Command C:\venv\white-phoenix\Scripts\f2py.exe PE32
 
 # foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -Include *.py)) {"Test-Command", $name.Fullname, "Python"  -join " " }
-Test-Command C:\venv\uv\regipy\Scripts\evtx_dump.py Python
-Test-Command C:\venv\uv\regipy\Scripts\evtx_info.py Python
-Test-Command C:\venv\uv\binary-refinery\Scripts\readelf.py Python
+Test-Command C:\venv\uv\regipy\Scripts\evtx_dump.exe PE32
+Test-Command C:\venv\uv\regipy\Scripts\evtx_info.exe PE32
+Test-Command C:\venv\uv\binary-refinery\Scripts\binref.exe PE32
 Test-Command C:\venv\uv\chepy\Scripts\exrex.py Python
 Test-Command C:\venv\uv\chepy\Scripts\jp.py Python
 Test-Command C:\Tools\bin\bmc-tools.py Python
