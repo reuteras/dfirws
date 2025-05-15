@@ -190,6 +190,13 @@ To see available options run **Get-Help .\downloadFiles.ps1**.
 
 More information about installed tools are available in the GitHub [wiki][wid].
 
+## Known problems and errors
+
+- aleapp: import xmltodict - not available
+- bazaar: ModuleNotFoundError: No module named 'typer'
+- shodan: ModuleNotFoundError: No module named 'pkg_resources'
+- freshclam: Doesn't work
+
   [wid]: https://github.com/reuteras/dfirws/wiki/Documentation
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
   [wsc]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file
