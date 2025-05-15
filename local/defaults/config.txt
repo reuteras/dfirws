@@ -73,14 +73,14 @@ $WSDFIR_HIDE_TASKBAR="Yes"
 $WSDFIR_START_MENU="Yes"
 
 # Use oh-my-posh
-$WSDFIR_OHMYPOSH="No"
+$WSDFIR_OHMYPOSH="Yes"
 
 # Configuration for oh-my-posh when using powerline10k compatible font
 # Needs to be set manually for PowerShell
-#$WSDFIR_OHMYPOSH_CONFIG="defaults\posh\dfirws-powerlevel10k.omp.json"
+$WSDFIR_OHMYPOSH_CONFIG="defaults\posh\dfirws-powerlevel10k.omp.json"
 
 # Configuration for oh-my-posh when using simple font
-$WSDFIR_OHMYPOSH_CONFIG="defaults\posh\dfirws.minimal.omp.json"
+#$WSDFIR_OHMYPOSH_CONFIG="defaults\posh\dfirws.minimal.omp.json"
 
 # Font name to use with oh-my-posh
 $WSDFIR_FONT_NAME="Meslo"
