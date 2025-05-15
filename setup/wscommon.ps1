@@ -741,13 +741,9 @@ function Install-OhMyPosh {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-ohmyposh.txt")) {
         Write-Output "Installing OhMyPosh"
         Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\oh-my-posh.msi /qn /norestart"
+        Write-Output "Installing OhMyPosh fonts"
         & "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" font install "${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
-        if (Test-Path "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk") {
-            Remove-Item "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk" -Force
-        }
-        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk") {
-            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk" -Force
-        }
+        Write-Output "Creating new shortcut"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oh-my-posh.exe --help" -Iconlocation "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
     } else {
