@@ -361,7 +361,7 @@ if ($status) {
 $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi" -check "Composite Document File V2 Document"
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
-$digitalcorpora_url = Get-DownloadUrlFromPage -url "https://downloads.digitalcorpora.org/downloads/bulk_extractor" -RegEx "[^']+windows.zip"
+$digitalcorpora_url = "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip"
 $status = Get-FileFromUri -uri "${digitalcorpora_url}" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\bulk_extractor") {
@@ -445,7 +445,7 @@ if ($status) {
 }
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
-$apktool_version = Get-DownloadUrlFromPage -url "https://bitbucket.org/iBotPeaches/apktool/downloads/" -RegEx 'apktool_[^"]+'
+$apktool_version = Get-DownloadUrlFromPage -url "https://apktool.org/" -RegEx 'apktool_[^"]+'
 $status = Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/${apktool_version}" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force
