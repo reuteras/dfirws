@@ -1,5 +1,6 @@
 .vscode/extensions.json
 config.ps1
+config.ps1.org
 downloads/*
 enrichment/*
 local/*
