@@ -433,7 +433,7 @@ $status = Get-FileFromUri -uri "${graphviz_url}" -FilePath ".\downloads\graphviz
 $status = Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe" -CheckURL "Yes" -check "PE32"
 
 # https://gluonhq.com/products/javafx/ - JavaFX 21
-$javafx_version = Get-DownloadUrlFromPage -url "https://gluonhq.com/products/javafx/" -RegEx '21\.[^" ]+'
+$javafx_version = Get-DownloadUrlFromPage -url "https://gluonhq.com/products/javafx/" -RegEx '21\.[0-9.]+'
 $status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/${javafx_version}/openjfx-${javafx_version}_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\javafx-sdk") {
