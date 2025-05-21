@@ -395,7 +395,9 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
     $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
     $_.Line -notmatch "ucrt64/share" -and
-    $_.Line -notmatch "origin/main Updating"
+    $_.Line -notmatch "origin/main Updating" -and
+    $_.Line -notmatch "origin/master Updating"
+
 }
 
 if ($warnings -or $errors -or $failed) {
