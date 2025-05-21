@@ -266,6 +266,7 @@ $ADD_TO_PATH = @("${MSYS2_DIR}", `
 	"${TOOLS}\DidierStevens"
 	"${TOOLS}\die"
 	"${TOOLS}\dumpbin"
+	"${TOOLS}\edit"
 	"${TOOLS}\elfparser-ng\Release"
 	"${TOOLS}\ExeinfoPE"
 	"${TOOLS}\exiftool"

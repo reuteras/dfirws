@@ -848,6 +848,16 @@ if ($status) {
 # zaproxy - available for installation with dfirws-install.ps1
 $status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.exe" -match "windows.exe" -check "PE32"
 
+# edit
+$status = Get-GitHubRelease -repo "microsoft/edit" -path "${SETUP_PATH}\edit.zip" -match "windows.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\edit") {
+        Remove-Item "${TOOLS}\edit" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\edit.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\edit-* ${TOOLS}\edit
+}
+
 #
 # Obsidian plugins
 #
