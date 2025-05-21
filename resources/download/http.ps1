@@ -474,6 +474,12 @@ if ($status) {
     Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
 }
 
+# vmss2core
+$status = Get-FileFromUri -uri "https://archive.org/download/flings.vmware.com/Flings/Vmss2core/vmss2core-sb-8456865.exe" -FilePath ".\downloads\vmss2core.exe" -CheckURL "Yes" -check "PE32"
+if ($status) {
+    Copy-Item ".\downloads\vmss2core.exe" "${TOOLS}\bin\vmss2core.exe" -Force
+}
+
 # Drivers for hashcat
 $intel_driver = Get-DownloadUrlFromPage -url "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-cpu-runtime-for-opencl-applications-with-sycl-support.html" -RegEx 'https://[^"]+\.exe'
 $status = Get-FileFromUri -uri "${intel_driver}" -FilePath ".\downloads\intel_driver.exe" -CheckURL "Yes" -check "PE32"
