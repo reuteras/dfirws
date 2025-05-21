@@ -846,6 +846,7 @@
         "vlc",
         "vmmap",
         "vmrun",
+        "vmss",
         "vmwarevm",
         "VMX",
         "volatilityworkbench",
