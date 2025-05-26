@@ -858,6 +858,15 @@ if ($status) {
     Move-Item ${TOOLS}\edit-* ${TOOLS}\edit
 }
 
+# https://download.sqlitebrowser.org/ - DB Browser for SQLite
+$status = Get-GitHubRelease -repo "sqlitebrowser/sqlitebrowser" -path "${SETUP_PATH}\sqlitebrowser.zip" -match "win64.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\DB Browser for SQLite") {
+        Remove-Item -Recurse -Force "${TOOLS}\DB Browser for SQLite" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\sqlitebrowser" | Out-Null
+}
+
 #
 # Obsidian plugins
 #

@@ -392,16 +392,6 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\nmap.exe" -o"${TOOLS}\nmap" | Out-Null
 }
 
-# https://download.sqlitebrowser.org/ - DB Browser for SQLite
-$sqlitebrowser_version = Get-DownloadUrlFromPage -url "https://download.sqlitebrowser.org/" -RegEx 'DB[^"]+win64.zip'
-$status = Get-FileFromUri -uri "https://download.sqlitebrowser.org/${sqlitebrowser_version}" -FilePath ".\downloads\sqlitebrowser.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\DB Browser for SQLite") {
-        Remove-Item -Recurse -Force "${TOOLS}\DB Browser for SQLite" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\sqlitebrowser" | Out-Null
-}
-
 # https://flatassembler.net/download.php - FASM
 $flatassembler_version = Get-DownloadUrlFromPage -url "https://flatassembler.net/download.php" -RegEx 'fasmw[^"]+zip'
 $status = Get-FileFromUri -uri "https://flatassembler.net/${flatassembler_version}" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes" -check "Zip archive data"
