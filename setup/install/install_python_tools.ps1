@@ -150,18 +150,22 @@ foreach ($iShutdown in @("iShutdown_detect.py", "iShutdown_parse.py", "iShutdown
 #
 # venv default
 #
-
+# Include all needed by Didier's tools, https://github.com/DidierStevens/DidierStevensSuite/blob/master/requirements.txt
 Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.txt"
 uv venv "C:\venv\default" >> "C:\log\python.txt"
 C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Set-Location "C:\venv\default"
 uv pip install -U `
     "acquire", `
+    "aiodns", `
     "aiohttp[speedups]", `
     "Aspose.Email-for-Python-via-Net", `
+    "BeautifulSoup4", `
+    "bitstruct", `
     "compressed_rtf", `
     "dissect", `
     "dissect.target[yara]", `
+    "dnslib", `
     "flow.record", `
     "geoip2", `
     "cabarchive", `
@@ -171,6 +175,7 @@ uv pip install -U `
     "elasticsearch", `
     "evtx", `
     "graphviz", `
+    "javaobj-py3", `
     "keystone-engine", `
     "lief", `
     "matplotlib", `
@@ -181,16 +186,27 @@ uv pip install -U `
     "neo4j-driver", `
     "networkx", `
     "olefile", `
+    "oletools", `
     "openpyxl", `
     "orjson", `
-    "peutils", `
+    "paramiko", `
+    "pathlab", `
     "pefile", `
+    "peutils", `
+    "pfp", `
     "ppdeep", `
     "prettytable", `
+    "pyasn1", `
+    "pycares", `
+    "pycryptodome", `
+    "pydivert", `
     "pypdf", `
     "pypdf2", `
+    "pyshark", `
+    "PySocks", `
     "python-magic", `
     "python-magic-bin", `
+    "python-registry", `
     "pyvis", `
     "pywin32", `
     "pyzipper", `
@@ -204,13 +220,15 @@ uv pip install -U `
         "pysigma-backend-sqlite", `
         "pysigma-pipeline-sysmon", `
         "pysigma-pipeline-windows", `
+    "simplejson", `
     "termcolor", `
     "textsearch", `
     "tomlkit", `
     "treelib", `
     "unicorn", `
     "xxhash", `
-    "yara-python" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    "yara-python", `
+    "win_inet_pton" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 #
 # venv white-phoenix
