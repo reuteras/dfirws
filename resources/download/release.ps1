@@ -315,12 +315,14 @@ if ($status) {
 }
 
 # WinObjEx64
-$status = Get-GitHubRelease -repo "hfiref0x/WinObjEx64" -path "${SETUP_PATH}\WinObjEx64.zip" -match "WinobjEx64" -check "Zip archive data"
-if ($status) {
+$status = Get-GitHubRelease -repo "hfiref0x/WinObjEx64" -path "${SETUP_PATH}\WinObjEx64.zip" -match "WinobjEx64.*[0-9].zip" -check "Zip archive data"
+$plugin_status = Get-GitHubRelease -repo "hfiref0x/WinObjEx64" -path "${SETUP_PATH}\WinObjEx64_plugins.zip" -match "WinobjEx64.*plugins.zip" -check "Zip archive data"
+if ($status -or $plugin_status) {
     if (Test-Path "${TOOLS}\WinObjEx64") {
         Remove-Item "${TOOLS}\WinObjEx64" -Recurse -Force
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinObjEx64.zip" -o"${TOOLS}\WinObjEx64" | Out-Null
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinObjEx64_plugins.zip" -o"${TOOLS}\WinObjEx64" | Out-Null
 }
 
 # Detect It Easy
@@ -359,9 +361,6 @@ if ($status) {
 # LogBoost
 $status = Get-GitHubRelease -repo "joeavanzato/logboost" -path "${SETUP_PATH}\logboost.rar" -match "logboost_release" -check "RAR archive data"
 if ($status) {
-    if (Test-Path "${TOOLS}\logboost") {
-        Remove-Item "${TOOLS}\logboost" -Recurse -Force
-    }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logboost.rar" -o"${TOOLS}\logboost" | Out-Null
 }
 
