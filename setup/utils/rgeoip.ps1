@@ -4,4 +4,4 @@ if (-not (Test-Path -Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb")) {
     return
 }
 
-$input | C:\venv\dissect\Scripts\rgeoip.exe -c "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" -a "C:\enrichment\maxmind_current\GeoLite2-ASN.mmdb" $args
+$input | rgeoip.exe -c "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" -a "C:\enrichment\maxmind_current\GeoLite2-ASN.mmdb" $args
