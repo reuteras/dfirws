@@ -386,7 +386,7 @@ Test-Command C:\Tools\bin\smtpsmug.py Python
 Test-Command C:\Tools\bin\SQLiteWalker.py Python
 Test-Command C:\venv\bin\unpy2exe.py Python
 Test-Command C:\venv\bin\vba_extract.py Python
-Test-Command C:\venv\bin\vd.py Python
+Test-Command C:\venv\bin\vd.exe PE32
 Test-Command C:\venv\bin\vsc_mount.py Python
 Test-Command C:\venv\evt2sigma\Scripts\evt2sigma.py Python
 Test-Command C:\venv\pe2pic\Scripts\pe2pic.py Python
