@@ -37,6 +37,7 @@ $DidierStevensSuite = `
     "js-file.exe", `
     "libnspr4.dll", `
     "msoffcrypto-crack.py", `
+    "myipaddress.py", `
     "myjson-filter.py", `
     "myjson-transform.py", `
     "nsrl.py", `
