@@ -242,6 +242,17 @@ uv pip install -r "${WSDFIR_TEMP}\white-phoenix.txt" 2>&1 | ForEach-Object{ "$_"
 deactivate
 Write-DateLog "Python venv white-phoenix done." >> "C:\log\python.txt"
 
+### venv for Kanvas
+Write-DateLog "Install packages in venv kanvas in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+git clone https://github.com/WithSecureLabs/Kanvas.git C:\venv\Kanvas 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Set-Location "C:\venv\Kanvas"
+uv venv "C:\venv\Kanvas\.venv" >> "C:\log\python.txt"
+C:\venv\Kanvas\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
+uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+C:\Users\WDAGUtilityAccount\Documents\tools\utils\kanvas_update.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+deactivate
+Write-DateLog "Python venv kanvas done." >> "C:\log\python.txt"
+
 #
 # venv dfir-unfurl
 #

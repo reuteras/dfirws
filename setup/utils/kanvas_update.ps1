@@ -196,35 +196,30 @@ catch {
     exit 1
 }
 
-# Optional: Clean up temporary files
-$cleanupChoice = Read-Host "`nWould you like to clean up temporary download files? (y/n)"
-if ($cleanupChoice -match '^[Yy]') {
-    Write-Status "Cleaning up temporary files..."
-    
-    # List of temporary files that might be created during download
-    $tempFiles = @(
-        "dan.txt", "torproject.txt", "d3fend-full-mappings.csv", "user.json", 
-        "admin.json", "thirdparty.json", "us-govt.json", "china.json", 
-        "edu.json", "licensing.json", "training.json", "evtx_id.csv", 
-        "mitre_techniques.csv", "known_exploited_vulnerabilities.csv", 
-        "MicrosoftApps.csv", "GraphAppRoles.csv", "GraphDelegateRoles.csv", 
-        "Malicious_EntraID.csv", "onetracker.csv", "evidencetype.csv", 
-        "secureupdates.txt"
-    )
-    
-    foreach ($file in $tempFiles) {
-        if (Test-Path $file) {
-            try {
-                Remove-Item $file -Force
-                Write-Host "  Removed: $file" -ForegroundColor Gray
-            }
-            catch {
-                Write-Warning "Could not remove $file"
-            }
+Write-Status "Cleaning up temporary files..."
+
+# List of temporary files that might be created during download
+$tempFiles = @(
+    "dan.txt", "torproject.txt", "d3fend-full-mappings.csv", "user.json", 
+    "admin.json", "thirdparty.json", "us-govt.json", "china.json", 
+    "edu.json", "licensing.json", "training.json", "evtx_id.csv", 
+    "mitre_techniques.csv", "known_exploited_vulnerabilities.csv", 
+    "MicrosoftApps.csv", "GraphAppRoles.csv", "GraphDelegateRoles.csv", 
+    "Malicious_EntraID.csv", "onetracker.csv", "evidencetype.csv", 
+    "secureupdates.txt"
+)
+
+foreach ($file in $tempFiles) {
+    if (Test-Path $file) {
+        try {
+            Remove-Item $file -Force
+            Write-Host "  Removed: $file" -ForegroundColor Gray
+        }
+        catch {
+            Write-Warning "Could not remove $file"
         }
     }
-    
-    Write-Status "Cleanup completed"
 }
 
+Write-Status "Cleanup completed"
 Write-Host "`nScript execution completed." -ForegroundColor Green

@@ -32,8 +32,8 @@ param(
     [Parameter(HelpMessage = "Switch to venv maldump.")]
     [Switch]$maldump,
     [Parameter(HelpMessage = "Switch to venv mwcp.")]
-    [Switch]$mwcp,
-    [Parameter(HelpMessage = "Switch to venv pe2pic.")]
+    [Switch]$Kanvas,
+    [Parameter(HelpMessage = "Switch to venv Kanvas.")]
     [Switch]$pe2pic,
     [Parameter(HelpMessage = "Switch to venv peepdf3.")]
     [Switch]$peepdf3,
@@ -85,8 +85,8 @@ if ($aspose) {
     $venv = "magika"
 } elseif ($maldump) {
     $venv = "maldump"
-} elseif ($mwcp) {
-    $venv = "mwcp"
+} elseif ($Kanvas) {
+    $venv = "Kanvas"
 } elseif ($pe2pic) {
     $venv = "pe2pic"
 } elseif ($peepdf3) {
@@ -112,6 +112,8 @@ if (Test-Path "C:\venv\$venv\Scripts\Activate.ps1") {
     & "C:\venv\$venv\Scripts\Activate.ps1"
 } elseif (Test-Path "C:\venv\uv\$venv\Scripts\Activate.ps1") {
     & "C:\venv\uv\$venv\Scripts\Activate.ps1"
+} elseif (Test-Path "C:\venv\Kanvas\.venv\Scripts\Activate.ps1") {
+    & "${env:ProgramFiles}\Kanvas\.venv\Scripts\Activate.ps1"
 } else {
     Write-Output "ERROR: Activate.ps1 not found. Exiting"
     Exit

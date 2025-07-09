@@ -599,6 +599,24 @@ function Install-Kape {
     }
 }
 
+function Install-Kanvas {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-kanvas.txt")) {
+        Write-Output "Installing Kanvas"
+        Copy-Item -Recurse "${VENV}\kanvas" "${env:ProgramFiles}" -Force | Out-Null
+        Add-ToUserPath "${env:ProgramFiles}\Kanvas"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Kanvas.py (case management for incident response).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command venv.ps1 -Kanvas ; Kanvas.py"
+        if (Test-Path "${HOME}\Desktop\dfirws\IR\Kanvas (runs dfirws-install -Kanvas).lnk") {
+            Remove-Item "${HOME}\Desktop\dfirws\IR\Kanvas (runs dfirws-install -Kanvas).lnk" -Force
+        }
+        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - IR\Kanvas (runs dfirws-install -Kanvas).lnk") {
+            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - IR\Kanvas (runs dfirws-install -Kanvas).lnk" -Force
+        }
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-kanvas.txt" | Out-Null
+    } else {
+        Write-Output "Kanvas is already installed"
+    }
+}
+
 function Install-LibreOffice {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-libreoffice.txt")) {
         Write-Output "Installing LibreOffice"

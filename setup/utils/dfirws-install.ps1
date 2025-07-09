@@ -22,6 +22,7 @@ param (
     [switch]$Gpg4win,
     [switch]$Hashcat,
     [switch]$Jadx,
+    [switch]$Kanvas,
     [switch]$Kape,
     [switch]$LibreOffice,
     [switch]$LogBoost,
@@ -133,6 +134,10 @@ if ($Hashcat.IsPresent) {
 
 if ($Jadx.IsPresent) {
     Install-Jadx
+}
+
+if ($Kanvas.IsPresent) {
+    Install-Kanvas
 }
 
 if ($Kape.IsPresent) {
