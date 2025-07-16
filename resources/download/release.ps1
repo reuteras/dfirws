@@ -545,6 +545,16 @@ if ($status) {
     Move-Item ${TOOLS}\pev* ${TOOLS}\pev
 }
 
+# jwt-cli
+$status = Get-GitHubRelease -repo "mike-engel/jwt-cli" -path "${SETUP_PATH}\jwt-cli.tar.gz" -match "jwt-windows.tar.gz"
+if ($status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jwt-cli.tar.gz" -o"${TOOLS}\bin" | Out-Null
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${TOOLS}\bin\jwt-cli.tar" -o"${TOOLS}\bin" | Out-Null
+    if (Test-Path "${TOOLS}\bin\jwt-cli.tar") {
+        Remove-Item "${TOOLS}\bin\jwt-cli.tar" -Force
+    }
+}
+
 # dsq
 $status = Get-GitHubRelease -repo "multiprocessio/dsq" -path "${SETUP_PATH}\dsq.zip" -match "dsq-win" -check "Zip archive data"
 if ($status) {
