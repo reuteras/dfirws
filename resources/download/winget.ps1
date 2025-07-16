@@ -20,6 +20,10 @@ $status = Get-WinGet "Docker.DockerDesktop" "Docker*.exe" "docker.exe" -check "P
 Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
 $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
 
+# DotNet 8 Desktop runtime - installed during startup
+Write-SynchronizedLog "winget: Downloading DotNet 8 Desktop runtime."
+$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.8" "Microsoft*.exe" "dotnet8desktop.exe" -check "PE32"
+
 # IrfanView - installed during startup
 Write-SynchronizedLog "winget: Downloading IrfanView."
 $status = Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe" -check "PE32"
