@@ -128,6 +128,7 @@ C:\Windows\System32\curl.exe -L --silent -o "smtpsmug.py" "https://raw.githubuse
 C:\Windows\System32\curl.exe -L --silent -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
 C:\Windows\System32\curl.exe -L --silent -o "CanaryTokenScanner.py" "https://raw.githubusercontent.com/0xNslabs/CanaryTokenScanner/main/CanaryTokenScanner.py"
 C:\Windows\System32\curl.exe -L --silent -o "sigs.py" "https://raw.githubusercontent.com/clausing/scripts/master/sigs.py"
+C:\Windows\System32\curl.exe -L --silent -o "defender-dump.py" "https://raw.githubusercontent.com/AlexJ4n6/Defender-Quarantine-Dump/refs/heads/main/defender-dump.py"
 
 # Copy executables to bin folder
 Copy-Item "C:\venv\uv\chepy\Scripts\pyjwt.exe" "C:\venv\bin\pyjwt.exe" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
