@@ -87,6 +87,7 @@ foreach ($package in `
     "magika", `
     "maldump", `
     "malwarebazaar", `
+    "markitdown[all]", `
     "minidump", `
     "mkyara", `
     "msoffcrypto-tool", `
