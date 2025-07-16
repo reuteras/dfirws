@@ -91,6 +91,10 @@ Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${W
 Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
 Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
+# Install .NET 8
+Start-Process -Wait "${SETUP_PATH}\dotnet8desktop.exe" -ArgumentList "/install /quiet /norestart"
+Write-DateLog ".NET 8 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 # Install OhMyPosh
 if ("${WSDFIR_OHMYPOSH}" -eq "Yes") {
     Install-OhMyPosh | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append

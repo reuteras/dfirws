@@ -386,6 +386,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\usnjrnl_dump (Parses 
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\adalanche (Active Directory ACL Visualizer and Explorer).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command adalanche.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\CimSweep.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${GIT_PATH}\CimSweep" -Arguments "-NoExit -command Import-Module .\CimSweep\CimSweep.psd1"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\DitExplorer (Active Directory Database Explorer).lnk" -DestinationPath "${TOOLS}\DitExplorer\DitExplorer.UI.WpfApp.exe"
 
 # OS - Windows - Registry
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Registry" | Out-Null
@@ -594,7 +595,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Google Earth (runs dfi
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Graphviz.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command dot -?"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\jpterm (Jupyter in the terminal).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command jpterm --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\jupyter notebook.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command ${HOME}\Documents\tools\utils\jupyter.bat"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\markitdown (Python tool for converting files and office documents to Markdown).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command markitdown --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\markitdown (Python tool for converting files and office documents to Markdown).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command markitdown --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\mmdbinspect (Tool for GeoIP lookup).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command mmdbinspect --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command dfirws-install.ps1 -OhMyPosh"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\pwncat.py (Fancy reverse and bind shell handler).lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command pwncat.py --help"

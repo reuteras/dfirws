@@ -833,6 +833,7 @@
         "treelib",
         "trid",
         "triddefs",
+        "trustedsec",
         "txtfile",
         "typer",
         "tzdata",
