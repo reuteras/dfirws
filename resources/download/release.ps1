@@ -545,6 +545,16 @@ if ($status) {
     Move-Item ${TOOLS}\pev* ${TOOLS}\pev
 }
 
+# Dit explorer
+$status = Get-GitHubRelease -repo "trustedsec/DitExplorer" -path "${SETUP_PATH}\DitExplorer.zip" -match "win64-release.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\DitExplorer") {
+        Remove-Item "${TOOLS}\DitExplorer" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DitExplorer.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\DitExplorer-* "${TOOLS}\DitExplorer"
+}
+
 # jwt-cli
 $status = Get-GitHubRelease -repo "mike-engel/jwt-cli" -path "${SETUP_PATH}\jwt-cli.tar.gz" -match "jwt-windows.tar.gz"
 if ($status) {
