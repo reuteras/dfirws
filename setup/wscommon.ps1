@@ -11,6 +11,7 @@ $WSDFIR_TEMP = "C:\tmp"
 $TOOLS = "C:\Tools"
 $VENV = "C:\venv"
 $POWERSHELL_EXE = "${env:ProgramFiles}\PowerShell\7\pwsh.exe"
+$env:UV_PYTHON_INSTALL_DIR = "C:\venv\python"
 
 $null="${GIT_PATH}"
 $null="${LOCAL_PATH}"

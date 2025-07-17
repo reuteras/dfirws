@@ -10,6 +10,7 @@ $GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\").FullName | findstr.exe 
 $env:UV_TOOL_BIN_DIR = "C:\venv\bin"
 $env:UV_TOOL_DIR = "C:\venv\uv"
 $env:UV_INSTALL_DIR = "C:\venv\pkg"
+$env:UV_PYTHON_INSTALL_DIR = "C:\venv\python"
 $env:UV_CACHE_DIR = "C:\venv\cache"
 $env:UV_LINK_MODE = "copy"
 
