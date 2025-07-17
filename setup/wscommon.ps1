@@ -439,6 +439,24 @@ function Install-Firefox {
     }
 }
 
+function Install-ForensicTimeliner {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-forensictimeliner.txt")) {
+        Write-Output "Installing Forensic Timeliner"
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ForensicTimeliner.zip" -o"${env:ProgramFiles}" | Out-Null
+        Move-Item ${env:ProgramFiles}\ForensicTimeliner* "${env:ProgramFiles}\ForensicTimeliner" -Force
+        if (Test-Path "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk") {
+            Remove-Item "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk" -Force
+        }
+        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk") {
+            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk" -Force
+        }
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ForensicTimeliner -h"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-forensictimeliner.txt" | Out-Null
+    } else {
+        Write-Output "Forensic Timeliner is already installed"
+    }
+}
+
 function Install-FoxitReader {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-foxitreader.txt")) {
         Write-Output "Installing Foxit Reader"

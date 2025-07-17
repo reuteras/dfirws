@@ -224,14 +224,15 @@ Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_
 Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
 
-$ADD_TO_PATH = @("${MSYS2_DIR}", `
-    "${MSYS2_DIR}\ucrt64\bin", `
+$ADD_TO_PATH = @("${MSYS2_DIR}"
+    "${MSYS2_DIR}\ucrt64\bin"
     "${MSYS2_DIR}\usr\bin"
 	"${TOOLS}\perl\perl\bin"
 	"${env:ProgramFiles}\4n4lDetector"
 	"${env:ProgramFiles}\7-Zip"
 	"${env:ProgramFiles}\BeaconHunter"
 	"${env:ProgramFiles}\bin"
+	"${env:ProgramFiles}\ForensicTimeliner"
 	"${env:ProgramFiles}\Git\bin"
 	"${env:ProgramFiles}\Git\cmd"
 	"${env:ProgramFiles}\Git\usr\bin"

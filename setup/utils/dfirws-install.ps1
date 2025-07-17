@@ -14,6 +14,7 @@ param (
     [switch]$Dokany,
     [switch]$Fibratus,
     [switch]$Firefox,
+    [switch]$ForensicTimeliner,
     [switch]$FoxitReader,
     [switch]$FQLite,
     [switch]$Git,
@@ -102,6 +103,10 @@ if ($Fibratus.IsPresent) {
 
 if ($Firefox.IsPresent) {
     Install-Firefox
+}
+
+if ($ForensicTimeliner.IsPresent) {
+    Install-ForensicTimeliner
 }
 
 if ($FoxitReader.IsPresent) {

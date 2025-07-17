@@ -561,6 +561,9 @@ if ($status) {
     Copy-Item ${SETUP_PATH}\srum_dump.exe ${TOOLS}\bin\
 }
 
+# forensic-timeliner
+$status = Get-GitHubRelease -repo "acquiredsecurity/forensic-timeliner" -path "${SETUP_PATH}\ForensicTimeliner.zip" -match "ForensicTimeliner" -check "Zip archive data"
+
 # jwt-cli
 $status = Get-GitHubRelease -repo "mike-engel/jwt-cli" -path "${SETUP_PATH}\jwt-cli.tar.gz" -match "jwt-windows.tar.gz"
 if ($status) {
