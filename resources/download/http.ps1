@@ -415,6 +415,19 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
 }
 
+
+# https://codeberg.org/hrbrmstr/geolocus-cli/releases - Geolocus CLI
+$geolocus_url = Get-DownloadUrlFromPage -url "https://codeberg.org/hrbrmstr/geolocus-cli/releases" -RegEx 'https://[^"]*geolocus-cli-windows\.exe\.zip' -last
+$status = Get-FileFromUri -uri "${geolocus_url}" -FilePath ".\downloads\geolocus.zip" -CheckURL "Yes" -check "Zip archive data"
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\geolocus") {
+        Remove-Item -Recurse -Force "${TOOLS}\geolocus" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\geolocus.zip" -o"${TOOLS}\geolocus" | Out-Null
+    Copy-Item "${TOOLS}\geolocus\geolocus-cli-windows.exe" -Destination "${TOOLS}\bin\geolocus-cli.exe" -Force
+    Remove-Item -Recurse -Force "${TOOLS}\geolocus\__MACOSX" | Out-Null 2>&1
+}
+
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
 $graphviz_url = Get-DownloadUrlFromPage -url "https://www.graphviz.org/download/" -RegEx 'https://[^"]+win64.exe'
 $status = Get-FileFromUri -uri "${graphviz_url}" -FilePath ".\downloads\graphviz.exe" -CheckURL "Yes" -check "PE32"

@@ -308,7 +308,8 @@ function Get-GitHubRelease {
 function Get-DownloadUrlFromPage {
     param (
         [Parameter(Mandatory=$True)] [string]$Url,
-        [Parameter(Mandatory=$True)] [regex]$RegEx
+        [Parameter(Mandatory=$True)] [regex]$RegEx,
+        [Parameter(Mandatory=$False)] [switch]$last
     )
 
     $downloadUrl = ""
@@ -317,13 +318,25 @@ function Get-DownloadUrlFromPage {
     while ("$downloadUrl" -eq "") {
         try {
             if ($Url -contains "github.com") {
-                if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-                    $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
+                if ($last) {
+                    if ($GH_USER -eq "" -or $GH_PASS -eq "") {
+                        $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -Last 1
+                    } else {
+                        $downloadUrl = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -Last 1
+                    }
                 } else {
-                    $downloadUrl = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
+                    if ($GH_USER -eq "" -or $GH_PASS -eq "") {
+                        $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
+                    } else {
+                        $downloadUrl = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
+                    }
                 }
             } else {
-                $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
+                if ($last) {
+                    $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -Last 1
+                } else {
+                    $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
+                }
             }
         }
         catch {

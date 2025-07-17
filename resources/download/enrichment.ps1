@@ -4,6 +4,7 @@
 $currentDirectory = "${PWD}"
 $enrichmentDirectory = "${PWD}\enrichment"
 $cveSaveDirectory = "${enrichmentDirectory}\cve"
+$geolocusSaveDirectory = "${enrichmentDirectory}\geolocus"
 $gitSaveDirectory = "${enrichmentDirectory}\git"
 $IPinfoSaveDirectory = "${enrichmentDirectory}\ipinfo"
 $manufSaveDirectory = "${enrichmentDirectory}\manuf"
@@ -19,7 +20,7 @@ $maxmindCityUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-City"
 $maxmindCountryUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-Country"
 
 # Create directories if they don't exist
-Foreach ($directory in @($enrichmentDirectory, $cveSaveDirectory, $gitSaveDirectory, $IPinfoSaveDirectory, $manufSaveDirectory, $maxmindCurrentDirectory, $maxmindSaveDirectory, $maxmindUnpackDirectory, $maxmindASNUnpackDirectory, $maxmindCityUnpackDirectory, $maxmindCountryUnpackDirectory, $snortSaveDirectory, $suricataSaveDirectory, $torsaveDirectory, $yaraSaveDirectory)) {
+Foreach ($directory in @($enrichmentDirectory, $cveSaveDirectory, $geolocusSaveDirectory, $gitSaveDirectory, $IPinfoSaveDirectory, $manufSaveDirectory, $maxmindCurrentDirectory, $maxmindSaveDirectory, $maxmindUnpackDirectory, $maxmindASNUnpackDirectory, $maxmindCityUnpackDirectory, $maxmindCountryUnpackDirectory, $snortSaveDirectory, $suricataSaveDirectory, $torsaveDirectory, $yaraSaveDirectory)) {
     if (-not (Test-Path -Path "${directory}")) {
         New-Item -ItemType Directory -Path "${directory}" -Force | Out-Null
     }
@@ -30,6 +31,14 @@ if (-not (Test-Path -Path "${maxmindCurrentDirectory}")) {
 } else {
     Remove-Item -Path "${maxmindCurrentDirectory}" -Recurse -Force
     New-Item -ItemType Directory -Path "${maxmindCurrentDirectory}" -Force | Out-Null
+}
+
+if (!(Test-Path -Path "$geolocusSaveDirectory\.cache\geolocus-cli")) {
+    New-Item -ItemType Directory -Path "$geolocusSaveDirectory\.cache\geolocus-cli" -Force | Out-Null
+}
+
+if (!(Test-Path -Path "$geolocusSaveDirectory\mmdb")) {
+    New-Item -ItemType Directory -Path "$geolocusSaveDirectory\mmdb" -Force | Out-Null
 }
 
 # Get the current date
@@ -129,6 +138,16 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
     # Remove unpack directory
     Remove-Item -Path "${maxmindUnpackDirectory}" -Recurse -Force
 }
+
+#
+# Download Geolocus mmdb file
+$geolocus_url = "https://www.geolocus.io/geolocus.mmdb"
+$geolocusSavePath = Join-Path -Path "$geolocusSaveDirectory" -ChildPath "geolocus.mmdb"
+Write-Output "Downloading Geolocus mmdb file"
+Invoke-WebRequest -Uri "${geolocus_url}" -OutFile "${geolocusSavePath}"
+Copy-Item -Path "${geolocusSavePath}" -Destination "$geolocusSaveDirectory\mmdb\geolocus-${DATE}.mmdb" -Force
+Copy-Item -Path "${geolocusSavePath}" -Destination "$geolocusSaveDirectory\.cache\geolocus-cli\geolocus.mmdb" -Force
+Remove-Item -Path "${geolocusSavePath}" -Force
 
 #
 # Download the latest version of Suricata rules

@@ -272,6 +272,8 @@
         "gdiff",
         "geoip",
         "Geolocate",
+        "Geolocation",
+        "geolocus",
         "getactivescheme",
         "getitem",
         "Getsid",
