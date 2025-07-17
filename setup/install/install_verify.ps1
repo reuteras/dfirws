@@ -225,6 +225,7 @@ Test-Command SQLECmd PE32      # C:\Tools\Zimmerman\SQLECmd\SQLECmd.exe
 Test-Command zircolite PE32      # C:\Tools\zircolite\zircolite.exe
 Test-Command evtx_dump_win PE32      # C:\Tools\zircolite\bin\evtx_dump_win.exe
 Test-Command zstd PE32      # C:\Tools\zstd\zstd.exe
+Test-Command srum_dump PE32
 
 # Test some git repositories
 Test-Command dhparser PE32
