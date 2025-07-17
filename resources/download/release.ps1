@@ -555,6 +555,12 @@ if ($status) {
     Move-Item ${TOOLS}\DitExplorer-* "${TOOLS}\DitExplorer"
 }
 
+# srum_dump binary
+$status = Get-GitHubRelease -repo "MarkBaggett/srum-dump" -path "${SETUP_PATH}\srum_dump.exe" -match "srum_dump.exe" -check "PE32"
+if ($status) {
+    Copy-Item ${SETUP_PATH}\srum_dump.exe ${TOOLS}\bin\
+}
+
 # jwt-cli
 $status = Get-GitHubRelease -repo "mike-engel/jwt-cli" -path "${SETUP_PATH}\jwt-cli.tar.gz" -match "jwt-windows.tar.gz"
 if ($status) {
