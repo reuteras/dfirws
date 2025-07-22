@@ -34,9 +34,9 @@ cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >>
 
 (Get-ChildItem "C:\cargo\bin").Name | ForEach-Object { & "$_" --autocomplete powershell > "C:\cargo\autocomplete\$_.ps1"} 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
-Write-Output "Rust: Install mft2bodyfile, usnjrnl in sandbox."
-Write-DateLog "Rust: Install mft2bodyfile, usnjrnl in sandbox." >> "C:\log\rust.txt"
-cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+#Write-Output "Rust: Install mft2bodyfile in sandbox."
+#Write-DateLog "Rust: Install mft2bodyfile in sandbox." >> "C:\log\rust.txt"
+#cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 Write-Output "Rust: Install usnjrnl in sandbox."
 Write-DateLog "Rust: Install usnjrnl in sandbox." >> "C:\log\rust.txt"
