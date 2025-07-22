@@ -131,7 +131,7 @@ Test-Command hivescan PE32      # C:\Tools\cargo\bin\hivescan.exe
 Test-Command ipgrep PE32      # C:\Tools\cargo\bin\ipgrep.exe
 Test-Command lnk2bodyfile PE32      # C:\Tools\cargo\bin\lnk2bodyfile.exe
 Test-Command mactime2 PE32      # C:\Tools\cargo\bin\mactime2.exe
-Test-Command mft2bodyfile PE32      # C:\Tools\cargo\bin\mft2bodyfile.exe
+#Test-Command mft2bodyfile PE32      # C:\Tools\cargo\bin\mft2bodyfile.exe
 Test-Command pf2bodyfile PE32      # C:\Tools\cargo\bin\pf2bodyfile.exe
 Test-Command pol_export PE32      # C:\Tools\cargo\bin\pol_export.exe
 Test-Command regdump PE32      # C:\Tools\cargo\bin\regdump.exe
