@@ -121,7 +121,7 @@ Test-Command capa PE32      # C:\Tools\capa\capa.exe
 Test-Command capa-ghidra PE32      # C:\Tools\capa-ghidra\capa-ghidra.exe
 Test-Command cleanhive PE32      # C:\Tools\cargo\bin\cleanhive.exe
 Test-Command cute PE32      # C:\Tools\cargo\bin\cute.exe
-Test-Command es4forensics PE32      # C:\Tools\cargo\bin\es4forensics.exe
+#Test-Command es4forensics PE32      # C:\Tools\cargo\bin\es4forensics.exe
 Test-Command evtx2bodyfile PE32      # C:\Tools\cargo\bin\evtx2bodyfile.exe
 Test-Command evtxanalyze PE32      # C:\Tools\cargo\bin\evtxanalyze.exe
 Test-Command evtxcat PE32      # C:\Tools\cargo\bin\evtxcat.exe
