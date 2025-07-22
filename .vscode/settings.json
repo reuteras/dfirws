@@ -229,6 +229,7 @@
         "evtxls",
         "evtxparse",
         "evtxscan",
+        "excalidraw",
         "executequeueditems",
         "executionpolicy",
         "exefile",
@@ -354,6 +355,7 @@
         "jadx",
         "janstarke",
         "javafx",
+        "javalent",
         "javaobj",
         "jep",
         "jepvenv",
@@ -944,6 +946,7 @@
         "zsdt",
         "zstd",
         "zstyle",
+        "zsviczian",
         "zui"
     ],
     "cSpell.enableFiletypes": [

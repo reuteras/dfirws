@@ -928,3 +928,18 @@ $status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\
 $status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\main.js" -match "main.js" -check "JavaScript source"
 $status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\manifest.json" -match "manifest.json" -check "JSON text data"
 $status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\styles.css" -match "styles.css" -check "ASCII text"
+
+# obsidian-excalidraw-plugin
+$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\main.js" -match "main.js" -check "JavaScript source"
+$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\manifest.json" -match "manifest.json" -check "JSON text data"
+$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\styles.css" -match "styles.css" -check "ASCII text"
+
+# admonitions
+$status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\main.js" -match "main.js" -check "JavaScript source"
+$status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\manifest.json" -match "manifest.json" -check "JSON text data"
+$status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\styles.css" -match "styles.css" -check "ASCII text"
+
+# obsidian-timeline
+$status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\main.js" -match "main.js" -check "JavaScript source"
+$status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\manifest.json" -match "manifest.json" -check "JSON text data"
+$status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\styles.css" -match "styles.css" -check "ASCII text"
