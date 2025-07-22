@@ -358,7 +358,12 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "origin/main Updating" -and
     $_.Line -notmatch "new branch" -and
     $_.Line -notmatch "warnings.py" -and
-    $_.Line -notmatch "core_perl"
+    $_.Line -notmatch "core_perl" -and
+    $_.Line -notmatch "unused import" -and
+    $_.Line -notmatch "unused variable" -and
+    $_.Line -notmatch "is never used" -and
+    $_.Line -notmatch "is never constructed" -and
+    $_.Line -notmatch "generated [0-9]+ warnings"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
