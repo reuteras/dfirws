@@ -50,7 +50,7 @@ $status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -c
 
 # Ruby - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Ruby."
-$status = Get-WinGet "RubyInstallerTeam.Ruby.3.2" "Ruby*.exe" "ruby.exe" -check "PE32"
+$status = Get-WinGet "RubyInstallerTeam.Ruby.3.4" "Ruby*.exe" "ruby.exe" -check "PE32"
 
 # VideoLAN VLC - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading VLC."
