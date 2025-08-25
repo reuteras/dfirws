@@ -39,7 +39,7 @@ Test-Command "C:\Program Files (x86)\Digital Detective\DCode v5\DCode.exe" PE32
 $DokanyExecutable = (Get-ChildItem 'C:\Program Files\Dokan\' -Recurse -Include dokanctl.exe).FullName | Select-Object -Last 1
 Test-Command $DokanyExecutable PE32
 Test-Command "C:\Program Files\Mozilla Firefox\firefox.exe" PE32
-Test-Command "C:\Program Files (x86)\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" PE32
+Test-Command "C:\Program Files\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" PE32
 Test-Command go.exe PE32
 Test-Command "C:\Program Files\Google\Google Earth Pro\client\googleearth.exe" PE32
 Test-Command gpg PE32
