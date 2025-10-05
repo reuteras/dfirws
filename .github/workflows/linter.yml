@@ -34,7 +34,7 @@ jobs:
 
     # Runs a single command using the runners shell
       - name: Lint Code Base
-        uses: github/super-linter@v8
+        uses: github/super-linter@v7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
