@@ -79,11 +79,24 @@ param(
     [Switch]$Zimmerman
     )
 
+# Load enhanced modules
+if (Test-Path ".\resources\download\logging.ps1") {
+    . ".\resources\download\logging.ps1"
+} else {
+    Write-Warning "logging.ps1 not found. Using basic logging."
+}
+
+if (Test-Path ".\resources\download\error-handling.ps1") {
+    . ".\resources\download\error-handling.ps1"
+} else {
+    Write-Warning "error-handling.ps1 not found. Using basic error handling."
+}
+
 if (Test-Path ".\resources\download\common.ps1") {
     . ".\resources\download\common.ps1"
 } else {
-    Write-DateLog "Error: common.ps1 not found. Please check your installation."
-    Exit
+    Write-ErrorLog "Error: common.ps1 not found. Please check your installation."
+    Exit 1
 }
 
 if (Test-Path ".\config.ps1") {
@@ -91,26 +104,18 @@ if (Test-Path ".\config.ps1") {
 } elseif (Test-Path ".\config.ps1.template") {
     . ".\config.ps1.template"
 } else {
-    Write-DateLog "Error: Neither config.ps1 nor config.ps1.template found. Please check your installation."
-    Exit
+    Write-ErrorLog "Error: Neither config.ps1 nor config.ps1.template found. Please check your installation."
+    Exit 1
 }
 
 $ProgressPreference = "SilentlyContinue"
 
 # Ensure that we have the necessary tools installed
-if (! (Get-Command "git.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: git.exe not found. Please install Git for Windows and add it to PATH."
-    Exit
-}
-
-if (! (Get-Command "rclone.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: rclone.exe not found. Please install rclone and add it to PATH."
-    Exit
-}
-
-if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: 7z.exe not found. Please install 7-Zip and add it to PATH."
-    Exit
+Write-InfoLog "Checking required tools..."
+if (-not (Test-RequiredTools -Tools @("git.exe", "rclone.exe", "7z.exe") -ThrowOnMissing:$false)) {
+    Write-ErrorLog "Required tools are missing. Please install git, rclone, and 7-Zip and add them to PATH."
+    Write-ErrorLog "You can install them with: winget install Git.Git; winget install Rclone.Rclone; winget install 7zip.7zip"
+    Exit 1
 }
 
 # Ensure configuration exists for rclone
@@ -140,39 +145,33 @@ if ($all -eq $false) {
 }
 
 # Remove old temp files
-Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
+Write-InfoLog "Cleaning up old temporary files..."
+Remove-ItemSafe -Path ".\tmp\downloads\" -Recurse -Force | Out-Null
 
-# Create directories
-if (!(Test-Path "${SETUP_PATH}")) {
-    New-Item -ItemType Directory -Force -Path "${SETUP_PATH}" 2>&1 | Out-Null
+# Create required directories
+Write-InfoLog "Creating required directories..."
+$requiredDirectories = @(
+    "${SETUP_PATH}",
+    "${SETUP_PATH}\.etag",
+    "${TOOLS}",
+    "${TOOLS}\bin",
+    "${TOOLS}\lib",
+    "${TOOLS}\Zimmerman",
+    ".\log"
+)
+
+foreach ($dir in $requiredDirectories) {
+    if (-not (Test-Path $dir)) {
+        if (-not (New-DirectorySafe -Path $dir -Force)) {
+            Write-ErrorLog "Failed to create required directory: $dir"
+            Exit 1
+        }
+    }
 }
 
-if (!(Test-Path "${SETUP_PATH}\.etag")) {
-    New-Item -ItemType Directory -Force -Path "${SETUP_PATH}\.etag" 2>&1 | Out-Null
-}
-
-if (!(Test-Path "${TOOLS}")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}" 2>&1 | Out-Null
-}
-
-if (!(Test-Path "${TOOLS}\bin")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\bin" 2>&1 | Out-Null
-}
-
-if (!(Test-Path "${TOOLS}\lib")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\lib" 2>&1 | Out-Null
-}
-
-if (!(Test-Path "${TOOLS}\Zimmerman")) {
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\Zimmerman" 2>&1 | Out-Null
-}
-
+# Clean up debug directory if it exists
 if (Test-Path "${TOOLS}\Debug") {
-    Remove-Item -Recurse -Force "${TOOLS}\Debug" 2>&1 | Out-Null
-}
-
-if (! (Test-Path -Path ".\log" )) {
-    New-Item -ItemType Directory -Force -Path ".\log" > $null
+    Remove-ItemSafe -Path "${TOOLS}\Debug" -Recurse -Force | Out-Null
 }
 Get-Date > ".\log\log.txt"
 Get-Date > ".\log\logboost.txt"
@@ -185,8 +184,9 @@ if (Test-Path ".\tools_downloaded.csv") {
 }
 
 if ($DebugDownloads.IsPresent) {
-    Write-DateLog "Debug mode enabled."
-    New-Item -ItemType Directory -Force -Path "${TOOLS}\Debug" 2>&1 | Out-Null
+    Write-InfoLog "Debug mode enabled."
+    Initialize-Logging -MinimumLevel DEBUG -LogToFile $true -LogToConsole $true
+    New-DirectorySafe -Path "${TOOLS}\Debug" -Force | Out-Null
 }
 
 if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
@@ -324,17 +324,12 @@ foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name |
 Write-Output "" > ".\downloads\done.txt"
 
 # Remove temp files
-if (Test-Path ".\tmp\downloads") {
-    Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
-}
-if (Test-Path ".\tmp\enrichment") {
-    Remove-Item -Recurse -Force .\tmp\enrichment 2>&1 | Out-Null
-}
-if (Test-Path ".\tmp\mount") {
-    Remove-Item -Recurse -Force .\tmp\mount\ 2>&1 | Out-Null
-}
-if (Test-Path ".\tmp\msys2") {
-    Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
+Write-InfoLog "Cleaning up temporary files..."
+$tempDirs = @(".\tmp\downloads", ".\tmp\enrichment", ".\tmp\mount", ".\tmp\msys2")
+foreach ($tempDir in $tempDirs) {
+    if (Test-Path $tempDir) {
+        Remove-ItemSafe -Path $tempDir -Recurse -Force | Out-Null
+    }
 }
 
 # Verify that tools are available

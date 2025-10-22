@@ -1,6 +1,14 @@
 # Set the default encoding for Out-File to UTF-8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
+# Load enhanced logging and error handling modules
+if (Test-Path "$PSScriptRoot\logging.ps1") {
+    . "$PSScriptRoot\logging.ps1"
+}
+if (Test-Path "$PSScriptRoot\error-handling.ps1") {
+    . "$PSScriptRoot\error-handling.ps1"
+}
+
 # Variables used by the script
 $CONFIGURATION_FILES = ".\local"
 $SETUP_PATH = ".\downloads"
@@ -54,13 +62,21 @@ function Get-FileFromUri {
     $ProgressPreference = 'SilentlyContinue'
 
     # Ensure the directory for the final file path exists
-    If (! ( Test-Path ([System.IO.FileInfo]$FilePath).DirectoryName )) {
-        New-Item ([System.IO.FileInfo]$FilePath).DirectoryName -force -type directory | Out-Null
+    $finalDir = ([System.IO.FileInfo]$FilePath).DirectoryName
+    if ($finalDir -and -not (Test-Path $finalDir)) {
+        if (-not (New-DirectorySafe -Path $finalDir -Force)) {
+            Write-ErrorLog "Failed to create directory for final file: $finalDir"
+            return $false
+        }
     }
 
     # Ensure the directory for the temporary file path exists
-    If (! ( Test-Path ([System.IO.FileInfo]$TmpFilePath).DirectoryName )) {
-        New-Item ([System.IO.FileInfo]$TmpFilePath).DirectoryName -force -type directory | Out-Null
+    $tmpDir = ([System.IO.FileInfo]$TmpFilePath).DirectoryName
+    if ($tmpDir -and -not (Test-Path $tmpDir)) {
+        if (-not (New-DirectorySafe -Path $tmpDir -Force)) {
+            Write-ErrorLog "Failed to create directory for temporary file: $tmpDir"
+            return $false
+        }
     }
 
     $stringAsStream = [System.IO.MemoryStream]::new()
@@ -114,11 +130,39 @@ function Get-FileFromUri {
             if ($Uri -like "*marketplace.visualstudio.com*") {
                 Invoke-WebRequest -uri "${Uri}" -outfile "${TmpFilePath}"
             } else {
-                $CMD = "C:\Windows\system32\curl.exe"
-                $FLAGS = @()
-                (Write-Output "$ETAG_FLAG $Z_FLAG $GH_FLAG $UA_FLAG -L --silent --output $TmpFilePath $Uri").split(" ") | ForEach-Object {if ("" -ne $_ ) {$FLAGS += $_}}
-                $COMMAND_LINE = $CMD + " " + $FLAGS -join " "
-                Invoke-Expression $COMMAND_LINE
+                # Build curl arguments array safely (no Invoke-Expression)
+                $curlArgs = @()
+
+                # Add ETAG flags
+                if ($ETAG_FLAG) {
+                    $ETAG_FLAG.split(" ") | ForEach-Object { if ($_ -ne "") { $curlArgs += $_ } }
+                }
+
+                # Add conditional get flag
+                if ($Z_FLAG) {
+                    $Z_FLAG.split(" ") | ForEach-Object { if ($_ -ne "") { $curlArgs += $_ } }
+                }
+
+                # Add GitHub auth
+                if ($GH_FLAG) {
+                    $GH_FLAG.split(" ") | ForEach-Object { if ($_ -ne "") { $curlArgs += $_ } }
+                }
+
+                # Add user agent
+                if ($UA_FLAG) {
+                    $curlArgs += "--user-agent"
+                    $curlArgs += $UA_FLAG.Replace('--user-agent "', '').Replace('"', '')
+                }
+
+                # Add common flags
+                $curlArgs += "-L"
+                $curlArgs += "--silent"
+                $curlArgs += "--output"
+                $curlArgs += $TmpFilePath
+                $curlArgs += $Uri
+
+                # Execute curl with proper parameter array (secure)
+                & "C:\Windows\system32\curl.exe" @curlArgs
             }
             if (Test-Path $TmpFilePath) {
                 Write-SynchronizedLog "Downloaded $Uri to $FilePath."
@@ -461,8 +505,11 @@ function Clear-Tmp {
         [Parameter(Mandatory=$True)] [string]$Folder
     )
 
-    if (Test-Path -Path ".\tmp\${Folder}") {
-        Remove-Item -Recurse -Force ".\tmp\${Folder}" > $null 2>&1
+    $path = ".\tmp\${Folder}"
+    if (Test-Path -Path $path) {
+        if (-not (Remove-ItemSafe -Path $path -Recurse -Force)) {
+            Write-WarningLog "Failed to clear temporary directory: $path"
+        }
     }
 }
 
