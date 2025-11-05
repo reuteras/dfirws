@@ -58,7 +58,8 @@ if ($ShowCounts) {
     Write-Output "========================================`n"
 
     # Count standard tools
-    $standardToolFiles = Get-ChildItem -Path ".\resources\tools" -Filter "*.yaml" -Exclude "python-tools.yaml","git-repositories.yaml","nodejs-tools.yaml","didier-stevens-tools.yaml"
+    $standardToolFiles = Get-ChildItem -Path ".\resources\tools" -Filter "*.yaml" `
+        -Exclude "python-tools.yaml","git-repositories.yaml","nodejs-tools.yaml","didier-stevens-tools.yaml"
     $standardToolCount = 0
     foreach ($file in $standardToolFiles) {
         $count = (Get-Content $file.FullName | Select-String -Pattern "^\s+-\s+name:").Count
