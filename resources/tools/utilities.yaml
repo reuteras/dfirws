@@ -1,0 +1,140 @@
+# DFIRWS Utilities Tools Definition
+# This file defines general utility tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: utilities
+description: General utilities and helper tools
+
+tools:
+  # 7-Zip - File archiver
+  - name: 7zip
+    description: File archiver with high compression ratio
+    source: http
+    url: "https://www.7-zip.org/a/7z2301-x64.msi"
+    file_type: msi
+    install_method: installer
+    installer_args: "/qn /norestart"
+    enabled: true
+    priority: critical
+    notes: Required for other tool installations
+
+  # ripgrep - Fast text search tool
+  - name: ripgrep
+    description: Fast line-oriented search tool
+    source: github
+    repo: BurntSushi/ripgrep
+    match: "x86_64-pc-windows-msvc\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/ripgrep"
+    post_install:
+      - type: rename
+        pattern: "ripgrep-*"
+        target: "ripgrep"
+      - type: add_to_path
+        path: "${TOOLS}/ripgrep"
+    enabled: true
+    priority: high
+
+  # fx - JSON viewer and processor
+  - name: fx
+    description: Command-line JSON processing tool
+    source: github
+    repo: antonmedv/fx
+    match: "fx_windows_amd64\\.exe"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/fx.exe"
+    enabled: true
+    priority: medium
+
+  # lessmsi - MSI extractor
+  - name: lessmsi
+    description: View and extract contents of MSI files
+    source: github
+    repo: activescott/lessmsi
+    match: "lessmsi-v"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/lessmsi"
+    enabled: true
+    priority: medium
+
+  # exiftool - Metadata reader/writer
+  - name: exiftool
+    description: Read and write meta information in files
+    source: http
+    url_pattern: "https://exiftool.org/"
+    match: "exiftool-[^zip]+_64\\.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/exiftool"
+    post_install:
+      - type: rename
+        pattern: "exiftool-*"
+        target: "exiftool"
+      - type: copy
+        source: "${TOOLS}/exiftool/exiftool(-k).exe"
+        target: "${TOOLS}/exiftool/exiftool.exe"
+      - type: remove
+        target: "${TOOLS}/exiftool/exiftool(-k).exe"
+    enabled: true
+    priority: high
+
+  # ffmpeg - Multimedia framework
+  - name: ffmpeg
+    description: Complete, cross-platform solution to record, convert and stream audio and video
+    source: github
+    repo: BtbN/FFmpeg-Builds
+    match: "win64-gpl-7"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/ffmpeg"
+    post_install:
+      - type: rename
+        pattern: "ffmpeg-*"
+        target: "ffmpeg"
+    enabled: true
+    priority: medium
+
+  # HxD - Hex editor
+  - name: hxd
+    description: Hex editor for Windows
+    source: http
+    url: "https://mh-nexus.de/downloads/HxDSetup.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/hxd"
+    enabled: true
+    priority: high
+
+  # Sysinternals Suite
+  - name: sysinternals
+    description: Sysinternals utilities suite from Microsoft
+    source: http
+    url: "https://download.sysinternals.com/files/SysinternalsSuite.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/sysinternals"
+    post_install:
+      - type: add_to_path
+        path: "${TOOLS}/sysinternals"
+    enabled: true
+    priority: high
+
+  # Audacity - Audio editor
+  - name: audacity
+    description: Free, open source, cross-platform audio software
+    source: github
+    repo: audacity/audacity
+    match: "64bit\\.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/audacity"
+    post_install:
+      - type: rename
+        pattern: "audacity-*"
+        target: "audacity"
+    enabled: true
+    priority: low
