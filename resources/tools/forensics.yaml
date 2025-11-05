@@ -108,6 +108,24 @@ tools:
     priority: high
     notes: Requires Java Runtime Environment
 
+  # QELP - Quick ESXi Log Parser
+  - name: qelp
+    description: Quick ESXi Log Parser for incident response and forensics
+    source: github
+    repo: strozfriedberg/qelp
+    match: "qelp.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/qelp"
+    enabled: true
+    priority: high
+    notes: |
+      Parses ESXi logs and produces CSV reports in timeline format.
+      Tracks SSH access, user logons, password changes, file transfers, etc.
+      Supports partially encrypted ESXi logs.
+      Requires Python 3.
+      Related to GitHub issue #120
+
   # RDP Cache Stitcher
   - name: rdpcachestitcher
     description: Reconstruct images from RDP cache files
