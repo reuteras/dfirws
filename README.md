@@ -190,6 +190,75 @@ To see available options run **Get-Help .\downloadFiles.ps1**.
 
 More information about installed tools are available in the GitHub [wiki][wid].
 
+## DFIRWS v2 Architecture (NEW!)
+
+DFIRWS v2 introduces a modular YAML-based architecture that makes tool management more flexible and maintainable. All 433 tools are now defined in structured YAML files instead of monolithic PowerShell scripts.
+
+### Key Benefits
+
+- **Modular**: Tools organized by category in separate YAML files
+- **Maintainable**: Easy to add, update, or remove tools
+- **Documented**: Every tool includes description, priority, and notes
+- **Flexible**: Support for multiple installation methods and sources
+- **Automated**: Version management, parallel downloads, and update tracking
+
+### Quick Start with v2
+
+Show all available tools:
+
+```PowerShell
+.\resources\download\install-all-tools-v2.ps1 -ShowCounts
+```
+
+Install all tools (v2 method):
+
+```PowerShell
+.\resources\download\install-all-tools-v2.ps1 -All
+```
+
+Install specific categories:
+
+```PowerShell
+# Install only Python tools
+.\resources\download\install-all-tools-v2.ps1 -PythonTools
+
+# Install only Git repositories
+.\resources\download\install-all-tools-v2.ps1 -GitRepos
+
+# Install by forensic category
+.\resources\download\install-tools.ps1 -Category malware-analysis
+
+# Install by priority
+.\resources\download\install-tools.ps1 -Priority critical
+```
+
+### Tool Categories (v2)
+
+DFIRWS v2 includes **433 tools** across **23 categories**:
+
+| Category | Count | Description |
+|----------|-------|-------------|
+| **Standard Tools** | 193 | GitHub release-based tools across 19 categories |
+| **Python Tools** | 72 | Python packages via UV/pip |
+| **Git Repositories** | 62 | Detection rules, signatures, threat intel |
+| **Didier Stevens Suite** | 102 | Comprehensive document/malware analysis |
+| **Node.js Tools** | 4 | JavaScript analysis tools |
+
+### Documentation
+
+- **[YAML Architecture Guide](docs/YAML_ARCHITECTURE.md)** - Complete guide to v2 architecture
+- **[Migration Summary](MIGRATION_COMPLETE.md)** - Details of the v1 to v2 migration
+- **[Interactive Tool Addition](resources/download/add-tool.ps1)** - Script to add new tools with validation
+
+### Compatibility
+
+Both v1 (legacy) and v2 (YAML-based) systems are available:
+
+- **v1**: Original monolithic scripts (still functional)
+- **v2**: New YAML-based scripts (recommended for new installations)
+
+The v2 scripts have a `-v2` suffix (e.g., `install-all-tools-v2.ps1`) to distinguish them from legacy scripts.
+
 ## Known problems and errors
 
 - aleapp: import xmltodict - not available
