@@ -1,0 +1,587 @@
+# DFIRWS Didier Stevens Tools Suite Definition
+# This file defines tools from Didier Stevens' comprehensive Python toolkit
+# Schema version: 1.0
+#
+# NOTE: These tools are Python scripts downloaded directly from GitHub
+# Installation method: Direct download to Tools/DidierStevens/
+
+schema_version: "1.0"
+category: didier-stevens-tools
+description: Didier Stevens' comprehensive Python toolkit for malware analysis and forensics
+
+# Main suite from DidierStevensSuite repository
+main_suite:
+  source: "https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/"
+  destination: "${TOOLS}/DidierStevens/"
+  tools:
+    # PDF Analysis Tools
+    - name: pdf-parser.py
+      description: Parse and analyze PDF files for malicious content
+      category_type: document-analysis
+      priority: critical
+      notes: Core tool for PDF malware analysis
+
+    - name: pdfid.py
+      description: Scan PDF files for suspicious keywords and structure
+      category_type: document-analysis
+      priority: critical
+      notes: Quick triage tool for suspicious PDFs
+
+    - name: pdfid.ini
+      description: Configuration file for pdfid.py
+      category_type: document-analysis
+      priority: critical
+
+    - name: pdftool.py
+      description: Swiss army knife tool for PDF analysis
+      category_type: document-analysis
+      priority: high
+
+    # Office Document Analysis Tools
+    - name: oledump.py
+      description: Analyze OLE files (Office documents) for VBA macros
+      category_type: document-analysis
+      priority: critical
+      notes: Essential tool for Office malware analysis
+
+    - name: rtfdump.py
+      description: Analyze RTF files for malicious content
+      category_type: document-analysis
+      priority: high
+
+    - name: decompress_rtf.py
+      description: Decompress compressed RTF content
+      category_type: document-analysis
+      priority: medium
+
+    - name: emldump.py
+      description: Analyze email files
+      category_type: document-analysis
+      priority: high
+
+    - name: zipdump.py
+      description: Analyze ZIP files and Office Open XML documents
+      category_type: document-analysis
+      priority: high
+
+    - name: xmldump.py
+      description: Analyze XML files
+      category_type: document-analysis
+      priority: medium
+
+    - name: jpegdump.py
+      description: Analyze JPEG files for embedded content
+      category_type: document-analysis
+      priority: medium
+
+    # OLE Plugins (for oledump.py)
+    - name: plugin_biff.py
+      description: BIFF record analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_clsid.py
+      description: CLSID identification plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_dridex.py
+      description: Dridex malware detection plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_dttm.py
+      description: Timestamp analysis plugin
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_embeddedfile.py
+      description: Embedded file extraction plugin
+      category_type: document-analysis
+      priority: high
+
+    - name: plugin_hifo.py
+      description: HIFO structure analysis plugin
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_http_heuristics.py
+      description: HTTP URL detection plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_hyperlink.py
+      description: Hyperlink extraction plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_jumplist.py
+      description: Jump list analysis plugin
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_linear.py
+      description: Linear stream analysis plugin
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_list
+      description: Plugin list file
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_metadata.py
+      description: Document metadata extraction plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_msg_summary.py
+      description: MSG file summary plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_msg.py
+      description: MSG file analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_msi.py
+      description: MSI file analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_msi_info.py
+      description: MSI information extraction plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_nameobfuscation.py
+      description: Name obfuscation detection plugin
+      category_type: document-analysis
+      priority: high
+
+    - name: plugin_office_crypto.py
+      description: Office encryption detection plugin
+      category_type: document-analysis
+      priority: high
+
+    - name: plugin_olestreams.py
+      description: OLE stream analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_pcode_dumper.py
+      description: P-code dumper plugin
+      category_type: document-analysis
+      priority: high
+
+    - name: plugin_ppt.py
+      description: PowerPoint analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_str_sub.py
+      description: String substitution plugin
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_stream_o.py
+      description: Stream object analysis plugin
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_stream_sample.py
+      description: Sample stream plugin
+      category_type: document-analysis
+      priority: low
+
+    - name: plugin_triage.py
+      description: Quick triage plugin
+      category_type: document-analysis
+      priority: high
+
+    - name: plugin_vba_dco.py
+      description: VBA DCO analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_vba_dir.py
+      description: VBA directory analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_vba_routines.py
+      description: VBA routine extraction plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_vba_summary.py
+      description: VBA summary plugin
+      category_type: document-analysis
+      priority: high
+
+    - name: plugin_vba.py
+      description: VBA analysis plugin
+      category_type: document-analysis
+      priority: high
+
+    - name: plugin_vbaproject.py
+      description: VBA project analysis plugin
+      category_type: document-analysis
+      priority: medium
+
+    - name: plugin_version_vba.py
+      description: VBA version detection plugin
+      category_type: document-analysis
+      priority: low
+
+    # Binary Analysis and Encoding Tools
+    - name: base64dump.py
+      description: Search and decode Base64 strings in files
+      category_type: binary-analysis
+      priority: high
+      notes: Essential for finding encoded malicious content
+
+    - name: byte-stats.py
+      description: Calculate byte statistics for files
+      category_type: binary-analysis
+      priority: medium
+
+    - name: pecheck.py
+      description: Check PE file structure
+      category_type: binary-analysis
+      priority: high
+
+    - name: hex-to-bin.py
+      description: Convert hexadecimal to binary
+      category_type: utilities
+      priority: medium
+
+    - name: numbers-to-hex.py
+      description: Convert numbers to hexadecimal
+      category_type: utilities
+      priority: low
+
+    - name: numbers-to-string.py
+      description: Convert numbers to strings
+      category_type: utilities
+      priority: low
+
+    - name: format-bytes.py
+      description: Format byte sequences for analysis
+      category_type: utilities
+      priority: medium
+
+    - name: find-file-in-file.py
+      description: Find embedded files within files
+      category_type: binary-analysis
+      priority: high
+
+    # Cryptography and Hashing Tools
+    - name: cipher-tool.py
+      description: Cipher analysis and manipulation tool
+      category_type: cryptography
+      priority: high
+
+    - name: xor-kpa.py
+      description: XOR known plaintext attack
+      category_type: cryptography
+      priority: high
+      notes: Recover XOR keys from known plaintext
+
+    - name: xorsearch.py
+      description: Search for XOR encoded strings
+      category_type: cryptography
+      priority: high
+
+    - name: hash.py
+      description: Calculate various hash types
+      category_type: utilities
+      priority: high
+
+    - name: nsrl.py
+      description: NSRL hash database lookup
+      category_type: utilities
+      priority: medium
+
+    - name: ssdeep.py
+      description: Fuzzy hashing tool
+      category_type: utilities
+      priority: medium
+
+    - name: msoffcrypto-crack.py
+      description: Microsoft Office password cracking
+      category_type: cryptography
+      priority: medium
+
+    # JavaScript and Script Analysis
+    - name: js-ascii.exe
+      description: JavaScript ASCII decoder
+      category_type: malware-analysis
+      priority: medium
+
+    - name: js-file.exe
+      description: JavaScript file analyzer
+      category_type: malware-analysis
+      priority: medium
+
+    - name: decode-vbe.py
+      description: Decode VBScript encoded files
+      category_type: malware-analysis
+      priority: high
+
+    # Decoders
+    - name: decoder_add1.py
+      description: Add 1 decoder
+      category_type: utilities
+      priority: low
+
+    - name: decoder_ah.py
+      description: ASCII hex decoder
+      category_type: utilities
+      priority: low
+
+    - name: decoder_chr.py
+      description: Character decoder
+      category_type: utilities
+      priority: low
+
+    - name: decoder_rol1.py
+      description: Rotate left 1 decoder
+      category_type: utilities
+      priority: low
+
+    - name: decoder_xor1.py
+      description: XOR 1 decoder
+      category_type: utilities
+      priority: low
+
+    # String and Text Processing Tools
+    - name: strings.py
+      description: Enhanced strings extraction tool
+      category_type: utilities
+      priority: high
+
+    - name: re-search.py
+      description: Regular expression search tool
+      category_type: utilities
+      priority: high
+
+    - name: reextra.py
+      description: Extended regular expression library
+      category_type: utilities
+      priority: medium
+
+    - name: count.py
+      description: Count occurrences in data
+      category_type: utilities
+      priority: medium
+
+    - name: translate.py
+      description: Character translation tool
+      category_type: utilities
+      priority: medium
+
+    - name: sortcanon.py
+      description: Sort and canonicalize data
+      category_type: utilities
+      priority: low
+
+    # Data Processing Tools
+    - name: cut-bytes.py
+      description: Cut byte ranges from files
+      category_type: utilities
+      priority: medium
+
+    - name: headtail.py
+      description: Display head and tail of files
+      category_type: utilities
+      priority: medium
+
+    - name: split.py
+      description: Split files
+      category_type: utilities
+      priority: low
+
+    - name: split-overlap.py
+      description: Split files with overlap
+      category_type: utilities
+      priority: low
+
+    - name: teeplus.py
+      description: Enhanced tee functionality
+      category_type: utilities
+      priority: low
+
+    # CSV and Statistics Tools
+    - name: csv-stats.py
+      description: CSV statistics calculator
+      category_type: data-analysis
+      priority: medium
+
+    - name: sets.py
+      description: Set operations on data
+      category_type: data-analysis
+      priority: low
+
+    # JSON Tools
+    - name: myjson-filter.py
+      description: Filter JSON data
+      category_type: data-analysis
+      priority: medium
+
+    - name: myjson-transform.py
+      description: Transform JSON data
+      category_type: data-analysis
+      priority: medium
+
+    # File Identification Tools
+    - name: file-magic.py
+      description: File type identification via magic bytes
+      category_type: utilities
+      priority: high
+
+    - name: file-magic.def
+      description: Magic byte definitions
+      category_type: utilities
+      priority: high
+
+    # CobaltStrike Tools
+    - name: cs-analyze-processdump.py
+      description: Analyze CobaltStrike process dumps
+      category_type: malware-analysis
+      priority: medium
+
+    - name: cs-decrypt-metadata.py
+      description: Decrypt CobaltStrike metadata
+      category_type: malware-analysis
+      priority: medium
+
+    - name: cs-extract-key.py
+      description: Extract CobaltStrike keys
+      category_type: malware-analysis
+      priority: medium
+
+    # Specialized Tools
+    - name: 1768.py
+      description: CVE-2017-1768 analysis tool
+      category_type: malware-analysis
+      priority: low
+
+    - name: 1768.json
+      description: Configuration for 1768.py
+      category_type: malware-analysis
+      priority: low
+
+    - name: amsiscan.py
+      description: AMSI (Anti-Malware Scan Interface) scanner
+      category_type: utilities
+      priority: medium
+
+    - name: defuzzer.py
+      description: Defuzz obfuscated data
+      category_type: malware-analysis
+      priority: high
+
+    - name: disitool.py
+      description: DISI file analysis tool
+      category_type: utilities
+      priority: low
+
+    - name: myipaddress.py
+      description: IP address utility
+      category_type: utilities
+      priority: low
+
+    - name: what-is-new.py
+      description: Check for tool updates
+      category_type: utilities
+      priority: low
+
+    # Processing Frameworks
+    - name: process-binary-file.py
+      description: Binary file processing framework
+      category_type: utilities
+      priority: high
+
+    - name: process-text-file.py
+      description: Text file processing framework
+      category_type: utilities
+      priority: high
+
+    - name: python-per-line.py
+      description: Execute Python code per line
+      category_type: utilities
+      priority: medium
+
+    - name: python-per-line.library
+      description: Library for python-per-line.py
+      category_type: utilities
+      priority: medium
+
+    # Support Files
+    - name: libnspr4.dll
+      description: Netscape Portable Runtime library
+      category_type: utilities
+      priority: low
+
+# Beta tools from Beta repository
+beta_tools:
+  source: "https://raw.githubusercontent.com/DidierStevens/Beta/master/"
+  destination: "${TOOLS}/DidierStevens/"
+  tools:
+    - name: metatool.py
+      description: Metadata analysis tool (beta)
+      category_type: document-analysis
+      priority: medium
+      notes: Beta version, may have experimental features
+
+    - name: onedump.py
+      description: OneNote file dump tool (beta)
+      category_type: document-analysis
+      priority: medium
+      notes: Beta version for OneNote analysis
+
+    - name: pngdump.py
+      description: PNG file analysis tool (beta)
+      category_type: document-analysis
+      priority: medium
+      notes: Beta version for PNG analysis
+
+    - name: xlsbdump.py
+      description: XLSB (Excel Binary) file analysis tool (beta)
+      category_type: document-analysis
+      priority: medium
+      notes: Beta version for XLSB analysis
+
+notes: |
+  Didier Stevens Tools Suite is a comprehensive collection of Python scripts
+  for malware analysis, document forensics, and binary analysis.
+
+  Key tool categories:
+  - PDF Analysis: pdf-parser.py, pdfid.py, pdftool.py
+  - Office Documents: oledump.py with 30+ plugins
+  - Email Analysis: emldump.py
+  - Binary Analysis: base64dump.py, pecheck.py, strings.py
+  - Cryptography: xorsearch.py, xor-kpa.py, cipher-tool.py
+  - File Formats: rtfdump.py, zipdump.py, xmldump.py, jpegdump.py
+  - Utilities: Many data processing and analysis utilities
+
+  Installation:
+  - All tools downloaded directly from GitHub
+  - Main suite: 99 files from DidierStevensSuite repository
+  - Beta tools: 4 files from Beta repository
+  - Total: 103 files
+
+  Requirements:
+  - Python 3.x
+  - Virtual environment at C:\venv\default
+  - Some tools have additional dependencies
+
+  The suite is installed to: ${TOOLS}/DidierStevens/
+
+  Author: Didier Stevens (https://blog.didierstevens.com)
+  Main repo: https://github.com/DidierStevens/DidierStevensSuite
+  Beta repo: https://github.com/DidierStevens/Beta
+
+  Total tools: 103 (99 main + 4 beta)

@@ -90,7 +90,7 @@ tools:
   - name: detect-it-easy
     description: Program for determining types of files
     source: github
-    repo: horsicq/Detect-It-Easy
+    repo: horsicq/DIE-engine
     match: "die_win64_portable.*\\.zip$"
     file_type: zip
     install_method: extract
