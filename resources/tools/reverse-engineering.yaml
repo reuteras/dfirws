@@ -90,7 +90,7 @@ tools:
   - name: detect-it-easy
     description: Program for determining types of files
     source: github
-    repo: horsicq/Detect-It-Easy
+    repo: horsicq/DIE-engine
     match: "die_win64_portable.*\\.zip$"
     file_type: zip
     install_method: extract
@@ -207,3 +207,16 @@ tools:
     enabled: true
     priority: low
     notes: Requires Java Runtime Environment
+
+  # Iaito - Radare2 GUI
+  - name: iaito
+    description: Official GUI for Radare2 reverse engineering framework
+    source: github
+    repo: radareorg/iaito
+    match: "iaito.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/iaito"
+    enabled: true
+    priority: medium
+    notes: Qt-based GUI for Radare2
