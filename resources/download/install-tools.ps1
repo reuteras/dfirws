@@ -7,7 +7,7 @@ param(
     [Switch]$All,
 
     [Parameter(HelpMessage = "Install tools by category")]
-    [ValidateSet("forensics", "malware-analysis", "utilities", "network-analysis")]
+    [ValidateSet("forensics", "malware-analysis", "utilities", "network-analysis", "reverse-engineering", "memory-forensics", "data-analysis", "windows-forensics", "disk-forensics", "document-analysis", "email-forensics", "threat-intelligence", "active-directory")]
     [string]$Category,
 
     [Parameter(HelpMessage = "Install tools by priority")]
@@ -27,13 +27,45 @@ param(
     [Switch]$DryRun,
 
     [Parameter(HelpMessage = "Show statistics from last installation")]
-    [Switch]$Statistics
+    [Switch]$Statistics,
+
+    # Version Management Parameters
+    [Parameter(HelpMessage = "Check for available updates")]
+    [Switch]$CheckUpdates,
+
+    [Parameter(HelpMessage = "List available updates with details")]
+    [Switch]$ListUpdates,
+
+    [Parameter(HelpMessage = "Approve update for specific tools")]
+    [string[]]$ApproveUpdate,
+
+    [Parameter(HelpMessage = "Approve all available updates")]
+    [Switch]$ApproveAllUpdates,
+
+    [Parameter(HelpMessage = "Install approved updates")]
+    [Switch]$InstallUpdates,
+
+    [Parameter(HelpMessage = "Force reinstallation even if version matches")]
+    [Switch]$Force,
+
+    [Parameter(HelpMessage = "Ignore version pins and always install latest")]
+    [Switch]$IgnoreVersions,
+
+    [Parameter(HelpMessage = "Validate SHA256 checksums during installation")]
+    [Switch]$ValidateChecksums,
+
+    [Parameter(HelpMessage = "Clear version check cache")]
+    [Switch]$ClearCache,
+
+    [Parameter(HelpMessage = "Show installed versions")]
+    [Switch]$ShowVersions
 )
 
 # Import modules
 . ".\resources\download\common.ps1"
 . ".\resources\download\tool-handler.ps1"
 . ".\resources\download\state-manager.ps1"
+. ".\resources\download\version-manager.ps1"
 
 #region Main Installation Logic
 
@@ -79,10 +111,25 @@ function Install-ToolsSequential {
         Set-InProgressTool -ToolName $tool.name
 
         try {
-            $result = Install-ToolFromDefinition -ToolDefinition $tool -DryRun:$DryRun
+            # Install tool with optional SHA256 validation
+            $installParams = @{
+                ToolDefinition = $tool
+                DryRun = $DryRun
+            }
+
+            if ($ValidateChecksums) {
+                $installParams.ValidateChecksum = $true
+            }
+
+            $result = Install-ToolFromDefinition @installParams
 
             if ($result) {
                 Add-CompletedTool -ToolName $tool.name
+
+                # Update version lock on successful installation
+                if (-not $DryRun) {
+                    Update-ToolVersionLock -Tool $tool -Result $result
+                }
             } else {
                 Add-FailedTool -ToolName $tool.name -Error "Installation returned false"
             }
@@ -107,11 +154,12 @@ function Install-ToolsParallel {
 
     # Create script block for parallel execution
     $scriptBlock = {
-        param($tool, $setupPath, $toolsPath, $ghUser, $ghPass, $dryRun)
+        param($tool, $setupPath, $toolsPath, $ghUser, $ghPass, $dryRun, $validateChecksums)
 
         # Import necessary functions in the runspace
         . ".\resources\download\common.ps1"
         . ".\resources\download\tool-handler.ps1"
+        . ".\resources\download\version-manager.ps1"
 
         # Set global variables
         $global:SETUP_PATH = $setupPath
@@ -120,16 +168,28 @@ function Install-ToolsParallel {
         $global:GH_PASS = $ghPass
 
         try {
-            $result = Install-ToolFromDefinition -ToolDefinition $tool -DryRun:$dryRun
+            # Install tool with optional SHA256 validation
+            $installParams = @{
+                ToolDefinition = $tool
+                DryRun = $dryRun
+            }
+
+            if ($validateChecksums) {
+                $installParams.ValidateChecksum = $true
+            }
+
+            $result = Install-ToolFromDefinition @installParams
 
             return @{
                 name = $tool.name
+                tool = $tool
                 success = $result
                 error = $null
             }
         } catch {
             return @{
                 name = $tool.name
+                tool = $tool
                 success = $false
                 error = $_.Exception.Message
             }
@@ -142,13 +202,18 @@ function Install-ToolsParallel {
 
         $results = $sortedTools | ForEach-Object -Parallel {
             $tool = $_
-            & $using:scriptBlock -tool $tool -setupPath $using:SETUP_PATH -toolsPath $using:TOOLS -ghUser $using:GH_USER -ghPass $using:GH_PASS -dryRun $using:DryRun
+            & $using:scriptBlock -tool $tool -setupPath $using:SETUP_PATH -toolsPath $using:TOOLS -ghUser $using:GH_USER -ghPass $using:GH_PASS -dryRun $using:DryRun -validateChecksums $using:ValidateChecksums
         } -ThrottleLimit $ThrottleLimit
 
         # Process results
         foreach ($result in $results) {
             if ($result.success) {
                 Add-CompletedTool -ToolName $result.name
+
+                # Update version lock on successful installation
+                if (-not $DryRun) {
+                    Update-ToolVersionLock -Tool $result.tool -Result $result.success
+                }
             } else {
                 Add-FailedTool -ToolName $result.name -Error $result.error
             }
@@ -171,6 +236,11 @@ function Install-ToolsParallel {
 
                         if ($result.success) {
                             Add-CompletedTool -ToolName $result.name
+
+                            # Update version lock on successful installation
+                            if (-not $DryRun) {
+                                Update-ToolVersionLock -Tool $result.tool -Result $result.success
+                            }
                         } else {
                             Add-FailedTool -ToolName $result.name -Error $result.error
                         }
@@ -185,7 +255,7 @@ function Install-ToolsParallel {
             # Start new job
             Set-InProgressTool -ToolName $tool.name
 
-            $job = Start-Job -ScriptBlock $scriptBlock -ArgumentList $tool, $SETUP_PATH, $TOOLS, $GH_USER, $GH_PASS, $DryRun
+            $job = Start-Job -ScriptBlock $scriptBlock -ArgumentList $tool, $SETUP_PATH, $TOOLS, $GH_USER, $GH_PASS, $DryRun, $ValidateChecksums
             $jobs += $job
             $activeJobs++
         }
@@ -194,6 +264,11 @@ function Install-ToolsParallel {
         $jobs | Wait-Job | Receive-Job | ForEach-Object {
             if ($_.success) {
                 Add-CompletedTool -ToolName $_.name
+
+                # Update version lock on successful installation
+                if (-not $DryRun) {
+                    Update-ToolVersionLock -Tool $_.tool -Result $_.success
+                }
             } else {
                 Add-FailedTool -ToolName $_.name -Error $_.error
             }
@@ -203,9 +278,184 @@ function Install-ToolsParallel {
     }
 }
 
+function Update-ToolVersionLock {
+    <#
+    .SYNOPSIS
+        Update version lock after successful tool installation
+    #>
+    param(
+        [Parameter(Mandatory=$true)]
+        [PSCustomObject]$Tool,
+
+        [Parameter(Mandatory=$true)]
+        $Result
+    )
+
+    try {
+        # Determine version from tool definition
+        $version = if ($Tool.version) {
+            $Tool.version
+        } else {
+            # Try to get latest version for GitHub sources
+            if ($Tool.source -eq "github") {
+                $latest = Get-LatestGitHubVersion -Repo $Tool.repo
+                if ($latest) {
+                    $latest.version
+                } else {
+                    "unknown"
+                }
+            } else {
+                "unknown"
+            }
+        }
+
+        # Get SHA256 if available (from tool definition or calculate if needed)
+        $sha256 = if ($Tool.sha256) {
+            $Tool.sha256
+        } else {
+            $null
+        }
+
+        # Update version lock
+        Update-VersionLock `
+            -ToolName $Tool.name `
+            -Version $version `
+            -SHA256 $sha256 `
+            -Source $Tool.source `
+            -Repo $(if ($Tool.repo) { $Tool.repo } else { $null }) `
+            -DownloadUrl $(if ($Tool.url) { $Tool.url } else { $null })
+
+    } catch {
+        Write-Warning "Failed to update version lock for $($Tool.name): $_"
+    }
+}
+
 #endregion
 
 #region Main Script
+
+#region Version Management Handlers
+
+# Clear cache
+if ($ClearCache) {
+    Clear-VersionCache
+    Write-DateLog "Version check cache cleared"
+    exit 0
+}
+
+# Show installed versions
+if ($ShowVersions) {
+    $lock = Get-VersionLock
+    if (-not $lock.tools -or $lock.tools.PSObject.Properties.Count -eq 0) {
+        Write-Output "`nNo tools installed yet`n"
+    } else {
+        Write-Output "`n========================================"
+        Write-Output "   Installed Tool Versions"
+        Write-Output "========================================`n"
+
+        $lock.tools.PSObject.Properties | Sort-Object Name | ForEach-Object {
+            $toolName = $_.Name
+            $info = $_.Value
+            Write-Output "📦 $toolName"
+            Write-Output "   Version:       $($info.version)"
+            Write-Output "   Installed:     $($info.installed_date)"
+            Write-Output "   Source:        $($info.source)"
+            if ($info.repo) {
+                Write-Output "   Repository:    $($info.repo)"
+            }
+            Write-Output ""
+        }
+        Write-Output "========================================`n"
+    }
+    exit 0
+}
+
+# Check for updates
+if ($CheckUpdates -or $ListUpdates) {
+    Write-DateLog "Checking for available updates..."
+    Initialize-VersionLock | Out-Null
+
+    # Load all tools to check
+    $tools = Get-EnabledTools
+
+    $updates = Get-AvailableUpdates -Tools $tools
+    Show-AvailableUpdates -Updates $updates
+
+    if ($updates.Count -gt 0) {
+        Write-Output "To approve updates:"
+        Write-Output "  Single tool:  .\install-tools.ps1 -ApproveUpdate <tool-name>"
+        Write-Output "  Multiple:     .\install-tools.ps1 -ApproveUpdate <tool1>,<tool2>"
+        Write-Output "  All updates:  .\install-tools.ps1 -ApproveAllUpdates"
+        Write-Output ""
+        Write-Output "To install approved updates:"
+        Write-Output "  .\install-tools.ps1 -InstallUpdates [-Parallel]"
+        Write-Output ""
+    }
+
+    exit 0
+}
+
+# Approve specific updates
+if ($ApproveUpdate) {
+    Approve-Update -ToolNames $ApproveUpdate
+    Write-Output ""
+    Write-Output "To install approved updates, run:"
+    Write-Output "  .\install-tools.ps1 -InstallUpdates [-Parallel]"
+    Write-Output ""
+    exit 0
+}
+
+# Approve all updates
+if ($ApproveAllUpdates) {
+    Write-DateLog "Approving all available updates..."
+
+    $tools = Get-EnabledTools
+    $updates = Get-AvailableUpdates -Tools $tools
+
+    if ($updates.Count -eq 0) {
+        Write-Output "No updates available to approve"
+    } else {
+        $toolNames = $updates | ForEach-Object { $_.tool.name }
+        Approve-Update -ToolNames $toolNames
+
+        Write-Output ""
+        Write-Output "To install approved updates, run:"
+        Write-Output "  .\install-tools.ps1 -InstallUpdates [-Parallel]"
+        Write-Output ""
+    }
+
+    exit 0
+}
+
+# Install approved updates
+if ($InstallUpdates) {
+    Write-DateLog "Installing approved updates..."
+
+    # Load all tools
+    $allTools = Get-EnabledTools
+
+    # Filter to only approved tools
+    $tools = $allTools | Where-Object { Test-UpdateApproved -ToolName $_.name }
+
+    if (-not $tools -or $tools.Count -eq 0) {
+        Write-Output "No approved updates to install"
+        Write-Output ""
+        Write-Output "To check for updates and approve them:"
+        Write-Output "  .\install-tools.ps1 -CheckUpdates"
+        Write-Output "  .\install-tools.ps1 -ApproveUpdate <tool-name>"
+        Write-Output ""
+        exit 0
+    }
+
+    Write-DateLog "Installing $($tools.Count) approved updates"
+
+    # Clear approvals after loading tools to install
+    Clear-UpdateApprovals
+
+    # Proceed to installation (below)
+}
+
+#endregion
 
 # Handle statistics display
 if ($Statistics) {
