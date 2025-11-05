@@ -156,3 +156,45 @@ tools:
     enabled: true
     priority: low
     notes: Font file - install manually or via script
+
+  # PowerShell Core
+  - name: powershell-core
+    description: PowerShell Core (pwsh) - cross-platform PowerShell
+    source: github
+    repo: PowerShell/PowerShell
+    match: "win-x64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/pwsh"
+    enabled: true
+    priority: high
+    notes: Latest PowerShell version with cross-platform support
+
+  # gftrace - API tracing tool
+  - name: gftrace
+    description: Windows API tracing tool for malware analysis
+    source: github
+    repo: leandrofroes/gftrace
+    match: "gftrace64.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/gftrace"
+    enabled: true
+    priority: medium
+    notes: Traces Windows API calls for analysis
+
+  # OWASP ZAP - Security testing proxy
+  - name: zaproxy
+    description: OWASP ZAP security testing proxy and scanner
+    source: github
+    repo: zaproxy/zaproxy
+    match: "windows.*\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${SETUP_PATH}/zaproxy.exe"
+    enabled: true
+    priority: medium
+    notes: |
+      Web application security scanner and proxy
+      Available for installation with dfirws-install.ps1
+      Installer EXE requires manual installation

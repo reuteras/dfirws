@@ -1,0 +1,49 @@
+# DFIRWS Database Tools Definition
+# This file defines database management and analysis tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: database-tools
+description: Database management, analysis, and forensics tools
+
+tools:
+  # H2 Database - Java SQL database
+  - name: h2database
+    description: Java SQL database engine with embedded and server modes
+    source: github
+    repo: h2database/h2database
+    match: "bundle\\.jar$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/h2database"
+    enabled: true
+    priority: medium
+    notes: |
+      Lightweight Java database, useful for forensics and data analysis
+      Also includes web-based database console
+
+  # H2 Database Documentation
+  - name: h2database-docs
+    description: Documentation for H2 Database (PDF format)
+    source: github
+    repo: h2database/h2database
+    match: "h2\\.pdf$"
+    file_type: zip
+    install_method: copy
+    copy_to: "${TOOLS}/h2database/h2.pdf"
+    enabled: true
+    priority: low
+    notes: Complete H2 database documentation in PDF format
+
+  # fqlite - SQLite forensics tool
+  - name: fqlite
+    description: SQLite forensics and recovery tool
+    source: github
+    repo: pawlaszczyk/fqlite
+    match: "windows.*\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/fqlite.exe"
+    enabled: true
+    priority: medium
+    notes: Forensic analysis of SQLite databases including recovery
