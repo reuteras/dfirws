@@ -1,0 +1,63 @@
+# DFIRWS Node.js Tools Definition
+# This file defines Node.js-based tools installed via npm
+# Schema version: 1.0
+#
+# NOTE: These tools require Node.js and npm
+# Installation method: npm install -g <package>
+
+schema_version: "1.0"
+category: nodejs-tools
+description: Node.js-based analysis and utility tools
+
+tools:
+  # JavaScript Analysis Tools
+  - name: box-js
+    package: box-js
+    description: JavaScript malware analysis sandbox
+    category_type: malware-analysis
+    priority: high
+    notes: |
+      Analyzes suspicious JavaScript files in a sandboxed environment.
+      Useful for deobfuscating and analyzing malicious JavaScript.
+
+  - name: deobfuscator
+    package: deobfuscator
+    description: JavaScript deobfuscator
+    category_type: malware-analysis
+    priority: high
+    notes: |
+      Deobfuscates JavaScript code to reveal its true functionality.
+      Supports multiple obfuscation techniques.
+
+  - name: jsdom
+    package: jsdom
+    description: JavaScript DOM implementation
+    category_type: utilities
+    priority: medium
+    notes: |
+      Pure JavaScript implementation of web standards for Node.js.
+      Useful for analyzing and testing JavaScript that interacts with the DOM.
+
+  # Documentation Tools
+  - name: docsify-cli
+    package: docsify-cli
+    description: Documentation site generator
+    category_type: utilities
+    priority: low
+    notes: |
+      Generates documentation sites from Markdown files.
+      Used for creating and serving project documentation.
+
+notes: |
+  Node.js tools require:
+  - Node.js runtime installed
+  - npm package manager
+
+  Installation is handled by node.ps1 which:
+  1. Checks for package updates via npm registry
+  2. Installs packages globally via npm install -g
+  3. Syncs packages to mount/Tools/node directory
+
+  All packages are installed globally and available in PATH.
+
+  Total packages: 4

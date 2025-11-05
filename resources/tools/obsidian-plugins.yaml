@@ -1,0 +1,147 @@
+# DFIRWS Obsidian Plugins Definition
+# This file defines plugins for Obsidian knowledge management application
+# Schema version: 1.0
+#
+# NOTE: Obsidian plugins require special handling as each plugin consists
+# of 3 files: main.js, manifest.json, and styles.css
+# These plugins should be installed to ${SETUP_PATH}/obsidian-plugins/<plugin-name>/
+
+schema_version: "1.0"
+category: obsidian-plugins
+description: Obsidian knowledge management application plugins
+
+tools:
+  # Dataview - Data query and visualization plugin
+  - name: obsidian-dataview
+    description: Advanced data query and visualization plugin for Obsidian
+    source: github
+    repo: blacksmithgu/obsidian-dataview
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-dataview"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/dataview/
+
+  # Kanban - Kanban board plugin
+  - name: obsidian-kanban
+    description: Kanban board plugin for Obsidian task management
+    source: github
+    repo: mgmeyers/obsidian-kanban
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-kanban"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/obsidian-kanban/
+
+  # QuickAdd - Quick capture and automation plugin
+  - name: quickadd
+    description: Quick capture and macro automation plugin for Obsidian
+    source: github
+    repo: chhoumann/quickadd
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/quickadd"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/quickadd/
+
+  # Calendar - Calendar view plugin
+  - name: obsidian-calendar-plugin
+    description: Calendar view and daily notes plugin for Obsidian
+    source: github
+    repo: liamcain/obsidian-calendar-plugin
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-calendar-plugin"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/calendar/
+
+  # Templater - Template automation plugin
+  - name: templater
+    description: Template automation and scripting plugin for Obsidian
+    source: github
+    repo: SilentVoid13/Templater
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/Templater"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/templater-obsidian/
+
+  # Tasks - Task management plugin
+  - name: obsidian-tasks
+    description: Advanced task management plugin for Obsidian
+    source: github
+    repo: obsidian-tasks-group/obsidian-tasks
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-tasks"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/obsidian-tasks-plugin/
+
+  # Excalidraw - Drawing and diagramming plugin
+  - name: obsidian-excalidraw-plugin
+    description: Drawing and diagramming plugin for Obsidian
+    source: github
+    repo: zsviczian/obsidian-excalidraw-plugin
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-excalidraw-plugin"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/obsidian-excalidraw-plugin/
+
+  # Admonitions - Callout blocks plugin
+  - name: admonitions
+    description: Callout and admonition blocks plugin for Obsidian
+    source: github
+    repo: javalent/admonitions
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/admonitions"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/obsidian-admonition/
+
+  # Timeline - Timeline view plugin
+  - name: obsidian-timeline
+    description: Timeline view plugin for Obsidian
+    source: github
+    repo: George-debug/obsidian-timeline
+    match: "main\\.js$"
+    file_type: zip
+    install_method: special
+    extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-timeline"
+    enabled: true
+    priority: low
+    notes: |
+      Requires downloading 3 files: main.js, manifest.json, styles.css
+      Install to Obsidian vault .obsidian/plugins/obsidian-timeline/

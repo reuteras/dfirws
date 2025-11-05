@@ -1,0 +1,127 @@
+# DFIRWS Memory Forensics Tools Definition
+# This file defines memory forensics and analysis tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: memory-forensics
+description: Memory acquisition, analysis, and forensics tools
+
+tools:
+  # Volatility 3 - Memory forensics framework
+  - name: volatility3
+    description: Advanced memory forensics framework (Python version)
+    source: github
+    repo: volatilityfoundation/volatility3
+    match: "volatility3-.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/volatility3"
+    enabled: true
+    priority: critical
+    notes: Python-based, requires Python 3.6+
+
+  # Volatility 2 standalone - Legacy version
+  - name: volatility2
+    description: Memory forensics framework standalone executable
+    source: github
+    repo: volatilityfoundation/volatility
+    match: "volatility.*standalone.*\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/volatility2.exe"
+    enabled: true
+    priority: high
+    notes: Standalone version, no Python required
+
+  # MemProcFS - Memory process file system
+  - name: memprocfs
+    description: Easy and convenient way of accessing physical memory
+    source: github
+    repo: ufrisk/MemProcFS
+    match: "MemProcFS.*win_x64.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/MemProcFS"
+    post_install:
+      - type: rename
+        pattern: "MemProcFS*"
+        target: "MemProcFS"
+    enabled: true
+    priority: high
+
+  # PCILeech - Direct memory access attack software
+  - name: pcileech
+    description: Direct memory access (DMA) attack software
+    source: github
+    repo: ufrisk/pcileech
+    match: "pcileech.*win_x64.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/pcileech"
+    post_install:
+      - type: rename
+        pattern: "pcileech*"
+        target: "pcileech"
+    enabled: true
+    priority: medium
+
+  # Rekall - Memory forensics framework
+  - name: rekall
+    description: Memory forensics framework (advanced)
+    source: github
+    repo: google/rekall
+    match: "rekall-.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/rekall"
+    enabled: false
+    priority: low
+    notes: Project archived, may not work with newer systems
+
+  # strings2 - Enhanced strings utility
+  - name: strings2
+    description: Enhanced strings utility for finding strings in memory/files
+    source: github
+    repo: glmcdona/strings2
+    match: "strings2.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/strings2"
+    enabled: true
+    priority: medium
+
+  # winpmem - Windows memory acquisition
+  - name: winpmem
+    description: Physical memory acquisition tool for Windows
+    source: github
+    repo: Velocidex/WinPmem
+    match: "winpmem.*\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/winpmem.exe"
+    enabled: true
+    priority: high
+
+  # DumpIt - Memory dumper
+  - name: dumpit
+    description: Memory dump utility for Windows
+    source: http
+    url: "https://download.comae.com/DumpIt.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/DumpIt"
+    enabled: true
+    priority: medium
+    notes: May require registration or alternative download source
+
+  # MemDump - Memory dumping tool
+  - name: memdump
+    description: Windows memory dumping tool
+    source: github
+    repo: kost/memdump
+    match: "memdump.*win.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/memdump"
+    enabled: true
+    priority: low

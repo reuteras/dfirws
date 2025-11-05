@@ -1,0 +1,222 @@
+# DFIRWS Reverse Engineering Tools Definition
+# This file defines reverse engineering, disassembly, and binary analysis tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: reverse-engineering
+description: Reverse engineering, disassembly, and binary analysis tools
+
+tools:
+  # ImHex - Hex editor for reverse engineers
+  - name: imhex
+    description: Hex editor for reverse engineers and programmers
+    source: github
+    repo: WerWolv/ImHex
+    match: "Windows.*Portable.*zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/imhex"
+    enabled: true
+    priority: high
+
+  # Recaf - Modern Java bytecode editor
+  - name: recaf
+    description: Modern Java bytecode editor
+    source: github
+    repo: Col-E/Recaf
+    match: "Recaf-.*-J8-jar-with-dependencies\\.jar$"
+    file_type: jar
+    install_method: copy
+    copy_to: "${TOOLS}/lib/recaf.jar"
+    enabled: true
+    priority: medium
+    notes: Requires Java Runtime Environment
+
+  # Bytecode Viewer - Java/Android bytecode viewer
+  - name: bytecode-viewer
+    description: Java/Android bytecode viewer and decompiler
+    source: github
+    repo: Konloch/bytecode-viewer
+    match: "Bytecode-Viewer.*\\.jar$"
+    file_type: jar
+    install_method: copy
+    copy_to: "${TOOLS}/lib/bytecode-viewer.jar"
+    enabled: true
+    priority: medium
+    notes: Requires Java Runtime Environment
+
+  # Ghidra - Software reverse engineering framework
+  - name: ghidra
+    description: NSA's software reverse engineering framework
+    source: github
+    repo: NationalSecurityAgency/ghidra
+    match: "ghidra_.*_PUBLIC_.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Ghidra"
+    enabled: true
+    priority: high
+    notes: Requires Java JDK 17+
+
+  # redress - Go binary analysis tool
+  - name: redress
+    description: Tool for analyzing stripped Go binaries
+    source: github
+    repo: goretk/redress
+    match: "windows\\.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/redress"
+    post_install:
+      - type: rename
+        pattern: "redress-*"
+        target: "redress"
+    enabled: true
+    priority: medium
+
+  # dumpbin - PE file dump utility
+  - name: dumpbin
+    description: Display information about PE files
+    source: github
+    repo: Delphier/dumpbin
+    match: "dumpbin.*x64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/dumpbin"
+    enabled: true
+    priority: low
+
+  # Detect It Easy (DIE) - Program for determining types of files
+  - name: detect-it-easy
+    description: Program for determining types of files
+    source: github
+    repo: horsicq/DIE-engine
+    match: "die_win64_portable.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/die"
+    post_install:
+      - type: rename
+        pattern: "die_*"
+        target: "die"
+    enabled: true
+    priority: high
+
+  # x64dbg - x64/x32 debugger for Windows
+  - name: x64dbg
+    description: Open-source x64/x32 debugger for Windows
+    source: github
+    repo: x64dbg/x64dbg
+    match: "snapshot.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/x64dbg"
+    enabled: true
+    priority: high
+
+  # dnSpy - .NET debugger and assembly editor
+  - name: dnspy
+    description: .NET debugger and assembly editor
+    source: github
+    repo: dnSpyEx/dnSpy
+    match: "dnSpy-net-win64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/dnSpy"
+    enabled: true
+    priority: high
+
+  # ILSpy - .NET decompiler
+  - name: ilspy
+    description: .NET assembly browser and decompiler
+    source: github
+    repo: icsharpcode/ILSpy
+    match: "ILSpy_binaries.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/ILSpy"
+    enabled: true
+    priority: high
+
+  # Radare2 - Reverse engineering framework
+  - name: radare2
+    description: UNIX-like reverse engineering framework and command-line toolset
+    source: github
+    repo: radareorg/radare2
+    match: "radare2.*w64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/radare2"
+    post_install:
+      - type: rename
+        pattern: "radare2-*"
+        target: "radare2"
+    enabled: true
+    priority: high
+
+  # Cutter - GUI for Radare2
+  - name: cutter
+    description: Free and open-source reverse engineering platform powered by Radare2
+    source: github
+    repo: rizinorg/cutter
+    match: "Cutter-.*-Windows-x86_64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/cutter"
+    enabled: true
+    priority: medium
+
+  # JADX - Dex to Java decompiler
+  - name: jadx
+    description: Dex to Java decompiler for Android
+    source: github
+    repo: skylot/jadx
+    match: "jadx-.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/jadx"
+    post_install:
+      - type: rename
+        pattern: "jadx-*"
+        target: "jadx"
+    enabled: true
+    priority: high
+
+  # JD-GUI - Java decompiler
+  - name: jd-gui
+    description: Standalone Java Decompiler GUI
+    source: github
+    repo: java-decompiler/jd-gui
+    match: "jd-gui.*\\.jar$"
+    file_type: jar
+    install_method: copy
+    copy_to: "${TOOLS}/lib/jd-gui.jar"
+    enabled: true
+    priority: medium
+    notes: Requires Java Runtime Environment
+
+  # Luyten - Java decompiler GUI
+  - name: luyten
+    description: Open source Java decompiler GUI for Procyon
+    source: github
+    repo: deathmarine/Luyten
+    match: "luyten.*\\.jar$"
+    file_type: jar
+    install_method: copy
+    copy_to: "${TOOLS}/lib/luyten.jar"
+    enabled: true
+    priority: low
+    notes: Requires Java Runtime Environment
+
+  # Iaito - Radare2 GUI
+  - name: iaito
+    description: Official GUI for Radare2 reverse engineering framework
+    source: github
+    repo: radareorg/iaito
+    match: "iaito.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/iaito"
+    enabled: true
+    priority: medium
+    notes: Qt-based GUI for Radare2

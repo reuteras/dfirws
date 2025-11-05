@@ -1,0 +1,68 @@
+# DFIRWS Email Forensics Tools Definition
+# This file defines email analysis and forensics tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: email-forensics
+description: Email analysis, PST/OST parsing, and message forensics tools
+
+tools:
+  # pstwalker - PST file viewer
+  - name: pstwalker
+    description: PST file viewer and analyzer
+    source: http
+    url: "https://downloads.pstwalker.com/pstwalker-portable"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/pstwalker"
+    post_install:
+      - type: rename
+        pattern: "pstwalker*portable"
+        target: "pstwalker"
+    enabled: true
+    priority: high
+
+  # MailView - Email viewer
+  - name: mailview
+    description: Email file viewer (EML, MSG, etc.)
+    source: http
+    url: "https://www.mitec.cz/Downloads/MailView.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/MailView"
+    enabled: true
+    priority: high
+
+  # MsgViewer - Outlook MSG viewer
+  - name: msgviewer
+    description: MSG file viewer for Outlook messages
+    source: github
+    repo: lolo101/MsgViewer
+    match: "msgviewer\\.jar"
+    file_type: jar
+    install_method: copy
+    copy_to: "${TOOLS}/lib/msgviewer.jar"
+    enabled: true
+    priority: high
+    notes: Requires Java Runtime Environment
+
+  # Hindsight - Chrome browser history forensics
+  - name: hindsight
+    description: Web browser forensics for Google Chrome/Chromium
+    source: github
+    repo: obsidianforensics/hindsight
+    match: "hindsight.*exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/hindsight.exe"
+    enabled: true
+    priority: medium
+
+  # email-header-analyzer - Analyze email headers
+  - name: email-header-analyzer
+    description: Analyze email headers for forensics
+    source: local
+    install_method: none
+    enabled: false
+    priority: low
+    notes: Web-based tool or Python script to be added

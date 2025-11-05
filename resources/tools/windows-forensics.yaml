@@ -1,0 +1,258 @@
+# DFIRWS Windows Forensics Tools Definition
+# This file defines Windows-specific forensics and analysis tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: windows-forensics
+description: Windows-specific forensics and artifact analysis tools
+
+tools:
+  # KAPE - Kroll Artifact Parser and Extractor
+  - name: kape
+    description: Kroll Artifact Parser and Extractor
+    source: local
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/KAPE"
+    enabled: true
+    priority: critical
+    notes: Requires local kape.zip in .\local\kape.zip
+
+  # EvtxECmd - Event log parser
+  - name: evtxecmd
+    description: Event log (evtx) parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/evtx.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # MFTECmd - MFT parser
+  - name: mftecmd
+    description: MFT (Master File Table) parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/mft.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # JLECmd - Jump list parser
+  - name: jlecmd
+    description: Jump list parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/JLECmd.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # LECmd - LNK file parser
+  - name: lecmd
+    description: LNK file parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/LECmd.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # PECmd - Prefetch parser
+  - name: pecmd
+    description: Windows Prefetch parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/PECmd.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # RBCmd - Recycle bin parser
+  - name: rbcmd
+    description: Recycle bin parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/RBCmd.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # RECmd - Registry parser
+  - name: recmd
+    description: Registry parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/RECmd.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # SBECmd - ShellBags parser
+  - name: sbecmd
+    description: ShellBags parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/SBECmd.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # Timeline Explorer - Timeline analysis tool
+  - name: timeline-explorer
+    description: Timeline analysis tool from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/TimelineExplorer.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # Registry Explorer - Registry viewer
+  - name: registry-explorer
+    description: Advanced registry viewer from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/RegistryExplorer.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: high
+
+  # ShellBags Explorer - ShellBags viewer
+  - name: shellbags-explorer
+    description: ShellBags viewer from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/ShellBagsExplorer.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: medium
+
+  # AppCompatCache Parser
+  - name: appcompatcache-parser
+    description: AppCompatCache parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/AppCompatCacheParser.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: medium
+
+  # AmcacheParser
+  - name: amcache-parser
+    description: Amcache parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/AmcacheParser.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: medium
+
+  # WxTCmd - Windows 10 Timeline parser
+  - name: wxtcmd
+    description: Windows 10 Timeline database parser from Eric Zimmerman
+    source: http
+    url: "https://ericzimmerman.github.io/Software/WxTCmd.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/Zimmerman"
+    enabled: true
+    priority: medium
+
+  # Debloat - Windows debloater
+  - name: debloat
+    description: PowerShell script to remove Windows bloatware
+    source: github
+    repo: Squiblydoo/debloat
+    match: "debloat.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/debloat"
+    enabled: true
+    priority: low
+
+  # USB Detective - USB forensics
+  - name: usb-detective
+    description: USB device forensics tool
+    source: github
+    repo: digitalsleuth/USB_Detective
+    match: "USB_Detective.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/USBDetective"
+    enabled: true
+    priority: medium
+
+  # RegRipper - Registry analysis tool
+  - name: regripper
+    description: Registry data extraction and analysis tool
+    source: github
+    repo: keydet89/RegRipper3.0
+    match: "regripper.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/RegRipper"
+    enabled: true
+    priority: high
+
+  # Strawberry Perl - Perl for Windows
+  - name: strawberry-perl
+    description: Perl distribution for Windows
+    source: github
+    repo: StrawberryPerl/Perl-Dist-Strawberry
+    match: "strawberry-perl.*portable.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/perl"
+    enabled: true
+    priority: medium
+    notes: Required for some forensics tools
+
+  # Jumplist Browser - Jump list viewer
+  - name: jumplist-browser
+    description: Windows Jump List browser and parser
+    source: github
+    repo: kacos2000/Jumplist-Browser
+    match: "JumplistBrowser\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/JumplistBrowser.exe"
+    enabled: true
+    priority: medium
+
+  # MFT Browser - MFT viewer
+  - name: mft-browser
+    description: Windows MFT (Master File Table) browser
+    source: github
+    repo: kacos2000/MFT_Browser
+    match: "MFTBrowser\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/MFTBrowser.exe"
+    enabled: true
+    priority: medium
+
+  # Prefetch Browser - Prefetch file viewer
+  - name: prefetch-browser
+    description: Windows Prefetch file browser
+    source: github
+    repo: kacos2000/Prefetch-Browser
+    match: "PrefetchBrowser\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/PrefetchBrowser.exe"
+    enabled: true
+    priority: medium
