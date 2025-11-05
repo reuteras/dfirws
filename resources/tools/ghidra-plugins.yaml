@@ -1,0 +1,78 @@
+# DFIRWS Ghidra Plugins and Extensions Definition
+# This file defines plugins and extensions for Ghidra reverse engineering platform
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: ghidra-plugins
+description: Ghidra reverse engineering platform plugins and extensions
+
+tools:
+  # GolangAnalyzerExtension for Ghidra 10.4
+  - name: golang-analyzer-10-4
+    description: Golang analysis extension for Ghidra 10.4
+    source: github
+    repo: mooncat-greenpy/Ghidra_GolangAnalyzerExtension
+    match: "10\\.4_.*\\.zip$"
+    file_type: zip
+    install_method: copy
+    copy_to: "${TOOLS}/ghidra_extensions/GolangAnalyzerExtension_10.4.zip"
+    enabled: true
+    priority: medium
+    notes: Extension for Ghidra 10.4 - install via Ghidra Extension Manager
+
+  # GolangAnalyzerExtension for Ghidra 11.0
+  - name: golang-analyzer-11-0
+    description: Golang analysis extension for Ghidra 11.0
+    source: github
+    repo: mooncat-greenpy/Ghidra_GolangAnalyzerExtension
+    match: "11\\.0.*\\.zip$"
+    file_type: zip
+    install_method: copy
+    copy_to: "${TOOLS}/ghidra_extensions/GolangAnalyzerExtension_11.0.zip"
+    enabled: true
+    priority: medium
+    notes: Extension for Ghidra 11.0 and later - install via Ghidra Extension Manager
+
+  # BTIGhidra - Binary Type Inference for Ghidra
+  - name: btighidra
+    description: Binary Type Inference plugin for Ghidra
+    source: github
+    repo: trailofbits/BTIGhidra
+    match: "ghidra.*\\.zip$"
+    file_type: zip
+    install_method: copy
+    copy_to: "${TOOLS}/ghidra_extensions/btighidra.zip"
+    enabled: true
+    priority: medium
+    notes: Install via Ghidra Extension Manager
+
+  # Cartographer - Code coverage exploration plugin
+  - name: cartographer
+    description: Code coverage exploration plugin for Ghidra
+    source: github
+    repo: nccgroup/Cartographer
+    match: "Cartographer\\.zip$"
+    file_type: zip
+    install_method: copy
+    copy_to: "${TOOLS}/ghidra_extensions/Cartographer.zip"
+    enabled: true
+    priority: medium
+    notes: Install via Ghidra Extension Manager
+
+  # CAPA for Ghidra
+  - name: capa-ghidra
+    description: CAPA malware capability detection for Ghidra
+    source: http
+    url: "https://github.com/mandiant/capa/releases/download/v6.0.0/capa-v6.0.0-windows.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/capa-ghidra"
+    post_install:
+      - type: delete
+        path: "${TOOLS}/capa-ghidra/capa-ghidra.exe"
+      - type: rename
+        pattern: "capa.exe"
+        target: "capa-ghidra.exe"
+    enabled: true
+    priority: medium
+    notes: CAPA version with Ghidra extension support
