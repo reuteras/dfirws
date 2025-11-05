@@ -7,7 +7,10 @@ param(
     [Switch]$All,
 
     [Parameter(HelpMessage = "Install tools by category")]
-    [ValidateSet("forensics", "malware-analysis", "utilities", "network-analysis", "reverse-engineering", "memory-forensics", "data-analysis", "windows-forensics", "disk-forensics", "document-analysis", "email-forensics", "threat-intelligence", "active-directory")]
+    [ValidateSet("forensics", "malware-analysis", "utilities", "network-analysis",
+        "reverse-engineering", "memory-forensics", "data-analysis", "windows-forensics",
+        "disk-forensics", "document-analysis", "email-forensics", "threat-intelligence",
+        "active-directory")]
     [string]$Category,
 
     [Parameter(HelpMessage = "Install tools by priority")]
@@ -202,7 +205,9 @@ function Install-ToolsParallel {
 
         $results = $sortedTools | ForEach-Object -Parallel {
             $tool = $_
-            & $using:scriptBlock -tool $tool -setupPath $using:SETUP_PATH -toolsPath $using:TOOLS -ghUser $using:GH_USER -ghPass $using:GH_PASS -dryRun $using:DryRun -validateChecksums $using:ValidateChecksums
+            & $using:scriptBlock -tool $tool -setupPath $using:SETUP_PATH -toolsPath $using:TOOLS `
+                -ghUser $using:GH_USER -ghPass $using:GH_PASS -dryRun $using:DryRun `
+                -validateChecksums $using:ValidateChecksums
         } -ThrottleLimit $ThrottleLimit
 
         # Process results

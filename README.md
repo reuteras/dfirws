@@ -192,7 +192,9 @@ More information about installed tools are available in the GitHub [wiki][wid].
 
 ## DFIRWS v2 Architecture (NEW!)
 
-DFIRWS v2 introduces a modular YAML-based architecture that makes tool management more flexible and maintainable. All 433 tools are now defined in structured YAML files instead of monolithic PowerShell scripts.
+DFIRWS v2 introduces a modular YAML-based architecture that makes tool management more
+flexible and maintainable. All 433 tools are now defined in structured YAML files instead
+of monolithic PowerShell scripts.
 
 ### Key Benefits
 
