@@ -124,13 +124,19 @@ function Install-ToolFromDefinition {
 
     .PARAMETER DryRun
         If specified, only show what would be done without actually doing it
+
+    .PARAMETER ValidateChecksum
+        If specified, validate SHA256 checksum after download
     #>
     param(
         [Parameter(Mandatory=$true)]
         [PSCustomObject]$ToolDefinition,
 
         [Parameter(Mandatory=$false)]
-        [switch]$DryRun
+        [switch]$DryRun,
+
+        [Parameter(Mandatory=$false)]
+        [switch]$ValidateChecksum
     )
 
     $toolName = $ToolDefinition.name
@@ -149,7 +155,7 @@ function Install-ToolFromDefinition {
     }
 
     # Download the tool
-    $downloaded = Get-ToolBinary -ToolDefinition $ToolDefinition
+    $downloaded = Get-ToolBinary -ToolDefinition $ToolDefinition -ValidateChecksum:$ValidateChecksum
 
     if (-not $downloaded) {
         Write-Error "Failed to download $toolName"
@@ -178,7 +184,10 @@ function Get-ToolBinary {
     #>
     param(
         [Parameter(Mandatory=$true)]
-        [PSCustomObject]$ToolDefinition
+        [PSCustomObject]$ToolDefinition,
+
+        [Parameter(Mandatory=$false)]
+        [switch]$ValidateChecksum
     )
 
     $source = $ToolDefinition.source
@@ -189,20 +198,51 @@ function Get-ToolBinary {
         "zip" { ".zip" }
         "exe" { ".exe" }
         "msi" { ".msi" }
+        "jar" { ".jar" }
+        "war" { ".war" }
         default { "" }
     }
 
     $filePath = "${SETUP_PATH}\${toolName}${extension}"
 
+    # Check if version pinning is specified
+    $versionToInstall = if ($ToolDefinition.version -and $ToolDefinition.version -ne "latest") {
+        $ToolDefinition.version
+    } else {
+        $null
+    }
+
     try {
         switch ($source) {
             "github" {
                 Write-SynchronizedLog "Downloading $toolName from GitHub: $($ToolDefinition.repo)"
-                $status = Get-GitHubRelease `
-                    -repo $ToolDefinition.repo `
-                    -path $filePath `
-                    -match $ToolDefinition.match `
-                    -check $ToolDefinition.file_type
+
+                # Get version-specific release if pinned
+                if ($versionToInstall) {
+                    Write-SynchronizedLog "Using pinned version: $versionToInstall"
+                    $status = Get-GitHubRelease `
+                        -repo $ToolDefinition.repo `
+                        -path $filePath `
+                        -match $ToolDefinition.match `
+                        -version $versionToInstall `
+                        -check $ToolDefinition.file_type
+                } else {
+                    $status = Get-GitHubRelease `
+                        -repo $ToolDefinition.repo `
+                        -path $filePath `
+                        -match $ToolDefinition.match `
+                        -check $ToolDefinition.file_type
+                }
+
+                # Validate SHA256 if specified and download succeeded
+                if ($status -and $ToolDefinition.sha256 -and $ValidateChecksum) {
+                    Write-SynchronizedLog "Validating SHA256 checksum for $toolName"
+                    $valid = Test-SHA256 -FilePath $filePath -ExpectedHash $ToolDefinition.sha256
+                    if (-not $valid) {
+                        Write-Error "SHA256 validation failed for $toolName"
+                        return $false
+                    }
+                }
 
                 return $status
             }
@@ -228,6 +268,16 @@ function Get-ToolBinary {
                     -uri $url `
                     -FilePath $filePath `
                     -check $ToolDefinition.file_type
+
+                # Validate SHA256 if specified and download succeeded
+                if ($status -and $ToolDefinition.sha256 -and $ValidateChecksum) {
+                    Write-SynchronizedLog "Validating SHA256 checksum for $toolName"
+                    $valid = Test-SHA256 -FilePath $filePath -ExpectedHash $ToolDefinition.sha256
+                    if (-not $valid) {
+                        Write-Error "SHA256 validation failed for $toolName"
+                        return $false
+                    }
+                }
 
                 return $status
             }

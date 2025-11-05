@@ -138,3 +138,93 @@ tools:
         target: "audacity"
     enabled: true
     priority: low
+
+  # SSView - System utilities viewer
+  - name: ssview
+    description: System utilities and information viewer
+    source: http
+    url: "https://www.mitec.cz/Downloads/SSView.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/ssview"
+    enabled: true
+    priority: medium
+
+  # FullEventLogView - Event log viewer
+  - name: fulleventlogview
+    description: Event log viewer from NirSoft
+    source: http
+    url: "https://www.nirsoft.net/utils/fulleventlogview-x64.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/FullEventLogView"
+    enabled: true
+    priority: high
+
+  # WinApiSearch - Windows API reference
+  - name: winapisearch
+    description: Windows API search and reference tool
+    source: http
+    url: "https://dennisbabkin.com/php/downloads/WinApiSearch.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/WinApiSearch"
+    enabled: true
+    priority: low
+
+  # Notepad++ - Text editor
+  - name: notepad-plus-plus
+    description: Free source code editor and Notepad replacement
+    source: github
+    repo: notepad-plus-plus/notepad-plus-plus
+    match: "npp\\..*\\.portable\\.x64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/notepad++"
+    post_install:
+      - type: rename
+        pattern: "npp.*"
+        target: "notepad++"
+    enabled: true
+    priority: high
+
+  # HFS - HTTP File Server
+  - name: hfs
+    description: HTTP File Server for easy file sharing
+    source: github
+    repo: rejetto/hfs
+    match: "hfs.*windows\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/hfs"
+    enabled: true
+    priority: low
+
+  # Nerd Fonts - Patched developer fonts
+  - name: nerd-fonts
+    description: Iconic font aggregator with patches
+    source: github
+    repo: ryanoasis/nerd-fonts
+    match: "Meslo\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/fonts/Meslo"
+    enabled: true
+    priority: medium
+    notes: Meslo font only, not all Nerd Fonts
+
+  # mmdbinspect - MaxMind database inspector
+  - name: mmdbinspect
+    description: Look up records for IP addresses in MaxMind DB files
+    source: github
+    repo: maxmind/mmdbinspect
+    match: "mmdbinspect.*windows.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/mmdbinspect"
+    post_install:
+      - type: rename
+        pattern: "mmdbinspect*"
+        target: "mmdbinspect"
+    enabled: true
+    priority: low

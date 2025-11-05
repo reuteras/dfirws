@@ -1,0 +1,202 @@
+# DFIRWS Data Analysis Tools Definition
+# This file defines data analysis, parsing, and visualization tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: data-analysis
+description: Data analysis, log parsing, and visualization tools
+
+tools:
+  # CyberChef - Data analysis and transformation
+  - name: cyberchef
+    description: Cyber Swiss Army Knife for data analysis and transformation
+    source: github
+    repo: gchq/CyberChef
+    match: "CyberChef"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/CyberChef"
+    post_install:
+      - type: rename
+        pattern: "CyberChef_*"
+        target: "CyberChef.html"
+    enabled: true
+    priority: critical
+
+  # Hayabusa - Fast forensic timeline generator
+  - name: hayabusa
+    description: Fast forensic timeline generator and threat hunting tool
+    source: github
+    repo: Yamato-Security/hayabusa
+    match: "hayabusa.*windows.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/hayabusa"
+    post_install:
+      - type: rename
+        pattern: "hayabusa-*"
+        target: "hayabusa"
+    enabled: true
+    priority: high
+
+  # Takajo - Hayabusa analyzer
+  - name: takajo
+    description: Analyzer for Hayabusa results
+    source: github
+    repo: Yamato-Security/takajo
+    match: "takajo.*windows.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/takajo"
+    post_install:
+      - type: rename
+        pattern: "takajo-*"
+        target: "takajo"
+    enabled: true
+    priority: medium
+
+  # Chainsaw - Rapidly search and hunt through Windows event logs
+  - name: chainsaw
+    description: Rapidly search and hunt through Windows event logs
+    source: github
+    repo: WithSecureLabs/chainsaw
+    match: "chainsaw.*x86_64-pc-windows.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/chainsaw"
+    post_install:
+      - type: rename
+        pattern: "chainsaw*"
+        target: "chainsaw"
+    enabled: true
+    priority: high
+
+  # Loki - Simple IOC and YARA scanner
+  - name: loki
+    description: Simple IOC and YARA scanner
+    source: github
+    repo: Neo23x0/Loki
+    match: "loki.*win.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/loki"
+    enabled: true
+    priority: high
+
+  # zstd - Compression tool
+  - name: zstd
+    description: Zstandard compression algorithm
+    source: github
+    repo: facebook/zstd
+    match: "win64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/zstd"
+    post_install:
+      - type: rename
+        pattern: "zstd-*"
+        target: "zstd"
+    enabled: true
+    priority: medium
+
+  # SRUM-dump - System Resource Utilization Monitor parser
+  - name: srum-dump
+    description: System Resource Utilization Monitor database parser
+    source: github
+    repo: MarkBaggett/srum-dump
+    match: "srum_dump.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/srum-dump"
+    enabled: true
+    priority: medium
+
+  # Forensic Timeline - Create forensic timelines
+  - name: forensic-timeliner
+    description: Create forensic timelines from various sources
+    source: github
+    repo: acquiredsecurity/forensic-timeliner
+    match: "forensic.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/forensic-timeliner"
+    enabled: true
+    priority: medium
+
+  # mboxviewer - View MBOX email files
+  - name: mboxviewer
+    description: MBOX email file viewer
+    source: github
+    repo: eneam/mboxviewer
+    match: "mbox-viewer\\.exe"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/mboxviewer"
+    enabled: true
+    priority: low
+
+  # gollum - Simple wiki system
+  - name: gollum
+    description: Simple wiki system built on Git
+    source: github
+    repo: gollum/gollum
+    match: "gollum\\.war"
+    file_type: war
+    install_method: copy
+    copy_to: "${TOOLS}/lib/gollum.war"
+    enabled: true
+    priority: low
+    notes: Requires Java application server
+
+  # jq - JSON processor
+  - name: jq
+    description: Command-line JSON processor
+    source: github
+    repo: jqlang/jq
+    match: "jq-windows-amd64\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/jq.exe"
+    enabled: true
+    priority: high
+
+  # yq - YAML processor
+  - name: yq
+    description: Command-line YAML processor
+    source: github
+    repo: mikefarah/yq
+    match: "yq_windows_amd64\\.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/yq.exe"
+    enabled: true
+    priority: high
+
+  # sqlite - SQLite database browser
+  - name: sqlite-tools
+    description: SQLite command-line tools
+    source: http
+    url: "https://www.sqlite.org/download.html"
+    url_pattern: "https://www.sqlite.org/download.html"
+    match: "sqlite-tools-win.*\\.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/sqlite"
+    post_install:
+      - type: rename
+        pattern: "sqlite-*"
+        target: "sqlite"
+    enabled: true
+    priority: high
+
+  # DB Browser for SQLite
+  - name: db-browser-sqlite
+    description: Visual tool to create, design, and edit SQLite databases
+    source: github
+    repo: sqlitebrowser/sqlitebrowser
+    match: "DB\\.Browser\\.for\\.SQLite-.*win64\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/DBBrowserSQLite"
+    enabled: true
+    priority: high

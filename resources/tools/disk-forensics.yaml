@@ -1,0 +1,122 @@
+# DFIRWS Disk Forensics Tools Definition
+# This file defines disk imaging, analysis, and file system forensics tools
+# Schema version: 1.0
+
+schema_version: "1.0"
+category: disk-forensics
+description: Disk imaging, mounting, and file system forensics tools
+
+tools:
+  # Sleuth Kit - File system forensics tools
+  - name: sleuthkit
+    description: Collection of command line file system forensics tools
+    source: github
+    repo: sleuthkit/sleuthkit
+    match: "sleuthkit.*win32\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/sleuthkit"
+    post_install:
+      - type: rename
+        pattern: "sleuthkit-*"
+        target: "sleuthkit"
+    enabled: true
+    priority: high
+
+  # FTK Imager Lite - Disk imaging tool
+  - name: ftk-imager
+    description: Disk imaging and analysis tool from AccessData
+    source: http
+    url: "https://d1kpmuwb7gvu1i.cloudfront.net/AccessData_FTK_Imager_Lite_3.1.1.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/FTKImager"
+    enabled: true
+    priority: high
+    notes: May need to update URL for latest version
+
+  # Arsenal Image Mounter - Disk image mounter
+  - name: arsenal-image-mounter
+    description: Virtual SCSI adapter for mounting disk images
+    source: http
+    url: "https://arsenalrecon.com/downloads/ArsenalImageMounter.zip"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/ArsenalImageMounter"
+    enabled: true
+    priority: high
+    notes: Requires installation, driver signing may be needed
+
+  # OSFMount - Mount disk images
+  - name: osfmount
+    description: Mount local disk image files as virtual disks
+    source: http
+    url: "https://www.osforensics.com/downloads/osfmount.exe"
+    file_type: exe
+    install_method: installer
+    installer_args: "/VERYSILENT /NORESTART"
+    enabled: true
+    priority: high
+
+  # ImDisk Toolkit - Virtual disk driver
+  - name: imdisk
+    description: Virtual disk driver for Windows
+    source: http
+    url: "https://sourceforge.net/projects/imdisk-toolkit/files/latest/download"
+    file_type: exe
+    install_method: installer
+    installer_args: "/SILENT"
+    enabled: true
+    priority: medium
+
+  # Kroll Ontrack Easy Recovery
+  - name: thumbcache-viewer
+    description: Thumbcache viewer for Windows
+    source: github
+    repo: thumbcacheviewer/thumbcacheviewer
+    match: "thumbcache.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/ThumbcacheViewer"
+    enabled: true
+    priority: medium
+
+  # sidr - Slack space dumper and analyzer
+  - name: sidr
+    description: Slack space dumper and analyzer
+    source: github
+    repo: strozfriedberg/sidr
+    match: "sidr.*windows.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/sidr"
+    enabled: true
+    priority: low
+
+  # qrtool - QR code tool
+  - name: qrtool
+    description: Utility for encoding and decoding QR codes
+    source: github
+    repo: sorairolake/qrtool
+    match: "qrtool.*x86_64.*windows.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/qrtool"
+    post_install:
+      - type: rename
+        pattern: "qrtool-*"
+        target: "qrtool"
+    enabled: true
+    priority: low
+
+  # dsq - SQL queries on CSV, JSON, etc
+  - name: dsq
+    description: Run SQL queries on CSV, JSON, and other formats
+    source: github
+    repo: multiprocessio/dsq
+    match: "dsq-win.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/dsq"
+    enabled: true
+    priority: medium
