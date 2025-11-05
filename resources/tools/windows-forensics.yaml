@@ -40,6 +40,25 @@ tools:
     enabled: true
     priority: high
 
+  # OneDriveExplorer - OneDrive forensics tool
+  - name: onedriveexplorer
+    description: Reconstruct OneDrive folder structure from forensic artifacts
+    source: github
+    repo: Beercow/OneDriveExplorer
+    match: "OneDriveExplorer.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/OneDriveExplorer"
+    enabled: true
+    priority: high
+    notes: |
+      Parses <UserCid>.dat, <UserCid>.dat.previous and SQLite databases.
+      Supports OneDrive logs (.odl, .odlgz, .odlsent, .aold extensions).
+      Produces JSON, CSV, or HTML output.
+      Includes both CLI and GUI versions.
+      Can parse live system or offline dat/SQLite files.
+      Related to GitHub issue #115
+
   # JLECmd - Jump list parser
   - name: jlecmd
     description: Jump list parser from Eric Zimmerman

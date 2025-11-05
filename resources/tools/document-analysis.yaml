@@ -69,6 +69,25 @@ tools:
     priority: high
     notes: Part of Didier Stevens tools
 
+  # pdf_object_hashing - PDF threat detection
+  - name: pdf-object-hashing
+    description: PDF threat detection via object hashing - identify related malicious PDFs
+    source: github
+    repo: EmergingThreats/pdf_object_hashing
+    match: "pdf_object_hashing.*\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/pdf_object_hashing"
+    enabled: true
+    priority: high
+    notes: |
+      Creates detection rules based on PDF structure "skeleton" or "template".
+      Similar to imphash or ja3 hash - extracts object types and hashes them.
+      Useful for identifying related documents where content changed but structure remained.
+      Helps with attribution when threat actors use PDF builders.
+      Requires Python 3.
+      Related to GitHub issue #118
+
   # pdfid - PDF analysis
   - name: pdfid
     description: Scan PDF files to identify suspicious content
