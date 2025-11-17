@@ -1,0 +1,180 @@
+name: Test V2 Installers
+
+on:
+  push:
+    branches: [ v2, main ]
+    paths:
+      - 'resources/download/install-*-v2.ps1'
+      - 'resources/download/*-manager.ps1'
+      - 'resources/download/yaml-parser.ps1'
+      - '.github/workflows/test-installers.yml'
+  pull_request:
+    branches: [ v2, main ]
+    paths:
+      - 'resources/download/install-*-v2.ps1'
+      - 'resources/download/*-manager.ps1'
+      - 'resources/download/yaml-parser.ps1'
+      - '.github/workflows/test-installers.yml'
+  workflow_dispatch:
+
+jobs:
+  test-yaml-parser:
+    runs-on: windows-latest
+    name: Test YAML Parser
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test YAML Parser Loading
+        shell: pwsh
+        run: |
+          Write-Host "Testing YAML parser..."
+
+          # Source the parser
+          . .\resources\download\yaml-parser.ps1
+
+          # Test loading each category
+          $categories = @(
+            "forensics", "malware-analysis", "utilities", "network-analysis",
+            "reverse-engineering", "memory-forensics", "data-analysis",
+            "windows-forensics", "disk-forensics", "document-analysis",
+            "email-forensics", "threat-intelligence", "active-directory",
+            "binary-utilities", "code-editors", "database-tools",
+            "ghidra-plugins", "obsidian-plugins", "system-utilities"
+          )
+
+          $failed = 0
+          foreach ($cat in $categories) {
+            try {
+              $tools = Import-ToolDefinition -Category $cat
+              Write-Host "✅ $cat : Loaded $($tools.Count) tools"
+            } catch {
+              Write-Host "❌ $cat : Failed to load"
+              $failed++
+            }
+          }
+
+          if ($failed -gt 0) {
+            Write-Host ""
+            Write-Host "ERROR: $failed categories failed to load"
+            exit 1
+          }
+
+          Write-Host ""
+          Write-Host "✅ All categories loaded successfully"
+
+  test-dry-run:
+    runs-on: windows-latest
+    name: Test Dry-Run Mode
+    needs: test-yaml-parser
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test Standard Tools Dry-Run
+        shell: pwsh
+        run: |
+          Write-Host "Testing standard tools dry-run..."
+          .\resources\download\install-all-tools-v2.ps1 -StandardTools -DryRun
+
+      - name: Test Git Repos Dry-Run
+        shell: pwsh
+        run: |
+          Write-Host "Testing git repos dry-run..."
+          .\resources\download\install-all-tools-v2.ps1 -GitRepos -DryRun
+
+      - name: Test Didier Stevens Dry-Run
+        shell: pwsh
+        run: |
+          Write-Host "Testing Didier Stevens tools dry-run..."
+          .\resources\download\install-all-tools-v2.ps1 -DidierStevensTools -DryRun
+
+      - name: Test Python Tools Dry-Run
+        shell: pwsh
+        run: |
+          Write-Host "Testing Python tools dry-run..."
+          .\resources\download\install-all-tools-v2.ps1 -PythonTools -DryRun
+
+      - name: Test Node.js Tools Dry-Run
+        shell: pwsh
+        run: |
+          Write-Host "Testing Node.js tools dry-run..."
+          .\resources\download\install-all-tools-v2.ps1 -NodeJsTools -DryRun
+
+      - name: Dry-Run Summary
+        if: success()
+        shell: pwsh
+        run: |
+          Write-Host ""
+          Write-Host "✅ All dry-run tests passed!"
+          Write-Host ""
+          Write-Host "Tested installers:"
+          Write-Host "- StandardTools"
+          Write-Host "- GitRepos"
+          Write-Host "- DidierStevensTools"
+          Write-Host "- PythonTools"
+          Write-Host "- NodeJsTools"
+
+  test-tool-counts:
+    runs-on: windows-latest
+    name: Verify Tool Counts
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Count Tools
+        shell: pwsh
+        run: |
+          Write-Host "Verifying tool counts..."
+          .\resources\download\install-all-tools-v2.ps1 -ShowCounts
+
+      - name: Verify Total
+        shell: pwsh
+        run: |
+          # Source parser
+          . .\resources\download\yaml-parser.ps1
+
+          # Count each type
+          $standardCount = 0
+          $categories = @(
+            "forensics", "malware-analysis", "utilities", "network-analysis",
+            "reverse-engineering", "memory-forensics", "data-analysis",
+            "windows-forensics", "disk-forensics", "document-analysis",
+            "email-forensics", "threat-intelligence", "active-directory",
+            "binary-utilities", "code-editors", "database-tools",
+            "ghidra-plugins", "obsidian-plugins", "system-utilities"
+          )
+
+          foreach ($cat in $categories) {
+            $tools = Import-ToolDefinition -Category $cat
+            $standardCount += $tools.Count
+          }
+
+          $pythonTools = Import-PythonToolsDefinition
+          $gitRepos = Import-GitRepositoriesDefinition
+          $nodejsTools = Import-NodeJsToolsDefinition
+          $didierTools = Import-DidierStevensToolsDefinition
+
+          $total = $standardCount + $pythonTools.Count + $gitRepos.Count + $nodejsTools.Count + $didierTools.Count
+
+          Write-Host ""
+          Write-Host "=== Tool Count Verification ==="
+          Write-Host "Standard Tools: $standardCount"
+          Write-Host "Python Tools: $($pythonTools.Count)"
+          Write-Host "Git Repos: $($gitRepos.Count)"
+          Write-Host "Node.js Tools: $($nodejsTools.Count)"
+          Write-Host "Didier Stevens: $($didierTools.Count)"
+          Write-Host "---"
+          Write-Host "Total: $total"
+
+          if ($total -eq 433) {
+            Write-Host ""
+            Write-Host "✅ Tool count verification passed! (433 tools)"
+          } else {
+            Write-Host ""
+            Write-Host "❌ ERROR: Expected 433 tools, found $total"
+            exit 1
+          }

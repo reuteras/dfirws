@@ -1,0 +1,96 @@
+name: YAML Validation
+
+on:
+  push:
+    branches: [ v2, main ]
+    paths:
+      - 'resources/tools/**/*.yaml'
+      - '.github/workflows/yaml-validation.yml'
+  pull_request:
+    branches: [ v2, main ]
+    paths:
+      - 'resources/tools/**/*.yaml'
+      - '.github/workflows/yaml-validation.yml'
+
+jobs:
+  validate-yaml:
+    runs-on: ubuntu-latest
+    name: Validate YAML Tool Definitions
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Validate YAML syntax
+        run: |
+          echo "Validating YAML files in resources/tools/..."
+          yamllint -d relaxed resources/tools/*.yaml
+
+      - name: Count tools
+        run: |
+          echo "=== Tool Count Summary ==="
+          for file in resources/tools/*.yaml; do
+            count=$(grep -c "^  - name:" "$file" || echo "0")
+            echo "$(basename $file): $count tools"
+          done
+
+          total=$(grep -c "^  - name:" resources/tools/*.yaml || echo "0")
+          echo ""
+          echo "Total tools defined: $total"
+
+      - name: Check for duplicate tool names
+        run: |
+          echo "Checking for duplicate tool names..."
+          duplicates=$(grep "^  - name:" resources/tools/*.yaml | cut -d: -f2 | tr -d ' ' | sort | uniq -d)
+          if [ -n "$duplicates" ]; then
+            echo "ERROR: Duplicate tool names found:"
+            echo "$duplicates"
+            exit 1
+          else
+            echo "No duplicate tool names found."
+          fi
+
+      - name: Validate required fields
+        run: |
+          echo "Validating required fields in YAML files..."
+          missing=0
+
+          for file in resources/tools/*.yaml; do
+            # Check for schema_version
+            if ! grep -q "^schema_version:" "$file"; then
+              echo "ERROR: Missing schema_version in $file"
+              missing=$((missing + 1))
+            fi
+
+            # Check for category
+            if ! grep -q "^category:" "$file"; then
+              echo "ERROR: Missing category in $file"
+              missing=$((missing + 1))
+            fi
+
+            # Check for description
+            if ! grep -q "^description:" "$file"; then
+              echo "ERROR: Missing description in $file"
+              missing=$((missing + 1))
+            fi
+          done
+
+          if [ $missing -gt 0 ]; then
+            echo "Found $missing validation errors"
+            exit 1
+          else
+            echo "All required fields present"
+          fi
+
+      - name: Validation Summary
+        if: success()
+        run: |
+          echo "✅ All YAML validation checks passed!"
+          echo ""
+          echo "Summary:"
+          echo "- YAML syntax: Valid"
+          echo "- Duplicate names: None found"
+          echo "- Required fields: All present"
