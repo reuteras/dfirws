@@ -5,10 +5,12 @@
 
 .DESCRIPTION
     This script downloads files and prepares the sandbox for DFIRWS.
+    Now uses v2 YAML-based architecture for GitHub releases, Git repositories,
+    and Didier Stevens tools (433 tools across 23 categories).
 
 .EXAMPLE
     .\downloadFiles.ps1
-    This will download all files needed for DFIRWS.
+    This will download all files needed for DFIRWS using the v2 architecture.
 
 .EXAMPLE
     .\downloadFiles.ps1 -AllTools -Enrichment
@@ -26,9 +28,22 @@
     .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
     This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
 
+.EXAMPLE
+    .\downloadFiles.ps1 -Release
+    Download only GitHub releases using v2 YAML-based installer (standard tools).
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Git
+    Clone and update Git repositories using v2 YAML definitions.
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Didier
+    Download Didier Stevens tools using v2 YAML installer.
+
 .NOTES
     File Name      : downloadFiles.ps1
     Author         : Peter R
+    Version        : 2.0 (Integrated with YAML-based v2 architecture)
 
 .LINK
     https://github.com/reuteras/dfirws
@@ -224,8 +239,8 @@ if ($all -or $MSYS2.IsPresent) {
 }
 
 if ($all -or $Release.IsPresent) {
-    Write-DateLog "Download releases from GitHub."
-    .\resources\download\release.ps1
+    Write-DateLog "Download releases from GitHub (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -StandardTools
 }
 
 if ($all -or $Http.IsPresent) {
@@ -244,8 +259,8 @@ if ($all -or $Node.IsPresent) {
 }
 
 if ($all -or $Git.IsPresent) {
-    Write-DateLog "Download and update git repositories"
-    .\resources\download\git.ps1
+    Write-DateLog "Download and update git repositories (v2 YAML-based)"
+    .\resources\download\install-all-tools-v2.ps1 -GitRepos
 }
 
 if ($all -or $GoLang.IsPresent) {
@@ -267,8 +282,8 @@ if ($all -or $Rust.IsPresent) {
 }
 
 if ($all -or $Didier.IsPresent) {
-    Write-DateLog "Download Didier Stevens tools."
-    .\resources\download\didier.ps1
+    Write-DateLog "Download Didier Stevens tools (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -DidierStevensTools
 }
 
 if ($all -or $Winget.IsPresent) {
