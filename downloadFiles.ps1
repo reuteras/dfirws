@@ -18,7 +18,7 @@
 
 .EXAMPLE
     .\downloadFiles.ps1 -Python
-    This will download and update packages for Python but no other files.
+    Install Python tools using v2 YAML-based installer (72 packages).
 
 .EXAMPLE
     .\downloadFiles.ps1 -Freshclam
@@ -39,6 +39,10 @@
 .EXAMPLE
     .\downloadFiles.ps1 -Didier
     Download Didier Stevens tools using v2 YAML installer.
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Node
+    Install Node.js packages using v2 YAML-based installer (4 packages).
 
 .NOTES
     File Name      : downloadFiles.ps1
@@ -254,8 +258,8 @@ if ($all -or $Http.IsPresent) {
 
 if ($all -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
-    Write-DateLog "Setup Node and install npm packages."
-    .\resources\download\node.ps1 | Out-Null
+    Write-DateLog "Setup Node and install npm packages (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -NodeJsTools
 }
 
 if ($all -or $Git.IsPresent) {
@@ -271,8 +275,8 @@ if ($all -or $GoLang.IsPresent) {
 
 if ($all -or $Python.IsPresent) {
     Write-Output "" > .\log\python.txt
-    Write-DateLog "Setup Python and install packages in virtual environments."
-    .\resources\download\python.ps1 | Out-Null
+    Write-DateLog "Setup Python and install packages (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -PythonTools
 }
 
 if ($all -or $Rust.IsPresent) {
