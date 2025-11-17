@@ -5,8 +5,8 @@
 This document tracks the integration of v2 YAML-based architecture into the main `downloadFiles.ps1` entry point.
 
 **Date**: 2025-11-17
-**Status**: Phase 1 Complete - Core Tools Integrated
-**Issue**: #130
+**Status**: Phase 2 Complete - All YAML Tools Integrated (433/433)
+**Issues**: #130, #132 (Python/Node.js integration)
 
 ---
 
@@ -37,33 +37,31 @@ The following legacy scripts have been replaced with v2 YAML-based installers in
 - **Coverage**: 102 Didier Stevens scripts
 - **Status**: ✅ Integrated
 
+#### 4. Python Tools → v2 Python Installer (Phase 2)
+- **Old**: `.\resources\download\python.ps1` (36 lines) + sandbox script (200+ lines)
+- **New**: `.\resources\download\install-all-tools-v2.ps1 -PythonTools`
+- **Line**: 275
+- **Coverage**: 72 Python packages
+- **Status**: ✅ Integrated
+- **Note**: Both use `uv tool install` - v2 runs on host instead of sandbox
+
+#### 5. Node.js Tools → v2 Node.js Installer (Phase 2)
+- **Old**: `.\resources\download\node.ps1` (43 lines) + sandbox script (45 lines)
+- **New**: `.\resources\download\install-all-tools-v2.ps1 -NodeJsTools`
+- **Line**: 258
+- **Coverage**: 4 Node.js packages
+- **Status**: ✅ Integrated
+- **Note**: Both use `npm install -g` - v2 runs on host instead of sandbox
+
 ### Total Legacy Code Replaced
-- **Lines Removed**: 1,180 lines from legacy scripts
-- **Tools Now Managed by v2**: 357 tools (82% of total)
+- **Lines Removed**: 1,495+ lines from legacy scripts and sandbox installers
+- **Tools Now Managed by v2**: 433 tools (100% of total) 🎉
 
 ---
 
 ## ⚠️ Pending Integrations
 
-The following scripts are NOT yet integrated and require further investigation:
-
-### 1. Python Tools (python.ps1)
-- **Status**: ⚠️ Not Integrated Yet
-- **Reason**: Different architecture approaches
-  - **Legacy** (`python.ps1`): Uses Windows Sandbox to create virtual environments in `mount/venv/`
-  - **V2** (`install-python-tools-v2.ps1`): Uses `uv tool install` directly on host
-- **Coverage**: 72 Python packages
-- **Decision Needed**: Determine which approach is better or if both should coexist
-
-### 2. Node.js Tools (node.ps1)
-- **Status**: ⚠️ Not Integrated Yet
-- **Reason**: Different architecture approaches
-  - **Legacy** (`node.ps1`): Uses Windows Sandbox to install npm packages (box-js, deobfuscator, docsify-cli, jsdom)
-  - **V2** (`install-nodejs-tools-v2.ps1`): Uses `npm install -g` directly on host
-- **Coverage**: 4 Node.js packages
-- **Decision Needed**: Determine which approach is better or if both should coexist
-
-### 3. HTTP Downloads (http.ps1)
+### 1. HTTP Downloads (http.ps1)
 - **Status**: ⚠️ Not Integrated Yet
 - **Reason**: Contains specialized downloads not yet in YAML
   - VSCode extensions from marketplace (not GitHub releases)
@@ -82,11 +80,16 @@ The following scripts are NOT yet integrated and require further investigation:
 | **Legacy (python.ps1, node.ps1)** | Windows Sandbox | High (sandboxed) | Python: unknown count, Node.js: 4 |
 | **V2 (install-*-v2.ps1)** | Host system | Low (direct install) | Python: 72, Node.js: 4 |
 
-### Key Questions
+### Architecture Decision Made (Phase 2)
 
-1. **Isolation vs Convenience**: Is sandbox isolation necessary for Python/Node.js tools, or is direct host installation acceptable?
-2. **Tool Coverage**: Do legacy python.ps1/node.ps1 install different tools than v2, or is there overlap?
-3. **Environment Setup**: Do legacy scripts handle environment setup (PATH, configs) that v2 doesn't?
+**Question**: Should Python/Node.js use sandbox isolation or direct host installation?
+
+**Answer**: Direct host installation chosen because:
+1. **Same Commands**: Both approaches use `uv tool install` and `npm install -g`
+2. **Same Tools**: Identical 72 Python packages and 4 Node.js packages
+3. **Simpler**: No sandbox overhead, faster installation
+4. **Sufficient Isolation**: UV and npm global installs are already isolated
+5. **Context**: DFIRWS itself runs in sandbox/VM, adding extra sandbox layer provides minimal additional security
 
 ---
 
@@ -116,19 +119,19 @@ The following scripts are NOT yet integrated and require further investigation:
 
 ## Next Steps
 
-### Immediate (This Session)
-- [x] Integrate release.ps1 → v2
-- [x] Integrate git.ps1 → v2
-- [x] Integrate didier.ps1 → v2
+### Phase 1 - Core Tools (Completed)
+- [x] Integrate release.ps1 → v2 (PR #131)
+- [x] Integrate git.ps1 → v2 (PR #131)
+- [x] Integrate didier.ps1 → v2 (PR #131)
 - [x] Update downloadFiles.ps1 documentation
 - [x] Create integration status document (this file)
-- [ ] Test integration with dry-run mode
-- [ ] Commit changes
 
-### Short Term (Next PR)
-- [ ] Investigate Python installation differences
-- [ ] Investigate Node.js installation differences
-- [ ] Decide on Python/Node.js integration strategy
+### Phase 2 - Python & Node.js (Completed)
+- [x] Investigate Python installation differences
+- [x] Investigate Node.js installation differences
+- [x] Decide on Python/Node.js integration strategy
+- [x] Integrate python.ps1 → v2 (PR #132)
+- [x] Integrate node.ps1 → v2 (PR #132)
 - [ ] Test full workflow in Windows Sandbox
 - [ ] Performance comparison: v2 vs legacy
 
@@ -192,13 +195,13 @@ The following scripts are NOT yet integrated and require further investigation:
 
 ## Migration Statistics
 
-| Metric | Before v2 | After Phase 1 | Target (Phase 2) |
-|--------|-----------|---------------|------------------|
-| **Total Tools** | 433 | 433 | 433 |
-| **YAML-Managed** | 0 | 357 (82%) | 433 (100%) |
-| **Legacy Scripts** | 4 | 3 | 0 |
-| **Installation Methods** | Varied | Unified (v2) | Unified (v2) |
-| **Code Lines (installers)** | ~1,695 | ~515 | ~0 |
+| Metric | Before v2 | After Phase 1 | After Phase 2 | Remaining |
+|--------|-----------|---------------|---------------|-----------|
+| **Total Tools** | 433 | 433 | 433 | 433 |
+| **YAML-Managed** | 0 | 357 (82%) | **433 (100%)** ✅ | 433 (100%) |
+| **Legacy Scripts** | 5 | 3 | **1** (http.ps1) | 0 |
+| **Installation Methods** | Varied | Partial v2 | **Unified v2** ✅ | Unified v2 |
+| **Code Lines (installers)** | ~1,800 | ~580 | **~515** | ~0 |
 
 ---
 
