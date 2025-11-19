@@ -231,7 +231,7 @@ dfirws/
 - **Decision**: Security wins - this is a DFIR toolkit
 
 ### Compatibility
-- **Requires**: Windows 10 Pro/Enterprise or Windows 11 Pro (Sandbox feature)
+- **Requires**: Windows 11 Pro/Enterprise or later (Sandbox feature)
 - **Home editions**: Not supported (same as legacy)
 - **Note**: DFIRWS is primarily for professional DFIR work
 

@@ -12,7 +12,7 @@ DFIRWS has been enhanced since its start and now contains the following main par
   - **network_dfirws.wsb** - Windows Sandbox configuration file with network enabled.
 - **createVM.ps1** - create a Windows 11 VM with the tools installed.
 
-DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough it's currently only tested on Windows 11. The VM only creates a Windows 11 VM and currently only works with VMWare Workstation.
+**DFIRWS requires Windows 11 Pro/Enterprise or later.** The Windows Sandbox feature and VM creation are only supported on Windows 11. The VM only works with VMWare Workstation.
 
 **Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. I don't want to have to recommend this but the reason is that at least Windows Defender will some time classify tools as malware even though they are not. Even though I try to exclude those tools I've found that a file can be classified as malware one day and not the next. The choice is yours.
 

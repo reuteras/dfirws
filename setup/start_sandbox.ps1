@@ -137,13 +137,8 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
 
 # Import registry settings
 reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
-if ($WINDOWS_VERSION -eq "10") {
-	reg import "${HOME}\Documents\tools\reg\right-click-win10.reg" | Out-Null
-	Write-DateLog "Windows 10 right-click context menu entries imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-} elseif ($WINDOWS_VERSION -eq "11") {
-	reg import "${HOME}\Documents\tools\reg\right-click-win11.reg" | Out-Null
-	Write-DateLog "Windows 11 right-click context menu entries imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
+reg import "${HOME}\Documents\tools\reg\right-click-win11.reg" | Out-Null
+Write-DateLog "Windows 11 right-click context menu entries imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 foreach ($extension in "doc", "docm", "docx", "dot", "dotm", "dotx", "xls", "xlsm", "xlsx", "xlt", "xltm", "xltx", "ppt", "pptm", "pptx", "pot", "potm", "potx") {
@@ -210,11 +205,6 @@ netsh firewall set opmode DISABLE 2>&1 | Out-Null
 if ("${WSDFIR_HIDE_TASKBAR}" -eq "Yes") {
     # From https://www.itechtics.com/hide-show-taskbar/#from-windows-powershell
     &{$p='HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3';$v=(Get-ItemProperty -Path $p).Settings;$v[8]=3;&Set-ItemProperty -Path $p -Name Settings -Value $v;&Stop-Process -f -ProcessName explorer}
-}
-
-# Windows 10 Loopback
-if ("${WSDFIR_W10_LOOPBACK}" -eq "Yes") {
-    Install-W10Loopback | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Restart Explorer process
