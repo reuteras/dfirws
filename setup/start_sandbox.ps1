@@ -139,6 +139,10 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
 reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
 if ($WINDOWS_VERSION -eq "10") {
 	reg import "${HOME}\Documents\tools\reg\right-click-win10.reg" | Out-Null
+	Write-DateLog "Windows 10 right-click context menu entries imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+} elseif ($WINDOWS_VERSION -eq "11") {
+	reg import "${HOME}\Documents\tools\reg\right-click-win11.reg" | Out-Null
+	Write-DateLog "Windows 11 right-click context menu entries imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
