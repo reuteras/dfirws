@@ -926,7 +926,7 @@ function Install-VisualStudioBuildTool {
 
         Write-Output "Installing Visual Studio Build Tools"
 
-        Start-Process -Wait "${TOOLS}\VSLayout\vs_buildtools.exe" -ArgumentList "--noWeb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
+        Start-Process -Wait "${TOOLS}\VSLayout\vs_buildtools.exe" -ArgumentList "--noWeb --passive --norestart --force --add Microsoft.VisualStudio.Product.BuildTools --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop"
         Copy-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019\Visual Studio Tools\Developer PowerShell for VS 2019.lnk" "${env:USERPROFILE}\Desktop\dfirws\Programming"
         if (Test-Path "${HOME}\Desktop\dfirws\Programming\Visual Studio Buildtools (runs dfirws-install -VisualStudioBuildTools).lnk") {
@@ -1006,21 +1006,6 @@ function Install-VSCode {
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Visual Studio Code.lnk" -DestinationPath "${HOME}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
     } else {
         Write-Output "Visual Studio Code is already installed"
-    }
-}
-
-function Install-W10Loopback {
-    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-loopback.txt")) {
-        Write-Output "Installing Windows 10 Loopback adapter"
-        $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
-        if ($WIN10) {
-            & "${HOME}\Documents\tools\utils\devcon.exe" install "${env:windir}\inf\netloop.inf" *msloop
-            Write-DateLog "Loopback adapter installed"
-        } else {
-            Write-DateLog "Loopback adapter not installed since not running Windows 10"
-        }
-    } else {
-        Write-Output "Windows 10 Loopback adapter is already installed"
     }
 }
 
