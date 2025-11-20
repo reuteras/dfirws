@@ -142,6 +142,15 @@ function Import-PythonToolsDefinition {
             }
         }
 
+        # Add repo scripts
+        if ($definition.repo_scripts) {
+            foreach ($tool in $definition.repo_scripts) {
+                $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "repo_script" -Force
+                $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
+                $allTools += $tool
+            }
+        }
+
         return $allTools
     } else {
         # Fallback: Simple parser
