@@ -29,6 +29,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install PowerShell-YAML module
+        shell: pwsh
+        run: |
+          Write-Host "Installing powershell-yaml module..."
+          Install-Module -Name powershell-yaml -Force -Scope CurrentUser
+          Write-Host "✅ powershell-yaml module installed"
+
       - name: Test YAML Parser Loading
         shell: pwsh
         run: |
@@ -75,6 +82,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install PowerShell-YAML module
+        shell: pwsh
+        run: |
+          Write-Host "Installing powershell-yaml module..."
+          Install-Module -Name powershell-yaml -Force -Scope CurrentUser
+          Write-Host "✅ powershell-yaml module installed"
 
       - name: Test Standard Tools Dry-Run
         shell: pwsh
@@ -127,6 +141,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install PowerShell-YAML module
+        shell: pwsh
+        run: |
+          Write-Host "Installing powershell-yaml module..."
+          Install-Module -Name powershell-yaml -Force -Scope CurrentUser
+          Write-Host "✅ powershell-yaml module installed"
 
       - name: Count Tools
         shell: pwsh
