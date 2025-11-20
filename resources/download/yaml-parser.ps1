@@ -151,6 +151,24 @@ function Import-PythonToolsDefinition {
             }
         }
 
+        # Add direct scripts
+        if ($definition.direct_scripts) {
+            foreach ($tool in $definition.direct_scripts) {
+                $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "direct_script" -Force
+                $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
+                $allTools += $tool
+            }
+        }
+
+        # Add utility scripts
+        if ($definition.utility_scripts) {
+            foreach ($tool in $definition.utility_scripts) {
+                $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "utility_script" -Force
+                $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
+                $allTools += $tool
+            }
+        }
+
         return $allTools
     } else {
         # Fallback: Simple parser
