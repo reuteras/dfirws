@@ -15,7 +15,12 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\freshclam.exe")) {
     Start-Sleep -Seconds 1
 }
 
-& 'C:\Program Files\ClamAV\freshclam.exe' --quiet 2>&1 | ForEach-Object{ "$_" } | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+if (-not (Test-Path -Path "C:\Program Files\ClamAV\freshclam.conf")) {
+    (Get-Content 'C:\Program Files\ClamAV\conf_examples\freshclam.conf.sample').Replace("Example", "#Example") | Out-File -FilePath 'C:\Program Files\ClamAV\freshclam.conf' -Encoding "ascii"
+    Write-Output 'DatabaseDirectory "C:\Tools\ClamAV\db"' | Out-File -Append 'C:\Program Files\ClamAV\freshclam.conf'
+}
+
+& 'C:\Program Files\ClamAV\freshclam.exe' 2>&1 | ForEach-Object{ "$_" } | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
 
 Write-DateLog "Freshclam update done." | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
 
