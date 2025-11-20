@@ -164,12 +164,6 @@ tools:
     category_type: data-analysis
     priority: medium
 
-  - name: xmltodict
-    package: xmltodict
-    description: "Makes working with XML feel like you are working with JSON"
-    category_type: forensics-utility
-    priority: high
-
   # Windows Forensics
   - name: LnkParse3
     package: LnkParse3
@@ -325,14 +319,12 @@ tools:
   # Threat Intelligence
   - name: shodan
     package: shodan
-    with: "setuptools"
     description: Shodan search engine CLI
     category_type: threat-intel
     priority: medium
 
   - name: malwarebazaar
     package: malwarebazaar
-    with: "typer"
     description: MalwareBazaar API client
     category_type: threat-intel
     priority: medium
