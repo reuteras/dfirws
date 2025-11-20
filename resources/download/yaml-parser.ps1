@@ -26,6 +26,71 @@ function Test-YamlModule {
 
 #endregion
 
+#region Standard Tools YAML Parser (Category-based)
+
+function Import-ToolDefinition {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Category
+    )
+
+    $yamlFile = "${PSScriptRoot}\..\tools\${Category}.yaml"
+
+    if (-not (Test-Path $yamlFile)) {
+        throw "YAML file not found: $yamlFile"
+    }
+
+    $tools = @()
+    $content = Get-Content $yamlFile -Raw
+    $lines = $content -split "`n"
+
+    $currentTool = $null
+    $inTools = $false
+
+    foreach ($line in $lines) {
+        $trimmed = $line.TrimEnd()
+
+        # Detect tools section
+        if ($trimmed -match "^tools:") {
+            $inTools = $true
+            continue
+        }
+
+        # Detect end of tools section
+        if ($inTools -and $trimmed -match "^[a-zA-Z]" -and -not $trimmed.StartsWith(" ")) {
+            $inTools = $false
+            continue
+        }
+
+        # Parse tool entries
+        if ($inTools -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
+            # Save previous tool
+            if ($currentTool) {
+                $tools += $currentTool
+            }
+
+            # Start new tool
+            $currentTool = [PSCustomObject]@{
+                name = $matches[1].Trim()
+                category = $Category
+            }
+        } elseif ($currentTool -and $trimmed -match "^\s*(\w+):\s*(.+)") {
+            $key = $matches[1]
+            $value = $matches[2].Trim('"').Trim("'")
+            $currentTool | Add-Member -NotePropertyName $key -NotePropertyValue $value -Force
+        }
+    }
+
+    # Add last tool
+    if ($currentTool) {
+        $tools += $currentTool
+    }
+
+    return $tools
+}
+
+#endregion
+
 #region Python Tools YAML Parser
 
 function Import-PythonToolsDefinition {
