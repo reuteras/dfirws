@@ -74,18 +74,6 @@ tools:
     enabled: true
     priority: medium
 
-  # dumpbin - PE file dump utility
-  - name: dumpbin
-    description: Display information about PE files
-    source: github
-    repo: Delphier/dumpbin
-    match: "dumpbin.*x64\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/dumpbin"
-    enabled: true
-    priority: low
-
   # Detect It Easy (DIE) - Program for determining types of files
   - name: detect-it-easy
     description: Program for determining types of files

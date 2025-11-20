@@ -12,6 +12,9 @@ on:
       - 'resources/tools/**/*.yaml'
       - '.github/workflows/yaml-validation.yml'
 
+permissions:
+  contents: read
+
 jobs:
   validate-yaml:
     runs-on: ubuntu-latest
@@ -34,7 +37,7 @@ jobs:
           echo "=== Tool Count Summary ==="
           for file in resources/tools/*.yaml; do
             count=$(grep -c "^  - name:" "$file" || echo "0")
-            echo "$(basename $file): $count tools"
+            echo "$(basename "$file"): $count tools"
           done
 
           total=$(grep -c "^  - name:" resources/tools/*.yaml || echo "0")
@@ -44,7 +47,7 @@ jobs:
       - name: Check for duplicate tool names
         run: |
           echo "Checking for duplicate tool names..."
-          duplicates=$(grep "^  - name:" resources/tools/*.yaml | cut -d: -f2 | tr -d ' ' | sort | uniq -d)
+          duplicates=$(grep "^  - name:" resources/tools/*.yaml | cut -d: -f3 | tr -d ' ' | sort | uniq -d)
           if [ -n "$duplicates" ]; then
             echo "ERROR: Duplicate tool names found:"
             echo "$duplicates"

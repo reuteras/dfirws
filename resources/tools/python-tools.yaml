@@ -419,10 +419,10 @@ utility_scripts:
 
 # Git repo scripts copied to bin
 repo_scripts:
-  - name: bmc-tools
+  - name: bmc-tools-script
     source: "C:/git/bmc-tools/bmc-tools.py"
     destination: "${TOOLS}/bin/bmc-tools.py"
-    description: BMC tools Python script
+    description: BMC tools Python script (from bmc-tools git repo)
 
   - name: dotnetfile_dump
     source: "C:/git/dotnetfile/examples/dotnetfile_dump.py"

@@ -17,6 +17,9 @@ on:
       - '.github/workflows/test-installers.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   test-yaml-parser:
     runs-on: windows-latest
