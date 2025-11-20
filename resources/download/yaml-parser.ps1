@@ -111,8 +111,8 @@ function Import-PythonToolsDefinition {
             if (($inSpecialInstalls -or $inTools) -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous tool
                 if ($currentTool) {
-                    $currentTool.install_type = if ($inSpecialInstalls) { "special" } else { "standard" }
-                    $currentTool.category = "python-tools"
+                    $currentTool | Add-Member -NotePropertyName "install_type" -NotePropertyValue $(if ($inSpecialInstalls) { "special" } else { "standard" }) -Force
+                    $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
                     $allTools += $currentTool
                 }
 
@@ -129,8 +129,8 @@ function Import-PythonToolsDefinition {
 
         # Add last tool
         if ($currentTool) {
-            $currentTool.install_type = if ($inSpecialInstalls) { "special" } else { "standard" }
-            $currentTool.category = "python-tools"
+            $currentTool | Add-Member -NotePropertyName "install_type" -NotePropertyValue $(if ($inSpecialInstalls) { "special" } else { "standard" }) -Force
+            $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
             $allTools += $currentTool
         }
 
@@ -285,7 +285,7 @@ function Import-NodeJsToolsDefinition {
             if ($inTools -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous tool
                 if ($currentTool) {
-                    $currentTool.category = "nodejs-tools"
+                    $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "nodejs-tools" -Force
                     $allTools += $currentTool
                 }
 
@@ -302,7 +302,7 @@ function Import-NodeJsToolsDefinition {
 
         # Add last tool
         if ($currentTool) {
-            $currentTool.category = "nodejs-tools"
+            $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "nodejs-tools" -Force
             $allTools += $currentTool
         }
 
@@ -414,10 +414,10 @@ function Import-DidierStevensToolsDefinition {
             if ($inTools -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous tool
                 if ($currentTool) {
-                    $currentTool.source = $currentSource
-                    $currentTool.destination = $currentDestination
-                    $currentTool.suite = if ($inMainSuite) { "main" } else { "beta" }
-                    $currentTool.category = "didier-stevens-tools"
+                    $currentTool | Add-Member -NotePropertyName "source" -NotePropertyValue $currentSource -Force
+                    $currentTool | Add-Member -NotePropertyName "destination" -NotePropertyValue $currentDestination -Force
+                    $currentTool | Add-Member -NotePropertyName "suite" -NotePropertyValue $(if ($inMainSuite) { "main" } else { "beta" }) -Force
+                    $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "didier-stevens-tools" -Force
                     $allTools += $currentTool
                 }
 
@@ -434,10 +434,10 @@ function Import-DidierStevensToolsDefinition {
 
         # Add last tool
         if ($currentTool) {
-            $currentTool.source = $currentSource
-            $currentTool.destination = $currentDestination
-            $currentTool.suite = if ($inMainSuite) { "main" } else { "beta" }
-            $currentTool.category = "didier-stevens-tools"
+            $currentTool | Add-Member -NotePropertyName "source" -NotePropertyValue $currentSource -Force
+            $currentTool | Add-Member -NotePropertyName "destination" -NotePropertyValue $currentDestination -Force
+            $currentTool | Add-Member -NotePropertyName "suite" -NotePropertyValue $(if ($inMainSuite) { "main" } else { "beta" }) -Force
+            $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "didier-stevens-tools" -Force
             $allTools += $currentTool
         }
 
