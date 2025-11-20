@@ -14,12 +14,12 @@ function Test-YamlModule {
             Import-Module powershell-yaml -ErrorAction Stop
             return $true
         } catch {
-            Write-Warning "powershell-yaml module found but failed to load: $_"
+            Write-Host "INFO: powershell-yaml module found but failed to load: $_" -ForegroundColor Yellow
             return $false
         }
     } else {
-        Write-Warning "powershell-yaml module not found. Using fallback parser."
-        Write-Warning "Install with: Install-Module -Name powershell-yaml -Force"
+        Write-Host "INFO: powershell-yaml module not found. Using fallback parser." -ForegroundColor Yellow
+        Write-Host "INFO: Install with: Install-Module -Name powershell-yaml -Force" -ForegroundColor Yellow
         return $false
     }
 }
