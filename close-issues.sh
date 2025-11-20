@@ -105,6 +105,7 @@ EOF
 
 echo ""
 echo "Step 2: Closing issue #120 (QELP)..."
+# shellcheck disable=SC2016
 gh issue close 120 --comment '✅ **Resolved in PR #127**
 
 QELP has been added to the DFIRWS toolset!
@@ -131,6 +132,7 @@ Thank you for the suggestion!'
 
 echo ""
 echo "Step 3: Closing issue #118 (pdf_object_hashing)..."
+# shellcheck disable=SC2016
 gh issue close 118 --comment '✅ **Resolved in PR #127**
 
 pdf_object_hashing has been added to the DFIRWS toolset!
@@ -158,6 +160,7 @@ Thank you for the suggestion!'
 
 echo ""
 echo "Step 4: Closing issue #116 (minusone)..."
+# shellcheck disable=SC2016
 gh issue close 116 --comment '✅ **Resolved in PR #127**
 
 minusone has been added to the DFIRWS toolset!
@@ -185,6 +188,7 @@ Thank you for the suggestion!'
 
 echo ""
 echo "Step 5: Closing issue #115 (OneDriveExplorer)..."
+# shellcheck disable=SC2016
 gh issue close 115 --comment '✅ **Resolved in PR #127**
 
 OneDriveExplorer has been added to the DFIRWS toolset!
@@ -213,6 +217,7 @@ Thank you for the suggestion!'
 
 echo ""
 echo "Step 6: Adding comment to issue #97 (Windows 11 right-click)..."
+# shellcheck disable=SC2016
 gh issue comment 97 --body '🔧 **Windows 11 Right-Click Fix Available in PR #127**
 
 A comprehensive solution for the Windows 11 context menu issue has been created!

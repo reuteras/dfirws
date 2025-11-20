@@ -447,14 +447,7 @@ function Import-DidierStevensToolsDefinition {
 
 #endregion
 
-#region Export Functions
-
-Export-ModuleMember -Function @(
-    'Test-YamlModule',
-    'Import-PythonToolsDefinition',
-    'Import-GitRepositoriesDefinition',
-    'Import-NodeJsToolsDefinition',
-    'Import-DidierStevensToolsDefinition'
-)
+# Note: Export-ModuleMember removed - this script is dot-sourced, not imported as a module
+# All functions are automatically available when dot-sourced
 
 #endregion
