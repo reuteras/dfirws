@@ -23,12 +23,6 @@ param(
 . ".\resources\download\common.ps1"
 . ".\resources\download\yaml-parser.ps1"
 
-# Ensure powershell-yaml is installed
-if (-not (Get-Module -ListAvailable -Name powershell-yaml)) {
-    Write-Host "Installing powershell-yaml module..."
-    Install-Module -Name powershell-yaml -Force -Scope CurrentUser
-}
-
 $ROOT_PATH = "${PWD}"
 
 Write-DateLog "Python Tools Installer v2 - Loading definitions from YAML" > ${ROOT_PATH}\log\python_tools.txt
@@ -86,35 +80,32 @@ function Install-PythonTool {
     Write-DateLog "Installing Python tool: $toolName" >> ${ROOT_PATH}\log\python_tools.txt
 
     try {
-        # Build UV install command arguments
-        $uvArgs = @("tool", "install")
+        # Build UV install command
+        $uvCmd = "uv tool install"
 
         # Add dependencies if specified
         if ($Tool.with) {
-            $dependencies = $Tool.with.Split(',') | ForEach-Object { $_.Trim() }
-            foreach ($dep in $dependencies) {
-                $uvArgs += "--with"
-                $uvArgs += $dep
-            }
+            $uvCmd += " --with `"$($Tool.with)`""
         }
 
         # Add package
-        $uvArgs += $package
+        $uvCmd += " `"$package`""
 
         # Execute UV command
-        Write-DateLog "Executing: uv $($uvArgs -join ' ')" >> ${ROOT_PATH}\log\python_tools.txt
+        Write-DateLog "Executing: $uvCmd" >> ${ROOT_PATH}\log\python_tools.txt
 
-        $result = & uv $uvArgs 2>&1
+        # Use Invoke-Expression for commands with complex quoting
+        $result = Invoke-Expression $uvCmd 2>&1
 
         if ($LASTEXITCODE -eq 0) {
             Write-DateLog "Successfully installed: $toolName" >> ${ROOT_PATH}\log\python_tools.txt
             return $true
         } else {
-            Write-DateLog "Failed to install $toolName : $result" >> ${ROOT_<em>PATH}\log\python_tools.txt
+            Write-DateLog "Failed to install $toolName : $result" >> ${ROOT_PATH}\log\python_tools.txt
             return $false
         }
     } catch {
-        Write-DateLog "Error installing $toolName : $</em>" >> ${ROOT_PATH}\log\python_tools.txt
+        Write-DateLog "Error installing $toolName : $_" >> ${ROOT_PATH}\log\python_tools.txt
         return $false
     }
 }

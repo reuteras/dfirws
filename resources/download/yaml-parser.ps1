@@ -14,12 +14,11 @@ function Test-YamlModule {
             Import-Module powershell-yaml -ErrorAction Stop
             return $true
         } catch {
-            Write-Warning "powershell-yaml module found but failed to load: $_"
+            # Silently fall back to manual parser
             return $false
         }
     } else {
-        Write-Warning "powershell-yaml module not found. Using fallback parser."
-        Write-Warning "Install with: Install-Module -Name powershell-yaml -Force"
+        # Silently use fallback parser
         return $false
     }
 }
@@ -108,7 +107,7 @@ function Import-PythonToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\python-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\python-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -138,6 +137,15 @@ function Import-PythonToolsDefinition {
         if ($definition.tools) {
             foreach ($tool in $definition.tools) {
                 $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "standard" -Force
+                $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
+                $allTools += $tool
+            }
+        }
+
+        # Add repo scripts
+        if ($definition.repo_scripts) {
+            foreach ($tool in $definition.repo_scripts) {
+                $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "repo_script" -Force
                 $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
                 $allTools += $tool
             }
@@ -217,7 +225,7 @@ function Import-GitRepositoriesDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\git-repositories.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\git-repositories.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -303,7 +311,7 @@ function Import-NodeJsToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\nodejs-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\nodejs-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -389,7 +397,7 @@ function Import-DidierStevensToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\didier-stevens-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\didier-stevens-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {

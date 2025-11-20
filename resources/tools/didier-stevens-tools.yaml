@@ -126,7 +126,7 @@ main_suite:
       priority: low
 
     - name: plugin_list
-      description: Plugin list file
+      description: "Plugin list file for oledump.py"
       category_type: document-analysis
       priority: low
 
