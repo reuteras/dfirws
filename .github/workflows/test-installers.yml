@@ -130,9 +130,7 @@ jobs:
 
       - name: Count Tools
         shell: pwsh
-        run: |
-          Write-Host "Verifying tool counts..."
-          .\resources\download\install-all-tools-v2.ps1 -ShowCounts
+        run: & ".\resources\download\install-all-tools-v2.ps1" -ShowCounts
 
       - name: Verify Total
         shell: pwsh
