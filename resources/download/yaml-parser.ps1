@@ -107,7 +107,7 @@ function Import-PythonToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\python-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\python-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -216,7 +216,7 @@ function Import-GitRepositoriesDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\git-repositories.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\git-repositories.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -302,7 +302,7 @@ function Import-NodeJsToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\nodejs-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\nodejs-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -388,7 +388,7 @@ function Import-DidierStevensToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\didier-stevens-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\didier-stevens-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
