@@ -449,5 +449,3 @@ function Import-DidierStevensToolsDefinition {
 
 # Note: Export-ModuleMember removed - this script is dot-sourced, not imported as a module
 # All functions are automatically available when dot-sourced
-
-#endregion
