@@ -264,7 +264,7 @@ function Import-GitRepositoriesDefinition {
             if ($inRepositories -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous repo
                 if ($currentRepo) {
-                    $currentRepo.category = "git-repositories"
+                    $currentRepo | Add-Member -NotePropertyName "category" -NotePropertyValue "git-repositories" -Force
                     $allRepos += $currentRepo
                 }
 
@@ -281,7 +281,7 @@ function Import-GitRepositoriesDefinition {
 
         # Add last repo
         if ($currentRepo) {
-            $currentRepo.category = "git-repositories"
+            $currentRepo | Add-Member -NotePropertyName "category" -NotePropertyValue "git-repositories" -Force
             $allRepos += $currentRepo
         }
 
