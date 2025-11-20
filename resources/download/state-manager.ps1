@@ -350,18 +350,5 @@ function Show-InstallationSummary {
 
 #endregion
 
-# Export functions
-Export-ModuleMember -Function @(
-    'Initialize-InstallationState',
-    'Get-InstallationState',
-    'Update-InstallationState',
-    'Add-CompletedTool',
-    'Add-FailedTool',
-    'Set-InProgressTool',
-    'Complete-InstallationState',
-    'Get-RemainingTools',
-    'Write-ToolError',
-    'Get-ToolErrors',
-    'Get-InstallationStatistics',
-    'Show-InstallationSummary'
-)
+# Note: Export-ModuleMember removed - this script is dot-sourced, not imported as a module
+# Functions are automatically available when dot-sourced
