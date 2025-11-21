@@ -1,3 +1,21 @@
+# ============================================================================
+# DEPRECATED - This script is replaced by v2 YAML-based architecture
+# ============================================================================
+# This legacy script has been replaced by: install-all-tools-v2.ps1 -StandardTools
+#
+# The v2 system provides:
+# - YAML-based tool definitions (resources/tools/*.yaml)
+# - Unified installation with consistent parameters
+# - Better maintainability (add tools by editing YAML, not PowerShell)
+# - Enhanced features (dry-run, parallel, version management)
+#
+# To use v2: .\downloadFiles.ps1 -Release
+# Or directly: .\resources\download\install-all-tools-v2.ps1 -StandardTools
+#
+# This file is kept temporarily for reference but is no longer called by
+# downloadFiles.ps1. It will be removed in a future release.
+# ============================================================================
+
 . ".\resources\download\common.ps1"
 
 # artemis

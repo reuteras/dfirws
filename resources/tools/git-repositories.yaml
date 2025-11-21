@@ -330,12 +330,6 @@ repositories:
     priority: medium
 
   # Memory Forensics
-  - name: fibratus
-    url: "https://github.com/rabbitstack/fibratus.git"
-    description: Windows kernel exploration tool (source)
-    category_type: memory-forensics
-    priority: medium
-
   - name: LeechCore-wiki
     url: "https://github.com/ufrisk/LeechCore.wiki.git"
     description: LeechCore documentation

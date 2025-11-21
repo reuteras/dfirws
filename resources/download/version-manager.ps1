@@ -573,22 +573,5 @@ function Clear-VersionCache {
 
 #endregion
 
-# Export functions
-Export-ModuleMember -Function @(
-    'Initialize-VersionLock',
-    'Get-VersionLock',
-    'Update-VersionLock',
-    'Get-InstalledVersion',
-    'Get-LatestVersion',
-    'Compare-Versions',
-    'Test-UpdateAvailable',
-    'Get-AvailableUpdates',
-    'Show-AvailableUpdates',
-    'Approve-Update',
-    'Test-UpdateApproved',
-    'Clear-UpdateApprovals',
-    'Get-FileSHA256',
-    'Test-SHA256',
-    'Add-SHA256ToYAML',
-    'Clear-VersionCache'
-)
+# Note: Export-ModuleMember removed - this script is dot-sourced, not imported as a module
+# Functions are automatically available when dot-sourced

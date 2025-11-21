@@ -5,10 +5,12 @@
 
 .DESCRIPTION
     This script downloads files and prepares the sandbox for DFIRWS.
+    Now uses v2 YAML-based architecture for GitHub releases, Git repositories,
+    and Didier Stevens tools (433 tools across 23 categories).
 
 .EXAMPLE
     .\downloadFiles.ps1
-    This will download all files needed for DFIRWS.
+    This will download all files needed for DFIRWS using the v2 architecture.
 
 .EXAMPLE
     .\downloadFiles.ps1 -AllTools -Enrichment
@@ -16,7 +18,7 @@
 
 .EXAMPLE
     .\downloadFiles.ps1 -Python
-    This will download and update packages for Python but no other files.
+    Install Python tools using v2 YAML-based installer (72 packages).
 
 .EXAMPLE
     .\downloadFiles.ps1 -Freshclam
@@ -26,9 +28,26 @@
     .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
     This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
 
+.EXAMPLE
+    .\downloadFiles.ps1 -Release
+    Download only GitHub releases using v2 YAML-based installer (standard tools).
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Git
+    Clone and update Git repositories using v2 YAML definitions.
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Didier
+    Download Didier Stevens tools using v2 YAML installer.
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Node
+    Install Node.js packages using v2 YAML-based installer (4 packages).
+
 .NOTES
     File Name      : downloadFiles.ps1
     Author         : Peter R
+    Version        : 2.0 (Integrated with YAML-based v2 architecture)
 
 .LINK
     https://github.com/reuteras/dfirws
@@ -224,8 +243,8 @@ if ($all -or $MSYS2.IsPresent) {
 }
 
 if ($all -or $Release.IsPresent) {
-    Write-DateLog "Download releases from GitHub."
-    .\resources\download\release.ps1
+    Write-DateLog "Download releases from GitHub (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -StandardTools
 }
 
 if ($all -or $Http.IsPresent) {
@@ -239,13 +258,13 @@ if ($all -or $Http.IsPresent) {
 
 if ($all -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
-    Write-DateLog "Setup Node and install npm packages."
-    .\resources\download\node.ps1 | Out-Null
+    Write-DateLog "Setup Node and install npm packages (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -NodeJsTools
 }
 
 if ($all -or $Git.IsPresent) {
-    Write-DateLog "Download and update git repositories"
-    .\resources\download\git.ps1
+    Write-DateLog "Download and update git repositories (v2 YAML-based)"
+    .\resources\download\install-all-tools-v2.ps1 -GitRepos
 }
 
 if ($all -or $GoLang.IsPresent) {
@@ -256,8 +275,8 @@ if ($all -or $GoLang.IsPresent) {
 
 if ($all -or $Python.IsPresent) {
     Write-Output "" > .\log\python.txt
-    Write-DateLog "Setup Python and install packages in virtual environments."
-    .\resources\download\python.ps1 | Out-Null
+    Write-DateLog "Setup Python and install packages (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -PythonTools
 }
 
 if ($all -or $Rust.IsPresent) {
@@ -267,8 +286,8 @@ if ($all -or $Rust.IsPresent) {
 }
 
 if ($all -or $Didier.IsPresent) {
-    Write-DateLog "Download Didier Stevens tools."
-    .\resources\download\didier.ps1
+    Write-DateLog "Download Didier Stevens tools (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -DidierStevensTools
 }
 
 if ($all -or $Winget.IsPresent) {

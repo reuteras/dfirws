@@ -1,6 +1,10 @@
 Windows Registry Editor Version 5.00
 
-; Based on the following registry file:
+; Windows 11 right-click context menu entries for DFIRWS
+; Based on Windows 10 version - works with classic context menu enabled
+; Related to GitHub Issue #97
+;
+; Original based on:
 ; Created by: Shawn Brink
 ; Created on: March 5th 2017
 ; Tutorial: https://www.tenforums.com/tutorials/78681-file-hash-context-menu-add-windows-8-windows-10-a.html

@@ -70,7 +70,9 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
 }
 
-# Get exiftool
+# Get exiftool - NOW HANDLED BY V2 YAML (utilities.yaml)
+# Removed duplicate - use: .\downloadFiles.ps1 -Release
+<# LEGACY CODE - REMOVED
 $EXIFTOOL_VERSION = Get-DownloadUrlFromPage -url https://exiftool.org/index.html -RegEx 'exiftool-[^zip]+_64.zip'
 $status = Get-FileFromUri -uri "https://exiftool.org/$EXIFTOOL_VERSION" -FilePath ".\downloads\exiftool.zip" -check "Zip archive data"
 if ($status) {
@@ -83,6 +85,7 @@ if ($status) {
     Copy-Item "${TOOLS}\exiftool\exiftool(-k).exe" ${TOOLS}\exiftool\exiftool.exe
     Remove-Item "${TOOLS}\exiftool\exiftool(-k).exe" -Force | Out-Null
 }
+#>
 
 # Get pestudio
 $status = Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio.zip" -FilePath ".\downloads\pestudio.zip" -check "Zip archive data"
@@ -102,7 +105,9 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hxd.zip" -o"${TOOLS}\hxd" | Out-Null
 }
 
-# Get trid and triddefs
+# Get trid and triddefs - NOW HANDLED BY V2 YAML (document-analysis.yaml)
+# Removed duplicates - use: .\downloadFiles.ps1 -Release
+<# LEGACY CODE - REMOVED
 $status = Get-FileFromUri -uri "https://mark0.net/download/trid_w32.zip" -FilePath ".\downloads\trid.zip" -check "Zip archive data"
 if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\trid.zip" -o"${TOOLS}\trid" | Out-Null
@@ -111,9 +116,13 @@ $status = Get-FileFromUri -uri "https://mark0.net/download/triddefs.zip" -FilePa
 if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\triddefs.zip" -o"${TOOLS}\trid" | Out-Null
 }
+#>
 
-# Get malcat - installed during start
+# Get malcat - NOW HANDLED BY V2 YAML (document-analysis.yaml)
+# Removed duplicate - use: .\downloadFiles.ps1 -Release
+<# LEGACY CODE - REMOVED
 $status = Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win313_lite.zip" -FilePath ".\downloads\malcat.zip" -check "Zip archive data"
+#>
 
 # Get ssview
 $status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/SSView.zip" -FilePath ".\downloads\ssview.zip" -check "Zip archive data"
@@ -133,7 +142,9 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logview.zip" -o"${TOOLS}\FullEventLogView" | Out-Null
 }
 
-# pstwalker
+# pstwalker - NOW HANDLED BY V2 YAML (email-forensics.yaml)
+# Removed duplicate - use: .\downloadFiles.ps1 -Release
+<# LEGACY CODE - REMOVED
 $status = Get-FileFromUri -uri "https://downloads.pstwalker.com/pstwalker-portable" -FilePath ".\downloads\pstwalker.zip" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\pstwalker") {
@@ -143,6 +154,7 @@ if ($status) {
     Start-Sleep -Seconds 3
     Move-Item ${TOOLS}\pstwalker*portable "${TOOLS}\pstwalker"
 }
+#>
 
 # Win API Search
 $status = Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -FilePath ".\downloads\WinApiSearch.zip" -check "Zip archive data"

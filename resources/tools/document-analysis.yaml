@@ -112,18 +112,6 @@ tools:
     priority: high
     notes: Part of Didier Stevens tools
 
-  # readpe - PE file reader
-  - name: readpe
-    description: Read and display PE file information
-    source: github
-    repo: mentebinaria/readpe"
-    match: "readpe.*windows.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/readpe"
-    enabled: true
-    priority: medium
-
   # elfparser - ELF file parser
   - name: elfparser
     description: ELF binary parser
@@ -135,22 +123,6 @@ tools:
     extract_to: "${TOOLS}/elfparser"
     enabled: true
     priority: medium
-
-  # upx - Ultimate Packer for eXecutables
-  - name: upx
-    description: Ultimate Packer for eXecutables - executable compression
-    source: github
-    repo: upx/upx
-    match: "upx-.*-win64\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/upx"
-    post_install:
-      - type: rename
-        pattern: "upx-*"
-        target: "upx"
-    enabled: true
-    priority: high
 
   # Malcat - Malware analysis tool
   - name: malcat

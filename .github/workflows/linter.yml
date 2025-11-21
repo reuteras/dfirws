@@ -13,6 +13,8 @@ on:
 
 permissions:
   contents: read
+  statuses: write
+  checks: write
 
 # A workflow run is made up of one or more jobs that can run sequentially
 # or in parallel
@@ -34,7 +36,7 @@ jobs:
 
     # Runs a single command using the runners shell
       - name: Lint Code Base
-        uses: github/super-linter@v7
+        uses: super-linter/super-linter/slim@2bdd90ed3262e023ac84bf8fe35dc480721fc1f2 # v8.2.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main

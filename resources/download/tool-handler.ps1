@@ -510,11 +510,5 @@ function Get-EnabledTools {
 
 #endregion
 
-# Export functions
-Export-ModuleMember -Function @(
-    'Import-ToolDefinitions',
-    'Install-ToolFromDefinition',
-    'Get-ToolsByCategory',
-    'Get-ToolsByPriority',
-    'Get-EnabledTools'
-)
+# Note: Export-ModuleMember removed - this script is dot-sourced, not imported as a module
+# Functions are automatically available when dot-sourced

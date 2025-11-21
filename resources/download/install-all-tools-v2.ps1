@@ -46,6 +46,11 @@ param(
 
 $ROOT_PATH = "${PWD}"
 
+# Create log directory if it doesn't exist
+if (-not (Test-Path "${ROOT_PATH}\log")) {
+    New-Item -ItemType Directory -Path "${ROOT_PATH}\log" -Force | Out-Null
+}
+
 Write-DateLog "========================================" > ${ROOT_PATH}\log\install_all_v2.txt
 Write-DateLog "DFIRWS v2 Unified Tool Installer" >> ${ROOT_PATH}\log\install_all_v2.txt
 Write-DateLog "========================================" >> ${ROOT_PATH}\log\install_all_v2.txt
@@ -58,7 +63,8 @@ if ($ShowCounts) {
     Write-Output "========================================`n"
 
     # Count standard tools
-    $standardToolFiles = Get-ChildItem -Path ".\resources\tools" -Filter "*.yaml" -Exclude "python-tools.yaml","git-repositories.yaml","nodejs-tools.yaml","didier-stevens-tools.yaml"
+    $standardToolFiles = Get-ChildItem -Path ".\resources\tools" -Filter "*.yaml" `
+        -Exclude "python-tools.yaml","git-repositories.yaml","nodejs-tools.yaml","didier-stevens-tools.yaml"
     $standardToolCount = 0
     foreach ($file in $standardToolFiles) {
         $count = (Get-Content $file.FullName | Select-String -Pattern "^\s+-\s+name:").Count
@@ -69,16 +75,16 @@ if ($ShowCounts) {
     Write-Output "`nStandard GitHub Release Tools: $standardToolCount"
 
     # Count specialized tools
-    $pythonTools = Import-PythonToolsDefinition
+    $pythonTools = Import-PythonToolsDefinition -ErrorAction SilentlyContinue
     Write-Output "Python Tools: $($pythonTools.Count)"
 
-    $gitRepos = Import-GitRepositoriesDefinition
+    $gitRepos = Import-GitRepositoriesDefinition -ErrorAction SilentlyContinue
     Write-Output "Git Repositories: $($gitRepos.Count)"
 
-    $nodejsTools = Import-NodeJsToolsDefinition
+    $nodejsTools = Import-NodeJsToolsDefinition -ErrorAction SilentlyContinue
     Write-Output "Node.js Tools: $($nodejsTools.Count)"
 
-    $didierTools = Import-DidierStevensToolsDefinition
+    $didierTools = Import-DidierStevensToolsDefinition -ErrorAction SilentlyContinue
     Write-Output "Didier Stevens Tools: $($didierTools.Count)"
 
     $totalTools = $standardToolCount + $pythonTools.Count + $gitRepos.Count + $nodejsTools.Count + $didierTools.Count

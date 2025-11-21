@@ -14,14 +14,78 @@ function Test-YamlModule {
             Import-Module powershell-yaml -ErrorAction Stop
             return $true
         } catch {
-            Write-Warning "powershell-yaml module found but failed to load: $_"
+            # Silently fall back to manual parser
             return $false
         }
     } else {
-        Write-Warning "powershell-yaml module not found. Using fallback parser."
-        Write-Warning "Install with: Install-Module -Name powershell-yaml -Force"
+        # Silently use fallback parser
         return $false
     }
+}
+
+#endregion
+
+#region Standard Tools YAML Parser (Category-based)
+
+function Import-ToolDefinition {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$Category
+    )
+
+    $yamlFile = "${PSScriptRoot}\..\tools\${Category}.yaml"
+
+    if (-not (Test-Path $yamlFile)) {
+        throw "YAML file not found: $yamlFile"
+    }
+
+    $tools = @()
+    $content = Get-Content $yamlFile -Raw
+    $lines = $content -split "`n"
+
+    $currentTool = $null
+    $inTools = $false
+
+    foreach ($line in $lines) {
+        $trimmed = $line.TrimEnd()
+
+        # Detect tools section
+        if ($trimmed -match "^tools:") {
+            $inTools = $true
+            continue
+        }
+
+        # Detect end of tools section
+        if ($inTools -and $trimmed -match "^[a-zA-Z]" -and -not $trimmed.StartsWith(" ")) {
+            $inTools = $false
+            continue
+        }
+
+        # Parse tool entries
+        if ($inTools -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
+            # Save previous tool
+            if ($currentTool) {
+                $tools += $currentTool
+            }
+
+            # Start new tool
+            $currentTool = [PSCustomObject]@{
+                name = $matches[1].Trim()
+                category = $Category
+            }
+        } elseif ($currentTool -and $trimmed -match "^\s*(\w+):\s*(.+)") {
+            $key = $matches[1]
+            $value = $matches[2].Trim('"').Trim("'")
+            $currentTool | Add-Member -NotePropertyName $key -NotePropertyValue $value -Force
+        }
+    }
+
+    # Add last tool
+    if ($currentTool) {
+        $tools += $currentTool
+    }
+
+    return $tools
 }
 
 #endregion
@@ -43,7 +107,7 @@ function Import-PythonToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\python-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\python-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -73,6 +137,33 @@ function Import-PythonToolsDefinition {
         if ($definition.tools) {
             foreach ($tool in $definition.tools) {
                 $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "standard" -Force
+                $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
+                $allTools += $tool
+            }
+        }
+
+        # Add repo scripts
+        if ($definition.repo_scripts) {
+            foreach ($tool in $definition.repo_scripts) {
+                $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "repo_script" -Force
+                $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
+                $allTools += $tool
+            }
+        }
+
+        # Add direct scripts
+        if ($definition.direct_scripts) {
+            foreach ($tool in $definition.direct_scripts) {
+                $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "direct_script" -Force
+                $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
+                $allTools += $tool
+            }
+        }
+
+        # Add utility scripts
+        if ($definition.utility_scripts) {
+            foreach ($tool in $definition.utility_scripts) {
+                $tool | Add-Member -NotePropertyName "install_type" -NotePropertyValue "utility_script" -Force
                 $tool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
                 $allTools += $tool
             }
@@ -111,8 +202,8 @@ function Import-PythonToolsDefinition {
             if (($inSpecialInstalls -or $inTools) -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous tool
                 if ($currentTool) {
-                    $currentTool.install_type = if ($inSpecialInstalls) { "special" } else { "standard" }
-                    $currentTool.category = "python-tools"
+                    $currentTool | Add-Member -NotePropertyName "install_type" -NotePropertyValue $(if ($inSpecialInstalls) { "special" } else { "standard" }) -Force
+                    $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
                     $allTools += $currentTool
                 }
 
@@ -129,8 +220,8 @@ function Import-PythonToolsDefinition {
 
         # Add last tool
         if ($currentTool) {
-            $currentTool.install_type = if ($inSpecialInstalls) { "special" } else { "standard" }
-            $currentTool.category = "python-tools"
+            $currentTool | Add-Member -NotePropertyName "install_type" -NotePropertyValue $(if ($inSpecialInstalls) { "special" } else { "standard" }) -Force
+            $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "python-tools" -Force
             $allTools += $currentTool
         }
 
@@ -152,7 +243,7 @@ function Import-GitRepositoriesDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\git-repositories.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\git-repositories.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -199,7 +290,7 @@ function Import-GitRepositoriesDefinition {
             if ($inRepositories -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous repo
                 if ($currentRepo) {
-                    $currentRepo.category = "git-repositories"
+                    $currentRepo | Add-Member -NotePropertyName "category" -NotePropertyValue "git-repositories" -Force
                     $allRepos += $currentRepo
                 }
 
@@ -216,7 +307,7 @@ function Import-GitRepositoriesDefinition {
 
         # Add last repo
         if ($currentRepo) {
-            $currentRepo.category = "git-repositories"
+            $currentRepo | Add-Member -NotePropertyName "category" -NotePropertyValue "git-repositories" -Force
             $allRepos += $currentRepo
         }
 
@@ -238,7 +329,7 @@ function Import-NodeJsToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\nodejs-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\nodejs-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -285,7 +376,7 @@ function Import-NodeJsToolsDefinition {
             if ($inTools -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous tool
                 if ($currentTool) {
-                    $currentTool.category = "nodejs-tools"
+                    $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "nodejs-tools" -Force
                     $allTools += $currentTool
                 }
 
@@ -302,7 +393,7 @@ function Import-NodeJsToolsDefinition {
 
         # Add last tool
         if ($currentTool) {
-            $currentTool.category = "nodejs-tools"
+            $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "nodejs-tools" -Force
             $allTools += $currentTool
         }
 
@@ -324,7 +415,7 @@ function Import-DidierStevensToolsDefinition {
     #>
     param(
         [Parameter(Mandatory=$false)]
-        [string]$Path = ".\resources\tools\didier-stevens-tools.yaml"
+        [string]$Path = "${PSScriptRoot}\..\tools\didier-stevens-tools.yaml"
     )
 
     if (-not (Test-Path $Path)) {
@@ -414,10 +505,10 @@ function Import-DidierStevensToolsDefinition {
             if ($inTools -and $trimmed -match "^\s*-\s*name:\s*(.+)") {
                 # Save previous tool
                 if ($currentTool) {
-                    $currentTool.source = $currentSource
-                    $currentTool.destination = $currentDestination
-                    $currentTool.suite = if ($inMainSuite) { "main" } else { "beta" }
-                    $currentTool.category = "didier-stevens-tools"
+                    $currentTool | Add-Member -NotePropertyName "source" -NotePropertyValue $currentSource -Force
+                    $currentTool | Add-Member -NotePropertyName "destination" -NotePropertyValue $currentDestination -Force
+                    $currentTool | Add-Member -NotePropertyName "suite" -NotePropertyValue $(if ($inMainSuite) { "main" } else { "beta" }) -Force
+                    $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "didier-stevens-tools" -Force
                     $allTools += $currentTool
                 }
 
@@ -434,10 +525,10 @@ function Import-DidierStevensToolsDefinition {
 
         # Add last tool
         if ($currentTool) {
-            $currentTool.source = $currentSource
-            $currentTool.destination = $currentDestination
-            $currentTool.suite = if ($inMainSuite) { "main" } else { "beta" }
-            $currentTool.category = "didier-stevens-tools"
+            $currentTool | Add-Member -NotePropertyName "source" -NotePropertyValue $currentSource -Force
+            $currentTool | Add-Member -NotePropertyName "destination" -NotePropertyValue $currentDestination -Force
+            $currentTool | Add-Member -NotePropertyName "suite" -NotePropertyValue $(if ($inMainSuite) { "main" } else { "beta" }) -Force
+            $currentTool | Add-Member -NotePropertyName "category" -NotePropertyValue "didier-stevens-tools" -Force
             $allTools += $currentTool
         }
 
@@ -447,14 +538,5 @@ function Import-DidierStevensToolsDefinition {
 
 #endregion
 
-#region Export Functions
-
-Export-ModuleMember -Function @(
-    'Test-YamlModule',
-    'Import-PythonToolsDefinition',
-    'Import-GitRepositoriesDefinition',
-    'Import-NodeJsToolsDefinition',
-    'Import-DidierStevensToolsDefinition'
-)
-
-#endregion
+# Note: Export-ModuleMember removed - this script is dot-sourced, not imported as a module
+# All functions are automatically available when dot-sourced

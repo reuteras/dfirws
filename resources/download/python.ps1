@@ -1,3 +1,15 @@
+# ============================================================================
+# DEPRECATED - This script is replaced by v2 YAML-based architecture
+# ============================================================================
+# This legacy script has been replaced by: install-all-tools-v2.ps1 -PythonTools
+#
+# To use v2: .\downloadFiles.ps1 -Python
+# Or directly: .\resources\download\install-all-tools-v2.ps1 -PythonTools
+#
+# This file is kept temporarily for reference but is no longer called by
+# downloadFiles.ps1. It will be removed in a future release.
+# ============================================================================
+
 . ".\resources\download\common.ps1"
 
 $ROOT_PATH = "${PWD}"
