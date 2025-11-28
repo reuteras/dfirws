@@ -75,7 +75,7 @@ Batch 2 continues the tool migration with focus on specialized categories includ
 
 ### Completion Visualization
 
-```
+```text
 Phase 1:   ████████░░░░░░░░░░░░░░░░░░░░ 30 tools (13.6%)
 Batch 1:   ████████████████████░░░░░░░░ 57 tools (25.9%)
 Batch 2:   ████████████████░░░░░░░░░░░░ 46 tools (20.9%)
@@ -155,7 +155,7 @@ Successfully created specialized categories for:
 
 2. **Plugins and Extensions**
    - Ghidra plugins (some done)
-   - VS Code extensions (some done)
+   - Visual Studio Code extensions (some done)
    - IDA plugins
 
 3. **Optional Components**
@@ -225,7 +225,7 @@ Successfully created specialized categories for:
    - Validate installations
 
 3. **Documentation**
-   - Update README
+   - Update readme
    - Tool catalog generation
    - Migration completion guide
 

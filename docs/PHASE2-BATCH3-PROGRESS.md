@@ -33,7 +33,7 @@ Key tools:
 ### 2. code-editors.yaml (9 tools)
 Code editors, IDEs, and their extensions:
 - **Notepad++ Plugins**: comparePlus, dspellcheck, nppmarkdownpanel
-- **VSCode Extensions**: vscode-powershell, vscode-shellcheck, vscode-spell-checker
+- **Visual Studio Code Extensions**: vscode-powershell, vscode-shellcheck, vscode-spell-checker
 - **Editors**: edit (Microsoft CLI editor), cmder (console emulator)
 
 Key features:
@@ -107,7 +107,7 @@ All from kacos2000, complementing Eric Zimmerman tools.
 
 ### Cumulative Progress
 
-```
+```text
 Phase 1:  ████████░░░░░░░░░░░░░░░░░░░░  13.6%
 Batch 1:  ████████████████████░░░░░░░░░░  39.5%
 Batch 2:  ███████████████████████████░░░  60.5%
@@ -125,7 +125,7 @@ Focus on PE file analysis, binary manipulation, and low-level inspection:
 ### Development Tools (9)
 IDE plugins and editor extensions:
 - Notepad++ plugins (3)
-- VSCode extensions (3)
+- Visual Studio Code extensions (3)
 - Editors (2)
 - Console emulators (1)
 
@@ -157,7 +157,7 @@ GUI tools for Windows artifact viewing:
 - Multiple Golang analyzer versions
 
 ### Integration Features
-- VSCode extension distribution
+- Visual Studio Code extension distribution
 - Notepad++ plugin deployment
 - Ghidra extension manager support
 - Obsidian vault integration
@@ -236,7 +236,7 @@ Based on legacy script analysis:
 ### Special Handling
 - **Fonts**: Nerd Fonts require manual installation or script
 - **Dokany**: MSI installer available for manual installation
-- **VSCode extensions**: VSIX files for extension manager
+- **Visual Studio Code extensions**: VSIX files for extension manager
 - **Ghidra plugins**: ZIP files for Ghidra extension manager
 - **Notepad++ plugins**: Require Notepad++ to be installed first
 

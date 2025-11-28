@@ -33,7 +33,7 @@ The original system had several challenges:
 
 ### New System Components
 
-```
+```text
 dfirws/
 ├── resources/
 │   ├── download/
@@ -150,7 +150,7 @@ Tracks progress and enables resume:
 
 Tools organized by purpose:
 
-```
+```text
 resources/tools/
 ├── forensics.yaml          # DFIR tools
 ├── malware-analysis.yaml   # RE and malware tools
@@ -334,21 +334,21 @@ Both systems can coexist during migration period.
 
 ## Benefits Summary
 
-### For Users
+### Benefits for Users
 
 1. **Faster Downloads**: 5-6x faster with parallel mode
 2. **Better Reliability**: Resume capability, error tracking
 3. **More Control**: Install by category/priority
 4. **Transparency**: Clear progress and statistics
 
-### For Developers
+### Benefits for Developers
 
 1. **Less Code**: 71% reduction in download scripts
 2. **Easier Maintenance**: No code changes for new tools
 3. **Better Testing**: Dry-run mode, smaller files
 4. **Clear Structure**: Organized by category
 
-### For Contributors
+### Benefits for Contributors
 
 1. **Easy to Add Tools**: Edit YAML, no code required
 2. **Self-Documenting**: YAML definitions are clear

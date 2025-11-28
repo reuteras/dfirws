@@ -43,7 +43,7 @@ if ($status) {
 
 Tools are organized by category in separate YAML files:
 
-```
+```text
 resources/tools/
 ├── forensics.yaml          # Digital forensics tools
 ├── malware-analysis.yaml   # Malware analysis and RE tools
@@ -119,7 +119,7 @@ Each tool is defined with the following structure:
 
 ### Module Structure
 
-```
+```text
 resources/
 ├── download/
 │   ├── common.ps1            # Common functions (existing)
@@ -215,7 +215,7 @@ Edit the appropriate category file (e.g., `resources/tools/forensics.yaml`):
 .\resources\download\install-tools.ps1 -Category forensics
 ```
 
-### 3. No Code Changes Required!
+### 3. No Code Changes Required
 
 The tool will be automatically processed by the generic handler.
 
@@ -297,8 +297,8 @@ Errors are logged in `log/tool-errors.json`:
 ### Tool Won't Download
 
 1. Check the YAML definition for typos
-2. Verify the GitHub repo exists
-3. Check the regex pattern matches actual release names
+2. Verify the GitHub repository exists
+3. Check the regular expression pattern matches actual release names
 4. Test with `-DryRun` flag
 
 ### Installation Fails
@@ -334,4 +334,4 @@ To add tools to the new system:
 3. Document any special requirements
 4. Submit pull request
 
-For questions or issues, see the main [README](../README.md) or open an issue on GitHub.
+For questions or issues, see the main [Readme](../README.md) or open an issue on GitHub.
