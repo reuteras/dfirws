@@ -423,9 +423,9 @@ Compare-Object (Get-ChildItem .\mount\Tools -Recurse).Name (Get-ChildItem .\moun
 
 ### Issue: Tool Won't Download
 
-**Cause:** Regex pattern doesn't match release assets
+**Cause:** Regular expression pattern doesn't match release assets
 
-**Solution:** Check GitHub releases page and adjust regex:
+**Solution:** Check GitHub releases page and adjust regular expression:
 
 ```powershell
 # Test pattern
