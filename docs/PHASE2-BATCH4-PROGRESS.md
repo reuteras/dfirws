@@ -87,7 +87,7 @@ Added:
 
 ### Cumulative Progress
 
-```
+```text
 Phase 1:  ████████░░░░░░░░░░░░░░░░░░░░░░░░  13.6%
 Batch 1:  ████████████████████░░░░░░░░░░░░  39.5%
 Batch 2:  ███████████████████████████░░░░░  60.5%
@@ -142,7 +142,7 @@ Obsidian plugins require custom installation logic:
 
 Based on analysis of legacy scripts, the remaining tools are primarily:
 1. **Python/Node.js package-based tools** (requires special handling)
-2. **Git clone repositories** (requires git integration)
+2. **Git clone repositories** (requires Git integration)
 3. **Custom/manual installation tools** (local files, special procedures)
 4. **Deprecated or optional tools** (may not need migration)
 
@@ -157,14 +157,14 @@ Based on analysis of legacy scripts, the remaining tools are primarily:
 The remaining ~13% of tools fall into these categories:
 1. **Python tools**: Require virtualenv and pip installation
 2. **Node.js tools**: Require npm installation
-3. **Git repos**: Require git clone operations
+3. **Git repositories**: Require Git clone operations
 4. **Local tools**: Require manual file placement
 5. **Special cases**: Tools with unique installation requirements
 
 **Recommendation**: Create specialized categories for:
 - `python-tools.yaml` (with pip integration)
 - `nodejs-tools.yaml` (with npm integration)
-- `git-repositories.yaml` (for direct git clones)
+- `git-repositories.yaml` (for direct Git clones)
 
 ## Success Metrics
 
@@ -247,7 +247,7 @@ The remaining ~13% of tools fall into these categories:
 4. **Parallel downloads**: Validate parallel installation performance
 
 ### Documentation Updates
-1. Update main README with migration status
+1. Update main readme with migration status
 2. Create deployment guide
 3. Document custom installation procedures
 4. Create troubleshooting guide

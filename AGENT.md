@@ -39,7 +39,7 @@ This document provides guidance for AI assistants (like Claude) working on the D
 
 ### v2 Architecture (Current - Recommended)
 
-```
+```text
 YAML Tool Definitions (resources/tools/*.yaml)
     ↓
 YAML Parser (resources/download/yaml-parser.ps1)
@@ -104,7 +104,7 @@ Tools Installed in Windows Sandbox
 
 ## Directory Structure
 
-```
+```text
 dfirws/
 ├── README.md                           # Main project documentation
 ├── AGENT.md                            # This file - AI assistant guide
@@ -607,7 +607,7 @@ Update documentation when:
 
 ### Commit Message Format
 
-```
+```text
 Brief summary (50 chars or less)
 
 Detailed explanation of changes:
@@ -619,7 +619,8 @@ Relevant issue numbers: #123
 ```
 
 **Example:**
-```
+
+```text
 Add support for container-based tools
 
 This commit adds new YAML fields for Docker/Podman container tools:
@@ -832,8 +833,8 @@ git push -u origin <branch-name>
 - **Architecture Guide**: `docs/YAML_ARCHITECTURE.md`
 - **Migration Details**: `MIGRATION_COMPLETE.md`
 - **Future Plans**: `ROADMAP.md`
-- **GitHub Wiki**: https://github.com/reuteras/dfirws/wiki
-- **Issues**: https://github.com/reuteras/dfirws/issues
+- **GitHub Wiki**: <https://github.com/reuteras/dfirws/wiki>
+- **Issues**: <https://github.com/reuteras/dfirws/issues>
 
 ---
 

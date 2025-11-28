@@ -19,7 +19,7 @@ DFIRWS v2 introduces a modular YAML-based architecture for managing tool install
 ### ✅ Documentation
 - Every tool includes description, priority, and notes
 - Clear installation methods
-- Source tracking (GitHub, pip, npm, git)
+- Source tracking (GitHub, pip, npm, Git)
 
 ### ✅ Flexibility
 - Multiple installation methods supported
@@ -35,7 +35,7 @@ DFIRWS v2 introduces a modular YAML-based architecture for managing tool install
 
 ## Directory Structure
 
-```
+```text
 dfirws/
 ├── resources/
 │   ├── tools/                          # YAML tool definitions
@@ -44,7 +44,7 @@ dfirws/
 │   │   ├── windows-forensics.yaml
 │   │   ├── ... (20 category files)
 │   │   ├── python-tools.yaml          # Python packages (UV/pip)
-│   │   ├── git-repositories.yaml      # Git repos to clone
+│   │   ├── git-repositories.yaml      # Git repositories to clone
 │   │   ├── nodejs-tools.yaml          # Node.js packages (npm)
 │   │   └── didier-stevens-tools.yaml  # Didier Stevens Suite
 │   │
@@ -189,8 +189,8 @@ beta_tools:
 | Field | Required | Description |
 |-------|----------|-------------|
 | `source` | ✅ | Source type: `github` or `http` |
-| `repo` | ✅ | GitHub repository (owner/repo) |
-| `match` | ✅ | Regex pattern to match release asset |
+| `repo` | ✅ | GitHub repository (owner/repository) |
+| `match` | ✅ | Regular expression pattern to match release asset |
 | `file_type` | ✅ | File type: `zip`, `exe`, `msi`, `jar` |
 | `install_method` | ✅ | Installation method: `extract`, `copy`, `installer` |
 | `extract_to` | ⚠️ | Extraction path (required if `install_method: extract`) |
@@ -544,7 +544,7 @@ Install-Module -Name powershell-yaml -Force
 ### Tool Installation Fails
 
 1. Check log file for specific error
-2. Verify GitHub repo and match pattern
+2. Verify GitHub repository and match pattern
 3. Check network connectivity
 4. Manually download to verify URL
 5. Validate YAML syntax
@@ -581,8 +581,8 @@ Both can be used, but v2 is recommended for new installations.
 
 For issues or questions:
 
-- GitHub Issues: https://github.com/reuteras/dfirws/issues
-- Documentation: https://github.com/reuteras/dfirws/wiki
+- GitHub Issues: <https://github.com/reuteras/dfirws/issues>
+- Documentation: <https://github.com/reuteras/dfirws/wiki>
 - Migration Guide: MIGRATION_COMPLETE.md
 
 ---

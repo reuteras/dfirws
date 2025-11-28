@@ -244,7 +244,7 @@ DFIRWS v2 includes **433 tools** across **23 categories**:
 | **Didier Stevens Suite** | 102 | Comprehensive document/malware analysis |
 | **Node.js Tools** | 4 | JavaScript analysis tools |
 
-### Documentation
+### v2 Documentation
 
 - **[YAML Architecture Guide](docs/YAML_ARCHITECTURE.md)** - Complete guide to v2 architecture
 - **[Migration Summary](MIGRATION_COMPLETE.md)** - Details of the v1 to v2 migration

@@ -141,7 +141,7 @@ DFIRWS aims to provide a comprehensive, isolated environment for digital forensi
 **Achievements**:
 - [x] Created migration summary (`MIGRATION_COMPLETE.md`)
 - [x] Wrote comprehensive architecture guide (`docs/YAML_ARCHITECTURE.md`)
-- [x] Updated main README with v2 section
+- [x] Updated main readme with v2 section
 - [x] Created AI agent instructions (`AGENT.md`)
 - [x] Created project roadmap (this document)
 - [x] 500+ lines of documentation
@@ -337,7 +337,7 @@ These are potential features that may be implemented based on user feedback and 
 
 #### Integration
 
-- **VSCode Extension**: Manage tools from VSCode
+- **Visual Studio Code Extension**: Manage tools from Visual Studio Code
 - **PowerShell Module**: DFIRWS PowerShell module
 - **REST API**: Programmatic tool management
 - **Webhook Support**: Integration with other tools
@@ -457,7 +457,7 @@ Features are prioritized based on:
 
 - **MAJOR**: Breaking changes (v1 → v2)
 - **MINOR**: New features, backward compatible
-- **PATCH**: Bug fixes, minor improvements
+- **PATCH**: Bugfixes, minor improvements
 
 ### Release Cycle
 
@@ -530,9 +530,9 @@ Features are prioritized based on:
 
 ## Contact and Support
 
-- **GitHub Issues**: https://github.com/reuteras/dfirws/issues
-- **GitHub Discussions**: https://github.com/reuteras/dfirws/discussions
-- **Documentation**: https://github.com/reuteras/dfirws/wiki
+- **GitHub Issues**: <https://github.com/reuteras/dfirws/issues>
+- **GitHub Discussions**: <https://github.com/reuteras/dfirws/discussions>
+- **Documentation**: <https://github.com/reuteras/dfirws/wiki>
 - **Email**: See GitHub profile
 
 ---
