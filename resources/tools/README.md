@@ -29,7 +29,7 @@ This directory contains YAML definitions for all tools that can be installed in 
 
 ## File Organization
 
-```
+```text
 resources/tools/
 ├── README.md                  # This file
 ├── forensics.yaml             # Digital forensics tools
