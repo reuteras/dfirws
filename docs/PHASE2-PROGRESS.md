@@ -213,7 +213,7 @@ From analysis of legacy scripts:
 ### What Could Be Improved
 
 1. **URL validation**: Should add URL checking script
-2. **Regex testing**: Need regex validation tool
+2. **Regular expression testing**: Need regular expression validation tool
 3. **Duplicate detection**: Some tools may be in multiple categories
 4. **Version tracking**: Should consider adding version fields
 
@@ -239,7 +239,7 @@ For each migrated tool:
 - [x] Unique tool name
 - [x] Appropriate category
 - [x] Correct source type
-- [x] Valid regex pattern
+- [x] Valid regular expression pattern
 - [x] Proper install method
 - [x] Post-install steps if needed
 - [x] Priority assigned
@@ -255,7 +255,7 @@ For each migrated tool:
 
 ## Progress Visualization
 
-```
+```text
 Phase 1: ████████░░░░░░░░░░░░░░░░░░░░ 30 tools (13.6%)
 Phase 2: ████████████████████░░░░░░░░ 57 tools (25.9%)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
