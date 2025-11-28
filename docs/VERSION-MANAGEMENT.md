@@ -89,13 +89,13 @@ Add optional version and validation fields:
 
 ### Key Functions
 
-1. **Initialize-VersionLock**: Create/load version lock file
+1. **Initialize-VersionLock**: Create/load version lockfile
 2. **Get-InstalledVersion**: Get currently installed version
 3. **Get-LatestVersion**: Check for latest available version
 4. **Check-Updates**: Find tools with updates available
 5. **Approve-Update**: Mark update as approved
 6. **Validate-Checksum**: Verify SHA256 checksum
-7. **Update-VersionLock**: Record installation in lock file
+7. **Update-VersionLock**: Record installation in lockfile
 
 ## Usage Examples
 

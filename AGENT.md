@@ -602,7 +602,7 @@ Update documentation when:
 ### Branch Naming
 
 - Feature branches: `feature/description`
-- Bug fixes: `fix/issue-description`
+- Bugfixes: `fix/issue-description`
 - Claude sessions: `claude/task-description-sessionid`
 
 ### Commit Message Format
@@ -676,10 +676,10 @@ git push -u origin <branch-name>
 
 **Solution:**
 1. Check log file in `.\log\` directory
-2. Verify GitHub repo and release pattern:
+2. Verify GitHub repository and release pattern:
    ```powershell
    # Check releases manually
-   gh release list --repo owner/repo
+   gh release list --repo owner/repository
    ```
 3. Test with dry run:
    ```powershell
