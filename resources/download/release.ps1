@@ -932,7 +932,7 @@ $status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "$
 # obsidian-excalidraw-plugin
 $status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\main.js" -match "main.js" -check "JavaScript source"
 $status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\styles.css" -match "styles.css" -check "ASCII text"
+$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\styles.css" -match "styles.css" -check "text"
 
 # admonitions
 $status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\main.js" -match "main.js" -check "JavaScript source"

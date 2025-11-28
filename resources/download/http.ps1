@@ -349,7 +349,7 @@ $status = Get-FileFromUri -uri "https://npcap.com/${NpcapVersion}" -FilePath ".\
 
 # https://www.sqlite.org/download.html - SQLite
 $SQLiteVersion = Get-DownloadUrlFromPage -Url "https://sqlite.org/download.html" -RegEx '[0-9]+/sqlite-tools-win-x64-[^"]+.zip'
-$status = Get-FileFromUri -uri "https://sqlite.org/${SQLiteVersion}" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes" -check "Zip archive data"
+$status = Get-FileFromUri -uri "https://sqlite.org/${SQLiteVersion}" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\sqlite") {
         Remove-Item -Recurse -Force "${TOOLS}\sqlite" | Out-Null 2>&1

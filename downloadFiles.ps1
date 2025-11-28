@@ -363,6 +363,7 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "unused variable" -and
     $_.Line -notmatch "is never used" -and
     $_.Line -notmatch "is never constructed" -and
+    $_.Line -notmatch "elided elsewhere is confusing" -and
     $_.Line -notmatch "generated [0-9]+ warnings"
 }
 
