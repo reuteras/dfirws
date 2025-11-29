@@ -3,9 +3,6 @@
 # Version: 1.0
 
 param(
-    [Parameter(HelpMessage = "Install all tools")]
-    [Switch]$All,
-
     [Parameter(HelpMessage = "Install tools by category")]
     [ValidateSet("forensics", "malware-analysis", "utilities", "network-analysis",
         "reverse-engineering", "memory-forensics", "data-analysis", "windows-forensics",
@@ -47,12 +44,6 @@ param(
 
     [Parameter(HelpMessage = "Install approved updates")]
     [Switch]$InstallUpdates,
-
-    [Parameter(HelpMessage = "Force reinstallation even if version matches")]
-    [Switch]$Force,
-
-    [Parameter(HelpMessage = "Ignore version pins and always install latest")]
-    [Switch]$IgnoreVersions,
 
     [Parameter(HelpMessage = "Validate SHA256 checksums during installation")]
     [Switch]$ValidateChecksums,
@@ -131,7 +122,7 @@ function Install-ToolsSequential {
 
                 # Update version lock on successful installation
                 if (-not $DryRun) {
-                    Update-ToolVersionLock -Tool $tool -Result $result
+                    Update-ToolVersionLock -Tool $tool
                 }
             } else {
                 Add-FailedTool -ToolName $tool.name -Error "Installation returned false"
@@ -157,18 +148,12 @@ function Install-ToolsParallel {
 
     # Create script block for parallel execution
     $scriptBlock = {
-        param($tool, $setupPath, $toolsPath, $ghUser, $ghPass, $dryRun, $validateChecksums)
+        param($tool, $dryRun, $validateChecksums)
 
         # Import necessary functions in the runspace
         . ".\resources\download\common.ps1"
         . ".\resources\download\tool-handler.ps1"
         . ".\resources\download\version-manager.ps1"
-
-        # Set global variables
-        $global:SETUP_PATH = $setupPath
-        $global:TOOLS = $toolsPath
-        $global:GH_USER = $ghUser
-        $global:GH_PASS = $ghPass
 
         try {
             # Install tool with optional SHA256 validation
@@ -205,8 +190,7 @@ function Install-ToolsParallel {
 
         $results = $sortedTools | ForEach-Object -Parallel {
             $tool = $_
-            & $using:scriptBlock -tool $tool -setupPath $using:SETUP_PATH -toolsPath $using:TOOLS `
-                -ghUser $using:GH_USER -ghPass $using:GH_PASS -dryRun $using:DryRun `
+            & $using:scriptBlock -tool $tool -dryRun $using:DryRun `
                 -validateChecksums $using:ValidateChecksums
         } -ThrottleLimit $ThrottleLimit
 
@@ -217,7 +201,7 @@ function Install-ToolsParallel {
 
                 # Update version lock on successful installation
                 if (-not $DryRun) {
-                    Update-ToolVersionLock -Tool $result.tool -Result $result.success
+                    Update-ToolVersionLock -Tool $result.tool
                 }
             } else {
                 Add-FailedTool -ToolName $result.name -Error $result.error
@@ -260,7 +244,7 @@ function Install-ToolsParallel {
             # Start new job
             Set-InProgressTool -ToolName $tool.name
 
-            $job = Start-Job -ScriptBlock $scriptBlock -ArgumentList $tool, $SETUP_PATH, $TOOLS, $GH_USER, $GH_PASS, $DryRun, $ValidateChecksums
+            $job = Start-Job -ScriptBlock $scriptBlock -ArgumentList $tool, $DryRun, $ValidateChecksums
             $jobs += $job
             $activeJobs++
         }
@@ -272,7 +256,7 @@ function Install-ToolsParallel {
 
                 # Update version lock on successful installation
                 if (-not $DryRun) {
-                    Update-ToolVersionLock -Tool $_.tool -Result $_.success
+                    Update-ToolVersionLock -Tool $_.tool
                 }
             } else {
                 Add-FailedTool -ToolName $_.name -Error $_.error
@@ -288,12 +272,10 @@ function Update-ToolVersionLock {
     .SYNOPSIS
         Update version lock after successful tool installation
     #>
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory=$true)]
-        [PSCustomObject]$Tool,
-
-        [Parameter(Mandatory=$true)]
-        $Result
+        [PSCustomObject]$Tool
     )
 
     try {

@@ -42,41 +42,41 @@ function Get-ValidatedInput {
 
     while ($true) {
         if ($Default) {
-            $input = Read-Host "$Prompt [$Default]"
-            if ([string]::IsNullOrWhiteSpace($input)) {
-                $input = $Default
+            $userInput = Read-Host "$Prompt [$Default]"
+            if ([string]::IsNullOrWhiteSpace($userInput)) {
+                $userInput = $Default
             }
         } else {
-            $input = Read-Host $Prompt
+            $userInput = Read-Host $Prompt
         }
 
         # Check if required
-        if ($Required -and [string]::IsNullOrWhiteSpace($input)) {
-            Write-Host "  ✗ This field is required" -ForegroundColor Red
+        if ($Required -and [string]::IsNullOrWhiteSpace($userInput)) {
+            Write-Output "  ✗ This field is required"
             continue
         }
 
         # Allow empty for optional fields
-        if ([string]::IsNullOrWhiteSpace($input) -and -not $Required) {
+        if ([string]::IsNullOrWhiteSpace($userInput) -and -not $Required) {
             return ""
         }
 
         # Check valid options
-        if ($ValidOptions -and $input -notin $ValidOptions) {
-            Write-Host "  ✗ Invalid option. Valid options: $($ValidOptions -join ', ')" -ForegroundColor Red
+        if ($ValidOptions -and $userInput -notin $ValidOptions) {
+            Write-Output "  ✗ Invalid option. Valid options: $($ValidOptions -join ', ')"
             continue
         }
 
         # Run custom validator
         if ($Validator) {
-            $result = & $Validator $input
+            $result = & $Validator $userInput
             if ($result -ne $true) {
-                Write-Host "  ✗ $result" -ForegroundColor Red
+                Write-Output "  ✗ $result"
                 continue
             }
         }
 
-        return $input.Trim()
+        return $userInput.Trim()
     }
 }
 
@@ -94,7 +94,7 @@ function Test-GitHubRepo {
         $json = $response | ConvertFrom-Json
 
         if ($json.id) {
-            Write-Host "  ✓ Found: $($json.full_name) - $($json.description)" -ForegroundColor Green
+            Write-Information "  ✓ Found: $($json.full_name) - $($json.description)" -InformationAction Continue
             return $true
         }
     } catch {
@@ -200,7 +200,7 @@ function New-ToolYAML {
             $yaml += "    - type: $($step.type)"
             foreach ($key in $step.Keys) {
                 if ($key -ne "type") {
-                    $yaml += "      $key: $(Format-YAMLValue $step[$key] -Quoted)"
+                    $yaml += "      ${key}: $(Format-YAMLValue $step[$key] -Quoted)"
                 }
             }
         }

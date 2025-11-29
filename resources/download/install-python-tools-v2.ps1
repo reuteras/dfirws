@@ -3,9 +3,6 @@
 # Version: 2.0
 
 param(
-    [Parameter(HelpMessage = "Install all Python tools")]
-    [Switch]$All,
-
     [Parameter(HelpMessage = "Install specific tool by name")]
     [string]$ToolName,
 
@@ -80,22 +77,24 @@ function Install-PythonTool {
     Write-DateLog "Installing Python tool: $toolName" >> ${ROOT_PATH}\log\python_tools.txt
 
     try {
-        # Build UV install command
-        $uvCmd = "uv tool install"
+        # Build UV install command arguments
+        $uvArgs = @('tool', 'install')
 
         # Add dependencies if specified
         if ($Tool.with) {
-            $uvCmd += " --with `"$($Tool.with)`""
+            $uvArgs += '--with'
+            $uvArgs += $Tool.with
         }
 
         # Add package
-        $uvCmd += " `"$package`""
+        $uvArgs += $package
 
         # Execute UV command
-        Write-DateLog "Executing: $uvCmd" >> ${ROOT_PATH}\log\python_tools.txt
+        $uvCmdString = "uv $($uvArgs -join ' ')"
+        Write-DateLog "Executing: $uvCmdString" >> ${ROOT_PATH}\log\python_tools.txt
 
-        # Use Invoke-Expression for commands with complex quoting
-        $result = Invoke-Expression $uvCmd 2>&1
+        # Use call operator instead of Invoke-Expression
+        $result = & uv $uvArgs 2>&1
 
         if ($LASTEXITCODE -eq 0) {
             Write-DateLog "Successfully installed: $toolName" >> ${ROOT_PATH}\log\python_tools.txt
