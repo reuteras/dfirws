@@ -27,21 +27,24 @@ The `add-tool.ps1` script provides an interactive wizard that:
 The wizard will guide you through the following steps:
 
 ### 1. Tool Name
-```
+
+```text
 Tool name: mytool
 ```
 - Only letters, numbers, hyphens, underscores, and dots allowed
 - Will be used as the tool identifier
 
 ### 2. Description
-```
+
+```text
 Description: A brief description of what this tool does
 ```
 - Brief, one-line description
 - Will be displayed in tool listings
 
 ### 3. Category
-```
+
+```text
 Category: forensics
 ```
 Available categories:
@@ -60,7 +63,8 @@ Available categories:
 - `utilities` - General utilities
 
 ### 4. Source Type
-```
+
+```text
 Source (github/http): github
 ```
 - `github` - Download from GitHub releases
@@ -68,42 +72,50 @@ Source (github/http): github
 
 ### 5. Source-Specific Fields
 
-#### For GitHub sources:
-```
+#### For GitHub sources
+
+```text
 GitHub repository (owner/repo): puffyCid/artemis
   ✓ Found: puffyCid/artemis - Fast forensic collection tool
 
-Asset filename pattern (regex): x86_64-pc-windows-msvc\.zip$
+Asset filename pattern (regular expression): x86_64-pc-windows-msvc\.zip$
 ```
-- Repository will be validated via GitHub API
-- Match pattern is a regex to identify the correct release asset
 
-#### For HTTP sources:
+- Repository will be validated via GitHub API
+- Match pattern is a regular expression to identify the correct release asset
+
+#### For HTTP sources
 
 **Static URL:**
-```
+
+```text
 Use dynamic URL detection? (y/n): n
 Direct download URL: https://example.com/tool.zip
 ```
 
 **Dynamic URL (scraping):**
-```
+
+```text
 Use dynamic URL detection? (y/n): y
 URL pattern (page to scrape): https://example.com/downloads
-Download link regex pattern: tool-.*\.zip
+Download link regular expression pattern: tool-.*\.zip
 ```
 
 ### 6. Version Pinning
-```
+
+```text
 Pin to specific version? (y/n): n
 ```
+
 If yes:
-```
+
+```text
 Version number: 1.2.3
 ```
 
 ### 7. SHA256 Checksum
-```
+
+```text
 Add SHA256 checksum? (y/n): y
 SHA256 checksum (or leave empty to calculate later): abc123...
 ```
@@ -111,7 +123,8 @@ SHA256 checksum (or leave empty to calculate later): abc123...
 - Can be added later by downloading the file and calculating the hash
 
 ### 8. Update Policy
-```
+
+```text
 Update policy (manual/auto/notify): notify
 ```
 - `notify` (default) - Show update available, require approval
@@ -119,7 +132,8 @@ Update policy (manual/auto/notify): notify
 - `auto` - Automatically update to latest version
 
 ### 9. File Type
-```
+
+```text
 File type (zip/exe/msi/jar/war): zip
 ```
 - `zip` - ZIP archive
@@ -129,64 +143,76 @@ File type (zip/exe/msi/jar/war): zip
 - `war` - Web application archive
 
 ### 10. Install Method
-```
+
+```text
 Install method (extract/run/copy): extract
 ```
 
-#### Extract method:
-```
+#### Extract method
+
+```text
 Extract to path: ${TOOLS}/mytool
 ```
+
 Extracts archive to specified directory.
 
-#### Run method:
-```
+#### Run method
+
+```text
 Run arguments (e.g., /S /D=path): /S /D=${TOOLS}\mytool
 ```
+
 Executes installer with arguments.
 
-#### Copy method:
-```
+#### Copy method
+
+```text
 Copy to path: ${TOOLS}/mytool.exe
 ```
 Copies file to destination.
 
 ### 11. Post-Install Steps
-```
+
+```text
 Add post-install steps? (y/n): y
 ```
 
 Available step types:
 
 **Rename:**
-```
+
+```text
 Post-install step type (or 'done' to finish): rename
   Pattern to match: mytool-*
   New name: mytool
 ```
 
 **Move:**
-```
+
+```text
 Post-install step type: move
   Source path: ${TOOLS}/mytool/bin
   Destination path: ${TOOLS}/mytool-bin
 ```
 
 **Delete:**
-```
+
+```text
 Post-install step type: delete
   Path to delete: ${TOOLS}/mytool/temp
 ```
 
 **Symlink:**
-```
+
+```text
 Post-install step type: symlink
   Source path: ${TOOLS}/mytool/mytool.exe
   Link path: ${TOOLS}/bin/mytool.exe
 ```
 
 ### 12. Priority
-```
+
+```text
 Priority (critical/high/medium/low): medium
 ```
 - `critical` - Essential tools, installed first
@@ -195,7 +221,8 @@ Priority (critical/high/medium/low): medium
 - `low` - Optional/specialty tools
 
 ### 13. Enabled
-```
+
+```text
 Enable tool? (true/false): true
 ```
 - `true` - Tool will be installed
@@ -317,7 +344,7 @@ The script performs the following validations:
 ### Input Validation
 - **Tool name**: Alphanumeric, hyphens, underscores, dots only
 - **URLs**: Must start with http:// or https://
-- **GitHub repos**: Validates format (owner/repo) and checks if repo exists
+- **GitHub repositories**: Validates format (owner/repository) and checks if repository exists
 - **Categories**: Must match predefined list
 - **Enums**: File type, install method, priority, etc.
 
@@ -371,13 +398,16 @@ Get-FileHash .\downloads\mytool.zip -Algorithm SHA256
 ## Troubleshooting
 
 ### GitHub Repository Not Found
-```
+
+```text
 ✗ Repository not found
 ```
-**Solution**: Check the repository name format (owner/repo) and ensure it's public
+
+**Solution**: Check the repository name format (owner/repository) and ensure it's public
 
 ### YAML Validation Failed
-```
+
+```text
 ✗ YAML validation failed: ...
 ```
 **Solution**: Review the generated YAML for syntax errors, check indentation

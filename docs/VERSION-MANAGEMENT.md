@@ -9,13 +9,13 @@ This module provides version pinning, SHA256 validation, and update management f
 - **Version Pinning**: Pin tools to specific versions
 - **SHA256 Validation**: Verify file integrity with checksums
 - **Update Detection**: Check for newer versions
-- **Version Lock File**: Track installed versions
+- **Version Lockfile**: Track installed versions
 - **Update Approval**: Review and approve updates
 - **Automatic/Manual Modes**: Choose update strategy
 
 ## Architecture
 
-### 1. Version Lock File
+### 1. Version Lockfile
 
 `downloads/tool-versions.lock.json` - Tracks installed versions:
 
@@ -68,7 +68,7 @@ Add optional version and validation fields:
 
 ### 3. Update Workflow
 
-```
+```text
 1. Check for updates
    └─> Compare current version with latest available
 
@@ -89,13 +89,13 @@ Add optional version and validation fields:
 
 ### Key Functions
 
-1. **Initialize-VersionLock**: Create/load version lock file
+1. **Initialize-VersionLock**: Create/load version lockfile
 2. **Get-InstalledVersion**: Get currently installed version
 3. **Get-LatestVersion**: Check for latest available version
 4. **Check-Updates**: Find tools with updates available
 5. **Approve-Update**: Mark update as approved
 6. **Validate-Checksum**: Verify SHA256 checksum
-7. **Update-VersionLock**: Record installation in lock file
+7. **Update-VersionLock**: Record installation in lockfile
 
 ## Usage Examples
 
@@ -247,7 +247,7 @@ When SHA256 is specified in YAML:
 2. **Use SHA256 validation**: Always validate checksums
 3. **Manual update policy**: Review before updating
 4. **Test before deploying**: Validate in test environment
-5. **Maintain version lock**: Commit lock file to git
+5. **Maintain version lock**: Commit lockfile to Git
 
 ### For Development
 
@@ -257,7 +257,7 @@ When SHA256 is specified in YAML:
 4. **Regular updates**: Check weekly
 5. **Review changes**: Read release notes
 
-## Version Lock File Management
+## Version Lockfile Management
 
 ### Commit to Git
 
@@ -270,16 +270,16 @@ git commit -m "Update tool versions lock file"
 ### Share Across Team
 
 ```powershell
-# Install exact versions from lock file
+# Install exact versions from lockfile
 .\resources\download\install-tools.ps1 -FromLockFile
 
 # This ensures everyone uses same versions
 ```
 
-### Update Lock File
+### Update Lockfile
 
 ```powershell
-# Update lock file without installing
+# Update lockfile without installing
 .\resources\download\install-tools.ps1 -UpdateLockOnly
 
 # Install and update lock
@@ -290,7 +290,7 @@ git commit -m "Update tool versions lock file"
 
 ### Checksum Mismatch
 
-```
+```text
 ERROR: SHA256 mismatch for artemis
 Expected: abc123...
 Actual:   def456...
@@ -303,7 +303,7 @@ Actual:   def456...
 
 ### Version Not Found
 
-```
+```text
 ERROR: Version 1.2.3 not found for artemis
 Latest available: 1.2.4
 ```
@@ -315,7 +315,7 @@ Latest available: 1.2.4
 
 ### Update Detection Fails
 
-```
+```text
 WARNING: Could not check for updates for artemis
 API rate limit exceeded
 ```

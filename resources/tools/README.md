@@ -29,7 +29,7 @@ This directory contains YAML definitions for all tools that can be installed in 
 
 ## File Organization
 
-```
+```text
 resources/tools/
 ├── README.md                  # This file
 ├── forensics.yaml             # Digital forensics tools
@@ -104,7 +104,7 @@ resources/tools/
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `repo` | string | Yes | Repository in format `owner/repository` |
-| `match` | string | Yes | Regex pattern to match release asset name |
+| `match` | string | Yes | Regular expression pattern to match release asset name |
 
 #### HTTP Source
 
@@ -112,7 +112,7 @@ resources/tools/
 |-------|------|----------|-------------|
 | `url` | string | No* | Direct download URL |
 | `url_pattern` | string | No* | Base URL to scrape for download link |
-| `match` | string | Yes** | Regex pattern to find download link |
+| `match` | string | Yes** | Regular expression pattern to find download link |
 
 *Either `url` OR `url_pattern` required
 **Required when using `url_pattern`
@@ -366,9 +366,9 @@ post_install:
     target: "${TOOLS}/temp"
 ```
 
-## Regex Patterns
+## Regular Expression Patterns
 
-Common regex patterns for matching releases:
+Common regular expression patterns for matching releases:
 
 ```yaml
 # Match version number
@@ -391,7 +391,7 @@ match: "tool.*\\.zip$"  # Then filter in code if needed
 
 ### Tool Not Found
 
-Check if regex pattern matches actual release names:
+Check if regular expression pattern matches actual release names:
 
 ```powershell
 # View actual release names

@@ -31,7 +31,7 @@
   - malware-analysis.yaml (15+ tools)
   - network-analysis.yaml (8+ tools)
   - utilities.yaml (15+ tools)
-- ✅ Complete documentation (3 guides + README)
+- ✅ Complete documentation (3 guides + readme)
 - ✅ Parallel download support
 - ✅ State management and resume
 
@@ -133,7 +133,7 @@
 **Tasks**:
 - [ ] Remove legacy code (release.ps1, http.ps1)
 - [ ] Consolidate common.ps1 and wscommon.ps1
-- [ ] Update all README files
+- [ ] Update all readme files
 - [ ] Create video tutorials
 - [ ] Migration success stories
 - [ ] Performance comparison reports
@@ -210,7 +210,7 @@
 - [ ] 100% resume success rate
 - [ ] <1% tool failure rate
 
-### Documentation
+### Documentation Goals
 - [ ] Complete API reference
 - [ ] All tools documented
 - [ ] Migration guides updated
@@ -262,7 +262,7 @@
 - Demo/walkthrough
 - Feedback collection
 
-### Documentation
+### Documentation Practices
 - Keep docs updated
 - Add examples as we go
 - Record decisions
@@ -270,7 +270,7 @@
 
 ## Resources
 
-### Documentation
+### Documentation Links
 - [MODULAR-ARCHITECTURE.md](../docs/MODULAR-ARCHITECTURE.md)
 - [MIGRATION-GUIDE.md](../docs/MIGRATION-GUIDE.md)
 - [REFACTORING-SUMMARY.md](../docs/REFACTORING-SUMMARY.md)
@@ -279,7 +279,7 @@
 ### Tools
 - PowerShell 7+
 - Git
-- VS Code
+- Visual Studio Code
 - Pester (testing)
 - powershell-yaml (parsing)
 

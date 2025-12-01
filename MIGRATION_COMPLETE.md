@@ -85,7 +85,7 @@ All tools from the legacy monolithic setup.ps1 have been successfully migrated t
 ### 3. **Documentation**
 - Each tool includes description, priority, and notes
 - Clear installation methods
-- Source tracking (GitHub releases, pip, npm, git)
+- Source tracking (GitHub releases, pip, npm, Git)
 
 ### 4. **Flexibility**
 - Multiple installation methods supported:
@@ -116,7 +116,7 @@ All tools from the legacy monolithic setup.ps1 have been successfully migrated t
 - Direct script downloads
 
 ### Git Repositories (62 repos)
-- Clone to mount/git directory
+- Clone to mount/Git directory
 - Automatic pull for updates
 - Post-clone patches
 - Script extraction to Tools/bin
@@ -167,7 +167,7 @@ All tools from the legacy monolithic setup.ps1 have been successfully migrated t
 ## Last 3 Tools Added (Final Migration)
 
 1. **VirusTotal/yara-x** - Next generation YARA with improved performance
-2. **horsicq/DIE-engine** - Detect It Easy (updated repo reference)
+2. **horsicq/DIE-engine** - Detect It Easy (updated repository reference)
 3. **mandiant/capa-rules** - CAPA rules database for capability detection
 
 ## Verification
@@ -194,7 +194,7 @@ comm -23 /tmp/legacy_repos.txt /tmp/yaml_repos_updated.txt
 
 1. ✅ **Migration Complete** - All tools migrated
 2. ⏳ **Testing** - Validate installation scripts work with new YAML structure
-3. ⏳ **Documentation** - Update user guides and README files
+3. ⏳ **Documentation** - Update user guides and readme files
 4. ⏳ **CI/CD** - Set up automated validation and testing
 5. ⏳ **Community** - Announce v2 and gather feedback
 
@@ -209,7 +209,7 @@ comm -23 /tmp/legacy_repos.txt /tmp/yaml_repos_updated.txt
 
 ### Modified Files
 - `resources/tools/malware-analysis.yaml` (added yara-x, capa-rules)
-- `resources/tools/reverse-engineering.yaml` (updated DIE repo reference)
+- `resources/tools/reverse-engineering.yaml` (updated DIE repository reference)
 
 ## Acknowledgments
 
