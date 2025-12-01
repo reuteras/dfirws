@@ -129,7 +129,6 @@ if ($ShowCounts) {
     # Count standard tools
 
     $standardToolFiles = Get-ChildItem -Path ".\resources\tools" -Filter "*.yaml" `
-
         -Exclude "python-tools.yaml","git-repositories.yaml","nodejs-tools.yaml","didier-stevens-tools.yaml"
 
     $standardToolCount = 0
@@ -151,67 +150,36 @@ if ($ShowCounts) {
 
 
     # Count specialized tools
-
-    $pythonTools = @()
-
     try {
-
         $pythonTools = Import-PythonToolsDefinition
-
     } catch {
-
-        $pythonTools = @()
-
+        $pythonTools = $null
     }
-
+    if (-not $pythonTools) { $pythonTools = @() }
     Write-Output "Python Tools: $($pythonTools.Count)"
 
-
-
-    $gitRepos = @()
-
     try {
-
         $gitRepos = Import-GitRepositoriesDefinition
-
     } catch {
-
-        $gitRepos = @()
-
+        $gitRepos = $null
     }
-
+    if (-not $gitRepos) { $gitRepos = @() }
     Write-Output "Git Repositories: $($gitRepos.Count)"
 
-
-
-    $nodejsTools = @()
-
     try {
-
         $nodejsTools = Import-NodeJsToolsDefinition
-
     } catch {
-
-        $nodejsTools = @()
-
+        $nodejsTools = $null
     }
-
+    if (-not $nodejsTools) { $nodejsTools = @() }
     Write-Output "Node.js Tools: $($nodejsTools.Count)"
 
-
-
-    $didierTools = @()
-
     try {
-
         $didierTools = Import-DidierStevensToolsDefinition
-
     } catch {
-
-        $didierTools = @()
-
+        $didierTools = $null
     }
-
+    if (-not $didierTools) { $didierTools = @() }
     Write-Output "Didier Stevens Tools: $($didierTools.Count)"
 
 
