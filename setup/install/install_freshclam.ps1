@@ -15,6 +15,10 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\freshclam.exe")) {
     Start-Sleep -Seconds 1
 }
 
+
+& certutil -generateSSTFromWU roots.sst | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+& certutil -addstore -f root roots.sst | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+
 & 'C:\Program Files\ClamAV\freshclam.exe' --quiet 2>&1 | ForEach-Object{ "$_" } | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
 
 Write-DateLog "Freshclam update done." | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
