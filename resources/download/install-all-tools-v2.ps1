@@ -75,23 +75,23 @@ if ($ShowCounts) {
     Write-Output "`nStandard GitHub Release Tools: $standardToolCount"
 
     # Count specialized tools
-    $pythonTools = Import-PythonToolsDefinition
-    if (-not $pythonTools) { $pythonTools = @() }
-    Write-Output "Python Tools: $($pythonTools.Count)"
+    $pythonToolsList = Import-PythonToolsDefinition
+    if (-not $pythonToolsList) { $pythonToolsList = @() }
+    Write-Output "Python Tools: $($pythonToolsList.Count)"
 
-    $gitRepos = Import-GitRepositoriesDefinition
-    if (-not $gitRepos) { $gitRepos = @() }
-    Write-Output "Git Repositories: $($gitRepos.Count)"
+    $gitReposList = Import-GitRepositoriesDefinition
+    if (-not $gitReposList) { $gitReposList = @() }
+    Write-Output "Git Repositories: $($gitReposList.Count)"
 
-    $nodejsTools = Import-NodeJsToolsDefinition
-    if (-not $nodejsTools) { $nodejsTools = @() }
-    Write-Output "Node.js Tools: $($nodejsTools.Count)"
+    $nodejsToolsList = Import-NodeJsToolsDefinition
+    if (-not $nodejsToolsList) { $nodejsToolsList = @() }
+    Write-Output "Node.js Tools: $($nodejsToolsList.Count)"
 
-    $didierTools = Import-DidierStevensToolsDefinition
-    if (-not $didierTools) { $didierTools = @() }
-    Write-Output "Didier Stevens Tools: $($didierTools.Count)"
+    $didierToolsList = Import-DidierStevensToolsDefinition
+    if (-not $didierToolsList) { $didierToolsList = @() }
+    Write-Output "Didier Stevens Tools: $($didierToolsList.Count)"
 
-    $totalTools = $standardToolCount + $pythonTools.Count + $gitRepos.Count + $nodejsTools.Count + $didierTools.Count
+    $totalTools = $standardToolCount + $pythonToolsList.Count + $gitReposList.Count + $nodejsToolsList.Count + $didierToolsList.Count
     Write-Output "`nTotal Tools: $totalTools"
     Write-Output "========================================`n"
 
