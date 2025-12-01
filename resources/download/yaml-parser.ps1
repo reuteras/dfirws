@@ -105,6 +105,7 @@ function Import-PythonToolsDefinition {
     .PARAMETER Path
         Path to python-tools.yaml file
     #>
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory=$false)]
         [string]$Path = "${PSScriptRoot}\..\tools\python-tools.yaml"
@@ -241,6 +242,7 @@ function Import-GitRepositoriesDefinition {
     .PARAMETER Path
         Path to git-repositories.yaml file
     #>
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory=$false)]
         [string]$Path = "${PSScriptRoot}\..\tools\git-repositories.yaml"
@@ -327,6 +329,7 @@ function Import-NodeJsToolsDefinition {
     .PARAMETER Path
         Path to nodejs-tools.yaml file
     #>
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory=$false)]
         [string]$Path = "${PSScriptRoot}\..\tools\nodejs-tools.yaml"
@@ -413,6 +416,7 @@ function Import-DidierStevensToolsDefinition {
     .PARAMETER Path
         Path to didier-stevens-tools.yaml file
     #>
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory=$false)]
         [string]$Path = "${PSScriptRoot}\..\tools\didier-stevens-tools.yaml"
