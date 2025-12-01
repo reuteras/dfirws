@@ -33,7 +33,6 @@ Test-Command BurpSuiteCommunity PE32
 Test-Command chrome PE32
 Test-Command clamscan PE32
 Test-Command Cmder PE32
-Test-Command "C:\Program Files\dbeaver\dbeaver-cli.exe" PE32
 Test-Command "C:\Program Files\dbeaver\dbeaver.exe" PE32
 Test-Command "C:\Program Files (x86)\Digital Detective\DCode v5\DCode.exe" PE32
 $DokanyExecutable = (Get-ChildItem 'C:\Program Files\Dokan\' -Recurse -Include dokanctl.exe).FullName | Select-Object -Last 1
