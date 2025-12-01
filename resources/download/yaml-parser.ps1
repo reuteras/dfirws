@@ -368,7 +368,8 @@ function Import-NodeJsToolsDefinition {
                 continue
             }
 
-            if ($trimmed -match "^notes:") {
+            # Only stop at root-level notes: (no leading spaces in original line)
+            if ($line -match "^notes:" -and -not $line.StartsWith(" ")) {
                 $inTools = $false
                 continue
             }
@@ -497,7 +498,8 @@ function Import-DidierStevensToolsDefinition {
                 continue
             }
 
-            if ($trimmed -match "^notes:") {
+            # Only stop at root-level notes: (no leading spaces in original line)
+            if ($line -match "^notes:" -and -not $line.StartsWith(" ")) {
                 $inTools = $false
                 continue
             }
