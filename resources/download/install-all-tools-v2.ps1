@@ -75,16 +75,16 @@ if ($ShowCounts) {
     Write-Output "`nStandard GitHub Release Tools: $standardToolCount"
 
     # Count specialized tools
-    $pythonTools = Import-PythonToolsDefinition -ErrorAction SilentlyContinue
+    try { $pythonTools = Import-PythonToolsDefinition } catch { $pythonTools = @() }
     Write-Output "Python Tools: $($pythonTools.Count)"
 
-    $gitRepos = Import-GitRepositoriesDefinition -ErrorAction SilentlyContinue
+    try { $gitRepos = Import-GitRepositoriesDefinition } catch { $gitRepos = @() }
     Write-Output "Git Repositories: $($gitRepos.Count)"
 
-    $nodejsTools = Import-NodeJsToolsDefinition -ErrorAction SilentlyContinue
+    try { $nodejsTools = Import-NodeJsToolsDefinition } catch { $nodejsTools = @() }
     Write-Output "Node.js Tools: $($nodejsTools.Count)"
 
-    $didierTools = Import-DidierStevensToolsDefinition -ErrorAction SilentlyContinue
+    try { $didierTools = Import-DidierStevensToolsDefinition } catch { $didierTools = @() }
     Write-Output "Didier Stevens Tools: $($didierTools.Count)"
 
     $totalTools = $standardToolCount + $pythonTools.Count + $gitRepos.Count + $nodejsTools.Count + $didierTools.Count
