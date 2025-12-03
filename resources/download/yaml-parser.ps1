@@ -76,6 +76,10 @@ function Import-ToolDefinition {
         } elseif ($currentTool -and $trimmed -match "^\s*(\w+):\s*(.+)") {
             $key = $matches[1]
             $value = $matches[2].Trim('"').Trim("'")
+            # Handle YAML escape sequences
+            $value = $value -replace '\\\\', '\'  # Convert \\ to \
+            $value = $value -replace '\\n', "`n"  # Convert \n to newline
+            $value = $value -replace '\\t', "`t"  # Convert \t to tab
             $currentTool | Add-Member -NotePropertyName $key -NotePropertyValue $value -Force
         }
     }
