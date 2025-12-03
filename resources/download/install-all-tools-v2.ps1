@@ -188,13 +188,11 @@ if ($installPython) {
 
     Write-DateLog "Starting Python Tools installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 
-    $params = @{ All = $true }
-
     if ($DryRun) {
-        $params.DryRun = $true
+        & ".\resources\download\install-python-tools-v2.ps1" -DryRun
+    } else {
+        & ".\resources\download\install-python-tools-v2.ps1"
     }
-
-    & ".\resources\download\install-python-tools-v2.ps1" @params
 
     Write-DateLog "Completed Python Tools installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 }
@@ -210,13 +208,11 @@ if ($installGit) {
 
     Write-DateLog "Starting Git Repositories installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 
-    $params = @{ All = $true; Update = $true }
-
     if ($DryRun) {
-        $params.DryRun = $true
+        & ".\resources\download\install-git-repos-v2.ps1" -All -Update -DryRun
+    } else {
+        & ".\resources\download\install-git-repos-v2.ps1" -All -Update
     }
-
-    & ".\resources\download\install-git-repos-v2.ps1" @params
 
     Write-DateLog "Completed Git Repositories installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 }
@@ -232,13 +228,11 @@ if ($installNodeJs) {
 
     Write-DateLog "Starting Node.js Tools installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 
-    $params = @{ All = $true }
-
     if ($DryRun) {
-        $params.DryRun = $true
+        & ".\resources\download\install-nodejs-tools-v2.ps1" -All -DryRun
+    } else {
+        & ".\resources\download\install-nodejs-tools-v2.ps1" -All
     }
-
-    & ".\resources\download\install-nodejs-tools-v2.ps1" @params
 
     Write-DateLog "Completed Node.js Tools installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 }
@@ -254,13 +248,11 @@ if ($installDidier) {
 
     Write-DateLog "Starting Didier Stevens Tools installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 
-    $params = @{ All = $true }
-
     if ($DryRun) {
-        $params.DryRun = $true
+        & ".\resources\download\install-didier-stevens-v2.ps1" -All -DryRun
+    } else {
+        & ".\resources\download\install-didier-stevens-v2.ps1" -All
     }
-
-    & ".\resources\download\install-didier-stevens-v2.ps1" @params
 
     Write-DateLog "Completed Didier Stevens Tools installation" >> ${ROOT_PATH}\log\install_all_v2.txt
 }
