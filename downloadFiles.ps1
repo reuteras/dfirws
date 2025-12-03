@@ -244,7 +244,7 @@ if ($all -or $MSYS2.IsPresent) {
 
 if ($all -or $Release.IsPresent) {
     Write-DateLog "Download releases from GitHub (v2 YAML-based)."
-    .\resources\download\install-all-tools-v2.ps1 -StandardTools
+    .\resources\download\install-all-tools-v2.ps1 -StandardTools -DownloadOnly
 }
 
 if ($all -or $Http.IsPresent) {
@@ -258,13 +258,13 @@ if ($all -or $Http.IsPresent) {
 
 if ($all -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
-    Write-DateLog "Setup Node and install npm packages (v2 YAML-based)."
-    .\resources\download\install-all-tools-v2.ps1 -NodeJsTools
+    Write-DateLog "Download Node packages (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -NodeJsTools -DownloadOnly
 }
 
 if ($all -or $Git.IsPresent) {
-    Write-DateLog "Download and update git repositories (v2 YAML-based)"
-    .\resources\download\install-all-tools-v2.ps1 -GitRepos
+    Write-DateLog "Download git repositories (v2 YAML-based)"
+    .\resources\download\install-all-tools-v2.ps1 -GitRepos -DownloadOnly
 }
 
 if ($all -or $GoLang.IsPresent) {
@@ -275,8 +275,8 @@ if ($all -or $GoLang.IsPresent) {
 
 if ($all -or $Python.IsPresent) {
     Write-Output "" > .\log\python.txt
-    Write-DateLog "Setup Python and install packages (v2 YAML-based)."
-    .\resources\download\install-all-tools-v2.ps1 -PythonTools
+    Write-DateLog "Download Python packages (v2 YAML-based)."
+    .\resources\download\install-all-tools-v2.ps1 -PythonTools -DownloadOnly
 }
 
 if ($all -or $Rust.IsPresent) {
@@ -287,7 +287,7 @@ if ($all -or $Rust.IsPresent) {
 
 if ($all -or $Didier.IsPresent) {
     Write-DateLog "Download Didier Stevens tools (v2 YAML-based)."
-    .\resources\download\install-all-tools-v2.ps1 -DidierStevensTools
+    .\resources\download\install-all-tools-v2.ps1 -DidierStevensTools -DownloadOnly
 }
 
 if ($all -or $Winget.IsPresent) {

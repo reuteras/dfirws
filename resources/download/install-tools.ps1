@@ -52,7 +52,10 @@ param(
     [Switch]$ClearCache,
 
     [Parameter(HelpMessage = "Show installed versions")]
-    [Switch]$ShowVersions
+    [Switch]$ShowVersions,
+
+    [Parameter(HelpMessage = "Download only without installing")]
+    [Switch]$DownloadOnly
 )
 
 # Import modules
@@ -115,6 +118,10 @@ function Install-ToolsSequential {
                 $installParams.ValidateChecksum = $true
             }
 
+            if ($DownloadOnly) {
+                $installParams.DownloadOnly = $true
+            }
+
             $result = Install-ToolFromDefinition @installParams
 
             if ($result) {
@@ -148,7 +155,7 @@ function Install-ToolsParallel {
 
     # Create script block for parallel execution
     $scriptBlock = {
-        param($tool, $dryRun, $validateChecksums)
+        param($tool, $dryRun, $validateChecksums, $downloadOnlyMode)
 
         # Import necessary functions in the runspace
         . ".\resources\download\common.ps1"
@@ -164,6 +171,10 @@ function Install-ToolsParallel {
 
             if ($validateChecksums) {
                 $installParams.ValidateChecksum = $true
+            }
+
+            if ($downloadOnlyMode) {
+                $installParams.DownloadOnly = $true
             }
 
             $result = Install-ToolFromDefinition @installParams
@@ -191,7 +202,8 @@ function Install-ToolsParallel {
         $results = $sortedTools | ForEach-Object -Parallel {
             $tool = $_
             & $using:scriptBlock -tool $tool -dryRun $using:DryRun `
-                -validateChecksums $using:ValidateChecksums
+                -validateChecksums $using:ValidateChecksums `
+                -downloadOnlyMode $using:DownloadOnly
         } -ThrottleLimit $ThrottleLimit
 
         # Process results
@@ -244,7 +256,7 @@ function Install-ToolsParallel {
             # Start new job
             Set-InProgressTool -ToolName $tool.name
 
-            $job = Start-Job -ScriptBlock $scriptBlock -ArgumentList $tool, $DryRun, $ValidateChecksums
+            $job = Start-Job -ScriptBlock $scriptBlock -ArgumentList $tool, $DryRun, $ValidateChecksums, $DownloadOnly
             $jobs += $job
             $activeJobs++
         }
