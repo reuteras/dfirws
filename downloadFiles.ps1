@@ -139,9 +139,6 @@ if ($all -eq $false) {
     }
 }
 
-# Remove old temp files
-Remove-Item -Recurse -Force .\tmp\downloads\ 2>&1 | Out-Null
-
 # Create directories
 if (!(Test-Path "${SETUP_PATH}")) {
     New-Item -ItemType Directory -Force -Path "${SETUP_PATH}" 2>&1 | Out-Null
