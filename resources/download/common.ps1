@@ -286,17 +286,10 @@ function Get-GitHubRelease {
         }
     }
 
-    # If still no download URL is found, try getting the tarball URL
+    # If still no download URL is found, fail gracefully
     if ( !$Url ) {
-        $releases = "https://api.github.com/repos/$repo/releases/latest"
-        $Url = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json).zipball_url.ToString()
-
-        if ( !$Url) {
-            Write-Error "Can't find a file to download for repo $repo."
-            Exit
-        } else {
-            Write-SynchronizedLog "Using tarball URL for $repo."
-        }
+        Write-SynchronizedLog "Error: No matching release asset found for repo $repo with pattern '$match'."
+        return $false
     }
 
     # Log the chosen URL and download the file

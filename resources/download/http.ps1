@@ -63,13 +63,6 @@ $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurit
 # Get Sysinternals Suite
 $status = Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip" -check "Zip archive data"
 
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\sysinternals") {
-        Remove-Item -Recurse -Force "${TOOLS}\sysinternals" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
-}
-
 # Get exiftool - NOW HANDLED BY V2 YAML (utilities.yaml)
 # Removed duplicate - use: .\downloadFiles.ps1 -Release
 <# LEGACY CODE - REMOVED
@@ -89,21 +82,9 @@ if ($status) {
 
 # Get pestudio
 $status = Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio.zip" -FilePath ".\downloads\pestudio.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\pestudio") {
-        Remove-Item -Recurse -Force "${TOOLS}\pestudio" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pestudio.zip" -o"${TOOLS}" | Out-Null
-}
 
 # Get HxD
 $status = Get-FileFromUri -uri "https://mh-nexus.de/downloads/HxDSetup.zip" -FilePath ".\downloads\hxd.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\hxd") {
-        Remove-Item -Recurse -Force "${TOOLS}\hxd" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hxd.zip" -o"${TOOLS}\hxd" | Out-Null
-}
 
 # Get trid and triddefs - NOW HANDLED BY V2 YAML (document-analysis.yaml)
 # Removed duplicates - use: .\downloadFiles.ps1 -Release
@@ -126,21 +107,9 @@ $status = Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win313_lite.zip"
 
 # Get ssview
 $status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/SSView.zip" -FilePath ".\downloads\ssview.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\ssview") {
-        Remove-Item -Recurse -Force "${TOOLS}\ssview" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ssview.zip" -o"${TOOLS}\ssview" | Out-Null
-}
 
 # FullEventLogView
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\FullEventLogView") {
-        Remove-Item -Recurse -Force "${TOOLS}\FullEventLogView" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logview.zip" -o"${TOOLS}\FullEventLogView" | Out-Null
-}
 
 # pstwalker - NOW HANDLED BY V2 YAML (email-forensics.yaml)
 # Removed duplicate - use: .\downloadFiles.ps1 -Release
@@ -158,12 +127,6 @@ if ($status) {
 
 # Win API Search
 $status = Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -FilePath ".\downloads\WinApiSearch.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\WinApiSearch") {
-        Remove-Item -Recurse -Force "${TOOLS}\WinApiSearch" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinApiSearch.zip" -o"${TOOLS}\WinApiSearch" | Out-Null
-}
 
 # Capa integration with Ghidra - installed during start
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_explorer.py" -FilePath ".\downloads\capa_explorer.py" -check "ASCII text"
@@ -187,113 +150,24 @@ $status = Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/r
 
 # Mail Viewer
 $status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/MailView.zip" -FilePath ".\downloads\mailview.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\MailView") {
-        Remove-Item -Recurse -Force "${TOOLS}\MailView" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mailview.zip" -o"${TOOLS}\MailView" | Out-Null
-}
 
 # Volatility Workbench 3
 $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench.zip" -FilePath ".\downloads\volatilityworkbench.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\VolatilityWorkbench") {
-        Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
-}
 
 # Volatility Workbench 2
 $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench-v2.1.zip" -FilePath ".\downloads\volatilityworkbench2.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\VolatilityWorkbench2") {
-        Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench2" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench2.zip" -o"${TOOLS}\VolatilityWorkbench2" | Out-Null
-}
 
 # Volatility Workbench 2 Profiles
 $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/Collection.zip" -FilePath ".\downloads\volatilityworkbench2profiles.zip" -check "Zip archive data"
 
 # Nirsoft tools
-New-Item -Path "${TOOLS}\nirsoft" -ItemType Directory -Force | Out-Null
-if (Test-Path -Path "${TOOLS}\ntemp") {
-    Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
-}
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/lastactivityview.zip" -FilePath ".\downloads\lastactivityview.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\lastactivityview.zip" -o"${TOOLS}\ntemp" | Out-Null
-    if (Test-Path -Path ${TOOLS}\ntemp\readme.txt) {
-        Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\lastactivityview.txt"
-    }
-    Copy-Item ${TOOLS}\ntemp\* "${TOOLS}\nirsoft"
-    Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
-}
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecv.zip" -FilePath ".\downloads\iecookiesview.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\iecookiesview.zip" -o"${TOOLS}\ntemp" | Out-Null
-    if (Test-Path -Path ${TOOLS}\ntemp\readme.txt) {
-        Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\iecookiesview.txt"
-    }
-    Copy-Item ${TOOLS}\ntemp\* "${TOOLS}\nirsoft"
-    Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
-}
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/mzcv-x64.zip" -FilePath ".\downloads\MZCookiesView.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\MZCookiesView.zip" -o"${TOOLS}\ntemp" | Out-Null
-    if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
-        Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\MZCookiesView.txt"
-    }
-    Copy-Item ${TOOLS}\ntemp\* "${TOOLS}\nirsoft"
-    Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
-}
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/chromecacheview.zip" -FilePath ".\downloads\chromecacheview.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\chromecacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
-    if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
-        Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\chromecacheview.txt"
-    }
-    Copy-Item ${TOOLS}\ntemp\* "${TOOLS}\nirsoft"
-Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
-}
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/mzcacheview.zip" -FilePath ".\downloads\mzcacheview.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mzcacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
-    if (Test-Path -Path ${TOOLS}\ntemp\readme.txt) {
-        Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\mzcacheview.txt"
-    }
-    Copy-Item ${TOOLS}\ntemp\* "${TOOLS}\nirsoft"
-    Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
-}
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecacheview.zip" -FilePath ".\downloads\iecacheview.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\iecacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
-    if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
-        Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\iecacheview.txt"
-    }
-    Copy-Item ${TOOLS}\ntemp\* "${TOOLS}\nirsoft"
-    Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null
-}
-
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/browsinghistoryview-x64.zip" -FilePath ".\downloads\browsinghistoryview.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\browsinghistoryview.zip" -o"${TOOLS}\ntemp" | Out-Null
-    if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
-        Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\browsinghistoryview.txt"
-    }
-    Copy-Item ${TOOLS}\ntemp\* "${TOOLS}\nirsoft"
-    Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
-}
-
-if (Test-Path -Path "${TOOLS}\nirsoft\readme.txt") {
-    Remove-Item -Force "${TOOLS}\nirsoft\readme.txt" | Out-Null 2>&1
-}
 
 # Get winpmem
 $status = Get-FileFromUri -uri "https://github.com/Velocidex/c-aff4/raw/master/tools/pmem/resources/winpmem/winpmem_64.sys" -FilePath ".\downloads\winpmem_64.sys" -check "PE32"
@@ -311,14 +185,6 @@ $status = Get-FileFromUri -uri "https://www.torproject.org$TorBrowserUrl" -FileP
 # DCode
 $DCodeUrl = Get-DownloadUrlFromPage -Url "https://www.digital-detective.net/dcode/" -RegEx "https://www.digital-detective.net/download/download[^']+"
 $status = Get-FileFromUri -uri "${DCodeURL}" -FilePath ".\downloads\dcode.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path ${SETUP_PATH}\dcode) {
-        Remove-Item -Recurse -Force ${SETUP_PATH}\dcode | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dcode.zip" -o"${SETUP_PATH}\dcode" | Out-Null
-    Start-Sleep -Seconds 3
-    Move-Item ${SETUP_PATH}\dcode\Dcode-* "${SETUP_PATH}\dcode\dcode.exe" | Out-Null
-}
 
 # Veracrypt - manual installation
 $VeracryptUrl = Get-DownloadUrlFromPage -Url "https://www.veracrypt.fr/en/Downloads.html" -RegEx 'https://[^"]+VeraCrypt_Setup[^"]+.msi'
@@ -334,21 +200,9 @@ $status = Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-commun
 
 # recbin
 $status = Get-FileFromUri -uri "https://github.com/keydet89/Tools/raw/refs/heads/master/exe/recbin.exe" -FilePath ".\downloads\recbin.exe" -check "PE32"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\bin\recbin.exe") {
-        Remove-Item -Force "${TOOLS}\bin\recbin.exe" | Out-Null 2>&1
-    }
-    Copy-Item ".\downloads\recbin.exe" "${TOOLS}\bin\recbin.exe"
-}
 
 # capa Explorer web
 $status = Get-FileFromUri -uri "https://mandiant.github.io/capa/explorer/capa-explorer-web.zip" -FilePath ".\downloads\capa-explorer-web.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\capa-explorer-web") {
-        Remove-Item -Recurse -Force "${TOOLS}\capa-explorer-web" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
-}
 
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
 $LibreOfficeVersionDownloadPage = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
@@ -362,12 +216,6 @@ $status = Get-FileFromUri -uri "https://npcap.com/${NpcapVersion}" -FilePath ".\
 # https://www.sqlite.org/download.html - SQLite
 $SQLiteVersion = Get-DownloadUrlFromPage -Url "https://sqlite.org/download.html" -RegEx '[0-9]+/sqlite-tools-win-x64-[^"]+.zip'
 $status = Get-FileFromUri -uri "https://sqlite.org/${SQLiteVersion}" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\sqlite") {
-        Remove-Item -Recurse -Force "${TOOLS}\sqlite" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
-}
 
 # OpenVPN - manual installation
 $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi" -check "Composite Document File V2 Document"
@@ -375,44 +223,18 @@ $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
 $digitalcorpora_url = "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip"
 $status = Get-FileFromUri -uri "${digitalcorpora_url}" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\bulk_extractor") {
-        Remove-Item -Recurse -Force "${TOOLS}\bulk_extractor" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\bulk_extractor.zip" -o"${TOOLS}\bulk_extractor" | Out-Null
-}
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
 $densityscout_url = Get-DownloadUrlFromPage -url "https://cert.at/en/downloads/software/software-densityscout" -RegEx '[^"]+windows.zip'
 $status = Get-FileFromUri -uri "${densityscout_url}" -FilePath ".\downloads\DensityScout.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\bin\densityscout.exe") {
-        Remove-Item -Recurse -Force "${TOOLS}\bin\densityscout.exe" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DensityScout.zip" -o"${TOOLS}" | Out-Null
-    Start-Sleep -Seconds 3
-    Move-Item "${TOOLS}\win64\densityscout.exe" "${TOOLS}\bin\densityscout.exe"
-}
 
 # https://nmap.org/download.html - Nmap
 $nmap_url = Get-DownloadUrlFromPage -url "https://nmap.org/download.html" -RegEx 'https[^"]+setup.exe'
 $status = Get-FileFromUri -uri "${nmap_url}" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes" -check "PE32"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\nmap") {
-        Remove-Item -Recurse -Force "${TOOLS}\nmap" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\nmap.exe" -o"${TOOLS}\nmap" | Out-Null
-}
 
 # https://flatassembler.net/download.php - FASM
 $flatassembler_version = Get-DownloadUrlFromPage -url "https://flatassembler.net/download.php" -RegEx 'fasmw[^"]+zip'
 $status = Get-FileFromUri -uri "https://flatassembler.net/${flatassembler_version}" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\fasm") {
-        Remove-Item -Recurse -Force "${TOOLS}\fasm" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fasm.zip" -o"${TOOLS}\fasm" | Out-Null
-}
 
 # Terminal for Windows - automatically installed during start
 $status = Get-FileFromUri -uri "https://aka.ms/terminal-canary-zip-x64" -FilePath ".\downloads\terminal.zip" -CheckURL "Yes" -check "Zip archive data"
@@ -420,25 +242,10 @@ $status = Get-FileFromUri -uri "https://aka.ms/terminal-canary-zip-x64" -FilePat
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
 $procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip'
 $status = Get-FileFromUri -uri "https://procdot.com/${procdot_path}" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\procdot") {
-        Remove-Item -Recurse -Force "${TOOLS}\procdot" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
-}
-
 
 # https://codeberg.org/hrbrmstr/geolocus-cli/releases - Geolocus CLI
 $geolocus_url = Get-DownloadUrlFromPage -url "https://codeberg.org/hrbrmstr/geolocus-cli/releases" -RegEx 'https://[^"]*geolocus-cli-windows\.exe\.zip' -last
 $status = Get-FileFromUri -uri "${geolocus_url}" -FilePath ".\downloads\geolocus.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\geolocus") {
-        Remove-Item -Recurse -Force "${TOOLS}\geolocus" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\geolocus.zip" -o"${TOOLS}\geolocus" | Out-Null
-    Copy-Item "${TOOLS}\geolocus\geolocus-cli-windows.exe" -Destination "${TOOLS}\bin\geolocus-cli.exe" -Force
-    Remove-Item -Recurse -Force "${TOOLS}\geolocus\__MACOSX" | Out-Null 2>&1
-}
 
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
 $graphviz_url = Get-DownloadUrlFromPage -url "https://www.graphviz.org/download/" -RegEx 'https://[^"]+win64.exe'
@@ -450,50 +257,21 @@ $status = Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r1
 # https://gluonhq.com/products/javafx/ - JavaFX 21
 $javafx_version = Get-DownloadUrlFromPage -url "https://gluonhq.com/products/javafx/" -RegEx '21\.[0-9.]+'
 $status = Get-FileFromUri -uri "https://download2.gluonhq.com/openjfx/${javafx_version}/openjfx-${javafx_version}_windows-x64_bin-sdk.zip" -FilePath ".\downloads\openjfx.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\javafx-sdk") {
-        Remove-Item -Recurse -Force "${TOOLS}\javafx-sdk" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\openjfx.zip" -o"${TOOLS}" | Out-Null
-    Start-Sleep -Seconds 3
-    Move-Item ${TOOLS}\javafx-sdk-* "${TOOLS}\javafx-sdk"
-}
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
 $apktool_version = Get-DownloadUrlFromPage -url "https://apktool.org/" -RegEx 'apktool_[^"]+'
 $status = Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/${apktool_version}" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force
-    Copy-Item "setup\utils\apktool.bat" "${TOOLS}\bin\apktool.bat" -Force
-}
 
 # https://windows.php.net/download - PHP 8
 $PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/downloads/releases/php-8.[.0-9]+-nts-Win32-vs16-x64.zip'
 $status = Get-FileFromUri -uri "https://windows.php.net${PHP_URL}" -FilePath ".\downloads\php.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\php") {
-        Remove-Item -Recurse -Force "${TOOLS}\php" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\php.zip" -o"${TOOLS}\php" | Out-Null
-}
 
 # https://hashcat.net/hashcat/ - hashcat
 $hashcat_version = Get-DownloadUrlFromPage -url "https://hashcat.net/hashcat/" -RegEx 'fil[^"]+\.7z'
 $status = Get-FileFromUri -uri "https://hashcat.net/${hashcat_version}" -FilePath ".\downloads\hashcat.7z" -CheckURL "Yes" -check "7-zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\hashcat") {
-        Remove-Item -Recurse -Force "${TOOLS}\hashcat" | Out-Null 2>&1
-    }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hashcat.7z" -o"${TOOLS}" | Out-Null
-    Start-Sleep -Seconds 3
-    Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
-}
 
 # vmss2core
 $status = Get-FileFromUri -uri "https://archive.org/download/flings.vmware.com/Flings/Vmss2core/vmss2core-sb-8456865.exe" -FilePath ".\downloads\vmss2core.exe" -CheckURL "Yes" -check "PE32"
-if ($status) {
-    Copy-Item ".\downloads\vmss2core.exe" "${TOOLS}\bin\vmss2core.exe" -Force
-}
 
 # Drivers for hashcat
 $intel_driver = Get-DownloadUrlFromPage -url "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-cpu-runtime-for-opencl-applications-with-sycl-support.html" -RegEx 'https://[^"]+\.exe'
@@ -513,15 +291,3 @@ $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/hea
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\auditbeat.zip" -CheckURL "Yes" -check "Zip archive data"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\winlogbeat.zip" -CheckURL "Yes" -check "Zip archive data"
 
-# Remove unused files and directories
-if (Test-Path -Path "${TOOLS}\win32") {
-    Remove-Item -Recurse -Force "${TOOLS}\win32" | Out-Null 2>&1
-}
-
-if (Test-Path -Path "${TOOLS}\win64") {
-    Remove-Item -Recurse -Force "${TOOLS}\win64" | Out-Null 2>&1
-}
-
-if (Test-Path -Path "${TOOLS}\license.txt") {
-    Remove-Item -Force "${TOOLS}\license.txt"
-}
