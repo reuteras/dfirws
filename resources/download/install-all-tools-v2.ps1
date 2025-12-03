@@ -37,7 +37,10 @@ param(
     [Switch]$DryRun,
 
     [Parameter(HelpMessage = "Show tool counts by category")]
-    [Switch]$ShowCounts
+    [Switch]$ShowCounts,
+
+    [Parameter(HelpMessage = "Download only without installing")]
+    [Switch]$DownloadOnly
 )
 
 # Import common modules
@@ -168,6 +171,10 @@ if ($installStandard) {
 
     if ($DryRun) {
         $params.DryRun = $true
+    }
+
+    if ($DownloadOnly) {
+        $params.DownloadOnly = $true
     }
 
     # Call the existing install-tools.ps1

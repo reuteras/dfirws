@@ -127,6 +127,9 @@ function Install-ToolFromDefinition {
 
     .PARAMETER ValidateChecksum
         If specified, validate SHA256 checksum after download
+
+    .PARAMETER DownloadOnly
+        If specified, only download the tool without installing it
     #>
     param(
         [Parameter(Mandatory=$true)]
@@ -136,7 +139,10 @@ function Install-ToolFromDefinition {
         [switch]$DryRun,
 
         [Parameter(Mandatory=$false)]
-        [switch]$ValidateChecksum
+        [switch]$ValidateChecksum,
+
+        [Parameter(Mandatory=$false)]
+        [switch]$DownloadOnly
     )
 
     $toolName = $ToolDefinition.name
@@ -160,6 +166,12 @@ function Install-ToolFromDefinition {
     if (-not $downloaded) {
         Write-Error "Failed to download $toolName"
         return $false
+    }
+
+    # If DownloadOnly mode, skip installation and post-install steps
+    if ($DownloadOnly) {
+        Write-SynchronizedLog "Successfully downloaded: $toolName (download-only mode)"
+        return $true
     }
 
     # Install the tool based on install method
