@@ -225,6 +225,16 @@ function Get-ToolBinary {
     }
 
     try {
+        # Convert file_type to file command output for validation
+        $fileCheckString = switch ($ToolDefinition.file_type) {
+            "zip" { "Zip archive data" }
+            "exe" { "PE32" }
+            "msi" { "Composite Document File V2 Document" }
+            "jar" { "Java archive data" }
+            "war" { "Java archive data" }
+            default { "" }
+        }
+
         switch ($source) {
             "github" {
                 Write-SynchronizedLog "Downloading $toolName from GitHub: $($ToolDefinition.repo)"
@@ -237,13 +247,13 @@ function Get-ToolBinary {
                         -path $filePath `
                         -match $ToolDefinition.match `
                         -version $versionToInstall `
-                        -check $ToolDefinition.file_type
+                        -check $fileCheckString
                 } else {
                     $status = Get-GitHubRelease `
                         -repo $ToolDefinition.repo `
                         -path $filePath `
                         -match $ToolDefinition.match `
-                        -check $ToolDefinition.file_type
+                        -check $fileCheckString
                 }
 
                 # Validate SHA256 if specified and download succeeded
@@ -279,7 +289,7 @@ function Get-ToolBinary {
                 $status = Get-FileFromUri `
                     -uri $url `
                     -FilePath $filePath `
-                    -check $ToolDefinition.file_type
+                    -check $fileCheckString
 
                 # Validate SHA256 if specified and download succeeded
                 if ($status -and $ToolDefinition.sha256 -and $ValidateChecksum) {
