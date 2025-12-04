@@ -33,9 +33,9 @@ tools:
 
   # BloodHound - AD attack path analysis
   - name: bloodhound
-    description: Active Directory attack path analysis and visualization
+    description: Active Directory attack path analysis and visualization (Legacy v4.x)
     source: github
-    repo: BloodHoundAD/BloodHound
+    repo: SpecterOps/BloodHound-Legacy
     match: "BloodHound-win32-x64\\.zip$"
     file_type: zip
     install_method: extract
@@ -46,12 +46,13 @@ tools:
         target: "BloodHound"
     enabled: true
     priority: high
+    notes: Using Legacy version (v4.x) - BloodHound v8+ is a different architecture
 
   # SharpHound - BloodHound data collector
   - name: sharphound
     description: BloodHound data collector for Active Directory
     source: github
-    repo: BloodHoundAD/SharpHound
+    repo: SpecterOps/SharpHound
     match: "SharpHound.*\\.zip$"
     file_type: zip
     install_method: extract

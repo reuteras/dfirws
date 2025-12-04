@@ -50,9 +50,19 @@ function Import-ToolDefinitions {
                 $content = Get-Content -Path $file.FullName -Raw
                 $definition = ConvertFrom-Yaml -Yaml $content
 
-                # Add category info to each tool
+                # Add category info to each tool and fix escape sequences
                 foreach ($tool in $definition.tools) {
                     $tool | Add-Member -NotePropertyName "category" -NotePropertyValue $definition.category -Force
+
+                    # Fix escape sequences in string properties (especially match patterns)
+                    foreach ($prop in $tool.PSObject.Properties) {
+                        if ($prop.Value -is [string]) {
+                            $prop.Value = $prop.Value -replace '\\\\', '\'  # Convert \\ to \
+                            $prop.Value = $prop.Value -replace '\\n', "`n"  # Convert \n to newline
+                            $prop.Value = $prop.Value -replace '\\t', "`t"  # Convert \t to tab
+                        }
+                    }
+
                     $allTools += $tool
                 }
             } else {
@@ -90,6 +100,10 @@ function Import-ToolDefinitions {
                         } elseif ($currentTool -and $line -match "^\s*(\w+):\s*(.+)") {
                             $key = $matches[1]
                             $value = $matches[2].Trim('"').Trim("'")
+                            # Handle YAML escape sequences
+                            $value = $value -replace '\\\\', '\'  # Convert \\ to \
+                            $value = $value -replace '\\n', "`n"  # Convert \n to newline
+                            $value = $value -replace '\\t', "`t"  # Convert \t to tab
                             $currentTool | Add-Member -NotePropertyName $key -NotePropertyValue $value -Force
                         }
                     }
@@ -489,9 +503,10 @@ function Expand-EnvironmentVariables {
         [string]$Path
     )
 
-    # Replace common variables
-    $expanded = $Path -replace '\$\{TOOLS\}', $TOOLS
-    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $SETUP_PATH
+    # Replace common variables using script scope
+    $expanded = $Path -replace '\$\{TOOLS\}', $script:TOOLS
+    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $script:SETUP_PATH
+    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $script:SANDBOX_TOOLS
 
     return $expanded
 }
