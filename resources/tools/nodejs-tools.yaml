@@ -14,7 +14,8 @@ tools:
   - name: box-js
     package: box-js
     description: JavaScript malware analysis sandbox
-    category_type: malware-analysis
+    category_type: malware-analysis    enabled: false
+
     priority: high
     notes: |
       Analyzes suspicious JavaScript files in a sandboxed environment.
@@ -23,7 +24,8 @@ tools:
   - name: deobfuscator
     package: deobfuscator
     description: JavaScript deobfuscator
-    category_type: malware-analysis
+    category_type: malware-analysis    enabled: false
+
     priority: high
     notes: |
       Deobfuscates JavaScript code to reveal its true functionality.
@@ -32,7 +34,8 @@ tools:
   - name: jsdom
     package: jsdom
     description: JavaScript DOM implementation
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: medium
     notes: |
       Pure JavaScript implementation of web standards for Node.js.
@@ -42,7 +45,8 @@ tools:
   - name: docsify-cli
     package: docsify-cli
     description: Documentation site generator
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: low
     notes: |
       Generates documentation sites from Markdown files.

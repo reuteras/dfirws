@@ -13,30 +13,35 @@ description: Python-based forensics, analysis, and security tools
 special_installs:
   - name: dfir-ntfs
     package: "https://github.com/msuhanov/dfir_ntfs/archive/1.1.20.tar.gz"
-    description: NTFS forensics library and tools
+    description: NTFS forensics library and tools    enabled: false
+
     priority: high
 
   - name: rat-king-parser
     package: "git+https://github.com/jeFF0Falltrades/rat_king_parser.git"
-    description: RAT (Remote Access Trojan) configuration parser
+    description: RAT (Remote Access Trojan) configuration parser    enabled: false
+
     priority: medium
 
   - name: binary-refinery
     package: "binary-refinery[extended]"
     with: "zipp>=3.20"
-    description: Binary data refinement and deobfuscation toolkit
+    description: Binary data refinement and deobfuscation toolkit    enabled: false
+
     priority: high
 
   - name: regipy
     package: "regipy>=4.0.0"
     with: "click, libfwsi-python, python-evtx, tabulate, zipp"
-    description: Windows registry parser and forensics tool
+    description: Windows registry parser and forensics tool    enabled: false
+
     priority: high
 
   - name: peepdf-3
     package: "peepdf-3"
     with: "pyreadline3, stpyv8"
-    description: PDF analysis and forensics tool
+    description: PDF analysis and forensics tool    enabled: false
+
     priority: high
 
 # Standard Python tools (uv tool install <package>)
@@ -45,312 +50,362 @@ tools:
   - name: autoit-ripper
     package: autoit-ripper
     description: AutoIt script extractor and decompiler
-    category_type: malware-analysis
+    category_type: malware-analysis    enabled: false
+
     priority: medium
 
   - name: maldump
     package: maldump
     description: Malware memory dump analysis tool
-    category_type: malware-analysis
+    category_type: malware-analysis    enabled: false
+
     priority: medium
 
   - name: mwcp
     package: mwcp
     description: Malware Configuration Parser framework
-    category_type: malware-analysis
+    category_type: malware-analysis    enabled: false
+
     priority: high
 
   - name: unpy2exe
     package: unpy2exe
     description: Python executable (py2exe) decompiler
-    category_type: malware-analysis
+    category_type: malware-analysis    enabled: false
+
     priority: medium
 
   - name: frida-tools
     package: frida-tools
     description: Dynamic instrumentation toolkit
-    category_type: malware-analysis
+    category_type: malware-analysis    enabled: false
+
     priority: high
 
   # Document Analysis
   - name: oletools
     package: "oletools[full]"
     description: Tools to analyze Microsoft OLE2 files
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: high
 
   - name: msoffcrypto-tool
     package: msoffcrypto-tool
     description: Microsoft Office file encryption/decryption tool
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: high
 
   - name: docx2txt
     package: docx2txt
     description: Extract text from DOCX files
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: medium
 
   - name: extract-msg
     package: "extract-msg>=0.48.4"
     description: Extract MSG email files
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: high
 
   - name: XLMMacroDeobfuscator
     package: XLMMacroDeobfuscator
     description: Excel 4.0 (XLM) macro deobfuscator
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: high
 
   - name: xlrd
     package: xlrd
     description: Library for reading Excel files
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: medium
 
   - name: XlsxWriter
     package: XlsxWriter
     description: Python module for creating Excel files
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: low
 
   - name: pdfalyzer
     package: pdfalyzer
     description: PDF analysis and forensics tool
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: high
 
   - name: markitdown
     package: "markitdown[all]"
     description: Convert various formats to Markdown
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: medium
 
   # Data Analysis & Forensics
   - name: cart
     package: cart
     description: Classification and Regression Trees
-    category_type: data-analysis
+    category_type: data-analysis    enabled: false
+
     priority: low
 
   - name: csvkit
     package: csvkit
     description: Suite of utilities for working with CSV files
-    category_type: data-analysis
+    category_type: data-analysis    enabled: false
+
     priority: high
 
   - name: flatten_json
     package: flatten_json
     description: Flatten JSON objects
-    category_type: data-analysis
+    category_type: data-analysis    enabled: false
+
     priority: medium
 
   - name: visidata
     package: visidata
     description: Terminal spreadsheet multitool
-    category_type: data-analysis
+    category_type: data-analysis    enabled: false
+
     priority: high
 
   - name: litecli
     package: litecli
     description: CLI for SQLite with auto-completion
-    category_type: data-analysis
+    category_type: data-analysis    enabled: false
+
     priority: medium
 
   - name: numpy
     package: numpy
     description: Fundamental package for scientific computing
-    category_type: data-analysis
+    category_type: data-analysis    enabled: false
+
     priority: medium
 
   # Windows Forensics
   - name: LnkParse3
     package: LnkParse3
     description: Windows LNK file parser
-    category_type: windows-forensics
+    category_type: windows-forensics    enabled: false
+
     priority: high
 
   - name: minidump
     package: minidump
     description: Windows minidump file parser
-    category_type: windows-forensics
+    category_type: windows-forensics    enabled: false
+
     priority: high
 
   # Network Analysis
   - name: scapy
     package: scapy
     description: Interactive packet manipulation program
-    category_type: network-analysis
+    category_type: network-analysis    enabled: false
+
     priority: high
 
   - name: pwncat
     package: pwncat
     description: Netcat on steroids with firewall/IDS/IPS evasion
-    category_type: network-analysis
+    category_type: network-analysis    enabled: false
+
     priority: medium
 
   - name: netaddr
     package: netaddr
     description: Network address manipulation library
-    category_type: network-analysis
+    category_type: network-analysis    enabled: false
+
     priority: medium
 
   # Cryptography & Encoding
   - name: name-that-hash
     package: name-that-hash
     description: Hash type identifier
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: high
 
   - name: chepy
     package: chepy
     description: Python library for data conversion (like CyberChef)
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: high
 
   # Ghidra Integration
   - name: ghidrecomp
     package: ghidrecomp
     description: Ghidra decompiler integration
-    category_type: reverse-engineering
+    category_type: reverse-engineering    enabled: false
+
     priority: medium
 
   - name: ghidriff
     package: ghidriff
     description: Ghidra binary diffing tool
-    category_type: reverse-engineering
+    category_type: reverse-engineering    enabled: false
+
     priority: medium
 
   - name: pyghidra
     package: pyghidra
     description: Python library for Ghidra automation
-    category_type: reverse-engineering
+    category_type: reverse-engineering    enabled: false
+
     priority: high
 
   - name: pcode2code
     package: pcode2code
     description: Ghidra P-code to source code translator
-    category_type: reverse-engineering
+    category_type: reverse-engineering    enabled: false
+
     priority: medium
 
   # Binary Analysis
   - name: hachoir
     package: hachoir
     description: Binary file parser and viewer
-    category_type: binary-analysis
+    category_type: binary-analysis    enabled: false
+
     priority: high
 
   # Steganography
   - name: stego-lsb
     package: stego-lsb
     description: LSB steganography tool
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: low
 
   - name: pypng
     package: pypng
     description: Pure Python PNG library
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: low
 
   # Development & Interactive Tools
   - name: jupyterlab
     package: jupyterlab
     description: Web-based interactive development environment
-    category_type: development
+    category_type: development    enabled: false
+
     priority: high
 
   - name: ptpython
     package: ptpython
     description: Better Python REPL
-    category_type: development
+    category_type: development    enabled: false
+
     priority: medium
 
   - name: jpterm
     package: jpterm
     description: Jupyter in the terminal
-    category_type: development
+    category_type: development    enabled: false
+
     priority: medium
 
   - name: grip
     package: grip
     description: GitHub README instant preview
-    category_type: development
+    category_type: development    enabled: false
+
     priority: low
 
   # Utilities
   - name: jsbeautifier
     package: jsbeautifier
     description: JavaScript beautifier
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: high
 
   - name: deep_translator
     package: deep_translator
     description: Translation library supporting multiple services
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: low
 
   - name: time-decode
     package: time-decode
     description: Timestamp decoder for various formats
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: high
 
   - name: toolong
     package: toolong
     description: Terminal log file viewer
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: medium
 
   - name: rexi
     package: rexi
     description: Regex interactive tester
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: medium
 
   - name: pip
     package: pip
     description: Python package installer
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: high
 
   # Threat Intelligence
   - name: shodan
     package: shodan
     description: Shodan search engine CLI
-    category_type: threat-intel
+    category_type: threat-intel    enabled: false
+
     priority: medium
 
   - name: malwarebazaar
     package: malwarebazaar
     description: MalwareBazaar API client
-    category_type: threat-intel
+    category_type: threat-intel    enabled: false
+
     priority: medium
 
   - name: mkyara
     package: mkyara
     description: YARA rule generator
-    category_type: threat-intel
+    category_type: threat-intel    enabled: false
+
     priority: medium
 
   - name: magika
     package: magika
     description: AI-powered file type detection
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: high
 
   - name: protodeep
     package: protodeep
     description: Protocol buffer deep inspector
-    category_type: utilities
+    category_type: utilities    enabled: false
+
     priority: medium
 
   - name: pyOneNote
     package: pyOneNote
     description: OneNote file parser
-    category_type: document-analysis
+    category_type: document-analysis    enabled: false
+
     priority: medium
 
 # Python scripts downloaded directly (not packages)
@@ -359,41 +414,57 @@ direct_scripts:
     url: "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py"
     description: Mach-O file format parser CLI
     destination: "${TOOLS}/bin/machofile-cli.py"
+    enabled: false
+
 
   - name: machofile
     url: "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
     description: Mach-O file format parser library
     destination: "${TOOLS}/bin/machofile.py"
+    enabled: false
+
 
   - name: msidump
     url: "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py"
     description: MSI file dump utility
     destination: "${TOOLS}/bin/msidump.py"
+    enabled: false
+
 
   - name: shellconv
     url: "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
     description: Shellcode converter
     destination: "${TOOLS}/bin/shellconv.py"
+    enabled: false
+
 
   - name: smtpsmug
     url: "https://raw.githubusercontent.com/hannob/smtpsmug/main/smtpsmug"
     description: SMTP smuggling tester
     destination: "${TOOLS}/bin/smtpsmug.py"
+    enabled: false
+
 
   - name: SQLiteWalker
     url: "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
     description: SQLite database walker
     destination: "${TOOLS}/bin/SQLiteWalker.py"
+    enabled: false
+
 
   - name: CanaryTokenScanner
     url: "https://raw.githubusercontent.com/0xNslabs/CanaryTokenScanner/main/CanaryTokenScanner.py"
     description: Canary token detector
     destination: "${TOOLS}/bin/CanaryTokenScanner.py"
+    enabled: false
+
 
   - name: sigs
     url: "https://raw.githubusercontent.com/clausing/scripts/master/sigs.py"
     description: Signature analysis script
     destination: "${TOOLS}/bin/sigs.py"
+    enabled: false
+
 
   - name: defender-dump
     url: "https://raw.githubusercontent.com/AlexJ4n6/Defender-Quarantine-Dump/refs/heads/main/defender-dump.py"
@@ -402,15 +473,21 @@ direct_scripts:
 
 # Utility scripts from setup
 utility_scripts:
+    enabled: false
+
   - name: hash-id
     source: "${PWD}/setup/utils/hash-id.py"
     destination: "${TOOLS}/bin/hash-id.py"
     description: Hash identifier utility
+    enabled: false
+
 
   - name: ipexpand
     source: "${PWD}/setup/utils/ipexpand.py"
     destination: "${TOOLS}/bin/ipexpand.py"
     description: IP address expander
+    enabled: false
+
 
   - name: powershell-cleanup
     source: "${PWD}/setup/utils/powershell-cleanup.py"
@@ -419,25 +496,35 @@ utility_scripts:
 
 # Git repo scripts copied to bin
 repo_scripts:
+    enabled: false
+
   - name: bmc-tools-script
     source: "C:/git/bmc-tools/bmc-tools.py"
     destination: "${TOOLS}/bin/bmc-tools.py"
     description: BMC tools Python script (from bmc-tools git repo)
+    enabled: false
+
 
   - name: dotnetfile_dump
     source: "C:/git/dotnetfile/examples/dotnetfile_dump.py"
     destination: "${TOOLS}/bin/dotnetfile_dump.py"
     description: .NET file dumper
+    enabled: false
+
 
   - name: iShutdown_detect
     source: "C:/git/iShutdown/iShutdown_detect.py"
     destination: "${TOOLS}/bin/iShutdown_detect.py"
     description: iShutdown spyware detector
+    enabled: false
+
 
   - name: iShutdown_parse
     source: "C:/git/iShutdown/iShutdown_parse.py"
     destination: "${TOOLS}/bin/iShutdown_parse.py"
     description: iShutdown log parser
+    enabled: false
+
 
   - name: iShutdown_stats
     source: "C:/git/iShutdown/iShutdown_stats.py"
@@ -459,3 +546,4 @@ notes: |
   6. Copies utility scripts
 
   Special handling required for some packages with dependencies.
+    enabled: false
