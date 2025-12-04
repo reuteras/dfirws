@@ -18,7 +18,7 @@ tools:
     extract_to: "${TOOLS}/sleuthkit"
     post_install:
       - type: rename
-        pattern: "sleuthkit-*"
+        pattern: "${TOOLS}/sleuthkit/sleuthkit-*"
         target: "sleuthkit"
     enabled: true
     priority: high
@@ -104,7 +104,7 @@ tools:
     extract_to: "${TOOLS}/qrtool"
     post_install:
       - type: rename
-        pattern: "qrtool-*"
+        pattern: "${TOOLS}/qrtool/qrtool-*"
         target: "qrtool"
     enabled: true
     priority: low

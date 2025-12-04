@@ -267,8 +267,11 @@ dfirws-install.ps1
    - `${TOOLS}` = `.\mount\Tools` (on host) or `C:\Tools` (in sandbox)
    - `${SETUP_PATH}` = `.\downloads`
    - `${SANDBOX_TOOLS}` = `C:\Tools` (sandbox only)
+   - Variables must be defined in global scope (`$global:TOOLS`) in common.ps1 to be accessible from functions in tool-handler.ps1
 
 4. **File type validation**: The `-check` parameter expects file command output:
    - `"Zip archive data"` (not "zip")
    - `"PE32"` (not "exe")
    - `"Composite Document File V2 Document"` (not "msi")
+
+5. **Variable scope**: When dot-sourcing scripts, variables need to be in global scope to be accessible across all functions. The Expand-EnvironmentVariables function looks for variables in global scope.

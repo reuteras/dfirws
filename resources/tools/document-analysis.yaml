@@ -52,7 +52,7 @@ tools:
     extract_to: "${TOOLS}/qpdf"
     post_install:
       - type: rename
-        pattern: "qpdf-*"
+        pattern: "${TOOLS}/qpdf/qpdf-*"
         target: "qpdf"
     enabled: true
     priority: high

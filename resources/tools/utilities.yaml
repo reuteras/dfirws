@@ -30,7 +30,7 @@ tools:
     extract_to: "${TOOLS}/ripgrep"
     post_install:
       - type: rename
-        pattern: "ripgrep-*"
+        pattern: "${TOOLS}/ripgrep/ripgrep-*"
         target: "ripgrep"
       - type: add_to_path
         path: "${TOOLS}/ripgrep"
@@ -72,7 +72,7 @@ tools:
     extract_to: "${TOOLS}/exiftool"
     post_install:
       - type: rename
-        pattern: "exiftool-*"
+        pattern: "${TOOLS}/exiftool/exiftool-*"
         target: "exiftool"
       - type: copy
         source: "${TOOLS}/exiftool/exiftool(-k).exe"
@@ -93,7 +93,7 @@ tools:
     extract_to: "${TOOLS}/ffmpeg"
     post_install:
       - type: rename
-        pattern: "ffmpeg-*"
+        pattern: "${TOOLS}/ffmpeg/ffmpeg-*"
         target: "ffmpeg"
     enabled: true
     priority: medium
@@ -134,7 +134,7 @@ tools:
     extract_to: "${TOOLS}/audacity"
     post_install:
       - type: rename
-        pattern: "audacity-*"
+        pattern: "${TOOLS}/audacity/audacity-*"
         target: "audacity"
     enabled: true
     priority: low
@@ -183,7 +183,7 @@ tools:
     extract_to: "${TOOLS}/notepad++"
     post_install:
       - type: rename
-        pattern: "npp.*"
+        pattern: "${TOOLS}/notepad++/npp.*"
         target: "notepad++"
     enabled: true
     priority: high
@@ -224,7 +224,7 @@ tools:
     extract_to: "${TOOLS}/mmdbinspect"
     post_install:
       - type: rename
-        pattern: "mmdbinspect*"
+        pattern: "${TOOLS}/mmdbinspect/mmdbinspect*"
         target: "mmdbinspect"
     enabled: true
     priority: low

@@ -42,7 +42,7 @@ tools:
     extract_to: "${TOOLS}/BloodHound"
     post_install:
       - type: rename
-        pattern: "BloodHound-win32-*"
+        pattern: "${TOOLS}/BloodHound/BloodHound-win32-*"
         target: "BloodHound"
     enabled: true
     priority: high

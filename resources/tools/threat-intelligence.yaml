@@ -18,7 +18,7 @@ tools:
     extract_to: "${TOOLS}/zircolite"
     post_install:
       - type: rename
-        pattern: "zircolite*"
+        pattern: "${TOOLS}/zircolite/zircolite*"
         target: "zircolite"
     enabled: true
     priority: high
@@ -70,7 +70,7 @@ tools:
     extract_to: "${TOOLS}/evtx"
     post_install:
       - type: rename
-        pattern: "evtx_dump*"
+        pattern: "${TOOLS}/evtx/evtx_dump*"
         target: "evtx"
     enabled: true
     priority: high

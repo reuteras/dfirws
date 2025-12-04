@@ -17,7 +17,7 @@ tools:
     extract_to: "${TOOLS}/pstwalker"
     post_install:
       - type: rename
-        pattern: "pstwalker*portable"
+        pattern: "${TOOLS}/pstwalker/pstwalker*portable"
         target: "pstwalker"
     enabled: true
     priority: high

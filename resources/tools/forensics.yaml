@@ -18,7 +18,7 @@ tools:
     extract_to: "${TOOLS}/artemis"
     post_install:
       - type: rename
-        pattern: "artemis-*"
+        pattern: "${TOOLS}/artemis/artemis-*"
         target: "artemis"
     enabled: true
     priority: high
@@ -137,7 +137,7 @@ tools:
     extract_to: "${TOOLS}"
     post_install:
       - type: rename
-        pattern: "RdpCacheStitcher_*"
+        pattern: "${TOOLS}/RdpCacheStitcher_*"
         target: "RdpCacheStitcher"
     enabled: true
     priority: medium
