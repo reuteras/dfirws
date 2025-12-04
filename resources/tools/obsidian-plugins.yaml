@@ -20,7 +20,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-dataview"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -35,7 +35,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-kanban"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -50,7 +50,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/quickadd"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -65,7 +65,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-calendar-plugin"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -80,7 +80,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/Templater"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -95,7 +95,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-tasks"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -110,7 +110,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-excalidraw-plugin"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -125,7 +125,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/admonitions"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css
@@ -140,7 +140,7 @@ tools:
     file_type: zip
     install_method: special
     extract_to: "${SETUP_PATH}/obsidian-plugins/obsidian-timeline"
-    enabled: true
+    enabled: false
     priority: low
     notes: |
       Requires downloading 3 files: main.js, manifest.json, styles.css

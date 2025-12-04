@@ -62,8 +62,9 @@ tools:
   # CAPA for Ghidra
   - name: capa-ghidra
     description: CAPA malware capability detection for Ghidra
-    source: http
-    url: "https://github.com/mandiant/capa/releases/download/v6.0.0/capa-v6.0.0-windows.zip"
+    source: github
+    repo: mandiant/capa
+    match: "capa-v.*-windows\\.zip$"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/capa-ghidra"
