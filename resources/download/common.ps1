@@ -1,18 +1,18 @@
 # Set the default encoding for Out-File to UTF-8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
-# Variables used by the script
-$CONFIGURATION_FILES = ".\local"
-$SETUP_PATH = ".\downloads"
-$WSDFIR_TEMP = "C:\tmp"
-$TOOLS = ".\mount\Tools"
-$SANDBOX_TOOLS = "C:\Tools"
+# Variables used by the script - define in global scope for access from all functions
+$global:CONFIGURATION_FILES = ".\local"
+$global:SETUP_PATH = ".\downloads"
+$global:WSDFIR_TEMP = "C:\tmp"
+$global:TOOLS = ".\mount\Tools"
+$global:SANDBOX_TOOLS = "C:\Tools"
 
-$null=$CONFIGURATION_FILES
-$null=$SANDBOX_TOOLS
-$null=$SETUP_PATH
-$null=$WSDFIR_TEMP
-$null=$TOOLS
+$null=$global:CONFIGURATION_FILES
+$null=$global:SANDBOX_TOOLS
+$null=$global:SETUP_PATH
+$null=$global:WSDFIR_TEMP
+$null=$global:TOOLS
 
 if (!(Test-Path variable:GIT_FILE)) {
     $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"

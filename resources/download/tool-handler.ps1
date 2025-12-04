@@ -10,12 +10,6 @@ $script:TOOLS_DEFINITIONS_PATH = ".\resources\tools"
 # Import common functions
 . ".\resources\download\common.ps1"
 
-# Capture common.ps1 variables into script scope for use in functions
-$script:TOOLS = $TOOLS
-$script:SETUP_PATH = $SETUP_PATH
-$script:SANDBOX_TOOLS = $SANDBOX_TOOLS
-$script:WSDFIR_TEMP = $WSDFIR_TEMP
-
 #region YAML Parsing
 
 function Import-ToolDefinitions {
@@ -510,35 +504,39 @@ function Expand-EnvironmentVariables {
         [string]$Path
     )
 
-    # Try to get variables from various scopes, with fallback to defaults
-    $toolsPath = if ($script:TOOLS) {
-        $script:TOOLS
-    } elseif (Get-Variable -Name TOOLS -ValueOnly -ErrorAction SilentlyContinue) {
-        Get-Variable -Name TOOLS -ValueOnly
-    } else {
-        ".\mount\Tools"
+    # Get variables from the caller's scope hierarchy
+    # Using Get-Variable without -Scope walks up the scope chain
+    try {
+        $toolsPath = Get-Variable -Name TOOLS -ValueOnly -Scope Global -ErrorAction Stop
+    } catch {
+        $toolsPath = ".\mount\Tools"
+        Write-SynchronizedLog "WARNING: TOOLS variable not found in global scope, using default: $toolsPath"
     }
 
-    $setupPath = if ($script:SETUP_PATH) {
-        $script:SETUP_PATH
-    } elseif (Get-Variable -Name SETUP_PATH -ValueOnly -ErrorAction SilentlyContinue) {
-        Get-Variable -Name SETUP_PATH -ValueOnly
-    } else {
-        ".\downloads"
+    try {
+        $setupPath = Get-Variable -Name SETUP_PATH -ValueOnly -Scope Global -ErrorAction Stop
+    } catch {
+        $setupPath = ".\downloads"
+        Write-SynchronizedLog "WARNING: SETUP_PATH variable not found in global scope, using default: $setupPath"
     }
 
-    $sandboxTools = if ($script:SANDBOX_TOOLS) {
-        $script:SANDBOX_TOOLS
-    } elseif (Get-Variable -Name SANDBOX_TOOLS -ValueOnly -ErrorAction SilentlyContinue) {
-        Get-Variable -Name SANDBOX_TOOLS -ValueOnly
-    } else {
-        "C:\Tools"
+    try {
+        $sandboxTools = Get-Variable -Name SANDBOX_TOOLS -ValueOnly -Scope Global -ErrorAction Stop
+    } catch {
+        $sandboxTools = "C:\Tools"
+        Write-SynchronizedLog "WARNING: SANDBOX_TOOLS variable not found in global scope, using default: $sandboxTools"
     }
+
+    # Log the values for debugging
+    Write-SynchronizedLog "Variable expansion: TOOLS='$toolsPath', SETUP_PATH='$setupPath', SANDBOX_TOOLS='$sandboxTools'"
+    Write-SynchronizedLog "Expanding path: $Path"
 
     # Replace common variables
-    $expanded = $Path -replace '\$\{TOOLS\}', $toolsPath
-    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $setupPath
-    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $sandboxTools
+    $expanded = $Path -replace '\$\{TOOLS\}', [regex]::Escape($toolsPath)
+    $expanded = $expanded -replace '\$\{SETUP_PATH\}', [regex]::Escape($setupPath)
+    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', [regex]::Escape($sandboxTools)
+
+    Write-SynchronizedLog "Expanded to: $expanded"
 
     return $expanded
 }
