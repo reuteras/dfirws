@@ -57,9 +57,10 @@ function Import-ToolDefinitions {
                     # Fix escape sequences in string properties (especially match patterns)
                     foreach ($prop in $tool.PSObject.Properties) {
                         if ($prop.Value -is [string]) {
-                            $prop.Value = $prop.Value -replace '\\\\', '\'  # Convert \\ to \
-                            $prop.Value = $prop.Value -replace '\\n', "`n"  # Convert \n to newline
-                            $prop.Value = $prop.Value -replace '\\t', "`t"  # Convert \t to tab
+                            $fixedValue = $prop.Value -replace '\\\\', '\'  # Convert \\ to \
+                            $fixedValue = $fixedValue -replace '\\n', "`n"  # Convert \n to newline
+                            $fixedValue = $fixedValue -replace '\\t', "`t"  # Convert \t to tab
+                            $tool.$($prop.Name) = $fixedValue
                         }
                     }
 
@@ -503,10 +504,15 @@ function Expand-EnvironmentVariables {
         [string]$Path
     )
 
-    # Replace common variables using script scope
-    $expanded = $Path -replace '\$\{TOOLS\}', $script:TOOLS
-    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $script:SETUP_PATH
-    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $script:SANDBOX_TOOLS
+    # Import common.ps1 variables if not already loaded
+    if (-not $TOOLS) {
+        . "$PSScriptRoot\common.ps1"
+    }
+
+    # Replace common variables
+    $expanded = $Path -replace '\$\{TOOLS\}', $TOOLS
+    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $SETUP_PATH
+    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $SANDBOX_TOOLS
 
     return $expanded
 }
