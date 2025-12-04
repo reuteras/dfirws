@@ -98,7 +98,7 @@ tools:
     extract_to: "${TOOLS}/edit"
     post_install:
       - type: rename
-        pattern: "edit-*"
+        pattern: "${TOOLS}/edit/edit-*"
         target: "edit"
     enabled: true
     priority: low

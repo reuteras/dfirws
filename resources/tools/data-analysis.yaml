@@ -18,7 +18,7 @@ tools:
     extract_to: "${TOOLS}/CyberChef"
     post_install:
       - type: rename
-        pattern: "CyberChef_*"
+        pattern: "${TOOLS}/CyberChef/CyberChef_*"
         target: "CyberChef.html"
     enabled: true
     priority: critical
@@ -34,7 +34,7 @@ tools:
     extract_to: "${TOOLS}/hayabusa"
     post_install:
       - type: rename
-        pattern: "hayabusa-*"
+        pattern: "${TOOLS}/hayabusa/hayabusa-*"
         target: "hayabusa"
     enabled: true
     priority: high
@@ -50,7 +50,7 @@ tools:
     extract_to: "${TOOLS}/takajo"
     post_install:
       - type: rename
-        pattern: "takajo-*"
+        pattern: "${TOOLS}/takajo/takajo-*"
         target: "takajo"
     enabled: true
     priority: medium
@@ -66,7 +66,7 @@ tools:
     extract_to: "${TOOLS}/chainsaw"
     post_install:
       - type: rename
-        pattern: "chainsaw*"
+        pattern: "${TOOLS}/chainsaw/chainsaw*"
         target: "chainsaw"
     enabled: true
     priority: high
@@ -94,7 +94,7 @@ tools:
     extract_to: "${TOOLS}/zstd"
     post_install:
       - type: rename
-        pattern: "zstd-*"
+        pattern: "${TOOLS}/zstd/zstd-*"
         target: "zstd"
     enabled: true
     priority: medium
@@ -184,7 +184,7 @@ tools:
     extract_to: "${TOOLS}/sqlite"
     post_install:
       - type: rename
-        pattern: "sqlite-*"
+        pattern: "${TOOLS}/sqlite/sqlite-*"
         target: "sqlite"
     enabled: true
     priority: high
