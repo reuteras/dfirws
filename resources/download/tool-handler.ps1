@@ -326,6 +326,38 @@ function Get-ToolBinary {
                 return $status
             }
 
+            "local" {
+                Write-SynchronizedLog "Copying $toolName from local source"
+
+                # Expected local file path (in .\local\ directory)
+                $localFilePath = "${CONFIGURATION_FILES}\${toolName}${extension}"
+
+                if (-not (Test-Path $localFilePath)) {
+                    Write-Error "Local file not found: $localFilePath"
+                    return $false
+                }
+
+                try {
+                    Copy-Item -Path $localFilePath -Destination $filePath -Force
+                    Write-SynchronizedLog "Copied $toolName from $localFilePath to $filePath"
+
+                    # Validate SHA256 if specified
+                    if ($ToolDefinition.sha256 -and $ValidateChecksum) {
+                        Write-SynchronizedLog "Validating SHA256 checksum for $toolName"
+                        $valid = Test-SHA256 -FilePath $filePath -ExpectedHash $ToolDefinition.sha256
+                        if (-not $valid) {
+                            Write-Error "SHA256 validation failed for $toolName"
+                            return $false
+                        }
+                    }
+
+                    return $true
+                } catch {
+                    Write-Error "Failed to copy local file: $_"
+                    return $false
+                }
+            }
+
             default {
                 Write-Error "Unknown source type: $source"
                 return $false
