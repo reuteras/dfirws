@@ -168,13 +168,16 @@ function Install-ToolFromDefinition {
         return $false
     }
 
-    # If DownloadOnly mode, skip installation and post-install steps
-    if ($DownloadOnly) {
-        Write-SynchronizedLog "Successfully downloaded: $toolName (download-only mode)"
+    # Determine if we should skip installation
+    $installMethod = $ToolDefinition.install_method
+
+    # In DownloadOnly mode, skip installer methods but still do extract/copy
+    if ($DownloadOnly -and $installMethod -eq "installer") {
+        Write-SynchronizedLog "Successfully downloaded: $toolName (download-only mode, skipping installer)"
         return $true
     }
 
-    # Install the tool based on install method
+    # Install the tool based on install method (extract, copy, or installer)
     $installed = Install-ToolBinary -ToolDefinition $ToolDefinition
 
     if (-not $installed) {
@@ -182,10 +185,14 @@ function Install-ToolFromDefinition {
         return $false
     }
 
-    # Run post-install steps
+    # Run post-install steps (rename, copy, etc.) - needed even in DownloadOnly for extract/copy methods
     Invoke-PostInstallSteps -ToolDefinition $ToolDefinition
 
-    Write-SynchronizedLog "Successfully installed: $toolName"
+    if ($DownloadOnly) {
+        Write-SynchronizedLog "Successfully prepared: $toolName (download-only mode)"
+    } else {
+        Write-SynchronizedLog "Successfully installed: $toolName"
+    }
     return $true
 }
 
