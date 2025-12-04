@@ -44,7 +44,7 @@ tools:
     extract_to: "${TOOLS}/MemProcFS"
     post_install:
       - type: rename
-        pattern: "MemProcFS*"
+        pattern: "${TOOLS}/MemProcFS/MemProcFS*"
         target: "MemProcFS"
     enabled: true
     priority: high
@@ -60,7 +60,7 @@ tools:
     extract_to: "${TOOLS}/pcileech"
     post_install:
       - type: rename
-        pattern: "pcileech*"
+        pattern: "${TOOLS}/pcileech/pcileech*"
         target: "pcileech"
     enabled: true
     priority: medium

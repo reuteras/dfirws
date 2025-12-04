@@ -69,7 +69,7 @@ tools:
     extract_to: "${TOOLS}/redress"
     post_install:
       - type: rename
-        pattern: "redress-*"
+        pattern: "${TOOLS}/redress/redress-*"
         target: "redress"
     enabled: true
     priority: medium
@@ -85,7 +85,7 @@ tools:
     extract_to: "${TOOLS}/die"
     post_install:
       - type: rename
-        pattern: "die_*"
+        pattern: "${TOOLS}/die/die_*"
         target: "die"
     enabled: true
     priority: high
@@ -137,7 +137,7 @@ tools:
     extract_to: "${TOOLS}/radare2"
     post_install:
       - type: rename
-        pattern: "radare2-*"
+        pattern: "${TOOLS}/radare2/radare2-*"
         target: "radare2"
     enabled: true
     priority: high
@@ -165,7 +165,7 @@ tools:
     extract_to: "${TOOLS}/jadx"
     post_install:
       - type: rename
-        pattern: "jadx-*"
+        pattern: "${TOOLS}/jadx/jadx-*"
         target: "jadx"
     enabled: true
     priority: high

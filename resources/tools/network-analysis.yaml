@@ -18,7 +18,7 @@ tools:
     extract_to: "${TOOLS}/godap"
     post_install:
       - type: rename
-        pattern: "godap-*"
+        pattern: "${TOOLS}/godap/godap-*"
         target: "godap"
     enabled: true
     priority: high

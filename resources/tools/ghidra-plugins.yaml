@@ -71,7 +71,7 @@ tools:
       - type: delete
         path: "${TOOLS}/capa-ghidra/capa-ghidra.exe"
       - type: rename
-        pattern: "capa.exe"
+        pattern: "${TOOLS}/capa-ghidra/capa.exe"
         target: "capa-ghidra.exe"
     enabled: true
     priority: medium
