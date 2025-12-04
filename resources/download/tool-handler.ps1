@@ -510,10 +510,35 @@ function Expand-EnvironmentVariables {
         [string]$Path
     )
 
-    # Replace common variables using script-scoped variables
-    $expanded = $Path -replace '\$\{TOOLS\}', $script:TOOLS
-    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $script:SETUP_PATH
-    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $script:SANDBOX_TOOLS
+    # Try to get variables from various scopes, with fallback to defaults
+    $toolsPath = if ($script:TOOLS) {
+        $script:TOOLS
+    } elseif (Get-Variable -Name TOOLS -ValueOnly -ErrorAction SilentlyContinue) {
+        Get-Variable -Name TOOLS -ValueOnly
+    } else {
+        ".\mount\Tools"
+    }
+
+    $setupPath = if ($script:SETUP_PATH) {
+        $script:SETUP_PATH
+    } elseif (Get-Variable -Name SETUP_PATH -ValueOnly -ErrorAction SilentlyContinue) {
+        Get-Variable -Name SETUP_PATH -ValueOnly
+    } else {
+        ".\downloads"
+    }
+
+    $sandboxTools = if ($script:SANDBOX_TOOLS) {
+        $script:SANDBOX_TOOLS
+    } elseif (Get-Variable -Name SANDBOX_TOOLS -ValueOnly -ErrorAction SilentlyContinue) {
+        Get-Variable -Name SANDBOX_TOOLS -ValueOnly
+    } else {
+        "C:\Tools"
+    }
+
+    # Replace common variables
+    $expanded = $Path -replace '\$\{TOOLS\}', $toolsPath
+    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $setupPath
+    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $sandboxTools
 
     return $expanded
 }
