@@ -22,7 +22,7 @@ tools:
   - name: evtxecmd
     description: Event log (evtx) parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/evtx.zip"
+    url: "https://download.ericzimmermanstools.com/net9/EvtxECmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -33,7 +33,7 @@ tools:
   - name: mftecmd
     description: MFT (Master File Table) parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/mft.zip"
+    url: "https://download.ericzimmermanstools.com/net9/MFTECmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -63,7 +63,7 @@ tools:
   - name: jlecmd
     description: Jump list parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/JLECmd.zip"
+    url: "https://download.ericzimmermanstools.com/net9/JLECmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -74,7 +74,7 @@ tools:
   - name: lecmd
     description: LNK file parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/LECmd.zip"
+    url: "https://download.ericzimmermanstools.com/net9/LECmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -85,7 +85,7 @@ tools:
   - name: pecmd
     description: Windows Prefetch parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/PECmd.zip"
+    url: "https://download.ericzimmermanstools.com/net9/PECmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -96,7 +96,7 @@ tools:
   - name: rbcmd
     description: Recycle bin parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/RBCmd.zip"
+    url: "https://download.ericzimmermanstools.com/net9/RBCmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -107,7 +107,7 @@ tools:
   - name: recmd
     description: Registry parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/RECmd.zip"
+    url: "https://download.ericzimmermanstools.com/net9/RECmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -118,7 +118,7 @@ tools:
   - name: sbecmd
     description: ShellBags parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/SBECmd.zip"
+    url: "https://download.ericzimmermanstools.com/net9/SBECmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -129,7 +129,7 @@ tools:
   - name: timeline-explorer
     description: Timeline analysis tool from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/TimelineExplorer.zip"
+    url: "https://download.ericzimmermanstools.com/net9/TimelineExplorer.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -140,7 +140,7 @@ tools:
   - name: registry-explorer
     description: Advanced registry viewer from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/RegistryExplorer.zip"
+    url: "https://download.ericzimmermanstools.com/net9/RegistryExplorer.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -151,7 +151,7 @@ tools:
   - name: shellbags-explorer
     description: ShellBags viewer from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/ShellBagsExplorer.zip"
+    url: "https://download.ericzimmermanstools.com/net9/ShellBagsExplorer.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -162,7 +162,7 @@ tools:
   - name: appcompatcache-parser
     description: AppCompatCache parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/AppCompatCacheParser.zip"
+    url: "https://download.ericzimmermanstools.com/net9/AppCompatCacheParser.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -173,7 +173,7 @@ tools:
   - name: amcache-parser
     description: Amcache parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/AmcacheParser.zip"
+    url: "https://download.ericzimmermanstools.com/net9/AmcacheParser.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"
@@ -184,7 +184,7 @@ tools:
   - name: wxtcmd
     description: Windows 10 Timeline database parser from Eric Zimmerman
     source: http
-    url: "https://ericzimmerman.github.io/Software/WxTCmd.zip"
+    url: "https://download.ericzimmermanstools.com/net9/WxTCmd.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/Zimmerman"

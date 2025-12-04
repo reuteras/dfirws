@@ -11,7 +11,8 @@ tools:
   - name: 7zip
     description: File archiver with high compression ratio
     source: http
-    url: "https://www.7-zip.org/a/7z2301-x64.msi"
+    url_pattern: "https://www.7-zip.org/download.html"
+    match: "7z[0-9]+-x64\\.msi"
     file_type: msi
     install_method: installer
     installer_args: "/qn /norestart"
