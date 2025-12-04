@@ -10,6 +10,12 @@ $script:TOOLS_DEFINITIONS_PATH = ".\resources\tools"
 # Import common functions
 . ".\resources\download\common.ps1"
 
+# Capture common.ps1 variables into script scope for use in functions
+$script:TOOLS = $TOOLS
+$script:SETUP_PATH = $SETUP_PATH
+$script:SANDBOX_TOOLS = $SANDBOX_TOOLS
+$script:WSDFIR_TEMP = $WSDFIR_TEMP
+
 #region YAML Parsing
 
 function Import-ToolDefinitions {
@@ -504,15 +510,10 @@ function Expand-EnvironmentVariables {
         [string]$Path
     )
 
-    # Import common.ps1 variables if not already loaded
-    if (-not $TOOLS) {
-        . "$PSScriptRoot\common.ps1"
-    }
-
-    # Replace common variables
-    $expanded = $Path -replace '\$\{TOOLS\}', $TOOLS
-    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $SETUP_PATH
-    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $SANDBOX_TOOLS
+    # Replace common variables using script-scoped variables
+    $expanded = $Path -replace '\$\{TOOLS\}', $script:TOOLS
+    $expanded = $expanded -replace '\$\{SETUP_PATH\}', $script:SETUP_PATH
+    $expanded = $expanded -replace '\$\{SANDBOX_TOOLS\}', $script:SANDBOX_TOOLS
 
     return $expanded
 }
