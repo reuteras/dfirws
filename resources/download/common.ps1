@@ -183,8 +183,16 @@ function Get-FileFromUri {
         Remove-Item $TmpFilePath -Force | Out-Null
         Update-ToolsDownloaded -URL $Uri -Name ([System.IO.FileInfo]$FilePath).Name -Path $FilePath
     } else {
-        Write-SynchronizedLog "Already downloaded $Uri according to etag (${ETAG_FILE})."
-        return $false
+        # Etag matched - verify file actually exists
+        if (Test-Path $FilePath) {
+            Write-SynchronizedLog "Already downloaded $Uri according to etag (${ETAG_FILE})."
+            return $false
+        } else {
+            Write-SynchronizedLog "Etag matched but file missing - removing etag and retrying download"
+            Remove-Item -Force "${ETAG_FILE}" -ErrorAction SilentlyContinue
+            # Retry the download without etag
+            return Get-FileFromUri -Uri $Uri -FilePath $FilePath -check $check -CheckURL "Yes"
+        }
     }
     $ProgressPreference = 'Continue'
 
