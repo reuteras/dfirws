@@ -278,8 +278,15 @@ function Get-ToolBinary {
                         -check $fileCheckString
                 }
 
-                # Validate SHA256 if specified and download succeeded
-                if ($status -and $ToolDefinition.sha256 -and $ValidateChecksum) {
+                # Get-GitHubRelease returns false when file already exists (etag match)
+                # Verify file actually exists regardless of download status
+                if (-not (Test-Path $filePath)) {
+                    Write-Error "Download failed and file does not exist: $filePath"
+                    return $false
+                }
+
+                # Validate SHA256 if specified
+                if ($ToolDefinition.sha256 -and $ValidateChecksum) {
                     Write-SynchronizedLog "Validating SHA256 checksum for $toolName"
                     $valid = Test-SHA256 -FilePath $filePath -ExpectedHash $ToolDefinition.sha256
                     if (-not $valid) {
@@ -288,7 +295,7 @@ function Get-ToolBinary {
                     }
                 }
 
-                return $status
+                return $true
             }
 
             "http" {
@@ -313,8 +320,15 @@ function Get-ToolBinary {
                     -FilePath $filePath `
                     -check $fileCheckString
 
-                # Validate SHA256 if specified and download succeeded
-                if ($status -and $ToolDefinition.sha256 -and $ValidateChecksum) {
+                # Get-FileFromUri returns false when file already exists (etag match)
+                # Verify file actually exists regardless of download status
+                if (-not (Test-Path $filePath)) {
+                    Write-Error "Download failed and file does not exist: $filePath"
+                    return $false
+                }
+
+                # Validate SHA256 if specified
+                if ($ToolDefinition.sha256 -and $ValidateChecksum) {
                     Write-SynchronizedLog "Validating SHA256 checksum for $toolName"
                     $valid = Test-SHA256 -FilePath $filePath -ExpectedHash $ToolDefinition.sha256
                     if (-not $valid) {
@@ -323,7 +337,7 @@ function Get-ToolBinary {
                     }
                 }
 
-                return $status
+                return $true
             }
 
             "local" {
