@@ -57,20 +57,6 @@ tools:
     enabled: true
     priority: high
 
-  # oledump - OLE file analysis
-  - name: oledump
-    description: Analyze OLE files (Compound Binary Files)
-    source: http
-    url: "https://didierstevens.com/files/software/oledump_V0_0_70.zip"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/didier/oledump"
-    enabled: false
-    priority: high
-    notes: |
-      DISABLED: Duplicate of oledump.py in didier-stevens-tools.yaml
-      This downloads old v0.0.70, while didier-stevens-tools.yaml gets latest from GitHub
-
   # pdf_object_hashing - PDF threat detection
   - name: pdf-object-hashing
     description: PDF threat detection via object hashing - identify related malicious PDFs
@@ -89,34 +75,6 @@ tools:
       Helps with attribution when threat actors use PDF builders.
       Requires Python 3.
       Related to GitHub issue #118
-
-  # pdfid - PDF analysis
-  - name: pdfid
-    description: Scan PDF files to identify suspicious content
-    source: http
-    url: "https://didierstevens.com/files/software/pdfid_v0_2_8.zip"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/didier/pdfid"
-    enabled: false
-    priority: high
-    notes: |
-      DISABLED: Duplicate of pdfid.py in didier-stevens-tools.yaml
-      This downloads old v0.2.8, while didier-stevens-tools.yaml gets latest from GitHub
-
-  # pdf-parser - PDF structure parser
-  - name: pdf-parser
-    description: Parse and analyze PDF structure
-    source: http
-    url: "https://didierstevens.com/files/software/pdf-parser_V0_7_8.zip"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/didier/pdf-parser"
-    enabled: false
-    priority: high
-    notes: |
-      DISABLED: Duplicate of pdf-parser.py in didier-stevens-tools.yaml
-      This downloads old v0.7.8, while didier-stevens-tools.yaml gets latest from GitHub
 
   # elfparser - ELF file parser
   - name: elfparser
