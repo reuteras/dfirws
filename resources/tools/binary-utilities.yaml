@@ -72,10 +72,10 @@ tools:
     description: Go symbol recovery and extraction tool
     source: github
     repo: mandiant/GoReSym
-    match: "GoReSym.*windows.*\\.exe$"
-    file_type: exe
-    install_method: copy
-    copy_to: "${TOOLS}/bin/GoReSym.exe"
+    match: "windows\\.zip$"
+    file_type: zip
+    install_method: extract
+    extract_to: "${TOOLS}/GoReSym"
     enabled: true
     priority: medium
 

@@ -109,7 +109,7 @@ tools:
     source: github
     repo: cmderdev/cmder
     match: "cmder\\.7z$"
-    file_type: zip
+    file_type: 7z
     install_method: extract
     extract_to: "${TOOLS}/cmder"
     enabled: true

@@ -178,14 +178,10 @@ tools:
     description: Free source code editor and Notepad replacement
     source: github
     repo: notepad-plus-plus/notepad-plus-plus
-    match: "npp\\..*\\.portable\\.x64\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/notepad++"
-    post_install:
-      - type: rename
-        pattern: "${TOOLS}/notepad++/npp.*"
-        target: "notepad++"
+    match: "Installer\\.x64\\.exe$"
+    file_type: exe
+    install_method: installer
+    installer_args: "/S"
     enabled: true
     priority: high
 
