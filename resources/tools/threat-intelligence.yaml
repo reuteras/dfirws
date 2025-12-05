@@ -12,8 +12,8 @@ tools:
     description: Fast and portable EVTX/JSON/XML log analysis tool using SIGMA rules
     source: github
     repo: wagga40/zircolite
-    match: "zircolite.*win.*\\.zip$"
-    file_type: zip
+    match: "zircolite.*\\.7z$"
+    file_type: 7z
     install_method: extract
     extract_to: "${TOOLS}/zircolite"
     post_install:
@@ -52,10 +52,9 @@ tools:
     description: Tool for exploration and tracing of the Windows kernel
     source: github
     repo: rabbitstack/fibratus
-    match: "fibratus.*windows.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/fibratus"
+    match: "fibratus-[.0-9]+-amd64\\.msi$"
+    file_type: msi
+    install_method: installer
     enabled: true
     priority: medium
 
@@ -64,14 +63,10 @@ tools:
     description: Fast Windows event log parser
     source: github
     repo: omerbenamram/evtx
-    match: "evtx.*x86_64.*windows.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/evtx"
-    post_install:
-      - type: rename
-        pattern: "${TOOLS}/evtx/evtx_dump*"
-        target: "evtx"
+    match: "exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/evtx_dump.exe"
     enabled: true
     priority: high
 

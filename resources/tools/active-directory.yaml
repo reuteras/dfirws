@@ -60,14 +60,3 @@ tools:
     enabled: true
     priority: high
     notes: Requires .NET Framework
-
-  # PingCastle - AD security assessment
-  - name: pingcastle
-    description: Active Directory security assessment tool
-    source: http
-    url: "https://github.com/vletoux/pingcastle/releases/latest/download/PingCastle.zip"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/PingCastle"
-    enabled: true
-    priority: high

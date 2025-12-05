@@ -128,9 +128,9 @@ tools:
     description: Encode and decode JWT tokens from the command line
     source: github
     repo: mike-engel/jwt-cli
-    match: "jwt-windows\\.exe$"
-    file_type: exe
-    install_method: copy
-    copy_to: "${TOOLS}/bin/jwt.exe"
+    match: "jwt-windows\\.tar\\.gz$"
+    file_type: tar.gz
+    install_method: extract
+    extract_to: "${TOOLS}/jwt-cli"
     enabled: true
     priority: low

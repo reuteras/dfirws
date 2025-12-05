@@ -38,7 +38,7 @@ tools:
     source: github
     repo: joeavanzato/logboost
     match: "logboost_release.*\\.rar$"
-    file_type: zip
+    file_type: rar
     install_method: extract
     extract_to: "${TOOLS}/logboost"
     enabled: true
