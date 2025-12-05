@@ -76,18 +76,6 @@ tools:
       Requires Python 3.
       Related to GitHub issue #118
 
-  # elfparser - ELF file parser
-  - name: elfparser
-    description: ELF binary parser
-    source: github
-    repo: mentebinaria/elfparser-ng
-    match: "elfparser.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/elfparser"
-    enabled: true
-    priority: medium
-
   # Malcat - Malware analysis tool
   - name: malcat
     description: Feature-rich hexadecimal editor / disassembler for malware analysis

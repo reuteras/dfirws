@@ -44,7 +44,7 @@ tools:
     description: Analyzer for Hayabusa results
     source: github
     repo: Yamato-Security/takajo
-    match: "takajo.*windows.*\\.zip$"
+    match: "win-x64\\.zip$"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/takajo"
@@ -76,7 +76,7 @@ tools:
     description: Simple IOC and YARA scanner
     source: github
     repo: Neo23x0/Loki
-    match: "loki.*win.*\\.zip$"
+    match: "loki.*\\.zip$"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/loki"

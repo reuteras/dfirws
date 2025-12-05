@@ -84,10 +84,14 @@ tools:
     description: PE file reader and analyzer
     source: github
     repo: mentebinaria/readpe
-    match: "readpe.*windows.*\\.zip$"
+    match: "win\\.zip$"
     file_type: zip
     install_method: extract
-    extract_to: "${TOOLS}/readpe"
+    extract_to: "${TOOLS}"
+    post_install:
+      - type: rename
+        pattern: "${TOOLS}/pev*"
+        target: "pev"
     enabled: true
     priority: medium
 
@@ -131,8 +135,8 @@ tools:
   - name: elfparser-ng
     description: ELF binary file parser and analyzer
     source: github
-    repo: e-m-b-a/elfparser-ng
-    match: "elfparser-ng.*windows.*\\.zip$"
+    repo: mentebinaria/elfparser-ng
+    match: "win64\\.zip$"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/elfparser-ng"
