@@ -65,9 +65,11 @@ tools:
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/didier/oledump"
-    enabled: true
+    enabled: false
     priority: high
-    notes: Part of Didier Stevens tools
+    notes: |
+      DISABLED: Duplicate of oledump.py in didier-stevens-tools.yaml
+      This downloads old v0.0.70, while didier-stevens-tools.yaml gets latest from GitHub
 
   # pdf_object_hashing - PDF threat detection
   - name: pdf-object-hashing
@@ -96,9 +98,11 @@ tools:
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/didier/pdfid"
-    enabled: true
+    enabled: false
     priority: high
-    notes: Part of Didier Stevens tools
+    notes: |
+      DISABLED: Duplicate of pdfid.py in didier-stevens-tools.yaml
+      This downloads old v0.2.8, while didier-stevens-tools.yaml gets latest from GitHub
 
   # pdf-parser - PDF structure parser
   - name: pdf-parser
@@ -108,9 +112,11 @@ tools:
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/didier/pdf-parser"
-    enabled: true
+    enabled: false
     priority: high
-    notes: Part of Didier Stevens tools
+    notes: |
+      DISABLED: Duplicate of pdf-parser.py in didier-stevens-tools.yaml
+      This downloads old v0.7.8, while didier-stevens-tools.yaml gets latest from GitHub
 
   # elfparser - ELF file parser
   - name: elfparser
