@@ -29,6 +29,7 @@ function Get-FileFromUri {
     )
 
     Write-SynchronizedLog "Downloading $Uri to $FilePath. CheckURL: $CheckURL."
+    Write-SynchronizedLog "DEBUG Get-FileFromUri: Received URI parameter: '$Uri'"
 
     $fileDownloadedOrChanged = $false
 
@@ -366,27 +367,7 @@ function Get-DownloadUrlFromPage {
     # Trim any whitespace
     $downloadUrl = $downloadUrl.Trim()
 
-    Write-SynchronizedLog "DEBUG: Extracted URL from page: '$downloadUrl'"
-
-    # If the URL is relative (doesn't start with http:// or https://), make it absolute
-    if (-not ($downloadUrl -match "^https?://")) {
-        Write-SynchronizedLog "DEBUG: URL is relative, constructing absolute URL"
-        # Extract base URL (protocol + domain)
-        if ($Url -match "^(https?://[^/]+)") {
-            $baseUrl = $matches[1]
-            # Handle leading slash in relative URL
-            if ($downloadUrl -match "^/") {
-                # Absolute path on same domain
-                $downloadUrl = "$baseUrl$downloadUrl"
-            } else {
-                # Relative path
-                $downloadUrl = "$baseUrl/$downloadUrl"
-            }
-            Write-SynchronizedLog "DEBUG: Constructed absolute URL: '$downloadUrl'"
-        }
-    } else {
-        Write-SynchronizedLog "DEBUG: URL is already absolute"
-    }
+    Write-SynchronizedLog "DEBUG: Extracted match from page: '$downloadUrl'"
 
     return $downloadUrl
 }
