@@ -303,19 +303,44 @@ function Get-ToolBinary {
 
                 # Handle URL patterns (for dynamic URLs)
                 if ($ToolDefinition.url_pattern) {
-                    $url = Get-DownloadUrlFromPage `
+                    $matchedPath = Get-DownloadUrlFromPage `
                         -url $ToolDefinition.url_pattern `
                         -RegEx $ToolDefinition.match
 
-                    if (-not $url) {
+                    if (-not $matchedPath) {
                         Write-Error "Could not determine download URL for $toolName"
                         return $false
+                    }
+
+                    Write-SynchronizedLog "DEBUG: Matched path from page: '$matchedPath'"
+
+                    # If the matched path is already absolute (starts with http:// or https://), use it as-is
+                    if ($matchedPath -match "^https?://") {
+                        $url = $matchedPath
+                        Write-SynchronizedLog "DEBUG: Path is already absolute URL"
+                    } else {
+                        # Extract base URL from url_pattern (protocol + domain)
+                        if ($ToolDefinition.url_pattern -match "^(https?://[^/]+)") {
+                            $baseUrl = $matches[1]
+                            # Handle leading slash in relative path
+                            if ($matchedPath -match "^/") {
+                                $url = "$baseUrl$matchedPath"
+                            } else {
+                                $url = "$baseUrl/$matchedPath"
+                            }
+                            Write-SynchronizedLog "DEBUG: Constructed absolute URL from base '$baseUrl' and path '$matchedPath': '$url'"
+                        } else {
+                            Write-Error "Could not extract base URL from url_pattern: $($ToolDefinition.url_pattern)"
+                            return $false
+                        }
                     }
 
                     Write-SynchronizedLog "Resolved download URL: $url"
                 } else {
                     $url = $ToolDefinition.url
                 }
+
+                Write-SynchronizedLog "DEBUG: About to call Get-FileFromUri with URL: '$url'"
 
                 $status = Get-FileFromUri `
                     -uri $url `
