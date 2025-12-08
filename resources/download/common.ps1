@@ -45,6 +45,9 @@ function Get-FileFromUri {
         $filePathHash = ""
     }
 
+    # Save original FilePath before transformation for potential retry
+    $OriginalFilePath = $FilePath
+
     # Remove any leading '..' from the file path and set up temporary file path and final file path
     $CleanPath = $FilePath -replace "^..", ""
     $TmpFilePath= "$PSScriptRoot\..\..\tmp\$CleanPath"
@@ -190,8 +193,8 @@ function Get-FileFromUri {
         } else {
             Write-SynchronizedLog "Etag matched but file missing - removing etag and retrying download"
             Remove-Item -Force "${ETAG_FILE}" -ErrorAction SilentlyContinue
-            # Retry the download without etag
-            return Get-FileFromUri -Uri $Uri -FilePath $FilePath -check $check -CheckURL "Yes"
+            # Retry the download without etag using original FilePath parameter
+            return Get-FileFromUri -Uri $Uri -FilePath $OriginalFilePath -check $check -CheckURL "Yes"
         }
     }
     $ProgressPreference = 'Continue'
