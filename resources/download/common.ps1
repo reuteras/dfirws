@@ -24,7 +24,8 @@ function Get-FileFromUri {
         [Parameter(Mandatory=$True)] [string]$Uri,
         [Parameter(Mandatory=$True)] [string]$FilePath,
         [Parameter(Mandatory=$False)] [string]$CheckURL = "",
-        [Parameter(Mandatory=$False)] [string]$check = ""
+        [Parameter(Mandatory=$False)] [string]$check = "",
+        [Parameter(Mandatory=$False)] [int]$RetryDepth = 0
     )
 
     Write-SynchronizedLog "Downloading $Uri to $FilePath. CheckURL: $CheckURL."
@@ -191,10 +192,16 @@ function Get-FileFromUri {
             Write-SynchronizedLog "Already downloaded $Uri according to etag (${ETAG_FILE})."
             return $false
         } else {
-            Write-SynchronizedLog "Etag matched but file missing - removing etag and retrying download"
+            # Prevent infinite recursion
+            if ($RetryDepth -ge 1) {
+                Write-Error "Download retry failed - file still missing after $RetryDepth attempts"
+                return $false
+            }
+
+            Write-SynchronizedLog "Etag matched but file missing - removing etag and retrying download (attempt $($RetryDepth + 1))"
             Remove-Item -Force "${ETAG_FILE}" -ErrorAction SilentlyContinue
             # Retry the download without etag using original FilePath parameter
-            return Get-FileFromUri -Uri $Uri -FilePath $OriginalFilePath -check $check -CheckURL "Yes"
+            return Get-FileFromUri -Uri $Uri -FilePath $OriginalFilePath -check $check -CheckURL "Yes" -RetryDepth ($RetryDepth + 1)
         }
     }
     $ProgressPreference = 'Continue'

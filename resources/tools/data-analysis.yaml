@@ -178,7 +178,7 @@ tools:
     source: http
     url: "https://www.sqlite.org/download.html"
     url_pattern: "https://www.sqlite.org/download.html"
-    match: "sqlite-tools-win.*\\.zip"
+    match: "sqlite-tools-win-x64.*\\.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/sqlite"
