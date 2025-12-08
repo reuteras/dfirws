@@ -23,18 +23,6 @@ tools:
     enabled: true
     priority: high
 
-  # FTK Imager Lite - Disk imaging tool
-  - name: ftk-imager
-    description: Disk imaging and analysis tool from AccessData
-    source: http
-    url: "https://d1kpmuwb7gvu1i.cloudfront.net/AccessData_FTK_Imager_Lite_3.1.1.zip"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/FTKImager"
-    enabled: true
-    priority: high
-    notes: May need to update URL for latest version
-
   # Arsenal Image Mounter - Disk image mounter
   - name: arsenal-image-mounter
     description: Virtual SCSI adapter for mounting disk images
