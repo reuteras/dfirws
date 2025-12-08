@@ -363,15 +363,29 @@ function Get-DownloadUrlFromPage {
         }
     }
 
+    # Trim any whitespace
+    $downloadUrl = $downloadUrl.Trim()
+
+    Write-SynchronizedLog "DEBUG: Extracted URL from page: '$downloadUrl'"
+
     # If the URL is relative (doesn't start with http:// or https://), make it absolute
-    if ($downloadUrl -notmatch "^https?://") {
-        # Extract base URL (protocol + domain + path without filename)
+    if (-not ($downloadUrl -match "^https?://")) {
+        Write-SynchronizedLog "DEBUG: URL is relative, constructing absolute URL"
+        # Extract base URL (protocol + domain)
         if ($Url -match "^(https?://[^/]+)") {
             $baseUrl = $matches[1]
-            # Remove leading slash if present in relative URL to avoid double slashes
-            $downloadUrl = $downloadUrl -replace "^/", ""
-            $downloadUrl = "$baseUrl/$downloadUrl"
+            # Handle leading slash in relative URL
+            if ($downloadUrl -match "^/") {
+                # Absolute path on same domain
+                $downloadUrl = "$baseUrl$downloadUrl"
+            } else {
+                # Relative path
+                $downloadUrl = "$baseUrl/$downloadUrl"
+            }
+            Write-SynchronizedLog "DEBUG: Constructed absolute URL: '$downloadUrl'"
         }
+    } else {
+        Write-SynchronizedLog "DEBUG: URL is already absolute"
     }
 
     return $downloadUrl
