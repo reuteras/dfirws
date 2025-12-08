@@ -7,32 +7,6 @@ category: memory-forensics
 description: Memory acquisition, analysis, and forensics tools
 
 tools:
-  # Volatility 3 - Memory forensics framework
-  - name: volatility3
-    description: Advanced memory forensics framework (Python version)
-    source: github
-    repo: volatilityfoundation/volatility3
-    match: "volatility3-.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/volatility3"
-    enabled: true
-    priority: critical
-    notes: Python-based, requires Python 3.6+
-
-  # Volatility 2 standalone - Legacy version
-  - name: volatility2
-    description: Memory forensics framework standalone executable
-    source: github
-    repo: volatilityfoundation/volatility
-    match: "volatility.*standalone.*\\.exe$"
-    file_type: exe
-    install_method: copy
-    copy_to: "${TOOLS}/bin/volatility2.exe"
-    enabled: true
-    priority: high
-    notes: Standalone version, no Python required
-
   # MemProcFS - Memory process file system
   - name: memprocfs
     description: Easy and convenient way of accessing physical memory
@@ -77,18 +51,6 @@ tools:
     enabled: false
     priority: low
     notes: Project archived, may not work with newer systems
-
-  # strings2 - Enhanced strings utility
-  - name: strings2
-    description: Enhanced strings utility for finding strings in memory/files
-    source: github
-    repo: glmcdona/strings2
-    match: "strings2.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/strings2"
-    enabled: true
-    priority: medium
 
   # winpmem - Windows memory acquisition
   - name: winpmem
