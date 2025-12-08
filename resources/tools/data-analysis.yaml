@@ -141,7 +141,7 @@ tools:
     source: github
     repo: gollum/gollum
     match: "gollum\\.war"
-    file_type: war
+    file_type: zip
     install_method: copy
     copy_to: "${TOOLS}/lib/gollum.war"
     enabled: true
@@ -178,7 +178,7 @@ tools:
     source: http
     url: "https://www.sqlite.org/download.html"
     url_pattern: "https://www.sqlite.org/download.html"
-    match: "sqlite-tools-win-x64.*\\.zip"
+    match: "[0-9]+/sqlite-tools-win-x64.*\\.zip"
     file_type: zip
     install_method: extract
     extract_to: "${TOOLS}/sqlite"

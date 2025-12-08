@@ -23,18 +23,6 @@ tools:
     enabled: true
     priority: high
 
-  # Arsenal Image Mounter - Disk image mounter
-  - name: arsenal-image-mounter
-    description: Virtual SCSI adapter for mounting disk images
-    source: http
-    url: "https://arsenalrecon.com/downloads/ArsenalImageMounter.zip"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/ArsenalImageMounter"
-    enabled: true
-    priority: high
-    notes: Requires installation, driver signing may be needed
-
   # OSFMount - Mount disk images
   - name: osfmount
     description: Mount local disk image files as virtual disks
@@ -45,17 +33,6 @@ tools:
     installer_args: "/VERYSILENT /NORESTART"
     enabled: true
     priority: high
-
-  # ImDisk Toolkit - Virtual disk driver
-  - name: imdisk
-    description: Virtual disk driver for Windows
-    source: http
-    url: "https://sourceforge.net/projects/imdisk-toolkit/files/latest/download"
-    file_type: exe
-    install_method: installer
-    installer_args: "/SILENT"
-    enabled: true
-    priority: medium
 
   # Kroll Ontrack Easy Recovery
   - name: thumbcache-viewer
@@ -74,10 +51,10 @@ tools:
     description: Slack space dumper and analyzer
     source: github
     repo: strozfriedberg/sidr
-    match: "sidr.*windows.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/sidr"
+    match: "sidr.exe$"
+    file_type: exe
+    install_method: copy
+    copy_to: "${TOOLS}/bin/sidr.exe"
     enabled: true
     priority: low
 
