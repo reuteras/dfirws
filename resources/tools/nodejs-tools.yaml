@@ -14,7 +14,8 @@ tools:
   - name: box-js
     package: box-js
     description: JavaScript malware analysis sandbox
-    category_type: malware-analysis    enabled: false
+    category_type: malware-analysis
+    enabled: false
 
     priority: high
     notes: |
@@ -24,7 +25,8 @@ tools:
   - name: deobfuscator
     package: deobfuscator
     description: JavaScript deobfuscator
-    category_type: malware-analysis    enabled: false
+    category_type: malware-analysis
+    enabled: false
 
     priority: high
     notes: |
@@ -34,7 +36,8 @@ tools:
   - name: jsdom
     package: jsdom
     description: JavaScript DOM implementation
-    category_type: utilities    enabled: false
+    category_type: utilities
+    enabled: false
 
     priority: medium
     notes: |
@@ -45,7 +48,8 @@ tools:
   - name: docsify-cli
     package: docsify-cli
     description: Documentation site generator
-    category_type: utilities    enabled: false
+    category_type: utilities
+    enabled: false
 
     priority: low
     notes: |
