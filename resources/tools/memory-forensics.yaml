@@ -63,27 +63,3 @@ tools:
     copy_to: "${TOOLS}/bin/winpmem.exe"
     enabled: true
     priority: high
-
-  # DumpIt - Memory dumper
-  - name: dumpit
-    description: Memory dump utility for Windows
-    source: http
-    url: "https://download.comae.com/DumpIt.zip"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/DumpIt"
-    enabled: true
-    priority: medium
-    notes: May require registration or alternative download source
-
-  # MemDump - Memory dumping tool
-  - name: memdump
-    description: Windows memory dumping tool
-    source: github
-    repo: kost/memdump
-    match: "memdump.*win.*\\.zip$"
-    file_type: zip
-    install_method: extract
-    extract_to: "${TOOLS}/memdump"
-    enabled: true
-    priority: low
