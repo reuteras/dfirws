@@ -363,6 +363,17 @@ function Get-DownloadUrlFromPage {
         }
     }
 
+    # If the URL is relative (doesn't start with http:// or https://), make it absolute
+    if ($downloadUrl -notmatch "^https?://") {
+        # Extract base URL (protocol + domain + path without filename)
+        if ($Url -match "^(https?://[^/]+)") {
+            $baseUrl = $matches[1]
+            # Remove leading slash if present in relative URL to avoid double slashes
+            $downloadUrl = $downloadUrl -replace "^/", ""
+            $downloadUrl = "$baseUrl/$downloadUrl"
+        }
+    }
+
     return $downloadUrl
 }
 
