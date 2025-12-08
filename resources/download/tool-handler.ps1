@@ -311,6 +311,8 @@ function Get-ToolBinary {
                         Write-Error "Could not determine download URL for $toolName"
                         return $false
                     }
+
+                    Write-SynchronizedLog "Resolved download URL: $url"
                 } else {
                     $url = $ToolDefinition.url
                 }
