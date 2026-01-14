@@ -57,7 +57,7 @@ Set-Alias di dfirws-install.ps1
 if ( ${WSDFIR_OHMYPOSH} -eq "Yes" ) {
 	# You can place your own theme in the local directory
 	if (!(Test-Path "${HOME}\tmp\oh-my-posh-init.ps1")) {
-		& "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG}" > "${HOME}\tmp\oh-my-posh-init.ps1"
+		& "oh-my-posh.exe" init pwsh --config "${LOCAL_PATH}\${WSDFIR_OHMYPOSH_CONFIG}" > "${HOME}\tmp\oh-my-posh-init.ps1"
 	}
 	& "${HOME}\tmp\oh-my-posh-init.ps1"
 

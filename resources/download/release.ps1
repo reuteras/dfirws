@@ -895,6 +895,16 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\sqlitebrowser" | Out-Null
 }
 
+# NetExt
+$status = Get-GitHubRelease -repo "rodneyviana/netext" -path "${SETUP_PATH}\netext.zip" -match "NetExt-.*.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\NetExt") {
+        Remove-Item "${TOOLS}\NetExt" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\netext.zip" -o"${TOOLS}" | Out-Null
+    Move-Item ${TOOLS}\NetExt-* "${TOOLS}\NetExt"
+}
+
 #
 # Obsidian plugins
 #

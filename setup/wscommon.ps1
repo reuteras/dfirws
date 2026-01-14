@@ -774,14 +774,15 @@ function Install-OSFMount {
         Write-Output "OSFMount is already installed"
     }
 }
+
 function Install-OhMyPosh {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-ohmyposh.txt")) {
         Write-Output "Installing OhMyPosh"
-        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\oh-my-posh.msi /qn /norestart"
+        Add-AppxPackage "${SETUP_PATH}\oh-my-posh.msi"
         Write-Output "Installing OhMyPosh fonts"
-        Start-Process "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" -ArgumentList "font install ${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
+        Start-Process "oh-my-posh.exe" -ArgumentList "font install ${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
         Write-Output "Creating new shortcut"
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oh-my-posh.exe --help" -Iconlocation "${HOME}\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oh-my-posh.exe --help"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
     } else {
         Write-Output "OhMyPosh is already installed"
@@ -827,6 +828,7 @@ function Install-PuTTY {
         Write-Output "PuTTY is already installed"
     }
 }
+
 function Install-Qemu {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-qemu.txt")) {
         Write-Output "Installing Qemu"
@@ -1021,6 +1023,24 @@ function Install-W10Loopback {
         }
     } else {
         Write-Output "Windows 10 Loopback adapter is already installed"
+    }
+}
+
+function Install-WinDbg {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-windbg.txt")) {
+        Write-Output "Installing WinDbg"
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\windbg.msi /qn /norestart"
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-windbg.txt" | Out-Null
+        Add-AppPackage "${SETUP_PATH}\windbg.msi"
+        if (Test-Path "${HOME}\Desktop\dfirws\Reverse Engineering\WinDbg (runs dfirws-install -WinDbg).lnk") {
+            Remove-Item "${HOME}\Desktop\dfirws\Reverse Engineering\WinDbg (runs dfirws-install -WinDbg).lnk" -Force
+        }
+        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Reverse Engineering\WinDbg (runs dfirws-install -WinDbg).lnk") {
+            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Reverse Engineering\WinDbg (runs dfirws-install -WinDbg).lnk" -Force
+        }
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\windbg.lnk" -DestinationPath "${env:ProgramFiles}\Windows Kits\10\Debuggers\x64\windbg.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\Windows Kits\10\Debuggers\x64\windbg.exe"
+    } else {
+        Write-Output "WinDbg is already installed"
     }
 }
 

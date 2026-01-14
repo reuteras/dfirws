@@ -107,4 +107,7 @@ if (Test-Path "${HOME}\Desktop\readonly\Quarantine.zip") {
 # You can access the arguments used to start the sandbox like this
 # Write-Output @args | Out-File -FilePath "${HOME}\Desktop\args.txt" -Encoding ascii
 
+# PowerShell shortcut to start pwsh in Desktop
+#Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
+
 # Add your own customizations here

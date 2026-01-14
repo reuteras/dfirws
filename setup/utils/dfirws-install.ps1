@@ -43,6 +43,7 @@ param (
     [switch]$VisualStudioBuildTools,
     [switch]$VLC,
     [switch]$VSCode,
+    [switch]$Windbg,
     [switch]$WinMerge,
     [switch]$Wireshark,
     [switch]$X64Dbg,
@@ -219,6 +220,10 @@ if ($VLC.IsPresent) {
 
 if ($VSCode.IsPresent) {
     Install-VSCode
+}
+
+if ($Windbg.IsPresent) {
+    Install-Windbg
 }
 
 if ($WinMerge.IsPresent) {

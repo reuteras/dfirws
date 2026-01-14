@@ -34,7 +34,7 @@ $status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "
 
 # oh-my-posh - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading oh-my-posh."
-$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.msi" "oh-my-posh.msi" -check "Composite Document File V2 Document"
+$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.msi" "oh-my-posh.msi" -check "Zip archive data"
 
 # PowerShell 7 - installed during startup
 Write-SynchronizedLog "winget: Downloading PowerShell 7."
@@ -60,7 +60,7 @@ $status = Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe" -check "PE32"
 Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
 $status = Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip" -check "Zip archive data"
 if ($status) {
- & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 # WinMerge - available for installation via dfirws-install.ps1
@@ -103,7 +103,11 @@ $status = Get-WinGet "Foxit.FoxitReader" "Foxit*.exe" "foxitreader.exe" -check "
 Write-SynchronizedLog "winget: Downloading uv."
 $status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
 if ($status) {
- & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
 }
+
+# Windbg - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Windbg."
+$status = Get-WinGet "Microsoft.WinDbg" "WinDbg*.msi" "windbg.msi" -check "Zip archive data"
 
 Write-SynchronizedLog "winget: Download complete."

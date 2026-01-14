@@ -56,7 +56,6 @@ Write-DateLog "PowerShell installed and execution policy set to Unrestricted for
 if ($PSVersionTable.PSVersion.Major -gt 7) {
 	Enable-ExperimentalFeature PSFeedbackProvider
 }
-Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
 
 # Install Terminal and link to it
 Expand-Archive "${SETUP_PATH}\Terminal.zip" -DestinationPath "$env:ProgramFiles\Windows Terminal" -Force | Out-Null
@@ -343,7 +342,6 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${VENV}\regipy\Scripts"
 	"${VENV}\sigma-cli\Scripts"
 	"${VENV}\toolong\Scripts"
-	"${HOME}\AppData\Local\Programs\oh-my-posh\bin"
 	"${HOME}\Documents\tools\utils")
 
 $ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"

@@ -487,6 +487,13 @@ if ($status) {
 $intel_driver = Get-DownloadUrlFromPage -url "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-cpu-runtime-for-opencl-applications-with-sycl-support.html" -RegEx 'https://[^"]+\.exe'
 $status = Get-FileFromUri -uri "${intel_driver}" -FilePath ".\downloads\intel_driver.exe" -CheckURL "Yes" -check "PE32"
 
+# Mex for WinDbg
+$status = Get-FileFromUri -uri "https://download.microsoft.com/download/0/c/4/0c4c45e3-bf02-49bf-8d68-6fa611f442e6/Mex.exe" -FilePath ".\downloads\mex.exe" -CheckURL "Yes" -check "PE32"
+if ($status) {
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mex.exe" -o"${SETUP_PATH}" | Out-Null
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mex.zip" -o"${TOOLS}\mex" | Out-Null
+}
+
 # ELK
 $ELK_VERSION = ((curl.exe --silent -L "https://api.github.com/repos/elastic/elasticsearch/releases/latest" | ConvertFrom-Json).tag_name).Replace("v", "")
 Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
