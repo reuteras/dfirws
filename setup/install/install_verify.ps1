@@ -156,7 +156,6 @@ Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\fqlite\fqlite.exe" PE32
 Test-Command FullEventLogView PE32      # C:\Tools\FullEventLogView\FullEventLogView.exe
 Test-Command gftrace PE32      # C:\Tools\gftrace64\gftrace.exe
 Test-Command ghidraRun ASCII
-Test-Command "C:\Tools\ghidra\ghidra_10.4_PUBLIC\ghidraRun" ASCII
 Test-Command godap PE32      # C:\Tools\godap\godap.exe
 Test-Command GoReSym PE32      # C:\Tools\GoReSym\GoReSym.exe
 Test-Command "C:\Tools\hashcat\hashcat.exe" PE32
@@ -400,7 +399,6 @@ Test-Command C:\downloads\tailscale.exe PE32
 Test-Command C:\downloads\wireguard.msi "MSI Installer"
 Test-Command C:\downloads\comparePlus.zip "Zip archive data"
 Test-Command C:\downloads\DSpellCheck.zip "Zip archive data"
-Test-Command C:\downloads\NppMarkdownPanel.zip "Zip archive data"
 
 # Verify length of file names in Start Menu
 (Get-ChildItem "C:\ProgramData\Microsoft\Windows\Start Menu\Programs" -Recurse).FullName | ForEach-Object { if ($_.Length -gt 250) {$message = "ERROR: Folder name to long " + ${_}.Length + " " + $_ ; Write-Output $message} }
