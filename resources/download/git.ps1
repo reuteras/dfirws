@@ -35,6 +35,7 @@ $repourls = `
     "https://github.com/mandiant/flare-floss.git", `
     "https://github.com/mandiant/gootloader.git", `
     "https://github.com/mandiant/GoReSym.git", `
+    "https://github.com/mandiant/gostringungarbler.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
     "https://github.com/mattifestation/CimSweep.git", `
@@ -60,6 +61,7 @@ $repourls = `
     "https://github.com/TrimarcJake/BlueTuxedo.git", `
     "https://github.com/ufrisk/LeechCore.wiki.git", `
     "https://github.com/ufrisk/MemProcFS.wiki.git", `
+    "https://github.com/VirusTotal/gti-dev-kit.git", `
     "https://github.com/volexity/one-extract.git", `
     "https://github.com/volexity/threat-intel.git", `
     "https://github.com/wagga40/Zircolite.git", `
