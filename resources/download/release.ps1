@@ -616,7 +616,7 @@ $status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\com
 # DSpellCheck plugin for Notepad++ - installed during start
 $status =  Get-GitHubRelease -repo "Predelnik/DSpellCheck" -path "${SETUP_PATH}\DSpellCheck.zip" -match "x64.zip" -check "Zip archive data"
 # NppMarkdownPanel plugin for Notepad++ - installed during start
-$status =  Get-GitHubRelease -repo "mohzy83/NppMarkdownPanel" -path "${SETUP_PATH}\NppMarkdownPanel.zip" -match "x64.zip" -check "Zip archive data"
+#$status =  Get-GitHubRelease -repo "mohzy83/NppMarkdownPanel" -path "${SETUP_PATH}\NppMarkdownPanel.zip" -match "x64.zip" -check "Zip archive data"
 
 # Visual Studio Code powershell extension - installed during start
 $status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix" -check "Zip archive data"
@@ -780,6 +780,12 @@ if ($status) {
 $status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match "windows-amd64.exe$" -check "PE32"
 if ($status) {
     Copy-Item "${SETUP_PATH}\velociraptor.exe" "${TOOLS}\bin\" -Force
+}
+
+# Witr
+$status = Get-GitHubRelease -repo "pranshuparmar/witr" -path "${SETUP_PATH}\witr.zip" -match "witr-windows-amd64.zip" -check "Zip archive data"
+if ($status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\witr.zip" "witr.exe" -o"${TOOLS}\bin" | Out-Null
 }
 
 # fq
