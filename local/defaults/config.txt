@@ -47,8 +47,6 @@ $WSDFIR_VSCODE_MERMAID="Yes"
 $WSDFIR_VSCODE_SHELLCHECK="Yes"
 # Install Visual Studio Code ruff extension
 $WSDFIR_VSCODE_RUFF="Yes"
-# Install Windows loopback adapter on Windows 10. Doesn't work on Windows 11 at the moment.
-$WSDFIR_W10_LOOPBACK="No"
 # Install Zui
 $WSDFIR_ZUI="No"
 
