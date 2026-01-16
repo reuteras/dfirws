@@ -240,7 +240,8 @@ function Get-GitHubRelease {
         [Parameter(Mandatory=$True)] [string]$path,
         [Parameter(Mandatory=$True)] [string]$match,
         [Parameter(Mandatory=$False)] [string]$version = "latest",
-        [Parameter(Mandatory=$False)] [string]$check = ""
+        [Parameter(Mandatory=$False)] [string]$check = "",
+        [Parameter(Mandatory=$False)] [bool]$download = $true
     )
 
     $Url = ""
@@ -301,6 +302,9 @@ function Get-GitHubRelease {
 
     # Log the chosen URL and download the file
     Write-SynchronizedLog "Using $Url for $repo."
+    if ($download -eq $false) {
+        return $Url
+    }
     return Get-FileFromUri -uri $Url -FilePath $path -CheckURL "Yes" -check $check
 }
 
