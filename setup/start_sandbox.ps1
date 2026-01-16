@@ -53,19 +53,16 @@ New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value 
 Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Shortcut for PowerShell
-if ($PSVersionTable.PSVersion.Major -gt 7) {
-	Enable-ExperimentalFeature PSFeedbackProvider
-}
+Enable-ExperimentalFeature PSFeedbackProvider
 
 # Install Terminal and link to it
 Expand-Archive "${SETUP_PATH}\Terminal.zip" -DestinationPath "$env:ProgramFiles\Windows Terminal" -Force | Out-Null
 $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
-$TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\wt.exe"
 if (! (Test-Path "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings")) {
 	New-Item -Path "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings" -ItemType Directory -Force | Out-Null
 }
 Copy-Item "$LOCAL_PATH\defaults\Windows_Terminal.json" "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings\settings.json" -Force | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath $TERMINAL_INSTALL_LOCATION -WorkingDirectory "${HOME}\Desktop"
+$TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR"
 
 # Add PersistenceSniper
 Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1
@@ -123,11 +120,6 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortTime -val
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sTimeFormat -value "HH:mm:ss" | Out-Null
 Write-DateLog "Date and time format set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Dark mode
-if ("${WSDFIR_DARK}" -eq "Yes") {
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0 | Out-Null
-}
-
 # Add right-click context menu if specified
 if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve | Out-Null
@@ -179,24 +171,11 @@ Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\s
 if ("${WSDFIR_DARK}" -eq "Yes") {
     Start-Process -Wait "c:\Windows\Resources\Themes\themeB.theme"
 	Stop-Process -Name SystemSettings
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0 | Out-Null
 }
 
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
 Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
-# Set Notepad++ as default for many file types
-if (!(Test-Path "C:\log\log.txt")) {
-	cmd /c "Ftype xmlfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype chmfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype cmdfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype htafile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype jsefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype jsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype txtfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype vbefile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	cmd /c "Ftype vbsfile=""${env:ProgramFiles}\Notepad++\notepad++.exe"" ""%1"""
-	Write-DateLog "Notepad++ set as default for many file types" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
 
 # Disable firewall to enable local web services
 netsh firewall set opmode DISABLE 2>&1 | Out-Null
@@ -205,11 +184,6 @@ netsh firewall set opmode DISABLE 2>&1 | Out-Null
 if ("${WSDFIR_HIDE_TASKBAR}" -eq "Yes") {
     # From https://www.itechtics.com/hide-show-taskbar/#from-windows-powershell
     &{$p='HKCU:SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3';$v=(Get-ItemProperty -Path $p).Settings;$v[8]=3;&Set-ItemProperty -Path $p -Name Settings -Value $v;&Stop-Process -f -ProcessName explorer}
-}
-
-# Windows 10 Loopback
-if ("${WSDFIR_W10_LOOPBACK}" -eq "Yes") {
-    Install-W10Loopback | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Restart Explorer process
@@ -257,6 +231,7 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${GIT_PATH}\Trawler"
 	"${GIT_PATH}\White-Phoenix"
 	"${HOME}\Go\bin"
+	"${TERMINAL_INSTALL_LOCATION}"
 	"${TOOLS}\artemis"
 	"${TOOLS}\audacity"
 	"${TOOLS}\bin"
@@ -459,7 +434,6 @@ if ("${WSDFIR_HASHCAT}" -eq "Yes") {
 & "${SETUP_PATH}\graphviz.exe" /S /D="${env:ProgramFiles}\graphviz"
 Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-
 #
 # Copy files to user profile
 #
@@ -514,11 +488,12 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLo
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 
 #
-# Add shortcuts to desktop for Jupyter and Gollum
+# Add shortcuts to desktop
 #
 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
 
 #
 # Config for bash and zsh
