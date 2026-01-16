@@ -109,6 +109,7 @@ foreach ($package in `
     "scapy", `
     "shodan", `
     "stego-lsb", `
+    "sqlit-tui[all]", `
     "time-decode", `
     "toolong", `
     "unpy2exe", `
@@ -206,6 +207,7 @@ uv pip install -U `
     "pypdf2", `
     "pyshark", `
     "PySocks", `
+    "python-dotenv", `
     "python-magic", `
     "python-magic-bin", `
     "python-registry", `
@@ -254,6 +256,16 @@ uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\
 C:\Users\WDAGUtilityAccount\Documents\tools\utils\kanvas_update.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 deactivate
 Write-DateLog "Python venv kanvas done." >> "C:\log\python.txt"
+
+### venv for gostringungarbler
+Write-DateLog "Install packages in venv gostringungarbler in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+git clone https://github.com/mandiant/gostringungarbler.git C:\venv\gostringungarbler 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Set-Location "C:\venv\gostringungarbler"
+uv venv "C:\venv\gostringungarbler\.venv" >> "C:\log\python.txt"
+C:\venv\gostringungarbler\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
+uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+deactivate
+Write-DateLog "Python venv gostringungarbler done." >> "C:\log\python.txt"
 
 #
 # venv dfir-unfurl
@@ -352,7 +364,9 @@ Write-DateLog "Python venv zircolite done." >> "C:\log\python.txt"
 # Venvs that needs Visual Studio Build Tools
 #
 
-if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") {
+$NeedVSBuildTools = $false
+
+if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe" -and $NeedVSBuildTools -eq $true) {
     Write-Output "" >> "${WSDFIR_TEMP}\visualstudio.txt"
 
     # Install Visual Studio Build Tools
@@ -380,24 +394,24 @@ if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") {
     C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat amd64 >> "C:\log\python.txt"
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")+ ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
 
-    Write-DateLog "Install Python packages in sandbox needing Visual Studio Build Tools." >> "C:\log\python.txt"
-    uv venv "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    #Write-DateLog "Install Python packages in sandbox needing Visual Studio Build Tools." >> "C:\log\python.txt"
+    #uv venv "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
 
     # Build Ghidrathon for Gidhra
-    Write-DateLog "Build Ghidrathon for Ghidra." >> "C:\log\python.txt"
-    Copy-Item -Force -Recurse "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
-    Set-Location "${WSDFIR_TEMP}\ghidrathon"
-    Get-Content requirements.txt >> "C:\log\python.txt"
-    uv pip install "jep==4.2.0" NumPy flare-capa 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    uv pip install -r requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
-        New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
-    }
-    Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    deactivate
-    Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
+    #Write-DateLog "Build Ghidrathon for Ghidra." >> "C:\log\python.txt"
+    #Copy-Item -Force -Recurse "${TOOLS}\ghidrathon" "${WSDFIR_TEMP}"
+    #Set-Location "${WSDFIR_TEMP}\ghidrathon"
+    #Get-Content requirements.txt >> "C:\log\python.txt"
+    #uv pip install "jep==4.2.0" NumPy flare-capa 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #uv pip install -r requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #python "ghidrathon_configure.py" "${GHIDRA_INSTALL_DIR}" --debug 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
+    #    New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra_extensions" | Out-Null
+    #}
+    #Copy-Item ${WSDFIR_TEMP}\ghidrathon\*.zip "${TOOLS}\ghidra_extensions\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #deactivate
+    #Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 }
 # End venvs needing Visual Studio Build Tools
 
