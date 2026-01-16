@@ -34,9 +34,8 @@ if ($all -or $Python) {
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"
 
     # Ghidra - latest release
-    $status_current = Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "${SETUP_PATH}\ghidra.zip" -match "_PUBLIC_" -check "Zip archive data"
-    $status_old = Get-FileFromUri -uri "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip" -FilePath "${SETUP_PATH}\ghidra_10.4_PUBLIC_20230928.zip" -CheckURL "Yes" -check "Zip archive data"
-    if ($status_current -or $status_old) {
+    $status = Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "${SETUP_PATH}\ghidra.zip" -match "_PUBLIC_" -check "Zip archive data"
+    if ($status) {
         if (Test-Path "${TOOLS}\ghidra") {
             Remove-Item "${TOOLS}\ghidra" -Recurse -Force
         }
@@ -44,17 +43,16 @@ if ($all -or $Python) {
         New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra" | Out-Null
         Move-Item ${TOOLS}\ghidra_1* "${TOOLS}\ghidra\"
         Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidra_10.4_PUBLIC_20230928.zip" -o"${TOOLS}\ghidra" | Out-Null
     }
 
     # Ghidrathon source
-    $status = Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "${SETUP_PATH}\ghidrathon.zip" -match "Ghidrathon" -check "Zip archive data"
-    if ($status) {
-        if (Test-Path "${TOOLS}\ghidrathon") {
-            Remove-Item "${TOOLS}\ghidrathon" -Recurse -Force
-        }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidrathon.zip" -o"${TOOLS}\ghidrathon" | Out-Null
-    }
+    #$status = Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "${SETUP_PATH}\ghidrathon.zip" -match "Ghidrathon" -check "Zip archive data"
+    #if ($status) {
+    #    if (Test-Path "${TOOLS}\ghidrathon") {
+    #        Remove-Item "${TOOLS}\ghidrathon" -Recurse -Force
+    #    }
+    #    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidrathon.zip" -o"${TOOLS}\" | Out-Null
+    #}
 
     # Tools to compile and build - version 2019
     $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe" -check "PE32"
