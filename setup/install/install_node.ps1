@@ -5,6 +5,8 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # This script runs in a Windows sandbox to install node tools.
 Write-Output "Install Node.js."
 Write-DateLog "Install npm packages" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+Write-DateLog "Install Git (in the background)." >> "C:\log\npm.txt"
+Install-Git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 New-Item -ItemType Directory "${WSDFIR_TEMP}" 2>&1 | ForEach-Object{ "$_" } | Out-Null
 
@@ -34,6 +36,13 @@ Write-DateLog "Install jsdom" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global jsdom | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install box-js" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global box-js | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+
+Set-Location "${HOME}"
+git clone --recurse-submodules https://github.com/Koifman/LUMEN.git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+Move-Item "${HOME}\LUMEN" "${TOOLS}\Lumen" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+Set-Location "${TOOLS}\Lumen\LUMEN"
+npm install 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm run build 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 Write-DateLog "Node installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
