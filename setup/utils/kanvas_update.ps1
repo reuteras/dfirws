@@ -7,12 +7,12 @@ function Write-Status {
     Write-Host "[INFO] $Message" -ForegroundColor Green
 }
 
-function Write-Warning {
+function Write-StatusWarning {
     param([string]$Message)
     Write-Host "[WARNING] $Message" -ForegroundColor Yellow
 }
 
-function Write-Error {
+function Write-StatusError {
     param([string]$Message)
     Write-Host "[ERROR] $Message" -ForegroundColor Red
 }
@@ -23,7 +23,7 @@ try {
 
     # Check if we're in the correct directory
     if (-not (Test-Path "kanvas.py")) {
-        Write-Error "kanvas.py not found. Please run this script from the Kanvas directory."
+        Write-StatusError "kanvas.py not found. Please run this script from the Kanvas directory."
         Read-Host "Press Enter to exit"
         exit 1
     }
@@ -42,7 +42,7 @@ try {
             Write-Status "Using Python command: python3"
         }
         catch {
-            Write-Error "Python is not installed or not in PATH"
+            Write-StatusError "Python is not installed or not in PATH"
             Read-Host "Press Enter to exit"
             exit 1
         }
@@ -55,7 +55,7 @@ try {
         Write-Status "All dependencies found"
     }
     catch {
-        Write-Warning "Some dependencies might be missing. The script will attempt to run anyway."
+        Write-StatusWarning "Some dependencies might be missing. The script will attempt to run anyway."
     }
 
     # Create the simple updater script if it doesn't exist
@@ -170,7 +170,7 @@ if __name__ == "__main__":
         Write-Host "You can now run the Kanvas application with the latest data." -ForegroundColor Green
     }
     else {
-        Write-Error "Update failed. Exit code: $($process.ExitCode)"
+        Write-StatusError "Update failed. Exit code: $($process.ExitCode)"
         
         # Show error logs if available
         if (Test-Path "update.log") {
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     }
 }
 catch {
-    Write-Error "An unexpected error occurred: $($_.Exception.Message)"
+    Write-StatusError "An unexpected error occurred: $($_.Exception.Message)"
     Write-Host "Stack trace:" -ForegroundColor Red
     Write-Host $_.ScriptStackTrace -ForegroundColor Red
     Read-Host "`nPress Enter to exit"
@@ -216,7 +216,7 @@ foreach ($file in $tempFiles) {
             Write-Host "  Removed: $file" -ForegroundColor Gray
         }
         catch {
-            Write-Warning "Could not remove $file"
+            Write-StatusWarning "Could not remove $file"
         }
     }
 }
