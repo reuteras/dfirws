@@ -1,13 +1,13 @@
 <#
 	.SYNOPSIS
 		A short, focused PowerShell script to automate ensuring that all instances of EZ Tools in a given path have updated ancillary files
-	
+
 	.DESCRIPTION
 		This script will ensure that all instances of EvtxECmd have updated Maps (.map), RECmd have updated Batch files (.reb), and SQLECmd have updated Maps (.smap). This script operates recursively so if you acquire EZ Tools using Get-ZimmermanTools -NetVersion 0 to grab all .NET 4, .NET 6, and .NET 9 versions of the tools, you can easily update EACH instance of each tool!
-	
+
 	.PARAMETER Path
 		Please provide a path where EZ Tools reside. This path will be searched recursively for all instances of EvtxECmd, RECmd, and SQLECmd, and run --sync for each of them.
-	
+
 	.EXAMPLE
 		PS C:\> .\Sync-EZTools.ps1 -Path 'Value1'
 #>
