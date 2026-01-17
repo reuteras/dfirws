@@ -21,12 +21,12 @@ param
 )
 
 Write-Host "Looking for any and all instances of EvtxECmd, RECmd, and SQLECmd..."
-Get-ChildItem -Path $Path -Filter "*ecmd.exe" -Recurse | Where-Object {$_.Name -in "Evtxecmd.exe", "sqlecmd.exe", "recmd.exe"} | ForEach-Object { 
+Get-ChildItem -Path $Path -Filter "*ecmd.exe" -Recurse | Where-Object {$_.Name -in "Evtxecmd.exe", "sqlecmd.exe", "recmd.exe"} | ForEach-Object {
     Write-Host "Running: $($_.FullName)"
-    try { 
-        & $_.FullName --sync 
-    } catch { 
-        Write-Warning "Error running $($_.FullName): $_" 
+    try {
+        & $_.FullName --sync
+    } catch {
+        Write-Warning "Error running $($_.FullName): $_"
     }
 }
 
