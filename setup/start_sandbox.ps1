@@ -52,9 +52,6 @@ New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value 
 & "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy -Scope CurrentUser Unrestricted"
 Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Shortcut for PowerShell
-Enable-ExperimentalFeature PSFeedbackProvider
-
 # Install Terminal and link to it
 Expand-Archive "${SETUP_PATH}\Terminal.zip" -DestinationPath "$env:ProgramFiles\Windows Terminal" -Force | Out-Null
 $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
@@ -309,6 +306,7 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${TOOLS}\zircolite"
 	"${TOOLS}\zircolite\bin"
 	"${TOOLS}\zstd"
+	"${TOOLS}\YAMAGoya"
 	"${VENV}\bin"
 	"${VENV}\jpterm\Scripts"
 	"${VENV}\magika\Scripts"

@@ -615,8 +615,6 @@ if ($status) {
 $status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zip" -match "x64.zip" -check "Zip archive data"
 # DSpellCheck plugin for Notepad++ - installed during start
 $status =  Get-GitHubRelease -repo "Predelnik/DSpellCheck" -path "${SETUP_PATH}\DSpellCheck.zip" -match "x64.zip" -check "Zip archive data"
-# NppMarkdownPanel plugin for Notepad++ - installed during start
-#$status =  Get-GitHubRelease -repo "mohzy83/NppMarkdownPanel" -path "${SETUP_PATH}\NppMarkdownPanel.zip" -match "x64.zip" -check "Zip archive data"
 
 # Visual Studio Code powershell extension - installed during start
 $status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix" -check "Zip archive data"
@@ -909,6 +907,15 @@ if ($status) {
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\netext.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\NetExt-* "${TOOLS}\NetExt"
+}
+
+# YAMAGoya
+$status = Get-GitHubRelease -repo "JPCERTCC/YAMAGoya" -path "${SETUP_PATH}\YAMAGoya.zip" -match "YAMAGoya.*.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\YAMAGoya") {
+        Remove-Item "${TOOLS}\YAMAGoya" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\YAMAGoya.zip" -o"${TOOLS}\YAMAGoya" | Out-Null
 }
 
 #

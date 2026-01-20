@@ -28,7 +28,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\Notepad++.lnk" -DestinationPath "${env:
 # Configure Notepad++
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DSpellCheck.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\DSpellCheck" | Out-Null
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\NppMarkdownPanel.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\NppMarkdownPanel" | Out-Null
 New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell" -ItemType Directory -Force | Out-Null
 if ("${WSDFIR_DARK}" -eq "Yes") {
     if (Test-Path "${LOCAL_PATH}\notepad++_dark.xml") {
@@ -42,11 +41,7 @@ if (Test-Path "${LOCAL_PATH}\DSpellCheck.ini") {
 } else {
     Copy-Item "${LOCAL_PATH}\defaults\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
 }
-if (Test-Path "${LOCAL_PATH}\NppMarkdownPanel.ini") {
-    Copy-Item "${LOCAL_PATH}\NppMarkdownPanel.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\NppMarkdownPanel.ini" -Force
-} else {
-    Copy-Item "${LOCAL_PATH}\defaults\NppMarkdownPanel.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\NppMarkdownPanel.ini" -Force
-}
+
 # Add US English dictionary
 Copy-Item "${GIT_PATH}\dictionaries\en\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
 Copy-Item "${GIT_PATH}\dictionaries\en\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
