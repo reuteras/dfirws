@@ -208,7 +208,7 @@ $null = $status
 # Get CVE data
 Write-Output "Downloading CVE data"
 Set-Location "${cveSaveDirectory}"
-$status = Get-FileFromUri -uri "https://cve.mitre.org/data/downloads/allitems.csv" -FilePath ".\enrichment\cve\allitems.csv"
+$status = Get-FileFromUri -uri "https://github.com/CVEProject/cvelistV5/archive/refs/heads/main.zip" -FilePath ".\enrichment\cve\main.zip"
 $status = Get-GitHubRelease -repo "CVEProject/cvelistV5" -path ".\enrichment\cve\all_CVEs_at_midnight.zip.zip" -match "all_CVEs_at_midnight.zip.zip$"
 
 Set-Location "${currentDirectory}"
