@@ -2,7 +2,7 @@ Write-Output $PWD
 
 . ".\resources\download\common.ps1"
 
-# ImportExcel
+# Download Visual Studio Build Tools if not already present
 Write-SynchronizedLog "Download Visual Studio buildtools."
 
 if (! (Test-Path "${TOOLS}\VSLayout\Layout.json")) {
