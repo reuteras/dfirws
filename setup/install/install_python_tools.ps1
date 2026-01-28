@@ -95,6 +95,7 @@ foreach ($package in `
     "name-that-hash", `
     "netaddr", `
     "numpy", `
+    "olefile", `
     "oletools[full]", `
     "pcode2code", `
     "pdfalyzer", `
@@ -105,6 +106,7 @@ foreach ($package in `
     "pyghidra", `
     "pyOneNote", `
     "pypng", `
+    "python-docx", `
     "rexi", `
     "scapy", `
     "shodan", `
