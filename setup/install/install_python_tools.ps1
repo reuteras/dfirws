@@ -207,6 +207,7 @@ uv pip install -U `
     "pypdf2", `
     "pyshark", `
     "PySocks", `
+    "python-docx", `
     "python-dotenv", `
     "python-magic", `
     "python-magic-bin", `

@@ -1,15 +1,20 @@
 # DFIRWS
 
+# Ugly fix
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
+"`n" | CiTool.exe -r
+
+# Cleanup
+if (Test-Path 'C:\Users\Public\Desktop\Microsoft Edge.lnk') {
+	Remove-Item 'C:\Users\Public\Desktop\Microsoft Edge.lnk' -Force
+}
+
 # Import common functions
 if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
     . "${HOME}\Documents\tools\wscommon.ps1"
 } else {
     . '\\vmware-host\Shared Folders\dfirws\setup\wscommon.ps1'
 }
-
-# Ugly fix
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
-"`n" | CiTool.exe -r
 
 # Start logging
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
@@ -123,45 +128,70 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     Write-DateLog "Right-click context menu added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
+# Change TERMINAL_INSTALL_DIR to actual installed version
+Get-Content "${HOME}\Documents\tools\reg\right-click.reg" | 
+	ForEach-Object { $_ -replace "TERMINAL_INSTALL_DIR", "${TERMINAL_INSTALL_DIR}" } | 
+	Set-Content "${WSDFIR_TEMP}\right-click.reg"
+
+reg import "${WSDFIR_TEMP}\right-click.reg" | Out-Null
+Write-DateLog "Right-click context menu registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 # Import registry settings
 reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
-if ($WINDOWS_VERSION -eq "10") {
-	reg import "${HOME}\Documents\tools\reg\right-click-win10.reg" | Out-Null
-}
 Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-foreach ($extension in "doc", "docm", "docx", "dot", "dotm", "dotx", "xls", "xlsm", "xlsx", "xlt", "xltm", "xltx", "ppt", "pptm", "pptx", "pot", "potm", "potx") {
+# Requires admin (writes to HKLM)
+# Uses SystemFileAssociations so the verbs apply reliably to file types
+# Uses full path to pwsh.exe (PowerShell 7)
+
+$extensions = @(
+    "doc","docm","docx","dot","dotm","dotx",
+    "xls","xlsm","xlsx","xlt","xltm","xltx",
+    "ppt","pptm","pptx","pot","potm","potx"
+)
+
+$wtpath = "C:\\Program Files\\Windows Terminal\\${TERMINAL_INSTALL_DIR}\\wt.exe"
+
+foreach ($extension in $extensions) {
+    $baseKey = "HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.${extension}\shell\dfirws_office"
+
+    $cmd_mraptor = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"mraptor '%1'`\`""
+    $cmd_oleid   = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"oleid '%1'`\`""
+    $cmd_olevba  = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"olevba '%1'`\`""
+
     $registry_file = @"
 Windows Registry Editor Version 5.00
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}]
+[$baseKey]
 "MUIVerb"="dfirws office"
 "SubCommands"=""
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\mraptor]
+[$baseKey\shell\mraptor]
 "MUIVerb"="mraptor"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\mraptor\command]
-@="pwsh -NoExit -Command mraptor '%1'"
+[$baseKey\shell\mraptor\command]
+@="$cmd_mraptor"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\oleid]
+[$baseKey\shell\oleid]
 "MUIVerb"="oleid"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\oleid\command]
-@="pwsh -NoExit -Command oleid '%1'"
+[$baseKey\shell\oleid\command]
+@="$cmd_oleid"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\olevba]
+[$baseKey\shell\olevba]
 "MUIVerb"="olevba"
 
-[HKEY_LOCAL_MACHINE\Software\Classes\.${extension}\shell\${extension}\shell\olevba\command]
-@="pwsh -NoExit -Command olevba '%1'"
-
+[$baseKey\shell\olevba\command]
+@="$cmd_olevba"
 "@
 
-    $registry_file | Out-File -FilePath "${WSDFIR_TEMP}\${extension}.reg" -Encoding ascii
-    reg import "${WSDFIR_TEMP}\${extension}.reg" | Out-Null
-    remove-item "${WSDFIR_TEMP}\${extension}.reg"
+    $regPath = Join-Path $WSDFIR_TEMP "${extension}.reg"
+    $registry_file | Out-File -FilePath $regPath -Encoding ascii
+
+    reg import $regPath | Out-Null
+    #Remove-Item -LiteralPath $regPath -Force
 }
+
 Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set dark theme if selected
@@ -194,23 +224,53 @@ Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_
 Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
 
+# TODO: Handle these later
+# "${env:ProgramFiles}\ForensicTimeliner"
+# "${env:ProgramFiles}\graphviz\bin"
+# "${env:ProgramFiles}\IDR\bin"
+# "${env:ProgramFiles}\jadx\bin"
+# "${GIT_PATH}\defender-detectionhistory-parser"
+# "${GIT_PATH}\ese-analyst"
+# "${GIT_PATH}\Events-Ripper"
+# "${GIT_PATH}\iShutdown"
+# "${GIT_PATH}\RegRipper4.0"
+# "${GIT_PATH}\Regshot"
+# "${GIT_PATH}\Trawler"
+# "${GIT_PATH}\White-Phoenix"
+# "${TOOLS}\h2database"
+# "${TOOLS}\Zimmerman\net6\EvtxECmd"
+# "${TOOLS}\Zimmerman\net6\EZViewer"
+# "${TOOLS}\Zimmerman\net6\JumpListExplorer"
+# "${TOOLS}\Zimmerman\net6\MFTExplorer"
+# "${TOOLS}\Zimmerman\net6\RECmd"
+# "${TOOLS}\Zimmerman\net6\SDBExplorer"
+# "${TOOLS}\Zimmerman\net6\SQLECmd"
+# "${TOOLS}\Zimmerman\net6\XWFIM"
+# "${TOOLS}\nmap"
+# "${TOOLS}\hfs"
+# "${TOOLS}\VolatilityWorkbench"
+# "${TOOLS}\WinApiSearch"
+# "${TOOLS}\gftrace64"
+# "${TOOLS}\procdot\win64"
+# "${TOOLS}\systeminformer\x64"
+# "${TOOLS}\systeminformer\x86"
+# "${TOOLS}\XELFViewer"
+# "${TOOLS}\audacity"
+# "${TOOLS}\capa-ghidra"
+# "${TOOLS}\elfparser-ng\Release"
+# "${TOOLS}\RdpCacheStitcher"
+
+# PATH - Windows have a limit of <2048 characters for user PATH
 $ADD_TO_PATH = @("${MSYS2_DIR}"
     "${MSYS2_DIR}\ucrt64\bin"
     "${MSYS2_DIR}\usr\bin"
 	"${TOOLS}\perl\perl\bin"
-	"${env:ProgramFiles}\4n4lDetector"
 	"${env:ProgramFiles}\7-Zip"
-	"${env:ProgramFiles}\BeaconHunter"
-	"${env:ProgramFiles}\bin"
-	"${env:ProgramFiles}\ForensicTimeliner"
 	"${env:ProgramFiles}\Git\bin"
 	"${env:ProgramFiles}\Git\cmd"
 	"${env:ProgramFiles}\Git\usr\bin"
-	"${env:ProgramFiles}\graphviz\bin"
 	"${env:ProgramFiles}\hxd"
-	"${env:ProgramFiles}\IDR\bin"
 	"${env:ProgramFiles}\iisGeolocate"
-	"${env:ProgramFiles}\jadx\bin"
 	"${env:ProgramFiles}\KAPE"
 	"${env:ProgramFiles}\loki"
 	"${env:ProgramFiles}\Notepad++"
@@ -219,31 +279,18 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${env:ProgramFiles}\TimelineExplorer"
 	"${env:ProgramFiles}\qemu"
 	"${RUST_DIR}\bin"
-	"${GIT_PATH}\defender-detectionhistory-parser"
-	"${GIT_PATH}\ese-analyst"
-	"${GIT_PATH}\Events-Ripper"
-	"${GIT_PATH}\iShutdown"
-	"${GIT_PATH}\RegRipper4.0"
-	"${GIT_PATH}\Regshot"
-	"${GIT_PATH}\Trawler"
-	"${GIT_PATH}\White-Phoenix"
 	"${HOME}\Go\bin"
 	"${TERMINAL_INSTALL_LOCATION}"
 	"${TOOLS}\artemis"
-	"${TOOLS}\audacity"
 	"${TOOLS}\bin"
 	"${TOOLS}\bulk_extractor\win64"
 	"${TOOLS}\capa"
-	"${TOOLS}\capa-ghidra"
 	"${TOOLS}\cargo\bin"
 	"${TOOLS}\chainsaw"
 	"${TOOLS}\cutter"
 	"${TOOLS}\sqlitebrowser"
-	"${TOOLS}\DidierStevens"
 	"${TOOLS}\die"
 	"${TOOLS}\dumpbin"
-	"${TOOLS}\edit"
-	"${TOOLS}\elfparser-ng\Release"
 	"${TOOLS}\ExeinfoPE"
 	"${TOOLS}\exiftool"
 	"${TOOLS}\fakenet"
@@ -251,13 +298,10 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${TOOLS}\ffmpeg\bin"
 	"${TOOLS}\floss"
 	"${TOOLS}\FullEventLogView"
-	"${TOOLS}\gftrace64"
     "${TOOLS}\ghidra\${GHIDRA_INSTALL_DIR}"
 	"${TOOLS}\godap"
 	"${TOOLS}\GoReSym"
-	"${TOOLS}\h2database"
 	"${TOOLS}\hayabusa"
-	"${TOOLS}\hfs"
 	"${TOOLS}\imhex"
 	"${TOOLS}\INDXRipper"
 	"${TOOLS}\jd-gui"
@@ -265,185 +309,74 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${TOOLS}\MemProcFS"
 	"${TOOLS}\mmdbinspect"
 	"${TOOLS}\lessmsi"
-	"${TOOLS}\nmap"
 	"${TOOLS}\node"
 	"${TOOLS}\pebear"
 	"${TOOLS}\pestudio"
 	"${TOOLS}\pev"
 	"${TOOLS}\php"
-	"${TOOLS}\procdot\win64"
 	"${TOOLS}\pstwalker"
 	"${TOOLS}\qpdf\bin"
 	"${TOOLS}\qrtool"
 	"${TOOLS}\radare2\bin"
-	"${TOOLS}\RdpCacheStitcher"
 	"${TOOLS}\redress"
 	"${TOOLS}\ripgrep"
 	"${TOOLS}\scdbg"
 	"${TOOLS}\sleuthkit\bin"
 	"${TOOLS}\sqlite"
 	"${TOOLS}\ssview"
-	"${TOOLS}\systeminformer\x64"
-	"${TOOLS}\systeminformer\x86"
 	"${TOOLS}\sysinternals"
 	"${TOOLS}\takajo"
 	"${TOOLS}\thumbcacheviewer"
 	"${TOOLS}\trid"
 	"${TOOLS}\upx"
-	"${TOOLS}\VolatilityWorkbench"
-	"${TOOLS}\WinApiSearch"
 	"${TOOLS}\WinObjEx64"
-	"${TOOLS}\XELFViewer"
 	"${TOOLS}\Zimmerman\net6"
-	"${TOOLS}\Zimmerman\net6\EvtxECmd"
-	"${TOOLS}\Zimmerman\net6\EZViewer"
-	"${TOOLS}\Zimmerman\net6\JumpListExplorer"
-	"${TOOLS}\Zimmerman\net6\MFTExplorer"
-	"${TOOLS}\Zimmerman\net6\RECmd"
-	"${TOOLS}\Zimmerman\net6\SDBExplorer"
-	"${TOOLS}\Zimmerman\net6\SQLECmd"
-	"${TOOLS}\Zimmerman\net6\XWFIM"
 	"${TOOLS}\zircolite"
 	"${TOOLS}\zircolite\bin"
 	"${TOOLS}\zstd"
 	"${TOOLS}\YAMAGoya"
 	"${VENV}\bin"
-	"${VENV}\jpterm\Scripts"
-	"${VENV}\magika\Scripts"
-	"${VENV}\maldump\Scripts"
-	"${VENV}\peepdf3\Scripts"
-	"${VENV}\regipy\Scripts"
-	"${VENV}\sigma-cli\Scripts"
-	"${VENV}\toolong\Scripts"
 	"${HOME}\Documents\tools\utils")
 
 $ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"
+echo "Adding to PATH: $ADD_TO_PATH_STRING" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+# Save length of ADD_TO_PATH_STRING to log
+$length = $ADD_TO_PATH_STRING.Length
+echo "Length of PATH addition string: $length" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+# Total user PATH length
+$existingUserPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+$totalPathLength = $existingUserPath.Length + $length + 1
+echo "Total user PATH length after addition: $totalPathLength" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+# Warn if total length exceeds 2048 characters
+if ($totalPathLength -gt 2048) {
+	echo "WARNING: Total user PATH length exceeds 2048 characters. Some entries may be truncated." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
+
 Add-MultipleToUserPath $ADD_TO_PATH_STRING
 
 Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\utils\dfirws_folder.ps1" -NoNewWindow
 
+# Add shortcuts to desktop
+Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
+
 #
-# Install tools
+# Main installation done, now copy files to user profile and other locations
 #
 
-# Add jadx
-if ("${WSDFIR_JADX}" -eq "Yes") {
-    Install-Jadx | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "jadx added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Add x64dbg if specified
-if ("${WSDFIR_X64DBG}" -eq "Yes") {
-    Install-X64dbg | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "x64dbg added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Add cmder
-if ("${WSDFIR_CMDER}" -eq "Yes") {
-    Install-CMDer | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "cmder added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Add apimonitor
-if ("${WSDFIR_APIMONITOR}" -eq "Yes") {
-    Install-Apimonitor | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "apimonitor added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Setup Node.js
-if ("${WSDFIR_NODE}" -eq "Yes") {
-    Install-Node | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Node.js installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Setup Obsidian
-if ("${WSDFIR_OBSIDIAN}" -eq "Yes") {
-    Install-Obsidian | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Obsidian installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install Qemu
-if ("${WSDFIR_QEMU}" -eq "Yes") {
-    Install-Qemu | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Qemu installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install Kape
-if ("${WSDFIR_KAPE}" -eq "Yes") {
-    Install-Kape | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Kape installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install Loki
-if ("${WSDFIR_LOKI}" -eq "Yes") {
-    Install-Loki | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Loki installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install malcat
-if ("${WSDFIR_MALCAT}" -eq "Yes") {
-    Install-Malcat | Out-Null
-    Write-DateLog "malcat installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install NEO4J if specified
-if ("${WSDFIR_NEO4J}" -eq "Yes") {
-    Install-Neo4j | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Neo4j installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install LibreOffice with custom arguments if specified
-if ("${WSDFIR_LIBREOFFICE}" -eq "Yes") {
-    Install-LibreOffice | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "LibreOffice installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install Git if specified
-if ("${WSDFIR_GIT}" -eq "Yes") {
-    Start-Process "${POWERSHELL_EXE}" -ArgumentList "-Command Install-Git" -NoNewWindow
-    Write-DateLog "Git installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install PDFStreamDumper if specified
-if ("${WSDFIR_PDFSTREAM}" -eq "Yes") {
-    Install-PDFStreamDumper | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "PDFStreamDumper installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install Visual Studio Code and extensions if specified
-if ("${WSDFIR_VSCODE}" -eq "Yes") {
-    Install-VSCode | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Visual Studio Code installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install Zui if specified
-if ("${WSDFIR_ZUI}" -eq "Yes") {
-    Install-Zui | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Zui installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# Install hashcat
-if ("${WSDFIR_HASHCAT}" -eq "Yes") {
-    Install-Hashcat | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Installing hashcat done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
+# Install Graphviz
 & "${SETUP_PATH}\graphviz.exe" /S /D="${env:ProgramFiles}\graphviz"
 Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-#
 # Copy files to user profile
-#
-
 New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
 if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
     Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force | Out-Null
 }if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
     Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force | Out-Null
 }
-
-# TODO Verify Robocopy destinations
 
 # Add plugins to Cutter
 New-Item -ItemType Directory -Force -Path "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
@@ -454,11 +387,6 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\icons" | Out-Null
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin" | Out-Null
 Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
-
-#
-# Copy and extract files that need be in writeable locations
-#
 
 # BeaconHunter
 Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter" | Out-Null
@@ -471,6 +399,7 @@ Robocopy.exe /MT:96 /MIR "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\.ju
 Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter\" -Force | Out-Null
 Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force | Out-Null
 
+# IIS Geolocate and other Zimmerman tools that needs readwrite access
 Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\iisGeolocate" "${env:ProgramFiles}\iisGeolocate" | Out-Null
 if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
     Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force | Out-Null
@@ -485,17 +414,7 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLo
 # 4n4lDetector
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 
-#
-# Add shortcuts to desktop
-#
-
-Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
-
-#
 # Config for bash and zsh
-#
 if (Test-Path "${LOCAL_PATH}\.zshrc") {
     Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc" -Force | Out-Null
 } else {
@@ -506,6 +425,10 @@ if (Test-Path "${LOCAL_PATH}\.zcompdump") {
 } else {
     Copy-Item "${LOCAL_PATH}\defaults\.zcompdump" "${HOME}\.zcompdump" -Force | Out-Null
 }
+
+# Enable clipboard history
+New-Item -Path "HKCU:\Software\Microsoft\Clipboard" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Clipboard" -Name EnableClipboardHistory -Type DWord -Value 1
 
 #
 # Run custom scripts
@@ -521,7 +444,6 @@ if (Test-Path "${LOCAL_PATH}\customize.ps1") {
     Write-DateLog "No customize scripts found, running defaults\customize-sandbox.ps1." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
-
 
 #
 # Start sysmon when installation is done

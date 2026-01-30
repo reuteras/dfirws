@@ -361,7 +361,8 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "is never used" -and
     $_.Line -notmatch "is never constructed" -and
     $_.Line -notmatch "elided elsewhere is confusing" -and
-    $_.Line -notmatch "generated [0-9]+ warnings"
+    $_.Line -notmatch "generated [0-9]+ warnings" -and
+    $_.Line -notmatch "EVTX-ATTACK-SAMPLES"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
@@ -392,15 +393,16 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "Error Getting File from" -and
     $_.Line -notmatch "Adding thiserror" -and
     $_.Line -notmatch "gpg-error" -and
-    $_.Line -notmatch "gpg: error reading key: Try again later"
+    $_.Line -notmatch "gpg: error reading key: Try again later" -and
+    $_.Line -notmatch "EVTX-ATTACK-SAMPLES"
 }
 
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
     $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
     $_.Line -notmatch "ucrt64/share" -and
     $_.Line -notmatch "origin/main Updating" -and
-    $_.Line -notmatch "origin/master Updating"
-
+    $_.Line -notmatch "origin/master Updating" -and
+    $_.Line -notmatch "EVTX-ATTACK-SAMPLES"
 }
 
 if ($warnings -or $errors -or $failed) {

@@ -18,6 +18,24 @@ if (!(Test-Path variable:GIT_FILE)) {
     $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
 }
 
+function ConvertTo-Icon {
+    Param(
+        [Parameter(Mandatory=$True)] $bitmapPath,
+        [Parameter(Mandatory=$True)] $iconPath
+    )
+
+    if (Test-Path $bitmapPath) {
+        $b = [System.Drawing.Bitmap]::FromFile($bitmapPath)
+        $icon = [System.Drawing.Icon]::FromHandle($b.GetHicon())
+        $file = New-Object System.IO.FileStream($iconPath, 'OpenOrCreate')
+        $icon.Save($file)
+        $file.Close()
+        $icon.Dispose()
+    } else {
+        Write-Warning "$BitmapPath does not exist"
+    }
+}
+
 # Function to download a file from a given URI and save it to a specified file path.
 function Get-FileFromUri {
     Param (

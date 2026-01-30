@@ -229,6 +229,9 @@ if ($status) {
         Remove-Item "${TOOLS}\CyberChef\CyberChef.html" -Force
     }
     Move-Item "${TOOLS}\CyberChef\CyberChef_*" "${TOOLS}\CyberChef\CyberChef.html"
+
+    Add-Type -AssemblyName System.Drawing
+    ConvertTo-Icon -bitmapPath "${PWD}\${TOOLS}\CyberChef\images\cyberchef-128x128.png" -iconPath "${PWD}\${TOOLS}\CyberChef\CyberChef.ico"
 }
 
 # Gollum
@@ -888,6 +891,7 @@ if ($status) {
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\edit.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\edit-* ${TOOLS}\edit
+    Copy-Item "${TOOLS}\edit\edit.exe" "${TOOLS}\bin\edit.exe"
 }
 
 # https://download.sqlitebrowser.org/ - DB Browser for SQLite
