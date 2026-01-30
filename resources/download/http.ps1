@@ -5,6 +5,8 @@ param(
 
 . ".\resources\download\common.ps1"
 
+$TOOL_DEFINITIONS = @()
+
 if (! $NoVSCodeExtensions.IsPresent) {
     # Get URI for Visual Studio Code C++ extension - ugly
     $vscode_cpp_string = Get-DownloadUrlFromPage -url "https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
@@ -54,8 +56,36 @@ if (! $NoVSCodeExtensions.IsPresent) {
     }
 }
 
-# Get Visual Studio Code - installed during start
+# Get Visual Studio Code installer
 $status = Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -FilePath ".\downloads\vscode.exe" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Visual Studio Code"
+    Shortcuts = @(
+        @{
+            Lnk      = "${HOME}\Desktop\dfirws\Editors\Visual Studio code (runs dfirws-install -VSCode).lnk"
+            Target   = "${CLI_TOOL}"
+            Args     = "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -VSCode"
+            Icon     = ""
+            WorkDir  = "${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -VSCode"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "code.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Visual Studio Code installer and extensions are downloaded via https.ps1 script."
+    Tips = @(
+        "After installation, you can add more extensions via Visual Studio Code Marketplace."
+    )
+    Usage = @(
+        "Visual Studio Code is a source-code editor made by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring."
+    )
+}
 
 # Get SwiftOnSecurity sysmon config - used from Sysmon
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml" -FilePath ".\downloads\sysmonconfig-export.xml" -check "ASCII text"
