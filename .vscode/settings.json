@@ -929,6 +929,7 @@
         "wsdump",
         "wsl",
         "Wstyle",
+        "wtpath",
         "wuauserv",
         "XELF",
         "xelfviewer",
@@ -967,5 +968,12 @@
         "bat",
         "powershell",
         "shellscript"
+    ],
+    "python-envs.pythonProjects": [
+        {
+            "path": "",
+            "envManager": "",
+            "packageManager": ""
+        }
     ]
 }

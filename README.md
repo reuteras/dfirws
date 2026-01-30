@@ -232,40 +232,6 @@ Install specific categories:
 .\resources\download\install-tools.ps1 -Priority critical
 ```
 
-### Tool Categories (v2)
-
-DFIRWS v2 includes **433 tools** across **23 categories**:
-
-| Category | Count | Description |
-|----------|-------|-------------|
-| **Standard Tools** | 193 | GitHub release-based tools across 19 categories |
-| **Python Tools** | 72 | Python packages via UV/pip |
-| **Git Repositories** | 62 | Detection rules, signatures, threat intel |
-| **Didier Stevens Suite** | 102 | Comprehensive document/malware analysis |
-| **Node.js Tools** | 4 | JavaScript analysis tools |
-
-### v2 Documentation
-
-- **[YAML Architecture Guide](docs/YAML_ARCHITECTURE.md)** - Complete guide to v2 architecture
-- **[Migration Summary](MIGRATION_COMPLETE.md)** - Details of the v1 to v2 migration
-- **[Interactive Tool Addition](resources/download/add-tool.ps1)** - Script to add new tools with validation
-
-### Compatibility
-
-Both v1 (legacy) and v2 (YAML-based) systems are available:
-
-- **v1**: Original monolithic scripts (still functional)
-- **v2**: New YAML-based scripts (recommended for new installations)
-
-The v2 scripts have a `-v2` suffix (e.g., `install-all-tools-v2.ps1`) to distinguish them from legacy scripts.
-
-## Known problems and errors
-
-- aleapp: import xmltodict - not available
-- bazaar: ModuleNotFoundError: No module named 'typer'
-- shodan: ModuleNotFoundError: No module named 'pkg_resources'
-- freshclam: Doesn't work
-
   [wid]: https://github.com/reuteras/dfirws/wiki/Documentation
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
   [wsc]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file

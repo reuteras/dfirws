@@ -131,4 +131,6 @@ foreach ($Tool in ${DidierStevensBeta}) {
   $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/DidierStevens/Beta/master/${Tool}" -FilePath "${TOOLS}\DidierStevens\${Tool}" -check "Python script"
 }
 
+Copy-Item "${TOOLS}\DidierStevens\*" "${TOOLS}\bin" -Force | Out-Null
+
 $null = $status

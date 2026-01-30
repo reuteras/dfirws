@@ -45,15 +45,6 @@ if ($all -or $Python) {
         Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force
     }
 
-    # Ghidrathon source
-    #$status = Get-GitHubRelease -repo "mandiant/Ghidrathon" -path "${SETUP_PATH}\ghidrathon.zip" -match "Ghidrathon" -check "Zip archive data"
-    #if ($status) {
-    #    if (Test-Path "${TOOLS}\ghidrathon") {
-    #        Remove-Item "${TOOLS}\ghidrathon" -Recurse -Force
-    #    }
-    #    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidrathon.zip" -o"${TOOLS}\" | Out-Null
-    #}
-
     # Tools to compile and build - version 2019
     $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe" -check "PE32"
 }

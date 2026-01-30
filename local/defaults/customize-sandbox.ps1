@@ -12,18 +12,18 @@
 # Create extra shortcuts - third option is optional and is the start directory
 # Set-Shortcut "${HOME}\Desktop\debloat.lnk" "C:\Tools\bin\debloat.exe" "${HOME}\Desktop"
 
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\bash.lnk" -DestinationPath "${env:ProgramFiles}\Git\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\cmder.lnk" -DestinationPath "${env:ProgramFiles}\cmder\cmder.exe" -WorkingDirectory "${HOME}\Desktop"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\HxD.lnk" -DestinationPath "${env:ProgramFiles}\HxD\HxD.exe"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\bash.lnk" -DestinationPath "${env:ProgramFiles}\Git\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "C:\Tools\CyberChef\CyberChef.ico"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\cmder.lnk" -DestinationPath "${env:ProgramFiles}\cmder\cmder.exe" -WorkingDirectory "${HOME}\Desktop"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\Cutter.lnk" -DestinationPath "C:\Tools\cutter\cutter.exe"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\FullEventLogView.lnk" -DestinationPath "C:\Tools\FullEventLogView\FullEventLogView.exe"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\ghidraRun.lnk" -DestinationPath "C:\Tools\ghidra\ghidraRun.bat"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\HxD.lnk" -DestinationPath "${env:ProgramFiles}\HxD\HxD.exe"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\msgviewer.lnk" -DestinationPath "C:\Tools\lib\msgviewer.jar"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\Malcat.lnk" -DestinationPath "C:\Tools\Malcat\bin\malcat.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\Notepad++.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
 
 # Configure Notepad++
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
@@ -77,14 +77,12 @@ foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
     ${GHIDRA_CONFIG} | Out-File -FilePath "${HOME}\.ghidra\.${version}\preferences" -Encoding ascii
 }
 
-#New-Item -Path "${HOME}/.ghidra\.ghidra_10.4_PUBLIC\Extensions" -ItemType Directory -Force | Out-Null
-#& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\GolangAnalyzerExtension.zip" -o"${HOME}/.ghidra/.ghidra_10.4_PUBLIC/Extensions" | Out-Null
-
-# Install extra programs
-#Install-Obsidian
-
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools
 & "C:\Windows\explorer.exe" "${HOME}\Desktop\dfirws"
+
+# Install extra programs
+# See setup\wscommon.ps1 for available install functions
+#Install-Obsidian
 
 # Automation example
 # Have a script that collects Quarantine files from a client and stores them in Quarantine.zip.
@@ -102,7 +100,7 @@ if (Test-Path "${HOME}\Desktop\readonly\Quarantine.zip") {
 # You can access the arguments used to start the sandbox like this
 # Write-Output @args | Out-File -FilePath "${HOME}\Desktop\args.txt" -Encoding ascii
 
-# PowerShell shortcut to start pwsh in Desktop
-#Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
+# PowerShell shortcut to start pwsh in Desktop folder
+# Add-Shortcut -SourceLnk "${HOME}\Desktop\PowerShell.lnk" -DestinationPath "${env:ProgramFiles}\PowerShell\7\pwsh.exe" -WorkingDirectory "${HOME}\Desktop"
 
 # Add your own customizations here

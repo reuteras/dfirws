@@ -30,7 +30,7 @@ if (Test-Path -Path "C:\log") {
 }
 
 # Create required directories
-foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${env:ProgramFiles}\bin", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
+foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
     if (-not (Test-Path -Path $dir)) {
         New-Item -ItemType Directory -Path $dir -Force | Out-Null
     }
@@ -66,7 +66,7 @@ function Add-MultipleToUserPath {
     )
 
     $path = [Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
-    [Environment]::SetEnvironmentVariable("PATH", "${path}" + ";${dirs}", [EnvironmentVariableTarget]::User)
+    [Environment]::SetEnvironmentVariable("PATH", "${path}" + "${dirs}", [EnvironmentVariableTarget]::User)
     Write-Output "Added ${dirs} to PATH"
 }
 
@@ -338,7 +338,7 @@ function Install-CMDer {
     }
 }
 
-function  Install-DCode {
+function Install-DCode {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dcode.txt")) {
         Write-Output "Installing DCode"
         Start-Process -Wait "${SETUP_PATH}\dcode\dcode.exe" -ArgumentList '/CURRENTUSER /VERYSILENT /NORESTART'
@@ -388,6 +388,7 @@ function Install-Docker {
         Write-Output "Docker is already installed"
     }
 }
+
 function Install-Dokany {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dokany.txt")) {
         Write-Output "Installing Dokany"
@@ -493,6 +494,7 @@ function Install-FQLite {
         Write-Output "FQLite is already installed"
     }
 }
+
 function Install-Git {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-git.txt")) {
         Write-Output "Installing Git"
@@ -846,7 +848,7 @@ function Install-Qemu {
     }
 }
 
-function  Install-Ruby {
+function Install-Ruby {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-ruby.txt")) {
         Write-Output "Installing Ruby"
         & "${SETUP_PATH}\ruby.exe" /verysilent /allusers /dir="${env:ProgramFiles}\ruby"
@@ -1011,21 +1013,6 @@ function Install-VSCode {
     }
 }
 
-function Install-W10Loopback {
-    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-loopback.txt")) {
-        Write-Output "Installing Windows 10 Loopback adapter"
-        $WIN10=(Get-ComputerInfo | Select-Object -expand OsName) -match 10
-        if ($WIN10) {
-            & "${HOME}\Documents\tools\utils\devcon.exe" install "${env:windir}\inf\netloop.inf" *msloop
-            Write-DateLog "Loopback adapter installed"
-        } else {
-            Write-DateLog "Loopback adapter not installed since not running Windows 10"
-        }
-    } else {
-        Write-Output "Windows 10 Loopback adapter is already installed"
-    }
-}
-
 function Install-WinDbg {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-windbg.txt")) {
         Write-Output "Installing WinDbg"
@@ -1124,6 +1111,7 @@ function Install-ZAProxy {
         Write-Output "ZAProxy is already installed"
     }
 }
+
 function Install-Zui {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-zui.txt")) {
         Write-Output "Installing Zui"
