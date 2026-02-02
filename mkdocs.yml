@@ -5,6 +5,3 @@ theme:
   name: material
   features:
     - navigation.expand
-nav:
-  - Home: index.md
-  - Tools: tools/index.md
