@@ -170,10 +170,12 @@ function Write-ToolPage {
     $meta_added = $false
     if ($null -ne $Tool.Homepage -and $Tool.Homepage -ne "") {
         $lines += "**Homepage:** <$($Tool.Homepage)>"
+        $lines += ""
         $meta_added = $true
     }
     if ($null -ne $Tool.Vendor -and $Tool.Vendor -ne "") {
         $lines += "**Vendor:** $($Tool.Vendor)"
+        $lines += ""
         $meta_added = $true
     }
     if ($null -ne $Tool.License -and $Tool.License -ne "") {
@@ -223,9 +225,7 @@ function Write-ToolPage {
     if ($sample_commands.Count -gt 0) {
         $lines += "## Sample Commands"
         foreach ($command in $sample_commands) {
-            $lines += "- ```bash"
-            $lines += $command
-            $lines += "```"
+            $lines += "- ``$command``"
         }
         $lines += ""
     }
@@ -237,21 +237,7 @@ function Write-ToolPage {
         }
         $lines += ""
     }
-    if ($null -ne $Tool.Verify -and $Tool.Verify.Count -gt 0) {
-        $lines += "## Verify"
-        foreach ($check in $Tool.Verify) {
-            $lines += "- $($check.Type): $($check.Name) ($($check.Expect))"
-        }
-        $lines += ""
-    }
-    if ($null -ne $Tool.InstallVerifyCommand -and $Tool.InstallVerifyCommand -ne "") {
-        $lines += "## Install Verify Command"
-        $lines += ""
-        $lines += "````text"
-        $lines += $Tool.InstallVerifyCommand
-        $lines += "````"
-        $lines += ""
-    }
+    
     Set-Content -Path $page_path -Value ($lines -join "`n")
     return $page_path
 }
