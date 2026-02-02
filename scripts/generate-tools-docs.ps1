@@ -138,15 +138,8 @@ foreach ($category_path in ($grouped.Keys | Sort-Object)) {
 New-Item -Force -ItemType Directory -Path $DocsRoot | Out-Null
 New-Item -Force -ItemType Directory -Path (Join-Path $DocsRoot "tools") | Out-Null
 
-$index_path = Join-Path $DocsRoot "index.md"
 $tools_index_path = Join-Path $DocsRoot "tools\\index.md"
 New-Item -Force -ItemType Directory -Path (Join-Path $DocsRoot "tools\\pages") | Out-Null
-
-Set-Content -Path $index_path -Value @"
-# dfirws tools
-
-Generated tool documentation. Start at [Tools](tools/index.md).
-"@
 
 $tools_index_lines = @()
 $tools_index_lines += "# Tools"
@@ -176,7 +169,7 @@ function Write-ToolPage {
     $lines += ""
     $meta_added = $false
     if ($null -ne $Tool.Homepage -and $Tool.Homepage -ne "") {
-        $lines += "**Homepage:** $($Tool.Homepage)"
+        $lines += "**Homepage:** <$($Tool.Homepage)>"
         $meta_added = $true
     }
     if ($null -ne $Tool.Vendor -and $Tool.Vendor -ne "") {
@@ -185,13 +178,13 @@ function Write-ToolPage {
     }
     if ($null -ne $Tool.License -and $Tool.License -ne "") {
         if ($null -ne $Tool.LicenseUrl -and $Tool.LicenseUrl -ne "") {
-            $lines += "**License:** $($Tool.License) ($($Tool.LicenseUrl))"
+            $lines += "**License:** [$($Tool.License)]($($Tool.LicenseUrl))"
         } else {
             $lines += "**License:** $($Tool.License)"
         }
         $meta_added = $true
     } elseif ($null -ne $Tool.LicenseUrl -and $Tool.LicenseUrl -ne "") {
-        $lines += "**License:** $($Tool.LicenseUrl)"
+        $lines += "**License:** <$($Tool.LicenseUrl)>"
         $meta_added = $true
     }
     if ($meta_added) {
@@ -206,35 +199,34 @@ function Write-ToolPage {
     if ($notes.Count -gt 0) {
         $lines += "## Notes"
         foreach ($note in $notes) {
-            $lines += "- $note"
+            $lines += $note
+            $lines += ""
         }
-        $lines += ""
     }
     $tips = Get-StringList -Value $Tool.Tips
     if ($tips.Count -gt 0) {
         $lines += "## Tips"
         foreach ($tip in $tips) {
-            $lines += "- $tip"
+            $lines += $tip
+            $lines += ""
         }
-        $lines += ""
     }
     $usage = Get-StringList -Value $Tool.Usage
     if ($usage.Count -gt 0) {
         $lines += "## Usage"
         foreach ($item in $usage) {
-            $lines += "- $item"
+            $lines += $item
+            $lines += ""
         }
-        $lines += ""
     }
     $sample_commands = Get-StringList -Value $Tool.SampleCommands
     if ($sample_commands.Count -gt 0) {
         $lines += "## Sample Commands"
-        $lines += ""
-        $lines += "````text"
         foreach ($command in $sample_commands) {
+            $lines += "- ```bash"
             $lines += $command
+            $lines += "```"
         }
-        $lines += "````"
         $lines += ""
     }
     $sample_files = Get-StringList -Value $Tool.SampleFiles
