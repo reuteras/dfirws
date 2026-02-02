@@ -79,7 +79,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\ImHex.lnk" -DestinationP
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Malcat.lnk" -DestinationPath "${env:ProgramFiles}\malcat\bin\malcat.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Notepad++.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-install -Obsidian).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Obsidian"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Visual Studio code (runs dfirws-install -VSCode).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -VSCode"
 
 # Files and apps
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps" | Out-Null
@@ -681,6 +680,13 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\TimeApp.lnk" -Destinat
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\TimelineExplorer.lnk" -DestinationPath "${env:ProgramFiles}\TimelineExplorer\TimelineExplorer.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\VSCMount.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\VSCMount.exe" -Arguments "${CLI_TOOL_ARGS} -command VSCMount.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Zimmerman\WxTCmd.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\WxTCmd.exe" -Arguments "${CLI_TOOL_ARGS} -command WxTCmd.exe -h"
+
+# Add shortcuts from in $SETUP_PATH\dfirws\dfirws_folder_*.ps1 if they exists
+$FOLDER_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "dfirws_folder_*.ps1" -ErrorAction SilentlyContinue
+foreach ($script in $FOLDER_SCRIPTS) {
+    Write-SynchronizedLog "Running dfirws folder script: $($script.FullName)"
+    & $script.FullName
+}
 
 # Pin to explorer
 $shell = new-object -com "Shell.Application"

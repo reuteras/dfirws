@@ -11,7 +11,6 @@ $repourls = `
     "https://github.com/ahmedkhlief/APT-Hunter.git", `
     "https://github.com/AndrewRathbun/DFIRArtifactMuseum.git", `
     "https://github.com/ANSSI-FR/bmc-tools.git", `
-    "https://github.com/Ashwesker/Ashwesker-CVE-2026-21509.git", `
     "https://github.com/avasero/psexposed.git", `
     "https://github.com/Bert-JanP/Incident-Response-Powershell.git", `
     "https://github.com/BSI-Bund/RdpCacheStitcher.git", `

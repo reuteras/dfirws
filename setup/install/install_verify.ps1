@@ -20,8 +20,14 @@ catch {
 # Basic tools
 Test-Command 7z PE32
 
+# Run tests in $SETUP_PATH\dfirws\verify_*.ps1 if they exists
+$VERIFY_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "verify_*.ps1" -ErrorAction SilentlyContinue
+foreach ($script in $VERIFY_SCRIPTS) {
+    Write-SynchronizedLog "Running verify script: $($script.FullName)"
+    & $script.FullName
+}
+
 # Extra tools
-Test-Command code DOS
 Test-Command HxD PE32
 Test-Command apimonitor-x86.exe PE32
 Test-Command apimonitor-x64.exe PE32

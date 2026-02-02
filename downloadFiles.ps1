@@ -144,6 +144,10 @@ if (!(Test-Path "${SETUP_PATH}")) {
     New-Item -ItemType Directory -Force -Path "${SETUP_PATH}" 2>&1 | Out-Null
 }
 
+if (!(Test-Path "${SETUP_PATH}\dfirws")) {
+    New-Item -ItemType Directory -Force -Path "${SETUP_PATH}\dfirws" 2>&1 | Out-Null
+}
+
 if (!(Test-Path "${SETUP_PATH}\.etag")) {
     New-Item -ItemType Directory -Force -Path "${SETUP_PATH}\.etag" 2>&1 | Out-Null
 }
@@ -175,11 +179,6 @@ Get-Date > ".\log\log.txt"
 Get-Date > ".\log\logboost.txt"
 Get-Date > ".\log\jobs.txt"
 Get-Date > ".\log\verify.txt"
-
-# Moved tools_downloaded.csv to downloads
-if (Test-Path ".\tools_downloaded.csv") {
-    Move-Item -Path ".\tools_downloaded.csv" -Destination ".\downloads\tools_downloaded.csv" -Force
-}
 
 if ($DebugDownloads.IsPresent) {
     Write-DateLog "Debug mode enabled."
