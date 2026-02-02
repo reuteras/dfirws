@@ -1,0 +1,8 @@
+site_name: dfirws tools
+docs_dir: docs
+site_dir: site
+theme:
+  name: readthedocs
+nav:
+  - Home: index.md
+  - Tools: tools/index.md

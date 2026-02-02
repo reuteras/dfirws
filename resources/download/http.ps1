@@ -61,6 +61,11 @@ $status = Get-FileFromUri -uri "https://update.code.visualstudio.com/latest/win3
 
 $TOOL_DEFINITIONS += @{
     Name = "Visual Studio Code"
+    Homepage = "https://code.visualstudio.com/"
+    Vendor = "Microsoft"
+    License = "Microsoft Software License Terms"
+    LicenseUrl = "https://code.visualstudio.com/License"
+    Category = "Editors"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Editors\Visual Studio code (runs dfirws-install -VSCode).lnk"
@@ -79,12 +84,10 @@ $TOOL_DEFINITIONS += @{
         }
     )
     Notes = "Visual Studio Code installer and extensions are downloaded via https.ps1 script."
-    Tips = @(
-        "After installation, you can add more extensions via Visual Studio Code Marketplace."
-    )
-    Usage = @(
-        "Visual Studio Code is a source-code editor made by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring."
-    )
+    Tips = "After installation, you can add more extensions via Visual Studio Code Marketplace."
+    Usage = "Visual Studio Code is a source-code editor made by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring."
+    SampleCommands = "dfirws-install.ps1 -VSCode"
+    SampleFiles = ""
 }
 
 # Get SwiftOnSecurity sysmon config - used from Sysmon
@@ -605,3 +608,51 @@ for ($i = 0; $i -lt $TOOL_DEFINITIONS.Count; $i++) {
         }
     }
 }
+
+# Export tool metadata for documentation generation.
+$tools_export = @()
+for ($i = 0; $i -lt $TOOL_DEFINITIONS.Count; $i++) {
+    $tool = $TOOL_DEFINITIONS[$i]
+    $category_path = $null
+
+    if ($null -ne $tool.Shortcuts -and $tool.Shortcuts.Count -gt 0) {
+        $lnk = $tool.Shortcuts[0].Lnk
+        if ($null -ne $lnk) {
+            $category_match = [regex]::Match($lnk, "\\Desktop\\dfirws\\(.+)\\[^\\]+$")
+            if ($category_match.Success) {
+                $category_path = $category_match.Groups[1].Value
+            }
+        }
+    }
+
+    $category = "Uncategorized"
+    if ($null -ne $category_path -and $category_path -ne "") {
+        $category = ($category_path -split "\\")[0]
+    }
+
+    $tools_export += [ordered]@{
+        Name                 = $tool.Name
+        Homepage             = $tool.Homepage
+        Vendor               = $tool.Vendor
+        License              = $tool.License
+        LicenseUrl           = $tool.LicenseUrl
+        Category             = $category
+        CategoryPath         = $category_path
+        InstallVerifyCommand = $tool.InstallVerifyCommand
+        Shortcuts            = $tool.Shortcuts
+        Verify               = $tool.Verify
+        Notes                = $tool.Notes
+        Tips                 = $tool.Tips
+        Usage                = $tool.Usage
+        SampleCommands       = $tool.SampleCommands
+        SampleFiles          = $tool.SampleFiles
+    }
+}
+
+$tools_doc = [ordered]@{
+    GeneratedAt  = (Get-Date).ToString("s")
+    SourceScript = "resources/download/http.ps1"
+    Tools        = $tools_export
+}
+
+Set-Content -Path ".\downloads\dfirws\tools_http.json" -Value ($tools_doc | ConvertTo-Json -Depth 8)
