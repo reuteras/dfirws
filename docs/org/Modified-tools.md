@@ -1,0 +1,3 @@
+- **PatchaPalooza** (*C:\git\PatchaPalooza*) is patched so that **termcolor** works on Windows. Patch is done in [resources/download/git.ps1](https://github.com/reuteras/dfirws/blob/main/resources/download/git.ps1).
+- **scare** (*C:\venv\scare*) is patched so that the splash screen looks better. Patch is done in [setup/install_python_tools.ps1](https://github.com/reuteras/dfirws/blob/main/setup/install_python_tools.ps1). Should be run with **ptpython**
+- **dfir-unfurl** (*C:\venv\dfir-unfurl*) is modified to use locally cached versions of JavaScript files instead of downloading them from Cloudflare at runtime. Patch is done in [setup/install_python_tools.ps1](https://github.com/reuteras/dfirws/blob/main/setup/install_python_tools.ps1)
