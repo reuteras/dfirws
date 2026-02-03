@@ -6,13 +6,10 @@ theme:
   features:
     - navigation.expand
 
-nav:
-- Home: index.md
-- Changes: Changes.md
+- Changelog: Changes.md
 - Customize Dfirws: Customize-dfirws.md
 - Didier Stevens Tools: Didier-Stevens-tools.md
 - Getting Started: Getting-started.md
-- Home: Home.md
 - Jupyter Notebooks: Jupyter-notebooks.md
 - KAPE: KAPE.md
 - Network Forensics: Network-forensics.md
@@ -30,118 +27,102 @@ nav:
   - Investigate PE Files: Investigations/Investigate-PE-files.md
   - Investigate PowerShell: Investigations/Investigate-PowerShell.md
   - Investigate ZIP Files: Investigations/Investigate-ZIP-files.md
-  - Tools:
-    - Overview: tools/index.md
-    - Development:
-      - Overview: tools/development.md
-      - Win Api Search: tools/pages/development-win-api-search.md
-    - Editors:
-      - Overview: tools/editors.md
-      - Hxd: tools/pages/editors-hxd.md
-      - Malcat Lite: tools/pages/editors-malcat-lite.md
-      - Visual Studio Code: tools/pages/editors-visual-studio-code.md
-    - Files And Apps Browser:
-      - Overview: tools/files-and-apps-browser.md
-      - Nirsoft Browser Utilities: tools/pages/files-and-apps-browser-nirsoft-browser-utilities.md
-    - Files And Apps Database:
-      - Overview: tools/files-and-apps-database.md
-      - Neo4j: tools/pages/files-and-apps-database-neo4j.md
-    - Files And Apps Email:
-      - Overview: tools/files-and-apps-email.md
-      - Mail Viewer: tools/pages/files-and-apps-email-mail-viewer.md
-      - Pst Walker: tools/pages/files-and-apps-email-pst-walker.md
-    - Files And Apps Office:
-      - Overview: tools/files-and-apps-office.md
-      - Libreoffice: tools/pages/files-and-apps-office-libreoffice.md
-      - Mitec Structured Storage Viewer: tools/pages/files-and-apps-office-mitec-structured-storage-viewer.md
-    - Files And Apps Pdf:
-      - Overview: tools/files-and-apps-pdf.md
-      - Pdfstreamdumper: tools/pages/files-and-apps-pdf-pdfstreamdumper.md
-    - Files And Apps Pe:
-      - Overview: tools/files-and-apps-pe.md
-      - Capa Explorer Web: tools/pages/files-and-apps-pe-capa-explorer-web.md
-      - Pestudio: tools/pages/files-and-apps-pe-pestudio.md
-    - Files And Apps:
-      - Overview: tools/files-and-apps.md
-      - Browser Nirsoft Browser Utilities: tools/pages/files-and-apps-browser-nirsoft-browser-utilities.md
-      - Bulk Extractor: tools/pages/files-and-apps-bulk-extractor.md
-      - Database Neo4j: tools/pages/files-and-apps-database-neo4j.md
-      - Densityscout: tools/pages/files-and-apps-densityscout.md
-      - Email Mail Viewer: tools/pages/files-and-apps-email-mail-viewer.md
-      - Email Pst Walker: tools/pages/files-and-apps-email-pst-walker.md
-      - Office Libreoffice: tools/pages/files-and-apps-office-libreoffice.md
-      - Office Mitec Structured Storage Viewer: tools/pages/files-and-apps-office-mitec-structured-storage-viewer.md
-      - Pdf Pdfstreamdumper: tools/pages/files-and-apps-pdf-pdfstreamdumper.md
-      - Pe Capa Explorer Web: tools/pages/files-and-apps-pe-capa-explorer-web.md
-      - Pe Pestudio: tools/pages/files-and-apps-pe-pestudio.md
-      - Trid: tools/pages/files-and-apps-trid.md
-    - Logs:
-      - Overview: tools/logs.md
-      - Fulleventlogview: tools/pages/logs-fulleventlogview.md
-    - Memory:
-      - Overview: tools/memory.md
-      - Volatility Workbench 2 1: tools/pages/memory-volatility-workbench-2-1.md
-      - Volatility Workbench 3: tools/pages/memory-volatility-workbench-3.md
-    - Os Android:
-      - Overview: tools/os-android.md
-      - Apktool: tools/pages/os-android-apktool.md
-    - Os Windows:
-      - Overview: tools/os-windows.md
-      - Procdot: tools/pages/os-windows-procdot.md
-      - Recbin: tools/pages/os-windows-recbin.md
-    - Programming:
-      - Overview: tools/programming.md
-      - Php: tools/pages/programming-php.md
-    - Reverse Engineering:
-      - Overview: tools/reverse-engineering.md
-      - Binary Ninja: tools/pages/reverse-engineering-binary-ninja.md
-      - Fasm: tools/pages/reverse-engineering-fasm.md
-    - Sysinternals:
-      - Overview: tools/sysinternals.md
-      - Sysinternals Suite: tools/pages/sysinternals-sysinternals-suite.md
-    - Uncategorized:
-      - Overview: tools/uncategorized.md
-      - Api Monitor: tools/pages/uncategorized-api-monitor.md
-      - Elastic Stack Elk Beats: tools/pages/uncategorized-elastic-stack-elk-beats.md
-      - Javafx Sdk: tools/pages/uncategorized-javafx-sdk.md
-      - Mex: tools/pages/uncategorized-mex.md
-      - Nmap: tools/pages/uncategorized-nmap.md
-      - Npcap: tools/pages/uncategorized-npcap.md
-      - Openvpn Connect: tools/pages/uncategorized-openvpn-connect.md
-      - Sqlite Tools: tools/pages/uncategorized-sqlite-tools.md
-      - Vmss2core: tools/pages/uncategorized-vmss2core.md
-      - Windows Terminal Canary: tools/pages/uncategorized-windows-terminal-canary.md
-      - Winpmem: tools/pages/uncategorized-winpmem.md
-    - Utilities Browsers:
-      - Overview: tools/utilities-browsers.md
-      - Tor Browser: tools/pages/utilities-browsers-tor-browser.md
-    - Utilities Crypto:
-      - Overview: tools/utilities-crypto.md
-      - Gpg4win: tools/pages/utilities-crypto-gpg4win.md
-      - Hashcat: tools/pages/utilities-crypto-hashcat.md
-      - Veracrypt: tools/pages/utilities-crypto-veracrypt.md
-    - Utilities:
-      - Overview: tools/utilities.md
-      - Browsers Tor Browser: tools/pages/utilities-browsers-tor-browser.md
-      - Crypto Gpg4win: tools/pages/utilities-crypto-gpg4win.md
-      - Crypto Hashcat: tools/pages/utilities-crypto-hashcat.md
-      - Crypto Veracrypt: tools/pages/utilities-crypto-veracrypt.md
-      - Dcode: tools/pages/utilities-dcode.md
-      - Exiftool: tools/pages/utilities-exiftool.md
-      - Geolocus Cli: tools/pages/utilities-geolocus-cli.md
-      - Graphviz: tools/pages/utilities-graphviz.md
-      - Sysinternals Suite: tools/pages/utilities-sysinternals-suite.md
+- Tools:
+  - Overview: tools/index.md
+  - Development:
+    - Overview: tools/development/index.md
+    - Win API Search: tools/development/win-api-search.md
+  - Editors:
+    - Overview: tools/editors/index.md
+    - HxD: tools/editors/hxd.md
+    - Malcat Lite: tools/editors/malcat-lite.md
+    - Visual Studio Code: tools/editors/visual-studio-code.md
+  - Files And Apps:
+    - Overview: tools/files-and-apps/index.md
+    - bulk_extractor: tools/files-and-apps/bulk-extractor.md
+    - DensityScout: tools/files-and-apps/densityscout.md
+    - TrID: tools/files-and-apps/trid.md
+  - Files And Apps Browser:
+    - Overview: tools/files-and-apps-browser/index.md
+    - NirSoft Browser Utilities: tools/files-and-apps-browser/nirsoft-browser-utilities.md
+  - Files And Apps Database:
+    - Overview: tools/files-and-apps-database/index.md
+    - Neo4j: tools/files-and-apps-database/neo4j.md
+  - Files And Apps Email:
+    - Overview: tools/files-and-apps-email/index.md
+    - Mail Viewer: tools/files-and-apps-email/mail-viewer.md
+    - PST Walker: tools/files-and-apps-email/pst-walker.md
+  - Files And Apps Office:
+    - Overview: tools/files-and-apps-office/index.md
+    - LibreOffice: tools/files-and-apps-office/libreoffice.md
+    - MiTeC Structured Storage Viewer: tools/files-and-apps-office/mitec-structured-storage-viewer.md
+  - Files And Apps Pdf:
+    - Overview: tools/files-and-apps-pdf/index.md
+    - PDFStreamDumper: tools/files-and-apps-pdf/pdfstreamdumper.md
+  - Files And Apps Pe:
+    - Overview: tools/files-and-apps-pe/index.md
+    - capa Explorer Web: tools/files-and-apps-pe/capa-explorer-web.md
+    - pestudio: tools/files-and-apps-pe/pestudio.md
+  - Logs:
+    - Overview: tools/logs/index.md
+    - FullEventLogView: tools/logs/fulleventlogview.md
+  - Memory:
+    - Overview: tools/memory/index.md
+    - Volatility Workbench 2.1: tools/memory/volatility-workbench-2-1.md
+    - Volatility Workbench 3: tools/memory/volatility-workbench-3.md
+  - Os Android:
+    - Overview: tools/os-android/index.md
+    - apktool: tools/os-android/apktool.md
+  - Os Windows:
+    - Overview: tools/os-windows/index.md
+    - ProcDOT: tools/os-windows/procdot.md
+    - recbin: tools/os-windows/recbin.md
+  - Programming:
+    - Overview: tools/programming/index.md
+    - PHP: tools/programming/php.md
+  - Reverse Engineering:
+    - Overview: tools/reverse-engineering/index.md
+    - Binary Ninja: tools/reverse-engineering/binary-ninja.md
+    - FASM: tools/reverse-engineering/fasm.md
+  - Sysinternals:
+    - Overview: tools/sysinternals/index.md
+    - Sysinternals Suite: tools/sysinternals/sysinternals-suite.md
+  - Uncategorized:
+    - Overview: tools/uncategorized/index.md
+    - API Monitor: tools/uncategorized/api-monitor.md
+    - Elastic Stack (ELK + Beats): tools/uncategorized/elastic-stack-elk-beats.md
+    - JavaFX SDK: tools/uncategorized/javafx-sdk.md
+    - MEX: tools/uncategorized/mex.md
+    - Nmap: tools/uncategorized/nmap.md
+    - Npcap: tools/uncategorized/npcap.md
+    - OpenVPN Connect: tools/uncategorized/openvpn-connect.md
+    - SQLite Tools: tools/uncategorized/sqlite-tools.md
+    - vmss2core: tools/uncategorized/vmss2core.md
+    - Windows Terminal (Canary): tools/uncategorized/windows-terminal-canary.md
+    - winpmem: tools/uncategorized/winpmem.md
+  - Utilities:
+    - Overview: tools/utilities/index.md
+    - DCode: tools/utilities/dcode.md
+    - ExifTool: tools/utilities/exiftool.md
+    - geolocus-cli: tools/utilities/geolocus-cli.md
+    - Graphviz: tools/utilities/graphviz.md
+  - Utilities Browsers:
+    - Overview: tools/utilities-browsers/index.md
+    - Tor Browser: tools/utilities-browsers/tor-browser.md
+  - Utilities Crypto:
+    - Overview: tools/utilities-crypto/index.md
+    - Gpg4win: tools/utilities-crypto/gpg4win.md
+    - hashcat: tools/utilities-crypto/hashcat.md
+    - VeraCrypt: tools/utilities-crypto/veracrypt.md
 
-- Home: index.md
 - Home: index.md
 
 nav:
 - Home: index.md
-- Changes: Changes.md
+- Changelog: Changes.md
 - Customize Dfirws: Customize-dfirws.md
 - Didier Stevens Tools: Didier-Stevens-tools.md
 - Getting Started: Getting-started.md
-- Home: Home.md
 - Jupyter Notebooks: Jupyter-notebooks.md
 - KAPE: KAPE.md
 - Network Forensics: Network-forensics.md
@@ -159,104 +140,92 @@ nav:
   - Investigate PE Files: Investigations/Investigate-PE-files.md
   - Investigate PowerShell: Investigations/Investigate-PowerShell.md
   - Investigate ZIP Files: Investigations/Investigate-ZIP-files.md
-  - Tools:
-    - Overview: tools/index.md
-    - Development:
-      - Overview: tools/development.md
-      - Win Api Search: tools/pages/development-win-api-search.md
-    - Editors:
-      - Overview: tools/editors.md
-      - Hxd: tools/pages/editors-hxd.md
-      - Malcat Lite: tools/pages/editors-malcat-lite.md
-      - Visual Studio Code: tools/pages/editors-visual-studio-code.md
-    - Files And Apps Browser:
-      - Overview: tools/files-and-apps-browser.md
-      - Nirsoft Browser Utilities: tools/pages/files-and-apps-browser-nirsoft-browser-utilities.md
-    - Files And Apps Database:
-      - Overview: tools/files-and-apps-database.md
-      - Neo4j: tools/pages/files-and-apps-database-neo4j.md
-    - Files And Apps Email:
-      - Overview: tools/files-and-apps-email.md
-      - Mail Viewer: tools/pages/files-and-apps-email-mail-viewer.md
-      - Pst Walker: tools/pages/files-and-apps-email-pst-walker.md
-    - Files And Apps Office:
-      - Overview: tools/files-and-apps-office.md
-      - Libreoffice: tools/pages/files-and-apps-office-libreoffice.md
-      - Mitec Structured Storage Viewer: tools/pages/files-and-apps-office-mitec-structured-storage-viewer.md
-    - Files And Apps Pdf:
-      - Overview: tools/files-and-apps-pdf.md
-      - Pdfstreamdumper: tools/pages/files-and-apps-pdf-pdfstreamdumper.md
-    - Files And Apps Pe:
-      - Overview: tools/files-and-apps-pe.md
-      - Capa Explorer Web: tools/pages/files-and-apps-pe-capa-explorer-web.md
-      - Pestudio: tools/pages/files-and-apps-pe-pestudio.md
-    - Files And Apps:
-      - Overview: tools/files-and-apps.md
-      - Browser Nirsoft Browser Utilities: tools/pages/files-and-apps-browser-nirsoft-browser-utilities.md
-      - Bulk Extractor: tools/pages/files-and-apps-bulk-extractor.md
-      - Database Neo4j: tools/pages/files-and-apps-database-neo4j.md
-      - Densityscout: tools/pages/files-and-apps-densityscout.md
-      - Email Mail Viewer: tools/pages/files-and-apps-email-mail-viewer.md
-      - Email Pst Walker: tools/pages/files-and-apps-email-pst-walker.md
-      - Office Libreoffice: tools/pages/files-and-apps-office-libreoffice.md
-      - Office Mitec Structured Storage Viewer: tools/pages/files-and-apps-office-mitec-structured-storage-viewer.md
-      - Pdf Pdfstreamdumper: tools/pages/files-and-apps-pdf-pdfstreamdumper.md
-      - Pe Capa Explorer Web: tools/pages/files-and-apps-pe-capa-explorer-web.md
-      - Pe Pestudio: tools/pages/files-and-apps-pe-pestudio.md
-      - Trid: tools/pages/files-and-apps-trid.md
-    - Logs:
-      - Overview: tools/logs.md
-      - Fulleventlogview: tools/pages/logs-fulleventlogview.md
-    - Memory:
-      - Overview: tools/memory.md
-      - Volatility Workbench 2 1: tools/pages/memory-volatility-workbench-2-1.md
-      - Volatility Workbench 3: tools/pages/memory-volatility-workbench-3.md
-    - Os Android:
-      - Overview: tools/os-android.md
-      - Apktool: tools/pages/os-android-apktool.md
-    - Os Windows:
-      - Overview: tools/os-windows.md
-      - Procdot: tools/pages/os-windows-procdot.md
-      - Recbin: tools/pages/os-windows-recbin.md
-    - Programming:
-      - Overview: tools/programming.md
-      - Php: tools/pages/programming-php.md
-    - Reverse Engineering:
-      - Overview: tools/reverse-engineering.md
-      - Binary Ninja: tools/pages/reverse-engineering-binary-ninja.md
-      - Fasm: tools/pages/reverse-engineering-fasm.md
-    - Sysinternals:
-      - Overview: tools/sysinternals.md
-      - Sysinternals Suite: tools/pages/sysinternals-sysinternals-suite.md
-    - Uncategorized:
-      - Overview: tools/uncategorized.md
-      - Api Monitor: tools/pages/uncategorized-api-monitor.md
-      - Elastic Stack Elk Beats: tools/pages/uncategorized-elastic-stack-elk-beats.md
-      - Javafx Sdk: tools/pages/uncategorized-javafx-sdk.md
-      - Mex: tools/pages/uncategorized-mex.md
-      - Nmap: tools/pages/uncategorized-nmap.md
-      - Npcap: tools/pages/uncategorized-npcap.md
-      - Openvpn Connect: tools/pages/uncategorized-openvpn-connect.md
-      - Sqlite Tools: tools/pages/uncategorized-sqlite-tools.md
-      - Vmss2core: tools/pages/uncategorized-vmss2core.md
-      - Windows Terminal Canary: tools/pages/uncategorized-windows-terminal-canary.md
-      - Winpmem: tools/pages/uncategorized-winpmem.md
-    - Utilities Browsers:
-      - Overview: tools/utilities-browsers.md
-      - Tor Browser: tools/pages/utilities-browsers-tor-browser.md
-    - Utilities Crypto:
-      - Overview: tools/utilities-crypto.md
-      - Gpg4win: tools/pages/utilities-crypto-gpg4win.md
-      - Hashcat: tools/pages/utilities-crypto-hashcat.md
-      - Veracrypt: tools/pages/utilities-crypto-veracrypt.md
-    - Utilities:
-      - Overview: tools/utilities.md
-      - Browsers Tor Browser: tools/pages/utilities-browsers-tor-browser.md
-      - Crypto Gpg4win: tools/pages/utilities-crypto-gpg4win.md
-      - Crypto Hashcat: tools/pages/utilities-crypto-hashcat.md
-      - Crypto Veracrypt: tools/pages/utilities-crypto-veracrypt.md
-      - Dcode: tools/pages/utilities-dcode.md
-      - Exiftool: tools/pages/utilities-exiftool.md
-      - Geolocus Cli: tools/pages/utilities-geolocus-cli.md
-      - Graphviz: tools/pages/utilities-graphviz.md
-      - Sysinternals Suite: tools/pages/utilities-sysinternals-suite.md
+- Tools:
+  - Overview: tools/index.md
+  - Development:
+    - Overview: tools/development/index.md
+    - Win API Search: tools/development/win-api-search.md
+  - Editors:
+    - Overview: tools/editors/index.md
+    - HxD: tools/editors/hxd.md
+    - Malcat Lite: tools/editors/malcat-lite.md
+    - Visual Studio Code: tools/editors/visual-studio-code.md
+  - Files And Apps:
+    - Overview: tools/files-and-apps/index.md
+    - bulk_extractor: tools/files-and-apps/bulk-extractor.md
+    - DensityScout: tools/files-and-apps/densityscout.md
+    - TrID: tools/files-and-apps/trid.md
+  - Files And Apps Browser:
+    - Overview: tools/files-and-apps-browser/index.md
+    - NirSoft Browser Utilities: tools/files-and-apps-browser/nirsoft-browser-utilities.md
+  - Files And Apps Database:
+    - Overview: tools/files-and-apps-database/index.md
+    - Neo4j: tools/files-and-apps-database/neo4j.md
+  - Files And Apps Email:
+    - Overview: tools/files-and-apps-email/index.md
+    - Mail Viewer: tools/files-and-apps-email/mail-viewer.md
+    - PST Walker: tools/files-and-apps-email/pst-walker.md
+  - Files And Apps Office:
+    - Overview: tools/files-and-apps-office/index.md
+    - LibreOffice: tools/files-and-apps-office/libreoffice.md
+    - MiTeC Structured Storage Viewer: tools/files-and-apps-office/mitec-structured-storage-viewer.md
+  - Files And Apps Pdf:
+    - Overview: tools/files-and-apps-pdf/index.md
+    - PDFStreamDumper: tools/files-and-apps-pdf/pdfstreamdumper.md
+  - Files And Apps Pe:
+    - Overview: tools/files-and-apps-pe/index.md
+    - capa Explorer Web: tools/files-and-apps-pe/capa-explorer-web.md
+    - pestudio: tools/files-and-apps-pe/pestudio.md
+  - Logs:
+    - Overview: tools/logs/index.md
+    - FullEventLogView: tools/logs/fulleventlogview.md
+  - Memory:
+    - Overview: tools/memory/index.md
+    - Volatility Workbench 2.1: tools/memory/volatility-workbench-2-1.md
+    - Volatility Workbench 3: tools/memory/volatility-workbench-3.md
+  - Os Android:
+    - Overview: tools/os-android/index.md
+    - apktool: tools/os-android/apktool.md
+  - Os Windows:
+    - Overview: tools/os-windows/index.md
+    - ProcDOT: tools/os-windows/procdot.md
+    - recbin: tools/os-windows/recbin.md
+  - Programming:
+    - Overview: tools/programming/index.md
+    - PHP: tools/programming/php.md
+  - Reverse Engineering:
+    - Overview: tools/reverse-engineering/index.md
+    - Binary Ninja: tools/reverse-engineering/binary-ninja.md
+    - FASM: tools/reverse-engineering/fasm.md
+  - Sysinternals:
+    - Overview: tools/sysinternals/index.md
+    - Sysinternals Suite: tools/sysinternals/sysinternals-suite.md
+  - Uncategorized:
+    - Overview: tools/uncategorized/index.md
+    - API Monitor: tools/uncategorized/api-monitor.md
+    - Elastic Stack (ELK + Beats): tools/uncategorized/elastic-stack-elk-beats.md
+    - JavaFX SDK: tools/uncategorized/javafx-sdk.md
+    - MEX: tools/uncategorized/mex.md
+    - Nmap: tools/uncategorized/nmap.md
+    - Npcap: tools/uncategorized/npcap.md
+    - OpenVPN Connect: tools/uncategorized/openvpn-connect.md
+    - SQLite Tools: tools/uncategorized/sqlite-tools.md
+    - vmss2core: tools/uncategorized/vmss2core.md
+    - Windows Terminal (Canary): tools/uncategorized/windows-terminal-canary.md
+    - winpmem: tools/uncategorized/winpmem.md
+  - Utilities:
+    - Overview: tools/utilities/index.md
+    - DCode: tools/utilities/dcode.md
+    - ExifTool: tools/utilities/exiftool.md
+    - geolocus-cli: tools/utilities/geolocus-cli.md
+    - Graphviz: tools/utilities/graphviz.md
+  - Utilities Browsers:
+    - Overview: tools/utilities-browsers/index.md
+    - Tor Browser: tools/utilities-browsers/tor-browser.md
+  - Utilities Crypto:
+    - Overview: tools/utilities-crypto/index.md
+    - Gpg4win: tools/utilities-crypto/gpg4win.md
+    - hashcat: tools/utilities-crypto/hashcat.md
+    - VeraCrypt: tools/utilities-crypto/veracrypt.md
+
+- Home: index.md
