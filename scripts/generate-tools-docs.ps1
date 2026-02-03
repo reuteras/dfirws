@@ -89,6 +89,53 @@ function Get-DocsNavLines {
     return $lines
 }
 
+function Get-ToolsNavLines {
+    param(
+        [string]$DocsRootPath,
+        [int]$Indent = 2
+    )
+    $lines = @()
+    $indent_text = " " * $Indent
+    $tools_root = Join-Path $DocsRootPath "tools"
+    if (! (Test-Path -Path $tools_root)) {
+        return $lines
+    }
+
+    $lines += ("{0}- Tools:" -f $indent_text)
+    $tools_indent = " " * ($Indent + 2)
+    $index_path = Join-Path $tools_root "index.md"
+    if (Test-Path -Path $index_path) {
+        $lines += ("{0}- Overview: tools/index.md" -f $tools_indent)
+    }
+
+    $category_files = Get-ChildItem -Path $tools_root -File -Filter "*.md" | Where-Object { $_.Name -ne "index.md" } | Sort-Object Name
+    $pages_root = Join-Path $tools_root "pages"
+    $tool_pages = @()
+    if (Test-Path -Path $pages_root) {
+        $tool_pages = Get-ChildItem -Path $pages_root -File -Filter "*.md" | Sort-Object Name
+    }
+
+    foreach ($file in $category_files) {
+        $category_slug = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+        $category_label = Get-NavLabel -Value $category_slug
+        $lines += ("{0}- {1}:" -f $tools_indent, $category_label)
+        $lines += ("{0}- Overview: tools/{1}.md" -f (" " * ($Indent + 4)), $category_slug)
+
+        if ($tool_pages.Count -gt 0) {
+            $prefix = $category_slug + "-"
+            $matching = $tool_pages | Where-Object { $_.Name.StartsWith($prefix) } | Sort-Object Name
+            foreach ($page in $matching) {
+                $page_slug = [System.IO.Path]::GetFileNameWithoutExtension($page.Name)
+                $tail = $page_slug.Substring($prefix.Length)
+                $tool_label = Get-NavLabel -Value $tail
+                $lines += ("{0}- {1}: tools/pages/{2}.md" -f (" " * ($Indent + 4)), $tool_label, $page_slug)
+            }
+        }
+    }
+
+    return $lines
+}
+
 function Update-MkDocsNav {
     param(
         [string]$ConfigPath,
@@ -122,7 +169,26 @@ function Update-MkDocsNav {
     }
 
     $nav_lines = @("nav:")
-    $nav_lines += Get-DocsNavLines -RootPath $DocsRootPath
+    $root_index = Join-Path $DocsRootPath "index.md"
+    if (Test-Path -Path $root_index) {
+        $nav_lines += "- Home: index.md"
+    }
+
+    $top_files = Get-ChildItem -Path $DocsRootPath -File -Filter "*.md" | Where-Object { $_.Name -ne "index.md" } | Sort-Object Name
+    foreach ($file in $top_files) {
+        $label = Get-NavLabel -Value ([System.IO.Path]::GetFileNameWithoutExtension($file.Name))
+        $nav_lines += ("- {0}: {1}" -f $label, $file.Name)
+    }
+
+    $top_dirs = Get-ChildItem -Path $DocsRootPath -Directory | Sort-Object Name
+    foreach ($dir in $top_dirs) {
+        if ($dir.Name -eq "tools") {
+            $nav_lines += Get-ToolsNavLines -DocsRootPath $DocsRootPath
+            continue
+        }
+        $nav_lines += ("- {0}:" -f (Get-NavLabel -Value $dir.Name))
+        $nav_lines += Get-DocsNavLines -RootPath $DocsRootPath -RelativePath $dir.Name -Indent 2
+    }
 
     $output = @()
     $output += $before
@@ -195,28 +261,6 @@ function Get-ToolPageSlug {
     return ("{0}-{1}" -f $slug, $index)
 }
 
-function Get-CategoryOrder {
-    param([string]$Path)
-    $order = @()
-    if (! (Test-Path -Path $Path)) {
-        return $order
-    }
-    $lines = Get-Content -Path $Path
-    foreach ($line in $lines) {
-        if ($line -match 'New-Item -Force -ItemType Directory "\$\{HOME\}\\Desktop\\dfirws\\(.+)"') {
-            $category_path = $Matches[1]
-            if ($category_path -ne "") {
-                if ($order -notcontains $category_path) {
-                    $order += $category_path
-                }
-            }
-        }
-    }
-    return $order
-}
-
-$category_order = Get-CategoryOrder -Path $CategoriesScript
-
 $grouped = @{}
 foreach ($tool in $tools) {
     $category_path = $tool.CategoryPath
@@ -232,17 +276,7 @@ foreach ($tool in $tools) {
     $grouped[$category_path] += $tool
 }
 
-$ordered_categories = @()
-foreach ($category_path in $category_order) {
-    if ($grouped.ContainsKey($category_path)) {
-        $ordered_categories += $category_path
-    }
-}
-foreach ($category_path in ($grouped.Keys | Sort-Object)) {
-    if ($ordered_categories -notcontains $category_path) {
-        $ordered_categories += $category_path
-    }
-}
+$ordered_categories = $grouped.Keys | Sort-Object
 
 New-Item -Force -ItemType Directory -Path $DocsRoot | Out-Null
 New-Item -Force -ItemType Directory -Path (Join-Path $DocsRoot "tools") | Out-Null
