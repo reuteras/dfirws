@@ -93,50 +93,8 @@ function Get-DocsNavLines {
 }
 
 function Get-ToolsNavLines {
-    param(
-        [string]$DocsRootPath,
-        [int]$Indent = 2
-    )
-    $lines = @()
-    $indent_text = " " * $Indent
-    $tools_root = Join-Path $DocsRootPath "tools"
-    if (! (Test-Path -Path $tools_root)) {
-        return $lines
-    }
-
-    $lines += ("{0}- Tools:" -f $indent_text)
-    $tools_indent = " " * ($Indent + 2)
-    $index_path = Join-Path $tools_root "index.md"
-    if (Test-Path -Path $index_path) {
-        $lines += ("{0}- Overview: tools/index.md" -f $tools_indent)
-    }
-
-    $category_files = Get-ChildItem -Path $tools_root -File -Filter "*.md" | Where-Object { $_.Name -ne "index.md" } | Sort-Object Name
-    $pages_root = Join-Path $tools_root "pages"
-    $tool_pages = @()
-    if (Test-Path -Path $pages_root) {
-        $tool_pages = Get-ChildItem -Path $pages_root -File -Filter "*.md" | Sort-Object Name
-    }
-
-    foreach ($file in $category_files) {
-        $category_slug = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-        $category_label = Get-NavLabel -Value $category_slug
-        $lines += ("{0}- {1}:" -f $tools_indent, $category_label)
-        $lines += ("{0}- Overview: tools/{1}.md" -f (" " * ($Indent + 4)), $category_slug)
-
-        if ($tool_pages.Count -gt 0) {
-            $prefix = $category_slug + "-"
-            $matching = $tool_pages | Where-Object { $_.Name.StartsWith($prefix) } | Sort-Object Name
-            foreach ($page in $matching) {
-                $page_slug = [System.IO.Path]::GetFileNameWithoutExtension($page.Name)
-                $tail = $page_slug.Substring($prefix.Length)
-                $tool_label = Get-NavLabel -Value $tail
-                $lines += ("{0}- {1}: tools/pages/{2}.md" -f (" " * ($Indent + 4)), $tool_label, $page_slug)
-            }
-        }
-    }
-
-    return $lines
+    param()
+    return @()
 }
 
 function Update-MkDocsNav {
@@ -202,13 +160,6 @@ function Update-MkDocsNav {
 
     $top_dirs = Get-ChildItem -Path $DocsRootPath -Directory | Sort-Object Name
     foreach ($dir in $top_dirs) {
-        if ($dir.Name -eq "tools") {
-            $tools_lines = Get-ToolsNavLines -DocsRootPath $DocsRootPath
-            if ($tools_lines.Count -gt 0) {
-                $nav_lines += $tools_lines
-            }
-            continue
-        }
         $child_lines = Get-DocsNavLines -RootPath $DocsRootPath -RelativePath $dir.Name -Indent 2
         if ($child_lines.Count -gt 0) {
             $nav_lines += ("- {0}:" -f (Get-NavLabel -Value $dir.Name))
@@ -312,7 +263,6 @@ New-Item -Force -ItemType Directory -Path $DocsRoot | Out-Null
 New-Item -Force -ItemType Directory -Path (Join-Path $DocsRoot "tools") | Out-Null
 
 $tools_index_path = Join-Path $DocsRoot "tools\\index.md"
-New-Item -Force -ItemType Directory -Path (Join-Path $DocsRoot "tools\\pages") | Out-Null
 
 $tools_index_lines = @()
 $tools_index_lines += "# Categories"
@@ -334,7 +284,10 @@ function Write-ToolPage {
         [string]$CategoryPath,
         [string]$Slug
     )
-    $page_path = Join-Path $DocsRoot ("tools\\pages\\" + $Slug + ".md")
+    $category_slug = Get-Slug $CategoryPath
+    $category_dir = Join-Path $DocsRoot ("tools\\" + $category_slug)
+    New-Item -Force -ItemType Directory -Path $category_dir | Out-Null
+    $page_path = Join-Path $category_dir ($Slug + ".md")
     $lines = @()
     $lines += "# $($Tool.Name)"
     $lines += ""
@@ -420,7 +373,9 @@ $tool_page_slugs = @{}
 foreach ($category_path in $ordered_categories) {
     $display_name = $category_path -replace "\\\\", " / "
     $slug = Get-Slug $category_path
-    $category_file = Join-Path $DocsRoot ("tools\\" + $slug + ".md")
+    $category_dir = Join-Path $DocsRoot ("tools\\" + $slug)
+    New-Item -Force -ItemType Directory -Path $category_dir | Out-Null
+    $category_file = Join-Path $category_dir "index.md"
     $lines = @()
     $lines += "# $display_name"
     $lines += ""
@@ -430,7 +385,7 @@ foreach ($category_path in $ordered_categories) {
     foreach ($tool in $tools_in_category) {
         $tool_slug = Get-ToolPageSlug -Name $tool.Name -CategoryPath $category_path -UsedSlugs $tool_page_slugs
         $tool_page = Write-ToolPage -Tool $tool -CategoryPath $category_path -Slug $tool_slug
-        $tool_link = "pages/$tool_slug.md"
+        $tool_link = "$tool_slug.md"
         $summary = Get-ToolSummary -Tool $tool
         $summary = $summary -replace "\|", "\|"
         $lines += "| [$($tool.Name)]($tool_link) | $summary |"
