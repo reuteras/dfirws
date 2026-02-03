@@ -6,8 +6,8 @@ theme:
   features:
     - navigation.expand
 
-- Images:
-  - OneNote:
+nav:
+- Home: index.md
 - Investigations:
   - Investigate Email: Investigations/Investigate-Email.md
   - Investigate JavaScript Files: Investigations/Investigate-JavaScript-files.md
@@ -43,7 +43,6 @@ theme:
   - Samples: org/Samples.md
   - Tools That Need To Be Manually Enabled: org/Tools-that-need-to-be-manually-enabled.md
   - Windows Forensics: org/Windows-forensics.md
-- Resources:
   - Tools:
     - Overview: tools/index.md
     - Development:
@@ -150,8 +149,6 @@ theme:
 
 nav:
 - Home: index.md
-- Images:
-  - OneNote:
 - Investigations:
   - Investigate Email: Investigations/Investigate-Email.md
   - Investigate JavaScript Files: Investigations/Investigate-JavaScript-files.md
@@ -187,7 +184,6 @@ nav:
   - Samples: org/Samples.md
   - Tools That Need To Be Manually Enabled: org/Tools-that-need-to-be-manually-enabled.md
   - Windows Forensics: org/Windows-forensics.md
-- Resources:
   - Tools:
     - Overview: tools/index.md
     - Development:
@@ -289,5 +285,3 @@ nav:
       - Geolocus Cli: tools/pages/utilities-geolocus-cli.md
       - Graphviz: tools/pages/utilities-graphviz.md
       - Sysinternals Suite: tools/pages/utilities-sysinternals-suite.md
-
-- Home: index.md
