@@ -46,6 +46,24 @@ function Get-NavLabel {
     return ($words -join " ")
 }
 
+function Get-NavLabelFromFile {
+    param([string]$FilePath)
+    if (! (Test-Path -Path $FilePath)) {
+        return Get-NavLabel -Value ([System.IO.Path]::GetFileNameWithoutExtension($FilePath))
+    }
+    $lines = Get-Content -Path $FilePath -ErrorAction SilentlyContinue
+    foreach ($line in $lines) {
+        if ($line -match '^\s*#\s+(.+)$') {
+            $title = $Matches[1].Trim()
+            if ($title -ne "") {
+                return $title
+            }
+            break
+        }
+    }
+    return Get-NavLabel -Value ([System.IO.Path]::GetFileNameWithoutExtension($FilePath))
+}
+
 function Get-DocsNavLines {
     param(
         [string]$RootPath,
@@ -73,8 +91,7 @@ function Get-DocsNavLines {
     }
 
     foreach ($file in $files) {
-        $name = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-        $label = Get-NavLabel -Value $name
+        $label = Get-NavLabelFromFile -FilePath $file.FullName
         $rel = if ($RelativePath -eq "") { $file.Name } else { ($RelativePath + "/" + $file.Name) }
         $lines += ("{0}- {1}: {2}" -f $indent_text, $label, $rel)
     }
@@ -154,7 +171,7 @@ function Update-MkDocsNav {
 
     $top_files = Get-ChildItem -Path $DocsRootPath -File -Filter "*.md" | Where-Object { $_.Name -ne "index.md" } | Sort-Object Name
     foreach ($file in $top_files) {
-        $label = Get-NavLabel -Value ([System.IO.Path]::GetFileNameWithoutExtension($file.Name))
+        $label = Get-NavLabelFromFile -FilePath $file.FullName
         $nav_lines += ("- {0}: {1}" -f $label, $file.Name)
     }
 
