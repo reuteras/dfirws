@@ -81,9 +81,12 @@ function Get-DocsNavLines {
 
     foreach ($dir in $dirs) {
         $dir_label = Get-NavLabel -Value $dir.Name
-        $lines += ("{0}- {1}:" -f $indent_text, $dir_label)
         $next_rel = if ($RelativePath -eq "") { $dir.Name } else { ($RelativePath + "/" + $dir.Name) }
-        $lines += Get-DocsNavLines -RootPath $RootPath -RelativePath $next_rel -Indent ($Indent + 2)
+        $child_lines = Get-DocsNavLines -RootPath $RootPath -RelativePath $next_rel -Indent ($Indent + 2)
+        if ($child_lines.Count -gt 0) {
+            $lines += ("{0}- {1}:" -f $indent_text, $dir_label)
+            $lines += $child_lines
+        }
     }
 
     return $lines
@@ -200,11 +203,17 @@ function Update-MkDocsNav {
     $top_dirs = Get-ChildItem -Path $DocsRootPath -Directory | Sort-Object Name
     foreach ($dir in $top_dirs) {
         if ($dir.Name -eq "tools") {
-            $nav_lines += Get-ToolsNavLines -DocsRootPath $DocsRootPath
+            $tools_lines = Get-ToolsNavLines -DocsRootPath $DocsRootPath
+            if ($tools_lines.Count -gt 0) {
+                $nav_lines += $tools_lines
+            }
             continue
         }
-        $nav_lines += ("- {0}:" -f (Get-NavLabel -Value $dir.Name))
-        $nav_lines += Get-DocsNavLines -RootPath $DocsRootPath -RelativePath $dir.Name -Indent 2
+        $child_lines = Get-DocsNavLines -RootPath $DocsRootPath -RelativePath $dir.Name -Indent 2
+        if ($child_lines.Count -gt 0) {
+            $nav_lines += ("- {0}:" -f (Get-NavLabel -Value $dir.Name))
+            $nav_lines += $child_lines
+        }
     }
 
     $output = @()
@@ -216,6 +225,10 @@ function Update-MkDocsNav {
     if ($after.Count -gt 0) {
         $output += ""
         $output += $after
+    }
+    if ($output -notmatch '^\s*nav\s*:') {
+        $output += ""
+        $output += $nav_lines
     }
     Set-Content -Path $ConfigPath -Value ($output -join "`n")
 }
