@@ -150,10 +150,24 @@ function Update-MkDocsNav {
     $before = @()
     $after = @()
     $in_nav = $false
+    $found_nav = $false
+    $in_loose_nav = $false
     foreach ($line in $existing) {
         if (! $in_nav) {
             if ($line -match '^\s*nav\s*:') {
                 $in_nav = $true
+                $found_nav = $true
+                continue
+            }
+            if (! $found_nav -and ! $in_loose_nav -and $line -match '^- ') {
+                $in_loose_nav = $true
+                continue
+            }
+            if ($in_loose_nav) {
+                if ($line -match '^\S' -and $line -notmatch '^- ') {
+                    $in_loose_nav = $false
+                    $after += $line
+                }
                 continue
             }
             $before += $line
@@ -166,6 +180,9 @@ function Update-MkDocsNav {
     }
     if ($in_nav) {
         $in_nav = $false
+    }
+    if ($in_loose_nav) {
+        $in_loose_nav = $false
     }
 
     $nav_lines = @("nav:")
