@@ -28,7 +28,6 @@ foreach ($script in $VERIFY_SCRIPTS) {
 }
 
 # Extra tools
-Test-Command HxD PE32
 Test-Command apimonitor-x86.exe PE32
 Test-Command apimonitor-x64.exe PE32
 $AutopsyExecutable = (Get-ChildItem "C:\Program Files\Autopsy*" -Include autopsy64.exe -Recurse).FullName
@@ -190,12 +189,10 @@ Test-Command ncat PE32      # C:\Tools\nmap\ncat.exe
 Test-Command nmap PE32      # C:\Tools\nmap\nmap.exe
 Test-Command node PE32      # C:\Tools\node\node.exe
 Test-Command PE-bear PE32      # C:\Tools\pebear\PE-bear.exe
-Test-Command pestudio PE32      # C:\Tools\pestudio\pestudio.exe
 Test-Command ofs2rva PE32      # C:\Tools\pev\ofs2rva.exe
 Test-Command pescan PE32      # C:\Tools\pev\pescan.exe
 Test-Command php PE32      # C:\Tools\php\php.exe
 Test-Command procdot PE32      # C:\Tools\procdot\win64\procdot.exe
-Test-Command pstwalker PE32      # C:\Tools\pstwalker\pstwalker.exe
 Test-Command qpdf PE32      # C:\Tools\qpdf\bin\qpdf.exe
 Test-Command qrtool PE32      # C:\Tools\qrtool\qrtool.exe
 Test-Command radare2 PE32      # C:\Tools\radare2\bin\radare2.exe
@@ -208,17 +205,9 @@ Test-Command sqlite3 PE32      # C:\Tools\sqlite\sqlite3.exe
 Test-Command "C:\Tools\sqlitebrowser\DB Browser for SQLite.exe" PE32
 Test-Command "C:\Tools\takajo\takajo.exe" PE32
 Test-Command SSView PE32      # C:\Tools\ssview\SSView.exe
-Test-Command autorunsc64 PE32      # C:\Tools\sysinternals\autorunsc64.exe
-Test-Command procdump64 PE32      # C:\Tools\sysinternals\procdump64.exe
-Test-Command procexp64 PE32      # C:\Tools\sysinternals\procexp64.exe
-Test-Command pskill64 PE32      # C:\Tools\sysinternals\pskill64.exe
-Test-Command ZoomIt64 PE32      # C:\Tools\sysinternals\ZoomIt64.exe
 Test-Command thumbcache_viewer PE32      # C:\Tools\thumbcacheviewer\thumbcache_viewer.exe
-Test-Command trid PE32      # C:\Tools\trid\trid.exe
 Test-Command upx PE32      # C:\Tools\upx\upx.exe
 Test-Command VolatilityWorkbench PE32      # C:\Tools\VolatilityWorkbench2\VolatilityWorkbench.exe
-Test-Command WinApiSearch32 PE32      # C:\Tools\WinApiSearch\WinApiSearch32.exe
-Test-Command WinApiSearch64 PE32      # C:\Tools\WinApiSearch\WinApiSearch64.exe
 Test-Command WinObjEx64 PE32      # C:\Tools\WinObjEx64\WinObjEx64.exe
 Test-Command xelfviewer PE32      # C:\Tools\XELFViewer\xelfviewer.exe
 Test-Command LECmd PE32      # C:\Tools\Zimmerman\LECmd.exe
@@ -252,7 +241,6 @@ Test-Command gxl2dot PE32
 Test-Command idr PE32
 Test-Command iisGeolocate PE32
 Test-Command "C:\Program Files\IrfanView\i_view64.exe" PE32
-Test-Command malcat PE32
 Test-Command notepad++ PE32
 Test-Command python PE32
 

@@ -83,11 +83,16 @@ $TOOL_DEFINITIONS += @{
             Expect = "DOS"
         }
     )
-    Notes = "Visual Studio Code installer and extensions are downloaded via https.ps1 script."
+    Notes = "Visual Studio Code is a source-code editor."
     Tips = "After installation, you can add more extensions via Visual Studio Code Marketplace."
     Usage = "Visual Studio Code is a source-code editor made by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring."
-    SampleCommands = "dfirws-install.ps1 -VSCode"
-    SampleFiles = ""
+    SampleCommands = @(
+        "code ."
+        "code --install-extension ms-vscode.cpptools"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # Get SwiftOnSecurity sysmon config - used from Sysmon
@@ -100,6 +105,1042 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\sysinternals" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Sysinternals Suite"
+    Homepage = "https://docs.microsoft.com/en-us/sysinternals/"
+    Vendor = "Microsoft"
+    License = "Sysinternals Software License Terms"
+    LicenseUrl = "https://docs.microsoft.com/en-us/sysinternals/license-terms"
+    Category = "Sysinternals"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\accesschk64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command accesschk64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\AccessEnum.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\AccessEnum.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ADExplorer64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\ADExplorer64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ADInsight64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\ADInsight64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\adrestore64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\adrestore64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Autologon64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\Autologon64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Autoruns64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\Autoruns64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\autorunsc64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command autorunsc64.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Bginfo64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Bginfo64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\CacheSet64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\CacheSet64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Contig64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Contig64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Coreinfo64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Coreinfo64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Ctrl2cap.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Ctrl2cap.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\CPUSTRES64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\CPUSTRES64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\DebugView64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command DebugView64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Desktops64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\Desktops64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\disk2vhd64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\disk2vhd64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\DiskExt64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command diskext64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\DiskMon64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\DiskMon64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\DiskView64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\DiskView64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\du64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command du64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\EfsInfo64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command EfsInfo64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\FindLinks64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command FindLinks64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Handle64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Handle64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Hex2dec64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Hex2dec64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\junction64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command junction64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ldmdump.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ldmdump.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\listdlls64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command listdlls64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\LiveKd64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command LiveKd64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\LoadOrd64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\LoadOrd64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\LoadOrdC64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command LoadOrdC64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\LogonSessions64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command LogonSessions64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\MoveFile64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command MoveFile64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\notmyfault64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\notmyfault64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\notmyfaultc64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command notmyfaultc64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ntfsinfo64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ntfsinfo64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PendMoves64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command PendMoves64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\pipelist64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pipelist64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\portmon.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command portmon.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ProcDump64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command procdump64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ProcessExplorer.lnk"
+            Target   = "`${TOOLS}\sysinternals\procexp64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ProcessMonitor.lnk"
+            Target   = "`${TOOLS}\sysinternals\procmon64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsExec64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command PsExec64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsFile64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command psfile64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsGetsid64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command PsGetsid64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsInfo64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command PsInfo64.exe"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\pskill64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pskill64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\pslist64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pslist64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsLoggedon64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command PsLoggedon64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsLogList64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command psloglist64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsPasswd64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pspasswd64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsPing64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command psping64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\PsService64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command PsService64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\psshutdown64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command psshutdown64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\pssuspend64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pssuspend64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\RAMMap64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command RAMMap64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\RDCMan.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\RDCMan.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\RegDelNull64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command RegDelNull64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Reghide.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Reghide.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\RegJump.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command regjump.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\RootkitRevealer.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\RootkitRevealer.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ru64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ru64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\SDelete64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command sdelete64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ShareEnum64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\ShareEnum64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ShellRunas.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ShellRunas.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\sigcheck64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command sigcheck64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\streams64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command streams64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\strings64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command strings64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Sync64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command sync64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Sysmon64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Sysmon64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\tcpvcon64.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command tcpvcon64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\TCPView64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\TCPView64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Testlimit64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Testlimit64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\vmmap64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command vmmap64.exe /?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Volumeid64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Volumeid64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\whois64.exe.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command whois64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\WinObj64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\Winobj64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\ZoomIt64.exe.lnk"
+            Target   = "`${TOOLS}\sysinternals\ZoomIt64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "accesschk64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "AccessEnum.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ADExplorer64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ADInsight64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "adrestore64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Autologon64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Autoruns64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "autorunsc64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Bginfo64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "CacheSet64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Contig64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Coreinfo64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Ctrl2cap.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "CPUSTRES64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "DebugView64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Desktops64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "disk2vhd64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "DiskExt64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "DiskMon64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "DiskView64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "du64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "EfsInfo64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "FindLinks64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Handle64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Hex2dec64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "junction64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ldmdump.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "listdlls64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "LiveKd64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "LoadOrd64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "LoadOrdC64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "LogonSessions64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "MoveFile64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "notmyfault64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "notmyfaultc64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ntfsinfo64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PendMoves64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "pipelist64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "portmon.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ProcDump64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ProcessExplorer.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ProcessMonitor.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsExec64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsFile64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsGetsid64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsInfo64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "pskill64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "pslist64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsLoggedon64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsLogList64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsPasswd64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsPing64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "PsService64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "psshutdown64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "pssuspend64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "RAMMap64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "RDCMan.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "RegDelNull64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Reghide.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "RegJump.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "RootkitRevealer.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ru64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "SDelete64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ShareEnum64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ShellRunas.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "sigcheck64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "streams64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "strings64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Sync64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Sysmon64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "tcpvcon64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "TCPView64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Testlimit64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "vmmap64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "Volumeid64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "whois64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "WinObj64.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ZoomIt64.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Sysinternals Suite is a collection of utilities for Windows."
+    Tips = "Sysinternals Suite is installed in ${TOOLS}\sysinternals."
+    Usage = "Sysinternals Suite is a collection of utilities for Windows. It includes tools for process management, file system analysis, network monitoring, and more."
+    SampleCommands = @(
+        "accesschk64.exe"
+        "AccessEnum.exe"
+        "ADExplorer64.exe"
+        "ADInsight64.exe"
+        "adrestore64.exe"
+        "Autologon64.exe"
+        "Autoruns64.exe"
+        "autorunsc64.exe"
+        "Bginfo64.exe"
+        "CacheSet64.exe"
+        "Contig64.exe"
+        "Coreinfo64.exe"
+        "Ctrl2cap.exe"
+        "CPUSTRES64.exe"
+        "DebugView64.exe"
+        "Desktops64.exe"
+        "disk2vhd64.exe"
+        "DiskExt64.exe"
+        "DiskMon64.exe"
+        "DiskView64.exe"
+        "du64.exe"
+        "EfsInfo64.exe"
+        "FindLinks64.exe"
+        "Handle64.exe"
+        "Hex2dec64.exe"
+        "junction64.exe"
+        "ldmdump.exe"
+        "listdlls64.exe"
+        "LiveKd64.exe"
+        "LoadOrd64.exe"
+        "LoadOrdC64.exe"
+        "LogonSessions64.exe"
+        "MoveFile64.exe"
+        "notmyfault64.exe"
+        "notmyfaultc64.exe"
+        "ntfsinfo64.exe"
+        "PendMoves64.exe"
+        "pipelist64.exe"
+        "portmon.exe"
+        "ProcDump64.exe"
+        "ProcessExplorer.exe"
+        "ProcessMonitor.exe"
+        "PsExec64.exe"
+        "PsFile64.exe"
+        "PsGetsid64.exe"
+        "PsInfo64.exe"
+        "pskill64.exe"
+        "pslist64.exe"
+        "PsLoggedon64.exe"
+        "PsLogList64.exe"
+        "PsPasswd64.exe"
+        "PsPing64.exe"
+        "PsService64.exe"
+        "psshutdown64.exe"
+        "pssuspend64.exe"
+        "RAMMap64.exe"
+        "RDCMan.exe"
+        "RegDelNull64.exe"
+        "Reghide.exe"
+        "RegJump.exe"
+        "RootkitRevealer.exe"
+        "ru64.exe"
+        "SDelete64.exe"
+        "ShareEnum64.exe"
+        "ShellRunas.exe"
+        "sigcheck64.exe"
+        "streams64.exe"
+        "strings64.exe"
+        "Sync64.exe"
+        "Sysmon64.exe"
+        "tcpvcon64.exe"
+        "TCPView64.exe"
+        "Testlimit64.exe"
+        "vmmap64.exe"
+        "Volumeid64.exe"
+        "whois64.exe"
+        "WinObj64.exe"
+        "ZoomIt64.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # Get exiftool
@@ -116,6 +1157,42 @@ if ($status) {
     Remove-Item "${TOOLS}\exiftool\exiftool(-k).exe" -Force | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "ExifTool"
+    Homepage = "https://exiftool.org/"
+    Vendor = "Phil Harvey"
+    License = "GNU General Public License"
+    LicenseUrl = "https://exiftool.org/#license"
+    Category = "Utilities"
+
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\ExifTool.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "${CLI_TOOL_ARGS} -command exiftool --help"
+            Icon     = "`${TOOLS}\exiftool\exiftool.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "exiftool.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files."
+    Tips = "ExifTool is installed in ${TOOLS}\exiftool."
+    Usage = ""
+    SampleCommands = @(
+        "exiftool image.jpg"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Get pestudio
 $status = Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio.zip" -FilePath ".\downloads\pestudio.zip" -check "Zip archive data"
 if ($status) {
@@ -125,6 +1202,40 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pestudio.zip" -o"${TOOLS}" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "pestudio"
+    Homepage = "https://www.winitor.com/"
+    Vendor = "Winitor"
+    License = "Proprietary"
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\pestudio.lnk"
+            Target   = "`${TOOLS}\pestudio\pestudio.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -VSCode"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "pestudio.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "pestudio is a tool for analyzing PE files."
+    Tips = "After installation, you can use pestudio to analyze PE files."
+    Usage = "pestudio is a tool for analyzing PE files. It provides detailed information about the structure and content of Portable Executable (PE) files."
+    SampleCommands = @(
+        "pestudio.exe sample.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Get HxD
 $status = Get-FileFromUri -uri "https://mh-nexus.de/downloads/HxDSetup.zip" -FilePath ".\downloads\hxd.zip" -check "Zip archive data"
 if ($status) {
@@ -132,6 +1243,41 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\hxd" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hxd.zip" -o"${TOOLS}\hxd" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "HxD"
+    Homepage = "https://mh-nexus.de/en/hxd/"
+    Vendor = "Maël Hörz"
+    License = "HxD License"
+    LicenseUrl = "https://mh-nexus.de/en/hxd/license.php"
+    Category = "Editors"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\HxD.lnk"
+            Target   = "`${env:ProgramFiles}\HxD\HxD.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "HxD.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "HxD is a hex editor, disk editor, and memory editor for Windows."
+    Tips = "HxD is installed in ${env:ProgramFiles}\HxD."
+    Usage = "HxD is a hex editor, disk editor, and memory editor for Windows. It allows you to view and edit binary files, disks, and memory."
+    SampleCommands = @(
+        "HxD.exe file.bin"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # Get trid and triddefs
@@ -144,8 +1290,78 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\triddefs.zip" -o"${TOOLS}\trid" | Out-Null
 }
 
-# Get malcat - installed during start
+$TOOL_DEFINITIONS += @{
+    Name = "TrID"
+    Homepage = "https://mark0.net/soft-trid-e.html"
+    Vendor = "Marco Pontello"
+    License = "TrID is free for personal / non commercial use."
+    Category = "Files and apps"
+
+    Shortcuts = @(
+            @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\TrID (File Identifier).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command trid.exe -?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "trid.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "TrID is a file identifier utility."
+    Tips = "TrID is installed in ${TOOLS}\trid."
+    Usage = "TrID is a file identifier utility that can identify file types based on their binary signatures."
+    SampleCommands = @(
+        "trid.exe sample_file.bin"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
+# Get malcat - installed during start - 313 indicates use of Python 3.13
 $status = Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win313_lite.zip" -FilePath ".\downloads\malcat.zip" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Malcat Lite"
+    Homepage = "https://malcat.fr/"
+    Vendor = "Malcat EI"
+    License = "Proprietary"
+    Category = "Editors"
+
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\Malcat.lnk"
+            Target   = "`${env:ProgramFiles}\malcat\bin\malcat.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${env:ProgramFiles}\malcat\bin\malcat.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Malcat is a malware analysis and reverse engineering tool."
+    Tips = "Beside these limitations (missing features), please not that the lite edition cannot be used in a professional environment."
+    Usage = "Malcat is a malware analysis and reverse engineering tool that provides various features for analyzing binary files."
+    SampleCommands = @(
+        "malcat.exe sample.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # Get ssview
 $status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/SSView.zip" -FilePath ".\downloads\ssview.zip" -check "Zip archive data"
@@ -156,6 +1372,41 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ssview.zip" -o"${TOOLS}\ssview" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "MiTeC Structured Storage Viewer"
+    Homepage = "https://www.mitec.cz/wp/mssv/"
+    Vendor = "MiTeC"
+    License = "Proprietary"
+    Category = "Files and apps\Office"
+
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\Structured Storage Viewer (SSView).lnk"
+            Target   = "`${TOOLS}\ssview\SSView.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "SSView.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Full-featured MS OLE Structured Storage based file management tool."
+    Tips = "SSView is installed in ${TOOLS}\ssview."
+    Usage = "This tool allows to completely manage any MS OLE Structured Storage based file. You can save and load streams, add, delete, rename and edit items and property sets. Embedded streams can be viewed as hexadecimal listing or text or interpreted as pictures, RTF or HTML."
+    SampleCommands = @(
+        "SSView.exe file.doc"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # FullEventLogView
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip" -check "Zip archive data"
 if ($status) {
@@ -163,6 +1414,41 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\FullEventLogView" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logview.zip" -o"${TOOLS}\FullEventLogView" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "FullEventLogView"
+    Homepage = "https://www.nirsoft.net/utils/full_event_log_view.html"
+    Vendor = "NirSoft"
+    License = "Freeware"
+    Category = "Logs"
+
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Logs\FullEventLogView.lnk"
+            Target   = "`${TOOLS}\FullEventLogView\FullEventLogView.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "FullEventLogView.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "FullEventLogView is a tool for viewing Windows event logs."
+    Tips = "FullEventLogView is installed in ${TOOLS}\FullEventLogView."
+    Usage = "FullEventLogView allows you to view and export Windows event logs from local and remote computers."
+    SampleCommands = @(
+        "FullEventLogView.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # pstwalker
@@ -176,6 +1462,42 @@ if ($status) {
     Move-Item ${TOOLS}\pstwalker*portable "${TOOLS}\pstwalker"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "PST Walker"
+    Homepage = "https://www.pstwalker.com/"
+    Vendor = "PST Walker"
+    License = "Proprietary"
+    LicenseUrl = "https://www.pstwalker.com/licensing-policy.html"
+    Category = "Files and apps\Email"
+
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Email\PST Walker.lnk"
+            Target   = "`${TOOLS}\pstwalker\PSTWalker.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "PSTWalker.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "PST Walker is a tool for analyzing PST files."
+    Tips = "PST Walker is installed in ${TOOLS}\pstwalker."
+    Usage = "PST Walker is a tool for analyzing PST files. It allows you to view and extract data from PST files."
+    SampleCommands = @(
+        "PSTWalker.exe sample.pst"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Win API Search
 $status = Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -FilePath ".\downloads\WinApiSearch.zip" -check "Zip archive data"
 if ($status) {
@@ -185,21 +1507,60 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinApiSearch.zip" -o"${TOOLS}\WinApiSearch" | Out-Null
 }
 
-# Capa integration with Ghidra - installed during start
-$status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_explorer.py" -FilePath ".\downloads\capa_explorer.py" -check "ASCII text"
-$status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py" -check "ASCII text"
+$TOOL_DEFINITIONS += @{
+    Name = "Win API Search"
+    Homepage = "https://dennisbabkin.com/winapisearch/"
+    Vendor = "Dennis Babkin"
+    License = "You may use this software for as long as you need it, make as many copies of the downloaded package as required, and distribute it among any people and organizations at no cost."
+    LicenseUrl = "https://dennisbabkin.com/winapisearch/#lic"
+    Category = "Development"
+
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Development\Win API Search.lnk"
+            Target   = "`${TOOLS}\WinApiSearch\WinApiSearch64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "WinApiSearch32.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "WinApiSearch64.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Win API Search is a tool for searching Windows API functions."
+    Tips = "Win API Search is installed in ${TOOLS}\WinApiSearch."
+    Usage = "Win API Search allows you to search for Windows API functions and view their documentation."
+    SampleCommands = @(
+        "WinApiSearch.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # pdfstreamdumper - installed during start
 $status = Get-FileFromUri -uri "http://sandsprite.com/CodeStuff/PDFStreamDumper_Setup.exe" -FilePath ".\downloads\pdfstreamdumper.exe" -check "PE32"
+
+# Capa integration with Ghidra - installed during start
+$status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_explorer.py" -FilePath ".\downloads\capa_explorer.py" -check "ASCII text"
+$status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py" -check "ASCII text"
 
 # Scripts for Cutter
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/yossizap/x64dbgcutter/master/x64dbgcutter.py" -FilePath ".\downloads\x64dbgcutter.py" -check "ASCII text"
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/malware-kitten/cutter_scripts/master/scripts/cutter_stackstrings.py" -FilePath ".\downloads\cutter_stackstrings.py" -check "ASCII text"
 
-# Dependence for PE-bear
+# Dependence different tools
 $status = Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" -FilePath ".\downloads\vcredist_17_x64.exe" -check "PE32"
-
-# Dependence for ncat
 $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe" -check "PE32"
 
 # Artifacts Exchange for Velociraptor
@@ -602,9 +1963,17 @@ for ($i = 0; $i -lt $TOOL_DEFINITIONS.Count; $i++) {
         $workdir = $link.WorkDir
 
         if ($null -eq $icon) {
-            Add-Content -Path ".\downloads\dfirws\dfirws_folder_http.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$args`" -WorkingDirectory `"$workdir`""
+            if ($null -eq $args) {
+                Add-Content -Path ".\downloads\dfirws\dfirws_folder_http.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -WorkingDirectory `"$workdir`""
+            } else {
+                Add-Content -Path ".\downloads\dfirws\dfirws_folder_http.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$args`" -WorkingDirectory `"$workdir`""
+            }
         } else {
-            Add-Content -Path ".\downloads\dfirws\dfirws_folder_http.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$args`" -IconLocation `"$icon`" -WorkingDirectory `"$workdir`""
+            if ($null -eq $args) {
+                Add-Content -Path ".\downloads\dfirws\dfirws_folder_http.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -IconLocation `"$icon`" -WorkingDirectory `"$workdir`""
+            } else {
+                Add-Content -Path ".\downloads\dfirws\dfirws_folder_http.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$args`" -IconLocation `"$icon`" -WorkingDirectory `"$workdir`""
+            }
         }
     }
 }

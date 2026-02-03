@@ -142,11 +142,11 @@ $tools_index_path = Join-Path $DocsRoot "tools\\index.md"
 New-Item -Force -ItemType Directory -Path (Join-Path $DocsRoot "tools\\pages") | Out-Null
 
 $tools_index_lines = @()
-$tools_index_lines += "# Tools"
+$tools_index_lines += "# Categories"
 $tools_index_lines += ""
 $tools_index_lines += "Categories generated from dfirws shortcuts."
 $tools_index_lines += ""
-$tools_index_lines += "## Categories"
+$tools_index_lines += "## Categories Index"
 $tools_index_lines += ""
 foreach ($category_path in $ordered_categories) {
     $display_name = $category_path -replace "\\\\", " / "

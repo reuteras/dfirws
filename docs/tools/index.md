@@ -1,7 +1,8 @@
-# Tools
+# Categories
 
 Categories generated from dfirws shortcuts.
 
-## Categories
+## Categories Index
 
 - [Editors](editors.md)
+- [Utilities](utilities.md)
