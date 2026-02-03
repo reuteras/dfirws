@@ -82,8 +82,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-in
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\autoit-ripper.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command autoit-ripper -h"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\binlex (A Binary Genetic Traits Lexer).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command binlex.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\bulk_extractor64.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command bulk_extractor64.exe -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\densityscout (calculates density (like entropy)).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command densityscout -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Detect It Easy (determining types of files).lnk" -DestinationPath "${TOOLS}\die\die.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\ezhexviewer (A simple hexadecimal viewer).lnk" -DestinationPath "C:\venv\bin\ezhexviewer.exe" -WorkingDirectory "${HOME}\Desktop"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\dumpbin (Microsoft COFF Binary File Dumper).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dumpbin.exe"
@@ -100,16 +98,10 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\WinMerge (runs df
 
 # Files and apps - Browser
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Browser" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\BrowsingHistoryView.lnk" -DestinationPath "${TOOLS}\nirsoft\BrowsingHistoryView.exe" -Iconlocation "${TOOLS}\nirsoft\BrowsingHistoryView.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\ChromeCacheView.lnk" -DestinationPath "${TOOLS}\nirsoft\ChromeCacheView.exe" -Iconlocation "${TOOLS}\nirsoft\ChromeCacheView.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight (Internet history forensics for Google Chrome and Chromium).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command hindsight.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight_gui.lnk" -DestinationPath "${TOOLS}\bin\hindsight_gui.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\unfurl_app.exe (unfurl takes a URL and expands it into a directed graph - dfir-unfurl).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command C:\venv\dfir-unfurl\Scripts\unfurl_app.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\unfurl.exe (unfurl takes a URL and expands it into a directed graph - dfir-unfurl).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command C:\venv\dfir-unfurl\Scripts\unfurl.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\IECacheView.lnk" -DestinationPath "${TOOLS}\nirsoft\IECacheView.exe" -Iconlocation "${TOOLS}\nirsoft\IECacheView.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\LastActivityView.lnk" -DestinationPath "${TOOLS}\nirsoft\LastActivityView.exe" -Iconlocation "${TOOLS}\nirsoft\LastActivityView.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\MZCacheView.lnk" -DestinationPath "${TOOLS}\nirsoft\MZCacheView.exe" -Iconlocation "${TOOLS}\nirsoft\MZCacheView.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Browser\MZCookiesView.lnk" -DestinationPath "${TOOLS}\nirsoft\mzcv.exe" -Iconlocation "${TOOLS}\nirsoft\mzcv.exe"
 
 # Files and apps - Database
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Database" | Out-Null
@@ -119,7 +111,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\dsq (com
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\h2 database.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${TOOLS}\h2database"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite (runs dfirws-install -FQLite).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -FQLite"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\litecli (SQLite CLI with autocompletion and syntax highlighting).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command litecli --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Neo4j"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\SQLECmd.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\Zimmerman\net6\SQLECmd\SQLECmd.exe" -Arguments "${CLI_TOOL_ARGS} -command SQLECmd.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqlit(TUI for SQL databases).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command sqlit.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\sqldiff.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\sqlite\sqlite3.exe" -Arguments "${CLI_TOOL_ARGS} -command sqldiff.exe --help"
@@ -169,7 +160,6 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Email
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\email-analyzer.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${GIT_PATH}\EmailAnalyzer" -Arguments "${CLI_TOOL_ARGS} -command .\email-analyzer.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\emldump (A utility to parse and analyze EML files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command emldump.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\extract_msg.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command extract_msg -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\Mail Viewer.lnk" -DestinationPath "${TOOLS}\MailView\MailView.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\Mbox Viewer.lnk" -DestinationPath "${TOOLS}\mboxviewer\mboxview64.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\msgviewer.lnk" -DestinationPath "${TOOLS}\lib\msgviewer.jar"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Email\pst-extract.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pst-extract.py -h"
@@ -212,7 +202,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Log\YAMAGoya (Yet
 
 # Files and apps - Office
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Office" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\LibreOffice (runs dfirws-install -LibreOffice).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -LibreOffice"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\MetadataPlus.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\bin\MetadataPlus.exe" -Arguments "${CLI_TOOL_ARGS} -command MetadataPlus.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\mraptor.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command mraptor -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Office\msodde.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command msodde -h"
@@ -234,7 +223,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdf-parser.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pdf-parser.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfalyze.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pdfalyze -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfid.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pdfid.py -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdfstreamdumper install (runs dfirws-install -PDFStreamDumper).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -PDFStreamDumper"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\pdftool.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pdftool.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\peepdf-3 (peepdf - peepdf-3 is a Python 3 tool to explore PDF files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command peepdf -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\qpdf.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command qpdf.exe --help"
@@ -244,7 +232,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\xray.lnk" -De
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\PE" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\4n4lDetector.lnk" -DestinationPath "${env:ProgramFiles}\4n4lDetector\4N4LDetector.exe"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\capa.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\capa\capa.exe" -Arguments "${CLI_TOOL_ARGS} -command capa.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\capa Explorer Web.lnk" -DestinationPath "${TOOLS}\capa-explorer-web\index.html" -Iconlocation "${TOOLS}\capa\capa.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\Debloat.lnk" -DestinationPath "${TOOLS}\bin\debloat.exe"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\dll_to_exe.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\ExeinfoPE.lnk" -DestinationPath "${TOOLS}\ExeinfoPE\exeinfope.exe"
@@ -339,8 +326,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Gootloader\Gootloa
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Dokany (runs dfirws-install -Dokany).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Dokany"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command MemProcFS.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 2.1.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench2\VolatilityWorkbench.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Memory\Volatility Workbench 3.lnk" -DestinationPath "${TOOLS}\VolatilityWorkbench\VolatilityWorkbench.exe"
 
 # Network
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Network" | Out-Null
@@ -362,7 +347,6 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS" | Out-Null
 
 # OS- Android
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Android" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Android\apktool.bat.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command apktool.bat -h"
 
 # OS - Linux
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Linux" | Out-Null
@@ -381,8 +365,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\fibratus (runs dfirws
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Jumplist-Browser.lnk" -DestinationPath "${TOOLS}\bin\JumplistBrowser.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\lnk2bodyfile (Parse Windows LNK files and create bodyfile output - dfir-toolkit).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command lnk2bodyfile.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Prefetch-Browser.lnk" -DestinationPath "${TOOLS}\bin\PrefetchBrowser.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\procdot.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\recbin (Parse Windows Recycle Bin INFO2 & `$Ixxxxx files in binary mode).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command recbin.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\sidr (Search Index DB Reporter - handles both ESE (.edb) and SQLite).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command sidr --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\srum-dump (Parses Windows System Resource Usage Monitor (SRUM) database).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command srum_dump.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Thumbcache Viewer.lnk" -DestinationPath "${TOOLS}\thumbcacheviewer\thumbcache_viewer.exe"
@@ -415,7 +397,6 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming" | Out-N
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\java.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\node.lnk" -DestinationPath "${TOOLS}\node\node.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\perl.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\php.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Python.lnk" -DestinationPath "${VENV}\bin\python.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Visual Studio Buildtools (runs dfirws-install -VisualStudioBuildTools).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -VisualStudioBuildTools"
 
@@ -464,11 +445,9 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Rust\Rust (runs dfir
 
 # Reverse Engineering
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Reverse Engineering" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Binary Ninja (runs dfirws-install -BinaryNinja).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -BinaryNinja"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Cutter.lnk" -DestinationPath "${TOOLS}\cutter\cutter.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk" -DestinationPath "${TOOLS}\dnSpy32\dnSpy.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\dnSpy64.lnk" -DestinationPath "${TOOLS}\dnSpy64\dnSpy.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\fasm.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command fasm.exe -h"
 (Get-ChildItem "${TOOLS}\ghidra").Name | Where-Object { $_ -match "ghidra_" } | ForEach-Object {
     $VERSION = "$_"
     Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "${TOOLS}\ghidra\${VERSION}\ghidraRun.bat"
@@ -511,14 +490,11 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities" | Out-Nul
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\7-Zip.lnk" -DestinationPath "${env:ProgramFiles}\7-Zip\7zFM.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (Git-version).lnk" -DestinationPath "${env:ProgramFiles}\Git\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\cmder (runs dfirws-install -Cmder).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Cmder"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\DCode (runs dfirws-install -DCode).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -DCode"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Docker"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\floss.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\floss\floss.exe" -Arguments "${CLI_TOOL_ARGS} -command venv.ps1 -floss ; floss --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\geolocus (Geolocation tool).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "C:\enrichment\geolocus" -Arguments "${CLI_TOOL_ARGS} -command geolocus-cli.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\git.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\Git\cmd\git-gui.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\godap (LDAP tool).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command godap --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Google Earth (runs dfirws-install -GoogleEarth).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -GoogleEarth"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Graphviz.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dot -?"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\jpterm (Jupyter in the terminal).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command jpterm --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\jupyter notebook.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-command ${HOME}\Documents\tools\utils\jupyter.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\markitdown (Python tool for converting files and office documents to Markdown).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command markitdown --help"
@@ -540,21 +516,17 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\_dfirws\dfirws-install
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Browsers" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Chrome (runs dfirws-install -Chrome).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Chrome"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Firefox (runs dfirws-install -Firefox).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Firefox"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Tor Browser (runs dfirws-install -Tor).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Tor"
 
 # Utilities - Crypto
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Crypto" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\ares.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ares --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\chepy.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command venv.ps1 -chepy ; chepy -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\CyberChef.lnk" -DestinationPath "${TOOLS}\CyberChef\CyberChef.html"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\gpg4win (runs dfirws-install -Gpg4win).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Gpg4win"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hash-id.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command hash-id.py"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat (runs dfirws-install -Hashcat).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Hashcat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\name-that-hash (also available as nth).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command name-that-hash --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\openssl.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command openssl --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\protodump.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command protodump --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\sigs.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command sigs.py --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\veracrypt (runs dfirws-install -Veracrypt).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Veracrypt"
 
 # Utilities - CTF
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\CTF" | Out-Null

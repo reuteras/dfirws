@@ -1,7 +1,8 @@
 param(
     [string]$JsonPath = ".\\downloads\\dfirws\\tools_http.json",
     [string]$DocsRoot = ".\\docs",
-    [string]$CategoriesScript = ".\\setup\\utils\\dfirws_folder.ps1"
+    [string]$CategoriesScript = ".\\setup\\utils\\dfirws_folder.ps1",
+    [string]$MkdocsConfigPath = ".\\mkdocs.yml"
 )
 
 if (! (Test-Path -Path $JsonPath)) {
@@ -26,6 +27,114 @@ function Get-Slug {
         $slug = "category"
     }
     return $slug
+}
+
+function Get-NavLabel {
+    param([string]$Value)
+    if ($null -eq $Value -or $Value -eq "") {
+        return "Docs"
+    }
+    $label = $Value -replace "[-_]+", " "
+    $label = $label.Trim()
+    if ($label -eq "") {
+        return "Docs"
+    }
+    $words = $label -split "\s+"
+    $words = $words | ForEach-Object {
+        if ($_.Length -le 1) { $_.ToUpperInvariant() } else { $_.Substring(0,1).ToUpperInvariant() + $_.Substring(1) }
+    }
+    return ($words -join " ")
+}
+
+function Get-DocsNavLines {
+    param(
+        [string]$RootPath,
+        [string]$RelativePath = "",
+        [int]$Indent = 2
+    )
+    $lines = @()
+    $current_path = $RootPath
+    if ($RelativePath -ne "") {
+        $current_path = Join-Path $RootPath $RelativePath
+    }
+    if (! (Test-Path -Path $current_path)) {
+        return $lines
+    }
+
+    $indent_text = " " * $Indent
+    $index_file = Join-Path $current_path "index.md"
+    $files = Get-ChildItem -Path $current_path -File -Filter "*.md" | Where-Object { $_.Name -ne "index.md" } | Sort-Object Name
+    $dirs = Get-ChildItem -Path $current_path -Directory | Sort-Object Name
+
+    if (Test-Path -Path $index_file) {
+        $rel = if ($RelativePath -eq "") { "index.md" } else { ($RelativePath + "/index.md") }
+        $label = if ($RelativePath -eq "") { "Home" } else { "Overview" }
+        $lines += ("{0}- {1}: {2}" -f $indent_text, $label, $rel)
+    }
+
+    foreach ($file in $files) {
+        $name = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+        $label = Get-NavLabel -Value $name
+        $rel = if ($RelativePath -eq "") { $file.Name } else { ($RelativePath + "/" + $file.Name) }
+        $lines += ("{0}- {1}: {2}" -f $indent_text, $label, $rel)
+    }
+
+    foreach ($dir in $dirs) {
+        $dir_label = Get-NavLabel -Value $dir.Name
+        $lines += ("{0}- {1}:" -f $indent_text, $dir_label)
+        $next_rel = if ($RelativePath -eq "") { $dir.Name } else { ($RelativePath + "/" + $dir.Name) }
+        $lines += Get-DocsNavLines -RootPath $RootPath -RelativePath $next_rel -Indent ($Indent + 2)
+    }
+
+    return $lines
+}
+
+function Update-MkDocsNav {
+    param(
+        [string]$ConfigPath,
+        [string]$DocsRootPath
+    )
+    if (! (Test-Path -Path $ConfigPath)) {
+        Write-Output "mkdocs.yml not found at $ConfigPath. Skipping nav update."
+        return
+    }
+
+    $existing = Get-Content -Path $ConfigPath
+    $before = @()
+    $after = @()
+    $in_nav = $false
+    foreach ($line in $existing) {
+        if (! $in_nav) {
+            if ($line -match '^\s*nav\s*:') {
+                $in_nav = $true
+                continue
+            }
+            $before += $line
+            continue
+        }
+        if ($line -match '^\S') {
+            $in_nav = $false
+            $after += $line
+        }
+    }
+    if ($in_nav) {
+        $in_nav = $false
+    }
+
+    $nav_lines = @("nav:")
+    $nav_lines += Get-DocsNavLines -RootPath $DocsRootPath
+
+    $output = @()
+    $output += $before
+    if ($output.Count -gt 0 -and $output[-1] -ne "") {
+        $output += ""
+    }
+    $output += $nav_lines
+    if ($after.Count -gt 0) {
+        $output += ""
+        $output += $after
+    }
+    Set-Content -Path $ConfigPath -Value ($output -join "`n")
 }
 
 function Get-ToolSummary {
@@ -264,3 +373,5 @@ foreach ($category_path in $ordered_categories) {
     }
     Set-Content -Path $category_file -Value ($lines -join "`n")
 }
+
+Update-MkDocsNav -ConfigPath $MkdocsConfigPath -DocsRootPath $DocsRoot

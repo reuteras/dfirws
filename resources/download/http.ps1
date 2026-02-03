@@ -1551,6 +1551,40 @@ $TOOL_DEFINITIONS += @{
 # pdfstreamdumper - installed during start
 $status = Get-FileFromUri -uri "http://sandsprite.com/CodeStuff/PDFStreamDumper_Setup.exe" -FilePath ".\downloads\pdfstreamdumper.exe" -check "PE32"
 
+$TOOL_DEFINITIONS += @{
+    Name = "PDFStreamDumper"
+    Homepage = "https://sandsprite.com/tools.php?id=17"
+    Vendor = "Sandsprite"
+    License = "Proprietary"
+    Category = "Files and apps\PDF"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PDF\pdfstreamdumper install (runs dfirws-install -PDFStreamDumper).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -PDFStreamDumper"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -PDFStreamDumper"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Sandsprite\PDFStreamDumper\PDFStreamDumper.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "PDFStreamDumper is a tool for inspecting PDF files."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "PDFStreamDumper helps analyze PDF structure and embedded streams."
+    SampleCommands = @(
+        "PDFStreamDumper.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Capa integration with Ghidra - installed during start
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_explorer.py" -FilePath ".\downloads\capa_explorer.py" -check "ASCII text"
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py" -check "ASCII text"
@@ -1575,6 +1609,40 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mailview.zip" -o"${TOOLS}\MailView" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Mail Viewer"
+    Homepage = "https://www.mitec.cz/wp/mmv/"
+    Vendor = "MiTeC"
+    License = "Freeware"
+    Category = "Files and apps\Email"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Email\Mail Viewer.lnk"
+            Target   = "`${TOOLS}\MailView\MailView.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "MailView"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Mail Viewer is a tool for viewing email files and mailboxes."
+    Tips = "Mail Viewer is installed in ${TOOLS}\MailView."
+    Usage = "Use Mail Viewer to inspect emails and mail archives."
+    SampleCommands = @(
+        "MailView.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Volatility Workbench 3
 $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench.zip" -FilePath ".\downloads\volatilityworkbench.zip" -check "Zip archive data"
 if ($status) {
@@ -1584,6 +1652,40 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Volatility Workbench 3"
+    Homepage = "https://www.osforensics.com/tools/volatility-workbench.html"
+    Vendor = "OSForensics"
+    License = "Freeware"
+    Category = "Memory"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Memory\Volatility Workbench 3.lnk"
+            Target   = "`${TOOLS}\VolatilityWorkbench\VolatilityWorkbench.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\VolatilityWorkbench\VolatilityWorkbench.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Volatility Workbench is a GUI for the Volatility memory analysis framework."
+    Tips = "Volatility Workbench 3 is installed in ${TOOLS}\VolatilityWorkbench."
+    Usage = "Use Volatility Workbench to manage memory images and run Volatility plugins."
+    SampleCommands = @(
+        "VolatilityWorkbench.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Volatility Workbench 2
 $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench-v2.1.zip" -FilePath ".\downloads\volatilityworkbench2.zip" -check "Zip archive data"
 if ($status) {
@@ -1591,6 +1693,40 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench2" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench2.zip" -o"${TOOLS}\VolatilityWorkbench2" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Volatility Workbench 2.1"
+    Homepage = "https://www.osforensics.com/tools/volatility-workbench.html"
+    Vendor = "OSForensics"
+    License = "Freeware"
+    Category = "Memory"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Memory\Volatility Workbench 2.1.lnk"
+            Target   = "`${TOOLS}\VolatilityWorkbench2\VolatilityWorkbench.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\VolatilityWorkbench2\VolatilityWorkbench.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Volatility Workbench is a GUI for the Volatility memory analysis framework."
+    Tips = "Volatility Workbench 2.1 is installed in ${TOOLS}\VolatilityWorkbench2."
+    Usage = "Use Volatility Workbench to manage memory images and run Volatility plugins."
+    SampleCommands = @(
+        "VolatilityWorkbench.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # Volatility Workbench 2 Profiles
@@ -1676,18 +1812,245 @@ if (Test-Path -Path "${TOOLS}\nirsoft\readme.txt") {
     Remove-Item -Force "${TOOLS}\nirsoft\readme.txt" | Out-Null 2>&1
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "NirSoft Browser Utilities"
+    Homepage = "https://www.nirsoft.net/"
+    Vendor = "NirSoft"
+    License = "Freeware"
+    Category = "Files and apps\Browser"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\BrowsingHistoryView.lnk"
+            Target   = "`${TOOLS}\nirsoft\BrowsingHistoryView.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\nirsoft\BrowsingHistoryView.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\ChromeCacheView.lnk"
+            Target   = "`${TOOLS}\nirsoft\ChromeCacheView.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\nirsoft\ChromeCacheView.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\IECacheView.lnk"
+            Target   = "`${TOOLS}\nirsoft\IECacheView.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\nirsoft\IECacheView.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\LastActivityView.lnk"
+            Target   = "`${TOOLS}\nirsoft\LastActivityView.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\nirsoft\LastActivityView.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\MZCacheView.lnk"
+            Target   = "`${TOOLS}\nirsoft\MZCacheView.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\nirsoft\MZCacheView.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\MZCookiesView.lnk"
+            Target   = "`${TOOLS}\nirsoft\mzcv.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\nirsoft\mzcv.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\nirsoft\BrowsingHistoryView.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\Tools\nirsoft\ChromeCacheView.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\Tools\nirsoft\IECacheView.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\Tools\nirsoft\iecv.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\Tools\nirsoft\LastActivityView.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\Tools\nirsoft\MZCacheView.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\Tools\nirsoft\mzcv.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "NirSoft browser utilities for cache and history analysis."
+    Tips = "Tools are installed in ${TOOLS}\nirsoft."
+    Usage = "Use these utilities to inspect browser artifacts."
+    SampleCommands = @(
+        "N/A"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Get winpmem
 $status = Get-FileFromUri -uri "https://github.com/Velocidex/c-aff4/raw/master/tools/pmem/resources/winpmem/winpmem_64.sys" -FilePath ".\downloads\winpmem_64.sys" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "winpmem"
+    Homepage = "https://github.com/Velocidex/c-aff4"
+    Vendor = "Velocidex"
+    License = "Apache License 2.0"
+    Category = "Memory"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "winpmem_64.sys"
+            Expect = "PE32"
+        }
+    )
+    Notes = "winpmem is a Windows memory acquisition driver."
+    Tips = "The driver is downloaded to ${SETUP_PATH}."
+    Usage = "Use winpmem with compatible acquisition tools."
+    SampleCommands = @(
+        "N/A"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # Binary Ninja - manual installation
 $status = Get-FileFromUri -uri "https://cdn.binary.ninja/installers/binaryninja_free_win64.exe" -FilePath ".\downloads\binaryninja.exe" -check "PE32"
 
+$TOOL_DEFINITIONS += @{
+    Name = "Binary Ninja"
+    Homepage = "https://binary.ninja/"
+    Vendor = "Vector 35"
+    License = "Proprietary"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\Binary Ninja (runs dfirws-install -BinaryNinja).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -BinaryNinja"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -BinaryNinja"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Binary Ninja\binaryninja.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Binary Ninja is a reverse engineering platform."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "Use Binary Ninja to analyze binaries."
+    SampleCommands = @(
+        "binaryninja.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # gpg4win
 $status = Get-FileFromUri -uri "https://files.gpg4win.org/gpg4win-latest.exe" -FilePath ".\downloads\gpg4win.exe" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Gpg4win"
+    Homepage = "https://www.gpg4win.org/"
+    Vendor = "Gpg4win Project"
+    License = "Open source"
+    Category = "Utilities\Crypto"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Crypto\gpg4win (runs dfirws-install -Gpg4win).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Gpg4win"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Gpg4win"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "gpg"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Gpg4win provides GnuPG and related tools for Windows."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "Gpg4win includes GPG, Kleopatra, and other tools for encryption and signing."
+    SampleCommands = @(
+        "gpg --version"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # Tor browser
 $TorBrowserUrl = Get-DownloadUrlFromPage -Url "https://www.torproject.org/download/" -RegEx '/dist/[^"]+exe'
 $status = Get-FileFromUri -uri "https://www.torproject.org$TorBrowserUrl" -FilePath ".\downloads\torbrowser.exe" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Tor Browser"
+    Homepage = "https://www.torproject.org/"
+    Vendor = "Tor Project"
+    License = "Open source"
+    Category = "Utilities\Browsers"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Browsers\Tor Browser (runs dfirws-install -Tor).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Tor"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Tor"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Users\WDAGUtilityAccount\Desktop\Tor Browser\Browser\firefox.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Tor Browser is a privacy-focused web browser based on Firefox."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "Tor Browser routes traffic through the Tor network for privacy."
+    SampleCommands = @(
+        "firefox.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # DCode
 $DCodeUrl = Get-DownloadUrlFromPage -Url "https://www.digital-detective.net/dcode/" -RegEx "https://www.digital-detective.net/download/download[^']+"
@@ -1701,9 +2064,77 @@ if ($status) {
     Move-Item ${SETUP_PATH}\dcode\Dcode-* "${SETUP_PATH}\dcode\dcode.exe" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "DCode"
+    Homepage = "https://www.digital-detective.net/dcode/"
+    Vendor = "Digital Detective"
+    License = "Proprietary"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\DCode (runs dfirws-install -DCode).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -DCode"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -DCode"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Program Files (x86)\Digital Detective\DCode v5\DCode.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "DCode is a date/time conversion and analysis tool."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "DCode helps convert and analyze timestamps across formats and timezones."
+    SampleCommands = @(
+        "DCode.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Veracrypt - manual installation
 $VeracryptUrl = Get-DownloadUrlFromPage -Url "https://www.veracrypt.fr/en/Downloads.html" -RegEx 'https://[^"]+VeraCrypt_Setup[^"]+.msi'
 $status = Get-FileFromUri -uri "${VeracryptUrl}" -FilePath ".\downloads\veracrypt.msi" -check "Composite Document File V2 Document"
+
+$TOOL_DEFINITIONS += @{
+    Name = "VeraCrypt"
+    Homepage = "https://www.veracrypt.fr/"
+    Vendor = "IDRIX"
+    License = "VeraCrypt License"
+    Category = "Utilities\Crypto"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Crypto\veracrypt (runs dfirws-install -Veracrypt).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Veracrypt"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Veracrypt"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "veracrypt"
+            Expect = "PE32"
+        }
+    )
+    Notes = "VeraCrypt is a disk encryption tool."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "VeraCrypt enables encrypted containers and full-disk encryption."
+    SampleCommands = @(
+        "VeraCrypt.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # Microsoft OpenJDK 11 - installed during start
 $MicrosoftJDKUrl = get-downloadUrlFromPage -url "https://learn.microsoft.com/en-us/java/openjdk/download" -RegEx 'https://aka.ms/download-jdk/microsoft-jdk-11.[.0-9]+-windows-x64.msi'
@@ -1713,6 +2144,40 @@ $status = Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\micro
 $NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'
 $status = Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes" -check "Zip archive data"
 
+$TOOL_DEFINITIONS += @{
+    Name = "Neo4j"
+    Homepage = "https://neo4j.com/"
+    Vendor = "Neo4j"
+    License = "Neo4j Community License"
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Neo4j"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Neo4j"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "neo4j"
+            Expect = "ASCII"
+        }
+    )
+    Notes = "Neo4j is a graph database."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "Neo4j stores data as nodes and relationships for graph analysis."
+    SampleCommands = @(
+        "neo4j.bat console"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # recbin
 $status = Get-FileFromUri -uri "https://github.com/keydet89/Tools/raw/refs/heads/master/exe/recbin.exe" -FilePath ".\downloads\recbin.exe" -check "PE32"
 if ($status) {
@@ -1720,6 +2185,40 @@ if ($status) {
         Remove-Item -Force "${TOOLS}\bin\recbin.exe" | Out-Null 2>&1
     }
     Copy-Item ".\downloads\recbin.exe" "${TOOLS}\bin\recbin.exe"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "recbin"
+    Homepage = "https://github.com/keydet89/Tools"
+    Vendor = "keydet89"
+    License = "Unspecified"
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\recbin (Parse Windows Recycle Bin INFO2 & `$Ixxxxx files in binary mode).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command recbin.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\bin\recbin.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "recbin parses Windows Recycle Bin files."
+    Tips = "recbin is installed in ${TOOLS}\bin."
+    Usage = "Use recbin to parse `$I` and INFO2 files."
+    SampleCommands = @(
+        "recbin.exe -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # capa Explorer web
@@ -1731,14 +2230,102 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "capa Explorer Web"
+    Homepage = "https://mandiant.github.io/capa/"
+    Vendor = "Mandiant"
+    License = "Apache License 2.0"
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\capa Explorer Web.lnk"
+            Target   = "`${TOOLS}\capa-explorer-web\index.html"
+            Args     = ""
+            Icon     = "`${TOOLS}\capa\capa.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\capa-explorer-web\index.html"
+            Expect = "HTML"
+        }
+    )
+    Notes = "capa Explorer Web is a web UI for exploring capa results."
+    Tips = "Open the HTML file in a browser."
+    Usage = "Use it to explore capa output."
+    SampleCommands = @(
+        "index.html"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
 $LibreOfficeVersionDownloadPage = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
 $LibreOfficeVersion = Get-DownloadUrlFromPage -Url "${LibreOfficeVersionDownloadPage}" -RegEx 'https://[^"]+.msi'
 $status = Get-FileFromUri -uri "${LibreOfficeVersion}" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
 
+$TOOL_DEFINITIONS += @{
+    Name = "LibreOffice"
+    Homepage = "https://www.libreoffice.org/"
+    Vendor = "The Document Foundation"
+    License = "Mozilla Public License 2.0"
+    Category = "Files and apps\Office"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\LibreOffice (runs dfirws-install -LibreOffice).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -LibreOffice"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -LibreOffice"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Program Files (x86)\LibreOffice\program\soffice.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "LibreOffice is a free and open-source office suite."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "LibreOffice provides Writer, Calc, Impress, and other office tools."
+    SampleCommands = @(
+        "soffice.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # https://npcap.com/#download - Npcap - available for manual installation
 $NpcapVersion = Get-DownloadUrlFromPage -Url "https://npcap.com/" -RegEx 'dist/npcap-[.0-9]+.exe'
 $status = Get-FileFromUri -uri "https://npcap.com/${NpcapVersion}" -FilePath ".\downloads\npcap.exe" -CheckURL "Yes" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Npcap"
+    Homepage = "https://npcap.com/"
+    Vendor = "Nmap Project"
+    License = "Npcap License"
+    Category = "Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = "Npcap packet capture driver installer."
+    Tips = "This is a manual install."
+    Usage = "Install Npcap to enable packet capture tools."
+    SampleCommands = @(
+        "npcap.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # https://www.sqlite.org/download.html - SQLite
 $SQLiteVersion = Get-DownloadUrlFromPage -Url "https://sqlite.org/download.html" -RegEx '[0-9]+/sqlite-tools-win-x64-[^"]+.zip'
@@ -1750,8 +2337,65 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "SQLite Tools"
+    Homepage = "https://sqlite.org/download.html"
+    Vendor = "SQLite"
+    License = "Public Domain"
+    Category = "Files and apps\Database"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "sqldiff"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "sqlite3"
+            Expect = "PE32"
+        }
+    )
+    Notes = "SQLite command-line tools."
+    Tips = "Tools are installed in ${TOOLS}\sqlite."
+    Usage = "Use sqlite3 and companion tools to inspect SQLite databases."
+    SampleCommands = @(
+        "sqlite3 --help"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # OpenVPN - manual installation
 $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi" -check "Composite Document File V2 Document"
+
+$TOOL_DEFINITIONS += @{
+    Name = "OpenVPN Connect"
+    Homepage = "https://openvpn.net/client/"
+    Vendor = "OpenVPN"
+    License = "Proprietary"
+    Category = "Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\downloads\openvpn.msi"
+            Expect = "MSI Installer"
+        }
+    )
+    Notes = "OpenVPN Connect installer."
+    Tips = "This is a manual install."
+    Usage = "Install the MSI to use OpenVPN Connect."
+    SampleCommands = @(
+        "msiexec /i C:\downloads\openvpn.msi"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
 $digitalcorpora_url = "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip"
@@ -1761,6 +2405,40 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\bulk_extractor" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\bulk_extractor.zip" -o"${TOOLS}\bulk_extractor" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "bulk_extractor"
+    Homepage = "https://downloads.digitalcorpora.org/downloads/bulk_extractor/"
+    Vendor = "Digital Corpora"
+    License = "Open source"
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\bulk_extractor64.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command bulk_extractor64.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "bulk_extractor64"
+            Expect = "PE32"
+        }
+    )
+    Notes = "bulk_extractor extracts features such as email addresses and URLs from disk images."
+    Tips = "bulk_extractor is installed in ${TOOLS}\bulk_extractor."
+    Usage = "Use bulk_extractor for bulk feature extraction from disk images and files."
+    SampleCommands = @(
+        "bulk_extractor64.exe -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
@@ -1775,6 +2453,40 @@ if ($status) {
     Move-Item "${TOOLS}\win64\densityscout.exe" "${TOOLS}\bin\densityscout.exe"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "DensityScout"
+    Homepage = "https://cert.at/en/downloads/software/software-densityscout"
+    Vendor = "CERT.at"
+    License = "Freeware"
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\densityscout (calculates density (like entropy)).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command densityscout -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "densityscout"
+            Expect = "PE32"
+        }
+    )
+    Notes = "DensityScout calculates file entropy and density."
+    Tips = "DensityScout is installed in ${TOOLS}\bin."
+    Usage = "Use DensityScout to compute entropy-like metrics on files."
+    SampleCommands = @(
+        "densityscout -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # https://nmap.org/download.html - Nmap
 $nmap_url = Get-DownloadUrlFromPage -url "https://nmap.org/download.html" -RegEx 'https[^"]+setup.exe'
 $status = Get-FileFromUri -uri "${nmap_url}" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes" -check "PE32"
@@ -1783,6 +2495,37 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\nmap" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\nmap.exe" -o"${TOOLS}\nmap" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Nmap"
+    Homepage = "https://nmap.org/"
+    Vendor = "Nmap Project"
+    License = "Nmap Public Source License"
+    Category = "Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "nmap"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ncat"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Nmap is a network exploration and security auditing tool."
+    Tips = "Nmap is installed in ${TOOLS}\nmap."
+    Usage = "Use Nmap to scan hosts and services."
+    SampleCommands = @(
+        "nmap --help"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # https://flatassembler.net/download.php - FASM
@@ -1795,8 +2538,62 @@ if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fasm.zip" -o"${TOOLS}\fasm" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "FASM"
+    Homepage = "https://flatassembler.net/"
+    Vendor = "Flat Assembler"
+    License = "Freeware"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\fasm.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command fasm.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "FASM"
+            Expect = "PE32"
+        }
+    )
+    Notes = "FASM is a fast assembler for x86 and x86-64 architectures."
+    Tips = "FASM is installed in ${TOOLS}\fasm."
+    Usage = "Use FASM to assemble x86/x64 source code."
+    SampleCommands = @(
+        "fasm.exe -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Terminal for Windows - automatically installed during start
 $status = Get-FileFromUri -uri "https://aka.ms/terminal-canary-zip-x64" -FilePath ".\downloads\terminal.zip" -CheckURL "Yes" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Windows Terminal (Canary)"
+    Homepage = "https://aka.ms/terminal"
+    Vendor = "Microsoft"
+    License = "MIT License"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = "Windows Terminal Canary package."
+    Tips = "This is downloaded during setup."
+    Usage = "Use Windows Terminal for shell access."
+    SampleCommands = @(
+        "wt.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
 $procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip'
@@ -1806,6 +2603,40 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\procdot" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ProcDOT"
+    Homepage = "https://procdot.com/"
+    Vendor = "ProcDOT"
+    License = "Freeware"
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\procdot.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command procdot.exe"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "procdot"
+            Expect = "PE32"
+        }
+    )
+    Notes = "ProcDOT is a visual malware analysis tool for process, file, and network activity."
+    Tips = "ProcDOT is installed in ${TOOLS}\procdot."
+    Usage = "Use ProcDOT to visualize procmon logs."
+    SampleCommands = @(
+        "procdot.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 
@@ -1821,12 +2652,111 @@ if ($status) {
     Remove-Item -Recurse -Force "${TOOLS}\geolocus\__MACOSX" | Out-Null 2>&1
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "geolocus-cli"
+    Homepage = "https://codeberg.org/hrbrmstr/geolocus-cli"
+    Vendor = "hrbrmstr"
+    License = "MIT License"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\geolocus (Geolocation tool).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command geolocus-cli.exe -h"
+            Icon     = ""
+            WorkDir  = "C:\enrichment\geolocus"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "geolocus-cli.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "geolocus-cli is a geolocation lookup tool."
+    Tips = "geolocus-cli is installed in ${TOOLS}\bin."
+    Usage = "Use geolocus-cli for IP geolocation lookups."
+    SampleCommands = @(
+        "geolocus-cli.exe -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
 $graphviz_url = Get-DownloadUrlFromPage -url "https://www.graphviz.org/download/" -RegEx 'https://[^"]+win64.exe'
 $status = Get-FileFromUri -uri "${graphviz_url}" -FilePath ".\downloads\graphviz.exe" -CheckURL "Yes" -check "PE32"
 
+$TOOL_DEFINITIONS += @{
+    Name = "Graphviz"
+    Homepage = "https://www.graphviz.org/"
+    Vendor = "Graphviz"
+    License = "Eclipse Public License 1.0"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Graphviz.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dot -?"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "dot"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Graphviz is a graph visualization software suite."
+    Tips = "Graphviz is installed via its MSI and adds tools like dot."
+    Usage = "Use dot to render graphs from DOT files."
+    SampleCommands = @(
+        "dot -?"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # http://www.rohitab.com/apimonitor - API Monitor - installed during start
 $status = Get-FileFromUri -uri "http://www.rohitab.com/download/api-monitor-v2r13-setup-x64.exe" -FilePath ".\downloads\apimonitor64.exe" -CheckURL "Yes" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "API Monitor"
+    Homepage = "http://www.rohitab.com/apimonitor"
+    Vendor = "Rohitab"
+    License = "Proprietary"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = "dfirws-install.ps1 -ApiMonitor"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "apimonitor-x86.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "apimonitor-x64.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "API Monitor is a tool for monitoring Windows API calls."
+    Tips = "After installation, API Monitor is added to the system path."
+    Usage = "Use API Monitor to trace API calls in processes."
+    SampleCommands = @(
+        "apimonitor-x64.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # https://gluonhq.com/products/javafx/ - JavaFX 21
 $javafx_version = Get-DownloadUrlFromPage -url "https://gluonhq.com/products/javafx/" -RegEx '21\.[0-9.]+'
@@ -1840,12 +2770,66 @@ if ($status) {
     Move-Item ${TOOLS}\javafx-sdk-* "${TOOLS}\javafx-sdk"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "JavaFX SDK"
+    Homepage = "https://gluonhq.com/products/javafx/"
+    Vendor = "Gluon"
+    License = "GPL + Classpath Exception"
+    Category = "Programming"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = "JavaFX SDK provides UI libraries for Java applications."
+    Tips = "JavaFX SDK is installed in ${TOOLS}\javafx-sdk."
+    Usage = "Use JavaFX SDK with Java development."
+    SampleCommands = @(
+        "N/A"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
 $apktool_version = Get-DownloadUrlFromPage -url "https://apktool.org/" -RegEx 'apktool_[^"]+'
 $status = Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/${apktool_version}" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force
     Copy-Item "setup\utils\apktool.bat" "${TOOLS}\bin\apktool.bat" -Force
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "apktool"
+    Homepage = "https://apktool.org/"
+    Vendor = "iBotPeaches"
+    License = "Apache License 2.0"
+    Category = "OS\Android"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Android\apktool.bat.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command apktool.bat -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "apktool.jar"
+            Expect = "Zip archive data"
+        }
+    )
+    Notes = "apktool is a tool for reverse engineering Android APK files."
+    Tips = "apktool is installed in ${TOOLS}\bin."
+    Usage = "Use apktool to decode and rebuild APK files."
+    SampleCommands = @(
+        "apktool.bat -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # https://windows.php.net/download - PHP 8
@@ -1856,6 +2840,40 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\php" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\php.zip" -o"${TOOLS}\php" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PHP"
+    Homepage = "https://www.php.net/"
+    Vendor = "PHP Group"
+    License = "PHP License"
+    Category = "Programming"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\php.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command php -v"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "php"
+            Expect = "PE32"
+        }
+    )
+    Notes = "PHP is a scripting language widely used for web development."
+    Tips = "PHP is installed in ${TOOLS}\php."
+    Usage = "Use PHP to run scripts and utilities."
+    SampleCommands = @(
+        "php -v"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # https://hashcat.net/hashcat/ - hashcat
@@ -1870,10 +2888,70 @@ if ($status) {
     Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "hashcat"
+    Homepage = "https://hashcat.net/hashcat/"
+    Vendor = "hashcat"
+    License = "MIT License"
+    Category = "Utilities\Crypto"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat (runs dfirws-install -Hashcat).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Hashcat"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Hashcat"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "hashcat"
+            Expect = "PE32"
+        }
+    )
+    Notes = "hashcat is a password recovery tool."
+    Tips = "After installation, the shortcut is replaced with the installed application."
+    Usage = "hashcat supports GPU-accelerated password recovery."
+    SampleCommands = @(
+        "hashcat --help"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # vmss2core
 $status = Get-FileFromUri -uri "https://archive.org/download/flings.vmware.com/Flings/Vmss2core/vmss2core-sb-8456865.exe" -FilePath ".\downloads\vmss2core.exe" -CheckURL "Yes" -check "PE32"
 if ($status) {
     Copy-Item ".\downloads\vmss2core.exe" "${TOOLS}\bin\vmss2core.exe" -Force
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "vmss2core"
+    Homepage = "https://archive.org/details/flings.vmware.com"
+    Vendor = "VMware"
+    License = "Proprietary"
+    Category = "Memory"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "vmss2core"
+            Expect = "PE32"
+        }
+    )
+    Notes = "vmss2core converts VM snapshot files to core dumps."
+    Tips = "vmss2core is installed in ${TOOLS}\bin."
+    Usage = "Use vmss2core to convert VMware snapshots for debugging."
+    SampleCommands = @(
+        "vmss2core.exe -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # Drivers for hashcat
@@ -1885,6 +2963,26 @@ $status = Get-FileFromUri -uri "https://download.microsoft.com/download/0/c/4/0c
 if ($status) {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mex.exe" -o"${SETUP_PATH}" | Out-Null
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mex.zip" -o"${TOOLS}\mex" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MEX"
+    Homepage = "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
+    Vendor = "Microsoft"
+    License = "Proprietary"
+    Category = "Development"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = "MEX is an extension for WinDbg."
+    Tips = "MEX is installed in ${TOOLS}\mex."
+    Usage = "Use MEX with WinDbg."
+    SampleCommands = @(
+        "N/A"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
 }
 
 # ELK
@@ -1900,6 +2998,26 @@ $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/pac
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\heartbeat.zip" -CheckURL "Yes" -check "Zip archive data"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\auditbeat.zip" -CheckURL "Yes" -check "Zip archive data"
 $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\winlogbeat.zip" -CheckURL "Yes" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Elastic Stack (ELK + Beats)"
+    Homepage = "https://www.elastic.co/elastic-stack"
+    Vendor = "Elastic"
+    License = "Elastic License"
+    Category = "Log"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = "Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats."
+    Tips = "Packages are downloaded to ${SETUP_PATH}."
+    Usage = "Use the downloaded zips to install ELK components."
+    SampleCommands = @(
+        "N/A"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 # Remove unused files and directories
 if (Test-Path -Path "${TOOLS}\win32") {

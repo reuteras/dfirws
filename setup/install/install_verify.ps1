@@ -28,41 +28,29 @@ foreach ($script in $VERIFY_SCRIPTS) {
 }
 
 # Extra tools
-Test-Command apimonitor-x86.exe PE32
-Test-Command apimonitor-x64.exe PE32
 $AutopsyExecutable = (Get-ChildItem "C:\Program Files\Autopsy*" -Include autopsy64.exe -Recurse).FullName
 Test-Command $AutopsyExecutable PE32
-$BinaryNinjaExecutable = (Get-ChildItem C:\Users\WDAGUtilityAccount\AppData\Local -Recurse -Include binaryninja.exe).FullName
-Test-Command $BinaryNinjaExecutable PE32
 Test-Command BurpSuiteCommunity PE32
 Test-Command chrome PE32
 Test-Command clamscan PE32
 Test-Command Cmder PE32
 Test-Command "C:\Program Files\dbeaver\dbeaver.exe" PE32
-Test-Command "C:\Program Files (x86)\Digital Detective\DCode v5\DCode.exe" PE32
 $DokanyExecutable = (Get-ChildItem 'C:\Program Files\Dokan\' -Recurse -Include dokanctl.exe).FullName | Select-Object -Last 1
 Test-Command $DokanyExecutable PE32
 Test-Command "C:\Program Files\Mozilla Firefox\firefox.exe" PE32
 Test-Command "C:\Program Files\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" PE32
 Test-Command go.exe PE32
 Test-Command "C:\Program Files\Google\Google Earth Pro\client\googleearth.exe" PE32
-Test-Command gpg PE32
-Test-Command hashcat PE32
 $JadxLibrary = (Get-ChildItem 'C:\Program Files\Jadx\' -Recurse -Include *.jar).FullName
 Test-Command $JadxLibrary "Zip archive data"
 Test-Command kape PE32
-Test-Command "C:\Program Files (x86)\LibreOffice\program\soffice.exe" PE32
 Test-Command loki PE32
-Test-Command neo4j ASCII
 Test-Command node PE32
 Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe" PE32
-Test-Command "C:\Sandsprite\PDFStreamDumper\PDFStreamDumper.exe" PE32
 Test-Command putty PE32
 Test-Command qemu-img PE32
 Test-Command ruby PE32
 Test-Command rustc PE32
-Test-Command "C:\Users\WDAGUtilityAccount\Desktop\Tor Browser\Browser\firefox.exe" PE32
-Test-Command veracrypt PE32
 Test-Command vlc PE32
 Test-Command WinMergeU PE32
 Test-Command Wireshark PE32
@@ -87,7 +75,6 @@ Test-Command binlex PE32      # C:\Tools\bin\binlex.exe
 Test-Command blyara PE32      # C:\Tools\bin\blyara.exe
 Test-Command CobaltStrikeScan PE32      # C:\Tools\bin\CobaltStrikeScan.exe
 Test-Command debloat PE32      # C:\Tools\bin\debloat.exe
-Test-Command densityscout PE32      # C:\Tools\bin\densityscout.exe
 Test-Command dll_load32 PE32      # C:\Tools\bin\dll_load32.exe
 Test-Command dll_load64 PE32      # C:\Tools\bin\dll_load64.exe
 Test-Command dll_to_exe PE32      # C:\Tools\bin\dll_to_exe.exe
@@ -111,7 +98,6 @@ Test-Command MFTBrowser PE32      # C:\Tools\bin\MFTBrowser.exe
 Test-Command msys2 PE32
 Test-Command pe_check PE32      # C:\Tools\bin\pe_check.exe
 Test-Command pe-sieve PE32      # C:\Tools\bin\pe-sieve.exe
-Test-Command recbin PE32      # C:\Tools\bin\recbin.exe
 Test-Command PrefetchBrowser PE32      # C:\Tools\bin\PrefetchBrowser.exe
 Test-Command sidr PE32      # C:\Tools\bin\sidr.exe
 Test-Command velociraptor PE32      # C:\Tools\bin\velociraptor.exe
@@ -120,7 +106,6 @@ Test-Command yara PE32      # C:\Tools\bin\yara.exe
 Test-Command yarac PE32      # C:\Tools\bin\yarac.exe
 Test-Command yq PE32      # C:\Tools\bin\yq.exe
 Test-Command yr PE32      # C:\Tools\bin\yr.exe
-Test-Command bulk_extractor64 PE32      # C:\Tools\bulk_extractor\win64\bulk_extractor64.exe
 Test-Command capa PE32      # C:\Tools\capa\capa.exe
 Test-Command capa-ghidra PE32      # C:\Tools\capa-ghidra\capa-ghidra.exe
 Test-Command cleanhive PE32      # C:\Tools\cargo\bin\cleanhive.exe
@@ -149,21 +134,16 @@ Test-Command rizin PE32      # C:\Tools\cutter\rizin.exe
 Test-Command js-file PE32      # C:\Tools\DidierStevens\js-file.exe
 Test-Command die PE32      # C:\Tools\die\die.exe
 Test-Command diec PE32      # C:\Tools\die\diec.exe
-Test-Command "C:\Tools\capa-explorer-web\index.html" HTML
 Test-Command "C:\Tools\dnSpy64\bin\dnSpy.dll" PE32
 Test-Command dumpbin PE32      # C:\Tools\dumpbin\dumpbin.exe
 Test-Command elfparser-ng PE32      # C:\Tools\elfparser-ng\Release\elfparser-ng.exe
-Test-Command exiftool PE32      # C:\Tools\exiftool\exiftool.exe
 Test-Command fakenet PE32      # C:\Tools\fakenet\fakenet.exe
-Test-Command FASM PE32      # C:\Tools\fasm\FASM.EXE
 Test-Command floss PE32      # C:\Tools\floss\floss.exe
 Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\fqlite\fqlite.exe" PE32
-Test-Command FullEventLogView PE32      # C:\Tools\FullEventLogView\FullEventLogView.exe
 Test-Command gftrace PE32      # C:\Tools\gftrace64\gftrace.exe
 Test-Command ghidraRun ASCII
 Test-Command godap PE32      # C:\Tools\godap\godap.exe
 Test-Command GoReSym PE32      # C:\Tools\GoReSym\GoReSym.exe
-Test-Command "C:\Tools\hashcat\hashcat.exe" PE32
 Test-Command hayabusa PE32      # C:\Tools\hayabusa\hayabusa.exe
 Test-Command "C:\Tools\iaito\iaito.exe" PE32
 Test-Command imhex-gui PE32      # C:\Tools\imhex\imhex-gui.exe
@@ -174,25 +154,13 @@ Test-Command lessmsi-gui PE32      # C:\Tools\lessmsi\lessmsi-gui.exe
 Test-Command lessmsi PE32      # C:\Tools\lessmsi\lessmsi.exe
 Test-Command "C:\Tools\LogBoost\LogBoost.exe" PE32
 Test-Command "C:\Tools\LogBoost\threats.db" "SQLite"
-Test-Command MailView PE32      # C:\Tools\MailView\MailView.exe
 Test-Command "C:\Tools\mboxviewer\mboxview64.exe" PE32 # GUI not in path
 Test-Command MemProcFS PE32      # C:\Tools\MemProcFS\MemProcFS.exe
 Test-Command mmdbinspect PE32      # C:\Tools\mmdbinspect\mmdbinspect.exe
-Test-Command "C:\Tools\nirsoft\BrowsingHistoryView.exe" PE32
-Test-Command "C:\Tools\nirsoft\ChromeCacheView.exe" PE32
-Test-Command "C:\Tools\nirsoft\IECacheView.exe" PE32
-Test-Command "C:\Tools\nirsoft\iecv.exe" PE32
-Test-Command "C:\Tools\nirsoft\LastActivityView.exe" PE32
-Test-Command "C:\Tools\nirsoft\MZCacheView.exe" PE32
-Test-Command "C:\Tools\nirsoft\mzcv.exe" PE32
-Test-Command ncat PE32      # C:\Tools\nmap\ncat.exe
-Test-Command nmap PE32      # C:\Tools\nmap\nmap.exe
 Test-Command node PE32      # C:\Tools\node\node.exe
 Test-Command PE-bear PE32      # C:\Tools\pebear\PE-bear.exe
 Test-Command ofs2rva PE32      # C:\Tools\pev\ofs2rva.exe
 Test-Command pescan PE32      # C:\Tools\pev\pescan.exe
-Test-Command php PE32      # C:\Tools\php\php.exe
-Test-Command procdot PE32      # C:\Tools\procdot\win64\procdot.exe
 Test-Command qpdf PE32      # C:\Tools\qpdf\bin\qpdf.exe
 Test-Command qrtool PE32      # C:\Tools\qrtool\qrtool.exe
 Test-Command radare2 PE32      # C:\Tools\radare2\bin\radare2.exe
@@ -200,14 +168,10 @@ Test-Command RdpCacheStitcher PE32      # C:\Tools\RdpCacheStitcher\RdpCacheStit
 Test-Command redress PE32      # C:\Tools\redress\redress.exe
 Test-Command rg PE32      # C:\Tools\ripgrep\rg.exe
 Test-Command blkcalc PE32      # C:\Tools\sleuthkit\bin\blkcalc.exe
-Test-Command sqldiff PE32      # C:\Tools\sqlite\sqldiff.exe
-Test-Command sqlite3 PE32      # C:\Tools\sqlite\sqlite3.exe
 Test-Command "C:\Tools\sqlitebrowser\DB Browser for SQLite.exe" PE32
 Test-Command "C:\Tools\takajo\takajo.exe" PE32
-Test-Command SSView PE32      # C:\Tools\ssview\SSView.exe
 Test-Command thumbcache_viewer PE32      # C:\Tools\thumbcacheviewer\thumbcache_viewer.exe
 Test-Command upx PE32      # C:\Tools\upx\upx.exe
-Test-Command VolatilityWorkbench PE32      # C:\Tools\VolatilityWorkbench2\VolatilityWorkbench.exe
 Test-Command WinObjEx64 PE32      # C:\Tools\WinObjEx64\WinObjEx64.exe
 Test-Command xelfviewer PE32      # C:\Tools\XELFViewer\xelfviewer.exe
 Test-Command LECmd PE32      # C:\Tools\Zimmerman\LECmd.exe
@@ -387,7 +351,6 @@ Test-Command C:\venv\scare\Scripts\scare.py Python
 
 # Downloads only files
 Test-Command C:\downloads\intel_driver.exe PE32
-Test-Command C:\downloads\openvpn.msi "MSI Installer"
 Test-Command C:\downloads\osfmount.exe PE32
 Test-Command C:\downloads\tailscale.exe PE32
 Test-Command C:\downloads\wireguard.msi "MSI Installer"
