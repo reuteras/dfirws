@@ -8,6 +8,18 @@ theme:
 
 nav:
 - Home: index.md
+- Changes: Changes.md
+- Customize Dfirws: Customize-dfirws.md
+- Didier Stevens Tools: Didier-Stevens-tools.md
+- Getting Started: Getting-started.md
+- Home: Home.md
+- Jupyter Notebooks: Jupyter-notebooks.md
+- KAPE: KAPE.md
+- Network Forensics: Network-forensics.md
+- Notebook For PE With Ghidra And Capa: Notebook-for-PE-with-Ghidra-and-capa.md
+- Obsidian: Obsidian.md
+- Samples: Samples.md
+- Windows Forensics: Windows-forensics.md
 - Investigations:
   - Investigate Email: Investigations/Investigate-Email.md
   - Investigate JavaScript Files: Investigations/Investigate-JavaScript-files.md
@@ -18,31 +30,6 @@ nav:
   - Investigate PE Files: Investigations/Investigate-PE-files.md
   - Investigate PowerShell: Investigations/Investigate-PowerShell.md
   - Investigate ZIP Files: Investigations/Investigate-ZIP-files.md
-- Org:
-  - Sidebar: org/_Sidebar.md
-  - Changes: org/Changes.md
-  - Customize Dfirws: org/Customize-dfirws.md
-  - Development: org/Development.md
-  - Didier Stevens Tools: org/Didier-Stevens-tools.md
-  - File System Forensics And Data Recovery: org/File-system-forensics-and-data-recovery.md
-  - General Tools: org/General-tools.md
-  - Getting Started: org/Getting-started.md
-  - Ghidra: org/Ghidra.md
-  - GoLang: org/GoLang.md
-  - Home: org/Home.md
-  - JSON Tools: org/JSON-tools.md
-  - Jupyter Notebooks: org/Jupyter-notebooks.md
-  - KAPE: org/KAPE.md
-  - Modified Tools: org/Modified-tools.md
-  - Network Forensics: org/Network-forensics.md
-  - Notebook For PE With Ghidra And Capa: org/Notebook-for-PE-with-Ghidra-and-capa.md
-  - Obsidian: org/Obsidian.md
-  - PatchaPalooza: org/PatchaPalooza.md
-  - Python Virtual Environments: org/Python-virtual-environments.md
-  - Qpdf: org/qpdf.md
-  - Samples: org/Samples.md
-  - Tools That Need To Be Manually Enabled: org/Tools-that-need-to-be-manually-enabled.md
-  - Windows Forensics: org/Windows-forensics.md
   - Tools:
     - Overview: tools/index.md
     - Development:
@@ -146,9 +133,22 @@ nav:
       - Sysinternals Suite: tools/pages/utilities-sysinternals-suite.md
 
 - Home: index.md
+- Home: index.md
 
 nav:
 - Home: index.md
+- Changes: Changes.md
+- Customize Dfirws: Customize-dfirws.md
+- Didier Stevens Tools: Didier-Stevens-tools.md
+- Getting Started: Getting-started.md
+- Home: Home.md
+- Jupyter Notebooks: Jupyter-notebooks.md
+- KAPE: KAPE.md
+- Network Forensics: Network-forensics.md
+- Notebook For PE With Ghidra And Capa: Notebook-for-PE-with-Ghidra-and-capa.md
+- Obsidian: Obsidian.md
+- Samples: Samples.md
+- Windows Forensics: Windows-forensics.md
 - Investigations:
   - Investigate Email: Investigations/Investigate-Email.md
   - Investigate JavaScript Files: Investigations/Investigate-JavaScript-files.md
@@ -159,31 +159,6 @@ nav:
   - Investigate PE Files: Investigations/Investigate-PE-files.md
   - Investigate PowerShell: Investigations/Investigate-PowerShell.md
   - Investigate ZIP Files: Investigations/Investigate-ZIP-files.md
-- Org:
-  - Sidebar: org/_Sidebar.md
-  - Changes: org/Changes.md
-  - Customize Dfirws: org/Customize-dfirws.md
-  - Development: org/Development.md
-  - Didier Stevens Tools: org/Didier-Stevens-tools.md
-  - File System Forensics And Data Recovery: org/File-system-forensics-and-data-recovery.md
-  - General Tools: org/General-tools.md
-  - Getting Started: org/Getting-started.md
-  - Ghidra: org/Ghidra.md
-  - GoLang: org/GoLang.md
-  - Home: org/Home.md
-  - JSON Tools: org/JSON-tools.md
-  - Jupyter Notebooks: org/Jupyter-notebooks.md
-  - KAPE: org/KAPE.md
-  - Modified Tools: org/Modified-tools.md
-  - Network Forensics: org/Network-forensics.md
-  - Notebook For PE With Ghidra And Capa: org/Notebook-for-PE-with-Ghidra-and-capa.md
-  - Obsidian: org/Obsidian.md
-  - PatchaPalooza: org/PatchaPalooza.md
-  - Python Virtual Environments: org/Python-virtual-environments.md
-  - Qpdf: org/qpdf.md
-  - Samples: org/Samples.md
-  - Tools That Need To Be Manually Enabled: org/Tools-that-need-to-be-manually-enabled.md
-  - Windows Forensics: org/Windows-forensics.md
   - Tools:
     - Overview: tools/index.md
     - Development:
