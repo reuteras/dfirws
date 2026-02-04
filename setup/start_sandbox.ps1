@@ -4,7 +4,7 @@
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
 "`n" | CiTool.exe -r
 
-# Cleanup
+# Cleanup - double Egde shortcut since sometime 2026
 if (Test-Path 'C:\Users\Public\Desktop\Microsoft Edge.lnk') {
 	Remove-Item 'C:\Users\Public\Desktop\Microsoft Edge.lnk' -Force
 }
@@ -21,6 +21,7 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
 
+# Check if running in verify mode
 if (Test-Path "C:\log\log.txt") {
 	Add-Shortcut -SourceLnk "${HOME}\Desktop\progress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Get-Content C:\log\verify.txt -Wait"
 }
@@ -32,6 +33,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
 Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
+# Install PSDecode module - https://github.com/R3MRUM/PSDecode
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force | Out-Null
 
 # Link latest PowerShell and set execution policy to Bypass
@@ -124,21 +126,20 @@ Write-DateLog "Date and time format set" | Tee-Object -FilePath "${WSDFIR_TEMP}\
 if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve | Out-Null
     Write-DateLog "Right-click context menu added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+	# Change TERMINAL_INSTALL_DIR to actual installed version
+	Get-Content "${HOME}\Documents\tools\reg\right-click.reg" | 
+		ForEach-Object { $_ -replace "TERMINAL_INSTALL_DIR", "${TERMINAL_INSTALL_DIR}" } | 
+		Set-Content "${WSDFIR_TEMP}\right-click.reg"
+
+	reg import "${WSDFIR_TEMP}\right-click.reg" | Out-Null
+	Write-DateLog "Right-click context menu registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
-
-# Change TERMINAL_INSTALL_DIR to actual installed version
-Get-Content "${HOME}\Documents\tools\reg\right-click.reg" | 
-	ForEach-Object { $_ -replace "TERMINAL_INSTALL_DIR", "${TERMINAL_INSTALL_DIR}" } | 
-	Set-Content "${WSDFIR_TEMP}\right-click.reg"
-
-reg import "${WSDFIR_TEMP}\right-click.reg" | Out-Null
-Write-DateLog "Right-click context menu registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Import registry settings
 reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
 Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Requires admin (writes to HKLM)
 # Uses SystemFileAssociations so the verbs apply reliably to file types
 # Uses full path to pwsh.exe (PowerShell 7)
 
@@ -357,8 +358,12 @@ Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\utils\dfi
 
 # Add shortcuts to desktop
 Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\gollum.bat"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\mkdocs.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
+
+# Enable clipboard history
+New-Item -Path "HKCU:\Software\Microsoft\Clipboard" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Clipboard" -Name EnableClipboardHistory -Type DWord -Value 1
 
 #
 # Main installation done, now copy files to user profile and other locations
@@ -424,10 +429,6 @@ if (Test-Path "${LOCAL_PATH}\.zcompdump") {
     Copy-Item "${LOCAL_PATH}\defaults\.zcompdump" "${HOME}\.zcompdump" -Force | Out-Null
 }
 
-# Enable clipboard history
-New-Item -Path "HKCU:\Software\Microsoft\Clipboard" -Force | Out-Null
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Clipboard" -Name EnableClipboardHistory -Type DWord -Value 1
-
 #
 # Run custom scripts
 #
@@ -452,6 +453,7 @@ if ("${WSDFIR_SYSMON}" -eq "Yes") {
 }
 Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
+# If in verify mode, run install_all and install_verify scripts
 if (Test-Path "C:\log\log.txt") {
     Write-SynchronizedLog "Running install_all.ps1 script."
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")

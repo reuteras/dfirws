@@ -211,6 +211,7 @@
         "dword",
         "editmenu",
         "efsdump",
+        "Egde",
         "elfparser",
         "embeddedfile",
         "emldump",
@@ -294,7 +295,6 @@
         "Gidhra",
         "gkape",
         "godap",
-        "gollum",
         "googleearth",
         "gootloader",
         "goretk",
@@ -471,6 +471,7 @@
         "mikefarah",
         "minidump",
         "mkape",
+        "mkdocs",
         "mkyara",
         "mmcat",
         "mmdb",
@@ -899,6 +900,7 @@
         "virtualenv",
         "visidata",
         "visualstudiobuildtools",
+        "vite",
         "vlc",
         "vmmap",
         "vmrun",
@@ -974,16 +976,16 @@
         "zsviczian",
         "zui"
     ],
-    "cSpell.enableFiletypes": [
-        "bat",
-        "powershell",
-        "shellscript"
-    ],
+    "cSpell.enabledFileTypes": {
+        "bat": true,
+        "powershell": true,
+        "shellscript": true
+    },
     "python-envs.pythonProjects": [
         {
             "path": "",
-            "envManager": "",
-            "packageManager": ""
+            "envManager": "ms-python.python:venv",
+            "packageManager": "ms-python.python:pip"
         }
     ]
 }

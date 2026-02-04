@@ -1,38 +1,8 @@
-# Rename file to config.txt to configure dfirws
+# Copy file to local\config.txt to set your own defaults
 
 # Root directory for the installation
 $WSDFIR_ROOT="C:\"
 
-# Tools to install
-
-# Install apimonitor
-$WSDFIR_APIMONITOR="No"
-# Install cmder
-$WSDFIR_CMDER="No"
-# Install git
-$WSDFIR_GIT="Yes"
-# Install hashcat
-$WSDFIR_HASHCAT="No"
-# Install Jadx
-$WSDFIR_JADX="No"
-# Install KAPE
-$WSDFIR_KAPE="No"
-# Install LibreOffice
-$WSDFIR_LIBREOFFICE="No"
-# Install Loki
-$WSDFIR_LOKI="No"
-# Install malcat
-$WSDFIR_MALCAT="Yes"
-# Install neo4j
-$WSDFIR_NEO4J="No"
-# Install Obsidian
-$WSDFIR_OBSIDIAN="No"
-# Install PDFStream Dumper
-$WSDFIR_PDFSTREAM="No"
-# Install Qemu
-$WSDFIR_QEMU="No"
-# Install Visual Studio Code
-$WSDFIR_VSCODE="No"
 # Install Visual Studio Code PowerShell extension
 $WSDFIR_VSCODE_POWERSHELL="Yes"
 # Install Visual Studio Code C/C++ extension
@@ -47,11 +17,9 @@ $WSDFIR_VSCODE_MERMAID="Yes"
 $WSDFIR_VSCODE_SHELLCHECK="Yes"
 # Install Visual Studio Code ruff extension
 $WSDFIR_VSCODE_RUFF="Yes"
-# Install Zui
-$WSDFIR_ZUI="No"
 
 # Run sysmon
-$WSDFIR_SYSMON="Yes"
+$WSDFIR_SYSMON="No"
 
 # Location of Sysmon configuration
 $WSDFIR_SYSMON_CONF="C:\downloads\sysmonconfig-export.xml"
@@ -84,8 +52,6 @@ $WSDFIR_OHMYPOSH_CONFIG="defaults\posh\dfirws-powerlevel10k.omp.json"
 $WSDFIR_FONT_NAME="Meslo"
 
 # Full name used by Visual Studio Code
-$WSDFIR_FONT_FULL_NAME="Consolas, 'Courier New', monospace"
-#$WSDFIR_FONT_FULL_NAME="MesloLGM Nerd Font Mono"
+#$WSDFIR_FONT_FULL_NAME="Consolas, 'Courier New', monospace"
+$WSDFIR_FONT_FULL_NAME="MesloLGM Nerd Font Mono"
 
-# Windows version (10 or 11 - Get-ComputerInfo is to slow)
-$WINDOWS_VERSION = "11"

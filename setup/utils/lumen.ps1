@@ -4,8 +4,25 @@ $LumenDestPath = "$HOME\Desktop\Lumen"
 
 if (Test-Path -Path $LumenSourcePath) {
     if (-not (Test-Path -Path $LumenDestPath)) {
-        Copy-Item -Path $LumenSourcePath -Destination $LumenDestPath -Recurse -Force -Exclude ".git"
-        Write-DateLog "Lumen copied to Desktop."
+        New-Item -ItemType Directory -Path $LumenDestPath | Out-Null
+        Set-Location $LumenDestPath
+        Get-ChildItem 'C:\Tools\lumen\lumen' -File | ForEach-Object {
+            Copy-Item $_.FullName -Destination (Join-Path (Get-Location) $_.Name) | Out-Null
+        }
+        Get-ChildItem 'C:\Tools\lumen\lumen' -Directory | ForEach-Object {
+            New-Item -ItemType Junction -Path (Join-Path (Get-Location) $_.Name) -Target $_.FullName | Out-Null
+        }
+        Remove-Item .\node_modules
+        New-Item -ItemType Directory -Path .\node_modules | Out-Null
+        Set-Location  "$LumenDestPath\node_modules"
+        Get-ChildItem 'C:\Tools\lumen\lumen\node_modules\' -File | ForEach-Object {
+           Copy-Item $_.FullName -Destination (Join-Path (Get-Location) $_.Name) | Out-Null
+        }
+        Get-ChildItem 'C:\Tools\lumen\lumen\node_modules\' -Directory | ForEach-Object {
+            New-Item -ItemType Junction -Path (Join-Path (Get-Location) $_.Name) -Target $_.FullName | Out-Null
+        }
+        Write-DateLog "Lumen linked to Desktop."
+        & "${HOME}\Documents\tools\utils\patch-vite-config.ps1" -ConfigPath "$LumenDestPath\vite.config.ts"
     }
 } else {
     Write-DateLog "Lumen source path does not exist: $LumenSourcePath"

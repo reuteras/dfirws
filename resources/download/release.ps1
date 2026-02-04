@@ -234,12 +234,6 @@ if ($status) {
     ConvertTo-Icon -bitmapPath "${PWD}\${TOOLS}\CyberChef\images\cyberchef-128x128.png" -iconPath "${PWD}\${TOOLS}\CyberChef\CyberChef.ico"
 }
 
-# Gollum
-$status = Get-GitHubRelease -repo "gollum/gollum" -path "${SETUP_PATH}\gollum.war" -match "gollum.war" -check "Zip archive data"
-if ($status) {
-    Copy-Item ${SETUP_PATH}\gollum.war ${TOOLS}\lib
-}
-
 # redress
 $status = Get-GitHubRelease -repo "goretk/redress" -path "${SETUP_PATH}\redress.zip" -match "windows.zip" -check "Zip archive data"
 if ($status) {

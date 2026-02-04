@@ -21,6 +21,7 @@ $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
 # Check if C:\log exists, indicating running downloadFiles.ps1
+# Fix DNS servers if needed
 if (Test-Path -Path "C:\log") {
     $dns = C:\Windows\System32\ipconfig /all | Select-String -Pattern "8.8.8.8"
     if ($null -eq $dns) {
@@ -176,21 +177,6 @@ function Test-Command {
         $actual_type = & 'C:\Program Files\Git\usr\bin\file.exe' -b $command.Path
         Write-SynchronizedLog "ERROR: $name exists but is not of type $type. Type is $actual_type"
     }
-}
-
-# Latest version of pip package
-function Get-LatestPipVersion {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
-        [string]
-        $package
-    )
-
-    $latest = Invoke-WebRequest -Uri "https://pypi.org/pypi/${package}/json" -UseBasicParsing | ConvertFrom-Json
-    $latest_version = $latest.info.version
-    Write-Output $latest_version
 }
 
 # Functions to help install programs
