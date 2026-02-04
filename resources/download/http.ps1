@@ -79,7 +79,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "code.exe"
+            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd"
             Expect = "DOS"
         }
     )
@@ -214,9 +214,9 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\DebugView64.exe.lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Dbgview.exe.lnk"
             Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command DebugView64.exe -h"
+            Args     = "`${CLI_TOOL_ARGS} -command Dbgview.exe -h"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
@@ -522,23 +522,9 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\Reghide.exe.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command Reghide.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-        @{
             Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\RegJump.exe.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command regjump.exe /?"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\RootkitRevealer.exe.lnk"
-            Target   = "`${TOOLS}\sysinternals\RootkitRevealer.exe"
-            Args     = ""
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
@@ -736,7 +722,7 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "DebugView64.exe"
+            Name = "Dbgview.exe"
             Expect = "PE32"
         }
         @{
@@ -866,12 +852,12 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "ProcessExplorer.exe"
+            Name = "procexp64.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "ProcessMonitor.exe"
+            Name = "procmon64.exe"
             Expect = "PE32"
         }
         @{
@@ -956,17 +942,7 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "Reghide.exe"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
             Name = "RegJump.exe"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
-            Name = "RootkitRevealer.exe"
             Expect = "PE32"
         }
         @{
@@ -1073,7 +1049,7 @@ $TOOL_DEFINITIONS += @{
         "Coreinfo64.exe"
         "Ctrl2cap.exe"
         "CPUSTRES64.exe"
-        "DebugView64.exe"
+        "Dbgview.exe"
         "Desktops64.exe"
         "disk2vhd64.exe"
         "DiskExt64.exe"
@@ -1099,8 +1075,8 @@ $TOOL_DEFINITIONS += @{
         "pipelist64.exe"
         "portmon.exe"
         "ProcDump64.exe"
-        "ProcessExplorer.exe"
-        "ProcessMonitor.exe"
+        "procexp64.exe"
+        "Procmon64.exe"
         "PsExec64.exe"
         "PsFile64.exe"
         "PsGetsid64.exe"
@@ -1327,6 +1303,12 @@ $TOOL_DEFINITIONS += @{
 
 # Get malcat - installed during start - 313 indicates use of Python 3.13
 $status = Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win313_lite.zip" -FilePath ".\downloads\malcat.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\malcat") {
+        Remove-Item -Recurse -Force "${TOOLS}\malcat" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\malcat.zip" -o"${TOOLS}\malcat" | Out-Null
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Malcat Lite"
@@ -1338,7 +1320,7 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Editors\Malcat.lnk"
-            Target   = "`${env:ProgramFiles}\malcat\bin\malcat.exe"
+            Target   = "`${TOOLS}\malcat\bin\malcat.exe"
             Args     = ""
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
@@ -1348,7 +1330,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "`${env:ProgramFiles}\malcat\bin\malcat.exe"
+            Name = "`${TOOLS}\malcat\bin\malcat.exe"
             Expect = "PE32"
         }
     )
@@ -1528,12 +1510,12 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "WinApiSearch32.exe"
+            Name = "`${TOOLS}\WinApiSearch\WinApiSearch32.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "WinApiSearch64.exe"
+            Name = "`${TOOLS}\WinApiSearch\WinApiSearch64.exe"
             Expect = "PE32"
         }
     )
@@ -1925,12 +1907,12 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "winpmem_64.sys"
+            Name = "C:\downloads\winpmem_64.sys"
             Expect = "PE32"
         }
     )
     Notes = "winpmem is a Windows memory acquisition driver."
-    Tips = "The driver is downloaded to ${SETUP_PATH}."
+    Tips = "The driver is downloaded to C:\downloads."
     Usage = "Use winpmem with compatible acquisition tools."
     SampleCommands = @(
         "N/A"
@@ -1962,7 +1944,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Binary Ninja\binaryninja.exe"
+            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Vector35\BinaryNinja\binaryninja.exe"
             Expect = "PE32"
         }
     )
@@ -2508,12 +2490,12 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "nmap"
+            Name = "`${TOOLS}\nmap\nmap.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "ncat"
+            Name = "`${TOOLS}\nmap\ncat.exe"
             Expect = "PE32"
         }
     )
@@ -2624,7 +2606,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "procdot"
+            Name = "`${TOOLS}\procdot\win64\procdot.exe"
             Expect = "PE32"
         }
     )
@@ -2709,7 +2691,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "dot"
+            Name = "`${env:ProgramFiles}\Graphviz\bin\dot.exe"
             Expect = "PE32"
         }
     )

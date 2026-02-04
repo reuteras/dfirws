@@ -237,11 +237,11 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2024-01-04
 
 - Add Perl to the sandbox. This way it is possible to test code from Perl based malware.
-- Add script to enable Ghidrathon in [[Ghidra]].
+- Add script to enable Ghidrathon in Ghidra.
 
 ## 2024-01-03
 
-- Add support for having [[KAPE]] in the sandbox. If you place your kape.zip in the *local* directory it will get installed and updated in *C:\Tools\KAPE*.
+- Add support for having KAPE in the sandbox. If you place your kape.zip in the *local* directory it will get installed and updated in *C:\Tools\KAPE*.
 
 ## 2023-12-29
 
@@ -308,7 +308,7 @@ Added Git repositories:
 
 - Add Iaito from Radareorg (Reversing tools)
 - Logg startup times to *C:\tmp\start_sandbox.log*
-- Update [[Jupyter notebooks]] for PE files
+- Update [Jupyter notebooks](Jupyter-notebooks.md) for PE files
 
 ## 2023-11-28
 
@@ -321,7 +321,7 @@ Added Git repositories:
 
 ## 2023-11-23
 
-- Added customization for [[Ghidra]] to [local/example-customize.ps1](https://github.com/reuteras/dfirws/blob/main/local/example-customize.ps1). If you already have a *local/customize.ps1* now is a good time to merge the updates into that file.
+- Added customization for Ghidra to [local/example-customize.ps1](https://github.com/reuteras/dfirws/blob/main/local/example-customize.ps1). If you already have a *local/customize.ps1* now is a good time to merge the updates into that file.
 - A GoLang-extension for Ghidra is available for installation in *C:\Tools\ghidra_extensions*.
 
 ## Start

@@ -137,7 +137,7 @@ If you like to cache a local copy of Visual Studio Build Tools you can run. **Im
 Personally I run the following command to download everything and cache Visual Studio Build Tools:
 
 ```PowerShell
-.\downloadFiles.ps1 -AllTools -Enrichment -Freshclam -Verify -VisualStudioBuildTools
+.\downloadFiles.ps1  -AllTools -Enrichment -Freshclam -LogBoost -VisualStudioBuildTools -Verify
 ```
 
 ## Usage and configuration of the sandbox
@@ -186,52 +186,5 @@ Update scripts used to create the sandbox (i.e. this code) by running `git pull`
 
 To see available options run **Get-Help .\downloadFiles.ps1**.
 
-## Documentation
-
-More information about installed tools are available in the GitHub [wiki][wid].
-
-## DFIRWS v2 Architecture (NEW!)
-
-DFIRWS v2 introduces a modular YAML-based architecture that makes tool management more flexible and maintainable. All 433 tools are now defined in structured YAML files instead of monolithic PowerShell scripts.
-
-### Key Benefits
-
-- **Modular**: Tools organized by category in separate YAML files
-- **Maintainable**: Easy to add, update, or remove tools
-- **Documented**: Every tool includes description, priority, and notes
-- **Flexible**: Support for multiple installation methods and sources
-- **Automated**: Version management, parallel downloads, and update tracking
-
-### Quick Start with v2
-
-Show all available tools:
-
-```PowerShell
-.\resources\download\install-all-tools-v2.ps1 -ShowCounts
-```
-
-Install all tools (v2 method):
-
-```PowerShell
-.\resources\download\install-all-tools-v2.ps1 -All
-```
-
-Install specific categories:
-
-```PowerShell
-# Install only Python tools
-.\resources\download\install-all-tools-v2.ps1 -PythonTools
-
-# Install only Git repositories
-.\resources\download\install-all-tools-v2.ps1 -GitRepos
-
-# Install by forensic category
-.\resources\download\install-tools.ps1 -Category malware-analysis
-
-# Install by priority
-.\resources\download\install-tools.ps1 -Priority critical
-```
-
-  [wid]: https://github.com/reuteras/dfirws/wiki/Documentation
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
   [wsc]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file

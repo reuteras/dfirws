@@ -6,10 +6,10 @@ Trying to add Jupyter Notebooks under [setup/jupyter](https://github.com/reutera
 
 Wiki pages with more information:
 
-- [[Notebook for PE with Ghidra and capa]]
+- [Notebook for PE with Ghidra and capa](Notebook-for-PE-with-Ghidra-and-capa.md)
 
 More inspiration can be found from [jupyter-collection](https://github.com/fr0gger/jupyter-collection/) by [fr0gger](https://github.com/fr0gger) and available locally under *C:\git\jupyter-collection*.
 
 Click on the link *jupyter* on the desktop to start **Jupyter Labs**:
 
-![jupyter](https://github.com/reuteras/dfirws/assets/449846/449b8dc1-4317-45e5-a8ef-2849dd382f04)
+![jupyter](images/jupyter.png)

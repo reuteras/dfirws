@@ -1,4 +1,4 @@
-If you run this notebook you can view the results from a run with [capa][cap] on the file and then import the `JSON` output from **capa** to [Ghidra][ghi] with the help of [CapaExplorer][cae]. The file analyzed below is [c0cb3a111965e1446e17f6077368164f324dc0f82333a534ee2826df57496bb7][c0c] which is the DDosia client for Windows updated in november of 2023 and it's written in [[GoLang]].
+If you run this notebook you can view the results from a run with [capa][cap] on the file and then import the `JSON` output from **capa** to [Ghidra][ghi] with the help of [CapaExplorer][cae]. The file analyzed below is [c0cb3a111965e1446e17f6077368164f324dc0f82333a534ee2826df57496bb7][c0c] which is the DDosia client for Windows updated in november of 2023 and it's written in GoLang.
 
 When the notebook is done and **Ghidra** has started you can start the *Script Manager*:
 

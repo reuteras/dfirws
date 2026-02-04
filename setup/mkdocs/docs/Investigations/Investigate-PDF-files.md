@@ -5,7 +5,6 @@ There are a couple of tools available in **dfirws** to investigate PDF files. So
 - **pdfid.py**
 - **PDFStreamDumper**
 - **[peepdf-3](https://pypi.org/project/peepdf-3/)** (virtualenv name _peepdf3_)
-- [[qpdf]]
 
 There is a Jupyter [Notebook](https://github.com/reuteras/dfirws/blob/main/setup/jupyter/pdf.ipynb) available to analyse PDF files.
 

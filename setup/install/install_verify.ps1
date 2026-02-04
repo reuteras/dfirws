@@ -66,7 +66,7 @@ Test-Command gdb PE32
 # First generated with the command below and then cleaned manually.
 # foreach ($name in (Get-ChildItem C:\Tools\ -Include *.exe -Recurse) ) {"Test-Command", $name.name.Split('.')[0], "PE32      #", $name.FullName  -join " " }
 Test-Command artemis PE32      # C:\Tools\artemis\artemis.exe
-Test-Command Audacity PE32
+Test-Command "C:\Tools\Audacity\audacity.exe" PE32
 Test-Command adalanche PE32      # C:\Tools\bin\adalanche.exe
 Test-Command aleapp PE32      # C:\Tools\bin\aleapp.exe
 Test-Command aleappGUI PE32      # C:\Tools\bin\aleappGUI.exe
@@ -84,7 +84,7 @@ Test-Command ffmpeg PE32      # C:\Tools\ffmpeg\bin\ffmpeg.exe
 Test-Command fq PE32      # C:\Tools\bin\fq.exe
 Test-Command fx PE32      # C:\Tools\bin\fx.exe
 Test-Command gron PE32      # C:\Tools\bin\gron.exe
-Test-Command hfs PE32      # C:\Tools\bin\hfs.exe
+Test-Command "C:\Tools\hfs\hfs.exe" PE32
 Test-Command hindsight_gui PE32      # C:\Tools\bin\hindsight_gui.exe
 Test-Command hindsight PE32      # C:\Tools\bin\hindsight.exe
 Test-Command hollows_hunter PE32      # C:\Tools\bin\hollows_hunter.exe
@@ -107,7 +107,7 @@ Test-Command yarac PE32      # C:\Tools\bin\yarac.exe
 Test-Command yq PE32      # C:\Tools\bin\yq.exe
 Test-Command yr PE32      # C:\Tools\bin\yr.exe
 Test-Command capa PE32      # C:\Tools\capa\capa.exe
-Test-Command capa-ghidra PE32      # C:\Tools\capa-ghidra\capa-ghidra.exe
+Test-Command "C:\Tools\capa-ghidra\capa-ghidra.exe" PE32
 Test-Command cleanhive PE32      # C:\Tools\cargo\bin\cleanhive.exe
 Test-Command cute PE32      # C:\Tools\cargo\bin\cute.exe
 #Test-Command es4forensics PE32      # C:\Tools\cargo\bin\es4forensics.exe
@@ -136,11 +136,11 @@ Test-Command die PE32      # C:\Tools\die\die.exe
 Test-Command diec PE32      # C:\Tools\die\diec.exe
 Test-Command "C:\Tools\dnSpy64\bin\dnSpy.dll" PE32
 Test-Command dumpbin PE32      # C:\Tools\dumpbin\dumpbin.exe
-Test-Command elfparser-ng PE32      # C:\Tools\elfparser-ng\Release\elfparser-ng.exe
+Test-Command "C:\Tools\elfparser-ng\Release\elfparser-ng.exe" PE32
 Test-Command fakenet PE32      # C:\Tools\fakenet\fakenet.exe
 Test-Command floss PE32      # C:\Tools\floss\floss.exe
 Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\fqlite\fqlite.exe" PE32
-Test-Command gftrace PE32      # C:\Tools\gftrace64\gftrace.exe
+Test-Command "C:\Tools\gftrace64\gftrace.exe" PE32
 Test-Command ghidraRun ASCII
 Test-Command godap PE32      # C:\Tools\godap\godap.exe
 Test-Command GoReSym PE32      # C:\Tools\GoReSym\GoReSym.exe
@@ -164,7 +164,7 @@ Test-Command pescan PE32      # C:\Tools\pev\pescan.exe
 Test-Command qpdf PE32      # C:\Tools\qpdf\bin\qpdf.exe
 Test-Command qrtool PE32      # C:\Tools\qrtool\qrtool.exe
 Test-Command radare2 PE32      # C:\Tools\radare2\bin\radare2.exe
-Test-Command RdpCacheStitcher PE32      # C:\Tools\RdpCacheStitcher\RdpCacheStitcher.exe
+Test-Command "C:\Tools\RdpCacheStitcher\RdpCacheStitcher.exe" PE32
 Test-Command redress PE32      # C:\Tools\redress\redress.exe
 Test-Command rg PE32      # C:\Tools\ripgrep\rg.exe
 Test-Command blkcalc PE32      # C:\Tools\sleuthkit\bin\blkcalc.exe
@@ -173,36 +173,36 @@ Test-Command "C:\Tools\takajo\takajo.exe" PE32
 Test-Command thumbcache_viewer PE32      # C:\Tools\thumbcacheviewer\thumbcache_viewer.exe
 Test-Command upx PE32      # C:\Tools\upx\upx.exe
 Test-Command WinObjEx64 PE32      # C:\Tools\WinObjEx64\WinObjEx64.exe
-Test-Command xelfviewer PE32      # C:\Tools\XELFViewer\xelfviewer.exe
+Test-Command "C:\Tools\XELFViewer\xelfviewer.exe" PE32
 Test-Command LECmd PE32      # C:\Tools\Zimmerman\LECmd.exe
 Test-Command MFTECmd PE32      # C:\Tools\Zimmerman\MFTECmd.exe
 Test-Command PECmd PE32      # C:\Tools\Zimmerman\PECmd.exe
 Test-Command RBCmd PE32      # C:\Tools\Zimmerman\RBCmd.exe
-Test-Command SQLECmd PE32      # C:\Tools\Zimmerman\SQLECmd\SQLECmd.exe
+Test-Command "C:\Tools\Zimmerman\net6\SQLECmd\SQLECmd.exe" PE32
 Test-Command zircolite PE32      # C:\Tools\zircolite\zircolite.exe
 Test-Command evtx_dump_win PE32      # C:\Tools\zircolite\bin\evtx_dump_win.exe
 Test-Command zstd PE32      # C:\Tools\zstd\zstd.exe
 Test-Command srum_dump PE32
 
 # Test some git repositories
-Test-Command dhparser PE32
-Test-Command ese2csv PE32
-Test-Command evtxparse PE32
-Test-Command C:\git\iShutdown\Win\iShutdown_detect.exe PE32
-Test-Command rip PE32
-Test-Command Regshot-x64-Unicode PE32
-Test-Command trawler CRLF
+Test-Command "C:\git\defender-detectionhistory-parser\dhparser.exe" PE32
+Test-Command "C:\git\ese-analyst\ese2csv.exe" PE32
+Test-Command "C:\git\Events-Ripper\evtxparse.exe" PE32
+Test-Command "C:\git\iShutdown\Win\iShutdown_detect.exe" PE32
+Test-Command "C:\git\RegRipper4.0\rip.exe" PE32
+Test-Command "C:\git\Regshot\Regshot-x64-Unicode.exe" PE32
+Test-Command "C:\git\Trawler\trawler.ps1" CRLF
 
 # Program files
-Test-Command BeaconHunter PE32
-Test-Command 4N4LDetector PE32
+Test-Command "${env:ProgramFiles}\BeaconHunter\BeaconHunter.exe" PE32
+Test-Command "${env:ProgramFiles}\4N4LDetector\4N4LDetector.exe" PE32
 $jaccessinspectorExecutable = (Get-ChildItem 'C:\Program Files\Amazon Corretto' -Recurse -Include jaccessinspector.exe).FullName
 Test-Command $jaccessinspectorExecutable PE32
 Test-Command 'C:\Program Files\AuthLogParser\MasterParser.ps1' CRLF
 Test-Command fibratus PE32
 Test-Command git PE32
-Test-Command gxl2dot PE32
-Test-Command idr PE32
+Test-Command "${env:ProgramFiles}\Graphviz\bin\gxl2dot.exe" PE32
+Test-Command "${env:ProgramFiles}\idr\bin\idr.exe" PE32
 Test-Command iisGeolocate PE32
 Test-Command "C:\Program Files\IrfanView\i_view64.exe" PE32
 Test-Command notepad++ PE32
