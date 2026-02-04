@@ -38,7 +38,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: setup/mkdocs/site
+          path: /home/runner/work/dfirws/dfirws/setup/mkdocs/setup/mkdocs/site
 
   deploy:
     needs: build
