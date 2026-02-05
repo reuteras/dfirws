@@ -50,7 +50,7 @@ function New-CreateToolFiles {
         # Use $TOOL_DEFINITIONS from this script.
         $install_verify_command = $TOOL_DEFINITIONS[$i].InstallVerifyCommand
 
-        if ($null -ne $install_verify_command) {
+        if ($null -ne $install_verify_command -and $install_verify_command -ne "") {
             Add-Content -Path "$BASE_PATH\dfirws\install_${source}.ps1" -Value "$install_verify_command"
         }
 

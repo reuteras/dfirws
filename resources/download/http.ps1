@@ -1193,7 +1193,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "dfirws-install.ps1 -VSCode"
+    InstallVerifyCommand = ""
     Verify = @(
         @{
             Type = "command"
@@ -1967,10 +1967,10 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.gpg4win.org/"
     Vendor = "Gpg4win Project"
     License = "Open source"
-    Category = "Utilities\Crypto"
+    Category = "Utilities\Cryptography"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Crypto\gpg4win (runs dfirws-install -Gpg4win).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\gpg4win (runs dfirws-install -Gpg4win).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Gpg4win"
             Icon     = ""
@@ -2089,10 +2089,10 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.veracrypt.fr/"
     Vendor = "IDRIX"
     License = "VeraCrypt License"
-    Category = "Utilities\Crypto"
+    Category = "Utilities\Cryptography"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Crypto\veracrypt (runs dfirws-install -Veracrypt).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\veracrypt (runs dfirws-install -Veracrypt).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Veracrypt"
             Icon     = ""
@@ -2875,10 +2875,10 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://hashcat.net/hashcat/"
     Vendor = "hashcat"
     License = "MIT License"
-    Category = "Utilities\Crypto"
+    Category = "Utilities\Cryptography"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat (runs dfirws-install -Hashcat).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\hashcat (runs dfirws-install -Hashcat).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Hashcat"
             Icon     = ""

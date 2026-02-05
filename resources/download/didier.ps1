@@ -603,7 +603,7 @@ $TOOL_DEFINITIONS += @{
         "xmldump.py -h",
         "xor-kpa.py -h",
         "xorsearch.py -h",
-        "zipdump.py -h",
+        "zipdump.py -h"
     )
     SampleFiles = @(
         "N/A"
