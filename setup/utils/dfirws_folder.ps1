@@ -14,62 +14,6 @@ $CLI_TOOL_ARGS = "-w 0 C:\Program Files\PowerShell\7\pwsh.exe -NoExit"
 
 # DidierStevens
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\DidierStevens" | Out-Null
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\1768.py (Analyze Cobalt Strike beacons).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command 1768.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\amsiscan.py (Scan input with AmsiScanBuffer).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command amsiscan.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\base64dump.py (Extract base64 strings from file).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command base64dump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\byte-stats.py (Calculate byte statistics).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command byte-stats.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cipher-tool.py (Cipher tool).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command cipher-tool.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\count.py (count unique items).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command count.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cs-analyze-processdump.py (Analyze Cobalt Strike beacon process dumps for further analysis).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command cs-analyze-processdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cs-decrypt-metadata.py (Cobalt Strike - RSA decrypt metadata).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command cs-decrypt-metadata.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cs-extract-key.py (Extract cryptographic keys from Cobalt Strike beacon process dump).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command cs-extract-key.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\csv-stats.py (Tool to produce statistics for CSV files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command csv-stats.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\cut-bytes.py (Cut a section of bytes out of a file).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command cut-bytes.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decode-vbe.py (Decode VBE script).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command decode-vbe.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\decompress_rtf.py (Tool to decompress compressed RTF).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command decompress_rtf.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\defuzzer.py (Merge 3 or more fuzzed files back to original).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command defuzzer.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\disitool.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command disitool.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\emldump.py (EML dump utility).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command emldump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\file-magic.py (Essentially a wrapper for file (libmagic)).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command file-magic.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\find-file-in-file.py (Find if a file is present in another file).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command find-file-in-file.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\format-bytes.py (This is essentially a wrapper for the struct module).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command format-bytes.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\hash.py (This is essentially a wrapper for the hashlib module).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command hash.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\headtail.py (Output head and tail of input).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command headtail.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\hex-to-bin.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command hex-to-bin.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\jpegdump.py (JPEG file analysis tool).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command jpegdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\js-ascii.exe.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command js-ascii.exe -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\js-file.exe.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command js-file.exe -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\metatool.py (Tool for Metasploit).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command metatool.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\msoffcrypto-crack.py (Crack MS Office document password).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command msoffcrypto-crack.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\myjson-filter.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command myjson-filter.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\myjson-transform.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command myjson-transform.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\nsrl.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command nsrl.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\numbers-to-hex.py (Program to convert decimal numbers into hex numbers).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command numbers-to-hex.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\numbers-to-string.py (Program to convert numbers into a string).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command numbers-to-string.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\oledump.py (Analyze OLE files (Compound Binary Files)).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command oledump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\onedump.py (Dump tool for OneNote files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command onedump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdf-parser.py (use it to parse a PDF document).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pdf-parser.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdfid.py (Tool to test a PDF file).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pdfid.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pdftool.py (Tool to process PDFs).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pdftool.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pecheck.py (Tool for displaying PE file info).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pecheck.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\pngdump.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command pngdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\python-per-line.py (Program to evaluate a Python expression for each line in the provided text file(s)).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command python-per-line.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\re-search.py (Program to use Pythons re.findall on files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command re-search.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\rtfdump.py (Analyze RTF files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command rtfdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\sets.py (Set operations on 1 or 2 files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command sets.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\sortcanon.py (Sort with canonicalization function).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command sortcanon.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\split-overlap.py (Split file with overlap).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command split-overlap.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\split.py (Split a text file into X number of files (2 by default)).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command split.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\ssdeep.py (ssdeep tool).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ssdeep.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\strings.py (Strings command in Python).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command strings.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\teeplus.py (Save binary data while piping it from stdin to stdout ).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command teeplus.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\translate.py (Translate bytes according to a Python expression).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command translate.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\what-is-new.py (Tool to monitor new items).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command what-is-new.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xlsbdump.py (XLSB parser).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command xlsbdump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xmldump.py (This is essentially a wrapper for xml.etree.ElementTree).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command xmldump.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xor-kpa.py (XOR known-plaintext attack).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command xor-kpa.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\xorsearch.py (Bruteforce a file for encodings and search).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command xorsearch.py -h"
-Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\DidierStevens\zipdump.py (ZIP dump utility).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command zipdump.py -h"
 
 # Editors
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Editors" | Out-Null
@@ -389,8 +333,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\regipy-plugi
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\regipy-process-transaction-logs.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command regipy-process-transaction-logs.exe --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\Registry Explorer.lnk" -DestinationPath "${TOOLS}\Zimmerman\net6\RegistryExplorer\RegistryExplorer.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\RegRipper (rip).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command rip.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-ANSI.lnk" -DestinationPath "${GIT_PATH}\Regshot\Regshot-x64-ANSI.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-Unicode.lnk" -DestinationPath "${GIT_PATH}\Regshot\Regshot-x64-Unicode.exe"
 
 # Programming and Development
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming" | Out-Null
@@ -487,7 +429,6 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Sysinternals" | Out-
 
 # Utilities
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\7-Zip.lnk" -DestinationPath "${env:ProgramFiles}\7-Zip\7zFM.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (Git-version).lnk" -DestinationPath "${env:ProgramFiles}\Git\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\cmder (runs dfirws-install -Cmder).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Cmder"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Docker"
@@ -518,15 +459,14 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Chrome (runs 
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Browsers\Firefox (runs dfirws-install -Firefox).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Firefox"
 
 # Utilities - Crypto
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Crypto" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\ares.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ares --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\chepy.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command venv.ps1 -chepy ; chepy -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\CyberChef.lnk" -DestinationPath "${TOOLS}\CyberChef\CyberChef.html"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hash-id.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command hash-id.py"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\name-that-hash (also available as nth).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command name-that-hash --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\openssl.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command openssl --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\protodump.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command protodump --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\sigs.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command sigs.py --help"
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Cryptography" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Cryptography\ares.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ares --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Cryptography\chepy.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command venv.ps1 -chepy ; chepy -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Cryptography\CyberChef.lnk" -DestinationPath "${TOOLS}\CyberChef\CyberChef.html"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Cryptography\hash-id.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command hash-id.py"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Cryptography\name-that-hash (also available as nth).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command name-that-hash --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Cryptography\openssl.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command openssl --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Cryptography\sigs.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command sigs.py --help"
 
 # Utilities - CTF
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\CTF" | Out-Null

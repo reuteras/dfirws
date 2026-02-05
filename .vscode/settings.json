@@ -609,6 +609,7 @@
         "PESTUDIO",
         "peutils",
         "PGHIDRA",
+        "pinfected",
         "pinfo",
         "pipelist",
         "pkr",
@@ -771,6 +772,7 @@
         "scarelib",
         "scdbg",
         "sdelete",
+        "Seabreg",
         "secureupdates",
         "setactive",
         "setlocal",
@@ -820,6 +822,7 @@
         "strozfriedberg",
         "struct",
         "structs",
+        "subfolders",
         "suppressmsgboxes",
         "suricata",
         "sysdiagnose",
@@ -984,7 +987,7 @@
     "python-envs.pythonProjects": [
         {
             "path": "",
-            "envManager": "ms-python.python:venv",
+            "envManager": "ms-python.python:system",
             "packageManager": "ms-python.python:pip"
         }
     ]

@@ -358,7 +358,7 @@ Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\utils\dfi
 
 # Add shortcuts to desktop
 Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws wiki.lnk" -DestinationPath "${HOME}\Documents\tools\utils\mkdocs.bat"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws docs.lnk" -DestinationPath "${HOME}\Documents\tools\utils\mkdocs.bat"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
 
 # Enable clipboard history

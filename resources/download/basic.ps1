@@ -1,11 +1,49 @@
 # Script to download files needed in sandboxes during download.
 
 . ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 # https://www.7-zip.org/download.html - 7-Zip - installed during start
 Write-SynchronizedLog "Downloading 7-Zip."
 $7zip_path = Get-DownloadUrlFromPage -url "https://www.7-zip.org/download.html" -RegEx '[^"]+x64.msi'
 $status = Get-FileFromUri -uri "https://www.7-zip.org/${7zip_path}" -FilePath ".\downloads\7zip.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
+
+$TOOL_DEFINITIONS += @{
+    Name = "7-Zip"
+    Homepage = "https://www.7-zip.org/"
+    Vendor = "7-Zip"
+    License = "GNU LGPL"
+    LicenseUrl = "https://www.7-zip.org/license.txt"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\7-Zip.lnk"
+            Target   = "`${env:ProgramFiles}\7-Zip\7zFM.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${env:ProgramFiles}\7-Zip\7zFM.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "7-Zip is a file archive tool."
+    Tips = "7-Zip is a free and open-source file archive tool."
+    Usage = "7-Zip is a file archive tool with both a graphical and command-line interface."
+    SampleCommands = @(
+        "7z x archive.zip -oC:\ExtractedFiles",
+        "7z a archive.7z C:\FilesToCompress"
+        "7z x -pinfected password_protected.7z -oC:\ExtractedFiles"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
 
 #
 # Packages used in freshclam sandbox
@@ -75,3 +113,5 @@ if ($all -or $Rust) {
     Write-SynchronizedLog "winget: Downloading Rust."
     $status = Get-WinGet "Rustlang.Rust.GNU" "Rust*.msi" "rust.msi" -check "Composite Document File V2 Document"
 }
+
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "basic"

@@ -131,7 +131,6 @@ Test-Command zip2bodyfile PE32      # C:\Tools\cargo\bin\zip2bodyfile.exe
 Test-Command chainsaw PE32      # C:\Tools\chainsaw\chainsaw.exe
 Test-Command cutter PE32      # C:\Tools\cutter\cutter.exe
 Test-Command rizin PE32      # C:\Tools\cutter\rizin.exe
-Test-Command js-file PE32      # C:\Tools\DidierStevens\js-file.exe
 Test-Command die PE32      # C:\Tools\die\die.exe
 Test-Command diec PE32      # C:\Tools\die\diec.exe
 Test-Command "C:\Tools\dnSpy64\bin\dnSpy.dll" PE32

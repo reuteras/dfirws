@@ -1,6 +1,8 @@
 # Set the default encoding for Out-File to UTF-8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
+. ".\setup\shared.ps1"
+
 # Variables used by the script
 $CONFIGURATION_FILES = ".\local"
 $SETUP_PATH = ".\downloads"

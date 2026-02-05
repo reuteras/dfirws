@@ -1,4 +1,5 @@
 . ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 New-Item -ItemType Directory -Force -Path mount\git | Out-Null
 Set-Location mount\git
@@ -47,7 +48,6 @@ $repourls = `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/rabbitstack/fibratus.git", `
-    "https://github.com/reuteras/dfirws.wiki.git", `
     "https://github.com/reuteras/dfirws-sample-files.git", `
     "https://github.com/reuteras/MSRC.git", `
     "https://github.com/rizinorg/cutter-jupyter.git", `
@@ -100,3 +100,55 @@ if (Test-Path -Path ".\parseusbs\parseusbs.exe") {
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
+
+$TOOL_DEFINITIONS += @{
+    Name = "RegShot"
+    Homepage = "https://github.com/Seabreg/Regshot"
+    Vendor = "Seabreg"
+    License = "MIT License"
+    LicenseUrl = "https://github.com/Seabreg/Regshot/blob/master/LICENSE"
+    Category = "OS\Windows\Registry"
+    Shortcuts = @(
+         @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-ANSI.lnk"
+            Target   = "`${GIT_PATH}\RegShot\RegShot-x64-ANSI.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Registry\RegShot-x64-Unicode.lnk"
+            Target   = "`${GIT_PATH}\RegShot\RegShot-x64-Unicode.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${GIT_PATH}\RegShot\RegShot-x64-ANSI.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "`${GIT_PATH}\RegShot\RegShot-x64-Unicode.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "RegShot is a small, free and open-source registry compare utility."
+    Tips = "Regshot is a small, free and open-source registry compare utility that allows you to quickly take a snapshot of your registry and then compare it with a second one - done after doing
+system changes or installing a new software product. The changes report can be produced in text or HTML format and contains a list of all modifications that have taken place between
+the two snapshots. In addition, you can also specify folders (with subfolders) to be scanned for changes as well."
+    Usage = "RegShot is a registry compare utility made by Seabreg for Windows. It includes support for taking snapshots of the registry and comparing them."
+    SampleCommands = @(
+        "RegShot-x64-ANSI.exe"
+        "RegShot-x64-Unicode.exe"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "git"

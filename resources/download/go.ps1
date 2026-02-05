@@ -37,3 +37,9 @@ if (! ${STATUS}) {
 } else {
     Write-DateLog "GoLang tools already installed and up to date." >> "${ROOT_PATH}\log\golang.txt"
 }
+
+if (Test-Path -Path "${ROOT_PATH}\log\dfirws" ) {
+    Copy-Item "${ROOT_PATH}\log\dfirws\*_go.ps1" "${ROOT_PATH}\downloads\dfirws\" -Force
+    Copy-Item "${ROOT_PATH}\log\dfirws\tools_go.json" "${ROOT_PATH}\downloads\dfirws\" -Force
+    Remove-Item -Recurse -Force "${ROOT_PATH}\log\dfirws" 2>&1 | Out-Null
+}
