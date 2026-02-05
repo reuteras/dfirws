@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -276,9 +277,30 @@ def load_tools(json_paths: list[Path]) -> list[dict]:
 
 
 def main() -> int:
-    json_path = Path(os.environ.get("TOOLS_JSON", "./downloads/dfirws"))
-    docs_root = Path(os.environ.get("DOCS_ROOT", "./docs"))
-    mkdocs_config = Path(os.environ.get("MKDOCS_CONFIG", "./mkdocs.yml"))
+    parser = argparse.ArgumentParser(description="Generate dfirws tools docs and mkdocs nav.")
+    parser.add_argument(
+        "--tools-json",
+        dest="tools_json",
+        default=os.environ.get("TOOLS_JSON", "./downloads/dfirws"),
+        help="Path to tools JSON file or directory (default: ./downloads/dfirws).",
+    )
+    parser.add_argument(
+        "--docs-root",
+        dest="docs_root",
+        default=os.environ.get("DOCS_ROOT", "./docs"),
+        help="Docs root directory (default: ./docs).",
+    )
+    parser.add_argument(
+        "--mkdocs-config",
+        dest="mkdocs_config",
+        default=os.environ.get("MKDOCS_CONFIG", "./mkdocs.yml"),
+        help="Path to mkdocs.yml (default: ./mkdocs.yml).",
+    )
+    args = parser.parse_args()
+
+    json_path = Path(args.tools_json)
+    docs_root = Path(args.docs_root)
+    mkdocs_config = Path(args.mkdocs_config)
 
     json_paths = collect_tools_json_paths(json_path)
     if not json_paths:
