@@ -24,3 +24,4 @@ Categories generated from dfirws shortcuts.
 - [Utilities](./utilities/index.md)
 - [Utilities / Browsers](./utilities-browsers/index.md)
 - [Utilities / Crypto](./utilities-crypto/index.md)
+- [Utilities / Cryptography](./utilities-cryptography/index.md)

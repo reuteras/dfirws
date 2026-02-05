@@ -4,7 +4,6 @@ site_dir: site
 theme:
   name: material
   features:
-    - navigation.expand
 
 nav:
 - Home: index.md
@@ -104,6 +103,7 @@ nav:
     - winpmem: tools/uncategorized/winpmem.md
   - Utilities:
     - Overview: tools/utilities/index.md
+    - 7-Zip: tools/utilities/7-zip.md
     - DCode: tools/utilities/dcode.md
     - ExifTool: tools/utilities/exiftool.md
     - geolocus-cli: tools/utilities/geolocus-cli.md
@@ -116,5 +116,8 @@ nav:
     - Gpg4win: tools/utilities-crypto/gpg4win.md
     - hashcat: tools/utilities-crypto/hashcat.md
     - VeraCrypt: tools/utilities-crypto/veracrypt.md
+  - Utilities Cryptography:
+    - Overview: tools/utilities-cryptography/index.md
+    - protodump: tools/utilities-cryptography/protodump.md
 
 - Home: index.md

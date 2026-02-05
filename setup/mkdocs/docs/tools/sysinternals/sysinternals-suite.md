@@ -34,7 +34,7 @@ Sysinternals Suite is a collection of utilities for Windows. It includes tools f
 - `Coreinfo64.exe`
 - `Ctrl2cap.exe`
 - `CPUSTRES64.exe`
-- `DebugView64.exe`
+- `Dbgview.exe`
 - `Desktops64.exe`
 - `disk2vhd64.exe`
 - `DiskExt64.exe`
@@ -60,8 +60,8 @@ Sysinternals Suite is a collection of utilities for Windows. It includes tools f
 - `pipelist64.exe`
 - `portmon.exe`
 - `ProcDump64.exe`
-- `ProcessExplorer.exe`
-- `ProcessMonitor.exe`
+- `procexp64.exe`
+- `Procmon64.exe`
 - `PsExec64.exe`
 - `PsFile64.exe`
 - `PsGetsid64.exe`
