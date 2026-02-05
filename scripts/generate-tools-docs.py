@@ -248,6 +248,8 @@ def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
         output.append("")
         output.extend(after)
 
+    output = [line for line in output if not re.match(r"^\s*-\s*navigation\.expand\s*$", line)]
+
     if not any(re.match(r"^\s*nav\s*:", line) for line in output):
         output.append("")
         output.extend(nav_lines)
@@ -255,16 +257,35 @@ def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
     config_path.write_text("\n".join(output), encoding="utf-8")
 
 
+def collect_tools_json_paths(path: Path) -> list[Path]:
+    if path.is_dir():
+        return sorted([p for p in path.glob("*.json") if p.is_file()])
+    return [path]
+
+
+def load_tools(json_paths: list[Path]) -> list[dict]:
+    tools: list[dict] = []
+    for path in json_paths:
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Tools JSON not found at {path}. Run resources\\download\\http.ps1 to generate it."
+            )
+        tools_doc = json.loads(path.read_text(encoding="utf-8"))
+        tools.extend(tools_doc.get("Tools") or [])
+    return tools
+
+
 def main() -> int:
-    json_path = Path(os.environ.get("TOOLS_JSON", "./downloads/dfirws/tools_http.json"))
+    json_path = Path(os.environ.get("TOOLS_JSON", "./downloads/dfirws"))
     docs_root = Path(os.environ.get("DOCS_ROOT", "./docs"))
     mkdocs_config = Path(os.environ.get("MKDOCS_CONFIG", "./mkdocs.yml"))
 
-    if not json_path.exists():
-        raise FileNotFoundError(f"Tools JSON not found at {json_path}. Run resources\\download\\http.ps1 to generate it.")
-
-    tools_doc = json.loads(json_path.read_text(encoding="utf-8"))
-    tools = tools_doc.get("Tools") or []
+    json_paths = collect_tools_json_paths(json_path)
+    if not json_paths:
+        raise FileNotFoundError(
+            f"No tools JSON files found in {json_path}. Run resources\\download\\http.ps1 to generate them."
+        )
+    tools = load_tools(json_paths)
 
     grouped: Dict[str, List[dict]] = {}
     for tool in tools:
