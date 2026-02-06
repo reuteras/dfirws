@@ -219,7 +219,7 @@ def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
                 continue
             before.append(line)
             continue
-        if re.match(r"^\S", line):
+        if re.match(r"^\S", line) and not line.startswith("- "):
             in_nav = False
             after.append(line)
 
