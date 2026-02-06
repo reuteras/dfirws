@@ -5,6 +5,7 @@ Categories generated from dfirws shortcuts.
 ## Categories Index
 
 - [Development](./development/index.md)
+- [DidierStevens](./didierstevens/index.md)
 - [Editors](./editors/index.md)
 - [Files and apps](./files-and-apps/index.md)
 - [Files and apps / Browser](./files-and-apps-browser/index.md)
