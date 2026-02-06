@@ -348,8 +348,9 @@ def main() -> int:
         display_name = category_path.replace("\\", " / ")
         slug = get_slug(category_path)
         tools_index_lines.append(f"- [{display_name}](./{slug}/index.md)")
-    tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
+    tools_index_lines.append("")
 
+    tools_index_entries: List[tuple[str, str]] = []
     for category_path in ordered_categories:
         display_name = category_path.replace("\\", " / ")
         slug = get_slug(category_path)
@@ -371,8 +372,18 @@ def main() -> int:
             tool_link = f"{tool_slug}.md"
             summary = get_tool_summary(tool).replace("|", "\\|")
             lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {summary} |")
+            tools_index_entries.append(
+                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md")
+            )
 
         category_file.write_text("\n".join(lines), encoding="utf-8")
+
+    tools_index_lines.append("## Tools Index")
+    tools_index_lines.append("")
+    for tool_name, tool_link in sorted(tools_index_entries, key=lambda item: item[0].lower()):
+        tools_index_lines.append(f"- [{tool_name}]({tool_link})")
+
+    tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
 
     update_mkdocs_nav(mkdocs_config, docs_root)
     return 0
