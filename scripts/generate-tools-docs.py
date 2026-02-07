@@ -117,6 +117,38 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     if meta_added:
         lines.append("")
 
+    # Show version and source info for auto-extracted metadata
+    version = tool.get("Version")
+    if version:
+        lines.append(f"**Version:** {version}")
+        lines.append("")
+
+    source = tool.get("Source")
+    if source == "github":
+        repo = tool.get("SourceRepo", "")
+        if repo:
+            lines.append(f"**Source:** [GitHub](<https://github.com/{repo}>)")
+            lines.append("")
+    elif source == "pypi":
+        pypi_pkg = tool.get("PypiPackage", "")
+        if pypi_pkg:
+            lines.append(f"**Source:** [PyPI](<https://pypi.org/project/{pypi_pkg}/>)")
+            lines.append("")
+        source_url = tool.get("SourceUrl")
+        if source_url:
+            lines.append(f"**Repository:** <{source_url}>")
+            lines.append("")
+    elif source == "winget":
+        winget_id = tool.get("WingetId", "")
+        if winget_id:
+            lines.append(f"**Winget ID:** `{winget_id}`")
+            lines.append("")
+
+    topics = tool.get("Topics")
+    if isinstance(topics, list) and topics:
+        lines.append(f"**Topics:** {', '.join(topics)}")
+        lines.append("")
+
     summary = get_tool_summary(tool)
     if summary:
         lines.append(summary)
