@@ -117,12 +117,7 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     if meta_added:
         lines.append("")
 
-    # Show version and source info for auto-extracted metadata
-    version = tool.get("Version")
-    if version:
-        lines.append(f"**Version:** {version}")
-        lines.append("")
-
+    # Show source info for auto-extracted metadata (skip version since we don't pin)
     source = tool.get("Source")
     if source == "github":
         repo = tool.get("SourceRepo", "")

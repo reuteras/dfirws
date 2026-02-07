@@ -117,8 +117,6 @@ def build_github_tool(meta: dict) -> dict:
     version = release.get("TagName") or ""
 
     notes = description
-    if version:
-        notes = f"{description} (latest: {version})"
 
     category = github_topics_to_category(topics)
 
@@ -185,10 +183,6 @@ def build_winget_tool(meta: dict) -> dict:
     tags = meta.get("Tags") or ""
 
     notes = description
-    if version and description:
-        notes = f"{description} (version: {version})"
-    elif version:
-        notes = f"Version: {version}"
 
     return {
         "Name": name,
@@ -302,10 +296,6 @@ def build_pypi_tool(pypi_data: dict, package_name: str) -> dict:
     category = pypi_classifiers_to_category(classifiers)
 
     notes = summary
-    if version and summary:
-        notes = f"{summary} (version: {version})"
-    elif version:
-        notes = f"Version: {version}"
 
     return {
         "Name": name,
