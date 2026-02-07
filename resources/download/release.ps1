@@ -1,4 +1,5 @@
 . ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 # artemis
 $status = Get-GitHubRelease -repo "puffyCid/artemis" -path "${SETUP_PATH}\artemis.zip" -match "x86_64-pc-windows-msvc.zip$" -check "Zip archive data"
@@ -964,3 +965,1545 @@ $status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\ob
 $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\main.js" -match "main.js" -check "JavaScript source"
 $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\manifest.json" -match "manifest.json" -check "JSON text data"
 $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\styles.css" -match "styles.css" -check "ASCII text"
+
+#
+# Tool definitions for documentation generation.
+# Fill in the dfirws-specific fields below. Auto-extracted metadata (Homepage,
+# Vendor, License) comes from the GitHub API cache via extract-tool-metadata.py.
+#
+
+$TOOL_DEFINITIONS += @{
+    Name = "artemis"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "godap"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "BeaconHunter"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "4n4lDetector"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "aLEAPP"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "iLEAPP"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "lessmsi"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "fx"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "CobaltStrikeScan"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Audacity"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Ares"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Zui"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "RDPCacheStitcher"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ffmpeg"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ripgrep"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "binlex"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "cmder"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Recaf"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DBeaver"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Dumpbin"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "dnSpy"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Dokany"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "mboxviewer"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "zstd"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "CyberChef"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "redress"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "h2database"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "INDXRipper"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "dll_to_exe"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "HollowsHunter"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PE-bear"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PE-sieve"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PE-utils"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "WinObjEx64"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Detect It Easy"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "XELFViewer"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "jd-gui"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "LogBoost"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "jq"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Jumplist Browser"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MFTBrowser"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Prefetch Browser"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "bytecode-viewer"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "gftrace"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "adalanche"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MsgViewer"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "capa"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "capa-rules"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Ghidra GolangAnalyzerExtension"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PowerShell"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Ghidra BTIGhidra"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Ghidra Cartographer"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Flare-Floss"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Flare-Fakenet-NG"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "GoReSym"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "mmdbinspect"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Elfparser-ng"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "readpe"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DitExplorer"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "srum_dump"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "forensic-timeliner"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "jwt-cli"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "dsq"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MetadataPlus"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Loki"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Notepad++"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "HindSight"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "evtx_dump"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ComparePlus"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DSpellCheck"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "VS Code PowerShell Extension"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "vscode-shellcheck"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "qpdf"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Fibratus"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Radare2"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Iaito"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "hfs"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-mitre-attack"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Cutter"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Nerd Fonts"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Strawberry Perl"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "sidr"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "jadx"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Sleuthkit"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "qrtool"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "debloat"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "VS Code Spell Checker"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Thumbcacheviewer"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "gron"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MemProcFS"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "upx"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Velociraptor"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Witr"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "fq"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "fqlite"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Zircolite"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ImHex"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "chainsaw"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "YARA"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "yara-x"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "yq"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "x64dbg"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "hayabusa"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "takajo"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "zaproxy"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "edit"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DB Browser for SQLite"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "NetExt"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "YAMAGoya"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-dataview"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-kanban"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "quickadd"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-calendar-plugin"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Templater"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-tasks"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-excalidraw-plugin"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "admonitions"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-timeline"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "release"
