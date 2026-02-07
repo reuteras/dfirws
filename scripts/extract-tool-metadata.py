@@ -30,9 +30,11 @@ def read_json(path: Path) -> dict:
 
 
 def write_tools_json(output_dir: Path, source: str, tools: List[dict]) -> Path:
+    # Strip _extracted suffix for the SourceScript reference
+    base_source = source.replace("_extracted", "")
     doc = {
         "GeneratedAt": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
-        "SourceScript": f"resources/download/{source}.ps1",
+        "SourceScript": f"scripts/extract-tool-metadata.py ({base_source})",
         "Tools": tools,
     }
     out = output_dir / f"tools_{source}.json"
@@ -501,7 +503,7 @@ def main() -> int:
         print("Processing GitHub metadata...")
         github_tools = process_github_metadata(metadata_dir)
         if github_tools:
-            out = write_tools_json(output_dir, "release", github_tools)
+            out = write_tools_json(output_dir, "release_extracted", github_tools)
             print(f"  Wrote {len(github_tools)} tools to {out}")
         else:
             print("  No GitHub metadata found. Run release.ps1 first to populate cache.")
@@ -511,7 +513,7 @@ def main() -> int:
         print("Processing winget metadata...")
         winget_tools = process_winget_metadata(metadata_dir)
         if winget_tools:
-            out = write_tools_json(output_dir, "winget", winget_tools)
+            out = write_tools_json(output_dir, "winget_extracted", winget_tools)
             print(f"  Wrote {len(winget_tools)} tools to {out}")
         else:
             print("  No winget metadata found. Run winget.ps1 first to populate cache.")
@@ -525,7 +527,7 @@ def main() -> int:
             install_script, cache_dir=pypi_cache, rate_limit=args.pypi_rate_limit
         )
         if pypi_tools:
-            out = write_tools_json(output_dir, "python", pypi_tools)
+            out = write_tools_json(output_dir, "python_extracted", pypi_tools)
             print(f"  Wrote {len(pypi_tools)} tools to {out}")
         else:
             print("  No Python packages found or PyPI lookups failed.")

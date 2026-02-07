@@ -1,4 +1,5 @@
 . ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 # Autopsy - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Autopsy."
@@ -111,3 +112,349 @@ Write-SynchronizedLog "winget: Downloading Windbg."
 $status = Get-WinGet "Microsoft.WinDbg" "WinDbg*.msi" "windbg.msi" -check "Zip archive data"
 
 Write-SynchronizedLog "winget: Download complete."
+
+#
+# Tool definitions for documentation generation.
+# Fill in the dfirws-specific fields below. Auto-extracted metadata (Homepage,
+# Vendor, License) comes from the winget cache via extract-tool-metadata.py.
+#
+
+$TOOL_DEFINITIONS += @{
+    Name = "Autopsy"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Burp Suite"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Chrome"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Docker Desktop"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DotNet 6 Desktop Runtime"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DotNet 8 Desktop Runtime"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "IrfanView"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Obsidian"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "oh-my-posh"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PowerShell 7"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PuTTY"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "QEMU"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Ruby"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "VLC"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "VirusTotal CLI"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "WinMerge"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "OpenVPN"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Google Earth Pro"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "OSFMount"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "WireGuard"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Wireshark"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Tailscale"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Firefox"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Foxit PDF Reader"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "uv"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "WinDbg"
+    Category = ""
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "winget"
