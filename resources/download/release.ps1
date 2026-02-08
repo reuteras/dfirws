@@ -974,10 +974,24 @@ $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETU
 
 $TOOL_DEFINITIONS += @{
     Name = "artemis"
-    Category = ""
-    Shortcuts = @()
+    Category = "Forensics"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\artemis.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command artemis.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "artemis"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -987,10 +1001,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "godap"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\godap (LDAP tool).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command godap --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "godap"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1000,10 +1028,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "BeaconHunter"
-    Category = ""
-    Shortcuts = @()
+    Category = "Malware tools\Cobalt Strike"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk"
+            Target   = "`${env:ProgramFiles}\BeaconHunter\BeaconHunter.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "${env:ProgramFiles}\BeaconHunter\BeaconHunter.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1013,10 +1055,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "4n4lDetector"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\4n4lDetector.lnk"
+            Target   = "`${env:ProgramFiles}\4n4lDetector\4N4LDetector.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "${env:ProgramFiles}\4N4LDetector\4N4LDetector.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1026,10 +1082,36 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "aLEAPP"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Phone"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\aleapp (Android Logs, Events, and Protobuf Parser).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command aleapp.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\aleappGUI.lnk"
+            Target   = "`${TOOLS}\bin\aleappGUI.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "aleapp"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "aleappGUI"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1039,10 +1121,36 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "iLEAPP"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Phone"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\ileapp (iOS Logs, Events, And Plists Parser).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ileapp.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iLEAPPGUI.lnk"
+            Target   = "`${TOOLS}\bin\iLEAPPGUI.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "ileapp"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "ileappGUI"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1052,10 +1160,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "lessmsi"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\lessmsi (A tool to view and extract the contents of a Windows Installer (.msi) file).lnk"
+            Target   = "`${TOOLS}\lessmsi\lessmsi-gui.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "lessmsi"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1065,10 +1187,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "fx"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\fx (Terminal JSON viewer and processor).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command fx -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "fx"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1078,10 +1214,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "CobaltStrikeScan"
-    Category = ""
-    Shortcuts = @()
+    Category = "Malware tools\Cobalt Strike"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\CobaltStrikeScan.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command CobaltStrikeScan.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "CobaltStrikeScan"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1091,10 +1241,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Audacity"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities\Media"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Media\Audacity.lnk"
+            Target   = "`${TOOLS}\Audacity\audacity.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\Audacity\audacity.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1104,10 +1268,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Ares"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities\Cryptography"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\ares.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "ares"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1117,10 +1295,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Zui"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\Zui (runs dfirws-install -Zui).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Zui"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Zui"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "zui"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1130,10 +1322,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "RDPCacheStitcher"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\RDP"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\RDP\RdpCacheStitcher.lnk"
+            Target   = "`${TOOLS}\RdpCacheStitcher\RdpCacheStitcher.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\RdpCacheStitcher\RdpCacheStitcher.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1143,10 +1349,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "ffmpeg"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities\Media"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Media\ffmpeg.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ffmpeg --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "ffmpeg"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1156,10 +1376,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "ripgrep"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\ripgrep (rg).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command rg -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "rg"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1169,10 +1403,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "binlex"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\binlex (A Binary Genetic Traits Lexer).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command binlex.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "binlex"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1182,10 +1430,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "cmder"
-    Category = ""
+    Category = "Utilities"
     Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    InstallVerifyCommand = "dfirws-install.ps1 -CMDer"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "Cmder"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1195,8 +1449,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Recaf"
-    Category = ""
-    Shortcuts = @()
+    Category = "Programming\Java"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\recaf (The modern Java bytecode editor).lnk"
+            Target   = "`${TOOLS}\bin\recaf.bat"
+            Args     = "`${CLI_TOOL_ARGS} -command recaf.bat"
+            Icon     = "`${TOOLS}\lib\recaf.jar"
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -1208,10 +1470,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "DBeaver"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\dbeaver (runs dfirws-install -DBeaver).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -DBeaver"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Dbeaver"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Program Files\dbeaver\dbeaver.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1221,10 +1497,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Dumpbin"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\dumpbin (Microsoft COFF Binary File Dumper).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dumpbin.exe"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "dumpbin"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1234,10 +1524,31 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "dnSpy"
-    Category = ""
-    Shortcuts = @()
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk"
+            Target   = "`${TOOLS}\dnSpy32\dnSpy.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\dnSpy64.lnk"
+            Target   = "`${TOOLS}\dnSpy64\dnSpy.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\dnSpy64\bin\dnSpy.dll"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1247,9 +1558,17 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Dokany"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
+    Category = "Memory"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Memory\Dokany (runs dfirws-install -Dokany).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Dokany"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Dokany"
     Verify = @()
     Notes = ""
     Tips = ""
@@ -1260,10 +1579,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "mboxviewer"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Email"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Email\Mbox Viewer.lnk"
+            Target   = "`${TOOLS}\mboxviewer\mboxview64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\mboxviewer\mboxview64.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1273,10 +1606,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "zstd"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\zstd.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command zstd -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "zstd"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1286,8 +1633,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "CyberChef"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities\Cryptography"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\CyberChef.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -1299,10 +1654,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "redress"
-    Category = ""
-    Shortcuts = @()
+    Category = "Programming\Go"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\Redress.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Redress.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "redress"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1312,8 +1681,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "h2database"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\h2 database.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${TOOLS}\h2database"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -1325,10 +1702,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "INDXRipper"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Disk"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\INDXRipper.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command INDXRipper.exe -h"
+            Icon     = "`${TOOLS}\INDXRipper\INDXRipper.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "INDXRipper"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1338,10 +1729,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "dll_to_exe"
-    Category = ""
+    Category = "Files and apps\PE"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "dll_to_exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1351,10 +1748,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "HollowsHunter"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\hollows_hunter (Scans running processes. Recognizes and dumps a variety of in-memory implants).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command hollows_hunter.exe /help"
+            Icon     = "`${TOOLS}\bin\hollows_hunter.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "hollows_hunter"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1364,10 +1775,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "PE-bear"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\PE-bear.lnk"
+            Target   = "`${TOOLS}\pebear\PE-bear.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "PE-bear"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1377,10 +1802,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "PE-sieve"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\PE-sieve (Scans a given process, recognizes and dumps a variety of in-memory implants).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pe-sieve.exe /help"
+            Icon     = "`${TOOLS}\bin\pe-sieve.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "pe-sieve"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1390,10 +1829,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "PE-utils"
-    Category = ""
+    Category = "Files and apps\PE"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "pescan"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1403,10 +1848,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "WinObjEx64"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\WinObjEx64.lnk"
+            Target   = "`${TOOLS}\WinObjEx64\WinObjEx64.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "WinObjEx64"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1416,10 +1875,29 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Detect It Easy"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Detect It Easy (determining types of files).lnk"
+            Target   = "`${TOOLS}\die\die.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "die"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "diec"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1429,10 +1907,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "XELFViewer"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Linux"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Linux\xelfviewer.lnk"
+            Target   = "`${TOOLS}\XELFViewer\xelfviewer.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\XELFViewer\xelfviewer.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1442,10 +1934,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "jd-gui"
-    Category = ""
-    Shortcuts = @()
+    Category = "Programming\Java"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\jd-gui.lnk"
+            Target   = "`${TOOLS}\jd-gui\jd-gui.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "jd-gui"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1455,10 +1961,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "LogBoost"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\logboost (runs dfirws-install -LogBoost).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -LogBoost"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -LogBoost"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\LogBoost\LogBoost.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1468,10 +1988,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "jq"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\jq ( commandline JSON processor).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command jq -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "jq"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1481,10 +2015,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Jumplist Browser"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Jumplist-Browser.lnk"
+            Target   = "`${TOOLS}\bin\JumplistBrowser.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "JumplistBrowser"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1494,10 +2042,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "MFTBrowser"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Disk"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\MFTBrowser.lnk"
+            Target   = "`${TOOLS}\bin\MFTBrowser.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "MFTBrowser"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1507,10 +2069,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Prefetch Browser"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Prefetch-Browser.lnk"
+            Target   = "`${TOOLS}\bin\PrefetchBrowser.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "PrefetchBrowser"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1520,8 +2096,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "bytecode-viewer"
-    Category = ""
-    Shortcuts = @()
+    Category = "Editors"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\Bytecode Viewer.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${POWERSHELL_EXE} -w hidden -command `${TOOLS}\bin\bcv.bat"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -1533,10 +2117,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "gftrace"
-    Category = ""
-    Shortcuts = @()
+    Category = "Programming\Go"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\gftrace.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command gftrace"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\gftrace64\gftrace.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1546,10 +2144,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "adalanche"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Windows\Active Directory (AD)"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\adalanche (Active Directory ACL Visualizer and Explorer).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command adalanche.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "adalanche"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1559,8 +2171,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "MsgViewer"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Email"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Email\msgviewer.lnk"
+            Target   = "`${TOOLS}\lib\msgviewer.jar"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -1572,10 +2192,29 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "capa"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\capa.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command capa.exe -h"
+            Icon     = "`${TOOLS}\capa\capa.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "capa"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\jep\Scripts\capa.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1585,7 +2224,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "capa-rules"
-    Category = ""
+    Category = "Files and apps\PE"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1598,7 +2237,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Ghidra GolangAnalyzerExtension"
-    Category = ""
+    Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1611,7 +2250,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "PowerShell"
-    Category = ""
+    Category = "Programming\PowerShell"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1624,7 +2263,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Ghidra BTIGhidra"
-    Category = ""
+    Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1637,7 +2276,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Ghidra Cartographer"
-    Category = ""
+    Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1650,10 +2289,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Flare-Floss"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\floss.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command venv.ps1 -floss ; floss --help"
+            Icon     = "`${TOOLS}\floss\floss.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "floss"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1663,10 +2316,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Flare-Fakenet-NG"
-    Category = ""
-    Shortcuts = @()
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\Fakenet.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command fakenet.exe -h"
+            Icon     = "`${TOOLS}\fakenet\fakenet.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "fakenet"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1676,10 +2343,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "GoReSym"
-    Category = ""
-    Shortcuts = @()
+    Category = "Programming\Go"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\GoReSym.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command GoReSym.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "GoReSym"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1689,10 +2370,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "mmdbinspect"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\mmdbinspect (Tool for GeoIP lookup).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command mmdbinspect --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "mmdbinspect"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1702,10 +2397,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Elfparser-ng"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Linux"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Linux\elfparser-ng.lnk"
+            Target   = "`${TOOLS}\elfparser-ng\Release\elfparser-ng.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1715,10 +2424,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "readpe"
-    Category = ""
+    Category = "Files and apps\PE"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "pescan"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1728,8 +2443,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "DitExplorer"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Windows\Active Directory (AD)"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\DitExplorer (Active Directory Database Explorer).lnk"
+            Target   = "`${TOOLS}\DitExplorer\DitExplorer.UI.WpfApp.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -1741,10 +2464,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "srum_dump"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\srum-dump (Parses Windows System Resource Usage Monitor (SRUM) database).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command srum_dump.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "srum_dump"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1754,9 +2491,9 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "forensic-timeliner"
-    Category = ""
+    Category = "IR"
     Shortcuts = @()
-    InstallVerifyCommand = ""
+    InstallVerifyCommand = "dfirws-install.ps1 -ForensicTimeliner"
     Verify = @()
     Notes = ""
     Tips = ""
@@ -1767,7 +2504,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "jwt-cli"
-    Category = ""
+    Category = "Programming\Java"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1780,10 +2517,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "dsq"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\dsq (commandline SQL engine for data files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dsq -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "dsq"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1793,10 +2544,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "MetadataPlus"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Office"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\MetadataPlus.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command MetadataPlus.exe -h"
+            Icon     = "`${TOOLS}\bin\MetadataPlus.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "MetadataPlus"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1806,10 +2571,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Loki"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\loki (runs dfirws-install -Loki).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Loki"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Loki"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "loki"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1819,10 +2598,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Notepad++"
-    Category = ""
-    Shortcuts = @()
+    Category = "Editors"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\Notepad++.lnk"
+            Target   = "`${env:ProgramFiles}\Notepad++\notepad++.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "notepad++"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1832,10 +2625,31 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "HindSight"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Browser"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight (Internet history forensics for Google Chrome and Chromium).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command hindsight.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight_gui.lnk"
+            Target   = "`${TOOLS}\bin\hindsight_gui.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "hindsight"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1845,10 +2659,29 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "evtx_dump"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\evtx_dump (Utility to parse EVTX files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command evtx_dump.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "evtx_dump"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\uv\regipy\Scripts\evtx_dump.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1858,10 +2691,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "ComparePlus"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\downloads\comparePlus.zip"
+            Expect = "Zip archive data"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1871,10 +2710,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "DSpellCheck"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\downloads\DSpellCheck.zip"
+            Expect = "Zip archive data"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1884,7 +2729,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "VS Code PowerShell Extension"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1897,7 +2742,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "vscode-shellcheck"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1910,10 +2755,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "qpdf"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PDF"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PDF\qpdf.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command qpdf.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "qpdf"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1923,10 +2782,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Fibratus"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\fibratus (runs dfirws-install -Fibratus).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Fibratus"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Fibratus"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "fibratus"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1936,10 +2809,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Radare2"
-    Category = ""
-    Shortcuts = @()
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\radare2.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command radare2 -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "radare2"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1949,10 +2836,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Iaito"
-    Category = ""
-    Shortcuts = @()
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\iaito.lnk"
+            Target   = "`${TOOLS}\iaito\iaito.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\iaito\iaito.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1962,10 +2863,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "hfs"
-    Category = ""
-    Shortcuts = @()
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\hfs.exe.lnk"
+            Target   = "`${TOOLS}\hfs\hfs.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\hfs\hfs.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1975,7 +2890,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "obsidian-mitre-attack"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -1988,10 +2903,29 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Cutter"
-    Category = ""
-    Shortcuts = @()
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\Cutter.lnk"
+            Target   = "`${TOOLS}\cutter\cutter.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "cutter"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "rizin"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2001,7 +2935,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Nerd Fonts"
-    Category = ""
+    Category = "Utilities"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2014,7 +2948,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Strawberry Perl"
-    Category = ""
+    Category = "Programming"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2027,10 +2961,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "sidr"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\sidr (Search Index DB Reporter - handles both ESE (.edb) and SQLite).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command sidr --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "sidr"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2040,9 +2988,17 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "jadx"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
+    Category = "Programming\Java"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\Jadx (runs dfirws-install -Jadx).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Jadx"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Jadx"
     Verify = @()
     Notes = ""
     Tips = ""
@@ -2053,10 +3009,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Sleuthkit"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Disk"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\blkcalc (Calculates where data in the unallocated space image).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "blkcalc"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2066,10 +3036,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "qrtool"
-    Category = ""
+    Category = "Files and apps"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "qrtool"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2079,10 +3055,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "debloat"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\Debloat.lnk"
+            Target   = "`${TOOLS}\bin\debloat.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "debloat"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2092,7 +3082,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "VS Code Spell Checker"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2105,10 +3095,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Thumbcacheviewer"
-    Category = ""
-    Shortcuts = @()
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Thumbcache Viewer.lnk"
+            Target   = "`${TOOLS}\thumbcacheviewer\thumbcache_viewer.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "thumbcache_viewer"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2118,10 +3122,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "gron"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\gron (Make JSON greppable).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command gron -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "gron"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2131,10 +3149,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "MemProcFS"
-    Category = ""
-    Shortcuts = @()
+    Category = "Memory"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command MemProcFS.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "MemProcFS"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2144,10 +3176,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "upx"
-    Category = ""
-    Shortcuts = @()
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\upx.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command upx"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "upx"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2157,10 +3203,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Velociraptor"
-    Category = ""
-    Shortcuts = @()
+    Category = "IR"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\IR\velociraptor.exe (Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command velociraptor.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "velociraptor"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2170,7 +3230,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Witr"
-    Category = ""
+    Category = "IR"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2183,10 +3243,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "fq"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\fq (jq for binary formats).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command fq -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "fq"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2196,10 +3270,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "fqlite"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\fqlite (runs dfirws-install -FQLite).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -FQLite"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -FQLite"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\fqlite\fqlite.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2209,10 +3297,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Zircolite"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command zircolite.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "zircolite"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2222,10 +3324,29 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "ImHex"
-    Category = ""
-    Shortcuts = @()
+    Category = "Editors"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\ImHex.lnk"
+            Target   = "`${TOOLS}\imhex\imhex-gui.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "imhex-gui"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "imhex"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2235,10 +3356,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "chainsaw"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\chainsaw (Rapidly work with Forensic Artefacts).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command chainsaw.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "chainsaw"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2248,10 +3383,36 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "YARA"
-    Category = ""
-    Shortcuts = @()
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yara.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yara.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yarac.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yarac.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "yara"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "yarac"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2261,10 +3422,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "yara-x"
-    Category = ""
-    Shortcuts = @()
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yr (yara-x).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yr.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "yr"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2274,10 +3449,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "yq"
-    Category = ""
-    Shortcuts = @()
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yq (is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yq.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "yq"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2287,10 +3476,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "x64dbg"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\X64dbg (runs dfirws-install -X64dbg).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -X64dbg"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -X64Dbg"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "x64dbg"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2300,10 +3503,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "hayabusa"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\hayabusa (is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command hayabusa.exe help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "hayabusa"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2313,10 +3530,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "takajo"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\takajo (is a tool to analyze Windows event logs - hayabusa).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command takajo.exe -h"
+            Icon     = ""
+            WorkDir  = "`${TOOLS}\takajo"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\takajo\takajo.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2326,10 +3557,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "zaproxy"
-    Category = ""
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-install -Zaproxy).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Zaproxy"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -ZAProxy"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "zap"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2339,7 +3584,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "edit"
-    Category = ""
+    Category = "Utilities"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2352,10 +3597,24 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "DB Browser for SQLite"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\DB Browser for SQLite.lnk"
+            Target   = "`${TOOLS}\sqlitebrowser\DB Browser for SQLite.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\sqlitebrowser\DB Browser for SQLite.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2365,7 +3624,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "NetExt"
-    Category = ""
+    Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2378,8 +3637,16 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "YAMAGoya"
-    Category = ""
-    Shortcuts = @()
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\YAMAGoya (Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command YAMAGoya.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -2391,7 +3658,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "obsidian-dataview"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2404,7 +3671,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "obsidian-kanban"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2417,7 +3684,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "quickadd"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2430,7 +3697,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "obsidian-calendar-plugin"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2443,7 +3710,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Templater"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2456,7 +3723,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "obsidian-tasks"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2469,7 +3736,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "obsidian-excalidraw-plugin"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2482,7 +3749,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "admonitions"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -2495,7 +3762,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "obsidian-timeline"
-    Category = ""
+    Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
