@@ -3,14 +3,14 @@
 Populate $TOOL_DEFINITIONS skeleton entries in download scripts
 with data from install_verify.ps1, dfirws_folder.ps1, and dfirws-install.ps1.
 
-One-time script to fill in Category, Verify, Shortcuts, and
-InstallVerifyCommand fields.
+Generates proper PowerShell hashtable format matching http.ps1 conventions:
+- Shortcuts = @( @{ Lnk=...; Target=...; Args=...; Icon=...; WorkDir=... } )
+- Verify = @( @{ Type="command"; Name=...; Expect=... } )
 """
 
 from __future__ import annotations
 
 import re
-import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -40,8 +40,13 @@ def get_cmd_basename(cmd: str) -> str:
     return name
 
 
+def escape_ps_vars(s: str) -> str:
+    """Add backtick before ${...} to prevent expansion in tool definitions."""
+    return s.replace("${", "`${")
+
+
 # ---------------------------------------------------------------------------
-# Parse install_verify.ps1
+# Parse install_verify.ps1 → structured verify entries
 # ---------------------------------------------------------------------------
 def parse_verify(path: Path) -> List[dict]:
     entries = []
@@ -58,59 +63,88 @@ def parse_verify(path: Path) -> List[dict]:
         if rest.startswith('"'):
             m2 = re.match(r'"([^"]+)"\s+("?[^"\s]+"?)', rest)
             if m2:
-                entries.append({"command": m2.group(1), "type": m2.group(2).strip('"')})
+                entries.append({
+                    "Name": m2.group(1),
+                    "Expect": m2.group(2).strip('"'),
+                })
         elif rest.startswith("$"):
             continue  # skip variable references
         else:
             parts = rest.split()
             if len(parts) >= 2:
-                entries.append({"command": parts[0], "type": parts[1]})
+                entries.append({"Name": parts[0], "Expect": parts[1]})
     return entries
 
 
-def build_verify_index(entries: List[dict]) -> Dict[str, List[str]]:
-    """Map normalized basename -> list of 'command type' verify strings."""
-    index: Dict[str, List[str]] = {}
+def build_verify_index(entries: List[dict]) -> Dict[str, List[dict]]:
+    """Map normalized basename -> list of {Name, Expect} dicts."""
+    index: Dict[str, List[dict]] = {}
     for e in entries:
-        basename = get_cmd_basename(e["command"])
+        basename = get_cmd_basename(e["Name"])
         norm = normalize(basename)
-        if "\\" in e["command"] or "/" in e["command"]:
-            vs = f'"{e["command"]}" {e["type"]}'
-        else:
-            vs = f'{e["command"]} {e["type"]}'
-        index.setdefault(norm, []).append(vs)
+        index.setdefault(norm, []).append(e)
     return index
 
 
+def parse_verify_string(s: str) -> dict:
+    """Parse a legacy verify string like 'artemis PE32' into {Name, Expect}."""
+    s = s.strip()
+    if s.startswith('"'):
+        m = re.match(r'"([^"]+)"\s+(.+)', s)
+        if m:
+            return {"Name": m.group(1), "Expect": m.group(2).strip('"')}
+    m = re.match(r'(\S+)\s+"([^"]+)"', s)
+    if m:
+        return {"Name": m.group(1), "Expect": m.group(2)}
+    parts = s.split(None, 1)
+    if len(parts) == 2:
+        return {"Name": parts[0], "Expect": parts[1]}
+    return {"Name": s, "Expect": "PE32"}
+
+
 # ---------------------------------------------------------------------------
-# Parse dfirws_folder.ps1
+# Parse dfirws_folder.ps1 → full shortcut data
 # ---------------------------------------------------------------------------
-def parse_shortcuts(path: Path) -> List[dict]:
-    shortcuts = []
+def parse_shortcuts_full(path: Path) -> Dict[Tuple[str, str], dict]:
+    """Parse Add-Shortcut lines, indexed by (category, name)."""
+    index: Dict[Tuple[str, str], dict] = {}
     text = path.read_text(encoding="utf-8")
     for line in text.splitlines():
         m = re.search(
-            r'Add-Shortcut\s+-SourceLnk\s+"[^"]*\\Desktop\\dfirws\\(.+?)\\([^\\]+)\.lnk"',
+            r"Add-Shortcut\s+-SourceLnk\s+\"([^\"]*\\Desktop\\dfirws\\(.+?)\\([^\\]+)\.lnk)\"",
             line,
             re.IGNORECASE,
         )
-        if m:
-            category = m.group(1)
-            shortcut_name = m.group(2)
-            shortcuts.append({"category": category, "name": shortcut_name})
-    return shortcuts
+        if not m:
+            continue
+        lnk_path = m.group(1)
+        category = m.group(2)
+        name = m.group(3)
 
+        # Extract DestinationPath
+        m_dest = re.search(r'-DestinationPath\s+"([^"]+)"', line, re.IGNORECASE)
+        target = m_dest.group(1) if m_dest else ""
 
-def build_shortcut_index(shortcuts: List[dict]) -> Dict[str, List[dict]]:
-    """Map normalized first-word of shortcut name -> list of shortcut entries."""
-    index: Dict[str, List[dict]] = {}
-    for s in shortcuts:
-        name = s["name"]
-        # Extract the first word / phrase before parenthetical description
-        m = re.match(r"([^(]+)", name)
-        key = m.group(1).strip() if m else name
-        norm = normalize(key)
-        index.setdefault(norm, []).append(s)
+        # Extract Arguments
+        m_args = re.search(r'-Arguments\s+"([^"]+)"', line, re.IGNORECASE)
+        args = m_args.group(1) if m_args else ""
+
+        # Extract Iconlocation
+        m_icon = re.search(r'-Iconlocation\s+"([^"]+)"', line, re.IGNORECASE)
+        icon = m_icon.group(1) if m_icon else ""
+
+        # Extract WorkingDirectory
+        m_wd = re.search(r'-WorkingDirectory\s+"([^"]+)"', line, re.IGNORECASE)
+        workdir = m_wd.group(1) if m_wd else ""
+
+        key = (category, name)
+        index[key] = {
+            "lnk": lnk_path,
+            "target": target,
+            "args": args,
+            "icon": icon,
+            "workdir": workdir,
+        }
     return index
 
 
@@ -131,7 +165,7 @@ def parse_install_params(path: Path) -> List[str]:
 # Explicit overrides for tricky mappings
 # ---------------------------------------------------------------------------
 
-# tool def Name -> list of verify strings
+# tool def Name -> list of verify strings (parsed into {Name, Expect} at use time)
 VERIFY_OVERRIDES: Dict[str, List[str]] = {
     "aLEAPP": ["aleapp PE32", "aleappGUI PE32"],
     "iLEAPP": ["ileapp PE32", "ileappGUI PE32"],
@@ -233,9 +267,9 @@ VERIFY_OVERRIDES: Dict[str, List[str]] = {
     "dissect.target": ["C:\\venv\\default\\Scripts\\target-shell.exe PE32"],
     "sigma-cli": ["C:\\venv\\default\\Scripts\\sigma.exe PE32"],
     "dfir-unfurl": ["C:\\venv\\dfir-unfurl\\Scripts\\unfurl.exe PE32"],
-    "stego-lsb": [],  # no verify
-    "sqlit-tui": [],  # no verify; built from source
-    "markitdown": [],  # no verify in install_verify
+    "stego-lsb": [],
+    "sqlit-tui": [],
+    "markitdown": [],
     "netaddr": ["C:\\venv\\bin\\netaddr.exe PE32"],
     "pypng": ["C:\\venv\\bin\\priweavepng.py Python"],
     "unpy2exe": ["C:\\venv\\bin\\unpy2exe.py Python"],
@@ -552,6 +586,7 @@ INSTALL_CMD_MAP: Dict[str, str] = {
 }
 
 # Shortcut overrides: tool name -> list of (category, shortcut_name) tuples
+# These are keys into the parsed shortcut index from dfirws_folder.ps1
 SHORTCUT_OVERRIDES: Dict[str, List[Tuple[str, str]]] = {
     "artemis": [("Forensics", "artemis")],
     "godap": [("Utilities", "godap (LDAP tool)")],
@@ -621,21 +656,21 @@ SHORTCUT_OVERRIDES: Dict[str, List[Tuple[str, str]]] = {
     "gron": [("Files and apps\\Log", "gron (Make JSON greppable)")],
     "MemProcFS": [("Memory", "MemProcFS")],
     "upx": [("Utilities", "upx")],
-    "Velociraptor": [("IR", "velociraptor.exe (Velociraptor is an advanced digital forensic and incident response tool)")],
+    "Velociraptor": [("IR", "velociraptor.exe (Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints)")],
     "fq": [("Files and apps", "fq (jq for binary formats)")],
     "fqlite": [("Files and apps\\Database", "fqlite (runs dfirws-install -FQLite)")],
-    "Zircolite": [("Files and apps\\Log", "zircolite (Standalone SIGMA-based detection tool)")],
+    "Zircolite": [("Files and apps\\Log", "zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs)")],
     "ImHex": [("Editors", "ImHex")],
     "chainsaw": [("Files and apps\\Log", "chainsaw (Rapidly work with Forensic Artefacts)")],
     "YARA": [("Signatures and information", "yara"), ("Signatures and information", "yarac")],
     "yara-x": [("Signatures and information", "yr (yara-x)")],
     "yq": [("Signatures and information", "yq (is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor)")],
     "x64dbg": [("Reverse Engineering", "X64dbg (runs dfirws-install -X64dbg)")],
-    "hayabusa": [("Files and apps\\Log", "hayabusa (is a sigma-based threat hunting and fast forensics timeline generator)")],
+    "hayabusa": [("Files and apps\\Log", "hayabusa (is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs)")],
     "takajo": [("Files and apps\\Log", "takajo (is a tool to analyze Windows event logs - hayabusa)")],
     "zaproxy": [("Network", "Zaproxy (runs dfirws-install -Zaproxy)")],
     "DB Browser for SQLite": [("Files and apps\\Database", "DB Browser for SQLite")],
-    "YAMAGoya": [("Files and apps\\Log", "YAMAGoya (Yet Another Memory Analyzer)")],
+    "YAMAGoya": [("Files and apps\\Log", "YAMAGoya (Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA)")],
     "redress": [("Programming\\Go", "Redress")],
     "Ares": [("Utilities\\Cryptography", "ares")],
     "Zui": [("Network", "Zui (runs dfirws-install -Zui)")],
@@ -667,7 +702,7 @@ SHORTCUT_OVERRIDES: Dict[str, List[Tuple[str, str]]] = {
     "Google Earth Pro": [("Utilities", "Google Earth (runs dfirws-install -GoogleEarth)")],
     "OSFMount": [("Files and apps\\Disk", "OSFMount (runs dfirws-install -OSFMount)")],
     "VirusTotal CLI": [("Signatures and information\\Online tools", "vt (A command-line tool for interacting with VirusTotal)")],
-    "WinDbg": [],  # No shortcut in dfirws_folder
+    "WinDbg": [],
     # python.ps1
     "binary-refinery": [("Forensics", "binary-refinery")],
     "chepy": [("Utilities\\Cryptography", "chepy")],
@@ -693,16 +728,16 @@ SHORTCUT_OVERRIDES: Dict[str, List[Tuple[str, str]]] = {
     "scapy": [("Network", "scapy")],
     "shodan": [("Signatures and information\\Online tools", "shodan")],
     "time-decode": [("Utilities", "time-decode")],
-    "toolong": [("Files and apps\\Log", "toolong (tl - A terminal application to view, tail, merge, and search log files)")],
+    "toolong": [("Files and apps\\Log", "toolong (tl - A terminal application to view, tail, merge, and search log files (plus JSONL))")],
     "visidata": [("Utilities", "visidata (VisiData or vd is an interactive multitool for tabular data)")],
     "XLMMacroDeobfuscator": [("Files and apps\\Office", "xlmdeobfuscator (XLMMacroDeobfuscator can be used to decode obfuscated XLM macros)")],
     "jpterm": [("Utilities", "jpterm (Jupyter in the terminal)")],
     "litecli": [("Files and apps\\Database", "litecli (SQLite CLI with autocompletion and syntax highlighting)")],
     "pwncat": [("Utilities", "pwncat.py (Fancy reverse and bind shell handler)")],
-    "sigma-cli": [("Signatures and information", "sigma-cli (This is the Sigma command line interface)")],
+    "sigma-cli": [("Signatures and information", "sigma-cli (This is the Sigma command line interface using the pySigma library to manage, list and convert Sigma rules into query languages)")],
     "dfir-unfurl": [
         ("Files and apps\\Browser", "unfurl_app.exe (unfurl takes a URL and expands it into a directed graph - dfir-unfurl)"),
-        ("Files and apps\\Browser", "unfurl.exe"),
+        ("Files and apps\\Browser", "unfurl.exe (unfurl takes a URL and expands it into a directed graph - dfir-unfurl)"),
     ],
     "jsbeautifier": [("Files and apps\\JavaScript", "js-beautify (Javascript beautifier)")],
     "hachoir": [("Files and apps\\PE", "hachoir-tools")],
@@ -734,42 +769,115 @@ SHORTCUT_OVERRIDES: Dict[str, List[Tuple[str, str]]] = {
 }
 
 
-def format_verify(items: List[str]) -> str:
-    if not items:
+# ---------------------------------------------------------------------------
+# Formatting helpers – generate PowerShell hashtable array syntax
+# ---------------------------------------------------------------------------
+
+def format_verify_block(verify_items: List[dict], indent: str = "    ") -> str:
+    """Format verify items as PowerShell @( @{...} ) block.
+
+    Each item is a dict with keys: Name, Expect.
+    """
+    if not verify_items:
         return "@()"
-    if len(items) == 1:
-        return f'@("{items[0]}")'
-    inner = ", ".join(f'"{v}"' for v in items)
-    return f"@({inner})"
+    lines = ["@("]
+    for v in verify_items:
+        lines.append(f"{indent}    @{{")
+        lines.append(f'{indent}        Type = "command"')
+        lines.append(f'{indent}        Name = "{v["Name"]}"')
+        lines.append(f'{indent}        Expect = "{v["Expect"]}"')
+        lines.append(f"{indent}    }}")
+    lines.append(f"{indent})")
+    return "\n".join(lines)
 
 
-def format_shortcuts(items: List[Tuple[str, str]]) -> str:
-    if not items:
+def format_shortcuts_block(
+    shortcut_items: List[dict], indent: str = "    "
+) -> str:
+    """Format shortcut items as PowerShell @( @{...} ) block.
+
+    Each item is a dict with keys: lnk, target, args, icon, workdir.
+    Values are backtick-escaped for use in tool definitions.
+    """
+    if not shortcut_items:
         return "@()"
-    entries = []
-    for cat, name in items:
-        entries.append(f"{cat}\\{name}")
-    if len(entries) == 1:
-        return f'@("{entries[0]}")'
-    inner = ", ".join(f'"{e}"' for e in entries)
-    return f"@({inner})"
+    lines = ["@("]
+    for s in shortcut_items:
+        lnk = escape_ps_vars(s["lnk"])
+        target = escape_ps_vars(s["target"])
+        args = escape_ps_vars(s["args"])
+        icon = escape_ps_vars(s["icon"])
+        workdir = escape_ps_vars(s["workdir"])
+        lines.append(f"{indent}    @{{")
+        lines.append(f'{indent}        Lnk      = "{lnk}"')
+        lines.append(f'{indent}        Target   = "{target}"')
+        lines.append(f'{indent}        Args     = "{args}"')
+        lines.append(f'{indent}        Icon     = "{icon}"')
+        lines.append(f'{indent}        WorkDir  = "{workdir}"')
+        lines.append(f"{indent}    }}")
+    lines.append(f"{indent})")
+    return "\n".join(lines)
 
+
+# ---------------------------------------------------------------------------
+# Resolve data for a tool definition
+# ---------------------------------------------------------------------------
+
+def resolve_verify(
+    name: str, verify_index: Dict[str, List[dict]]
+) -> List[dict]:
+    """Resolve verify entries for a tool: override first, then auto-match."""
+    override_strings = VERIFY_OVERRIDES.get(name)
+    if override_strings is not None:
+        return [parse_verify_string(s) for s in override_strings]
+    norm = normalize(name)
+    return verify_index.get(norm, [])
+
+
+def resolve_shortcuts(
+    name: str, shortcut_index: Dict[Tuple[str, str], dict]
+) -> List[dict]:
+    """Resolve full shortcut data for a tool from SHORTCUT_OVERRIDES + parsed index."""
+    override_keys = SHORTCUT_OVERRIDES.get(name)
+    if override_keys is None:
+        return []
+    result = []
+    for cat, sname in override_keys:
+        data = shortcut_index.get((cat, sname))
+        if data:
+            result.append(data)
+        else:
+            # Shortcut not found in parsed data – create minimal entry
+            lnk = f"${{HOME}}\\Desktop\\dfirws\\{cat}\\{sname}.lnk"
+            result.append({
+                "lnk": lnk,
+                "target": "${CLI_TOOL}",
+                "args": "",
+                "icon": "",
+                "workdir": "${HOME}\\Desktop",
+            })
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Update definitions in a download script
+# ---------------------------------------------------------------------------
 
 def update_definitions_in_file(
-    path: Path, stats: dict, verify_index: Dict[str, List[str]]
+    path: Path,
+    stats: dict,
+    verify_index: Dict[str, List[dict]],
+    shortcut_index: Dict[Tuple[str, str], dict],
 ) -> None:
     text = path.read_text(encoding="utf-8")
     lines = text.splitlines(keepends=True)
 
-    # Find each $TOOL_DEFINITIONS += @{ ... } block and update it
     result = []
     i = 0
     while i < len(lines):
         line = lines[i]
 
-        # Detect start of a tool definition block
         if re.match(r"\s*\$TOOL_DEFINITIONS\s*\+=\s*@\{", line):
-            # Collect the entire block
             block_lines = [line]
             i += 1
             brace_depth = 1
@@ -778,7 +886,6 @@ def update_definitions_in_file(
                 brace_depth += lines[i].count("{") - lines[i].count("}")
                 i += 1
 
-            # Extract the Name
             name_match = None
             for bl in block_lines:
                 m = re.match(r'\s*Name\s*=\s*"([^"]+)"', bl)
@@ -787,26 +894,13 @@ def update_definitions_in_file(
                     break
 
             if name_match:
-                # Get category
                 category = CATEGORY_MAP.get(name_match, "")
-                # Get verify - try override first, then auto-match
-                verify = VERIFY_OVERRIDES.get(name_match)
-                if verify is None:
-                    norm = normalize(name_match)
-                    verify = verify_index.get(norm, [])
-                # Get install command
+                verify = resolve_verify(name_match, verify_index)
                 install_cmd = ""
                 if name_match in INSTALL_CMD_MAP:
                     install_cmd = f"dfirws-install.ps1 -{INSTALL_CMD_MAP[name_match]}"
-                # Get shortcuts
-                shortcut_data = SHORTCUT_OVERRIDES.get(name_match)
-                shortcuts: List[Tuple[str, str]] = []
-                if shortcut_data is not None:
-                    shortcuts = shortcut_data
-                else:
-                    shortcuts = []
+                shortcuts = resolve_shortcuts(name_match, shortcut_index)
 
-                # Track stats
                 fields_populated = 0
                 if category:
                     fields_populated += 1
@@ -823,23 +917,24 @@ def update_definitions_in_file(
                 else:
                     stats["tools_without_data"] += 1
 
-                # Rebuild the block with populated fields
+                verify_str = format_verify_block(verify)
+                shortcuts_str = format_shortcuts_block(shortcuts)
+
                 new_block = []
-                new_block.append(f'$TOOL_DEFINITIONS += @{{\n')
+                new_block.append(f"$TOOL_DEFINITIONS += @{{\n")
                 new_block.append(f'    Name = "{name_match}"\n')
                 new_block.append(f'    Category = "{category}"\n')
-                new_block.append(f'    Shortcuts = {format_shortcuts(shortcuts)}\n')
+                new_block.append(f"    Shortcuts = {shortcuts_str}\n")
                 new_block.append(f'    InstallVerifyCommand = "{install_cmd}"\n')
-                new_block.append(f'    Verify = {format_verify(verify)}\n')
+                new_block.append(f"    Verify = {verify_str}\n")
                 new_block.append(f'    Notes = ""\n')
                 new_block.append(f'    Tips = ""\n')
                 new_block.append(f'    Usage = ""\n')
-                new_block.append(f'    SampleCommands = @()\n')
-                new_block.append(f'    SampleFiles = @()\n')
-                new_block.append(f'}}\n')
+                new_block.append(f"    SampleCommands = @()\n")
+                new_block.append(f"    SampleFiles = @()\n")
+                new_block.append(f"}}\n")
                 result.extend(new_block)
             else:
-                # No name found, keep as-is
                 result.extend(block_lines)
             continue
 
@@ -849,8 +944,11 @@ def update_definitions_in_file(
     path.write_text("".join(result), encoding="utf-8")
 
 
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
 def main() -> int:
-    # Verify source files exist
     for p in [VERIFY_FILE, FOLDER_FILE, INSTALL_FILE]:
         if not p.exists():
             print(f"ERROR: {p} not found")
@@ -860,32 +958,29 @@ def main() -> int:
             print(f"ERROR: {p} not found")
             return 1
 
-    # Parse sources
     verify_entries = parse_verify(VERIFY_FILE)
     verify_index = build_verify_index(verify_entries)
-    shortcuts = parse_shortcuts(FOLDER_FILE)
+    shortcut_index = parse_shortcuts_full(FOLDER_FILE)
     install_params = parse_install_params(INSTALL_FILE)
 
     print(f"Parsed {len(verify_entries)} verify commands from install_verify.ps1")
-    print(f"Parsed {len(shortcuts)} shortcuts from dfirws_folder.ps1")
+    print(f"Parsed {len(shortcut_index)} shortcuts from dfirws_folder.ps1")
     print(f"Parsed {len(install_params)} install parameters from dfirws-install.ps1")
     print(f"Built verify index with {len(verify_index)} unique command names")
     print()
 
-    # Report category coverage
     print(f"Category mappings defined: {len(CATEGORY_MAP)}")
     print(f"Verify overrides defined: {len(VERIFY_OVERRIDES)}")
     print(f"Shortcut overrides defined: {len(SHORTCUT_OVERRIDES)}")
     print(f"Install command mappings defined: {len(INSTALL_CMD_MAP)}")
     print()
 
-    # Process each download file
     total_stats = {"tools_with_data": 0, "tools_without_data": 0, "fields_populated": 0}
 
     for path in DOWNLOAD_FILES:
         file_stats = {"tools_with_data": 0, "tools_without_data": 0, "fields_populated": 0}
         print(f"Processing {path.name}...")
-        update_definitions_in_file(path, file_stats, verify_index)
+        update_definitions_in_file(path, file_stats, verify_index, shortcut_index)
         print(f"  Tools with data populated: {file_stats['tools_with_data']}")
         print(f"  Tools without data: {file_stats['tools_without_data']}")
         print(f"  Total fields populated: {file_stats['fields_populated']}")

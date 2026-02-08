@@ -122,7 +122,15 @@ Write-SynchronizedLog "winget: Download complete."
 $TOOL_DEFINITIONS += @{
     Name = "Autopsy"
     Category = "Forensics"
-    Shortcuts = @("Forensics\Autopsy (runs dfirws-install -Autopsy)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\Autopsy (runs dfirws-install -Autopsy).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Autopsy"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -Autopsy"
     Verify = @()
     Notes = ""
@@ -135,7 +143,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Burp Suite"
     Category = "Network"
-    Shortcuts = @("Network\Burp Suite (runs dfirws-install -BurpSuite)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\Burp Suite (runs dfirws-install -BurpSuite).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -BurpSuite"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -BurpSuite"
     Verify = @()
     Notes = ""
@@ -148,9 +164,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Chrome"
     Category = "Utilities\Browsers"
-    Shortcuts = @("Utilities\Browsers\Chrome (runs dfirws-install -Chrome)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Browsers\Chrome (runs dfirws-install -Chrome).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Chrome"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -Chrome"
-    Verify = @("chrome PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "chrome"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -161,7 +191,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Docker Desktop"
     Category = "Utilities"
-    Shortcuts = @("Utilities\Docker (runs dfirws-install.ps1 -Docker)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Docker"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -Docker"
     Verify = @()
     Notes = ""
@@ -202,7 +240,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Utilities\Media"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @(""C:\Program Files\IrfanView\i_view64.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Program Files\IrfanView\i_view64.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -213,9 +257,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Obsidian"
     Category = "Editors"
-    Shortcuts = @("Editors\Obsidian (runs dfirws-install -Obsidian)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-install -Obsidian).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Obsidian"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -Obsidian"
-    Verify = @(""C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -226,7 +284,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "oh-my-posh"
     Category = "Utilities"
-    Shortcuts = @("Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh (runs dfirws-install -OhMyPosh).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -OhMyPosh"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -OhMyPosh"
     Verify = @()
     Notes = ""
@@ -252,9 +318,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "PuTTY"
     Category = "Network"
-    Shortcuts = @("Network\PuTTY (runs dfirws-install -PuTTY)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\PuTTY (runs dfirws-install -PuTTY).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -PuTTY"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -PuTTY"
-    Verify = @("putty PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "putty"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -267,7 +347,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps"
     Shortcuts = @()
     InstallVerifyCommand = "dfirws-install.ps1 -Qemu"
-    Verify = @("qemu-img PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "qemu-img"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -280,7 +366,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Programming\Ruby"
     Shortcuts = @()
     InstallVerifyCommand = "dfirws-install.ps1 -Ruby"
-    Verify = @("ruby PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "ruby"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -291,9 +383,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "VLC"
     Category = "Utilities\Media"
-    Shortcuts = @("Utilities\Media\VLC (runs dfirws-install -VLC)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Media\VLC (runs dfirws-install -VLC).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -VLC"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -VLC"
-    Verify = @("vlc PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "vlc"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -304,9 +410,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "VirusTotal CLI"
     Category = "Signatures and information\Online tools"
-    Shortcuts = @("Signatures and information\Online tools\vt (A command-line tool for interacting with VirusTotal)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\Online tools\vt (A command-line tool for interacting with VirusTotal).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command vt help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("vt PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "vt"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -317,9 +437,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "WinMerge"
     Category = "Files and apps"
-    Shortcuts = @("Files and apps\WinMerge (runs dfirws-install -WinMerge)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\WinMerge (runs dfirws-install -WinMerge).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -WinMerge"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -WinMerge"
-    Verify = @("WinMergeU PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "WinMergeU"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -343,9 +477,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Google Earth Pro"
     Category = "Utilities"
-    Shortcuts = @("Utilities\Google Earth (runs dfirws-install -GoogleEarth)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Google Earth (runs dfirws-install -GoogleEarth).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -GoogleEarth"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -GoogleEarth"
-    Verify = @(""C:\Program Files\Google\Google Earth Pro\client\googleearth.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Program Files\Google\Google Earth Pro\client\googleearth.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -356,9 +504,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "OSFMount"
     Category = "Files and apps\Disk"
-    Shortcuts = @("Files and apps\Disk\OSFMount (runs dfirws-install -OSFMount)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\OSFMount (runs dfirws-install -OSFMount).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -OSFMount"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -OSFMount"
-    Verify = @(""C:\downloads\osfmount.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\downloads\osfmount.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -382,9 +544,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Wireshark"
     Category = "Network"
-    Shortcuts = @("Network\Wireshark (runs dfirws-install -Wireshark)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\Wireshark (runs dfirws-install -Wireshark).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Wireshark"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -Wireshark"
-    Verify = @("Wireshark PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "Wireshark"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -397,7 +573,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Network"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @(""C:\downloads\tailscale.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\downloads\tailscale.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -408,9 +590,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Firefox"
     Category = "Utilities\Browsers"
-    Shortcuts = @("Utilities\Browsers\Firefox (runs dfirws-install -Firefox)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Browsers\Firefox (runs dfirws-install -Firefox).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Firefox"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -Firefox"
-    Verify = @(""C:\Program Files\Mozilla Firefox\firefox.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Program Files\Mozilla Firefox\firefox.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -421,9 +617,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Foxit PDF Reader"
     Category = "Files and apps\PDF"
-    Shortcuts = @("Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PDF\Foxit Reader for pdf files (runs dfirws-install -FoxitReader).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -FoxitReader"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = "dfirws-install.ps1 -FoxitReader"
-    Verify = @(""C:\Program Files\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Program Files\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""

@@ -45,9 +45,35 @@ Write-DateLog "Pip packages done." >> "${ROOT_PATH}\log\python.txt"
 $TOOL_DEFINITIONS += @{
     Name = "dfir_ntfs"
     Category = "Files and apps\Disk"
-    Shortcuts = @("Files and apps\Disk\ntfs_parser.py (Extract information from NTFS metadata files, volumes, and shadow copies)", "Files and apps\Disk\fat_parser.py (Extract information from FAT files)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\ntfs_parser.py (Extract information from NTFS metadata files, volumes, and shadow copies).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ntfs_parser.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\fat_parser.py (Extract information from FAT files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command fat_parser.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\ntfs_parser.py Python", "C:\venv\bin\fat_parser.py Python")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\ntfs_parser.py"
+            Expect = "Python"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\fat_parser.py"
+            Expect = "Python"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -58,9 +84,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "binary-refinery"
     Category = "Forensics"
-    Shortcuts = @("Forensics\binary-refinery")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\binary-refinery.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command binref -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\binref.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\binref.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -71,9 +111,30 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "regipy"
     Category = "OS\Windows\Registry"
-    Shortcuts = @("OS\Windows\Registry\regipy-diff", "OS\Windows\Registry\regipy-dump")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Registry\regipy-diff.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command regipy-diff.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Registry\regipy-dump.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command regipy-dump.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\uv\regipy\Scripts\evtx_dump.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\uv\regipy\Scripts\evtx_dump.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -84,9 +145,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "peepdf-3"
     Category = "Files and apps\PDF"
-    Shortcuts = @("Files and apps\PDF\peepdf-3 (peepdf - peepdf-3 is a Python 3 tool to explore PDF files)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PDF\peepdf-3 (peepdf - peepdf-3 is a Python 3 tool to explore PDF files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command peepdf -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\peepdf.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\peepdf.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -110,9 +185,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "autoit-ripper"
     Category = "Files and apps"
-    Shortcuts = @("Files and apps\autoit-ripper")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\autoit-ripper.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command autoit-ripper -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\autoit-ripper.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\autoit-ripper.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -125,7 +214,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Forensics"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\cart.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\cart.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -136,9 +231,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "chepy"
     Category = "Utilities\Cryptography"
-    Shortcuts = @("Utilities\Cryptography\chepy")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\chepy.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\chepy.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\chepy.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -149,9 +258,28 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "csvkit"
     Category = "Malware tools"
-    Shortcuts = @("Malware tools\csvkit (tools for working with csv files)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command csv --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\csvclean.exe PE32", "C:\venv\bin\csvcut.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\csvclean.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\csvcut.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -164,7 +292,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Utilities"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\deep-translator.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\deep-translator.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -177,7 +311,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps\Office"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\docx2txt.py Python")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\docx2txt.py"
+            Expect = "Python"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -188,9 +328,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "extract-msg"
     Category = "Files and apps\Email"
-    Shortcuts = @("Files and apps\Email\extract_msg")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Email\extract_msg.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command extract_msg -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\extract_msg.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\extract_msg.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -203,7 +357,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps\Log"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\flatten_json.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\flatten_json.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -216,7 +376,18 @@ $TOOL_DEFINITIONS += @{
     Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\frida.exe PE32", "C:\venv\bin\frida-apk.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\frida.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\frida-apk.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -229,7 +400,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\ghidrecomp.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\ghidrecomp.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -242,7 +419,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\ghidriff.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\ghidriff.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -255,7 +438,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Utilities"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\grip.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\grip.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -266,9 +455,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "hachoir"
     Category = "Files and apps\PE"
-    Shortcuts = @("Files and apps\PE\hachoir-tools")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\hachoir-tools.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dir C:\venv\bin\hachoir-*"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\hachoir-wx.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\hachoir-wx.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -279,9 +482,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "jpterm"
     Category = "Utilities"
-    Shortcuts = @("Utilities\jpterm (Jupyter in the terminal)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\jpterm (Jupyter in the terminal).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command jpterm --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\jpterm.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\jpterm.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -292,9 +509,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "jsbeautifier"
     Category = "Files and apps\JavaScript"
-    Shortcuts = @("Files and apps\JavaScript\js-beautify (Javascript beautifier)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\JavaScript\js-beautify (Javascript beautifier).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command js-beautify --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\js-beautify.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\js-beautify.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -307,7 +538,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Utilities"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\uv\jupyterlab\Scripts\jupyter.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\uv\jupyterlab\Scripts\jupyter.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -318,9 +555,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "litecli"
     Category = "Files and apps\Database"
-    Shortcuts = @("Files and apps\Database\litecli (SQLite CLI with autocompletion and syntax highlighting)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\litecli (SQLite CLI with autocompletion and syntax highlighting).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command litecli --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\litecli.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\litecli.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -333,7 +584,13 @@ $TOOL_DEFINITIONS += @{
     Category = "OS\Windows"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\lnkparse.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\lnkparse.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -344,9 +601,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "magika"
     Category = "Files and apps"
-    Shortcuts = @("Files and apps\magika (A tool like file and file-magic based on AI)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\magika (A tool like file and file-magic based on AI).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command magika -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\magika.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\magika.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -357,9 +628,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "maldump"
     Category = "Malware tools"
-    Shortcuts = @("Malware tools\maldump.exe (Multi-quarantine extractor)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command maldump.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\maldump.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\maldump.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -370,9 +655,28 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "malwarebazaar"
     Category = "Signatures and information\Online tools"
-    Shortcuts = @("Signatures and information\Online tools\bazaar")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\Online tools\bazaar.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command bazaar --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\bazaar.exe PE32", "C:\venv\bin\yaraify.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\bazaar.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\yaraify.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -383,7 +687,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "markitdown"
     Category = "Utilities"
-    Shortcuts = @("Utilities\markitdown (Python tool for converting files and office documents to Markdown)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\markitdown (Python tool for converting files and office documents to Markdown).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command markitdown --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     Notes = ""
@@ -398,7 +710,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Memory"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\minidump.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\minidump.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -409,9 +727,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "mkyara"
     Category = "Signatures and information"
-    Shortcuts = @("Signatures and information\mkyara")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\mkyara.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command mkyara -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\mkyara.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\mkyara.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -422,9 +754,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "msoffcrypto-tool"
     Category = "Files and apps\Office"
-    Shortcuts = @("Files and apps\Office\msoffcrypto-tool")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\msoffcrypto-tool.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command msoffcrypto-tool -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\msoffcrypto-tool.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\msoffcrypto-tool.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -437,7 +783,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Malware tools"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\mwcp.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\mwcp.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -448,9 +800,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "name-that-hash"
     Category = "Utilities\Cryptography"
-    Shortcuts = @("Utilities\Cryptography\name-that-hash (also available as nth)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\name-that-hash (also available as nth).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\name-that-hash.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\name-that-hash.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -463,7 +829,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Network"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\netaddr.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\netaddr.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -487,9 +859,54 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "oletools"
     Category = "Files and apps\Office"
-    Shortcuts = @("Files and apps\Office\oleid", "Files and apps\Office\olevba", "Files and apps\Office\mraptor", "Files and apps\Office\msodde")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\oleid.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command oleid -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\olevba.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command olevba -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\mraptor.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command mraptor -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\msodde.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command msodde -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\oleid.exe PE32", "C:\venv\bin\olevba.exe PE32", "C:\venv\bin\mraptor.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\oleid.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\olevba.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\mraptor.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -500,9 +917,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "pcode2code"
     Category = "Files and apps\Office"
-    Shortcuts = @("Files and apps\Office\pcode2code")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\pcode2code.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pcode2code -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\pcode2code.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\pcode2code.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -528,7 +959,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Network"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\protodeep.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\protodeep.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -541,7 +978,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Programming\Python"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\ptpython.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\ptpython.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -552,9 +995,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "pwncat"
     Category = "Utilities"
-    Shortcuts = @("Utilities\pwncat.py (Fancy reverse and bind shell handler)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\pwncat.py (Fancy reverse and bind shell handler).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pwncat.py --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\pwncat.py Python")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\pwncat.py"
+            Expect = "Python"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -580,7 +1037,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps\Office"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\pyonenote.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\pyonenote.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -593,7 +1056,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Utilities\CTF"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\priweavepng.py Python")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\priweavepng.py"
+            Expect = "Python"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -604,9 +1073,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "rexi"
     Category = "Utilities"
-    Shortcuts = @("Utilities\rexi.exe (Terminal UI for Regex Testing)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\rexi.exe (Terminal UI for Regex Testing).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command rexi.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\rexi.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\rexi.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -617,9 +1100,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "scapy"
     Category = "Network"
-    Shortcuts = @("Network\scapy")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\scapy.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command scapy -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\scapy.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\scapy.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -630,9 +1127,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "shodan"
     Category = "Signatures and information\Online tools"
-    Shortcuts = @("Signatures and information\Online tools\shodan")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\Online tools\shodan.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command shodan"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\shodan.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\shodan.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -669,9 +1180,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "time-decode"
     Category = "Utilities"
-    Shortcuts = @("Utilities\time-decode")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\time-decode.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command time-decode --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\time-decode.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\time-decode.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -682,9 +1207,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "toolong"
     Category = "Files and apps\Log"
-    Shortcuts = @("Files and apps\Log\toolong (tl - A terminal application to view, tail, merge, and search log files)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\toolong (tl - A terminal application to view, tail, merge, and search log files (plus JSONL)).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command tl.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\tl.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\tl.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -697,7 +1236,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\unpy2exe.py Python")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\unpy2exe.py"
+            Expect = "Python"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -708,9 +1253,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "visidata"
     Category = "Utilities"
-    Shortcuts = @("Utilities\visidata (VisiData or vd is an interactive multitool for tabular data)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\visidata (VisiData or vd is an interactive multitool for tabular data).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command visidata --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\visidata.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\visidata.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -723,7 +1282,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps\Office"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\runxlrd.py Python")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\runxlrd.py"
+            Expect = "Python"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -734,9 +1299,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "XLMMacroDeobfuscator"
     Category = "Files and apps\Office"
-    Shortcuts = @("Files and apps\Office\xlmdeobfuscator (XLMMacroDeobfuscator can be used to decode obfuscated XLM macros)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\xlmdeobfuscator (XLMMacroDeobfuscator can be used to decode obfuscated XLM macros).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command xlmdeobfuscator -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\bin\xlmdeobfuscator.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\xlmdeobfuscator.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -760,9 +1339,35 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "acquire"
     Category = "Forensics"
-    Shortcuts = @("Forensics\acquire.exe (dissect)", "Forensics\acquire-decrypt.exe (dissect)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\acquire.exe (dissect).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command acquire.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\acquire-decrypt.exe (dissect).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command acquire-decrypt.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\default\Scripts\acquire.exe PE32", "C:\venv\default\Scripts\acquire-decrypt.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\default\Scripts\acquire.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\default\Scripts\acquire-decrypt.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -851,9 +1456,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "dissect"
     Category = "Forensics"
-    Shortcuts = @("Forensics\rdump.exe (dissect)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\rdump.exe (dissect).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command rdump.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\default\Scripts\rdump.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\default\Scripts\rdump.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -864,9 +1483,30 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "dissect.target"
     Category = "Forensics"
-    Shortcuts = @("Forensics\target-query.exe (dissect)", "Forensics\target-shell.exe (dissect)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\target-query.exe (dissect).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command target-query.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\target-shell.exe (dissect).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command target-shell.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\default\Scripts\target-shell.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\default\Scripts\target-shell.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1087,7 +1727,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps\Office"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @(""C:\venv\bin\olefile.exe" PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\olefile.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1410,9 +2056,23 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "sigma-cli"
     Category = "Signatures and information"
-    Shortcuts = @("Signatures and information\sigma-cli (This is the Sigma command line interface)")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\sigma-cli (This is the Sigma command line interface using the pySigma library to manage, list and convert Sigma rules into query languages).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command sigma.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\default\Scripts\sigma.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\default\Scripts\sigma.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1605,9 +2265,30 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "dfir-unfurl"
     Category = "Files and apps\Browser"
-    Shortcuts = @("Files and apps\Browser\unfurl_app.exe (unfurl takes a URL and expands it into a directed graph - dfir-unfurl)", "Files and apps\Browser\unfurl.exe")
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\unfurl_app.exe (unfurl takes a URL and expands it into a directed graph - dfir-unfurl).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command C:\venv\dfir-unfurl\Scripts\unfurl_app.exe"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\unfurl.exe (unfurl takes a URL and expands it into a directed graph - dfir-unfurl).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command C:\venv\dfir-unfurl\Scripts\unfurl.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
-    Verify = @("C:\venv\dfir-unfurl\Scripts\unfurl.exe PE32")
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\dfir-unfurl\Scripts\unfurl.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = ""
     Tips = ""
     Usage = ""
