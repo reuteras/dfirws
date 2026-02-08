@@ -992,6 +992,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".evtx", ".reg")
+    Tags = @("forensics", "artifact-extraction", "triage")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1019,6 +1021,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("active-directory", "ldap")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1046,6 +1050,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dmp", ".exe", ".dll")
+    Tags = @("malware-analysis", "cobalt-strike", "memory-forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1073,6 +1079,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("malware-analysis", "pe-analysis", "detection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1112,6 +1120,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".tar", ".zip")
+    Tags = @("mobile-forensics", "android", "artifact-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1151,6 +1161,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".tar", ".zip")
+    Tags = @("mobile-forensics", "ios", "artifact-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1178,6 +1190,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".msi")
+    Tags = @("windows", "installer")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1205,6 +1219,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json")
+    Tags = @("json", "data-processing", "visualization")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1232,6 +1248,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".dmp", ".bin")
+    Tags = @("malware-analysis", "cobalt-strike", "detection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1259,6 +1277,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".wav", ".mp3", ".flac", ".ogg", ".aiff")
+    Tags = @("audio", "multimedia", "steganography")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1286,6 +1306,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("malware-analysis", "pe-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1313,6 +1335,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pcap", ".pcapng", ".zng")
+    Tags = @("network-analysis", "pcap", "zeek")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1340,6 +1364,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".bmc", ".bin")
+    Tags = @("rdp", "forensics", "windows")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1367,6 +1393,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".mp4", ".avi", ".mkv", ".mov", ".mp3", ".wav", ".flac")
+    Tags = @("multimedia", "video", "audio", "conversion")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1394,6 +1422,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("search", "grep", "cli")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1421,6 +1451,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin")
+    Tags = @("malware-analysis", "binary-analysis", "similarity")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1440,6 +1472,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("terminal", "shell")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1461,6 +1495,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".class", ".jar")
+    Tags = @("reverse-engineering", "java", "decompiler", "deobfuscation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1488,6 +1524,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db", ".sqlite", ".sqlite3", ".sql")
+    Tags = @("database", "gui")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1515,6 +1553,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".obj", ".lib")
+    Tags = @("pe-analysis", "reverse-engineering")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1549,6 +1589,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1570,6 +1612,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = "dfirws-install.ps1 -Dokany"
     Verify = @()
+    FileExtensions = @()
+    Tags = @("filesystem", "mounting")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1597,6 +1641,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".mbox", ".eml")
+    Tags = @("email", "forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1624,6 +1670,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1645,6 +1693,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".bin", ".txt", ".json", ".hex")
+    Tags = @("data-processing", "encoding", "decoding", "deobfuscation", "encryption", "hashing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1672,6 +1722,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".elf")
+    Tags = @("reverse-engineering", "golang")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1693,6 +1745,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".h2.db")
+    Tags = @("database", "java")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1720,6 +1774,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".bin")
+    Tags = @("ntfs", "filesystem", "forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1739,6 +1795,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dll")
+    Tags = @("pe-analysis", "conversion")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1766,6 +1824,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".dmp")
+    Tags = @("malware-analysis", "pe-analysis", "process-injection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1793,6 +1853,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".sys")
+    Tags = @("pe-analysis", "reverse-engineering")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1820,6 +1882,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("pe-analysis", "malware-analysis", "process-injection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1839,6 +1903,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".sys")
+    Tags = @("pe-analysis", "reverse-engineering")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1866,6 +1932,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("windows", "kernel", "debugging")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1898,6 +1966,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf", ".mach-o", ".bin")
+    Tags = @("pe-analysis", "file-identification", "packer-detection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1925,6 +1995,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".elf", ".mach-o")
+    Tags = @("reverse-engineering", "elf-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1952,6 +2024,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".class", ".jar")
+    Tags = @("reverse-engineering", "java", "decompiler")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1979,6 +2053,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".evtx", ".csv", ".json")
+    Tags = @("log-analysis", "event-log")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2006,6 +2082,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json")
+    Tags = @("json", "data-processing", "cli")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2033,6 +2111,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".automaticDestinations-ms", ".customDestinations-ms")
+    Tags = @("windows", "forensics", "artifact-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2060,6 +2140,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".mft")
+    Tags = @("ntfs", "filesystem", "forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2087,6 +2169,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pf")
+    Tags = @("windows", "forensics", "prefetch")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2108,6 +2192,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".class", ".jar", ".apk", ".dex")
+    Tags = @("reverse-engineering", "java", "decompiler", "deobfuscation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2135,6 +2221,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe")
+    Tags = @("reverse-engineering", "api-tracing", "golang")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2162,6 +2250,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json")
+    Tags = @("active-directory", "attack-path", "visualization")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2183,6 +2273,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".msg")
+    Tags = @("email", "forensics", "outlook")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2215,6 +2307,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2228,6 +2322,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2241,6 +2337,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".exe", ".elf")
+    Tags = @("reverse-engineering", "golang")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2254,6 +2352,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".ps1", ".psm1", ".psd1")
+    Tags = @("scripting", "shell", "automation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2267,6 +2367,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "disassembler", "decompiler")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2280,6 +2382,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "disassembler", "visualization")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2307,6 +2411,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".bin")
+    Tags = @("malware-analysis", "string-extraction", "deobfuscation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2334,6 +2440,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pcap")
+    Tags = @("malware-analysis", "network-simulation", "dynamic-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2361,6 +2469,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".elf")
+    Tags = @("reverse-engineering", "golang", "symbol-recovery")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2388,6 +2498,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".mmdb")
+    Tags = @("geolocation", "maxmind")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2415,6 +2527,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".elf", ".so")
+    Tags = @("reverse-engineering", "elf-analysis", "linux")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2434,6 +2548,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".sys")
+    Tags = @("pe-analysis", "reverse-engineering")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2455,6 +2571,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".dit")
+    Tags = @("active-directory", "forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2482,6 +2600,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dat")
+    Tags = @("windows", "forensics", "srum")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2495,6 +2615,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = "dfirws-install.ps1 -ForensicTimeliner"
     Verify = @()
+    FileExtensions = @(".evtx", ".csv", ".json")
+    Tags = @("forensics", "timeline")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2508,6 +2630,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("web", "authentication", "jwt")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2535,6 +2659,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json", ".csv", ".tsv", ".parquet")
+    Tags = @("data-processing", "sql", "json", "csv")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2562,6 +2688,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".jpg", ".png")
+    Tags = @("metadata", "file-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2589,6 +2717,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".bin")
+    Tags = @("malware-analysis", "ioc-scanner", "yara", "detection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2616,6 +2746,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".txt", ".log", ".xml", ".json", ".csv", ".ps1", ".py", ".js")
+    Tags = @("text-editor", "syntax-highlighting")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2650,6 +2782,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db", ".sqlite")
+    Tags = @("browser-forensics", "chrome", "artifact-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2682,6 +2816,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "event-log", "windows")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2701,6 +2837,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "Zip archive data"
         }
     )
+    FileExtensions = @()
+    Tags = @("text-editor", "diff")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2720,6 +2858,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "Zip archive data"
         }
     )
+    FileExtensions = @()
+    Tags = @("text-editor")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2733,6 +2873,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".ps1", ".psm1", ".psd1")
+    Tags = @("text-editor", "powershell")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2746,6 +2888,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2773,6 +2917,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pdf")
+    Tags = @("pdf", "data-processing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2800,6 +2946,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".etl")
+    Tags = @("etw", "windows", "monitoring")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2827,6 +2975,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".mach-o")
+    Tags = @("reverse-engineering", "disassembler", "debugging")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2854,6 +3004,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "disassembler", "gui")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2881,6 +3033,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2894,6 +3048,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "mitre-attack", "threat-intelligence")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2926,6 +3082,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".dylib")
+    Tags = @("reverse-engineering", "disassembler", "decompiler")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2939,6 +3097,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".ttf", ".otf")
+    Tags = @("fonts", "terminal")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2952,6 +3112,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".pl", ".pm")
+    Tags = @("scripting", "perl")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2979,6 +3141,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db", ".sqlite")
+    Tags = @("browser-forensics", "forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3000,6 +3164,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = "dfirws-install.ps1 -Jadx"
     Verify = @()
+    FileExtensions = @(".apk", ".dex", ".jar", ".class", ".zip")
+    Tags = @("reverse-engineering", "android", "decompiler", "java", "deobfuscation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3027,6 +3193,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk")
+    Tags = @("disk-forensics", "filesystem", "forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3046,6 +3214,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".png", ".svg")
+    Tags = @("qr-code", "encoding", "decoding")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3073,6 +3243,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("malware-analysis", "pe-analysis", "deobfuscation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3086,6 +3258,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("text-editor")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3113,6 +3287,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db")
+    Tags = @("windows", "forensics", "thumbnails")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3140,6 +3316,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json")
+    Tags = @("json", "data-processing", "grep")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3167,6 +3345,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dmp", ".raw", ".vmem", ".img")
+    Tags = @("memory-forensics", "filesystem")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3194,6 +3374,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf")
+    Tags = @("packing", "pe-analysis", "compression")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3221,6 +3403,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json", ".csv")
+    Tags = @("incident-response", "forensics", "endpoint-detection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3234,6 +3418,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "triage")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3261,6 +3447,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pcap", ".pcapng", ".mp4", ".mp3", ".flac", ".zip", ".tar", ".gif", ".png")
+    Tags = @("data-processing", "binary-analysis", "file-format")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3288,6 +3476,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db", ".sqlite", ".sqlite3")
+    Tags = @("database", "sqlite", "forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3315,6 +3505,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".evtx", ".json")
+    Tags = @("log-analysis", "sigma", "detection", "incident-response")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3347,6 +3539,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".bin", ".hex", ".elf")
+    Tags = @("hex-editor", "binary-analysis", "pattern-language")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3374,6 +3568,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "incident-response", "sigma", "detection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3413,6 +3609,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
+    Tags = @("yara", "malware-analysis", "detection", "signatures")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3440,6 +3638,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
+    Tags = @("yara", "malware-analysis", "detection", "signatures")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3467,6 +3667,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".yaml", ".yml", ".json", ".xml", ".toml")
+    Tags = @("yaml", "data-processing", "cli")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3494,6 +3696,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("reverse-engineering", "debugging", "dynamic-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3521,6 +3725,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "event-log", "sigma", "detection", "timeline", "incident-response")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3548,6 +3754,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json")
+    Tags = @("log-analysis", "hayabusa", "timeline")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3575,6 +3783,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("web", "security-testing", "proxy")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3588,6 +3798,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("text-editor")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3615,6 +3827,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db", ".sqlite", ".sqlite3")
+    Tags = @("database", "sqlite", "gui")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3628,6 +3842,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".dmp")
+    Tags = @("debugging", "memory-forensics", "dotnet")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3649,6 +3865,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".yar", ".yara")
+    Tags = @("yara", "rule-generation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3662,6 +3880,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "data-processing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3675,6 +3895,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "project-management")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3688,6 +3910,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3701,6 +3925,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3714,6 +3940,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "automation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3727,6 +3955,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "task-management")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3740,6 +3970,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "drawing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3753,6 +3985,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3766,6 +4000,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "timeline")
     Notes = ""
     Tips = ""
     Usage = ""

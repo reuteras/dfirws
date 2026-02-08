@@ -83,6 +83,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "DOS"
         }
     )
+    FileExtensions = @(".ps1", ".py", ".js", ".ts", ".json", ".xml", ".yaml", ".md")
+    Tags = @("text-editor", "ide", "powershell")
     Notes = "Visual Studio Code is a source-code editor."
     Tips = "After installation, you can add more extensions via Visual Studio Code Marketplace."
     Usage = "Visual Studio Code is a source-code editor made by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring."
@@ -1031,6 +1033,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".sys")
+    Tags = @("windows", "debugging", "monitoring", "system-administration")
     Notes = "Sysinternals Suite is a collection of utilities for Windows."
     Tips = "Sysinternals Suite is installed in ${TOOLS}\sysinternals."
     Usage = "Sysinternals Suite is a collection of utilities for Windows. It includes tools for process management, file system analysis, network monitoring, and more."
@@ -1158,6 +1162,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".jpg", ".jpeg", ".png", ".gif", ".tiff", ".pdf", ".doc", ".docx", ".mp4")
+    Tags = @("metadata", "file-analysis", "image")
     Notes = "ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files."
     Tips = "ExifTool is installed in ${TOOLS}\exiftool."
     Usage = ""
@@ -1201,6 +1207,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".sys")
+    Tags = @("pe-analysis", "malware-analysis", "static-analysis")
     Notes = "pestudio is a tool for analyzing PE files."
     Tips = "After installation, you can use pestudio to analyze PE files."
     Usage = "pestudio is a tool for analyzing PE files. It provides detailed information about the structure and content of Portable Executable (PE) files."
@@ -1245,6 +1253,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".bin", ".hex")
+    Tags = @("hex-editor", "binary-analysis")
     Notes = "HxD is a hex editor, disk editor, and memory editor for Windows."
     Tips = "HxD is installed in ${env:ProgramFiles}\HxD."
     Usage = "HxD is a hex editor, disk editor, and memory editor for Windows. It allows you to view and edit binary files, disks, and memory."
@@ -1290,6 +1300,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("file-identification")
     Notes = "TrID is a file identifier utility."
     Tips = "TrID is installed in ${TOOLS}\trid."
     Usage = "TrID is a file identifier utility that can identify file types based on their binary signatures."
@@ -1334,6 +1346,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".sys")
+    Tags = @("pe-analysis", "malware-analysis", "hex-editor", "disassembler")
     Notes = "Malcat is a malware analysis and reverse engineering tool."
     Tips = "Beside these limitations (missing features), please not that the lite edition cannot be used in a professional environment."
     Usage = "Malcat is a malware analysis and reverse engineering tool that provides various features for analyzing binary files."
@@ -1378,6 +1392,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".doc", ".xls", ".ppt", ".msg")
+    Tags = @("office", "ole", "data-extraction")
     Notes = "Full-featured MS OLE Structured Storage based file management tool."
     Tips = "SSView is installed in ${TOOLS}\ssview."
     Usage = "This tool allows to completely manage any MS OLE Structured Storage based file. You can save and load streams, add, delete, rename and edit items and property sets. Embedded streams can be viewed as hexadecimal listing or text or interpreted as pictures, RTF or HTML."
@@ -1422,6 +1438,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "event-log", "windows")
     Notes = "FullEventLogView is a tool for viewing Windows event logs."
     Tips = "FullEventLogView is installed in ${TOOLS}\FullEventLogView."
     Usage = "FullEventLogView allows you to view and export Windows event logs from local and remote computers."
@@ -1469,6 +1487,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pst")
+    Tags = @("email", "forensics", "outlook")
     Notes = "PST Walker is a tool for analyzing PST files."
     Tips = "PST Walker is installed in ${TOOLS}\pstwalker."
     Usage = "PST Walker is a tool for analyzing PST files. It allows you to view and extract data from PST files."
@@ -1519,6 +1539,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "windows", "api")
     Notes = "Win API Search is a tool for searching Windows API functions."
     Tips = "Win API Search is installed in ${TOOLS}\WinApiSearch."
     Usage = "Win API Search allows you to search for Windows API functions and view their documentation."
@@ -1556,6 +1578,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pdf")
+    Tags = @("pdf", "malware-analysis", "javascript")
     Notes = "PDFStreamDumper is a tool for inspecting PDF files."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "PDFStreamDumper helps analyze PDF structure and embedded streams."
@@ -1614,6 +1638,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".eml", ".msg")
+    Tags = @("email", "forensics")
     Notes = "Mail Viewer is a tool for viewing email files and mailboxes."
     Tips = "Mail Viewer is installed in ${TOOLS}\MailView."
     Usage = "Use Mail Viewer to inspect emails and mail archives."
@@ -1657,6 +1683,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dmp", ".raw", ".vmem", ".img")
+    Tags = @("memory-forensics", "gui")
     Notes = "Volatility Workbench is a GUI for the Volatility memory analysis framework."
     Tips = "Volatility Workbench 3 is installed in ${TOOLS}\VolatilityWorkbench."
     Usage = "Use Volatility Workbench to manage memory images and run Volatility plugins."
@@ -1700,6 +1728,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dmp", ".raw", ".vmem", ".img")
+    Tags = @("memory-forensics", "gui")
     Notes = "Volatility Workbench is a GUI for the Volatility memory analysis framework."
     Tips = "Volatility Workbench 2.1 is installed in ${TOOLS}\VolatilityWorkbench2."
     Usage = "Use Volatility Workbench to manage memory images and run Volatility plugins."
@@ -1882,6 +1912,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db", ".sqlite")
+    Tags = @("browser-forensics", "artifact-extraction")
     Notes = "NirSoft browser utilities for cache and history analysis."
     Tips = "Tools are installed in ${TOOLS}\nirsoft."
     Usage = "Use these utilities to inspect browser artifacts."
@@ -1911,6 +1943,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".raw", ".aff4")
+    Tags = @("memory-forensics", "acquisition")
     Notes = "winpmem is a Windows memory acquisition driver."
     Tips = "The driver is downloaded to C:\downloads."
     Usage = "Use winpmem with compatible acquisition tools."
@@ -1948,6 +1982,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".dylib")
+    Tags = @("reverse-engineering", "disassembler", "decompiler")
     Notes = "Binary Ninja is a reverse engineering platform."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "Use Binary Ninja to analyze binaries."
@@ -1985,6 +2021,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".gpg", ".asc", ".pgp")
+    Tags = @("encryption", "pgp", "signing")
     Notes = "Gpg4win provides GnuPG and related tools for Windows."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "Gpg4win includes GPG, Kleopatra, and other tools for encryption and signing."
@@ -2023,6 +2061,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".html", ".htm")
+    Tags = @("browser", "privacy", "network")
     Notes = "Tor Browser is a privacy-focused web browser based on Firefox."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "Tor Browser routes traffic through the Tor network for privacy."
@@ -2069,6 +2109,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("timestamp", "forensics", "decoding")
     Notes = "DCode is a date/time conversion and analysis tool."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "DCode helps convert and analyze timestamps across formats and timezones."
@@ -2107,6 +2149,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".hc", ".tc")
+    Tags = @("encryption", "disk-encryption")
     Notes = "VeraCrypt is a disk encryption tool."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "VeraCrypt enables encrypted containers and full-disk encryption."
@@ -2149,6 +2193,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "ASCII"
         }
     )
+    FileExtensions = @()
+    Tags = @("database", "graph", "visualization")
     Notes = "Neo4j is a graph database."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "Neo4j stores data as nodes and relationships for graph analysis."
@@ -2192,6 +2238,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".bin")
+    Tags = @("binary-analysis", "carving")
     Notes = "recbin parses Windows Recycle Bin files."
     Tips = "recbin is installed in ${TOOLS}\bin."
     Usage = "Use recbin to parse `$I` and INFO2 files."
@@ -2235,6 +2283,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "HTML"
         }
     )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("malware-analysis", "capability-analysis", "visualization")
     Notes = "capa Explorer Web is a web UI for exploring capa results."
     Tips = "Open the HTML file in a browser."
     Usage = "Use it to explore capa output."
@@ -2274,6 +2324,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".ods", ".odp")
+    Tags = @("office", "document-viewer")
     Notes = "LibreOffice is a free and open-source office suite."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "LibreOffice provides Writer, Calc, Impress, and other office tools."
@@ -2298,6 +2350,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".pcap", ".pcapng")
+    Tags = @("network-analysis", "packet-capture")
     Notes = "Npcap packet capture driver installer."
     Tips = "This is a manual install."
     Usage = "Install Npcap to enable packet capture tools."
@@ -2339,6 +2393,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".db", ".sqlite", ".sqlite3")
+    Tags = @("database", "sqlite", "cli")
     Notes = "SQLite command-line tools."
     Tips = "Tools are installed in ${TOOLS}\sqlite."
     Usage = "Use sqlite3 and companion tools to inspect SQLite databases."
@@ -2368,6 +2424,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "MSI Installer"
         }
     )
+    FileExtensions = @(".ovpn")
+    Tags = @("vpn", "network")
     Notes = "OpenVPN Connect installer."
     Tips = "This is a manual install."
     Usage = "Install the MSI to use OpenVPN Connect."
@@ -2412,6 +2470,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dd", ".raw", ".E01", ".img")
+    Tags = @("forensics", "carving", "data-extraction")
     Notes = "bulk_extractor extracts features such as email addresses and URLs from disk images."
     Tips = "bulk_extractor is installed in ${TOOLS}\bulk_extractor."
     Usage = "Use bulk_extractor for bulk feature extraction from disk images and files."
@@ -2458,6 +2518,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll", ".bin")
+    Tags = @("malware-analysis", "entropy-analysis")
     Notes = "DensityScout calculates file entropy and density."
     Tips = "DensityScout is installed in ${TOOLS}\bin."
     Usage = "Use DensityScout to compute entropy-like metrics on files."
@@ -2499,6 +2561,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("network-analysis", "port-scanning", "reconnaissance")
     Notes = "Nmap is a network exploration and security auditing tool."
     Tips = "Nmap is installed in ${TOOLS}\nmap."
     Usage = "Use Nmap to scan hosts and services."
@@ -2543,6 +2607,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".asm")
+    Tags = @("reverse-engineering", "assembler")
     Notes = "FASM is a fast assembler for x86 and x86-64 architectures."
     Tips = "FASM is installed in ${TOOLS}\fasm."
     Usage = "Use FASM to assemble x86/x64 source code."
@@ -2566,6 +2632,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("terminal", "shell")
     Notes = "Windows Terminal Canary package."
     Tips = "This is downloaded during setup."
     Usage = "Use Windows Terminal for shell access."
@@ -2610,6 +2678,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".csv", ".log")
+    Tags = @("malware-analysis", "visualization", "dynamic-analysis")
     Notes = "ProcDOT is a visual malware analysis tool for process, file, and network activity."
     Tips = "ProcDOT is installed in ${TOOLS}\procdot."
     Usage = "Use ProcDOT to visualize procmon logs."
@@ -2657,6 +2727,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".json")
+    Tags = @("geolocation", "osint")
     Notes = "geolocus-cli is a geolocation lookup tool."
     Tips = "geolocus-cli is installed in ${TOOLS}\bin."
     Usage = "Use geolocus-cli for IP geolocation lookups."
@@ -2695,6 +2767,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dot", ".gv")
+    Tags = @("visualization", "graph")
     Notes = "Graphviz is a graph visualization software suite."
     Tips = "Graphviz is installed via its MSI and adds tools like dot."
     Usage = "Use dot to render graphs from DOT files."
@@ -2729,6 +2803,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("reverse-engineering", "api-tracing", "dynamic-analysis")
     Notes = "API Monitor is a tool for monitoring Windows API calls."
     Tips = "After installation, API Monitor is added to the system path."
     Usage = "Use API Monitor to trace API calls in processes."
@@ -2761,6 +2837,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".jar")
+    Tags = @("java", "gui", "runtime")
     Notes = "JavaFX SDK provides UI libraries for Java applications."
     Tips = "JavaFX SDK is installed in ${TOOLS}\javafx-sdk."
     Usage = "Use JavaFX SDK with Java development."
@@ -2803,6 +2881,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "Zip archive data"
         }
     )
+    FileExtensions = @(".apk")
+    Tags = @("reverse-engineering", "android", "decompiler")
     Notes = "apktool is a tool for reverse engineering Android APK files."
     Tips = "apktool is installed in ${TOOLS}\bin."
     Usage = "Use apktool to decode and rebuild APK files."
@@ -2847,6 +2927,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".php")
+    Tags = @("scripting", "web")
     Notes = "PHP is a scripting language widely used for web development."
     Tips = "PHP is installed in ${TOOLS}\php."
     Usage = "Use PHP to run scripts and utilities."
@@ -2893,6 +2975,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("password-cracking", "hashing")
     Notes = "hashcat is a password recovery tool."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "hashcat supports GPU-accelerated password recovery."
@@ -2925,6 +3009,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".vmss", ".vmsn")
+    Tags = @("memory-forensics", "vmware", "conversion")
     Notes = "vmss2core converts VM snapshot files to core dumps."
     Tips = "vmss2core is installed in ${TOOLS}\bin."
     Usage = "Use vmss2core to convert VMware snapshots for debugging."
@@ -2956,6 +3042,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".dmp")
+    Tags = @("debugging", "windbg", "dotnet")
     Notes = "MEX is an extension for WinDbg."
     Tips = "MEX is installed in ${TOOLS}\mex."
     Usage = "Use MEX with WinDbg."
@@ -2990,6 +3078,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".json", ".log")
+    Tags = @("siem", "log-analysis", "elasticsearch", "visualization")
     Notes = "Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats."
     Tips = "Packages are downloaded to ${SETUP_PATH}."
     Usage = "Use the downloaded zips to install ELK components."

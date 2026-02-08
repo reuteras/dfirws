@@ -144,6 +144,16 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
         lines.append(f"**Topics:** {', '.join(topics)}")
         lines.append("")
 
+    file_exts = tool.get("FileExtensions")
+    if isinstance(file_exts, list) and file_exts:
+        lines.append(f"**File Extensions:** {', '.join(f'`{e}`' for e in file_exts)}")
+        lines.append("")
+
+    tags = tool.get("Tags")
+    if isinstance(tags, list) and tags:
+        lines.append(f"**Tags:** {', '.join(tags)}")
+        lines.append("")
+
     summary = get_tool_summary(tool)
     if summary:
         lines.append(summary)

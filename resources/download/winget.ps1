@@ -133,6 +133,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = "dfirws-install.ps1 -Autopsy"
     Verify = @()
+    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk")
+    Tags = @("disk-forensics", "forensics", "gui", "artifact-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -154,6 +156,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = "dfirws-install.ps1 -BurpSuite"
     Verify = @()
+    FileExtensions = @()
+    Tags = @("web", "security-testing", "proxy")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -181,6 +185,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".html", ".htm", ".js", ".css")
+    Tags = @("browser", "web")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -202,6 +208,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = "dfirws-install.ps1 -Docker"
     Verify = @()
+    FileExtensions = @()
+    Tags = @("containers", "virtualization")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -215,6 +223,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("dotnet", "runtime")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -228,6 +238,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("dotnet", "runtime")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -247,6 +259,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".ico", ".webp")
+    Tags = @("image-viewer", "multimedia")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -274,6 +288,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @()
     Notes = ""
     Tips = ""
     Usage = ""
@@ -295,6 +311,8 @@ $TOOL_DEFINITIONS += @{
     )
     InstallVerifyCommand = "dfirws-install.ps1 -OhMyPosh"
     Verify = @()
+    FileExtensions = @()
+    Tags = @("terminal", "shell", "theming")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -308,6 +326,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".ps1", ".psm1", ".psd1")
+    Tags = @("scripting", "shell", "automation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -335,6 +355,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("ssh", "network", "terminal")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -354,6 +376,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".qcow2", ".vmdk", ".vdi", ".img", ".iso")
+    Tags = @("virtualization", "emulation")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -373,6 +397,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".rb")
+    Tags = @("scripting", "ruby")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -400,6 +426,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".mp4", ".avi", ".mkv", ".mov", ".mp3", ".wav", ".flac")
+    Tags = @("multimedia", "video", "audio")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -427,6 +455,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("malware-analysis", "threat-intelligence", "ioc-scanner")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -454,6 +484,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("diff", "file-comparison")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -467,6 +499,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".ovpn")
+    Tags = @("vpn", "network")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -494,6 +528,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".kml", ".kmz")
+    Tags = @("geolocation", "osint", "visualization")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -521,6 +557,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk", ".iso")
+    Tags = @("disk-forensics", "mounting", "filesystem")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -534,6 +572,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @()
+    Tags = @("vpn", "network")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -561,6 +601,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pcap", ".pcapng", ".cap")
+    Tags = @("network-analysis", "pcap", "protocol-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -580,6 +622,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @()
+    Tags = @("vpn", "network")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -607,6 +651,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".html", ".htm", ".js", ".css")
+    Tags = @("browser", "web")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -634,6 +680,8 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
+    FileExtensions = @(".pdf")
+    Tags = @("pdf", "viewer")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -647,6 +695,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
+    FileExtensions = @(".py")
+    Tags = @("python", "package-management")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -660,6 +710,8 @@ $TOOL_DEFINITIONS += @{
     Shortcuts = @()
     InstallVerifyCommand = "dfirws-install.ps1 -Windbg"
     Verify = @()
+    FileExtensions = @(".dmp", ".exe", ".dll", ".sys")
+    Tags = @("debugging", "memory-forensics", "kernel")
     Notes = ""
     Tips = ""
     Usage = ""
