@@ -761,6 +761,24 @@ function Install-OhMyPosh {
     }
 }
 
+function Install-Neovim {
+    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-neovim.txt")) {
+        Write-Output "Installing Neovim"
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\neovim.msi /qn /norestart"
+        Add-ToUserPath "${env:ProgramFiles}\neovim\bin"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Neovim.lnk" -DestinationPath "${env:ProgramFiles}\neovim\bin\nvim.exe" -WorkingDirectory "${HOME}\Desktop"
+        if (Test-Path "${HOME}\Desktop\dfirws\Editors\Neovim (runs dfirws-install -Neovim).lnk") {
+            Remove-Item "${HOME}\Desktop\dfirws\Editors\Neovim (runs dfirws-install -Neovim).lnk" -Force
+        }
+        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Editors\Neovim (runs dfirws-install -Neovim).lnk") {
+            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Editors\Neovim (runs dfirws-install -Neovim).lnk" -Force
+        }
+        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-neovim.txt" | Out-Null
+    } else {
+        Write-Output "Neovim is already installed"
+    }
+}
+
 function Install-PDFStreamDumper {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-pdfstreamdumper.txt")) {
         Write-Output "Installing PDFStreamDumper"

@@ -563,6 +563,7 @@
         "NTUSER",
         "numpy",
         "nupkg",
+        "nvim",
         "obsidianforensics",
         "OEMRET",
         "OHMYPOSH",
@@ -695,6 +696,7 @@
         "pyjwt",
         "pylupdate",
         "pymispwarninglists",
+        "pynvim",
         "pyonenote",
         "pyparsing",
         "pypdf",
@@ -1011,7 +1013,7 @@
     "python-envs.pythonProjects": [
         {
             "path": "",
-            "envManager": "ms-python.python:system",
+            "envManager": "ms-python.python:venv",
             "packageManager": "ms-python.python:pip"
         }
     ]

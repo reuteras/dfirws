@@ -87,8 +87,11 @@ Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandb
 Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Notepad++ and plugins
-& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
-Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+if ("${WSDFIR_NOTEPAD}" -eq "Yes") {
+	& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
+	Add-ToUserPath "${env:ProgramFiles}\Notepad++"
+	Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 
 #
 # Configure the sandbox
@@ -272,7 +275,6 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${env:ProgramFiles}\iisGeolocate"
 	"${env:ProgramFiles}\KAPE"
 	"${env:ProgramFiles}\loki"
-	"${env:ProgramFiles}\Notepad++"
 	"${env:ProgramFiles}\RegistryExplorer"
 	"${env:ProgramFiles}\ShellBagsExplorer"
 	"${env:ProgramFiles}\TimelineExplorer"

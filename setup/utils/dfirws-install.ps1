@@ -28,6 +28,7 @@ param (
     [switch]$LogBoost,
     [switch]$Loki,
     [switch]$Neo4j,
+    [switch]$Neovim,
     [switch]$Node,
     [switch]$Obsidian,
     [switch]$OhMyPosh,
@@ -159,6 +160,10 @@ if ($Loki.IsPresent) {
 
 if ($Neo4j.IsPresent) {
     Install-Neo4j
+}
+
+if ($Neovim.IsPresent) {
+    Install-Neovim
 }
 
 if ($Node.IsPresent) {

@@ -104,6 +104,7 @@ foreach ($package in `
     "ptpython", `
     "pwncat", `
     "pyghidra", `
+    "pynvim", `
     "pyOneNote", `
     "pypng", `
     "rexi", `

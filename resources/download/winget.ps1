@@ -5,116 +5,6 @@ $TOOL_DEFINITIONS = @()
 Write-SynchronizedLog "winget: Downloading Autopsy."
 $status = Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi" -check "Composite Document File V2 Document"
 
-# Burp suite - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Burp Suite."
-$status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe" -check "PE32"
-
-# Chrome - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Chrome."
-$status = Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi" -check "Composite Document File V2 Document"
-
-# DotNet 6 Desktop runtime - installed during startup
-Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
-$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
-
-# DotNet 8 Desktop runtime - installed during startup
-Write-SynchronizedLog "winget: Downloading DotNet 8 Desktop runtime."
-$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.8" "Microsoft*.exe" "dotnet8desktop.exe" -check "PE32"
-
-# IrfanView - installed during startup
-Write-SynchronizedLog "winget: Downloading IrfanView."
-$status = Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe" -check "PE32"
-
-# Obsidian - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Obsidian."
-$status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "PE32"
-
-# oh-my-posh - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading oh-my-posh."
-$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.msi" "oh-my-posh.msi" -check "Zip archive data"
-
-# PowerShell 7 - installed during startup
-Write-SynchronizedLog "winget: Downloading PowerShell 7."
-$status = Get-WinGet "Microsoft.PowerShell" "PowerShell*.msi" "powershell.msi" -check "Composite Document File V2 Document"
-
-# Putty - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Putty."
-$status = Get-WinGet "PuTTY.PuTTY" "PuTTY*.msi" "putty.msi" -check "Composite Document File V2 Document"
-
-# Qemu - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Qemu."
-$status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -check "PE32"
-
-# Ruby - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Ruby."
-$status = Get-WinGet "RubyInstallerTeam.Ruby.3.4" "Ruby*.exe" "ruby.exe" -check "PE32"
-
-# VideoLAN VLC - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading VLC."
-$status = Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe" -check "PE32"
-
-# VirusTotal CLI
-Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
-$status = Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
-}
-
-# WinMerge - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading WinMerge."
-$status = Get-WinGet "WinMerge.WinMerge" "WinMerge*.exe" "winmerge.exe" -check "PE32"
-
-# OpenVPN - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading OpenVPN."
-$status = Get-WinGet "OpenVPNTechnologies.OpenVPNConnect" "OpenVPN*.msi" "openvpn.msi" -check "Composite Document File V2 Document"
-
-# Google Earth Pro - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Google Earth Pro."
-$status = Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe" -check "PE32"
-
-# Passmark OSFMount - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading OSFMount."
-$status = Get-WinGet "PassmarkSoftware.OSFMount" "OSFMount*.exe" "osfmount.exe" -check "PE32"
-
-# WireGuard.WireGuard - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading WireGuard."
-$status = Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi" -check "Composite Document File V2 Document"
-
-# Wireshark - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Wireshark."
-$status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.exe" "wireshark.exe" -check "PE32"
-
-# tailscale - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Tailscale."
-$status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
-
-# Firefox - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Firefox."
-$status = Get-WinGet "Mozilla.Firefox" "Firefox*.exe" "firefox.exe" -check "PE32"
-
-# Foxit PDF Reader - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Foxit PDF Reader."
-$status = Get-WinGet "Foxit.FoxitReader" "Foxit*.exe" "foxitreader.exe" -check "PE32"
-
-# uv - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading uv."
-$status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
-}
-
-# Windbg - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Windbg."
-$status = Get-WinGet "Microsoft.WinDbg" "WinDbg*.msi" "windbg.msi" -check "Zip archive data"
-
-Write-SynchronizedLog "winget: Download complete."
-
-#
-# Tool definitions for documentation generation.
-# Fill in the dfirws-specific fields below. Auto-extracted metadata (Homepage,
-# Vendor, License) comes from the winget cache via extract-tool-metadata.py.
-#
-
 $TOOL_DEFINITIONS += @{
     Name = "Autopsy"
     Category = "Forensics"
@@ -138,6 +28,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# Burp suite - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Burp Suite."
+$status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "Burp Suite"
     Category = "Network"
@@ -160,6 +54,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# Chrome - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Chrome."
+$status = Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi" -check "Composite Document File V2 Document"
 
 $TOOL_DEFINITIONS += @{
     Name = "Chrome"
@@ -190,28 +88,9 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
-$TOOL_DEFINITIONS += @{
-    Name = "Docker Desktop"
-    Category = "Utilities"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Docker"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -Docker"
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("containers", "virtualization")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
+# DotNet 6 Desktop runtime - installed during startup
+Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
+$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
 
 $TOOL_DEFINITIONS += @{
     Name = "DotNet 6 Desktop Runtime"
@@ -228,6 +107,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# DotNet 8 Desktop runtime - installed during startup
+Write-SynchronizedLog "winget: Downloading DotNet 8 Desktop runtime."
+$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.8" "Microsoft*.exe" "dotnet8desktop.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "DotNet 8 Desktop Runtime"
     Category = "Programming\dotNET"
@@ -242,6 +125,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# IrfanView - installed during startup
+Write-SynchronizedLog "winget: Downloading IrfanView."
+$status = Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe" -check "PE32"
 
 $TOOL_DEFINITIONS += @{
     Name = "IrfanView"
@@ -263,6 +150,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# Obsidian - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Obsidian."
+$status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "PE32"
 
 $TOOL_DEFINITIONS += @{
     Name = "Obsidian"
@@ -293,6 +184,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# oh-my-posh - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading oh-my-posh."
+$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.msi" "oh-my-posh.msi" -check "Zip archive data"
+
 $TOOL_DEFINITIONS += @{
     Name = "oh-my-posh"
     Category = "Utilities"
@@ -316,6 +211,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# PowerShell 7 - installed during startup
+Write-SynchronizedLog "winget: Downloading PowerShell 7."
+$status = Get-WinGet "Microsoft.PowerShell" "PowerShell*.msi" "powershell.msi" -check "Composite Document File V2 Document"
+
 $TOOL_DEFINITIONS += @{
     Name = "PowerShell 7"
     Category = "Programming\PowerShell"
@@ -330,6 +229,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# Putty - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Putty."
+$status = Get-WinGet "PuTTY.PuTTY" "PuTTY*.msi" "putty.msi" -check "Composite Document File V2 Document"
 
 $TOOL_DEFINITIONS += @{
     Name = "PuTTY"
@@ -360,6 +263,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# Qemu - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Qemu."
+$status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "QEMU"
     Category = "Files and apps"
@@ -381,6 +288,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# Ruby - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Ruby."
+$status = Get-WinGet "RubyInstallerTeam.Ruby.3.4" "Ruby*.exe" "ruby.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "Ruby"
     Category = "Programming\Ruby"
@@ -401,6 +312,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# VideoLAN VLC - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading VLC."
+$status = Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe" -check "PE32"
 
 $TOOL_DEFINITIONS += @{
     Name = "VLC"
@@ -429,6 +344,13 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+}
+
+# VirusTotal CLI
+Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
+$status = Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip" -check "Zip archive data"
+if ($status) {
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -460,6 +382,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# WinMerge - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading WinMerge."
+$status = Get-WinGet "WinMerge.WinMerge" "WinMerge*.exe" "winmerge.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "WinMerge"
     Category = "Files and apps"
@@ -489,6 +415,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# OpenVPN - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading OpenVPN."
+$status = Get-WinGet "OpenVPNTechnologies.OpenVPNConnect" "OpenVPN*.msi" "openvpn.msi" -check "Composite Document File V2 Document"
+
 $TOOL_DEFINITIONS += @{
     Name = "OpenVPN"
     Category = "Network"
@@ -503,6 +433,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# Google Earth Pro - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Google Earth Pro."
+$status = Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe" -check "PE32"
 
 $TOOL_DEFINITIONS += @{
     Name = "Google Earth Pro"
@@ -533,6 +467,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# Passmark OSFMount - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading OSFMount."
+$status = Get-WinGet "PassmarkSoftware.OSFMount" "OSFMount*.exe" "osfmount.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "OSFMount"
     Category = "Files and apps\Disk"
@@ -562,6 +500,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# WireGuard.WireGuard - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading WireGuard."
+$status = Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi" -check "Composite Document File V2 Document"
+
 $TOOL_DEFINITIONS += @{
     Name = "WireGuard"
     Category = "Network"
@@ -576,6 +518,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# Wireshark - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Wireshark."
+$status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.exe" "wireshark.exe" -check "PE32"
 
 $TOOL_DEFINITIONS += @{
     Name = "Wireshark"
@@ -606,6 +552,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# tailscale - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Tailscale."
+$status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "Tailscale"
     Category = "Network"
@@ -626,6 +576,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# Firefox - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Firefox."
+$status = Get-WinGet "Mozilla.Firefox" "Firefox*.exe" "firefox.exe" -check "PE32"
 
 $TOOL_DEFINITIONS += @{
     Name = "Firefox"
@@ -656,6 +610,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# Foxit PDF Reader - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Foxit PDF Reader."
+$status = Get-WinGet "Foxit.FoxitReader" "Foxit*.exe" "foxitreader.exe" -check "PE32"
+
 $TOOL_DEFINITIONS += @{
     Name = "Foxit PDF Reader"
     Category = "Files and apps\PDF"
@@ -685,6 +643,13 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# uv - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading uv."
+$status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
+if ($status) {
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
+}
+
 $TOOL_DEFINITIONS += @{
     Name = "uv"
     Category = "Programming\Python"
@@ -700,6 +665,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
 }
 
+# Windbg - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Windbg."
+$status = Get-WinGet "Microsoft.WinDbg" "WinDbg*.msi" "windbg.msi" -check "Zip archive data"
+
 $TOOL_DEFINITIONS += @{
     Name = "WinDbg"
     Category = "Reverse Engineering"
@@ -714,5 +683,44 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
 }
+
+# Neovim - available for installation via dfirws-install.ps1
+Write-SynchronizedLog "winget: Downloading Neovim."
+$status = Get-WinGet "Neovim.Neovim" "nvim*.msi" "nvim.msi"
+if ($status) {
+    Copy-Item -Path ".\downloads\nvim.msi\Neovim*.msi" -Destination ".\downloads\neovim.msi" -Force
+    Remove-Item -Path ".\downloads\nvim.msi" -Force -Recurse
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Neovim"
+    Category = "Editors"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\Neovim (runs dfirws-install -Neovim).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Neovim"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Neovim"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "nvim"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".txt", ".md", ".log", ".ps1", ".py", ".rb", ".js")
+    Tags = @("text-editor", "code-editor", "terminal")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+Write-SynchronizedLog "winget: Download complete."
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "winget"
