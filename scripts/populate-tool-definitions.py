@@ -24,6 +24,10 @@ DOWNLOAD_FILES = [
     BASE_DIR / "resources" / "download" / "release.ps1",
     BASE_DIR / "resources" / "download" / "winget.ps1",
     BASE_DIR / "resources" / "download" / "python.ps1",
+    BASE_DIR / "resources" / "download" / "go.ps1",
+    BASE_DIR / "resources" / "download" / "node.ps1",
+    BASE_DIR / "resources" / "download" / "rust.ps1",
+    BASE_DIR / "resources" / "download" / "msys2.ps1",
 ]
 
 
@@ -274,6 +278,38 @@ VERIFY_OVERRIDES: Dict[str, List[str]] = {
     "pypng": ["C:\\venv\\bin\\priweavepng.py Python"],
     "unpy2exe": ["C:\\venv\\bin\\unpy2exe.py Python"],
     "xlrd": ["C:\\venv\\bin\\runxlrd.py Python"],
+    # --- go.ps1 tools ---
+    "protodump": [],
+    # --- node.ps1 tools ---
+    "box-js": [],
+    "deobfuscator": [],
+    "docsify-cli": [],
+    "jsdom": [],
+    "LUMEN": [],
+    # --- rust.ps1 tools ---
+    "dfir-toolkit": [
+        "cleanhive PE32",
+        "evtx2bodyfile PE32",
+        "evtxanalyze PE32",
+        "evtxcat PE32",
+        "evtxls PE32",
+        "evtxscan PE32",
+        "hivescan PE32",
+        "ipgrep PE32",
+        "lnk2bodyfile PE32",
+        "mactime2 PE32",
+        "pf2bodyfile PE32",
+        "pol_export PE32",
+        "regdump PE32",
+        "ts2date PE32",
+        "zip2bodyfile PE32",
+    ],
+    "usnjrnl": ["usnjrnl_dump PE32"],
+    "mft2bodyfile": ["mft2bodyfile PE32"],
+    "CuTE-tui": ["cute PE32"],
+    "SSHniff": ["sshniff PE32"],
+    # --- msys2.ps1 tools ---
+    "MSYS2": ["msys2 PE32", "bash PE32", "gcc PE32", "gdb PE32"],
 }
 
 # tool def Name -> dfirws category path
@@ -548,6 +584,22 @@ CATEGORY_MAP: Dict[str, str] = {
     "dfir-unfurl": "Files and apps\\Browser",
     "hexdump": "Utilities",
     "maclookup": "Network",
+    # --- go.ps1 tools ---
+    "protodump": "Utilities\\Cryptography",
+    # --- node.ps1 tools ---
+    "box-js": "Files and apps\\JavaScript",
+    "deobfuscator": "Files and apps\\JavaScript",
+    "docsify-cli": "Utilities",
+    "jsdom": "Files and apps\\JavaScript",
+    "LUMEN": "Files and apps\\Log",
+    # --- rust.ps1 tools ---
+    "dfir-toolkit": "Forensics",
+    "usnjrnl": "OS\\Windows",
+    "mft2bodyfile": "Files and apps\\Disk",
+    "CuTE-tui": "Utilities",
+    "SSHniff": "Network",
+    # --- msys2.ps1 tools ---
+    "MSYS2": "Programming",
 }
 
 # tool def Name -> dfirws-install.ps1 parameter name
@@ -583,6 +635,20 @@ INSTALL_CMD_MAP: Dict[str, str] = {
     "WinDbg": "Windbg",
     "WinMerge": "WinMerge",
     "Wireshark": "Wireshark",
+    # go.ps1
+    "protodump": "GoLang",
+    # node.ps1
+    "box-js": "Node",
+    "deobfuscator": "Node",
+    "docsify-cli": "Node",
+    "jsdom": "Node",
+    "LUMEN": "Node",
+    # rust.ps1
+    "dfir-toolkit": "Rust",
+    "usnjrnl": "Rust",
+    "mft2bodyfile": "Rust",
+    "CuTE-tui": "Rust",
+    "SSHniff": "Rust",
 }
 
 # Shortcut overrides: tool name -> list of (category, shortcut_name) tuples
@@ -766,6 +832,36 @@ SHORTCUT_OVERRIDES: Dict[str, List[Tuple[str, str]]] = {
         ("Forensics", "target-query.exe (dissect)"),
         ("Forensics", "target-shell.exe (dissect)"),
     ],
+    # --- go.ps1 tools ---
+    "protodump": [],
+    # --- node.ps1 tools ---
+    "box-js": [("Files and apps\\JavaScript", "box-js (is a utility to analyze malicious JavaScript files)")],
+    "deobfuscator": [("Files and apps\\JavaScript", "deobfuscator (synchrony)")],
+    "docsify-cli": [],
+    "jsdom": [("Files and apps\\JavaScript", "jsdom (opens README in Notepad++)")],
+    "LUMEN": [("Files and apps\\Log", "Lumen (Browser-based EVTX Companion)")],
+    # --- rust.ps1 tools ---
+    "dfir-toolkit": [
+        ("Files and apps\\Log", "cleanhive (merges logfiles into a hive file - dfir-toolkit)"),
+        ("Files and apps\\Log", "evtvenv x2bodyfile (creates bodyfile from Windows evtx files - dfir-toolkit)"),
+        ("Files and apps\\Log", "evtxanalyze (crate provide functions to analyze evtx files - dfir-toolkit)"),
+        ("Files and apps\\Log", "evtxcat (Display one or more events from an evtx file - dfir-toolkit)"),
+        ("Files and apps\\Log", "evtxls (Display one or more events from an evtx file - dfir-toolkit)"),
+        ("Files and apps\\Log", "evtxscan (Find time skews in an evtx file - dfir-toolkit)"),
+        ("Files and apps\\Log", "ipgrep (search for IP addresses in text files - dfir-toolkit)"),
+        ("Files and apps\\Log", "pf2bodyfile.exe (creates bodyfile from Windows Prefetch files - dfir-toolkit)"),
+        ("Files and apps\\Disk", "mactime2 (replacement for mactime - dfir-toolkit)"),
+        ("Files and apps\\Disk", "mft2bodyfile (parses an MFT file (and optionally the corresponding UsnJrnl) to bodyfile - dfir-toolkit - janstarke)"),
+        ("OS\\Windows", "lnk2bodyfile (Parse Windows LNK files and create bodyfile output - dfir-toolkit)"),
+        ("OS\\Windows\\Registry", "pol_export (Exporter for Windows Registry Policy Files - dfir-toolkit)"),
+        ("OS\\Windows\\Registry", "regdump (parses registry hive files and prints a bodyfile - dfir-toolkit)"),
+    ],
+    "usnjrnl": [("OS\\Windows", "usnjrnl_dump (Parses Windows UsnJrnl files - dfir-toolkit - janstarke)")],
+    "mft2bodyfile": [("Files and apps\\Disk", "mft2bodyfile (parses an MFT file (and optionally the corresponding UsnJrnl) to bodyfile - dfir-toolkit - janstarke)")],
+    "CuTE-tui": [],
+    "SSHniff": [],
+    # --- msys2.ps1 tools ---
+    "MSYS2": [],
 }
 
 # ---------------------------------------------------------------------------
@@ -1036,6 +1132,22 @@ FILE_EXTENSIONS_MAP: Dict[str, List[str]] = {
     "litecli": [".db", ".sqlite"],
     "neo4j": [],
     "sqlit-tui": [".db", ".sqlite", ".sqlite3"],
+    # --- go.ps1 tools ---
+    "protodump": [".exe", ".dll", ".elf", ".bin"],
+    # --- node.ps1 tools ---
+    "box-js": [".js"],
+    "deobfuscator": [".js"],
+    "docsify-cli": [".md", ".html"],
+    "jsdom": [".html", ".htm", ".js"],
+    "LUMEN": [".evtx"],
+    # --- rust.ps1 tools ---
+    "dfir-toolkit": [".evtx", ".reg", ".dat", ".lnk", ".pf", ".mft", ".zip"],
+    "usnjrnl": [".bin"],
+    "mft2bodyfile": [".mft"],
+    "CuTE-tui": [],
+    "SSHniff": [".pcap", ".pcapng"],
+    # --- msys2.ps1 tools ---
+    "MSYS2": [],
 }
 
 # ---------------------------------------------------------------------------
@@ -1305,6 +1417,22 @@ TAGS_MAP: Dict[str, List[str]] = {
     "litecli": ["database", "sqlite", "cli"],
     "neo4j": ["database", "graph"],
     "sqlit-tui": ["database", "sqlite", "tui"],
+    # --- go.ps1 tools ---
+    "protodump": ["reverse-engineering", "protobuf", "binary-analysis", "data-extraction"],
+    # --- node.ps1 tools ---
+    "box-js": ["malware-analysis", "javascript", "dynamic-analysis", "deobfuscation"],
+    "deobfuscator": ["javascript", "deobfuscation", "malware-analysis"],
+    "docsify-cli": ["documentation", "markdown"],
+    "jsdom": ["javascript", "html-parsing", "dom"],
+    "LUMEN": ["log-analysis", "event-log", "forensics", "visualization"],
+    # --- rust.ps1 tools ---
+    "dfir-toolkit": ["forensics", "timeline", "log-analysis", "event-log", "registry", "bodyfile"],
+    "usnjrnl": ["filesystem", "forensics", "ntfs", "windows"],
+    "mft2bodyfile": ["filesystem", "forensics", "ntfs", "bodyfile"],
+    "CuTE-tui": ["tui", "http", "network"],
+    "SSHniff": ["network-analysis", "ssh", "pcap"],
+    # --- msys2.ps1 tools ---
+    "MSYS2": ["build-environment", "shell", "linux-tools", "gcc", "debugging"],
     # --- http.ps1 tools ---
     "Visual Studio Code": ["text-editor", "ide", "powershell"],
     "Sysinternals Suite": ["windows", "debugging", "monitoring", "system-administration"],

@@ -1,4 +1,5 @@
 . ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 $ROOT_PATH = "${PWD}"
 
@@ -20,3 +21,39 @@ Wait-Sandbox -WSBPath "${ROOT_PATH}\tmp\generate_msys2.wsb" -WaitForPath "${ROOT
 Write-Output "C:/tmp/msys2 /tmp ntfs auto 0 0" >> "${ROOT_PATH}\mount\Tools\msys64\etc\fstab"
 
 Write-DateLog "MSYS2 and packages done." >> ${ROOT_PATH}\log\msys2.txt 2>&1
+
+$TOOL_DEFINITIONS += @{
+    Name = "MSYS2"
+    Category = "Programming"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "msys2"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "bash"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "gcc"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "gdb"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("build-environment", "shell", "linux-tools", "gcc", "debugging")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
