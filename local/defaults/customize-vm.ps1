@@ -88,7 +88,6 @@ dfirws-install.ps1 -Zui
 # Problems with virtualization in Workstation
 #wsl.exe --install -d Kali-Linux --no-launch
 #wsl.exe --set-version Kali-Linux 2
-#dfirws-install.ps1 -Docker
 
 Write-Output "Add auto start shortcut to open dfirws folder"
 Add-Shortcut "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\dfirws.lnk" -DestinationPath "${HOME}\Desktop\dfirws"

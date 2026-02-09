@@ -359,22 +359,6 @@ function Install-Dbeaver {
 
 }
 
-function Install-Docker {
-    if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-docker.txt")) {
-        Write-Output "Installing Docker"
-        Start-Process -Wait "${SETUP_PATH}\docker.exe" -ArgumentList 'install --quiet --accept-license'
-        if (Test-Path "${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk") {
-            Remove-Item "${HOME}\Desktop\dfirws\Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk" -Force
-        }
-        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk") {
-            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Utilities\Docker (runs dfirws-install.ps1 -Docker).lnk" -Force
-        }
-        New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-docker.txt" | Out-Null
-    } else {
-        Write-Output "Docker is already installed"
-    }
-}
-
 function Install-Dokany {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-dokany.txt")) {
         Write-Output "Installing Dokany"

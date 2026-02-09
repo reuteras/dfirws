@@ -28,10 +28,6 @@ foreach ($script in $VERIFY_SCRIPTS) {
 }
 
 # Extra tools
-$AutopsyExecutable = (Get-ChildItem "C:\Program Files\Autopsy*" -Include autopsy64.exe -Recurse).FullName
-Test-Command $AutopsyExecutable PE32
-Test-Command BurpSuiteCommunity PE32
-Test-Command chrome PE32
 Test-Command clamscan PE32
 Test-Command Cmder PE32
 Test-Command "C:\Program Files\dbeaver\dbeaver.exe" PE32
@@ -40,19 +36,12 @@ Test-Command $DokanyExecutable PE32
 Test-Command "C:\Program Files\Mozilla Firefox\firefox.exe" PE32
 Test-Command "C:\Program Files\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" PE32
 Test-Command go.exe PE32
-Test-Command "C:\Program Files\Google\Google Earth Pro\client\googleearth.exe" PE32
 $JadxLibrary = (Get-ChildItem 'C:\Program Files\Jadx\' -Recurse -Include *.jar).FullName
 Test-Command $JadxLibrary "Zip archive data"
 Test-Command kape PE32
 Test-Command loki PE32
 Test-Command node PE32
-Test-Command "C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Obsidian\Obsidian.exe" PE32
-Test-Command putty PE32
-Test-Command qemu-img PE32
-Test-Command ruby PE32
 Test-Command rustc PE32
-Test-Command vlc PE32
-Test-Command WinMergeU PE32
 Test-Command Wireshark PE32
 Test-Command x64dbg PE32
 Test-Command zap PE32
@@ -101,7 +90,6 @@ Test-Command pe-sieve PE32      # C:\Tools\bin\pe-sieve.exe
 Test-Command PrefetchBrowser PE32      # C:\Tools\bin\PrefetchBrowser.exe
 Test-Command sidr PE32      # C:\Tools\bin\sidr.exe
 Test-Command velociraptor PE32      # C:\Tools\bin\velociraptor.exe
-Test-Command vt PE32      # C:\Tools\bin\vt.exe
 Test-Command yara PE32      # C:\Tools\bin\yara.exe
 Test-Command yarac PE32      # C:\Tools\bin\yarac.exe
 Test-Command yq PE32      # C:\Tools\bin\yq.exe
@@ -173,11 +161,6 @@ Test-Command thumbcache_viewer PE32      # C:\Tools\thumbcacheviewer\thumbcache_
 Test-Command upx PE32      # C:\Tools\upx\upx.exe
 Test-Command WinObjEx64 PE32      # C:\Tools\WinObjEx64\WinObjEx64.exe
 Test-Command "C:\Tools\XELFViewer\xelfviewer.exe" PE32
-Test-Command LECmd PE32      # C:\Tools\Zimmerman\LECmd.exe
-Test-Command MFTECmd PE32      # C:\Tools\Zimmerman\MFTECmd.exe
-Test-Command PECmd PE32      # C:\Tools\Zimmerman\PECmd.exe
-Test-Command RBCmd PE32      # C:\Tools\Zimmerman\RBCmd.exe
-Test-Command "C:\Tools\Zimmerman\net6\SQLECmd\SQLECmd.exe" PE32
 Test-Command zircolite PE32      # C:\Tools\zircolite\zircolite.exe
 Test-Command evtx_dump_win PE32      # C:\Tools\zircolite\bin\evtx_dump_win.exe
 Test-Command zstd PE32      # C:\Tools\zstd\zstd.exe
@@ -203,7 +186,6 @@ Test-Command git PE32
 Test-Command "${env:ProgramFiles}\Graphviz\bin\gxl2dot.exe" PE32
 Test-Command "${env:ProgramFiles}\idr\bin\idr.exe" PE32
 Test-Command iisGeolocate PE32
-Test-Command "C:\Program Files\IrfanView\i_view64.exe" PE32
 Test-Command notepad++ PE32
 Test-Command python PE32
 
@@ -350,7 +332,6 @@ Test-Command C:\venv\scare\Scripts\scare.py Python
 
 # Downloads only files
 Test-Command C:\downloads\intel_driver.exe PE32
-Test-Command C:\downloads\osfmount.exe PE32
 Test-Command C:\downloads\tailscale.exe PE32
 Test-Command C:\downloads\wireguard.msi "MSI Installer"
 Test-Command C:\downloads\comparePlus.zip "Zip archive data"

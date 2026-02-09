@@ -10,7 +10,6 @@ param (
     [switch]$CMDer,
     [switch]$Dbeaver,
     [switch]$DCode,
-    [switch]$Docker,
     [switch]$Dokany,
     [switch]$Fibratus,
     [switch]$Firefox,
@@ -88,10 +87,6 @@ if ($Dbeaver.IsPresent) {
 
 if ($DCode.IsPresent) {
     Install-DCode
-}
-
-if ($Docker.IsPresent) {
-    Install-Docker
 }
 
 if ($Dokany.IsPresent) {
