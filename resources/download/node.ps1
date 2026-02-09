@@ -1,4 +1,5 @@
 . ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 $ROOT_PATH = "${PWD}"
 $node_packages = @("box-js", "deobfuscator", "docsify-cli", "jsdom", "@marp-team/marp-cli")
@@ -49,3 +50,110 @@ if ((Get-FileHash "${ROOT_PATH}\tmp\node\node.txt").Hash -ne (Get-FileHash ${CUR
 }
 
 Remove-Item -Recurse -Force "${ROOT_PATH}\tmp\node" 2>&1 | Out-Null
+
+$TOOL_DEFINITIONS += @{
+    Name = "box-js"
+    Category = "Files and apps\JavaScript"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\JavaScript\box-js (is a utility to analyze malicious JavaScript files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command box-js --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @()
+    FileExtensions = @(".js")
+    Tags = @("malware-analysis", "javascript", "dynamic-analysis", "deobfuscation")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "deobfuscator"
+    Category = "Files and apps\JavaScript"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\JavaScript\deobfuscator (synchrony).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command synchrony --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @()
+    FileExtensions = @(".js")
+    Tags = @("javascript", "deobfuscation", "malware-analysis")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "docsify-cli"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @()
+    FileExtensions = @(".md", ".html")
+    Tags = @("documentation", "markdown")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "jsdom"
+    Category = "Files and apps\JavaScript"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\JavaScript\jsdom (opens README in Notepad++).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command notepad++.exe C:\Tools\node\node_modules\jsdom\README.md"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @()
+    FileExtensions = @(".html", ".htm", ".js")
+    Tags = @("javascript", "html-parsing", "dom")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "LUMEN"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\Lumen (Browser-based EVTX Companion).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${HOME}\Documents\tools\utils\lumen.ps1"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @()
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "event-log", "forensics", "visualization")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
