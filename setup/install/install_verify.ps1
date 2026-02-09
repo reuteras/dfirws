@@ -342,7 +342,6 @@ Test-Command C:\downloads\DSpellCheck.zip "Zip archive data"
 
 if (Test-Path "C:\venv\visualstudio.txt") {
     Test-Command C:\venv\jep\Lib\site-packages\jep\jep.dll PE32
-    Test-Command C:\venv\jep\Scripts\capa.exe PE32
     Test-Command C:\venv\jep\Scripts\f2py.exe PE32
     Test-Command C:\venv\jep\Scripts\numpy-config.exe PE32
     Test-Command C:\venv\jep\Scripts\readelf.py Python

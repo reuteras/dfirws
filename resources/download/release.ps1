@@ -2303,7 +2303,7 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "C:\venv\jep\Scripts\capa.exe"
+            Name = "`${TOOLS}\capa\capa.exe"
             Expect = "PE32"
         }
     )

@@ -733,7 +733,7 @@ function Install-Obsidian {
 function Install-OSFMount {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-osfmount.txt")) {
         Write-Output "Installing OSFMount"
-        Start-Process -Wait "${SETUP_PATH}\osfmount.exe" -ArgumentList '/S /V"/qn /suppressmsgboxes REBOOT=ReallySuppress"'
+        Start-Process -Wait "${SETUP_PATH}\osfmount.exe" -ArgumentList '/verysilent /norestart /suppressmsgboxes /norun /SP-'
         if (Test-Path "${HOME}\Desktop\dfirws\Files and apps\Disk\OSFMount (runs dfirws-install -OSFMount).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Files and apps\Disk\OSFMount (runs dfirws-install -OSFMount).lnk" -Force
         }

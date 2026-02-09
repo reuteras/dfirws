@@ -545,7 +545,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "dfirws-install.ps1 -OSFMount"
+    InstallVerifyCommand = ""
     Verify = @(
         @{
             Type = "command"
