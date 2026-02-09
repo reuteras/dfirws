@@ -52,6 +52,43 @@ if ($all -or $Freshclam) {
     $status = Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi$" -check "Composite Document File V2 Document"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "ClamAV"
+    Homepage = "https://www.clamav.net/"
+    Vendor = "Cisco Talos"
+    License = "GPL-2.0"
+    LicenseUrl = "https://github.com/Cisco-Talos/clamav?tab=GPL-2.0-1-ov-file"
+    Category = "Malware tools"
+    Shortcuts = @(
+        # Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -ClamAV"
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -ClamAV"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`clamscan"
+            Expect = "PE32"
+        }
+    )
+    Notes = "ClamAV is an open-source antivirus engine for detecting malware."
+    Tips = "ClamAV is a free and open-source antivirus engine for detecting malware, viruses, trojans, and other malicious software."
+    Usage = "ClamAV is an antivirus engine that can be used to scan files and directories for malware."
+    SampleCommands = @(
+        "clamscan -r C:\FilesToScan",
+        "clamscan --infected --remove C:\FilesToScan"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 #
 # Packages used in NodeJS sandbox
 if ($all -or $Node) {
@@ -82,6 +119,23 @@ if ($all -or $Python) {
         Move-Item ${TOOLS}\ghidra_1* "${TOOLS}\ghidra\"
         Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force
     }
+
+    $TOOL_DEFINITIONS += @{
+        Name = "Ghidra"
+        Homepage = "https://ghidra-sre.org/"
+        Vendor = "National Security Agency"
+        License = "Apache-2.0"
+        LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
+        Category = "Reverse engineering"
+        Shortcuts = @()
+        InstallVerifyCommand = ""
+        Verify = @(
+            @{
+                Type = "file"
+                Name = "ghidraRun.bat"
+                Expect = "Batch file"
+            }
+        )
 
     # Tools to compile and build - version 2019
     $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe" -check "PE32"

@@ -28,7 +28,6 @@ foreach ($script in $VERIFY_SCRIPTS) {
 }
 
 # Extra tools
-Test-Command clamscan PE32
 Test-Command Cmder PE32
 Test-Command "C:\Program Files\dbeaver\dbeaver.exe" PE32
 $DokanyExecutable = (Get-ChildItem 'C:\Program Files\Dokan\' -Recurse -Include dokanctl.exe).FullName | Select-Object -Last 1

@@ -968,9 +968,6 @@ $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETU
 
 #
 # Tool definitions for documentation generation.
-# Fill in the dfirws-specific fields below. Auto-extracted metadata (Homepage,
-# Vendor, License) comes from the GitHub API cache via extract-tool-metadata.py.
-#
 
 $TOOL_DEFINITIONS += @{
     Name = "artemis"

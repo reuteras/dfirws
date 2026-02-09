@@ -245,7 +245,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\witr (Why is this running).ln
 
 # Malware tools
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -ClamAV"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command csv --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\defender-detectionhistory-parser (dhparser).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dhparser -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\defender-dump.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command defender-dump.py -h"

@@ -38,9 +38,6 @@ Write-DateLog "Pip packages done." >> "${ROOT_PATH}\log\python.txt"
 
 #
 # Tool definitions for documentation generation.
-# Fill in the dfirws-specific fields below. Auto-extracted metadata (Homepage,
-# Vendor, License) comes from the PyPI API via extract-tool-metadata.py.
-#
 
 $TOOL_DEFINITIONS += @{
     Name = "dfir_ntfs"
