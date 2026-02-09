@@ -768,6 +768,640 @@ SHORTCUT_OVERRIDES: Dict[str, List[Tuple[str, str]]] = {
     ],
 }
 
+# ---------------------------------------------------------------------------
+# File‑extension → tools mapping  (keys are tool names as in $TOOL_DEFINITIONS)
+# Values are lists of extensions *with* the leading dot.
+# ---------------------------------------------------------------------------
+
+FILE_EXTENSIONS_MAP: Dict[str, List[str]] = {
+    # --- release.ps1 tools ---
+    "4n4lDetector": [".exe", ".dll"],
+    "adalanche": [".json"],
+    "aLEAPP": [".tar", ".zip"],
+    "Ares": [".exe", ".dll"],
+    "artemis": [".exe", ".dll", ".evtx", ".reg"],
+    "Audacity": [".wav", ".mp3", ".flac", ".ogg", ".aiff"],
+    "BeaconHunter": [".dmp", ".exe", ".dll"],
+    "binary-refinery": [".exe", ".dll", ".bin"],
+    "binlex": [".exe", ".dll", ".elf", ".bin"],
+    "bytecode-viewer": [".class", ".jar", ".apk", ".dex"],
+    "cart": [".cart"],
+    "chainsaw": [".evtx"],
+    "cmder": [],
+    "CobaltStrikeScan": [".exe", ".dll", ".dmp", ".bin"],
+    "ComparePlus": [],
+    "Cutter": [".exe", ".dll", ".elf", ".bin", ".so", ".dylib"],
+    "CyberChef": [".bin", ".txt", ".json", ".hex"],
+    "DB Browser for SQLite": [".db", ".sqlite", ".sqlite3"],
+    "DBeaver": [".db", ".sqlite", ".sqlite3", ".sql"],
+    "dbSpy": [".db", ".sqlite", ".sqlite3"],
+    "debloat": [".exe", ".dll"],
+    "Detect It Easy": [".exe", ".dll", ".elf", ".mach-o", ".bin"],
+    "DitExplorer": [".dit"],
+    "dll_to_exe": [".dll"],
+    "Dokany": [],
+    "DSpellCheck": [],
+    "dsq": [".json", ".csv", ".tsv", ".parquet"],
+    "Dumpbin": [".exe", ".dll", ".obj", ".lib"],
+    "edit": [],
+    "Elfparser-ng": [".elf", ".so"],
+    "evtx_dump": [".evtx"],
+    "ffmpeg": [".mp4", ".avi", ".mkv", ".mov", ".mp3", ".wav", ".flac"],
+    "Fibratus": [".etl"],
+    "Flare-Fakenet-NG": [".pcap"],
+    "Flare-Floss": [".exe", ".dll", ".bin"],
+    "forensic-timeliner": [".evtx", ".csv", ".json"],
+    "fq": [".pcap", ".pcapng", ".mp4", ".mp3", ".flac", ".zip", ".tar", ".gif", ".png"],
+    "fqlite": [".db", ".sqlite", ".sqlite3"],
+    "fx": [".json"],
+    "gftrace": [".exe"],
+    "Ghidra BTIGhidra": [".exe", ".dll", ".elf", ".bin", ".so"],
+    "Ghidra Cartographer": [".exe", ".dll", ".elf", ".bin", ".so"],
+    "Ghidra GolangAnalyzerExtension": [".exe", ".elf"],
+    "godap": [],
+    "GoReSym": [".exe", ".elf"],
+    "gron": [".json"],
+    "h2database": [".h2.db"],
+    "hayabusa": [".evtx"],
+    "HindSight": [".db", ".sqlite"],
+    "HollowsHunter": [".exe", ".dll", ".dmp"],
+    "Iaito": [".exe", ".dll", ".elf", ".bin", ".so"],
+    "iLEAPP": [".tar", ".zip"],
+    "ImHex": [".exe", ".dll", ".bin", ".hex", ".elf"],
+    "INDXRipper": [".bin"],
+    "jadx": [".apk", ".dex", ".jar", ".class", ".zip"],
+    "jd-gui": [".class", ".jar"],
+    "jq": [".json"],
+    "Jumplist Browser": [".automaticDestinations-ms", ".customDestinations-ms"],
+    "jwt-cli": [],
+    "lessmsi": [".msi"],
+    "LogBoost": [".evtx", ".csv", ".json"],
+    "Loki": [".exe", ".dll", ".bin"],
+    "mboxviewer": [".mbox", ".eml"],
+    "MemProcFS": [".dmp", ".raw", ".vmem", ".img"],
+    "MetadataPlus": [".exe", ".dll", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".jpg", ".png"],
+    "MFTBrowser": [".mft"],
+    "mmdbinspect": [".mmdb"],
+    "MsgViewer": [".msg"],
+    "Nerd Fonts": [".ttf", ".otf"],
+    "NetExt": [".dmp"],
+    "Notepad++": [".txt", ".log", ".xml", ".json", ".csv", ".ps1", ".py", ".js"],
+    "PE-bear": [".exe", ".dll", ".sys"],
+    "PE-sieve": [".exe", ".dll"],
+    "PE-utils": [".exe", ".dll", ".sys"],
+    "PowerShell": [".ps1", ".psm1", ".psd1"],
+    "Prefetch Browser": [".pf"],
+    "qpdf": [".pdf"],
+    "qrtool": [".png", ".svg"],
+    "Radare2": [".exe", ".dll", ".elf", ".bin", ".so", ".mach-o"],
+    "RDPCacheStitcher": [".bmc", ".bin"],
+    "readpe": [".exe", ".dll", ".sys"],
+    "Recaf": [".class", ".jar"],
+    "redress": [".exe", ".elf"],
+    "ripgrep": [],
+    "sidr": [".db", ".sqlite"],
+    "Sleuthkit": [".dd", ".raw", ".E01", ".img", ".vmdk"],
+    "srum_dump": [".dat"],
+    "Strawberry Perl": [".pl", ".pm"],
+    "takajo": [".json"],
+    "Templater": [],
+    "Thumbcacheviewer": [".db"],
+    "upx": [".exe", ".dll", ".elf"],
+    "Velociraptor": [".json", ".csv"],
+    "VS Code PowerShell Extension": [".ps1", ".psm1", ".psd1"],
+    "VS Code Spell Checker": [],
+    "Witr": [],
+    "WinObjEx64": [],
+    "x64dbg": [".exe", ".dll"],
+    "XELFViewer": [".elf", ".mach-o"],
+    "YAMAGoya": [".yar", ".yara"],
+    "YARA": [".yar", ".yara", ".exe", ".dll", ".bin"],
+    "yara-x": [".yar", ".yara", ".exe", ".dll", ".bin"],
+    "yq": [".yaml", ".yml", ".json", ".xml", ".toml"],
+    "zaproxy": [],
+    "Zircolite": [".evtx", ".json"],
+    "Zui": [".pcap", ".pcapng", ".zng"],
+    # obsidian plugins
+    "admonitions": [],
+    "obsidian-calendar-plugin": [],
+    "obsidian-dataview": [],
+    "obsidian-excalidraw-plugin": [],
+    "obsidian-kanban": [],
+    "obsidian-mitre-attack": [],
+    "obsidian-tasks": [],
+    "obsidian-timeline": [],
+    # --- winget.ps1 tools ---
+    "Autopsy": [".dd", ".raw", ".E01", ".img", ".vmdk"],
+    "Burp Suite": [],
+    "Chrome": [".html", ".htm", ".js", ".css"],
+    "Docker Desktop": [],
+    "DotNet 6 Desktop Runtime": [],
+    "DotNet 8 Desktop Runtime": [],
+    "Firefox": [".html", ".htm", ".js", ".css"],
+    "Foxit PDF Reader": [".pdf"],
+    "Google Earth Pro": [".kml", ".kmz"],
+    "IrfanView": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".ico", ".webp"],
+    "obsidian": [".md"],
+    "oh-my-posh": [],
+    "OpenVPN": [".ovpn"],
+    "OSFMount": [".dd", ".raw", ".E01", ".img", ".vmdk", ".iso"],
+    "PowerShell 7": [".ps1", ".psm1", ".psd1"],
+    "PuTTY": [],
+    "QEMU": [".qcow2", ".vmdk", ".vdi", ".img", ".iso"],
+    "Ruby": [".rb"],
+    "Tailscale": [],
+    "uv": [".py"],
+    "VLC": [".mp4", ".avi", ".mkv", ".mov", ".mp3", ".wav", ".flac"],
+    "VirusTotal CLI": [],
+    "WinDbg": [".dmp", ".exe", ".dll", ".sys"],
+    "WinMerge": [],
+    "WireGuard": [],
+    "Wireshark": [".pcap", ".pcapng", ".cap"],
+    # --- python.ps1 tools ---
+    "dfir_ntfs": [".mft", ".dd", ".raw", ".img"],
+    "binary-refinery": [".exe", ".dll", ".bin"],
+    "regipy": [".reg", ".dat"],
+    "peepdf-3": [".pdf"],
+    "mkdocs": [".md", ".yml"],
+    "XLMMacroDeobfuscator": [".xls", ".xlsm", ".xlsb"],
+    "jsbeautifier": [".js"],
+    "chepy": [".bin", ".txt", ".hex"],
+    "name-that-hash": [],
+    "ppdeep": [],
+    "pycryptodome": [],
+    "lief": [".exe", ".dll", ".elf", ".mach-o"],
+    "pefile": [".exe", ".dll", ".sys"],
+    "peutils": [".exe", ".dll"],
+    "pfp": [".bin"],
+    "maldump": [".dmp"],
+    "Aspose.Email-for-Python-via-Net": [".msg", ".eml", ".pst", ".ost", ".mbox"],
+    "autoit-ripper": [".exe"],
+    "cabarchive": [".cab"],
+    "compressed_rtf": [".rtf"],
+    "docx2txt": [".docx"],
+    "extract-msg": [".msg"],
+    "flattenJSON": [".json"],
+    "hachoir": [".exe", ".dll", ".png", ".jpg", ".zip", ".tar", ".gz"],
+    "magika": [],
+    "msoffcrypto-tool": [".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx"],
+    "olefile": [".doc", ".xls", ".ppt", ".msg"],
+    "oletools": [".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".rtf"],
+    "openpyxl": [".xlsx"],
+    "pcode2code": [".doc", ".xls", ".ppt"],
+    "pdfalyzer": [".pdf"],
+    "protodeep": [".bin"],
+    "pyOneNote": [".one"],
+    "python-docx": [".docx"],
+    "xlrd": [".xls"],
+    "XlsxWriter": [".xlsx"],
+    "evtx": [".evtx"],
+    "python-registry": [".reg", ".dat"],
+    "aiodns": [],
+    "aiohttp": [],
+    "dnslib": [],
+    "dpkt": [".pcap", ".pcapng"],
+    "geoip2": [".mmdb"],
+    "maclookup": [],
+    "netaddr": [],
+    "paramiko": [],
+    "pycares": [],
+    "pydivert": [".pcap"],
+    "pyshark": [".pcap", ".pcapng"],
+    "PySocks": [],
+    "scapy": [".pcap", ".pcapng"],
+    "frida-tools": [".exe", ".apk", ".ipa"],
+    "ghidrecomp": [".exe", ".dll", ".elf"],
+    "ghidriff": [".exe", ".dll", ".elf"],
+    "keystone-engine": [],
+    "pyghidra": [".exe", ".dll", ".elf"],
+    "rzpipe": [".exe", ".dll", ".elf", ".bin"],
+    "unicorn": [],
+    "csvkit": [".csv"],
+    "mwcp": [".exe", ".dll", ".bin"],
+    "malwarebazaar": [],
+    "mkyara": [".exe", ".dll", ".bin"],
+    "sigma-cli": [".yml", ".yaml"],
+    "pysigma-backend-elasticsearch": [".yml", ".yaml"],
+    "pySigma-backend-loki": [".yml", ".yaml"],
+    "pysigma-backend-splunk": [".yml", ".yaml"],
+    "pysigma-backend-sqlite": [".yml", ".yaml"],
+    "pysigma-pipeline-sysmon": [".yml", ".yaml"],
+    "pysigma-pipeline-windows": [".yml", ".yaml"],
+    "shodan": [],
+    "yara-python": [".yar", ".yara"],
+    "BeautifulSoup4": [".html", ".htm", ".xml"],
+    "deep_translator": [],
+    "dfir-unfurl": [],
+    "graphviz": [".dot", ".gv"],
+    "grip": [".md"],
+    "hexdump": [".bin"],
+    "jpterm": [".json"],
+    "jupyterlab": [".ipynb"],
+    "LnkParse3": [".lnk"],
+    "markitdown": [".docx", ".xlsx", ".pptx", ".pdf", ".html"],
+    "matplotlib": [],
+    "minidump": [".dmp"],
+    "networkx": [],
+    "numpy": [],
+    "orjson": [".json"],
+    "prettytable": [],
+    "ptpython": [".py"],
+    "pwncat": [],
+    "pypdf": [".pdf"],
+    "pypng": [".png"],
+    "pyvis": [],
+    "pyzipper": [".zip"],
+    "requests": [],
+    "rexi": [],
+    "simplejson": [".json"],
+    "termcolor": [],
+    "textsearch": [],
+    "time-decode": [],
+    "tomlkit": [".toml"],
+    "toolong": [".log", ".txt"],
+    "treelib": [],
+    "unpy2exe": [".exe"],
+    "visidata": [".csv", ".tsv", ".json", ".sqlite", ".xlsx"],
+    "xxhash": [],
+    "bitstruct": [],
+    "dotnetfile": [".exe", ".dll"],
+    "stego-lsb": [".png", ".bmp", ".wav"],
+    "acquire": [".tar"],
+    "dissect": [".dd", ".raw", ".tar"],
+    "dissect.target": [".dd", ".raw", ".tar", ".vmdk", ".E01"],
+    "flow.record": [".rec"],
+    "msticpy": [".json", ".csv"],
+    "pathlab": [],
+    "elasticsearch": [],
+    "litecli": [".db", ".sqlite"],
+    "neo4j": [],
+    "sqlit-tui": [".db", ".sqlite", ".sqlite3"],
+}
+
+# ---------------------------------------------------------------------------
+# Tags mapping  (keys are tool names as in $TOOL_DEFINITIONS)
+# Values are lists of tag strings.
+# ---------------------------------------------------------------------------
+
+TAGS_MAP: Dict[str, List[str]] = {
+    # --- release.ps1 tools ---
+    "4n4lDetector": ["malware-analysis", "pe-analysis", "detection"],
+    "adalanche": ["active-directory", "attack-path", "visualization"],
+    "aLEAPP": ["mobile-forensics", "android", "artifact-extraction"],
+    "Ares": ["malware-analysis", "pe-analysis"],
+    "artemis": ["forensics", "artifact-extraction", "triage"],
+    "Audacity": ["audio", "multimedia", "steganography"],
+    "BeaconHunter": ["malware-analysis", "cobalt-strike", "memory-forensics"],
+    "binary-refinery": ["malware-analysis", "deobfuscation", "data-extraction", "scripting"],
+    "binlex": ["malware-analysis", "binary-analysis", "similarity"],
+    "bytecode-viewer": ["reverse-engineering", "java", "decompiler", "deobfuscation"],
+    "cart": ["malware-analysis", "packaging"],
+    "chainsaw": ["log-analysis", "incident-response", "sigma", "detection"],
+    "cmder": ["terminal", "shell"],
+    "CobaltStrikeScan": ["malware-analysis", "cobalt-strike", "detection"],
+    "ComparePlus": ["text-editor", "diff"],
+    "Cutter": ["reverse-engineering", "disassembler", "decompiler"],
+    "CyberChef": ["data-processing", "encoding", "decoding", "deobfuscation", "encryption", "hashing"],
+    "DB Browser for SQLite": ["database", "sqlite", "gui"],
+    "DBeaver": ["database", "gui"],
+    "dbSpy": ["database", "sqlite", "visualization"],
+    "debloat": ["malware-analysis", "pe-analysis", "deobfuscation"],
+    "Detect It Easy": ["pe-analysis", "file-identification", "packer-detection"],
+    "DitExplorer": ["active-directory", "forensics"],
+    "dll_to_exe": ["pe-analysis", "conversion"],
+    "Dokany": ["filesystem", "mounting"],
+    "DSpellCheck": ["text-editor"],
+    "dsq": ["data-processing", "sql", "json", "csv"],
+    "Dumpbin": ["pe-analysis", "reverse-engineering"],
+    "edit": ["text-editor"],
+    "Elfparser-ng": ["reverse-engineering", "elf-analysis", "linux"],
+    "evtx_dump": ["log-analysis", "event-log", "windows"],
+    "ffmpeg": ["multimedia", "video", "audio", "conversion"],
+    "Fibratus": ["etw", "windows", "monitoring"],
+    "Flare-Fakenet-NG": ["malware-analysis", "network-simulation", "dynamic-analysis"],
+    "Flare-Floss": ["malware-analysis", "string-extraction", "deobfuscation"],
+    "forensic-timeliner": ["forensics", "timeline"],
+    "fq": ["data-processing", "binary-analysis", "file-format"],
+    "fqlite": ["database", "sqlite", "forensics"],
+    "fx": ["json", "data-processing", "visualization"],
+    "gftrace": ["reverse-engineering", "api-tracing", "golang"],
+    "Ghidra BTIGhidra": ["reverse-engineering", "disassembler", "decompiler"],
+    "Ghidra Cartographer": ["reverse-engineering", "disassembler", "visualization"],
+    "Ghidra GolangAnalyzerExtension": ["reverse-engineering", "golang"],
+    "godap": ["active-directory", "ldap"],
+    "GoReSym": ["reverse-engineering", "golang", "symbol-recovery"],
+    "gron": ["json", "data-processing", "grep"],
+    "h2database": ["database", "java"],
+    "hayabusa": ["log-analysis", "event-log", "sigma", "detection", "timeline", "incident-response"],
+    "HindSight": ["browser-forensics", "chrome", "artifact-extraction"],
+    "HollowsHunter": ["malware-analysis", "pe-analysis", "process-injection"],
+    "Iaito": ["reverse-engineering", "disassembler", "gui"],
+    "iLEAPP": ["mobile-forensics", "ios", "artifact-extraction"],
+    "ImHex": ["hex-editor", "binary-analysis", "pattern-language"],
+    "INDXRipper": ["ntfs", "filesystem", "forensics"],
+    "jadx": ["reverse-engineering", "android", "decompiler", "java", "deobfuscation"],
+    "jd-gui": ["reverse-engineering", "java", "decompiler"],
+    "jq": ["json", "data-processing", "cli"],
+    "Jumplist Browser": ["windows", "forensics", "artifact-extraction"],
+    "jwt-cli": ["web", "authentication", "jwt"],
+    "lessmsi": ["windows", "installer"],
+    "LogBoost": ["log-analysis", "event-log"],
+    "Loki": ["malware-analysis", "ioc-scanner", "yara", "detection"],
+    "mboxviewer": ["email", "forensics"],
+    "MemProcFS": ["memory-forensics", "filesystem"],
+    "MetadataPlus": ["metadata", "file-analysis"],
+    "MFTBrowser": ["ntfs", "filesystem", "forensics"],
+    "mmdbinspect": ["geolocation", "maxmind"],
+    "MsgViewer": ["email", "forensics", "outlook"],
+    "Nerd Fonts": ["fonts", "terminal"],
+    "NetExt": ["debugging", "memory-forensics", "dotnet"],
+    "Notepad++": ["text-editor", "syntax-highlighting"],
+    "PE-bear": ["pe-analysis", "reverse-engineering"],
+    "PE-sieve": ["pe-analysis", "malware-analysis", "process-injection"],
+    "PE-utils": ["pe-analysis", "reverse-engineering"],
+    "PowerShell": ["scripting", "shell", "automation"],
+    "Prefetch Browser": ["windows", "forensics", "prefetch"],
+    "qpdf": ["pdf", "data-processing"],
+    "qrtool": ["qr-code", "encoding", "decoding"],
+    "Radare2": ["reverse-engineering", "disassembler", "debugging"],
+    "RDPCacheStitcher": ["rdp", "forensics", "windows"],
+    "readpe": ["pe-analysis", "reverse-engineering"],
+    "Recaf": ["reverse-engineering", "java", "decompiler", "deobfuscation"],
+    "redress": ["reverse-engineering", "golang"],
+    "ripgrep": ["search", "grep", "cli"],
+    "sidr": ["browser-forensics", "forensics"],
+    "Sleuthkit": ["disk-forensics", "filesystem", "forensics"],
+    "srum_dump": ["windows", "forensics", "srum"],
+    "Strawberry Perl": ["scripting", "perl"],
+    "takajo": ["log-analysis", "hayabusa", "timeline"],
+    "Templater": ["obsidian", "automation"],
+    "Thumbcacheviewer": ["windows", "forensics", "thumbnails"],
+    "upx": ["packing", "pe-analysis", "compression"],
+    "Velociraptor": ["incident-response", "forensics", "endpoint-detection"],
+    "VS Code PowerShell Extension": ["text-editor", "powershell"],
+    "VS Code Spell Checker": ["text-editor"],
+    "Witr": ["forensics", "triage"],
+    "WinObjEx64": ["windows", "kernel", "debugging"],
+    "x64dbg": ["reverse-engineering", "debugging", "dynamic-analysis"],
+    "XELFViewer": ["reverse-engineering", "elf-analysis"],
+    "YAMAGoya": ["yara", "rule-generation"],
+    "YARA": ["yara", "malware-analysis", "detection", "signatures"],
+    "yara-x": ["yara", "malware-analysis", "detection", "signatures"],
+    "yq": ["yaml", "data-processing", "cli"],
+    "zaproxy": ["web", "security-testing", "proxy"],
+    "Zircolite": ["log-analysis", "sigma", "detection", "incident-response"],
+    "Zui": ["network-analysis", "pcap", "zeek"],
+    # obsidian plugins
+    "admonitions": ["obsidian"],
+    "obsidian-calendar-plugin": ["obsidian"],
+    "obsidian-dataview": ["obsidian", "data-processing"],
+    "obsidian-excalidraw-plugin": ["obsidian", "drawing"],
+    "obsidian-kanban": ["obsidian", "project-management"],
+    "obsidian-mitre-attack": ["obsidian", "mitre-attack", "threat-intelligence"],
+    "obsidian-tasks": ["obsidian", "task-management"],
+    "obsidian-timeline": ["obsidian", "timeline"],
+    # --- winget.ps1 tools ---
+    "Autopsy": ["disk-forensics", "forensics", "gui", "artifact-extraction"],
+    "Burp Suite": ["web", "security-testing", "proxy"],
+    "Chrome": ["browser", "web"],
+    "Docker Desktop": ["containers", "virtualization"],
+    "DotNet 6 Desktop Runtime": ["dotnet", "runtime"],
+    "DotNet 8 Desktop Runtime": ["dotnet", "runtime"],
+    "Firefox": ["browser", "web"],
+    "Foxit PDF Reader": ["pdf", "viewer"],
+    "Google Earth Pro": ["geolocation", "osint", "visualization"],
+    "IrfanView": ["image-viewer", "multimedia"],
+    "obsidian": ["note-taking", "markdown", "documentation"],
+    "oh-my-posh": ["terminal", "shell", "theming"],
+    "OpenVPN": ["vpn", "network"],
+    "OSFMount": ["disk-forensics", "mounting", "filesystem"],
+    "PowerShell 7": ["scripting", "shell", "automation"],
+    "PuTTY": ["ssh", "network", "terminal"],
+    "QEMU": ["virtualization", "emulation"],
+    "Ruby": ["scripting", "ruby"],
+    "Tailscale": ["vpn", "network"],
+    "uv": ["python", "package-management"],
+    "VLC": ["multimedia", "video", "audio"],
+    "VirusTotal CLI": ["malware-analysis", "threat-intelligence", "ioc-scanner"],
+    "WinDbg": ["debugging", "memory-forensics", "kernel"],
+    "WinMerge": ["diff", "file-comparison"],
+    "WireGuard": ["vpn", "network"],
+    "Wireshark": ["network-analysis", "pcap", "protocol-analysis"],
+    # --- python.ps1 tools ---
+    "dfir_ntfs": ["ntfs", "filesystem", "forensics", "disk-forensics"],
+    "regipy": ["registry", "windows", "forensics"],
+    "peepdf-3": ["pdf", "malware-analysis", "javascript"],
+    "mkdocs": ["documentation", "markdown"],
+    "XLMMacroDeobfuscator": ["office", "macro", "deobfuscation", "malware-analysis"],
+    "jsbeautifier": ["javascript", "deobfuscation", "beautifier"],
+    "chepy": ["data-processing", "encoding", "decoding", "deobfuscation", "hashing"],
+    "name-that-hash": ["hashing", "identification"],
+    "ppdeep": ["hashing", "fuzzy-hashing", "similarity"],
+    "pycryptodome": ["encryption", "cryptography"],
+    "lief": ["pe-analysis", "elf-analysis", "binary-analysis"],
+    "pefile": ["pe-analysis", "reverse-engineering"],
+    "peutils": ["pe-analysis", "packer-detection"],
+    "pfp": ["binary-analysis", "file-format"],
+    "maldump": ["malware-analysis", "memory-forensics"],
+    "Aspose.Email-for-Python-via-Net": ["email", "forensics", "data-extraction"],
+    "autoit-ripper": ["malware-analysis", "autoit", "deobfuscation"],
+    "cabarchive": ["archive", "data-extraction"],
+    "compressed_rtf": ["office", "rtf", "data-extraction"],
+    "docx2txt": ["office", "word", "data-extraction"],
+    "extract-msg": ["email", "outlook", "data-extraction"],
+    "flattenJSON": ["json", "data-processing"],
+    "hachoir": ["binary-analysis", "metadata", "file-format"],
+    "magika": ["file-identification", "machine-learning"],
+    "msoffcrypto-tool": ["office", "encryption", "decryption"],
+    "olefile": ["office", "ole", "data-extraction"],
+    "oletools": ["office", "macro", "malware-analysis", "vba"],
+    "openpyxl": ["office", "excel", "data-extraction"],
+    "pcode2code": ["office", "vba", "decompiler"],
+    "pdfalyzer": ["pdf", "malware-analysis", "visualization"],
+    "protodeep": ["protobuf", "reverse-engineering"],
+    "pyOneNote": ["office", "onenote", "data-extraction"],
+    "python-docx": ["office", "word", "data-extraction"],
+    "xlrd": ["office", "excel", "data-extraction"],
+    "XlsxWriter": ["office", "excel"],
+    "evtx": ["log-analysis", "event-log", "windows"],
+    "python-registry": ["registry", "windows", "forensics"],
+    "aiodns": ["network", "dns"],
+    "aiohttp": ["network", "http"],
+    "dnslib": ["network", "dns"],
+    "dpkt": ["network-analysis", "pcap", "protocol-analysis"],
+    "geoip2": ["geolocation", "network", "maxmind"],
+    "maclookup": ["network", "mac-address"],
+    "netaddr": ["network", "ip-address"],
+    "paramiko": ["network", "ssh", "scripting"],
+    "pycares": ["network", "dns"],
+    "pydivert": ["network", "packet-capture"],
+    "pyshark": ["network-analysis", "pcap", "protocol-analysis"],
+    "PySocks": ["network", "proxy"],
+    "scapy": ["network-analysis", "pcap", "packet-crafting"],
+    "frida-tools": ["reverse-engineering", "dynamic-analysis", "instrumentation"],
+    "ghidrecomp": ["reverse-engineering", "decompiler"],
+    "ghidriff": ["reverse-engineering", "binary-diffing"],
+    "keystone-engine": ["reverse-engineering", "assembler"],
+    "pyghidra": ["reverse-engineering", "decompiler", "scripting"],
+    "rzpipe": ["reverse-engineering", "radare2", "scripting"],
+    "unicorn": ["reverse-engineering", "emulation"],
+    "csvkit": ["csv", "data-processing", "cli"],
+    "mwcp": ["malware-analysis", "configuration-extraction"],
+    "malwarebazaar": ["malware-analysis", "threat-intelligence", "ioc-scanner"],
+    "mkyara": ["yara", "rule-generation", "malware-analysis"],
+    "sigma-cli": ["sigma", "detection", "log-analysis"],
+    "pysigma-backend-elasticsearch": ["sigma", "detection", "elasticsearch"],
+    "pySigma-backend-loki": ["sigma", "detection", "loki"],
+    "pysigma-backend-splunk": ["sigma", "detection", "splunk"],
+    "pysigma-backend-sqlite": ["sigma", "detection", "sqlite"],
+    "pysigma-pipeline-sysmon": ["sigma", "detection", "sysmon"],
+    "pysigma-pipeline-windows": ["sigma", "detection", "windows"],
+    "shodan": ["osint", "network", "reconnaissance"],
+    "yara-python": ["yara", "malware-analysis", "detection"],
+    "BeautifulSoup4": ["web", "html-parsing", "scraping"],
+    "deep_translator": ["translation", "text-processing"],
+    "dfir-unfurl": ["url-analysis", "forensics", "visualization"],
+    "graphviz": ["visualization", "graph"],
+    "grip": ["markdown", "preview"],
+    "hexdump": ["hex-editor", "binary-analysis"],
+    "jpterm": ["json", "data-processing", "tui"],
+    "jupyterlab": ["python", "notebook", "data-analysis"],
+    "LnkParse3": ["windows", "forensics", "shortcut-analysis"],
+    "markitdown": ["conversion", "markdown", "data-extraction"],
+    "matplotlib": ["visualization", "plotting"],
+    "minidump": ["memory-forensics", "windows"],
+    "networkx": ["visualization", "graph"],
+    "numpy": ["data-analysis", "scientific-computing"],
+    "orjson": ["json", "data-processing"],
+    "prettytable": ["data-processing", "formatting"],
+    "ptpython": ["python", "repl"],
+    "pwncat": ["exploitation", "post-exploitation"],
+    "pypdf": ["pdf", "data-extraction"],
+    "pypng": ["image", "steganography"],
+    "pyvis": ["visualization", "graph"],
+    "pyzipper": ["archive", "encryption"],
+    "requests": ["network", "http"],
+    "rexi": ["regex", "data-processing", "tui"],
+    "simplejson": ["json", "data-processing"],
+    "termcolor": ["terminal", "formatting"],
+    "textsearch": ["text-processing", "search"],
+    "time-decode": ["timestamp", "forensics", "decoding"],
+    "tomlkit": ["toml", "data-processing"],
+    "toolong": ["log-analysis", "tui"],
+    "treelib": ["data-processing", "tree"],
+    "unpy2exe": ["reverse-engineering", "python", "decompiler"],
+    "visidata": ["data-processing", "tui", "csv"],
+    "xxhash": ["hashing"],
+    "bitstruct": ["binary-analysis", "data-processing"],
+    "dotnetfile": ["pe-analysis", "dotnet"],
+    "stego-lsb": ["steganography", "image", "audio"],
+    "acquire": ["forensics", "incident-response", "disk-imaging"],
+    "dissect": ["forensics", "incident-response", "data-extraction"],
+    "dissect.target": ["forensics", "incident-response", "artifact-extraction"],
+    "flow.record": ["forensics", "data-processing"],
+    "msticpy": ["threat-intelligence", "incident-response", "jupyter"],
+    "pathlab": ["forensics", "filesystem"],
+    "elasticsearch": ["database", "elasticsearch", "siem"],
+    "litecli": ["database", "sqlite", "cli"],
+    "neo4j": ["database", "graph"],
+    "sqlit-tui": ["database", "sqlite", "tui"],
+    # --- http.ps1 tools ---
+    "Visual Studio Code": ["text-editor", "ide", "powershell"],
+    "Sysinternals Suite": ["windows", "debugging", "monitoring", "system-administration"],
+    "ExifTool": ["metadata", "file-analysis", "image"],
+    "pestudio": ["pe-analysis", "malware-analysis", "static-analysis"],
+    "HxD": ["hex-editor", "binary-analysis"],
+    "TrID": ["file-identification"],
+    "Malcat Lite": ["pe-analysis", "malware-analysis", "hex-editor", "disassembler"],
+    "MiTeC Structured Storage Viewer": ["office", "ole", "data-extraction"],
+    "FullEventLogView": ["log-analysis", "event-log", "windows"],
+    "PST Walker": ["email", "forensics", "outlook"],
+    "Win API Search": ["reverse-engineering", "windows", "api"],
+    "PDFStreamDumper": ["pdf", "malware-analysis", "javascript"],
+    "Mail Viewer": ["email", "forensics"],
+    "Volatility Workbench 3": ["memory-forensics", "gui"],
+    "Volatility Workbench 2.1": ["memory-forensics", "gui"],
+    "NirSoft Browser Utilities": ["browser-forensics", "artifact-extraction"],
+    "winpmem": ["memory-forensics", "acquisition"],
+    "Binary Ninja": ["reverse-engineering", "disassembler", "decompiler"],
+    "Gpg4win": ["encryption", "pgp", "signing"],
+    "Tor Browser": ["browser", "privacy", "network"],
+    "DCode": ["timestamp", "forensics", "decoding"],
+    "VeraCrypt": ["encryption", "disk-encryption"],
+    "Neo4j": ["database", "graph", "visualization"],
+    "recbin": ["binary-analysis", "carving"],
+    "capa Explorer Web": ["malware-analysis", "capability-analysis", "visualization"],
+    "LibreOffice": ["office", "document-viewer"],
+    "Npcap": ["network-analysis", "packet-capture"],
+    "SQLite Tools": ["database", "sqlite", "cli"],
+    "OpenVPN Connect": ["vpn", "network"],
+    "bulk_extractor": ["forensics", "carving", "data-extraction"],
+    "DensityScout": ["malware-analysis", "entropy-analysis"],
+    "Nmap": ["network-analysis", "port-scanning", "reconnaissance"],
+    "FASM": ["reverse-engineering", "assembler"],
+    "Windows Terminal (Canary)": ["terminal", "shell"],
+    "ProcDOT": ["malware-analysis", "visualization", "dynamic-analysis"],
+    "geolocus-cli": ["geolocation", "osint"],
+    "Graphviz": ["visualization", "graph"],
+    "API Monitor": ["reverse-engineering", "api-tracing", "dynamic-analysis"],
+    "JavaFX SDK": ["java", "gui", "runtime"],
+    "apktool": ["reverse-engineering", "android", "decompiler"],
+    "PHP": ["scripting", "web"],
+    "hashcat": ["password-cracking", "hashing"],
+    "vmss2core": ["memory-forensics", "vmware", "conversion"],
+    "MEX": ["debugging", "windbg", "dotnet"],
+    "Elastic Stack (ELK + Beats)": ["siem", "log-analysis", "elasticsearch", "visualization"],
+}
+
+# Add http.ps1 tools to FILE_EXTENSIONS_MAP
+FILE_EXTENSIONS_MAP.update({
+    "Visual Studio Code": [".ps1", ".py", ".js", ".ts", ".json", ".xml", ".yaml", ".md"],
+    "Sysinternals Suite": [".exe", ".dll", ".sys"],
+    "ExifTool": [".jpg", ".jpeg", ".png", ".gif", ".tiff", ".pdf", ".doc", ".docx", ".mp4"],
+    "pestudio": [".exe", ".dll", ".sys"],
+    "HxD": [".exe", ".dll", ".bin", ".hex"],
+    "TrID": [],
+    "Malcat Lite": [".exe", ".dll", ".elf", ".bin", ".sys"],
+    "MiTeC Structured Storage Viewer": [".doc", ".xls", ".ppt", ".msg"],
+    "FullEventLogView": [".evtx"],
+    "PST Walker": [".pst"],
+    "Win API Search": [],
+    "PDFStreamDumper": [".pdf"],
+    "Mail Viewer": [".eml", ".msg"],
+    "Volatility Workbench 3": [".dmp", ".raw", ".vmem", ".img"],
+    "Volatility Workbench 2.1": [".dmp", ".raw", ".vmem", ".img"],
+    "NirSoft Browser Utilities": [".db", ".sqlite"],
+    "winpmem": [".raw", ".aff4"],
+    "Binary Ninja": [".exe", ".dll", ".elf", ".bin", ".so", ".dylib"],
+    "Gpg4win": [".gpg", ".asc", ".pgp"],
+    "Tor Browser": [".html", ".htm"],
+    "DCode": [],
+    "VeraCrypt": [".hc", ".tc"],
+    "Neo4j": [],
+    "recbin": [".bin"],
+    "capa Explorer Web": [".exe", ".dll"],
+    "LibreOffice": [".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".ods", ".odp"],
+    "Npcap": [".pcap", ".pcapng"],
+    "SQLite Tools": [".db", ".sqlite", ".sqlite3"],
+    "OpenVPN Connect": [".ovpn"],
+    "bulk_extractor": [".dd", ".raw", ".E01", ".img"],
+    "DensityScout": [".exe", ".dll", ".bin"],
+    "Nmap": [],
+    "FASM": [".asm"],
+    "Windows Terminal (Canary)": [],
+    "ProcDOT": [".csv", ".log"],
+    "geolocus-cli": [".json"],
+    "Graphviz": [".dot", ".gv"],
+    "API Monitor": [".exe", ".dll"],
+    "JavaFX SDK": [".jar"],
+    "apktool": [".apk"],
+    "PHP": [".php"],
+    "hashcat": [],
+    "vmss2core": [".vmss", ".vmsn"],
+    "MEX": [".dmp"],
+    "Elastic Stack (ELK + Beats)": [".json", ".log"],
+})
+
 
 # ---------------------------------------------------------------------------
 # Formatting helpers – generate PowerShell hashtable array syntax
@@ -817,6 +1451,14 @@ def format_shortcuts_block(
         lines.append(f"{indent}    }}")
     lines.append(f"{indent})")
     return "\n".join(lines)
+
+
+def format_ps_string_array(items: List[str]) -> str:
+    """Format a list of strings as PowerShell @("a", "b") syntax."""
+    if not items:
+        return "@()"
+    quoted = ", ".join(f'"{item}"' for item in items)
+    return f"@({quoted})"
 
 
 # ---------------------------------------------------------------------------
@@ -900,6 +1542,8 @@ def update_definitions_in_file(
                 if name_match in INSTALL_CMD_MAP:
                     install_cmd = f"dfirws-install.ps1 -{INSTALL_CMD_MAP[name_match]}"
                 shortcuts = resolve_shortcuts(name_match, shortcut_index)
+                file_exts = FILE_EXTENSIONS_MAP.get(name_match, [])
+                tags = TAGS_MAP.get(name_match, [])
 
                 fields_populated = 0
                 if category:
@@ -910,6 +1554,10 @@ def update_definitions_in_file(
                     fields_populated += 1
                 if shortcuts:
                     fields_populated += 1
+                if file_exts:
+                    fields_populated += 1
+                if tags:
+                    fields_populated += 1
 
                 if fields_populated > 0:
                     stats["tools_with_data"] += 1
@@ -919,6 +1567,8 @@ def update_definitions_in_file(
 
                 verify_str = format_verify_block(verify)
                 shortcuts_str = format_shortcuts_block(shortcuts)
+                file_exts_str = format_ps_string_array(file_exts)
+                tags_str = format_ps_string_array(tags)
 
                 new_block = []
                 new_block.append(f"$TOOL_DEFINITIONS += @{{\n")
@@ -927,6 +1577,8 @@ def update_definitions_in_file(
                 new_block.append(f"    Shortcuts = {shortcuts_str}\n")
                 new_block.append(f'    InstallVerifyCommand = "{install_cmd}"\n')
                 new_block.append(f"    Verify = {verify_str}\n")
+                new_block.append(f"    FileExtensions = {file_exts_str}\n")
+                new_block.append(f"    Tags = {tags_str}\n")
                 new_block.append(f'    Notes = ""\n')
                 new_block.append(f'    Tips = ""\n')
                 new_block.append(f'    Usage = ""\n')
@@ -947,6 +1599,93 @@ def update_definitions_in_file(
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
+HTTP_FILE = BASE_DIR / "resources" / "download" / "http.ps1"
+
+
+def patch_tags_extensions(path: Path, stats: dict) -> None:
+    """Patch only FileExtensions and Tags into existing tool definition blocks.
+
+    Unlike update_definitions_in_file, this preserves all existing fields and
+    only inserts/replaces FileExtensions and Tags lines.
+    """
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines(keepends=True)
+
+    result = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+
+        if re.match(r"\s*\$TOOL_DEFINITIONS\s*\+=\s*@\{", line):
+            block_lines = [line]
+            i += 1
+            brace_depth = 1
+            while i < len(lines) and brace_depth > 0:
+                block_lines.append(lines[i])
+                brace_depth += lines[i].count("{") - lines[i].count("}")
+                i += 1
+
+            name_match = None
+            for bl in block_lines:
+                m = re.match(r'\s*Name\s*=\s*"([^"]+)"', bl)
+                if m:
+                    name_match = m.group(1)
+                    break
+
+            if name_match:
+                file_exts = FILE_EXTENSIONS_MAP.get(name_match, [])
+                tags = TAGS_MAP.get(name_match, [])
+
+                fields_populated = 0
+                if file_exts:
+                    fields_populated += 1
+                if tags:
+                    fields_populated += 1
+
+                if fields_populated > 0:
+                    stats["tools_with_data"] += 1
+                    stats["fields_populated"] += fields_populated
+                else:
+                    stats["tools_without_data"] += 1
+
+                file_exts_str = format_ps_string_array(file_exts)
+                tags_str = format_ps_string_array(tags)
+
+                # Remove existing FileExtensions/Tags lines
+                filtered = []
+                for bl in block_lines:
+                    if not re.match(r"\s+FileExtensions\s*=", bl) and \
+                       not re.match(r"\s+Tags\s*=", bl):
+                        filtered.append(bl)
+
+                # Insert before Notes at top-level depth (depth==1 means
+                # inside the outer @{} but not inside nested structures).
+                new_block = []
+                inserted = False
+                depth = 0
+                for bl in filtered:
+                    depth += bl.count("{") - bl.count("}")
+                    # Insert at depth 1 before Notes, or at depth 0
+                    # (closing brace of outer block)
+                    if not inserted and (
+                        (depth == 1 and re.match(r'\s+Notes\s*=', bl)) or
+                        depth == 0
+                    ):
+                        new_block.append(f"    FileExtensions = {file_exts_str}\n")
+                        new_block.append(f"    Tags = {tags_str}\n")
+                        inserted = True
+                    new_block.append(bl)
+                result.extend(new_block)
+            else:
+                result.extend(block_lines)
+            continue
+
+        result.append(line)
+        i += 1
+
+    path.write_text("".join(result), encoding="utf-8")
+
 
 def main() -> int:
     for p in [VERIFY_FILE, FOLDER_FILE, INSTALL_FILE]:
@@ -973,6 +1712,8 @@ def main() -> int:
     print(f"Verify overrides defined: {len(VERIFY_OVERRIDES)}")
     print(f"Shortcut overrides defined: {len(SHORTCUT_OVERRIDES)}")
     print(f"Install command mappings defined: {len(INSTALL_CMD_MAP)}")
+    print(f"File extension mappings defined: {len(FILE_EXTENSIONS_MAP)}")
+    print(f"Tags mappings defined: {len(TAGS_MAP)}")
     print()
 
     total_stats = {"tools_with_data": 0, "tools_without_data": 0, "fields_populated": 0}
@@ -987,6 +1728,18 @@ def main() -> int:
         total_stats["tools_with_data"] += file_stats["tools_with_data"]
         total_stats["tools_without_data"] += file_stats["tools_without_data"]
         total_stats["fields_populated"] += file_stats["fields_populated"]
+
+    # Patch FileExtensions and Tags into http.ps1 (preserves existing fields)
+    if HTTP_FILE.exists():
+        http_stats = {"tools_with_data": 0, "tools_without_data": 0, "fields_populated": 0}
+        print(f"Patching {HTTP_FILE.name} (FileExtensions + Tags only)...")
+        patch_tags_extensions(HTTP_FILE, http_stats)
+        print(f"  Tools with data populated: {http_stats['tools_with_data']}")
+        print(f"  Tools without data: {http_stats['tools_without_data']}")
+        print(f"  Total fields populated: {http_stats['fields_populated']}")
+        total_stats["tools_with_data"] += http_stats["tools_with_data"]
+        total_stats["tools_without_data"] += http_stats["tools_without_data"]
+        total_stats["fields_populated"] += http_stats["fields_populated"]
 
     print()
     print("=== Summary ===")
