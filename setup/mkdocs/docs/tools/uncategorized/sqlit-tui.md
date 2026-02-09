@@ -1,0 +1,3 @@
+# sqlit-tui
+
+**Category:** Uncategorized

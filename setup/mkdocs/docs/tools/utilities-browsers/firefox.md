@@ -1,0 +1,3 @@
+# Firefox
+
+**Category:** Utilities\Browsers

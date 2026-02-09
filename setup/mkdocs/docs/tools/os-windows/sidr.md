@@ -1,0 +1,3 @@
+# sidr
+
+**Category:** OS\Windows

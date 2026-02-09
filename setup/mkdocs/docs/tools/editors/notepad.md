@@ -1,0 +1,3 @@
+# Notepad++
+
+**Category:** Editors

@@ -1,0 +1,3 @@
+# vscode-shellcheck
+
+**Category:** Uncategorized

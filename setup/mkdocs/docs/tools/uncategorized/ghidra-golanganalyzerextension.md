@@ -1,0 +1,3 @@
+# Ghidra GolangAnalyzerExtension
+
+**Category:** Uncategorized

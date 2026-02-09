@@ -1,0 +1,3 @@
+# Chrome
+
+**Category:** Utilities\Browsers

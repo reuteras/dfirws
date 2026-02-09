@@ -1,0 +1,3 @@
+# capa-rules
+
+**Category:** Uncategorized

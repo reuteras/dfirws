@@ -1,0 +1,3 @@
+# ImHex
+
+**Category:** Editors

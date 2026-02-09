@@ -1,0 +1,3 @@
+# obsidian-kanban
+
+**Category:** Uncategorized

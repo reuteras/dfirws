@@ -1,0 +1,3 @@
+# DSpellCheck
+
+**Category:** Uncategorized
