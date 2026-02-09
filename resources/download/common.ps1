@@ -211,6 +211,140 @@ function Get-FileFromUri {
     return $fileDownloadedOrChanged
 }
 
+# Saves GitHub repository and release metadata to a cache file for documentation generation.
+# This reuses data already fetched by Get-GitHubRelease to avoid duplicate API calls.
+function Save-GitHubRepoMetadata {
+    param (
+        [Parameter(Mandatory=$True)] [string]$Repo,
+        [Parameter(Mandatory=$False)] $ReleaseData = $null
+    )
+
+    $metadataDir = "$PSScriptRoot\..\..\downloads\.metadata\github"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    $safeRepo = $Repo -replace "/", "_"
+    $metadataFile = "$metadataDir\${safeRepo}.json"
+
+    # Fetch repo-level metadata (description, license, homepage, topics)
+    $repoUrl = "https://api.github.com/repos/$Repo"
+    try {
+        $repoData = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $repoUrl | ConvertFrom-Json
+    } catch {
+        Write-SynchronizedLog "Warning: Could not fetch repo metadata for $Repo."
+        return
+    }
+
+    if ($null -eq $repoData -or $null -ne $repoData.message) {
+        Write-SynchronizedLog "Warning: GitHub API returned no data for $Repo."
+        return
+    }
+
+    # Extract release info if provided
+    $releaseInfo = $null
+    if ($null -ne $ReleaseData) {
+        $releaseInfo = [ordered]@{
+            TagName    = $ReleaseData.tag_name
+            Name       = $ReleaseData.name
+            PublishedAt = $ReleaseData.published_at
+            Body       = if ($ReleaseData.body.Length -gt 500) { $ReleaseData.body.Substring(0, 500) + "..." } else { $ReleaseData.body }
+            Prerelease = $ReleaseData.prerelease
+        }
+    }
+
+    # Build license info
+    $licenseInfo = $null
+    if ($null -ne $repoData.license) {
+        $licenseInfo = [ordered]@{
+            Name   = $repoData.license.name
+            SpdxId = $repoData.license.spdx_id
+            Url    = $repoData.license.url
+        }
+    }
+
+    $metadata = [ordered]@{
+        Repo         = $Repo
+        Name         = $repoData.name
+        FullName     = $repoData.full_name
+        Description  = $repoData.description
+        Homepage     = $repoData.homepage
+        License      = $licenseInfo
+        Topics       = $repoData.topics
+        Language     = $repoData.language
+        Owner        = $repoData.owner.login
+        Stars        = $repoData.stargazers_count
+        HtmlUrl      = $repoData.html_url
+        Archived     = $repoData.archived
+        LatestRelease = $releaseInfo
+        FetchedAt    = (Get-Date).ToString("s")
+    }
+
+    Set-Content -Path $metadataFile -Value ($metadata | ConvertTo-Json -Depth 4)
+    Write-SynchronizedLog "Saved GitHub metadata for $Repo to $metadataFile."
+}
+
+# Saves winget package metadata to a cache file for documentation generation.
+function Save-WingetMetadata {
+    param (
+        [Parameter(Mandatory=$True)] [string]$AppName,
+        [Parameter(Mandatory=$False)] [string]$Version = ""
+    )
+
+    $metadataDir = "$PSScriptRoot\..\..\downloads\.metadata\winget"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    $metadataFile = "$metadataDir\${AppName}.json"
+
+    try {
+        $showOutput = winget show --exact --id "$AppName" 2>&1 | Out-String
+    } catch {
+        Write-SynchronizedLog "Warning: Could not fetch winget metadata for $AppName."
+        return
+    }
+
+    # Parse winget show output into a hashtable
+    $metadata = [ordered]@{
+        AppId     = $AppName
+        FetchedAt = (Get-Date).ToString("s")
+    }
+
+    # Parse key-value pairs from winget show output
+    foreach ($line in ($showOutput -split "`n")) {
+        $line = $line.Trim()
+        if ($line -match "^(.+?):\s+(.+)$") {
+            $key = $Matches[1].Trim()
+            $value = $Matches[2].Trim()
+            switch ($key) {
+                "Name"            { $metadata["Name"] = $value }
+                "Publisher"       { $metadata["Publisher"] = $value }
+                "Version"         { $metadata["Version"] = $value }
+                "Publisher Url"   { $metadata["PublisherUrl"] = $value }
+                "Publisher Support Url" { $metadata["PublisherSupportUrl"] = $value }
+                "Author"          { $metadata["Author"] = $value }
+                "Description"     { $metadata["Description"] = $value }
+                "Homepage"        { $metadata["Homepage"] = $value }
+                "License"         { $metadata["License"] = $value }
+                "License Url"     { $metadata["LicenseUrl"] = $value }
+                "Copyright"       { $metadata["Copyright"] = $value }
+                "Copyright Url"   { $metadata["CopyrightUrl"] = $value }
+                "Release Notes Url" { $metadata["ReleaseNotesUrl"] = $value }
+                "Tags"            { $metadata["Tags"] = $value }
+                "Installer Type"  { $metadata["InstallerType"] = $value }
+            }
+        }
+    }
+
+    if ($Version -ne "") {
+        $metadata["Version"] = $Version
+    }
+
+    Set-Content -Path $metadataFile -Value ($metadata | ConvertTo-Json -Depth 4)
+    Write-SynchronizedLog "Saved winget metadata for $AppName to $metadataFile."
+}
+
 # Retrieves the download URL for a GitHub release based on a provided regex match.
 function Get-DownloadUrl {
     Param (
@@ -265,6 +399,7 @@ function Get-GitHubRelease {
     )
 
     $Url = ""
+    $matchedRelease = $null
 
     if ($version -eq "latest") {
         Write-SynchronizedLog "Getting the latest release for $repo."
@@ -278,6 +413,7 @@ function Get-GitHubRelease {
         foreach ($asset in $latest_release.assets) {
             if ($asset.browser_download_url -match $match) {
                 $Url = $asset.browser_download_url
+                $matchedRelease = $latest_release
                 Write-Output "Found download URL: $Url"
             }
         }
@@ -295,10 +431,12 @@ function Get-GitHubRelease {
                 if ($asset.browser_download_url -match $match) {
                     if ($release.tag_name -eq $version) {
                         $Url = $asset.browser_download_url
+                        $matchedRelease = $release
                         Write-Output "Found download URL: $Url"
                         break releaseLoop
                     } elseif ($version -eq "latest") {
                         $Url = $asset.browser_download_url
+                        $matchedRelease = $release
                         Write-Output "Found download URL: $Url"
                         break releaseLoop
                     }
@@ -319,6 +457,9 @@ function Get-GitHubRelease {
             Write-SynchronizedLog "Using tarball URL for $repo."
         }
     }
+
+    # Cache repository and release metadata for documentation generation
+    Save-GitHubRepoMetadata -Repo $repo -ReleaseData $matchedRelease
 
     # Log the chosen URL and download the file
     Write-SynchronizedLog "Using $Url for $repo."
@@ -500,6 +641,9 @@ function Get-Winget {
     )
 
     $VERSION = (winget search --exact --id "$AppName") -match '^([A-Z0-9]+|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
+
+    # Cache winget metadata for documentation generation
+    Save-WingetMetadata -AppName $AppName -Version $VERSION
 
     Clear-Tmp winget
     if (Test-Path ".\downloads\$DownloadName") {
