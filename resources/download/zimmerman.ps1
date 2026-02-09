@@ -254,11 +254,6 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\TimeApp.exe"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
             Name = "`${env:ProgramFiles}\TimelineExplorer\TimelineExplorer.exe"
             Expect = "PE32"
         }

@@ -2,6 +2,11 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-02-09
+
+- Start updating the changelog. Lots of changes from 2024-11-12 until now is not listed here.
+- Documentation has been changed from using GitHub wiki to using MkDocs. This file is now located in the *docs* folder and will be used to generate the documentation website.
+
 ## 2024-11-12
 
 - Add [artemis](https://github.com/puffyCid/artemis)
@@ -277,7 +282,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2023-12-08
 
 - Add script *ipexpand.py* to the sandbox.
-- Add *enrichment.ps1* that can be used to download lists of Tor exit nodes, Maxmind databases and more to be used in the sandbox during investigations. Data is stored in the folder *C:\Downloads\encrichment*.
+- Add *enrichment.ps1* that can be used to download lists of Tor exit nodes, Maxmind databases and more to be used in the sandbox during investigations. Data is stored in the folder *C:\Downloads\enrichment*.
 - Download Elasticsearch, Kibana, Logstash and some beats.
 - Add [sorairolake/qrtool](https://github.com/sorairolake/qrtool)
 
@@ -307,7 +312,7 @@ Added Git repositories:
 ## 2023-12-02
 
 - Add Iaito from Radareorg (Reversing tools)
-- Logg startup times to *C:\tmp\start_sandbox.log*
+- Log startup times to *C:\tmp\start_sandbox.log*
 - Update [Jupyter notebooks](Jupyter-notebooks.md) for PE files
 
 ## 2023-11-28
