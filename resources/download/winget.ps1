@@ -12,10 +12,6 @@ $status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "
 Write-SynchronizedLog "winget: Downloading Chrome."
 $status = Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi" -check "Composite Document File V2 Document"
 
-# Docker Desktop - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Docker Desktop."
-$status = Get-WinGet "Docker.DockerDesktop" "Docker*.exe" "docker.exe" -check "PE32"
-
 # DotNet 6 Desktop runtime - installed during startup
 Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
 $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
