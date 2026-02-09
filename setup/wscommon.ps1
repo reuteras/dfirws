@@ -977,6 +977,9 @@ function Install-VSCode {
         if ($WSDFIR_VSCODE_SHELLCHECK -eq "Yes") {
             & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" 2>&1 | Out-Null
         }
+        if ($WSDFIR_VSCODE_YARA -eq "Yes") {
+            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-yara.vsix" 2>&1 | Out-Null
+        }
         if (Test-Path "${HOME}\.vscode\argv.json") {
             (Get-Content "${HOME}\.vscode\argv.json").Replace('"enable-crash-reporter": true,"', '"enable-crash-reporter": false,"') | Set-Content "${HOME}\.vscode\argv.json" -Force
         }
