@@ -773,6 +773,11 @@ function Install-Neovim {
         if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Editors\Neovim (runs dfirws-install -Neovim).lnk") {
             Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Editors\Neovim (runs dfirws-install -Neovim).lnk" -Force
         }
+        if (!(Test-Path "${env:LOCALAPPDATA}\nvim-data\site\spell")) {
+            New-Item -ItemType Directory -Path "${env:LOCALAPPDATA}\nvim-data\site\spell" -Force | Out-Null
+        }
+        Copy-Item "${SETUP_PATH}\en.utf-8.spl" "${env:LOCALAPPDATA}\nvim-data\site\spell\en.utf-8.spl" -Force
+        Copy-Item "${SETUP_PATH}\en.utf-8.sug" "${env:LOCALAPPDATA}\nvim-data\site\spell\en.utf-8.sug" -Force
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-neovim.txt" | Out-Null
     } else {
         Write-Output "Neovim is already installed"

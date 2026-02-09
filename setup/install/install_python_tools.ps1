@@ -359,6 +359,7 @@ C:\venv\zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Copy-Item -Recurse "C:\git\zircolite" "C:\venv\zircolite"
 Set-Location "C:\venv\zircolite\zircolite"
 uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+python zircolite.py -U 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Copy-Item "C:\venv\zircolite\zircolite\zircolite.py" "C:\venv\zircolite\Scripts"
 deactivate
 Write-DateLog "Python venv zircolite done." >> "C:\log\python.txt"
