@@ -46,13 +46,6 @@ Set-Location "${TOOLS}\Lumen\LUMEN"
 npm install 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm run build 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
-Set-Location "${HOME}"
-git clone https://github.com/Owl4444/jsdeob-workbench.git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-Move-Item "${HOME}\jsdeob-workbench" "${TOOLS}\jsdeob-workbench" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt" 
-Set-Location "${TOOLS}\jsdeob-workbench"
-npm install 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt" 
-npm run build 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-
 Write-DateLog "Node installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 if (Test-Path -Path "${TOOLS}\Debug") {

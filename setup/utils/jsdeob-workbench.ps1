@@ -23,7 +23,6 @@ if (Test-Path -Path $jsdeobSourcePath) {
             New-Item -ItemType Junction -Path (Join-Path (Get-Location) $_.Name) -Target $_.FullName | Out-Null
         }
         Write-DateLog "jsdeob-workbench linked to Desktop."
-        & "${HOME}\Documents\tools\utils\patch-vite-config.ps1" -ConfigPath "$jsdeobDestPath\vite.config.ts"
     }
 } else {
     Write-DateLog "jsdeob-workbench source path does not exist: $jsdeobSourcePath"

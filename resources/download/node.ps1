@@ -19,10 +19,6 @@ New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Lumen" | Out-Null
 if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\Lumen" )) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\Lumen" | Out-Null
 }
-New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\jsdeob-workbench" | Out-Null
-if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\jsdeob-workbench" )) {
-    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\jsdeob-workbench" | Out-Null
-}
 
 # Check if we have installed packages before.
 if (Test-Path -Path "${ROOT_PATH}\mount\Tools\node\node.txt" ) {
@@ -38,7 +34,6 @@ foreach ($package in $node_packages) {
 
 # Get latest LUMEN release url without downloading.
 Get-GitHubRelease Koifman/LUMEN "dummy" "." -download $false >> ${ROOT_PATH}\tmp\node\node.txt
-Get-GitHubRelease Owl4444/jsdeob-workbench "dummy" "." -download $false >> ${ROOT_PATH}\tmp\node\node.txt
 
 if ((Get-FileHash "${ROOT_PATH}\tmp\node\node.txt").Hash -ne (Get-FileHash ${CURRENT}).Hash) {
     (Get-Content ${ROOT_PATH}\resources\templates\generate_node.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_node.wsb"
@@ -47,7 +42,6 @@ if ((Get-FileHash "${ROOT_PATH}\tmp\node\node.txt").Hash -ne (Get-FileHash ${CUR
 
     rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\node" "${ROOT_PATH}\mount\Tools\node" >> ${ROOT_PATH}\log\npm.txt 2>&1
     rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\Lumen" "${ROOT_PATH}\mount\Tools\Lumen" >> ${ROOT_PATH}\log\npm.txt 2>&1
-    rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\jsdeob-workbench" "${ROOT_PATH}\mount\Tools\jsdeob-workbench" >> ${ROOT_PATH}\log\npm.txt 2>&1
     
     Write-DateLog "Node and npm packages done." >> ${ROOT_PATH}\log\npm.txt 2>&1
 } else {
