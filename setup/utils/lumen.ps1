@@ -1,4 +1,4 @@
-# Copy Lumen files from C:\Tools\Lumen to Desktop if not already present
+# Create a junction link for Lumen on the Desktop if it doesn't already exist, and then run the development server.
 $LumenSourcePath = "C:\Tools\Lumen\LUMEN"
 $LumenDestPath = "$HOME\Desktop\Lumen"
 
