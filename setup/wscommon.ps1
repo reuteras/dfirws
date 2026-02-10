@@ -767,6 +767,7 @@ function Install-Neovim {
         Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\neovim.msi /qn /norestart"
         Add-ToUserPath "${env:ProgramFiles}\neovim\bin"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Neovim.lnk" -DestinationPath "${env:ProgramFiles}\neovim\bin\nvim.exe" -WorkingDirectory "${HOME}\Desktop"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\Neovim.lnk" -DestinationPath "${env:ProgramFiles}\neovim\bin\nvim.exe" -WorkingDirectory "${HOME}\Desktop"
         if (Test-Path "${HOME}\Desktop\dfirws\Editors\Neovim (runs dfirws-install -Neovim).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Editors\Neovim (runs dfirws-install -Neovim).lnk" -Force
         }

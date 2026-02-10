@@ -83,7 +83,7 @@ Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install IrfanView
-& "${SETUP_PATH}\irfanview.exe" /silent /assoc=2 | Out-Null
+& "${SETUP_PATH}\irfanview.exe" /silent /assoc=1 | Out-Null
 Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Notepad++ and plugins
@@ -91,6 +91,12 @@ if ("${WSDFIR_NOTEPAD}" -eq "Yes") {
 	& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
 	Add-ToUserPath "${env:ProgramFiles}\Notepad++"
 	Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
+
+# Install Neovim
+if ("${WSDFIR_NEOVIM}" -eq "Yes") {
+	Install-Neovim
+	Write-DateLog "Neovim installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 #
@@ -195,6 +201,138 @@ Windows Registry Editor Version 5.00
 }
 
 Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+# Set default editor associations for text files
+
+# Extensions you want
+$exts = @(
+  ".txt",".log",".md",".js",".json",".yaml",".yml",".py",".ps1",".toml",".ini",".cfg",
+  ".xml",".html",".css",".ts",".tsx",".lua",".c",".cpp",".h",".cs",".go",".rs",".sh",".cmd"
+)
+
+# Select editor
+$editorSel = $WSDFIR_TEXT_EDITOR
+if ([string]::IsNullOrWhiteSpace($editorSel)) { $editorSel = "notepad_plus_plus" }
+$editorSel = $editorSel.ToLowerInvariant()
+
+function Resolve-ExePath {
+  param(
+    [string[]]$names,
+    [string[]]$fallbackPaths
+  )
+  foreach ($n in $names) {
+    $cmd = Get-Command $n -ErrorAction SilentlyContinue
+    if ($cmd -and $cmd.Source) { return $cmd.Source }
+  }
+  foreach ($p in $fallbackPaths) {
+    if ($p -and (Test-Path $p)) { return $p }
+  }
+  return $null
+}
+
+function Resolve-Editor {
+  param([string]$sel)
+
+  if ($sel -eq "neovim" -or $sel -eq "nvim") {
+    $exe = Resolve-ExePath `
+      -names @("nvim.exe") `
+      -fallbackPaths @(
+        "$env:ProgramFiles\Neovim\bin\nvim.exe",
+        "$env:LOCALAPPDATA\Programs\Neovim\bin\nvim.exe",
+        "$env:ChocolateyInstall\bin\nvim.exe"
+      )
+    if (-not $exe) { throw "WSDFIR_TEXT_EDITOR='$sel' but nvim.exe not found." }
+
+    return [pscustomobject]@{
+      Name     = "Neovim"
+      ProgId   = "WSDFIR.Neovim.File"
+      AppExe   = "nvim.exe"
+      Exe      = $exe
+      Cmd      = "`"$exe`" `"%1`""
+      Icon     = "`"$exe`",0"
+      ShellKey = "EditWithNeovim"
+    }
+  }
+
+  # default: Notepad++
+  $exe = Resolve-ExePath `
+    -names @("notepad++.exe") `
+    -fallbackPaths @(
+      "$env:ProgramFiles\Notepad++\notepad++.exe",
+      "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe",
+      "$env:ChocolateyInstall\bin\notepad++.exe",
+      "$env:LOCALAPPDATA\Programs\Notepad++\notepad++.exe"
+    )
+  if (-not $exe) { throw "Notepad++ selected (default/fallback) but notepad++.exe not found." }
+
+  return [pscustomobject]@{
+    Name     = "Notepad++"
+    ProgId   = "WSDFIR.NotepadPP.File"
+    AppExe   = "notepad++.exe"
+    Exe      = $exe
+    Cmd      = "`"$exe`" `"%1`""
+    Icon     = "`"$exe`",0"
+    ShellKey = "EditWithNotepadPP"
+  }
+}
+
+function Set-DefaultForExt {
+  param(
+    [string]$ext,
+    [string]$progId
+  )
+
+  # 1) The actual association
+  $extKey = "HKCU:\Software\Classes\$ext"
+  New-Item -Path $extKey -Force | Out-Null
+  Set-ItemProperty -Path $extKey -Name "(default)" -Value $progId
+
+  # 2) Make Windows treat it as a text file (helps Explorer “open” behavior)
+  New-ItemProperty -Path $extKey -Name "PerceivedType" -Value "text" -PropertyType String -Force | Out-Null
+
+  # Special case for .md to be treated as markdown (enables preview pane and other features in Explorer)
+  if ($ext -eq ".md") {
+    New-ItemProperty -Path $extKey -Name "Content Type" -Value "text/markdown" -PropertyType String -Force | Out-Null
+  }
+
+  # 3) Clear Explorer overrides for THIS extension only
+  $fe = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\$ext"
+  Remove-Item -Path "$fe\UserChoice" -Recurse -Force -ErrorAction SilentlyContinue
+  Remove-Item -Path "$fe\OpenWithList" -Recurse -Force -ErrorAction SilentlyContinue
+  Remove-Item -Path "$fe\OpenWithProgids" -Recurse -Force -ErrorAction SilentlyContinue
+}
+
+# --- Pick editor + define ProgID ---
+$ed = Resolve-Editor -sel $editorSel
+
+$progRoot = "HKCU:\Software\Classes\$($ed.ProgId)"
+
+# ProgID open + edit (maximum feel)
+New-Item -Path "$progRoot\shell\open\command" -Force | Out-Null
+Set-ItemProperty -Path "$progRoot\shell\open\command" -Name "(default)" -Value $ed.Cmd
+
+New-Item -Path "$progRoot\shell\edit\command" -Force | Out-Null
+Set-ItemProperty -Path "$progRoot\shell\edit\command" -Name "(default)" -Value $ed.Cmd
+
+New-Item -Path $progRoot -Force | Out-Null
+Set-ItemProperty -Path $progRoot -Name "FriendlyTypeName" -Value ("WSDFIR " + $ed.Name)
+New-Item -Path "$progRoot\DefaultIcon" -Force | Out-Null
+Set-ItemProperty -Path "$progRoot\DefaultIcon" -Name "(default)" -Value $ed.Icon
+
+# Register application (helps “Choose an app” scenarios)
+New-Item -Path "HKCU:\Software\Classes\Applications\$($ed.AppExe)\shell\open\command" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Classes\Applications\$($ed.AppExe)\shell\open\command" -Name "(default)" -Value $ed.Cmd
+
+# Always-available context menu entry for all files (*)
+New-Item -Path "HKCU:\Software\Classes\*\shell\$($ed.ShellKey)\command" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Classes\*\shell\$($ed.ShellKey)\command" -Name "(default)" -Value $ed.Cmd
+
+# --- Apply associations (explicitly avoid .lnk) ---
+foreach ($ext in $exts) {
+  Set-DefaultForExt -ext $ext -progId $ed.ProgId
+}
+
+Write-DateLog "Editor associations set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set dark theme if selected
 if ("${WSDFIR_DARK}" -eq "Yes") {

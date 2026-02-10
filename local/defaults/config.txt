@@ -6,8 +6,8 @@ $WSDFIR_ROOT="C:\"
 # Install Notepad++
 $WSDFIR_NOTEPAD="Yes"
 # Install Neovim
-$WSDFIR_NEOVIM="Yes"
-# Default text editor to use in the terminal (nvim or notepad)
+$WSDFIR_NEOVIM="No"
+# Default text editor to use in the terminal (nvim or notepad_plus_plus)
 $WSDFIR_TEXT_EDITOR="notepad_plus_plus"
 # Install Visual Studio Code PowerShell extension
 $WSDFIR_VSCODE_POWERSHELL="Yes"
