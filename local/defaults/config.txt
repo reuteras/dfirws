@@ -23,6 +23,8 @@ $WSDFIR_VSCODE_MERMAID="Yes"
 $WSDFIR_VSCODE_SHELLCHECK="Yes"
 # Install Visual Studio Code ruff extension
 $WSDFIR_VSCODE_RUFF="Yes"
+# Install Visual Studio Code YARA Language extension
+$WSDFIR_VSCODE_YARA="Yes"
 
 # Run sysmon
 $WSDFIR_SYSMON="No"
