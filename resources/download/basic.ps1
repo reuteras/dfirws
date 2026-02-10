@@ -136,6 +136,16 @@ if ($all -or $Python) {
                 Expect = "Batch file"
             }
         )
+        Notes = "Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate."
+        Tips = "Ghidra is a free and open-source software reverse engineering (SRE) framework developed by NSA's Research Directorate."
+        Usage = "Ghidra is used for analyzing compiled code on a variety of platforms including Windows, macOS, and Linux."
+        SampleCommands = @(
+            "ghidraRun.bat"
+        )
+        SampleFiles = @(
+            "N/A"
+        )
+    }
 
     # Tools to compile and build - version 2019
     $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe" -check "PE32"

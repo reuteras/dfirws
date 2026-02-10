@@ -185,7 +185,6 @@ Test-Command git PE32
 Test-Command "${env:ProgramFiles}\Graphviz\bin\gxl2dot.exe" PE32
 Test-Command "${env:ProgramFiles}\idr\bin\idr.exe" PE32
 Test-Command iisGeolocate PE32
-Test-Command notepad++ PE32
 Test-Command python PE32
 
 # foreach ($name in (Get-ChildItem C:\venv\*\scripts -Recurse -Include *.exe -Exclude python.exe,pip.exe,pip3.exe,pip3.11.exe,poetry.exe,virtualenv.exe,pythonw.exe,pkginfo.exe,doesitcache.exe,dulwich.exe,keyring.exe,pyproject-build.exe,normalizer.exe,pygmentize.exe,wheel.exe)) {"Test-Command", $name.Fullname, "PE32"  -join " " }

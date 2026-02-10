@@ -24,6 +24,13 @@ Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEM
 # Check if running in verify mode
 if (Test-Path "C:\log\log.txt") {
 	Add-Shortcut -SourceLnk "${HOME}\Desktop\progress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Get-Content C:\log\verify.txt -Wait"
+	Write-DateLog "Sandbox started in verify mode." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+	# Install Notepad++
+	$WSDFIR_NOTEPAD="Yes"
+	# Install Neovim
+	$WSDFIR_NEOVIM="Yes"
+	# Default text editor to use in the terminal (nvim or notepad_plus_plus)
+	$WSDFIR_TEXT_EDITOR="notepad_plus_plus"
 }
 
 # Set the execution policy to Bypass for default PowerShell

@@ -20,11 +20,13 @@ Install-Git >> "C:\log\rust.txt"
 Write-DateLog "Install Rust." >> "C:\log\rust.txt"
 Install-Rust >> "C:\log\rust.txt"
 
+$env:CC  = "C:\Tools\msys64\ucrt64\bin\gcc.exe"
+$env:CXX = "C:\Tools\msys64\ucrt64\bin\g++.exe"
+$env:AR  = "C:\Tools\msys64\ucrt64\bin\ar.exe"
+
 # Set PATH to include Rust and Git
-$env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
-Add-ToUserPath "${MSYS2_DIR}"
-Add-ToUserPath "${MSYS2_DIR}\ucrt64\bin"
-Add-ToUserPath "${MSYS2_DIR}\usr\bin"
+$env:PATH="${RUST_DIR}\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH};"
+$env:Path = "C:\Tools\msys64\ucrt64\bin;C:\Tools\msys64\usr\bin;$env:Path"
 $env:PATH="${env:PATH};C:\cargo\bin;" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 # Install Rust tools
