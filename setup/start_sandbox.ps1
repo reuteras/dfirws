@@ -25,12 +25,6 @@ Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEM
 if (Test-Path "C:\log\log.txt") {
 	Add-Shortcut -SourceLnk "${HOME}\Desktop\progress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Get-Content C:\log\verify.txt -Wait"
 	Write-DateLog "Sandbox started in verify mode." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-	# Install Notepad++
-	$WSDFIR_NOTEPAD="Yes"
-	# Install Neovim
-	$WSDFIR_NEOVIM="Yes"
-	# Default text editor to use in the terminal (nvim or notepad_plus_plus)
-	$WSDFIR_TEXT_EDITOR="notepad_plus_plus"
 }
 
 # Set the execution policy to Bypass for default PowerShell
@@ -94,14 +88,15 @@ Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandb
 Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Notepad++ and plugins
-if ("${WSDFIR_NOTEPAD}" -eq "Yes") {
+if (("${WSDFIR_NOTEPAD}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
 	Add-ToUserPath "${env:ProgramFiles}\Notepad++"
+	Add-Shortcut -SourceLnk "${HOME}\Desktop\Notepad++.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe"
 	Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 # Install Neovim
-if ("${WSDFIR_NEOVIM}" -eq "Yes") {
+if (("${WSDFIR_NEOVIM}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	Install-Neovim
 	Write-DateLog "Neovim installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
@@ -504,8 +499,8 @@ Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${WSDFI
 Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\utils\dfirws_folder.ps1" -NoNewWindow
 
 # Add shortcuts to desktop
-Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws docs.lnk" -DestinationPath "${HOME}\Documents\tools\utils\mkdocs.bat"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\Documents\tools\utils\jupyter.bat" -IconLocation "C:\venv\uv\jupyterlab\Lib\site-packages\jupyter_server\static\favicons\favicon.ico"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws docs.lnk" -DestinationPath "${HOME}\Documents\tools\utils\mkdocs.bat" -IconLocation "$env:windir\System32\shell32.dll" -IconIndex 23
 Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
 
 # Enable clipboard history

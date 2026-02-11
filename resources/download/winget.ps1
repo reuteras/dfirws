@@ -710,7 +710,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "nvim"
+            Name = "C:\Program Files\Neovim\bin\nvim.exe"
             Expect = "PE32"
         }
     )

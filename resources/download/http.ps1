@@ -54,18 +54,6 @@ if (! $NoVSCodeExtensions.IsPresent) {
     } else {
         Write-DateLog "ERROR: Could not get URI for Visual Studio Code ruff extension"
     }
-
-    # Get URI for Visual Studio Code YARA Language extension - ugly
-    $vscode_yara_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=virustotal.yara-x-ls -RegEx '"AssetUri":"[^"]+virustotal.yara-x-ls/([^/]+)/'
-
-    if ("$vscode_yara_string" -ne "") {
-        $vscode_tmp = $vscode_yara_string | Select-String -Pattern '"AssetUri":"[^"]+virustotal.yara-x-ls/([^/]+)/'
-        $vscode_yara_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code YARA Language extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/virustotal/vsextensions/yara-x-ls/$vscode_yara_version/vspackage" -FilePath ".\downloads\vscode\vscode-yara.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code YARA Language extension"
-    }
 }
 
 # Get Visual Studio Code installer

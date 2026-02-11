@@ -73,34 +73,42 @@ function Add-MultipleToUserPath {
 
 function Add-Shortcut {
     param (
+        [Parameter(Mandatory)]
         [string]$SourceLnk,
+
+        [Parameter(Mandatory)]
         [string]$DestinationPath,
-        [string]$WorkingDirectory = "${HOME}\Desktop",
-        [string]$Iconlocation = $Null,
-        [switch]$IconArrayLocation,
-        [string]$Arguments = $Null
+
+        [string]$WorkingDirectory = "$HOME\Desktop",
+
+        # Path to .ico/.exe/.dll that contains icons
+        [string]$IconLocation = $null,
+
+        # Icon index inside the file (0-based)
+        [int]$IconIndex = 0,
+
+        [string]$Arguments = $null
     )
-    $WshShell = New-Object -comObject WScript.Shell
-    # Make sure the directory exists for the $SourceLnk file
-    if (-not (Test-Path -Path $(Split-Path -Path $SourceLnk))) {
-        New-Item -ItemType Directory -Path $(Split-Path -Path $SourceLnk) | Out-Null
+
+    $WshShell = New-Object -ComObject WScript.Shell
+
+    $dir = Split-Path -Path $SourceLnk -Parent
+    if ($dir -and -not (Test-Path $dir)) {
+        New-Item -ItemType Directory -Path $dir -Force | Out-Null
     }
 
-    $Shortcut = ${WshShell}.CreateShortcut("${SourceLnk}")
-    if ($Null -ne ${WorkingDirectory}) {
-        $Shortcut.WorkingDirectory = "${WorkingDirectory}"
+    $Shortcut = $WshShell.CreateShortcut($SourceLnk)
+
+    if ($WorkingDirectory) { $Shortcut.WorkingDirectory = $WorkingDirectory }
+    if ($Arguments)        { $Shortcut.Arguments = $Arguments }
+
+    $Shortcut.TargetPath = $DestinationPath
+
+    if ($IconLocation) {
+        $Shortcut.IconLocation = "$IconLocation,$IconIndex"
     }
-    if ($Null -ne ${Iconlocation}) {
-        if ($Null -eq ${IconArrayLocation}) {
-            ${IconArrayLocation} = 0
-        }
-        ${Shortcut}.Iconlocation = "${Iconlocation}, ${IconArrayLocation}"
-    }
-    if ($Null -ne ${Arguments}) {
-        ${Shortcut}.Arguments = "${Arguments}"
-    }
-    ${Shortcut}.TargetPath = "${DestinationPath}"
-    ${Shortcut}.Save()
+
+    $Shortcut.Save()
 }
 
 # Update the wallpaper for the current users desktop
@@ -779,6 +787,18 @@ function Install-Neovim {
         }
         Copy-Item "${SETUP_PATH}\en.utf-8.spl" "${env:LOCALAPPDATA}\nvim-data\site\spell\en.utf-8.spl" -Force
         Copy-Item "${SETUP_PATH}\en.utf-8.sug" "${env:LOCALAPPDATA}\nvim-data\site\spell\en.utf-8.sug" -Force
+
+        $ed = "C:\Program Files\Neovim\bin\nvim.exe"
+        $menuKey = "HKCU:\Software\Classes\*\shell\EditWithNeovim"
+
+        New-Item -Path "$menuKey\command" -Force | Out-Null
+
+        # Text shown in the right-click menu
+        Set-ItemProperty -Path $menuKey -Name "(default)" -Value "Edit with Neovim"
+
+        # Icon (nvim.exe usually works fine as an icon source)
+        New-ItemProperty -Path $menuKey -Name "Icon" -PropertyType String -Value "`"$($ed)`",0" -Force | Out-Null
+
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-neovim.txt" | Out-Null
     } else {
         Write-Output "Neovim is already installed"
