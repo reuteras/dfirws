@@ -387,7 +387,7 @@ def main() -> int:
         tools_index_lines.append(f"- [{display_name}](./{slug}/index.md)")
     tools_index_lines.append("")
 
-    tools_index_entries: List[tuple[str, str, str, str]] = []
+    tools_index_entries: List[tuple[str, str, str, str, str]] = []
     for category_path in ordered_categories:
         display_name = category_path.replace("\\", " / ")
         slug = get_slug(category_path)
@@ -398,8 +398,8 @@ def main() -> int:
         lines: List[str] = []
         lines.append(f"# {display_name}")
         lines.append("")
-        lines.append("| Tool | Tags | File Extensions |")
-        lines.append("| --- | --- | --- |")
+        lines.append("| Tool | Description | Tags | File Extensions |")
+        lines.append("| --- | --- | --- | --- |")
 
         tools_in_category = sorted(grouped[category_path], key=lambda t: t.get("Name", ""))
         used_slugs: Dict[str, int] = {}
@@ -407,21 +407,22 @@ def main() -> int:
             tool_slug = get_tool_page_slug(tool.get("Name", ""), used_slugs)
             write_tool_page(docs_root, tool, category_path, tool_slug)
             tool_link = f"{tool_slug}.md"
+            summary = get_tool_summary(tool).replace("|", "\\|")
             tags = ", ".join(get_string_list(tool.get("Tags")))
             file_exts = ", ".join(f"`{e}`" for e in get_string_list(tool.get("FileExtensions")))
-            lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {tags} | {file_exts} |")
+            lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {summary} | {tags} | {file_exts} |")
             tools_index_entries.append(
-                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md", tags, file_exts)
+                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md", summary, tags, file_exts)
             )
 
         category_file.write_text("\n".join(lines), encoding="utf-8")
 
     tools_index_lines.append("## Tools Index")
     tools_index_lines.append("")
-    tools_index_lines.append("| Tool | Tags | File Extensions |")
-    tools_index_lines.append("| --- | --- | --- |")
-    for tool_name, tool_link, tags, file_exts in sorted(tools_index_entries, key=lambda item: item[0].lower()):
-        tools_index_lines.append(f"| [{tool_name}]({tool_link}) | {tags} | {file_exts} |")
+    tools_index_lines.append("| Tool | Description | Tags | File Extensions |")
+    tools_index_lines.append("| --- | --- | --- | --- |")
+    for tool_name, tool_link, summary, tags, file_exts in sorted(tools_index_entries, key=lambda item: item[0].lower()):
+        tools_index_lines.append(f"| [{tool_name}]({tool_link}) | {summary} | {tags} | {file_exts} |")
 
     tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
 
