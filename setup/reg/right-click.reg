@@ -237,6 +237,12 @@ Windows Registry Editor Version 5.00
 "Position"="Top"
 "SubCommands"=""
 
+[HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\pdfalyze]
+"MUIVerb"="pdfalyze"
+
+[HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\pdfalyze\command]
+@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\venv\\bin\\pdfalyze.exe '%1'"
+
 [HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\pdfparser]
 "MUIVerb"="pdf-parser.py"
 
@@ -253,19 +259,19 @@ Windows Registry Editor Version 5.00
 "MUIVerb"="peepdf"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\peepdf\command]
-@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\Tools\\bin\\peepdf.py '%1'"
+@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\venv\\bin\\peepdf.exe '%1'"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\peepdfi]
 "MUIVerb"="peepdf -i"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\peepdfi\command]
-@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\Tools\\bin\\peepdf.py -i '%1'"
+@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\venv\\bin\\peepdf.exe -i '%1'"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\qpdf]
 "MUIVerb"="qpdf --json"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.pdf\shell\pdf\shell\qpdf\command]
-@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\Tools\\qpdf\\bin\\qpdf --json '%1' | fx"
+@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\Tools\\qpdf\\bin\\qpdf --json '%1' | C:\\Tools\\bin\\fx.exe"
 
 ;
 ; Add "dfirws PST" to the context menu of .pst files (Exchange PST files)

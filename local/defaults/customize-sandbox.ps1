@@ -21,26 +21,28 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\CyberChef.lnk" -DestinationPath "C:\Too
 # Add-Shortcut -SourceLnk "${HOME}\Desktop\PE-bear.lnk" -DestinationPath "C:\Tools\pebear\PE-bear.exe"
 # Add-Shortcut -SourceLnk "${HOME}\Desktop\pestudio.lnk" -DestinationPath "C:\Tools\pestudio\pestudio\pestudio.exe"
 
-# Configure Notepad++
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DSpellCheck.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\DSpellCheck" | Out-Null
-New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell" -ItemType Directory -Force | Out-Null
-if ("${WSDFIR_DARK}" -eq "Yes") {
-    if (Test-Path "${LOCAL_PATH}\notepad++_dark.xml") {
-        Copy-Item "${LOCAL_PATH}\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
-    } else {
-        Copy-Item "${LOCAL_PATH}\defaults\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+if ($WSDFIR_NOTEPAD -eq "Yes") {
+    # Configure Notepad++
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DSpellCheck.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\DSpellCheck" | Out-Null
+    New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell" -ItemType Directory -Force | Out-Null
+    if ("${WSDFIR_DARK}" -eq "Yes") {
+        if (Test-Path "${LOCAL_PATH}\notepad++_dark.xml") {
+            Copy-Item "${LOCAL_PATH}\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+        } else {
+            Copy-Item "${LOCAL_PATH}\defaults\notepad++_dark.xml" "${env:USERPROFILE}\AppData\Roaming\Notepad++\config.xml" -Force
+        }
     }
-}
-if (Test-Path "${LOCAL_PATH}\DSpellCheck.ini") {
-    Copy-Item "${LOCAL_PATH}\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
-} else {
-    Copy-Item "${LOCAL_PATH}\defaults\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
-}
+    if (Test-Path "${LOCAL_PATH}\DSpellCheck.ini") {
+        Copy-Item "${LOCAL_PATH}\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
+    } else {
+        Copy-Item "${LOCAL_PATH}\defaults\DSpellCheck.ini" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\DSpellCheck.ini" -Force
+    }
 
-# Add US English dictionary
-Copy-Item "${GIT_PATH}\dictionaries\en\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
-Copy-Item "${GIT_PATH}\dictionaries\en\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
+    # Add US English dictionary
+    Copy-Item "${GIT_PATH}\dictionaries\en\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
+    Copy-Item "${GIT_PATH}\dictionaries\en\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
+}
 
 # Add new path for user
 # Add-ToUserPath "C:\local\bin"
@@ -69,8 +71,8 @@ USER_AGREEMENT=ACCEPT
 "@
 
 foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
-    New-Item -Path "${HOME}\.ghidra\.${version}" -ItemType Directory -Force | Out-Null
-    ${GHIDRA_CONFIG} | Out-File -FilePath "${HOME}\.ghidra\.${version}\preferences" -Encoding ascii
+    New-Item -Path "${HOME}\AppData\Roaming\ghidra\${version}" -ItemType Directory -Force | Out-Null
+    ${GHIDRA_CONFIG} | Out-File -FilePath "${HOME}\AppData\Roaming\ghidra\${version}\preferences" -Encoding ascii
 }
 
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools
