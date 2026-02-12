@@ -2298,8 +2298,9 @@ $TOOL_DEFINITIONS += @{
 
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
 $LibreOfficeVersionDownloadPage = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
-$LibreOfficeVersion = Get-DownloadUrlFromPage -Url "${LibreOfficeVersionDownloadPage}" -RegEx 'https://[^"]+.msi'
-$status = Get-FileFromUri -uri "${LibreOfficeVersion}" -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
+$LibreOfficeVersionDownloadPage_64 = $LibreOfficeVersionDownloadPage.Replace("dl/win-x86/", "dl/win-x86_64/").Replace("x86.msi", "x86-64.msi").Replace("https://download.documentfoundation.org/libreoffice/stable/", "https://www.libreoffice.org/donate/dl/")
+$LibreOfficeVersion = Get-DownloadUrlFromPage -Url "${LibreOfficeVersionDownloadPage_64}" -RegEx 'https://[^"]+.msi'
+$status = Get-FileFromUri -uri ${LibreOfficeVersion} -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
 
 $TOOL_DEFINITIONS += @{
     Name = "LibreOffice"
@@ -2982,40 +2983,6 @@ $TOOL_DEFINITIONS += @{
     Usage = "hashcat supports GPU-accelerated password recovery."
     SampleCommands = @(
         "hashcat --help"
-    )
-    SampleFiles = @(
-        "N/A"
-    )
-}
-
-# vmss2core
-$status = Get-FileFromUri -uri "https://archive.org/download/flings.vmware.com/Flings/Vmss2core/vmss2core-sb-8456865.exe" -FilePath ".\downloads\vmss2core.exe" -CheckURL "Yes" -check "PE32"
-if ($status) {
-    Copy-Item ".\downloads\vmss2core.exe" "${TOOLS}\bin\vmss2core.exe" -Force
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "vmss2core"
-    Homepage = "https://archive.org/details/flings.vmware.com"
-    Vendor = "VMware"
-    License = "Proprietary"
-    Category = "Memory"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "vmss2core"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".vmss", ".vmsn")
-    Tags = @("memory-forensics", "vmware", "conversion")
-    Notes = "vmss2core converts VM snapshot files to core dumps."
-    Tips = "vmss2core is installed in ${TOOLS}\bin."
-    Usage = "Use vmss2core to convert VMware snapshots for debugging."
-    SampleCommands = @(
-        "vmss2core.exe -h"
     )
     SampleFiles = @(
         "N/A"

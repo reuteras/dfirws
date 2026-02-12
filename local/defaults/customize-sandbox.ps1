@@ -1,4 +1,4 @@
-# Rename to customize.ps1 to use.
+# Copy this file to local\customize.ps1 to customize the sandbox.
 # Add files to this folder and they will be available as C:\local
 
 # Source common functions
@@ -8,9 +8,6 @@
 
 # Customize background image:
 # Update-Wallpaper "C:\local\image.jpg"
-
-# Create extra shortcuts - third option is optional and is the start directory
-# Set-Shortcut "${HOME}\Desktop\debloat.lnk" "C:\Tools\bin\debloat.exe" "${HOME}\Desktop"
 
 # Add-Shortcut -SourceLnk "${HOME}\Desktop\bash.lnk" -DestinationPath "${env:ProgramFiles}\Git\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\CyberChef.lnk" -DestinationPath "C:\Tools\CyberChef\CyberChef.html" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "C:\Tools\CyberChef\CyberChef.ico"
@@ -90,7 +87,7 @@ if (Test-Path "${HOME}\Desktop\readonly\Quarantine.zip") {
     . 'C:\Users\WDAGUtilityAccount\Documents\PowerShell\Microsoft.PowerShell_profile.ps1'
     Set-Location "${HOME}\Desktop\"
     Restore-Quarantine
-    C:\venv\maldump\Scripts\maldump.exe -a C:\
+    C:\venv\bin\maldump.exe -a C:\
     if (Test-Path "${HOME}\Desktop\quarantine.tar") {
         tar xvf ".\quarantine.tar"
     }

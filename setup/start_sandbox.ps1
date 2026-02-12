@@ -208,8 +208,8 @@ Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\s
 
 # Extensions you want
 $exts = @(
-  ".txt",".log",".md",".js",".json",".yaml",".yml",".py",".ps1",".toml",".ini",".cfg",
-  ".xml",".html",".css",".ts",".tsx",".lua",".c",".cpp",".h",".cs",".go",".rs",".sh",".cmd"
+  ".txt",".log",".md",".json",".yaml",".yml",".toml",".ini",".cfg",
+  ".xml",".html",".css",".ts",".tsx",".lua",".c",".cpp",".h",".cs",".go",".rs",".sh"
 )
 
 # Select editor
@@ -368,7 +368,6 @@ Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox
 $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
 
 # TODO: Handle these later
-# "${env:ProgramFiles}\ForensicTimeliner"
 # "${env:ProgramFiles}\IDR\bin"
 # "${env:ProgramFiles}\jadx\bin"
 # "${GIT_PATH}\defender-detectionhistory-parser"
@@ -552,6 +551,12 @@ if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
 Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\RegistryExplorer" "${env:ProgramFiles}\RegistryExplorer" | Out-Null
 Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\ShellBagsExplorer" "${env:ProgramFiles}\ShellBagsExplorer" | Out-Null
 Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\TimelineExplorer" "${env:ProgramFiles}\TimelineExplorer" | Out-Null
+
+# geolocus
+if (Test-Path "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb") {
+    New-Item -Path "${HOME}\.cache\geolocus-cli" -ItemType Directory -Force | Out-Null
+    Copy-Item "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb" "${HOME}\.cache\geolocus-cli\geolocus.mmdb" -Force | Out-Null
+}
 
 # AuthLogParser
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLogParser" | Out-Null

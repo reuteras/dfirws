@@ -1,6 +1,6 @@
 # OS / Linux
 
-| Tool | Description |
-| --- | --- |
-| [Elfparser-ng](elfparser-ng.md) |  |
-| [XELFViewer](xelfviewer.md) |  |
+| Tool | Description | Tags | File Extensions |
+| --- | --- | --- | --- |
+| [Elfparser-ng](elfparser-ng.md) |  |  |  |
+| [XELFViewer](xelfviewer.md) |  |  |  |

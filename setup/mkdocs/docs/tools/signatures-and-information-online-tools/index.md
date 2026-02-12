@@ -1,7 +1,7 @@
 # Signatures and information / Online tools
 
-| Tool | Description |
-| --- | --- |
-| [VirusTotal CLI](virustotal-cli.md) |  |
-| [malwarebazaar](malwarebazaar.md) |  |
-| [shodan](shodan.md) |  |
+| Tool | Description | Tags | File Extensions |
+| --- | --- | --- | --- |
+| [VirusTotal CLI](virustotal-cli.md) |  |  |  |
+| [malwarebazaar](malwarebazaar.md) |  |  |  |
+| [shodan](shodan.md) |  |  |  |

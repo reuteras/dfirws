@@ -10,7 +10,7 @@ nav:
 - Changelog: Changes.md
 - Customize Dfirws: Customize-dfirws.md
 - Didier Stevens Tools: Didier-Stevens-tools.md
-- Getting Started: Getting-started.md
+- Getting started: Getting-started.md
 - Jupyter Notebooks: Jupyter-notebooks.md
 - KAPE: KAPE.md
 - Network Forensics: Network-forensics.md
@@ -42,6 +42,7 @@ nav:
     - HxD: tools/editors/hxd.md
     - ImHex: tools/editors/imhex.md
     - Malcat Lite: tools/editors/malcat-lite.md
+    - Neovim: tools/editors/neovim.md
     - Notepad++: tools/editors/notepad.md
     - Obsidian: tools/editors/obsidian.md
     - Visual Studio Code: tools/editors/visual-studio-code.md
@@ -153,6 +154,7 @@ nav:
     - FullEventLogView: tools/logs/fulleventlogview.md
   - Malware Tools:
     - Overview: tools/malware-tools/index.md
+    - ClamAV: tools/malware-tools/clamav.md
     - csvkit: tools/malware-tools/csvkit.md
     - maldump: tools/malware-tools/maldump.md
   - Malware Tools Cobalt Strike:
@@ -274,6 +276,7 @@ nav:
     - Ghidra BTIGhidra: tools/uncategorized/ghidra-btighidra.md
     - Ghidra Cartographer: tools/uncategorized/ghidra-cartographer.md
     - Ghidra GolangAnalyzerExtension: tools/uncategorized/ghidra-golanganalyzerextension.md
+    - Ghidra: tools/uncategorized/ghidra.md
     - ghidrecomp: tools/uncategorized/ghidrecomp.md
     - ghidriff: tools/uncategorized/ghidriff.md
     - graphviz: tools/uncategorized/graphviz.md

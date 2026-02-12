@@ -1,5 +1,5 @@
 # Files and apps / JavaScript
 
-| Tool | Description |
-| --- | --- |
-| [jsbeautifier](jsbeautifier.md) |  |
+| Tool | Description | Tags | File Extensions |
+| --- | --- | --- | --- |
+| [jsbeautifier](jsbeautifier.md) |  |  |  |

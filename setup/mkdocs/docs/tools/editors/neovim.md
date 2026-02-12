@@ -1,0 +1,3 @@
+# Neovim
+
+**Category:** Editors

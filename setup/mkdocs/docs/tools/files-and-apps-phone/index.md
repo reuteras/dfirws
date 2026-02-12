@@ -1,6 +1,6 @@
 # Files and apps / Phone
 
-| Tool | Description |
-| --- | --- |
-| [aLEAPP](aleapp.md) |  |
-| [iLEAPP](ileapp.md) |  |
+| Tool | Description | Tags | File Extensions |
+| --- | --- | --- | --- |
+| [aLEAPP](aleapp.md) |  |  |  |
+| [iLEAPP](ileapp.md) |  |  |  |

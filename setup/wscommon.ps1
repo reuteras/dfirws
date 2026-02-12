@@ -421,6 +421,13 @@ function Install-Firefox {
 function Install-ForensicTimeliner {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-forensictimeliner.txt")) {
         Write-Output "Installing Forensic Timeliner"
+        #$CLI_TOOL = "${POWERSHELL_EXE}"
+        #$CLI_TOOL_ARGS = "-NoExit"
+        $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
+        $TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR"
+        $CLI_TOOL = "${TERMINAL_INSTALL_LOCATION}\wt.exe"
+        $CLI_TOOL_ARGS = "-w 0 C:\Program Files\PowerShell\7\pwsh.exe -NoExit"
+
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ForensicTimeliner.zip" -o"${env:ProgramFiles}" | Out-Null
         Move-Item ${env:ProgramFiles}\ForensicTimeliner* "${env:ProgramFiles}\ForensicTimeliner" -Force
         if (Test-Path "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk") {
@@ -429,7 +436,8 @@ function Install-ForensicTimeliner {
         if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk") {
             Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk" -Force
         }
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command ForensicTimeliner -h"
+        Add-ToUserPath "${env:ProgramFiles}\ForensicTimeliner"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ForensicTimeliner -h"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-forensictimeliner.txt" | Out-Null
     } else {
         Write-Output "Forensic Timeliner is already installed"

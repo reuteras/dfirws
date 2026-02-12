@@ -1,5 +1,5 @@
 # IR
 
-| Tool | Description |
-| --- | --- |
-| [Velociraptor](velociraptor.md) |  |
+| Tool | Description | Tags | File Extensions |
+| --- | --- | --- | --- |
+| [Velociraptor](velociraptor.md) |  |  |  |
