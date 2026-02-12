@@ -47,7 +47,7 @@ Write-DateLog "PowerShell installed and execution policy set to Unrestricted for
 #
 
 # Always install common Java.
-Start-Process msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
+Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
 Write-DateLog "Java installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Python

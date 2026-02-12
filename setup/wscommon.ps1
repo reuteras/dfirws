@@ -768,7 +768,7 @@ function Install-OhMyPosh {
         Write-Output "Installing OhMyPosh"
         Add-AppxPackage "${SETUP_PATH}\oh-my-posh.msi"
         Write-Output "Installing OhMyPosh fonts"
-        Start-Process "oh-my-posh.exe" -ArgumentList "font install ${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
+        Start-Process -Wait "oh-my-posh.exe" -ArgumentList "font install ${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
         Write-Output "Creating new shortcut"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oh-my-posh.exe --help"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
