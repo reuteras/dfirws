@@ -227,7 +227,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".evtx", ".reg", ".dat", ".lnk", ".pf", ".mft", ".zip")
     Tags = @("forensics", "timeline", "log-analysis", "event-log", "registry", "bodyfile")
-    Notes = ""
+    Notes = "The dfir-toolkit is a collection of command-line tools for digital forensics and incident response (DFIR) tasks. It includes various utilities for analyzing log files, registry hives, MFT files, and other artifacts commonly encountered in DFIR investigations."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -256,7 +256,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".bin")
     Tags = @("filesystem", "forensics", "ntfs", "windows")
-    Notes = ""
+    Notes = "The usnjrnl tool is a command-line utility for parsing Windows UsnJrnl files. It allows you to extract and analyze information from the USN Journal, which is a feature of the NTFS file system that tracks changes to files and directories. This tool can be useful for forensic investigations and understanding file system activity."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -285,7 +285,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".mft")
     Tags = @("filesystem", "forensics", "ntfs", "bodyfile")
-    Notes = ""
+    Notes = "The mft2bodyfile tool is a command-line utility for parsing Master File Table (MFT) files from NTFS file systems and optionally the corresponding USN Journal to create bodyfile output. The bodyfile format is commonly used in digital forensics for timeline analysis. This tool can help investigators extract valuable information about files and directories from MFT records, such as file names, timestamps, and metadata."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -306,7 +306,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("tui", "http", "network")
-    Notes = ""
+    Notes = "CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -327,7 +327,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".pcap", ".pcapng")
     Tags = @("network-analysis", "ssh", "pcap")
-    Notes = ""
+    Notes = "SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications."
     Tips = ""
     Usage = ""
     SampleCommands = @()

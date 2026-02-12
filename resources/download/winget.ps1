@@ -21,7 +21,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk")
     Tags = @("disk-forensics", "forensics", "gui", "artifact-extraction")
-    Notes = ""
+    Notes = "Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -48,7 +48,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("web", "security-testing", "proxy")
-    Notes = ""
+    Notes = "Burp Suite is an integrated platform for performing security testing of web applications. It provides a wide range of tools for intercepting HTTP traffic, analyzing web applications, and automating security testing tasks."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -81,7 +81,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".html", ".htm", ".js", ".css")
     Tags = @("browser", "web")
-    Notes = ""
+    Notes = "Chrome is a widely used web browser developed by Google. It offers fast browsing, a user-friendly interface, and a wide range of extensions and developer tools, making it popular for both general web browsing and web development."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -144,7 +144,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".ico", ".webp")
     Tags = @("image-viewer", "multimedia")
-    Notes = ""
+    Notes = "IrfanView is a fast and compact image viewer and editor for Windows. It supports a wide range of image formats and provides basic editing features, making it useful for quickly viewing and manipulating images."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -175,9 +175,9 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
-    FileExtensions = @()
-    Tags = @()
-    Notes = ""
+    FileExtensions = @(".md", ".markdown")
+    Tags = @("obsidian", "markdown")
+    Notes = "Obsidian is a powerful knowledge management and note-taking application that allows you to create and link notes in a graph-based structure."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -204,7 +204,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("terminal", "shell", "theming")
-    Notes = ""
+    Notes = "Oh My Posh is a customizable prompt for PowerShell and other shells. It allows you to create beautiful and functional command-line prompts with themes and customizations."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -223,7 +223,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".ps1", ".psm1", ".psd1")
     Tags = @("scripting", "shell", "automation")
-    Notes = ""
+    Notes = "PowerShell 7 is a cross-platform shell and scripting language that provides a powerful command-line interface and automation capabilities."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -256,7 +256,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("ssh", "network", "terminal")
-    Notes = ""
+    Notes = "PuTTY is a free and open-source terminal emulator and SSH client for Windows. It is used to connect to remote systems via SSH, Telnet, and other protocols."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -281,7 +281,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".qcow2", ".vmdk", ".vdi", ".img", ".iso")
     Tags = @("virtualization", "emulation")
-    Notes = ""
+    Notes = "QEMU is a generic and open-source machine emulator and virtualizer. It can be used to run operating systems and applications for different architectures on a host system, making it useful for testing, development, and analysis."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -306,7 +306,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".rb")
     Tags = @("scripting", "ruby")
-    Notes = ""
+    Notes = "Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -339,7 +339,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".mp4", ".avi", ".mkv", ".mov", ".mp3", ".wav", ".flac")
     Tags = @("multimedia", "video", "audio")
-    Notes = ""
+    Notes = "VLC is a versatile media player that supports a wide range of audio and video formats. It can be used for playing media files, streaming content, and even basic media conversion tasks."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -375,10 +375,14 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("malware-analysis", "threat-intelligence", "ioc-scanner")
-    Notes = ""
+    Notes = "VirusTotal CLI is a command-line tool for interacting with VirusTotal, allowing you to analyze files and URLs for malware and other threats."
     Tips = ""
     Usage = ""
-    SampleCommands = @()
+    SampleCommands = @(
+        "vt file sample.exe",
+        "vt url http://example.com",
+        "vt ip 8.8.8.8"
+    )
     SampleFiles = @()
 }
 
@@ -408,7 +412,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("diff", "file-comparison")
-    Notes = ""
+    Notes = "WinMerge is a visual file and directory comparison tool that helps you compare files and directories. It is useful for identifying differences between files, merging changes, and synchronizing directories."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -427,7 +431,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".ovpn")
     Tags = @("vpn", "network")
-    Notes = ""
+    Notes = "OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -460,7 +464,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".kml", ".kmz")
     Tags = @("geolocation", "osint", "visualization")
-    Notes = ""
+    Notes = "Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -493,7 +497,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk", ".iso")
     Tags = @("disk-forensics", "mounting", "filesystem")
-    Notes = ""
+    Notes = "OSFMount is a tool for mounting disk images and virtual hard disks as virtual drives. It can be used for analyzing disk images, accessing files within them, and performing forensic analysis on the mounted images."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -512,7 +516,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("vpn", "network")
-    Notes = ""
+    Notes = "WireGuard is a modern and efficient VPN protocol that provides secure and fast connections. It is designed to be simple to configure and use, making it a popular choice for both personal and enterprise VPN solutions."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -545,7 +549,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".pcap", ".pcapng", ".cap")
     Tags = @("network-analysis", "pcap", "protocol-analysis")
-    Notes = ""
+    Notes = "Wireshark is a widely used network protocol analyzer that allows you to capture and analyze network traffic. It can be used for troubleshooting network issues, analyzing security incidents, and learning about network protocols. Wireshark provides a graphical interface for viewing and filtering captured packets, making it easier to analyze complex network traffic."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -570,7 +574,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("vpn", "network")
-    Notes = ""
+    Notes = "Tailscale is a modern VPN solution that allows you to create secure, private networks between your devices. It is designed to be easy to use and can be used for remote access, secure file sharing, and connecting devices across different networks."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -603,7 +607,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".html", ".htm", ".js", ".css")
     Tags = @("browser", "web")
-    Notes = ""
+    Notes = "Firefox is a fast and secure web browser that can be used to browse the internet, view websites, and manage bookmarks and passwords."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -636,7 +640,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".pdf")
     Tags = @("pdf", "viewer")
-    Notes = ""
+    Notes = "Foxit PDF Reader is a lightweight and fast PDF viewer that can be used to open and view PDF files. It is an alternative to Adobe Acrobat Reader and offers features such as annotation, form filling, and digital signatures."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -658,7 +662,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".py")
     Tags = @("python", "package-management")
-    Notes = ""
+    Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -677,7 +681,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".dmp", ".exe", ".dll", ".sys")
     Tags = @("debugging", "memory-forensics", "kernel")
-    Notes = ""
+    Notes = "WinDbg is a powerful debugger from Microsoft that can be used for analyzing crash dumps, debugging applications, and performing memory forensics. It is commonly used in incident response and malware analysis to investigate system crashes and analyze the behavior of malicious software."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -716,10 +720,12 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".txt", ".md", ".log", ".ps1", ".py", ".rb", ".js")
     Tags = @("text-editor", "code-editor", "terminal")
-    Notes = ""
+    Notes = "Neovim is a terminal-based text editor that can be used for editing scripts, notes, and other text files. It is a fork of Vim with additional features and improvements."
     Tips = ""
     Usage = ""
-    SampleCommands = @()
+    SampleCommands = @(
+        "nvim notes.md",
+    )
     SampleFiles = @()
 }
 
