@@ -2341,7 +2341,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "C:\Program Files (x86)\LibreOffice\program\soffice.exe"
+            Name = "C:\Program Files\LibreOffice\program\soffice.exe"
             Expect = "PE32"
         }
     )

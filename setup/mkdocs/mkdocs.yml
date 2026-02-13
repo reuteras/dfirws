@@ -373,6 +373,7 @@ nav:
     - unicorn: tools/uncategorized/unicorn.md
     - unpy2exe: tools/uncategorized/unpy2exe.md
     - uv: tools/uncategorized/uv.md
+    - Velociraptor Artifact Exchange: tools/uncategorized/velociraptor-artifact-exchange.md
     - vmss2core: tools/uncategorized/vmss2core.md
     - VS Code PowerShell Extension: tools/uncategorized/vs-code-powershell-extension.md
     - VS Code Spell Checker: tools/uncategorized/vs-code-spell-checker.md

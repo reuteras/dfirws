@@ -2,4 +2,4 @@
 
 | Tool | Description | Tags | File Extensions |
 | --- | --- | --- | --- |
-| [RDPCacheStitcher](rdpcachestitcher.md) |  |  |  |
+| [RDPCacheStitcher](rdpcachestitcher.md) | RdpCacheStitcher is a tool for analyzing RDP cache files. |  |  |

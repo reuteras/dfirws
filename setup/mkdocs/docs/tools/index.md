@@ -49,144 +49,144 @@ Categories generated from dfirws shortcuts.
 
 | Tool | Description | Tags | File Extensions |
 | --- | --- | --- | --- |
-| [4n4lDetector](./files-and-apps-pe/4n4ldetector.md) |  |  |  |
+| [4n4lDetector](./files-and-apps-pe/4n4ldetector.md) | Advanced static analysis tool |  |  |
 | [7-Zip](./utilities/7-zip.md) | 7-Zip is a file archive tool. |  |  |
 | [acquire](./forensics/acquire.md) |  |  |  |
-| [adalanche](./os-windows-active-directory-ad/adalanche.md) |  |  |  |
+| [adalanche](./os-windows-active-directory-ad/adalanche.md) | Attack Graph Visualizer and Explorer (Active Directory) ...Who's *really* Domain Admin? |  |  |
 | [admonitions](./uncategorized/admonitions.md) |  |  |  |
 | [aiodns](./uncategorized/aiodns.md) |  |  |  |
 | [aiohttp](./uncategorized/aiohttp.md) |  |  |  |
-| [aLEAPP](./files-and-apps-phone/aleapp.md) |  |  |  |
+| [aLEAPP](./files-and-apps-phone/aleapp.md) | ALEAPP is a tool for parsing and analyzing Android logs, events, and protobuf files. It can be used to extract artifacts from Android devices and analyze them in a structured way. |  |  |
 | [API Monitor](./uncategorized/api-monitor.md) | API Monitor is a tool for monitoring Windows API calls. |  |  |
 | [apktool](./os-android/apktool.md) | apktool is a tool for reverse engineering Android APK files. |  |  |
 | [Ares](./utilities-cryptography/ares.md) |  |  |  |
-| [artemis](./forensics/artemis.md) |  |  |  |
+| [artemis](./forensics/artemis.md) | Artemis is a tool for extracting and analyzing Windows artifacts. It can be used for triage and forensic analysis of Windows systems, allowing investigators to quickly gather information about the system and its activity. |  |  |
 | [Aspose.Email-for-Python-via-Net](./uncategorized/aspose-email-for-python-via-net.md) |  |  |  |
-| [Audacity](./utilities-media/audacity.md) |  |  |  |
+| [Audacity](./utilities-media/audacity.md) | Audacity is a free and open-source audio editing software. |  |  |
 | [autoit-ripper](./files-and-apps/autoit-ripper.md) |  |  |  |
 | [Autopsy](./forensics/autopsy.md) |  |  |  |
-| [BeaconHunter](./malware-tools-cobalt-strike/beaconhunter.md) |  |  |  |
+| [BeaconHunter](./malware-tools-cobalt-strike/beaconhunter.md) | Detect and respond to Cobalt Strike beacons using ETW. |  |  |
 | [BeautifulSoup4](./uncategorized/beautifulsoup4.md) |  |  |  |
 | [Binary Ninja](./reverse-engineering/binary-ninja.md) | Binary Ninja is a reverse engineering platform. |  |  |
 | [binary-refinery](./forensics/binary-refinery.md) |  |  |  |
-| [binlex](./files-and-apps/binlex.md) |  |  |  |
+| [binlex](./files-and-apps/binlex.md) | binlex is a binary genetic traits lexer for malware analysis. |  |  |
 | [bitstruct](./uncategorized/bitstruct.md) |  |  |  |
 | [bulk_extractor](./files-and-apps/bulk-extractor.md) | bulk_extractor extracts features such as email addresses and URLs from disk images. |  |  |
 | [Burp Suite](./network/burp-suite.md) |  |  |  |
-| [bytecode-viewer](./editors/bytecode-viewer.md) |  |  |  |
+| [bytecode-viewer](./editors/bytecode-viewer.md) | A Java 8+ Jar & Android APK Reverse Engineering Suite (Decompiler, Editor, Debugger & More) |  |  |
 | [cabarchive](./uncategorized/cabarchive.md) |  |  |  |
-| [capa](./files-and-apps-pe/capa.md) |  |  |  |
+| [capa](./files-and-apps-pe/capa.md) | capa rules for identifying capabilities in binaries. |  |  |
 | [capa Explorer Web](./files-and-apps-pe/capa-explorer-web.md) | capa Explorer Web is a web UI for exploring capa results. |  |  |
 | [capa-rules](./uncategorized/capa-rules.md) |  |  |  |
 | [cart](./uncategorized/cart.md) |  |  |  |
-| [chainsaw](./files-and-apps-log/chainsaw.md) |  |  |  |
+| [chainsaw](./files-and-apps-log/chainsaw.md) | Rapidly Search and Hunt through Windows Forensic Artefacts |  |  |
 | [chepy](./utilities-cryptography/chepy.md) |  |  |  |
 | [Chrome](./utilities-browsers/chrome.md) |  |  |  |
 | [ClamAV](./malware-tools/clamav.md) | ClamAV is an open-source antivirus engine for detecting malware. |  |  |
-| [cmder](./uncategorized/cmder.md) |  |  |  |
-| [CobaltStrikeScan](./malware-tools-cobalt-strike/cobaltstrikescan.md) |  |  |  |
-| [ComparePlus](./uncategorized/compareplus.md) |  |  |  |
+| [cmder](./uncategorized/cmder.md) | Cmder is a console emulator for Windows. |  |  |
+| [CobaltStrikeScan](./malware-tools-cobalt-strike/cobaltstrikescan.md) | Scan files or process memory for CobaltStrike beacons and parse their configuration |  |  |
+| [ComparePlus](./uncategorized/compareplus.md) | A diff plugin for Notepad++. |  |  |
 | [compressed_rtf](./uncategorized/compressed-rtf.md) |  |  |  |
 | [csvkit](./malware-tools/csvkit.md) |  |  |  |
-| [Cutter](./reverse-engineering/cutter.md) |  |  |  |
-| [CyberChef](./utilities-cryptography/cyberchef.md) |  |  |  |
-| [DB Browser for SQLite](./files-and-apps-database/db-browser-for-sqlite.md) |  |  |  |
-| [DBeaver](./files-and-apps-database/dbeaver.md) |  |  |  |
+| [Cutter](./reverse-engineering/cutter.md) | Cutter is a Qt and C++ GUI powered by Rizin that provides an intuitive interface for reverse engineering and analyzing binaries across multiple platforms. |  |  |
+| [CyberChef](./utilities-cryptography/cyberchef.md) | CyberChef is a web app for data processing and analysis. It provides a wide range of operations for encoding, decoding, encrypting, decrypting, and analyzing data. |  |  |
+| [DB Browser for SQLite](./files-and-apps-database/db-browser-for-sqlite.md) | DB Browser for SQLite is a high quality, visual, open source tool for creating, designing, and editing database files compatible with SQLite. |  |  |
+| [DBeaver](./files-and-apps-database/dbeaver.md) | DBeaver is a database management tool. |  |  |
 | [DCode](./utilities/dcode.md) | DCode is a date/time conversion and analysis tool. |  |  |
-| [debloat](./files-and-apps-pe/debloat.md) |  |  |  |
+| [debloat](./files-and-apps-pe/debloat.md) | A GUI and CLI tool for removing bloat from executables |  |  |
 | [deep_translator](./uncategorized/deep-translator.md) |  |  |  |
 | [DensityScout](./files-and-apps/densityscout.md) | DensityScout calculates file entropy and density. |  |  |
-| [Detect It Easy](./files-and-apps/detect-it-easy.md) |  |  |  |
+| [Detect It Easy](./files-and-apps/detect-it-easy.md) | Detect It Easy is a tool for identifying file types and detecting packers. |  |  |
 | [dfir-unfurl](./files-and-apps-browser/dfir-unfurl.md) |  |  |  |
 | [dfir_ntfs](./files-and-apps-disk/dfir-ntfs.md) |  |  |  |
 | [Didier Stevens Suite](./didierstevens/didier-stevens-suite.md) | Didier Stevens Suite is a collection of tools written in Python and some compiled executables for various digital forensics and incident response tasks. |  |  |
 | [dissect](./forensics/dissect.md) |  |  |  |
 | [dissect.target](./forensics/dissect-target.md) |  |  |  |
-| [DitExplorer](./os-windows-active-directory-ad/ditexplorer.md) |  |  |  |
-| [dll_to_exe](./uncategorized/dll-to-exe.md) |  |  |  |
+| [DitExplorer](./os-windows-active-directory-ad/ditexplorer.md) | Tool for viewing NTDS.dit Active Directory database files. |  |  |
+| [dll_to_exe](./uncategorized/dll-to-exe.md) | Converts a DLL into EXE |  |  |
 | [dnslib](./uncategorized/dnslib.md) |  |  |  |
-| [dnSpy](./reverse-engineering/dnspy.md) |  |  |  |
+| [dnSpy](./reverse-engineering/dnspy.md) | dnSpy is a .NET debugger and decompiler. It can be used to analyze and debug .NET applications, including malware. |  |  |
 | [docx2txt](./uncategorized/docx2txt.md) |  |  |  |
-| [Dokany](./memory/dokany.md) |  |  |  |
+| [Dokany](./memory/dokany.md) | User mode file system library for windows with FUSE Wrapper |  |  |
 | [DotNet 6 Desktop Runtime](./uncategorized/dotnet-6-desktop-runtime.md) |  |  |  |
 | [DotNet 8 Desktop Runtime](./uncategorized/dotnet-8-desktop-runtime.md) |  |  |  |
 | [dotnetfile](./uncategorized/dotnetfile.md) |  |  |  |
 | [dpkt](./uncategorized/dpkt.md) |  |  |  |
-| [DSpellCheck](./uncategorized/dspellcheck.md) |  |  |  |
-| [dsq](./files-and-apps-database/dsq.md) |  |  |  |
+| [DSpellCheck](./uncategorized/dspellcheck.md) | A spell-checker plugin for Notepad++. |  |  |
+| [dsq](./files-and-apps-database/dsq.md) | Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more. |  |  |
 | [Dumpbin](./files-and-apps/dumpbin.md) |  |  |  |
-| [edit](./uncategorized/edit.md) |  |  |  |
+| [edit](./uncategorized/edit.md) | Edit is a simple text editor for Windows made by Microsoft. |  |  |
 | [Elastic Stack (ELK + Beats)](./uncategorized/elastic-stack-elk-beats.md) | Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats. |  |  |
 | [elasticsearch](./uncategorized/elasticsearch.md) |  |  |  |
-| [Elfparser-ng](./os-linux/elfparser-ng.md) |  |  |  |
+| [Elfparser-ng](./os-linux/elfparser-ng.md) | Multiplatform CLI and GUI tool to show information about ELF files. |  |  |
 | [evtx](./uncategorized/evtx.md) |  |  |  |
-| [evtx_dump](./files-and-apps-log/evtx-dump.md) |  |  |  |
+| [evtx_dump](./files-and-apps-log/evtx-dump.md) | A Fast (and safe) parser for the Windows XML Event Log (EVTX) format |  |  |
 | [ExifTool](./utilities/exiftool.md) | ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files. |  |  |
 | [extract-msg](./files-and-apps-email/extract-msg.md) |  |  |  |
 | [FASM](./reverse-engineering/fasm.md) | FASM is a fast assembler for x86 and x86-64 architectures. |  |  |
-| [ffmpeg](./utilities-media/ffmpeg.md) |  |  |  |
-| [Fibratus](./os-windows/fibratus.md) |  |  |  |
+| [ffmpeg](./utilities-media/ffmpeg.md) | ffmpeg is a free and open-source multimedia framework for processing video and audio files. It can be used to convert between different formats, extract audio from video files, and perform various other multimedia processing tasks. |  |  |
+| [Fibratus](./os-windows/fibratus.md) | Adversary tradecraft detection, protection, and hunting |  |  |
 | [Firefox](./utilities-browsers/firefox.md) |  |  |  |
-| [Flare-Fakenet-NG](./network/flare-fakenet-ng.md) |  |  |  |
-| [Flare-Floss](./utilities/flare-floss.md) |  |  |  |
+| [Flare-Fakenet-NG](./network/flare-fakenet-ng.md) | FakeNet-NG - Next Generation Dynamic Network Analysis Tool |  |  |
+| [Flare-Floss](./utilities/flare-floss.md) | Flare-Floss is a tool for extracting strings from malware samples. |  |  |
 | [flatten_json](./uncategorized/flatten-json.md) |  |  |  |
 | [flow.record](./uncategorized/flow-record.md) |  |  |  |
-| [forensic-timeliner](./uncategorized/forensic-timeliner.md) |  |  |  |
+| [forensic-timeliner](./uncategorized/forensic-timeliner.md) | A high-speed forensic timeline engine for Windows forensic artifact CSV output built for DFIR investigators. Quickly consolidate CSV output from processed triage evidence for Eric Zimmerman (EZ Tools) Kape, Axiom, Hayabusa, Chainsaw and Nirsoft into a unified timeline. |  |  |
 | [Foxit PDF Reader](./files-and-apps-pdf/foxit-pdf-reader.md) |  |  |  |
-| [fq](./files-and-apps/fq.md) |  |  |  |
-| [fqlite](./files-and-apps-database/fqlite.md) |  |  |  |
+| [fq](./files-and-apps/fq.md) | jq for binary formats - tool, language and decoders for working with binary and text formats |  |  |
+| [fqlite](./files-and-apps-database/fqlite.md) | FQLite - SQLite Forensic Toolkit. FQLite is a tool to find and restore deleted records in SQlite databases. It therefore examines the database for entries marked as deleted. |  |  |
 | [frida-tools](./uncategorized/frida-tools.md) |  |  |  |
 | [FullEventLogView](./logs/fulleventlogview.md) | FullEventLogView is a tool for viewing Windows event logs. |  |  |
-| [fx](./files-and-apps-log/fx.md) |  |  |  |
+| [fx](./files-and-apps-log/fx.md) | fx is a terminal JSON viewer and processor. |  |  |
 | [geoip2](./uncategorized/geoip2.md) |  |  |  |
 | [geolocus-cli](./utilities/geolocus-cli.md) | geolocus-cli is a geolocation lookup tool. |  |  |
-| [gftrace](./programming-go/gftrace.md) |  |  |  |
+| [gftrace](./programming-go/gftrace.md) | A command line Windows API tracing tool for Golang binaries. |  |  |
 | [Ghidra](./uncategorized/ghidra.md) | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  |
-| [Ghidra BTIGhidra](./uncategorized/ghidra-btighidra.md) |  |  |  |
-| [Ghidra Cartographer](./uncategorized/ghidra-cartographer.md) |  |  |  |
+| [Ghidra BTIGhidra](./uncategorized/ghidra-btighidra.md) | Binary Type Inference Ghidra Plugin |  |  |
+| [Ghidra Cartographer](./uncategorized/ghidra-cartographer.md) | Code Coverage Exploration Plugin for Ghidra. |  |  |
 | [Ghidra GolangAnalyzerExtension](./uncategorized/ghidra-golanganalyzerextension.md) |  |  |  |
 | [ghidrecomp](./uncategorized/ghidrecomp.md) |  |  |  |
 | [ghidriff](./uncategorized/ghidriff.md) |  |  |  |
-| [godap](./utilities/godap.md) |  |  |  |
+| [godap](./utilities/godap.md) | godap is a tool for analyzing Active Directory LDAP data. |  |  |
 | [Google Earth Pro](./utilities/google-earth-pro.md) |  |  |  |
-| [GoReSym](./programming-go/goresym.md) |  |  |  |
+| [GoReSym](./programming-go/goresym.md) | Go symbol recovery tool. |  |  |
 | [Gpg4win](./utilities-cryptography/gpg4win.md) | Gpg4win provides GnuPG and related tools for Windows. |  |  |
 | [graphviz](./uncategorized/graphviz.md) |  |  |  |
 | [Graphviz](./utilities/graphviz.md) | Graphviz is a graph visualization software suite. |  |  |
 | [grip](./uncategorized/grip.md) |  |  |  |
-| [gron](./files-and-apps-log/gron.md) |  |  |  |
-| [h2database](./files-and-apps-database/h2database.md) |  |  |  |
+| [gron](./files-and-apps-log/gron.md) | gron makes JSON greppable by transforming it into discrete assignments that can be easily searched and filtered using standard command-line tools. |  |  |
+| [h2database](./files-and-apps-database/h2database.md) | H2 Database is an open source Java SQL database. |  |  |
 | [hachoir](./files-and-apps-pe/hachoir.md) |  |  |  |
 | [hashcat](./utilities-cryptography/hashcat.md) | hashcat is a password recovery tool. |  |  |
-| [hayabusa](./files-and-apps-log/hayabusa.md) |  |  |  |
+| [hayabusa](./files-and-apps-log/hayabusa.md) | Hayabusa (隼) is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs. |  |  |
 | [hexdump](./uncategorized/hexdump.md) |  |  |  |
-| [hfs](./network/hfs.md) |  |  |  |
-| [HindSight](./files-and-apps-browser/hindsight.md) |  |  |  |
-| [HollowsHunter](./files-and-apps-pe/hollowshunter.md) |  |  |  |
+| [hfs](./network/hfs.md) | hfs is a simple HTTP file server for Windows. |  |  |
+| [HindSight](./files-and-apps-browser/hindsight.md) | Browser forensics tool for Google Chrome (and other Chromium-based browsers). |  |  |
+| [HollowsHunter](./files-and-apps-pe/hollowshunter.md) | Scans running processes. Recognizes and dumps a variety of in-memory implants |  |  |
 | [HxD](./editors/hxd.md) | HxD is a hex editor, disk editor, and memory editor for Windows. |  |  |
-| [Iaito](./reverse-engineering/iaito.md) |  |  |  |
-| [iLEAPP](./files-and-apps-phone/ileapp.md) |  |  |  |
-| [ImHex](./editors/imhex.md) |  |  |  |
-| [INDXRipper](./files-and-apps-disk/indxripper.md) |  |  |  |
+| [Iaito](./reverse-engineering/iaito.md) | iaito is the official graphical interface for radare2, a libre reverse engineering framework. |  |  |
+| [iLEAPP](./files-and-apps-phone/ileapp.md) | iLEAPP is a tool for parsing and analyzing iOS logs, events, and plists. It can be used to extract artifacts from iOS devices and analyze them in a structured way. |  |  |
+| [ImHex](./editors/imhex.md) | ImHex is a hex editor for binary analysis and pattern language. |  |  |
+| [INDXRipper](./files-and-apps-disk/indxripper.md) | Carve file metadata from NTFS index ($I30) attributes |  |  |
 | [IrfanView](./uncategorized/irfanview.md) |  |  |  |
-| [jadx](./programming-java/jadx.md) |  |  |  |
+| [jadx](./programming-java/jadx.md) | Dex to Java decompiler |  |  |
 | [JavaFX SDK](./uncategorized/javafx-sdk.md) | JavaFX SDK provides UI libraries for Java applications. |  |  |
 | [javaobj-py3](./uncategorized/javaobj-py3.md) |  |  |  |
-| [jd-gui](./programming-java/jd-gui.md) |  |  |  |
+| [jd-gui](./programming-java/jd-gui.md) | A standalone Java Decompiler GUI |  |  |
 | [jpterm](./utilities/jpterm.md) |  |  |  |
-| [jq](./files-and-apps/jq.md) |  |  |  |
+| [jq](./files-and-apps/jq.md) | jq is a powerful command-line JSON processor that allows you to parse, filter, and manipulate JSON data with ease. It supports a wide range of operations, including selecting specific fields, transforming data, and performing complex queries. With its simple syntax and extensive functionality, jq is an essential tool for anyone working with JSON data in the command line. |  |  |
 | [jsbeautifier](./files-and-apps-javascript/jsbeautifier.md) |  |  |  |
-| [Jumplist Browser](./os-windows/jumplist-browser.md) |  |  |  |
+| [Jumplist Browser](./os-windows/jumplist-browser.md) | Automatic/Custom Destinations & LNK (MS-SHLLINK) Browser |  |  |
 | [jupyterlab](./uncategorized/jupyterlab.md) |  |  |  |
-| [jwt-cli](./uncategorized/jwt-cli.md) |  |  |  |
+| [jwt-cli](./uncategorized/jwt-cli.md) | A super fast CLI tool to decode and encode JWTs built in Rust |  |  |
 | [keystone-engine](./uncategorized/keystone-engine.md) |  |  |  |
-| [lessmsi](./files-and-apps/lessmsi.md) |  |  |  |
+| [lessmsi](./files-and-apps/lessmsi.md) | lessmsi is a tool to view and extract the contents of a Windows Installer (.msi) file. |  |  |
 | [LibreOffice](./files-and-apps-office/libreoffice.md) | LibreOffice is a free and open-source office suite. |  |  |
 | [lief](./uncategorized/lief.md) |  |  |  |
 | [litecli](./files-and-apps-database/litecli.md) |  |  |  |
 | [LnkParse3](./uncategorized/lnkparse3.md) |  |  |  |
-| [LogBoost](./files-and-apps-log/logboost.md) |  |  |  |
-| [Loki](./signatures-and-information/loki.md) |  |  |  |
+| [LogBoost](./files-and-apps-log/logboost.md) | Convert a variety of log formats to CSV while enriching detected IPs with Geolocation, ASN, DNS, WhoIs, Shodan InternetDB and Threat Indicator matches. |  |  |
+| [Loki](./signatures-and-information/loki.md) | Loki - Simple IOC and YARA Scanner |  |  |
 | [maclookup](./uncategorized/maclookup.md) |  |  |  |
 | [magika](./files-and-apps/magika.md) |  |  |  |
 | [Mail Viewer](./files-and-apps-email/mail-viewer.md) | Mail Viewer is a tool for viewing email files and mailboxes. |  |  |
@@ -195,17 +195,17 @@ Categories generated from dfirws shortcuts.
 | [malwarebazaar](./signatures-and-information-online-tools/malwarebazaar.md) |  |  |  |
 | [markitdown](./utilities/markitdown.md) |  |  |  |
 | [matplotlib](./uncategorized/matplotlib.md) |  |  |  |
-| [mboxviewer](./files-and-apps-email/mboxviewer.md) |  |  |  |
-| [MemProcFS](./memory/memprocfs.md) |  |  |  |
-| [MetadataPlus](./files-and-apps-office/metadataplus.md) |  |  |  |
+| [mboxviewer](./files-and-apps-email/mboxviewer.md) | A small but powerful app for viewing MBOX files. |  |  |
+| [MemProcFS](./memory/memprocfs.md) | MemProcFS is an easy and convenient way of viewing physical memory as files in a virtual file system. |  |  |
+| [MetadataPlus](./files-and-apps-office/metadataplus.md) | A tool to use novel locations to extract metadata from Office documents. |  |  |
 | [MEX](./uncategorized/mex.md) | MEX is an extension for WinDbg. |  |  |
-| [MFTBrowser](./files-and-apps-disk/mftbrowser.md) |  |  |  |
+| [MFTBrowser](./files-and-apps-disk/mftbrowser.md) | $MFT directory tree reconstruction & FILE record info |  |  |
 | [minidump](./uncategorized/minidump.md) |  |  |  |
 | [MiTeC Structured Storage Viewer](./files-and-apps-office/mitec-structured-storage-viewer.md) | Full-featured MS OLE Structured Storage based file management tool. |  |  |
 | [mkdocs](./uncategorized/mkdocs.md) |  |  |  |
 | [mkyara](./signatures-and-information/mkyara.md) |  |  |  |
-| [mmdbinspect](./utilities/mmdbinspect.md) |  |  |  |
-| [MsgViewer](./files-and-apps-email/msgviewer.md) |  |  |  |
+| [mmdbinspect](./utilities/mmdbinspect.md) | Tool for inspecting MaxMind GeoIP2 databases. |  |  |
+| [MsgViewer](./files-and-apps-email/msgviewer.md) | A tool for viewing and analyzing Outlook MSG files. |  |  |
 | [msoffcrypto-tool](./files-and-apps-office/msoffcrypto-tool.md) |  |  |  |
 | [msticpy](./uncategorized/msticpy.md) |  |  |  |
 | [mwcp](./uncategorized/mwcp.md) |  |  |  |
@@ -215,11 +215,11 @@ Categories generated from dfirws shortcuts.
 | [Neovim](./editors/neovim.md) |  |  |  |
 | [Nerd Fonts](./uncategorized/nerd-fonts.md) |  |  |  |
 | [netaddr](./uncategorized/netaddr.md) |  |  |  |
-| [NetExt](./uncategorized/netext.md) |  |  |  |
+| [NetExt](./uncategorized/netext.md) | WinDbg extension for data mining managed heap. It also includes commands to list http request, wcf services, WIF tokens among others |  |  |
 | [networkx](./uncategorized/networkx.md) |  |  |  |
 | [NirSoft Browser Utilities](./files-and-apps-browser/nirsoft-browser-utilities.md) | NirSoft browser utilities for cache and history analysis. |  |  |
 | [Nmap](./uncategorized/nmap.md) | Nmap is a network exploration and security auditing tool. |  |  |
-| [Notepad++](./editors/notepad.md) |  |  |  |
+| [Notepad++](./editors/notepad.md) | Notepad++ is a free source code editor and Notepad replacement that supports several programming languages. |  |  |
 | [Npcap](./uncategorized/npcap.md) | Npcap packet capture driver installer. |  |  |
 | [numpy](./uncategorized/numpy.md) |  |  |  |
 | [Obsidian](./editors/obsidian.md) |  |  |  |
@@ -227,7 +227,7 @@ Categories generated from dfirws shortcuts.
 | [obsidian-dataview](./uncategorized/obsidian-dataview.md) |  |  |  |
 | [obsidian-excalidraw-plugin](./uncategorized/obsidian-excalidraw-plugin.md) |  |  |  |
 | [obsidian-kanban](./uncategorized/obsidian-kanban.md) |  |  |  |
-| [obsidian-mitre-attack](./uncategorized/obsidian-mitre-attack.md) |  |  |  |
+| [obsidian-mitre-attack](./uncategorized/obsidian-mitre-attack.md) | A vault for Obsidian.md containing the MITRE ATT&CK framework in markdown format. |  |  |
 | [obsidian-tasks](./uncategorized/obsidian-tasks.md) |  |  |  |
 | [obsidian-timeline](./uncategorized/obsidian-timeline.md) |  |  |  |
 | [oh-my-posh](./utilities/oh-my-posh.md) |  |  |  |
@@ -243,8 +243,8 @@ Categories generated from dfirws shortcuts.
 | [pcode2code](./files-and-apps-office/pcode2code.md) |  |  |  |
 | [pdfalyzer](./uncategorized/pdfalyzer.md) |  |  |  |
 | [PDFStreamDumper](./files-and-apps-pdf/pdfstreamdumper.md) | PDFStreamDumper is a tool for inspecting PDF files. |  |  |
-| [PE-bear](./files-and-apps-pe/pe-bear.md) |  |  |  |
-| [PE-sieve](./files-and-apps-pe/pe-sieve.md) |  |  |  |
+| [PE-bear](./files-and-apps-pe/pe-bear.md) | A tool for analyzing PE files |  |  |
+| [PE-sieve](./files-and-apps-pe/pe-sieve.md) | Scans a given process. Recognizes and dumps a variety of potentially malicious implants (replaced/injected PEs, shellcodes, hooks, in-memory patches). |  |  |
 | [PE-utils](./uncategorized/pe-utils.md) |  |  |  |
 | [peepdf-3](./files-and-apps-pdf/peepdf-3.md) |  |  |  |
 | [pefile](./uncategorized/pefile.md) |  |  |  |
@@ -252,10 +252,10 @@ Categories generated from dfirws shortcuts.
 | [peutils](./uncategorized/peutils.md) |  |  |  |
 | [pfp](./uncategorized/pfp.md) |  |  |  |
 | [PHP](./programming/php.md) | PHP is a scripting language widely used for web development. |  |  |
-| [PowerShell](./uncategorized/powershell.md) |  |  |  |
+| [PowerShell](./uncategorized/powershell.md) | PowerShell is a task automation and configuration management framework from Microsoft. |  |  |
 | [PowerShell 7](./uncategorized/powershell-7.md) |  |  |  |
 | [ppdeep](./uncategorized/ppdeep.md) |  |  |  |
-| [Prefetch Browser](./os-windows/prefetch-browser.md) |  |  |  |
+| [Prefetch Browser](./os-windows/prefetch-browser.md) | Prefetch Browser is a tool for analyzing Windows Prefetch files, which can provide valuable information about program execution and system activity. |  |  |
 | [prettytable](./uncategorized/prettytable.md) |  |  |  |
 | [ProcDOT](./os-windows/procdot.md) | ProcDOT is a visual malware analysis tool for process, file, and network activity. |  |  |
 | [protodeep](./uncategorized/protodeep.md) |  |  |  |
@@ -287,40 +287,40 @@ Categories generated from dfirws shortcuts.
 | [pyvis](./uncategorized/pyvis.md) |  |  |  |
 | [pyzipper](./uncategorized/pyzipper.md) |  |  |  |
 | [QEMU](./uncategorized/qemu.md) |  |  |  |
-| [qpdf](./files-and-apps-pdf/qpdf.md) |  |  |  |
-| [qrtool](./uncategorized/qrtool.md) |  |  |  |
+| [qpdf](./files-and-apps-pdf/qpdf.md) | qpdf: A content-preserving PDF document transformer |  |  |
+| [qrtool](./uncategorized/qrtool.md) | Tool for decoding QR codes from images |  |  |
 | [quickadd](./uncategorized/quickadd.md) |  |  |  |
-| [Radare2](./reverse-engineering/radare2.md) |  |  |  |
-| [RDPCacheStitcher](./files-and-apps-rdp/rdpcachestitcher.md) |  |  |  |
-| [readpe](./uncategorized/readpe.md) |  |  |  |
-| [Recaf](./programming-java/recaf.md) |  |  |  |
+| [Radare2](./reverse-engineering/radare2.md) | UNIX-like reverse engineering framework and command-line toolset |  |  |
+| [RDPCacheStitcher](./files-and-apps-rdp/rdpcachestitcher.md) | RdpCacheStitcher is a tool for analyzing RDP cache files. |  |  |
+| [readpe](./uncategorized/readpe.md) | The PE file analysis toolkit |  |  |
+| [Recaf](./programming-java/recaf.md) | Recaf is a modern Java bytecode editor. |  |  |
 | [recbin](./os-windows/recbin.md) | recbin parses Windows Recycle Bin files. |  |  |
-| [redress](./programming-go/redress.md) |  |  |  |
+| [redress](./programming-go/redress.md) | Redress - A tool for analyzing stripped Go binaries. |  |  |
 | [regipy](./os-windows-registry/regipy.md) |  |  |  |
 | [RegShot](./os-windows-registry/regshot.md) | RegShot is a small, free and open-source registry compare utility. |  |  |
 | [requests](./uncategorized/requests.md) |  |  |  |
 | [rexi](./utilities/rexi.md) |  |  |  |
-| [ripgrep](./files-and-apps/ripgrep.md) |  |  |  |
+| [ripgrep](./files-and-apps/ripgrep.md) | ripgrep is a fast, modern, and user-friendly command-line search tool. |  |  |
 | [Ruby](./uncategorized/ruby.md) |  |  |  |
 | [rzpipe](./uncategorized/rzpipe.md) |  |  |  |
 | [scapy](./network/scapy.md) |  |  |  |
 | [shodan](./signatures-and-information-online-tools/shodan.md) |  |  |  |
-| [sidr](./os-windows/sidr.md) |  |  |  |
+| [sidr](./os-windows/sidr.md) | Search Index Database Reporter |  |  |
 | [sigma-cli](./signatures-and-information/sigma-cli.md) |  |  |  |
 | [simplejson](./uncategorized/simplejson.md) |  |  |  |
-| [Sleuthkit](./files-and-apps-disk/sleuthkit.md) |  |  |  |
+| [Sleuthkit](./files-and-apps-disk/sleuthkit.md) | The Sleuth Kit® (TSK) is a library and collection of command line digital forensics tools that allow you to investigate volume and file system data. The library can be incorporated into larger digital forensics tools and the command line tools can be directly used to find evidence. |  |  |
 | [sqlit-tui](./uncategorized/sqlit-tui.md) |  |  |  |
 | [SQLite Tools](./uncategorized/sqlite-tools.md) | SQLite command-line tools. |  |  |
-| [srum_dump](./os-windows/srum-dump.md) |  |  |  |
+| [srum_dump](./os-windows/srum-dump.md) | A forensics tool to convert the data in the Windows srum (System Resource Usage Monitor) database to an xlsx spreadsheet. |  |  |
 | [stego-lsb](./uncategorized/stego-lsb.md) |  |  |  |
-| [Strawberry Perl](./uncategorized/strawberry-perl.md) |  |  |  |
+| [Strawberry Perl](./uncategorized/strawberry-perl.md) | Strawberry Perl is a Perl distribution for Windows that includes a complete Perl environment. |  |  |
 | [Sysinternals Suite](./sysinternals/sysinternals-suite.md) | Sysinternals Suite is a collection of utilities for Windows. |  |  |
 | [Tailscale](./uncategorized/tailscale.md) |  |  |  |
-| [takajo](./files-and-apps-log/takajo.md) |  |  |  |
+| [takajo](./files-and-apps-log/takajo.md) | Takajō (鷹匠) is a Hayabusa results analyzer. |  |  |
 | [Templater](./uncategorized/templater.md) |  |  |  |
 | [termcolor](./uncategorized/termcolor.md) |  |  |  |
 | [textsearch](./uncategorized/textsearch.md) |  |  |  |
-| [Thumbcacheviewer](./os-windows/thumbcacheviewer.md) |  |  |  |
+| [Thumbcacheviewer](./os-windows/thumbcacheviewer.md) | Thumbcache Viewer - Extract Windows Vista, Windows 7, Windows 8, Windows 8.1, and Windows 10 thumbcache database files. |  |  |
 | [time-decode](./utilities/time-decode.md) |  |  |  |
 | [tomlkit](./uncategorized/tomlkit.md) |  |  |  |
 | [toolong](./files-and-apps-log/toolong.md) |  |  |  |
@@ -329,9 +329,10 @@ Categories generated from dfirws shortcuts.
 | [TrID](./files-and-apps/trid.md) | TrID is a file identifier utility. |  |  |
 | [unicorn](./uncategorized/unicorn.md) |  |  |  |
 | [unpy2exe](./uncategorized/unpy2exe.md) |  |  |  |
-| [upx](./utilities/upx.md) |  |  |  |
+| [upx](./utilities/upx.md) | UPX is a free, portable, extendable, high-performance executable packer. |  |  |
 | [uv](./uncategorized/uv.md) |  |  |  |
-| [Velociraptor](./ir/velociraptor.md) |  |  |  |
+| [Velociraptor](./ir/velociraptor.md) | Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints. |  |  |
+| [Velociraptor Artifact Exchange](./uncategorized/velociraptor-artifact-exchange.md) |  |  |  |
 | [VeraCrypt](./utilities-cryptography/veracrypt.md) | VeraCrypt is a disk encryption tool. |  |  |
 | [VirusTotal CLI](./signatures-and-information-online-tools/virustotal-cli.md) |  |  |  |
 | [visidata](./utilities/visidata.md) |  |  |  |
@@ -339,31 +340,31 @@ Categories generated from dfirws shortcuts.
 | [VLC](./utilities-media/vlc.md) |  |  |  |
 | [Volatility Workbench 2.1](./memory/volatility-workbench-2-1.md) | Volatility Workbench is a GUI for the Volatility memory analysis framework. |  |  |
 | [Volatility Workbench 3](./memory/volatility-workbench-3.md) | Volatility Workbench is a GUI for the Volatility memory analysis framework. |  |  |
-| [VS Code PowerShell Extension](./uncategorized/vs-code-powershell-extension.md) |  |  |  |
-| [VS Code Spell Checker](./uncategorized/vs-code-spell-checker.md) |  |  |  |
+| [VS Code PowerShell Extension](./uncategorized/vs-code-powershell-extension.md) | Visual Studio Code PowerShell extension. |  |  |
+| [VS Code Spell Checker](./uncategorized/vs-code-spell-checker.md) | Visual Studio Code Spell Checker extension. |  |  |
 | [vscode-shellcheck](./uncategorized/vscode-shellcheck.md) |  |  |  |
 | [Win API Search](./development/win-api-search.md) | Win API Search is a tool for searching Windows API functions. |  |  |
 | [WinDbg](./uncategorized/windbg.md) |  |  |  |
 | [Windows Terminal (Canary)](./uncategorized/windows-terminal-canary.md) | Windows Terminal Canary package. |  |  |
 | [WinMerge](./files-and-apps/winmerge.md) |  |  |  |
-| [WinObjEx64](./files-and-apps-pe/winobjex64.md) |  |  |  |
+| [WinObjEx64](./files-and-apps-pe/winobjex64.md) | WinObjEx64 is an advanced utility that lets you explore the Windows Object Manager namespace. |  |  |
 | [winpmem](./uncategorized/winpmem.md) | winpmem is a Windows memory acquisition driver. |  |  |
 | [WireGuard](./uncategorized/wireguard.md) |  |  |  |
 | [Wireshark](./network/wireshark.md) |  |  |  |
 | [Witr](./uncategorized/witr.md) |  |  |  |
-| [x64dbg](./reverse-engineering/x64dbg.md) |  |  |  |
-| [XELFViewer](./os-linux/xelfviewer.md) |  |  |  |
+| [x64dbg](./reverse-engineering/x64dbg.md) | An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis. |  |  |
+| [XELFViewer](./os-linux/xelfviewer.md) | ELF file viewer/editor for Windows, Linux and MacOS. |  |  |
 | [XLMMacroDeobfuscator](./files-and-apps-office/xlmmacrodeobfuscator.md) |  |  |  |
 | [xlrd](./uncategorized/xlrd.md) |  |  |  |
 | [XlsxWriter](./uncategorized/xlsxwriter.md) |  |  |  |
 | [xxhash](./uncategorized/xxhash.md) |  |  |  |
-| [YAMAGoya](./files-and-apps-log/yamagoya.md) |  |  |  |
-| [YARA](./signatures-and-information/yara.md) |  |  |  |
+| [YAMAGoya](./files-and-apps-log/yamagoya.md) | Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA |  |  |
+| [YARA](./signatures-and-information/yara.md) | YARA is a tool for identifying and classifying malware. |  |  |
 | [yara-python](./uncategorized/yara-python.md) |  |  |  |
-| [yara-x](./signatures-and-information/yara-x.md) |  |  |  |
-| [yq](./signatures-and-information/yq.md) |  |  |  |
-| [zaproxy](./network/zaproxy.md) |  |  |  |
+| [yara-x](./signatures-and-information/yara-x.md) | yara-x is a faster and more flexible version of YARA. |  |  |
+| [yq](./signatures-and-information/yq.md) | yq is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor. |  |  |
+| [zaproxy](./network/zaproxy.md) | The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to. |  |  |
 | [Zimmerman Tools](./zimmerman/zimmerman-tools.md) | Zimmerman Tools is a collection of Windows forensics tools developed by Eric Zimmerman. |  |  |
-| [Zircolite](./files-and-apps-log/zircolite.md) |  |  |  |
-| [zstd](./utilities/zstd.md) |  |  |  |
-| [Zui](./network/zui.md) |  |  |  |
+| [Zircolite](./files-and-apps-log/zircolite.md) | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs |  |  |
+| [zstd](./utilities/zstd.md) | Zstandard is a fast lossless compression algorithm. |  |  |
+| [Zui](./network/zui.md) | Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data. |  |  |

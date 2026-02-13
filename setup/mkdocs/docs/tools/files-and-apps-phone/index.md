@@ -2,5 +2,5 @@
 
 | Tool | Description | Tags | File Extensions |
 | --- | --- | --- | --- |
-| [aLEAPP](aleapp.md) |  |  |  |
-| [iLEAPP](ileapp.md) |  |  |  |
+| [aLEAPP](aleapp.md) | ALEAPP is a tool for parsing and analyzing Android logs, events, and protobuf files. It can be used to extract artifacts from Android devices and analyze them in a structured way. |  |  |
+| [iLEAPP](ileapp.md) | iLEAPP is a tool for parsing and analyzing iOS logs, events, and plists. It can be used to extract artifacts from iOS devices and analyze them in a structured way. |  |  |

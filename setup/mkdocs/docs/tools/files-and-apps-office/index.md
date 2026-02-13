@@ -3,7 +3,7 @@
 | Tool | Description | Tags | File Extensions |
 | --- | --- | --- | --- |
 | [LibreOffice](libreoffice.md) | LibreOffice is a free and open-source office suite. |  |  |
-| [MetadataPlus](metadataplus.md) |  |  |  |
+| [MetadataPlus](metadataplus.md) | A tool to use novel locations to extract metadata from Office documents. |  |  |
 | [MiTeC Structured Storage Viewer](mitec-structured-storage-viewer.md) | Full-featured MS OLE Structured Storage based file management tool. |  |  |
 | [XLMMacroDeobfuscator](xlmmacrodeobfuscator.md) |  |  |  |
 | [msoffcrypto-tool](msoffcrypto-tool.md) |  |  |  |
