@@ -2,6 +2,10 @@
 
 **Category:** Files and apps\RDP
 
+**File Extensions:** `.bmc`, `.bin`
+
+**Tags:** rdp, forensics, windows
+
 RdpCacheStitcher is a tool for analyzing RDP cache files.
 
 ## Notes

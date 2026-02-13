@@ -8,6 +8,10 @@
 
 **License:** PHP License
 
+**File Extensions:** `.php`
+
+**Tags:** scripting, web
+
 PHP is a scripting language widely used for web development.
 
 ## Notes

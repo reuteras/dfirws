@@ -8,6 +8,10 @@
 
 **License:** [Sysinternals Software License Terms](https://docs.microsoft.com/en-us/sysinternals/license-terms)
 
+**File Extensions:** `.exe`, `.dll`, `.sys`
+
+**Tags:** windows, debugging, monitoring, system-administration
+
 Sysinternals Suite is a collection of utilities for Windows.
 
 ## Notes

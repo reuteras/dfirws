@@ -2,6 +2,10 @@
 
 **Category:** OS\Windows
 
+**File Extensions:** `.etl`
+
+**Tags:** etw, windows, monitoring
+
 Adversary tradecraft detection, protection, and hunting
 
 ## Notes

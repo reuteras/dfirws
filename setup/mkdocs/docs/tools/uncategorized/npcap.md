@@ -8,6 +8,10 @@
 
 **License:** Npcap License
 
+**File Extensions:** `.pcap`, `.pcapng`
+
+**Tags:** network-analysis, packet-capture
+
 Npcap packet capture driver installer.
 
 ## Notes

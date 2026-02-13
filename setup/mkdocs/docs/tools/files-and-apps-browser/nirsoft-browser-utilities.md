@@ -8,6 +8,10 @@
 
 **License:** Freeware
 
+**File Extensions:** `.db`, `.sqlite`
+
+**Tags:** browser-forensics, artifact-extraction
+
 NirSoft browser utilities for cache and history analysis.
 
 ## Notes

@@ -8,6 +8,10 @@
 
 **License:** Freeware
 
+**File Extensions:** `.dmp`, `.raw`, `.vmem`, `.img`
+
+**Tags:** memory-forensics, gui
+
 Volatility Workbench is a GUI for the Volatility memory analysis framework.
 
 ## Notes

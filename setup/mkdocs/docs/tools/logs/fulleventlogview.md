@@ -8,6 +8,10 @@
 
 **License:** Freeware
 
+**File Extensions:** `.evtx`
+
+**Tags:** log-analysis, event-log, windows
+
 FullEventLogView is a tool for viewing Windows event logs.
 
 ## Notes

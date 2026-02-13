@@ -8,6 +8,10 @@
 
 **License:** Open source
 
+**File Extensions:** `.gpg`, `.asc`, `.pgp`
+
+**Tags:** encryption, pgp, signing
+
 Gpg4win provides GnuPG and related tools for Windows.
 
 ## Notes

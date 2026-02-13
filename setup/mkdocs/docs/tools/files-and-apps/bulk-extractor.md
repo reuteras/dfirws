@@ -8,6 +8,10 @@
 
 **License:** Open source
 
+**File Extensions:** `.dd`, `.raw`, `.E01`, `.img`
+
+**Tags:** forensics, carving, data-extraction
+
 bulk_extractor extracts features such as email addresses and URLs from disk images.
 
 ## Notes

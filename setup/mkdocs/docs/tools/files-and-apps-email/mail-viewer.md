@@ -8,6 +8,10 @@
 
 **License:** Freeware
 
+**File Extensions:** `.eml`, `.msg`
+
+**Tags:** email, forensics
+
 Mail Viewer is a tool for viewing email files and mailboxes.
 
 ## Notes

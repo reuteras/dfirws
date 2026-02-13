@@ -8,6 +8,8 @@
 
 **License:** [You may use this software for as long as you need it, make as many copies of the downloaded package as required, and distribute it among any people and organizations at no cost.](https://dennisbabkin.com/winapisearch/#lic)
 
+**Tags:** reverse-engineering, windows, api
+
 Win API Search is a tool for searching Windows API functions.
 
 ## Notes

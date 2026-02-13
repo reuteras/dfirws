@@ -8,6 +8,10 @@
 
 **License:** Unspecified
 
+**File Extensions:** `.bin`
+
+**Tags:** binary-analysis, carving
+
 recbin parses Windows Recycle Bin files.
 
 ## Notes

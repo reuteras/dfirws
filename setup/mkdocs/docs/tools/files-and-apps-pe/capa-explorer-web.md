@@ -8,6 +8,10 @@
 
 **License:** Apache License 2.0
 
+**File Extensions:** `.exe`, `.dll`
+
+**Tags:** malware-analysis, capability-analysis, visualization
+
 capa Explorer Web is a web UI for exploring capa results.
 
 ## Notes

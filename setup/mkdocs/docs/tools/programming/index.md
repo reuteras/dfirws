@@ -2,4 +2,4 @@
 
 | Tool | Description | Tags | File Extensions |
 | --- | --- | --- | --- |
-| [PHP](php.md) | PHP is a scripting language widely used for web development. |  |  |
+| [PHP](php.md) | PHP is a scripting language widely used for web development. | scripting, web | `.php` |

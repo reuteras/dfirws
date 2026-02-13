@@ -2,6 +2,10 @@
 
 **Category:** Files and apps\Email
 
+**File Extensions:** `.msg`
+
+**Tags:** email, forensics, outlook
+
 A tool for viewing and analyzing Outlook MSG files.
 
 ## Notes

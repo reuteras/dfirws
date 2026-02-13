@@ -8,6 +8,8 @@
 
 **License:** Nmap Public Source License
 
+**Tags:** network-analysis, port-scanning, reconnaissance
+
 Nmap is a network exploration and security auditing tool.
 
 ## Notes

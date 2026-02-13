@@ -8,6 +8,10 @@
 
 **License:** VeraCrypt License
 
+**File Extensions:** `.hc`, `.tc`
+
+**Tags:** encryption, disk-encryption
+
 VeraCrypt is a disk encryption tool.
 
 ## Notes

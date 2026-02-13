@@ -2,6 +2,10 @@
 
 **Category:** Utilities
 
+**File Extensions:** `.mmdb`
+
+**Tags:** geolocation, maxmind
+
 Tool for inspecting MaxMind GeoIP2 databases.
 
 ## Notes

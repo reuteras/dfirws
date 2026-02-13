@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.sys`
+
+**Tags:** pe-analysis, malware-analysis, hex-editor, disassembler
+
 Malcat is a malware analysis and reverse engineering tool.
 
 ## Notes

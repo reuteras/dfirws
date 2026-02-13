@@ -8,6 +8,10 @@
 
 **License:** [Proprietary](https://www.pstwalker.com/licensing-policy.html)
 
+**File Extensions:** `.pst`
+
+**Tags:** email, forensics, outlook
+
 PST Walker is a tool for analyzing PST files.
 
 ## Notes

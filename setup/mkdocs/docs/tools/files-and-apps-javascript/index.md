@@ -2,4 +2,4 @@
 
 | Tool | Description | Tags | File Extensions |
 | --- | --- | --- | --- |
-| [jsbeautifier](jsbeautifier.md) |  |  |  |
+| [jsbeautifier](jsbeautifier.md) |  | javascript, deobfuscation, beautifier | `.js` |

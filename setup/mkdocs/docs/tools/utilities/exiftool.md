@@ -8,6 +8,10 @@
 
 **License:** [GNU General Public License](https://exiftool.org/#license)
 
+**File Extensions:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.pdf`, `.doc`, `.docx`, `.mp4`
+
+**Tags:** metadata, file-analysis, image
+
 ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files.
 
 ## Notes

@@ -2,4 +2,4 @@
 
 | Tool | Description | Tags | File Extensions |
 | --- | --- | --- | --- |
-| [FullEventLogView](fulleventlogview.md) | FullEventLogView is a tool for viewing Windows event logs. |  |  |
+| [FullEventLogView](fulleventlogview.md) | FullEventLogView is a tool for viewing Windows event logs. | log-analysis, event-log, windows | `.evtx` |

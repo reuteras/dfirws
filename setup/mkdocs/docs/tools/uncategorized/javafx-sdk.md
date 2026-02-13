@@ -8,6 +8,10 @@
 
 **License:** GPL + Classpath Exception
 
+**File Extensions:** `.jar`
+
+**Tags:** java, gui, runtime
+
 JavaFX SDK provides UI libraries for Java applications.
 
 ## Notes

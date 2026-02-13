@@ -8,6 +8,8 @@
 
 **License:** MIT License
 
+**Tags:** password-cracking, hashing
+
 hashcat is a password recovery tool.
 
 ## Notes

@@ -8,6 +8,10 @@
 
 **License:** MIT License
 
+**File Extensions:** `.json`
+
+**Tags:** geolocation, osint
+
 geolocus-cli is a geolocation lookup tool.
 
 ## Notes

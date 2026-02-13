@@ -8,6 +8,10 @@
 
 **License:** Freeware
 
+**File Extensions:** `.csv`, `.log`
+
+**Tags:** malware-analysis, visualization, dynamic-analysis
+
 ProcDOT is a visual malware analysis tool for process, file, and network activity.
 
 ## Notes

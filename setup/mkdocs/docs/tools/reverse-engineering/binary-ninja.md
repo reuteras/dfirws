@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib`
+
+**Tags:** reverse-engineering, disassembler, decompiler
+
 Binary Ninja is a reverse engineering platform.
 
 ## Notes

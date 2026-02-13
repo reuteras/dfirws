@@ -8,6 +8,10 @@
 
 **License:** Freeware
 
+**File Extensions:** `.exe`, `.dll`, `.bin`
+
+**Tags:** malware-analysis, entropy-analysis
+
 DensityScout calculates file entropy and density.
 
 ## Notes

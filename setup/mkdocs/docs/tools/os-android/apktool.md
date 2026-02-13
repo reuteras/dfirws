@@ -8,6 +8,10 @@
 
 **License:** Apache License 2.0
 
+**File Extensions:** `.apk`
+
+**Tags:** reverse-engineering, android, decompiler
+
 apktool is a tool for reverse engineering Android APK files.
 
 ## Notes

@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.exe`, `.dll`, `.sys`
+
+**Tags:** pe-analysis, malware-analysis, static-analysis
+
 pestudio is a tool for analyzing PE files.
 
 ## Notes

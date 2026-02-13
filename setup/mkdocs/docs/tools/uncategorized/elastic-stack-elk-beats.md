@@ -8,6 +8,10 @@
 
 **License:** Elastic License
 
+**File Extensions:** `.json`, `.log`
+
+**Tags:** siem, log-analysis, elasticsearch, visualization
+
 Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats.
 
 ## Notes

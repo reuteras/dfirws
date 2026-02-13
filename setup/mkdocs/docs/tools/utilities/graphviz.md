@@ -8,6 +8,10 @@
 
 **License:** Eclipse Public License 1.0
 
+**File Extensions:** `.dot`, `.gv`
+
+**Tags:** visualization, graph
+
 Graphviz is a graph visualization software suite.
 
 ## Notes

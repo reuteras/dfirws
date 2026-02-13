@@ -2,6 +2,10 @@
 
 **Category:** Files and apps\PE
 
+**File Extensions:** `.exe`, `.dll`, `.sys`
+
+**Tags:** pe-analysis, reverse-engineering
+
 A tool for analyzing PE files
 
 ## Notes

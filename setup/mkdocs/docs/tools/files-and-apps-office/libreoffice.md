@@ -8,6 +8,10 @@
 
 **License:** Mozilla Public License 2.0
 
+**File Extensions:** `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.ods`, `.odp`
+
+**Tags:** office, document-viewer
+
 LibreOffice is a free and open-source office suite.
 
 ## Notes

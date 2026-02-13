@@ -2,6 +2,10 @@
 
 **Category:** Files and apps\Log
 
+**File Extensions:** `.json`, `.jsonl`
+
+**Tags:** json, data-processing, visualization
+
 fx is a terminal JSON viewer and processor.
 
 ## Notes

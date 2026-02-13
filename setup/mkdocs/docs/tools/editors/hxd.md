@@ -8,6 +8,10 @@
 
 **License:** [HxD License](https://mh-nexus.de/en/hxd/license.php)
 
+**File Extensions:** `.exe`, `.dll`, `.bin`, `.hex`
+
+**Tags:** hex-editor, binary-analysis
+
 HxD is a hex editor, disk editor, and memory editor for Windows.
 
 ## Notes

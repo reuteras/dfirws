@@ -2,6 +2,10 @@
 
 **Category:** Files and apps\PE
 
+**File Extensions:** `.exe`, `.dll`
+
+**Tags:** malware-analysis, pe-analysis, detection
+
 Advanced static analysis tool
 
 ## Notes

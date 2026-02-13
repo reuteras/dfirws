@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.ovpn`
+
+**Tags:** vpn, network
+
 OpenVPN Connect installer.
 
 ## Notes

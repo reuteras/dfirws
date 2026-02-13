@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.doc`, `.xls`, `.ppt`, `.msg`
+
+**Tags:** office, ole, data-extraction
+
 Full-featured MS OLE Structured Storage based file management tool.
 
 ## Notes

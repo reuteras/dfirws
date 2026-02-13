@@ -2,7 +2,7 @@
 $TOOL_DEFINITIONS = @()
 
 $ROOT_PATH = "${PWD}"
-$node_packages = @("box-js", "deobfuscator", "docsify-cli", "jsdom", "@marp-team/marp-cli")
+$node_packages = @("box-js", "deobfuscator", "docsify-cli", "jsdom", "@marp-team/marp-cli", "opencode-ai")
 
 Write-DateLog "Setup Node and install npm packages in Sandbox." > ${ROOT_PATH}\log\npm.txt
 
@@ -153,6 +153,36 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".evtx")
     Tags = @("log-analysis", "event-log", "forensics", "visualization")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "@marp-team/marp-cli"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @()
+    FileExtensions = @(".md", ".markdown")
+    Tags = @("markdown", "presentation", "documentation")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "opencode-ai"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @()
+    FileExtensions = @(".txt", ".md", ".log", ".json")
+    Tags = @("ai", "code-generation", "automation")
     Notes = ""
     Tips = ""
     Usage = ""

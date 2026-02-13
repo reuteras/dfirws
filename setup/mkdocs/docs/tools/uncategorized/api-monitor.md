@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.exe`, `.dll`
+
+**Tags:** reverse-engineering, api-tracing, dynamic-analysis
+
 API Monitor is a tool for monitoring Windows API calls.
 
 ## Notes

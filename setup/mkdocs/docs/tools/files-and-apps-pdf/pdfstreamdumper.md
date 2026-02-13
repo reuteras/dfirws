@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.pdf`
+
+**Tags:** pdf, malware-analysis, javascript
+
 PDFStreamDumper is a tool for inspecting PDF files.
 
 ## Notes

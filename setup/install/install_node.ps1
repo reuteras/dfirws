@@ -38,6 +38,8 @@ Write-DateLog "Install box-js" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global box-js | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install Marp CLI" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global @marp-team/marp-cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+Write-DateLog "Install opencode-ai" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global opencode-ai | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 Set-Location "${HOME}"
 git clone --recurse-submodules https://github.com/Koifman/LUMEN.git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"

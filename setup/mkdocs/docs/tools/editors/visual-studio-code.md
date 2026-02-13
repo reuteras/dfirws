@@ -8,6 +8,10 @@
 
 **License:** [Microsoft Software License Terms](https://code.visualstudio.com/License)
 
+**File Extensions:** `.ps1`, `.py`, `.js`, `.ts`, `.json`, `.xml`, `.yaml`, `.md`
+
+**Tags:** text-editor, ide, powershell
+
 Visual Studio Code is a source-code editor.
 
 ## Notes

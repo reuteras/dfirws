@@ -7,5 +7,7 @@
 **Vendor:** Velocidex
 
 
+**Tags:** velociraptor
+
 ## Sample Files
 - N/A

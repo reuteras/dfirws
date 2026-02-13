@@ -2,6 +2,8 @@
 
 **Category:** Uncategorized
 
+**Tags:** terminal, shell
+
 Cmder is a console emulator for Windows.
 
 ## Notes

@@ -8,6 +8,10 @@
 
 **License:** Apache License 2.0
 
+**File Extensions:** `.raw`, `.aff4`
+
+**Tags:** memory-forensics, acquisition
+
 winpmem is a Windows memory acquisition driver.
 
 ## Notes

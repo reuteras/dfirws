@@ -8,6 +8,10 @@
 
 **License:** Freeware
 
+**File Extensions:** `.asm`
+
+**Tags:** reverse-engineering, assembler
+
 FASM is a fast assembler for x86 and x86-64 architectures.
 
 ## Notes

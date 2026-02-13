@@ -8,6 +8,10 @@
 
 **License:** Public Domain
 
+**File Extensions:** `.db`, `.sqlite`, `.sqlite3`
+
+**Tags:** database, sqlite, cli
+
 SQLite command-line tools.
 
 ## Notes

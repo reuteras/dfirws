@@ -2,6 +2,10 @@
 
 **Category:** Files and apps\PDF
 
+**File Extensions:** `.pdf`
+
+**Tags:** pdf, data-processing
+
 qpdf: A content-preserving PDF document transformer
 
 ## Notes

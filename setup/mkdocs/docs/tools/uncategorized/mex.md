@@ -8,6 +8,10 @@
 
 **License:** Proprietary
 
+**File Extensions:** `.dmp`
+
+**Tags:** debugging, windbg, dotnet
+
 MEX is an extension for WinDbg.
 
 ## Notes

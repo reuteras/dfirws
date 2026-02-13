@@ -2,6 +2,10 @@
 
 **Category:** Uncategorized
 
+**File Extensions:** `.dll`, `.exe`
+
+**Tags:** pe-analysis, conversion
+
 Converts a DLL into EXE
 
 ## Notes
