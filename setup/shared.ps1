@@ -116,6 +116,8 @@ function New-CreateToolFiles {
             Usage                = $tool.Usage
             SampleCommands       = $tool.SampleCommands
             SampleFiles          = $tool.SampleFiles
+            Tags                 = $tool.Tags
+            FileExtensions      = $tool.FileExtensions
         }
     }
 
