@@ -37,7 +37,7 @@ Get-ChildItem -Exclude *.* .\mount\venv\bin\ | ForEach-Object { Move-Item "$_" "
 Write-DateLog "Pip packages done." >> "${ROOT_PATH}\log\python.txt"
 
 #
-# Tool definitions for documentation generation.
+# TODO: Move TOOL_DEFINITIONS to setup/install/install_python_tools.ps1 and add more entries for other Python based tools
 
 $TOOL_DEFINITIONS += @{
     Name = "dfir_ntfs"

@@ -51,6 +51,8 @@ if (! ${STATUS}) {
     Write-DateLog "Rust tools already installed and up to date." >> "${ROOT_PATH}\log\rust.txt"
 }
 
+# TODO: Move TOOL_DEFINITIONS to setup/install/install_rust_tools.ps1 and add more entries for other Rust based tools
+
 $TOOL_DEFINITIONS += @{
     Name = "dfir-toolkit"
     Category = "Forensics"

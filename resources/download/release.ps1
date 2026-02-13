@@ -2062,6 +2062,35 @@ if ($status) {
     Move-Item ${TOOLS}\elfparser-ng* "${TOOLS}\elfparser-ng"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Elfparser-ng"
+    Category = "OS\Linux"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Linux\elfparser-ng.lnk"
+            Target   = "`${TOOLS}\elfparser-ng\Release\elfparser-ng.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".elf", ".so")
+    Tags = @("reverse-engineering", "elf-analysis", "linux")
+    Notes = "Multiplatform CLI and GUI tool to show information about ELF files."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # readpe
 $status = Get-GitHubRelease -repo "mentebinaria/readpe" -path "${SETUP_PATH}\readpe.zip" -match "win.zip" -check "Zip archive data"
 if ($status) {
@@ -2070,6 +2099,27 @@ if ($status) {
         Remove-Item "${TOOLS}\pev" -Recurse -Force
     }
     Move-Item ${TOOLS}\pev* ${TOOLS}\pev
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "readpe"
+    Category = "Files and apps\PE"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "pescan"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".sys")
+    Tags = @("pe-analysis", "reverse-engineering")
+    Notes = "The PE file analysis toolkit"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # Dit explorer
@@ -2082,14 +2132,81 @@ if ($status) {
     Move-Item ${TOOLS}\DitExplorer-* "${TOOLS}\DitExplorer"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "DitExplorer"
+    Category = "OS\Windows\Active Directory (AD)"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\DitExplorer (Active Directory Database Explorer).lnk"
+            Target   = "`${TOOLS}\DitExplorer\DitExplorer.UI.WpfApp.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".dit")
+    Tags = @("active-directory", "forensics")
+    Notes = "Tool for viewing NTDS.dit Active Directory database files."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # srum_dump binary
 $status = Get-GitHubRelease -repo "MarkBaggett/srum-dump" -path "${SETUP_PATH}\srum_dump.exe" -match "srum_dump.exe" -check "PE32"
 if ($status) {
     Copy-Item ${SETUP_PATH}\srum_dump.exe ${TOOLS}\bin\
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "srum_dump"
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\srum-dump (Parses Windows System Resource Usage Monitor (SRUM) database).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command srum_dump.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "srum_dump"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".dat")
+    Tags = @("windows", "forensics", "srum")
+    Notes = "A forensics tool to convert the data in the Windows srum (System Resource Usage Monitor) database to an xlsx spreadsheet."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # forensic-timeliner
 $status = Get-GitHubRelease -repo "acquiredsecurity/forensic-timeliner" -path "${SETUP_PATH}\ForensicTimeliner.zip" -match "ForensicTimeliner" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "forensic-timeliner"
+    Category = "IR"
+    Shortcuts = @()
+    InstallVerifyCommand = "dfirws-install.ps1 -ForensicTimeliner"
+    Verify = @()
+    FileExtensions = @(".evtx", ".csv", ".json")
+    Tags = @("forensics", "timeline")
+    Notes = "A high-speed forensic timeline engine for Windows forensic artifact CSV output built for DFIR investigators. Quickly consolidate CSV output from processed triage evidence for Eric Zimmerman (EZ Tools) Kape, Axiom, Hayabusa, Chainsaw and Nirsoft into a unified timeline."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # jwt-cli
 $status = Get-GitHubRelease -repo "mike-engel/jwt-cli" -path "${SETUP_PATH}\jwt-cli.tar.gz" -match "jwt-windows.tar.gz"
@@ -2101,10 +2218,54 @@ if ($status) {
     }
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "jwt-cli"
+    Category = "Programming\Java"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("web", "authentication", "jwt")
+    Notes = "A super fast CLI tool to decode and encode JWTs built in Rust"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # dsq
 $status = Get-GitHubRelease -repo "multiprocessio/dsq" -path "${SETUP_PATH}\dsq.zip" -match "dsq-win" -check "Zip archive data"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dsq.zip" -o"${TOOLS}\bin" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "dsq"
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\dsq (commandline SQL engine for data files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dsq -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "dsq"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".json", ".csv", ".tsv", ".parquet")
+    Tags = @("data-processing", "sql", "json", "csv")
+    Notes = "Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # MetadataPlus
@@ -2113,22 +2274,191 @@ if ($status) {
     Copy-Item ${SETUP_PATH}\MetadataPlus.exe ${TOOLS}\bin\
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "MetadataPlus"
+    Category = "Files and apps\Office"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\MetadataPlus.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command MetadataPlus.exe -h"
+            Icon     = "`${TOOLS}\bin\MetadataPlus.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "MetadataPlus"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".jpg", ".png")
+    Tags = @("metadata", "file-analysis")
+    Notes = "A tool to use novel locations to extract metadata from Office documents."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # Loki - installed during start
 $status =  Get-GitHubRelease -repo "Neo23x0/Loki" -path "${SETUP_PATH}\loki.zip" -match "loki" -check "Zip archive data"
 
+$TOOL_DEFINITIONS += @{
+    Name = "Loki"
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\loki (runs dfirws-install -Loki).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Loki"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Loki"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "loki"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".bin")
+    Tags = @("malware-analysis", "ioc-scanner", "yara", "detection")
+    Notes = "Loki - Simple IOC and YARA Scanner"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # Notepad++ - installed during start
 $status =  Get-GitHubRelease -repo "notepad-plus-plus/notepad-plus-plus" -path "${SETUP_PATH}\notepad++.exe" -match "Installer.x64.exe$" -check "PE32"
+#Plugins for Notepad++ - installed during start
+# ComparePlus plugin for Notepad++ - installed during start
+$status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zip" -match "x64.zip" -check "Zip archive data"
+# DSpellCheck plugin for Notepad++ - installed during start
+$status =  Get-GitHubRelease -repo "Predelnik/DSpellCheck" -path "${SETUP_PATH}\DSpellCheck.zip" -match "x64.zip" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Notepad++"
+    Category = "Editors"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\Notepad++.lnk"
+            Target   = "`${env:ProgramFiles}\Notepad++\notepad++.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "notepad++"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".txt", ".log", ".xml", ".json", ".csv", ".ps1", ".py", ".js")
+    Tags = @("text-editor", "syntax-highlighting")
+    Notes = "Notepad++ is a free source code editor and Notepad replacement that supports several programming languages."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ComparePlus"
+    Category = "Editors"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\downloads\comparePlus.zip"
+            Expect = "Zip archive data"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("text-editor", "diff", "plugins")
+    Notes = "A diff plugin for Notepad++."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DSpellCheck"
+    Category = "Editors"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\downloads\DSpellCheck.zip"
+            Expect = "Zip archive data"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("text-editor", "spell-checker", "plugins")
+    Notes = "A spell-checker plugin for Notepad++."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # HindSight
 $status = Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "${SETUP_PATH}\hindsight.exe" -match "hindsight.exe" -check "PE32"
 if ($status) {
     Copy-Item "${SETUP_PATH}\hindsight.exe" "${TOOLS}\bin"
 }
-
 # Hindsight GUI
 $status = Get-GitHubRelease -repo "obsidianforensics/hindsight" -path "${SETUP_PATH}\hindsight_gui.exe" -match "hindsight_gui.exe" -check "PE32"
 if ($status) {
     Copy-Item "${SETUP_PATH}\hindsight_gui.exe" "${TOOLS}\bin"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "HindSight"
+    Category = "Files and apps\Browser"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight (Internet history forensics for Google Chrome and Chromium).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command hindsight.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight_gui.lnk"
+            Target   = "`${TOOLS}\bin\hindsight_gui.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "hindsight"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".db", ".sqlite")
+    Tags = @("browser-forensics", "chrome", "artifact-extraction")
+    Notes = "Browser forensics tool for Google Chrome (and other Chromium-based browsers)."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # evtx_dump
@@ -2137,16 +2467,91 @@ if ($status) {
     Copy-Item "${SETUP_PATH}\evtx_dump.exe" "${TOOLS}\bin"
 }
 
-#Plugins for Notepad++ - installed during start
-# ComparePlus plugin for Notepad++ - installed during start
-$status =  Get-GitHubRelease -repo "pnedev/comparePlus" -path "${SETUP_PATH}\comparePlus.zip" -match "x64.zip" -check "Zip archive data"
-# DSpellCheck plugin for Notepad++ - installed during start
-$status =  Get-GitHubRelease -repo "Predelnik/DSpellCheck" -path "${SETUP_PATH}\DSpellCheck.zip" -match "x64.zip" -check "Zip archive data"
+$TOOL_DEFINITIONS += @{
+    Name = "evtx_dump"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\evtx_dump (Utility to parse EVTX files).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command evtx_dump.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "evtx_dump"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "C:\venv\uv\regipy\Scripts\evtx_dump.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "event-log", "windows")
+    Notes = "A Fast (and safe) parser for the Windows XML Event Log (EVTX) format"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # Visual Studio Code powershell extension - installed during start
 $status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix" -check "Zip archive data"
 # vscode-shellcheck
 $status =  Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match "vsix" -check "Zip archive data"
+# Visual Studio Code spell checker extension - installed during start
+$status =  Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" -match "vsix" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "VS Code PowerShell Extension"
+    Category = "Editors"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".ps1", ".psm1", ".psd1")
+    Tags = @("text-editor", "powershell", "plugins")
+    Notes = "Visual Studio Code PowerShell extension."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "vscode-shellcheck"
+    Category = "Editors"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("text-editor", "shellcheck", "linting", "bash", "sh", "plugins")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "VS Code Spell Checker"
+    Category = "Editors"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("text-editor", "spell-checker", "plugins")
+    Notes = "Visual Studio Code Spell Checker extension."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # qpdf
 $status = Get-GitHubRelease -repo "qpdf/qpdf" -path "${SETUP_PATH}\qpdf.zip" -match "msvc64.zip" -check "Zip archive data"
@@ -2158,8 +2563,66 @@ if ($status) {
     Move-Item ${TOOLS}\qpdf-* "${TOOLS}\qpdf"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "qpdf"
+    Category = "Files and apps\PDF"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PDF\qpdf.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command qpdf.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "qpdf"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".pdf")
+    Tags = @("pdf", "data-processing")
+    Notes = "qpdf: A content-preserving PDF document transformer"
+    Tips = ""
+    Usage = "qpdf is a command-line tool and C++ library that performs content-preserving transformations on PDF files. It supports linearization, encryption, and numerous other features. It can also be used for splitting and merging files, creating PDF files (but you have to supply all the content yourself), and inspecting files for study or analysis. qpdf does not render PDFs or perform text extraction, and it does not contain higher-level interfaces for working with page contents. It is a low-level tool for working with the structure of PDF files and can be a valuable tool for anyone who wants to do programmatic or command-line-based manipulation of PDF files."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # Fibratus
 $status = Get-GitHubRelease -repo "rabbitstack/fibratus" -path "${SETUP_PATH}\fibratus.msi" -match "fibratus-[.0-9]+-amd64.msi$" -check "Composite Document File V2 Document"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Fibratus"
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\fibratus (runs dfirws-install -Fibratus).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Fibratus"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Fibratus"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "fibratus"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".etl")
+    Tags = @("etw", "windows", "monitoring")
+    Notes = "Adversary tradecraft detection, protection, and hunting"
+    Tips = ""
+    Usage = "Fibratus detects, protects, and eradicates advanced adversary tradecraft by scrutinizing and asserting a wide spectrum of system events against a behavior-driven rule engine and YARA memory scanner."
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # Radare2
 $status = Get-GitHubRelease -repo "radareorg/radare2" -path "${SETUP_PATH}\radare2.zip" -match "w64.zip" -check "Zip archive data"
@@ -2169,6 +2632,35 @@ if ($status) {
         Remove-Item "${TOOLS}\radare2" -Recurse -Force
     }
     Move-Item ${TOOLS}\radare2-* ${TOOLS}\radare2
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Radare2"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\radare2.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command radare2 -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "radare2"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".mach-o")
+    Tags = @("reverse-engineering", "disassembler", "debugging")
+    Notes = "UNIX-like reverse engineering framework and command-line toolset"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # Iaito by Radareorg
@@ -2183,6 +2675,35 @@ if ($status) {
     }
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Iaito"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\iaito.lnk"
+            Target   = "`${TOOLS}\iaito\iaito.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\iaito\iaito.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "disassembler", "gui")
+    Notes = "iaito is the official graphical interface for radare2, a libre reverse engineering framework."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # hfs
 $status = Get-GitHubRelease -repo "rejetto/hfs" -path "${SETUP_PATH}\hfs.zip" -match "hfs-windows-x64" -check "Zip archive data"
 if ($status) {
@@ -2190,6 +2711,35 @@ if ($status) {
         Remove-Item "${TOOLS}\hfs" -Recurse -Force
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hfs.zip" -o"${TOOLS}\hfs" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "hfs"
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\hfs.exe.lnk"
+            Target   = "`${TOOLS}\hfs\hfs.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\hfs\hfs.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("http", "file-server", "network")
+    Notes = "hfs is a simple HTTP file server for Windows."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # obsidian-mitre-attack
@@ -2203,6 +2753,21 @@ if ($status) {
     Remove-Item "${TOOLS}\README.md" -Force
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "obsidian-mitre-attack"
+    Category = "Editors"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("obsidian", "mitre-attack", "threat-intelligence")
+    Notes = "A vault for Obsidian.md containing the MITRE ATT&CK framework in markdown format."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # Cutter
 $status = Get-GitHubRelease -repo "rizinorg/cutter" -path "${SETUP_PATH}\cutter.zip" -match "Windows-x86_64.zip" -check "Zip archive data"
 if ($status) {
@@ -2213,12 +2778,61 @@ if ($status) {
     Move-Item ${TOOLS}\Cutter-* ${TOOLS}\cutter
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Cutter"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\Cutter.lnk"
+            Target   = "`${TOOLS}\cutter\cutter.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "cutter"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "rizin"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".dylib")
+    Tags = @("reverse-engineering", "disassembler", "decompiler", "gui")
+    Notes = "Cutter is a Qt and C++ GUI powered by Rizin that provides an intuitive interface for reverse engineering and analyzing binaries across multiple platforms."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # Nerd fonts - installed during start
 # Add some example fonts
 $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\JetBrainsMono.zip" -match "JetBrainsMono.zip" -check "Zip archive data"
 $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\LiberationMono.zip" -match "LiberationMono.zip" -check "Zip archive data"
 $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Meslo.zip" -match "Meslo.zip" -check "Zip archive data"
 $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Terminus.zip" -match "Terminus.zip" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Nerd Fonts"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".ttf", ".otf")
+    Tags = @("fonts", "terminal")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # Perl by Strawberry
 $status = Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "${SETUP_PATH}\perl.zip" -match "portable.zip" -check "Zip archive data"
@@ -2229,14 +2843,81 @@ if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\perl.zip" -o"${TOOLS}\perl" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Strawberry Perl"
+    Category = "Programming"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".pl", ".pm")
+    Tags = @("scripting", "perl")
+    Notes = "Strawberry Perl is a Perl distribution for Windows that includes a complete Perl environment."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # sidr
 $status = Get-GitHubRelease -repo "strozfriedberg/sidr" -path "${SETUP_PATH}\sidr.exe" -match "sidr.exe" -check "PE32"
 if ($status) {
     Copy-Item "${SETUP_PATH}\sidr.exe" "${TOOLS}\bin"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "sidr"
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\sidr (Search Index DB Reporter - handles both ESE (.edb) and SQLite).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command sidr --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "sidr"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".db", ".sqlite")
+    Tags = @("browser-forensics", "forensics")
+    Notes = "Search Index Database Reporter"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # jadx - installed during start
 $status =  Get-GitHubRelease -repo "skylot/jadx" -path "${SETUP_PATH}\jadx.zip" -match "jadx-1" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "jadx"
+    Category = "Programming\Java"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\Jadx (runs dfirws-install -Jadx).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Jadx"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Jadx"
+    Verify = @()
+    FileExtensions = @(".apk", ".dex", ".jar", ".class", ".zip")
+    Tags = @("reverse-engineering", "android", "decompiler", "java", "deobfuscation")
+    Notes = "Dex to Java decompiler"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # Sleuthkit
 $status = Get-GitHubRelease -repo "sleuthkit/sleuthkit" -path "${SETUP_PATH}\sleuthkit.zip" -match "win32.zip$" -check "Zip archive data"
@@ -2246,6 +2927,35 @@ if ($status) {
         Remove-Item "${TOOLS}\sleuthkit" -Recurse -Force
     }
     Move-Item ${TOOLS}\sleuthkit-* "${TOOLS}\sleuthkit"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Sleuthkit"
+    Category = "Files and apps\Disk"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\blkcalc (Calculates where data in the unallocated space image).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "blkcalc"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk")
+    Tags = @("disk-forensics", "filesystem", "forensics")
+    Notes = "The Sleuth Kit® (TSK) is a library and collection of command line digital forensics tools that allow you to investigate volume and file system data. The library can be incorporated into larger digital forensics tools and the command line tools can be directly used to find evidence."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # qrtool
@@ -2258,14 +2968,61 @@ if ($status) {
     Move-Item ${TOOLS}\qrtool-* "${TOOLS}\qrtool"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "qrtool"
+    Category = "Files and apps"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "qrtool"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".png", ".svg")
+    Tags = @("qr-code", "encoding", "decoding")
+    Notes = "Tool for decoding QR codes from images"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # debloat
 $status = Get-GitHubRelease -repo "Squiblydoo/debloat" -path "${SETUP_PATH}\debloat.zip" -match "Windows" -check "Zip archive data"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\debloat.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
-# Visual Studio Code spell checker extension - installed during start
-$status =  Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" -match "vsix" -check "Zip archive data"
+$TOOL_DEFINITIONS += @{
+    Name = "debloat"
+    Category = "Files and apps\PE"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\Debloat.lnk"
+            Target   = "`${TOOLS}\bin\debloat.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "debloat"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("malware-analysis", "pe-analysis", "deobfuscation")
+    Notes = "A GUI and CLI tool for removing bloat from executables"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # Thumbcacheviewer
 $status = Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "${SETUP_PATH}\thumbcacheviewer.zip" -match "viewer_64" -check "Zip archive data"
@@ -2276,10 +3033,68 @@ if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\thumbcacheviewer.zip" -o"${TOOLS}\thumbcacheviewer" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Thumbcacheviewer"
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Thumbcache Viewer.lnk"
+            Target   = "`${TOOLS}\thumbcacheviewer\thumbcache_viewer.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "thumbcache_viewer"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".db")
+    Tags = @("windows", "forensics", "thumbnails")
+    Notes = "Thumbcache Viewer - Extract Windows Vista, Windows 7, Windows 8, Windows 8.1, and Windows 10 thumbcache database files."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # gron
 $status = Get-GitHubRelease -repo "tomnomnom/gron" -path "${SETUP_PATH}\gron.zip" -match "gron-windows-amd64" -check "Zip archive data"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\gron.zip" -o"${TOOLS}\bin" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "gron"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\gron (Make JSON greppable).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command gron -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "gron"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".json")
+    Tags = @("json", "data-processing", "grep")
+    Notes = "gron makes JSON greppable by transforming it into discrete assignments that can be easily searched and filtered using standard command-line tools."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # MemProcFS
@@ -2289,6 +3104,35 @@ if ($status) {
         Remove-Item "${TOOLS}\MemProcFS" -Recurse -Force
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\memprocfs.zip" -o"${TOOLS}\MemProcFS" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MemProcFS"
+    Category = "Memory"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command MemProcFS.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "MemProcFS"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".dmp", ".raw", ".vmem", ".img")
+    Tags = @("memory-forensics", "filesystem")
+    Notes = "MemProcFS is an easy and convenient way of viewing physical memory as files in a virtual file system."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # upx
@@ -2301,10 +3145,68 @@ if ($status) {
     Move-Item ${TOOLS}\upx-* "${TOOLS}\upx"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "upx"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\upx.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command upx"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "upx"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".elf")
+    Tags = @("packing", "pe-analysis", "compression")
+    Notes = "UPX is a free, portable, extendable, high-performance executable packer."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # Velociraptor
 $status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match "windows-amd64.exe$" -check "PE32"
 if ($status) {
     Copy-Item "${SETUP_PATH}\velociraptor.exe" "${TOOLS}\bin\" -Force
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Velociraptor"
+    Category = "IR"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\IR\velociraptor.exe (Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command velociraptor.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "velociraptor"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".json", ".csv")
+    Tags = @("incident-response", "forensics", "endpoint-detection")
+    Notes = "Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # Witr
@@ -2313,14 +3215,87 @@ if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\witr.zip" "witr.exe" -o"${TOOLS}\bin" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Witr"
+    Category = "IR"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "triage")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # fq
 $status = Get-GitHubRelease -repo "wader/fq" -path "${SETUP_PATH}\fq.zip" -match "windows_amd64.zip" -check "Zip archive data"
 if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fq.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "fq"
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\fq (jq for binary formats).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command fq -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "fq"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".pcap", ".pcapng", ".mp4", ".mp3", ".flac", ".zip", ".tar", ".gif", ".png")
+    Tags = @("data-processing", "binary-analysis", "file-format")
+    Notes = "jq for binary formats - tool, language and decoders for working with binary and text formats"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # fqlite
 $status = Get-GitHubRelease -repo "pawlaszczyk/fqlite" -path "${SETUP_PATH}\fqlite.exe" -match "windows.exe" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "fqlite"
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\fqlite (runs dfirws-install -FQLite).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -FQLite"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -FQLite"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\fqlite\fqlite.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".db", ".sqlite", ".sqlite3")
+    Tags = @("database", "sqlite", "forensics")
+    Notes = "FQLite - SQLite Forensic Toolkit. FQLite is a tool to find and restore deleted records in SQlite databases. It therefore examines the database for entries marked as deleted."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # Zircolite
 $status = Get-GitHubRelease -repo "wagga40/zircolite" -path "${SETUP_PATH}\zircolite.7z" -match "zircolite" -check "7-zip archive data"
@@ -2333,6 +3308,35 @@ if ($status) {
     Move-Item ${TOOLS}\zircolite\zircolite_*.exe ${TOOLS}\zircolite\zircolite.exe
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "Zircolite"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command zircolite.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "zircolite"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".evtx", ".json")
+    Tags = @("log-analysis", "sigma", "detection", "incident-response")
+    Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # imhex
 $status = Get-GitHubRelease -repo "WerWolv/ImHex" -path "${SETUP_PATH}\imhex.zip" -match "Portable-NoGPU-x86_64.zip" -check "Zip archive data"
 if ($status) {
@@ -2342,6 +3346,40 @@ if ($status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\imhex.zip" -o"${TOOLS}\imhex" | Out-Null
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "ImHex"
+    Category = "Editors"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Editors\ImHex.lnk"
+            Target   = "`${TOOLS}\imhex\imhex-gui.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "imhex-gui"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "imhex"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".bin", ".hex", ".elf")
+    Tags = @("hex-editor", "binary-analysis", "pattern-language")
+    Notes = "ImHex is a hex editor for binary analysis and pattern language."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # chainsaw
 $status = Get-GitHubRelease -repo "WithSecureLabs/chainsaw" -path "${SETUP_PATH}\chainsaw.zip" -match "x86_64-pc-windows-msvc" -check "Zip archive data"
 if ($status) {
@@ -2349,6 +3387,35 @@ if ($status) {
         Remove-Item "${TOOLS}\chainsaw" -Recurse -Force
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\chainsaw.zip" -o"${TOOLS}" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "chainsaw"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\chainsaw (Rapidly work with Forensic Artefacts).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command chainsaw.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "chainsaw"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "incident-response", "sigma", "detection")
+    Notes = "Rapidly Search and Hunt through Windows Forensic Artefacts"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # yara
@@ -2365,6 +3432,47 @@ if ($status) {
     Move-Item ${TOOLS}\yarac64.exe ${TOOLS}\bin\yarac.exe
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "YARA"
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yara.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yara.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yarac.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yarac.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "yara"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "yarac"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
+    Tags = @("yara", "malware-analysis", "detection", "signatures")
+    Notes = "YARA is a tool for identifying and classifying malware."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # yara-x
 $status = Get-GitHubRelease -repo "VirusTotal/yara-x" -path "${SETUP_PATH}\yara-x.zip" -match "x86_64-pc-windows-msvc" -check "Zip archive data"
 if ($status) {
@@ -2375,14 +3483,101 @@ if ($status) {
     Move-Item ${TOOLS}\yr.exe ${TOOLS}\bin\yr.exe
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "yara-x"
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yr (yara-x).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yr.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "yr"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
+    Tags = @("yara", "malware-analysis", "detection", "signatures")
+    Notes = "yara-x is a faster and more flexible version of YARA."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # yq
 $status = Get-GitHubRelease -repo "mikefarah/yq" -path "${SETUP_PATH}\yq.exe" -match "yq_windows_amd64.exe" -check "PE32"
 if ($status) {
     Copy-Item "${SETUP_PATH}\yq.exe" "${TOOLS}\bin"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "yq"
+    Category = "Signatures and information"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yq (is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command yq.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "yq"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".yaml", ".yml", ".json", ".xml", ".toml")
+    Tags = @("yaml", "data-processing", "cli")
+    Notes = "yq is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # Get x64dbg - installed during start
 $status =  Get-GitHubRelease -repo "x64dbg/x64dbg" -path "${SETUP_PATH}\x64dbg.zip" -match "snapshot/snapshot" -check "Zip archive data"
+
+$TOOL_DEFINITIONS += @{
+    Name = "x64dbg"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\X64dbg (runs dfirws-install -X64dbg).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -X64dbg"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -X64Dbg"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "x64dbg"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("reverse-engineering", "debugging", "dynamic-analysis")
+    Notes = "An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # hayabusa
 $status = Get-GitHubRelease -repo "Yamato-Security/hayabusa" -path "${SETUP_PATH}\hayabusa.zip" -match "win-x64.zip" -check "Zip archive data"
@@ -2392,6 +3587,35 @@ if ($status) {
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}\hayabusa" | Out-Null
     Move-Item ${TOOLS}\hayabusa\hayabusa-* ${TOOLS}\hayabusa\hayabusa.exe
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "hayabusa"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\hayabusa (is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command hayabusa.exe help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "hayabusa"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".evtx")
+    Tags = @("log-analysis", "event-log", "sigma", "detection", "timeline", "incident-response")
+    Notes = "Hayabusa (隼) is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # takajo
@@ -2404,8 +3628,66 @@ if ($status) {
     Move-Item ${TOOLS}\takajo\takajo-* "${TOOLS}\takajo\takajo.exe"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "takajo"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\takajo (is a tool to analyze Windows event logs - hayabusa).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command takajo.exe -h"
+            Icon     = ""
+            WorkDir  = "`${TOOLS}\takajo"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\takajo\takajo.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".json")
+    Tags = @("log-analysis", "hayabusa", "timeline")
+    Notes = "Takajō (鷹匠) is a Hayabusa results analyzer."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # zaproxy - available for installation with dfirws-install.ps1
 $status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.exe" -match "windows.exe" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "zaproxy"
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-install -Zaproxy).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Zaproxy"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -ZAProxy"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "zap"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("web", "security-testing", "proxy")
+    Notes = "The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # edit
 $status = Get-GitHubRelease -repo "microsoft/edit" -path "${SETUP_PATH}\edit.zip" -match "windows.zip" -check "Zip archive data"
@@ -2418,6 +3700,21 @@ if ($status) {
     Copy-Item "${TOOLS}\edit\edit.exe" "${TOOLS}\bin\edit.exe"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "edit"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("text-editor")
+    Notes = "Edit is a simple text editor for Windows made by Microsoft."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # https://download.sqlitebrowser.org/ - DB Browser for SQLite
 $status = Get-GitHubRelease -repo "sqlitebrowser/sqlitebrowser" -path "${SETUP_PATH}\sqlitebrowser.zip" -match "win64.zip" -check "Zip archive data"
 if ($status) {
@@ -2425,6 +3722,35 @@ if ($status) {
         Remove-Item -Recurse -Force "${TOOLS}\DB Browser for SQLite" | Out-Null 2>&1
     }
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\sqlitebrowser" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DB Browser for SQLite"
+    Category = "Files and apps\Database"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\DB Browser for SQLite.lnk"
+            Target   = "`${TOOLS}\sqlitebrowser\DB Browser for SQLite.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = ""
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\sqlitebrowser\DB Browser for SQLite.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".db", ".sqlite", ".sqlite3")
+    Tags = @("database", "sqlite", "gui")
+    Notes = "DB Browser for SQLite is a high quality, visual, open source tool for creating, designing, and editing database files compatible with SQLite."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 # NetExt
@@ -2437,6 +3763,21 @@ if ($status) {
     Move-Item ${TOOLS}\NetExt-* "${TOOLS}\NetExt"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "NetExt"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".dmp")
+    Tags = @("debugging", "memory-forensics", "dotnet", "winDbg", "extension")
+    Notes = "WinDbg extension for data mining managed heap. It also includes commands to list http request, wcf services, WIF tokens among others"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
 # YAMAGoya
 $status = Get-GitHubRelease -repo "JPCERTCC/YAMAGoya" -path "${SETUP_PATH}\YAMAGoya.zip" -match "YAMAGoya.*.zip" -check "Zip archive data"
 if ($status) {
@@ -2444,6 +3785,29 @@ if ($status) {
         Remove-Item "${TOOLS}\YAMAGoya" -Recurse -Force
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\YAMAGoya.zip" -o"${TOOLS}\YAMAGoya" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "YAMAGoya"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\YAMAGoya (Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command YAMAGoya.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".yar", ".yara")
+    Tags = @("yara", "rule-generation")
+    Notes = "Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
 }
 
 #
@@ -2497,1380 +3861,13 @@ $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETU
 
 
 $TOOL_DEFINITIONS += @{
-    Name = "Elfparser-ng"
-    Category = "OS\Linux"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Linux\elfparser-ng.lnk"
-            Target   = "`${TOOLS}\elfparser-ng\Release\elfparser-ng.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\Tools\elfparser-ng\Release\elfparser-ng.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".elf", ".so")
-    Tags = @("reverse-engineering", "elf-analysis", "linux")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "readpe"
-    Category = "Files and apps\PE"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "pescan"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".sys")
-    Tags = @("pe-analysis", "reverse-engineering")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "DitExplorer"
-    Category = "OS\Windows\Active Directory (AD)"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\DitExplorer (Active Directory Database Explorer).lnk"
-            Target   = "`${TOOLS}\DitExplorer\DitExplorer.UI.WpfApp.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".dit")
-    Tags = @("active-directory", "forensics")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "srum_dump"
-    Category = "OS\Windows"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\srum-dump (Parses Windows System Resource Usage Monitor (SRUM) database).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command srum_dump.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "srum_dump"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".dat")
-    Tags = @("windows", "forensics", "srum")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "forensic-timeliner"
-    Category = "IR"
-    Shortcuts = @()
-    InstallVerifyCommand = "dfirws-install.ps1 -ForensicTimeliner"
-    Verify = @()
-    FileExtensions = @(".evtx", ".csv", ".json")
-    Tags = @("forensics", "timeline")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "jwt-cli"
-    Category = "Programming\Java"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("web", "authentication", "jwt")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "dsq"
-    Category = "Files and apps\Database"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\dsq (commandline SQL engine for data files).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dsq -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "dsq"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".json", ".csv", ".tsv", ".parquet")
-    Tags = @("data-processing", "sql", "json", "csv")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "MetadataPlus"
-    Category = "Files and apps\Office"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\MetadataPlus.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command MetadataPlus.exe -h"
-            Icon     = "`${TOOLS}\bin\MetadataPlus.exe"
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "MetadataPlus"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".doc", ".docx", ".xls", ".xlsx", ".pdf", ".jpg", ".png")
-    Tags = @("metadata", "file-analysis")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Loki"
-    Category = "Signatures and information"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\loki (runs dfirws-install -Loki).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Loki"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -Loki"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "loki"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".bin")
-    Tags = @("malware-analysis", "ioc-scanner", "yara", "detection")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Notepad++"
-    Category = "Editors"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Editors\Notepad++.lnk"
-            Target   = "`${env:ProgramFiles}\Notepad++\notepad++.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "notepad++"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".txt", ".log", ".xml", ".json", ".csv", ".ps1", ".py", ".js")
-    Tags = @("text-editor", "syntax-highlighting")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "HindSight"
-    Category = "Files and apps\Browser"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight (Internet history forensics for Google Chrome and Chromium).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command hindsight.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Browser\hindsight_gui.lnk"
-            Target   = "`${TOOLS}\bin\hindsight_gui.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "hindsight"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".db", ".sqlite")
-    Tags = @("browser-forensics", "chrome", "artifact-extraction")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "evtx_dump"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\evtx_dump (Utility to parse EVTX files).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command evtx_dump.exe --help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "evtx_dump"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
-            Name = "C:\venv\uv\regipy\Scripts\evtx_dump.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".evtx")
-    Tags = @("log-analysis", "event-log", "windows")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "ComparePlus"
-    Category = "Editors"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\downloads\comparePlus.zip"
-            Expect = "Zip archive data"
-        }
-    )
-    FileExtensions = @()
-    Tags = @("text-editor", "diff")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "DSpellCheck"
-    Category = "Editors"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\downloads\DSpellCheck.zip"
-            Expect = "Zip archive data"
-        }
-    )
-    FileExtensions = @()
-    Tags = @("text-editor")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "VS Code PowerShell Extension"
-    Category = "Editors"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".ps1", ".psm1", ".psd1")
-    Tags = @("text-editor", "powershell")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "vscode-shellcheck"
-    Category = "Editors"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @()
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "qpdf"
-    Category = "Files and apps\PDF"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PDF\qpdf.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command qpdf.exe --help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "qpdf"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".pdf")
-    Tags = @("pdf", "data-processing")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Fibratus"
-    Category = "OS\Windows"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\fibratus (runs dfirws-install -Fibratus).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Fibratus"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -Fibratus"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "fibratus"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".etl")
-    Tags = @("etw", "windows", "monitoring")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Radare2"
-    Category = "Reverse Engineering"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\radare2.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command radare2 -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "radare2"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".mach-o")
-    Tags = @("reverse-engineering", "disassembler", "debugging")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Iaito"
-    Category = "Reverse Engineering"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\iaito.lnk"
-            Target   = "`${TOOLS}\iaito\iaito.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\Tools\iaito\iaito.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
-    Tags = @("reverse-engineering", "disassembler", "gui")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "hfs"
-    Category = "Network"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Network\hfs.exe.lnk"
-            Target   = "`${TOOLS}\hfs\hfs.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\Tools\hfs\hfs.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @()
-    Tags = @()
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "obsidian-mitre-attack"
-    Category = "Editors"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("obsidian", "mitre-attack", "threat-intelligence")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Cutter"
-    Category = "Reverse Engineering"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\Cutter.lnk"
-            Target   = "`${TOOLS}\cutter\cutter.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "cutter"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
-            Name = "rizin"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".dylib")
-    Tags = @("reverse-engineering", "disassembler", "decompiler")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Nerd Fonts"
-    Category = "Utilities"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".ttf", ".otf")
-    Tags = @("fonts", "terminal")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Strawberry Perl"
-    Category = "Programming"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".pl", ".pm")
-    Tags = @("scripting", "perl")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "sidr"
-    Category = "OS\Windows"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\sidr (Search Index DB Reporter - handles both ESE (.edb) and SQLite).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command sidr --help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "sidr"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".db", ".sqlite")
-    Tags = @("browser-forensics", "forensics")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "jadx"
-    Category = "Programming\Java"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\Jadx (runs dfirws-install -Jadx).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Jadx"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -Jadx"
-    Verify = @()
-    FileExtensions = @(".apk", ".dex", ".jar", ".class", ".zip")
-    Tags = @("reverse-engineering", "android", "decompiler", "java", "deobfuscation")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Sleuthkit"
-    Category = "Files and apps\Disk"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\blkcalc (Calculates where data in the unallocated space image).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "blkcalc"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk")
-    Tags = @("disk-forensics", "filesystem", "forensics")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "qrtool"
-    Category = "Files and apps"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "qrtool"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".png", ".svg")
-    Tags = @("qr-code", "encoding", "decoding")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "debloat"
-    Category = "Files and apps\PE"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\Debloat.lnk"
-            Target   = "`${TOOLS}\bin\debloat.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "debloat"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll")
-    Tags = @("malware-analysis", "pe-analysis", "deobfuscation")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "VS Code Spell Checker"
-    Category = "Editors"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("text-editor")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Thumbcacheviewer"
-    Category = "OS\Windows"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Thumbcache Viewer.lnk"
-            Target   = "`${TOOLS}\thumbcacheviewer\thumbcache_viewer.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "thumbcache_viewer"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".db")
-    Tags = @("windows", "forensics", "thumbnails")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "gron"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\gron (Make JSON greppable).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command gron -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "gron"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".json")
-    Tags = @("json", "data-processing", "grep")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "MemProcFS"
-    Category = "Memory"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Memory\MemProcFS.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command MemProcFS.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "MemProcFS"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".dmp", ".raw", ".vmem", ".img")
-    Tags = @("memory-forensics", "filesystem")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "upx"
-    Category = "Utilities"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\upx.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command upx"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "upx"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".elf")
-    Tags = @("packing", "pe-analysis", "compression")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Velociraptor"
-    Category = "IR"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\IR\velociraptor.exe (Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command velociraptor.exe --help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "velociraptor"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".json", ".csv")
-    Tags = @("incident-response", "forensics", "endpoint-detection")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Witr"
-    Category = "IR"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("forensics", "triage")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "fq"
-    Category = "Files and apps"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\fq (jq for binary formats).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command fq -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "fq"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".pcap", ".pcapng", ".mp4", ".mp3", ".flac", ".zip", ".tar", ".gif", ".png")
-    Tags = @("data-processing", "binary-analysis", "file-format")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "fqlite"
-    Category = "Files and apps\Database"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\fqlite (runs dfirws-install -FQLite).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -FQLite"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -FQLite"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\Users\WDAGUtilityAccount\AppData\Local\fqlite\fqlite.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".db", ".sqlite", ".sqlite3")
-    Tags = @("database", "sqlite", "forensics")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Zircolite"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command zircolite.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "zircolite"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".evtx", ".json")
-    Tags = @("log-analysis", "sigma", "detection", "incident-response")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "ImHex"
-    Category = "Editors"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Editors\ImHex.lnk"
-            Target   = "`${TOOLS}\imhex\imhex-gui.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "imhex-gui"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
-            Name = "imhex"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll", ".bin", ".hex", ".elf")
-    Tags = @("hex-editor", "binary-analysis", "pattern-language")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "chainsaw"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\chainsaw (Rapidly work with Forensic Artefacts).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command chainsaw.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "chainsaw"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".evtx")
-    Tags = @("log-analysis", "incident-response", "sigma", "detection")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "YARA"
-    Category = "Signatures and information"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yara.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command yara.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yarac.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command yarac.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "yara"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
-            Name = "yarac"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
-    Tags = @("yara", "malware-analysis", "detection", "signatures")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "yara-x"
-    Category = "Signatures and information"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yr (yara-x).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command yr.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "yr"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
-    Tags = @("yara", "malware-analysis", "detection", "signatures")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "yq"
-    Category = "Signatures and information"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\yq (is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command yq.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "yq"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".yaml", ".yml", ".json", ".xml", ".toml")
-    Tags = @("yaml", "data-processing", "cli")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "x64dbg"
-    Category = "Reverse Engineering"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\X64dbg (runs dfirws-install -X64dbg).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -X64dbg"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -X64Dbg"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "x64dbg"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll")
-    Tags = @("reverse-engineering", "debugging", "dynamic-analysis")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "hayabusa"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\hayabusa (is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command hayabusa.exe help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "hayabusa"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".evtx")
-    Tags = @("log-analysis", "event-log", "sigma", "detection", "timeline", "incident-response")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "takajo"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\takajo (is a tool to analyze Windows event logs - hayabusa).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command takajo.exe -h"
-            Icon     = ""
-            WorkDir  = "`${TOOLS}\takajo"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\Tools\takajo\takajo.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".json")
-    Tags = @("log-analysis", "hayabusa", "timeline")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "zaproxy"
-    Category = "Network"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-install -Zaproxy).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Zaproxy"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -ZAProxy"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "zap"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @()
-    Tags = @("web", "security-testing", "proxy")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "edit"
-    Category = "Utilities"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("text-editor")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "DB Browser for SQLite"
-    Category = "Files and apps\Database"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\DB Browser for SQLite.lnk"
-            Target   = "`${TOOLS}\sqlitebrowser\DB Browser for SQLite.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\Tools\sqlitebrowser\DB Browser for SQLite.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".db", ".sqlite", ".sqlite3")
-    Tags = @("database", "sqlite", "gui")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "NetExt"
-    Category = "Reverse Engineering"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".dmp")
-    Tags = @("debugging", "memory-forensics", "dotnet")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "YAMAGoya"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\YAMAGoya (Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command YAMAGoya.exe --help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".yar", ".yara")
-    Tags = @("yara", "rule-generation")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
     Name = "obsidian-dataview"
     Category = "Editors"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "data-processing")
+    Tags = @("obsidian", "data-processing", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3885,7 +3882,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "project-management")
+    Tags = @("obsidian", "project-management", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3900,7 +3897,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @()
+    Tags = @("obsidian", "automation", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3915,7 +3912,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian")
+    Tags = @("obsidian", "calendar", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3930,7 +3927,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "automation")
+    Tags = @("obsidian", "automation", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3945,7 +3942,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "task-management")
+    Tags = @("obsidian", "task-management", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3960,7 +3957,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "drawing")
+    Tags = @("obsidian", "drawing", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3975,7 +3972,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian")
+    Tags = @("obsidian", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3990,7 +3987,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "timeline")
+    Tags = @("obsidian", "timeline", "plugins")
     Notes = ""
     Tips = ""
     Usage = ""

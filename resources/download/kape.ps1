@@ -4,6 +4,7 @@
 
 if (test-path .\local\kape.zip) {
     Write-DateLog "kape.zip found. Will add and update Kape for dfirws."
+    # TODO: Add TOOL_DEFINITIONS entry for Kape
 } else {
     Write-DateLog "kape.zip not found. Will not add or update Kape for dfirws."
     Write-dateLog "If you want to add Kape place your copy of kape.zip in the local directory."

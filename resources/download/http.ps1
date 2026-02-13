@@ -1606,6 +1606,24 @@ $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" 
 # Artifacts Exchange for Velociraptor
 $status = Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/raw/gh-pages/exchange/artifact_exchange_v2.zip" -FilePath ".\downloads\artifact_exchange.zip" -check "Zip archive data"
 
+$TOOL_DEFINITIONS += @{
+    Name = "Velociraptor Artifact Exchange"
+    Homepage = "https://github.com/Velocidex/velociraptor-docs/tree/gh-pages/exchange"
+    Vendor = "Velocidex"
+    Category = "Utilities"
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("velociraptor")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @(
+        "N/A"
+    )
+}
+
 # Mail Viewer
 $status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/MailView.zip" -FilePath ".\downloads\mailview.zip" -check "Zip archive data"
 if ($status) {
@@ -2165,6 +2183,8 @@ $TOOL_DEFINITIONS += @{
 # Microsoft OpenJDK 11 - installed during start
 $MicrosoftJDKUrl = get-downloadUrlFromPage -url "https://learn.microsoft.com/en-us/java/openjdk/download" -RegEx 'https://aka.ms/download-jdk/microsoft-jdk-11.[.0-9]+-windows-x64.msi'
 $status = Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
+
+# TODO: Add TOOL_DEFINITIONS entry for Microsoft OpenJDK 11
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
 $NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'

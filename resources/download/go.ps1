@@ -39,6 +39,7 @@ if (! ${STATUS}) {
     Write-DateLog "GoLang tools already installed and up to date." >> "${ROOT_PATH}\log\golang.txt"
 }
 
+# TODO: Move TOOL_DEFINITIONS to setup/install/install_golang_tools.ps1 and add more entries for other GoLang based tools
 $TOOL_DEFINITIONS += @{
     Name = "protodump"
     Category = "Utilities\Cryptography"

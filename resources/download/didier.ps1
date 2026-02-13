@@ -610,5 +610,4 @@ $TOOL_DEFINITIONS += @{
     )
 }
 
-
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "didier"

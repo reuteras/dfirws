@@ -1,5 +1,11 @@
 # Script to download data to use for enrichment.
 
+# TODO: ADD TOOL_DEFINITIONS entries for enrichment data. Also look at other tools
+# that can use this data and add tags to the TOOL_DEFINITIONS entries for those tools
+# to link them to the enrichment data. For example, tags like "geolocation", "threat-intel",
+# "yara-rules", "cve-data" can be added to tools that can use this data and then linked
+# to the relevant enrichment data in the TOOL_DEFINITIONS entry for the enrichment data.
+
 # Set directories
 $currentDirectory = "${PWD}"
 $enrichmentDirectory = "${PWD}\enrichment"

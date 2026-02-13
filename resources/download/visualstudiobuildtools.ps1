@@ -11,4 +11,6 @@ if (! (Test-Path "${TOOLS}\VSLayout\Layout.json")) {
     Start-Process -Wait "${SETUP_PATH}\vs_BuildTools.exe" -ArgumentList "--layout .\mount\Tools\VSLayout --passive"
 }
 
+# TODO: Add TOOL_DEFINITIONS entries for Visual Studio Build Tools
+
 Write-SynchronizedLog "Visual Studio: Download complete."

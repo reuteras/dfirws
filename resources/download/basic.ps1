@@ -157,6 +157,7 @@ if ($all -or $MSYS2) {
     if ($status) {
         Copy-Item "${SETUP_PATH}\msys2.exe" "${TOOLS}\bin\msys2.exe"
     }
+    # TOOL_DEFINITIONS entry for MSYS2 is added in msys2.ps1
 }
 
 #
