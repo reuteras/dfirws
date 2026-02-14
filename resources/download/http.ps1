@@ -2184,7 +2184,24 @@ $TOOL_DEFINITIONS += @{
 $MicrosoftJDKUrl = get-downloadUrlFromPage -url "https://learn.microsoft.com/en-us/java/openjdk/download" -RegEx 'https://aka.ms/download-jdk/microsoft-jdk-11.[.0-9]+-windows-x64.msi'
 $status = Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
 
-# TODO: Add TOOL_DEFINITIONS entry for Microsoft OpenJDK 11
+$TOOL_DEFINITIONS += @{
+    Name = "Microsoft OpenJDK 11"
+    Homepage = "https://learn.microsoft.com/en-us/java/openjdk/download"
+    Vendor = "Microsoft"
+    License = "GPLv2 with Classpath Exception"
+    LicenseUrl = "https://openjdk.org/legal/gplv2+ce.html"
+    Category = "Development"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("java", "runtime", "development")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
 $NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'

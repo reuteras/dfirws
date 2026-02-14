@@ -1,10 +1,7 @@
 # Script to download data to use for enrichment.
 
-# TODO: ADD TOOL_DEFINITIONS entries for enrichment data. Also look at other tools
-# that can use this data and add tags to the TOOL_DEFINITIONS entries for those tools
-# to link them to the enrichment data. For example, tags like "geolocation", "threat-intel",
-# "yara-rules", "cve-data" can be added to tools that can use this data and then linked
-# to the relevant enrichment data in the TOOL_DEFINITIONS entry for the enrichment data.
+. ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 # Set directories
 $currentDirectory = "${PWD}"
@@ -218,3 +215,514 @@ $status = Get-FileFromUri -uri "https://github.com/CVEProject/cvelistV5/archive/
 $status = Get-GitHubRelease -repo "CVEProject/cvelistV5" -path ".\enrichment\cve\all_CVEs_at_midnight.zip.zip" -match "all_CVEs_at_midnight.zip.zip$"
 
 Set-Location "${currentDirectory}"
+
+#
+# TOR Exit Nodes
+#
+$TOOL_DEFINITIONS += @{
+    Name = "TOR Exit Nodes"
+    Homepage = "https://collector.torproject.org/archive/exit-lists/"
+    Vendor = "The Tor Project"
+    License = "Public Data"
+    LicenseUrl = "https://www.torproject.org/"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("tor", "exit-nodes", "network", "threat-intel")
+    Notes = "TOR exit node lists from the Tor Project collector archive."
+    Tips = "Use these lists to identify if an IP address is a known TOR exit node. Useful for network forensics and threat intelligence."
+    Usage = "The exit node lists are downloaded from the Tor Project collector archive and stored in the enrichment\tor directory. Each file contains exit relay information for a specific time period."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# Wireshark MAC Address Lookup (manuf)
+#
+$TOOL_DEFINITIONS += @{
+    Name = "Wireshark Manuf"
+    Homepage = "https://www.wireshark.org/download/automated/data/manuf"
+    Vendor = "Wireshark Foundation"
+    License = "GPL-2.0"
+    LicenseUrl = "https://www.wireshark.org/about.html"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".txt")
+    Tags = @("mac-address", "network", "wireshark")
+    Notes = "Wireshark OUI/MAC address manufacturer lookup file."
+    Tips = "Use the manuf file to resolve MAC address prefixes (OUI) to vendor/manufacturer names. Useful for identifying devices on a network."
+    Usage = "The manuf file is downloaded from Wireshark and stored in enrichment\manuf. It maps MAC address prefixes to manufacturer names."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# IPinfo.io Free IP to Country + ASN database
+#
+$TOOL_DEFINITIONS += @{
+    Name = "IPinfo Country ASN"
+    Homepage = "https://ipinfo.io/"
+    Vendor = "IPinfo"
+    License = "Creative Commons Attribution-ShareAlike 4.0"
+    LicenseUrl = "https://ipinfo.io/terms-of-service"
+    Category = "Enrichment\Geolocation"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".mmdb")
+    Tags = @("geolocation", "ip-address", "asn")
+    Notes = "IPinfo.io free IP to Country and ASN database in MMDB format. Requires IPINFO_API_KEY."
+    Tips = "Use this MMDB file with tools that support MaxMind DB format to resolve IP addresses to country and ASN information. Set IPINFO_API_KEY in config.ps1 to download."
+    Usage = "The country_asn.mmdb file is downloaded from IPinfo.io and stored in enrichment\ipinfo. It provides IP to country and ASN lookups."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# MaxMind GeoLite2 ASN
+#
+$TOOL_DEFINITIONS += @{
+    Name = "MaxMind GeoLite2 ASN"
+    Homepage = "https://dev.maxmind.com/geoip/geolite2-free-geolocation-data"
+    Vendor = "MaxMind"
+    License = "GeoLite2 End User License Agreement"
+    LicenseUrl = "https://www.maxmind.com/en/geolite2/eula"
+    Category = "Enrichment\Geolocation"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".mmdb", ".tar.gz")
+    Tags = @("geolocation", "asn", "maxmind")
+    Notes = "MaxMind GeoLite2 ASN database for mapping IP addresses to Autonomous System Numbers. Requires MAXMIND_LICENSE_KEY."
+    Tips = "Use this database with tools that support MaxMind DB format to resolve IP addresses to ASN information. Set MAXMIND_LICENSE_KEY in config.ps1 to download."
+    Usage = "The GeoLite2-ASN.mmdb file is downloaded from MaxMind and stored in enrichment\maxmind_current. It provides IP to ASN lookups."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# MaxMind GeoLite2 City
+#
+$TOOL_DEFINITIONS += @{
+    Name = "MaxMind GeoLite2 City"
+    Homepage = "https://dev.maxmind.com/geoip/geolite2-free-geolocation-data"
+    Vendor = "MaxMind"
+    License = "GeoLite2 End User License Agreement"
+    LicenseUrl = "https://www.maxmind.com/en/geolite2/eula"
+    Category = "Enrichment\Geolocation"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".mmdb", ".tar.gz")
+    Tags = @("geolocation", "city", "maxmind")
+    Notes = "MaxMind GeoLite2 City database for mapping IP addresses to city-level geolocation. Requires MAXMIND_LICENSE_KEY."
+    Tips = "Use this database with tools that support MaxMind DB format to resolve IP addresses to city-level location data. Set MAXMIND_LICENSE_KEY in config.ps1 to download."
+    Usage = "The GeoLite2-City.mmdb file is downloaded from MaxMind and stored in enrichment\maxmind_current. It provides IP to city-level geolocation lookups."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# MaxMind GeoLite2 Country
+#
+$TOOL_DEFINITIONS += @{
+    Name = "MaxMind GeoLite2 Country"
+    Homepage = "https://dev.maxmind.com/geoip/geolite2-free-geolocation-data"
+    Vendor = "MaxMind"
+    License = "GeoLite2 End User License Agreement"
+    LicenseUrl = "https://www.maxmind.com/en/geolite2/eula"
+    Category = "Enrichment\Geolocation"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".mmdb", ".tar.gz")
+    Tags = @("geolocation", "country", "maxmind")
+    Notes = "MaxMind GeoLite2 Country database for mapping IP addresses to countries. Requires MAXMIND_LICENSE_KEY."
+    Tips = "Use this database with tools that support MaxMind DB format to resolve IP addresses to country-level location data. Set MAXMIND_LICENSE_KEY in config.ps1 to download."
+    Usage = "The GeoLite2-Country.mmdb file is downloaded from MaxMind and stored in enrichment\maxmind_current. It provides IP to country lookups."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# Geolocus MMDB
+#
+$TOOL_DEFINITIONS += @{
+    Name = "Geolocus"
+    Homepage = "https://www.geolocus.io/"
+    Vendor = "Geolocus"
+    License = "See website"
+    LicenseUrl = "https://www.geolocus.io/"
+    Category = "Enrichment\Geolocation"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".mmdb")
+    Tags = @("geolocation", "mmdb")
+    Notes = "Geolocus MMDB geolocation database."
+    Tips = "Use this MMDB file with tools that support MaxMind DB format for IP geolocation lookups."
+    Usage = "The geolocus.mmdb file is downloaded from geolocus.io and stored in enrichment\geolocus. It provides an alternative IP geolocation database."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# Suricata Rules (Emerging Threats)
+#
+$TOOL_DEFINITIONS += @{
+    Name = "Suricata Rules"
+    Homepage = "https://rules.emergingthreats.net/"
+    Vendor = "Proofpoint (Emerging Threats)"
+    License = "BSD License"
+    LicenseUrl = "https://rules.emergingthreats.net/OPEN_download_instructions.html"
+    Category = "Enrichment\IDS"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".rules", ".zip")
+    Tags = @("suricata", "ids", "detection-rules", "network")
+    Notes = "Emerging Threats open ruleset for Suricata IDS."
+    Tips = "Use these rules with Suricata to detect network-based threats. The rules are updated regularly and cover a wide range of threat categories."
+    Usage = "The emerging.rules.zip is downloaded from Emerging Threats and stored in enrichment\suricata. Extract and use with Suricata IDS for network traffic analysis."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# Snort Rules (Community)
+#
+$TOOL_DEFINITIONS += @{
+    Name = "Snort Rules"
+    Homepage = "https://www.snort.org/downloads"
+    Vendor = "Cisco Talos"
+    License = "GPL-2.0"
+    LicenseUrl = "https://www.snort.org/license"
+    Category = "Enrichment\IDS"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".rules", ".tar.gz")
+    Tags = @("snort", "ids", "detection-rules", "network")
+    Notes = "Snort 3 community ruleset for network intrusion detection."
+    Tips = "Use these rules with Snort or compatible IDS tools to detect network-based threats."
+    Usage = "The community-rules.tar.gz is downloaded from snort.org and stored in enrichment\snort. Extract and use with Snort IDS for network traffic analysis."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# YARA Forge Rules (Core)
+#
+$TOOL_DEFINITIONS += @{
+    Name = "YARA Forge Rules Core"
+    Homepage = "https://github.com/YARAHQ/yara-forge"
+    Vendor = "YARAHQ"
+    License = "See individual rule licenses"
+    LicenseUrl = "https://github.com/YARAHQ/yara-forge/blob/main/LICENSE"
+    Category = "Enrichment\YARA"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".yar", ".zip")
+    Tags = @("yara", "detection-rules", "malware-detection")
+    Notes = "YARA Forge core ruleset - curated set of high-quality YARA rules."
+    Tips = "The core ruleset contains the most reliable and well-tested YARA rules. Use with YARA or YARA-compatible tools for malware detection and classification."
+    Usage = "The yara-forge-rules-core.zip is downloaded from YARA Forge GitHub releases and stored in enrichment\yara. Extract and use with YARA-compatible tools."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# YARA Forge Rules (Extended)
+#
+$TOOL_DEFINITIONS += @{
+    Name = "YARA Forge Rules Extended"
+    Homepage = "https://github.com/YARAHQ/yara-forge"
+    Vendor = "YARAHQ"
+    License = "See individual rule licenses"
+    LicenseUrl = "https://github.com/YARAHQ/yara-forge/blob/main/LICENSE"
+    Category = "Enrichment\YARA"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".yar", ".zip")
+    Tags = @("yara", "detection-rules", "malware-detection")
+    Notes = "YARA Forge extended ruleset - broader set of YARA rules beyond the core set."
+    Tips = "The extended ruleset includes additional YARA rules that go beyond the core set. May have higher false positive rates but covers more threats."
+    Usage = "The yara-forge-rules-extended.zip is downloaded from YARA Forge GitHub releases and stored in enrichment\yara. Extract and use with YARA-compatible tools."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# YARA Forge Rules (Full)
+#
+$TOOL_DEFINITIONS += @{
+    Name = "YARA Forge Rules Full"
+    Homepage = "https://github.com/YARAHQ/yara-forge"
+    Vendor = "YARAHQ"
+    License = "See individual rule licenses"
+    LicenseUrl = "https://github.com/YARAHQ/yara-forge/blob/main/LICENSE"
+    Category = "Enrichment\YARA"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".yar", ".zip")
+    Tags = @("yara", "detection-rules", "malware-detection")
+    Notes = "YARA Forge full ruleset - comprehensive collection of all available YARA rules."
+    Tips = "The full ruleset contains all available YARA rules from YARA Forge. Most comprehensive coverage but may have higher false positive rates."
+    Usage = "The yara-forge-rules-full.zip is downloaded from YARA Forge GitHub releases and stored in enrichment\yara. Extract and use with YARA-compatible tools."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# CVE Data (CVEProject/cvelistV5)
+#
+$TOOL_DEFINITIONS += @{
+    Name = "CVE Data"
+    Homepage = "https://github.com/CVEProject/cvelistV5"
+    Vendor = "CVE Project"
+    License = "See repository"
+    LicenseUrl = "https://github.com/CVEProject/cvelistV5/blob/main/LICENSE"
+    Category = "Enrichment\Vulnerability"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".json", ".zip")
+    Tags = @("cve", "vulnerability", "threat-intel")
+    Notes = "CVE list data from the CVEProject cvelistV5 repository."
+    Tips = "Use this data to look up CVE details for vulnerability analysis. The data includes both the main branch archive and the all_CVEs_at_midnight snapshot."
+    Usage = "CVE data is downloaded from the CVEProject/cvelistV5 GitHub repository and stored in enrichment\cve. Contains JSON-formatted CVE records."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# SSC-Threat-Intel-IoCs
+#
+$TOOL_DEFINITIONS += @{
+    Name = "SSC-Threat-Intel-IoCs"
+    Homepage = "https://github.com/securityscorecard/SSC-Threat-Intel-IoCs"
+    Vendor = "SecurityScorecard"
+    License = "See repository"
+    LicenseUrl = "https://github.com/securityscorecard/SSC-Threat-Intel-IoCs"
+    Category = "Enrichment\Threat Intelligence"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("threat-intel", "ioc")
+    Notes = "SecurityScorecard threat intelligence indicators of compromise."
+    Tips = "Use these IoCs for threat hunting and incident response. Contains indicators from SecurityScorecard threat research."
+    Usage = "The repository is cloned to enrichment\git\SSC-Threat-Intel-IoCs and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# Volexity Threat Intel
+#
+$TOOL_DEFINITIONS += @{
+    Name = "Volexity Threat Intel"
+    Homepage = "https://github.com/volexity/threat-intel"
+    Vendor = "Volexity"
+    License = "See repository"
+    LicenseUrl = "https://github.com/volexity/threat-intel"
+    Category = "Enrichment\Threat Intelligence"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("threat-intel", "ioc")
+    Notes = "Volexity threat intelligence indicators and YARA rules."
+    Tips = "Use these indicators and rules for threat hunting. Contains YARA rules and IoCs from Volexity threat research."
+    Usage = "The repository is cloned to enrichment\git\threat-intel and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet VPN List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet VPN List"
+    Homepage = "https://github.com/X4BNet/lists_vpn"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_vpn"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("vpn", "network", "blocklist")
+    Notes = "X4BNet list of known VPN IP addresses."
+    Tips = "Use this list to identify VPN exit nodes in network traffic. Useful for network forensics and access log analysis."
+    Usage = "The repository is cloned to enrichment\git\lists_vpn and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet TOR Exit List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet TOR Exit List"
+    Homepage = "https://github.com/X4BNet/lists_torexit"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_torexit"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("tor", "network", "blocklist")
+    Notes = "X4BNet list of known TOR exit node IP addresses."
+    Tips = "Use this list to identify TOR exit nodes in network traffic. Complements the Tor Project exit node data."
+    Usage = "The repository is cloned to enrichment\git\lists_torexit and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet StopForumSpam List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet StopForumSpam"
+    Homepage = "https://github.com/X4BNet/lists_stopforumspam"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_stopforumspam"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("spam", "network", "blocklist")
+    Notes = "X4BNet list of known spam IP addresses from StopForumSpam."
+    Tips = "Use this list to identify known spammer IP addresses in network traffic or access logs."
+    Usage = "The repository is cloned to enrichment\git\lists_stopforumspam and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet Search Engine List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet Search Engine List"
+    Homepage = "https://github.com/X4BNet/lists_searchengine"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_searchengine"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("search-engine", "network", "blocklist")
+    Notes = "X4BNet list of known search engine crawler IP addresses."
+    Tips = "Use this list to identify search engine crawlers in network traffic or access logs."
+    Usage = "The repository is cloned to enrichment\git\lists_searchengine and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet Bots List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet Bots List"
+    Homepage = "https://github.com/X4BNet/lists_bots"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_bots"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("bots", "network", "blocklist")
+    Notes = "X4BNet list of known bot IP addresses."
+    Tips = "Use this list to identify known bot IP addresses in network traffic or access logs."
+    Usage = "The repository is cloned to enrichment\git\lists_bots and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet UptimeRobot List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet UptimeRobot List"
+    Homepage = "https://github.com/X4BNet/lists_uptimerobot"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_uptimerobot"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("monitoring", "network", "blocklist")
+    Notes = "X4BNet list of known UptimeRobot monitoring IP addresses."
+    Tips = "Use this list to identify UptimeRobot monitoring service IP addresses in network traffic or access logs."
+    Usage = "The repository is cloned to enrichment\git\lists_uptimerobot and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet Cloudflare List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet Cloudflare List"
+    Homepage = "https://github.com/X4BNet/lists_cloudflare"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_cloudflare"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("cloudflare", "network", "blocklist")
+    Notes = "X4BNet list of known Cloudflare IP addresses."
+    Tips = "Use this list to identify Cloudflare CDN IP addresses in network traffic. Useful for distinguishing CDN traffic from direct connections."
+    Usage = "The repository is cloned to enrichment\git\lists_cloudflare and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+#
+# X4BNet Route53 List
+#
+$TOOL_DEFINITIONS += @{
+    Name = "X4BNet Route53 List"
+    Homepage = "https://github.com/X4BNet/lists_route53"
+    Vendor = "X4BNet"
+    License = "See repository"
+    LicenseUrl = "https://github.com/X4BNet/lists_route53"
+    Category = "Enrichment\Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("route53", "network", "blocklist")
+    Notes = "X4BNet list of known AWS Route53 health check IP addresses."
+    Tips = "Use this list to identify AWS Route53 health check IP addresses in network traffic or access logs."
+    Usage = "The repository is cloned to enrichment\git\lists_route53 and updated via git pull."
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+# ============================================================================
+# Generate tool files for enrichment data sources
+# ============================================================================
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "enrichment"

@@ -150,6 +150,919 @@ $TOOL_DEFINITIONS += @{
     )
 }
 
-# TODO: Add more TOOL_DEFINITIONS entries for other git repositories
+$TOOL_DEFINITIONS += @{
+    Name = "APT-Hunter"
+    Category = "Files and apps\Log"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("event-log", "threat-hunting")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DFIRArtifactMuseum"
+    Category = "Forensics"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "artifacts", "reference")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "bmc-tools"
+    Category = "Files and apps"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "rdp")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "psexposed"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "forensics", "psexec")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Incident-Response-Powershell"
+    Category = "IR"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("incident-response", "powershell")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "RdpCacheStitcher"
+    Category = "Files and apps"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "rdp", "image-reconstruction")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "IDR"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "delphi", "decompiler")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "White-Phoenix"
+    Category = "Forensics"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("ransomware", "decryption", "recovery")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ASL"
+    Category = "Files and apps\PE"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("pe-analysis", "packer-detection")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "jupyter-collection"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("jupyter", "notebook")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Python-dsstore"
+    Category = "Files and apps"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "macos", "data-extraction")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "chainsaw-rules"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("sigma", "detection-rules")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "radare2-deep-graph"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "visualization")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "defender-detectionhistory-parser"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "defender", "forensics")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Trawler"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "persistence", "threat-hunting")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ToolAnalysisResultSheet"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "reference", "lateral-movement")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "iShutdown"
+    Category = "Files and apps"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("ios", "forensics", "mobile")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "EmailAnalyzer"
+    Category = "Files and apps\Email"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("email", "forensics", "phishing")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Events-Ripper"
+    Category = "Files and apps\Log"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("event-log", "forensics", "windows")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "RegRipper4.0"
+    Category = "OS\Windows\Registry"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("registry", "forensics", "windows")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PersistenceSniper"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "persistence", "threat-hunting")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PersistenceSniper.wiki"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "persistence", "documentation")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "dictionaries"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("dictionaries", "libreoffice")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PowerDecode"
+    Category = "Files and apps"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("powershell", "deobfuscation", "malware-analysis")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "flare-floss"
+    Category = "Malware tools"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "string-extraction", "malware-analysis")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "gootloader"
+    Category = "Malware tools"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("malware-analysis", "gootloader")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "GoReSym"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "golang", "symbol-recovery")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "gostringungarbler"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "golang", "deobfuscation")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "CapaExplorer"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "capa", "visualization")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ese-analyst"
+    Category = "Files and apps\Database"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "ese", "database")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "CimSweep"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "forensics", "wmi")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "malware-bazaar-advanced-search"
+    Category = "Malware tools"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("malware-analysis", "threat-intelligence")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "god-mode-rules"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("yara", "sigma", "detection-rules")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "signature-base"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("yara", "detection-rules", "ioc")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "scare"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("assembly", "emulation", "repl")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "capa-explorer"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "capa", "visualization")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "dotnetfile"
+    Category = "Programming\dotNET"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("pe-analysis", "dotnet")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "fibratus"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "etw", "tracing")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ai-fs-proxy"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("ai", "filesystem")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "dfirws-sample-files"
+    Category = "Forensics"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "samples", "testing")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MSRC"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("vulnerability", "microsoft", "security-advisory")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "cutter-jupyter"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "rizin")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "EVTX-ATTACK-SAMPLES"
+    Category = "Files and apps\Log"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("event-log", "mitre-attack", "samples")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "legacy-sigmatools"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("sigma", "detection-rules")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "sigma"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("sigma", "detection-rules", "siem")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Shadow-Pulse"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("threat-intelligence", "ioc")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PowerSponse"
+    Category = "IR"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("incident-response", "powershell", "containment")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "HiddenWave"
+    Category = "Utilities\CTF"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("steganography", "audio")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "deobshell"
+    Category = "Files and apps"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("powershell", "deobfuscation", "malware-analysis")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "BlueTuxedo"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "active-directory", "dns")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "LeechCore.wiki"
+    Category = "Memory"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("memory-forensics", "documentation")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "MemProcFS.wiki"
+    Category = "Memory"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("memory-forensics", "documentation")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "gti-dev-kit"
+    Category = "Signatures and information\Online tools"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("virustotal", "threat-intelligence")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "one-extract"
+    Category = "Forensics"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "onenote", "data-extraction")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "threat-intel"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("threat-intelligence", "ioc")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Zircolite"
+    Category = "Files and apps\Log"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("event-log", "sigma", "detection")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PatchaPalooza"
+    Category = "Signatures and information"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("vulnerability", "microsoft", "patch-analysis")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "TotalRecall"
+    Category = "OS\Windows"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("windows", "recall", "forensics")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "hayabusa-rules"
+    Category = "Files and apps\Log"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("event-log", "detection-rules", "sigma")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "AuthLogParser"
+    Category = "Files and apps\Log"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("log-analysis", "linux", "authentication")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "cutterref"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("reverse-engineering", "rizin", "cheatsheet")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "git"
