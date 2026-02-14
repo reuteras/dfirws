@@ -1,4 +1,4 @@
-. ".\resources\download\common.ps1"
+﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
 $ROOT_PATH = "${PWD}"
@@ -56,4 +56,5 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }

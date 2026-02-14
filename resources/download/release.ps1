@@ -1,4 +1,4 @@
-. ".\resources\download\common.ps1"
+﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
 # artemis
@@ -38,6 +38,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # godap
@@ -77,6 +78,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # BeaconHunter - copied to program files during startup
@@ -112,6 +114,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # 4n4lDetector - installed in sandbox during startup
@@ -146,6 +149,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # aLEAPP
@@ -207,6 +211,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # iLEAPP
@@ -268,6 +273,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # lessmsi
@@ -306,6 +312,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # fx
@@ -341,6 +348,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # CobaltStrikeScan
@@ -376,6 +384,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Audacity
@@ -415,6 +424,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Ares
@@ -455,6 +465,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Brim/Zui (Zq) - installed during start
@@ -487,6 +498,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # RDPCacheStitcher
@@ -526,6 +538,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # ffmpeg
@@ -565,6 +578,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # ripgrep
@@ -604,6 +618,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # binlex
@@ -639,6 +654,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # cmder - installed during start
@@ -663,6 +679,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Recaf
@@ -693,6 +710,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # DBeaver
@@ -731,6 +749,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Dumpbin from Visual Studio
@@ -769,6 +788,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # dnSpy 32-bit and 64-bit
@@ -821,6 +841,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("dotnet6")
 }
 
 # Dokany - available for manual installation
@@ -847,6 +868,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # mboxviewer
@@ -885,6 +907,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # zstd
@@ -924,6 +947,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # CyberChef
@@ -963,6 +987,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # redress
@@ -1002,6 +1027,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # h2database - available for manual installation
@@ -1038,6 +1064,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # INDXRipper
@@ -1076,6 +1103,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # dll_to_exe
@@ -1103,6 +1131,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # HollowsHunter
@@ -1138,6 +1167,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # PE-bear
@@ -1176,6 +1206,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # PE-sieve
@@ -1211,6 +1242,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # PE-utils
@@ -1250,6 +1282,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # WinObjEx64
@@ -1290,6 +1323,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Detect It Easy
@@ -1333,6 +1367,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # XELFViewer
@@ -1376,6 +1411,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # jd-gui
@@ -1415,6 +1451,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # LogBoost
@@ -1450,6 +1487,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # jq
@@ -1485,6 +1523,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Jumplist Browser
@@ -1520,6 +1559,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # MFTBrowser
@@ -1555,6 +1595,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Prefetch Browser
@@ -1590,6 +1631,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # bytecode-viewer
@@ -1620,6 +1662,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # gftrace
@@ -1658,6 +1701,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # adalanche
@@ -1693,6 +1737,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # MsgViewer
@@ -1722,6 +1767,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # capa
@@ -1778,6 +1824,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # capa-rules
@@ -1803,6 +1850,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Folder for Ghidra extensions
@@ -1833,6 +1881,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("Ghidra")
 }
 
 # Microsoft PowerShell
@@ -1857,6 +1906,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Ghidra btighidra
@@ -1878,6 +1928,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("Ghidra")
 }
 
 # Ghidra Cartographer plugin
@@ -1899,6 +1950,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("Ghidra")
 }
 
 # Flare-Floss
@@ -1937,6 +1989,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Flare-Fakenet-NG
@@ -1976,6 +2029,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # GoReSym
@@ -2014,6 +2068,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # mmdbinspect
@@ -2053,6 +2108,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Elfparser-ng
@@ -2092,6 +2148,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # readpe
@@ -2123,6 +2180,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Dit explorer
@@ -2156,6 +2214,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # srum_dump binary
@@ -2191,6 +2250,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # forensic-timeliner
@@ -2209,6 +2269,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # jwt-cli
@@ -2234,6 +2295,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # dsq
@@ -2269,6 +2331,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # MetadataPlus
@@ -2304,6 +2367,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Loki - installed during start
@@ -2336,6 +2400,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Notepad++ - installed during start
@@ -2373,6 +2438,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2394,6 +2460,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2415,6 +2482,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # HindSight
@@ -2462,6 +2530,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # evtx_dump
@@ -2502,6 +2571,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Visual Studio Code powershell extension - installed during start
@@ -2524,6 +2594,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2539,6 +2610,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2554,6 +2626,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # qpdf
@@ -2593,6 +2666,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "qpdf is a command-line tool and C++ library that performs content-preserving transformations on PDF files. It supports linearization, encryption, and numerous other features. It can also be used for splitting and merging files, creating PDF files (but you have to supply all the content yourself), and inspecting files for study or analysis. qpdf does not render PDFs or perform text extraction, and it does not contain higher-level interfaces for working with page contents. It is a low-level tool for working with the structure of PDF files and can be a valuable tool for anyone who wants to do programmatic or command-line-based manipulation of PDF files."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Fibratus
@@ -2625,6 +2699,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "Fibratus detects, protects, and eradicates advanced adversary tradecraft by scrutinizing and asserting a wide spectrum of system events against a behavior-driven rule engine and YARA memory scanner."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Radare2
@@ -2664,6 +2739,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Iaito by Radareorg
@@ -2705,6 +2781,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # hfs
@@ -2743,6 +2820,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # obsidian-mitre-attack
@@ -2769,6 +2847,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Cutter
@@ -2813,6 +2892,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Nerd fonts - installed during start
@@ -2835,6 +2915,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Perl by Strawberry
@@ -2859,6 +2940,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # sidr
@@ -2894,6 +2976,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # jadx - installed during start
@@ -2920,6 +3003,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Sleuthkit
@@ -2959,6 +3043,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # qrtool
@@ -2990,6 +3075,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # debloat
@@ -3025,6 +3111,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Thumbcacheviewer
@@ -3063,6 +3150,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # gron
@@ -3098,6 +3186,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # MemProcFS
@@ -3136,6 +3225,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # upx
@@ -3175,6 +3265,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Velociraptor
@@ -3210,6 +3301,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Witr
@@ -3231,6 +3323,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # fq
@@ -3266,6 +3359,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # fqlite
@@ -3298,6 +3392,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Zircolite
@@ -3338,6 +3433,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # imhex
@@ -3381,6 +3477,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # chainsaw
@@ -3419,6 +3516,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # yara
@@ -3474,6 +3572,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # yara-x
@@ -3513,6 +3612,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # yq
@@ -3548,6 +3648,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Get x64dbg - installed during start
@@ -3580,6 +3681,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # hayabusa
@@ -3619,6 +3721,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # takajo
@@ -3658,6 +3761,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # zaproxy - available for installation with dfirws-install.ps1
@@ -3690,6 +3794,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # edit
@@ -3716,6 +3821,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # https://download.sqlitebrowser.org/ - DB Browser for SQLite
@@ -3754,6 +3860,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # NetExt
@@ -3779,6 +3886,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # YAMAGoya
@@ -3811,6 +3919,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -3876,6 +3985,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3891,6 +4001,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3906,6 +4017,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3921,6 +4033,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3936,6 +4049,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3951,6 +4065,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3966,6 +4081,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3981,6 +4097,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3996,6 +4113,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "release"

@@ -1,4 +1,4 @@
-# Script to download data to use for enrichment.
+﻿# Script to download data to use for enrichment.
 
 . ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
@@ -236,6 +236,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The exit node lists are downloaded from the Tor Project collector archive and stored in the enrichment\tor directory. Each file contains exit relay information for a specific time period."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -258,6 +259,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The manuf file is downloaded from Wireshark and stored in enrichment\manuf. It maps MAC address prefixes to manufacturer names."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -280,6 +282,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The country_asn.mmdb file is downloaded from IPinfo.io and stored in enrichment\ipinfo. It provides IP to country and ASN lookups."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -302,6 +305,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The GeoLite2-ASN.mmdb file is downloaded from MaxMind and stored in enrichment\maxmind_current. It provides IP to ASN lookups."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -324,6 +328,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The GeoLite2-City.mmdb file is downloaded from MaxMind and stored in enrichment\maxmind_current. It provides IP to city-level geolocation lookups."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -346,6 +351,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The GeoLite2-Country.mmdb file is downloaded from MaxMind and stored in enrichment\maxmind_current. It provides IP to country lookups."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -368,6 +374,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The geolocus.mmdb file is downloaded from geolocus.io and stored in enrichment\geolocus. It provides an alternative IP geolocation database."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -390,6 +397,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The emerging.rules.zip is downloaded from Emerging Threats and stored in enrichment\suricata. Extract and use with Suricata IDS for network traffic analysis."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -412,6 +420,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The community-rules.tar.gz is downloaded from snort.org and stored in enrichment\snort. Extract and use with Snort IDS for network traffic analysis."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -434,6 +443,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The yara-forge-rules-core.zip is downloaded from YARA Forge GitHub releases and stored in enrichment\yara. Extract and use with YARA-compatible tools."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -456,6 +466,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The yara-forge-rules-extended.zip is downloaded from YARA Forge GitHub releases and stored in enrichment\yara. Extract and use with YARA-compatible tools."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -478,6 +489,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The yara-forge-rules-full.zip is downloaded from YARA Forge GitHub releases and stored in enrichment\yara. Extract and use with YARA-compatible tools."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -500,6 +512,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "CVE data is downloaded from the CVEProject/cvelistV5 GitHub repository and stored in enrichment\cve. Contains JSON-formatted CVE records."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -522,6 +535,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\SSC-Threat-Intel-IoCs and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -544,6 +558,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\threat-intel and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -566,6 +581,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_vpn and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -588,6 +604,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_torexit and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -610,6 +627,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_stopforumspam and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -632,6 +650,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_searchengine and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -654,6 +673,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_bots and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -676,6 +696,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_uptimerobot and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -698,6 +719,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_cloudflare and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 #
@@ -720,6 +742,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "The repository is cloned to enrichment\git\lists_route53 and updated via git pull."
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # ============================================================================

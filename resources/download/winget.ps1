@@ -1,4 +1,4 @@
-. ".\resources\download\common.ps1"
+﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
 # Autopsy - available for installation via dfirws-install.ps1
@@ -26,6 +26,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Burp suite - available for installation via dfirws-install.ps1
@@ -53,6 +54,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Chrome - available for installation via dfirws-install.ps1
@@ -86,6 +88,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # DotNet 6 Desktop runtime - installed during startup
@@ -105,6 +108,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # DotNet 8 Desktop runtime - installed during startup
@@ -124,6 +128,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # IrfanView - installed during startup
@@ -149,6 +154,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Obsidian - available for installation via dfirws-install.ps1
@@ -182,6 +188,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # oh-my-posh - available for installation via dfirws-install.ps1
@@ -209,6 +216,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # PowerShell 7 - installed during startup
@@ -228,6 +236,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Putty - available for installation via dfirws-install.ps1
@@ -261,6 +270,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Qemu - available for installation via dfirws-install.ps1
@@ -286,6 +296,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Ruby - available for installation via dfirws-install.ps1
@@ -311,6 +322,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # VideoLAN VLC - available for installation via dfirws-install.ps1
@@ -344,6 +356,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # VirusTotal CLI
@@ -384,6 +397,7 @@ $TOOL_DEFINITIONS += @{
         "vt ip 8.8.8.8"
     )
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # WinMerge - available for installation via dfirws-install.ps1
@@ -417,6 +431,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # OpenVPN - available for installation via dfirws-install.ps1
@@ -436,6 +451,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Google Earth Pro - available for installation via dfirws-install.ps1
@@ -469,6 +485,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Passmark OSFMount - available for installation via dfirws-install.ps1
@@ -502,6 +519,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # WireGuard.WireGuard - available for installation via dfirws-install.ps1
@@ -521,6 +539,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Wireshark - available for installation via dfirws-install.ps1
@@ -554,6 +573,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # tailscale - available for installation via dfirws-install.ps1
@@ -579,6 +599,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Firefox - available for installation via dfirws-install.ps1
@@ -612,6 +633,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Foxit PDF Reader - available for installation via dfirws-install.ps1
@@ -645,6 +667,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # uv - available for installation via dfirws-install.ps1
@@ -667,6 +690,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Windbg - available for installation via dfirws-install.ps1
@@ -686,6 +710,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # Neovim - available for installation via dfirws-install.ps1
@@ -727,6 +752,7 @@ $TOOL_DEFINITIONS += @{
         "nvim notes.md",
     )
     SampleFiles = @()
+    Dependencies = @()
 }
 
 Write-SynchronizedLog "winget: Download complete."

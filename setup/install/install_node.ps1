@@ -1,4 +1,4 @@
-$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+﻿$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
 . "C:\Users\WDAGUtilityAccount\Documents\tools\shared.ps1"
@@ -74,6 +74,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("nodejs")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -97,6 +98,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("nodejs")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -112,6 +114,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("nodejs")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -135,6 +138,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("nodejs")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -158,6 +162,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("nodejs")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -173,6 +178,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("nodejs")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -188,6 +194,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("nodejs")
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "node"

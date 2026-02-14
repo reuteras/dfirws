@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(HelpMessage = "Don't update Visual Studio Code Extensions via http.")]
     [Switch]$NoVSCodeExtensions
 )
@@ -95,6 +95,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get SwiftOnSecurity sysmon config - used from Sysmon
@@ -1121,6 +1122,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get exiftool
@@ -1173,6 +1175,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get pestudio
@@ -1218,6 +1221,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get HxD
@@ -1264,6 +1268,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get trid and triddefs
@@ -1311,6 +1316,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get malcat - installed during start - 313 indicates use of Python 3.13
@@ -1357,6 +1363,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get ssview
@@ -1403,6 +1410,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # FullEventLogView
@@ -1449,6 +1457,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # pstwalker
@@ -1498,6 +1507,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Win API Search
@@ -1550,6 +1560,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # pdfstreamdumper - installed during start
@@ -1589,6 +1600,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Capa integration with Ghidra - installed during start
@@ -1622,6 +1634,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Mail Viewer
@@ -1667,6 +1680,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Volatility Workbench 3
@@ -1712,6 +1726,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Volatility Workbench 2
@@ -1757,6 +1772,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Volatility Workbench 2 Profiles
@@ -1941,6 +1957,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Get winpmem
@@ -1972,6 +1989,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Binary Ninja - manual installation
@@ -2011,6 +2029,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # gpg4win
@@ -2050,6 +2069,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Tor browser
@@ -2090,6 +2110,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # DCode
@@ -2138,6 +2159,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Veracrypt - manual installation
@@ -2178,6 +2200,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Microsoft OpenJDK 11 - installed during start
@@ -2201,6 +2224,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
@@ -2241,6 +2265,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # recbin
@@ -2286,6 +2311,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # capa Explorer web
@@ -2331,6 +2357,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
@@ -2373,6 +2400,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://npcap.com/#download - Npcap - available for manual installation
@@ -2399,6 +2427,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://www.sqlite.org/download.html - SQLite
@@ -2442,6 +2471,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # OpenVPN - manual installation
@@ -2473,6 +2503,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
@@ -2519,6 +2550,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
@@ -2567,6 +2599,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://nmap.org/download.html - Nmap
@@ -2610,6 +2643,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://flatassembler.net/download.php - FASM
@@ -2656,6 +2690,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Terminal for Windows - automatically installed during start
@@ -2681,6 +2716,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
@@ -2727,6 +2763,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 
@@ -2776,6 +2813,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @("enrichment")
 }
 
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
@@ -2816,6 +2854,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # http://www.rohitab.com/apimonitor - API Monitor - installed during start
@@ -2852,6 +2891,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://gluonhq.com/products/javafx/ - JavaFX 21
@@ -2886,6 +2926,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
@@ -2930,6 +2971,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://windows.php.net/download - PHP 8
@@ -2976,6 +3018,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # https://hashcat.net/hashcat/ - hashcat
@@ -3024,6 +3067,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Drivers for hashcat
@@ -3057,6 +3101,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # ELK
@@ -3093,6 +3138,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 # Remove unused files and directories

@@ -1,4 +1,4 @@
-# Script to download files needed in sandboxes during download.
+﻿# Script to download files needed in sandboxes during download.
 
 . ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
@@ -43,6 +43,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 #
@@ -87,6 +88,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 #
@@ -145,6 +147,7 @@ if ($all -or $Python) {
         SampleFiles = @(
             "N/A"
         )
+        Dependencies = @("openjdk11")
     }
 
     # Tools to compile and build - version 2019

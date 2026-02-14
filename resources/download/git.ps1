@@ -1,4 +1,4 @@
-. ".\resources\download\common.ps1"
+﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
 New-Item -ItemType Directory -Force -Path mount\git | Out-Null
@@ -148,6 +148,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -163,6 +164,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -178,6 +180,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -193,6 +196,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -208,6 +212,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -223,6 +228,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -238,6 +244,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -253,6 +260,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -268,6 +276,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -283,6 +292,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -298,6 +308,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -313,6 +324,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -328,6 +340,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -343,6 +356,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -358,6 +372,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -373,6 +388,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -388,6 +404,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -403,6 +420,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -418,6 +436,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -433,6 +452,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -448,6 +468,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -463,6 +484,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -478,6 +500,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -493,6 +516,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -508,6 +532,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -523,6 +548,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -538,6 +564,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -553,6 +580,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -568,6 +596,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -583,6 +612,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -598,6 +628,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -613,6 +644,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -628,6 +660,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -643,6 +676,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -658,6 +692,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -673,6 +708,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -688,6 +724,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -703,6 +740,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -718,6 +756,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -733,6 +772,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -748,6 +788,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -763,6 +804,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -778,6 +820,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -793,6 +836,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -808,6 +852,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -823,6 +868,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -838,6 +884,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -853,6 +900,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -868,6 +916,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -883,6 +932,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -898,6 +948,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -913,6 +964,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -928,6 +980,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -943,6 +996,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -958,6 +1012,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -973,6 +1028,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -988,6 +1044,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1003,6 +1060,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1018,6 +1076,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1033,6 +1092,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1048,6 +1108,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1063,6 +1124,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "git"
