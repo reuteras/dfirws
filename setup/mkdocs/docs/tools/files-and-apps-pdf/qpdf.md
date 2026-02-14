@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\PDF
 
+**Source:** GitHub Release
+
 **File Extensions:** `.pdf`
 
 **Tags:** pdf, data-processing

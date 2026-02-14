@@ -2,6 +2,8 @@
 
 **Category:** OS\Linux
 
+**Source:** GitHub Release
+
 **File Extensions:** `.elf`, `.so`
 
 **Tags:** reverse-engineering, elf-analysis, linux

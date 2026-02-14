@@ -1,6 +1,6 @@
 # OS / Windows / Registry
 
-| Tool | Description | Tags | File Extensions |
-| --- | --- | --- | --- |
-| [RegShot](regshot.md) | RegShot is a small, free and open-source registry compare utility. |  |  |
-| [regipy](regipy.md) |  | registry, windows, forensics | `.reg`, `.dat` |
+| Tool | Source | Description | Tags | File Extensions |
+| --- | --- | --- | --- | --- |
+| [RegShot](regshot.md) | Git | RegShot is a small, free and open-source registry compare utility. |  |  |
+| [regipy](regipy.md) | Python |  | registry, windows, forensics | `.reg`, `.dat` |

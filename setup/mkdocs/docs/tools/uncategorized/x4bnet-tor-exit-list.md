@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/X4BNet/lists_torexit)
 
+**Source:** Enrichment
+
 **Tags:** tor, network, blocklist
 
 X4BNet list of known TOR exit node IP addresses.

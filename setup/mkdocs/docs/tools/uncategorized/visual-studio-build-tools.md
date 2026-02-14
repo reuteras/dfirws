@@ -8,4 +8,6 @@
 
 **License:** [Microsoft Software License Terms](https://visualstudio.microsoft.com/license-terms/)
 
+**Source:** Installer
+
 **Tags:** development, compiler, build-tools

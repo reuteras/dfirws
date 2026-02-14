@@ -8,6 +8,8 @@
 
 **License:** [GPL-2.0](https://www.wireshark.org/about.html)
 
+**Source:** Enrichment
+
 **File Extensions:** `.txt`
 
 **Tags:** mac-address, network, wireshark

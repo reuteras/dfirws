@@ -8,6 +8,8 @@
 
 **License:** [Microsoft Software License Terms](https://code.visualstudio.com/License)
 
+**Source:** HTTP
+
 **File Extensions:** `.ps1`, `.py`, `.js`, `.ts`, `.json`, `.xml`, `.yaml`, `.md`
 
 **Tags:** text-editor, ide, powershell

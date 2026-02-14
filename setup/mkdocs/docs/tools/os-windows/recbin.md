@@ -8,6 +8,8 @@
 
 **License:** Unspecified
 
+**Source:** HTTP
+
 **File Extensions:** `.bin`
 
 **Tags:** binary-analysis, carving

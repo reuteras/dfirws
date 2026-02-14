@@ -2,6 +2,8 @@
 
 **Category:** Editors
 
+**Source:** GitHub Release
+
 **File Extensions:** `.class`, `.jar`, `.apk`, `.dex`
 
 **Tags:** reverse-engineering, java, decompiler, deobfuscation

@@ -8,6 +8,8 @@
 
 **License:** Eclipse Public License 1.0
 
+**Source:** HTTP
+
 **File Extensions:** `.dot`, `.gv`
 
 **Tags:** visualization, graph

@@ -2,6 +2,8 @@
 
 **Category:** Reverse Engineering
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.mach-o`
 
 **Tags:** reverse-engineering, disassembler, debugging

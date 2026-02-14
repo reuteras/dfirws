@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Email
 
+**Source:** GitHub Release
+
 **File Extensions:** `.mbox`, `.eml`
 
 **Tags:** email, forensics

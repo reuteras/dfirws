@@ -8,6 +8,8 @@
 
 **License:** [Public Data](https://www.torproject.org/)
 
+**Source:** Enrichment
+
 **Tags:** tor, exit-nodes, network, threat-intel
 
 TOR exit node lists from the Tor Project collector archive.

@@ -8,6 +8,8 @@
 
 **License:** [GPL-2.0](https://www.snort.org/license)
 
+**Source:** Enrichment
+
 **File Extensions:** `.rules`, `.tar.gz`
 
 **Tags:** snort, ids, detection-rules, network

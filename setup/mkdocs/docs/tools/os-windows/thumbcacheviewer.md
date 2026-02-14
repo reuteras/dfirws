@@ -2,6 +2,8 @@
 
 **Category:** OS\Windows
 
+**Source:** GitHub Release
+
 **File Extensions:** `.db`
 
 **Tags:** windows, forensics, thumbnails

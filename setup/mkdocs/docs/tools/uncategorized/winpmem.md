@@ -8,6 +8,8 @@
 
 **License:** Apache License 2.0
 
+**Source:** HTTP
+
 **File Extensions:** `.raw`, `.aff4`
 
 **Tags:** memory-forensics, acquisition

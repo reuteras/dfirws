@@ -2,6 +2,8 @@
 
 **Category:** Utilities
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.elf`
 
 **Tags:** packing, pe-analysis, compression

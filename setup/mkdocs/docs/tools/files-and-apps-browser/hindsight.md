@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Browser
 
+**Source:** GitHub Release
+
 **File Extensions:** `.db`, `.sqlite`
 
 **Tags:** browser-forensics, chrome, artifact-extraction

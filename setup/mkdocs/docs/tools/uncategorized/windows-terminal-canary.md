@@ -8,6 +8,8 @@
 
 **License:** MIT License
 
+**Source:** HTTP
+
 **Tags:** terminal, shell
 
 Windows Terminal Canary package.

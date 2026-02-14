@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Log
 
+**Source:** GitHub Release
+
 **File Extensions:** `.json`, `.jsonl`
 
 **Tags:** json, data-processing, visualization

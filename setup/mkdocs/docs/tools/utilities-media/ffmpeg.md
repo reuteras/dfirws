@@ -2,6 +2,8 @@
 
 **Category:** Utilities\Media
 
+**Source:** GitHub Release
+
 **File Extensions:** `.mp4`, `.avi`, `.mkv`, `.mov`, `.mp3`, `.wav`, `.flac`
 
 **Tags:** multimedia, video, audio, conversion

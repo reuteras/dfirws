@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Email
 
+**Source:** GitHub Release
+
 **File Extensions:** `.msg`
 
 **Tags:** email, forensics, outlook

@@ -2,6 +2,8 @@
 
 **Category:** Utilities\Cryptography
 
+**Source:** GitHub Release
+
 **File Extensions:** `.bin`, `.txt`, `.json`, `.hex`
 
 **Tags:** data-processing, encoding, decoding, deobfuscation, encryption, hashing

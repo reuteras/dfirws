@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Office
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.doc`, `.docx`, `.xls`, `.xlsx`, `.pdf`, `.jpg`, `.png`
 
 **Tags:** metadata, file-analysis

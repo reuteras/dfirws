@@ -2,7 +2,7 @@
 
 **Category:** Forensics
 
-**Winget ID:** `SleuthKit.Autopsy`
+**Source:** Winget
 
 **File Extensions:** `.dd`, `.raw`, `.E01`, `.img`, `.vmdk`
 

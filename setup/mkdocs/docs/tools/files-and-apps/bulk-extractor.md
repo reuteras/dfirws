@@ -8,6 +8,8 @@
 
 **License:** Open source
 
+**Source:** HTTP
+
 **File Extensions:** `.dd`, `.raw`, `.E01`, `.img`
 
 **Tags:** forensics, carving, data-extraction

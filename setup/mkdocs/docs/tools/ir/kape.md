@@ -8,6 +8,8 @@
 
 **License:** Commercial
 
+**Source:** Installer
+
 **Tags:** forensics, incident-response, artifact-collection, triage
 
 ## Sample Commands

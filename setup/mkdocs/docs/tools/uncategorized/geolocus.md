@@ -8,6 +8,8 @@
 
 **License:** [See website](https://www.geolocus.io/)
 
+**Source:** Enrichment
+
 **File Extensions:** `.mmdb`
 
 **Tags:** geolocation, mmdb

@@ -2,6 +2,8 @@
 
 **Category:** Memory
 
+**Source:** GitHub Release
+
 **File Extensions:** `.dmp`, `.raw`, `.vmem`, `.img`
 
 **Tags:** memory-forensics, filesystem

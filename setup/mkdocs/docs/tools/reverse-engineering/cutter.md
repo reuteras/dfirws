@@ -2,6 +2,8 @@
 
 **Category:** Reverse Engineering
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib`
 
 **Tags:** reverse-engineering, disassembler, decompiler, gui

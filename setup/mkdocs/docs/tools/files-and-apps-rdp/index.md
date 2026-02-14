@@ -1,5 +1,5 @@
 # Files and apps / RDP
 
-| Tool | Description | Tags | File Extensions |
-| --- | --- | --- | --- |
-| [RDPCacheStitcher](rdpcachestitcher.md) | RdpCacheStitcher is a tool for analyzing RDP cache files. | rdp, forensics, windows | `.bmc`, `.bin` |
+| Tool | Source | Description | Tags | File Extensions |
+| --- | --- | --- | --- | --- |
+| [RDPCacheStitcher](rdpcachestitcher.md) | GitHub Release | RdpCacheStitcher is a tool for analyzing RDP cache files. | rdp, forensics, windows | `.bmc`, `.bin` |

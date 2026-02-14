@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/X4BNet/lists_searchengine)
 
+**Source:** Enrichment
+
 **Tags:** search-engine, network, blocklist
 
 X4BNet list of known search engine crawler IP addresses.

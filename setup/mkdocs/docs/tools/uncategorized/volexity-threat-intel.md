@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/volexity/threat-intel)
 
+**Source:** Enrichment
+
 **Tags:** threat-intel, ioc
 
 Volexity threat intelligence indicators and YARA rules.

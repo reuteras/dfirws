@@ -2,6 +2,8 @@
 
 **Category:** Utilities
 
+**Source:** GitHub Release
+
 **File Extensions:** `.zst`
 
 **Tags:** compression, decompression, cli

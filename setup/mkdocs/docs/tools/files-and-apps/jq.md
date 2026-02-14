@@ -2,6 +2,8 @@
 
 **Category:** Files and apps
 
+**Source:** GitHub Release
+
 **File Extensions:** `.json`, `.ndjson`, `.jsonl`
 
 **Tags:** json, data-processing, cli

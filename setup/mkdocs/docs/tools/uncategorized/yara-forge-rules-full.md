@@ -8,6 +8,8 @@
 
 **License:** [See individual rule licenses](https://github.com/YARAHQ/yara-forge/blob/main/LICENSE)
 
+**Source:** Enrichment
+
 **File Extensions:** `.yar`, `.zip`
 
 **Tags:** yara, detection-rules, malware-detection

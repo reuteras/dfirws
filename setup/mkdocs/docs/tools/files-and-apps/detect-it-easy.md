@@ -2,6 +2,8 @@
 
 **Category:** Files and apps
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.mach-o`, `.bin`
 
 **Tags:** pe-analysis, file-identification, packer-detection

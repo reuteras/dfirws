@@ -2,6 +2,8 @@
 
 **Category:** Utilities\Media
 
+**Source:** GitHub Release
+
 **File Extensions:** `.wav`, `.mp3`, `.flac`, `.ogg`, `.aiff`
 
 **Tags:** audio, multimedia, steganography

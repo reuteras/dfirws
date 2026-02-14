@@ -2,6 +2,8 @@
 
 **Category:** Uncategorized
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.so`
 
 **Tags:** reverse-engineering, disassembler, visualization

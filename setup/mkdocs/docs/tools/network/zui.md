@@ -2,6 +2,8 @@
 
 **Category:** Network
 
+**Source:** GitHub Release
+
 **File Extensions:** `.pcap`, `.pcapng`, `.zng`
 
 **Tags:** network-analysis, pcap, zeek

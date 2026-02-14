@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Database
 
+**Source:** GitHub Release
+
 **File Extensions:** `.json`, `.csv`, `.tsv`, `.parquet`
 
 **Tags:** data-processing, sql, json, csv

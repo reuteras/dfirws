@@ -2,6 +2,8 @@
 
 **Category:** Signatures and information
 
+**Source:** GitHub Release
+
 **File Extensions:** `.yaml`, `.yml`, `.json`, `.xml`, `.toml`
 
 **Tags:** yaml, data-processing, cli

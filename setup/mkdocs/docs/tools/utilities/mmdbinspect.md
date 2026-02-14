@@ -2,6 +2,8 @@
 
 **Category:** Utilities
 
+**Source:** GitHub Release
+
 **File Extensions:** `.mmdb`
 
 **Tags:** geolocation, maxmind

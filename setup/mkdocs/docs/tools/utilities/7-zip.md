@@ -8,6 +8,8 @@
 
 **License:** [GNU LGPL](https://www.7-zip.org/license.txt)
 
+**Source:** Installer
+
 7-Zip is a file archive tool.
 
 ## Notes

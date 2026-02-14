@@ -8,6 +8,8 @@
 
 **License:** [Creative Commons Attribution-ShareAlike 4.0](https://ipinfo.io/terms-of-service)
 
+**Source:** Enrichment
+
 **File Extensions:** `.mmdb`
 
 **Tags:** geolocation, ip-address, asn

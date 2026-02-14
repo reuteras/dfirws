@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Log
 
+**Source:** GitHub Release
+
 **File Extensions:** `.evtx`
 
 **Tags:** log-analysis, event-log, sigma, detection, timeline, incident-response

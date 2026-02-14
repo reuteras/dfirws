@@ -8,6 +8,8 @@
 
 **License:** Proprietary
 
+**Source:** HTTP
+
 **File Extensions:** `.dmp`
 
 **Tags:** debugging, windbg, dotnet

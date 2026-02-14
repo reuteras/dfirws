@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\RDP
 
+**Source:** GitHub Release
+
 **File Extensions:** `.bmc`, `.bin`
 
 **Tags:** rdp, forensics, windows

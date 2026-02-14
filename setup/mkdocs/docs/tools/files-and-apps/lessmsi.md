@@ -2,6 +2,8 @@
 
 **Category:** Files and apps
 
+**Source:** GitHub Release
+
 **File Extensions:** `.msi`
 
 **Tags:** windows, installer

@@ -8,6 +8,8 @@
 
 **License:** Freeware
 
+**Source:** HTTP
+
 **File Extensions:** `.csv`, `.log`
 
 **Tags:** malware-analysis, visualization, dynamic-analysis

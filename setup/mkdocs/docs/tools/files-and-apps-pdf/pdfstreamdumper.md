@@ -8,6 +8,8 @@
 
 **License:** Proprietary
 
+**Source:** HTTP
+
 **File Extensions:** `.pdf`
 
 **Tags:** pdf, malware-analysis, javascript

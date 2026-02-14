@@ -8,6 +8,8 @@
 
 **License:** Freeware
 
+**Source:** HTTP
+
 **File Extensions:** `.eml`, `.msg`
 
 **Tags:** email, forensics

@@ -8,6 +8,8 @@
 
 **License:** Apache License 2.0
 
+**Source:** HTTP
+
 **File Extensions:** `.exe`, `.dll`
 
 **Tags:** malware-analysis, capability-analysis, visualization

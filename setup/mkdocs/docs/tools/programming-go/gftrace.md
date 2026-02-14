@@ -2,6 +2,8 @@
 
 **Category:** Programming\Go
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`
 
 **Tags:** reverse-engineering, api-tracing, golang

@@ -8,6 +8,8 @@
 
 **License:** [MIT License](https://github.com/Seabreg/Regshot/blob/master/LICENSE)
 
+**Source:** Git
+
 RegShot is a small, free and open-source registry compare utility.
 
 ## Notes

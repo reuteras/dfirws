@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/securityscorecard/SSC-Threat-Intel-IoCs)
 
+**Source:** Enrichment
+
 **Tags:** threat-intel, ioc
 
 SecurityScorecard threat intelligence indicators of compromise.

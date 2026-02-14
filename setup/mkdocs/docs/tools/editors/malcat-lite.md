@@ -8,6 +8,8 @@
 
 **License:** Proprietary
 
+**Source:** HTTP
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.sys`
 
 **Tags:** pe-analysis, malware-analysis, hex-editor, disassembler

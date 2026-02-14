@@ -2,6 +2,8 @@
 
 **Category:** Network
 
+**Source:** GitHub Release
+
 **File Extensions:** `.pcap`
 
 **Tags:** malware-analysis, network-simulation, dynamic-analysis

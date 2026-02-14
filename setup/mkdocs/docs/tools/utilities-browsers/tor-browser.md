@@ -8,6 +8,8 @@
 
 **License:** Open source
 
+**Source:** HTTP
+
 **File Extensions:** `.html`, `.htm`
 
 **Tags:** browser, privacy, network

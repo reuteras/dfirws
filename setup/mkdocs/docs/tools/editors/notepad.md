@@ -2,6 +2,8 @@
 
 **Category:** Editors
 
+**Source:** GitHub Release
+
 **File Extensions:** `.txt`, `.log`, `.xml`, `.json`, `.csv`, `.ps1`, `.py`, `.js`
 
 **Tags:** text-editor, syntax-highlighting

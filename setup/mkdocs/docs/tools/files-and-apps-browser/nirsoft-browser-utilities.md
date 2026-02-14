@@ -8,6 +8,8 @@
 
 **License:** Freeware
 
+**Source:** HTTP
+
 **File Extensions:** `.db`, `.sqlite`
 
 **Tags:** browser-forensics, artifact-extraction

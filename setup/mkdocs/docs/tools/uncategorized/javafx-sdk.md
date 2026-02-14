@@ -8,6 +8,8 @@
 
 **License:** GPL + Classpath Exception
 
+**Source:** HTTP
+
 **File Extensions:** `.jar`
 
 **Tags:** java, gui, runtime

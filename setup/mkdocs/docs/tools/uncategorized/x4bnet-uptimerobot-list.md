@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/X4BNet/lists_uptimerobot)
 
+**Source:** Enrichment
+
 **Tags:** monitoring, network, blocklist
 
 X4BNet list of known UptimeRobot monitoring IP addresses.

@@ -2,6 +2,8 @@
 
 **Category:** Uncategorized
 
+**Source:** GitHub Release
+
 **File Extensions:** `.png`, `.svg`
 
 **Tags:** qr-code, encoding, decoding

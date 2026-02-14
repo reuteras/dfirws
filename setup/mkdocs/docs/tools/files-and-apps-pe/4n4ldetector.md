@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\PE
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`
 
 **Tags:** malware-analysis, pe-analysis, detection

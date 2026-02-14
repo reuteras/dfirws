@@ -8,6 +8,8 @@
 
 **License:** Proprietary
 
+**Source:** HTTP
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib`
 
 **Tags:** reverse-engineering, disassembler, decompiler

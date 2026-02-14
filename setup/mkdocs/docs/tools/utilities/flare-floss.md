@@ -2,6 +2,8 @@
 
 **Category:** Utilities
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.bin`
 
 **Tags:** malware-analysis, string-extraction, deobfuscation

@@ -2,6 +2,8 @@
 
 **Category:** Uncategorized
 
+**Source:** GitHub Release
+
 **File Extensions:** `.ps1`, `.psm1`, `.psd1`
 
 **Tags:** scripting, shell, automation

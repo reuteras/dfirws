@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/X4BNet/lists_stopforumspam)
 
+**Source:** Enrichment
+
 **Tags:** spam, network, blocklist
 
 X4BNet list of known spam IP addresses from StopForumSpam.

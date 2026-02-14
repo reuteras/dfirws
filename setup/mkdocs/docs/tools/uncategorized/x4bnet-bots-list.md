@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/X4BNet/lists_bots)
 
+**Source:** Enrichment
+
 **Tags:** bots, network, blocklist
 
 X4BNet list of known bot IP addresses.

@@ -8,6 +8,8 @@
 
 **License:** [Proprietary](https://www.pstwalker.com/licensing-policy.html)
 
+**Source:** HTTP
+
 **File Extensions:** `.pst`
 
 **Tags:** email, forensics, outlook

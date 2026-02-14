@@ -277,6 +277,7 @@ nav:
     - cutter-jupyter: tools/uncategorized/cutter-jupyter.md
     - cutterref: tools/uncategorized/cutterref.md
     - CVE Data: tools/uncategorized/cve-data.md
+    - decai: tools/uncategorized/decai.md
     - deep_translator: tools/uncategorized/deep-translator.md
     - defender-detectionhistory-parser: tools/uncategorized/defender-detectionhistory-parser.md
     - deobshell: tools/uncategorized/deobshell.md
@@ -311,6 +312,7 @@ nav:
     - Geolocus: tools/uncategorized/geolocus.md
     - Ghidra BTIGhidra: tools/uncategorized/ghidra-btighidra.md
     - Ghidra Cartographer: tools/uncategorized/ghidra-cartographer.md
+    - Ghidra GhidrAssistMCP: tools/uncategorized/ghidra-ghidrassistmcp.md
     - Ghidra GolangAnalyzerExtension: tools/uncategorized/ghidra-golanganalyzerextension.md
     - Ghidra: tools/uncategorized/ghidra.md
     - ghidrecomp: tools/uncategorized/ghidrecomp.md
@@ -422,9 +424,12 @@ nav:
     - QEMU: tools/uncategorized/qemu.md
     - qrtool: tools/uncategorized/qrtool.md
     - quickadd: tools/uncategorized/quickadd.md
+    - r2ai: tools/uncategorized/r2ai.md
     - radare2-deep-graph: tools/uncategorized/radare2-deep-graph.md
+    - radare2-mcp: tools/uncategorized/radare2-mcp.md
     - RdpCacheStitcher: tools/uncategorized/rdpcachestitcher.md
     - readpe: tools/uncategorized/readpe.md
+    - regipy: tools/uncategorized/regipy.md
     - RegRipper4.0: tools/uncategorized/regripper4-0.md
     - requests: tools/uncategorized/requests.md
     - Ruby: tools/uncategorized/ruby.md

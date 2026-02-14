@@ -8,6 +8,8 @@
 
 **License:** Proprietary
 
+**Source:** HTTP
+
 **File Extensions:** `.doc`, `.xls`, `.ppt`, `.msg`
 
 **Tags:** office, ole, data-extraction

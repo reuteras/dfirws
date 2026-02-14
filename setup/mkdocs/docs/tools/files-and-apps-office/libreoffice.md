@@ -8,6 +8,8 @@
 
 **License:** Mozilla Public License 2.0
 
+**Source:** HTTP
+
 **File Extensions:** `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.ods`, `.odp`
 
 **Tags:** office, document-viewer

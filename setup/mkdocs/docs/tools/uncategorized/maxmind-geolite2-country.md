@@ -8,6 +8,8 @@
 
 **License:** [GeoLite2 End User License Agreement](https://www.maxmind.com/en/geolite2/eula)
 
+**Source:** Enrichment
+
 **File Extensions:** `.mmdb`, `.tar.gz`
 
 **Tags:** geolocation, country, maxmind

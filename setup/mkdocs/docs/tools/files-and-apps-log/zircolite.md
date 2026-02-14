@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Log
 
+**Source:** GitHub Release
+
 **File Extensions:** `.evtx`, `.json`
 
 **Tags:** log-analysis, sigma, detection, incident-response

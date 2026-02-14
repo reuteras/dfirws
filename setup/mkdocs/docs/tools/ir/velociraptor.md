@@ -2,6 +2,8 @@
 
 **Category:** IR
 
+**Source:** GitHub Release
+
 **File Extensions:** `.json`, `.csv`
 
 **Tags:** incident-response, forensics, endpoint-detection

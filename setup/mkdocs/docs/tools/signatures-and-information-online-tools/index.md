@@ -1,7 +1,7 @@
 # Signatures and information / Online tools
 
-| Tool | Description | Tags | File Extensions |
-| --- | --- | --- | --- |
-| [VirusTotal CLI](virustotal-cli.md) |  |  |  |
-| [malwarebazaar](malwarebazaar.md) |  | malware-analysis, threat-intelligence, ioc-scanner |  |
-| [shodan](shodan.md) |  | osint, network, reconnaissance |  |
+| Tool | Source | Description | Tags | File Extensions |
+| --- | --- | --- | --- | --- |
+| [VirusTotal CLI](virustotal-cli.md) | Winget | VirusTotal CLI is a command-line tool for interacting with VirusTotal, allowing you to analyze files and URLs for malware and other threats. | malware-analysis, threat-intelligence, ioc-scanner |  |
+| [malwarebazaar](malwarebazaar.md) | Python |  | malware-analysis, threat-intelligence, ioc-scanner |  |
+| [shodan](shodan.md) | Python |  | osint, network, reconnaissance |  |

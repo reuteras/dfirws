@@ -8,6 +8,8 @@
 
 **License:** Proprietary
 
+**Source:** HTTP
+
 **File Extensions:** `.exe`, `.dll`
 
 **Tags:** reverse-engineering, api-tracing, dynamic-analysis

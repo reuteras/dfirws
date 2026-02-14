@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Log
 
+**Source:** GitHub Release
+
 **File Extensions:** `.yar`, `.yara`
 
 **Tags:** yara, rule-generation

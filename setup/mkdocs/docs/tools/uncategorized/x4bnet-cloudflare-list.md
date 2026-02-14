@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/X4BNet/lists_cloudflare)
 
+**Source:** Enrichment
+
 **Tags:** cloudflare, network, blocklist
 
 X4BNet list of known Cloudflare IP addresses.

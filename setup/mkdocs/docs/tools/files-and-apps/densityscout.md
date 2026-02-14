@@ -8,6 +8,8 @@
 
 **License:** Freeware
 
+**Source:** HTTP
+
 **File Extensions:** `.exe`, `.dll`, `.bin`
 
 **Tags:** malware-analysis, entropy-analysis

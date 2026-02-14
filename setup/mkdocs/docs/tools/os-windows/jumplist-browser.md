@@ -2,6 +2,8 @@
 
 **Category:** OS\Windows
 
+**Source:** GitHub Release
+
 **File Extensions:** `.automaticDestinations-ms`, `.customDestinations-ms`, `.lnk`
 
 **Tags:** windows, forensics, artifact-extraction

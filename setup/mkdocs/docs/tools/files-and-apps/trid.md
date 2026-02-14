@@ -8,6 +8,8 @@
 
 **License:** TrID is free for personal / non commercial use.
 
+**Source:** HTTP
+
 **Tags:** file-identification
 
 TrID is a file identifier utility.

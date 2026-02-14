@@ -8,6 +8,8 @@
 
 **License:** Public Domain
 
+**Source:** HTTP
+
 **File Extensions:** `.db`, `.sqlite`, `.sqlite3`
 
 **Tags:** database, sqlite, cli

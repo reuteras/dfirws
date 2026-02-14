@@ -2,6 +2,8 @@
 
 **Category:** OS\Windows\Active Directory (AD)
 
+**Source:** GitHub Release
+
 **File Extensions:** `.dit`
 
 **Tags:** active-directory, forensics

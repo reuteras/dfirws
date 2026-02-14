@@ -2,6 +2,8 @@
 
 **Category:** Forensics
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.evtx`, `.reg`
 
 **Tags:** forensics, artifact-extraction, triage

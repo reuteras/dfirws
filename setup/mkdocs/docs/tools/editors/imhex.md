@@ -2,6 +2,8 @@
 
 **Category:** Editors
 
+**Source:** GitHub Release
+
 **File Extensions:** `.exe`, `.dll`, `.bin`, `.hex`, `.elf`
 
 **Tags:** hex-editor, binary-analysis, pattern-language

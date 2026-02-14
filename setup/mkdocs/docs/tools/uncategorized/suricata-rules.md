@@ -8,6 +8,8 @@
 
 **License:** [BSD License](https://rules.emergingthreats.net/OPEN_download_instructions.html)
 
+**Source:** Enrichment
+
 **File Extensions:** `.rules`, `.zip`
 
 **Tags:** suricata, ids, detection-rules, network

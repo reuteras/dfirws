@@ -2,6 +2,8 @@
 
 **Category:** Signatures and information
 
+**Source:** GitHub Release
+
 **File Extensions:** `.yar`, `.yara`, `.exe`, `.dll`, `.bin`
 
 **Tags:** yara, malware-analysis, detection, signatures

@@ -8,6 +8,8 @@
 
 **License:** Proprietary
 
+**Source:** HTTP
+
 **File Extensions:** `.exe`, `.dll`, `.sys`
 
 **Tags:** pe-analysis, malware-analysis, static-analysis

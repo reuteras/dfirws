@@ -8,6 +8,8 @@
 
 **License:** Elastic License
 
+**Source:** HTTP
+
 **File Extensions:** `.json`, `.log`
 
 **Tags:** siem, log-analysis, elasticsearch, visualization

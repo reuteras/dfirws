@@ -8,6 +8,8 @@
 
 **License:** [See repository](https://github.com/X4BNet/lists_vpn)
 
+**Source:** Enrichment
+
 **Tags:** vpn, network, blocklist
 
 X4BNet list of known VPN IP addresses.

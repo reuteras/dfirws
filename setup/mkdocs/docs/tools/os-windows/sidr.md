@@ -2,6 +2,8 @@
 
 **Category:** OS\Windows
 
+**Source:** GitHub Release
+
 **File Extensions:** `.db`, `.sqlite`
 
 **Tags:** browser-forensics, forensics

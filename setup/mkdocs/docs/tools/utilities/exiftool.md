@@ -8,6 +8,8 @@
 
 **License:** [GNU General Public License](https://exiftool.org/#license)
 
+**Source:** HTTP
+
 **File Extensions:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.pdf`, `.doc`, `.docx`, `.mp4`
 
 **Tags:** metadata, file-analysis, image

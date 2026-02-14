@@ -2,6 +2,8 @@
 
 **Category:** Files and apps\Database
 
+**Source:** GitHub Release
+
 **File Extensions:** `.db`, `.sqlite`, `.sqlite3`
 
 **Tags:** database, sqlite, gui

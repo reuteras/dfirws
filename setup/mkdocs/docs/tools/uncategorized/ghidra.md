@@ -8,6 +8,8 @@
 
 **License:** [Apache-2.0](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)
 
+**Source:** Installer
+
 Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate.
 
 ## Notes
