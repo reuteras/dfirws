@@ -69,7 +69,7 @@ Categories generated from dfirws shortcuts.
 | [Audacity](./utilities-media/audacity.md) | Audacity is a free and open-source audio editing software. | audio, multimedia, steganography | `.wav`, `.mp3`, `.flac`, `.ogg`, `.aiff` |
 | [AuthLogParser](./uncategorized/authlogparser.md) |  | log-analysis, linux, authentication |  |
 | [autoit-ripper](./files-and-apps/autoit-ripper.md) |  | malware-analysis, autoit, deobfuscation | `.exe` |
-| [Autopsy](./forensics/autopsy.md) |  |  |  |
+| [Autopsy](./forensics/autopsy.md) | Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic. | disk-forensics, forensics, gui, artifact-extraction | `.dd`, `.raw`, `.E01`, `.img`, `.vmdk` |
 | [BeaconHunter](./malware-tools-cobalt-strike/beaconhunter.md) | Detect and respond to Cobalt Strike beacons using ETW. | malware-analysis, cobalt-strike, memory-forensics | `.dmp`, `.exe`, `.dll` |
 | [BeautifulSoup4](./uncategorized/beautifulsoup4.md) |  | web, html-parsing, scraping | `.html`, `.htm`, `.xml` |
 | [Binary Ninja](./reverse-engineering/binary-ninja.md) | Binary Ninja is a reverse engineering platform. | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib` |
