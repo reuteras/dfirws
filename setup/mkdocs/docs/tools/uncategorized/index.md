@@ -24,7 +24,6 @@
 | [EmailAnalyzer](emailanalyzer.md) | Git |  | email, forensics, phishing |  |
 | [Events-Ripper](events-ripper.md) | Git |  | event-log, forensics, windows |  |
 | [Geolocus](geolocus.md) | Enrichment | Geolocus MMDB geolocation database. | geolocation, mmdb | `.mmdb` |
-| [Ghidra](ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  |
 | [Ghidra BTIGhidra](ghidra-btighidra.md) | GitHub Release | Binary Type Inference Ghidra Plugin | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
 | [Ghidra Cartographer](ghidra-cartographer.md) | GitHub Release | Code Coverage Exploration Plugin for Ghidra. | reverse-engineering, disassembler, visualization | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
 | [Ghidra GhidrAssistMCP](ghidra-ghidrassistmcp.md) | GitHub Release | Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default. | reverse-engineering, mcp, ai, ghidra | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
