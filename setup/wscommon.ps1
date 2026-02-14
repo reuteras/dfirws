@@ -733,13 +733,26 @@ function Install-Obsidian {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-obsidian.txt")) {
         Write-Output "Installing Obsidian"
         Start-Process -Wait "${SETUP_PATH}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        # Obsidian uses a Squirrel/Electron installer that spawns a child process
+        # (Update.exe) to perform the actual installation. Start-Process -Wait only
+        # waits for the parent process, so the desktop shortcut may not exist yet.
+        $retries = 0
+        while (!(Test-Path "${HOME}\Desktop\Obsidian.lnk") -and $retries -lt 30) {
+            Start-Sleep -Seconds 2
+            $retries++
+        }
         if (Test-Path "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-install -Obsidian).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-install -Obsidian).lnk" -Force
         }
         if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Editors\Obsidian (runs dfirws-install -Obsidian).lnk") {
             Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Editors\Obsidian (runs dfirws-install -Obsidian).lnk" -Force
         }
-        Copy-Item "${HOME}\Desktop\Obsidian.lnk" "${HOME}\Desktop\dfirws\Editors\Obsidian.lnk" -Force
+        if (Test-Path "${HOME}\Desktop\Obsidian.lnk") {
+            Copy-Item "${HOME}\Desktop\Obsidian.lnk" "${HOME}\Desktop\dfirws\Editors\Obsidian.lnk" -Force
+        } else {
+            Write-Warning "Obsidian.lnk not found on Desktop after installation. Creating shortcut manually."
+            Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Obsidian.lnk" -DestinationPath "${HOME}\AppData\Local\Programs\Obsidian\Obsidian.exe" -WorkingDirectory "${HOME}\Desktop"
+        }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-obsidian.txt" | Out-Null
     } else {
         Write-Output "Obsidian is already installed"
