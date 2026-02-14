@@ -79,6 +79,7 @@ nav:
     - Overview: tools/files-and-apps-disk/index.md
     - dfir_ntfs: tools/files-and-apps-disk/dfir-ntfs.md
     - INDXRipper: tools/files-and-apps-disk/indxripper.md
+    - mft2bodyfile: tools/files-and-apps-disk/mft2bodyfile.md
     - MFTBrowser: tools/files-and-apps-disk/mftbrowser.md
     - OSFMount: tools/files-and-apps-disk/osfmount.md
     - Sleuthkit: tools/files-and-apps-disk/sleuthkit.md
@@ -91,15 +92,20 @@ nav:
     - PST Walker: tools/files-and-apps-email/pst-walker.md
   - Files And Apps Javascript:
     - Overview: tools/files-and-apps-javascript/index.md
+    - box-js: tools/files-and-apps-javascript/box-js.md
+    - deobfuscator: tools/files-and-apps-javascript/deobfuscator.md
     - jsbeautifier: tools/files-and-apps-javascript/jsbeautifier.md
+    - jsdom: tools/files-and-apps-javascript/jsdom.md
   - Files And Apps Log:
     - Overview: tools/files-and-apps-log/index.md
     - chainsaw: tools/files-and-apps-log/chainsaw.md
+    - dfir-toolkit: tools/files-and-apps-log/dfir-toolkit.md
     - evtx_dump: tools/files-and-apps-log/evtx-dump.md
     - fx: tools/files-and-apps-log/fx.md
     - gron: tools/files-and-apps-log/gron.md
     - hayabusa: tools/files-and-apps-log/hayabusa.md
     - LogBoost: tools/files-and-apps-log/logboost.md
+    - LUMEN: tools/files-and-apps-log/lumen.md
     - takajo: tools/files-and-apps-log/takajo.md
     - toolong: tools/files-and-apps-log/toolong.md
     - YAMAGoya: tools/files-and-apps-log/yamagoya.md
@@ -148,6 +154,7 @@ nav:
     - dissect: tools/forensics/dissect.md
   - Ir:
     - Overview: tools/ir/index.md
+    - KAPE: tools/ir/kape.md
     - Velociraptor: tools/ir/velociraptor.md
   - Logs:
     - Overview: tools/logs/index.md
@@ -194,6 +201,7 @@ nav:
     - sidr: tools/os-windows/sidr.md
     - srum_dump: tools/os-windows/srum-dump.md
     - Thumbcacheviewer: tools/os-windows/thumbcacheviewer.md
+    - usnjrnl: tools/os-windows/usnjrnl.md
   - Os Windows Active Directory Ad:
     - Overview: tools/os-windows-active-directory-ad/index.md
     - adalanche: tools/os-windows-active-directory-ad/adalanche.md
@@ -243,58 +251,108 @@ nav:
   - Uncategorized:
     - Overview: tools/uncategorized/index.md
     - admonitions: tools/uncategorized/admonitions.md
+    - ai-fs-proxy: tools/uncategorized/ai-fs-proxy.md
     - aiodns: tools/uncategorized/aiodns.md
     - aiohttp: tools/uncategorized/aiohttp.md
     - API Monitor: tools/uncategorized/api-monitor.md
+    - APT-Hunter: tools/uncategorized/apt-hunter.md
+    - ASL: tools/uncategorized/asl.md
     - Aspose.Email-for-Python-via-Net: tools/uncategorized/aspose-email-for-python-via-net.md
+    - AuthLogParser: tools/uncategorized/authlogparser.md
     - BeautifulSoup4: tools/uncategorized/beautifulsoup4.md
     - bitstruct: tools/uncategorized/bitstruct.md
+    - BlueTuxedo: tools/uncategorized/bluetuxedo.md
+    - bmc-tools: tools/uncategorized/bmc-tools.md
     - cabarchive: tools/uncategorized/cabarchive.md
+    - capa-explorer: tools/uncategorized/capa-explorer.md
     - capa-rules: tools/uncategorized/capa-rules.md
+    - CapaExplorer: tools/uncategorized/capaexplorer.md
     - cart: tools/uncategorized/cart.md
+    - chainsaw-rules: tools/uncategorized/chainsaw-rules.md
+    - CimSweep: tools/uncategorized/cimsweep.md
     - cmder: tools/uncategorized/cmder.md
     - ComparePlus: tools/uncategorized/compareplus.md
     - compressed_rtf: tools/uncategorized/compressed-rtf.md
+    - CuTE-tui: tools/uncategorized/cute-tui.md
+    - cutter-jupyter: tools/uncategorized/cutter-jupyter.md
+    - cutterref: tools/uncategorized/cutterref.md
+    - CVE Data: tools/uncategorized/cve-data.md
     - deep_translator: tools/uncategorized/deep-translator.md
+    - defender-detectionhistory-parser: tools/uncategorized/defender-detectionhistory-parser.md
+    - deobshell: tools/uncategorized/deobshell.md
+    - DFIRArtifactMuseum: tools/uncategorized/dfirartifactmuseum.md
+    - dfirws-sample-files: tools/uncategorized/dfirws-sample-files.md
+    - dictionaries: tools/uncategorized/dictionaries.md
     - dll_to_exe: tools/uncategorized/dll-to-exe.md
     - dnslib: tools/uncategorized/dnslib.md
+    - docsify-cli: tools/uncategorized/docsify-cli.md
     - docx2txt: tools/uncategorized/docx2txt.md
     - DotNet 6 Desktop Runtime: tools/uncategorized/dotnet-6-desktop-runtime.md
     - DotNet 8 Desktop Runtime: tools/uncategorized/dotnet-8-desktop-runtime.md
+    - dotnetfile: tools/uncategorized/dotnetfile-2.md
     - dotnetfile: tools/uncategorized/dotnetfile.md
     - dpkt: tools/uncategorized/dpkt.md
     - DSpellCheck: tools/uncategorized/dspellcheck.md
     - edit: tools/uncategorized/edit.md
     - Elastic Stack (ELK + Beats): tools/uncategorized/elastic-stack-elk-beats.md
     - elasticsearch: tools/uncategorized/elasticsearch.md
+    - EmailAnalyzer: tools/uncategorized/emailanalyzer.md
+    - ese-analyst: tools/uncategorized/ese-analyst.md
+    - Events-Ripper: tools/uncategorized/events-ripper.md
+    - EVTX-ATTACK-SAMPLES: tools/uncategorized/evtx-attack-samples.md
     - evtx: tools/uncategorized/evtx.md
+    - fibratus: tools/uncategorized/fibratus.md
+    - flare-floss: tools/uncategorized/flare-floss.md
     - flatten_json: tools/uncategorized/flatten-json.md
     - flow.record: tools/uncategorized/flow-record.md
     - forensic-timeliner: tools/uncategorized/forensic-timeliner.md
     - frida-tools: tools/uncategorized/frida-tools.md
     - geoip2: tools/uncategorized/geoip2.md
+    - Geolocus: tools/uncategorized/geolocus.md
     - Ghidra BTIGhidra: tools/uncategorized/ghidra-btighidra.md
     - Ghidra Cartographer: tools/uncategorized/ghidra-cartographer.md
     - Ghidra GolangAnalyzerExtension: tools/uncategorized/ghidra-golanganalyzerextension.md
     - Ghidra: tools/uncategorized/ghidra.md
     - ghidrecomp: tools/uncategorized/ghidrecomp.md
     - ghidriff: tools/uncategorized/ghidriff.md
+    - god-mode-rules: tools/uncategorized/god-mode-rules.md
+    - gootloader: tools/uncategorized/gootloader.md
+    - GoReSym: tools/uncategorized/goresym.md
+    - gostringungarbler: tools/uncategorized/gostringungarbler.md
     - graphviz: tools/uncategorized/graphviz.md
     - grip: tools/uncategorized/grip.md
+    - gti-dev-kit: tools/uncategorized/gti-dev-kit.md
+    - hayabusa-rules: tools/uncategorized/hayabusa-rules.md
     - hexdump: tools/uncategorized/hexdump.md
+    - HiddenWave: tools/uncategorized/hiddenwave.md
+    - IDR: tools/uncategorized/idr.md
+    - Incident-Response-Powershell: tools/uncategorized/incident-response-powershell.md
+    - IPinfo Country ASN: tools/uncategorized/ipinfo-country-asn.md
     - IrfanView: tools/uncategorized/irfanview.md
+    - iShutdown: tools/uncategorized/ishutdown.md
     - JavaFX SDK: tools/uncategorized/javafx-sdk.md
     - javaobj-py3: tools/uncategorized/javaobj-py3.md
+    - jupyter-collection: tools/uncategorized/jupyter-collection.md
     - jupyterlab: tools/uncategorized/jupyterlab.md
     - jwt-cli: tools/uncategorized/jwt-cli.md
     - keystone-engine: tools/uncategorized/keystone-engine.md
+    - LeechCore.wiki: tools/uncategorized/leechcore-wiki.md
+    - legacy-sigmatools: tools/uncategorized/legacy-sigmatools.md
     - lief: tools/uncategorized/lief.md
     - LnkParse3: tools/uncategorized/lnkparse3.md
     - maclookup: tools/uncategorized/maclookup.md
+    - malware-bazaar-advanced-search: tools/uncategorized/malware-bazaar-advanced-search.md
+    - @marp-team/marp-cli: tools/uncategorized/marp-team-marp-cli.md
     - matplotlib: tools/uncategorized/matplotlib.md
+    - MaxMind GeoLite2 ASN: tools/uncategorized/maxmind-geolite2-asn.md
+    - MaxMind GeoLite2 City: tools/uncategorized/maxmind-geolite2-city.md
+    - MaxMind GeoLite2 Country: tools/uncategorized/maxmind-geolite2-country.md
+    - MemProcFS.wiki: tools/uncategorized/memprocfs-wiki.md
     - MEX: tools/uncategorized/mex.md
+    - Microsoft OpenJDK 11: tools/uncategorized/microsoft-openjdk-11.md
     - minidump: tools/uncategorized/minidump.md
     - mkdocs: tools/uncategorized/mkdocs.md
+    - MSRC: tools/uncategorized/msrc.md
     - msticpy: tools/uncategorized/msticpy.md
     - mwcp: tools/uncategorized/mwcp.md
     - neo4j: tools/uncategorized/neo4j.md
@@ -313,22 +371,30 @@ nav:
     - obsidian-tasks: tools/uncategorized/obsidian-tasks.md
     - obsidian-timeline: tools/uncategorized/obsidian-timeline.md
     - olefile: tools/uncategorized/olefile.md
+    - one-extract: tools/uncategorized/one-extract.md
+    - opencode-ai: tools/uncategorized/opencode-ai.md
     - openpyxl: tools/uncategorized/openpyxl.md
     - OpenVPN Connect: tools/uncategorized/openvpn-connect.md
     - OpenVPN: tools/uncategorized/openvpn.md
     - orjson: tools/uncategorized/orjson.md
     - paramiko: tools/uncategorized/paramiko.md
+    - PatchaPalooza: tools/uncategorized/patchapalooza.md
     - pathlab: tools/uncategorized/pathlab.md
     - pdfalyzer: tools/uncategorized/pdfalyzer.md
     - PE-utils: tools/uncategorized/pe-utils.md
     - pefile: tools/uncategorized/pefile.md
+    - PersistenceSniper.wiki: tools/uncategorized/persistencesniper-wiki.md
+    - PersistenceSniper: tools/uncategorized/persistencesniper.md
     - peutils: tools/uncategorized/peutils.md
     - pfp: tools/uncategorized/pfp.md
+    - PowerDecode: tools/uncategorized/powerdecode.md
     - PowerShell 7: tools/uncategorized/powershell-7.md
     - PowerShell: tools/uncategorized/powershell.md
+    - PowerSponse: tools/uncategorized/powersponse.md
     - ppdeep: tools/uncategorized/ppdeep.md
     - prettytable: tools/uncategorized/prettytable.md
     - protodeep: tools/uncategorized/protodeep.md
+    - psexposed: tools/uncategorized/psexposed.md
     - ptpython: tools/uncategorized/ptpython.md
     - pyasn1: tools/uncategorized/pyasn1.md
     - pycares: tools/uncategorized/pycares.md
@@ -348,6 +414,7 @@ nav:
     - PySocks: tools/uncategorized/pysocks.md
     - python-docx: tools/uncategorized/python-docx.md
     - python-dotenv: tools/uncategorized/python-dotenv.md
+    - Python-dsstore: tools/uncategorized/python-dsstore.md
     - python-magic: tools/uncategorized/python-magic.md
     - python-registry: tools/uncategorized/python-registry.md
     - pyvis: tools/uncategorized/pyvis.md
@@ -355,38 +422,70 @@ nav:
     - QEMU: tools/uncategorized/qemu.md
     - qrtool: tools/uncategorized/qrtool.md
     - quickadd: tools/uncategorized/quickadd.md
+    - radare2-deep-graph: tools/uncategorized/radare2-deep-graph.md
+    - RdpCacheStitcher: tools/uncategorized/rdpcachestitcher.md
     - readpe: tools/uncategorized/readpe.md
+    - RegRipper4.0: tools/uncategorized/regripper4-0.md
     - requests: tools/uncategorized/requests.md
     - Ruby: tools/uncategorized/ruby.md
     - rzpipe: tools/uncategorized/rzpipe.md
+    - scare: tools/uncategorized/scare.md
+    - Shadow-Pulse: tools/uncategorized/shadow-pulse.md
+    - sigma: tools/uncategorized/sigma.md
+    - signature-base: tools/uncategorized/signature-base.md
     - simplejson: tools/uncategorized/simplejson.md
+    - Snort Rules: tools/uncategorized/snort-rules.md
     - sqlit-tui: tools/uncategorized/sqlit-tui.md
     - SQLite Tools: tools/uncategorized/sqlite-tools.md
+    - SSC-Threat-Intel-IoCs: tools/uncategorized/ssc-threat-intel-iocs.md
+    - SSHniff: tools/uncategorized/sshniff.md
     - stego-lsb: tools/uncategorized/stego-lsb.md
     - Strawberry Perl: tools/uncategorized/strawberry-perl.md
+    - Suricata Rules: tools/uncategorized/suricata-rules.md
     - Tailscale: tools/uncategorized/tailscale.md
     - Templater: tools/uncategorized/templater.md
     - termcolor: tools/uncategorized/termcolor.md
     - textsearch: tools/uncategorized/textsearch.md
+    - threat-intel: tools/uncategorized/threat-intel.md
     - tomlkit: tools/uncategorized/tomlkit.md
+    - ToolAnalysisResultSheet: tools/uncategorized/toolanalysisresultsheet.md
+    - TOR Exit Nodes: tools/uncategorized/tor-exit-nodes.md
+    - TotalRecall: tools/uncategorized/totalrecall.md
+    - Trawler: tools/uncategorized/trawler.md
     - treelib: tools/uncategorized/treelib.md
     - unicorn: tools/uncategorized/unicorn.md
     - unpy2exe: tools/uncategorized/unpy2exe.md
     - uv: tools/uncategorized/uv.md
     - Velociraptor Artifact Exchange: tools/uncategorized/velociraptor-artifact-exchange.md
+    - Visual Studio Build Tools: tools/uncategorized/visual-studio-build-tools.md
     - vmss2core: tools/uncategorized/vmss2core.md
+    - Volexity Threat Intel: tools/uncategorized/volexity-threat-intel.md
     - VS Code PowerShell Extension: tools/uncategorized/vs-code-powershell-extension.md
     - VS Code Spell Checker: tools/uncategorized/vs-code-spell-checker.md
     - vscode-shellcheck: tools/uncategorized/vscode-shellcheck.md
+    - White-Phoenix: tools/uncategorized/white-phoenix.md
     - WinDbg: tools/uncategorized/windbg.md
     - Windows Terminal (Canary): tools/uncategorized/windows-terminal-canary.md
     - winpmem: tools/uncategorized/winpmem.md
     - WireGuard: tools/uncategorized/wireguard.md
+    - Wireshark Manuf: tools/uncategorized/wireshark-manuf.md
     - Witr: tools/uncategorized/witr.md
+    - X4BNet Bots List: tools/uncategorized/x4bnet-bots-list.md
+    - X4BNet Cloudflare List: tools/uncategorized/x4bnet-cloudflare-list.md
+    - X4BNet Route53 List: tools/uncategorized/x4bnet-route53-list.md
+    - X4BNet Search Engine List: tools/uncategorized/x4bnet-search-engine-list.md
+    - X4BNet StopForumSpam: tools/uncategorized/x4bnet-stopforumspam.md
+    - X4BNet TOR Exit List: tools/uncategorized/x4bnet-tor-exit-list.md
+    - X4BNet UptimeRobot List: tools/uncategorized/x4bnet-uptimerobot-list.md
+    - X4BNet VPN List: tools/uncategorized/x4bnet-vpn-list.md
     - xlrd: tools/uncategorized/xlrd.md
     - XlsxWriter: tools/uncategorized/xlsxwriter.md
     - xxhash: tools/uncategorized/xxhash.md
+    - YARA Forge Rules Core: tools/uncategorized/yara-forge-rules-core.md
+    - YARA Forge Rules Extended: tools/uncategorized/yara-forge-rules-extended.md
+    - YARA Forge Rules Full: tools/uncategorized/yara-forge-rules-full.md
     - yara-python: tools/uncategorized/yara-python.md
+    - Zircolite: tools/uncategorized/zircolite.md
   - Utilities:
     - Overview: tools/utilities/index.md
     - 7-Zip: tools/utilities/7-zip.md
