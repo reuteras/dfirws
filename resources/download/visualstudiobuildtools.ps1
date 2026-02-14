@@ -1,4 +1,4 @@
-Write-Output $PWD
+﻿Write-Output $PWD
 
 . ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
@@ -29,6 +29,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @()
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "visualstudiobuildtools"

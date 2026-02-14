@@ -1,4 +1,4 @@
-# Set default encoding to UTF8
+﻿# Set default encoding to UTF8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 . "C:\Users\WDAGUtilityAccount\Documents\tools\wscommon.ps1"
@@ -242,6 +242,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("msys2")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -271,6 +272,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("msys2")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -300,6 +302,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("msys2")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -321,6 +324,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("msys2")
 }
 
 $TOOL_DEFINITIONS += @{
@@ -342,6 +346,7 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
+    Dependencies = @("msys2")
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "rust"

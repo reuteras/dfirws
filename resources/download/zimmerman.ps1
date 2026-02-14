@@ -1,4 +1,4 @@
-. ".\resources\download\common.ps1"
+﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
 # Download and update Zimmerman tools.
@@ -297,6 +297,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @("dotnet6")
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "zimmerman"

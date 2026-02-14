@@ -1,4 +1,4 @@
-. ".\resources\download\common.ps1"
+﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
 New-Item -ItemType Directory -Force -Path "${TOOLS}\DidierStevens" | Out-Null
@@ -608,6 +608,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
+    Dependencies = @()
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "didier"

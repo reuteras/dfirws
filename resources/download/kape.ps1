@@ -1,4 +1,4 @@
-# Install and update kape if kape.zip is present
+﻿# Install and update kape if kape.zip is present
 
 . ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
@@ -63,6 +63,7 @@ $TOOL_DEFINITIONS += @{
         "kape --help"
     )
     SampleFiles = @()
+    Dependencies = @()
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "kape"

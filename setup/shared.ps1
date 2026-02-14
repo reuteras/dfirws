@@ -117,7 +117,9 @@ function New-CreateToolFiles {
             SampleCommands       = $tool.SampleCommands
             SampleFiles          = $tool.SampleFiles
             Tags                 = $tool.Tags
-            FileExtensions      = $tool.FileExtensions
+            FileExtensions       = $tool.FileExtensions
+            Dependencies         = $tool.Dependencies
+            PythonVersion        = $tool.PythonVersion
         }
     }
 
