@@ -1953,6 +1953,31 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @("Ghidra")
 }
 
+# GhidrAssistMCP - MCP server extension for Ghidra
+$status = Get-GitHubRelease -repo "jtang613/GhidrAssistMCP" -path "${SETUP_PATH}\GhidrAssistMCP.zip" -match "\.zip$" -check "Zip archive data"
+if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GhidrAssistMCP.zip")) {
+    Copy-Item "${SETUP_PATH}\GhidrAssistMCP.zip" "${TOOLS}\ghidra_extensions\GhidrAssistMCP.zip"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Ghidra GhidrAssistMCP"
+    Homepage = "https://github.com/jtang613/GhidrAssistMCP"
+    Vendor = "jtang613"
+    License = "MIT License"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "mcp", "ai", "ghidra")
+    Notes = "Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default."
+    Tips = "Start the MCP server from Window > GhidrAssistMCP in Ghidra. Connect opencode-ai or other MCP clients to http://localhost:8080/sse."
+    Usage = "Install extension in Ghidra, enable plugin, start MCP server, then connect AI tools."
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @("Ghidra")
+}
+
 # Flare-Floss
 $status = Get-GitHubRelease -repo "mandiant/flare-floss" -path "${SETUP_PATH}\floss.zip" -match "windows" -check "Zip archive data"
 if ($status) {
@@ -2740,6 +2765,31 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+}
+
+# radare2-mcp - MCP server for radare2
+$status = Get-GitHubRelease -repo "radareorg/radare2-mcp" -path "${SETUP_PATH}\r2mcp.zip" -match "w64" -check "Zip archive data"
+if ($status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\r2mcp.zip" -o"${TOOLS}\radare2\bin" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "radare2-mcp"
+    Homepage = "https://github.com/radareorg/radare2-mcp"
+    Vendor = "radareorg"
+    License = "MIT License"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "mcp", "ai", "radare2")
+    Notes = "MCP stdio server for radare2. Enables AI assistants to interact with radare2 for binary analysis. Known issue: Windows binary may crash with stack overflow (GitHub issue #24)."
+    Tips = "Configure in opencode.json with command: r2mcp. The server communicates via stdio."
+    Usage = "Used as a local MCP server with opencode-ai or other MCP clients."
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @("Radare2")
 }
 
 # Iaito by Radareorg

@@ -120,6 +120,7 @@ function New-CreateToolFiles {
             FileExtensions       = $tool.FileExtensions
             Dependencies         = $tool.Dependencies
             PythonVersion        = $tool.PythonVersion
+            SourceType           = $Source
         }
     }
 

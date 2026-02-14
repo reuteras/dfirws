@@ -55,6 +55,32 @@ def get_string_list(value) -> List[str]:
     return []
 
 
+SOURCE_TYPE_LABELS = {
+    "python": "Python",
+    "node": "npm",
+    "rust": "Cargo",
+    "go": "Go",
+    "http": "HTTP",
+    "release": "GitHub Release",
+    "git": "Git",
+    "enrichment": "Enrichment",
+    "kape": "Installer",
+    "visualstudiobuildtools": "Installer",
+    "basic": "Installer",
+    "didier": "HTTP",
+    "winget": "Winget",
+    "zimmerman": ".NET",
+    "msys2": "Installer",
+}
+
+
+def get_source_label(tool: dict) -> str:
+    source_type = tool.get("SourceType", "")
+    if source_type:
+        return SOURCE_TYPE_LABELS.get(source_type, source_type)
+    return ""
+
+
 def get_tool_summary(tool: dict) -> str:
     notes = tool.get("Notes")
     if isinstance(notes, list) and notes:
@@ -117,17 +143,22 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     if meta_added:
         lines.append("")
 
+    source_label = get_source_label(tool)
+    if source_label:
+        lines.append(f"**Source:** {source_label}")
+        lines.append("")
+
     # Show source info for auto-extracted metadata (skip version since we don't pin)
     source = tool.get("Source")
     if source == "github":
         repo = tool.get("SourceRepo", "")
         if repo:
-            lines.append(f"**Source:** [GitHub](<https://github.com/{repo}>)")
+            lines.append(f"**Repository:** [GitHub](<https://github.com/{repo}>)")
             lines.append("")
     elif source == "pypi":
         pypi_pkg = tool.get("PypiPackage", "")
         if pypi_pkg:
-            lines.append(f"**Source:** [PyPI](<https://pypi.org/project/{pypi_pkg}/>)")
+            lines.append(f"**PyPI:** [PyPI](<https://pypi.org/project/{pypi_pkg}/>)")
             lines.append("")
         source_url = tool.get("SourceUrl")
         if source_url:
@@ -387,7 +418,7 @@ def main() -> int:
         tools_index_lines.append(f"- [{display_name}](./{slug}/index.md)")
     tools_index_lines.append("")
 
-    tools_index_entries: List[tuple[str, str, str, str, str]] = []
+    tools_index_entries: List[tuple[str, str, str, str, str, str]] = []
     for category_path in ordered_categories:
         display_name = category_path.replace("\\", " / ")
         slug = get_slug(category_path)
@@ -398,8 +429,8 @@ def main() -> int:
         lines: List[str] = []
         lines.append(f"# {display_name}")
         lines.append("")
-        lines.append("| Tool | Description | Tags | File Extensions |")
-        lines.append("| --- | --- | --- | --- |")
+        lines.append("| Tool | Source | Description | Tags | File Extensions |")
+        lines.append("| --- | --- | --- | --- | --- |")
 
         tools_in_category = sorted(grouped[category_path], key=lambda t: t.get("Name", ""))
         used_slugs: Dict[str, int] = {}
@@ -408,21 +439,22 @@ def main() -> int:
             write_tool_page(docs_root, tool, category_path, tool_slug)
             tool_link = f"{tool_slug}.md"
             summary = get_tool_summary(tool).replace("|", "\\|")
+            source_label = get_source_label(tool)
             tags = ", ".join(get_string_list(tool.get("Tags")))
             file_exts = ", ".join(f"`{e}`" for e in get_string_list(tool.get("FileExtensions")))
-            lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {summary} | {tags} | {file_exts} |")
+            lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} |")
             tools_index_entries.append(
-                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md", summary, tags, file_exts)
+                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md", source_label, summary, tags, file_exts)
             )
 
         category_file.write_text("\n".join(lines), encoding="utf-8")
 
     tools_index_lines.append("## Tools Index")
     tools_index_lines.append("")
-    tools_index_lines.append("| Tool | Description | Tags | File Extensions |")
-    tools_index_lines.append("| --- | --- | --- | --- |")
-    for tool_name, tool_link, summary, tags, file_exts in sorted(tools_index_entries, key=lambda item: item[0].lower()):
-        tools_index_lines.append(f"| [{tool_name}]({tool_link}) | {summary} | {tags} | {file_exts} |")
+    tools_index_lines.append("| Tool | Source | Description | Tags | File Extensions |")
+    tools_index_lines.append("| --- | --- | --- | --- | --- |")
+    for tool_name, tool_link, source_label, summary, tags, file_exts in sorted(tools_index_entries, key=lambda item: item[0].lower()):
+        tools_index_lines.append(f"| [{tool_name}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} |")
 
     tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
 
