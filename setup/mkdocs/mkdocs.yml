@@ -344,7 +344,7 @@ nav:
     - LnkParse3: tools/uncategorized/lnkparse3.md
     - maclookup: tools/uncategorized/maclookup.md
     - malware-bazaar-advanced-search: tools/uncategorized/malware-bazaar-advanced-search.md
-    - "@marp-team/marp-cli": tools/uncategorized/marp-team-marp-cli.md
+    - @marp-team/marp-cli: tools/uncategorized/marp-team-marp-cli.md
     - matplotlib: tools/uncategorized/matplotlib.md
     - MaxMind GeoLite2 ASN: tools/uncategorized/maxmind-geolite2-asn.md
     - MaxMind GeoLite2 City: tools/uncategorized/maxmind-geolite2-city.md
