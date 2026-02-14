@@ -1,5 +1,4 @@
 . ".\resources\download\common.ps1"
-$TOOL_DEFINITIONS = @()
 
 ${ROOT_PATH} = "${PWD}"
 
@@ -37,22 +36,6 @@ if (! ${STATUS}) {
     Write-DateLog "GoLang tools done." >> "${ROOT_PATH}\log\golang.txt"
 } else {
     Write-DateLog "GoLang tools already installed and up to date." >> "${ROOT_PATH}\log\golang.txt"
-}
-
-# TODO: Move TOOL_DEFINITIONS to setup/install/install_golang_tools.ps1 and add more entries for other GoLang based tools
-$TOOL_DEFINITIONS += @{
-    Name = "protodump"
-    Category = "Utilities\Cryptography"
-    Shortcuts = @()
-    InstallVerifyCommand = "dfirws-install.ps1 -GoLang"
-    Verify = @()
-    FileExtensions = @(".exe", ".dll", ".elf", ".bin")
-    Tags = @("reverse-engineering", "protobuf", "binary-analysis", "data-extraction")
-    Notes = ""
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
 }
 
 if (Test-Path -Path "${ROOT_PATH}\log\dfirws" ) {

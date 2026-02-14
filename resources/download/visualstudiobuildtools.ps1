@@ -1,6 +1,7 @@
 Write-Output $PWD
 
 . ".\resources\download\common.ps1"
+$TOOL_DEFINITIONS = @()
 
 # Download Visual Studio Build Tools if not already present
 Write-SynchronizedLog "Download Visual Studio buildtools."
@@ -11,6 +12,25 @@ if (! (Test-Path "${TOOLS}\VSLayout\Layout.json")) {
     Start-Process -Wait "${SETUP_PATH}\vs_BuildTools.exe" -ArgumentList "--layout .\mount\Tools\VSLayout --passive"
 }
 
-# TODO: Add TOOL_DEFINITIONS entries for Visual Studio Build Tools
+$TOOL_DEFINITIONS += @{
+    Name = "Visual Studio Build Tools"
+    Homepage = "https://visualstudio.microsoft.com/visual-cpp-build-tools/"
+    Vendor = "Microsoft"
+    License = "Microsoft Software License Terms"
+    LicenseUrl = "https://visualstudio.microsoft.com/license-terms/"
+    Category = "Development"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("development", "compiler", "build-tools")
+    Notes = ""
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+}
+
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "visualstudiobuildtools"
 
 Write-SynchronizedLog "Visual Studio: Download complete."

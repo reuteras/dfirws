@@ -1810,11 +1810,14 @@ if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
     New-Item -Path "${TOOLS}\ghidra_extensions" -ItemType Directory | Out-Null
 }
 
-# Ghidra GolangAnalyzerExtension
-# TODO: Get latest version of GolangAnalyzerExtension
-$status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_12.0.zip" -match "12.0_" -check "Zip archive data"
-if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_12.0.zip")) {
-    Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_12.0.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_12.0.zip"
+# GolangAnalyzerExtension for latest installed Ghidra version
+$GHIDRA_DIR_NAME = (Get-ChildItem "${TOOLS}\ghidra\").Name | findstr.exe PUBLIC | Select-Object -Last 1
+if ($GHIDRA_DIR_NAME -match 'ghidra_(.+?)_PUBLIC') {
+    $GHIDRA_VERSION = $Matches[1]
+    $status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip" -match "${GHIDRA_VERSION}_" -check "Zip archive data"
+    if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip")) {
+        Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip"
+    }
 }
 
 $TOOL_DEFINITIONS += @{

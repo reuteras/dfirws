@@ -367,7 +367,7 @@ Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_
 Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
 
-# TODO: Handle these later
+# Excluded from PATH due to 2048 character limit. Accessible via desktop shortcuts.
 # "${env:ProgramFiles}\IDR\bin"
 # "${env:ProgramFiles}\jadx\bin"
 # "${GIT_PATH}\defender-detectionhistory-parser"
