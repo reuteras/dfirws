@@ -49,6 +49,9 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     $env:MSYSTEM = 'UCRT64'
     $env:PKG_CONFIG_PATH = "C:\Tools\radare2\lib\pkgconfig"
 
+    # Create r2 alias for radare2 (the Makefile expects 'r2' command in PATH)
+    Copy-Item "C:\Tools\radare2\bin\radare2.exe" "C:\Tools\radare2\bin\r2.exe" -Force
+
     # Copy source to writable location (git mount is read-only)
     New-Item -ItemType Directory -Force -Path "C:\tmp\r2ai_build" | Out-Null
     Copy-Item -Recurse "C:\git\r2ai\src\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
