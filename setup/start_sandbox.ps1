@@ -532,10 +532,13 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roa
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin" | Out-Null
 Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Install radare2 plugins via r2pm
-r2pm -Uci r2ai 2>&1 | Out-Null
-r2pm -Uci decai 2>&1 | Out-Null
-Write-DateLog "Installed r2ai and decai via r2pm." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+# Install decai plugin for radare2 (r2js, no compilation needed)
+if (Test-Path "${GIT_PATH}\r2ai\decai\decai.r2.js") {
+    $r2_plugins_dir = "${HOME}\.local\share\radare2\plugins"
+    New-Item -ItemType Directory -Force -Path "${r2_plugins_dir}" | Out-Null
+    Copy-Item "${GIT_PATH}\r2ai\decai\decai.r2.js" "${r2_plugins_dir}\decai.r2.js" -Force | Out-Null
+    Write-DateLog "Installed decai plugin for radare2." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 
 # BeaconHunter
 Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter" | Out-Null

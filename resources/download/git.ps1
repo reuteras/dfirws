@@ -49,6 +49,7 @@ $repourls = `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/rabbitstack/fibratus.git", `
+    "https://github.com/radareorg/r2ai.git", `
     "https://github.com/reuteras/ai-fs-proxy.git", `
     "https://github.com/reuteras/dfirws-sample-files.git", `
     "https://github.com/reuteras/MSRC.git", `
@@ -358,6 +359,46 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "r2ai"
+    Homepage = "https://github.com/radareorg/r2ai"
+    Vendor = "radareorg"
+    License = "MIT License"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "ai", "radare2")
+    Notes = "Native AI plugin for radare2. Requires compilation with gcc/pkg-config (build sandbox needed). Provides AI-assisted analysis using local and remote language models."
+    Tips = "Set API keys via environment variables (ANTHROPIC_API_KEY, OPENAI_API_KEY) or edit ~/.config/r2ai/apikeys.txt with r2ai -K."
+    Usage = "Use within radare2 shell. Currently requires a build sandbox with msys2 to compile the native plugin."
+    SampleCommands = @(
+        "r2pm -r r2ai"
+    )
+    SampleFiles = @()
+    Dependencies = @("Radare2", "msys2")
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "decai"
+    Homepage = "https://github.com/radareorg/r2ai"
+    Vendor = "radareorg"
+    License = "MIT License"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "ai", "decompilation", "radare2")
+    Notes = "r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed by copying decai.r2.js to the radare2 plugins directory."
+    Tips = "Use within radare2 to get AI-powered decompilation output. Requires an LLM API key configured."
+    Usage = "Use within radare2 shell for AI-assisted decompilation of binary code."
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @("Radare2")
 }
 
 $TOOL_DEFINITIONS += @{
