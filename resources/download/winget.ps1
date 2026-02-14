@@ -749,7 +749,7 @@ $TOOL_DEFINITIONS += @{
     Tips = ""
     Usage = ""
     SampleCommands = @(
-        "nvim notes.md",
+        "nvim notes.md"
     )
     SampleFiles = @()
     Dependencies = @()
