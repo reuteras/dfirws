@@ -28,6 +28,14 @@ def get_nav_label(value: str | None) -> str:
     return " ".join(words)
 
 
+def yaml_safe_label(label: str) -> str:
+    """Quote a YAML nav label if it contains characters that cannot start a YAML token."""
+    if re.search(r"[@`%]", label):
+        escaped = label.replace('"', '\\"')
+        return f'"{escaped}"'
+    return label
+
+
 def get_nav_label_from_file(path: Path) -> str:
     if not path.exists():
         return get_nav_label(path.stem)
@@ -248,12 +256,12 @@ def get_docs_nav_lines(root: Path, relative: Path = Path(""), indent: int = 2) -
     for file in files:
         label = get_nav_label_from_file(file)
         rel = str(relative / file.name).replace("\\", "/") if relative != Path("") else file.name
-        lines.append(f"{indent_text}- {label}: {rel}")
+        lines.append(f"{indent_text}- {yaml_safe_label(label)}: {rel}")
 
     for d in dirs:
         child_lines = get_docs_nav_lines(root, relative / d.name, indent + 2)
         if child_lines:
-            lines.append(f"{indent_text}- {get_nav_label(d.name)}:")
+            lines.append(f"{indent_text}- {yaml_safe_label(get_nav_label(d.name))}:")
             lines.extend(child_lines)
 
     return lines
@@ -299,13 +307,13 @@ def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
     top_files = sorted([p for p in docs_root.glob("*.md") if p.name != "index.md"], key=lambda p: p.name)
     for file in top_files:
         label = get_nav_label_from_file(file)
-        nav_lines.append(f"- {label}: {file.name}")
+        nav_lines.append(f"- {yaml_safe_label(label)}: {file.name}")
 
     top_dirs = sorted([p for p in docs_root.iterdir() if p.is_dir()], key=lambda p: p.name)
     for d in top_dirs:
         child_lines = get_docs_nav_lines(docs_root, Path(d.name), 2)
         if child_lines:
-            nav_lines.append(f"- {get_nav_label(d.name)}:")
+            nav_lines.append(f"- {yaml_safe_label(get_nav_label(d.name))}:")
             nav_lines.extend(child_lines)
 
     output: List[str] = []
