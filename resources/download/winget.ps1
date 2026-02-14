@@ -720,8 +720,8 @@ if ($status) {
     Copy-Item -Path ".\downloads\nvim.msi\Neovim*.msi" -Destination ".\downloads\neovim.msi" -Force
     Remove-Item -Path ".\downloads\nvim.msi" -Force -Recurse
 }
-Get-FileFromUri "https://github.com/vim/vim/raw/refs/heads/master/runtime/spell/en.utf-8.spl" -FilePath ".\downloads\en.utf-8.spl"
-Get-FileFromUri "https://github.com/vim/vim/raw/refs/heads/master/runtime/spell/en.utf-8.sug" -FilePath ".\downloads\en.utf-8.sug"
+$null = Get-FileFromUri "https://github.com/vim/vim/raw/refs/heads/master/runtime/spell/en.utf-8.spl" -FilePath ".\downloads\en.utf-8.spl"
+$null = Get-FileFromUri "https://github.com/vim/vim/raw/refs/heads/master/runtime/spell/en.utf-8.sug" -FilePath ".\downloads\en.utf-8.sug"
 
 $TOOL_DEFINITIONS += @{
     Name = "Neovim"
