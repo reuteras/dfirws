@@ -39,10 +39,6 @@ cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >>
 
 (Get-ChildItem "C:\cargo\bin").Name | ForEach-Object { & "$_" --autocomplete powershell > "C:\cargo\autocomplete\$_.ps1"} 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
-#Write-Output "Rust: Install mft2bodyfile in sandbox."
-#Write-DateLog "Rust: Install mft2bodyfile in sandbox." >> "C:\log\rust.txt"
-#cargo install --root "C:\cargo" mft2bodyfile 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
-
 Write-Output "Rust: Install usnjrnl in sandbox."
 Write-DateLog "Rust: Install usnjrnl in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" usnjrnl 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
@@ -125,13 +121,6 @@ $TOOL_DEFINITIONS += @{
             Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\mactime2 (replacement for mactime - dfir-toolkit).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command mactime2.exe --help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\mft2bodyfile (parses an MFT file (and optionally the corresponding UsnJrnl) to bodyfile - dfir-toolkit - janstarke).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command mft2bodyfile.exe --help"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
@@ -267,35 +256,6 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".bin")
     Tags = @("filesystem", "forensics", "ntfs", "windows")
     Notes = "The usnjrnl tool is a command-line utility for parsing Windows UsnJrnl files. It allows you to extract and analyze information from the USN Journal, which is a feature of the NTFS file system that tracks changes to files and directories. This tool can be useful for forensic investigations and understanding file system activity."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "mft2bodyfile"
-    Category = "Files and apps\Disk"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\mft2bodyfile (parses an MFT file (and optionally the corresponding UsnJrnl) to bodyfile - dfir-toolkit - janstarke).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command mft2bodyfile.exe --help"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -Rust"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "mft2bodyfile"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".mft")
-    Tags = @("filesystem", "forensics", "ntfs", "bodyfile")
-    Notes = "The mft2bodyfile tool is a command-line utility for parsing Master File Table (MFT) files from NTFS file systems and optionally the corresponding USN Journal to create bodyfile output. The bodyfile format is commonly used in digital forensics for timeline analysis. This tool can help investigators extract valuable information about files and directories from MFT records, such as file names, timestamps, and metadata."
     Tips = ""
     Usage = ""
     SampleCommands = @()
