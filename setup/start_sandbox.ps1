@@ -532,6 +532,11 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roa
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin" | Out-Null
 Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
+# Install radare2 plugins via r2pm
+r2pm -Uci r2ai 2>&1 | Out-Null
+r2pm -Uci decai 2>&1 | Out-Null
+Write-DateLog "Installed r2ai and decai via r2pm." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 # BeaconHunter
 Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter" | Out-Null
 

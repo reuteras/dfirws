@@ -2792,6 +2792,48 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @("Radare2")
 }
 
+# r2ai and decai are installed via r2pm in start_sandbox.ps1
+
+$TOOL_DEFINITIONS += @{
+    Name = "r2ai"
+    Homepage = "https://github.com/radareorg/r2ai"
+    Vendor = "radareorg"
+    License = "MIT License"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "ai", "radare2")
+    Notes = "AI plugin for radare2. Provides AI-assisted analysis using local and remote language models (Anthropic, OpenAI, Ollama, etc.). Installed via r2pm during sandbox startup."
+    Tips = "Set API keys via environment variables (ANTHROPIC_API_KEY, OPENAI_API_KEY) or edit ~/.config/r2ai/apikeys.txt with r2ai -K."
+    Usage = "Use within radare2 shell. Run r2pm -r r2ai for standalone mode."
+    SampleCommands = @(
+        "r2pm -r r2ai"
+    )
+    SampleFiles = @()
+    Dependencies = @("Radare2")
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "decai"
+    Homepage = "https://github.com/radareorg/r2ai"
+    Vendor = "radareorg"
+    License = "MIT License"
+    Category = "Reverse Engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
+    Tags = @("reverse-engineering", "ai", "decompilation", "radare2")
+    Notes = "r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed via r2pm during sandbox startup."
+    Tips = "Use within radare2 to get AI-powered decompilation output."
+    Usage = "Use within radare2 shell for AI-assisted decompilation of binary code."
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @("Radare2")
+}
+
 # Iaito by Radareorg
 $status = Get-GitHubRelease -repo "radareorg/iaito" -path "${SETUP_PATH}\iaito.zip" -match "iaito.zip" -check "Zip archive data"
 if ($status) {
