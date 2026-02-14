@@ -564,6 +564,16 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLo
 # 4n4lDetector
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 
+# Config for opencode-ai MCP servers
+$opencode_config_dir = "${HOME}\.config\opencode"
+New-Item -ItemType Directory -Force -Path "${opencode_config_dir}" | Out-Null
+if (Test-Path "${LOCAL_PATH}\opencode.json") {
+    Copy-Item "${LOCAL_PATH}\opencode.json" "${opencode_config_dir}\opencode.json" -Force | Out-Null
+} else {
+    Copy-Item "${LOCAL_PATH}\defaults\opencode.json" "${opencode_config_dir}\opencode.json" -Force | Out-Null
+}
+Write-DateLog "Installed opencode-ai config." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 # Config for bash and zsh
 if (Test-Path "${LOCAL_PATH}\.zshrc") {
     Copy-Item "${LOCAL_PATH}\.zshrc" "${HOME}\.zshrc" -Force | Out-Null

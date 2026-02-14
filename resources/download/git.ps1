@@ -36,6 +36,7 @@ $repourls = `
     "https://github.com/Malandrone/PowerDecode.git", `
     "https://github.com/mandiant/flare-floss.git", `
     "https://github.com/mandiant/gootloader.git", `
+    "https://github.com/mkorman90/regipy.git", `
     "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mandiant/gostringungarbler.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
@@ -1057,6 +1058,25 @@ $TOOL_DEFINITIONS += @{
     Tags = @("vulnerability", "microsoft", "patch-analysis")
     Notes = ""
     Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "regipy"
+    Homepage = "https://github.com/mkorman90/regipy"
+    Vendor = "mkorman90"
+    License = "MIT License"
+    Category = "OS\\Windows\\Registry"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".reg", ".dat")
+    Tags = @("registry", "windows", "forensics", "mcp")
+    Notes = "regipy repository including regipy MCP server for AI-assisted registry analysis."
+    Tips = "The regipy MCP server is at C:\\git\\regipy\\regipy_mcp_server\\server.py. It can be used with opencode-ai for AI-assisted registry hive analysis."
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()

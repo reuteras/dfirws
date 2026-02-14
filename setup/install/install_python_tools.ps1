@@ -66,7 +66,7 @@ Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
 
 uv tool install "git+https://github.com/msuhanov/dfir_ntfs.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "zipp>=3.20" "binary-refinery[extended]" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --with "click, libfwsi-python, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --with "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "mkdocs-material" "mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
