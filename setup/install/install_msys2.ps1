@@ -39,6 +39,41 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     Write-Output "MSYS2 installation done."
 }
 
+## Compile r2ai plugin if radare2 and r2ai source are available
+if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin\radare2.exe")) {
+    Write-DateLog "Compiling r2ai plugin for radare2." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Write-Output "Compiling r2ai plugin for radare2."
+
+    # Set up build environment
+    $env:CHERE_INVOKING = 'yes'
+    $env:MSYSTEM = 'UCRT64'
+    $env:PKG_CONFIG_PATH = "C:\Tools\radare2\lib\pkgconfig"
+
+    # Copy source to writable location (git mount is read-only)
+    New-Item -ItemType Directory -Force -Path "C:\tmp\r2ai_build" | Out-Null
+    Copy-Item -Recurse "C:\git\r2ai\src\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+
+    # Build r2ai with msys2 toolchain
+    & "C:\Tools\msys64\usr\bin\bash.exe" -lc "export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig && export PATH=/ucrt64/bin:/c/Tools/radare2/bin:\$PATH && cd /c/tmp/r2ai_build && make DOTEXE=.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+
+    # Copy output to persistent location
+    $r2ai_output = "C:\Tools\msys64\r2ai_build"
+    New-Item -ItemType Directory -Force -Path "$r2ai_output" | Out-Null
+    if (Test-Path "C:\tmp\r2ai_build\r2ai.dll") {
+        Copy-Item "C:\tmp\r2ai_build\r2ai.dll" "$r2ai_output\r2ai.dll" -Force
+        if (Test-Path "C:\tmp\r2ai_build\r2ai.exe") {
+            Copy-Item "C:\tmp\r2ai_build\r2ai.exe" "$r2ai_output\r2ai.exe" -Force
+        }
+        Write-DateLog "r2ai plugin compiled successfully." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "r2ai plugin compiled successfully."
+    } else {
+        Write-DateLog "r2ai compilation failed - r2ai.dll not found." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "r2ai compilation failed - check C:\log\msys2.txt for details."
+    }
+} else {
+    Write-DateLog "Skipping r2ai compilation (prerequisites not available)." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+}
+
 if (Test-Path -Path "${TOOLS}\Debug") {
     Read-Host "Press Enter to continue"
 }

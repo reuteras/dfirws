@@ -12,6 +12,11 @@ if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\msys64" )) {
     Remove-Item "${ROOT_PATH}\mount\Tools\msys64\done" | Out-Null
 }
 
+# Ensure git directory exists for sandbox mapping (may contain r2ai source)
+if (! (Test-Path -Path "${ROOT_PATH}\mount\git" )) {
+    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\git" | Out-Null
+}
+
 # Create WSB file for MSYS2 and run it
 (Get-Content ${ROOT_PATH}\resources\templates\generate_msys2.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_msys2.wsb"
 Start-Process "${ROOT_PATH}\tmp\generate_msys2.wsb"

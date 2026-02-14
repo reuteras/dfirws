@@ -214,11 +214,6 @@ if ($VisualStudioBuildTools.IsPresent) {
     .\resources\download\visualstudiobuildtools.ps1 | Out-Null
 }
 
-if ($all -or $MSYS2.IsPresent) {
-    Write-DateLog "Download MSYS2."
-    .\resources\download\msys2.ps1 | Out-Null
-}
-
 if ($all -or $Release.IsPresent) {
     Write-DateLog "Download releases from GitHub."
     .\resources\download\release.ps1
@@ -242,6 +237,11 @@ if ($all -or $Node.IsPresent) {
 if ($all -or $Git.IsPresent) {
     Write-DateLog "Download and update git repositories"
     .\resources\download\git.ps1
+}
+
+if ($all -or $MSYS2.IsPresent) {
+    Write-DateLog "Download MSYS2 and compile r2ai plugin."
+    .\resources\download\msys2.ps1 | Out-Null
 }
 
 if ($all -or $GoLang.IsPresent) {

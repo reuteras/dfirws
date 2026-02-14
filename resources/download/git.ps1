@@ -369,14 +369,20 @@ $TOOL_DEFINITIONS += @{
     Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "path"
+            Name = "`${HOME}\.local\share\radare2\plugins\r2ai.dll"
+            Expect = "PE32"
+        }
+    )
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
     Tags = @("reverse-engineering", "ai", "radare2")
-    Notes = "Native AI plugin for radare2. Requires compilation with gcc/pkg-config (build sandbox needed). Provides AI-assisted analysis using local and remote language models."
+    Notes = "Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models."
     Tips = "Set API keys via environment variables (ANTHROPIC_API_KEY, OPENAI_API_KEY) or edit ~/.config/r2ai/apikeys.txt with r2ai -K."
-    Usage = "Use within radare2 shell. Currently requires a build sandbox with msys2 to compile the native plugin."
+    Usage = "Load automatically as a radare2 core plugin. Use r2ai commands within the radare2 shell for AI-assisted binary analysis."
     SampleCommands = @(
-        "r2pm -r r2ai"
+        "r2ai -h"
     )
     SampleFiles = @()
     Dependencies = @("Radare2", "msys2")

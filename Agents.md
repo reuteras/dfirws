@@ -199,12 +199,28 @@ if (Test-Path -Path "${ROOT_PATH}\log\dfirws") {
 | generate_rust.wsb | install_rust_tools.ps1 | 5 Rust tools via cargo | Rust, msys2 gcc |
 | generate_golang.wsb | install_golang_tools.ps1 | 1 Go tool | Go |
 | generate_node.wsb | install_node.ps1 | 7 npm packages | Node.js, npm |
-| generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment | - |
+| generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment + r2ai plugin | msys2 gcc, pkg-config |
 | generate_freshclam.wsb | install_freshclam.ps1 | ClamAV signatures | ClamAV |
+
+### r2ai Compilation in the MSYS2 Sandbox
+
+The r2ai native plugin for radare2 is compiled inside the MSYS2 sandbox:
+
+1. **Prerequisites**: Radare2 (from `release.ps1`) and r2ai source (from `git.ps1`) must be available
+2. **Ordering**: `downloadFiles.ps1` runs MSYS2 after `release.ps1` and `git.ps1` so both are ready
+3. **Build process** (`install_msys2.ps1`):
+   - Copies r2ai source from read-only `C:\git\r2ai\src\` to writable `C:\tmp\r2ai_build\`
+   - Sets `PKG_CONFIG_PATH` to point at radare2's pkgconfig files
+   - Runs `make DOTEXE=.exe` with msys2's UCRT64 gcc toolchain
+   - Saves `r2ai.dll` and `r2ai.exe` to `C:\Tools\msys64\r2ai_build\`
+4. **Installation** (`start_sandbox.ps1`):
+   - Copies `r2ai.dll` to `%HOME%\.local\share\radare2\plugins\`
+   - Copies `r2ai.exe` to `C:\Tools\radare2\bin\`
+5. **Conditional**: Build is skipped if radare2 or r2ai source are not available
 
 ### Adding a New Build Sandbox
 
-To add a tool that needs compilation (e.g., r2ai native plugin):
+To add a tool that needs compilation:
 
 1. Create `resources/templates/generate_<name>.wsb.template` (copy from existing)
 2. Create `setup/install/install_<name>.ps1` (runs inside sandbox)
@@ -300,7 +316,7 @@ opencode-ai is configured with MCP servers for AI-assisted analysis. Config depl
 | radare2-mcp (r2mcp) | Local (stdio) | Binary downloaded | Known Windows crash issue (#24) |
 | regipy MCP | Local (stdio) | Repo cloned + mcp pkg | Uses regipy venv Python |
 | decai | radare2 plugin | JS file copied | Loaded by radare2 directly (not MCP) |
-| r2ai | radare2 plugin | Repo cloned only | Needs compilation (build sandbox required) |
+| r2ai | radare2 plugin | Compiled in MSYS2 sandbox | Native C plugin, r2ai.dll + r2ai.exe |
 
 ### MCP Configuration
 
