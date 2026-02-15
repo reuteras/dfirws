@@ -57,18 +57,12 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     Copy-Item -Recurse "C:\git\r2ai\src\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
     # Build r2ai with msys2 toolchain.
-    # The upstream Makefile default target may run `r2check` which executes `r2`.
-    # In the sandbox this runtime check can fail (Error 127) even when compilation works,
-    # so provide a temporary no-op `r2` shim only for this build invocation.
+    # Build only the plugin artifact to avoid optional CLI link issues in sandbox builds.
     $r2aiBuildScriptPathWin = "C:\tmp\r2ai_build\build-r2ai.sh"
     $r2aiBuildScript = @'
 set -x
 export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig
 export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH
-mkdir -p /tmp/r2shim
-cp /usr/bin/true /tmp/r2shim/r2 2>/dev/null || cp /bin/true /tmp/r2shim/r2
-chmod +x /tmp/r2shim/r2
-export PATH=/tmp/r2shim:$PATH
 MAKE_BIN=$(command -v make || command -v mingw32-make || command -v gmake || true)
 if [ -z "$MAKE_BIN" ]; then
   echo "make not found in PATH=$PATH"
@@ -76,7 +70,8 @@ if [ -z "$MAKE_BIN" ]; then
   exit 127
 fi
 cd /c/tmp/r2ai_build
-"$MAKE_BIN" DOTEXE=.exe
+"$MAKE_BIN" clean >/dev/null 2>&1 || true
+"$MAKE_BIN" EXT_SO=dll DOTEXE=.exe r2ai.dll
 '@
     $r2aiBuildScript | Out-File -FilePath $r2aiBuildScriptPathWin -Encoding ascii -Force
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'bash /c/tmp/r2ai_build/build-r2ai.sh' 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
