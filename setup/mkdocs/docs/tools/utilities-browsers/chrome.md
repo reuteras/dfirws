@@ -1,6 +1,6 @@
 # Chrome
 
-**Category:** Utilities\Browsers
+**Category:** Utilities / Browsers
 
 **Source:** Winget
 

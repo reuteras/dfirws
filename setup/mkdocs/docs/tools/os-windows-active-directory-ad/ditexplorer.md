@@ -1,6 +1,6 @@
 # DitExplorer
 
-**Category:** OS\Windows\Active Directory (AD)
+**Category:** OS / Windows / Active Directory (AD)
 
 **Source:** GitHub Release
 

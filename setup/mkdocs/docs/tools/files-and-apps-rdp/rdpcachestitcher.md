@@ -1,6 +1,6 @@
 # RDPCacheStitcher
 
-**Category:** Files and apps\RDP
+**Category:** Files and apps / RDP
 
 **Source:** GitHub Release
 

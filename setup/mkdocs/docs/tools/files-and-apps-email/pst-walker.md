@@ -1,6 +1,6 @@
 # PST Walker
 
-**Category:** Files and apps\Email
+**Category:** Files and apps / Email
 
 **Homepage:** <https://www.pstwalker.com/>
 

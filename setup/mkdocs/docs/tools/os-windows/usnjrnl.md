@@ -1,6 +1,6 @@
 # usnjrnl
 
-**Category:** OS\Windows
+**Category:** OS / Windows
 
 **File Extensions:** `.bin`
 
