@@ -9,50 +9,83 @@ $TOOL_DEFINITIONS = @()
 
 if (! $NoVSCodeExtensions.IsPresent) {
     # Get URI for Visual Studio Code C++ extension - ugly
-    $vscode_cpp_string = Get-DownloadUrlFromPage -url "https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
+    try {
+        $vscode_cpp_string = Get-DownloadUrlFromPage -url "https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
 
-    if ("$vscode_cpp_string" -ne "") {
-        $vscode_tmp = $vscode_cpp_string | Select-String -Pattern '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
-        $vscode_cpp_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code C++ extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/cpptools/$vscode_cpp_version/vspackage?targetPlatform=win32-x64" -FilePath ".\downloads\vscode\vscode-cpp.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code C++ extension"
+        if ("$vscode_cpp_string" -ne "") {
+            $vscode_tmp = $vscode_cpp_string | Select-String -Pattern '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
+            if ($null -ne $vscode_tmp -and $null -ne $vscode_tmp.Matches -and $vscode_tmp.Matches.Count -gt 0) {
+                $vscode_cpp_version = $vscode_tmp.Matches.Groups[1].Value
+                # Visual Studio Code C++ extension
+                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/cpptools/$vscode_cpp_version/vspackage?targetPlatform=win32-x64" -FilePath ".\downloads\vscode\vscode-cpp.vsix" -CheckURL "Yes" -check "Zip archive data"
+            } else {
+                Write-DateLog "ERROR: Could not parse version for Visual Studio Code C++ extension"
+            }
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code C++ extension"
+        }
+    } catch {
+        Write-DateLog "ERROR: Failed to download Visual Studio Code C++ extension: $($_.Exception.Message)"
     }
-    # Get URI for Visual Studio Code python extension - ugly
-    $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
 
-    if ("$vscode_python_string" -ne "") {
-        $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
-        $vscode_python_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code python extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code python extension"
+    # Get URI for Visual Studio Code python extension - ugly
+    try {
+        $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
+
+        if ("$vscode_python_string" -ne "") {
+            $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
+            if ($null -ne $vscode_tmp -and $null -ne $vscode_tmp.Matches -and $vscode_tmp.Matches.Count -gt 0) {
+                $vscode_python_version = $vscode_tmp.Matches.Groups[1].Value
+                # Visual Studio Code python extension
+                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix" -CheckURL "Yes" -check "Zip archive data"
+            } else {
+                Write-DateLog "ERROR: Could not parse version for Visual Studio Code python extension"
+            }
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code python extension"
+        }
+    } catch {
+        Write-DateLog "ERROR: Failed to download Visual Studio Code python extension: $($_.Exception.Message)"
     }
 
     # Get URI for Visual Studio Code mermaid extension - ugly
-    $vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -RegEx '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+    try {
+        $vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -RegEx '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
 
-    if ("$vscode_mermaid_string" -ne "") {
-        $vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
-        $vscode_mermaid_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code mermaid extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code mermaid extension"
+        if ("$vscode_mermaid_string" -ne "") {
+            $vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+            if ($null -ne $vscode_tmp -and $null -ne $vscode_tmp.Matches -and $vscode_tmp.Matches.Count -gt 0) {
+                $vscode_mermaid_version = $vscode_tmp.Matches.Groups[1].Value
+                # Visual Studio Code mermaid extension
+                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix" -CheckURL "Yes" -check "Zip archive data"
+            } else {
+                Write-DateLog "ERROR: Could not parse version for Visual Studio Code mermaid extension"
+            }
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code mermaid extension"
+        }
+    } catch {
+        Write-DateLog "ERROR: Failed to download Visual Studio Code mermaid extension: $($_.Exception.Message)"
     }
 
     # Get URI for Visual Studio Code ruff extension - ugly
-    $vscode_ruff_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff -RegEx '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
+    try {
+        $vscode_ruff_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff -RegEx '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
 
-    if ("$vscode_ruff_string" -ne "") {
-        $vscode_tmp = $vscode_ruff_string | Select-String -Pattern '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
-        $vscode_ruff_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code ruff extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/charliermarsh/vsextensions/ruff/$vscode_ruff_version/vspackage" -FilePath ".\downloads\vscode\vscode-ruff.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code ruff extension"
+        if ("$vscode_ruff_string" -ne "") {
+            $vscode_tmp = $vscode_ruff_string | Select-String -Pattern '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
+            if ($null -ne $vscode_tmp -and $null -ne $vscode_tmp.Matches -and $vscode_tmp.Matches.Count -gt 0) {
+                $vscode_ruff_version = $vscode_tmp.Matches.Groups[1].Value
+                # Visual Studio Code ruff extension
+                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/charliermarsh/vsextensions/ruff/$vscode_ruff_version/vspackage" -FilePath ".\downloads\vscode\vscode-ruff.vsix" -CheckURL "Yes" -check "Zip archive data"
+            } else {
+                Write-DateLog "ERROR: Could not parse version for Visual Studio Code ruff extension"
+            }
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code ruff extension"
+        }
+    } catch {
+        Write-DateLog "ERROR: Failed to download Visual Studio Code ruff extension: $($_.Exception.Message)"
     }
 }
 
