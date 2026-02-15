@@ -1,6 +1,6 @@
 # dfir-toolkit
 
-**Category:** Files and apps\Log
+**Category:** Files and apps / Log
 
 **File Extensions:** `.evtx`, `.reg`, `.dat`, `.lnk`, `.pf`, `.mft`, `.zip`
 

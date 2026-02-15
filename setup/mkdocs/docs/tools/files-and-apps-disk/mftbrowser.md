@@ -1,6 +1,6 @@
 # MFTBrowser
 
-**Category:** Files and apps\Disk
+**Category:** Files and apps / Disk
 
 **Source:** GitHub Release
 

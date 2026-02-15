@@ -1,6 +1,6 @@
 # VLC
 
-**Category:** Utilities\Media
+**Category:** Utilities / Media
 
 **Source:** Winget
 

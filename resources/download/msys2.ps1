@@ -56,7 +56,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("build-environment", "shell", "linux-tools", "gcc", "debugging")
-    Notes = ""
+    Notes = "MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software."
     Tips = ""
     Usage = ""
     SampleCommands = @()

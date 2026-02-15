@@ -1,6 +1,6 @@
 # litecli
 
-**Category:** Files and apps\Database
+**Category:** Files and apps / Database
 
 **Source:** Python
 

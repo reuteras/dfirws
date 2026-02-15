@@ -1,6 +1,6 @@
 # XELFViewer
 
-**Category:** OS\Linux
+**Category:** OS / Linux
 
 **Source:** GitHub Release
 

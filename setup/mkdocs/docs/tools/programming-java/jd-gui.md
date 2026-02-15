@@ -1,6 +1,6 @@
 # jd-gui
 
-**Category:** Programming\Java
+**Category:** Programming / Java
 
 **Source:** GitHub Release
 

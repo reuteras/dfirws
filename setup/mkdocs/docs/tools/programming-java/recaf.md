@@ -1,6 +1,6 @@
 # Recaf
 
-**Category:** Programming\Java
+**Category:** Programming / Java
 
 **Source:** GitHub Release
 

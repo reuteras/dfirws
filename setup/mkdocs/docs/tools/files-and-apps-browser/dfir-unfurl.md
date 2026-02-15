@@ -1,6 +1,6 @@
 # dfir-unfurl
 
-**Category:** Files and apps\Browser
+**Category:** Files and apps / Browser
 
 **Source:** Python
 

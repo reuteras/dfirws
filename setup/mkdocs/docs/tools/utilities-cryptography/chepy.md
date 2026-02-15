@@ -1,6 +1,6 @@
 # chepy
 
-**Category:** Utilities\Cryptography
+**Category:** Utilities / Cryptography
 
 **Source:** Python
 
