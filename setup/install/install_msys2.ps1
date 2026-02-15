@@ -60,7 +60,7 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     # The upstream Makefile default target may run `r2check` which executes `r2`.
     # In the sandbox this runtime check can fail (Error 127) even when compilation works,
     # so provide a temporary no-op `r2` shim only for this build invocation.
-    $r2aiBuildCommand = 'set -x; export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig; export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH; mkdir -p /tmp/r2shim; echo "#!/usr/bin/env sh" > /tmp/r2shim/r2; echo "exit 0" >> /tmp/r2shim/r2; chmod +x /tmp/r2shim/r2; export PATH=/tmp/r2shim:$PATH; MAKE_BIN=$(command -v make || command -v mingw32-make || command -v gmake || true); [ -n "$MAKE_BIN" ] || { echo "make not found in PATH=$PATH"; ls -l /usr/bin/make /ucrt64/bin/make* 2>/dev/null || true; exit 127; }; cd /c/tmp/r2ai_build; "$MAKE_BIN" DOTEXE=.exe'
+    $r2aiBuildCommand = 'export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig; export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH; mkdir -p /tmp/r2shim; cp /usr/bin/true /tmp/r2shim/r2 2>/dev/null || cp /bin/true /tmp/r2shim/r2; chmod +x /tmp/r2shim/r2; export PATH=/tmp/r2shim:$PATH; MAKE_BIN=$(command -v make || command -v mingw32-make || command -v gmake || true); [ -n "$MAKE_BIN" ] || { echo "make not found in PATH=$PATH"; ls -l /usr/bin/make /ucrt64/bin/make* 2>/dev/null || true; exit 127; }; cd /c/tmp/r2ai_build; "$MAKE_BIN" DOTEXE=.exe'
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc $r2aiBuildCommand 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
     $r2aiBuildExitCode = $LASTEXITCODE
     if ($r2aiBuildExitCode -ne 0) {
