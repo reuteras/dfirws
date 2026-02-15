@@ -1,6 +1,6 @@
 # Ares
 
-**Category:** Utilities\Cryptography
+**Category:** Utilities / Cryptography
 
 **Source:** GitHub Release
 

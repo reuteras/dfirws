@@ -1,6 +1,6 @@
 # ProcDOT
 
-**Category:** OS\Windows
+**Category:** OS / Windows
 
 **Homepage:** <https://procdot.com/>
 

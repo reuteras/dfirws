@@ -1,6 +1,6 @@
 # PDFStreamDumper
 
-**Category:** Files and apps\PDF
+**Category:** Files and apps / PDF
 
 **Homepage:** <https://sandsprite.com/tools.php?id=17>
 

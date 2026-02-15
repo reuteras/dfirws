@@ -1,6 +1,6 @@
 # HindSight
 
-**Category:** Files and apps\Browser
+**Category:** Files and apps / Browser
 
 **Source:** GitHub Release
 

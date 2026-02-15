@@ -1,6 +1,6 @@
 # Gpg4win
 
-**Category:** Utilities\Cryptography
+**Category:** Utilities / Cryptography
 
 **Homepage:** <https://www.gpg4win.org/>
 

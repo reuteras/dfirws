@@ -1,6 +1,6 @@
 # NirSoft Browser Utilities
 
-**Category:** Files and apps\Browser
+**Category:** Files and apps / Browser
 
 **Homepage:** <https://www.nirsoft.net/>
 

@@ -1,6 +1,6 @@
 # sidr
 
-**Category:** OS\Windows
+**Category:** OS / Windows
 
 **Source:** GitHub Release
 

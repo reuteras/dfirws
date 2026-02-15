@@ -1,6 +1,6 @@
 # apktool
 
-**Category:** OS\Android
+**Category:** OS / Android
 
 **Homepage:** <https://apktool.org/>
 
