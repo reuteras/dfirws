@@ -733,6 +733,32 @@ function Wait-Sandbox {
     }
 }
 
+# Function to check if a tool should be downloaded based on the active profile.
+# Returns $true if the tool should be included, $false if excluded by profile.
+function Test-ToolIncluded {
+    param (
+        [Parameter(Mandatory=$True)] [string]$ToolName
+    )
+
+    # If no profile filtering is active, include everything
+    if ($null -eq $DFIRWS_EXCLUDE_TOOLS -or $DFIRWS_EXCLUDE_TOOLS.Count -eq 0) {
+        return $true
+    }
+
+    # Check if tool is in the extras include list (overrides exclusion)
+    if ($null -ne $DFIRWS_EXTRAS_RESOLVED -and $DFIRWS_EXTRAS_RESOLVED -contains $ToolName) {
+        return $true
+    }
+
+    # Check if tool is excluded by profile
+    if ($DFIRWS_EXCLUDE_TOOLS -contains $ToolName) {
+        Write-SynchronizedLog "Skipping $ToolName (excluded by profile)."
+        return $false
+    }
+
+    return $true
+}
+
 # Function to stop the sandbox
 function Stop-Sandbox {
     [CmdletBinding(SupportsShouldProcess)]

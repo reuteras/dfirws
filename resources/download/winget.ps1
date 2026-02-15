@@ -2,8 +2,10 @@
 $TOOL_DEFINITIONS = @()
 
 # Autopsy - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Autopsy."
-$status = Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "Autopsy") {
+    Write-SynchronizedLog "winget: Downloading Autopsy."
+    $status = Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Autopsy"
@@ -30,8 +32,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Burp suite - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Burp Suite."
-$status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Burp Suite") {
+    Write-SynchronizedLog "winget: Downloading Burp Suite."
+    $status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Burp Suite"
@@ -274,8 +278,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Qemu - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Qemu."
-$status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "QEMU") {
+    Write-SynchronizedLog "winget: Downloading Qemu."
+    $status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "QEMU"
@@ -455,8 +461,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Google Earth Pro - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Google Earth Pro."
-$status = Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Google Earth Pro") {
+    Write-SynchronizedLog "winget: Downloading Google Earth Pro."
+    $status = Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Google Earth Pro"

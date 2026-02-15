@@ -1684,12 +1684,14 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Volatility Workbench 3
-$status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench.zip" -FilePath ".\downloads\volatilityworkbench.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\VolatilityWorkbench") {
-        Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench" | Out-Null 2>&1
+if (Test-ToolIncluded -ToolName "Volatility Workbench 3") {
+    $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench.zip" -FilePath ".\downloads\volatilityworkbench.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\VolatilityWorkbench") {
+            Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1730,12 +1732,14 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Volatility Workbench 2
-$status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench-v2.1.zip" -FilePath ".\downloads\volatilityworkbench2.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\VolatilityWorkbench2") {
-        Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench2" | Out-Null 2>&1
+if (Test-ToolIncluded -ToolName "Volatility Workbench 2.1") {
+    $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench-v2.1.zip" -FilePath ".\downloads\volatilityworkbench2.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\VolatilityWorkbench2") {
+            Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench2" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench2.zip" -o"${TOOLS}\VolatilityWorkbench2" | Out-Null
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench2.zip" -o"${TOOLS}\VolatilityWorkbench2" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1776,7 +1780,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Volatility Workbench 2 Profiles
-$status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/Collection.zip" -FilePath ".\downloads\volatilityworkbench2profiles.zip" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "Volatility Workbench 2.1") {
+    $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/Collection.zip" -FilePath ".\downloads\volatilityworkbench2profiles.zip" -check "Zip archive data"
+}
 
 # Nirsoft tools
 New-Item -Path "${TOOLS}\nirsoft" -ItemType Directory -Force | Out-Null
@@ -1993,7 +1999,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Binary Ninja - manual installation
-$status = Get-FileFromUri -uri "https://cdn.binary.ninja/installers/binaryninja_free_win64.exe" -FilePath ".\downloads\binaryninja.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Binary Ninja") {
+    $status = Get-FileFromUri -uri "https://cdn.binary.ninja/installers/binaryninja_free_win64.exe" -FilePath ".\downloads\binaryninja.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Binary Ninja"
@@ -2228,8 +2236,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
-$NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'
-$status = Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "Neo4j") {
+    $NeoVersion = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx '4.4.[^"]+-windows\.zip'
+    $status = Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes" -check "Zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Neo4j"
@@ -2361,10 +2371,12 @@ $TOOL_DEFINITIONS += @{
 }
 
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
-$LibreOfficeVersionDownloadPage = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
-$LibreOfficeVersionDownloadPage_64 = $LibreOfficeVersionDownloadPage.Replace("dl/win-x86/", "dl/win-x86_64/").Replace("x86.msi", "x86-64.msi").Replace("https://download.documentfoundation.org/libreoffice/stable/", "https://www.libreoffice.org/donate/dl/")
-$LibreOfficeVersion = Get-DownloadUrlFromPage -Url "${LibreOfficeVersionDownloadPage_64}" -RegEx 'https://[^"]+.msi'
-$status = Get-FileFromUri -uri ${LibreOfficeVersion} -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "LibreOffice") {
+    $LibreOfficeVersionDownloadPage = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
+    $LibreOfficeVersionDownloadPage_64 = $LibreOfficeVersionDownloadPage.Replace("dl/win-x86/", "dl/win-x86_64/").Replace("x86.msi", "x86-64.msi").Replace("https://download.documentfoundation.org/libreoffice/stable/", "https://www.libreoffice.org/donate/dl/")
+    $LibreOfficeVersion = Get-DownloadUrlFromPage -Url "${LibreOfficeVersionDownloadPage_64}" -RegEx 'https://[^"]+.msi'
+    $status = Get-FileFromUri -uri ${LibreOfficeVersion} -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "LibreOffice"
@@ -3022,15 +3034,17 @@ $TOOL_DEFINITIONS += @{
 }
 
 # https://hashcat.net/hashcat/ - hashcat
-$hashcat_version = Get-DownloadUrlFromPage -url "https://hashcat.net/hashcat/" -RegEx 'fil[^"]+\.7z'
-$status = Get-FileFromUri -uri "https://hashcat.net/${hashcat_version}" -FilePath ".\downloads\hashcat.7z" -CheckURL "Yes" -check "7-zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\hashcat") {
-        Remove-Item -Recurse -Force "${TOOLS}\hashcat" | Out-Null 2>&1
+if (Test-ToolIncluded -ToolName "hashcat") {
+    $hashcat_version = Get-DownloadUrlFromPage -url "https://hashcat.net/hashcat/" -RegEx 'fil[^"]+\.7z'
+    $status = Get-FileFromUri -uri "https://hashcat.net/${hashcat_version}" -FilePath ".\downloads\hashcat.7z" -CheckURL "Yes" -check "7-zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\hashcat") {
+            Remove-Item -Recurse -Force "${TOOLS}\hashcat" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hashcat.7z" -o"${TOOLS}" | Out-Null
+        Start-Sleep -Seconds 3
+        Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hashcat.7z" -o"${TOOLS}" | Out-Null
-    Start-Sleep -Seconds 3
-    Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3071,8 +3085,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Drivers for hashcat
-$intel_driver = Get-DownloadUrlFromPage -url "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-cpu-runtime-for-opencl-applications-with-sycl-support.html" -RegEx 'https://[^"]+\.exe'
-$status = Get-FileFromUri -uri "${intel_driver}" -FilePath ".\downloads\intel_driver.exe" -CheckURL "Yes" -check "PE32"
+if (Test-ToolIncluded -ToolName "hashcat") {
+    $intel_driver = Get-DownloadUrlFromPage -url "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-cpu-runtime-for-opencl-applications-with-sycl-support.html" -RegEx 'https://[^"]+\.exe'
+    $status = Get-FileFromUri -uri "${intel_driver}" -FilePath ".\downloads\intel_driver.exe" -CheckURL "Yes" -check "PE32"
+}
 
 # Mex for WinDbg
 $status = Get-FileFromUri -uri "https://download.microsoft.com/download/0/c/4/0c4c45e3-bf02-49bf-8d68-6fa611f442e6/Mex.exe" -FilePath ".\downloads\mex.exe" -CheckURL "Yes" -check "PE32"
@@ -3105,18 +3121,20 @@ $TOOL_DEFINITIONS += @{
 }
 
 # ELK
-$ELK_VERSION = ((curl.exe --silent -L "https://api.github.com/repos/elastic/elasticsearch/releases/latest" | ConvertFrom-Json).tag_name).Replace("v", "")
-Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/logstash/logstash-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\logstash.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elastic-agent.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\filebeat.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\metricbeat.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\packetbeat.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\heartbeat.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\auditbeat.zip" -CheckURL "Yes" -check "Zip archive data"
-$status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\winlogbeat.zip" -CheckURL "Yes" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "Elastic Stack (ELK + Beats)") {
+    $ELK_VERSION = ((curl.exe --silent -L "https://api.github.com/repos/elastic/elasticsearch/releases/latest" | ConvertFrom-Json).tag_name).Replace("v", "")
+    Set-Content -Path ".\downloads\elk_version.txt" -Value "${ELK_VERSION}"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elasticsearch.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/kibana/kibana-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\kibana.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/logstash/logstash-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\logstash.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\elastic-agent.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\filebeat.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\metricbeat.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\packetbeat.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/heartbeat/heartbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\heartbeat.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\auditbeat.zip" -CheckURL "Yes" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://artifacts.elastic.co/downloads/beats/winlogbeat/winlogbeat-${ELK_VERSION}-windows-x86_64.zip" -FilePath ".\downloads\winlogbeat.zip" -CheckURL "Yes" -check "Zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Elastic Stack (ELK + Beats)"

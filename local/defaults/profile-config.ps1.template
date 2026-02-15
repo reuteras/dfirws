@@ -1,0 +1,24 @@
+# Distribution profile configuration for DFIRWS
+# Copy this file to local/profile-config.ps1 and customize.
+#
+# Select profile: "Basic" or "Full"
+# Default (empty string) = Full (all tools downloaded)
+$DFIRWS_PROFILE = ""
+
+# Override script inclusion (overrides the profile setting)
+# Uncomment and set to $true/$false to override:
+# $DFIRWS_PROFILE_NODE = $true
+# $DFIRWS_PROFILE_RUST = $false
+# $DFIRWS_PROFILE_GO = $false
+# $DFIRWS_PROFILE_MSYS2 = $false
+
+# Extra tools to include even when excluded by the profile.
+# Add tool names to force-include them.
+# Available extras for Basic profile:
+#   "Autopsy", "QEMU", "Burp Suite", "Google Earth Pro",
+#   "Binary Ninja", "Neo4j", "hashcat",
+#   "Volatility Workbench 3", "Volatility Workbench 2.1",
+#   "LibreOffice", "Elastic Stack (ELK + Beats)"
+#
+# Example: $DFIRWS_EXTRAS = @("Autopsy", "LibreOffice")
+$DFIRWS_EXTRAS = @()
