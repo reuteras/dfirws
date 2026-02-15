@@ -155,7 +155,7 @@ if ($all -or $Python) {
 }
 
 # MSYS2
-if ($all -or $MSYS2) {
+if (($all -and $profileMsys2Enabled) -or $MSYS2) {
     $status = Get-FileFromUri -uri "https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe" -FilePath "${SETUP_PATH}\msys2.exe" -CheckURL "No" -check "PE32"
     if ($status) {
         Copy-Item "${SETUP_PATH}\msys2.exe" "${TOOLS}\bin\msys2.exe"
@@ -165,7 +165,7 @@ if ($all -or $MSYS2) {
 
 #
 # Packages used in Go sandbox
-if ($all -or $Go) {
+if (($all -and $profileGoEnabled) -or $Go) {
     # GoLang - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading GoLang."
     $status = Get-WinGet "GoLang.Go" "Go*.msi" "golang.msi" -check "Composite Document File V2 Document"
@@ -173,7 +173,7 @@ if ($all -or $Go) {
 
 #
 # Packages used in Rust sandbox
-if ($all -or $Rust) {
+if (($all -and $profileRustEnabled) -or $Rust) {
     # git - installed during start
     $status = Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe" -check "PE32"
 
