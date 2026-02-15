@@ -1,6 +1,6 @@
 # shodan
 
-**Category:** Signatures and information\Online tools
+**Category:** Signatures and information / Online tools
 
 **Source:** Python
 

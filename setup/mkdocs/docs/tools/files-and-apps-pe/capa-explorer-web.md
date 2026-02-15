@@ -1,6 +1,6 @@
 # capa Explorer Web
 
-**Category:** Files and apps\PE
+**Category:** Files and apps / PE
 
 **Homepage:** <https://mandiant.github.io/capa/>
 

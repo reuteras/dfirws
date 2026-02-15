@@ -1,6 +1,6 @@
 # Foxit PDF Reader
 
-**Category:** Files and apps\PDF
+**Category:** Files and apps / PDF
 
 **Source:** Winget
 

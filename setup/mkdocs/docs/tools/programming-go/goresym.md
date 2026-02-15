@@ -1,6 +1,6 @@
 # GoReSym
 
-**Category:** Programming\Go
+**Category:** Programming / Go
 
 **Source:** GitHub Release
 

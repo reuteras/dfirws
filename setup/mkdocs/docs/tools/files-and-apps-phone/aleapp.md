@@ -1,6 +1,6 @@
 # aLEAPP
 
-**Category:** Files and apps\Phone
+**Category:** Files and apps / Phone
 
 **Source:** GitHub Release
 

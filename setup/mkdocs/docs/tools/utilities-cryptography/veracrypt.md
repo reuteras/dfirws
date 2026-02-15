@@ -1,6 +1,6 @@
 # VeraCrypt
 
-**Category:** Utilities\Cryptography
+**Category:** Utilities / Cryptography
 
 **Homepage:** <https://www.veracrypt.fr/>
 

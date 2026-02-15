@@ -1,6 +1,6 @@
 # name-that-hash
 
-**Category:** Utilities\Cryptography
+**Category:** Utilities / Cryptography
 
 **Source:** Python
 
