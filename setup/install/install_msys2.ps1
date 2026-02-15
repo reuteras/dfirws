@@ -57,7 +57,8 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     Copy-Item -Recurse "C:\git\r2ai\src\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
     # Build r2ai with msys2 toolchain
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc "export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig && export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:\$PATH && cd /c/tmp/r2ai_build && make DOTEXE=.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    # Ensure r2 is accessible in MSYS2 PATH (r2check target runs 'r2 -NN -qcq --')
+    & "C:\Tools\msys64\usr\bin\bash.exe" -lc "export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig && export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:\$PATH && command -v r2 || cp /c/Tools/radare2/bin/radare2.exe /ucrt64/bin/r2.exe && cd /c/tmp/r2ai_build && make DOTEXE=.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
     # Copy output to persistent location
     $r2ai_output = "C:\Tools\msys64\r2ai_build"
