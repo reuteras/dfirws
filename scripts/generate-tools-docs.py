@@ -66,7 +66,9 @@ def get_string_list(value) -> List[str]:
 SOURCE_TYPE_LABELS = {
     "python": "Python",
     "node": "npm",
+    "npm": "npm",
     "rust": "Cargo",
+    "cargo": "Cargo",
     "go": "Go",
     "http": "HTTP",
     "release": "GitHub Release",
@@ -83,9 +85,9 @@ SOURCE_TYPE_LABELS = {
 
 
 def get_source_label(tool: dict) -> str:
-    source_type = tool.get("SourceType", "")
+    source_type = str(tool.get("SourceType", "") or "").strip()
     if source_type:
-        return SOURCE_TYPE_LABELS.get(source_type, source_type)
+        return SOURCE_TYPE_LABELS.get(source_type.lower(), source_type)
     return ""
 
 
@@ -123,7 +125,8 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     lines: List[str] = []
     lines.append(f"# {tool.get('Name', '')}")
     lines.append("")
-    lines.append(f"**Category:** {category_path.replace('\\\\', ' / ')}")
+    category_display = category_path.replace('\\', ' / ')
+    lines.append(f"**Category:** {category_display}")
     lines.append("")
 
     meta_added = False
