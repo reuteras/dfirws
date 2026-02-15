@@ -351,6 +351,21 @@ def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
     config_path.write_text("\n".join(output), encoding="utf-8")
 
 
+
+
+def get_default_docs_root() -> str:
+    repo_docs_root = Path("./setup/mkdocs/docs")
+    if repo_docs_root.exists():
+        return str(repo_docs_root)
+    return "./docs"
+
+
+def get_default_mkdocs_config() -> str:
+    repo_mkdocs_config = Path("./setup/mkdocs/mkdocs.yml")
+    if repo_mkdocs_config.exists():
+        return str(repo_mkdocs_config)
+    return "./mkdocs.yml"
+
 def collect_tools_json_paths(path: Path) -> list[Path]:
     if path.is_dir():
         return sorted([p for p in path.glob("*.json") if p.is_file()])
@@ -380,14 +395,14 @@ def main() -> int:
     parser.add_argument(
         "--docs-root",
         dest="docs_root",
-        default=os.environ.get("DOCS_ROOT", "./docs"),
-        help="Docs root directory (default: ./docs).",
+        default=os.environ.get("DOCS_ROOT", get_default_docs_root()),
+        help="Docs root directory (default: ./setup/mkdocs/docs when present, else ./docs).",
     )
     parser.add_argument(
         "--mkdocs-config",
         dest="mkdocs_config",
-        default=os.environ.get("MKDOCS_CONFIG", "./mkdocs.yml"),
-        help="Path to mkdocs.yml (default: ./mkdocs.yml).",
+        default=os.environ.get("MKDOCS_CONFIG", get_default_mkdocs_config()),
+        help="Path to mkdocs.yml (default: ./setup/mkdocs/mkdocs.yml when present, else ./mkdocs.yml).",
     )
     args = parser.parse_args()
 
