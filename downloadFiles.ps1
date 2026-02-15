@@ -26,6 +26,14 @@
     .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
     This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
 
+.EXAMPLE
+    .\downloadFiles.ps1 -Profile Basic
+    Download a basic distribution without large optional tools and without Rust, Go, and MSYS2 toolchains.
+
+.EXAMPLE
+    .\downloadFiles.ps1 -Profile Full
+    Download all tools (same as default behavior).
+
 .NOTES
     File Name      : downloadFiles.ps1
     Author         : Peter R
@@ -35,6 +43,9 @@
 #>
 
 param(
+    [Parameter(HelpMessage = "Select distribution profile (Basic or Full).")]
+    [ValidateSet("Basic", "Full")]
+    [string]$Profile = "",
     [Parameter(HelpMessage = "Download all tools for dfirws.")]
     [Switch]$AllTools,
     [Parameter(HelpMessage = "Update Didier Stevens tools.")]
@@ -93,6 +104,71 @@ if (Test-Path ".\config.ps1") {
 } else {
     Write-DateLog "Error: Neither config.ps1 nor config.ps1.template found. Please check your installation."
     Exit
+}
+
+# Load profile definitions
+if (Test-Path ".\local\defaults\profiles.ps1") {
+    . ".\local\defaults\profiles.ps1"
+}
+
+# Load user profile config
+if (Test-Path ".\local\profile-config.ps1") {
+    . ".\local\profile-config.ps1"
+}
+
+# Resolve active profile: CLI parameter > config file > none (Full)
+if ($Profile -ne "") {
+    $activeProfileName = $Profile
+} elseif ((Test-Path variable:DFIRWS_PROFILE) -and $DFIRWS_PROFILE -ne "") {
+    $activeProfileName = $DFIRWS_PROFILE
+} else {
+    $activeProfileName = ""
+}
+
+# Build effective configuration from profile
+if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DFIRWS_PROFILES.ContainsKey($activeProfileName)) {
+    Write-DateLog "Using profile: $activeProfileName"
+    $activeProfile = $DFIRWS_PROFILES[$activeProfileName]
+
+    # Script toggles (with per-script overrides from user config)
+    $profileNodeEnabled = $activeProfile.Scripts["node"]
+    $profileRustEnabled = $activeProfile.Scripts["rust"]
+    $profileGoEnabled   = $activeProfile.Scripts["go"]
+    $profileMsys2Enabled = $activeProfile.Scripts["msys2"]
+
+    if (Test-Path variable:DFIRWS_PROFILE_NODE)  { $profileNodeEnabled  = $DFIRWS_PROFILE_NODE }
+    if (Test-Path variable:DFIRWS_PROFILE_RUST)  { $profileRustEnabled  = $DFIRWS_PROFILE_RUST }
+    if (Test-Path variable:DFIRWS_PROFILE_GO)    { $profileGoEnabled    = $DFIRWS_PROFILE_GO }
+    if (Test-Path variable:DFIRWS_PROFILE_MSYS2) { $profileMsys2Enabled = $DFIRWS_PROFILE_MSYS2 }
+
+    # Resolve extras include list
+    $DFIRWS_EXTRAS_RESOLVED = @()
+    if ((Test-Path variable:DFIRWS_EXTRAS) -and $null -ne $DFIRWS_EXTRAS) {
+        $DFIRWS_EXTRAS_RESOLVED = $DFIRWS_EXTRAS
+    }
+
+    # Build effective exclude list (extras override exclusions)
+    $DFIRWS_EXCLUDE_TOOLS = [System.Collections.Generic.List[string]]::new()
+    foreach ($tool in $activeProfile.ExcludeTools) {
+        if ($DFIRWS_EXTRAS_RESOLVED -notcontains $tool) {
+            $DFIRWS_EXCLUDE_TOOLS.Add($tool)
+        }
+    }
+
+    if ($DFIRWS_EXCLUDE_TOOLS.Count -gt 0) {
+        Write-DateLog "Profile excludes: $($DFIRWS_EXCLUDE_TOOLS -join ', ')"
+    }
+    if ($DFIRWS_EXTRAS_RESOLVED.Count -gt 0) {
+        Write-DateLog "Extras included: $($DFIRWS_EXTRAS_RESOLVED -join ', ')"
+    }
+} else {
+    # No profile = Full behavior (everything included)
+    $profileNodeEnabled  = $true
+    $profileRustEnabled  = $true
+    $profileGoEnabled    = $true
+    $profileMsys2Enabled = $true
+    $DFIRWS_EXCLUDE_TOOLS = @()
+    $DFIRWS_EXTRAS_RESOLVED = @()
 }
 
 $ProgressPreference = "SilentlyContinue"
@@ -228,7 +304,7 @@ if ($all -or $Http.IsPresent) {
     }
 }
 
-if ($all -or $Node.IsPresent) {
+if (($all -and $profileNodeEnabled) -or $Node.IsPresent) {
     Write-Output "" > .\log\node.txt
     Write-DateLog "Setup Node and install npm packages."
     .\resources\download\node.ps1 | Out-Null
@@ -239,12 +315,12 @@ if ($all -or $Git.IsPresent) {
     .\resources\download\git.ps1
 }
 
-if ($all -or $MSYS2.IsPresent) {
+if (($all -and $profileMsys2Enabled) -or $MSYS2.IsPresent) {
     Write-DateLog "Download MSYS2 and compile r2ai plugin."
     .\resources\download\msys2.ps1 | Out-Null
 }
 
-if ($all -or $GoLang.IsPresent) {
+if (($all -and $profileGoEnabled) -or $GoLang.IsPresent) {
     Write-Output "" > .\log\golang.txt
     Write-DateLog "Setup GoLang and install packages."
     .\resources\download\go.ps1 | Out-Null
@@ -256,7 +332,7 @@ if ($all -or $Python.IsPresent) {
     .\resources\download\python.ps1 | Out-Null
 }
 
-if ($all -or $Rust.IsPresent) {
+if (($all -and $profileRustEnabled) -or $Rust.IsPresent) {
     Write-Output "" > .\log\rust.txt
     Write-DateLog "Setup Rust and install packages with cargo."
     .\resources\download\rust.ps1 | Out-Null

@@ -2,8 +2,10 @@
 $TOOL_DEFINITIONS = @()
 
 # Autopsy - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Autopsy."
-$status = Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "Autopsy") {
+    Write-SynchronizedLog "winget: Downloading Autopsy."
+    $status = Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Autopsy"
@@ -30,8 +32,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Burp suite - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Burp Suite."
-$status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Burp Suite") {
+    Write-SynchronizedLog "winget: Downloading Burp Suite."
+    $status = Get-WinGet "PortSwigger.BurpSuite.${BURP_SUITE_EDITION}" "Burp*.exe" "burp.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Burp Suite"
@@ -274,8 +278,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Qemu - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Qemu."
-$status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "QEMU") {
+    Write-SynchronizedLog "winget: Downloading Qemu."
+    $status = Get-WinGet "SoftwareFreedomConservancy.QEMU" "QEMU*.exe" "qemu.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "QEMU"
@@ -455,8 +461,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Google Earth Pro - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Google Earth Pro."
-$status = Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Google Earth Pro") {
+    Write-SynchronizedLog "winget: Downloading Google Earth Pro."
+    $status = Get-WinGet "Google.EarthPro" "Google*.exe" "googleearth.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Google Earth Pro"
@@ -663,29 +671,6 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pdf")
     Tags = @("pdf", "viewer")
     Notes = "Foxit PDF Reader is a lightweight and fast PDF viewer that can be used to open and view PDF files. It is an alternative to Adobe Acrobat Reader and offers features such as annotation, form filling, and digital signatures."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-}
-
-# uv - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading uv."
-$status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "uv"
-    Category = "Programming\Python"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".py")
-    Tags = @("python", "package-management")
-    Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
     Tips = ""
     Usage = ""
     SampleCommands = @()

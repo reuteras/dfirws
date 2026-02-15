@@ -22,6 +22,8 @@ DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 ev
 - [Installation and configuration](#installation-and-configuration)
 - [Download tools and enrichment data](#download-tools-and-enrichment-data)
 - [Usage and configuration of the sandbox](#usage-and-configuration-of-the-sandbox)
+  - [Distribution profiles](#distribution-profiles)
+  - [Sandbox configuration](#sandbox-configuration)
 - [Usage and configuration of the VM](#usage-and-configuration-of-the-vm)
 - [Update](#update)
 - [Documentation](#documentation)
@@ -141,6 +143,32 @@ Personally I run the following command to download everything and cache Visual S
 ```
 
 ## Usage and configuration of the sandbox
+
+### Distribution profiles
+
+DFIRWS supports distribution profiles to control which tools are downloaded. This is useful for standalone or external client installations where you don't need the full tool suite.
+
+Two profiles are available:
+
+- **Full** (default) - Downloads all tools, including all build toolchains (Node.js, Rust, Go, MSYS2) and large optional tools.
+- **Basic** - Skips Rust, Go, and MSYS2 toolchains. Keeps Node.js for JavaScript malware analysis. Excludes large optional tools like Autopsy, ELK Stack, Binary Ninja, Neo4j, hashcat, LibreOffice, and others.
+
+To use a profile, pass `-Profile` to `downloadFiles.ps1`:
+
+```PowerShell
+.\downloadFiles.ps1 -Profile Basic
+```
+
+For persistent configuration, copy `local\defaults\profile-config.ps1.template` to `local\profile-config.ps1` and set `$DFIRWS_PROFILE = "Basic"`. You can also override individual toolchain inclusion and add extras (large tools to include despite the profile):
+
+```PowerShell
+$DFIRWS_PROFILE = "Basic"
+$DFIRWS_EXTRAS = @("Autopsy", "LibreOffice")
+```
+
+The `-Profile` CLI parameter takes precedence over the config file. Explicit switches like `-Rust` or `-Node` always override the profile setting.
+
+### Sandbox configuration
 
 The quickest way to use the DFIRWS is to start a sandbox by clicking on **dfirws.wsb** or running **.\dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
 
