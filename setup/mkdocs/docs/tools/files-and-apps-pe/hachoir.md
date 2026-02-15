@@ -1,6 +1,6 @@
 # hachoir
 
-**Category:** Files and apps\PE
+**Category:** Files and apps / PE
 
 **Source:** Python
 

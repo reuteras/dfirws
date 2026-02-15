@@ -1,6 +1,6 @@
 # jsbeautifier
 
-**Category:** Files and apps\JavaScript
+**Category:** Files and apps / JavaScript
 
 **Source:** Python
 

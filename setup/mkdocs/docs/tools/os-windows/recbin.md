@@ -1,6 +1,6 @@
 # recbin
 
-**Category:** OS\Windows
+**Category:** OS / Windows
 
 **Homepage:** <https://github.com/keydet89/Tools>
 

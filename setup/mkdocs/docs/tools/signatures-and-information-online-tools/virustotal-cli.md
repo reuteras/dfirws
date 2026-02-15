@@ -1,6 +1,6 @@
 # VirusTotal CLI
 
-**Category:** Signatures and information\Online tools
+**Category:** Signatures and information / Online tools
 
 **Source:** Winget
 

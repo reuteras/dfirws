@@ -1,6 +1,6 @@
 # regipy
 
-**Category:** OS\Windows\Registry
+**Category:** OS / Windows / Registry
 
 **Source:** Python
 

@@ -1,6 +1,6 @@
 # RegShot
 
-**Category:** OS\Windows\Registry
+**Category:** OS / Windows / Registry
 
 **Homepage:** <https://github.com/Seabreg/Regshot>
 

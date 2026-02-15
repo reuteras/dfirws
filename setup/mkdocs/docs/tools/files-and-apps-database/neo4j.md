@@ -1,6 +1,6 @@
 # Neo4j
 
-**Category:** Files and apps\Database
+**Category:** Files and apps / Database
 
 **Homepage:** <https://neo4j.com/>
 

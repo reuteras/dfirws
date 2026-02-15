@@ -1,6 +1,6 @@
 # dfir_ntfs
 
-**Category:** Files and apps\Disk
+**Category:** Files and apps / Disk
 
 **Source:** Python
 

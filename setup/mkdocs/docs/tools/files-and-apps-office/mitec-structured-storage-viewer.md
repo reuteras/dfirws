@@ -1,6 +1,6 @@
 # MiTeC Structured Storage Viewer
 
-**Category:** Files and apps\Office
+**Category:** Files and apps / Office
 
 **Homepage:** <https://www.mitec.cz/wp/mssv/>
 
