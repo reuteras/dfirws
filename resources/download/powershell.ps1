@@ -4,7 +4,7 @@ Clear-Tmp powershell
 
 # Download PowerShell modules
 Write-SynchronizedLog "powershell: Downloading ImportExcel, posh-git and Terminal-Icons."
-Save-Module -Name ImportExcel,posh-git,Terminal-Icons -Path .\tmp\powershell -Force
+Save-Module -Name ImportExcel,posh-git,Terminal-Icons -Path .\tmp\powershell -Force -WarningAction SilentlyContinue
 
 if (! (Test-Path ".\tmp\powershell\ImportExcel")) {
     Write-SynchronizedLog "powershell: ImportExcel module not found. Exiting."
