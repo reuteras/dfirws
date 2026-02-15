@@ -2114,8 +2114,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Tor browser
-$TorBrowserUrl = Get-DownloadUrlFromPage -Url "https://www.torproject.org/download/" -RegEx '/dist/[^"]+exe'
-$status = Get-FileFromUri -uri "https://www.torproject.org$TorBrowserUrl" -FilePath ".\downloads\torbrowser.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Tor Browser") {
+    $TorBrowserUrl = Get-DownloadUrlFromPage -Url "https://www.torproject.org/download/" -RegEx '/dist/[^"]+exe'
+    $status = Get-FileFromUri -uri "https://www.torproject.org$TorBrowserUrl" -FilePath ".\downloads\torbrowser.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Tor Browser"
@@ -2204,8 +2206,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Veracrypt - manual installation
-$VeracryptUrl = Get-DownloadUrlFromPage -Url "https://www.veracrypt.fr/en/Downloads.html" -RegEx 'https://[^"]+VeraCrypt_Setup[^"]+.msi'
-$status = Get-FileFromUri -uri "${VeracryptUrl}" -FilePath ".\downloads\veracrypt.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "VeraCrypt") {
+    $VeracryptUrl = Get-DownloadUrlFromPage -Url "https://www.veracrypt.fr/en/Downloads.html" -RegEx 'https://[^"]+VeraCrypt_Setup[^"]+.msi'
+    $status = Get-FileFromUri -uri "${VeracryptUrl}" -FilePath ".\downloads\veracrypt.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "VeraCrypt"
@@ -2358,12 +2362,14 @@ $TOOL_DEFINITIONS += @{
 }
 
 # capa Explorer web
-$status = Get-FileFromUri -uri "https://mandiant.github.io/capa/explorer/capa-explorer-web.zip" -FilePath ".\downloads\capa-explorer-web.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\capa-explorer-web") {
-        Remove-Item -Recurse -Force "${TOOLS}\capa-explorer-web" | Out-Null 2>&1
+if (Test-ToolIncluded -ToolName "capa Explorer Web") {
+    $status = Get-FileFromUri -uri "https://mandiant.github.io/capa/explorer/capa-explorer-web.zip" -FilePath ".\downloads\capa-explorer-web.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\capa-explorer-web") {
+            Remove-Item -Recurse -Force "${TOOLS}\capa-explorer-web" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{

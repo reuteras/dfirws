@@ -161,6 +161,12 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     if ($DFIRWS_EXTRAS_RESOLVED.Count -gt 0) {
         Write-DateLog "Extras included: $($DFIRWS_EXTRAS_RESOLVED -join ', ')"
     }
+
+    # Build git repo exclude list
+    $DFIRWS_EXCLUDE_GIT_REPOS = @()
+    if ($null -ne $activeProfile.ExcludeGitRepos) {
+        $DFIRWS_EXCLUDE_GIT_REPOS = $activeProfile.ExcludeGitRepos
+    }
 } else {
     # No profile = Full behavior (everything included)
     $profileNodeEnabled  = $true
@@ -169,6 +175,7 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     $profileMsys2Enabled = $true
     $DFIRWS_EXCLUDE_TOOLS = @()
     $DFIRWS_EXTRAS_RESOLVED = @()
+    $DFIRWS_EXCLUDE_GIT_REPOS = @()
 }
 
 $ProgressPreference = "SilentlyContinue"
@@ -203,6 +210,9 @@ if ($AllTools.IsPresent) {
     $all = $true
 } elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
+} elseif ($Profile -ne "") {
+    Write-DateLog "Download tools for dfirws using profile: $Profile"
+    $all = $true
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."
     $all = $true

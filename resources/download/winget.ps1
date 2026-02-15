@@ -62,8 +62,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Chrome - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Chrome."
-$status = Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "Chrome") {
+    Write-SynchronizedLog "winget: Downloading Chrome."
+    $status = Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Chrome"
@@ -162,8 +164,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Obsidian - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Obsidian."
-$status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Obsidian") {
+    Write-SynchronizedLog "winget: Downloading Obsidian."
+    $status = Get-WinGet "Obsidian.Obsidian" "Obsidian*.exe" "obsidian.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Obsidian"
@@ -244,8 +248,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Putty - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Putty."
-$status = Get-WinGet "PuTTY.PuTTY" "PuTTY*.msi" "putty.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "PuTTY") {
+    Write-SynchronizedLog "winget: Downloading Putty."
+    $status = Get-WinGet "PuTTY.PuTTY" "PuTTY*.msi" "putty.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "PuTTY"
@@ -306,8 +312,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Ruby - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Ruby."
-$status = Get-WinGet "RubyInstallerTeam.Ruby.3.4" "Ruby*.exe" "ruby.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Ruby") {
+    Write-SynchronizedLog "winget: Downloading Ruby."
+    $status = Get-WinGet "RubyInstallerTeam.Ruby.3.4" "Ruby*.exe" "ruby.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Ruby"
@@ -332,8 +340,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # VideoLAN VLC - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading VLC."
-$status = Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "VLC") {
+    Write-SynchronizedLog "winget: Downloading VLC."
+    $status = Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "VLC"
@@ -366,10 +376,12 @@ $TOOL_DEFINITIONS += @{
 }
 
 # VirusTotal CLI
-Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
-$status = Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip" -check "Zip archive data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
+if (Test-ToolIncluded -ToolName "VirusTotal CLI") {
+    Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
+    $status = Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip" -check "Zip archive data"
+    if ($status) {
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -441,8 +453,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # OpenVPN - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading OpenVPN."
-$status = Get-WinGet "OpenVPNTechnologies.OpenVPNConnect" "OpenVPN*.msi" "openvpn.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "OpenVPN") {
+    Write-SynchronizedLog "winget: Downloading OpenVPN."
+    $status = Get-WinGet "OpenVPNTechnologies.OpenVPNConnect" "OpenVPN*.msi" "openvpn.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "OpenVPN"
@@ -531,8 +545,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # WireGuard.WireGuard - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading WireGuard."
-$status = Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "WireGuard") {
+    Write-SynchronizedLog "winget: Downloading WireGuard."
+    $status = Get-WinGet "WireGuard.WireGuard" "wireguard*.msi" "wireguard.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "WireGuard"
@@ -585,8 +601,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # tailscale - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Tailscale."
-$status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Tailscale") {
+    Write-SynchronizedLog "winget: Downloading Tailscale."
+    $status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Tailscale"
@@ -611,8 +629,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Firefox - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Firefox."
-$status = Get-WinGet "Mozilla.Firefox" "Firefox*.exe" "firefox.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Firefox") {
+    Write-SynchronizedLog "winget: Downloading Firefox."
+    $status = Get-WinGet "Mozilla.Firefox" "Firefox*.exe" "firefox.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Firefox"
@@ -645,8 +665,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Foxit PDF Reader - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading Foxit PDF Reader."
-$status = Get-WinGet "Foxit.FoxitReader" "Foxit*.exe" "foxitreader.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "Foxit PDF Reader") {
+    Write-SynchronizedLog "winget: Downloading Foxit PDF Reader."
+    $status = Get-WinGet "Foxit.FoxitReader" "Foxit*.exe" "foxitreader.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Foxit PDF Reader"
