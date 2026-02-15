@@ -107,6 +107,30 @@ if ($all -or $Python) {
     Write-SynchronizedLog "winget: Downloading Python."
     $status = Get-WinGet "Python.Python.3.11" "Python*.exe" "python3.exe" -check "PE32"
 
+    # uv - available for installation via dfirws-install.ps1
+    Write-SynchronizedLog "winget: Downloading uv."
+    $status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
+    if ($status) {
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
+    }
+
+    $TOOL_DEFINITIONS += @{
+        Name = "uv"
+        Category = "Programming\Python"
+        Shortcuts = @()
+        InstallVerifyCommand = ""
+        Verify = @()
+        FileExtensions = @(".py")
+        Tags = @("python", "package-management")
+        Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
+        Tips = ""
+        Usage = ""
+        SampleCommands = @()
+        SampleFiles = @()
+        Dependencies = @()
+    }
+
+
     # Get Amazon Corretto - installed during start
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"
 

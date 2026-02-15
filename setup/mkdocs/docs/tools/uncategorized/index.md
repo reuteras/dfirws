@@ -2,7 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions |
 | --- | --- | --- | --- | --- |
-| [@marp-team/marp-cli](marp-team-marp-cli.md) |  |  | markdown, presentation, documentation | `.md`, `.markdown` |
+| [@marp-team/marp-cli](marp-team-marp-cli.md) | npm |  | markdown, presentation, documentation | `.md`, `.markdown` |
 | [API Monitor](api-monitor.md) | HTTP | API Monitor is a tool for monitoring Windows API calls. | reverse-engineering, api-tracing, dynamic-analysis | `.exe`, `.dll` |
 | [APT-Hunter](apt-hunter.md) | Git |  | event-log, threat-hunting |  |
 | [ASL](asl.md) | Git |  | pe-analysis, packer-detection |  |
@@ -24,6 +24,7 @@
 | [EmailAnalyzer](emailanalyzer.md) | Git |  | email, forensics, phishing |  |
 | [Events-Ripper](events-ripper.md) | Git |  | event-log, forensics, windows |  |
 | [Geolocus](geolocus.md) | Enrichment | Geolocus MMDB geolocation database. | geolocation, mmdb | `.mmdb` |
+| [Ghidra](ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  |
 | [Ghidra BTIGhidra](ghidra-btighidra.md) | GitHub Release | Binary Type Inference Ghidra Plugin | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
 | [Ghidra Cartographer](ghidra-cartographer.md) | GitHub Release | Code Coverage Exploration Plugin for Ghidra. | reverse-engineering, disassembler, visualization | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
 | [Ghidra GhidrAssistMCP](ghidra-ghidrassistmcp.md) | GitHub Release | Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default. | reverse-engineering, mcp, ai, ghidra | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
@@ -124,7 +125,7 @@
 | [dictionaries](dictionaries.md) | Git |  | dictionaries, libreoffice |  |
 | [dll_to_exe](dll-to-exe.md) | GitHub Release | Converts a DLL into EXE | pe-analysis, conversion | `.dll`, `.exe` |
 | [dnslib](dnslib.md) | Python |  | network, dns |  |
-| [docsify-cli](docsify-cli.md) |  |  | documentation, markdown | `.md`, `.html` |
+| [docsify-cli](docsify-cli.md) | npm |  | documentation, markdown | `.md`, `.html` |
 | [docx2txt](docx2txt.md) | Python |  | office, word, data-extraction | `.docx` |
 | [dotnetfile](dotnetfile.md) | Git |  | pe-analysis, dotnet |  |
 | [dotnetfile](dotnetfile-2.md) | Python |  | pe-analysis, dotnet | `.exe`, `.dll` |
@@ -178,7 +179,7 @@
 | [obsidian-timeline](obsidian-timeline.md) | GitHub Release |  | obsidian, timeline, plugins |  |
 | [olefile](olefile.md) | Python |  | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |
 | [one-extract](one-extract.md) | Git |  | forensics, onenote, data-extraction |  |
-| [opencode-ai](opencode-ai.md) |  |  | ai, code-generation, automation | `.txt`, `.md`, `.log`, `.json` |
+| [opencode-ai](opencode-ai.md) | npm | AI coding agent for the terminal with MCP server support. Configured with MCP servers for Ghidra (GhidrAssistMCP), radare2 (r2mcp), and regipy. | ai, code-generation, automation, mcp | `.txt`, `.md`, `.log`, `.json` |
 | [openpyxl](openpyxl.md) | Python |  | office, excel, data-extraction | `.xlsx` |
 | [orjson](orjson.md) | Python |  | json, data-processing | `.json` |
 | [paramiko](paramiko.md) | Python |  | network, ssh, scripting |  |
