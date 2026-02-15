@@ -60,8 +60,13 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     # The upstream Makefile default target may run `r2check` which executes `r2`.
     # In the sandbox this runtime check can fail (Error 127) even when compilation works,
     # so provide a temporary no-op `r2` shim only for this build invocation.
-    $r2aiBuildCommand = 'export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig; export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH; mkdir -p /tmp/r2shim; echo "#!/usr/bin/env sh" > /tmp/r2shim/r2; echo "exit 0" >> /tmp/r2shim/r2; chmod +x /tmp/r2shim/r2; export PATH=/tmp/r2shim:$PATH; MAKE_BIN=$(command -v make || command -v mingw32-make || command -v gmake || true); [ -n "$MAKE_BIN" ] || { echo "make not found in PATH=$PATH"; ls -l /usr/bin/make /ucrt64/bin/make* 2>/dev/null || true; exit 127; }; cd /c/tmp/r2ai_build; "$MAKE_BIN" DOTEXE=.exe'
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc $r2aiBuildCommand 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    $r2aiBuildCommand = 'set -x; export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig; export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH; mkdir -p /tmp/r2shim; echo "#!/usr/bin/env sh" > /tmp/r2shim/r2; echo "exit 0" >> /tmp/r2shim/r2; chmod +x /tmp/r2shim/r2; export PATH=/tmp/r2shim:$PATH; MAKE_BIN=$(command -v make || command -v mingw32-make || command -v gmake || true); [ -n "$MAKE_BIN" ] || { echo "make not found in PATH=$PATH"; ls -l /usr/bin/make /ucrt64/bin/make* 2>/dev/null || true; exit 127; }; cd /c/tmp/r2ai_build; "$MAKE_BIN" DOTEXE=.exe'
+    & "C:\Tools\msys64\usr\bin\bash.exe" -lc $r2aiBuildCommand 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
+    $r2aiBuildExitCode = $LASTEXITCODE
+    if ($r2aiBuildExitCode -ne 0) {
+        Write-DateLog "r2ai build command exited with code $r2aiBuildExitCode." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "r2ai build command exited with code $r2aiBuildExitCode"
+    }
     # Copy output to persistent location
     $r2ai_output = "C:\Tools\msys64\r2ai_build"
     New-Item -ItemType Directory -Force -Path "$r2ai_output" | Out-Null
@@ -73,6 +78,8 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
         Write-DateLog "r2ai plugin compiled successfully." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Write-Output "r2ai plugin compiled successfully."
     } else {
+        Write-DateLog "r2ai build artifacts in C:\tmp\r2ai_build:" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Get-ChildItem -Path "C:\tmp\r2ai_build" -Force 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
         Write-DateLog "r2ai compilation failed - r2ai.dll not found." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Write-Output "r2ai compilation failed - check C:\log\msys2.txt for details."
     }
