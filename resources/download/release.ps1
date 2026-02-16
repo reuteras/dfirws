@@ -1475,9 +1475,11 @@ $TOOL_DEFINITIONS += @{
 }
 
 # LogBoost
-$status = Get-GitHubRelease -repo "joeavanzato/logboost" -path "${SETUP_PATH}\logboost.rar" -match "logboost_release" -check "RAR archive data"
-if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logboost.rar" -o"${TOOLS}\logboost" | Out-Null
+if (Test-ToolIncluded -ToolName "LogBoost") {
+    $status = Get-GitHubRelease -repo "joeavanzato/logboost" -path "${SETUP_PATH}\logboost.rar" -match "logboost_release" -check "RAR archive data"
+    if ($status) {
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logboost.rar" -o"${TOOLS}\logboost" | Out-Null
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2311,7 +2313,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # forensic-timeliner
-$status = Get-GitHubRelease -repo "acquiredsecurity/forensic-timeliner" -path "${SETUP_PATH}\ForensicTimeliner.zip" -match "ForensicTimeliner" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "forensic-timeliner") {
+    $status = Get-GitHubRelease -repo "acquiredsecurity/forensic-timeliner" -path "${SETUP_PATH}\ForensicTimeliner.zip" -match "ForensicTimeliner" -check "Zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "forensic-timeliner"
@@ -2629,9 +2633,13 @@ $TOOL_DEFINITIONS += @{
 # Visual Studio Code powershell extension - installed during start
 $status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix" -check "Zip archive data"
 # vscode-shellcheck
-$status =  Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match "vsix" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "vscode-shellcheck") {
+    $status =  Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match "vsix" -check "Zip archive data"
+}
 # Visual Studio Code spell checker extension - installed during start
-$status =  Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" -match "vsix" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "vscode-spell-checker") {
+    $status =  Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" -match "vsix" -check "Zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "VS Code PowerShell Extension"
@@ -3068,7 +3076,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # jadx - installed during start
-$status =  Get-GitHubRelease -repo "skylot/jadx" -path "${SETUP_PATH}\jadx.zip" -match "jadx-1" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "jadx") {
+    $status =  Get-GitHubRelease -repo "skylot/jadx" -path "${SETUP_PATH}\jadx.zip" -match "jadx-1" -check "Zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "jadx"

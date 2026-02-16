@@ -89,7 +89,6 @@ foreach ($package in `
     "ghidriff", `
     "grip", `
     "hachoir", `
-    "jpterm",  `
     "jsbeautifier", `
     "jupyterlab", `
     "litecli",  `
@@ -112,7 +111,6 @@ foreach ($package in `
     "protodeep", `
     "ptpython", `
     "pwncat", `
-    "pyghidra", `
     "pynvim", `
     "pyOneNote", `
     "pypng", `
@@ -129,6 +127,14 @@ foreach ($package in `
     "XLMMacroDeobfuscator", `
     "XlsxWriter") {
         uv tool install $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+}
+
+# Profile-conditional Python packages
+if (Test-ToolIncludedSandbox -ToolName "jpterm") {
+    uv tool install jpterm 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+}
+if (Test-ToolIncludedSandbox -ToolName "pyghidra") {
+    uv tool install pyghidra 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 Write-DateLog "Install extra scripts in Tools\bin." >> "C:\log\python.txt"
@@ -249,25 +255,29 @@ uv pip install -U `
 #
 # venv white-phoenix
 #
-Write-DateLog "Install packages in venv white-phoenix in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-C:\Windows\System32\curl.exe -L --silent -o "${WSDFIR_TEMP}\white-phoenix.txt" "https://raw.githubusercontent.com/cyberark/White-Phoenix/main/requirements.txt" 2>&1 >> "C:\log\python.txt"
-uv venv "C:\venv\white-phoenix" >> "C:\log\python.txt"
-C:\venv\white-phoenix\Scripts\Activate.ps1 >> "C:\log\python.txt"
-Set-Location "C:\venv\white-phoenix"
-uv pip install -r "${WSDFIR_TEMP}\white-phoenix.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-deactivate
-Write-DateLog "Python venv white-phoenix done." >> "C:\log\python.txt"
+if (Test-ToolIncludedSandbox -ToolName "White-Phoenix") {
+    Write-DateLog "Install packages in venv white-phoenix in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+    C:\Windows\System32\curl.exe -L --silent -o "${WSDFIR_TEMP}\white-phoenix.txt" "https://raw.githubusercontent.com/cyberark/White-Phoenix/main/requirements.txt" 2>&1 >> "C:\log\python.txt"
+    uv venv "C:\venv\white-phoenix" >> "C:\log\python.txt"
+    C:\venv\white-phoenix\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Set-Location "C:\venv\white-phoenix"
+    uv pip install -r "${WSDFIR_TEMP}\white-phoenix.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv white-phoenix done." >> "C:\log\python.txt"
+}
 
 ### venv for Kanvas
-Write-DateLog "Install packages in venv kanvas in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-git clone https://github.com/WithSecureLabs/Kanvas.git C:\venv\Kanvas 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-Set-Location "C:\venv\Kanvas"
-uv venv "C:\venv\Kanvas\.venv" >> "C:\log\python.txt"
-C:\venv\Kanvas\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
-uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-C:\Users\WDAGUtilityAccount\Documents\tools\utils\kanvas_update.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-deactivate
-Write-DateLog "Python venv kanvas done." >> "C:\log\python.txt"
+if (Test-ToolIncludedSandbox -ToolName "Kanvas") {
+    Write-DateLog "Install packages in venv kanvas in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+    git clone https://github.com/WithSecureLabs/Kanvas.git C:\venv\Kanvas 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Set-Location "C:\venv\Kanvas"
+    uv venv "C:\venv\Kanvas\.venv" >> "C:\log\python.txt"
+    C:\venv\Kanvas\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    C:\Users\WDAGUtilityAccount\Documents\tools\utils\kanvas_update.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    deactivate
+    Write-DateLog "Python venv kanvas done." >> "C:\log\python.txt"
+}
 
 ### venv for gostringungarbler
 Write-DateLog "Install packages in venv gostringungarbler in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
@@ -327,17 +337,19 @@ Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
 #
 # venv evt2sigma
 #
-Write-DateLog "Install packages in venv evt2sigma in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-Set-Location "C:\tmp"
-C:\Windows\System32\curl.exe -L --silent -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py" 2>&1 >> "C:\log\python.txt"
-C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
-uv venv "C:\venv\evt2sigma"
-C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
-uv pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
-Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
-deactivate
-Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
+if (Test-ToolIncludedSandbox -ToolName "evt2sigma") {
+    Write-DateLog "Install packages in venv evt2sigma in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
+    Set-Location "C:\tmp"
+    C:\Windows\System32\curl.exe -L --silent -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py" 2>&1 >> "C:\log\python.txt"
+    C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
+    uv venv "C:\venv\evt2sigma"
+    C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    uv pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
+    Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
+    deactivate
+    Write-DateLog "Python venv evt2sigma done." >> "C:\log\python.txt"
+}
 
 
 #

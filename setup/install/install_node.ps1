@@ -44,12 +44,14 @@ npm install --global @marp-team/marp-cli | Out-String -Stream 2>&1 | ForEach-Obj
 Write-DateLog "Install opencode-ai" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global opencode-ai | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
-Set-Location "${HOME}"
-git clone --recurse-submodules https://github.com/Koifman/LUMEN.git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-Move-Item "${HOME}\LUMEN" "${TOOLS}\Lumen" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-Set-Location "${TOOLS}\Lumen\LUMEN"
-npm install 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm run build 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+if (Test-ToolIncludedSandbox -ToolName "LUMEN") {
+    Set-Location "${HOME}"
+    git clone --recurse-submodules https://github.com/Koifman/LUMEN.git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    Move-Item "${HOME}\LUMEN" "${TOOLS}\Lumen" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    Set-Location "${TOOLS}\Lumen\LUMEN"
+    npm install 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    npm run build 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+}
 
 Write-DateLog "Node installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 

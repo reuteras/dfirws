@@ -37,6 +37,26 @@ foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${HOME}\Documents\WindowsPowerShell"
     }
 }
 
+# Load profile exclude list if available (written by downloadFiles.ps1)
+$DFIRWS_EXCLUDE_TOOLS = @()
+if (Test-Path "${TOOLS}\dfirws-profile.ps1") {
+    . "${TOOLS}\dfirws-profile.ps1"
+}
+
+function Test-ToolIncludedSandbox {
+    param (
+        [Parameter(Mandatory=$True)] [string]$ToolName
+    )
+    if ($DFIRWS_EXCLUDE_TOOLS.Count -eq 0) {
+        return $true
+    }
+    if ($DFIRWS_EXCLUDE_TOOLS -contains $ToolName) {
+        Write-Output "Skipping $ToolName (excluded by profile)."
+        return $false
+    }
+    return $true
+}
+
 # Declare helper functions
 
 # Adds a directory to the user's PATH environment variable.
