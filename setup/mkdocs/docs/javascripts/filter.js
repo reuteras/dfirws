@@ -51,6 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
     container.innerHTML =
       '<div class="tool-filter-row">' +
         '<div class="tool-filter-field">' +
+          '<label for="filter-desc">Filter by description</label>' +
+          '<input type="text" id="filter-desc" placeholder="e.g. timeline" />' +
+        "</div>" +
+        '<div class="tool-filter-field">' +
           '<label for="' + tagId + '">Filter by tag</label>' +
           '<input type="text" id="' + tagId + '" list="' + tagId + '-list" placeholder="e.g. malware-analysis" />' +
           '<datalist id="' + tagId + '-list">' +
@@ -63,10 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
           '<datalist id="' + extId + '-list">' +
             Object.keys(allExts).sort().map(function (e) { return '<option value="' + e + '">'; }).join("") +
           "</datalist>" +
-        "</div>" +
-        '<div class="tool-filter-field">' +
-          '<label for="filter-desc">Filter by description</label>' +
-          '<input type="text" id="filter-desc" placeholder="e.g. timeline" />' +
         "</div>" +
         '<div class="tool-filter-field tool-filter-actions">' +
           '<button type="button" class="tool-filter-clear">Clear</button>' +
