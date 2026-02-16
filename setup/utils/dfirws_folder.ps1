@@ -379,9 +379,11 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Reverse Engineering"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Cutter.lnk" -DestinationPath "${TOOLS}\cutter\cutter.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\dnSpy32.lnk" -DestinationPath "${TOOLS}\dnSpy32\dnSpy.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\dnSpy64.lnk" -DestinationPath "${TOOLS}\dnSpy64\dnSpy.exe"
-(Get-ChildItem "${TOOLS}\ghidra").Name | Where-Object { $_ -match "ghidra_" } | ForEach-Object {
-    $VERSION = "$_"
-    Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "${TOOLS}\ghidra\${VERSION}\ghidraRun.bat"
+if (Test-Path "${TOOLS}\ghidra") {
+    (Get-ChildItem "${TOOLS}\ghidra").Name | Where-Object { $_ -match "ghidra_" } | ForEach-Object {
+        $VERSION = "$_"
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "${TOOLS}\ghidra\${VERSION}\ghidraRun.bat"
+    }
 }
 #if (Test-Path "${VENV}\jep") {
 #    Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\Ghidrathon (Ghidra with JEP and Ghidrathon).lnk" -DestinationPath "${HOME}\Documents\tools\utils\ghidrathon.bat"
