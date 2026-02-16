@@ -110,7 +110,7 @@ foreach ($Tool in ${DidierStevensSuite}) {
     } elseif ($extension -eq ".dll") {
         $checkString = "PE32"
     } elseif ($extension -eq ".py") {
-        $checkString = "(Python script|^$)"
+        $checkString = "(Python script|^$|JavaScript)"
     } elseif ($extension -eq ".def") {
         $checkString = "magic text fragment"
     } elseif ($extension -eq ".json") {
