@@ -39,11 +39,6 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     Write-Output "MSYS2 installation done."
 }
 
-# Ensure required MSYS2/UCRT64 build packages are present on both fresh install and update paths.
-# Without this step, updated sandboxes may miss `make` and fail r2ai compilation.
-Write-DateLog "Ensure MSYS2 build packages are installed." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-& "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -S --needed make bc binutils cpio expect git gnu-netcat mingw-w64-ucrt-x86_64-autotools mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-make mingw-w64-ucrt-x86_64-toolchain nasm ncurses ncurses-devel pv rsync tree zsh vim' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-
 ## Compile r2ai plugin if radare2 and r2ai source are available
 if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin\radare2.exe")) {
     Write-DateLog "Compiling r2ai plugin for radare2." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
@@ -62,11 +57,29 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     Copy-Item -Recurse "C:\git\r2ai\src\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
     # Build r2ai with msys2 toolchain.
-    # The upstream Makefile default target may run `r2check` which executes `r2`.
-    # In the sandbox this runtime check can fail (Error 127) even when compilation works,
-    # so provide a temporary no-op `r2` shim only for this build invocation.
-    $r2aiBuildCommand = 'export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig; export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH; mkdir -p /tmp/r2shim; printf "#!/usr/bin/env sh\nexit 0\n" > /tmp/r2shim/r2; chmod +x /tmp/r2shim/r2; export PATH=/tmp/r2shim:$PATH; MAKE_BIN=$(command -v make || command -v gmake || true); [ -n "$MAKE_BIN" ] || { echo "make not found in PATH=$PATH"; ls -l /usr/bin/make /ucrt64/bin/make* 2>/dev/null || true; exit 127; }; cd /c/tmp/r2ai_build; "$MAKE_BIN" DOTEXE=.exe'
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc $r2aiBuildCommand 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    # Build only the plugin artifact to avoid optional CLI link issues in sandbox builds.
+    $r2aiBuildScriptPathWin = "C:\tmp\r2ai_build\build-r2ai.sh"
+    $r2aiBuildScript = @'
+set -x
+export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig
+export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH
+MAKE_BIN=$(command -v make || command -v mingw32-make || command -v gmake || true)
+if [ -z "$MAKE_BIN" ]; then
+  echo "make not found in PATH=$PATH"
+  ls -l /usr/bin/make /ucrt64/bin/make* 2>/dev/null || true
+  exit 127
+fi
+cd /c/tmp/r2ai_build
+"$MAKE_BIN" clean >/dev/null 2>&1 || true
+"$MAKE_BIN" EXT_SO=dll DOTEXE=.exe r2ai
+'@
+    $r2aiBuildScript | Out-File -FilePath $r2aiBuildScriptPathWin -Encoding ascii -Force
+    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'bash /c/tmp/r2ai_build/build-r2ai.sh' 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
+    $r2aiBuildExitCode = $LASTEXITCODE
+    if ($r2aiBuildExitCode -ne 0) {
+        Write-DateLog "r2ai build command exited with code $r2aiBuildExitCode." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "r2ai build command exited with code $r2aiBuildExitCode"
+    }
     # Copy output to persistent location
     $r2ai_output = "C:\Tools\msys64\r2ai_build"
     New-Item -ItemType Directory -Force -Path "$r2ai_output" | Out-Null
@@ -77,7 +90,16 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
         }
         Write-DateLog "r2ai plugin compiled successfully." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Write-Output "r2ai plugin compiled successfully."
+    } elseif (Test-Path "C:\tmp\r2ai_build\r2ai") {
+        Copy-Item "C:\tmp\r2ai_build\r2ai" "$r2ai_output\r2ai.dll" -Force
+        if (Test-Path "C:\tmp\r2ai_build\r2ai.exe") {
+            Copy-Item "C:\tmp\r2ai_build\r2ai.exe" "$r2ai_output\r2ai.exe" -Force
+        }
+        Write-DateLog "r2ai plugin built without extension; copied r2ai -> r2ai.dll." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "r2ai plugin compiled successfully (extensionless output)."
     } else {
+        Write-DateLog "r2ai build artifacts in C:\tmp\r2ai_build:" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Get-ChildItem -Path "C:\tmp\r2ai_build" -Force 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
         Write-DateLog "r2ai compilation failed - r2ai.dll not found." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Write-Output "r2ai compilation failed - check C:\log\msys2.txt for details."
     }
