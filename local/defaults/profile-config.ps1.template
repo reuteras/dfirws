@@ -34,8 +34,8 @@ $DFIRWS_PROFILE = ""
 #                "vscode-shellcheck", "vscode-spell-checker",
 #                "Extra Nerd Fonts"
 #   node.ps1:    "LUMEN"
-#   python:      "jpterm", "pyghidra", "White-Phoenix", "Kanvas",
-#                "evt2sigma"
+#   python:      "binary-refinery", "jpterm", "pyghidra",
+#                "White-Phoenix", "Kanvas", "evt2sigma"
 #
 # Note: Adding "Obsidian" also requires adding the Obsidian plugins:
 #   "obsidian-mitre-attack", "obsidian-dataview", "obsidian-kanban",
