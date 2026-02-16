@@ -372,6 +372,16 @@ def collect_tools_json_paths(path: Path) -> list[Path]:
     return [path]
 
 
+def get_line_column_from_offset(raw_bytes: bytes, byte_offset: int) -> tuple[int, int]:
+    safe_offset = max(0, min(byte_offset, len(raw_bytes)))
+    before_error = raw_bytes[:safe_offset]
+    line = before_error.count(b"\n") + 1
+    last_newline = before_error.rfind(b"\n")
+    line_start = 0 if last_newline == -1 else last_newline + 1
+    column = safe_offset - line_start + 1
+    return line, column
+
+
 def load_tools(json_paths: list[Path]) -> list[dict]:
     tools: list[dict] = []
     for path in json_paths:
@@ -379,7 +389,22 @@ def load_tools(json_paths: list[Path]) -> list[dict]:
             raise FileNotFoundError(
                 f"Tools JSON not found at {path}. Run resources\\download\\http.ps1 to generate it."
             )
-        tools_doc = json.loads(path.read_text(encoding="utf-8"))
+        raw_json = path.read_bytes()
+        try:
+            text = raw_json.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            line, column = get_line_column_from_offset(raw_json, exc.start)
+            raise ValueError(
+                f"Failed to read UTF-8 in {path} at line {line}, column {column}: {exc}"
+            ) from exc
+
+        try:
+            tools_doc = json.loads(text)
+        except json.JSONDecodeError as exc:
+            raise ValueError(
+                f"Invalid JSON in {path} at line {exc.lineno}, column {exc.colno}: {exc.msg}"
+            ) from exc
+
         tools.extend(tools_doc.get("Tools") or [])
     return tools
 
@@ -415,7 +440,11 @@ def main() -> int:
         raise FileNotFoundError(
             f"No tools JSON files found in {json_path}. Run resources\\download\\http.ps1 to generate them."
         )
-    tools = load_tools(json_paths)
+    try:
+        tools = load_tools(json_paths)
+    except ValueError as exc:
+        print(f"Error: {exc}")
+        return 1
 
     grouped: Dict[str, List[dict]] = {}
     for tool in tools:

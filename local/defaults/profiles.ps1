@@ -89,6 +89,7 @@ $DFIRWS_PROFILES = @{
             # node.ps1 (sandbox)
             "LUMEN",
             # install_python_tools.ps1 (sandbox)
+            "binary-refinery",
             "jpterm",
             "pyghidra",
             "White-Phoenix",
