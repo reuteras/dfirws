@@ -46,6 +46,9 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
 }
 
+# git - installed during start
+$status = Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe" -check "PE32"
+
 #
 # Packages used in freshclam sandbox
 if ($all -or $Freshclam) {
@@ -202,9 +205,6 @@ if (($all -and $profileGoEnabled) -or $Go) {
 #
 # Packages used in Rust sandbox
 if (($all -and $profileRustEnabled) -or $Rust) {
-    # git - installed during start
-    $status = Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe" -check "PE32"
-
     # Rust - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading Rust."
     $status = Get-WinGet "Rustlang.Rust.GNU" "Rust*.msi" "rust.msi" -check "Composite Document File V2 Document"
