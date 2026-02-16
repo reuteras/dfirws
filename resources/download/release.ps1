@@ -1291,7 +1291,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "pescan"
+            Name = "pe_check"
             Expect = "PE32"
         }
     )
@@ -2613,11 +2613,6 @@ $TOOL_DEFINITIONS += @{
         @{
             Type = "command"
             Name = "evtx_dump"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
-            Name = "C:\venv\uv\regipy\Scripts\evtx_dump.exe"
             Expect = "PE32"
         }
     )

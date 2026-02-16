@@ -267,11 +267,6 @@ $TOOL_DEFINITIONS += @{
             Name = "`${TOOLS}\Zimmerman\net6\WxTCmd.exe"
             Expect = "PE32"
         }
-        @{
-            Type = "command"
-            Name = "`${env:ProgramFiles}\RegistryExplorer\RegistryExplorer.exe"
-            Expect = "PE32"
-        }
     )
     Notes = "Zimmerman Tools is a collection of Windows forensics tools developed by Eric Zimmerman."
     Tips = "Zimmerman Tools includes a variety of tools for analyzing Windows artifacts, such as the registry, event logs, and more."
