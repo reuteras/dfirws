@@ -15,7 +15,9 @@ $env:PATH_TO_FX = "C:\Tools\javafx-sdk\lib"
 $env:POSH_THEMES_PATH = "${HOME}\AppData\Local\Programs\oh-my-posh\themes"
 $env:PSModulePath = "$env:PSModulePath;C:\Downloads\powershell-modules"
 # Find last version of Ghidra
-$env:GHIDRA_INSTALL_DIR = "C:\Tools\ghidra\" + ((Get-ChildItem C:\Tools\ghidra\ | C:\Windows\System32\findstr.exe PUBLIC | Select-Object -Last 1).Split(" ") | Select-Object -Last 1)
+if (Test-Path "C:\Tools\ghidra\") {
+    $env:GHIDRA_INSTALL_DIR = "C:\Tools\ghidra\" + ((Get-ChildItem C:\Tools\ghidra\ | C:\Windows\System32\findstr.exe PUBLIC | Select-Object -Last 1).Split(" ") | Select-Object -Last 1)
+}
 
 # Autosuggestions with PSReadLine
 if (-not(Get-Module -ListAvailable PSReadLine)) {

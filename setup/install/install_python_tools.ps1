@@ -9,7 +9,10 @@ Write-Output "Start installation of Python in Sandbox."
 $TOOL_DEFINITIONS = @()
 $PYTHON_DEFAULT = "3.11"
 
-$GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\").FullName | findstr.exe PUBLIC | Select-Object -Last 1
+$GHIDRA_INSTALL_DIR = ""
+if (Test-Path "${TOOLS}\ghidra\") {
+    $GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\").FullName | findstr.exe PUBLIC | Select-Object -Last 1
+}
 
 $env:UV_TOOL_BIN_DIR = "C:\venv\bin"
 $env:UV_TOOL_DIR = "C:\venv\uv"
@@ -47,8 +50,10 @@ Start-Process -Wait "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive 
 Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install .NET 6
-Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
-Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+if (Test-Path "${SETUP_PATH}\dotnet6desktop.exe") {
+    Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
+    Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 
 Write-DateLog "Install Git." >> "C:\log\python.txt"
 Install-Git | Out-Null

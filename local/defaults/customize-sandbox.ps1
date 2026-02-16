@@ -70,9 +70,11 @@ ${GHIDRA_THEME}
 USER_AGREEMENT=ACCEPT
 "@
 
-foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
-    New-Item -Path "${HOME}\AppData\Roaming\ghidra\${version}" -ItemType Directory -Force | Out-Null
-    ${GHIDRA_CONFIG} | Out-File -FilePath "${HOME}\AppData\Roaming\ghidra\${version}\preferences" -Encoding ascii
+if (Test-Path "${TOOLS}\ghidra\") {
+    foreach ($version in (Get-ChildItem "${TOOLS}\ghidra\" -Directory).Name) {
+        New-Item -Path "${HOME}\AppData\Roaming\ghidra\${version}" -ItemType Directory -Force | Out-Null
+        ${GHIDRA_CONFIG} | Out-File -FilePath "${HOME}\AppData\Roaming\ghidra\${version}\preferences" -Encoding ascii
+    }
 }
 
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools

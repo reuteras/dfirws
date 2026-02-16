@@ -365,7 +365,10 @@ Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_
 # PATH - Windows have a limit of <2048 characters for user PATH
 
 Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-$GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
+$GHIDRA_INSTALL_DIR=""
+if (Test-Path "${TOOLS}\ghidra\") {
+    $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
+}
 
 # Excluded from PATH due to 2048 character limit. Accessible via desktop shortcuts.
 # "${env:ProgramFiles}\IDR\bin"
