@@ -42,13 +42,15 @@ $TOOL_DEFINITIONS += @{
 }
 
 # godap
-$status = Get-GitHubRelease -repo "Macmod/godap" -path "${SETUP_PATH}\godap.zip" -match "windows-amd64.zip$" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\godap") {
-        Remove-Item "${TOOLS}\godap" -Recurse -Force
+if (Test-ToolIncluded -ToolName "godap") {
+    $status = Get-GitHubRelease -repo "Macmod/godap" -path "${SETUP_PATH}\godap.zip" -match "windows-amd64.zip$" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\godap") {
+            Remove-Item "${TOOLS}\godap" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\godap.zip" -o"${TOOLS}\godap" | Out-Null
+        Move-Item ${TOOLS}\godap-* "${TOOLS}\godap"
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\godap.zip" -o"${TOOLS}\godap" | Out-Null
-    Move-Item ${TOOLS}\godap-* "${TOOLS}\godap"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -118,7 +120,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # 4n4lDetector - installed in sandbox during startup
-$status =  Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "${SETUP_PATH}\4n4lDetector.zip" -match "4n4lDetector" -check "Zip archive data"
+if (Test-ToolIncluded -ToolName "4n4lDetector") {
+    $status =  Get-GitHubRelease -repo "4n0nym0us/4n4lDetector" -path "${SETUP_PATH}\4n4lDetector.zip" -match "4n4lDetector" -check "Zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "4n4lDetector"
@@ -388,13 +392,15 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Audacity
-$status = Get-GitHubRelease -repo "audacity/audacity" -path "${SETUP_PATH}\audacity.zip" -match "64bit.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\audacity") {
-        Remove-Item "${TOOLS}\audacity" -Recurse -Force
+if (Test-ToolIncluded -ToolName "Audacity") {
+    $status = Get-GitHubRelease -repo "audacity/audacity" -path "${SETUP_PATH}\audacity.zip" -match "64bit.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\audacity") {
+            Remove-Item "${TOOLS}\audacity" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\audacity.zip" -o"${TOOLS}" | Out-Null
+        Move-Item ${TOOLS}\audacity-* "${TOOLS}\audacity"
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\audacity.zip" -o"${TOOLS}" | Out-Null
-    Move-Item ${TOOLS}\audacity-* "${TOOLS}\audacity"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -460,7 +466,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll")
     Tags = @("malware-analysis", "pe-analysis")
-    Notes = ""
+    Notes = "Automated decoding of encrypted text without knowing the key or ciphers used"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -469,7 +475,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Brim/Zui (Zq) - installed during start
-$status =  Get-GitHubRelease -repo "brimdata/zui" -path "${SETUP_PATH}\zui.exe" -match "exe$" -check "PE32"
+if (Test-ToolIncluded -ToolName "Zui") {
+    $status =  Get-GitHubRelease -repo "brimdata/zui" -path "${SETUP_PATH}\zui.exe" -match "exe$" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Zui"
@@ -542,13 +550,15 @@ $TOOL_DEFINITIONS += @{
 }
 
 # ffmpeg
-$status = Get-GitHubRelease -repo "BtbN/FFmpeg-Builds" -path "${SETUP_PATH}\ffmpeg.zip" -match "win64-gpl-7" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\ffmpeg") {
-        Remove-Item "${TOOLS}\ffmpeg" -Recurse -Force
+if (Test-ToolIncluded -ToolName "ffmpeg") {
+    $status = Get-GitHubRelease -repo "BtbN/FFmpeg-Builds" -path "${SETUP_PATH}\ffmpeg.zip" -match "win64-gpl-7" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\ffmpeg") {
+            Remove-Item "${TOOLS}\ffmpeg" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ffmpeg.zip" -o"${TOOLS}" | Out-Null
+        Move-Item ${TOOLS}\ffmpeg-* "${TOOLS}\ffmpeg"
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ffmpeg.zip" -o"${TOOLS}" | Out-Null
-    Move-Item ${TOOLS}\ffmpeg-* "${TOOLS}\ffmpeg"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -658,7 +668,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # cmder - installed during start
-$status =  Get-GitHubRelease -repo "cmderdev/cmder" -path "${SETUP_PATH}\cmder.7z" -match "cmder.7z" -check "7-zip archive data"
+if (Test-ToolIncluded -ToolName "cmder") {
+    $status =  Get-GitHubRelease -repo "cmderdev/cmder" -path "${SETUP_PATH}\cmder.7z" -match "cmder.7z" -check "7-zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "cmder"
@@ -683,10 +695,12 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Recaf
-$status = Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match "jar-with-dependencies.jar" -check "Java archive data \(JAR\)"
-if ($status) {
-    Copy-Item ${SETUP_PATH}\recaf.jar ${TOOLS}\lib\recaf.jar
-    Set-Content -Encoding Ascii -Path "${TOOLS}\bin\recaf.bat" "@echo off`njava --module-path ${SANDBOX_TOOLS}\javafx-sdk\lib --add-modules javafx.controls -jar C:\Tools\lib\recaf.jar"
+if (Test-ToolIncluded -ToolName "Recaf") {
+    $status = Get-GitHubRelease -repo "Col-E/Recaf" -path "${SETUP_PATH}\recaf.jar" -match "jar-with-dependencies.jar" -check "Java archive data \(JAR\)"
+    if ($status) {
+        Copy-Item ${SETUP_PATH}\recaf.jar ${TOOLS}\lib\recaf.jar
+        Set-Content -Encoding Ascii -Path "${TOOLS}\bin\recaf.bat" "@echo off`njava --module-path ${SANDBOX_TOOLS}\javafx-sdk\lib --add-modules javafx.controls -jar C:\Tools\lib\recaf.jar"
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -714,12 +728,14 @@ $TOOL_DEFINITIONS += @{
 }
 
 # DBeaver
-$status = Get-GitHubRelease -repo "dbeaver/dbeaver" -path "${SETUP_PATH}\dbeaver.zip" -match "win32.win32.x86_64.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\dbeaver") {
-        Remove-Item "${TOOLS}\dbeaver" -Recurse -Force
+if (Test-ToolIncluded -ToolName "DBeaver") {
+    $status = Get-GitHubRelease -repo "dbeaver/dbeaver" -path "${SETUP_PATH}\dbeaver.zip" -match "win32.win32.x86_64.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\dbeaver") {
+            Remove-Item "${TOOLS}\dbeaver" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dbeaver.zip" -o"${TOOLS}" | Out-Null
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dbeaver.zip" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -783,7 +799,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll", ".obj", ".lib")
     Tags = @("pe-analysis", "reverse-engineering")
-    Notes = ""
+    Notes = "Microsoft COFF Binary File Dumper: Extract from Visual Studio MSVC Tools"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -845,7 +861,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Dokany - available for manual installation
-$status =  Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.msi" -match "Dokan_x64.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "Dokany") {
+    $status =  Get-GitHubRelease -repo "dokan-dev/dokany" -path "${SETUP_PATH}\dokany.msi" -match "Dokan_x64.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Dokany"
@@ -1031,16 +1049,18 @@ $TOOL_DEFINITIONS += @{
 }
 
 # h2database - available for manual installation
-$status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2database.zip" -match "bundle.jar" -check "Java archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\h2database") {
-        Remove-Item "${TOOLS}\h2database" -Recurse -Force
+if (Test-ToolIncluded -ToolName "h2database") {
+    $status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2database.zip" -match "bundle.jar" -check "Java archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\h2database") {
+            Remove-Item "${TOOLS}\h2database" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\h2database.zip" -o"${TOOLS}\h2database" | Out-Null
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\h2database.zip" -o"${TOOLS}\h2database" | Out-Null
-}
-$status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2.pdf" -match "h2.pdf"
-if ($status) {
-    Copy-Item ${SETUP_PATH}\h2.pdf ${TOOLS}\h2database
+    $status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2.pdf" -match "h2.pdf"
+    if ($status) {
+        Copy-Item ${SETUP_PATH}\h2.pdf ${TOOLS}\h2database
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1277,7 +1297,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll", ".sys")
     Tags = @("pe-analysis", "reverse-engineering")
-    Notes = ""
+    Notes = "A set of small utilities, helpers for PIN tracers."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1705,9 +1725,11 @@ $TOOL_DEFINITIONS += @{
 }
 
 # adalanche
-$status = Get-GitHubRelease -repo "lkarlslund/adalanche" -path "${SETUP_PATH}\adalanche.exe" -match "adalanche-windows-x64" -check "PE32"
-if ($status) {
-    Copy-Item ${SETUP_PATH}\adalanche.exe ${TOOLS}\bin\
+if (Test-ToolIncluded -ToolName "adalanche") {
+    $status = Get-GitHubRelease -repo "lkarlslund/adalanche" -path "${SETUP_PATH}\adalanche.exe" -match "adalanche-windows-x64" -check "PE32"
+    if ($status) {
+        Copy-Item ${SETUP_PATH}\adalanche.exe ${TOOLS}\bin\
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1845,7 +1867,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @()
-    Notes = ""
+    Notes = "Rules for capa."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1876,7 +1898,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".exe", ".elf")
     Tags = @("reverse-engineering", "golang")
-    Notes = ""
+    Notes = "GoLang extension for Ghidra."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -2630,7 +2652,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("text-editor", "shellcheck", "linting", "bash", "sh", "plugins")
-    Notes = ""
+    Notes = "Shellcheck extension for VS Code."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -2695,7 +2717,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Fibratus
-$status = Get-GitHubRelease -repo "rabbitstack/fibratus" -path "${SETUP_PATH}\fibratus.msi" -match "fibratus-[.0-9]+-amd64.msi$" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "Fibratus") {
+    $status = Get-GitHubRelease -repo "rabbitstack/fibratus" -path "${SETUP_PATH}\fibratus.msi" -match "fibratus-[.0-9]+-amd64.msi$" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Fibratus"
@@ -2874,14 +2898,16 @@ $TOOL_DEFINITIONS += @{
 }
 
 # obsidian-mitre-attack
-$status = Get-GitHubRelease -repo "reuteras/obsidian-mitre-attack" -path "${SETUP_PATH}\obsidian-mitre-attack.zip" -match "release.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\obsidian-mitre-attack") {
-        Remove-Item "${TOOLS}\obsidian-mitre-attack" -Recurse -Force
+if (Test-ToolIncluded -ToolName "obsidian-mitre-attack") {
+    $status = Get-GitHubRelease -repo "reuteras/obsidian-mitre-attack" -path "${SETUP_PATH}\obsidian-mitre-attack.zip" -match "release.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\obsidian-mitre-attack") {
+            Remove-Item "${TOOLS}\obsidian-mitre-attack" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\obsidian-mitre-attack.zip" -o"${TOOLS}" | Out-Null
+        Move-Item "${TOOLS}\MITRE" "${TOOLS}\obsidian-mitre-attack"
+        Remove-Item "${TOOLS}\README.md" -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\obsidian-mitre-attack.zip" -o"${TOOLS}" | Out-Null
-    Move-Item "${TOOLS}\MITRE" "${TOOLS}\obsidian-mitre-attack"
-    Remove-Item "${TOOLS}\README.md" -Force
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2901,13 +2927,15 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Cutter
-$status = Get-GitHubRelease -repo "rizinorg/cutter" -path "${SETUP_PATH}\cutter.zip" -match "Windows-x86_64.zip" -check "Zip archive data"
-if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cutter.zip" -o"${TOOLS}" | Out-Null
-    if (Test-Path "${TOOLS}\cutter") {
-        Remove-Item "${TOOLS}\cutter" -Recurse -Force
+if (Test-ToolIncluded -ToolName "Cutter") {
+    $status = Get-GitHubRelease -repo "rizinorg/cutter" -path "${SETUP_PATH}\cutter.zip" -match "Windows-x86_64.zip" -check "Zip archive data"
+    if ($status) {
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cutter.zip" -o"${TOOLS}" | Out-Null
+        if (Test-Path "${TOOLS}\cutter") {
+            Remove-Item "${TOOLS}\cutter" -Recurse -Force
+        }
+        Move-Item ${TOOLS}\Cutter-* ${TOOLS}\cutter
     }
-    Move-Item ${TOOLS}\Cutter-* ${TOOLS}\cutter
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2960,7 +2988,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".ttf", ".otf")
     Tags = @("fonts", "terminal")
-    Notes = ""
+    Notes = "Nerd Fonts for terminal and more."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -2969,12 +2997,14 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Perl by Strawberry
-$status = Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "${SETUP_PATH}\perl.zip" -match "portable.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\perl") {
-        Remove-Item "${TOOLS}\perl" -Recurse -Force
+if (Test-ToolIncluded -ToolName "Strawberry Perl") {
+    $status = Get-GitHubRelease -repo "StrawberryPerl/Perl-Dist-Strawberry" -path "${SETUP_PATH}\perl.zip" -match "portable.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\perl") {
+            Remove-Item "${TOOLS}\perl" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\perl.zip" -o"${TOOLS}\perl" | Out-Null
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\perl.zip" -o"${TOOLS}\perl" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3319,9 +3349,11 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Velociraptor
-$status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match "windows-amd64.exe$" -check "PE32"
-if ($status) {
-    Copy-Item "${SETUP_PATH}\velociraptor.exe" "${TOOLS}\bin\" -Force
+if (Test-ToolIncluded -ToolName "Velociraptor") {
+    $status = Get-GitHubRelease -repo "velocidex/velociraptor" -path "${SETUP_PATH}\velociraptor.exe" -match "windows-amd64.exe$" -check "PE32"
+    if ($status) {
+        Copy-Item "${SETUP_PATH}\velociraptor.exe" "${TOOLS}\bin\" -Force
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3368,7 +3400,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("forensics", "triage")
-    Notes = ""
+    Notes = "Why is this running?"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -3413,7 +3445,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # fqlite
-$status = Get-GitHubRelease -repo "pawlaszczyk/fqlite" -path "${SETUP_PATH}\fqlite.exe" -match "windows.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "fqlite") {
+    $status = Get-GitHubRelease -repo "pawlaszczyk/fqlite" -path "${SETUP_PATH}\fqlite.exe" -match "windows.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "fqlite"
@@ -3815,7 +3849,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # zaproxy - available for installation with dfirws-install.ps1
-$status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.exe" -match "windows.exe" -check "PE32"
+if (Test-ToolIncluded -ToolName "zaproxy") {
+    $status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.exe" -match "windows.exe" -check "PE32"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "zaproxy"
@@ -3940,12 +3976,14 @@ $TOOL_DEFINITIONS += @{
 }
 
 # YAMAGoya
-$status = Get-GitHubRelease -repo "JPCERTCC/YAMAGoya" -path "${SETUP_PATH}\YAMAGoya.zip" -match "YAMAGoya.*.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\YAMAGoya") {
-        Remove-Item "${TOOLS}\YAMAGoya" -Recurse -Force
+if (Test-ToolIncluded -ToolName "YAMAGoya") {
+    $status = Get-GitHubRelease -repo "JPCERTCC/YAMAGoya" -path "${SETUP_PATH}\YAMAGoya.zip" -match "YAMAGoya.*.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\YAMAGoya") {
+            Remove-Item "${TOOLS}\YAMAGoya" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\YAMAGoya.zip" -o"${TOOLS}\YAMAGoya" | Out-Null
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\YAMAGoya.zip" -o"${TOOLS}\YAMAGoya" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3976,50 +4014,53 @@ $TOOL_DEFINITIONS += @{
 # Obsidian plugins
 #
 
-# obsidian-dataview
-$status = Get-GitHubRelease -repo "blacksmithgu/obsidian-dataview" -path "${SETUP_PATH}\obsidian-plugins\obsidian-dataview\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "blacksmithgu/obsidian-dataview" -path "${SETUP_PATH}\obsidian-plugins\obsidian-dataview\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "blacksmithgu/obsidian-dataview" -path "${SETUP_PATH}\obsidian-plugins\obsidian-dataview\styles.css" -match "styles.css" -check "ASCII text"
+# Obsidian plugins - all gated on Obsidian inclusion
+if (Test-ToolIncluded -ToolName "Obsidian") {
+    # obsidian-dataview
+    $status = Get-GitHubRelease -repo "blacksmithgu/obsidian-dataview" -path "${SETUP_PATH}\obsidian-plugins\obsidian-dataview\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "blacksmithgu/obsidian-dataview" -path "${SETUP_PATH}\obsidian-plugins\obsidian-dataview\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "blacksmithgu/obsidian-dataview" -path "${SETUP_PATH}\obsidian-plugins\obsidian-dataview\styles.css" -match "styles.css" -check "ASCII text"
 
-# obsidian-kanban
-$status = Get-GitHubRelease -repo "mgmeyers/obsidian-kanban" -path "${SETUP_PATH}\obsidian-plugins\obsidian-kanban\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "mgmeyers/obsidian-kanban" -path "${SETUP_PATH}\obsidian-plugins\obsidian-kanban\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "mgmeyers/obsidian-kanban" -path "${SETUP_PATH}\obsidian-plugins\obsidian-kanban\styles.css" -match "styles.css" -check "ASCII text"
+    # obsidian-kanban
+    $status = Get-GitHubRelease -repo "mgmeyers/obsidian-kanban" -path "${SETUP_PATH}\obsidian-plugins\obsidian-kanban\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "mgmeyers/obsidian-kanban" -path "${SETUP_PATH}\obsidian-plugins\obsidian-kanban\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "mgmeyers/obsidian-kanban" -path "${SETUP_PATH}\obsidian-plugins\obsidian-kanban\styles.css" -match "styles.css" -check "ASCII text"
 
-# quickadd
-$status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\styles.css" -match "styles.css" -check "ASCII text"
+    # quickadd
+    $status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\styles.css" -match "styles.css" -check "ASCII text"
 
-# obsidian-calendar-plugin
-$status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\styles.css" -match "styles.css" -check "ASCII text"
+    # obsidian-calendar-plugin
+    $status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\styles.css" -match "styles.css" -check "ASCII text"
 
-# Templater
-$status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\styles.css" -match "styles.css" -check "ASCII text"
+    # Templater
+    $status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\styles.css" -match "styles.css" -check "ASCII text"
 
-# obsidian-tasks
-$status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\styles.css" -match "styles.css" -check "ASCII text"
+    # obsidian-tasks
+    $status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "obsidian-tasks-group/obsidian-tasks" -path "${SETUP_PATH}\obsidian-plugins\obsidian-tasks\styles.css" -match "styles.css" -check "ASCII text"
 
-# obsidian-excalidraw-plugin
-$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\styles.css" -match "styles.css" -check "text"
+    # obsidian-excalidraw-plugin
+    $status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "zsviczian/obsidian-excalidraw-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-excalidraw-plugin\styles.css" -match "styles.css" -check "text"
 
-# admonitions
-$status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\styles.css" -match "styles.css" -check "ASCII text"
+    # admonitions
+    $status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "javalent/admonitions" -path "${SETUP_PATH}\obsidian-plugins\admonitions\styles.css" -match "styles.css" -check "ASCII text"
 
-# obsidian-timeline
-$status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\main.js" -match "main.js" -check "JavaScript source"
-$status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\manifest.json" -match "manifest.json" -check "JSON text data"
-$status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\styles.css" -match "styles.css" -check "ASCII text"
+    # obsidian-timeline
+    $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "George-debug/obsidian-timeline" -path "${SETUP_PATH}\obsidian-plugins\obsidian-timeline\styles.css" -match "styles.css" -check "ASCII text"
+}
 
 
 $TOOL_DEFINITIONS += @{
@@ -4030,7 +4071,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "data-processing", "plugins")
-    Notes = ""
+    Notes = "Obsidian dataview plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4046,7 +4087,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "project-management", "plugins")
-    Notes = ""
+    Notes = "Obsidian Kanban plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4062,7 +4103,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "automation", "plugins")
-    Notes = ""
+    Notes = "Obsidian quicadd plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4078,7 +4119,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "calendar", "plugins")
-    Notes = ""
+    Notes = "Obsidian calendar plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4094,7 +4135,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "automation", "plugins")
-    Notes = ""
+    Notes = "Obsidian templater plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4110,7 +4151,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "task-management", "plugins")
-    Notes = ""
+    Notes = "Obsidian tasks plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4126,7 +4167,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "drawing", "plugins")
-    Notes = ""
+    Notes = "Obsidian Excalidraw plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4142,7 +4183,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "plugins")
-    Notes = ""
+    Notes = "Obsidian admonitions plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -4158,7 +4199,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "timeline", "plugins")
-    Notes = ""
+    Notes = "Obsidian timeline plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()

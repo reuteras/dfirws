@@ -77,6 +77,10 @@ $repourls = `
 
 foreach ($repourl in $repourls) {
     $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\.git$" }
+    if ($null -ne $DFIRWS_EXCLUDE_GIT_REPOS -and $DFIRWS_EXCLUDE_GIT_REPOS.Count -gt 0 -and $DFIRWS_EXCLUDE_GIT_REPOS -contains $repo) {
+        Write-SynchronizedLog "Skipping git repo ${repo} (excluded by profile)."
+        continue
+    }
     if ( Test-Path -Path "${repo}" ) {
         Set-Location "${repo}"
         ${result} = git pull 2>&1

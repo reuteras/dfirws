@@ -1,6 +1,6 @@
 # pestudio
 
-**Category:** Files and apps\PE
+**Category:** Files and apps / PE
 
 **Homepage:** <https://www.winitor.com/>
 

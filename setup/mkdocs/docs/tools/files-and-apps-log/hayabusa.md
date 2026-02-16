@@ -1,6 +1,6 @@
 # hayabusa
 
-**Category:** Files and apps\Log
+**Category:** Files and apps / Log
 
 **Source:** GitHub Release
 

@@ -1,6 +1,6 @@
 # Firefox
 
-**Category:** Utilities\Browsers
+**Category:** Utilities / Browsers
 
 **Source:** Winget
 

@@ -5,8 +5,8 @@
 # Default (empty string) = Full (all tools downloaded)
 $DFIRWS_PROFILE = ""
 
-# Override script inclusion (overrides the profile setting)
-# Uncomment and set to $true/$false to override:
+# Override script inclusion (overrides profile setting)
+# Uncomment to override:
 # $DFIRWS_PROFILE_NODE = $true
 # $DFIRWS_PROFILE_RUST = $false
 # $DFIRWS_PROFILE_GO = $false
@@ -14,11 +14,27 @@ $DFIRWS_PROFILE = ""
 
 # Extra tools to include even when excluded by the profile.
 # Add tool names to force-include them.
-# Available extras for Basic profile:
-#   "Autopsy", "QEMU", "Burp Suite", "Google Earth Pro",
-#   "Binary Ninja", "Neo4j", "hashcat",
-#   "Volatility Workbench 3", "Volatility Workbench 2.1",
-#   "LibreOffice", "Elastic Stack (ELK + Beats)"
+#
+# Available extras for Basic profile (grouped by source):
+#   basic.ps1:   "Ghidra", "ClamAV"
+#   winget.ps1:  "Autopsy", "Burp Suite", "QEMU", "Google Earth Pro",
+#                "Obsidian", "OpenVPN", "Tailscale", "Chrome", "Firefox",
+#                "VLC", "PuTTY", "WireGuard", "Foxit PDF Reader", "Ruby",
+#                "VirusTotal CLI"
+#   http.ps1:    "Binary Ninja", "Neo4j", "hashcat",
+#                "Volatility Workbench 3", "Volatility Workbench 2.1",
+#                "LibreOffice", "Elastic Stack (ELK + Beats)",
+#                "Tor Browser", "VeraCrypt", "capa Explorer Web"
+#   release.ps1: "Audacity", "Zui", "ffmpeg", "cmder", "DBeaver",
+#                "godap", "Recaf", "4n4lDetector", "Dokany", "adalanche",
+#                "Cutter", "Fibratus", "h2database", "Strawberry Perl",
+#                "zaproxy", "YAMAGoya", "Velociraptor", "fqlite"
+#
+# Note: Adding "Obsidian" also requires adding the Obsidian plugins:
+#   "obsidian-mitre-attack", "obsidian-dataview", "obsidian-kanban",
+#   "quickadd", "obsidian-calendar-plugin", "Templater",
+#   "obsidian-tasks", "obsidian-excalidraw-plugin", "admonitions",
+#   "obsidian-timeline"
 #
 # Example: $DFIRWS_EXTRAS = @("Autopsy", "LibreOffice")
 $DFIRWS_EXTRAS = @()

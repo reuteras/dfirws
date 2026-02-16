@@ -1,6 +1,6 @@
 # Mail Viewer
 
-**Category:** Files and apps\Email
+**Category:** Files and apps / Email
 
 **Homepage:** <https://www.mitec.cz/wp/mmv/>
 

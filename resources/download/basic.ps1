@@ -50,7 +50,9 @@ $TOOL_DEFINITIONS += @{
 # Packages used in freshclam sandbox
 if ($all -or $Freshclam) {
     # ClamAV - installed during start
-    $status = Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi$" -check "Composite Document File V2 Document"
+    if (Test-ToolIncluded -ToolName "ClamAV") {
+        $status = Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi$" -check "Composite Document File V2 Document"
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -135,15 +137,17 @@ if ($all -or $Python) {
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"
 
     # Ghidra - latest release
-    $status = Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "${SETUP_PATH}\ghidra.zip" -match "_PUBLIC_" -check "Zip archive data"
-    if ($status) {
-        if (Test-Path "${TOOLS}\ghidra") {
-            Remove-Item "${TOOLS}\ghidra" -Recurse -Force
+    if (Test-ToolIncluded -ToolName "Ghidra") {
+        $status = Get-GitHubRelease -repo "NationalSecurityAgency/ghidra" -path "${SETUP_PATH}\ghidra.zip" -match "_PUBLIC_" -check "Zip archive data"
+        if ($status) {
+            if (Test-Path "${TOOLS}\ghidra") {
+                Remove-Item "${TOOLS}\ghidra" -Recurse -Force
+            }
+            & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidra.zip" -o"${TOOLS}" | Out-Null
+            New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra" | Out-Null
+            Move-Item ${TOOLS}\ghidra_1* "${TOOLS}\ghidra\"
+            Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidra.zip" -o"${TOOLS}" | Out-Null
-        New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra" | Out-Null
-        Move-Item ${TOOLS}\ghidra_1* "${TOOLS}\ghidra\"
-        Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force
     }
 
     $TOOL_DEFINITIONS += @{

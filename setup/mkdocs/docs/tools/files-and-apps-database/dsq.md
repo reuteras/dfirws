@@ -1,6 +1,6 @@
 # dsq
 
-**Category:** Files and apps\Database
+**Category:** Files and apps / Database
 
 **Source:** GitHub Release
 

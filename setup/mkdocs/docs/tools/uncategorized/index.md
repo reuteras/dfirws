@@ -14,7 +14,7 @@
 | [CapaExplorer](capaexplorer.md) | Git |  | reverse-engineering, capa, visualization |  |
 | [CimSweep](cimsweep.md) | Git |  | windows, forensics, wmi |  |
 | [ComparePlus](compareplus.md) | GitHub Release | A diff plugin for Notepad++. | text-editor, diff, plugins |  |
-| [CuTE-tui](cute-tui.md) |  | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |
+| [CuTE-tui](cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |
 | [DFIRArtifactMuseum](dfirartifactmuseum.md) | Git |  | forensics, artifacts, reference |  |
 | [DSpellCheck](dspellcheck.md) | GitHub Release | A spell-checker plugin for Notepad++. | text-editor, spell-checker, plugins |  |
 | [DotNet 6 Desktop Runtime](dotnet-6-desktop-runtime.md) | Winget |  | dotnet, runtime |  |
@@ -24,7 +24,6 @@
 | [EmailAnalyzer](emailanalyzer.md) | Git |  | email, forensics, phishing |  |
 | [Events-Ripper](events-ripper.md) | Git |  | event-log, forensics, windows |  |
 | [Geolocus](geolocus.md) | Enrichment | Geolocus MMDB geolocation database. | geolocation, mmdb | `.mmdb` |
-| [Ghidra](ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  |
 | [Ghidra BTIGhidra](ghidra-btighidra.md) | GitHub Release | Binary Type Inference Ghidra Plugin | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
 | [Ghidra Cartographer](ghidra-cartographer.md) | GitHub Release | Code Coverage Exploration Plugin for Ghidra. | reverse-engineering, disassembler, visualization | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
 | [Ghidra GhidrAssistMCP](ghidra-ghidrassistmcp.md) | GitHub Release | Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default. | reverse-engineering, mcp, ai, ghidra | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |
@@ -67,7 +66,7 @@
 | [Ruby](ruby.md) | Winget | Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. | scripting, ruby | `.rb` |
 | [SQLite Tools](sqlite-tools.md) | HTTP | SQLite command-line tools. | database, sqlite, cli | `.db`, `.sqlite`, `.sqlite3` |
 | [SSC-Threat-Intel-IoCs](ssc-threat-intel-iocs.md) | Enrichment | SecurityScorecard threat intelligence indicators of compromise. | threat-intel, ioc |  |
-| [SSHniff](sshniff.md) |  | SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications. | network-analysis, ssh, pcap | `.pcap`, `.pcapng` |
+| [SSHniff](sshniff.md) | Cargo | SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications. | network-analysis, ssh, pcap | `.pcap`, `.pcapng` |
 | [Shadow-Pulse](shadow-pulse.md) | Git |  | threat-intelligence, ioc |  |
 | [Snort Rules](snort-rules.md) | Enrichment | Snort 3 community ruleset for network intrusion detection. | snort, ids, detection-rules, network | `.rules`, `.tar.gz` |
 | [Strawberry Perl](strawberry-perl.md) | GitHub Release | Strawberry Perl is a Perl distribution for Windows that includes a complete Perl environment. | scripting, perl | `.pl`, `.pm` |

@@ -1,6 +1,6 @@
 # Tor Browser
 
-**Category:** Utilities\Browsers
+**Category:** Utilities / Browsers
 
 **Homepage:** <https://www.torproject.org/>
 

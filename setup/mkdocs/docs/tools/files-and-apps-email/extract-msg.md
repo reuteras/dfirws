@@ -1,6 +1,6 @@
 # extract-msg
 
-**Category:** Files and apps\Email
+**Category:** Files and apps / Email
 
 **Source:** Python
 

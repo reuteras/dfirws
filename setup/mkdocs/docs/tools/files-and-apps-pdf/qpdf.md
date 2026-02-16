@@ -1,6 +1,6 @@
 # qpdf
 
-**Category:** Files and apps\PDF
+**Category:** Files and apps / PDF
 
 **Source:** GitHub Release
 
