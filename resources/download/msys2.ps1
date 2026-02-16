@@ -12,7 +12,7 @@ if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\msys64" )) {
     Remove-Item "${ROOT_PATH}\mount\Tools\msys64\done" | Out-Null
 }
 
-# Ensure git directory exists for sandbox mapping (may contain r2ai source)
+# Ensure git directory exists for sandbox mapping
 if (! (Test-Path -Path "${ROOT_PATH}\mount\git" )) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\git" | Out-Null
 }

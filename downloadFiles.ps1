@@ -333,7 +333,7 @@ if ($all -or $Git.IsPresent) {
 }
 
 if (($all -and $profileMsys2Enabled) -or $MSYS2.IsPresent) {
-    Write-DateLog "Download MSYS2 and compile r2ai plugin."
+    Write-DateLog "Download MSYS2."
     .\resources\download\msys2.ps1 | Out-Null
 }
 
