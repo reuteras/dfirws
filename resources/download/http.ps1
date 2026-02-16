@@ -9,15 +9,17 @@ $TOOL_DEFINITIONS = @()
 
 if (! $NoVSCodeExtensions.IsPresent) {
     # Get URI for Visual Studio Code C++ extension - ugly
-    $vscode_cpp_string = Get-DownloadUrlFromPage -url "https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
+    if (Test-ToolIncluded -ToolName "vscode-cpp") {
+        $vscode_cpp_string = Get-DownloadUrlFromPage -url "https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" -RegEx '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
 
-    if ("$vscode_cpp_string" -ne "") {
-        $vscode_tmp = $vscode_cpp_string | Select-String -Pattern '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
-        $vscode_cpp_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code C++ extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/cpptools/$vscode_cpp_version/vspackage?targetPlatform=win32-x64" -FilePath ".\downloads\vscode\vscode-cpp.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code C++ extension"
+        if ("$vscode_cpp_string" -ne "") {
+            $vscode_tmp = $vscode_cpp_string | Select-String -Pattern '"AssetUri":"[^"]+ms-vscode.cpptools/([^/]+)/'
+            $vscode_cpp_version = $vscode_tmp.Matches.Groups[1].Value
+            # Visual Studio Code C++ extension
+            $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/cpptools/$vscode_cpp_version/vspackage?targetPlatform=win32-x64" -FilePath ".\downloads\vscode\vscode-cpp.vsix" -CheckURL "Yes" -check "Zip archive data"
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code C++ extension"
+        }
     }
     # Get URI for Visual Studio Code python extension - ugly
     $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
@@ -32,27 +34,31 @@ if (! $NoVSCodeExtensions.IsPresent) {
     }
 
     # Get URI for Visual Studio Code mermaid extension - ugly
-    $vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -RegEx '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+    if (Test-ToolIncluded -ToolName "vscode-mermaid") {
+        $vscode_mermaid_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid -RegEx '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
 
-    if ("$vscode_mermaid_string" -ne "") {
-        $vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
-        $vscode_mermaid_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code mermaid extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code mermaid extension"
+        if ("$vscode_mermaid_string" -ne "") {
+            $vscode_tmp = $vscode_mermaid_string | Select-String -Pattern '"AssetUri":"[^"]+markdown-mermaid/([^/]+)/'
+            $vscode_mermaid_version = $vscode_tmp.Matches.Groups[1].Value
+            # Visual Studio Code mermaid extension
+            $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/bierner/vsextensions/markdown-mermaid/$vscode_mermaid_version/vspackage" -FilePath ".\downloads\vscode\vscode-mermaid.vsix" -CheckURL "Yes" -check "Zip archive data"
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code mermaid extension"
+        }
     }
 
     # Get URI for Visual Studio Code ruff extension - ugly
-    $vscode_ruff_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff -RegEx '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
+    if (Test-ToolIncluded -ToolName "vscode-ruff") {
+        $vscode_ruff_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff -RegEx '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
 
-    if ("$vscode_ruff_string" -ne "") {
-        $vscode_tmp = $vscode_ruff_string | Select-String -Pattern '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
-        $vscode_ruff_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code ruff extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/charliermarsh/vsextensions/ruff/$vscode_ruff_version/vspackage" -FilePath ".\downloads\vscode\vscode-ruff.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code ruff extension"
+        if ("$vscode_ruff_string" -ne "") {
+            $vscode_tmp = $vscode_ruff_string | Select-String -Pattern '"AssetUri":"[^"]+charliermarsh.ruff/([^/]+)/'
+            $vscode_ruff_version = $vscode_tmp.Matches.Groups[1].Value
+            # Visual Studio Code ruff extension
+            $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/charliermarsh/vsextensions/ruff/$vscode_ruff_version/vspackage" -FilePath ".\downloads\vscode\vscode-ruff.vsix" -CheckURL "Yes" -check "Zip archive data"
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code ruff extension"
+        }
     }
 }
 
@@ -2738,13 +2744,15 @@ $TOOL_DEFINITIONS += @{
 }
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
-$procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip'
-$status = Get-FileFromUri -uri "https://procdot.com/${procdot_path}" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes" -check "Zip archive data"
-if ($status) {
-    if (Test-Path -Path "${TOOLS}\procdot") {
-        Remove-Item -Recurse -Force "${TOOLS}\procdot" | Out-Null 2>&1
+if (Test-ToolIncluded -ToolName "ProcDOT") {
+    $procdot_path = Get-DownloadUrlFromPage -url "https://procdot.com/downloadprocdotbinaries.htm" -RegEx 'download[^"]+windows.zip'
+    $status = Get-FileFromUri -uri "https://procdot.com/${procdot_path}" -FilePath ".\downloads\procdot.zip" -CheckURL "Yes" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\procdot") {
+            Remove-Item -Recurse -Force "${TOOLS}\procdot" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{

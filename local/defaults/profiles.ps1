@@ -45,6 +45,10 @@ $DFIRWS_PROFILES = @{
             "Tor Browser",
             "VeraCrypt",
             "capa Explorer Web",
+            "ProcDOT",
+            "vscode-cpp",
+            "vscode-mermaid",
+            "vscode-ruff",
             # release.ps1
             "Audacity",
             "Zui",
@@ -64,6 +68,11 @@ $DFIRWS_PROFILES = @{
             "YAMAGoya",
             "Velociraptor",
             "fqlite",
+            "LogBoost",
+            "jadx",
+            "forensic-timeliner",
+            "vscode-shellcheck",
+            "vscode-spell-checker",
             # release.ps1 - Obsidian plugins (excluded with Obsidian)
             "obsidian-mitre-attack",
             "obsidian-dataview",
@@ -76,7 +85,15 @@ $DFIRWS_PROFILES = @{
             "admonitions",
             "obsidian-timeline",
             # release.ps1 - Fonts
-            "Extra Nerd Fonts"
+            "Extra Nerd Fonts",
+            # node.ps1 (sandbox)
+            "LUMEN",
+            # install_python_tools.ps1 (sandbox)
+            "jpterm",
+            "pyghidra",
+            "White-Phoenix",
+            "Kanvas",
+            "evt2sigma"
         )
         ExcludeGitRepos = @(
             "DFIRArtifactMuseum",
@@ -87,7 +104,13 @@ $DFIRWS_PROFILES = @{
             "fibratus",
             "MemProcFS.wiki",
             "LeechCore.wiki",
-            "Trawler"
+            "Trawler",
+            "White-Phoenix",
+            "PersistenceSniper.wiki",
+            "EVTX-ATTACK-SAMPLES",
+            "cutter-jupyter",
+            "cutterref",
+            "BlueTuxedo"
         )
     }
     "Full" = @{

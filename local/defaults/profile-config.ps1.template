@@ -24,12 +24,18 @@ $DFIRWS_PROFILE = ""
 #   http.ps1:    "Binary Ninja", "Neo4j", "hashcat",
 #                "Volatility Workbench 3", "Volatility Workbench 2.1",
 #                "LibreOffice", "Elastic Stack (ELK + Beats)",
-#                "Tor Browser", "VeraCrypt", "capa Explorer Web"
+#                "Tor Browser", "VeraCrypt", "capa Explorer Web",
+#                "ProcDOT", "vscode-cpp", "vscode-mermaid", "vscode-ruff"
 #   release.ps1: "Audacity", "Zui", "ffmpeg", "cmder", "DBeaver",
 #                "godap", "Recaf", "4n4lDetector", "Dokany", "adalanche",
 #                "Cutter", "Fibratus", "h2database", "Strawberry Perl",
 #                "zaproxy", "YAMAGoya", "Velociraptor", "fqlite",
+#                "LogBoost", "jadx", "forensic-timeliner",
+#                "vscode-shellcheck", "vscode-spell-checker",
 #                "Extra Nerd Fonts"
+#   node.ps1:    "LUMEN"
+#   python:      "jpterm", "pyghidra", "White-Phoenix", "Kanvas",
+#                "evt2sigma"
 #
 # Note: Adding "Obsidian" also requires adding the Obsidian plugins:
 #   "obsidian-mitre-attack", "obsidian-dataview", "obsidian-kanban",

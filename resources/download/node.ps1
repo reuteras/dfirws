@@ -15,9 +15,11 @@ New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\node" | Out-Null
 if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\node" )) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\node" | Out-Null
 }
-New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Lumen" | Out-Null
-if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\Lumen" )) {
-    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\Lumen" | Out-Null
+if (Test-ToolIncluded -ToolName "LUMEN") {
+    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Lumen" | Out-Null
+    if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\Lumen" )) {
+        New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\Lumen" | Out-Null
+    }
 }
 
 # Check if we have installed packages before.
@@ -33,7 +35,9 @@ foreach ($package in $node_packages) {
 }
 
 # Get latest LUMEN release url without downloading.
-Get-GitHubRelease Koifman/LUMEN "dummy" "." -download $false >> ${ROOT_PATH}\tmp\node\node.txt
+if (Test-ToolIncluded -ToolName "LUMEN") {
+    Get-GitHubRelease Koifman/LUMEN "dummy" "." -download $false >> ${ROOT_PATH}\tmp\node\node.txt
+}
 
 if ((Get-FileHash "${ROOT_PATH}\tmp\node\node.txt").Hash -ne (Get-FileHash ${CURRENT}).Hash) {
     (Get-Content ${ROOT_PATH}\resources\templates\generate_node.wsb.template).replace('__SANDBOX__', "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_node.wsb"
@@ -41,7 +45,9 @@ if ((Get-FileHash "${ROOT_PATH}\tmp\node\node.txt").Hash -ne (Get-FileHash ${CUR
     Wait-Sandbox -WSBPath "${ROOT_PATH}\tmp\generate_node.wsb" -WaitForPath "${ROOT_PATH}\tmp\node\done"
 
     rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\node" "${ROOT_PATH}\mount\Tools\node" >> ${ROOT_PATH}\log\npm.txt 2>&1
-    rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\Lumen" "${ROOT_PATH}\mount\Tools\Lumen" >> ${ROOT_PATH}\log\npm.txt 2>&1
+    if (Test-ToolIncluded -ToolName "LUMEN") {
+        rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\Lumen" "${ROOT_PATH}\mount\Tools\Lumen" >> ${ROOT_PATH}\log\npm.txt 2>&1
+    }
     
     Write-DateLog "Node and npm packages done." >> ${ROOT_PATH}\log\npm.txt 2>&1
 } else {
