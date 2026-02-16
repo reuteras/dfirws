@@ -2499,7 +2499,9 @@ $TOOL_DEFINITIONS += @{
 }
 
 # OpenVPN - manual installation
-$status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi" -check "Composite Document File V2 Document"
+if (Test-ToolIncluded -ToolName "OpenVPN") {
+    $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi" -check "Composite Document File V2 Document"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "OpenVPN Connect"
