@@ -49,6 +49,27 @@ $TOOL_DEFINITIONS += @{
 # git - installed during start
 $status = Get-GitHubRelease -repo "git-for-windows/git" -path "${SETUP_PATH}\git.exe" -match "64-bit.exe" -check "PE32"
 
+$TOOL_DEFINITIONS += @{
+    Name = "git"
+    Homepage = "https://gitforwindows.org/"
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = "A fork of Git containing Windows-specific patches."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @(
+        "git clone https://github.com/reuteras/dfirws.git"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+}
 #
 # Packages used in freshclam sandbox
 if ($all -or $Freshclam) {
