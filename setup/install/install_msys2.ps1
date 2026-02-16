@@ -60,8 +60,8 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     # Build r2ai plugin (and optionally CLI). The || true allows the build to
     # succeed even if the standalone executable link step fails in sandbox builds.
     $r2aiBuildScriptPathWin = "C:\tmp\r2ai_build\build-r2ai.sh"
-    $r2aiBuildScript = @'
-set -x
+$r2aiBuildScript = @'
+set -euo pipefail
 export PKG_CONFIG_PATH=/c/Tools/radare2/lib/pkgconfig
 export PATH=/ucrt64/bin:/usr/bin:/c/Tools/radare2/bin:$PATH
 MAKE_BIN=$(command -v make || command -v mingw32-make || command -v gmake || true)
@@ -72,7 +72,10 @@ if [ -z "$MAKE_BIN" ]; then
 fi
 cd /c/tmp/r2ai_build
 "$MAKE_BIN" clean >/dev/null 2>&1 || true
-"$MAKE_BIN" DOTLIB=.dll DOTEXE=.exe all || true
+# Prefer building the plugin target directly, because some upstream `all`
+# targets include optional checks that can fail in sandboxed environments.
+"$MAKE_BIN" DOTLIB=.dll DOTEXE=.exe r2ai.dll || \
+  "$MAKE_BIN" DOTLIB=.dll DOTEXE=.exe all || true
 '@
     $r2aiBuildScript | Out-File -FilePath $r2aiBuildScriptPathWin -Encoding ascii -Force
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'bash /c/tmp/r2ai_build/build-r2ai.sh' 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
