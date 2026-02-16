@@ -28,7 +28,8 @@ $DFIRWS_PROFILE = ""
 #   release.ps1: "Audacity", "Zui", "ffmpeg", "cmder", "DBeaver",
 #                "godap", "Recaf", "4n4lDetector", "Dokany", "adalanche",
 #                "Cutter", "Fibratus", "h2database", "Strawberry Perl",
-#                "zaproxy", "YAMAGoya", "Velociraptor", "fqlite"
+#                "zaproxy", "YAMAGoya", "Velociraptor", "fqlite",
+#                "Extra Nerd Fonts"
 #
 # Note: Adding "Obsidian" also requires adding the Obsidian plugins:
 #   "obsidian-mitre-attack", "obsidian-dataview", "obsidian-kanban",
