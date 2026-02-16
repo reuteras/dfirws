@@ -2,7 +2,7 @@
 
 **Category:** Uncategorized
 
-**Source:** Winget
+**Source:** Installer
 
 **File Extensions:** `.py`
 

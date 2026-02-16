@@ -7,3 +7,8 @@
 **File Extensions:** `.ipynb`
 
 **Tags:** python, notebook, data-analysis
+
+JupyterLab computational environment
+
+## Notes
+JupyterLab computational environment

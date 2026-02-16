@@ -7,3 +7,8 @@
 **File Extensions:** `.exe`, `.dll`, `.elf`
 
 **Tags:** reverse-engineering, binary-diffing
+
+Ghidra Binary Diffing Engine.
+
+## Notes
+Ghidra Binary Diffing Engine.

@@ -5,3 +5,8 @@
 **Source:** GitHub Release
 
 **Tags:** text-editor, shellcheck, linting, bash, sh, plugins
+
+Shellcheck extension for VS Code.
+
+## Notes
+Shellcheck extension for VS Code.

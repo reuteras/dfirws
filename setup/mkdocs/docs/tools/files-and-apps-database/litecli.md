@@ -7,3 +7,8 @@
 **File Extensions:** `.db`, `.sqlite`
 
 **Tags:** database, sqlite, cli
+
+CLI for SQLite Databases with auto-completion and syntax highlighting.
+
+## Notes
+CLI for SQLite Databases with auto-completion and syntax highlighting.

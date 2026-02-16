@@ -7,3 +7,8 @@
 **File Extensions:** `.evtx`
 
 **Tags:** log-analysis, event-log, forensics, visualization
+
+Your Browser-based EVTX Companion.
+
+## Notes
+Your Browser-based EVTX Companion.

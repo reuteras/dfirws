@@ -2,7 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions |
 | --- | --- | --- | --- | --- |
-| [LUMEN](lumen.md) | npm |  | log-analysis, event-log, forensics, visualization | `.evtx` |
+| [LUMEN](lumen.md) | npm | Your Browser-based EVTX Companion. | log-analysis, event-log, forensics, visualization | `.evtx` |
 | [LogBoost](logboost.md) | GitHub Release | Convert a variety of log formats to CSV while enriching detected IPs with Geolocation, ASN, DNS, WhoIs, Shodan InternetDB and Threat Indicator matches. | log-analysis, event-log | `.evtx`, `.csv`, `.json` |
 | [YAMAGoya](yamagoya.md) | GitHub Release | Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA | yara, rule-generation | `.yar`, `.yara` |
 | [Zircolite](zircolite.md) | GitHub Release | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |

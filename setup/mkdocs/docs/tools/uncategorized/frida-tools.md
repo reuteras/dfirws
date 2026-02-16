@@ -7,3 +7,8 @@
 **File Extensions:** `.exe`, `.apk`, `.ipa`
 
 **Tags:** reverse-engineering, dynamic-analysis, instrumentation
+
+Frida CLI tools.
+
+## Notes
+Frida CLI tools.
