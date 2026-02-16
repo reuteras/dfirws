@@ -15,11 +15,11 @@ New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\node" | Out-Null
 if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\node" )) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\node" | Out-Null
 }
-if (Test-ToolIncluded -ToolName "LUMEN") {
-    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Lumen" | Out-Null
-    if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\Lumen" )) {
-        New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\Lumen" | Out-Null
-    }
+
+# generate_node.wsb.template always maps tmp\Lumen, so this directory must exist.
+New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\Lumen" | Out-Null
+if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\Lumen" )) {
+    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\Lumen" | Out-Null
 }
 
 # Check if we have installed packages before.
@@ -55,6 +55,13 @@ if ((Get-FileHash "${ROOT_PATH}\tmp\node\node.txt").Hash -ne (Get-FileHash ${CUR
 }
 
 Remove-Item -Recurse -Force "${ROOT_PATH}\tmp\node" 2>&1 | Out-Null
+Remove-Item -Recurse -Force "${ROOT_PATH}\tmp\Lumen" 2>&1 | Out-Null
+
+# LUMEN is excluded in the Basic profile. Keep it available for sandbox mapping,
+# but remove it from mount\Tools after npm sandbox processing when excluded.
+if (!(Test-ToolIncluded -ToolName "LUMEN") -and (Test-Path -Path "${ROOT_PATH}\mount\Tools\Lumen")) {
+    Remove-Item -Recurse -Force "${ROOT_PATH}\mount\Tools\Lumen" 2>&1 | Out-Null
+}
 
 if (Test-Path -Path "${ROOT_PATH}\log\dfirws" ) {
     Copy-Item "${ROOT_PATH}\log\dfirws\*_node.ps1" "${ROOT_PATH}\downloads\dfirws\" -Force
