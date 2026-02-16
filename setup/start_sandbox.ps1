@@ -594,6 +594,23 @@ if (Test-Path "${LOCAL_PATH}\opencode.json") {
 } else {
     Copy-Item "${LOCAL_PATH}\defaults\opencode.json" "${opencode_config_dir}\opencode.json" -Force | Out-Null
 }
+
+$opencode_skills_src = ""
+if (Test-Path "${LOCAL_PATH}\opencode-skills") {
+    $opencode_skills_src = "${LOCAL_PATH}\opencode-skills"
+} elseif (Test-Path "${LOCAL_PATH}\defaults\opencode-skills") {
+    $opencode_skills_src = "${LOCAL_PATH}\defaults\opencode-skills"
+}
+
+if ($opencode_skills_src -ne "") {
+    $opencode_skills_dest = "${opencode_config_dir}\skills"
+    New-Item -ItemType Directory -Force -Path "${opencode_skills_dest}" | Out-Null
+    Robocopy.exe /MT:96 /MIR "${opencode_skills_src}" "${opencode_skills_dest}" | Out-Null
+    Write-DateLog "Installed opencode-ai skills." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+} else {
+    Write-DateLog "No opencode-ai skills found in local or defaults." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
+
 Write-DateLog "Installed opencode-ai config." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Config for bash and zsh
