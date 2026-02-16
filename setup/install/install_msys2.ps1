@@ -52,13 +52,12 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     # Create r2 alias for radare2 (the Makefile expects 'r2' command in PATH)
     Copy-Item "C:\Tools\radare2\bin\radare2.exe" "C:\Tools\radare2\bin\r2.exe" -Force
 
-    # Copy source to writable location (git mount is read-only)
+    # Copy source repository to writable location (git mount is read-only)
     New-Item -ItemType Directory -Force -Path "C:\tmp\r2ai_build" | Out-Null
-    Copy-Item -Recurse "C:\git\r2ai\src\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Copy-Item -Recurse "C:\git\r2ai\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
     # Build r2ai with msys2 toolchain.
-    # Build r2ai plugin (and optionally CLI). The || true allows the build to
-    # succeed even if the standalone executable link step fails in sandbox builds.
+    # Prefer explicit plugin targets to avoid optional `r2check` failures in CI.
     $r2aiBuildScriptPathWin = "C:\tmp\r2ai_build\build-r2ai.sh"
 $r2aiBuildScript = @'
 set -euo pipefail
@@ -71,11 +70,9 @@ if [ -z "$MAKE_BIN" ]; then
   exit 127
 fi
 cd /c/tmp/r2ai_build
-"$MAKE_BIN" clean >/dev/null 2>&1 || true
-# Prefer building the plugin target directly, because some upstream `all`
-# targets include optional checks that can fail in sandboxed environments.
-"$MAKE_BIN" DOTLIB=.dll DOTEXE=.exe r2ai.dll || \
-  "$MAKE_BIN" DOTLIB=.dll DOTEXE=.exe all || true
+"$MAKE_BIN" -C src clean >/dev/null 2>&1 || true
+# r2pm uses `make -C src`; try explicit plugin targets first to bypass `r2check`.
+"$MAKE_BIN" -C src DOTLIB=.dll DOTEXE=.exe r2ai.dll || "$MAKE_BIN" -C src DOTLIB=.dll DOTEXE=.exe r2ai || "$MAKE_BIN" -C src DOTLIB=.dll DOTEXE=.exe all || true
 '@
     $r2aiBuildScript | Out-File -FilePath $r2aiBuildScriptPathWin -Encoding ascii -Force
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'bash /c/tmp/r2ai_build/build-r2ai.sh' 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
@@ -87,20 +84,28 @@ cd /c/tmp/r2ai_build
     # Copy output to persistent location
     $r2ai_output = "C:\Tools\msys64\r2ai_build"
     New-Item -ItemType Directory -Force -Path "$r2ai_output" | Out-Null
-    if (Test-Path "C:\tmp\r2ai_build\r2ai.dll") {
-        Copy-Item "C:\tmp\r2ai_build\r2ai.dll" "$r2ai_output\r2ai.dll" -Force
-        if (Test-Path "C:\tmp\r2ai_build\r2ai.exe") {
-            Copy-Item "C:\tmp\r2ai_build\r2ai.exe" "$r2ai_output\r2ai.exe" -Force
+    $pluginCandidates = @(
+        "C:\tmp\r2ai_build\src\r2ai.dll",
+        "C:\tmp\r2ai_build\src\r2ai",
+        "C:\tmp\r2ai_build\src\*r2ai*.dll",
+        "C:\tmp\r2ai_build\src\*.dll"
+    )
+    $pluginPath = $null
+    foreach ($candidate in $pluginCandidates) {
+        $match = Get-Item $candidate -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($match) {
+            $pluginPath = $match.FullName
+            break
         }
-        Write-DateLog "r2ai plugin compiled successfully." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    }
+
+    if ($pluginPath) {
+        Copy-Item $pluginPath "$r2ai_output\r2ai.dll" -Force
+        if (Test-Path "C:\tmp\r2ai_build\src\r2ai.exe") {
+            Copy-Item "C:\tmp\r2ai_build\src\r2ai.exe" "$r2ai_output\r2ai.exe" -Force
+        }
+        Write-DateLog "r2ai plugin compiled successfully from $pluginPath." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Write-Output "r2ai plugin compiled successfully."
-    } elseif (Test-Path "C:\tmp\r2ai_build\r2ai") {
-        Copy-Item "C:\tmp\r2ai_build\r2ai" "$r2ai_output\r2ai.dll" -Force
-        if (Test-Path "C:\tmp\r2ai_build\r2ai.exe") {
-            Copy-Item "C:\tmp\r2ai_build\r2ai.exe" "$r2ai_output\r2ai.exe" -Force
-        }
-        Write-DateLog "r2ai plugin built without extension; copied r2ai -> r2ai.dll." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-        Write-Output "r2ai plugin compiled successfully (extensionless output)."
     } else {
         Write-DateLog "r2ai build artifacts in C:\tmp\r2ai_build:" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Get-ChildItem -Path "C:\tmp\r2ai_build" -Force 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
