@@ -57,7 +57,8 @@ if ((Test-Path "C:\git\r2ai\src\Makefile") -and (Test-Path "C:\Tools\radare2\bin
     Copy-Item -Recurse "C:\git\r2ai\src\*" "C:\tmp\r2ai_build\" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
     # Build r2ai with msys2 toolchain.
-    # Build only the plugin artifact to avoid optional CLI link issues in sandbox builds.
+    # Build r2ai plugin (and optionally CLI). The || true allows the build to
+    # succeed even if the standalone executable link step fails in sandbox builds.
     $r2aiBuildScriptPathWin = "C:\tmp\r2ai_build\build-r2ai.sh"
     $r2aiBuildScript = @'
 set -x
@@ -71,7 +72,7 @@ if [ -z "$MAKE_BIN" ]; then
 fi
 cd /c/tmp/r2ai_build
 "$MAKE_BIN" clean >/dev/null 2>&1 || true
-"$MAKE_BIN" EXT_SO=dll DOTEXE=.exe r2ai
+"$MAKE_BIN" DOTLIB=.dll DOTEXE=.exe all || true
 '@
     $r2aiBuildScript | Out-File -FilePath $r2aiBuildScriptPathWin -Encoding ascii -Force
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'bash /c/tmp/r2ai_build/build-r2ai.sh' 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
