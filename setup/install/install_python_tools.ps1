@@ -1246,7 +1246,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "Generating YARA rules based on binary code."
+    InstallVerifyCommand = ""
     Verify = @(
         @{
             Type = "command"
