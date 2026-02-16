@@ -1,6 +1,6 @@
 # LibreOffice
 
-**Category:** Files and apps\Office
+**Category:** Files and apps / Office
 
 **Homepage:** <https://www.libreoffice.org/>
 

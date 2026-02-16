@@ -109,7 +109,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("dotnet", "runtime")
-    Notes = ""
+    Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -129,7 +129,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("dotnet", "runtime")
-    Notes = ""
+    Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -693,29 +693,6 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pdf")
     Tags = @("pdf", "viewer")
     Notes = "Foxit PDF Reader is a lightweight and fast PDF viewer that can be used to open and view PDF files. It is an alternative to Adobe Acrobat Reader and offers features such as annotation, form filling, and digital signatures."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-}
-
-# uv - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading uv."
-$status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
-if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "uv"
-    Category = "Programming\Python"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".py")
-    Tags = @("python", "package-management")
-    Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
     Tips = ""
     Usage = ""
     SampleCommands = @()

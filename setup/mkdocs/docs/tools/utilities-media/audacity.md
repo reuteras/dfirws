@@ -1,6 +1,6 @@
 # Audacity
 
-**Category:** Utilities\Media
+**Category:** Utilities / Media
 
 **Source:** GitHub Release
 

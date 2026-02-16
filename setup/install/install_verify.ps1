@@ -142,7 +142,6 @@ Test-Command "C:\Tools\LogBoost\threats.db" "SQLite"
 Test-Command "C:\Tools\mboxviewer\mboxview64.exe" PE32 # GUI not in path
 Test-Command MemProcFS PE32      # C:\Tools\MemProcFS\MemProcFS.exe
 Test-Command mmdbinspect PE32      # C:\Tools\mmdbinspect\mmdbinspect.exe
-Test-Command node PE32      # C:\Tools\node\node.exe
 Test-Command PE-bear PE32      # C:\Tools\pebear\PE-bear.exe
 Test-Command ofs2rva PE32      # C:\Tools\pev\ofs2rva.exe
 Test-Command pescan PE32      # C:\Tools\pev\pescan.exe
@@ -224,7 +223,6 @@ Test-Command C:\venv\bin\js-beautify.exe PE32
 Test-Command C:\venv\uv\jupyterlab\Scripts\jsonschema.exe PE32
 Test-Command C:\venv\uv\jupyterlab\Scripts\jupyter.exe PE32
 Test-Command C:\venv\bin\lnkparse.exe PE32
-Test-Command C:\venv\default\Scripts\markdown_py.exe PE32
 Test-Command C:\venv\bin\minidump.exe PE32
 Test-Command C:\venv\bin\mkyara.exe PE32
 Test-Command C:\venv\bin\mraptor.exe PE32
@@ -272,23 +270,15 @@ Test-Command C:\venv\default\Scripts\vma-extract.exe PE32
 Test-Command C:\venv\bin\xlmdeobfuscator.exe PE32
 Test-Command C:\venv\dfir-unfurl\Scripts\flask.exe PE32
 Test-Command C:\venv\dfir-unfurl\Scripts\unfurl.exe PE32
-Test-Command C:\venv\default\Scripts\acquire.exe PE32
-Test-Command C:\venv\default\Scripts\thumbcache-extract.exe PE32
-Test-Command C:\venv\default\Scripts\vma-extract.exe PE32
 Test-Command C:\venv\bin\ghidrecomp.exe PE32
 Test-Command C:\venv\bin\jpterm.exe PE32
-Test-Command C:\venv\uv\jupyterlab\Scripts\jupyter.exe PE32
 Test-Command C:\venv\bin\litecli.exe PE32
 Test-Command C:\venv\bin\magika.exe PE32
-Test-Command C:\venv\default\Scripts\tqdm.exe PE32
 Test-Command C:\venv\bin\maldump.exe PE32
 Test-Command C:\venv\bin\bazaar.exe PE32
 Test-Command C:\venv\bin\yaraify.exe PE32
 Test-Command C:\venv\bin\mwcp.exe PE32
-Test-Command C:\venv\bin\numpy-config.exe PE32
-Test-Command C:\venv\bin\js-beautify.exe PE32
 Test-Command C:\venv\bin\peepdf.exe PE32
-Test-Command C:\venv\bin\rexi.exe PE32
 Test-Command C:\venv\scare\Scripts\ptpython.exe PE32
 Test-Command C:\venv\default\Scripts\sigma.exe PE32
 Test-Command C:\venv\default\Scripts\markdown-it.exe PE32

@@ -1,6 +1,6 @@
 # oletools
 
-**Category:** Files and apps\Office
+**Category:** Files and apps / Office
 
 **Source:** Python
 

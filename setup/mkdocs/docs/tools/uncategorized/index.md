@@ -2,7 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions |
 | --- | --- | --- | --- | --- |
-| [@marp-team/marp-cli](marp-team-marp-cli.md) |  |  | markdown, presentation, documentation | `.md`, `.markdown` |
+| [@marp-team/marp-cli](marp-team-marp-cli.md) | npm |  | markdown, presentation, documentation | `.md`, `.markdown` |
 | [API Monitor](api-monitor.md) | HTTP | API Monitor is a tool for monitoring Windows API calls. | reverse-engineering, api-tracing, dynamic-analysis | `.exe`, `.dll` |
 | [APT-Hunter](apt-hunter.md) | Git |  | event-log, threat-hunting |  |
 | [ASL](asl.md) | Git |  | pe-analysis, packer-detection |  |
@@ -14,7 +14,7 @@
 | [CapaExplorer](capaexplorer.md) | Git |  | reverse-engineering, capa, visualization |  |
 | [CimSweep](cimsweep.md) | Git |  | windows, forensics, wmi |  |
 | [ComparePlus](compareplus.md) | GitHub Release | A diff plugin for Notepad++. | text-editor, diff, plugins |  |
-| [CuTE-tui](cute-tui.md) |  | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |
+| [CuTE-tui](cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |
 | [DFIRArtifactMuseum](dfirartifactmuseum.md) | Git |  | forensics, artifacts, reference |  |
 | [DSpellCheck](dspellcheck.md) | GitHub Release | A spell-checker plugin for Notepad++. | text-editor, spell-checker, plugins |  |
 | [DotNet 6 Desktop Runtime](dotnet-6-desktop-runtime.md) | Winget |  | dotnet, runtime |  |
@@ -66,7 +66,7 @@
 | [Ruby](ruby.md) | Winget | Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. | scripting, ruby | `.rb` |
 | [SQLite Tools](sqlite-tools.md) | HTTP | SQLite command-line tools. | database, sqlite, cli | `.db`, `.sqlite`, `.sqlite3` |
 | [SSC-Threat-Intel-IoCs](ssc-threat-intel-iocs.md) | Enrichment | SecurityScorecard threat intelligence indicators of compromise. | threat-intel, ioc |  |
-| [SSHniff](sshniff.md) |  | SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications. | network-analysis, ssh, pcap | `.pcap`, `.pcapng` |
+| [SSHniff](sshniff.md) | Cargo | SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications. | network-analysis, ssh, pcap | `.pcap`, `.pcapng` |
 | [Shadow-Pulse](shadow-pulse.md) | Git |  | threat-intelligence, ioc |  |
 | [Snort Rules](snort-rules.md) | Enrichment | Snort 3 community ruleset for network intrusion detection. | snort, ids, detection-rules, network | `.rules`, `.tar.gz` |
 | [Strawberry Perl](strawberry-perl.md) | GitHub Release | Strawberry Perl is a Perl distribution for Windows that includes a complete Perl environment. | scripting, perl | `.pl`, `.pm` |
@@ -124,7 +124,7 @@
 | [dictionaries](dictionaries.md) | Git |  | dictionaries, libreoffice |  |
 | [dll_to_exe](dll-to-exe.md) | GitHub Release | Converts a DLL into EXE | pe-analysis, conversion | `.dll`, `.exe` |
 | [dnslib](dnslib.md) | Python |  | network, dns |  |
-| [docsify-cli](docsify-cli.md) |  |  | documentation, markdown | `.md`, `.html` |
+| [docsify-cli](docsify-cli.md) | npm |  | documentation, markdown | `.md`, `.html` |
 | [docx2txt](docx2txt.md) | Python |  | office, word, data-extraction | `.docx` |
 | [dotnetfile](dotnetfile.md) | Git |  | pe-analysis, dotnet |  |
 | [dotnetfile](dotnetfile-2.md) | Python |  | pe-analysis, dotnet | `.exe`, `.dll` |
@@ -178,7 +178,7 @@
 | [obsidian-timeline](obsidian-timeline.md) | GitHub Release |  | obsidian, timeline, plugins |  |
 | [olefile](olefile.md) | Python |  | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |
 | [one-extract](one-extract.md) | Git |  | forensics, onenote, data-extraction |  |
-| [opencode-ai](opencode-ai.md) |  |  | ai, code-generation, automation | `.txt`, `.md`, `.log`, `.json` |
+| [opencode-ai](opencode-ai.md) | npm | AI coding agent for the terminal with MCP server support. Configured with MCP servers for Ghidra (GhidrAssistMCP), radare2 (r2mcp), and regipy. | ai, code-generation, automation, mcp | `.txt`, `.md`, `.log`, `.json` |
 | [openpyxl](openpyxl.md) | Python |  | office, excel, data-extraction | `.xlsx` |
 | [orjson](orjson.md) | Python |  | json, data-processing | `.json` |
 | [paramiko](paramiko.md) | Python |  | network, ssh, scripting |  |

@@ -121,6 +121,8 @@ function New-CreateToolFiles {
             Dependencies         = $tool.Dependencies
             PythonVersion        = $tool.PythonVersion
             SourceType           = $Source
+            # Keep a legacy Source field for downstream tools that expect it.
+            Source               = $Source
         }
     }
 

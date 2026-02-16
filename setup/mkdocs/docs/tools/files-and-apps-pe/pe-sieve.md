@@ -1,6 +1,6 @@
 # PE-sieve
 
-**Category:** Files and apps\PE
+**Category:** Files and apps / PE
 
 **Source:** GitHub Release
 

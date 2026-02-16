@@ -21,16 +21,25 @@ if (! $NoVSCodeExtensions.IsPresent) {
             Write-DateLog "ERROR: Could not get URI for Visual Studio Code C++ extension"
         }
     }
-    # Get URI for Visual Studio Code python extension - ugly
-    $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
 
-    if ("$vscode_python_string" -ne "") {
-        $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
-        $vscode_python_version = $vscode_tmp.Matches.Groups[1].Value
-        # Visual Studio Code python extension
-        $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix" -CheckURL "Yes" -check "Zip archive data"
-    } else {
-        Write-DateLog "ERROR: Could not get URI for Visual Studio Code python extension"
+    # Get URI for Visual Studio Code python extension - ugly
+    try {
+        $vscode_python_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=ms-python.python -RegEx '"AssetUri":"[^"]+python/([^/]+)/'
+
+        if ("$vscode_python_string" -ne "") {
+            $vscode_tmp = $vscode_python_string | Select-String -Pattern '"AssetUri":"[^"]+python/([^/]+)/'
+            if ($null -ne $vscode_tmp -and $null -ne $vscode_tmp.Matches -and $vscode_tmp.Matches.Count -gt 0) {
+                $vscode_python_version = $vscode_tmp.Matches.Groups[1].Value
+                # Visual Studio Code python extension
+                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-python/vsextensions/python/$vscode_python_version/vspackage" -FilePath ".\downloads\vscode\vscode-python.vsix" -CheckURL "Yes" -check "Zip archive data"
+            } else {
+                Write-DateLog "ERROR: Could not parse version for Visual Studio Code python extension"
+            }
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code python extension"
+        }
+    } catch {
+        Write-DateLog "ERROR: Failed to download Visual Studio Code python extension: $($_.Exception.Message)"
     }
 
     # Get URI for Visual Studio Code mermaid extension - ugly
@@ -1633,7 +1642,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("velociraptor")
-    Notes = ""
+    Notes = "The artifact exchange is a place for sharing community contributed artifacts for Velociraptor. Simply search below for an artifact that might address your need. If you wish to contribute to the exchange, please click the button to the right."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -2237,7 +2246,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("java", "runtime", "development")
-    Notes = ""
+    Notes = "Microsofts OpenJDK 11"
     Tips = ""
     Usage = ""
     SampleCommands = @()

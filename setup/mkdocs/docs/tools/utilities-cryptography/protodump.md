@@ -1,6 +1,6 @@
 # protodump
 
-**Category:** Utilities\Cryptography
+**Category:** Utilities / Cryptography
 
 **Homepage:** <https://github.com/arkadiyt/protodump>
 

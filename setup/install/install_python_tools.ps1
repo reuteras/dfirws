@@ -474,7 +474,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".mft", ".dd", ".raw", ".img")
     Tags = @("ntfs", "filesystem", "forensics", "disk-forensics")
-    Notes = ""
+    Notes = "An NTFS/FAT parser for digital forensics & incident response."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -505,7 +505,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll", ".bin")
     Tags = @("malware-analysis", "deobfuscation", "data-extraction", "scripting")
-    Notes = ""
+    Notes = "The Binary Refinery™ is a collection of Python scripts that implement transformations of binary data such as compression and encryption. We will often refer to it simply by refinery, which is also the name of the corresponding package."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -543,7 +543,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".reg", ".dat")
     Tags = @("registry", "windows", "forensics")
-    Notes = ""
+    Notes = "Regipy is a python library for parsing offline registry hives."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -574,7 +574,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".pdf")
     Tags = @("pdf", "malware-analysis", "javascript")
-    Notes = ""
+    Notes = "A Python 3 tool to explore, analyse, and disassemble PDF files"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -591,7 +591,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".md", ".yml")
     Tags = @("documentation", "markdown")
-    Notes = ""
+    Notes = "Project documentation with Markdown."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -622,7 +622,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe")
     Tags = @("malware-analysis", "autoit", "deobfuscation")
-    Notes = ""
+    Notes = "Extract AutoIt scripts embedded in PE binaries."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -645,7 +645,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".cart")
     Tags = @("malware-analysis", "packaging")
-    Notes = ""
+    Notes = "Compressed and RC4 Transport (CaRT) Neutering format. This is a file format that is used to neuter malware files for distribution in the malware analyst community."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -676,7 +676,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".bin", ".txt", ".hex")
     Tags = @("data-processing", "encoding", "decoding", "deobfuscation", "hashing")
-    Notes = ""
+    Notes = "Chepy is a python library with a handy cli that is aimed to mirror some of the capabilities of CyberChef. A reasonable amount of effort was put behind Chepy to make it compatible to the various functionalities that CyberChef offers, all in a pure Pythonic manner."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -712,7 +712,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".csv")
     Tags = @("csv", "data-processing", "cli")
-    Notes = ""
+    Notes = "A suite of command-line tools for working with CSV, the king of tabular file formats."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -735,7 +735,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("translation", "text-processing")
-    Notes = ""
+    Notes = "A flexible free and unlimited python tool to translate between different languages in a simple way using multiple translators"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -758,7 +758,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".docx")
     Tags = @("office", "word", "data-extraction")
-    Notes = ""
+    Notes = "A pure python-based utility to extract text and images from docx files."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -789,7 +789,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".msg")
     Tags = @("email", "outlook", "data-extraction")
-    Notes = ""
+    Notes = "Extracts emails and attachments saved in Microsoft Outlook's .msg files"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -810,9 +810,9 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
-    FileExtensions = @()
-    Tags = @()
-    Notes = ""
+    FileExtensions = @(".json")
+    Tags = @("python", "library", "json")
+    Notes = "Flatten JSON objects"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -840,7 +840,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".apk", ".ipa")
     Tags = @("reverse-engineering", "dynamic-analysis", "instrumentation")
-    Notes = ""
+    Notes = "Frida CLI tools."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -863,7 +863,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll", ".elf")
     Tags = @("reverse-engineering", "decompiler")
-    Notes = ""
+    Notes = "Python Command-Line Ghidra Decomplier."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -886,7 +886,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll", ".elf")
     Tags = @("reverse-engineering", "binary-diffing")
-    Notes = ""
+    Notes = "Ghidra Binary Diffing Engine."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -909,7 +909,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".md")
     Tags = @("markdown", "preview")
-    Notes = ""
+    Notes = "Render local readme files before sending off to GitHub."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -940,7 +940,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll", ".png", ".jpg", ".zip", ".tar", ".gz")
     Tags = @("binary-analysis", "metadata", "file-format")
-    Notes = ""
+    Notes = "Hachoir is a Python library to view and edit a binary stream field by field. In other words, Hachoir allows you to `"browse`" any binary stream just like you browse directories and files."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -970,8 +970,8 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".json")
-    Tags = @("json", "data-processing", "tui")
-    Notes = ""
+    Tags = @("jupyter", "data-processing", "tui", "notebook")
+    Notes = "Jupyter in the terminal."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1002,7 +1002,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".js")
     Tags = @("javascript", "deobfuscation", "beautifier")
-    Notes = ""
+    Notes = "JavaScript unobfuscator and beautifier."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1025,7 +1025,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".ipynb")
     Tags = @("python", "notebook", "data-analysis")
-    Notes = ""
+    Notes = "JupyterLab computational environment"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1056,7 +1056,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".db", ".sqlite")
     Tags = @("database", "sqlite", "cli")
-    Notes = ""
+    Notes = "CLI for SQLite Databases with auto-completion and syntax highlighting."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1079,7 +1079,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".lnk")
     Tags = @("windows", "forensics", "shortcut-analysis")
-    Notes = ""
+    Notes = "Windows Shortcut file (LNK) parser"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1110,7 +1110,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("file-identification", "machine-learning")
-    Notes = ""
+    Notes = "A tool to determine the content type of a file with deep learning."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1139,9 +1139,9 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
-    FileExtensions = @(".dmp")
-    Tags = @("malware-analysis", "memory-forensics")
-    Notes = ""
+    FileExtensions = @()
+    Tags = @("malware-analysis", "anti-virus")
+    Notes = "Maldump makes it easy to extract quarantined files of multiple AVs from a live system or a mounted disk image."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1177,7 +1177,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("malware-analysis", "threat-intelligence", "ioc-scanner")
-    Notes = ""
+    Notes = "CLI wrapper for malware bazaar API (bazaar.abuse.ch) and YARAify API (yaraify.abuse.ch)"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1201,8 +1201,8 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".docx", ".xlsx", ".pptx", ".pdf", ".html")
-    Tags = @("conversion", "markdown", "data-extraction")
-    Notes = ""
+    Tags = @("conversion", "markdown", "data-extraction", "office", "word")
+    Notes = "Utility tool for converting various files to Markdown."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1225,7 +1225,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".dmp")
     Tags = @("memory-forensics", "windows")
-    Notes = ""
+    Notes = "Python library to parse Windows minidump file format."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1246,7 +1246,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = ""
+    InstallVerifyCommand = "Generating YARA rules based on binary code."
     Verify = @(
         @{
             Type = "command"
@@ -1287,7 +1287,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx")
     Tags = @("office", "encryption", "decryption")
-    Notes = ""
+    Notes = "Python tool and library for decrypting and encrypting MS Office files using a password or other keys"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1310,7 +1310,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".exe", ".dll", ".bin")
     Tags = @("malware-analysis", "configuration-extraction")
-    Notes = ""
+    Notes = "A framework for malware configuration parsers."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1341,7 +1341,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("hashing", "identification")
-    Notes = ""
+    Notes = "The Modern Hash Identification System."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1364,7 +1364,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("network", "ip-address")
-    Notes = ""
+    Notes = "A network address manipulation library for Python."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1381,7 +1381,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("data-analysis", "scientific-computing")
-    Notes = ""
+    Notes = "Fundamental package for array computing in Python."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1443,7 +1443,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".rtf")
     Tags = @("office", "macro", "malware-analysis", "vba")
-    Notes = ""
+    Notes = "Python tools to analyze security characteristics of MS Office and OLE files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), for Malware Analysis and Incident Response #DFIR."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1474,7 +1474,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".doc", ".xls", ".ppt")
     Tags = @("office", "vba", "decompiler")
-    Notes = ""
+    Notes = "A vba p-code decompiler based on pcodedmp"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1491,7 +1491,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".pdf")
     Tags = @("pdf", "malware-analysis", "visualization")
-    Notes = ""
+    Notes = "Analyze PDFs with colors (and YARA). Visualize a PDF's inner tree-like data structure, check it against a library of YARA rules, force decodes of suspicious font binaries, and more."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1514,7 +1514,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".bin")
     Tags = @("protobuf", "reverse-engineering")
-    Notes = ""
+    Notes = "A tool to help reversing protobuf."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1537,7 +1537,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @(".py")
     Tags = @("python", "repl")
-    Notes = ""
+    Notes = "Python REPL build on top of prompt_toolkit."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1568,7 +1568,7 @@ $TOOL_DEFINITIONS += @{
     )
     FileExtensions = @()
     Tags = @("exploitation", "post-exploitation")
-    Notes = ""
+    Notes = "Netcat on steroids with Firewall, IDS/IPS evasion, bind and reverse shell and port forwarding magic - and its fully scriptable with Python (PSE)."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -1585,7 +1585,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @(".exe", ".dll", ".elf")
     Tags = @("reverse-engineering", "decompiler", "scripting")
-    Notes = ""
+    Notes = "The PyGhidra Python library, originally developed by the Department of Defense Cyber Crime Center (DC3) under the name `"Pyhidra`", is a Python library that provides direct access to the Ghidra API within a native CPython 3 interpreter using JPype. PyGhidra contains some conveniences for setting up analysis on a given sample and running a Ghidra script locally. It also contains a Ghidra plugin to allow the use of CPython 3 from the Ghidra GUI."
     Tips = ""
     Usage = ""
     SampleCommands = @()

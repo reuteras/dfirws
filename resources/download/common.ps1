@@ -158,10 +158,10 @@ function Get-FileFromUri {
                 Write-SynchronizedLog "Waiting 10 seconds before retrying. Retries left: $retries"
                 Start-Sleep -Seconds 10
             } else {
-                $exception = $_.Exception
                 $exceptionMessage = $_.Exception.Message
                 Write-SynchronizedLog "Failed to download '$Uri': $exceptionMessage"
-                throw $exception
+                Write-DateLog "ERROR: Failed to download '$Uri': $exceptionMessage"
+                return $false
             }
         }
     }

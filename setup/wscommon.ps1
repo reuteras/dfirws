@@ -1024,28 +1024,60 @@ function Install-VSCode {
         Write-Output "Installing Visual Studio Code"
         Start-Process -Wait "${SETUP_PATH}\vscode.exe" -ArgumentList '/verysilent /suppressmsgboxes /MERGETASKS="!runcode,!associatewithfiles,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath"'
         if ($WSDFIR_VSCODE_C -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-cpp.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-cpp.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-cpp.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-cpp.vsix not found, skipping C++ extension installation"
+            }
         }
         if ($WSDFIR_VSCODE_POWERSHELL -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-powershell.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-powershell.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-powershell.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-powershell.vsix not found, skipping PowerShell extension installation"
+            }
         }
         if ($WSDFIR_VSCODE_PYTHON -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-python.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-python.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-python.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-python.vsix not found, skipping Python extension installation"
+            }
         }
         if ($WSDFIR_VSCODE_SPELL -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-spell-checker.vsix not found, skipping Spell Checker extension installation"
+            }
         }
         if ($WSDFIR_VSCODE_MERMAID -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-mermaid.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-mermaid.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-mermaid.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-mermaid.vsix not found, skipping Mermaid extension installation"
+            }
         }
         if ($WSDFIR_VSCODE_RUFF -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-ruff.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-ruff.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-ruff.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-ruff.vsix not found, skipping Ruff extension installation"
+            }
         }
         if ($WSDFIR_VSCODE_SHELLCHECK -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-shellcheck.vsix not found, skipping ShellCheck extension installation"
+            }
         }
         if ($WSDFIR_VSCODE_YARA -eq "Yes") {
-            & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-yara.vsix" 2>&1 | Out-Null
+            if (Test-Path "${SETUP_PATH}\vscode\vscode-yara.vsix") {
+                & "${HOME}\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd" --install-extension "${SETUP_PATH}\vscode\vscode-yara.vsix" 2>&1 | Out-Null
+            } else {
+                Write-DateLog "WARNING: vscode-yara.vsix not found, skipping YARA extension installation"
+            }
         }
         if (Test-Path "${HOME}\.vscode\argv.json") {
             (Get-Content "${HOME}\.vscode\argv.json").Replace('"enable-crash-reporter": true,"', '"enable-crash-reporter": false,"') | Set-Content "${HOME}\.vscode\argv.json" -Force

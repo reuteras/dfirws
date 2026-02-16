@@ -79,7 +79,6 @@ nav:
     - Overview: tools/files-and-apps-disk/index.md
     - dfir_ntfs: tools/files-and-apps-disk/dfir-ntfs.md
     - INDXRipper: tools/files-and-apps-disk/indxripper.md
-    - mft2bodyfile: tools/files-and-apps-disk/mft2bodyfile.md
     - MFTBrowser: tools/files-and-apps-disk/mftbrowser.md
     - OSFMount: tools/files-and-apps-disk/osfmount.md
     - Sleuthkit: tools/files-and-apps-disk/sleuthkit.md

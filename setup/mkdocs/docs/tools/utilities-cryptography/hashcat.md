@@ -1,6 +1,6 @@
 # hashcat
 
-**Category:** Utilities\Cryptography
+**Category:** Utilities / Cryptography
 
 **Homepage:** <https://hashcat.net/hashcat/>
 

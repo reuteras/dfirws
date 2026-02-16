@@ -1,6 +1,8 @@
 # usnjrnl
 
-**Category:** OS\Windows
+**Category:** OS / Windows
+
+**Source:** Cargo
 
 **File Extensions:** `.bin`
 

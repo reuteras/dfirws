@@ -1,6 +1,8 @@
 # box-js
 
-**Category:** Files and apps\JavaScript
+**Category:** Files and apps / JavaScript
+
+**Source:** npm
 
 **File Extensions:** `.js`
 
