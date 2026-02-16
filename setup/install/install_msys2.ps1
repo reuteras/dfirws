@@ -71,7 +71,7 @@ if [ -z "$MAKE_BIN" ]; then
 fi
 cd /c/tmp/r2ai_build
 "$MAKE_BIN" clean >/dev/null 2>&1 || true
-"$MAKE_BIN" EXT_SO=dll DOTEXE=.exe r2ai.dll
+"$MAKE_BIN" EXT_SO=dll DOTEXE=.exe r2ai
 '@
     $r2aiBuildScript | Out-File -FilePath $r2aiBuildScriptPathWin -Encoding ascii -Force
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'bash /c/tmp/r2ai_build/build-r2ai.sh' 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
@@ -90,6 +90,13 @@ cd /c/tmp/r2ai_build
         }
         Write-DateLog "r2ai plugin compiled successfully." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Write-Output "r2ai plugin compiled successfully."
+    } elseif (Test-Path "C:\tmp\r2ai_build\r2ai") {
+        Copy-Item "C:\tmp\r2ai_build\r2ai" "$r2ai_output\r2ai.dll" -Force
+        if (Test-Path "C:\tmp\r2ai_build\r2ai.exe") {
+            Copy-Item "C:\tmp\r2ai_build\r2ai.exe" "$r2ai_output\r2ai.exe" -Force
+        }
+        Write-DateLog "r2ai plugin built without extension; copied r2ai -> r2ai.dll." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "r2ai plugin compiled successfully (extensionless output)."
     } else {
         Write-DateLog "r2ai build artifacts in C:\tmp\r2ai_build:" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Get-ChildItem -Path "C:\tmp\r2ai_build" -Force 2>&1 | Tee-Object -FilePath "C:\log\msys2.txt" -Append
