@@ -1,0 +1,70 @@
+.tool-filter {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.25rem;
+  background: var(--md-code-bg-color);
+}
+
+.tool-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.tool-filter-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 180px;
+  min-width: 140px;
+}
+
+.tool-filter-field label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.tool-filter-field input[type="text"] {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.tool-filter-field input[type="text"]:focus {
+  outline: none;
+  border-color: var(--md-accent-fg-color);
+}
+
+.tool-filter-actions {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+}
+
+.tool-filter-clear {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.tool-filter-clear:hover {
+  background: var(--md-accent-fg-color);
+  color: var(--md-accent-bg-color);
+}
+
+.tool-filter-count {
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color--light);
+  white-space: nowrap;
+}
