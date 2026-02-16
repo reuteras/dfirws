@@ -1802,16 +1802,18 @@ if ($status) {
 }
 # Temporary get Capa version 6.0.0 until the issue with the latest version not working with
 # capaexplorer for Ghidra is fixed.
-$status = Get-FileFromUri -uri "https://github.com/mandiant/capa/releases/download/v6.0.0/capa-v6.0.0-windows.zip" -FilePath "${SETUP_PATH}\capa-ghidra.zip" -check "Zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\capa-ghidra") {
-        Remove-Item "${TOOLS}\capa-ghidra" -Recurse -Force
+if (Test-ToolIncluded -ToolName "Ghidra") {
+    $status = Get-FileFromUri -uri "https://github.com/mandiant/capa/releases/download/v6.0.0/capa-v6.0.0-windows.zip" -FilePath "${SETUP_PATH}\capa-ghidra.zip" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path "${TOOLS}\capa-ghidra") {
+            Remove-Item "${TOOLS}\capa-ghidra" -Recurse -Force
+        }
+        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-ghidra.zip" -o"${TOOLS}\capa-ghidra" | Out-Null
+        if (Test-Path "${TOOLS}\capa-ghidra\capa-ghidra.exe") {
+            Remove-Item "${TOOLS}\capa-ghidra\capa-ghidra.exe" -Force
+        }
+        Move-Item ${TOOLS}\capa-ghidra\capa.exe ${TOOLS}\capa-ghidra\capa-ghidra.exe
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-ghidra.zip" -o"${TOOLS}\capa-ghidra" | Out-Null
-    if (Test-Path "${TOOLS}\capa-ghidra\capa-ghidra.exe") {
-        Remove-Item "${TOOLS}\capa-ghidra\capa-ghidra.exe" -Force
-    }
-    Move-Item ${TOOLS}\capa-ghidra\capa.exe ${TOOLS}\capa-ghidra\capa-ghidra.exe
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1876,17 +1878,19 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Folder for Ghidra extensions
-if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
-    New-Item -Path "${TOOLS}\ghidra_extensions" -ItemType Directory | Out-Null
-}
+if (Test-ToolIncluded -ToolName "Ghidra") {
+    if (! (Test-Path "${TOOLS}\ghidra_extensions")) {
+        New-Item -Path "${TOOLS}\ghidra_extensions" -ItemType Directory | Out-Null
+    }
 
-# GolangAnalyzerExtension for latest installed Ghidra version
-$GHIDRA_DIR_NAME = (Get-ChildItem "${TOOLS}\ghidra\").Name | findstr.exe PUBLIC | Select-Object -Last 1
-if ($GHIDRA_DIR_NAME -match 'ghidra_(.+?)_PUBLIC') {
-    $GHIDRA_VERSION = $Matches[1]
-    $status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip" -match "${GHIDRA_VERSION}_" -check "Zip archive data"
-    if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip")) {
-        Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip"
+    # GolangAnalyzerExtension for latest installed Ghidra version
+    $GHIDRA_DIR_NAME = (Get-ChildItem "${TOOLS}\ghidra\").Name | findstr.exe PUBLIC | Select-Object -Last 1
+    if ($GHIDRA_DIR_NAME -match 'ghidra_(.+?)_PUBLIC') {
+        $GHIDRA_VERSION = $Matches[1]
+        $status = Get-GitHubRelease -repo "mooncat-greenpy/Ghidra_GolangAnalyzerExtension" -path "${SETUP_PATH}\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip" -match "${GHIDRA_VERSION}_" -check "Zip archive data"
+        if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip")) {
+            Copy-Item "${SETUP_PATH}\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip" "${TOOLS}\ghidra_extensions\GolangAnalyzerExtension_${GHIDRA_VERSION}.zip"
+        }
     }
 }
 
@@ -1932,9 +1936,11 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Ghidra btighidra
-$status = Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match "ghidra" -check "Zip archive data"
-if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\btighidra.zip")) {
-    Copy-Item "${SETUP_PATH}\btighidra.zip" "${TOOLS}\ghidra_extensions\btighidra.zip"
+if (Test-ToolIncluded -ToolName "Ghidra") {
+    $status = Get-GitHubRelease -repo "trailofbits/BTIGhidra" -path "${SETUP_PATH}\btighidra.zip" -match "ghidra" -check "Zip archive data"
+    if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\btighidra.zip")) {
+        Copy-Item "${SETUP_PATH}\btighidra.zip" "${TOOLS}\ghidra_extensions\btighidra.zip"
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1954,9 +1960,11 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Ghidra Cartographer plugin
-$status = Get-GitHubRelease -repo "nccgroup/Cartographer" -path "${SETUP_PATH}\Cartographer.zip" -match "Cartographer.zip" -check "Zip archive data"
-if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\Cartographer.zip")) {
-    Copy-Item "${SETUP_PATH}\Cartographer.zip" "${TOOLS}\ghidra_extensions\Cartographer.zip"
+if (Test-ToolIncluded -ToolName "Ghidra") {
+    $status = Get-GitHubRelease -repo "nccgroup/Cartographer" -path "${SETUP_PATH}\Cartographer.zip" -match "Cartographer.zip" -check "Zip archive data"
+    if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\Cartographer.zip")) {
+        Copy-Item "${SETUP_PATH}\Cartographer.zip" "${TOOLS}\ghidra_extensions\Cartographer.zip"
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1976,9 +1984,11 @@ $TOOL_DEFINITIONS += @{
 }
 
 # GhidrAssistMCP - MCP server extension for Ghidra
-$status = Get-GitHubRelease -repo "jtang613/GhidrAssistMCP" -path "${SETUP_PATH}\GhidrAssistMCP.zip" -match "\.zip$" -check "Zip archive data"
-if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GhidrAssistMCP.zip")) {
-    Copy-Item "${SETUP_PATH}\GhidrAssistMCP.zip" "${TOOLS}\ghidra_extensions\GhidrAssistMCP.zip"
+if (Test-ToolIncluded -ToolName "Ghidra") {
+    $status = Get-GitHubRelease -repo "jtang613/GhidrAssistMCP" -path "${SETUP_PATH}\GhidrAssistMCP.zip" -match "\.zip$" -check "Zip archive data"
+    if ($status -or !(Test-Path "${TOOLS}\ghidra_extensions\GhidrAssistMCP.zip")) {
+        Copy-Item "${SETUP_PATH}\GhidrAssistMCP.zip" "${TOOLS}\ghidra_extensions\GhidrAssistMCP.zip"
+    }
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2974,11 +2984,14 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Nerd fonts - installed during start
-# Add some example fonts
-$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\JetBrainsMono.zip" -match "JetBrainsMono.zip" -check "Zip archive data"
-$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\LiberationMono.zip" -match "LiberationMono.zip" -check "Zip archive data"
+# Meslo is the default font, always downloaded
 $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Meslo.zip" -match "Meslo.zip" -check "Zip archive data"
-$status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Terminus.zip" -match "Terminus.zip" -check "Zip archive data"
+# Additional fonts only in Full profile
+if (Test-ToolIncluded -ToolName "Extra Nerd Fonts") {
+    $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\JetBrainsMono.zip" -match "JetBrainsMono.zip" -check "Zip archive data"
+    $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\LiberationMono.zip" -match "LiberationMono.zip" -check "Zip archive data"
+    $status =  Get-GitHubRelease -repo "ryanoasis/nerd-fonts" -path "${SETUP_PATH}\Terminus.zip" -match "Terminus.zip" -check "Zip archive data"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "Nerd Fonts"

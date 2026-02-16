@@ -74,7 +74,9 @@ $DFIRWS_PROFILES = @{
             "obsidian-tasks",
             "obsidian-excalidraw-plugin",
             "admonitions",
-            "obsidian-timeline"
+            "obsidian-timeline",
+            # release.ps1 - Fonts
+            "Extra Nerd Fonts"
         )
         ExcludeGitRepos = @(
             "DFIRArtifactMuseum",
