@@ -40,8 +40,10 @@ if ($WSDFIR_NOTEPAD -eq "Yes") {
     }
 
     # Add US English dictionary
-    Copy-Item "${GIT_PATH}\dictionaries\en\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
-    Copy-Item "${GIT_PATH}\dictionaries\en\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
+    if (Test-Path "${GIT_PATH}\dictionaries") {
+        Copy-Item "${GIT_PATH}\dictionaries\en\en_US.dic" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.dic" -Force
+        Copy-Item "${GIT_PATH}\dictionaries\en\en_US.aff" "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell\en_US.aff" -Force
+    }
 }
 
 # Add new path for user

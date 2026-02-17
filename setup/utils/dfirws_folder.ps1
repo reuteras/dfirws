@@ -342,7 +342,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Delphi\idr.lnk" -Des
 
 # Programming - Go
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Go" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\GoLang (runs dfirws-install -GoLang).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -GoLang"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\gftrace.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command gftrace"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\GoReSym.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command GoReSym.exe -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Go\Redress.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command Redress.exe -h"
@@ -372,7 +371,6 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Ruby" | 
 
 # Programming - Rust
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming\Rust" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Rust\Rust (runs dfirws-install -Rust).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Rust"
 
 # Reverse Engineering
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Reverse Engineering" | Out-Null

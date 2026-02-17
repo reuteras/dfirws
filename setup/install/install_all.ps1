@@ -11,12 +11,6 @@ foreach ($script in $INSTALL_SCRIPTS) {
 
 Write-SynchronizedLog "Install all tools in the sandbox."
 Write-OutPut "Install all tools in the sandbox."
-Write-SynchronizedLog ([string](dfirws-install.ps1 -ClamAV))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -Git))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -GoLang))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -Kape))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -Node))
-Write-SynchronizedLog ([string](dfirws-install.ps1 -Rust))
 if (Test-Path -Path C:\venv\visualstudio.txt) {
     Write-SynchronizedLog ([string](dfirws-install.ps1 -VisualStudioBuildTools))
 }

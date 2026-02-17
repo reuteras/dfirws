@@ -96,7 +96,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".js")
     Tags = @("javascript", "deobfuscation", "malware-analysis")
@@ -117,7 +117,7 @@ $TOOL_DEFINITIONS += @{
     Name = "docsify-cli"
     Category = "Utilities"
     Shortcuts = @()
-    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".md", ".html")
     Tags = @("documentation", "markdown")
@@ -146,7 +146,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".html", ".htm", ".js")
     Tags = @("javascript", "html-parsing", "dom")
@@ -175,7 +175,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".evtx")
     Tags = @("log-analysis", "event-log", "forensics", "visualization")
@@ -196,7 +196,7 @@ $TOOL_DEFINITIONS += @{
     Name = "@marp-team/marp-cli"
     Category = "Utilities"
     Shortcuts = @()
-    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".md", ".markdown")
     Tags = @("markdown", "presentation", "documentation")
@@ -217,7 +217,7 @@ $TOOL_DEFINITIONS += @{
     Name = "opencode-ai"
     Category = "Utilities"
     Shortcuts = @()
-    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".txt", ".md", ".log", ".json")
     Tags = @("ai", "code-generation", "automation", "mcp")

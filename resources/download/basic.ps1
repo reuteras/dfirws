@@ -60,7 +60,7 @@ $TOOL_DEFINITIONS += @{
     LicenseUrl = ""
     Category = "Utilities"
     Shortcuts = @()
-    InstallVerifyCommand = ""
+    InstallVerifyCommand = "dfirws-install.ps1 -Git"
     Verify = @()
     Notes = "A fork of Git containing Windows-specific patches."
     Tips = ""
@@ -102,7 +102,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = ""
+    InstallVerifyCommand = "dfirws-install.ps1 -ClamAV"
     Verify = @(
         @{
             Type = "command"
@@ -238,6 +238,42 @@ if (($all -and $profileGoEnabled) -or $Go) {
     # GoLang - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading GoLang."
     $status = Get-WinGet "GoLang.Go" "Go*.msi" "golang.msi" -check "Composite Document File V2 Document"
+    $TOOL_DEFINITIONS += @{
+        Name = "GoLang"
+        Homepage = "https://go.dev/"
+        Vendor = ""
+        License = ""
+        LicenseUrl = ""
+        Category = "Programming"
+        Shortcuts = @(
+            @{
+                Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\GoLang (runs dfirws-install -GoLang).lnk"
+                Target   = "`${CLI_TOOL}"
+                Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -GoLang"
+                Icon     = ""
+                WorkDir  = "`${HOME}\Desktop"
+            }
+        )
+        InstallVerifyCommand = "dfirws-install.ps1 -GoLang"
+        Verify = @(
+            @{
+                Type = "command"
+                Name = "go.exe"
+                Expect = "PE32"
+            }
+        )
+        Notes = "Go programming language."
+        Tips = ""
+        Usage = ""
+        SampleCommands = @()
+        SampleFiles = @(
+            "N/A"
+        )
+        Dependencies = @("openjdk11")
+        Tags = @()
+        FileExtensions = @()
+        PythonVersion = ""
+    }
 }
 
 #
@@ -246,6 +282,43 @@ if (($all -and $profileRustEnabled) -or $Rust) {
     # Rust - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading Rust."
     $status = Get-WinGet "Rustlang.Rust.GNU" "Rust*.msi" "rust.msi" -check "Composite Document File V2 Document"
+
+    $TOOL_DEFINITIONS += @{
+        Name = "Rust"
+        Homepage = "https://rust-lang.org/"
+        Vendor = ""
+        License = ""
+        LicenseUrl = ""
+        Category = "Programming"
+        Shortcuts = @(
+            @{
+                Lnk      = "`${HOME}\Desktop\dfirws\Programming\Rust\Rust (runs dfirws-install -Rust).lnk"
+                Target   = "`${CLI_TOOL}"
+                Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Rust"
+                Icon     = ""
+                WorkDir  = "`${HOME}\Desktop"
+            }
+        )
+        InstallVerifyCommand = "dfirws-install.ps1 -Rust"
+        Verify = @(
+            @{
+                Type = "command"
+                Name = "rustc.exe"
+                Expect = "PE32"
+            }
+        )
+        Notes = "Rust programming language."
+        Tips = ""
+        Usage = ""
+        SampleCommands = @()
+        SampleFiles = @(
+            "N/A"
+        )
+        Dependencies = @("openjdk11")
+        Tags = @()
+        FileExtensions = @()
+        PythonVersion = ""
+    }
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "basic"
