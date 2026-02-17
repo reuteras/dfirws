@@ -583,7 +583,9 @@ if (Test-Path "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb") {
 }
 
 # 4n4lDetector
-& "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
+if (Test-Path "${SETUP_PATH}\4n4lDetector.zip") {
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
+}
 
 # Config for opencode-ai MCP servers
 $opencode_config_dir = "${HOME}\.config\opencode"

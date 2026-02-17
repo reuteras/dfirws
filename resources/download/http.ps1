@@ -2562,42 +2562,6 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# OpenVPN - manual installation
-if (Test-ToolIncluded -ToolName "OpenVPN") {
-    $status = Get-FileFromUri -uri "https://openvpn.net/downloads/openvpn-connect-v3-windows.msi" -FilePath ".\downloads\openvpn.msi" -check "Composite Document File V2 Document"
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "OpenVPN Connect"
-    Homepage = "https://openvpn.net/client/"
-    Vendor = "OpenVPN"
-    License = "Proprietary"
-    Category = "Network"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\downloads\openvpn.msi"
-            Expect = "MSI Installer"
-        }
-    )
-    FileExtensions = @(".ovpn")
-    Tags = @("vpn", "network")
-    Notes = "OpenVPN Connect installer."
-    Tips = "This is a manual install."
-    Usage = "Install the MSI to use OpenVPN Connect."
-    SampleCommands = @(
-        "msiexec /i C:\downloads\openvpn.msi"
-    )
-    SampleFiles = @(
-        "N/A"
-    )
-    Dependencies = @()
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
 $digitalcorpora_url = "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip"
 $status = Get-FileFromUri -uri "${digitalcorpora_url}" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes" -check "Zip archive data"

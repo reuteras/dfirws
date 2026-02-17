@@ -41,6 +41,7 @@ foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${HOME}\Documents\WindowsPowerShell"
 $DFIRWS_EXCLUDE_TOOLS = @()
 if (Test-Path "${TOOLS}\dfirws-profile.ps1") {
     . "${TOOLS}\dfirws-profile.ps1"
+    Write-Output "Excluded tools: $DFIRWS_EXCLUDE_TOOLS"
 }
 
 function Test-ToolIncludedSandbox {

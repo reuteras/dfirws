@@ -531,27 +531,27 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "OpenVPN") {
     Write-SynchronizedLog "winget: Downloading OpenVPN."
     $status = Get-WinGet "OpenVPNTechnologies.OpenVPNConnect" "OpenVPN*.msi" "openvpn.msi" -check "Composite Document File V2 Document"
-}
 
-$TOOL_DEFINITIONS += @{
-    Name = "OpenVPN"
-    Category = "Network"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".ovpn")
-    Tags = @("vpn", "network")
-    Notes = "OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
+    $TOOL_DEFINITIONS += @{
+        Name = "OpenVPN"
+        Category = "Network"
+        Shortcuts = @()
+        InstallVerifyCommand = ""
+        Verify = @()
+        FileExtensions = @(".ovpn")
+        Tags = @("vpn", "network")
+        Notes = "OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols."
+        Tips = ""
+        Usage = ""
+        SampleCommands = @()
+        SampleFiles = @()
+        Dependencies = @()
+        Homepage = ""
+        Vendor = ""
+        License = ""
+        LicenseUrl = ""
+        PythonVersion = ""
+    }
 }
 
 # Google Earth Pro - available for installation via dfirws-install.ps1
