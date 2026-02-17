@@ -277,7 +277,7 @@ The `generate-tools-docs.py` script:
 
 The `Dependencies` field tracks high-level build/runtime dependencies between components:
 - `"msys2"` - Needs gcc/g++ from MSYS2
-- `"dotnet6"` / `"dotnet8"` - Needs .NET runtime
+- `"dotnet6"` / `"dotnet9"` - Needs .NET runtime
 - `"Ghidra"` - Needs Ghidra installed
 - `"openjdk11"` - Needs Java runtime
 - `"nodejs"` - Needs Node.js runtime
