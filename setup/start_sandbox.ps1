@@ -580,9 +580,6 @@ if (Test-Path "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb") {
     Copy-Item "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb" "${HOME}\.cache\geolocus-cli\geolocus.mmdb" -Force | Out-Null
 }
 
-# AuthLogParser
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\AuthLogParser" "${env:ProgramFiles}\AuthLogParser" | Out-Null
-
 # 4n4lDetector
 & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 

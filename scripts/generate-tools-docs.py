@@ -215,13 +215,6 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
         lines.append(summary)
         lines.append("")
 
-    notes = get_string_list(tool.get("Notes"))
-    if notes:
-        lines.append("## Notes")
-        for note in notes:
-            lines.append(note)
-            lines.append("")
-
     tips = get_string_list(tool.get("Tips"))
     if tips:
         lines.append("## Tips")
