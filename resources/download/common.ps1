@@ -47,6 +47,19 @@ function Get-FileFromUri {
         [Parameter(Mandatory=$False)] [string]$check = ""
     )
 
+    # Validate URI before attempting download
+    if ([string]::IsNullOrWhiteSpace($Uri)) {
+        Write-SynchronizedLog "Error: Empty URI provided for $FilePath. Skipping download."
+        Write-DateLog "ERROR: Empty URI provided for $FilePath. Skipping download."
+        return $false
+    }
+
+    if ($Uri -notmatch '^https?://') {
+        Write-SynchronizedLog "Error: Invalid URI '$Uri' for $FilePath. URI must start with http:// or https://. Skipping download."
+        Write-DateLog "ERROR: Invalid URI '$Uri' for $FilePath. URI must start with http:// or https://. Skipping download."
+        return $false
+    }
+
     Write-SynchronizedLog "Downloading $Uri to $FilePath. CheckURL: $CheckURL."
 
     $fileDownloadedOrChanged = $false
@@ -97,18 +110,18 @@ function Get-FileFromUri {
     }
 
     if ("Yes" -eq "${CheckURL}") {
-        $ETAG_FLAG = ""
-        $Z_FLAG = ""
+        $ETAG_FLAGS = @()
+        $Z_FLAGS = @()
     } else {
         if (Test-Path "${ETAG_FILE}") {
-            $ETAG_FLAG = "--etag-compare ${ETAG_FILE} --etag-save ${ETAG_FILE}"
+            $ETAG_FLAGS = @("--etag-compare", "${ETAG_FILE}", "--etag-save", "${ETAG_FILE}")
         } else {
-            $ETAG_FLAG = "--etag-save ${ETAG_FILE}"
+            $ETAG_FLAGS = @("--etag-save", "${ETAG_FILE}")
         }
         if (Test-Path $FilePath) {
-            $Z_FLAG = "-z $FilePath"
+            $Z_FLAGS = @("-z", "$FilePath")
         } else {
-            $Z_FLAG = ""
+            $Z_FLAGS = @()
         }
     }
 
@@ -118,17 +131,17 @@ function Get-FileFromUri {
             Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
 
             if ($Uri -like "*github.com*" -and "" -ne $GH_USER -and "" -ne $GH_PASS) {
-                $GH_FLAG = "-u ${GH_USER}:${GH_PASS}"
+                $GH_FLAGS = @("-u", "${GH_USER}:${GH_PASS}")
             } else {
-                $GH_FLAG = ""
+                $GH_FLAGS = @()
             }
 
             if ($Uri -like "*sourceforge.net*") {
-                $UA_FLAG = '--user-agent "Wget x64"'
+                $UA_FLAGS = @("--user-agent", "Wget x64")
             } elseif ($Uri -like "*.amazonaws.com*") {
-                $UA_FLAG = '--user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"'
+                $UA_FLAGS = @("--user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36")
             } else {
-                $UA_FLAG = ""
+                $UA_FLAGS = @()
             }
 
             if ($Uri -like "*marketplace.visualstudio.com*") {
@@ -136,9 +149,12 @@ function Get-FileFromUri {
             } else {
                 $CMD = "C:\Windows\system32\curl.exe"
                 $FLAGS = @()
-                (Write-Output "$ETAG_FLAG $Z_FLAG $GH_FLAG $UA_FLAG -L --silent --output $TmpFilePath $Uri").split(" ") | ForEach-Object {if ("" -ne $_ ) {$FLAGS += $_}}
-                $COMMAND_LINE = $CMD + " " + $FLAGS -join " "
-                Invoke-Expression $COMMAND_LINE
+                $FLAGS += $ETAG_FLAGS
+                $FLAGS += $Z_FLAGS
+                $FLAGS += $GH_FLAGS
+                $FLAGS += $UA_FLAGS
+                $FLAGS += @("-L", "--silent", "--output", "$TmpFilePath", "$Uri")
+                & $CMD @FLAGS
             }
             if (Test-Path $TmpFilePath) {
                 Write-SynchronizedLog "Downloaded $Uri to $FilePath."
