@@ -67,6 +67,23 @@ function New-CreateToolFiles {
         New-Item -ItemType Directory -Force -Path "$BASE_PATH\dfirws" | Out-Null
     }
 
+    # Apply profile filtering to metadata as a safety net so generated verify/install
+    # scripts don't reference tools excluded by the active profile.
+    if ((Test-Path variable:DFIRWS_EXCLUDE_TOOLS) -and $null -ne $DFIRWS_EXCLUDE_TOOLS -and $DFIRWS_EXCLUDE_TOOLS.Count -gt 0) {
+        $filteredToolDefinitions = @()
+        foreach ($toolDefinition in $ToolDefinitions) {
+            $toolName = "$($toolDefinition.Name)"
+            if ((Test-Path variable:DFIRWS_EXTRAS_RESOLVED) -and $null -ne $DFIRWS_EXTRAS_RESOLVED -and $DFIRWS_EXTRAS_RESOLVED -contains $toolName) {
+                $filteredToolDefinitions += $toolDefinition
+            } elseif ($DFIRWS_EXCLUDE_TOOLS -contains $toolName) {
+                continue
+            } else {
+                $filteredToolDefinitions += $toolDefinition
+            }
+        }
+        $ToolDefinitions = $filteredToolDefinitions
+    }
+
     $ToolDefinitions = Normalize-ToolDefinitions -ToolDefinitions $ToolDefinitions
 
     # Remove old helper files for HTTP installations and create new ones.
