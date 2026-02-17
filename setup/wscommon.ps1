@@ -177,6 +177,105 @@ function Write-SynchronizedLog {
     }
 }
 
+# Progress bar support for sandbox setup
+$script:SandboxProgressSync = $null
+$script:SandboxProgressPS   = $null
+$script:SandboxProgressRS   = $null
+
+function Initialize-SandboxProgress {
+    param(
+        [int]$TotalSteps = 30,
+        [string]$Title   = "DFIRWS Sandbox Setup"
+    )
+
+    $sync = [hashtable]::Synchronized(@{
+        CurrentStep = 0
+        TotalSteps  = $TotalSteps
+        Status      = "Starting..."
+        Done        = $false
+    })
+    $script:SandboxProgressSync = $sync
+
+    $rs = [runspacefactory]::CreateRunspace()
+    $rs.ApartmentState = "STA"
+    $rs.ThreadOptions  = "ReuseThread"
+    $rs.Open()
+    $rs.SessionStateProxy.SetVariable("sync", $sync)
+
+    $ps = [PowerShell]::Create()
+    $ps.Runspace = $rs
+    [void]$ps.AddScript({
+        Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
+        $xaml = @"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DFIRWS Sandbox Setup" Height="130" Width="520"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True">
+    <Grid Margin="15,12,15,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="DFIRWS Sandbox Setup"
+                   FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+        <ProgressBar Grid.Row="1" x:Name="ProgressBar" Height="22"
+                     Minimum="0" Maximum="1" Value="0" Margin="0,0,0,8"/>
+        <TextBlock Grid.Row="2" x:Name="StatusText" Text="Starting..."
+                   HorizontalAlignment="Center" FontSize="11"/>
+    </Grid>
+</Window>
+"@
+        $reader = [System.Xml.XmlReader]::Create([System.IO.StringReader]::new($xaml))
+        $window = [System.Windows.Markup.XamlReader]::Load($reader)
+        $bar    = $window.FindName("ProgressBar")
+        $status = $window.FindName("StatusText")
+
+        $timer = New-Object System.Windows.Threading.DispatcherTimer
+        $timer.Interval = [TimeSpan]::FromMilliseconds(300)
+        $timer.Add_Tick({
+            $pct       = if ($sync.TotalSteps -gt 0) { $sync.CurrentStep / $sync.TotalSteps } else { 0 }
+            $bar.Value = [Math]::Min([double]$pct, 1.0)
+            $status.Text = $sync.Status
+            if ($sync.Done) {
+                $timer.Stop()
+                $window.Close()
+            }
+        })
+        $timer.Start()
+        $window.ShowDialog() | Out-Null
+    })
+
+    $script:SandboxProgressPS = $ps
+    $script:SandboxProgressRS = $rs
+    $null = $ps.BeginInvoke()
+}
+
+function Update-SandboxProgress {
+    param([string]$Status)
+    if ($script:SandboxProgressSync) {
+        $script:SandboxProgressSync.CurrentStep++
+        $script:SandboxProgressSync.Status = $Status
+    }
+}
+
+function Close-SandboxProgress {
+    if ($script:SandboxProgressSync) {
+        $script:SandboxProgressSync.Status = "Setup complete."
+        $script:SandboxProgressSync.Done   = $true
+        Start-Sleep -Milliseconds 800
+    }
+    if ($script:SandboxProgressPS) {
+        $script:SandboxProgressPS.Dispose()
+        $script:SandboxProgressPS = $null
+    }
+    if ($script:SandboxProgressRS) {
+        $script:SandboxProgressRS.Close()
+        $script:SandboxProgressRS.Dispose()
+        $script:SandboxProgressRS = $null
+    }
+}
+
 # Function to verify a command exists and is of a certain type
 function Test-Command {
     [CmdletBinding()]
