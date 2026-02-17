@@ -1,4 +1,56 @@
 # Function to create tool files
+function Normalize-ToolDefinitions {
+    param(
+        [Parameter(Mandatory=$True)] [array]$ToolDefinitions
+    )
+
+    $defaultToolValues = [ordered]@{
+        Name                 = ""
+        Homepage             = ""
+        Vendor               = ""
+        License              = ""
+        LicenseUrl           = ""
+        Category             = ""
+        Shortcuts            = @()
+        InstallVerifyCommand = ""
+        Verify               = @()
+        Notes                = ""
+        Tips                 = ""
+        Usage                = ""
+        SampleCommands       = @()
+        SampleFiles          = @()
+        Tags                 = @()
+        FileExtensions       = @()
+        Dependencies         = @()
+        PythonVersion        = ""
+    }
+
+    for ($i = 0; $i -lt $ToolDefinitions.Count; $i++) {
+        $tool = $ToolDefinitions[$i]
+        foreach ($property in $defaultToolValues.Keys) {
+            if (! $tool.ContainsKey($property) -or $null -eq $tool[$property]) {
+                $tool[$property] = $defaultToolValues[$property]
+            }
+        }
+
+        foreach ($shortcut in $tool.Shortcuts) {
+            if (! $shortcut.ContainsKey("Lnk") -or $null -eq $shortcut.Lnk) { $shortcut["Lnk"] = "" }
+            if (! $shortcut.ContainsKey("Target") -or $null -eq $shortcut.Target) { $shortcut["Target"] = "" }
+            if (! $shortcut.ContainsKey("Args") -or $null -eq $shortcut.Args) { $shortcut["Args"] = "" }
+            if (! $shortcut.ContainsKey("Icon") -or $null -eq $shortcut.Icon) { $shortcut["Icon"] = "" }
+            if (! $shortcut.ContainsKey("WorkDir") -or $null -eq $shortcut.WorkDir) { $shortcut["WorkDir"] = "" }
+        }
+
+        foreach ($verify in $tool.Verify) {
+            if (! $verify.ContainsKey("Type") -or $null -eq $verify.Type) { $verify["Type"] = "" }
+            if (! $verify.ContainsKey("Name") -or $null -eq $verify.Name) { $verify["Name"] = "" }
+            if (! $verify.ContainsKey("Expect") -or $null -eq $verify.Expect) { $verify["Expect"] = "" }
+        }
+    }
+
+    return $ToolDefinitions
+}
+
 function New-CreateToolFiles {
     param (
         [Parameter(Mandatory=$True)] [array]$ToolDefinitions,
@@ -14,6 +66,8 @@ function New-CreateToolFiles {
     if (! (Test-Path -Path "$BASE_PATH\dfirws")) {
         New-Item -ItemType Directory -Force -Path "$BASE_PATH\dfirws" | Out-Null
     }
+
+    $ToolDefinitions = Normalize-ToolDefinitions -ToolDefinitions $ToolDefinitions
 
     # Remove old helper files for HTTP installations and create new ones.
     if (Test-Path -Path "$BASE_PATH\dfirws\verify_${source}.ps1") {
