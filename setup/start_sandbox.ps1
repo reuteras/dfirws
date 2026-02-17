@@ -21,7 +21,12 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
 
-Initialize-SandboxProgress -TotalSteps 30
+# Total number of Update-SandboxProgress calls in this script.
+# Increment this by 1 whenever you add a new Update-SandboxProgress call,
+# and decrement it when you remove one.  Verify with:
+#   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count
+$SANDBOX_PROGRESS_STEPS = 30
+Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
 
 # Check if running in verify mode
 if (Test-Path "C:\log\log.txt") {
@@ -706,6 +711,9 @@ if ("${WSDFIR_SYSMON}" -eq "Yes") {
     & "${TOOLS}\sysinternals\Sysmon64.exe" -accepteula -i "${WSDFIR_SYSMON_CONF}" | Out-Null
 }
 Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+# Main setup is complete - sandbox is now usable even while background tasks finish.
+Set-SandboxProgressReady
 
 # If in verify mode, run install_all and install_verify scripts
 if (Test-Path "C:\log\log.txt") {
