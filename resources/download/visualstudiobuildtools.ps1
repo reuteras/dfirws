@@ -30,6 +30,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "visualstudiobuildtools"

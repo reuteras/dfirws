@@ -237,6 +237,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -260,6 +261,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -283,6 +285,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -306,6 +309,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -329,6 +333,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -352,6 +357,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -375,6 +381,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -398,6 +405,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -421,6 +429,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -444,6 +453,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -467,6 +477,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -490,6 +501,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -513,6 +525,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -536,6 +549,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -559,6 +573,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -582,6 +597,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -605,6 +621,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -628,6 +645,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -651,6 +669,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -674,6 +693,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -697,6 +717,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -720,6 +741,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 #
@@ -743,6 +765,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # ============================================================================

@@ -39,6 +39,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # godap
@@ -81,6 +86,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # BeaconHunter - copied to program files during startup
@@ -117,6 +127,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # 4n4lDetector - installed in sandbox during startup
@@ -154,6 +169,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # aLEAPP
@@ -216,6 +236,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # iLEAPP
@@ -278,6 +303,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # lessmsi
@@ -317,6 +347,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # fx
@@ -353,6 +388,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # CobaltStrikeScan
@@ -389,6 +429,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Audacity
@@ -431,6 +476,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Ares
@@ -472,6 +522,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Brim/Zui (Zq) - installed during start
@@ -507,6 +562,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # RDPCacheStitcher
@@ -547,6 +607,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # ffmpeg
@@ -589,6 +654,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # ripgrep
@@ -629,6 +699,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # binlex
@@ -665,6 +740,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # cmder - installed during start
@@ -692,6 +772,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Recaf
@@ -725,6 +810,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # DBeaver
@@ -766,6 +856,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Dumpbin from Visual Studio
@@ -805,6 +900,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # dnSpy 32-bit and 64-bit
@@ -858,6 +958,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("dotnet6")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Dokany - available for manual installation
@@ -887,6 +992,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # mboxviewer
@@ -926,6 +1036,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # zstd
@@ -966,6 +1081,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # CyberChef
@@ -1006,6 +1126,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # redress
@@ -1046,6 +1171,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # h2database - available for manual installation
@@ -1085,6 +1215,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # INDXRipper
@@ -1124,6 +1259,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # dll_to_exe
@@ -1152,6 +1292,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # HollowsHunter
@@ -1188,6 +1333,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # PE-bear
@@ -1227,6 +1377,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # PE-sieve
@@ -1263,6 +1418,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # PE-utils
@@ -1303,6 +1463,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # WinObjEx64
@@ -1344,6 +1509,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Detect It Easy
@@ -1388,6 +1558,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # XELFViewer
@@ -1432,6 +1607,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # jd-gui
@@ -1472,6 +1652,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # LogBoost
@@ -1510,6 +1695,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # jq
@@ -1546,6 +1736,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Jumplist Browser
@@ -1582,6 +1777,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # MFTBrowser
@@ -1618,6 +1818,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Prefetch Browser
@@ -1654,6 +1859,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # bytecode-viewer
@@ -1685,6 +1895,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # gftrace
@@ -1724,6 +1939,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # adalanche
@@ -1762,6 +1982,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # MsgViewer
@@ -1792,6 +2017,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # capa
@@ -1851,6 +2081,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # capa-rules
@@ -1877,6 +2112,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Folder for Ghidra extensions
@@ -1913,6 +2153,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Ghidra")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Microsoft PowerShell
@@ -1938,6 +2183,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Ghidra btighidra
@@ -1962,6 +2212,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Ghidra")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Ghidra Cartographer plugin
@@ -1986,6 +2241,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Ghidra")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # GhidrAssistMCP - MCP server extension for Ghidra
@@ -2013,6 +2273,8 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Ghidra")
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Flare-Floss
@@ -2052,6 +2314,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Flare-Fakenet-NG
@@ -2092,6 +2359,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # GoReSym
@@ -2131,6 +2403,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # mmdbinspect
@@ -2171,6 +2448,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Elfparser-ng
@@ -2211,6 +2493,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # readpe
@@ -2243,6 +2530,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Dit explorer
@@ -2277,6 +2569,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # srum_dump binary
@@ -2313,6 +2610,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # forensic-timeliner
@@ -2334,6 +2636,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # jwt-cli
@@ -2360,6 +2667,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # dsq
@@ -2396,6 +2708,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # MetadataPlus
@@ -2432,6 +2749,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Loki - installed during start
@@ -2465,6 +2787,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Notepad++ - installed during start
@@ -2503,6 +2830,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2525,6 +2857,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2547,6 +2884,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # HindSight
@@ -2595,6 +2937,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # evtx_dump
@@ -2631,6 +2978,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Visual Studio Code powershell extension - installed during start
@@ -2658,6 +3010,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2674,6 +3031,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2690,6 +3052,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # qpdf
@@ -2730,6 +3097,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Fibratus
@@ -2765,6 +3137,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Radare2
@@ -2805,6 +3182,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # radare2-mcp - MCP server for radare2
@@ -2830,6 +3212,8 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Radare2")
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # r2ai
@@ -2852,6 +3236,8 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Radare2")
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Iaito by Radareorg
@@ -2894,6 +3280,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # hfs
@@ -2933,6 +3324,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # obsidian-mitre-attack
@@ -2962,6 +3358,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Cutter
@@ -3009,6 +3410,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Nerd fonts - installed during start
@@ -3035,6 +3441,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Perl by Strawberry
@@ -3062,6 +3473,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # sidr
@@ -3098,6 +3514,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # jadx - installed during start
@@ -3127,6 +3548,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Sleuthkit
@@ -3167,6 +3593,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # qrtool
@@ -3199,6 +3630,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # debloat
@@ -3235,6 +3671,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Thumbcacheviewer
@@ -3274,6 +3715,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # gron
@@ -3310,6 +3756,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # MemProcFS
@@ -3349,6 +3800,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # upx
@@ -3389,6 +3845,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Velociraptor
@@ -3427,6 +3888,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Witr
@@ -3449,6 +3915,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # fq
@@ -3485,6 +3956,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # fqlite
@@ -3520,6 +3996,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Zircolite
@@ -3561,6 +4042,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # imhex
@@ -3605,6 +4091,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # chainsaw
@@ -3644,6 +4135,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # yara
@@ -3700,6 +4196,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # yara-x
@@ -3740,6 +4241,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # yq
@@ -3776,6 +4282,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Get x64dbg - installed during start
@@ -3809,6 +4320,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # hayabusa
@@ -3849,6 +4365,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # takajo
@@ -3889,6 +4410,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # zaproxy - available for installation with dfirws-install.ps1
@@ -3924,6 +4450,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # edit
@@ -3951,6 +4482,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://download.sqlitebrowser.org/ - DB Browser for SQLite
@@ -3990,6 +4526,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # NetExt
@@ -4016,6 +4557,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # YAMAGoya
@@ -4051,6 +4597,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 #
@@ -4120,6 +4671,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4136,6 +4692,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4152,6 +4713,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4168,6 +4734,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4184,6 +4755,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4200,6 +4776,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4216,6 +4797,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4232,6 +4818,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4248,6 +4839,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "release"

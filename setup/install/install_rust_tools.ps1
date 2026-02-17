@@ -232,6 +232,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -262,6 +267,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -284,6 +294,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -306,6 +321,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "rust"
