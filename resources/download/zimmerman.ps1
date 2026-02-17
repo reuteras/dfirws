@@ -293,6 +293,10 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @("dotnet6")
+    LicenseUrl = ""
+    Tags = @()
+    FileExtensions = @()
+    PythonVersion = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "zimmerman"

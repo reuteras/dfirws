@@ -609,6 +609,10 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    Tags = @()
+    FileExtensions = @()
+    PythonVersion = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "didier"

@@ -483,6 +483,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -514,6 +518,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -552,6 +560,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -583,6 +595,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -600,6 +616,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -631,6 +651,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -654,6 +678,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -685,6 +713,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -721,6 +753,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -744,6 +780,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -767,6 +807,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -798,6 +842,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -821,6 +869,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -849,6 +901,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -872,6 +928,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -895,6 +955,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -918,6 +982,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -949,6 +1017,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -980,6 +1052,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1011,6 +1087,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1034,6 +1114,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1065,6 +1149,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1088,6 +1176,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1119,6 +1211,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1150,6 +1246,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1186,6 +1286,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1211,6 +1315,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1234,6 +1342,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1265,6 +1377,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1296,6 +1412,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1319,6 +1439,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1350,6 +1474,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1373,6 +1501,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1390,6 +1522,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1452,6 +1588,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1483,6 +1623,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1500,6 +1644,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1523,6 +1671,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1546,6 +1698,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1577,6 +1733,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1594,6 +1754,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @("Ghidra")
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1617,6 +1781,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1640,6 +1808,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1671,6 +1843,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1702,6 +1878,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1733,6 +1913,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1750,6 +1934,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1767,6 +1955,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1798,6 +1990,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1829,6 +2025,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1852,6 +2052,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1883,6 +2087,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1906,6 +2114,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1937,6 +2149,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1954,6 +2170,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1997,6 +2217,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2014,6 +2238,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2031,6 +2259,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2048,6 +2280,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2065,6 +2301,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2082,6 +2322,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2099,6 +2343,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2130,6 +2378,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2168,6 +2420,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2185,6 +2441,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2202,6 +2462,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2219,6 +2483,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @("enrichment")
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2236,6 +2504,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2253,6 +2525,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2270,6 +2546,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2287,6 +2567,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2304,6 +2588,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2321,6 +2609,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2338,6 +2630,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2355,6 +2651,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2372,6 +2672,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2389,6 +2693,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2406,6 +2714,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2423,6 +2735,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2440,6 +2756,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2463,6 +2783,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2480,6 +2804,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2497,6 +2825,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2514,6 +2846,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2531,6 +2867,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2548,6 +2888,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2565,6 +2909,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2582,6 +2930,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2599,6 +2951,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2616,6 +2972,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2633,6 +2993,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2650,6 +3014,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2667,6 +3035,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2684,6 +3056,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2701,6 +3077,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2718,6 +3098,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2735,6 +3119,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2752,6 +3140,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2769,6 +3161,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2786,6 +3182,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2803,6 +3203,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2820,6 +3224,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2837,6 +3245,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2854,6 +3266,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2871,6 +3287,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2902,6 +3322,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2919,6 +3343,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2936,6 +3364,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2953,6 +3385,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2970,6 +3406,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2987,6 +3427,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3004,6 +3448,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3021,6 +3469,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3038,6 +3490,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3055,6 +3511,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3072,6 +3532,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3089,6 +3553,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3106,6 +3574,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3123,6 +3595,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3140,6 +3616,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3178,6 +3658,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3195,6 +3679,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3212,6 +3700,10 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     PythonVersion = $PYTHON_DEFAULT
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "python"
