@@ -432,6 +432,10 @@ if (Test-Path ".\tmp\msys2") {
     Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
 }
 
+if (!(Test-Path ".\mount\golang")){
+    New-Item -ItemType Directory -Force -Path ".\mount\golang" 2>&1 | Out-Null
+}
+
 # Verify that tools are available
 if ($Verify.IsPresent) {
     Write-DateLog "Verify that tools are available."
