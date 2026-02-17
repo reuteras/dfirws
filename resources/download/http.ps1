@@ -111,6 +111,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # Get SwiftOnSecurity sysmon config - used from Sysmon
@@ -1138,6 +1139,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # Get exiftool
@@ -1191,6 +1193,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # Get pestudio
@@ -1237,6 +1240,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Get HxD
@@ -1284,6 +1289,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # Get trid and triddefs
@@ -1332,6 +1338,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Get malcat - installed during start - 313 indicates use of Python 3.13
@@ -1379,6 +1387,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Get ssview
@@ -1426,6 +1436,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # FullEventLogView
@@ -1473,6 +1485,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # pstwalker
@@ -1523,6 +1537,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # Win API Search
@@ -1576,6 +1591,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # pdfstreamdumper - installed during start
@@ -1616,6 +1632,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Capa integration with Ghidra - installed during start
@@ -1650,6 +1668,10 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    License = ""
+    LicenseUrl = ""
+    Shortcuts = @()
+    PythonVersion = ""
 }
 
 # Mail Viewer
@@ -1696,6 +1718,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Volatility Workbench 3
@@ -1744,6 +1768,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Volatility Workbench 2
@@ -1792,6 +1818,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Volatility Workbench 2 Profiles
@@ -1979,6 +2007,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Get winpmem
@@ -2011,6 +2041,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Binary Ninja - manual installation
@@ -2053,6 +2085,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # gpg4win
@@ -2093,6 +2127,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Tor browser
@@ -2136,6 +2172,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # DCode
@@ -2185,6 +2223,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Veracrypt - manual installation
@@ -2228,6 +2268,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Microsoft OpenJDK 11 - installed during start
@@ -2252,6 +2294,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
+    PythonVersion = ""
 }
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
@@ -2295,6 +2338,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # recbin
@@ -2341,6 +2386,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # capa Explorer web
@@ -2389,6 +2436,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
@@ -2434,6 +2483,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://npcap.com/#download - Npcap - available for manual installation
@@ -2461,6 +2512,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://www.sqlite.org/download.html - SQLite
@@ -2505,6 +2558,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # OpenVPN - manual installation
@@ -2539,6 +2594,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://downloads.digitalcorpora.org/downloads/bulk_extractor - bulk_extractor
@@ -2586,6 +2643,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://cert.at/en/downloads/software/software-densityscout - DensityScout
@@ -2635,6 +2694,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://nmap.org/download.html - Nmap
@@ -2679,6 +2740,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://flatassembler.net/download.php - FASM
@@ -2726,6 +2789,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Terminal for Windows - automatically installed during start
@@ -2752,6 +2817,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://procdot.com/downloadprocdotbinaries.htm - Procdot
@@ -2801,6 +2868,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 
@@ -2851,6 +2920,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @("enrichment")
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://www.graphviz.org/download/ - Graphviz - available for manual installation
@@ -2892,6 +2963,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # http://www.rohitab.com/apimonitor - API Monitor - installed during start
@@ -2929,6 +3002,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://gluonhq.com/products/javafx/ - JavaFX 21
@@ -2964,6 +3039,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
@@ -3009,6 +3086,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://windows.php.net/download - PHP 8
@@ -3056,6 +3135,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # https://hashcat.net/hashcat/ - hashcat
@@ -3107,6 +3188,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Drivers for hashcat
@@ -3143,6 +3226,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # ELK
@@ -3182,6 +3267,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 # Remove unused files and directories

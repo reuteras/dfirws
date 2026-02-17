@@ -64,6 +64,8 @@ $TOOL_DEFINITIONS += @{
     )
     SampleFiles = @()
     Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "kape"

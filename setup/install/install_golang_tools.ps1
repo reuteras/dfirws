@@ -59,6 +59,10 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @("golang")
+    LicenseUrl = ""
+    Tags = @()
+    FileExtensions = @()
+    PythonVersion = ""
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "go"

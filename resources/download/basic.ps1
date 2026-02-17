@@ -44,6 +44,9 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    Tags = @()
+    FileExtensions = @()
+    PythonVersion = ""
 }
 
 # git - installed during start
@@ -69,6 +72,9 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    Tags = @()
+    FileExtensions = @()
+    PythonVersion = ""
 }
 #
 # Packages used in freshclam sandbox
@@ -115,6 +121,9 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
+    Tags = @()
+    FileExtensions = @()
+    PythonVersion = ""
 }
 
 #
@@ -154,7 +163,12 @@ if ($all -or $Python) {
         SampleCommands = @()
         SampleFiles = @()
         Dependencies = @()
-    }
+        Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
 
 
     # Get Amazon Corretto - installed during start
@@ -200,7 +214,10 @@ if ($all -or $Python) {
             "N/A"
         )
         Dependencies = @("openjdk11")
-    }
+        Tags = @()
+    FileExtensions = @()
+    PythonVersion = ""
+}
 
     # Tools to compile and build - version 2019
     $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe" -check "PE32"
