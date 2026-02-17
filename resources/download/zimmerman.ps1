@@ -16,42 +16,42 @@ $TOOL_DEFINITIONS += @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\AmcacheParser.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command AmcacheParser.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\AmcacheParser.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\AmcacheParser.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\AppCompatCacheParser.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command AppCompatCacheParser.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\AppCompatCacheParser.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\AppCompatCacheParser.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\RegistryExplorer.lnk"
             Target   = "`${env:ProgramFiles}\RegistryExplorer\RegistryExplorer.exe"
             Args     = ""
-            Icon     = "`${TOOLS}\Zimmerman\net6\RegistryExplorer.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\RegistryExplorer.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\bstrings.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command bstrings.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\bstrings.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\bstrings.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
          @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\EvtxECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command EvtxECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\EvtxECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\EvtxECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\EZViewer.lnk"
-            Target   = "`${TOOLS}\Zimmerman\net6\EZViewer.exe"
+            Target   = "`${TOOLS}\Zimmerman\net4\EZViewer.exe"
             Args     = ""
-            Icon     = "`${TOOLS}\Zimmerman\net6\EZViewer.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\EZViewer.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
@@ -65,56 +65,56 @@ $TOOL_DEFINITIONS += @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\JLECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command JLECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\JLECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\JLECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\LECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command LECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\LECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\LECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\MFTECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command MFTECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\MFTECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\MFTECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\PECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command PECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\PECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\PECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\RBCmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command RBCmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\RBCmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\RBCmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\RecentFileCacheParser.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command RecentFileCacheParser.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\RecentFileCacheParser.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\RecentFileCacheParser.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\rla.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command rla.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\rla.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\rla.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\SBECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command SBECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\SBECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\SBECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
@@ -128,14 +128,14 @@ $TOOL_DEFINITIONS += @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\SrumECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command SrumECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\SrumECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\SrumECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\SumECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command SumECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\SumECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\SumECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
@@ -149,14 +149,14 @@ $TOOL_DEFINITIONS += @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\VSCMount.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command VSCMount.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\VSCMount.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\VSCMount.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\WxTCmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command WxTCmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\net6\WxTCmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\net4\WxTCmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
     )
@@ -164,12 +164,12 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\AmcacheParser.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\AmcacheParser.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\AppCompatCacheParser.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\AppCompatCacheParser.exe"
             Expect = "PE32"
         }
          @{
@@ -179,17 +179,17 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\bstrings.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\bstrings.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\EvtxeCmd\EvtxECmd.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\EZViewer\EZViewer.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\EZViewer\EZViewer.exe"
             Expect = "PE32"
         }
         @{
@@ -199,42 +199,42 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\JLECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\JLECmd.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\LECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\LECmd.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\MFTECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\MFTECmd.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\PECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\PECmd.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\RBCmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\RBCmd.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\RecentFileCacheParser.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\RecentFileCacheParser.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\rla.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\rla.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\SBECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\SBECmd.exe"
             Expect = "PE32"
         }
         @{
@@ -244,12 +244,12 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\SrumECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\SrumECmd.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\SumECmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\SumECmd.exe"
             Expect = "PE32"
         }
         @{
@@ -259,12 +259,12 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\VSCMount.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\VSCMount.exe"
             Expect = "PE32"
         }
         @{
             Type = "command"
-            Name = "`${TOOLS}\Zimmerman\net6\WxTCmd.exe"
+            Name = "`${TOOLS}\Zimmerman\net4\WxTCmd.exe"
             Expect = "PE32"
         }
     )
