@@ -278,11 +278,9 @@ function Initialize-SandboxProgress {
             $status.Text = $sync.Status
 
             # Turn bar green when the sandbox is declared ready.
-            if ($sync.Ready -and $bar.Foreground -isnot [System.Windows.Media.SolidColorBrush] -or
-                ($sync.Ready -and ($bar.Foreground -as [System.Windows.Media.SolidColorBrush])?.Color -ne [System.Windows.Media.Colors]::Green)) {
-                if ($sync.Ready) {
-                    $bar.Foreground = [System.Windows.Media.Brushes]::ForestGreen
-                }
+            # Simple assignment every tick is fine - WPF is idempotent on same brush.
+            if ($sync.Ready) {
+                $bar.Foreground = [System.Windows.Media.Brushes]::ForestGreen
             }
 
             if ($sync.Done) {
