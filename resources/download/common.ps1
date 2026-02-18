@@ -671,10 +671,21 @@ function Get-Winget {
 
     Write-SynchronizedLog "Downloading $AppName version $VERSION."
 
+    New-Item -ItemType Directory -Force -Path .\tmp\winget | Out-Null
     winget download --disable-interactivity	--exact --id "$AppName" -d .\tmp\winget 2>&1 | Out-Null
     Remove-Item .\tmp\winget\*.yaml -Force 2>&1 | Out-Null
 
+    if (-not (Test-Path .\tmp\winget\)) {
+        Write-SynchronizedLog "Error: winget download failed for $AppName - tmp\winget directory does not exist."
+        return $false
+    }
+
     $FileName = Get-ChildItem .\tmp\winget\ | Select-Object -Last 1 -ExpandProperty FullName
+
+    if (-not $FileName) {
+        Write-SynchronizedLog "Error: winget download failed for $AppName - no file found in tmp\winget."
+        return $false
+    }
 
     if ($check -ne "" ) {
         $FILE_TYPE = & "$GIT_FILE" -b "$FileName"
