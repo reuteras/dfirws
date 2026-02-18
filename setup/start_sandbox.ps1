@@ -643,13 +643,13 @@ Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\"
 
 # IIS Geolocate and other Zimmerman tools that needs readwrite access
 Update-SandboxProgress "Configuring Zimmerman tools..."
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\iisGeolocate" "${env:ProgramFiles}\iisGeolocate" | Out-Null
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\iisGeolocate" "${env:ProgramFiles}\iisGeolocate" | Out-Null
 if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
     Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force | Out-Null
 }
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\RegistryExplorer" "${env:ProgramFiles}\RegistryExplorer" | Out-Null
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\ShellBagsExplorer" "${env:ProgramFiles}\ShellBagsExplorer" | Out-Null
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\TimelineExplorer" "${env:ProgramFiles}\TimelineExplorer" | Out-Null
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\RegistryExplorer" "${env:ProgramFiles}\RegistryExplorer" | Out-Null
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\ShellBagsExplorer" "${env:ProgramFiles}\ShellBagsExplorer" | Out-Null
+Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\TimelineExplorer" "${env:ProgramFiles}\TimelineExplorer" | Out-Null
 
 # geolocus
 if (Test-Path "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb") {
