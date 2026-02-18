@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.js`
 
 **Tags:** javascript, deobfuscation, beautifier

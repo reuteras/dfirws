@@ -4,6 +4,8 @@
 
 **Source:** Installer
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.py`
 
 **Tags:** python, package-management

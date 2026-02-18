@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`
 
 **Tags:** office, encryption, decryption

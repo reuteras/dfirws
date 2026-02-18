@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.bin`, `.txt`, `.hex`
 
 **Tags:** data-processing, encoding, decoding, deobfuscation, hashing

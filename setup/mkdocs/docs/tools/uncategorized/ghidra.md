@@ -10,6 +10,8 @@
 
 **Source:** Installer
 
+**Profiles:** Full (not included in Basic profile)
+
 Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate.
 
 ## Tips

@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **Tags:** hashing, identification
 
 The Modern Hash Identification System.

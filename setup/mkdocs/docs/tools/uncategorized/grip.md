@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.md`
 
 **Tags:** markdown, preview

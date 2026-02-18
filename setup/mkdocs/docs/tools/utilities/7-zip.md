@@ -10,6 +10,8 @@
 
 **Source:** Installer
 
+**Profiles:** Full, Basic
+
 7-Zip is a file archive tool.
 
 ## Tips

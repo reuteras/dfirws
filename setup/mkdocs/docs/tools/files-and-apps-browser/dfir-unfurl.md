@@ -4,4 +4,6 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **Tags:** url-analysis, forensics, visualization

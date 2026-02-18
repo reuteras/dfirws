@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.doc`, `.xls`, `.ppt`
 
 **Tags:** office, vba, decompiler

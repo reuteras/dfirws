@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.lnk`
 
 **Tags:** windows, forensics, shortcut-analysis

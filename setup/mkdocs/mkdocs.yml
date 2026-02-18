@@ -501,6 +501,7 @@ nav:
     - YARA Forge Rules Full: tools/uncategorized/yara-forge-rules-full.md
     - yara-python: tools/uncategorized/yara-python.md
     - Zircolite: tools/uncategorized/zircolite.md
+    - zvec: tools/uncategorized/zvec.md
   - Utilities:
     - Overview: tools/utilities/index.md
     - 7-Zip: tools/utilities/7-zip.md

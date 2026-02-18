@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.mft`, `.dd`, `.raw`, `.img`
 
 **Tags:** ntfs, filesystem, forensics, disk-forensics

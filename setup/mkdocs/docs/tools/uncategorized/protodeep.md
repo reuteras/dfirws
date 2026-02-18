@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.bin`
 
 **Tags:** protobuf, reverse-engineering

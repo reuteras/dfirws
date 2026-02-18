@@ -131,7 +131,8 @@ foreach ($package in `
     "visidata", `
     "xlrd", `
     "XLMMacroDeobfuscator", `
-    "XlsxWriter") {
+    "XlsxWriter", `
+    "zvec" ) {
         uv tool install $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
         Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
@@ -3709,6 +3710,27 @@ $TOOL_DEFINITIONS += @{
     Vendor = ""
     License = ""
     LicenseUrl = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "zvec"
+    Category = "Files and apps\Database"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".bin")
+    Tags = @("database", "rag", "vector-search", "vectordb")
+    Notes = "Zvec is an open-source, in-process vector database - lightweight, lightning-fast, and designed to embed directly into applications. Built on Proxima (Alibabas battle-tested vector search engine), it delivers production-grade, low-latency, scalable similarity search with minimal setup."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = $PYTHON_DEFAULT
+    Homepage = "https://zvec.org/en/"
+    Vendor = "Alibaba"
+    License = "Apache-2.0 license"
+    LicenseUrl = "https://github.com/alibaba/zvec?tab=Apache-2.0-1-ov-file"
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "python"

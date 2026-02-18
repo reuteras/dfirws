@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`
 
 **Tags:** malware-analysis, autoit, deobfuscation

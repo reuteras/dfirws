@@ -7,6 +7,8 @@
 
 **Source:** Installer
 
+**Profiles:** Full, Basic
+
 A fork of Git containing Windows-specific patches.
 
 ## Sample Commands

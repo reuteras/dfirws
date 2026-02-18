@@ -19,6 +19,7 @@
         "aiodns",
         "aiohttp",
         "aleapp",
+        "Alibabas",
         "Allget",
         "allitems",
         "allusers",
@@ -503,6 +504,7 @@
         "metricbeat",
         "MFTE",
         "mgmeyers",
+        "Microsofts",
         "mikefarah",
         "minidump",
         "mkape",
@@ -821,6 +823,7 @@
         "Runas",
         "runcode",
         "runmenu",
+        "runspacefactory",
         "runxlrd",
         "rustc",
         "Rustlang",
@@ -970,6 +973,7 @@
         "vbsfile",
         "vcredist",
         "vcvarsall",
+        "vectordb",
         "velocidex",
         "Velociraptor",
         "venv",
@@ -1062,7 +1066,8 @@
         "zstd",
         "zstyle",
         "zsviczian",
-        "zui"
+        "zui",
+        "zvec"
     ],
     "cSpell.enabledFileTypes": {
         "bat": true,

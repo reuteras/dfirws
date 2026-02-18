@@ -4,6 +4,8 @@
 
 **Source:** Python
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.db`, `.sqlite`
 
 **Tags:** database, sqlite, cli
