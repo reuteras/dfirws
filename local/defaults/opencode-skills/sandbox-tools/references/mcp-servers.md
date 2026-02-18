@@ -23,6 +23,7 @@ The DFIRWS sandbox can optionally enable MCP (Model Context Protocol) servers th
 - **Capabilities**: Disassemble, analyze functions, extract strings, search patterns, debug
 
 **Fallback if unavailable**: Use `C:\Tools\radare2\bin\radare2.exe` directly via CLI commands:
+
 ```
 C:\Tools\radare2\bin\radare2.exe -q -c "aaa; afl" Desktop\readonly\suspect.exe
 C:\Tools\radare2\bin\radare2.exe -q -c "iz" Desktop\readonly\suspect.exe
@@ -36,6 +37,7 @@ C:\Tools\radare2\bin\radare2.exe -q -c "iz" Desktop\readonly\suspect.exe
 - **Capabilities**: Parse registry hives, enumerate keys, extract values, search for patterns, timeline registry changes
 
 **Fallback if unavailable**: Use the regipy CLI or RegRipper:
+
 ```
 C:\venv\bin\registry-dump.exe Desktop\readonly\NTUSER.DAT
 C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\NTUSER.DAT -a
@@ -59,7 +61,7 @@ If a user asks to use an MCP-enabled workflow and the server is not enabled, exp
 ## When to recommend MCP vs. CLI
 
 | Scenario | Recommendation |
-|----------|---------------|
+| -------- | -------------- |
 | One-shot extraction (e.g., "dump all registry keys") | CLI tool |
 | Iterative exploration (e.g., "find suspicious keys, then dig deeper") | MCP if enabled |
 | Batch processing multiple files | CLI tool |

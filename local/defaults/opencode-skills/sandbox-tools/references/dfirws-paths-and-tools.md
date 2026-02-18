@@ -3,26 +3,28 @@
 Use this file when command/path specificity matters. All paths are Windows-native.
 
 ## Core paths
-- `C:\Tools\` - pre-extracted forensic and reverse engineering binaries.
+
+- `C:\Tools\` - pre-extracted forensic and reverse engineering binaries (read-only).
 - `C:\Tools\bin\` - wrapper scripts and small utilities (on PATH).
 - `C:\Tools\Zimmerman\net6\` - Eric Zimmerman .NET forensic tools.
 - `C:\Tools\DidierStevens\` - Didier Stevens Python analysis scripts (also copied to `C:\Tools\bin\`).
 - `C:\Tools\sysinternals\` - Microsoft Sysinternals Suite (80+ tools).
-- `C:\venv\` - Python virtual environments and script launchers.
+- `C:\venv\` - Python virtual environments and script launchers (read-only).
 - `C:\venv\bin\` - Python tool executables installed via uv.
 - `C:\venv\default\Scripts\` - default venv entry-point scripts.
-- `C:\git\` - cloned repositories used by some toolchains.
+- `C:\git\` - cloned repositories used by some toolchains (read-only).
 - `C:\enrichment\` - threat intelligence and enrichment data (read-only).
 - `C:\downloads\` - installer cache (read-only).
 - `Desktop\readonly\` - read-only evidence/input directory.
 - `Desktop\readwrite\` - writable analyst workspace (default for case output).
+- `C:\tmp` - Directory for temporary work.
 
 ## Tool selection by artifact type
 
 ### Event logs (`.evtx`)
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | Hayabusa | `C:\Tools\hayabusa\hayabusa.exe` | SIGMA-based threat hunting, timeline generation |
 | Chainsaw | `C:\Tools\chainsaw\chainsaw.exe` | Fast SIGMA/keyword search across event logs |
 | EvtxECmd | `C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe` | Detailed EVTX parsing to CSV/JSON |
@@ -35,6 +37,7 @@ Use this file when command/path specificity matters. All paths are Windows-nativ
 | YAMAGoya | `C:\Tools\YAMAGoya\YAMAGoya.exe` | YARA/SIGMA rule analyzer |
 
 **Quick triage commands:**
+
 ```
 C:\Tools\hayabusa\hayabusa.exe csv-timeline -d Desktop\readonly\evtx -o Desktop\readwrite\hayabusa_timeline.csv
 C:\Tools\chainsaw\chainsaw.exe hunt Desktop\readonly\evtx -s C:\Tools\chainsaw\sigma\ --mapping C:\Tools\chainsaw\mappings\sigma-event-logs-all.yml -o Desktop\readwrite\chainsaw_results.csv --csv
@@ -44,7 +47,7 @@ C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe -d Desktop\readonly\evtx --csv Des
 ### Registry hives (`NTUSER.DAT`, `SYSTEM`, `SOFTWARE`, `SAM`, `SECURITY`, etc.)
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | RegistryExplorer | `C:\Program Files\RegistryExplorer\RegistryExplorer.exe` | GUI registry hive viewer |
 | RegRipper 4.0 | `C:\git\RegRipper4.0\rip.exe` | Scripted broad registry extraction |
 | regipy (CLI) | `C:\venv\bin\registry-dump.exe` | Python-based registry parsing |
@@ -55,6 +58,7 @@ C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe -d Desktop\readonly\evtx --csv Des
 | AppCompatCacheParser | `C:\Tools\Zimmerman\net6\AppCompatCacheParser.exe` | Shimcache analysis |
 
 **Quick triage commands:**
+
 ```
 C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\SYSTEM -a > Desktop\readwrite\system_regripper.txt
 C:\Tools\Zimmerman\net6\AmcacheParser.exe -f Desktop\readonly\Amcache.hve --csv Desktop\readwrite\amcache_output
@@ -64,7 +68,7 @@ C:\Tools\Zimmerman\net6\AppCompatCacheParser.exe -f Desktop\readonly\SYSTEM --cs
 ### Executables / DLLs / PE files
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | capa | `C:\Tools\capa\capa.exe` | Capability detection (maps to MITRE ATT&CK) |
 | Detect It Easy | `C:\Tools\die\die.exe` | Packer/compiler/linker detection |
 | pestudio | `C:\Tools\pestudio\pestudio.exe` | PE static analysis GUI |
@@ -85,6 +89,7 @@ C:\Tools\Zimmerman\net6\AppCompatCacheParser.exe -f Desktop\readonly\SYSTEM --cs
 | sigcheck (Sysinternals) | `C:\Tools\sysinternals\sigcheck.exe` | Signature and certificate checking |
 
 **Quick triage commands:**
+
 ```
 C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe -j > Desktop\readwrite\capa_results.json
 C:\Tools\floss\floss.exe Desktop\readonly\suspect.exe -j > Desktop\readwrite\floss_strings.json
@@ -96,13 +101,14 @@ C:\Tools\densityscout\densityscout.exe -pe Desktop\readonly\suspect.exe
 ### Memory images
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | VolatilityWorkbench 3 | `C:\Tools\VolatilityWorkbench\VolatilityWorkbench.exe` | GUI memory forensics (Vol3) |
 | VolatilityWorkbench 2 | `C:\Tools\VolatilityWorkbench2\VolatilityWorkbench.exe` | GUI memory forensics (Vol2) |
 | volatility3 (Python) | `C:\venv\default\Scripts\vol.exe` or via `python -m volatility3` | CLI memory forensics |
 | MemProcFS | `C:\Tools\MemProcFS\` | Memory as filesystem |
 
 **Quick triage commands:**
+
 ```
 C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.info
 C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.pslist > Desktop\readwrite\vol3_pslist.txt
@@ -112,7 +118,7 @@ C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.netscan >
 ### Network captures (`.pcap`, `.pcapng`)
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | Wireshark | Via installed shortcut | GUI packet analysis |
 | tshark | In Wireshark install dir | CLI packet analysis |
 | Zui | `C:\Tools\Zui\Zui.exe` | Network traffic analysis GUI |
@@ -122,7 +128,7 @@ C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.netscan >
 ### Browser artifacts / SQLite
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | BrowsingHistoryView | `C:\Tools\nirsoft\BrowsingHistoryView.exe` | Browser history extraction |
 | ChromeCacheView | `C:\Tools\nirsoft\ChromeCacheView.exe` | Chrome cache viewer |
 | MZCacheView | `C:\Tools\nirsoft\MZCacheView.exe` | Firefox cache viewer |
@@ -137,7 +143,7 @@ C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.netscan >
 ### Office documents (`.docx`, `.xlsx`, `.pptx`, OLE files)
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | olevba | `C:\venv\bin\olevba.exe` | VBA macro extraction and analysis |
 | oleid | `C:\venv\bin\oleid.exe` | OLE file identifier |
 | oledump.py | `C:\Tools\DidierStevens\oledump.py` | OLE stream extraction |
@@ -150,6 +156,7 @@ C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.netscan >
 | LibreOffice | Via installed shortcut | Open/inspect Office files |
 
 **Quick triage commands:**
+
 ```
 C:\venv\bin\oleid.exe Desktop\readonly\document.docx
 C:\venv\bin\olevba.exe Desktop\readonly\document.docx
@@ -160,7 +167,7 @@ python C:\Tools\DidierStevens\oledump.py Desktop\readonly\document.doc
 ### PDF files
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | pdfid.py | `C:\Tools\DidierStevens\pdfid.py` | PDF structure identifier (detect JavaScript, OpenAction) |
 | pdf-parser.py | `C:\Tools\DidierStevens\pdf-parser.py` | PDF object/stream extraction |
 | peepdf | `C:\venv\bin\peepdf.exe` | Interactive PDF analysis |
@@ -169,6 +176,7 @@ python C:\Tools\DidierStevens\oledump.py Desktop\readonly\document.doc
 | Foxit PDF Reader | Via installed shortcut | Safe PDF viewing |
 
 **Quick triage commands:**
+
 ```
 python C:\Tools\DidierStevens\pdfid.py Desktop\readonly\suspect.pdf
 python C:\Tools\DidierStevens\pdf-parser.py --stats Desktop\readonly\suspect.pdf
@@ -177,7 +185,7 @@ python C:\Tools\DidierStevens\pdf-parser.py --stats Desktop\readonly\suspect.pdf
 ### Email (`.eml`, `.msg`, `.pst`, `.mbox`)
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | emldump.py | `C:\Tools\DidierStevens\emldump.py` | EML file analysis |
 | extract-msg | `C:\venv\bin\extract_msg.exe` | MSG file extraction |
 | Mail Viewer (MiTeC) | `C:\Tools\MailView\MailView.exe` | GUI email viewer |
@@ -188,7 +196,7 @@ python C:\Tools\DidierStevens\pdf-parser.py --stats Desktop\readonly\suspect.pdf
 ### Archives and unknown containers
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | 7-Zip | `C:\Program Files\7-Zip\7z.exe` | Universal archive extraction |
 | TrID | `C:\Tools\trid\trid.exe` | File type identification |
 | file-magic.py | `C:\Tools\DidierStevens\file-magic.py` | File identification |
@@ -199,7 +207,7 @@ python C:\Tools\DidierStevens\pdf-parser.py --stats Desktop\readonly\suspect.pdf
 ### Disk images and filesystem artifacts
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | Sleuthkit | `C:\Tools\sleuthkit\bin\` (fls, icat, mmls, etc.) | Filesystem forensics CLI |
 | OSFMount | Via installed shortcut | Mount disk images as drive letters |
 | MFTECmd | `C:\Tools\Zimmerman\net6\MFTECmd.exe` | MFT parsing |
@@ -208,6 +216,7 @@ python C:\Tools\DidierStevens\pdf-parser.py --stats Desktop\readonly\suspect.pdf
 | MFTBrowser | `C:\Tools\MFTBrowser\MFTBrowser.exe` | GUI MFT viewer |
 
 **Quick triage commands:**
+
 ```
 C:\Tools\Zimmerman\net6\MFTECmd.exe -f Desktop\readonly\$MFT --csv Desktop\readwrite\mft_output
 C:\Tools\sleuthkit\bin\mmls.exe Desktop\readonly\disk.dd
@@ -217,7 +226,7 @@ C:\Tools\sleuthkit\bin\fls.exe -r -o <offset> Desktop\readonly\disk.dd > Desktop
 ### Windows artifact parsing (Jump Lists, LNK, Prefetch, Recycle Bin, SRUM, etc.)
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | JLECmd | `C:\Tools\Zimmerman\net6\JLECmd.exe` | Jump list parsing |
 | LECmd | `C:\Tools\Zimmerman\net6\LECmd.exe` | LNK file parsing |
 | PECmd | `C:\Tools\Zimmerman\net6\PECmd.exe` | Prefetch file parsing |
@@ -232,6 +241,7 @@ C:\Tools\sleuthkit\bin\fls.exe -r -o <offset> Desktop\readonly\disk.dd > Desktop
 | LastActivityView | `C:\Tools\nirsoft\LastActivityView.exe` | Recent activity summary |
 
 **Quick triage commands:**
+
 ```
 C:\Tools\Zimmerman\net6\PECmd.exe -d Desktop\readonly\Prefetch --csv Desktop\readwrite\prefetch_output
 C:\Tools\Zimmerman\net6\LECmd.exe -d Desktop\readonly\lnk_files --csv Desktop\readwrite\lnk_output
@@ -242,7 +252,7 @@ C:\Tools\Zimmerman\net6\RBCmd.exe -d Desktop\readonly\$Recycle.Bin --csv Desktop
 ### Mobile forensics
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | aLEAPP | `C:\Tools\aLEAPP\aleappGUI.exe` | Android artifact parsing |
 | iLEAPP | `C:\Tools\iLEAPP\ileappGUI.exe` | iOS artifact parsing |
 | apktool | `C:\Tools\bin\apktool.bat` | APK decompiling |
@@ -251,7 +261,7 @@ C:\Tools\Zimmerman\net6\RBCmd.exe -d Desktop\readonly\$Recycle.Bin --csv Desktop
 ### Malware detection and IOC scanning
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | YARA | `C:\Tools\yara\yara64.exe` | Signature-based malware detection |
 | yara-x | `C:\Tools\yara-x\yr.exe` | Next-gen YARA engine |
 | Loki | `C:\Tools\loki\loki.exe` | IOC scanner (hashes, filenames, YARA) |
@@ -261,6 +271,7 @@ C:\Tools\Zimmerman\net6\RBCmd.exe -d Desktop\readonly\$Recycle.Bin --csv Desktop
 | 1768.py | `C:\Tools\DidierStevens\1768.py` | Cobalt Strike config extraction |
 
 **Quick triage commands:**
+
 ```
 C:\Tools\yara\yara64.exe -r C:\enrichment\yara\yara-forge-rules-core.yar Desktop\readonly\suspect.exe
 C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
@@ -270,7 +281,7 @@ C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
 ### Encoding, decoding, and data transformation
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | CyberChef | `C:\Tools\CyberChef\CyberChef.html` (open in browser) | Swiss army knife for data transformations |
 | base64dump.py | `C:\Tools\DidierStevens\base64dump.py` | Base64 stream extraction |
 | xorsearch.py | `C:\Tools\DidierStevens\xorsearch.py` | XOR-encoded content search |
@@ -283,7 +294,7 @@ C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
 ### Timestamp and timeline tools
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | TimelineExplorer | `C:\Program Files\TimelineExplorer\TimelineExplorer.exe` | View and filter CSV timelines |
 | forensic-timeliner | `C:\Tools\forensic-timeliner\` | Automated timeline generation |
 | DCode | `C:\Tools\DCode\DCode.exe` | Individual timestamp decode |
@@ -292,7 +303,7 @@ C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
 ### Sysinternals (selected tools at `C:\Tools\sysinternals\`)
 
 | Tool | Binary | Use case |
-|------|--------|----------|
+| ---- | ------ | -------- |
 | strings | `strings.exe` | Extract printable strings |
 | sigcheck | `sigcheck.exe` | Digital signature verification |
 | autorunsc | `autorunsc.exe` | Persistence location enumeration |
@@ -305,14 +316,14 @@ C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
 ### Active Directory and LDAP
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | godap | `C:\Tools\bin\godap.exe` | LDAP analysis |
 | AdaLanche | `C:\Tools\AdaLanche\` | AD analysis |
 
 ### Data querying and visualization
 
 | Tool | Path | Use case |
-|------|------|----------|
+| ---- | ---- | -------- |
 | fx | `C:\Tools\bin\fx.exe` | Interactive JSON viewer |
 | jq | `C:\Tools\bin\jq.exe` | JSON processor |
 | fq | `C:\Tools\bin\fq.exe` | Binary format querying (like jq for binary) |
@@ -323,6 +334,7 @@ C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
 | Neo4j | `C:\Tools\neo4j\` | Graph database for relationship analysis |
 
 ## Reproducibility pattern
+
 For each task, return:
 1. Input path assumptions.
 2. Command block(s) with absolute paths.
@@ -330,6 +342,7 @@ For each task, return:
 4. Validation command for sanity-checking generated output.
 
 ## Safety notes
+
 - Prefer command options that avoid modifying source artifacts.
 - Treat `Desktop\readonly` as source evidence and avoid writing back to it.
 - Write derived artifacts (CSV/JSON/reports) under `Desktop\readwrite\cases\<case-id>\`.

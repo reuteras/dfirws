@@ -6,7 +6,9 @@ description: Use this skill when working in the DFIRWS Windows Sandbox to analyz
 # Sandbox Tools Skill
 
 ## When to use
+
 Use this skill when the user asks to:
+
 - analyze files inside the DFIRWS sandbox,
 - choose the right built-in forensic tools,
 - run quick triage on logs, registry hives, browser artifacts, executables, memory images, PCAPs, Office documents, PDFs, email, or archives,
@@ -15,6 +17,7 @@ Use this skill when the user asks to:
 - query enrichment data (YARA rules, GeoIP, IOC databases, Sigma rules).
 
 Before answering, read the relevant reference files:
+
 - **Tool paths and selection**: `references/dfirws-paths-and-tools.md`
 - **MCP servers**: `references/mcp-servers.md`
 - **Common investigation workflows**: `references/common-workflows.md`
@@ -22,6 +25,7 @@ Before answering, read the relevant reference files:
 - **Python tool invocation**: `references/python-tools.md`
 
 ## Workflow
+
 1. **Confirm scope**
    - Identify artifact type (event log, registry hive, binary, PCAP, archive, memory image, timeline source, Office document, PDF, email, disk image, phone extraction, browser data).
    - Confirm where artifacts are expected (`Desktop\readonly` for input artifacts, `Desktop\readwrite` for analysis output).
@@ -60,6 +64,7 @@ Before answering, read the relevant reference files:
    - Include assumptions and next-step branches.
 
 ## Output template
+
 Use this structure in responses:
 
 - **Objective**: What question the analysis answers.
@@ -69,6 +74,7 @@ Use this structure in responses:
 - **Next checks**: 2-4 concrete follow-ups.
 
 ## Guardrails
+
 - Prefer offline-capable workflows; do not assume internet access in the final analysis sandbox.
 - Never invent tool output; clearly mark estimated or pending results.
 - Keep pathing Windows-native unless the user explicitly asks for PowerShell-to-Bash translation.

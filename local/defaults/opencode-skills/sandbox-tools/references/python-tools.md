@@ -5,7 +5,7 @@ The DFIRWS sandbox has multiple Python environments. Understanding the structure
 ## Python environments overview
 
 | Environment | Path | Purpose |
-|-------------|------|---------|
+| ----------- | ---- | ------- |
 | System Python | `C:\Tools\python\python.exe` | Base interpreter (on PATH) |
 | Default venv | `C:\venv\default\` | General-purpose venv with most forensic packages |
 | UV tool bin | `C:\venv\bin\` | Standalone tool executables installed by uv |
@@ -17,6 +17,7 @@ The DFIRWS sandbox has multiple Python environments. Understanding the structure
 ### Pattern 1: Direct executables from `C:\venv\bin\`
 
 Most Python tools are available as standalone `.exe` files. Use these directly:
+
 ```
 C:\venv\bin\olevba.exe Desktop\readonly\document.docx
 C:\venv\bin\mraptor.exe Desktop\readonly\document.docx
@@ -33,6 +34,7 @@ C:\venv\bin\extract_msg.exe Desktop\readonly\email.msg
 ### Pattern 2: Default venv entry points at `C:\venv\default\Scripts\`
 
 Some tools install their entry points in the default venv:
+
 ```
 C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.pslist
 C:\venv\default\Scripts\acquire.exe --help
@@ -43,6 +45,7 @@ C:\venv\default\Scripts\sigma.exe convert -t <target> -f Desktop\readonly\rule.y
 ### Pattern 3: Specialized venvs at `C:\venv\<name>\`
 
 Some tools have their own isolated virtual environments:
+
 ```
 C:\venv\zircolite\Scripts\python.exe C:\git\zircolite\zircolite.py -e Desktop\readonly\evtx
 C:\venv\dfir-unfurl\Scripts\unfurl.exe "https://example.com/path?param=value"
@@ -53,6 +56,7 @@ C:\venv\evt2sigma\Scripts\python.exe C:\git\evt2sigma\evt2sigma.py
 ### Pattern 4: Didier Stevens Python scripts
 
 These scripts are in `C:\Tools\DidierStevens\` (also copied to `C:\Tools\bin\`) and run with the system Python:
+
 ```
 python C:\Tools\DidierStevens\oledump.py Desktop\readonly\document.doc
 python C:\Tools\DidierStevens\pdfid.py Desktop\readonly\suspect.pdf
@@ -70,6 +74,7 @@ python C:\Tools\DidierStevens\byte-stats.py Desktop\readonly\suspect.exe
 ### Pattern 5: UV-managed per-tool venvs at `C:\venv\uv\<tool>\`
 
 Some tools are managed in isolated uv environments:
+
 ```
 C:\venv\uv\regipy\Scripts\python.exe -m regipy Desktop\readonly\NTUSER.DAT
 C:\venv\uv\jupyterlab\Scripts\jupyter.exe lab
@@ -80,7 +85,7 @@ C:\venv\uv\jupyterlab\Scripts\jupyter.exe lab
 These libraries can be imported in Python scripts for custom analysis:
 
 | Library | Purpose |
-|---------|---------|
+| ------- | ------- |
 | `pefile` | PE file parsing |
 | `lief` | Binary format parsing (PE, ELF, Mach-O) |
 | `yara-python` | YARA rule matching from Python |
@@ -98,6 +103,7 @@ These libraries can be imported in Python scripts for custom analysis:
 | `geoip2` | MaxMind GeoIP database reader |
 
 **Example custom script:**
+
 ```python
 # Save as Desktop\readwrite\analyze.py and run with:
 # C:\venv\default\Scripts\python.exe Desktop\readwrite\analyze.py
@@ -118,7 +124,7 @@ with open(r"Desktop\readwrite\pe_analysis.json", "w") as f:
 ## Troubleshooting
 
 | Issue | Solution |
-|-------|----------|
+| ----- | -------- |
 | `ModuleNotFoundError` | The library may be in a different venv. Try `C:\venv\default\Scripts\python.exe` instead of system `python` |
 | Tool not found in `C:\venv\bin\` | Check `C:\venv\default\Scripts\` or specialized venvs |
 | Permission error writing files | Make sure output goes to `Desktop\readwrite\`, not `Desktop\readonly\` |
