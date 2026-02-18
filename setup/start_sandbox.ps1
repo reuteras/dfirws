@@ -292,20 +292,22 @@ function Resolve-Editor {
         "$env:LOCALAPPDATA\Programs\Neovim\bin\nvim.exe",
         "$env:ChocolateyInstall\bin\nvim.exe"
       )
-    if (-not $exe) { throw "WSDFIR_TEXT_EDITOR='$sel' but nvim.exe not found." }
-
-    return [pscustomobject]@{
-      Name     = "Neovim"
-      ProgId   = "WSDFIR.Neovim.File"
-      AppExe   = "nvim.exe"
-      Exe      = $exe
-      Cmd      = "`"$exe`" `"%1`""
-      Icon     = "`"$exe`",0"
-      ShellKey = "EditWithNeovim"
+    if ($exe) {
+      return [pscustomobject]@{
+        Name     = "Neovim"
+        ProgId   = "WSDFIR.Neovim.File"
+        AppExe   = "nvim.exe"
+        Exe      = $exe
+        Cmd      = "`"$exe`" `"%1`""
+        Icon     = "`"$exe`",0"
+        ShellKey = "EditWithNeovim"
+      }
     }
+    Write-DateLog "WARNING: WSDFIR_TEXT_EDITOR='$sel' but nvim.exe not found; trying Notepad++." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    # fall through to Notepad++ below
   }
 
-  # default: Notepad++
+  # Notepad++ (requested or fallback from Neovim)
   $exe = Resolve-ExePath `
     -names @("notepad++.exe") `
     -fallbackPaths @(
@@ -314,17 +316,21 @@ function Resolve-Editor {
       "$env:ChocolateyInstall\bin\notepad++.exe",
       "$env:LOCALAPPDATA\Programs\Notepad++\notepad++.exe"
     )
-  if (-not $exe) { throw "Notepad++ selected (default/fallback) but notepad++.exe not found." }
-
-  return [pscustomobject]@{
-    Name     = "Notepad++"
-    ProgId   = "WSDFIR.NotepadPP.File"
-    AppExe   = "notepad++.exe"
-    Exe      = $exe
-    Cmd      = "`"$exe`" `"%1`""
-    Icon     = "`"$exe`",0"
-    ShellKey = "EditWithNotepadPP"
+  if ($exe) {
+    return [pscustomobject]@{
+      Name     = "Notepad++"
+      ProgId   = "WSDFIR.NotepadPP.File"
+      AppExe   = "notepad++.exe"
+      Exe      = $exe
+      Cmd      = "`"$exe`" `"%1`""
+      Icon     = "`"$exe`",0"
+      ShellKey = "EditWithNotepadPP"
+    }
   }
+
+  # Neither Neovim nor Notepad++ found - return $null so the caller skips associations.
+  Write-DateLog "WARNING: No text editor (Neovim or Notepad++) found; skipping file associations." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+  return $null
 }
 
 function Set-DefaultForExt {
@@ -356,34 +362,36 @@ function Set-DefaultForExt {
 # --- Pick editor + define ProgID ---
 $ed = Resolve-Editor -sel $editorSel
 
-$progRoot = "HKCU:\Software\Classes\$($ed.ProgId)"
+if ($ed) {
+    $progRoot = "HKCU:\Software\Classes\$($ed.ProgId)"
 
-# ProgID open + edit (maximum feel)
-New-Item -Path "$progRoot\shell\open\command" -Force | Out-Null
-Set-ItemProperty -Path "$progRoot\shell\open\command" -Name "(default)" -Value $ed.Cmd
+    # ProgID open + edit (maximum feel)
+    New-Item -Path "$progRoot\shell\open\command" -Force | Out-Null
+    Set-ItemProperty -Path "$progRoot\shell\open\command" -Name "(default)" -Value $ed.Cmd
 
-New-Item -Path "$progRoot\shell\edit\command" -Force | Out-Null
-Set-ItemProperty -Path "$progRoot\shell\edit\command" -Name "(default)" -Value $ed.Cmd
+    New-Item -Path "$progRoot\shell\edit\command" -Force | Out-Null
+    Set-ItemProperty -Path "$progRoot\shell\edit\command" -Name "(default)" -Value $ed.Cmd
 
-New-Item -Path $progRoot -Force | Out-Null
-Set-ItemProperty -Path $progRoot -Name "FriendlyTypeName" -Value ("WSDFIR " + $ed.Name)
-New-Item -Path "$progRoot\DefaultIcon" -Force | Out-Null
-Set-ItemProperty -Path "$progRoot\DefaultIcon" -Name "(default)" -Value $ed.Icon
+    New-Item -Path $progRoot -Force | Out-Null
+    Set-ItemProperty -Path $progRoot -Name "FriendlyTypeName" -Value ("WSDFIR " + $ed.Name)
+    New-Item -Path "$progRoot\DefaultIcon" -Force | Out-Null
+    Set-ItemProperty -Path "$progRoot\DefaultIcon" -Name "(default)" -Value $ed.Icon
 
-# Register application (helps “Choose an app” scenarios)
-New-Item -Path "HKCU:\Software\Classes\Applications\$($ed.AppExe)\shell\open\command" -Force | Out-Null
-Set-ItemProperty -Path "HKCU:\Software\Classes\Applications\$($ed.AppExe)\shell\open\command" -Name "(default)" -Value $ed.Cmd
+    # Register application (helps "Choose an app" scenarios)
+    New-Item -Path "HKCU:\Software\Classes\Applications\$($ed.AppExe)\shell\open\command" -Force | Out-Null
+    Set-ItemProperty -Path "HKCU:\Software\Classes\Applications\$($ed.AppExe)\shell\open\command" -Name "(default)" -Value $ed.Cmd
 
-# Always-available context menu entry for all files (*)
-New-Item -Path "HKCU:\Software\Classes\*\shell\$($ed.ShellKey)\command" -Force | Out-Null
-Set-ItemProperty -Path "HKCU:\Software\Classes\*\shell\$($ed.ShellKey)\command" -Name "(default)" -Value $ed.Cmd
+    # Always-available context menu entry for all files (*)
+    New-Item -Path "HKCU:\Software\Classes\*\shell\$($ed.ShellKey)\command" -Force | Out-Null
+    Set-ItemProperty -Path "HKCU:\Software\Classes\*\shell\$($ed.ShellKey)\command" -Name "(default)" -Value $ed.Cmd
 
-# --- Apply associations (explicitly avoid .lnk) ---
-foreach ($ext in $exts) {
-  Set-DefaultForExt -ext $ext -progId $ed.ProgId
+    # --- Apply associations (explicitly avoid .lnk) ---
+    foreach ($ext in $exts) {
+        Set-DefaultForExt -ext $ext -progId $ed.ProgId
+    }
+
+    Write-DateLog "Editor associations set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
-
-Write-DateLog "Editor associations set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set dark theme if selected
 Update-SandboxProgress "Applying theme and wallpaper..."
