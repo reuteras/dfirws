@@ -292,20 +292,22 @@ function Resolve-Editor {
         "$env:LOCALAPPDATA\Programs\Neovim\bin\nvim.exe",
         "$env:ChocolateyInstall\bin\nvim.exe"
       )
-    if (-not $exe) { throw "WSDFIR_TEXT_EDITOR='$sel' but nvim.exe not found." }
-
-    return [pscustomobject]@{
-      Name     = "Neovim"
-      ProgId   = "WSDFIR.Neovim.File"
-      AppExe   = "nvim.exe"
-      Exe      = $exe
-      Cmd      = "`"$exe`" `"%1`""
-      Icon     = "`"$exe`",0"
-      ShellKey = "EditWithNeovim"
+    if ($exe) {
+      return [pscustomobject]@{
+        Name     = "Neovim"
+        ProgId   = "WSDFIR.Neovim.File"
+        AppExe   = "nvim.exe"
+        Exe      = $exe
+        Cmd      = "`"$exe`" `"%1`""
+        Icon     = "`"$exe`",0"
+        ShellKey = "EditWithNeovim"
+      }
     }
+    Write-DateLog "WARNING: WSDFIR_TEXT_EDITOR='$sel' but nvim.exe not found; trying Notepad++." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    # fall through to Notepad++ below
   }
 
-  # default: Notepad++
+  # Notepad++ (requested or fallback from Neovim)
   $exe = Resolve-ExePath `
     -names @("notepad++.exe") `
     -fallbackPaths @(
@@ -314,16 +316,28 @@ function Resolve-Editor {
       "$env:ChocolateyInstall\bin\notepad++.exe",
       "$env:LOCALAPPDATA\Programs\Notepad++\notepad++.exe"
     )
-  if (-not $exe) { throw "Notepad++ selected (default/fallback) but notepad++.exe not found." }
+  if ($exe) {
+    return [pscustomobject]@{
+      Name     = "Notepad++"
+      ProgId   = "WSDFIR.NotepadPP.File"
+      AppExe   = "notepad++.exe"
+      Exe      = $exe
+      Cmd      = "`"$exe`" `"%1`""
+      Icon     = "`"$exe`",0"
+      ShellKey = "EditWithNotepadPP"
+    }
+  }
 
+  # Last resort: built-in Windows Notepad (always present)
+  Write-DateLog "WARNING: No preferred editor found; falling back to Windows Notepad." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
   return [pscustomobject]@{
-    Name     = "Notepad++"
-    ProgId   = "WSDFIR.NotepadPP.File"
-    AppExe   = "notepad++.exe"
-    Exe      = $exe
-    Cmd      = "`"$exe`" `"%1`""
-    Icon     = "`"$exe`",0"
-    ShellKey = "EditWithNotepadPP"
+    Name     = "Notepad"
+    ProgId   = "WSDFIR.Notepad.File"
+    AppExe   = "notepad.exe"
+    Exe      = "notepad.exe"
+    Cmd      = "notepad.exe `"%1`""
+    Icon     = "notepad.exe,0"
+    ShellKey = "EditWithNotepad"
   }
 }
 

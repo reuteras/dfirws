@@ -232,7 +232,7 @@ function Initialize-SandboxProgress {
         $xaml = @"
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="DFIRWS Sandbox Setup" Height="130" Width="520"
+        Title="DFIRWS Sandbox Setup" Width="520" SizeToContent="Height" MinHeight="140"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True">
     <Grid Margin="15,12,15,12">
         <Grid.RowDefinitions>
