@@ -164,12 +164,36 @@ if ($all -or $Python) {
         SampleFiles = @()
         Dependencies = @()
         Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
+        Vendor = ""
+        License = ""
+        LicenseUrl = ""
+        PythonVersion = ""
+    }
 
+    # DotNet 6 Desktop runtime - installed during startup
+    Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
+    $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
+
+    $TOOL_DEFINITIONS += @{
+        Name = "DotNet 6 Desktop Runtime"
+        Category = "Programming\dotNET"
+        Shortcuts = @()
+        InstallVerifyCommand = ""
+        Verify = @()
+        FileExtensions = @()
+        Tags = @("dotnet", "runtime")
+        Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0."
+        Tips = ""
+        Usage = ""
+        SampleCommands = @()
+        SampleFiles = @()
+        Dependencies = @()
+        Homepage = ""
+        Vendor = ""
+        License = ""
+        LicenseUrl = ""
+        PythonVersion = ""
+    }
 
     # Get Amazon Corretto - installed during start
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"

@@ -68,14 +68,18 @@ Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 # Install Python packages
 #
 Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
-
 uv tool install "git+https://github.com/msuhanov/dfir_ntfs.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed dfir_ntfs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
     uv tool install --with "zipp>=3.20" "binary-refinery[extended]" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Write-DateLog "Installed binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 uv tool install --with "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "mkdocs-material" "mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 foreach ($package in `
     "autoit-ripper", `
@@ -93,7 +97,7 @@ foreach ($package in `
     "hachoir", `
     "jsbeautifier", `
     "jupyterlab", `
-    "litecli",  `
+    "litecli", `
     "LnkParse3", `
     "magika", `
     "maldump", `
@@ -129,6 +133,7 @@ foreach ($package in `
     "XLMMacroDeobfuscator", `
     "XlsxWriter") {
         uv tool install $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 # Profile-conditional Python packages
