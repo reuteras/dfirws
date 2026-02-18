@@ -25,7 +25,7 @@ Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEM
 # Increment this by 1 whenever you add a new Update-SandboxProgress call,
 # and decrement it when you remove one.  Verify with:
 #   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count
-$SANDBOX_PROGRESS_STEPS = 30
+$SANDBOX_PROGRESS_STEPS = 31
 Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
 
 # Check if running in verify mode
@@ -102,11 +102,19 @@ Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFI
 
 # Install .NET 8
 Update-SandboxProgress "Installing .NET 8..."
-$procDotnet8 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet9desktop.exe" -ArgumentList "/install /quiet /norestart"
+$procDotnet8 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet8desktop.exe" -ArgumentList "/install /quiet /norestart"
 if ($procDotnet8.ExitCode -ne 0) {
     Write-DateLog "WARNING: .NET 8 installer exited with code $($procDotnet8.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 Write-DateLog ".NET 8 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+# Install .NET 9
+Update-SandboxProgress "Installing .NET 9..."
+$procDotnet8 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet8desktop.exe" -ArgumentList "/install /quiet /norestart"
+if ($procDotnet8.ExitCode -ne 0) {
+    Write-DateLog "WARNING: .NET 9 installer exited with code $($procDotnet8.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
+Write-DateLog ".NET 9 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Copy config files and import them - needed for OhMyPosh installation
 Update-SandboxProgress "Importing configuration..."

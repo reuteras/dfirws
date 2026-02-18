@@ -112,6 +112,32 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# DotNet 8 Desktop runtime - installed during startup
+Write-SynchronizedLog "winget: Downloading DotNet 8 Desktop runtime."
+$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.8" "Microsoft*.exe" "dotnet8desktop.exe" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "DotNet 8 Desktop Runtime"
+    Category = "Programming\dotNET"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("dotnet", "runtime")
+    Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
+
 # DotNet 9 Desktop runtime - installed during startup
 Write-SynchronizedLog "winget: Downloading DotNet 9 Desktop runtime."
 $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.9" "Microsoft*.exe" "dotnet9desktop.exe" -check "PE32"
