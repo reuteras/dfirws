@@ -177,6 +177,186 @@ function Write-SynchronizedLog {
     }
 }
 
+# Progress bar support for sandbox setup
+#
+# Four public functions:
+#   Initialize-SandboxProgress  - call once at startup (main script only)
+#   Update-SandboxProgress      - call in the main process at each step
+#   Update-SandboxProgressFile  - call from child processes (customize.ps1, etc.)
+#   Set-SandboxProgressReady    - sandbox is usable; bar turns green, extras still run
+#   Close-SandboxProgress       - call at the very end
+#
+# To add a new step: add one Update-SandboxProgress call and increment
+# $SANDBOX_PROGRESS_STEPS in start_sandbox.ps1 by 1.
+# Verify the count with: (Select-String 'Update-SandboxProgress' start_sandbox.ps1).Count
+
+# File used for cross-process progress updates (child scripts → WPF window).
+# Must match the path used in child scripts.
+$script:SandboxProgressFile = "C:\tmp\sandbox_progress_update.txt"
+$script:SandboxProgressSync = $null
+$script:SandboxProgressPS   = $null
+$script:SandboxProgressRS   = $null
+
+function Initialize-SandboxProgress {
+    param(
+        [int]$TotalSteps = 30,
+        [string]$Title   = "DFIRWS Sandbox Setup"
+    )
+
+    # Remove any stale cross-process update file from a previous run.
+    if (Test-Path $script:SandboxProgressFile) {
+        Remove-Item $script:SandboxProgressFile -Force -ErrorAction SilentlyContinue
+    }
+
+    $sync = [hashtable]::Synchronized(@{
+        CurrentStep   = 0
+        TotalSteps    = $TotalSteps
+        Status        = "Starting..."
+        Done          = $false
+        Ready         = $false   # set by Set-SandboxProgressReady
+        UpdateFile    = $script:SandboxProgressFile
+        FileLastWrite = [datetime]::MinValue
+    })
+    $script:SandboxProgressSync = $sync
+
+    $rs = [runspacefactory]::CreateRunspace()
+    $rs.ApartmentState = "STA"
+    $rs.ThreadOptions  = "ReuseThread"
+    $rs.Open()
+    $rs.SessionStateProxy.SetVariable("sync", $sync)
+
+    $ps = [PowerShell]::Create()
+    $ps.Runspace = $rs
+    [void]$ps.AddScript({
+        Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
+        $xaml = @"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DFIRWS Sandbox Setup" Height="130" Width="520"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True">
+    <Grid Margin="15,12,15,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="DFIRWS Sandbox Setup"
+                   FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+        <ProgressBar Grid.Row="1" x:Name="ProgressBar" Height="22"
+                     Minimum="0" Maximum="1" Value="0" Margin="0,0,0,8"/>
+        <TextBlock Grid.Row="2" x:Name="StatusText" Text="Starting..."
+                   HorizontalAlignment="Center" FontSize="11"/>
+    </Grid>
+</Window>
+"@
+        $reader = [System.Xml.XmlReader]::Create([System.IO.StringReader]::new($xaml))
+        $window = [System.Windows.Markup.XamlReader]::Load($reader)
+        $bar    = $window.FindName("ProgressBar")
+        $status = $window.FindName("StatusText")
+
+        $timer = New-Object System.Windows.Threading.DispatcherTimer
+        $timer.Interval = [TimeSpan]::FromMilliseconds(300)
+        $timer.Add_Tick({
+            # Poll the cross-process update file written by child scripts.
+            $updateFile = $sync.UpdateFile
+            if ($updateFile -and (Test-Path $updateFile)) {
+                try {
+                    $fi = Get-Item $updateFile -ErrorAction SilentlyContinue
+                    if ($fi -and $fi.LastWriteTime -gt $sync.FileLastWrite) {
+                        $raw = [System.IO.File]::ReadAllText($updateFile)
+                        $upd = $raw | ConvertFrom-Json
+                        if ($upd.Status) { $sync.Status = $upd.Status }
+                        # A positive Step overrides the counter; -1 means status-only.
+                        if ($upd.Step -ge 0) { $sync.CurrentStep = $upd.Step }
+                        $sync.FileLastWrite = $fi.LastWriteTime
+                    }
+                } catch {}
+            }
+
+            $pct       = if ($sync.TotalSteps -gt 0) { $sync.CurrentStep / $sync.TotalSteps } else { 0 }
+            $bar.Value = [Math]::Min([double]$pct, 1.0)
+            $status.Text = $sync.Status
+
+            # Turn bar green when the sandbox is declared ready.
+            if ($sync.Ready -and $bar.Foreground -isnot [System.Windows.Media.SolidColorBrush] -or
+                ($sync.Ready -and ($bar.Foreground -as [System.Windows.Media.SolidColorBrush])?.Color -ne [System.Windows.Media.Colors]::Green)) {
+                if ($sync.Ready) {
+                    $bar.Foreground = [System.Windows.Media.Brushes]::ForestGreen
+                }
+            }
+
+            if ($sync.Done) {
+                $timer.Stop()
+                $window.Close()
+            }
+        })
+        $timer.Start()
+        $window.ShowDialog() | Out-Null
+    })
+
+    $script:SandboxProgressPS = $ps
+    $script:SandboxProgressRS = $rs
+    $null = $ps.BeginInvoke()
+}
+
+function Update-SandboxProgress {
+    # Call this in the main (parent) process at each numbered step.
+    param([string]$Status)
+    if ($script:SandboxProgressSync) {
+        $script:SandboxProgressSync.CurrentStep++
+        $script:SandboxProgressSync.Status = $Status
+    }
+}
+
+function Update-SandboxProgressFile {
+    # Call this from child processes (customize.ps1, dfirws_folder.ps1, …)
+    # that cannot share the in-process hashtable.  The WPF timer polls the
+    # file on every tick.  Pass -Step to move the bar, or omit it for a
+    # status-only update (bar position stays unchanged).
+    param(
+        [Parameter(Mandatory=$true)] [string]$Status,
+        [int]$Step = -1
+    )
+    $progressFile = $script:SandboxProgressFile
+    if (-not $progressFile) { $progressFile = "C:\tmp\sandbox_progress_update.txt" }
+    try {
+        $payload = [ordered]@{ Status = $Status; Step = $Step } | ConvertTo-Json -Compress
+        [System.IO.File]::WriteAllText($progressFile, $payload)
+    } catch {}
+}
+
+function Set-SandboxProgressReady {
+    # Call when the sandbox is fully usable but background extras are still
+    # running (e.g. after Sysmon starts).  Fills bar to 100 % and turns it
+    # green.  The window stays open until Close-SandboxProgress is called.
+    param([string]$Status = "Sandbox ready - completing extras...")
+    if ($script:SandboxProgressSync) {
+        $script:SandboxProgressSync.CurrentStep = $script:SandboxProgressSync.TotalSteps
+        $script:SandboxProgressSync.Status      = $Status
+        $script:SandboxProgressSync.Ready       = $true
+    }
+}
+
+function Close-SandboxProgress {
+    if ($script:SandboxProgressSync) {
+        $script:SandboxProgressSync.Status = "Setup complete."
+        $script:SandboxProgressSync.Done   = $true
+        Start-Sleep -Milliseconds 800
+    }
+    if ($script:SandboxProgressPS) {
+        $script:SandboxProgressPS.Dispose()
+        $script:SandboxProgressPS = $null
+    }
+    if ($script:SandboxProgressRS) {
+        $script:SandboxProgressRS.Close()
+        $script:SandboxProgressRS.Dispose()
+        $script:SandboxProgressRS = $null
+    }
+    if (Test-Path $script:SandboxProgressFile) {
+        Remove-Item $script:SandboxProgressFile -Force -ErrorAction SilentlyContinue
+    }
+}
+
 # Function to verify a command exists and is of a certain type
 function Test-Command {
     [CmdletBinding()]

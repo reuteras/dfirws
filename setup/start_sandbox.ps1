@@ -21,6 +21,13 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
 
+# Total number of Update-SandboxProgress calls in this script.
+# Increment this by 1 whenever you add a new Update-SandboxProgress call,
+# and decrement it when you remove one.  Verify with:
+#   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count
+$SANDBOX_PROGRESS_STEPS = 30
+Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
+
 # Check if running in verify mode
 if (Test-Path "C:\log\log.txt") {
 	Add-Shortcut -SourceLnk "${HOME}\Desktop\progress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Get-Content C:\log\verify.txt -Wait"
@@ -31,13 +38,18 @@ if (Test-Path "C:\log\log.txt") {
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
 # Install 7-Zip first - needed for other installations
-Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
+Update-SandboxProgress "Installing 7-Zip..."
+$proc7zip = Start-Process -Wait -PassThru msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
+if ($proc7zip.ExitCode -ne 0) {
+    Write-DateLog "WARNING: 7-Zip installer exited with code $($proc7zip.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install PSDecode module - https://github.com/R3MRUM/PSDecode
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force | Out-Null
 
 # Link latest PowerShell and set execution policy to Bypass
+Update-SandboxProgress "Configuring PowerShell 7..."
 New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value "${TOOLS}\pwsh" -Force | Out-Null
 & "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy -Scope CurrentUser Unrestricted"
 Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
@@ -47,26 +59,57 @@ Write-DateLog "PowerShell installed and execution policy set to Unrestricted for
 #
 
 # Always install common Java.
-Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
+Update-SandboxProgress "Installing Java..."
+$procJava = Start-Process -Wait -PassThru msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
+if ($procJava.ExitCode -ne 0) {
+    Write-DateLog "WARNING: Java installer exited with code $($procJava.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 Write-DateLog "Java installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
-# Install Python
-& "${SETUP_PATH}\python3.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
-Write-DateLog "Python installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+# Install Python - retry up to 3 times as installer can be unreliable
+Update-SandboxProgress "Installing Python..."
+$pythonInstalled = $false
+for ($attempt = 1; $attempt -le 3; $attempt++) {
+    $procPython = Start-Process -Wait -PassThru "${SETUP_PATH}\python3.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
+    if ($procPython.ExitCode -eq 0) {
+        $pythonInstalled = $true
+        break
+    }
+    Write-DateLog "Python installation attempt $attempt failed (exit code: $($procPython.ExitCode)), retrying in 5 seconds..." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Start-Sleep -Seconds 5
+}
+if ($pythonInstalled) {
+    Write-DateLog "Python installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+} else {
+    Write-DateLog "WARNING: Python installation may have failed after 3 attempts" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 
 # Install Visual C++ Redistributable 16 and 17
-Start-Process -Wait "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
+Update-SandboxProgress "Installing Visual C++ Redistributable..."
+$procVcredist = Start-Process -Wait -PassThru "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
+if ($procVcredist.ExitCode -ne 0) {
+    Write-DateLog "WARNING: Visual C++ Redistributable installer exited with code $($procVcredist.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install .NET 6
-Start-Process -Wait "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
+Update-SandboxProgress "Installing .NET 6..."
+$procDotnet6 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
+if ($procDotnet6.ExitCode -ne 0) {
+    Write-DateLog "WARNING: .NET 6 installer exited with code $($procDotnet6.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install .NET 8
-Start-Process -Wait "${SETUP_PATH}\dotnet9desktop.exe" -ArgumentList "/install /quiet /norestart"
+Update-SandboxProgress "Installing .NET 8..."
+$procDotnet8 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet9desktop.exe" -ArgumentList "/install /quiet /norestart"
+if ($procDotnet8.ExitCode -ne 0) {
+    Write-DateLog "WARNING: .NET 8 installer exited with code $($procDotnet8.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+}
 Write-DateLog ".NET 8 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Copy config files and import them - needed for OhMyPosh installation
+Update-SandboxProgress "Importing configuration..."
 if (Test-Path "${LOCAL_PATH}\config.txt") {
     Copy-Item "${LOCAL_PATH}\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force | Out-Null
 } else {
@@ -76,18 +119,22 @@ if (Test-Path "${LOCAL_PATH}\config.txt") {
 Write-DateLog "Config files copied and imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install OhMyPosh
+Update-SandboxProgress "Installing OhMyPosh..."
 Install-OhMyPosh | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install HxD
+Update-SandboxProgress "Installing HxD..."
 Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 & "${WSDFIR_TEMP}\HxDSetup.exe" /VERYSILENT /NORESTART
 Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install IrfanView
+Update-SandboxProgress "Installing IrfanView..."
 & "${SETUP_PATH}\irfanview.exe" /silent /assoc=1 | Out-Null
 Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install Notepad++ and plugins
+Update-SandboxProgress "Configuring optional editors..."
 if (("${WSDFIR_NOTEPAD}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
 	Add-ToUserPath "${env:ProgramFiles}\Notepad++"
@@ -127,6 +174,7 @@ $TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTA
 Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1
 
 # Set date and time format
+Update-SandboxProgress "Configuring date and time format..."
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortDate -value "yyyy-MM-dd" | Out-Null
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sLongDate -value "yyyy-MMMM-dddd" | Out-Null
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortTime -value "HH:mm" | Out-Null
@@ -134,6 +182,7 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sTimeFormat -va
 Write-DateLog "Date and time format set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Add right-click context menu if specified
+Update-SandboxProgress "Configuring context menu and registry..."
 if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve | Out-Null
     Write-DateLog "Right-click context menu added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
@@ -153,7 +202,7 @@ Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP
 
 # Uses SystemFileAssociations so the verbs apply reliably to file types
 # Uses full path to pwsh.exe (PowerShell 7)
-
+Update-SandboxProgress "Configuring Office file associations..."
 $extensions = @(
     "doc","docm","docx","dot","dotm","dotx",
     "xls","xlsm","xlsx","xlt","xltm","xltx",
@@ -205,7 +254,7 @@ Windows Registry Editor Version 5.00
 Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set default editor associations for text files
-
+Update-SandboxProgress "Configuring text editor associations..."
 # Extensions you want
 $exts = @(
   ".txt",".log",".md",".json",".yaml",".yml",".toml",".ini",".cfg",
@@ -337,6 +386,7 @@ foreach ($ext in $exts) {
 Write-DateLog "Editor associations set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Set dark theme if selected
+Update-SandboxProgress "Applying theme and wallpaper..."
 if ("${WSDFIR_DARK}" -eq "Yes") {
     Start-Process -Wait "c:\Windows\Resources\Themes\themeB.theme"
 	Stop-Process -Name SystemSettings
@@ -356,6 +406,7 @@ if ("${WSDFIR_HIDE_TASKBAR}" -eq "Yes") {
 }
 
 # Restart Explorer process
+Update-SandboxProgress "Restarting Explorer..."
 Stop-Process -ProcessName "Explorer" -Force
 Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
@@ -364,6 +415,7 @@ Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_
 #
 # PATH - Windows have a limit of <2048 characters for user PATH
 
+Update-SandboxProgress "Configuring PATH environment variable..."
 Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 $GHIDRA_INSTALL_DIR=""
 if (Test-Path "${TOOLS}\ghidra\") {
@@ -497,6 +549,7 @@ if ($totalPathLength -gt 2048) {
 
 Add-MultipleToUserPath $ADD_TO_PATH_STRING
 
+Update-SandboxProgress "Creating Desktop shortcuts..."
 Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\utils\dfirws_folder.ps1" -NoNewWindow
 
@@ -514,6 +567,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Clipboard" -Name EnableClipboar
 #
 
 # Install Graphviz
+Update-SandboxProgress "Installing Graphviz..."
 & "${SETUP_PATH}\graphviz.exe" /S /D="${env:ProgramFiles}\graphviz"
 Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
@@ -526,6 +580,7 @@ if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
 }
 
 # Add plugins to Cutter
+Update-SandboxProgress "Installing Cutter plugins..."
 New-Item -ItemType Directory -Force -Path "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" | Out-Null
 Copy-Item "${GIT_PATH}\radare2-deep-graph\cutter\graphs_plugin_grid.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force | Out-Null
 Copy-Item "${SETUP_PATH}\x64dbgcutter.py" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python" -Force | Out-Null
@@ -538,6 +593,7 @@ Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOM
 Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Install radare2 plugins
+Update-SandboxProgress "Configuring radare2 plugins..."
 $r2_plugins_dir = "${HOME}\.local\share\radare2\plugins"
 New-Item -ItemType Directory -Force -Path "${r2_plugins_dir}" | Out-Null
 
@@ -557,17 +613,20 @@ if (Test-Path "${TOOLS}\msys64\r2ai_build\r2ai.dll") {
 }
 
 # BeaconHunter
+Update-SandboxProgress "Configuring forensic tools..."
 Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter" | Out-Null
 
 # IDR
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\IDR" "${env:ProgramFiles}\IDR" | Out-Null
 
 # Jupyter
+Update-SandboxProgress "Configuring Jupyter..."
 Robocopy.exe /MT:96 /MIR "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\.jupyter" | Out-Null
 Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter\" -Force | Out-Null
 Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force | Out-Null
 
 # IIS Geolocate and other Zimmerman tools that needs readwrite access
+Update-SandboxProgress "Configuring Zimmerman tools..."
 Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\net6\iisGeolocate" "${env:ProgramFiles}\iisGeolocate" | Out-Null
 if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
     Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force | Out-Null
@@ -588,6 +647,7 @@ if (Test-Path "${SETUP_PATH}\4n4lDetector.zip") {
 }
 
 # Config for opencode-ai MCP servers
+Update-SandboxProgress "Configuring opencode-ai..."
 $opencode_config_dir = "${HOME}\.config\opencode"
 New-Item -ItemType Directory -Force -Path "${opencode_config_dir}" | Out-Null
 if (Test-Path "${LOCAL_PATH}\opencode.json") {
@@ -630,6 +690,7 @@ if (Test-Path "${LOCAL_PATH}\.zcompdump") {
 # Run custom scripts
 #
 
+Update-SandboxProgress "Running customization script..."
 if (Test-Path "${LOCAL_PATH}\customize.ps1") {
     Write-DateLog "Running customize script." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
@@ -645,10 +706,14 @@ if (Test-Path "${LOCAL_PATH}\customize.ps1") {
 # Start sysmon when installation is done
 #
 
+Update-SandboxProgress "Starting Sysmon..."
 if ("${WSDFIR_SYSMON}" -eq "Yes") {
     & "${TOOLS}\sysinternals\Sysmon64.exe" -accepteula -i "${WSDFIR_SYSMON_CONF}" | Out-Null
 }
 Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+# Main setup is complete - sandbox is now usable even while background tasks finish.
+Set-SandboxProgressReady
 
 # If in verify mode, run install_all and install_verify scripts
 if (Test-Path "C:\log\log.txt") {
@@ -665,11 +730,14 @@ if (Test-Path "C:\log\log.txt") {
 }
 
 # Wait for all jobs to finish and clean up
+Update-SandboxProgress "Finalizing setup..."
 Get-Job | Wait-Job | Out-Null
 Get-Job | Receive-Job 2>&1 | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 Get-Job | Remove-Job | Out-Null
 Remove-Item "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 
 Write-DateLog "Setup done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+Close-SandboxProgress
 
 Exit 0
