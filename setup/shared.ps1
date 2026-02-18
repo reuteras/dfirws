@@ -67,6 +67,10 @@ function New-CreateToolFiles {
         New-Item -ItemType Directory -Force -Path "$BASE_PATH\dfirws" | Out-Null
     }
 
+    # Save the full unfiltered list before profile filtering so all tools (with profile
+    # metadata) can be exported to the JSON used for documentation generation.
+    $AllToolDefinitions = $ToolDefinitions
+
     # Apply profile filtering to metadata as a safety net so generated verify/install
     # scripts don't reference tools excluded by the active profile.
     if ((Test-Path variable:DFIRWS_EXCLUDE_TOOLS) -and $null -ne $DFIRWS_EXCLUDE_TOOLS -and $DFIRWS_EXCLUDE_TOOLS.Count -gt 0) {
@@ -85,6 +89,8 @@ function New-CreateToolFiles {
     }
 
     $ToolDefinitions = Normalize-ToolDefinitions -ToolDefinitions $ToolDefinitions
+    # Normalize any tools that were filtered out so they are ready for JSON export too.
+    $AllToolDefinitions = Normalize-ToolDefinitions -ToolDefinitions $AllToolDefinitions
 
     # Remove old helper files for HTTP installations and create new ones.
     if (Test-Path -Path "$BASE_PATH\dfirws\verify_${source}.ps1") {
@@ -150,10 +156,27 @@ function New-CreateToolFiles {
         }
     }
 
+    # Build a lookup of which named profiles exclude each tool so the documentation
+    # generator can show or filter by profile availability.
+    # $DFIRWS_PROFILES is populated by local/defaults/profiles.ps1 which is dot-sourced
+    # by downloadFiles.ps1 before calling the download sub-scripts.
+    $profileExcludeMaps = @{}
+    if ((Test-Path variable:DFIRWS_PROFILES) -and $null -ne $DFIRWS_PROFILES) {
+        foreach ($profileName in $DFIRWS_PROFILES.Keys) {
+            $excludeList = $DFIRWS_PROFILES[$profileName].ExcludeTools
+            if ($null -ne $excludeList) {
+                $profileExcludeMaps[$profileName] = $excludeList
+            }
+        }
+    }
+
     # Export tool metadata for documentation generation.
+    # Use the unfiltered $AllToolDefinitions so excluded tools are still present in the
+    # JSON, annotated with the profiles that include them.  The helper scripts above
+    # (verify / install / dfirws_folder) only reference the filtered set.
     $tools_export = @()
-    for ($i = 0; $i -lt $ToolDefinitions.Count; $i++) {
-        $tool = $ToolDefinitions[$i]
+    for ($i = 0; $i -lt $AllToolDefinitions.Count; $i++) {
+        $tool = $AllToolDefinitions[$i]
         $category_path = $null
 
         if ($null -ne $tool.Shortcuts -and $tool.Shortcuts.Count -gt 0) {
@@ -169,6 +192,24 @@ function New-CreateToolFiles {
         $category = "Uncategorized"
         if ($null -ne $category_path -and $category_path -ne "") {
             $category = ($category_path -split "\\")[0]
+        }
+
+        # Determine which profiles include this tool.
+        $tool_profiles = [System.Collections.Generic.List[string]]::new()
+        $tool_profiles.Add("Full")
+        if ($profileExcludeMaps.Count -gt 0) {
+            foreach ($profileName in $profileExcludeMaps.Keys) {
+                if ($profileName -eq "Full") { continue }
+                $excludeList = $profileExcludeMaps[$profileName]
+                $isExtra = (Test-Path variable:DFIRWS_EXTRAS_RESOLVED) -and $null -ne $DFIRWS_EXTRAS_RESOLVED -and $DFIRWS_EXTRAS_RESOLVED -contains $tool.Name
+                $isExcluded = ($excludeList -contains $tool.Name) -and (-not $isExtra)
+                if (-not $isExcluded) {
+                    $tool_profiles.Add($profileName)
+                }
+            }
+        } else {
+            # profiles.ps1 was not loaded; assume the tool is available in all profiles.
+            $tool_profiles.Add("Basic")
         }
 
         $tools_export += [ordered]@{
@@ -191,6 +232,7 @@ function New-CreateToolFiles {
             FileExtensions       = $tool.FileExtensions
             Dependencies         = $tool.Dependencies
             PythonVersion        = $tool.PythonVersion
+            Profiles             = @($tool_profiles)
             SourceType           = $Source
             # Keep a legacy Source field for downstream tools that expect it.
             Source               = $Source
