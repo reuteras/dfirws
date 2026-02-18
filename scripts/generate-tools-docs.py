@@ -195,6 +195,14 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
             lines.append(f"**Winget ID:** `{winget_id}`")
             lines.append("")
 
+    profiles = get_string_list(tool.get("Profiles"))
+    if profiles:
+        profiles_display = ", ".join(profiles)
+        if "Basic" not in profiles:
+            profiles_display += " (not included in Basic profile)"
+        lines.append(f"**Profiles:** {profiles_display}")
+        lines.append("")
+
     topics = tool.get("Topics")
     if isinstance(topics, list) and topics:
         lines.append(f"**Topics:** {', '.join(topics)}")
@@ -422,11 +430,23 @@ def main() -> int:
         default=os.environ.get("MKDOCS_CONFIG", get_default_mkdocs_config()),
         help="Path to mkdocs.yml (default: ./setup/mkdocs/mkdocs.yml when present, else ./mkdocs.yml).",
     )
+    parser.add_argument(
+        "--profile",
+        dest="profile",
+        default=os.environ.get("DFIRWS_PROFILE", ""),
+        help=(
+            "Limit generated docs to tools available in this profile (e.g. Basic or Full). "
+            "Tools whose 'Profiles' metadata does not include the requested profile are "
+            "omitted from the output. Has no effect when the tools JSON was generated "
+            "without profile metadata."
+        ),
+    )
     args = parser.parse_args()
 
     json_path = Path(args.tools_json)
     docs_root = Path(args.docs_root)
     mkdocs_config = Path(args.mkdocs_config)
+    active_profile = args.profile.strip() if args.profile else ""
 
     json_paths = collect_tools_json_paths(json_path)
     if not json_paths:
@@ -438,6 +458,27 @@ def main() -> int:
     except ValueError as exc:
         print(f"Error: {exc}")
         return 1
+
+    # When a profile is requested, filter to only tools whose Profiles metadata
+    # includes that profile.  Tools without a Profiles field are kept (older JSON).
+    if active_profile:
+        active_profile_lower = active_profile.lower()
+        filtered: list[dict] = []
+        skipped = 0
+        for tool in tools:
+            tool_profiles = get_string_list(tool.get("Profiles"))
+            if not tool_profiles:
+                # No profile metadata – keep the tool (assume it is available).
+                filtered.append(tool)
+            elif any(p.lower() == active_profile_lower for p in tool_profiles):
+                filtered.append(tool)
+            else:
+                skipped += 1
+        if skipped:
+            print(
+                f"Profile '{active_profile}': excluding {skipped} tool(s) not available in that profile."
+            )
+        tools = filtered
 
     grouped: Dict[str, List[dict]] = {}
     for tool in tools:
@@ -480,7 +521,7 @@ def main() -> int:
         tools_index_lines.append(f"- [{display_name}](./{slug}/index.md)")
     tools_index_lines.append("")
 
-    tools_index_entries: List[tuple[str, str, str, str, str, str]] = []
+    tools_index_entries: List[tuple[str, str, str, str, str, str, str]] = []
     for category_path in ordered_categories:
         display_name = category_path.replace("\\", " / ")
         slug = get_slug(category_path)
@@ -491,8 +532,8 @@ def main() -> int:
         lines: List[str] = []
         lines.append(f"# {display_name}")
         lines.append("")
-        lines.append("| Tool | Source | Description | Tags | File Extensions |")
-        lines.append("| --- | --- | --- | --- | --- |")
+        lines.append("| Tool | Source | Description | Tags | File Extensions | Profiles |")
+        lines.append("| --- | --- | --- | --- | --- | --- |")
 
         tools_in_category = sorted(grouped[category_path], key=lambda t: t.get("Name", ""))
         used_slugs: Dict[str, int] = {}
@@ -504,19 +545,21 @@ def main() -> int:
             source_label = get_source_label(tool)
             tags = ", ".join(get_string_list(tool.get("Tags")))
             file_exts = ", ".join(f"`{e}`" for e in get_string_list(tool.get("FileExtensions")))
-            lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} |")
+            tool_profiles = get_string_list(tool.get("Profiles"))
+            profiles_note = "" if (not tool_profiles or "Basic" in tool_profiles) else "Full only"
+            lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |")
             tools_index_entries.append(
-                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md", source_label, summary, tags, file_exts)
+                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md", source_label, summary, tags, file_exts, profiles_note)
             )
 
         category_file.write_text("\n".join(lines), encoding="utf-8")
 
     tools_index_lines.append("## Tools Index")
     tools_index_lines.append("")
-    tools_index_lines.append("| Tool | Source | Description | Tags | File Extensions |")
-    tools_index_lines.append("| --- | --- | --- | --- | --- |")
-    for tool_name, tool_link, source_label, summary, tags, file_exts in sorted(tools_index_entries, key=lambda item: item[0].lower()):
-        tools_index_lines.append(f"| [{tool_name}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} |")
+    tools_index_lines.append("| Tool | Source | Description | Tags | File Extensions | Profiles |")
+    tools_index_lines.append("| --- | --- | --- | --- | --- | --- |")
+    for tool_name, tool_link, source_label, summary, tags, file_exts, profiles_note in sorted(tools_index_entries, key=lambda item: item[0].lower()):
+        tools_index_lines.append(f"| [{tool_name}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |")
 
     tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
 
