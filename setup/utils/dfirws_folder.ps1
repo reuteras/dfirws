@@ -2,6 +2,8 @@
 # dfirws directory
 #
 
+Write-DateLog "Starting dfirws_folder.ps1"
+
 #$CLI_TOOL = "${POWERSHELL_EXE}"
 #$CLI_TOOL_ARGS = "-NoExit"
 $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
@@ -511,3 +513,5 @@ if ("${WSDFIR_START_MENU}" -eq "Yes") {
 
     Write-DateLog "Files have been copied to the destination directory: ${DestinationDir}"
 }
+
+Write-DateLog "dfirws_folder.ps1 done"
