@@ -14,9 +14,6 @@
 
 X4BNet list of known bot IP addresses.
 
-## Notes
-X4BNet list of known bot IP addresses.
-
 ## Tips
 Use this list to identify known bot IP addresses in network traffic or access logs.
 

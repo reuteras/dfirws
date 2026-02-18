@@ -12,9 +12,6 @@
 
 7-Zip is a file archive tool.
 
-## Notes
-7-Zip is a file archive tool.
-
 ## Tips
 7-Zip is a free and open-source file archive tool.
 

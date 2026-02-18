@@ -16,9 +16,6 @@
 
 VeraCrypt is a disk encryption tool.
 
-## Notes
-VeraCrypt is a disk encryption tool.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

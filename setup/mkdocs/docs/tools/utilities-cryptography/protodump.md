@@ -8,9 +8,8 @@
 
 **License:** Unknown
 
-Protodump is a tool to extract protobuf messages from binary files without having the .proto schema files.
+**Source:** Go
 
-## Notes
 Protodump is a tool to extract protobuf messages from binary files without having the .proto schema files.
 
 ## Tips

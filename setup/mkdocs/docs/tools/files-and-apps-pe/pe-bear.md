@@ -9,6 +9,3 @@
 **Tags:** pe-analysis, reverse-engineering
 
 A tool for analyzing PE files
-
-## Notes
-A tool for analyzing PE files

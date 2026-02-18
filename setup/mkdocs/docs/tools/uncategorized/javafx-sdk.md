@@ -16,9 +16,6 @@
 
 JavaFX SDK provides UI libraries for Java applications.
 
-## Notes
-JavaFX SDK provides UI libraries for Java applications.
-
 ## Tips
 JavaFX SDK is installed in .\mount\Tools\javafx-sdk.
 

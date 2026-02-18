@@ -16,9 +16,6 @@
 
 Geolocus MMDB geolocation database.
 
-## Notes
-Geolocus MMDB geolocation database.
-
 ## Tips
 Use this MMDB file with tools that support MaxMind DB format for IP geolocation lookups.
 

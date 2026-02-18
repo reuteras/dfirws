@@ -14,9 +14,6 @@
 
 DCode is a date/time conversion and analysis tool.
 
-## Notes
-DCode is a date/time conversion and analysis tool.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

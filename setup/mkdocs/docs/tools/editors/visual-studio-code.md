@@ -16,9 +16,6 @@
 
 Visual Studio Code is a source-code editor.
 
-## Notes
-Visual Studio Code is a source-code editor.
-
 ## Tips
 After installation, you can add more extensions via Visual Studio Code Marketplace.
 

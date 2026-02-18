@@ -16,9 +16,6 @@
 
 Malcat is a malware analysis and reverse engineering tool.
 
-## Notes
-Malcat is a malware analysis and reverse engineering tool.
-
 ## Tips
 Beside these limitations (missing features), please not that the lite edition cannot be used in a professional environment.
 

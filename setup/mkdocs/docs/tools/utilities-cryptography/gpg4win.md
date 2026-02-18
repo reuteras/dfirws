@@ -16,9 +16,6 @@
 
 Gpg4win provides GnuPG and related tools for Windows.
 
-## Notes
-Gpg4win provides GnuPG and related tools for Windows.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

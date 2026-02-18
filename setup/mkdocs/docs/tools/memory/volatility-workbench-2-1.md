@@ -16,9 +16,6 @@
 
 Volatility Workbench is a GUI for the Volatility memory analysis framework.
 
-## Notes
-Volatility Workbench is a GUI for the Volatility memory analysis framework.
-
 ## Tips
 Volatility Workbench 2.1 is installed in .\mount\Tools\VolatilityWorkbench2.
 

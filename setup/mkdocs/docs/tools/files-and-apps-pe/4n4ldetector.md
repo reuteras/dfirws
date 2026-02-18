@@ -10,9 +10,6 @@
 
 Advanced static analysis tool
 
-## Notes
-Advanced static analysis tool
-
 ## Tips
 4n4lDetector is a powerful static analysis tool focused on Microsoft Windows executables, libraries, drivers, and memory dumps, while its integrated modules can analyze virtually any file type with reliable performance and accurate detection.
     

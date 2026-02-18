@@ -14,9 +14,6 @@
 
 X4BNet list of known AWS Route53 health check IP addresses.
 
-## Notes
-X4BNet list of known AWS Route53 health check IP addresses.
-
 ## Tips
 Use this list to identify AWS Route53 health check IP addresses in network traffic or access logs.
 

@@ -16,9 +16,6 @@
 
 DensityScout calculates file entropy and density.
 
-## Notes
-DensityScout calculates file entropy and density.
-
 ## Tips
 DensityScout is installed in .\mount\Tools\bin.
 

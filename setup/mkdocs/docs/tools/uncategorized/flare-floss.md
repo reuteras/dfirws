@@ -2,6 +2,11 @@
 
 **Category:** Uncategorized
 
+**Vendor:** Mandiant
+
+
 **Source:** Git
 
 **Tags:** reverse-engineering, string-extraction, malware-analysis
+
+FLARE Obfuscated String Solver - Automatically extract obfuscated strings from malware.

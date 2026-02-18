@@ -9,6 +9,3 @@
 **Tags:** malware-analysis, pe-analysis, process-injection
 
 Scans running processes. Recognizes and dumps a variety of in-memory implants
-
-## Notes
-Scans running processes. Recognizes and dumps a variety of in-memory implants

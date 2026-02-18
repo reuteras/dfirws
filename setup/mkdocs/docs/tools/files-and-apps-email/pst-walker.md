@@ -16,9 +16,6 @@
 
 PST Walker is a tool for analyzing PST files.
 
-## Notes
-PST Walker is a tool for analyzing PST files.
-
 ## Tips
 PST Walker is installed in .\mount\Tools\pstwalker.
 

@@ -16,9 +16,6 @@
 
 YARA Forge core ruleset - curated set of high-quality YARA rules.
 
-## Notes
-YARA Forge core ruleset - curated set of high-quality YARA rules.
-
 ## Tips
 The core ruleset contains the most reliable and well-tested YARA rules. Use with YARA or YARA-compatible tools for malware detection and classification.
 

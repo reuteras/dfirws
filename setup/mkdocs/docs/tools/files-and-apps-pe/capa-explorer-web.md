@@ -16,9 +16,6 @@
 
 capa Explorer Web is a web UI for exploring capa results.
 
-## Notes
-capa Explorer Web is a web UI for exploring capa results.
-
 ## Tips
 Open the HTML file in a browser.
 

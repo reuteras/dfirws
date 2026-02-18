@@ -13,6 +13,3 @@
 **Tags:** java, runtime, development
 
 Microsofts OpenJDK 11
-
-## Notes
-Microsofts OpenJDK 11

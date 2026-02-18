@@ -12,9 +12,6 @@
 
 Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate.
 
-## Notes
-Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate.
-
 ## Tips
 Ghidra is a free and open-source software reverse engineering (SRE) framework developed by NSA's Research Directorate.
 

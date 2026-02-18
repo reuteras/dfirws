@@ -16,9 +16,6 @@
 
 PHP is a scripting language widely used for web development.
 
-## Notes
-PHP is a scripting language widely used for web development.
-
 ## Tips
 PHP is installed in .\mount\Tools\php.
 

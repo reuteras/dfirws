@@ -16,9 +16,6 @@
 
 MaxMind GeoLite2 Country database for mapping IP addresses to countries. Requires MAXMIND_LICENSE_KEY.
 
-## Notes
-MaxMind GeoLite2 Country database for mapping IP addresses to countries. Requires MAXMIND_LICENSE_KEY.
-
 ## Tips
 Use this database with tools that support MaxMind DB format to resolve IP addresses to country-level location data. Set MAXMIND_LICENSE_KEY in config.ps1 to download.
 

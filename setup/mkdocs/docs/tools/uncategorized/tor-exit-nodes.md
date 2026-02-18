@@ -14,9 +14,6 @@
 
 TOR exit node lists from the Tor Project collector archive.
 
-## Notes
-TOR exit node lists from the Tor Project collector archive.
-
 ## Tips
 Use these lists to identify if an IP address is a known TOR exit node. Useful for network forensics and threat intelligence.
 

@@ -16,9 +16,6 @@
 
 FullEventLogView is a tool for viewing Windows event logs.
 
-## Notes
-FullEventLogView is a tool for viewing Windows event logs.
-
 ## Tips
 FullEventLogView is installed in .\mount\Tools\FullEventLogView.
 

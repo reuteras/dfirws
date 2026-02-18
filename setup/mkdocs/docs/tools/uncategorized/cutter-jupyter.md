@@ -5,3 +5,5 @@
 **Source:** Git
 
 **Tags:** reverse-engineering, rizin
+
+Jupyter Plugin for Cutter.

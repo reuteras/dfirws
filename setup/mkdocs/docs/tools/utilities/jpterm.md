@@ -9,6 +9,3 @@
 **Tags:** jupyter, data-processing, tui, notebook
 
 Jupyter in the terminal.
-
-## Notes
-Jupyter in the terminal.

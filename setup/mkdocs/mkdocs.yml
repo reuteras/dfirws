@@ -219,6 +219,7 @@ nav:
   - Programming Go:
     - Overview: tools/programming-go/index.md
     - gftrace: tools/programming-go/gftrace.md
+    - GoLang: tools/programming-go/golang.md
     - GoReSym: tools/programming-go/goresym.md
     - redress: tools/programming-go/redress.md
   - Programming Java:
@@ -226,6 +227,9 @@ nav:
     - jadx: tools/programming-java/jadx.md
     - jd-gui: tools/programming-java/jd-gui.md
     - Recaf: tools/programming-java/recaf.md
+  - Programming Rust:
+    - Overview: tools/programming-rust/index.md
+    - Rust: tools/programming-rust/rust.md
   - Reverse Engineering:
     - Overview: tools/reverse-engineering/index.md
     - Binary Ninja: tools/reverse-engineering/binary-ninja.md
@@ -261,7 +265,6 @@ nav:
     - APT-Hunter: tools/uncategorized/apt-hunter.md
     - ASL: tools/uncategorized/asl.md
     - Aspose.Email-for-Python-via-Net: tools/uncategorized/aspose-email-for-python-via-net.md
-    - AuthLogParser: tools/uncategorized/authlogparser.md
     - BeautifulSoup4: tools/uncategorized/beautifulsoup4.md
     - bitstruct: tools/uncategorized/bitstruct.md
     - BlueTuxedo: tools/uncategorized/bluetuxedo.md
@@ -293,6 +296,7 @@ nav:
     - docx2txt: tools/uncategorized/docx2txt.md
     - DotNet 6 Desktop Runtime: tools/uncategorized/dotnet-6-desktop-runtime.md
     - DotNet 8 Desktop Runtime: tools/uncategorized/dotnet-8-desktop-runtime.md
+    - DotNet 9 Desktop Runtime: tools/uncategorized/dotnet-9-desktop-runtime.md
     - dotnetfile: tools/uncategorized/dotnetfile-2.md
     - dotnetfile: tools/uncategorized/dotnetfile.md
     - dpkt: tools/uncategorized/dpkt.md
@@ -320,6 +324,7 @@ nav:
     - Ghidra: tools/uncategorized/ghidra.md
     - ghidrecomp: tools/uncategorized/ghidrecomp.md
     - ghidriff: tools/uncategorized/ghidriff.md
+    - git: tools/uncategorized/git.md
     - god-mode-rules: tools/uncategorized/god-mode-rules.md
     - gootloader: tools/uncategorized/gootloader.md
     - GoReSym: tools/uncategorized/goresym.md
@@ -348,6 +353,7 @@ nav:
     - maclookup: tools/uncategorized/maclookup.md
     - malware-bazaar-advanced-search: tools/uncategorized/malware-bazaar-advanced-search.md
     - "@marp-team/marp-cli": tools/uncategorized/marp-team-marp-cli.md
+    - MasterParser: tools/uncategorized/masterparser.md
     - matplotlib: tools/uncategorized/matplotlib.md
     - MaxMind GeoLite2 ASN: tools/uncategorized/maxmind-geolite2-asn.md
     - MaxMind GeoLite2 City: tools/uncategorized/maxmind-geolite2-city.md
@@ -427,6 +433,7 @@ nav:
     - QEMU: tools/uncategorized/qemu.md
     - qrtool: tools/uncategorized/qrtool.md
     - quickadd: tools/uncategorized/quickadd.md
+    - r2ai: tools/uncategorized/r2ai-2.md
     - r2ai: tools/uncategorized/r2ai.md
     - radare2-deep-graph: tools/uncategorized/radare2-deep-graph.md
     - radare2-mcp: tools/uncategorized/radare2-mcp.md

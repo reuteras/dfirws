@@ -16,9 +16,6 @@
 
 MEX is an extension for WinDbg.
 
-## Notes
-MEX is an extension for WinDbg.
-
 ## Tips
 MEX is installed in .\mount\Tools\mex.
 

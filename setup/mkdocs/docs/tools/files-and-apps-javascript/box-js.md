@@ -9,6 +9,3 @@
 **Tags:** malware-analysis, javascript, dynamic-analysis, deobfuscation
 
 A tool for studying JavaScript malware.
-
-## Notes
-A tool for studying JavaScript malware.

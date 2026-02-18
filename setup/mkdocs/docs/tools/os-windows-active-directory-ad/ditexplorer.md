@@ -9,6 +9,3 @@
 **Tags:** active-directory, forensics
 
 Tool for viewing NTDS.dit Active Directory database files.
-
-## Notes
-Tool for viewing NTDS.dit Active Directory database files.

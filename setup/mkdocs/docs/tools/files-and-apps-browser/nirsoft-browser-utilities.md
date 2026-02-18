@@ -16,9 +16,6 @@
 
 NirSoft browser utilities for cache and history analysis.
 
-## Notes
-NirSoft browser utilities for cache and history analysis.
-
 ## Tips
 Tools are installed in .\mount\Tools\nirsoft.
 

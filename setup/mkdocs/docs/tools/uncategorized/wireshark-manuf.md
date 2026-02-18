@@ -16,9 +16,6 @@
 
 Wireshark OUI/MAC address manufacturer lookup file.
 
-## Notes
-Wireshark OUI/MAC address manufacturer lookup file.
-
 ## Tips
 Use the manuf file to resolve MAC address prefixes (OUI) to vendor/manufacturer names. Useful for identifying devices on a network.
 

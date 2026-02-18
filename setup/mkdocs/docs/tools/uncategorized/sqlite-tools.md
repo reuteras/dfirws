@@ -16,9 +16,6 @@
 
 SQLite command-line tools.
 
-## Notes
-SQLite command-line tools.
-
 ## Tips
 Tools are installed in .\mount\Tools\sqlite.
 

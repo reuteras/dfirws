@@ -9,6 +9,3 @@
 **Tags:** protobuf, reverse-engineering
 
 A tool to help reversing protobuf.
-
-## Notes
-A tool to help reversing protobuf.

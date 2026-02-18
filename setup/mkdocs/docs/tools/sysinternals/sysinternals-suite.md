@@ -16,9 +16,6 @@
 
 Sysinternals Suite is a collection of utilities for Windows.
 
-## Notes
-Sysinternals Suite is a collection of utilities for Windows.
-
 ## Tips
 Sysinternals Suite is installed in .\mount\Tools\sysinternals.
 

@@ -7,6 +7,3 @@
 **Tags:** hashing, identification
 
 The Modern Hash Identification System.
-
-## Notes
-The Modern Hash Identification System.

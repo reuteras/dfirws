@@ -9,6 +9,3 @@
 **Tags:** reverse-engineering, java, decompiler
 
 A standalone Java Decompiler GUI
-
-## Notes
-A standalone Java Decompiler GUI

@@ -16,9 +16,6 @@
 
 LibreOffice is a free and open-source office suite.
 
-## Notes
-LibreOffice is a free and open-source office suite.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

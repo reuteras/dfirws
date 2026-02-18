@@ -16,9 +16,6 @@
 
 Tor Browser is a privacy-focused web browser based on Firefox.
 
-## Notes
-Tor Browser is a privacy-focused web browser based on Firefox.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

@@ -16,9 +16,6 @@
 
 bulk_extractor extracts features such as email addresses and URLs from disk images.
 
-## Notes
-bulk_extractor extracts features such as email addresses and URLs from disk images.
-
 ## Tips
 bulk_extractor is installed in .\mount\Tools\bulk_extractor.
 

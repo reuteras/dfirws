@@ -12,9 +12,6 @@
 
 Zimmerman Tools is a collection of Windows forensics tools developed by Eric Zimmerman.
 
-## Notes
-Zimmerman Tools is a collection of Windows forensics tools developed by Eric Zimmerman.
-
 ## Tips
 Zimmerman Tools includes a variety of tools for analyzing Windows artifacts, such as the registry, event logs, and more.
 

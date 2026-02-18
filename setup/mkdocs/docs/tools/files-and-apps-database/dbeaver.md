@@ -9,6 +9,3 @@
 **Tags:** database, gui
 
 DBeaver is a database management tool.
-
-## Notes
-DBeaver is a database management tool.

@@ -9,6 +9,3 @@
 **Tags:** json, data-processing, visualization
 
 fx is a terminal JSON viewer and processor.
-
-## Notes
-fx is a terminal JSON viewer and processor.

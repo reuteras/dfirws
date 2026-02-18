@@ -7,6 +7,3 @@
 **Tags:** obsidian, timeline, plugins
 
 Obsidian timeline plugin.
-
-## Notes
-Obsidian timeline plugin.

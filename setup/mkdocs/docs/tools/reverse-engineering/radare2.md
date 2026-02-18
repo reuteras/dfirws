@@ -9,6 +9,3 @@
 **Tags:** reverse-engineering, disassembler, debugging
 
 UNIX-like reverse engineering framework and command-line toolset
-
-## Notes
-UNIX-like reverse engineering framework and command-line toolset

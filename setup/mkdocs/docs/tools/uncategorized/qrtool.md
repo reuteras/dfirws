@@ -9,6 +9,3 @@
 **Tags:** qr-code, encoding, decoding
 
 Tool for decoding QR codes from images
-
-## Notes
-Tool for decoding QR codes from images

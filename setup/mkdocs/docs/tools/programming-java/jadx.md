@@ -9,6 +9,3 @@
 **Tags:** reverse-engineering, android, decompiler, java, deobfuscation
 
 Dex to Java decompiler
-
-## Notes
-Dex to Java decompiler

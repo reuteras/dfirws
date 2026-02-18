@@ -16,9 +16,6 @@
 
 apktool is a tool for reverse engineering Android APK files.
 
-## Notes
-apktool is a tool for reverse engineering Android APK files.
-
 ## Tips
 apktool is installed in .\mount\Tools\bin.
 

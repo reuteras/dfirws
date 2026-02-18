@@ -16,9 +16,6 @@
 
 YARA Forge extended ruleset - broader set of YARA rules beyond the core set.
 
-## Notes
-YARA Forge extended ruleset - broader set of YARA rules beyond the core set.
-
 ## Tips
 The extended ruleset includes additional YARA rules that go beyond the core set. May have higher false positive rates but covers more threats.
 

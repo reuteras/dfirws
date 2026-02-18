@@ -5,3 +5,5 @@
 **Source:** Git
 
 **Tags:** forensics, rdp
+
+RDP Bitmap Cache parser

@@ -9,6 +9,3 @@
 **Tags:** malware-analysis, binary-analysis, similarity
 
 binlex is a binary genetic traits lexer for malware analysis.
-
-## Notes
-binlex is a binary genetic traits lexer for malware analysis.

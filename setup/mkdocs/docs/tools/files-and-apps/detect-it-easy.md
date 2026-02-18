@@ -9,6 +9,3 @@
 **Tags:** pe-analysis, file-identification, packer-detection
 
 Detect It Easy is a tool for identifying file types and detecting packers.
-
-## Notes
-Detect It Easy is a tool for identifying file types and detecting packers.

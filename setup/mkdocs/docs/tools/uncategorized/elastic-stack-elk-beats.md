@@ -16,9 +16,6 @@
 
 Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats.
 
-## Notes
-Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats.
-
 ## Tips
 Packages are downloaded to .\downloads.
 

@@ -16,9 +16,6 @@
 
 Emerging Threats open ruleset for Suricata IDS.
 
-## Notes
-Emerging Threats open ruleset for Suricata IDS.
-
 ## Tips
 Use these rules with Suricata to detect network-based threats. The rules are updated regularly and cover a wide range of threat categories.
 

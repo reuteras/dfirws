@@ -16,9 +16,6 @@
 
 recbin parses Windows Recycle Bin files.
 
-## Notes
-recbin parses Windows Recycle Bin files.
-
 ## Tips
 recbin is installed in .\mount\Tools\bin.
 

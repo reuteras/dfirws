@@ -14,9 +14,6 @@
 
 Win API Search is a tool for searching Windows API functions.
 
-## Notes
-Win API Search is a tool for searching Windows API functions.
-
 ## Tips
 Win API Search is installed in .\mount\Tools\WinApiSearch.
 

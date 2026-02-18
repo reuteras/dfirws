@@ -9,6 +9,3 @@
 **Tags:** data-processing, sql, json, csv
 
 Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more.
-
-## Notes
-Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more.

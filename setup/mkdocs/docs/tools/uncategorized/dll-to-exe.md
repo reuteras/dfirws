@@ -9,6 +9,3 @@
 **Tags:** pe-analysis, conversion
 
 Converts a DLL into EXE
-
-## Notes
-Converts a DLL into EXE

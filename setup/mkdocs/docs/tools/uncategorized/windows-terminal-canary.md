@@ -14,9 +14,6 @@
 
 Windows Terminal Canary package.
 
-## Notes
-Windows Terminal Canary package.
-
 ## Tips
 This is downloaded during setup.
 

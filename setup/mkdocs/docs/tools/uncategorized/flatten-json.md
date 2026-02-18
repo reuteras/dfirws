@@ -9,6 +9,3 @@
 **Tags:** python, library, json
 
 Flatten JSON objects
-
-## Notes
-Flatten JSON objects

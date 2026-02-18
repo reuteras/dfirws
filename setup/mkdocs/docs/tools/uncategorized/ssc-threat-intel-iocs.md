@@ -14,9 +14,6 @@
 
 SecurityScorecard threat intelligence indicators of compromise.
 
-## Notes
-SecurityScorecard threat intelligence indicators of compromise.
-
 ## Tips
 Use these IoCs for threat hunting and incident response. Contains indicators from SecurityScorecard threat research.
 

@@ -16,9 +16,6 @@
 
 Full-featured MS OLE Structured Storage based file management tool.
 
-## Notes
-Full-featured MS OLE Structured Storage based file management tool.
-
 ## Tips
 SSView is installed in .\mount\Tools\ssview.
 

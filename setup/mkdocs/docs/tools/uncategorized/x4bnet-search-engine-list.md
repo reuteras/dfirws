@@ -14,9 +14,6 @@
 
 X4BNet list of known search engine crawler IP addresses.
 
-## Notes
-X4BNet list of known search engine crawler IP addresses.
-
 ## Tips
 Use this list to identify search engine crawlers in network traffic or access logs.
 

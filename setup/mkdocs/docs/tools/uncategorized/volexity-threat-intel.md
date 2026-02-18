@@ -14,9 +14,6 @@
 
 Volexity threat intelligence indicators and YARA rules.
 
-## Notes
-Volexity threat intelligence indicators and YARA rules.
-
 ## Tips
 Use these indicators and rules for threat hunting. Contains YARA rules and IoCs from Volexity threat research.
 

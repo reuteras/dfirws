@@ -16,9 +16,6 @@
 
 geolocus-cli is a geolocation lookup tool.
 
-## Notes
-geolocus-cli is a geolocation lookup tool.
-
 ## Tips
 geolocus-cli is installed in .\mount\Tools\bin.
 

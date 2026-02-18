@@ -13,6 +13,3 @@
 **Tags:** development, compiler, build-tools
 
 The most comprehensive IDE for .NET and C++ developers on Windows for building web, cloud, desktop, mobile apps, services and games.
-
-## Notes
-The most comprehensive IDE for .NET and C++ developers on Windows for building web, cloud, desktop, mobile apps, services and games.

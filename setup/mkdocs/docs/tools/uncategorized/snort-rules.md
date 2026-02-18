@@ -16,9 +16,6 @@
 
 Snort 3 community ruleset for network intrusion detection.
 
-## Notes
-Snort 3 community ruleset for network intrusion detection.
-
 ## Tips
 Use these rules with Snort or compatible IDS tools to detect network-based threats.
 

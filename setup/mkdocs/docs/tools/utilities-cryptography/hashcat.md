@@ -14,9 +14,6 @@
 
 hashcat is a password recovery tool.
 
-## Notes
-hashcat is a password recovery tool.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

@@ -9,6 +9,3 @@
 **Tags:** text-editor, powershell, plugins
 
 Visual Studio Code PowerShell extension.
-
-## Notes
-Visual Studio Code PowerShell extension.

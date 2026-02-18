@@ -16,9 +16,6 @@
 
 IPinfo.io free IP to Country and ASN database in MMDB format. Requires IPINFO_API_KEY.
 
-## Notes
-IPinfo.io free IP to Country and ASN database in MMDB format. Requires IPINFO_API_KEY.
-
 ## Tips
 Use this MMDB file with tools that support MaxMind DB format to resolve IP addresses to country and ASN information. Set IPINFO_API_KEY in config.ps1 to download.
 

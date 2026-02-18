@@ -16,9 +16,6 @@
 
 PDFStreamDumper is a tool for inspecting PDF files.
 
-## Notes
-PDFStreamDumper is a tool for inspecting PDF files.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

@@ -16,9 +16,6 @@
 
 Mail Viewer is a tool for viewing email files and mailboxes.
 
-## Notes
-Mail Viewer is a tool for viewing email files and mailboxes.
-
 ## Tips
 Mail Viewer is installed in .\mount\Tools\MailView.
 

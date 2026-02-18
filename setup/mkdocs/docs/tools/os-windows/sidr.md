@@ -9,6 +9,3 @@
 **Tags:** browser-forensics, forensics
 
 Search Index Database Reporter
-
-## Notes
-Search Index Database Reporter

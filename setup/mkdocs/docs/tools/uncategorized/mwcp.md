@@ -9,6 +9,3 @@
 **Tags:** malware-analysis, configuration-extraction
 
 A framework for malware configuration parsers.
-
-## Notes
-A framework for malware configuration parsers.

@@ -16,9 +16,6 @@
 
 Binary Ninja is a reverse engineering platform.
 
-## Notes
-Binary Ninja is a reverse engineering platform.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

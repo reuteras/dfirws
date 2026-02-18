@@ -14,9 +14,6 @@
 
 Neo4j is a graph database.
 
-## Notes
-Neo4j is a graph database.
-
 ## Tips
 After installation, the shortcut is replaced with the installed application.
 

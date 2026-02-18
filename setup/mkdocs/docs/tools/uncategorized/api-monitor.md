@@ -16,9 +16,6 @@
 
 API Monitor is a tool for monitoring Windows API calls.
 
-## Notes
-API Monitor is a tool for monitoring Windows API calls.
-
 ## Tips
 After installation, API Monitor is added to the system path.
 

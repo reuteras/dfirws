@@ -16,9 +16,6 @@
 
 ProcDOT is a visual malware analysis tool for process, file, and network activity.
 
-## Notes
-ProcDOT is a visual malware analysis tool for process, file, and network activity.
-
 ## Tips
 ProcDOT is installed in .\mount\Tools\procdot.
 

@@ -16,9 +16,6 @@
 
 Npcap packet capture driver installer.
 
-## Notes
-Npcap packet capture driver installer.
-
 ## Tips
 This is a manual install.
 

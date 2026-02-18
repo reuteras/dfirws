@@ -16,9 +16,6 @@
 
 YARA Forge full ruleset - comprehensive collection of all available YARA rules.
 
-## Notes
-YARA Forge full ruleset - comprehensive collection of all available YARA rules.
-
 ## Tips
 The full ruleset contains all available YARA rules from YARA Forge. Most comprehensive coverage but may have higher false positive rates.
 

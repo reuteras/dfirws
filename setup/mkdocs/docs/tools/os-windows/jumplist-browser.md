@@ -9,6 +9,3 @@
 **Tags:** windows, forensics, artifact-extraction
 
 Automatic/Custom Destinations & LNK (MS-SHLLINK) Browser
-
-## Notes
-Automatic/Custom Destinations & LNK (MS-SHLLINK) Browser

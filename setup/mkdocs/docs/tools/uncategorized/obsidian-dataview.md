@@ -7,6 +7,3 @@
 **Tags:** obsidian, data-processing, plugins
 
 Obsidian dataview plugin.
-
-## Notes
-Obsidian dataview plugin.

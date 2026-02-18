@@ -14,9 +14,6 @@
 
 X4BNet list of known TOR exit node IP addresses.
 
-## Notes
-X4BNet list of known TOR exit node IP addresses.
-
 ## Tips
 Use this list to identify TOR exit nodes in network traffic. Complements the Tor Project exit node data.
 

@@ -9,6 +9,3 @@
 **Tags:** reverse-engineering, disassembler, decompiler
 
 Binary Type Inference Ghidra Plugin
-
-## Notes
-Binary Type Inference Ghidra Plugin

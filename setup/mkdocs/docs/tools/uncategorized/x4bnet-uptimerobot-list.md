@@ -14,9 +14,6 @@
 
 X4BNet list of known UptimeRobot monitoring IP addresses.
 
-## Notes
-X4BNet list of known UptimeRobot monitoring IP addresses.
-
 ## Tips
 Use this list to identify UptimeRobot monitoring service IP addresses in network traffic or access logs.
 

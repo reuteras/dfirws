@@ -14,9 +14,6 @@
 
 TrID is a file identifier utility.
 
-## Notes
-TrID is a file identifier utility.
-
 ## Tips
 TrID is installed in .\mount\Tools\trid.
 

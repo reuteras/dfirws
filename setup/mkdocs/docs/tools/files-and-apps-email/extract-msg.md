@@ -9,6 +9,3 @@
 **Tags:** email, outlook, data-extraction
 
 Extracts emails and attachments saved in Microsoft Outlook's .msg files
-
-## Notes
-Extracts emails and attachments saved in Microsoft Outlook's .msg files

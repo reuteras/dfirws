@@ -9,6 +9,3 @@
 **Tags:** office, vba, decompiler
 
 A vba p-code decompiler based on pcodedmp
-
-## Notes
-A vba p-code decompiler based on pcodedmp

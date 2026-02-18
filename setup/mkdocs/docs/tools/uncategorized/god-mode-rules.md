@@ -5,3 +5,5 @@
 **Source:** Git
 
 **Tags:** yara, sigma, detection-rules
+
+God Mode Detection Rules

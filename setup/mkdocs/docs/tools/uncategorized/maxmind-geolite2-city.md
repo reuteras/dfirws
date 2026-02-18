@@ -16,9 +16,6 @@
 
 MaxMind GeoLite2 City database for mapping IP addresses to city-level geolocation. Requires MAXMIND_LICENSE_KEY.
 
-## Notes
-MaxMind GeoLite2 City database for mapping IP addresses to city-level geolocation. Requires MAXMIND_LICENSE_KEY.
-
 ## Tips
 Use this database with tools that support MaxMind DB format to resolve IP addresses to city-level location data. Set MAXMIND_LICENSE_KEY in config.ps1 to download.
 

@@ -14,9 +14,6 @@
 
 X4BNet list of known Cloudflare IP addresses.
 
-## Notes
-X4BNet list of known Cloudflare IP addresses.
-
 ## Tips
 Use this list to identify Cloudflare CDN IP addresses in network traffic. Useful for distinguishing CDN traffic from direct connections.
 

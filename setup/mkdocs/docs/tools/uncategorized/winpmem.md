@@ -16,9 +16,6 @@
 
 winpmem is a Windows memory acquisition driver.
 
-## Notes
-winpmem is a Windows memory acquisition driver.
-
 ## Tips
 The driver is downloaded to C:\downloads.
 

@@ -16,9 +16,6 @@
 
 HxD is a hex editor, disk editor, and memory editor for Windows.
 
-## Notes
-HxD is a hex editor, disk editor, and memory editor for Windows.
-
 ## Tips
 HxD is installed in C:\Program Files\HxD.
 

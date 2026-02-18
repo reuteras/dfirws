@@ -9,6 +9,3 @@
 **Tags:** documentation, markdown
 
 Project documentation with Markdown.
-
-## Notes
-Project documentation with Markdown.

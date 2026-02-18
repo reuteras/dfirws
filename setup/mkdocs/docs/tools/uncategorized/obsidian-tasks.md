@@ -7,6 +7,3 @@
 **Tags:** obsidian, task-management, plugins
 
 Obsidian tasks plugin.
-
-## Notes
-Obsidian tasks plugin.

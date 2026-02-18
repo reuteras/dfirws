@@ -16,9 +16,6 @@
 
 pestudio is a tool for analyzing PE files.
 
-## Notes
-pestudio is a tool for analyzing PE files.
-
 ## Tips
 After installation, you can use pestudio to analyze PE files.
 
