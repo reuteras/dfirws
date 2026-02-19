@@ -464,7 +464,8 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "is never constructed" -and
     $_.Line -notmatch "elided elsewhere is confusing" -and
     $_.Line -notmatch "generated [0-9]+ warnings" -and
-    $_.Line -notmatch "EVTX-ATTACK-SAMPLES"
+    $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
+    $_.line -notmatch "skipping tool at index"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
