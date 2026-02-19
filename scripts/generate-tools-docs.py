@@ -535,10 +535,10 @@ def main() -> int:
         lines.append("| Tool | Source | Description | Tags | File Extensions | Profiles |")
         lines.append("| --- | --- | --- | --- | --- | --- |")
 
-        tools_in_category = sorted(grouped[category_path], key=lambda t: t.get("Name", ""))
+        tools_in_category = sorted(grouped[category_path], key=lambda t: t.get("Name") or "")
         used_slugs: Dict[str, int] = {}
         for tool in tools_in_category:
-            tool_slug = get_tool_page_slug(tool.get("Name", ""), used_slugs)
+            tool_slug = get_tool_page_slug(tool.get("Name") or "", used_slugs)
             write_tool_page(docs_root, tool, category_path, tool_slug)
             tool_link = f"{tool_slug}.md"
             summary = get_tool_summary(tool).replace("|", "\\|")
@@ -547,9 +547,9 @@ def main() -> int:
             file_exts = ", ".join(f"`{e}`" for e in get_string_list(tool.get("FileExtensions")))
             tool_profiles = get_string_list(tool.get("Profiles"))
             profiles_note = "" if (not tool_profiles or "Basic" in tool_profiles) else "Full only"
-            lines.append(f"| [{tool.get('Name', '')}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |")
+            lines.append(f"| [{tool.get('Name') or ''}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |")
             tools_index_entries.append(
-                (tool.get("Name", ""), f"./{slug}/{tool_slug}.md", source_label, summary, tags, file_exts, profiles_note)
+                (tool.get("Name") or "", f"./{slug}/{tool_slug}.md", source_label, summary, tags, file_exts, profiles_note)
             )
 
         category_file.write_text("\n".join(lines), encoding="utf-8")
