@@ -480,6 +480,11 @@ def main() -> int:
             )
         tools = filtered
 
+    unnamed: list[dict] = [t for t in tools if not (t.get("Name") or "").strip()]
+    if unnamed:
+        print(f"Warning: skipping {len(unnamed)} tool(s) with no Name.")
+    tools = [t for t in tools if (t.get("Name") or "").strip()]
+
     grouped: Dict[str, List[dict]] = {}
     for tool in tools:
         category_path = tool.get("CategoryPath") or tool.get("Category") or "Uncategorized"
