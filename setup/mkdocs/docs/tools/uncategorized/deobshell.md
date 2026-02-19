@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **Tags:** powershell, deobfuscation, malware-analysis
 
 Powershell script deobfuscation using AST in Python.

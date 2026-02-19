@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** vpn, network, blocklist
 
 X4BNet list of known VPN IP addresses.

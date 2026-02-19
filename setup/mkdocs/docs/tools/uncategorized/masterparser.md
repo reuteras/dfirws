@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.log`
 
 **Tags:** log-analysis, linux, authentication

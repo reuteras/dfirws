@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.rules`, `.tar.gz`
 
 **Tags:** snort, ids, detection-rules, network

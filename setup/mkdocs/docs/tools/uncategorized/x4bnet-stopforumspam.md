@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** spam, network, blocklist
 
 X4BNet list of known spam IP addresses from StopForumSpam.

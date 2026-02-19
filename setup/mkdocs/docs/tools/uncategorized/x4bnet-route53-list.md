@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** route53, network, blocklist
 
 X4BNet list of known AWS Route53 health check IP addresses.

@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.class`, `.jar`
 
 **Tags:** reverse-engineering, java, decompiler

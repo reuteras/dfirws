@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.pdf`, `.doc`, `.docx`, `.mp4`
 
 **Tags:** metadata, file-analysis, image

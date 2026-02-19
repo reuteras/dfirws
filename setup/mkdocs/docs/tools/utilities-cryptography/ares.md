@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`
 
 **Tags:** malware-analysis, pe-analysis

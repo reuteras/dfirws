@@ -10,6 +10,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 RegShot is a small, free and open-source registry compare utility.
 
 ## Tips

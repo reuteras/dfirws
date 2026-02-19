@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full (not included in Basic profile)
+
 **Tags:** vpn, network
 
 Tailscale is a modern VPN solution that allows you to create secure, private networks between your devices. It is designed to be easy to use and can be used for remote access, secure file sharing, and connecting devices across different networks.

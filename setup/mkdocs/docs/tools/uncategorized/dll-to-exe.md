@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dll`, `.exe`
 
 **Tags:** pe-analysis, conversion

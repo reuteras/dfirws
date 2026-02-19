@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.kml`, `.kmz`
 
 **Tags:** geolocation, osint, visualization

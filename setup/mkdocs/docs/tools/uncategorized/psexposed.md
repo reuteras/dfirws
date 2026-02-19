@@ -7,6 +7,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.ps1`
 
 **Tags:** windows, forensics, psexec

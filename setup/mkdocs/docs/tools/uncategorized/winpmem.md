@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.raw`, `.aff4`
 
 **Tags:** memory-forensics, acquisition

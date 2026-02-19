@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **Tags:** file-identification
 
 TrID is a file identifier utility.

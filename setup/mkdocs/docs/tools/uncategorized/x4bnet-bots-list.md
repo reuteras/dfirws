@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** bots, network, blocklist
 
 X4BNet list of known bot IP addresses.

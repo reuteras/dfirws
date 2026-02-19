@@ -6,10 +6,10 @@
 | [DCode](dcode.md) | HTTP | DCode is a date/time conversion and analysis tool. | timestamp, forensics, decoding |  |  |
 | [ExifTool](exiftool.md) | HTTP | ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files. | metadata, file-analysis, image | `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.pdf`, `.doc`, `.docx`, `.mp4` |  |
 | [Flare-Floss](flare-floss.md) | GitHub Release | Flare-Floss is a tool for extracting strings from malware samples. | malware-analysis, string-extraction, deobfuscation | `.exe`, `.dll`, `.bin` |  |
-| [Google Earth Pro](google-earth-pro.md) | Winget | Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features. | geolocation, osint, visualization | `.kml`, `.kmz` |  |
+| [Google Earth Pro](google-earth-pro.md) | Winget | Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features. | geolocation, osint, visualization | `.kml`, `.kmz` | Full only |
 | [Graphviz](graphviz.md) | HTTP | Graphviz is a graph visualization software suite. | visualization, graph | `.dot`, `.gv` |  |
 | [geolocus-cli](geolocus-cli.md) | HTTP | geolocus-cli is a geolocation lookup tool. | geolocation, osint | `.json` |  |
-| [godap](godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | active-directory, ldap |  |  |
+| [godap](godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | active-directory, ldap |  | Full only |
 | [jpterm](jpterm.md) | Python | Jupyter in the terminal. | jupyter, data-processing, tui, notebook | `.json` |  |
 | [markitdown](markitdown.md) | Python | Utility tool for converting various files to Markdown. | conversion, markdown, data-extraction, office, word | `.docx`, `.xlsx`, `.pptx`, `.pdf`, `.html` |  |
 | [mmdbinspect](mmdbinspect.md) | GitHub Release | Tool for inspecting MaxMind GeoIP2 databases. | geolocation, maxmind | `.mmdb` |  |

@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.txt`
 
 **Tags:** mac-address, network, wireshark

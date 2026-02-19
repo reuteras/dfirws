@@ -7,6 +7,8 @@
 
 **Source:** Installer
 
+**Profiles:** Full, Basic
+
 Rust programming language.
 
 ## Sample Files

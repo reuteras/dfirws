@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** monitoring, network, blocklist
 
 X4BNet list of known UptimeRobot monitoring IP addresses.

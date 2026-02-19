@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dmp`
 
 **Tags:** debugging, windbg, dotnet

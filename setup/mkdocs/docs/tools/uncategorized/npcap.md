@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.pcap`, `.pcapng`
 
 **Tags:** network-analysis, packet-capture

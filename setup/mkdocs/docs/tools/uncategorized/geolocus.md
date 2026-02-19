@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.mmdb`
 
 **Tags:** geolocation, mmdb

@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.class`, `.jar`
 
 **Tags:** reverse-engineering, java, decompiler, deobfuscation

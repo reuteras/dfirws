@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.eml`
 
 **Tags:** email, forensics, phishing

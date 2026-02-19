@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.mft`
 
 **Tags:** ntfs, filesystem, forensics

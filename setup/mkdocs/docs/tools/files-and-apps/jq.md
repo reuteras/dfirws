@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.json`, `.ndjson`, `.jsonl`
 
 **Tags:** json, data-processing, cli

@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** tor, network, blocklist
 
 X4BNet list of known TOR exit node IP addresses.

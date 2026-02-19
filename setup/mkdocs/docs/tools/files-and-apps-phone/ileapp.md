@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.tar`, `.zip`
 
 **Tags:** mobile-forensics, ios, artifact-extraction

@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.db`, `.sqlite`
 
 **Tags:** browser-forensics, artifact-extraction

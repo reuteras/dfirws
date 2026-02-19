@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.jpg`, `.jpeg`, `.png`, `.gif`, `.bmp`, `.tiff`, `.ico`, `.webp`
 
 **Tags:** image-viewer, multimedia

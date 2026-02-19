@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dmp`, `.raw`, `.vmem`, `.img`
 
 **Tags:** memory-forensics, filesystem

@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.DS_Store`
 
 **Tags:** forensics, macos, data-extraction

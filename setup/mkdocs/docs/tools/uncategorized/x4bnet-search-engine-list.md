@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** search-engine, network, blocklist
 
 X4BNet list of known search engine crawler IP addresses.

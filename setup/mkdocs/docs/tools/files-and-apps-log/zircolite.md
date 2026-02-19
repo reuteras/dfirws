@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.evtx`, `.json`
 
 **Tags:** log-analysis, sigma, detection, incident-response

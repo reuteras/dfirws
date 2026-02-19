@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.evtx`, `.csv`, `.json`
 
 **Tags:** forensics, timeline

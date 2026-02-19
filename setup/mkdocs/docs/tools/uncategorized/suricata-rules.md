@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.rules`, `.zip`
 
 **Tags:** suricata, ids, detection-rules, network

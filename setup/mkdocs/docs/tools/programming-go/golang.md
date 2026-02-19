@@ -7,6 +7,8 @@
 
 **Source:** Installer
 
+**Profiles:** Full, Basic
+
 Go programming language.
 
 ## Sample Files

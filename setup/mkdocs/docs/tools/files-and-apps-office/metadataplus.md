@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.doc`, `.docx`, `.xls`, `.xlsx`, `.pdf`, `.jpg`, `.png`
 
 **Tags:** metadata, file-analysis

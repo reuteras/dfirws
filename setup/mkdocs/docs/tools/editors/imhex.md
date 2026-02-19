@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.bin`, `.hex`, `.elf`
 
 **Tags:** hex-editor, binary-analysis, pattern-language

@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** cloudflare, network, blocklist
 
 X4BNet list of known Cloudflare IP addresses.

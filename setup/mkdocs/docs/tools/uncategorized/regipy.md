@@ -10,6 +10,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.reg`, `.dat`
 
 **Tags:** registry, windows, forensics, mcp

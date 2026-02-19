@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.json`, `.csv`, `.tsv`, `.parquet`
 
 **Tags:** data-processing, sql, json, csv

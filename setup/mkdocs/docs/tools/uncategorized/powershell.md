@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.ps1`, `.psm1`, `.psd1`
 
 **Tags:** scripting, shell, automation

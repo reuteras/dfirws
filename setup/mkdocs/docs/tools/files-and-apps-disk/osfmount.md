@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dd`, `.raw`, `.E01`, `.img`, `.vmdk`, `.iso`
 
 **Tags:** disk-forensics, mounting, filesystem

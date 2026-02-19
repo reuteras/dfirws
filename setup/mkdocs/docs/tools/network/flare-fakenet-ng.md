@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.pcap`
 
 **Tags:** malware-analysis, network-simulation, dynamic-analysis

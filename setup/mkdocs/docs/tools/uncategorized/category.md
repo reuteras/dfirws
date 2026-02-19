@@ -1,9 +1,7 @@
-# capa-rules
+# None
 
 **Category:** Uncategorized
 
-**Source:** GitHub Release
+**Source:** HTTP
 
 **Profiles:** Full, Basic
-
-Rules for capa.

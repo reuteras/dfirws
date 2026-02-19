@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dmp`, `.exe`, `.dll`, `.sys`
 
 **Tags:** debugging, memory-forensics, kernel

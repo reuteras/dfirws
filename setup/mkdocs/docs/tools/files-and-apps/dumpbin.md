@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.obj`, `.lib`
 
 **Tags:** pe-analysis, reverse-engineering

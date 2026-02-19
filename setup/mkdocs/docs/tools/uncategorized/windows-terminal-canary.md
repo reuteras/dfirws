@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **Tags:** terminal, shell
 
 Windows Terminal Canary package.

@@ -2,7 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
-| [LibreOffice](libreoffice.md) | HTTP | LibreOffice is a free and open-source office suite. | office, document-viewer | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.ods`, `.odp` |  |
+| [LibreOffice](libreoffice.md) | HTTP | LibreOffice is a free and open-source office suite. | office, document-viewer | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.ods`, `.odp` | Full only |
 | [MetadataPlus](metadataplus.md) | GitHub Release | A tool to use novel locations to extract metadata from Office documents. | metadata, file-analysis | `.exe`, `.dll`, `.doc`, `.docx`, `.xls`, `.xlsx`, `.pdf`, `.jpg`, `.png` |  |
 | [MiTeC Structured Storage Viewer](mitec-structured-storage-viewer.md) | HTTP | Full-featured MS OLE Structured Storage based file management tool. | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |  |
 | [XLMMacroDeobfuscator](xlmmacrodeobfuscator.md) | Python |  | office, macro, deobfuscation, malware-analysis | `.xls`, `.xlsm`, `.xlsb` |  |

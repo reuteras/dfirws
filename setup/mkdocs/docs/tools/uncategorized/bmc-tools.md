@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **Tags:** forensics, rdp
 
 RDP Bitmap Cache parser

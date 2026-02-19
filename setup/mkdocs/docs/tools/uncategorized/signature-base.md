@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.yara`
 
 **Tags:** yara, detection-rules, ioc

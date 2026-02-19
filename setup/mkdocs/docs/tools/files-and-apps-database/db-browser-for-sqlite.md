@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.db`, `.sqlite`, `.sqlite3`
 
 **Tags:** database, sqlite, gui

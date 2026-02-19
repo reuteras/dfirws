@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.mp4`, `.avi`, `.mkv`, `.mov`, `.mp3`, `.wav`, `.flac`
 
 **Tags:** multimedia, video, audio

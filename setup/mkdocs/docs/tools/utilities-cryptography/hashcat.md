@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full (not included in Basic profile)
+
 **Tags:** password-cracking, hashing
 
 hashcat is a password recovery tool.

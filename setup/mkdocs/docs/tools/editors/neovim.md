@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.txt`, `.md`, `.log`, `.ps1`, `.py`, `.rb`, `.js`
 
 **Tags:** text-editor, code-editor, terminal

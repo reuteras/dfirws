@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.class`, `.jar`, `.apk`, `.dex`
 
 **Tags:** reverse-engineering, java, decompiler, deobfuscation

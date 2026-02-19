@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.pdf`
 
 **Tags:** pdf, malware-analysis, javascript

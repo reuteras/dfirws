@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.mach-o`, `.bin`
 
 **Tags:** pe-analysis, file-identification, packer-detection

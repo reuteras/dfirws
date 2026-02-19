@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.gpg`, `.asc`, `.pgp`
 
 **Tags:** encryption, pgp, signing

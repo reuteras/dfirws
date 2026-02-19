@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.bin`
 
 **Tags:** malware-analysis, string-extraction, deobfuscation

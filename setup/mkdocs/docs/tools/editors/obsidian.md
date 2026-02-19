@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.md`, `.markdown`
 
 **Tags:** obsidian, markdown

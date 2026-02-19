@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`
 
 **Tags:** reverse-engineering, api-tracing, dynamic-analysis

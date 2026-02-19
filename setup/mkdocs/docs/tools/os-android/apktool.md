@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.apk`
 
 **Tags:** reverse-engineering, android, decompiler

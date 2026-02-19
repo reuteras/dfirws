@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** threat-intel, ioc
 
 SecurityScorecard threat intelligence indicators of compromise.

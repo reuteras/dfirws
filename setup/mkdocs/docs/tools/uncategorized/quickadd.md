@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full (not included in Basic profile)
+
 **Tags:** obsidian, automation, plugins
 
 Obsidian quicadd plugin.

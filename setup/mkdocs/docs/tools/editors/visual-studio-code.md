@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.ps1`, `.py`, `.js`, `.ts`, `.json`, `.xml`, `.yaml`, `.md`
 
 **Tags:** text-editor, ide, powershell

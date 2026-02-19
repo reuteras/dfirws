@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.evtx`
 
 **Tags:** log-analysis, event-log, windows

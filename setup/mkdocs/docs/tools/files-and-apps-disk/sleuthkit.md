@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dd`, `.raw`, `.E01`, `.img`, `.vmdk`
 
 **Tags:** disk-forensics, filesystem, forensics

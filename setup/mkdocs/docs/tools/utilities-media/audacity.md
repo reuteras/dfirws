@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.wav`, `.mp3`, `.flac`, `.ogg`, `.aiff`
 
 **Tags:** audio, multimedia, steganography

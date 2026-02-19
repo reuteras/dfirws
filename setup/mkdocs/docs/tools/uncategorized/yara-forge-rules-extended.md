@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.yar`, `.zip`
 
 **Tags:** yara, detection-rules, malware-detection

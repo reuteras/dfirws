@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.pcap`, `.pcapng`, `.mp4`, `.mp3`, `.flac`, `.zip`, `.tar`, `.gif`, `.png`
 
 **Tags:** data-processing, binary-analysis, file-format

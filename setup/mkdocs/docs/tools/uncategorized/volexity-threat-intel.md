@@ -10,6 +10,8 @@
 
 **Source:** Enrichment
 
+**Profiles:** Full, Basic
+
 **Tags:** threat-intel, ioc
 
 Volexity threat intelligence indicators and YARA rules.

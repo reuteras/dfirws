@@ -274,6 +274,7 @@ nav:
     - capa-rules: tools/uncategorized/capa-rules.md
     - CapaExplorer: tools/uncategorized/capaexplorer.md
     - cart: tools/uncategorized/cart.md
+    - None: tools/uncategorized/category.md
     - chainsaw-rules: tools/uncategorized/chainsaw-rules.md
     - CimSweep: tools/uncategorized/cimsweep.md
     - cmder: tools/uncategorized/cmder.md

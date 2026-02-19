@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.bmc`, `.bin`
 
 **Tags:** rdp, forensics, windows

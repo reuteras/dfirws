@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.html`, `.htm`
 
 **Tags:** browser, privacy, network

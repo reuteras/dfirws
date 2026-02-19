@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.bin`, `.txt`, `.json`, `.hex`
 
 **Tags:** data-processing, encoding, decoding, deobfuscation, encryption, hashing

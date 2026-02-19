@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.pcap`, `.pcapng`, `.cap`
 
 **Tags:** network-analysis, pcap, protocol-analysis

@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.bin`, `.hex`
 
 **Tags:** hex-editor, binary-analysis

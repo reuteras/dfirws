@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.evtx`
 
 **Tags:** forensics, reference, lateral-movement

@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full (not included in Basic profile)
+
 **Tags:** database, graph, visualization
 
 Neo4j is a graph database.

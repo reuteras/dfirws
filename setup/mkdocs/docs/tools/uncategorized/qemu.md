@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.qcow2`, `.vmdk`, `.vdi`, `.img`, `.iso`
 
 **Tags:** virtualization, emulation

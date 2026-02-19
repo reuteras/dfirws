@@ -2,10 +2,10 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
-| [Fibratus](fibratus.md) | GitHub Release | Adversary tradecraft detection, protection, and hunting | etw, windows, monitoring | `.etl` |  |
+| [Fibratus](fibratus.md) | GitHub Release | Adversary tradecraft detection, protection, and hunting | etw, windows, monitoring | `.etl` | Full only |
 | [Jumplist Browser](jumplist-browser.md) | GitHub Release | Automatic/Custom Destinations & LNK (MS-SHLLINK) Browser | windows, forensics, artifact-extraction | `.automaticDestinations-ms`, `.customDestinations-ms`, `.lnk` |  |
 | [Prefetch Browser](prefetch-browser.md) | GitHub Release | Prefetch Browser is a tool for analyzing Windows Prefetch files, which can provide valuable information about program execution and system activity. | windows, forensics, prefetch | `.pf` |  |
-| [ProcDOT](procdot.md) | HTTP | ProcDOT is a visual malware analysis tool for process, file, and network activity. | malware-analysis, visualization, dynamic-analysis | `.csv`, `.log` |  |
+| [ProcDOT](procdot.md) | HTTP | ProcDOT is a visual malware analysis tool for process, file, and network activity. | malware-analysis, visualization, dynamic-analysis | `.csv`, `.log` | Full only |
 | [Thumbcacheviewer](thumbcacheviewer.md) | GitHub Release | Thumbcache Viewer - Extract Windows Vista, Windows 7, Windows 8, Windows 8.1, and Windows 10 thumbcache database files. | windows, forensics, thumbnails | `.db` |  |
 | [recbin](recbin.md) | HTTP | recbin parses Windows Recycle Bin files. | binary-analysis, carving | `.bin` |  |
 | [sidr](sidr.md) | GitHub Release | Search Index Database Reporter | browser-forensics, forensics | `.db`, `.sqlite` |  |

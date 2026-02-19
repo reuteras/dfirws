@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.elf`, `.so`
 
 **Tags:** reverse-engineering, elf-analysis, linux

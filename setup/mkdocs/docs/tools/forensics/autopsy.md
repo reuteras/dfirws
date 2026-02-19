@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.dd`, `.raw`, `.E01`, `.img`, `.vmdk`
 
 **Tags:** disk-forensics, forensics, gui, artifact-extraction

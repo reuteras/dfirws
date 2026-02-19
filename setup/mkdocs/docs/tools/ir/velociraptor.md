@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.json`, `.csv`
 
 **Tags:** incident-response, forensics, endpoint-detection

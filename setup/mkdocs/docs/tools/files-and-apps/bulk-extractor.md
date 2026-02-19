@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dd`, `.raw`, `.E01`, `.img`
 
 **Tags:** forensics, carving, data-extraction

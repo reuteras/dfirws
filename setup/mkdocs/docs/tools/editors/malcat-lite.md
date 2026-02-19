@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.sys`
 
 **Tags:** pe-analysis, malware-analysis, hex-editor, disassembler

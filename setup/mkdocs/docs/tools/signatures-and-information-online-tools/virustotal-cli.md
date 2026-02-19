@@ -4,6 +4,8 @@
 
 **Source:** Winget
 
+**Profiles:** Full (not included in Basic profile)
+
 **Tags:** malware-analysis, threat-intelligence, ioc-scanner
 
 VirusTotal CLI is a command-line tool for interacting with VirusTotal, allowing you to analyze files and URLs for malware and other threats.

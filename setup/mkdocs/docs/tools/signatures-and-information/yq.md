@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.yaml`, `.yml`, `.json`, `.xml`, `.toml`
 
 **Tags:** yaml, data-processing, cli

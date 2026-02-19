@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.sys`
 
 **Tags:** windows, debugging, monitoring, system-administration

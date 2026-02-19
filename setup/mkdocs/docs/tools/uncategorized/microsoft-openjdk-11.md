@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **Tags:** java, runtime, development
 
 Microsofts OpenJDK 11

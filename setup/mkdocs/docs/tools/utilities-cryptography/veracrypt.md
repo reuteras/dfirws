@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.hc`, `.tc`
 
 **Tags:** encryption, disk-encryption

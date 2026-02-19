@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.elf`, `.mach-o`
 
 **Tags:** reverse-engineering, elf-analysis

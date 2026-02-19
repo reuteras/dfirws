@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.dmp`, `.raw`, `.vmem`, `.img`
 
 **Tags:** memory-forensics, gui

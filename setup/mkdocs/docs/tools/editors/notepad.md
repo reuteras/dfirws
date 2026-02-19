@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.txt`, `.log`, `.xml`, `.json`, `.csv`, `.ps1`, `.py`, `.js`
 
 **Tags:** text-editor, syntax-highlighting

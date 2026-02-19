@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.pcap`, `.pcapng`, `.zng`
 
 **Tags:** network-analysis, pcap, zeek

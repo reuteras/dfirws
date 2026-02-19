@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full (not included in Basic profile)
+
 **File Extensions:** `.csv`, `.log`
 
 **Tags:** malware-analysis, visualization, dynamic-analysis

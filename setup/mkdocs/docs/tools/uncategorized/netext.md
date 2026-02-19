@@ -4,6 +4,8 @@
 
 **Source:** GitHub Release
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.dmp`
 
 **Tags:** debugging, memory-forensics, dotnet, winDbg, extension

@@ -10,6 +10,8 @@
 
 **Source:** HTTP
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`, `.dll`, `.bin`
 
 **Tags:** malware-analysis, entropy-analysis

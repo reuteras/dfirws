@@ -4,6 +4,8 @@
 
 **Source:** Git
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.exe`
 
 **Tags:** pe-analysis, packer-detection
