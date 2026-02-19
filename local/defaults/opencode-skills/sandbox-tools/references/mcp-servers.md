@@ -24,7 +24,7 @@ The DFIRWS sandbox can optionally enable MCP (Model Context Protocol) servers th
 
 **Fallback if unavailable**: Use `C:\Tools\radare2\bin\radare2.exe` directly via CLI commands:
 
-```
+```pwsh
 C:\Tools\radare2\bin\radare2.exe -q -c "aaa; afl" Desktop\readonly\suspect.exe
 C:\Tools\radare2\bin\radare2.exe -q -c "iz" Desktop\readonly\suspect.exe
 ```
@@ -38,7 +38,7 @@ C:\Tools\radare2\bin\radare2.exe -q -c "iz" Desktop\readonly\suspect.exe
 
 **Fallback if unavailable**: Use the regipy CLI or RegRipper:
 
-```
+```pwsh
 C:\venv\bin\registry-dump.exe Desktop\readonly\NTUSER.DAT
 C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\NTUSER.DAT -a
 ```

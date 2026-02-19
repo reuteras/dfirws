@@ -38,7 +38,7 @@ Use this file when command/path specificity matters. All paths are Windows-nativ
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\Tools\hayabusa\hayabusa.exe csv-timeline -d Desktop\readonly\evtx -o Desktop\readwrite\hayabusa_timeline.csv
 C:\Tools\chainsaw\chainsaw.exe hunt Desktop\readonly\evtx -s C:\Tools\chainsaw\sigma\ --mapping C:\Tools\chainsaw\mappings\sigma-event-logs-all.yml -o Desktop\readwrite\chainsaw_results.csv --csv
 C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe -d Desktop\readonly\evtx --csv Desktop\readwrite\evtxecmd_output
@@ -59,7 +59,7 @@ C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe -d Desktop\readonly\evtx --csv Des
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\SYSTEM -a > Desktop\readwrite\system_regripper.txt
 C:\Tools\Zimmerman\net6\AmcacheParser.exe -f Desktop\readonly\Amcache.hve --csv Desktop\readwrite\amcache_output
 C:\Tools\Zimmerman\net6\AppCompatCacheParser.exe -f Desktop\readonly\SYSTEM --csv Desktop\readwrite\shimcache_output
@@ -90,7 +90,7 @@ C:\Tools\Zimmerman\net6\AppCompatCacheParser.exe -f Desktop\readonly\SYSTEM --cs
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe -j > Desktop\readwrite\capa_results.json
 C:\Tools\floss\floss.exe Desktop\readonly\suspect.exe -j > Desktop\readwrite\floss_strings.json
 C:\Tools\die\diec.exe Desktop\readonly\suspect.exe
@@ -109,7 +109,7 @@ C:\Tools\densityscout\densityscout.exe -pe Desktop\readonly\suspect.exe
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.info
 C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.pslist > Desktop\readwrite\vol3_pslist.txt
 C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.netscan > Desktop\readwrite\vol3_netscan.txt
@@ -157,7 +157,7 @@ C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.netscan >
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\venv\bin\oleid.exe Desktop\readonly\document.docx
 C:\venv\bin\olevba.exe Desktop\readonly\document.docx
 C:\venv\bin\mraptor.exe Desktop\readonly\document.docx
@@ -177,7 +177,7 @@ python C:\Tools\DidierStevens\oledump.py Desktop\readonly\document.doc
 
 **Quick triage commands:**
 
-```
+```pwsh
 python C:\Tools\DidierStevens\pdfid.py Desktop\readonly\suspect.pdf
 python C:\Tools\DidierStevens\pdf-parser.py --stats Desktop\readonly\suspect.pdf
 ```
@@ -217,7 +217,7 @@ python C:\Tools\DidierStevens\pdf-parser.py --stats Desktop\readonly\suspect.pdf
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\Tools\Zimmerman\net6\MFTECmd.exe -f Desktop\readonly\$MFT --csv Desktop\readwrite\mft_output
 C:\Tools\sleuthkit\bin\mmls.exe Desktop\readonly\disk.dd
 C:\Tools\sleuthkit\bin\fls.exe -r -o <offset> Desktop\readonly\disk.dd > Desktop\readwrite\fls_listing.txt
@@ -242,7 +242,7 @@ C:\Tools\sleuthkit\bin\fls.exe -r -o <offset> Desktop\readonly\disk.dd > Desktop
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\Tools\Zimmerman\net6\PECmd.exe -d Desktop\readonly\Prefetch --csv Desktop\readwrite\prefetch_output
 C:\Tools\Zimmerman\net6\LECmd.exe -d Desktop\readonly\lnk_files --csv Desktop\readwrite\lnk_output
 C:\Tools\Zimmerman\net6\JLECmd.exe -d Desktop\readonly\jumplists --csv Desktop\readwrite\jumplist_output
@@ -272,7 +272,7 @@ C:\Tools\Zimmerman\net6\RBCmd.exe -d Desktop\readonly\$Recycle.Bin --csv Desktop
 
 **Quick triage commands:**
 
-```
+```pwsh
 C:\Tools\yara\yara64.exe -r C:\enrichment\yara\yara-forge-rules-core.yar Desktop\readonly\suspect.exe
 C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
 "C:\Program Files\ClamAV\clamscan.exe" Desktop\readonly\suspect.exe

@@ -3734,6 +3734,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "python"
+
 if (Test-Path -Path "${TOOLS}\Debug") {
     Read-Host "Press Enter to continue"
 }

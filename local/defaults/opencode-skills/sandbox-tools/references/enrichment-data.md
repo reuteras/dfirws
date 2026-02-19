@@ -16,7 +16,7 @@ Pre-compiled YARA rule sets from YARA Forge:
 
 **Usage:**
 
-```
+```pwsh
 C:\Tools\yara\yara64.exe -r C:\enrichment\yara\yara-forge-rules-core.yar Desktop\readonly\suspect.exe
 C:\Tools\yara\yara64.exe -r C:\enrichment\yara\yara-forge-rules-core.yar -r Desktop\readonly\samples\
 C:\Tools\yara-x\yr.exe scan C:\enrichment\yara\yara-forge-rules-core.yar Desktop\readonly\suspect.exe
@@ -65,7 +65,7 @@ MMDB files also cached at `%USERPROFILE%\.cache\geolocus-cli\geolocus.mmdb`.
 
 **Note**: These rules are in compressed format. Extract them to `Desktop\readwrite\` before use:
 
-```
+```pwsh
 "C:\Program Files\7-Zip\7z.exe" x C:\enrichment\snort\*.tar.gz -oDesktop\readwrite\snort_rules
 "C:\Program Files\7-Zip\7z.exe" x C:\enrichment\suricata\*.zip -oDesktop\readwrite\suricata_rules
 ```
@@ -114,7 +114,7 @@ Wireshark manufacturer database for MAC address vendor identification.
 
 **Usage with tools:**
 
-```
+```pwsh
 C:\Tools\hayabusa\hayabusa.exe csv-timeline -d Desktop\readonly\evtx -r C:\git\hayabusa-rules
 C:\Tools\chainsaw\chainsaw.exe hunt Desktop\readonly\evtx -s C:\git\sigma\rules
 ```
@@ -128,7 +128,7 @@ C:\Tools\chainsaw\chainsaw.exe hunt Desktop\readonly\evtx -s C:\git\sigma\rules
 
 **Usage:**
 
-```
+```pwsh
 C:\Tools\yara\yara64.exe -r C:\git\signature-base\yara\*.yar Desktop\readonly\suspect.exe
 C:\Tools\capa\capa.exe -r C:\git\capa-rules Desktop\readonly\suspect.exe
 ```

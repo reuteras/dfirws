@@ -26,7 +26,6 @@ DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 ev
   - [Sandbox configuration](#sandbox-configuration)
 - [Usage and configuration of the VM](#usage-and-configuration-of-the-vm)
 - [Update](#update)
-- [Documentation](#documentation)
 
 ## Preparation
 

@@ -14,7 +14,7 @@ DFIRWS creates a comprehensive forensic investigation and incident response tool
 
 ## Directory Structure
 
-```
+```text
 dfirws/
 ├── downloadFiles.ps1              # Main entry point - orchestrates all downloads
 ├── createSandboxConfig.ps1        # Creates .wsb files from templates
@@ -150,7 +150,7 @@ Tools that need compilation or package installation use temporary build sandboxe
 
 ### Pattern: Download Script + Build Sandbox
 
-```
+```text
 resources/download/python.ps1   (host, online)
     │
     ├── Downloads Python installer, uv binary
@@ -254,7 +254,7 @@ The analysis sandbox runs **offline**. It:
 
 ## Documentation Pipeline
 
-```
+```text
 TOOL_DEFINITIONS (PowerShell)
     ↓ New-CreateToolFiles
 tools_*.json (JSON metadata)

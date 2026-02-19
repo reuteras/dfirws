@@ -18,7 +18,7 @@ The DFIRWS sandbox has multiple Python environments. Understanding the structure
 
 Most Python tools are available as standalone `.exe` files. Use these directly:
 
-```
+```pwsh
 C:\venv\bin\olevba.exe Desktop\readonly\document.docx
 C:\venv\bin\mraptor.exe Desktop\readonly\document.docx
 C:\venv\bin\oleid.exe Desktop\readonly\document.docx
@@ -35,7 +35,7 @@ C:\venv\bin\extract_msg.exe Desktop\readonly\email.msg
 
 Some tools install their entry points in the default venv:
 
-```
+```pwsh
 C:\venv\default\Scripts\vol.exe -f Desktop\readonly\memory.raw windows.pslist
 C:\venv\default\Scripts\acquire.exe --help
 C:\venv\default\Scripts\rdump.exe Desktop\readonly\hive
@@ -46,7 +46,7 @@ C:\venv\default\Scripts\sigma.exe convert -t <target> -f Desktop\readonly\rule.y
 
 Some tools have their own isolated virtual environments:
 
-```
+```pwsh
 C:\venv\zircolite\Scripts\python.exe C:\git\zircolite\zircolite.py -e Desktop\readonly\evtx
 C:\venv\dfir-unfurl\Scripts\unfurl.exe "https://example.com/path?param=value"
 C:\venv\white-phoenix\Scripts\python.exe C:\git\White-Phoenix\wp.py
@@ -57,7 +57,7 @@ C:\venv\evt2sigma\Scripts\python.exe C:\git\evt2sigma\evt2sigma.py
 
 These scripts are in `C:\Tools\DidierStevens\` (also copied to `C:\Tools\bin\`) and run with the system Python:
 
-```
+```pwsh
 python C:\Tools\DidierStevens\oledump.py Desktop\readonly\document.doc
 python C:\Tools\DidierStevens\pdfid.py Desktop\readonly\suspect.pdf
 python C:\Tools\DidierStevens\pdf-parser.py Desktop\readonly\suspect.pdf
@@ -75,7 +75,7 @@ python C:\Tools\DidierStevens\byte-stats.py Desktop\readonly\suspect.exe
 
 Some tools are managed in isolated uv environments:
 
-```
+```pwsh
 C:\venv\uv\regipy\Scripts\python.exe -m regipy Desktop\readonly\NTUSER.DAT
 C:\venv\uv\jupyterlab\Scripts\jupyter.exe lab
 ```
