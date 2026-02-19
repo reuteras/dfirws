@@ -177,6 +177,10 @@ function New-CreateToolFiles {
     $tools_export = @()
     for ($i = 0; $i -lt $AllToolDefinitions.Count; $i++) {
         $tool = $AllToolDefinitions[$i]
+        if ($null -eq $tool -or [string]::IsNullOrWhiteSpace($tool.Name)) {
+            Write-SynchronizedLog "Warning: skipping tool at index $i with no Name in $Source."
+            continue
+        }
         $category_path = $null
 
         if ($null -ne $tool.Shortcuts -and $tool.Shortcuts.Count -gt 0) {
