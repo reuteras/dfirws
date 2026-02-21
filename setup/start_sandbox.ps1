@@ -550,17 +550,17 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${HOME}\Documents\tools\utils")
 
 $ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"
-echo "Adding to PATH: $ADD_TO_PATH_STRING" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-Output "Adding to PATH: $ADD_TO_PATH_STRING" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 # Save length of ADD_TO_PATH_STRING to log
 $length = $ADD_TO_PATH_STRING.Length
-echo "Length of PATH addition string: $length" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-Output "Length of PATH addition string: $length" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 # Total user PATH length
 $existingUserPath = [Environment]::GetEnvironmentVariable("PATH", "User")
 $totalPathLength = $existingUserPath.Length + $length + 1
-echo "Total user PATH length after addition: $totalPathLength" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-Output "Total user PATH length after addition: $totalPathLength" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 # Warn if total length exceeds 2048 characters
 if ($totalPathLength -gt 2048) {
-	echo "WARNING: Total user PATH length exceeds 2048 characters. Some entries may be truncated." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+	Write-Output "WARNING: Total user PATH length exceeds 2048 characters. Some entries may be truncated." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
 Add-MultipleToUserPath $ADD_TO_PATH_STRING

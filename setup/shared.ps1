@@ -136,21 +136,21 @@ function New-CreateToolFiles {
         foreach ($link in $ToolDefinitions[$i].Shortcuts) {
             $lnk = $link.Lnk
             $target = $link.Target
-            $args = $link.Args
+            $linkArgs = $link.Args
             $icon = $link.Icon
             $workdir = $link.WorkDir
 
             if ($null -eq $icon) {
-                if ($null -eq $args) {
+                if ($null -eq $linkArgs) {
                     Add-Content -Path "$BASE_PATH\dfirws\dfirws_folder_${source}.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -WorkingDirectory `"$workdir`""
                 } else {
-                    Add-Content -Path "$BASE_PATH\dfirws\dfirws_folder_${source}.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$args`" -WorkingDirectory `"$workdir`""
+                    Add-Content -Path "$BASE_PATH\dfirws\dfirws_folder_${source}.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$linkArgs`" -WorkingDirectory `"$workdir`""
                 }
             } else {
-                if ($null -eq $args) {
+                if ($null -eq $linkArgs) {
                     Add-Content -Path "$BASE_PATH\dfirws\dfirws_folder_${source}.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -IconLocation `"$icon`" -WorkingDirectory `"$workdir`""
                 } else {
-                    Add-Content -Path "$BASE_PATH\dfirws\dfirws_folder_${source}.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$args`" -IconLocation `"$icon`" -WorkingDirectory `"$workdir`""
+                    Add-Content -Path "$BASE_PATH\dfirws\dfirws_folder_${source}.ps1" -Value "Add-Shortcut -SourceLnk `"$lnk`" -DestinationPath `"$target`" -Arguments `"$linkArgs`" -IconLocation `"$icon`" -WorkingDirectory `"$workdir`""
                 }
             }
         }
