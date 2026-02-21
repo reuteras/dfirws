@@ -40,10 +40,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
           VALIDATE_ALL_CODEBASE: true
+          VALIDATE_BIOME_FORMAT: false
+          VALIDATE_BIOME_LINT: false
           VALIDATE_GITLEAKS: false
           VALIDATE_JAVASCRIPT_PRETTIER: false
           VALIDATE_JSCPD: false
           VALIDATE_JSON_PRETTIER: false
+          VALIDATE_JUPYTER_NBQA_BLACK: false
+          VALIDATE_JUPYTER_NBQA_FLAKE8: false
+          VALIDATE_JUPYTER_NBQA_ISORT: false
+          VALIDATE_JUPYTER_NBQA_PYLINT: false
           VALIDATE_MARKDOWN_PRETTIER: false
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_PYTHON_BLACK: false
