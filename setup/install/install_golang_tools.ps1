@@ -31,7 +31,7 @@ $TOOL_DEFINITIONS += @{
     Vendor = "arkadiyt"
     License = "Unknown"
     Category = "Utilities\Cryptography"
-    Shortcuts = @(    
+    Shortcuts = @(
          @{
             Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Cryptography\protodump.lnk"
             Target   = "`${CLI_TOOL}"

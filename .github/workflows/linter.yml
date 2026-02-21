@@ -53,4 +53,4 @@ jobs:
           VALIDATE_PYTHON_PYLINT: false
           VALIDATE_SHELL_SHFMT: false
           VALIDATE_YAML_PRETTIER: false
-          FILTER_REGEX_EXCLUDE: hash-id\.py|PSDecode\.psm1|PowerSiem\.ps1|Get-ZimmermanTools\.ps1
+          FILTER_REGEX_EXCLUDE: hash-id\.py|PSDecode\.psm1|PowerSiem\.ps1|Get-ZimmermanTools\.ps1|Sync-EZTools\.ps1|kanvas_update\.ps1

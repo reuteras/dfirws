@@ -45,7 +45,7 @@
 param(
     [Parameter(HelpMessage = "Select distribution profile (Basic or Full).")]
     [ValidateSet("Basic", "Full")]
-    [string]$Profile = "",
+    [string]$DistributionProfile = "",
     [Parameter(HelpMessage = "Download all tools for dfirws.")]
     [Switch]$AllTools,
     [Parameter(HelpMessage = "Update Didier Stevens tools.")]
@@ -117,8 +117,8 @@ if (Test-Path ".\local\profile-config.ps1") {
 }
 
 # Resolve active profile: CLI parameter > config file > none (Full)
-if ($Profile -ne "") {
-    $activeProfileName = $Profile
+if ($DistributionProfile -ne "") {
+    $activeProfileName = $DistributionProfile
 } elseif ((Test-Path variable:DFIRWS_PROFILE) -and $DFIRWS_PROFILE -ne "") {
     $activeProfileName = $DFIRWS_PROFILE
 } else {
@@ -162,10 +162,13 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
         Write-DateLog "Extras included: $($DFIRWS_EXTRAS_RESOLVED -join ', ')"
     }
 
-    # Build git repo exclude list
+    # Build git repo exclude list (consumed by git.ps1 via dot-sourcing)
     $DFIRWS_EXCLUDE_GIT_REPOS = @()
     if ($null -ne $activeProfile.ExcludeGitRepos) {
         $DFIRWS_EXCLUDE_GIT_REPOS = $activeProfile.ExcludeGitRepos
+    }
+    if ($DFIRWS_EXCLUDE_GIT_REPOS.Count -gt 0) {
+        Write-DateLog "Profile excludes git repos: $($DFIRWS_EXCLUDE_GIT_REPOS -join ', ')"
     }
 } else {
     # No profile = Full behavior (everything included)
@@ -210,8 +213,8 @@ if ($AllTools.IsPresent) {
     $all = $true
 } elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
-} elseif ($Profile -ne "") {
-    Write-DateLog "Download tools for dfirws using profile: $Profile"
+} elseif ($DistributionProfile -ne "") {
+    Write-DateLog "Download tools for dfirws using profile: $DistributionProfile"
     $all = $true
 } else {
     Write-DateLog "No arguments given. Will download all tools for dfirws."

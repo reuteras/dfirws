@@ -6,6 +6,10 @@
 #   ExcludeTools - Large or optional tools to skip in download scripts
 #   ExcludeGitRepos - Git repositories to skip in git.ps1
 
+# $DFIRWS_PROFILES is consumed by downloadFiles.ps1 via dot-sourcing
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
+param()
+
 $DFIRWS_PROFILES = @{
     "Basic" = @{
         Scripts = @{

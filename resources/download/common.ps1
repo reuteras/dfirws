@@ -211,7 +211,6 @@ function Get-FileFromUri {
             }
         }
         catch {
-            $exception = $_.Exception
             $exceptionMessage = $_.Exception.Message
             Write-SynchronizedLog "Failed to rclone copyto '${TmpFilePath}' '${FilePath}': $exceptionMessage"
         }
@@ -229,6 +228,7 @@ function Get-FileFromUri {
 
 # Saves GitHub repository and release metadata to a cache file for documentation generation.
 # This reuses data already fetched by Get-GitHubRelease to avoid duplicate API calls.
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
 function Save-GitHubRepoMetadata {
     param (
         [Parameter(Mandatory=$True)] [string]$Repo,
@@ -301,6 +301,7 @@ function Save-GitHubRepoMetadata {
 }
 
 # Saves winget package metadata to a cache file for documentation generation.
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
 function Save-WingetMetadata {
     param (
         [Parameter(Mandatory=$True)] [string]$AppName,

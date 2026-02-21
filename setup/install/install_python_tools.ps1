@@ -1,4 +1,8 @@
 ﻿# Set default encoding to UTF8
+# GHIDRA_INSTALL_DIR is referenced in commented-out code below
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
+param()
+
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 Write-Output "Start installation of Python in Sandbox."

@@ -48,7 +48,7 @@ if ((Get-FileHash "${ROOT_PATH}\tmp\node\node.txt").Hash -ne (Get-FileHash ${CUR
     if (Test-ToolIncluded -ToolName "LUMEN") {
         rclone.exe sync --verbose --checksum "${ROOT_PATH}\tmp\Lumen" "${ROOT_PATH}\mount\Tools\Lumen" >> ${ROOT_PATH}\log\npm.txt 2>&1
     }
-    
+
     Write-DateLog "Node and npm packages done." >> ${ROOT_PATH}\log\npm.txt 2>&1
 } else {
     Write-DateLog "Node and npm packages already installed and up to date." >> ${ROOT_PATH}\log\npm.txt 2>&1
