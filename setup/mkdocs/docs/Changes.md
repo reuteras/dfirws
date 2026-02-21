@@ -124,7 +124,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2024-03-08
 
 - Added [malwarebazaar](https://github.com/3c7/bazaar) - a command-line tool to access [MalwareBazaar](https://bazaar.abuse.ch/).
-- Also added [malware-bazaar-advanced-search](https://github.com/montysecurity/malware-bazaar-advanced-search) introduced [here](https://montysecurity.medium.com/hunting-cobalt-strike-lnk-loaders-f3c407a991c0)
+- Also added [malware-bazaar-advanced-search](https://github.com/montysecurity/malware-bazaar-advanced-search) introduced [in this blog](https://montysecurity.medium.com/hunting-cobalt-strike-lnk-loaders-f3c407a991c0)
 - Add [pdfalyzer](https://github.com/michelcrypt4d4mus/pdfalyzer)
 
 ## 2024-03-05
@@ -322,7 +322,7 @@ Added Git repositories:
 ## 2023-11-24
 
 - Added [Ares](https://github.com/bee-san/Ares) as a replacement for ciphey. Ciphey is being [deprecated](https://github.com/Ciphey/Ciphey/issues/764).
-- Added [Binary Refinary](https://github.com/binref/refinery/) via [pypi](https://pypi.org/project/binary-refinery/). Documentation [here](https://binref.github.io/).
+- Added [Binary Refinary](https://github.com/binref/refinery/) via [pypi](https://pypi.org/project/binary-refinery/). [Documentation](https://binref.github.io/).
 
 ## 2023-11-23
 

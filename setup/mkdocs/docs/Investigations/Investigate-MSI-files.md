@@ -1,3 +1,4 @@
 # Investigate MSI files
 
 Intezer has a good blog post about [How to Analyze Malicious MSI Installer Files](https://intezer.com/blog/incident-response/how-to-analyze-malicious-msi-installer-files/).
+

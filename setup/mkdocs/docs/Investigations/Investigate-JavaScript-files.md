@@ -71,3 +71,4 @@ Error: Could not load script: "https://example.com/directory/nextevilthing"
 ```
 
 Now assume your sandbox is toast and close it and start a new one.
+

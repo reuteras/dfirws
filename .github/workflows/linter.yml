@@ -50,6 +50,7 @@ jobs:
           VALIDATE_JUPYTER_NBQA_FLAKE8: false
           VALIDATE_JUPYTER_NBQA_ISORT: false
           VALIDATE_JUPYTER_NBQA_PYLINT: false
+          VALIDATE_JUPYTER_NBQA_RUFF: false
           VALIDATE_MARKDOWN_PRETTIER: false
           VALIDATE_NATURAL_LANGUAGE: false
           VALIDATE_PYTHON_BLACK: false

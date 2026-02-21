@@ -72,3 +72,4 @@ EZViewer.exe C:\Users\WDAGUtilityAccount\Desktop\kape\ProgramExecution\202401031
 ## Image mounting
 
 KAPE recommends using [Arsenal Image Mounter](https://arsenalrecon.com/downloadsI) (AIM) over tools like FTK Imager. Arsenal Image Mounter is distributed via MEGA.nz and can't easily be added to DFIRWS so you have to download it manually if it is needed. The driver for AIM requires a reboot and it is therefore not suitable for the DFIRWS sandbox. It is still relevant for when there is an installation option for virtual machines.
+

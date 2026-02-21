@@ -9,3 +9,4 @@ mv .\obsidian-plugins\ plugins
 ```
 
 Restart Obsidian and the plugins can be enabled.
+

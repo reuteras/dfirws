@@ -16,3 +16,4 @@ For *.msg* files you can use **extract_msg**. Se help and example below.
 
 ![Help for extract_msg](../images/extract_msg1.png)
 ![Example use of extract_msg](../images/extract_msg2.png)
+
