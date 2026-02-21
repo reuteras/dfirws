@@ -62,8 +62,8 @@ If a user asks to use an MCP-enabled workflow and the server is not enabled, exp
 
 | Scenario | Recommendation |
 | -------- | -------------- |
-| One-shot extraction (e.g., "dump all registry keys") | CLI tool |
+| One-shot extraction (e.g., "dump all registry keys") | Command-line tool |
 | Iterative exploration (e.g., "find suspicious keys, then dig deeper") | MCP if enabled |
-| Batch processing multiple files | CLI tool |
+| Batch processing multiple files | Command-line tool |
 | Interactive debugging session | MCP if enabled |
-| Scripted/reproducible workflow | CLI tool (easier to copy-paste commands) |
+| Scripted/reproducible workflow | Command-line tool (easier to copypaste commands) |

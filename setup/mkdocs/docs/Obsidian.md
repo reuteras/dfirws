@@ -1,3 +1,5 @@
+# Obsidian
+
 To install plugins first create a vault, for example create _Test_ in the _readwrite_ folder on the _Desktop_ and open a **Terminal**.
 
 ```shell

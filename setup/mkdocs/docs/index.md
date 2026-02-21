@@ -1,4 +1,4 @@
-# Welcome to the dfirws wiki!
+# Welcome to the dfirws wiki
 
 The goal for [dfirws](https://github.com/reuteras/dfirws) is to have useful tools for DFIR and IR work in an easy to access way in a Windows Sandbox.
 

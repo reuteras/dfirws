@@ -91,7 +91,7 @@ Each script follows the same pattern:
 3. Download tools using helper functions:
    - `Get-FileFromUri` - HTTP download with etag caching
    - `Get-GitHubRelease` - GitHub release asset download
-   - `Get-DownloadUrlFromPage` - Regex URL extraction from web pages
+   - `Get-DownloadUrlFromPage` - regular expression URL extraction from web pages
 4. Extract/organize into `mount/Tools/` or `downloads/`
 5. Add `$TOOL_DEFINITIONS += @{ ... }` entry for each tool
 6. Call `New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "name"`
@@ -245,7 +245,7 @@ The analysis sandbox runs **offline**. It:
 | Path | Contents |
 |------|----------|
 | `C:\Tools\` | All extracted tool binaries (read-only) |
-| `C:\git\` | Cloned git repositories (read-only) |
+| `C:\git\` | Cloned Git repositories (read-only) |
 | `C:\venv\` | Python virtual environments (read-only) |
 | `C:\downloads\` | Installer cache (read-only) |
 | `C:\enrichment\` | Threat intel data (read-only) |
@@ -301,7 +301,7 @@ Automatically set by `New-CreateToolFiles` from the `-Source` parameter. Maps to
 | go | Go |
 | release | GitHub Release |
 | http | HTTP |
-| git | Git |
+| Git | Git |
 | winget | Winget |
 | zimmerman | .NET |
 | enrichment | Enrichment |
@@ -314,7 +314,7 @@ opencode-ai is configured with MCP servers for AI-assisted analysis. Config depl
 |--------|------|--------|-------|
 | GhidrAssistMCP | Remote (SSE) | Extension downloaded | Requires Ghidra running with plugin enabled |
 | radare2-mcp (r2mcp) | Local (stdio) | Binary downloaded | Known Windows crash issue (#24) |
-| regipy MCP | Local (stdio) | Repo cloned + mcp pkg | Uses regipy venv Python |
+| regipy MCP | Local (stdio) | Repository cloned + mcp pkg | Uses regipy venv Python |
 | decai | radare2 plugin | JS file copied | Loaded by radare2 directly (not MCP) |
 | r2ai | radare2 plugin | Compiled in MSYS2 sandbox | Native C plugin, r2ai.dll + r2ai.exe |
 

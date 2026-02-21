@@ -5,7 +5,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2026-02-09
 
 - Start updating the changelog. Lots of changes from 2024-11-12 until now is not listed here.
-- Documentation has been changed from using GitHub wiki to using MkDocs. This file is now located in the *docs* folder and will be used to generate the documentation website.
+- Documentation has been changed from using GitHub wiki to using MkDocs. This file is now located in the *docs* folder and will be used to generate the documentation site.
 
 ## 2024-11-12
 
@@ -39,7 +39,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 ## 2024-09-12
 
-- Added the option _-verify_ do `downloadFiles.ps1` to verify that downloads are correct and tool are available in a running sandbox.
+- Added the option *-verify* do `downloadFiles.ps1` to verify that downloads are correct and tool are available in a running sandbox.
 - Added [yq](https://github.com/mikefarah/yq/)
 - Added [yara-x](https://github.com/VirusTotal/yara-x)
 - Added [ffmpeg](https://github.com/BtbN/FFmpeg-Builds) built for Windows
@@ -98,7 +98,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2024-03-21
 
 - Add [ingestr](https://bruin-data.github.io/ingestr/)
-- Start adding more programs to context menus. 
+- Start adding more programs to context menus.
 
 ## 2024-03-17
 
@@ -109,7 +109,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2024-03-15
 
 - IPinfo.io added as an option to enrichment
-- Added helper script to show automation if a file Quarantine.zip exits in the _readonly_ folder.
+- Added helper script to show automation if a file Quarantine.zip exits in the *readonly* folder.
 - Content of dfirws folder are now added to the Start menu. Can be disabled.
 
 ## 2024-03-13
@@ -123,7 +123,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 ## 2024-03-08
 
-- Added [malwarebazaar](https://github.com/3c7/bazaar) - a cli tool to access [MalwareBazaar](https://bazaar.abuse.ch/).
+- Added [malwarebazaar](https://github.com/3c7/bazaar) - a command-line tool to access [MalwareBazaar](https://bazaar.abuse.ch/).
 - Also added [malware-bazaar-advanced-search](https://github.com/montysecurity/malware-bazaar-advanced-search) introduced [here](https://montysecurity.medium.com/hunting-cobalt-strike-lnk-loaders-f3c407a991c0)
 - Add [pdfalyzer](https://github.com/michelcrypt4d4mus/pdfalyzer)
 
@@ -134,8 +134,8 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2024-03-04
 
 - Install full regipy in separate venv
-- Add gootloader and Sigma-Rules git repositories.
-- Moved yara-forge rules to _C:\enrichment_ from _C:\Data_
+- Add gootloader and Sigma-Rules Git repositories.
+- Moved yara-forge rules to *C:\enrichment* from *C:\Data*
 - Use **.\downloadFiles.ps1 -Enrichment** instead of **.\enrichment.ps1**
 
 ## 2024-02-29
@@ -165,7 +165,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 - Move configuration files to *local* and defaults to *local\defaults*
 - Better handling of fonts and oh-my-posh settings
 - Added [tabby.sh](https://tabby.sh)
-- Added ruff and shellcheck extensions to Visual Studio code
+- Added ruff and shellcheck extensions to Visual Studio Code
 - Gollum is not started on boot, only after clicking the link
 - Added [rexi](https://github.com/royreznik/rexi) for testing regular expressions
 - Added [shodan cli](https://github.com/achillean/shodan-python)
@@ -175,7 +175,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 - Add [MemProcFS](https://github.com/ufrisk/MemProcFS) to sandbox. Also add [Dokany](https://github.com/dokan-dev/dokany).
 - It is now possible to create a VM.
- 
+
 ## 2024-02-08
 
 - First support for using downloaded files to build a VM with VMware Workstation is done. Documentation will come later.
@@ -210,7 +210,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 ## 2024-01-26
 
-- Add Visual Studio dumpbin tools via the repo [Delphier/dumpbin](https://github.com/Delphier/dumpbin). 
+- Add Visual Studio dumpbin tools via the repository [Delphier/dumpbin](https://github.com/Delphier/dumpbin).
 
 ## 2024-01-24
 
@@ -226,7 +226,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 ## 2024-01-19
 
-- Add git repo [iShutdown](https://github.com/KasperskyLab/iShutdown) see the blog post [A lightweight method to detect potential iOS malware](https://securelist.com/shutdown-log-lightweight-ios-malware-detection-method/111734/).
+- Add Git repository [iShutdown](https://github.com/KasperskyLab/iShutdown) see the blog post [A lightweight method to detect potential iOS malware](https://securelist.com/shutdown-log-lightweight-ios-malware-detection-method/111734/).
 - Made the update script much faster making it easier to keep the tools updated.
 
 ## 2024-01-16
@@ -237,7 +237,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2024-01-15
 
 - Add [CanaryTokenScanner.py](https://github.com/0xNslabs/CanaryTokenScanner/)
-- Fix installation of Visual Studio Code so it isn't associated with any filetypes to avoid questions about using it or Python for .py-files.
+- Fix installation of Visual Studio Code so it isn't associated with any file types to avoid questions about using it or Python for .py-files.
 
 ## 2024-01-04
 
@@ -250,7 +250,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 ## 2023-12-29
 
-- Add repo from JPCERT named [Tool Analysis Result Sheet](https://github.com/JPCERTCC/ToolAnalysisResultSheet), run ** ToolAnalysisResultSheet.ps1** to start a local web server with its content.
+- Add repository from JPCERT named [Tool Analysis Result Sheet](https://github.com/JPCERTCC/ToolAnalysisResultSheet), run **ToolAnalysisResultSheet.ps1** to start a local web server with its content.
 - Add Rust and the tool [dfir-toolkit](https://github.com/dfir-dd/dfir-toolkit) that is written in Rust.
 - Add [Volatility Workbench](https://www.osforensics.com/tools/volatility-workbench.html) 2.1 and 3.
 - Add tools from Nirsoft for viewing browser data.
@@ -259,8 +259,8 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 - Install both Ghidra 10.4 and the latest version (currently 11.0).
 - Download h2database for use with Ghidra BSIM (also download h2.pdf).
-- Add [AuthLogParser](https://github.com/YosfanEilay/AuthLogParser/) repo.
-- Add [Shadow-Pulse](https://github.com/StrangerealIntel/Shadow-Pulse) repo with information about ransomware.
+- Add [AuthLogParser](https://github.com/YosfanEilay/AuthLogParser/) repository.
+- Add [Shadow-Pulse](https://github.com/StrangerealIntel/Shadow-Pulse) repository with information about ransomware.
 - Add [CaRT (Compressed and RC4 Transport)](https://github.com/CybercentreCanada/cart) package from pypi. The CaRT file format is used to store/transfer malware and its associated metadata. It neuters the malware so it cannot be executed and encrypts it so anti-virus software cannot flag the CaRT file as malware.
 
 ## 2023-12-21
@@ -288,7 +288,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 
 ## 2023-12-05
 
-- Add two git repositories with sample files, [reuteras/dfirws-sample-files](https://github.com/reuteras/dfirws-sample-files) and [AndrewRathbun/DFIRArtifactMuseum](https://github.com/AndrewRathbun/DFIRArtifactMuseum) 
+- Add two Git repositories with sample files, [reuteras/dfirws-sample-files](https://github.com/reuteras/dfirws-sample-files) and [AndrewRathbun/DFIRArtifactMuseum](https://github.com/AndrewRathbun/DFIRArtifactMuseum)
 
 ## 2023-12-04
 
@@ -299,15 +299,15 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 - Add [aLEAPP](https://github.com/abrignoni/aLEAPP)
 - Add [iLEAPP](https://github.com/abrignoni/iLEAPP)
 - Add [MFTBrowser](https://github.com/kacos2000/MFT_Browser)
-- Add [RdpCacheStitcher](https://github.com/BSI-Bund/RdpCacheStitcher) by BSI 
+- Add [RdpCacheStitcher](https://github.com/BSI-Bund/RdpCacheStitcher) by BSI
 - Add [Sleuthkit](https://www.sleuthkit.org/sleuthkit/)
 - Download [Velociraptor](https://github.com/Velocidex/velociraptor)
 - Create new venv *dissect* and install package [dissect](https://www.fox-it.com/nl-en/dissect/) by FOX IT (NCCgroup)
 
 Added Git repositories:
-- https://github.com/mattifestation/CimSweep.git
-- https://github.com/swisscom/PowerSponse.git
-- https://github.com/ahmedkhlief/APT-Hunter.git
+- <https://github.com/mattifestation/CimSweep.git>
+- <https://github.com/swisscom/PowerSponse.git>
+- <https://github.com/ahmedkhlief/APT-Hunter.git>
 
 ## 2023-12-02
 

@@ -1,4 +1,6 @@
-Included tools. 
+# Investigate PowerShell
+
+Included tools.
 
 - [PSDecode][psd]
 - powershell-cleanup.py by [Max 'Libra' Kersten][mlk]

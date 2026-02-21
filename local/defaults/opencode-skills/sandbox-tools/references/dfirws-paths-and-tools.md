@@ -81,7 +81,7 @@ C:\Tools\Zimmerman\net6\AppCompatCacheParser.exe -f Desktop\readonly\SYSTEM --cs
 | TrID | `C:\Tools\trid\trid.exe` | File type identification |
 | Ghidra | Via `ghidraRun.bat` in Ghidra install dir | Deep static reverse engineering |
 | radare2 | `C:\Tools\radare2\bin\radare2.exe` | CLI reverse engineering/disassembly |
-| Cutter | `C:\Tools\cutter\cutter.exe` | GUI reverse engineering (radare2 front-end) |
+| Cutter | `C:\Tools\cutter\cutter.exe` | GUI reverse engineering (radare2 frontend) |
 | x64dbg | Via installed shortcut | Dynamic debugging |
 | ImHex | `C:\Tools\imhex\imhex.exe` | Hex editor with pattern language |
 | Malcat Lite | `C:\Tools\malcat\bin\malcat.exe` | Malware analysis viewer |

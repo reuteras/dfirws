@@ -163,7 +163,7 @@ $TOOL_DEFINITIONS += @{
     Tags = @("malware-analysis", "pe-analysis", "detection")
     Notes = "Advanced static analysis tool"
     Tips = "4n4lDetector is a powerful static analysis tool focused on Microsoft Windows executables, libraries, drivers, and memory dumps, while its integrated modules can analyze virtually any file type with reliable performance and accurate detection.
-    
+
     It performs deep inspection of Portable Executable (PE) structures, sections, headers, and resources to identify anomalies, obfuscation layers, and embedded malicious components. Beyond standard PE analysis, its specialized modules extract and classify strings, metadata, and embedded code from non-PE files, extending its scope to a wide range of binary formats."
     Usage = ""
     SampleCommands = @()
@@ -2268,7 +2268,7 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
     Tags = @("reverse-engineering", "mcp", "ai", "ghidra")
     Notes = "Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default."
-    Tips = "Start the MCP server from Window > GhidrAssistMCP in Ghidra. Connect opencode-ai or other MCP clients to http://localhost:8080/sse."
+    Tips = "Start the MCP server from Window > GhidrAssistMCP in Ghidra. Connect opencode-ai or other MCP clients to <http://localhost:8080/sse>."
     Usage = "Install extension in Ghidra, enable plugin, start MCP server, then connect AI tools."
     SampleCommands = @()
     SampleFiles = @()

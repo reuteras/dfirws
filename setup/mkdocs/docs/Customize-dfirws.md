@@ -1,3 +1,5 @@
+# Customize dfirws
+
 There are a couple of ways to configure and customize **dfirws**.
 
 - Change settings in the *dfirws.wsb* file. Enable copy/paste, enable printing etc. You can also mount more folders.

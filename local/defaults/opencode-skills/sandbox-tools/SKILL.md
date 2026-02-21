@@ -35,7 +35,7 @@ Before answering, read the relevant reference files:
    - If the task involves registry analysis, check whether the regipy MCP server is enabled.
    - If the task involves reverse engineering, check whether Ghidra or radare2 MCP servers are enabled.
    - MCP servers allow interactive, iterative analysis. Prefer them when enabled and the task benefits from back-and-forth exploration.
-   - If an MCP server is not enabled, fall back to CLI tools for the same artifact type.
+   - If an MCP server is not enabled, fall back to command-line tools for the same artifact type.
 
 3. **Pick the least-friction toolchain**
    - Prefer tools that are already bundled in `C:\Tools` (native binaries, fastest).

@@ -1,7 +1,9 @@
+# Investigate JavaScript files
+
 You can use the following tools to inspect JavaScript:
 
 - [synchrony](https://github.com/relative/synchrony/)
-- [Visual Studio Code](https://code.visualstudio.com/) with [NodeJS](https://nodejs.org/en) and [jsdom](https://www.npmjs.com/package/jsdom)
+- [Visual Studio Code](https://code.visualstudio.com/) with [Node.js](https://nodejs.org/en) and [jsdom](https://www.npmjs.com/package/jsdom)
 - [js-beautify](https://github.com/beautify-web/js-beautify) installed via Python pip
 
 There is also a [Jupyter Notebook](https://github.com/reuteras/dfirws/blob/main/setup/jupyter/pdf.ipynb) available.
@@ -14,7 +16,7 @@ Save the script and only the script in a file, for example *malware.js*. Then ru
 synchrony .\malware.js
 ```
 
-The cleaned file will be available as *malware.cleaned.js*. 
+The cleaned file will be available as *malware.cleaned.js*.
 
 ## js-beautify
 
@@ -26,7 +28,7 @@ js-beautify.exe -o beautified.js .\obfuscated.js
 
 ## jsdom in Visual Studio Code
 
-This options allows you to load a html file and run the JavaScript in the file. First open **PowerShell** and runt the following commands:
+This options allows you to load a HTML file and run the JavaScript in the file. First open **PowerShell** and runt the following commands:
 
 ```PowerShell
 (venv) PS C:\Users\WDAGUtilityAccount\node> Copy-Node
@@ -60,7 +62,7 @@ JSDOM.fromFile('index.html', options).then((dom) => {
 
 **Make sure you are in a Sandbox without network access!**
 
-Then select the menu option `Run` -> `Start Debugging` and select nodejs
+Then select the menu option `Run` -> `Start Debugging` and select Node.js
 
 It the script tries to access the network you will have an error message like the following:
 

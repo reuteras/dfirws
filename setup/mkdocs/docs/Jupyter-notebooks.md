@@ -1,6 +1,8 @@
+# Jupyter notebooks
+
 Trying to add Jupyter Notebooks under [setup/jupyter](https://github.com/reuteras/dfirws/tree/main/setup/jupyter) to be able to automate investigations as much as possible. At the moment there are notebooks for
 
-- [Javascript](https://github.com/reuteras/dfirws/blob/main/setup/jupyter/javascript.ipynb)
+- [JavaScript](https://github.com/reuteras/dfirws/blob/main/setup/jupyter/javascript.ipynb)
 - [PDF](https://github.com/reuteras/dfirws/blob/main/setup/jupyter/pdf.ipynb)
 - [PE with Ghidra and capa](https://github.com/reuteras/dfirws/blob/main/setup/jupyter/PE_-_Ghidra_-_capa.ipynb)
 

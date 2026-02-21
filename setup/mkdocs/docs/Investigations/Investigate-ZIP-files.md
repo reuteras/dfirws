@@ -1,3 +1,5 @@
+# Investigate ZIP files
+
 ## Resources
 
 - [zipdump & Evasive ZIP Concatenation](https://isc.sans.edu/forums/diary/zipdump+Evasive+ZIP+Concatenation/31426/)

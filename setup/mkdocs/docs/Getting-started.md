@@ -5,7 +5,7 @@ This page will help you get started with **dfirws**. If you haven't downloaded t
 After installation you have you can choose between starting **dfirws.wsb** and **network_dfirws.wsb**. The first one has no network access and the other  has network access enabled. You can [customize the sandbox](Customize-dfirws.md) if you want to change the default settings.
 
 When the sandbox is running you should see this screen:
- 
+
 ![Default start screen](images/default.png)
 
 You can search for tools in the search bar (in this case Ghidra):

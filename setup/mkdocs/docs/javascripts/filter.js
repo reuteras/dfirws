@@ -1,40 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Find tables that have the tool table header structure
-  var tables = document.querySelectorAll("table");
+  const tables = document.querySelectorAll("table");
   tables.forEach(function (table) {
-    var headers = table.querySelectorAll("thead th");
+    const headers = table.querySelectorAll("thead th");
     if (headers.length < 5) return;
 
-    var headerTexts = Array.prototype.map.call(headers, function (th) {
+    const headerTexts = Array.prototype.map.call(headers, function (th) {
       return th.textContent.trim().toLowerCase();
     });
 
-    var colTool = headerTexts.indexOf("tool");
-    var colSource = headerTexts.indexOf("source");
-    var colDesc = headerTexts.indexOf("description");
-    var colTags = headerTexts.indexOf("tags");
-    var colExt = headerTexts.indexOf("file extensions");
+    const colTool = headerTexts.indexOf("tool");
+    const colSource = headerTexts.indexOf("source");
+    const colDesc = headerTexts.indexOf("description");
+    const colTags = headerTexts.indexOf("tags");
+    const colExt = headerTexts.indexOf("file extensions");
 
     // Only add filtering to tables that match the tool table structure
     if (colTool === -1 || colDesc === -1 || colTags === -1 || colExt === -1) return;
 
-    var rows = table.querySelectorAll("tbody tr");
+    const rows = table.querySelectorAll("tbody tr");
     if (rows.length === 0) return;
 
     // Collect unique tags and extensions for datalist suggestions
-    var allTags = {};
-    var allExts = {};
+    const allTags = {};
+    const allExts = {};
     rows.forEach(function (row) {
-      var cells = row.querySelectorAll("td");
+      const cells = row.querySelectorAll("td");
       if (cells.length <= Math.max(colTags, colExt)) return;
 
-      var tagsText = cells[colTags].textContent.trim();
+      const tagsText = cells[colTags].textContent.trim();
       tagsText.split(",").forEach(function (t) {
         t = t.trim();
         if (t) allTags[t] = true;
       });
 
-      var extText = cells[colExt].textContent.trim();
+      const extText = cells[colExt].textContent.trim();
       extText.split(",").forEach(function (e) {
         e = e.trim();
         if (e) allExts[e] = true;
@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Build filter container
-    var container = document.createElement("div");
+    const container = document.createElement("div");
     container.className = "tool-filter";
 
-    var tagId = "filter-tags-" + Math.random().toString(36).substr(2, 6);
-    var extId = "filter-ext-" + Math.random().toString(36).substr(2, 6);
+    const tagId = "filter-tags-" + Math.random().toString(36).substr(2, 6);
+    const extId = "filter-ext-" + Math.random().toString(36).substr(2, 6);
 
     container.innerHTML =
       '<div class="tool-filter-row">' +
@@ -76,29 +76,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     table.parentNode.insertBefore(container, table);
 
-    var inputTag = container.querySelector("#" + tagId);
-    var inputExt = container.querySelector("#" + extId);
-    var inputDesc = container.querySelector("#filter-desc");
-    var clearBtn = container.querySelector(".tool-filter-clear");
-    var countSpan = container.querySelector(".tool-filter-count");
+    const inputTag = container.querySelector("#" + tagId);
+    const inputExt = container.querySelector("#" + extId);
+    const inputDesc = container.querySelector("#filter-desc");
+    const clearBtn = container.querySelector(".tool-filter-clear");
+    const countSpan = container.querySelector(".tool-filter-count");
 
     function applyFilter() {
-      var filterTag = inputTag.value.trim().toLowerCase();
-      var filterExt = inputExt.value.trim().toLowerCase();
-      var filterDesc = inputDesc.value.trim().toLowerCase();
+      const filterTag = inputTag.value.trim().toLowerCase();
+      const filterExt = inputExt.value.trim().toLowerCase();
+      const filterDesc = inputDesc.value.trim().toLowerCase();
 
-      var visible = 0;
+      let visible = 0;
       rows.forEach(function (row) {
-        var cells = row.querySelectorAll("td");
+        const cells = row.querySelectorAll("td");
         if (cells.length <= Math.max(colTags, colExt, colDesc)) return;
 
-        var tagsText = cells[colTags].textContent.trim().toLowerCase();
-        var extText = cells[colExt].textContent.trim().toLowerCase();
-        var descText = cells[colDesc].textContent.trim().toLowerCase();
+        const tagsText = cells[colTags].textContent.trim().toLowerCase();
+        const extText = cells[colExt].textContent.trim().toLowerCase();
+        const descText = cells[colDesc].textContent.trim().toLowerCase();
 
-        var matchTag = !filterTag || tagsText.indexOf(filterTag) !== -1;
-        var matchExt = !filterExt || extText.indexOf(filterExt) !== -1;
-        var matchDesc = !filterDesc || descText.indexOf(filterDesc) !== -1;
+        const matchTag = !filterTag || tagsText.indexOf(filterTag) !== -1;
+        const matchExt = !filterExt || extText.indexOf(filterExt) !== -1;
+        const matchDesc = !filterDesc || descText.indexOf(filterDesc) !== -1;
 
         if (matchTag && matchExt && matchDesc) {
           row.style.display = "";
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      var hasFilter = filterTag || filterExt || filterDesc;
+      const hasFilter = filterTag || filterExt || filterDesc;
       countSpan.textContent = hasFilter ? visible + " of " + rows.length + " tools" : rows.length + " tools";
     }
 
