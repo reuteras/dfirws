@@ -228,8 +228,8 @@ function Get-FileFromUri {
 
 # Saves GitHub repository and release metadata to a cache file for documentation generation.
 # This reuses data already fetched by Get-GitHubRelease to avoid duplicate API calls.
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
 function Save-GitHubRepoMetadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
     param (
         [Parameter(Mandatory=$True)] [string]$Repo,
         [Parameter(Mandatory=$False)] $ReleaseData = $null
@@ -301,8 +301,8 @@ function Save-GitHubRepoMetadata {
 }
 
 # Saves winget package metadata to a cache file for documentation generation.
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
 function Save-WingetMetadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
     param (
         [Parameter(Mandatory=$True)] [string]$AppName,
         [Parameter(Mandatory=$False)] [string]$Version = ""
