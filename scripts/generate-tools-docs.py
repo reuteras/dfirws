@@ -139,7 +139,7 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     lines: List[str] = []
     lines.append(f"# {tool.get('Name', '')}")
     lines.append("")
-    category_display = category_path.replace('\\', ' / ')
+    category_display = category_path.replace("\\", " / ")
     lines.append(f"**Category:** {category_display}")
     lines.append("")
 
@@ -255,7 +255,9 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     return page_path
 
 
-def get_docs_nav_lines(root: Path, relative: Path = Path(""), indent: int = 2) -> List[str]:
+def get_docs_nav_lines(
+    root: Path, relative: Path = Path(""), indent: int = 2
+) -> List[str]:
     lines: List[str] = []
     current = root / relative if relative != Path("") else root
     if not current.exists():
@@ -263,17 +265,27 @@ def get_docs_nav_lines(root: Path, relative: Path = Path(""), indent: int = 2) -
 
     indent_text = " " * indent
     index_file = current / "index.md"
-    files = sorted([p for p in current.glob("*.md") if p.name != "index.md"], key=lambda p: p.name)
+    files = sorted(
+        [p for p in current.glob("*.md") if p.name != "index.md"], key=lambda p: p.name
+    )
     dirs = sorted([p for p in current.iterdir() if p.is_dir()], key=lambda p: p.name)
 
     if index_file.exists():
-        rel = "index.md" if relative == Path("") else str(relative / "index.md").replace("\\", "/")
+        rel = (
+            "index.md"
+            if relative == Path("")
+            else str(relative / "index.md").replace("\\", "/")
+        )
         label = "Home" if relative == Path("") else "Overview"
         lines.append(f"{indent_text}- {label}: {rel}")
 
     for file in files:
         label = get_nav_label_from_file(file)
-        rel = str(relative / file.name).replace("\\", "/") if relative != Path("") else file.name
+        rel = (
+            str(relative / file.name).replace("\\", "/")
+            if relative != Path("")
+            else file.name
+        )
         lines.append(f"{indent_text}- {yaml_safe_label(label)}: {rel}")
 
     for d in dirs:
@@ -322,12 +334,17 @@ def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
     if root_index.exists():
         nav_lines.append("- Home: index.md")
 
-    top_files = sorted([p for p in docs_root.glob("*.md") if p.name != "index.md"], key=lambda p: p.name)
+    top_files = sorted(
+        [p for p in docs_root.glob("*.md") if p.name != "index.md"],
+        key=lambda p: p.name,
+    )
     for file in top_files:
         label = get_nav_label_from_file(file)
         nav_lines.append(f"- {yaml_safe_label(label)}: {file.name}")
 
-    top_dirs = sorted([p for p in docs_root.iterdir() if p.is_dir()], key=lambda p: p.name)
+    top_dirs = sorted(
+        [p for p in docs_root.iterdir() if p.is_dir()], key=lambda p: p.name
+    )
     for d in top_dirs:
         child_lines = get_docs_nav_lines(docs_root, Path(d.name), 2)
         if child_lines:
@@ -343,15 +360,15 @@ def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
         output.append("")
         output.extend(after)
 
-    output = [line for line in output if not re.match(r"^\s*-\s*navigation\.expand\s*$", line)]
+    output = [
+        line for line in output if not re.match(r"^\s*-\s*navigation\.expand\s*$", line)
+    ]
 
     if not any(re.match(r"^\s*nav\s*:", line) for line in output):
         output.append("")
         output.extend(nav_lines)
 
     config_path.write_text("\n".join(output), encoding="utf-8")
-
-
 
 
 def get_default_docs_root() -> str:
@@ -366,6 +383,7 @@ def get_default_mkdocs_config() -> str:
     if repo_mkdocs_config.exists():
         return str(repo_mkdocs_config)
     return "./mkdocs.yml"
+
 
 def collect_tools_json_paths(path: Path) -> list[Path]:
     if path.is_dir():
@@ -411,7 +429,9 @@ def load_tools(json_paths: list[Path]) -> list[dict]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate dfirws tools docs and mkdocs nav.")
+    parser = argparse.ArgumentParser(
+        description="Generate dfirws tools docs and mkdocs nav."
+    )
     parser.add_argument(
         "--tools-json",
         dest="tools_json",
@@ -487,7 +507,9 @@ def main() -> int:
 
     grouped: Dict[str, List[dict]] = {}
     for tool in tools:
-        category_path = tool.get("CategoryPath") or tool.get("Category") or "Uncategorized"
+        category_path = (
+            tool.get("CategoryPath") or tool.get("Category") or "Uncategorized"
+        )
         grouped.setdefault(category_path, []).append(tool)
 
     ordered_categories = sorted(grouped.keys())
@@ -537,10 +559,14 @@ def main() -> int:
         lines: List[str] = []
         lines.append(f"# {display_name}")
         lines.append("")
-        lines.append("| Tool | Source | Description | Tags | File Extensions | Profiles |")
+        lines.append(
+            "| Tool | Source | Description | Tags | File Extensions | Profiles |"
+        )
         lines.append("| --- | --- | --- | --- | --- | --- |")
 
-        tools_in_category = sorted(grouped[category_path], key=lambda t: t.get("Name") or "")
+        tools_in_category = sorted(
+            grouped[category_path], key=lambda t: t.get("Name") or ""
+        )
         used_slugs: Dict[str, int] = {}
         for tool in tools_in_category:
             tool_slug = get_tool_page_slug(tool.get("Name") or "", used_slugs)
@@ -549,22 +575,48 @@ def main() -> int:
             summary = get_tool_summary(tool).replace("|", "\\|")
             source_label = get_source_label(tool)
             tags = ", ".join(get_string_list(tool.get("Tags")))
-            file_exts = ", ".join(f"`{e}`" for e in get_string_list(tool.get("FileExtensions")))
+            file_exts = ", ".join(
+                f"`{e}`" for e in get_string_list(tool.get("FileExtensions"))
+            )
             tool_profiles = get_string_list(tool.get("Profiles"))
-            profiles_note = "" if (not tool_profiles or "Basic" in tool_profiles) else "Full only"
-            lines.append(f"| [{tool.get('Name') or ''}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |")
+            profiles_note = (
+                "" if (not tool_profiles or "Basic" in tool_profiles) else "Full only"
+            )
+            lines.append(
+                f"| [{tool.get('Name') or ''}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |"
+            )
             tools_index_entries.append(
-                (tool.get("Name") or "", f"./{slug}/{tool_slug}.md", source_label, summary, tags, file_exts, profiles_note)
+                (
+                    tool.get("Name") or "",
+                    f"./{slug}/{tool_slug}.md",
+                    source_label,
+                    summary,
+                    tags,
+                    file_exts,
+                    profiles_note,
+                )
             )
 
         category_file.write_text("\n".join(lines), encoding="utf-8")
 
     tools_index_lines.append("## Tools Index")
     tools_index_lines.append("")
-    tools_index_lines.append("| Tool | Source | Description | Tags | File Extensions | Profiles |")
+    tools_index_lines.append(
+        "| Tool | Source | Description | Tags | File Extensions | Profiles |"
+    )
     tools_index_lines.append("| --- | --- | --- | --- | --- | --- |")
-    for tool_name, tool_link, source_label, summary, tags, file_exts, profiles_note in sorted(tools_index_entries, key=lambda item: item[0].lower()):
-        tools_index_lines.append(f"| [{tool_name}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |")
+    for (
+        tool_name,
+        tool_link,
+        source_label,
+        summary,
+        tags,
+        file_exts,
+        profiles_note,
+    ) in sorted(tools_index_entries, key=lambda item: item[0].lower()):
+        tools_index_lines.append(
+            f"| [{tool_name}]({tool_link}) | {source_label} | {summary} | {tags} | {file_exts} | {profiles_note} |"
+        )
 
     tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
 
