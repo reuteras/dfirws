@@ -116,7 +116,7 @@ function New-CreateToolFiles {
         foreach ($test in $ToolDefinitions[$i].Verify) {
             $verify_type = $test.Type
             $verify_name = $test.Name
-            $verify_expect = $test.Expect 
+            $verify_expect = $test.Expect
 
             if ("command" -eq $verify_type) {
                 Add-Content -Path "$BASE_PATH\dfirws\verify_${source}.ps1" -Value "Test-Command `"$verify_name`" `"$verify_expect`""

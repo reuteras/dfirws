@@ -196,8 +196,8 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     Write-DateLog "Right-click context menu added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 	# Change TERMINAL_INSTALL_DIR to actual installed version
-	Get-Content "${HOME}\Documents\tools\reg\right-click.reg" | 
-		ForEach-Object { $_ -replace "TERMINAL_INSTALL_DIR", "${TERMINAL_INSTALL_DIR}" } | 
+	Get-Content "${HOME}\Documents\tools\reg\right-click.reg" |
+		ForEach-Object { $_ -replace "TERMINAL_INSTALL_DIR", "${TERMINAL_INSTALL_DIR}" } |
 		Set-Content "${WSDFIR_TEMP}\right-click.reg"
 
 	reg import "${WSDFIR_TEMP}\right-click.reg" | Out-Null
