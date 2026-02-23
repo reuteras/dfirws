@@ -37,7 +37,7 @@ C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe -f Desktop\readonly\evtx\Security.
 C:\Tools\takajo\takajo.exe -t Desktop\readwrite\case_evtx\hayabusa_timeline.csv
 ```
 
-## Workflow 2: Suspicious executable triag
+## Workflow 2: Suspicious executable triage
 
 **Goal**: Determine whether a binary is malicious and understand its capabilities.
 
