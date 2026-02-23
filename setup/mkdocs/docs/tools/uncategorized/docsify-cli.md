@@ -4,6 +4,8 @@
 
 **Source:** npm
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.md`, `.html`
 
 **Tags:** documentation, markdown

@@ -4,6 +4,8 @@
 
 **Source:** npm
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.html`, `.htm`, `.js`
 
 **Tags:** javascript, html-parsing, dom

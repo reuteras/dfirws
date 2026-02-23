@@ -4,6 +4,8 @@
 
 **Source:** npm
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.evtx`
 
 **Tags:** log-analysis, event-log, forensics, visualization

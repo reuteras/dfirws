@@ -12,7 +12,7 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** reverse-engineering, windows, API
+**Tags:** reverse-engineering, windows, api
 
 Win API Search is a tool for searching Windows API functions.
 

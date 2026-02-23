@@ -12,26 +12,26 @@ theme:
 nav:
 - Home: index.md
 - Changelog: Changes.md
-- Customize Dfirws: Customize-dfirws.md
-- Didier Stevens Tools: Didier-Stevens-tools.md
+- Customize dfirws: Customize-dfirws.md
+- Didier Stevens tools: Didier-Stevens-tools.md
 - Getting started: Getting-started.md
-- Jupyter Notebooks: Jupyter-notebooks.md
+- Jupyter notebooks: Jupyter-notebooks.md
 - KAPE: KAPE.md
-- Network Forensics: Network-forensics.md
-- Notebook For PE With Ghidra And Capa: Notebook-for-PE-with-Ghidra-and-capa.md
+- Network forensics: Network-forensics.md
+- Notebook for PE with Ghidra and capa: Notebook-for-PE-with-Ghidra-and-capa.md
 - Obsidian: Obsidian.md
 - Samples: Samples.md
-- Windows Forensics: Windows-forensics.md
+- Windows forensics: Windows-forensics.md
 - Investigations:
   - Investigate Email: Investigations/Investigate-Email.md
-  - Investigate JavaScript Files: Investigations/Investigate-JavaScript-files.md
-  - Investigate MSI Files: Investigations/Investigate-MSI-files.md
-  - Investigate Office Files: Investigations/Investigate-Office-files.md
-  - Investigate OneNote File: Investigations/Investigate-OneNote-file.md
-  - Investigate PDF Files: Investigations/Investigate-PDF-files.md
-  - Investigate PE Files: Investigations/Investigate-PE-files.md
+  - Investigate JavaScript files: Investigations/Investigate-JavaScript-files.md
+  - Investigate MSI files: Investigations/Investigate-MSI-files.md
+  - Investigate Office files: Investigations/Investigate-Office-files.md
+  - Investigate OneNote files: Investigations/Investigate-OneNote-file.md
+  - Investigate PDF files: Investigations/Investigate-PDF-files.md
+  - Investigate PE files: Investigations/Investigate-PE-files.md
   - Investigate PowerShell: Investigations/Investigate-PowerShell.md
-  - Investigate ZIP Files: Investigations/Investigate-ZIP-files.md
+  - Investigate ZIP files: Investigations/Investigate-ZIP-files.md
 - Tools:
   - Overview: tools/index.md
   - Development:

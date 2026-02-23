@@ -4,6 +4,8 @@
 
 **Source:** npm
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.txt`, `.md`, `.log`, `.json`
 
 **Tags:** ai, code-generation, automation, mcp

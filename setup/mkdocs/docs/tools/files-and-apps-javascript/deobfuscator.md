@@ -4,6 +4,8 @@
 
 **Source:** npm
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.js`
 
 **Tags:** javascript, deobfuscation, malware-analysis
