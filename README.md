@@ -152,10 +152,10 @@ Two profiles are available:
 - **Full** (default) - Downloads all tools, including all build toolchains (Node.js, Rust, Go, MSYS2) and large optional tools.
 - **Basic** - Skips Rust, Go, and MSYS2 toolchains. Keeps Node.js for JavaScript malware analysis. Excludes large optional tools like Autopsy, ELK Stack, Binary Ninja, Neo4j, hashcat, LibreOffice, and others.
 
-To use a profile, pass `-Profile` to `downloadFiles.ps1`:
+To use a profile, pass `-DistributionProfile` to `downloadFiles.ps1`:
 
 ```PowerShell
-.\downloadFiles.ps1 -Profile Basic
+.\downloadFiles.ps1 -DistributionProfile Basic
 ```
 
 For persistent configuration, copy `local\defaults\profile-config.ps1.template` to `local\profile-config.ps1` and set `$DFIRWS_PROFILE = "Basic"`. You can also override individual toolchain inclusion and add extras (large tools to include despite the profile):
@@ -165,7 +165,7 @@ $DFIRWS_PROFILE = "Basic"
 $DFIRWS_EXTRAS = @("Autopsy", "LibreOffice")
 ```
 
-The `-Profile` CLI parameter takes precedence over the config file. Explicit switches like `-Rust` or `-Node` always override the profile setting.
+The `-DistributionProfile` CLI parameter takes precedence over the config file. Explicit switches like `-Rust` or `-Node` always override the profile setting.
 
 ### Sandbox configuration
 
