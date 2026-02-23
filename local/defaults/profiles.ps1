@@ -13,10 +13,11 @@ param()
 $DFIRWS_PROFILES = @{
     "Basic" = @{
         Scripts = @{
-            "node"   = $true
-            "rust"   = $false
-            "go"     = $false
-            "msys2"  = $false
+            "node"    = $true
+            "rust"    = $false
+            "go"      = $false
+            "msys2"   = $false
+            "general" = $true
         }
         ExcludeTools = @(
             # basic.ps1
@@ -120,10 +121,11 @@ $DFIRWS_PROFILES = @{
     }
     "Full" = @{
         Scripts = @{
-            "node"   = $true
-            "rust"   = $true
-            "go"     = $true
-            "msys2"  = $true
+            "node"    = $true
+            "rust"    = $true
+            "go"      = $true
+            "msys2"   = $true
+            "general" = $true
         }
         ExcludeTools = @()
         ExcludeGitRepos = @()

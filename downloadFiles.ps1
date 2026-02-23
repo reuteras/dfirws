@@ -27,11 +27,11 @@
     This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
 
 .EXAMPLE
-    .\downloadFiles.ps1 -DistributionProfile Basic
+    .\downloadFiles.ps1 -Profile Basic
     Download a basic distribution without large optional tools and without Rust, Go, and MSYS2 toolchains.
 
 .EXAMPLE
-    .\downloadFiles.ps1 -DistributionProfile Full
+    .\downloadFiles.ps1 -Profile Full
     Download all tools (same as default behavior).
 
 .NOTES
@@ -44,6 +44,7 @@
 
 param(
     [Parameter(HelpMessage = "Select distribution profile (Basic or Full).")]
+    [Alias("Profile")]
     [ValidateSet("Basic", "Full")]
     [string]$DistributionProfile = "",
     [Parameter(HelpMessage = "Download all tools for dfirws.")]
@@ -133,15 +134,17 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     $activeProfile = $DFIRWS_PROFILES[$activeProfileName]
 
     # Script toggles (with per-script overrides from user config)
-    $profileNodeEnabled = $activeProfile.Scripts["node"]
-    $profileRustEnabled = $activeProfile.Scripts["rust"]
-    $profileGoEnabled   = $activeProfile.Scripts["go"]
-    $profileMsys2Enabled = $activeProfile.Scripts["msys2"]
+    $profileNodeEnabled    = $activeProfile.Scripts["node"]
+    $profileRustEnabled    = $activeProfile.Scripts["rust"]
+    $profileGoEnabled      = $activeProfile.Scripts["go"]
+    $profileMsys2Enabled   = $activeProfile.Scripts["msys2"]
+    $profileGeneralEnabled = $activeProfile.Scripts["general"]
 
-    if (Test-Path variable:DFIRWS_PROFILE_NODE)  { $profileNodeEnabled  = $DFIRWS_PROFILE_NODE }
-    if (Test-Path variable:DFIRWS_PROFILE_RUST)  { $profileRustEnabled  = $DFIRWS_PROFILE_RUST }
-    if (Test-Path variable:DFIRWS_PROFILE_GO)    { $profileGoEnabled    = $DFIRWS_PROFILE_GO }
-    if (Test-Path variable:DFIRWS_PROFILE_MSYS2) { $profileMsys2Enabled = $DFIRWS_PROFILE_MSYS2 }
+    if (Test-Path variable:DFIRWS_PROFILE_NODE)    { $profileNodeEnabled    = $DFIRWS_PROFILE_NODE }
+    if (Test-Path variable:DFIRWS_PROFILE_RUST)    { $profileRustEnabled    = $DFIRWS_PROFILE_RUST }
+    if (Test-Path variable:DFIRWS_PROFILE_GO)      { $profileGoEnabled      = $DFIRWS_PROFILE_GO }
+    if (Test-Path variable:DFIRWS_PROFILE_MSYS2)   { $profileMsys2Enabled   = $DFIRWS_PROFILE_MSYS2 }
+    if (Test-Path variable:DFIRWS_PROFILE_GENERAL) { $profileGeneralEnabled = $DFIRWS_PROFILE_GENERAL }
 
     # Resolve extras include list
     $DFIRWS_EXTRAS_RESOLVED = @()
@@ -174,10 +177,11 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     }
 } else {
     # No profile = Full behavior (everything included)
-    $profileNodeEnabled  = $true
-    $profileRustEnabled  = $true
-    $profileGoEnabled    = $true
-    $profileMsys2Enabled = $true
+    $profileNodeEnabled    = $true
+    $profileRustEnabled    = $true
+    $profileGoEnabled      = $true
+    $profileMsys2Enabled   = $true
+    $profileGeneralEnabled = $true
     $DFIRWS_EXCLUDE_TOOLS = @()
     $DFIRWS_EXTRAS_RESOLVED = @()
     $DFIRWS_EXCLUDE_GIT_REPOS = @()
@@ -317,7 +321,7 @@ if ($all -or $Release.IsPresent) {
     .\resources\download\release.ps1
 }
 
-if ($all -or $General.IsPresent) {
+if (($all -and $profileGeneralEnabled) -or $General.IsPresent) {
     Write-DateLog "Run general sandbox to install tools via package managers."
     .\resources\download\general.ps1
 }
