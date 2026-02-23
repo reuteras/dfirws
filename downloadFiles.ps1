@@ -87,7 +87,9 @@ param(
     [Parameter(HelpMessage = "Install and Update Visual Studio buildtools.")]
     [Switch]$VisualStudioBuildTools,
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
-    [Switch]$Zimmerman
+    [Switch]$Zimmerman,
+    [Parameter(HelpMessage = "Run general sandbox to install tools via package managers (e.g. r2pm).")]
+    [Switch]$General
     )
 
 if (Test-Path ".\resources\download\common.ps1") {
@@ -211,7 +213,7 @@ if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $General.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } elseif ($DistributionProfile -ne "") {
     Write-DateLog "Download tools for dfirws using profile: $DistributionProfile"
@@ -313,6 +315,11 @@ if ($VisualStudioBuildTools.IsPresent) {
 if ($all -or $Release.IsPresent) {
     Write-DateLog "Download releases from GitHub."
     .\resources\download\release.ps1
+}
+
+if ($all -or $General.IsPresent) {
+    Write-DateLog "Run general sandbox to install tools via package managers."
+    .\resources\download\general.ps1
 }
 
 if ($all -or $Http.IsPresent) {
