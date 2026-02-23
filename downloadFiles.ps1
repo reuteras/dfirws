@@ -27,11 +27,11 @@
     This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
 
 .EXAMPLE
-    .\downloadFiles.ps1 -Profile Basic
+    .\downloadFiles.ps1 -DistributionProfile Basic
     Download a basic distribution without large optional tools and without Rust, Go, and MSYS2 toolchains.
 
 .EXAMPLE
-    .\downloadFiles.ps1 -Profile Full
+    .\downloadFiles.ps1 -DistributionProfile Full
     Download all tools (same as default behavior).
 
 .NOTES
@@ -44,7 +44,6 @@
 
 param(
     [Parameter(HelpMessage = "Select distribution profile (Basic or Full).")]
-    [Alias("Profile")]
     [ValidateSet("Basic", "Full")]
     [string]$DistributionProfile = "",
     [Parameter(HelpMessage = "Download all tools for dfirws.")]
