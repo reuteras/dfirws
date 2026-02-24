@@ -13,6 +13,8 @@ if (! (Test-Path "${WSDFIR_TEMP}")) {
 Write-Output "Get-Content C:\log\general.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
+$TOOL_DEFINITIONS = @()
+
 # Find r2pm in the Tools directory
 $r2pm = $null
 $r2pmPaths = @(
@@ -84,6 +86,8 @@ if ($null -eq $r2pm) {
         PythonVersion = ""
     }
 }
+
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "general"
 
 Write-DateLog "General: Done installing general tools in sandbox." | Tee-Object -FilePath "C:\log\general.txt" -Append
 
