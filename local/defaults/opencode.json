@@ -3,21 +3,19 @@
   "mcp": {
     "ghidrassist": {
       "type": "remote",
-      "url": "http://localhost:8080/sse",
+      "url": "http://localhost:8081/sse",
       "enabled": false,
       "timeout": 10000
     },
     "radare2": {
       "type": "local",
-      "command": ["r2mcp"],
-      "enabled": false,
-      "timeout": 10000
+      "command": ["C:\\Tools\radare2\\bin\\r2pm", "-r", "r2mcp"],
+      "enabled": false
     },
     "regipy": {
       "type": "local",
       "command": ["C:\\venv\\uv\\regipy\\Scripts\\python.exe", "C:\\git\\regipy\\regipy_mcp_server\\server.py", "--hives-dir", "C:\\cases"],
-      "enabled": false,
-      "timeout": 10000
+      "enabled": false
     }
   }
 }

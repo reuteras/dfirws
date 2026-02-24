@@ -9,7 +9,7 @@
   <MappedFolders>
     <MappedFolder>
       <HostFolder>__SANDBOX__setup</HostFolder>
-	  <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
+	    <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\tools</SandboxFolder>
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
@@ -21,11 +21,6 @@
       <HostFolder>__SANDBOX__downloads</HostFolder>
       <SandboxFolder>C:\downloads</SandboxFolder>
       <ReadOnly>true</ReadOnly>
-    </MappedFolder>
-    <MappedFolder>
-      <HostFolder>__SANDBOX__readwrite</HostFolder>
-      <SandboxFolder>C:\Users\WDAGUtilityAccount\Desktop\readwrite</SandboxFolder>
-      <ReadOnly>false</ReadOnly>
     </MappedFolder>
     <MappedFolder>
       <HostFolder>__SANDBOX__log</HostFolder>
