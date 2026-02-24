@@ -65,6 +65,8 @@ if (!(Test-ToolIncluded -ToolName "LUMEN") -and (Test-Path -Path "${ROOT_PATH}\m
 
 if (Test-Path -Path "${ROOT_PATH}\log\dfirws" ) {
     Copy-Item "${ROOT_PATH}\log\dfirws\*_node.ps1" "${ROOT_PATH}\downloads\dfirws\" -Force
-    Copy-Item "${ROOT_PATH}\log\dfirws\tools_node.json" "${ROOT_PATH}\downloads\dfirws\" -Force
+    if (Test-Path -Path "${ROOT_PATH}\log\dfirws\tools_node.json") {
+        Copy-Item "${ROOT_PATH}\log\dfirws\tools_node.json" "${ROOT_PATH}\downloads\dfirws\" -Force
+    }
     Remove-Item -Recurse -Force "${ROOT_PATH}\log\dfirws" 2>&1 | Out-Null
 }
