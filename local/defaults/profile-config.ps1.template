@@ -11,7 +11,6 @@ $DFIRWS_PROFILE = ""
 # $DFIRWS_PROFILE_RUST = $false
 # $DFIRWS_PROFILE_GO = $false
 # $DFIRWS_PROFILE_MSYS2 = $false
-# $DFIRWS_PROFILE_GENERAL = $true
 
 # Extra tools to include even when excluded by the profile.
 # Add tool names to force-include them.
