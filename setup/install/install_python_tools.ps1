@@ -24,6 +24,7 @@ $env:UV_INSTALL_DIR = "C:\venv\pkg"
 $env:UV_PYTHON_INSTALL_DIR = "C:\venv\python"
 $env:UV_CACHE_DIR = "C:\venv\cache"
 $env:UV_LINK_MODE = "copy"
+$env:UV_CONCURRENT_INSTALLS = "1"
 
 foreach ($dir in @($env:UV_TOOL_BIN_DIR, $env:UV_TOOL_DIR, $env:UV_INSTALL_DIR, $env:UV_CACHE_DIR)) {
     if (-not (Test-Path $dir)) {
