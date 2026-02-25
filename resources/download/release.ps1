@@ -1133,6 +1133,30 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# mcp-server-elasticsearch
+$status = Get-GitHubRelease -repo "elastic/mcp-server-elasticsearch" -path "${SETUP_PATH}\mcp-server-elasticsearch.exe" -match "windows-x86_64.exe" -check "PE32"
+
+$TOOL_DEFINITIONS += @{
+    Name = "mcp-server-elasticsearch"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @("")
+    Tags = @("mcp", "ai", "logs")
+    Notes = "MCP server to connect to elastic 8.X"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = ""
+    Vendor = "Elastic"
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 # redress
 $status = Get-GitHubRelease -repo "goretk/redress" -path "${SETUP_PATH}\redress.zip" -match "windows.zip" -check "Zip archive data"
 if ($status) {
@@ -3218,6 +3242,13 @@ $TOOL_DEFINITIONS += @{
 
 # r2ai
 $status = Get-GitHubRelease -repo "radareorg/r2ai" -path "${SETUP_PATH}\r2ai.zip" -match "windows-latest" -check "Zip archive data"
+if ($status -or $radare_status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\r2ai.zip" -o"${TOOLS}\r2ai" | Out-Null
+    Copy-Item "${TOOLS}\r2ai\decai.r2.js" "${TOOLS}\radare2\share\scripts\"
+    Copy-Item "${TOOLS}\r2ai\libr2ai.dll" "${TOOLS}\radare2\bin\"
+    Copy-Item "${TOOLS}\r2ai\r2ai.exe" "${TOOLS}\radare2\bin\"
+    Remove-Item -Recurse -Force "${TOOLS}\r2ai"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "r2ai"
@@ -4707,7 +4738,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("obsidian", "automation", "plugins")
-    Notes = "Obsidian quicadd plugin."
+    Notes = "Obsidian quickadd plugin."
     Tips = ""
     Usage = ""
     SampleCommands = @()
