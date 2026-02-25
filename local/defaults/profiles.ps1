@@ -17,7 +17,6 @@ $DFIRWS_PROFILES = @{
             "rust"    = $false
             "go"      = $false
             "msys2"   = $false
-            "general" = $true
         }
         ExcludeTools = @(
             # basic.ps1
@@ -125,7 +124,6 @@ $DFIRWS_PROFILES = @{
             "rust"    = $true
             "go"      = $true
             "msys2"   = $true
-            "general" = $true
         }
         ExcludeTools = @()
         ExcludeGitRepos = @()

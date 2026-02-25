@@ -87,9 +87,7 @@ param(
     [Parameter(HelpMessage = "Install and Update Visual Studio buildtools.")]
     [Switch]$VisualStudioBuildTools,
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
-    [Switch]$Zimmerman,
-    [Parameter(HelpMessage = "Run general sandbox to install tools via package managers (e.g. r2pm).")]
-    [Switch]$General
+    [Switch]$Zimmerman
     )
 
 if (Test-Path ".\resources\download\common.ps1") {
@@ -137,13 +135,11 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     $profileRustEnabled    = $activeProfile.Scripts["rust"]
     $profileGoEnabled      = $activeProfile.Scripts["go"]
     $profileMsys2Enabled   = $activeProfile.Scripts["msys2"]
-    $profileGeneralEnabled = $activeProfile.Scripts["general"]
 
     if (Test-Path variable:DFIRWS_PROFILE_NODE)    { $profileNodeEnabled    = $DFIRWS_PROFILE_NODE }
     if (Test-Path variable:DFIRWS_PROFILE_RUST)    { $profileRustEnabled    = $DFIRWS_PROFILE_RUST }
     if (Test-Path variable:DFIRWS_PROFILE_GO)      { $profileGoEnabled      = $DFIRWS_PROFILE_GO }
     if (Test-Path variable:DFIRWS_PROFILE_MSYS2)   { $profileMsys2Enabled   = $DFIRWS_PROFILE_MSYS2 }
-    if (Test-Path variable:DFIRWS_PROFILE_GENERAL) { $profileGeneralEnabled = $DFIRWS_PROFILE_GENERAL }
 
     # Resolve extras include list
     $DFIRWS_EXTRAS_RESOLVED = @()
@@ -180,7 +176,6 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     $profileRustEnabled    = $true
     $profileGoEnabled      = $true
     $profileMsys2Enabled   = $true
-    $profileGeneralEnabled = $true
     $DFIRWS_EXCLUDE_TOOLS = @()
     $DFIRWS_EXTRAS_RESOLVED = @()
     $DFIRWS_EXCLUDE_GIT_REPOS = @()
@@ -216,7 +211,7 @@ if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $General.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } elseif ($DistributionProfile -ne "") {
     Write-DateLog "Download tools for dfirws using profile: $DistributionProfile"
@@ -318,11 +313,6 @@ if ($VisualStudioBuildTools.IsPresent) {
 if ($all -or $Release.IsPresent) {
     Write-DateLog "Download releases from GitHub."
     .\resources\download\release.ps1
-}
-
-if (($all -and $profileGeneralEnabled) -or $General.IsPresent) {
-    Write-DateLog "Run general sandbox to install tools via package managers."
-    .\resources\download\general.ps1
 }
 
 if ($all -or $Http.IsPresent) {
