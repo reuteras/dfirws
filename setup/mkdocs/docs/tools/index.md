@@ -249,6 +249,7 @@ Categories generated from dfirws shortcuts.
 | [MaxMind GeoLite2 City](./uncategorized/maxmind-geolite2-city.md) | Enrichment | MaxMind GeoLite2 City database for mapping IP addresses to city-level geolocation. Requires MAXMIND_LICENSE_KEY. | geolocation, city, maxmind | `.mmdb`, `.tar.gz` |  |
 | [MaxMind GeoLite2 Country](./uncategorized/maxmind-geolite2-country.md) | Enrichment | MaxMind GeoLite2 Country database for mapping IP addresses to countries. Requires MAXMIND_LICENSE_KEY. | geolocation, country, maxmind | `.mmdb`, `.tar.gz` |  |
 | [mboxviewer](./files-and-apps-email/mboxviewer.md) | GitHub Release | A small but powerful app for viewing MBOX files. | email, forensics | `.mbox`, `.eml` |  |
+| [mcp-server-elasticsearch](./uncategorized/mcp-server-elasticsearch.md) | GitHub Release | MCP server to connect to elastic 8.X | mcp, ai, logs | `` |  |
 | [MemProcFS](./memory/memprocfs.md) | GitHub Release | MemProcFS is an easy and convenient way of viewing physical memory as files in a virtual file system. | memory-forensics, filesystem | `.dmp`, `.raw`, `.vmem`, `.img` |  |
 | [MemProcFS.wiki](./uncategorized/memprocfs-wiki.md) | Git | GitHub wiki for MemProcFS | memory-forensics, documentation |  |  |
 | [MetadataPlus](./files-and-apps-office/metadataplus.md) | GitHub Release | A tool to use novel locations to extract metadata from Office documents. | metadata, file-analysis | `.exe`, `.dll`, `.doc`, `.docx`, `.xls`, `.xlsx`, `.pdf`, `.jpg`, `.png` |  |
@@ -272,6 +273,7 @@ Categories generated from dfirws shortcuts.
 | [Nerd Fonts](./uncategorized/nerd-fonts.md) | GitHub Release | Nerd Fonts for terminal and more. | fonts, terminal | `.ttf`, `.otf` |  |
 | [netaddr](./uncategorized/netaddr.md) | Python | A network address manipulation library for Python. | network, ip-address |  |  |
 | [NetExt](./uncategorized/netext.md) | GitHub Release | WinDbg extension for data mining managed heap. It also includes commands to list http request, wcf services, WIF tokens among others | debugging, memory-forensics, dotnet, winDbg, extension | `.dmp` |  |
+| [NetworkMiner](./network/networkminer.md) | HTTP | NetworkMiner is an open source network forensics tool that extracts artifacts, such as files, images, emails and passwords, from captured network traffic in PCAP files. | network-analysis | `.pcap`, `.pcapng`, `.etl` | Full only |
 | [networkx](./uncategorized/networkx.md) | Python |  | visualization, graph |  |  |
 | [NirSoft Browser Utilities](./files-and-apps-browser/nirsoft-browser-utilities.md) | HTTP | NirSoft browser utilities for cache and history analysis. | browser-forensics, artifact-extraction | `.db`, `.sqlite` |  |
 | [Nmap](./uncategorized/nmap.md) | HTTP | Nmap is a network exploration and security auditing tool. | network-analysis, port-scanning, reconnaissance |  |  |
@@ -353,7 +355,7 @@ Categories generated from dfirws shortcuts.
 | [QEMU](./uncategorized/qemu.md) | Winget | QEMU is a generic and open-source machine emulator and virtualizer. It can be used to run operating systems and applications for different architectures on a host system, making it useful for testing, development, and analysis. | virtualization, emulation | `.qcow2`, `.vmdk`, `.vdi`, `.img`, `.iso` | Full only |
 | [qpdf](./files-and-apps-pdf/qpdf.md) | GitHub Release | qpdf: A content-preserving PDF document transformer | pdf, data-processing | `.pdf` |  |
 | [qrtool](./uncategorized/qrtool.md) | GitHub Release | Tool for decoding QR codes from images | qr-code, encoding, decoding | `.png`, `.svg` |  |
-| [quickadd](./uncategorized/quickadd.md) | GitHub Release | Obsidian quicadd plugin. | obsidian, automation, plugins |  | Full only |
+| [quickadd](./uncategorized/quickadd.md) | GitHub Release | Obsidian quickadd plugin. | obsidian, automation, plugins |  | Full only |
 | [r2ai](./uncategorized/r2ai.md) | Git | Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models. | reverse-engineering, ai, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [r2ai](./uncategorized/r2ai-2.md) | GitHub Release | LLM-based reversing for radare2. | reverse-engineering, mcp, ai, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Radare2](./reverse-engineering/radare2.md) | GitHub Release | UNIX-like reverse engineering framework and command-line toolset | reverse-engineering, disassembler, debugging | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.mach-o` |  |
@@ -467,4 +469,3 @@ Categories generated from dfirws shortcuts.
 | [Zircolite](./uncategorized/zircolite.md) | Git | A standalone SIGMA-based detection tool for EVTX, Auditd and Sysmon for Linux logs | event-log, sigma, detection | `.evtx` |  |
 | [zstd](./utilities/zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |
 | [Zui](./network/zui.md) | GitHub Release | Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data. | network-analysis, pcap, zeek | `.pcap`, `.pcapng`, `.zng` | Full only |
-| [zvec](./uncategorized/zvec.md) | Python | Zvec is an open-source, in-process vector database - lightweight, lightning-fast, and designed to embed directly into applications. Built on Proxima (Alibabas battle-tested vector search engine), it delivers production-grade, low-latency, scalable similarity search with minimal setup. | database, rag, vector-search, vectordb | `.bin` |  |

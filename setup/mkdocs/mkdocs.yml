@@ -182,6 +182,7 @@ nav:
     - Burp Suite: tools/network/burp-suite.md
     - Flare-Fakenet-NG: tools/network/flare-fakenet-ng.md
     - hfs: tools/network/hfs.md
+    - NetworkMiner: tools/network/networkminer.md
     - PuTTY: tools/network/putty.md
     - scapy: tools/network/scapy.md
     - Wireshark: tools/network/wireshark.md
@@ -359,6 +360,7 @@ nav:
     - MaxMind GeoLite2 ASN: tools/uncategorized/maxmind-geolite2-asn.md
     - MaxMind GeoLite2 City: tools/uncategorized/maxmind-geolite2-city.md
     - MaxMind GeoLite2 Country: tools/uncategorized/maxmind-geolite2-country.md
+    - mcp-server-elasticsearch: tools/uncategorized/mcp-server-elasticsearch.md
     - MemProcFS.wiki: tools/uncategorized/memprocfs-wiki.md
     - MEX: tools/uncategorized/mex.md
     - Microsoft OpenJDK 11: tools/uncategorized/microsoft-openjdk-11.md
@@ -502,7 +504,6 @@ nav:
     - YARA Forge Rules Full: tools/uncategorized/yara-forge-rules-full.md
     - yara-python: tools/uncategorized/yara-python.md
     - Zircolite: tools/uncategorized/zircolite.md
-    - zvec: tools/uncategorized/zvec.md
   - Utilities:
     - Overview: tools/utilities/index.md
     - 7-Zip: tools/utilities/7-zip.md

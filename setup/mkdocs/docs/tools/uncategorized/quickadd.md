@@ -8,4 +8,4 @@
 
 **Tags:** obsidian, automation, plugins
 
-Obsidian quicadd plugin.
+Obsidian quickadd plugin.

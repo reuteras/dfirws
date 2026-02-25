@@ -162,6 +162,7 @@
 | [maclookup](maclookup.md) | Python |  | network, mac-address |  |  |
 | [malware-bazaar-advanced-search](malware-bazaar-advanced-search.md) | Git | Script to chain search parameters for MalwareBazaar | malware-analysis, threat-intelligence |  |  |
 | [matplotlib](matplotlib.md) | Python |  | visualization, plotting |  |  |
+| [mcp-server-elasticsearch](mcp-server-elasticsearch.md) | GitHub Release | MCP server to connect to elastic 8.X | mcp, ai, logs | `` |  |
 | [minidump](minidump.md) | Python | Python library to parse Windows minidump file format. | memory-forensics, windows | `.dmp` |  |
 | [mkdocs](mkdocs.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.yml` |  |
 | [msticpy](msticpy.md) | Python |  | threat-intelligence, incident-response, jupyter | `.json`, `.csv` |  |
@@ -215,7 +216,7 @@
 | [pyvis](pyvis.md) | Python |  | visualization, graph |  |  |
 | [pyzipper](pyzipper.md) | Python |  | archive, encryption | `.zip` |  |
 | [qrtool](qrtool.md) | GitHub Release | Tool for decoding QR codes from images | qr-code, encoding, decoding | `.png`, `.svg` |  |
-| [quickadd](quickadd.md) | GitHub Release | Obsidian quicadd plugin. | obsidian, automation, plugins |  | Full only |
+| [quickadd](quickadd.md) | GitHub Release | Obsidian quickadd plugin. | obsidian, automation, plugins |  | Full only |
 | [r2ai](r2ai.md) | Git | Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models. | reverse-engineering, ai, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [r2ai](r2ai-2.md) | GitHub Release | LLM-based reversing for radare2. | reverse-engineering, mcp, ai, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [radare2-deep-graph](radare2-deep-graph.md) | Git | A Cutter plugin to generate radare2 graphs. | reverse-engineering, visualization |  |  |
@@ -243,4 +244,3 @@
 | [xlrd](xlrd.md) | Python |  | office, excel, data-extraction | `.xls` |  |
 | [xxhash](xxhash.md) | Python |  | hashing |  |  |
 | [yara-python](yara-python.md) | Python |  | yara, malware-analysis, detection | `.yar`, `.yara` |  |
-| [zvec](zvec.md) | Python | Zvec is an open-source, in-process vector database - lightweight, lightning-fast, and designed to embed directly into applications. Built on Proxima (Alibabas battle-tested vector search engine), it delivers production-grade, low-latency, scalable similarity search with minimal setup. | database, rag, vector-search, vectordb | `.bin` |  |
