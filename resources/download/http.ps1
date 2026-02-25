@@ -2674,6 +2674,55 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# NetworkMiner
+if (Test-ToolIncluded -ToolName "NetworkMiner") {
+    $status = Get-FileFromUri -uri "https://www.netresec.com/?download=NetworkMiner" -FilePath ".\downloads\NetworkMiner.zip" -CheckURL "Yes" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\NetworkMiner") {
+            Remove-Item -Recurse -Force "${TOOLS}\NetworkMiner" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\NetworkMiner.zip" -o"${TOOLS}" | Out-Null
+        Move-Item ${TOOLS}\NetworkMiner_* "${TOOLS}\NetworkMiner"
+    }
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "NetworkMiner"
+    Homepage = "https://www.netresec.com/?page=NetworkMiner"
+    Vendor = "Netresec"
+    License = "free edition"
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\NetworkMiner.lnk"
+            Target   = "`${TOOLS}\NetworkMiner\NetworkMiner.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\NetworkMiner\NetworkMiner.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".pcap", ".pcapng", ".etl")
+    Tags = @("network-analysis")
+    Notes = "NetworkMiner is an open source network forensics tool that extracts artifacts, such as files, images, emails and passwords, from captured network traffic in PCAP files."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 # https://nmap.org/download.html - Nmap
 $nmap_url = Get-DownloadUrlFromPage -url "https://nmap.org/download.html" -RegEx 'https[^"]+setup.exe'
 $status = Get-FileFromUri -uri "${nmap_url}" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes" -check "PE32"

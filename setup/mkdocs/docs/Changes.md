@@ -2,6 +2,10 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-02-25
+
+- Add [NetworkMiner](https://www.netresec.com/?page=NetworkMiner) by Netresec.
+
 ## 2026-02-09
 
 - Start updating the changelog. Lots of changes from 2024-11-12 until now is not listed here.

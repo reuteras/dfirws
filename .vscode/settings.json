@@ -558,6 +558,7 @@
         "netcat",
         "netext",
         "netloop",
+        "Netresec",
         "netscan",
         "netsh",
         "networkx",

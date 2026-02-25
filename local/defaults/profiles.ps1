@@ -53,6 +53,7 @@ $DFIRWS_PROFILES = @{
             "vscode-cpp",
             "vscode-mermaid",
             "vscode-ruff",
+            "NetworkMiner",
             # release.ps1
             "Audacity",
             "Zui",
