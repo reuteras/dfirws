@@ -74,16 +74,16 @@ Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
 uv tool install "git+https://github.com/msuhanov/dfir_ntfs.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed dfir_ntfs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
-    uv tool install --with "zipp>=3.20" "binary-refinery[extended]" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    Write-DateLog "Installed binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-}
 uv tool install --with "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --with "mkdocs-material" "mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
+    uv tool install "binary-refinery[extended]@0.9.26" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Write-DateLog "Installed binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+}
 
 foreach ($package in `
     "autoit-ripper", `
@@ -404,7 +404,7 @@ Write-DateLog "Python venv zircolite done." >> "C:\log\python.txt"
 
 $NeedVSBuildTools = $false
 
-if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe" -and $NeedVSBuildTools -eq $true) {
+if (((Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") -and ($NeedVSBuildTools -eq $true)))  {
     Write-Output "" >> "${WSDFIR_TEMP}\visualstudio.txt"
 
     # Install Visual Studio Build Tools
@@ -418,19 +418,19 @@ if (Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe" -and $NeedVSBuildTools -eq $
         Start-Process -Wait "${SETUP_PATH}\vs_BuildTools.exe" -ArgumentList "--passive --norestart --force --installWhileDownloading --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows10SDK.19041 --add Microsoft.VisualStudio.Component.TestTools.BuildTools --add Microsoft.VisualStudio.Component.VC.CMake.Project --add Microsoft.VisualStudio.Component.VC.CLI.Support --installPath C:\BuildTools"
     }
 
-    # Install Java for jep
-    Write-DateLog "Start installation of Corretto Java." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
-    Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-    $env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
-
     ## Set environment variables for Visual Studio Build Tools
     $env:DISTUTILS_USE_SDK=1
     $env:MSSdk=1
     $env:LIB = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\shared\x64;" + $env:LIB
     $env:INCLUDE = "C:\BuildTools\VC\Tools\MSVC\14.29.30133\include" + ";C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0" + $env:INCLUDE
     C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat amd64 >> "C:\log\python.txt"
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")+ ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
+    $env:Path = "C:\Users\WDAGUtilityAccount\.local\bin" + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";C:\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64"
+
+    # Install Java for jep
+    #Write-DateLog "Start installation of Corretto Java." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
+    #Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
     #Write-DateLog "Install Python packages in sandbox needing Visual Studio Build Tools." >> "C:\log\python.txt"
     #uv venv "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"

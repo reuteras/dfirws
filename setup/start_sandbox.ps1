@@ -25,7 +25,7 @@ Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEM
 # Increment this by 1 whenever you add a new Update-SandboxProgress call,
 # and decrement it when you remove one.  Verify with:
 #   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count
-$SANDBOX_PROGRESS_STEPS = 31
+$SANDBOX_PROGRESS_STEPS = 30
 Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
 
 # Check if running in verify mode
@@ -608,26 +608,6 @@ if (Test-Path "${GIT_PATH}\cutterref"){
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\icons" | Out-Null
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin" | Out-Null
 Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
-# Install radare2 plugins
-Update-SandboxProgress "Configuring radare2 plugins..."
-$r2_plugins_dir = "${HOME}\.local\share\radare2\plugins"
-New-Item -ItemType Directory -Force -Path "${r2_plugins_dir}" | Out-Null
-
-# decai (r2js plugin, no compilation needed)
-if (Test-Path "${GIT_PATH}\r2ai\decai\decai.r2.js") {
-    Copy-Item "${GIT_PATH}\r2ai\decai\decai.r2.js" "${r2_plugins_dir}\decai.r2.js" -Force | Out-Null
-    Write-DateLog "Installed decai plugin for radare2." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
-
-# r2ai (compiled native plugin from msys2 build)
-if (Test-Path "${TOOLS}\msys64\r2ai_build\r2ai.dll") {
-    Copy-Item "${TOOLS}\msys64\r2ai_build\r2ai.dll" "${r2_plugins_dir}\r2ai.dll" -Force | Out-Null
-    if (Test-Path "${TOOLS}\msys64\r2ai_build\r2ai.exe") {
-        Copy-Item "${TOOLS}\msys64\r2ai_build\r2ai.exe" "${TOOLS}\radare2\bin\r2ai.exe" -Force | Out-Null
-    }
-    Write-DateLog "Installed r2ai plugin for radare2." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-}
 
 # BeaconHunter
 Update-SandboxProgress "Configuring forensic tools..."

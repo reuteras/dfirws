@@ -36,9 +36,14 @@ if ($null -eq $r2pm) {
 } else {
     Write-DateLog "General: Found r2pm at $r2pm." | Tee-Object -FilePath "C:\log\general.txt" -Append
 
+    $env:R2PM_PLUGDIR="${TOOLS}\radare2\r2pm"
+
+    & $r2pm init 2>&1 | Tee-Object -FilePath "C:\log\general.txt" -Append
+    & $r2pm update 2>&1 | Tee-Object -FilePath "C:\log\general.txt" -Append
+
     # Install r2mcp
     Write-DateLog "General: Installing r2mcp via r2pm." | Tee-Object -FilePath "C:\log\general.txt" -Append
-    & $r2pm -ci r2mcp 2>&1 | ForEach-Object { "$_" } | Tee-Object -FilePath "C:\log\general.txt" -Append
+    & $r2pm -gi r2mcp 2>&1 | ForEach-Object { "$_" } | Tee-Object -FilePath "C:\log\general.txt" -Append
 
     $TOOL_DEFINITIONS += @{
         Name = "radare2-mcp"
@@ -63,7 +68,7 @@ if ($null -eq $r2pm) {
 
     # Install r2ai
     Write-DateLog "General: Installing r2ai via r2pm." | Tee-Object -FilePath "C:\log\general.txt" -Append
-    & $r2pm -ci r2ai 2>&1 | ForEach-Object { "$_" } | Tee-Object -FilePath "C:\log\general.txt" -Append
+    & $r2pm -gi r2ai 2>&1 | ForEach-Object { "$_" } | Tee-Object -FilePath "C:\log\general.txt" -Append
 
     $TOOL_DEFINITIONS += @{
         Name = "r2ai"
