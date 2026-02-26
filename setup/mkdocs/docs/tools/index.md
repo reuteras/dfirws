@@ -290,6 +290,7 @@ Categories generated from dfirws shortcuts.
 | [obsidian-mitre-attack](./uncategorized/obsidian-mitre-attack.md) | GitHub Release | A vault for Obsidian.md containing the MITRE ATT&CK framework in markdown format. | obsidian, mitre-attack, threat-intelligence |  | Full only |
 | [obsidian-tasks](./uncategorized/obsidian-tasks.md) | GitHub Release | Obsidian tasks plugin. | obsidian, task-management, plugins |  | Full only |
 | [obsidian-timeline](./uncategorized/obsidian-timeline.md) | GitHub Release | Obsidian timeline plugin. | obsidian, timeline, plugins |  | Full only |
+| [OfficeMalScanner](./files-and-apps-office/officemalscanner.md) | Git | OfficeMalScanner can scan old office documents. | office, macro, vba, malware-analysis | `.doc`, `.ppt`, `.xls` |  |
 | [oh-my-posh](./utilities/oh-my-posh.md) | Winget | Oh My Posh is a customizable prompt for PowerShell and other shells. It allows you to create beautiful and functional command-line prompts with themes and customizations. | terminal, shell, theming |  |  |
 | [olefile](./uncategorized/olefile.md) | Python |  | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |  |
 | [oletools](./files-and-apps-office/oletools.md) | Python | Python tools to analyze security characteristics of MS Office and OLE files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), for Malware Analysis and Incident Response #DFIR. | office, macro, malware-analysis, vba | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.rtf` |  |

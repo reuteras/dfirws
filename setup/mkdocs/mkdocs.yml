@@ -119,6 +119,7 @@ nav:
     - MetadataPlus: tools/files-and-apps-office/metadataplus.md
     - MiTeC Structured Storage Viewer: tools/files-and-apps-office/mitec-structured-storage-viewer.md
     - msoffcrypto-tool: tools/files-and-apps-office/msoffcrypto-tool.md
+    - OfficeMalScanner: tools/files-and-apps-office/officemalscanner.md
     - oletools: tools/files-and-apps-office/oletools.md
     - pcode2code: tools/files-and-apps-office/pcode2code.md
     - XLMMacroDeobfuscator: tools/files-and-apps-office/xlmmacrodeobfuscator.md

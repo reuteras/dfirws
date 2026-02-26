@@ -111,10 +111,10 @@ if (Test-Path -Path ".\parseusbs\parseusbs.exe") {
 
 # Extract OfficeMalScanner
 if (Test-Path -Path ".\reconstructer.org\OfficeMalScanner.zip") {
-    if (Test-Path -Path "${TOOLS}\OfficeMalScanner") {
-        Remove-Item -Force -Recurse "${TOOLS}\OfficeMalScanner"
+    if (Test-Path -Path "..\Tools\OfficeMalScanner") {
+        Remove-Item -Force -Recurse "..\Tools\OfficeMalScanner"
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\OfficeMalScanner.zip" -o"${TOOLS}" | Out-Null
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\reconstructer.org\OfficeMalScanner.zip" -o"..\Tools\" | Out-Null
 }
 
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
