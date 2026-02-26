@@ -16,18 +16,26 @@ if (! (Test-Path .\dfirws\local) ) {
     New-Item -ItemType Directory .\dfirws\local
 }
 
-foreach ($folder in "vscode") {
+foreach ($folder in "tabby", "vscode") {
     if (! (Test-Path .\dfirws\local\$folder) ) {
         New-Item -ItemType Directory .\dfirws\local\$folder -Force
     }
 }
 
-Robocopy.exe $SOURCE_DIRECTORY\downloads .\dfirws\downloads /MIR /MT:96
-Robocopy.exe $SOURCE_DIRECTORY\enrichment .\dfirws\enrichment /MIR /MT:96
-Robocopy.exe $SOURCE_DIRECTORY\local\defaults .\dfirws\local\defaults /MIR /MT:96
-Robocopy.exe $SOURCE_DIRECTORY\mount .\dfirws\mount /MIR /MT:96
-Robocopy.exe $SOURCE_DIRECTORY\resources .\dfirws\resources /MIR /MT:96
-Robocopy.exe $SOURCE_DIRECTORY\setup .\dfirws\setup /MIR /MT:96
+Write-Output "Syncing downloads"
+Robocopy.exe $SOURCE_DIRECTORY\downloads .\dfirws\downloads /MIR /MT:96 | Out-Null
+Write-Output "Syncing enrichment"
+Robocopy.exe $SOURCE_DIRECTORY\enrichment .\dfirws\enrichment /MIR /MT:96 | Out-Null
+Write-Output "Syncing defaults"
+Robocopy.exe $SOURCE_DIRECTORY\local\defaults .\dfirws\local\defaults /MIR /MT:96 | Out-Null
+Write-Output "Syncing mount"
+Robocopy.exe $SOURCE_DIRECTORY\mount .\dfirws\mount /MIR /MT:96 | Out-Null
+Write-Output "Syncing resources"
+Robocopy.exe $SOURCE_DIRECTORY\resources .\dfirws\resources /MIR /MT:96 | Out-Null
+Write-Output "Syncing setup"
+Robocopy.exe $SOURCE_DIRECTORY\setup .\dfirws\setup /MIR /MT:96 | Out-Null
 
+Write-Output "Copying files"
 Copy-Item $SOURCE_DIRECTORY\createSandboxConfig.ps1 .\dfirws\
 Copy-Item $SOURCE_DIRECTORY\README.md .\dfirws\
+Write-Output "Done"

@@ -1,6 +1,10 @@
 ﻿Write-Output "Installing and updating files for dfirws"
 
 $source = "M:\IT\dfirws"
+if (! (Test-Path "${source}\dfirws.ps1")) {
+	Write-Output "Mounting M: since its missing from your computer"
+	net use M: \\ad.polisen.se\Common | Out-Null
+}
 
 if (! (Test-Path "${HOME}\dfirws")) {
 	Write-Output "Creating directory ${HOME}\dfirws for dfirws"
@@ -16,7 +20,7 @@ if (! (Test-Path "${HOME}\dfirws")) {
 	Remove-Item dfirws.zip
 }
 
-$folders = "local", "readonly", "readwrite", "local\defaults", "local\vscode"
+$folders = "local", "readonly", "readwrite", "local\defaults", "local\tabby", "local\vscode"
 foreach ($folder in $folders) {
 	if (! (Test-Path "${HOME}\dfirws\$folder")) {
 		mkdir "${HOME}\dfirws\$folder" | Out-Null
