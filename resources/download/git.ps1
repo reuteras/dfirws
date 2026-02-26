@@ -23,6 +23,7 @@ $repourls = `
     "https://github.com/cyberark/White-Phoenix.git", `
     "https://github.com/ExeinfoASL/ASL.git", `
     "https://github.com/fr0gger/jupyter-collection.git", `
+    "https://github.com/fboldewin/reconstructer.org.git", `
     "https://github.com/gehaxelt/Python-dsstore.git", `
     "https://github.com/import-pandas-as-numpy/chainsaw-rules", `
     "https://github.com/JavierYuste/radare2-deep-graph.git", `
@@ -108,9 +109,54 @@ if (Test-Path -Path ".\parseusbs\parseusbs.exe") {
     Copy-Item ".\parseusbs\parseusbs.exe" "..\Tools\bin" -Force | Out-Null
 }
 
+# Extract OfficeMalScanner
+if (Test-Path -Path ".\reconstructer.org\OfficeMalScanner.zip") {
+    if (Test-Path -Path "${TOOLS}\OfficeMalScanner") {
+        Remove-Item -Force -Recurse "${TOOLS}\OfficeMalScanner"
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\OfficeMalScanner.zip" -o"${TOOLS}" | Out-Null
+}
+
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
+
+$TOOL_DEFINITIONS += @{
+    Name = "OfficeMalScanner"
+    Homepage = "https://github.com/fboldewin/reconstructer.org"
+    Vendor = "fboldewin"
+    License = ""
+    LicenseUrl = ""
+    Category = "Files and apps\Office"
+    Shortcuts = @(
+         @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\OfficeMalScanner.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${TOOLS}\OfficeMalScanner\OfficeMalScanner.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\OfficeMalScanner\OfficeMalScanner.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "OfficeMalScanner can scan old office documents."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    Tags = @("office", "macro", "vba", "malware-analysis")
+    FileExtensions = @(".doc", ".ppt", ".xls")
+    PythonVersion = ""
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "RegShot"
