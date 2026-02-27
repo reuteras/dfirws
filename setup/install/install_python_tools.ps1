@@ -71,8 +71,8 @@ if (Test-ToolIncludedSandbox -ToolName "python3.13") {
 }
 Start-Process "${SETUP_PATH}\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
 $iniPath = "$env:LOCALAPPDATA\py.ini"
-echo "[defaults]" > $iniPath
-echo "python=3.11" >> $iniPath
+Write-Output "[defaults]" > $iniPath
+Write-Output "python=3.11" >> $iniPath
 cp $iniPath "C:\Windows\py.ini" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 py -0 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
