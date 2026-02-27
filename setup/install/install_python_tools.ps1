@@ -66,23 +66,31 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User") + ";" + 
 git config --global --add safe.directory '*' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 Write-DateLog "Install Python in Sandbox." >> "C:\log\python.txt"
+if (Test-ToolIncludedSandbox -ToolName "python3.13") {
+    Start-Process "${SETUP_PATH}\python3.13.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=0 Include_test=0"
+}
 Start-Process "${SETUP_PATH}\python3.exe" -Wait -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1 Include_test=0"
+$iniPath = "$env:LOCALAPPDATA\py.ini"
+echo "[defaults]" > $iniPath
+echo "python=3.11" >> $iniPath
+cp $iniPath "C:\Windows\py.ini" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+py -0 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 #
 # Install Python packages
 #
 Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
-uv tool install "git+https://github.com/msuhanov/dfir_ntfs.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --python "C:\Program Files\Python311\python.exe" "git+https://github.com/msuhanov/dfir_ntfs.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed dfir_ntfs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --with "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --python "C:\Program Files\Python311\python.exe" --with "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --python "C:\Program Files\Python311\python.exe" --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --with "mkdocs-material" "mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --python "C:\Program Files\Python311\python.exe" --with "mkdocs-material" "mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
-    uv tool install "binary-refinery[extended]@0.9.26" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    uv tool install --python "C:\Program Files\Python311\python.exe" "binary-refinery[extended]@0.9.26" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
     Write-DateLog "Installed binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
@@ -137,16 +145,16 @@ foreach ($package in `
     "xlrd", `
     "XLMMacroDeobfuscator", `
     "XlsxWriter" ) {
-        uv tool install $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        uv tool install --python "C:\Program Files\Python311\python.exe" $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
         Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 # Profile-conditional Python packages
 if (Test-ToolIncludedSandbox -ToolName "jpterm") {
-    uv tool install jpterm 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    uv tool install --python "C:\Program Files\Python311\python.exe" jpterm 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 if (Test-ToolIncludedSandbox -ToolName "pyghidra") {
-    uv tool install pyghidra 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    uv tool install --python "C:\Program Files\Python311\python.exe" pyghidra 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 Write-DateLog "Install extra scripts in Tools\bin." >> "C:\log\python.txt"
@@ -184,7 +192,7 @@ foreach ($iShutdown in @("iShutdown_detect.py", "iShutdown_parse.py", "iShutdown
 #
 # Include all needed by Didier's tools, https://github.com/DidierStevens/DidierStevensSuite/blob/master/requirements.txt
 Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.txt"
-uv venv "C:\venv\default" >> "C:\log\python.txt"
+uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\default" >> "C:\log\python.txt"
 C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Set-Location "C:\venv\default"
 uv pip install -U `
@@ -270,7 +278,7 @@ uv pip install -U `
 if (Test-ToolIncludedSandbox -ToolName "White-Phoenix") {
     Write-DateLog "Install packages in venv white-phoenix in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
     C:\Windows\System32\curl.exe -L --silent -o "${WSDFIR_TEMP}\white-phoenix.txt" "https://raw.githubusercontent.com/cyberark/White-Phoenix/main/requirements.txt" 2>&1 >> "C:\log\python.txt"
-    uv venv "C:\venv\white-phoenix" >> "C:\log\python.txt"
+    uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\white-phoenix" >> "C:\log\python.txt"
     C:\venv\white-phoenix\Scripts\Activate.ps1 >> "C:\log\python.txt"
     Set-Location "C:\venv\white-phoenix"
     uv pip install -r "${WSDFIR_TEMP}\white-phoenix.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -283,7 +291,7 @@ if (Test-ToolIncludedSandbox -ToolName "Kanvas") {
     Write-DateLog "Install packages in venv kanvas in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
     git clone https://github.com/WithSecureLabs/Kanvas.git C:\venv\Kanvas 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     Set-Location "C:\venv\Kanvas"
-    uv venv "C:\venv\Kanvas\.venv" >> "C:\log\python.txt"
+    uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\Kanvas\.venv" >> "C:\log\python.txt"
     C:\venv\Kanvas\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
     uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     C:\Users\WDAGUtilityAccount\Documents\tools\utils\kanvas_update.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -295,7 +303,7 @@ if (Test-ToolIncludedSandbox -ToolName "Kanvas") {
 Write-DateLog "Install packages in venv gostringungarbler in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
 git clone https://github.com/mandiant/gostringungarbler.git C:\venv\gostringungarbler 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Set-Location "C:\venv\gostringungarbler"
-uv venv "C:\venv\gostringungarbler\.venv" >> "C:\log\python.txt"
+uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\gostringungarbler\.venv" >> "C:\log\python.txt"
 C:\venv\gostringungarbler\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 deactivate
@@ -305,7 +313,7 @@ Write-DateLog "Python venv gostringungarbler done." >> "C:\log\python.txt"
 # venv dfir-unfurl
 #
 Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-uv venv "C:\venv\dfir-unfurl" >> "C:\log\python.txt"
+uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\dfir-unfurl" >> "C:\log\python.txt"
 C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Set-Location "C:\venv\dfir-unfurl"
 uv pip install -U `
@@ -338,7 +346,7 @@ Write-DateLog "Install packages in venv pe2pic in sandbox (needs specific versio
 Set-Location "C:\tmp"
 C:\Windows\System32\curl.exe -L --silent -o "pe2pic.py" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py" 2>&1 >> "C:\log\python.txt"
 C:\Windows\System32\curl.exe -L --silent -o "pe2pic_requirements.txt" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
-uv venv "C:\venv\pe2pic"
+uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\pe2pic"
 C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install -r "C:\tmp\pe2pic_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Copy-Item "C:\tmp\pe2pic.py" "C:\venv\pe2pic\Scripts\pe2pic.py" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -354,7 +362,7 @@ if (Test-ToolIncludedSandbox -ToolName "evt2sigma") {
     Set-Location "C:\tmp"
     C:\Windows\System32\curl.exe -L --silent -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py" 2>&1 >> "C:\log\python.txt"
     C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
-    uv venv "C:\venv\evt2sigma"
+    uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\evt2sigma"
     C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
     uv pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
@@ -368,7 +376,7 @@ if (Test-ToolIncludedSandbox -ToolName "evt2sigma") {
 # venv scare
 #
 Write-DateLog "Install packages in venv scare in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-uv venv "C:\venv\scare"
+uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\scare"
 Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -387,7 +395,7 @@ Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 # venv zircolite
 #
 Write-DateLog "Install packages in venv zircolite in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-uv venv "C:\venv\zircolite"
+uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\zircolite"
 C:\venv\zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Copy-Item -Recurse "C:\git\zircolite" "C:\venv\zircolite"
 Set-Location "C:\venv\zircolite\zircolite"
@@ -433,7 +441,7 @@ if (((Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") -and ($NeedVSBuildTools -
     #$env:JAVA_HOME="C:\Program Files\Amazon Corretto\"+(Get-ChildItem 'C:\Program Files\Amazon Corretto\').Name
 
     #Write-DateLog "Install Python packages in sandbox needing Visual Studio Build Tools." >> "C:\log\python.txt"
-    #uv venv "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    #uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\jep" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     #C:\venv\jep\Scripts\Activate.ps1 >> "C:\log\python.txt"
 
     # Build Ghidrathon for Gidhra

@@ -141,6 +141,7 @@ if ($all -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
     Write-SynchronizedLog "winget: Downloading Python."
     $status = Get-WinGet "Python.Python.3.11" "Python*.exe" "python3.exe" -check "PE32"
+    $status = Get-WinGet "Python.Python.3.13" "Python*.exe" "python3.13.exe" -check "PE32"
 
     # uv - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading uv."
