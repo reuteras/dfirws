@@ -3009,13 +3009,13 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# Visual Studio Code powershell extension - installed during start
+# Visual Studio Code powershell extension
 $status =  Get-GitHubRelease -repo "PowerShell/vscode-powershell" -path "${SETUP_PATH}\vscode\vscode-powershell.vsix" -match "vsix" -check "Zip archive data"
 # vscode-shellcheck
 if (Test-ToolIncluded -ToolName "vscode-shellcheck") {
     $status =  Get-GitHubRelease -repo "vscode-shellcheck/vscode-shellcheck" -path "${SETUP_PATH}\vscode\vscode-shellcheck.vsix" -match "vsix" -check "Zip archive data"
 }
-# Visual Studio Code spell checker extension - installed during start
+# Visual Studio Code spell checker extension
 if (Test-ToolIncluded -ToolName "vscode-spell-checker") {
     $status =  Get-GitHubRelease -repo "streetsidesoftware/vscode-spell-checker" -path "${SETUP_PATH}\vscode\vscode-spell-checker.vsix" -match "vsix" -check "Zip archive data"
 }

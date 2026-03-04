@@ -81,6 +81,24 @@ if (! $NoVSCodeExtensions.IsPresent) {
             Write-DateLog "ERROR: Could not get URI for Visual Studio Code ruff extension. You may be blocked by Microsoft. Try running downloadFiles.ps1 with -HttpNoVSCodeExtensions to skip VSCode extension downloads."
         }
     }
+
+    # Get URI for Visual Studio Yara Language Server extension - ugly
+    if (Test-ToolIncluded -ToolName "vscode-yara") {
+        $vscode_yara_string = Get-DownloadUrlFromPage -url https://marketplace.visualstudio.com/items?itemName=VirusTotal.yara-x-ls -RegEx '"AssetUri":"[^"]+VirusTotal.yara-x-ls/([^/]+)/'
+
+        if ("$vscode_yara_string" -ne "") {
+            $vscode_tmp = $vscode_yara_string | Select-String -Pattern '"AssetUri":"[^"]+VirusTotal.yara-x-ls/([^/]+)/'
+            if ($null -ne $vscode_tmp -and $null -ne $vscode_tmp.Matches -and $vscode_tmp.Matches.Count -gt 0) {
+                $vscode_yara_version = $vscode_tmp.Matches.Groups[1].Value
+                # Visual Studio Code Yara Language Server extension
+                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VirusTotal/v   sextensions/yara-x-ls/$vscode_yara_version/vspackage" -FilePath "${SETUP_PATH}\vscode\vscode-yara.vsix" -CheckURL "Yes" -check "Zip archive data"
+            } else {
+                Write-DateLog "ERROR: Could not parse version for Visual Studio Code Yara Language Server extension. You may be blocked by Microsoft. Try running downloadFiles.ps1 with -HttpNoVSCodeExtensions to skip VSCode extension downloads."
+            }
+        } else {
+            Write-DateLog "ERROR: Could not get URI for Visual Studio Code Yara Language Server extension. You may be blocked by Microsoft. Try running downloadFiles.ps1 with -HttpNoVSCodeExtensions to skip VSCode extension downloads."
+        }
+    }
 }
 
 # Get Visual Studio Code installer
