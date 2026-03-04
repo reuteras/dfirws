@@ -51,6 +51,7 @@ $repourls = `
     "https://github.com/Neo23x0/god-mode-rules.git", `
     "https://github.com/Neo23x0/signature-base.git", `
     "https://github.com/netspooky/scare.git", `
+    "https://github.com/netwho/PacketCircle.git", `
     "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/rabbitstack/fibratus.git", `
@@ -120,6 +121,29 @@ if (Test-Path -Path ".\reconstructer.org\OfficeMalScanner.zip") {
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
+
+$TOOL_DEFINITIONS += @{
+    Name = "PacketCircle"
+    Homepage = "https://github.com/netwho/PacketCircle"
+    Vendor = "netwho"
+    License = "GPL-2.0"
+    LicenseUrl = "https://github.com/netwho/PacketCircle?tab=GPL-2.0-1-ov-file"
+    Category = "Network"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    Notes = "Wireshark Plugin for traffic-matrix visualization."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @("Wireshark")
+    Tags = @("network", "plugin", "visualization")
+    FileExtensions = @(".pcap", ".pcapng")
+    PythonVersion = ""
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "OfficeMalScanner"

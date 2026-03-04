@@ -33,7 +33,6 @@ Categories generated from dfirws shortcuts.
 - [Programming](./programming/index.md)
 - [Programming / Go](./programming-go/index.md)
 - [Programming / Java](./programming-java/index.md)
-- [Programming / Rust](./programming-rust/index.md)
 - [Reverse Engineering](./reverse-engineering/index.md)
 - [Signatures and information](./signatures-and-information/index.md)
 - [Signatures and information / Online tools](./signatures-and-information-online-tools/index.md)
@@ -182,7 +181,6 @@ Categories generated from dfirws shortcuts.
 | [git](./uncategorized/git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
 | [god-mode-rules](./uncategorized/god-mode-rules.md) | Git | God Mode Detection Rules | yara, sigma, detection-rules |  |  |
 | [godap](./utilities/godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | active-directory, ldap |  | Full only |
-| [GoLang](./programming-go/golang.md) | Installer | Go programming language. |  |  |  |
 | [Google Earth Pro](./utilities/google-earth-pro.md) | Winget | Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features. | geolocation, osint, visualization | `.kml`, `.kmz` | Full only |
 | [gootloader](./uncategorized/gootloader.md) | Git | Collection of scripts used to deobfuscate GOOTLOADER malware samples. | malware-analysis, gootloader |  |  |
 | [GoReSym](./programming-go/goresym.md) | GitHub Release | Go symbol recovery tool. | reverse-engineering, golang, symbol-recovery | `.exe`, `.elf` |  |
@@ -300,6 +298,7 @@ Categories generated from dfirws shortcuts.
 | [OpenVPN](./uncategorized/openvpn.md) | Winget | OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols. | vpn, network | `.ovpn` | Full only |
 | [orjson](./uncategorized/orjson.md) | Python |  | json, data-processing | `.json` |  |
 | [OSFMount](./files-and-apps-disk/osfmount.md) | Winget | OSFMount is a tool for mounting disk images and virtual hard disks as virtual drives. It can be used for analyzing disk images, accessing files within them, and performing forensic analysis on the mounted images. | disk-forensics, mounting, filesystem | `.dd`, `.raw`, `.E01`, `.img`, `.vmdk`, `.iso` |  |
+| [PacketCircle](./uncategorized/packetcircle.md) | Git | Wireshark Plugin for traffic-matrix visualization. | network, plugin, visualization | `.pcap`, `.pcapng` |  |
 | [paramiko](./uncategorized/paramiko.md) | Python |  | network, ssh, scripting |  |  |
 | [PatchaPalooza](./uncategorized/patchapalooza.md) | Git | A comprehensive tool that provides an insightful analysis of Microsoft's monthly security updates. | vulnerability, microsoft, patch-analysis |  |  |
 | [pathlab](./uncategorized/pathlab.md) | Python |  | forensics, filesystem |  |  |
@@ -378,7 +377,6 @@ Categories generated from dfirws shortcuts.
 | [rexi](./utilities/rexi.md) | Python |  | regex, data-processing, tui |  |  |
 | [ripgrep](./files-and-apps/ripgrep.md) | GitHub Release | ripgrep is a fast, modern, and user-friendly command-line search tool. | search, grep, cli |  |  |
 | [Ruby](./uncategorized/ruby.md) | Winget | Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. | scripting, ruby | `.rb` | Full only |
-| [Rust](./programming-rust/rust.md) | Installer | Rust programming language. |  |  |  |
 | [rzpipe](./uncategorized/rzpipe.md) | Python |  | reverse-engineering, radare2, scripting | `.exe`, `.dll`, `.elf`, `.bin` |  |
 | [scapy](./network/scapy.md) | Python |  | network-analysis, pcap, packet-crafting | `.pcap`, `.pcapng` |  |
 | [scare](./uncategorized/scare.md) | Git | A multi-arch assembly REPL and emulator for your command line. | assembly, emulation, repl |  |  |

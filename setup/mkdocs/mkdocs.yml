@@ -392,6 +392,7 @@ nav:
     - OpenVPN Connect: tools/uncategorized/openvpn-connect.md
     - OpenVPN: tools/uncategorized/openvpn.md
     - orjson: tools/uncategorized/orjson.md
+    - PacketCircle: tools/uncategorized/packetcircle.md
     - paramiko: tools/uncategorized/paramiko.md
     - PatchaPalooza: tools/uncategorized/patchapalooza.md
     - pathlab: tools/uncategorized/pathlab.md

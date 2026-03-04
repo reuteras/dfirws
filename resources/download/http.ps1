@@ -91,7 +91,7 @@ if (! $NoVSCodeExtensions.IsPresent) {
             if ($null -ne $vscode_tmp -and $null -ne $vscode_tmp.Matches -and $vscode_tmp.Matches.Count -gt 0) {
                 $vscode_yara_version = $vscode_tmp.Matches.Groups[1].Value
                 # Visual Studio Code Yara Language Server extension
-                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VirusTotal/v   sextensions/yara-x-ls/$vscode_yara_version/vspackage" -FilePath "${SETUP_PATH}\vscode\vscode-yara.vsix" -CheckURL "Yes" -check "Zip archive data"
+                $status = Get-FileFromUri -uri "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/VirusTotal/vsextensions/yara-x-ls/$vscode_yara_version/vspackage" -FilePath "${SETUP_PATH}\vscode\vscode-yara.vsix" -CheckURL "Yes" -check "Zip archive data"
             } else {
                 Write-DateLog "ERROR: Could not parse version for Visual Studio Code Yara Language Server extension. You may be blocked by Microsoft. Try running downloadFiles.ps1 with -HttpNoVSCodeExtensions to skip VSCode extension downloads."
             }

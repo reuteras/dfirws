@@ -1334,6 +1334,8 @@ function Install-Wireshark {
         if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Network\Wireshark (runs dfirws-install -Wireshark).lnk") {
             Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Network\Wireshark (runs dfirws-install -Wireshark).lnk" -Force
         }
+        New-Item -ItemType Directory -Path "${env:APPDATA}\Wireshark\plugins\4.6\epan\" 2>&1 | Out-Null
+        Copy-Item "${GIT_PATH}\PacketCircle\installer-v.0.4.x\windows-x86_64\v.0.4.0\packetcircle.dll" "${env:APPDATA}\Wireshark\plugins\4.6\epan"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-wireshark.txt" | Out-Null
     } else {
         Write-Output "Wireshark is already installed"

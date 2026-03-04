@@ -52,6 +52,7 @@
 | [Npcap](npcap.md) | HTTP | Npcap packet capture driver installer. | network-analysis, packet-capture | `.pcap`, `.pcapng` |  |
 | [OpenVPN](openvpn.md) | Winget | OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols. | vpn, network | `.ovpn` | Full only |
 | [PE-utils](pe-utils.md) | GitHub Release | A set of small utilities, helpers for PIN tracers. | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
+| [PacketCircle](packetcircle.md) | Git | Wireshark Plugin for traffic-matrix visualization. | network, plugin, visualization | `.pcap`, `.pcapng` |  |
 | [PatchaPalooza](patchapalooza.md) | Git | A comprehensive tool that provides an insightful analysis of Microsoft's monthly security updates. | vulnerability, microsoft, patch-analysis |  |  |
 | [PersistenceSniper](persistencesniper.md) | Git | Powershell module that can be used by Blue Teams, Incident Responders and System Administrators to hunt persistences implanted in Windows machines. | windows, persistence, threat-hunting |  |  |
 | [PersistenceSniper.wiki](persistencesniper-wiki.md) | Git | GitHub wiki for PersistenceSniper. | windows, persistence, documentation |  |  |
