@@ -160,6 +160,10 @@ if (("${WSDFIR_NEOVIM}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 # Configure the sandbox
 #
 
+# Import registry settings
+reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
+Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
 # PowerShell
 if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
     Copy-Item "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1" "${HOME}\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Force | Out-Null
@@ -176,6 +180,7 @@ if (! (Test-Path "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\setti
 	New-Item -Path "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings" -ItemType Directory -Force | Out-Null
 }
 Copy-Item "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\wt.exe" "$env:ProgramFiles\Windows Terminal\"
+& "${TOOLS}\sysinternals\junction.exe" "$env:ProgramFiles\Windows Terminal\bin" "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR" | Out-Null
 Copy-Item "$LOCAL_PATH\defaults\Windows_Terminal.json" "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings\settings.json" -Force | Out-Null
 $TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR"
 
@@ -204,10 +209,6 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
 	reg import "${WSDFIR_TEMP}\right-click.reg" | Out-Null
 	Write-DateLog "Right-click context menu registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
-
-# Import registry settings
-reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
-Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
 # Uses SystemFileAssociations so the verbs apply reliably to file types
 # Uses full path to pwsh.exe (PowerShell 7)
