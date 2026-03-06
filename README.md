@@ -2,19 +2,11 @@
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-DFIRWS is a solution to do DFIR work in a Windows Sandbox. To avoid having to download and install tools manually from many different sources, the tools are downloaded and prepared for use in a Windows Sandbox or in a VM (only VMWare Workstation at the moment). Therefore the tools is suitable in environment without internet access.
+DFIRWS is a solution to do digital forensics and incident response analysis work in a Windows Sandbox.
 
-DFIRWS has been enhanced since its start and now contains the following main parts.
+The first part of DFIRWS downloads and updates many of the great tools that are available. The second part is the scripts that install the tools and starts a Windows Sandbox with the tools available. There is also a script available to create a VM (only VMWare Workstation at the moment) but it is not as well tested as the sandbox scripts. DFIRWS is suitable in environments without internet access and that has always been its main use case. 
 
-- **downloadFiles.ps1** - download, update and prepare tools to use for DFIR work. Also downloads enrichment data and updates ClamAV signatures. The script can also be used to verify the downloaded files and cache a local copy of Visual Studio Build Tools.
-- **createSandboxConfig.ps1** - create Windows Sandbox configuration files for the tools.
-  - **dfirws.wsb** - Windows Sandbox configuration file with network disabled.
-  - **network_dfirws.wsb** - Windows Sandbox configuration file with network enabled.
-- **createVM.ps1** - create a Windows 11 VM with the tools installed.
-
-DFIRWS should work with the Windows Sandbox in both Windows 10 and Windows 11 even tough it's currently only tested on Windows 11. The VM only creates a Windows 11 VM and currently only works with VMWare Workstation.
-
-**Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. I don't want to have to recommend this but the reason is that at least Windows Defender will some time classify tools as malware even though they are not. Even though I try to exclude those tools I've found that a file can be classified as malware one day and not the next. The choice is yours.
+**Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. I don't want to have to recommend this but the reason is that AV tools classify some legitimate tools as malware. The choice is yours.
 
 ## Table of contents
 
@@ -123,12 +115,6 @@ To verify you can run the following command:
 .\downloadFiles.ps1 -Verify
 ```
 
-Or run everything in one go:
-
-```PowerShell
-.\downloadFiles.ps1 -AllTools -Enrichment -Freshclam -Verify
-```
-
 If you like to cache a local copy of Visual Studio Build Tools you can run. **Important: The Visual Studio Build Tools downloader runs on the host and not in a sandbox!**
 
 ```PowerShell
@@ -170,8 +156,6 @@ The `-DistributionProfile` CLI parameter takes precedence over the config file. 
 ### Sandbox configuration
 
 The quickest way to use the DFIRWS is to start a sandbox by clicking on **dfirws.wsb** or running **.\dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
-
-The goal for startup time is set to around one minute on a computer with a Intel Core i7 and the default configuration. The following is an example screen of the sandbox running after start.
 
 ![Screen when installation is done](./resources/images/screen.png)
 
