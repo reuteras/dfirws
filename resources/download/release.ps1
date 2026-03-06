@@ -4637,6 +4637,182 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# RpcView
+$status = Get-GitHubRelease -repo "silverf0x/RpcView" -path "${SETUP_PATH}\rpcview.7z" -match "RpcView64.7z" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\RpcView") {
+        Remove-Item "${TOOLS}\RpcView" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\rpcview.7z" -o"${TOOLS}" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "RpcView"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\RpcView (is a tool to view RPC endpoints).lnk"
+            Target   = "`${TOOLS}\RpcView64\RpcView.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\RpcView64\RpcView.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("rpc", "utilities")
+    Notes = "RpcView is a tool to view RPC endpoints."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @("Microsoft Visual C++ 2019 Redistributable")
+    Homepage = "https://github.com/silverf0x/RpcView"
+    Vendor = "Silverf0x"
+    License = "GPL-3.0"
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
+# go-size-analyzer
+$status = Get-GitHubRelease -repo "Zxilly/go-size-analyzer" -path "${SETUP_PATH}\go-size-analyzer.zip" -match "go-size-analyzer_.*_windows_amd64.zip" -check "Zip archive data"
+if ($status) {
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\go-size-analyzer.zip" -o"${TOOLS}\bin\" | Out-Null
+    Remove-Item "${TOOLS}\bin\LICENSE" -Force -ErrorAction SilentlyContinue
+    Remove-Item "${TOOLS}\bin\README.md" -Force -ErrorAction SilentlyContinue
+    Remove-Item "${TOOLS}\bin\README_zh_CN.md" -Force -ErrorAction SilentlyContinue
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "go-size-analyzer"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\gsa (is a tool to analyze the size of Go binaries).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command gsa.exe -h"
+            Icon     = ""
+            WorkDir  = "${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "gsa"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("go", "binary-analysis", "utilities")
+    Notes = "go-size-analyzer (gsa) is a tool to analyze the size of Go binaries."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/Zxilly/go-size-analyzer"
+    Vendor = ""
+    License = "AGPL-3.0"
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
+# ILSpy
+$status = Get-GitHubRelease -repo "icsharpcode/ILSpy" -path "${SETUP_PATH}\ilspy.zip" -match "ILSpy_selfcontained_.*x64.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\ILSpy") {
+        Remove-Item "${TOOLS}\ILSpy" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ilspy.zip" -o"${TOOLS}\ILSpy" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ILSpy"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\ILSpy (is a .NET assembly browser and decompiler).lnk"
+            Target   = "`${TOOLS}\ILSpy\ILSpy.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Tools\ILSpy\ILSpy.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("dotnet", "decompiler", "reverse-engineering")
+    Notes = "ILSpy is a .NET assembly browser and decompiler."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/icsharpcode/ILSpy"
+    Vendor = "ICSharpCode"
+    License = "MIT"
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
+# carina-studio/ULogViewer
+$status = Get-GitHubRelease -repo "carina-studio/ULogViewer" -path "${SETUP_PATH}\ULogViewer.zip" -match "ULogViewer-[0-9.]*-win-x64.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\ULogViewer") {
+        Remove-Item "${TOOLS}\ULogViewer" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ULogViewer.zip" -o"${TOOLS}\ULogViewer" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "ULogViewer"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\ULogViewer (is a log viewer for ULog files).lnk"
+            Target   = "`${TOOLS}\ULogViewer\ULogViewer.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "${TOOLS}\ULogViewer\ULogViewer.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("log-viewer", "utilities")
+    Notes = "ULogViewer is a log viewer for ULog files."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/carina-studio/ULogViewer"
+    Vendor = "Carina Studio"
+    License = "MIT"
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 #
 # Obsidian plugins
 #

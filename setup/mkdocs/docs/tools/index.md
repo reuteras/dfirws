@@ -183,6 +183,7 @@ Categories generated from dfirws shortcuts.
 | [ghidrecomp](./uncategorized/ghidrecomp.md) | Python | Python Command-Line Ghidra Decomplier. | reverse-engineering, decompiler | `.exe`, `.dll`, `.elf` |  |
 | [ghidriff](./uncategorized/ghidriff.md) | Python | Ghidra Binary Diffing Engine. | reverse-engineering, binary-diffing | `.exe`, `.dll`, `.elf` |  |
 | [git](./uncategorized/git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
+| [go-size-analyzer](./utilities/go-size-analyzer.md) | GitHub Release | go-size-analyzer (gsa) is a tool to analyze the size of Go binaries. | go, binary-analysis, utilities | `.exe`, `.dll` |  |
 | [god-mode-rules](./uncategorized/god-mode-rules.md) | Git | God Mode Detection Rules | yara, sigma, detection-rules |  |  |
 | [godap](./utilities/godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | active-directory, ldap |  | Full only |
 | [GoLang](./programming-go/golang.md) | Installer | Go programming language. |  |  |  |
@@ -211,6 +212,7 @@ Categories generated from dfirws shortcuts.
 | [Iaito](./reverse-engineering/iaito.md) | GitHub Release | iaito is the official graphical interface for radare2, a libre reverse engineering framework. | reverse-engineering, disassembler, gui | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [IDR](./uncategorized/idr.md) | Git | Interactive Delphi Reconstructor | reverse-engineering, delphi, decompiler |  |  |
 | [iLEAPP](./files-and-apps-phone/ileapp.md) | GitHub Release | iLEAPP is a tool for parsing and analyzing iOS logs, events, and plists. It can be used to extract artifacts from iOS devices and analyze them in a structured way. | mobile-forensics, ios, artifact-extraction | `.tar`, `.zip` |  |
+| [ILSpy](./reverse-engineering/ilspy.md) | GitHub Release | ILSpy is a .NET assembly browser and decompiler. | dotnet, decompiler, reverse-engineering | `.exe`, `.dll` |  |
 | [ImHex](./editors/imhex.md) | GitHub Release | ImHex is a hex editor for binary analysis and pattern language. | hex-editor, binary-analysis, pattern-language | `.exe`, `.dll`, `.bin`, `.hex`, `.elf` |  |
 | [Incident-Response-Powershell](./uncategorized/incident-response-powershell.md) | Git | PowerShell Digital Forensics & Incident Response Scripts. | incident-response, powershell |  |  |
 | [INDXRipper](./files-and-apps-disk/indxripper.md) | GitHub Release | Carve file metadata from NTFS index ($I30) attributes | ntfs, filesystem, forensics, metadata | `.bin` |  |
@@ -261,6 +263,7 @@ Categories generated from dfirws shortcuts.
 | [MEX](./uncategorized/mex.md) | HTTP | MEX is an extension for WinDbg. | debugging, windbg, dotnet | `.dmp` |  |
 | [MFTBrowser](./files-and-apps-disk/mftbrowser.md) | GitHub Release | $MFT directory tree reconstruction & FILE record info | ntfs, filesystem, forensics | `.mft` |  |
 | [Microsoft OpenJDK 11](./uncategorized/microsoft-openjdk-11.md) | HTTP | Microsofts OpenJDK 11 | java, runtime, development |  |  |
+| [Microsoft.etl2pcapng](./network/microsoft-etl2pcapng.md) | Winget | Microsoft.etl2pcapng is a tool for converting ETL (Event Trace Log) files to PCAPNG format, allowing you to analyze network traffic captured in ETL files using tools like Wireshark. | network-analysis, pcap, protocol-analysis | `.etl` |  |
 | [minidump](./uncategorized/minidump.md) | Python | Python library to parse Windows minidump file format. | memory-forensics, windows | `.dmp` |  |
 | [MiTeC Structured Storage Viewer](./files-and-apps-office/mitec-structured-storage-viewer.md) | HTTP | Full-featured MS OLE Structured Storage based file management tool. | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |  |
 | [mkdocs](./uncategorized/mkdocs.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.yml` |  |
@@ -382,8 +385,10 @@ Categories generated from dfirws shortcuts.
 | [RegRipper4.0](./uncategorized/regripper4-0.md) | Git | RegRipper4.0 includes ISO 8601-ish time stamp formatting, MITRE ATT&CK mapping (for some, albeit not all, plugins), and Analysis Tips. Also, there are many new plugins since August, 2020. | registry, forensics, windows |  |  |
 | [RegShot](./os-windows-registry/regshot.md) | Git | RegShot is a small, free and open-source registry compare utility. |  |  |  |
 | [requests](./uncategorized/requests.md) | Python |  | network, http |  |  |
+| [Resource Hacker](./utilities/resource-hacker.md) | HTTP | Resource Hacker is a tool for viewing and editing resources in Windows executables. | resource-editing, reverse-engineering | `.exe`, `.dll`, `.res` |  |
 | [rexi](./utilities/rexi.md) | Python |  | regex, data-processing, tui |  |  |
 | [ripgrep](./files-and-apps/ripgrep.md) | GitHub Release | ripgrep is a fast, modern, and user-friendly command-line search tool. | search, grep, cli |  |  |
+| [RpcView](./utilities/rpcview.md) | GitHub Release | RpcView is a tool to view RPC endpoints. | rpc, utilities |  |  |
 | [Ruby](./uncategorized/ruby.md) | Winget | Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. | scripting, ruby | `.rb` | Full only |
 | [Rust](./programming-rust/rust.md) | Installer | Rust programming language. |  |  |  |
 | [rzpipe](./uncategorized/rzpipe.md) | Python |  | reverse-engineering, radare2, scripting | `.exe`, `.dll`, `.elf`, `.bin` |  |
@@ -424,6 +429,7 @@ Categories generated from dfirws shortcuts.
 | [Trawler](./ir/trawler.md) | Git | PowerShell script helping Incident Responders discover potential adversary persistence mechanisms. | windows, persistence, threat-hunting |  |  |
 | [treelib](./uncategorized/treelib.md) | Python |  | data-processing, tree |  |  |
 | [TrID](./files-and-apps/trid.md) | HTTP | TrID is a file identifier utility. | file-identification |  |  |
+| [ULogViewer](./utilities/ulogviewer.md) | GitHub Release | ULogViewer is a log viewer for ULog files. | log-viewer, utilities | `.exe`, `.dll` |  |
 | [unicorn](./uncategorized/unicorn.md) | Python |  | reverse-engineering, emulation |  |  |
 | [unpy2exe](./uncategorized/unpy2exe.md) | Python |  | reverse-engineering, python, decompiler | `.exe` |  |
 | [upx](./utilities/upx.md) | GitHub Release | UPX is a free, portable, extendable, high-performance executable packer. | packing, pe-analysis, compression | `.exe`, `.dll`, `.elf` |  |

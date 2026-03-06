@@ -888,6 +888,48 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+
+# Microsoft.etl2pcapng
+Write-SynchronizedLog "winget: Downloading Microsoft.etl2pcapng."
+$status = Get-WinGet "Microsoft.etl2pcapng" "etl2pcapng*.msi" "etl2pcapng.exe" -check "PE32"
+if ($status) {
+    Copy-Item -Path ".\downloads\etl2pcapng.exe" -Destination ".\mount\Tools\bin\etl2pcapng.exe" -Force
+}
 Write-SynchronizedLog "winget: Download complete."
+
+$TOOL_DEFINITIONS += @{
+    Name = "Microsoft.etl2pcapng"
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\etl2pcapng.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command etl2pcapng"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "etl2pcapng.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".etl")
+    Tags = @("network-analysis", "pcap", "protocol-analysis")
+    Notes = "Microsoft.etl2pcapng is a tool for converting ETL (Event Trace Log) files to PCAPNG format, allowing you to analyze network traffic captured in ETL files using tools like Wireshark."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "winget"

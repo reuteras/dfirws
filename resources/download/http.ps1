@@ -3273,6 +3273,54 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# Resource hacker
+$status = Get-FileFromUri -uri "https://www.angusj.com/resourcehacker/resource_hacker.zip" -FilePath ".\downloads\resourcehacker.zip" -CheckURL "No" -check "Zip archive data"
+if ($status) {
+    if (Test-Path -Path "${TOOLS}\ResourceHacker") {
+        Remove-Item -Recurse -Force "${TOOLS}\ResourceHacker" | Out-Null 2>&1
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\resourcehacker.zip" -o"${TOOLS}\ResourceHacker" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Resource Hacker"
+    Homepage = "https://angusj.com/resourcehacker/"
+    Vendor = "Angus Johnson"
+    License = "Freeware"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Resource Hacker.lnk"
+            Target   = "`${TOOLS}\ResourceHacker\ResourceHacker.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\ResourceHacker\ResourceHacker.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll", ".res")
+    Tags = @("resource-editing", "reverse-engineering")
+    Notes = "Resource Hacker is a tool for viewing and editing resources in Windows executables."
+    Tips = "Resource Hacker is installed in ${TOOLS}\ResourceHacker."
+    Usage = "Use Resource Hacker to modify resources in PE files."
+    SampleCommands = @(
+        "ResourceHacker.exe -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 # ELK
 if (Test-ToolIncluded -ToolName "Elastic Stack (ELK + Beats)") {
     $ELK_VERSION = ((curl.exe --silent -L "https://api.github.com/repos/elastic/elasticsearch/releases/latest" | ConvertFrom-Json).tag_name).Replace("v", "")

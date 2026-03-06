@@ -2,6 +2,17 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-03-06
+
+- Added [ULogViewer](https://github.com/carina-studio/ULogViewer/)
+- Added [Resource Hacker](https://www.angusj.com/resourcehacker/)
+- Added [ILSpy](https://github.com/icsharpcode/ILSpy)
+- Added etl2pcapng to convert ETL files to PCAPNG format
+- Added [go-size-analyzer](https://github.com/Zxilly/go-size-analyzer)
+- Added [RpcView](https://github.com/silverf0x/RpcView)
+
+Also more fixes to documentation and some of the scripts. The documentation is available at <https://reuteras.github.io/dfirws/>.
+
 ## 2026-02-25
 
 - Add [NetworkMiner](https://www.netresec.com/?page=NetworkMiner) by Netresec.

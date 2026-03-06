@@ -8,7 +8,11 @@
 | [Flare-Floss](flare-floss.md) | GitHub Release | Flare-Floss is a tool for extracting strings from malware samples. | malware-analysis, string-extraction, deobfuscation | `.exe`, `.dll`, `.bin` |  |
 | [Google Earth Pro](google-earth-pro.md) | Winget | Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features. | geolocation, osint, visualization | `.kml`, `.kmz` | Full only |
 | [Graphviz](graphviz.md) | HTTP | Graphviz is a graph visualization software suite. | visualization, graph | `.dot`, `.gv` |  |
+| [Resource Hacker](resource-hacker.md) | HTTP | Resource Hacker is a tool for viewing and editing resources in Windows executables. | resource-editing, reverse-engineering | `.exe`, `.dll`, `.res` |  |
+| [RpcView](rpcview.md) | GitHub Release | RpcView is a tool to view RPC endpoints. | rpc, utilities |  |  |
+| [ULogViewer](ulogviewer.md) | GitHub Release | ULogViewer is a log viewer for ULog files. | log-viewer, utilities | `.exe`, `.dll` |  |
 | [geolocus-cli](geolocus-cli.md) | HTTP | geolocus-cli is a geolocation lookup tool. | geolocation, osint | `.json` |  |
+| [go-size-analyzer](go-size-analyzer.md) | GitHub Release | go-size-analyzer (gsa) is a tool to analyze the size of Go binaries. | go, binary-analysis, utilities | `.exe`, `.dll` |  |
 | [godap](godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | active-directory, ldap |  | Full only |
 | [jpterm](jpterm.md) | Python | Jupyter in the terminal. | jupyter, data-processing, tui, notebook | `.json` |  |
 | [markitdown](markitdown.md) | Python | Utility tool for converting various files to Markdown. | conversion, markdown, data-extraction, office, word | `.docx`, `.xlsx`, `.pptx`, `.pdf`, `.html` |  |
