@@ -2,6 +2,12 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/import-pandas-as-numpy/chainsaw-rules>
+
+**Vendor:** import-pandas-as-numpy
+
+**License:** MIT License
+
 **Source:** Git
 
 **Profiles:** Full, Basic

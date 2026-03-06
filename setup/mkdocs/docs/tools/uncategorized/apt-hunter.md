@@ -2,6 +2,12 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/ahmedkhlief/APT-Hunter>
+
+**Vendor:** ahmedkhlief
+
+**License:** GPL-3.0 License
+
 **Source:** Git
 
 **Profiles:** Full, Basic

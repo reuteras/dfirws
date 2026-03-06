@@ -2,6 +2,10 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/jakehildreth/BlueTuxedo>
+
+**License:** <https://github.com/jakehildreth/BlueTuxedo/blob/main/LICENSE>
+
 **Source:** Git
 
 **Profiles:** Full, Basic

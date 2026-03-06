@@ -37,9 +37,6 @@ nav:
   - Development:
     - Overview: tools/development/index.md
     - Win API Search: tools/development/win-api-search.md
-  - Didierstevens:
-    - Overview: tools/didierstevens/index.md
-    - Didier Stevens Suite: tools/didierstevens/didier-stevens-suite.md
   - Editors:
     - Overview: tools/editors/index.md
     - bytecode-viewer: tools/editors/bytecode-viewer.md
@@ -62,6 +59,9 @@ nav:
     - jq: tools/files-and-apps/jq.md
     - lessmsi: tools/files-and-apps/lessmsi.md
     - magika: tools/files-and-apps/magika.md
+    - msidump: tools/files-and-apps/msidump.md
+    - oletools: tools/files-and-apps/oletools.md
+    - Python-dsstore: tools/files-and-apps/python-dsstore.md
     - ripgrep: tools/files-and-apps/ripgrep.md
     - TrID: tools/files-and-apps/trid.md
     - WinMerge: tools/files-and-apps/winmerge.md
@@ -75,10 +75,12 @@ nav:
     - DB Browser for SQLite: tools/files-and-apps-database/db-browser-for-sqlite.md
     - DBeaver: tools/files-and-apps-database/dbeaver.md
     - dsq: tools/files-and-apps-database/dsq.md
+    - ese-analyst: tools/files-and-apps-database/ese-analyst.md
     - fqlite: tools/files-and-apps-database/fqlite.md
     - h2database: tools/files-and-apps-database/h2database.md
     - litecli: tools/files-and-apps-database/litecli.md
     - Neo4j: tools/files-and-apps-database/neo4j.md
+    - sqlit-tui: tools/files-and-apps-database/sqlit-tui.md
   - Files And Apps Disk:
     - Overview: tools/files-and-apps-disk/index.md
     - dfir_ntfs: tools/files-and-apps-disk/dfir-ntfs.md
@@ -88,6 +90,7 @@ nav:
     - Sleuthkit: tools/files-and-apps-disk/sleuthkit.md
   - Files And Apps Email:
     - Overview: tools/files-and-apps-email/index.md
+    - EmailAnalyzer: tools/files-and-apps-email/emailanalyzer.md
     - extract-msg: tools/files-and-apps-email/extract-msg.md
     - Mail Viewer: tools/files-and-apps-email/mail-viewer.md
     - mboxviewer: tools/files-and-apps-email/mboxviewer.md
@@ -103,13 +106,16 @@ nav:
     - Overview: tools/files-and-apps-log/index.md
     - chainsaw: tools/files-and-apps-log/chainsaw.md
     - dfir-toolkit: tools/files-and-apps-log/dfir-toolkit.md
+    - Events-Ripper: tools/files-and-apps-log/events-ripper.md
     - evtx_dump: tools/files-and-apps-log/evtx-dump.md
     - fx: tools/files-and-apps-log/fx.md
     - gron: tools/files-and-apps-log/gron.md
     - hayabusa: tools/files-and-apps-log/hayabusa.md
     - LogBoost: tools/files-and-apps-log/logboost.md
     - LUMEN: tools/files-and-apps-log/lumen.md
+    - MasterParser: tools/files-and-apps-log/masterparser.md
     - takajo: tools/files-and-apps-log/takajo.md
+    - ToolAnalysisResultSheet: tools/files-and-apps-log/toolanalysisresultsheet.md
     - toolong: tools/files-and-apps-log/toolong.md
     - YAMAGoya: tools/files-and-apps-log/yamagoya.md
     - Zircolite: tools/files-and-apps-log/zircolite.md
@@ -120,7 +126,6 @@ nav:
     - MiTeC Structured Storage Viewer: tools/files-and-apps-office/mitec-structured-storage-viewer.md
     - msoffcrypto-tool: tools/files-and-apps-office/msoffcrypto-tool.md
     - OfficeMalScanner: tools/files-and-apps-office/officemalscanner.md
-    - oletools: tools/files-and-apps-office/oletools.md
     - pcode2code: tools/files-and-apps-office/pcode2code.md
     - XLMMacroDeobfuscator: tools/files-and-apps-office/xlmmacrodeobfuscator.md
   - Files And Apps Pdf:
@@ -132,6 +137,7 @@ nav:
   - Files And Apps Pe:
     - Overview: tools/files-and-apps-pe/index.md
     - 4n4lDetector: tools/files-and-apps-pe/4n4ldetector.md
+    - ASL: tools/files-and-apps-pe/asl.md
     - capa Explorer Web: tools/files-and-apps-pe/capa-explorer-web.md
     - capa: tools/files-and-apps-pe/capa.md
     - debloat: tools/files-and-apps-pe/debloat.md
@@ -145,8 +151,11 @@ nav:
     - Overview: tools/files-and-apps-phone/index.md
     - aLEAPP: tools/files-and-apps-phone/aleapp.md
     - iLEAPP: tools/files-and-apps-phone/ileapp.md
+    - iShutdown: tools/files-and-apps-phone/ishutdown.md
   - Files And Apps Rdp:
     - Overview: tools/files-and-apps-rdp/index.md
+    - bmc-tools: tools/files-and-apps-rdp/bmc-tools.md
+    - RdpCacheStitcher: tools/files-and-apps-rdp/rdpcachestitcher-2.md
     - RDPCacheStitcher: tools/files-and-apps-rdp/rdpcachestitcher.md
   - Forensics:
     - Overview: tools/forensics/index.md
@@ -158,8 +167,11 @@ nav:
     - dissect: tools/forensics/dissect.md
   - Ir:
     - Overview: tools/ir/index.md
-    - KAPE: tools/ir/kape.md
+    - PersistenceSniper: tools/ir/persistencesniper.md
+    - PowerSponse: tools/ir/powersponse.md
+    - Trawler: tools/ir/trawler.md
     - Velociraptor: tools/ir/velociraptor.md
+    - white-phoenix: tools/ir/white-phoenix.md
   - Logs:
     - Overview: tools/logs/index.md
     - FullEventLogView: tools/logs/fulleventlogview.md
@@ -167,11 +179,15 @@ nav:
     - Overview: tools/malware-tools/index.md
     - ClamAV: tools/malware-tools/clamav.md
     - csvkit: tools/malware-tools/csvkit.md
+    - defender-detectionhistory-parser: tools/malware-tools/defender-detectionhistory-parser.md
     - maldump: tools/malware-tools/maldump.md
   - Malware Tools Cobalt Strike:
     - Overview: tools/malware-tools-cobalt-strike/index.md
     - BeaconHunter: tools/malware-tools-cobalt-strike/beaconhunter.md
     - CobaltStrikeScan: tools/malware-tools-cobalt-strike/cobaltstrikescan.md
+  - Malware Tools Gootloader:
+    - Overview: tools/malware-tools-gootloader/index.md
+    - gootloader: tools/malware-tools-gootloader/gootloader.md
   - Memory:
     - Overview: tools/memory/index.md
     - Dokany: tools/memory/dokany.md
@@ -217,18 +233,30 @@ nav:
     - RegShot: tools/os-windows-registry/regshot.md
   - Programming:
     - Overview: tools/programming/index.md
+    - NodeJS: tools/programming/nodejs.md
     - PHP: tools/programming/php.md
+    - Python 3.11: tools/programming/python-3-11.md
+  - Programming Dotnet:
+    - Overview: tools/programming-dotnet/index.md
+    - dotnetfile: tools/programming-dotnet/dotnetfile.md
   - Programming Go:
     - Overview: tools/programming-go/index.md
     - gftrace: tools/programming-go/gftrace.md
     - GoLang: tools/programming-go/golang.md
+    - GoReSym: tools/programming-go/goresym-2.md
     - GoReSym: tools/programming-go/goresym.md
+    - gostringungarbler: tools/programming-go/gostringungarbler.md
     - redress: tools/programming-go/redress.md
   - Programming Java:
     - Overview: tools/programming-java/index.md
+    - Amazon Corretto 21: tools/programming-java/amazon-corretto-21.md
     - jadx: tools/programming-java/jadx.md
     - jd-gui: tools/programming-java/jd-gui.md
     - Recaf: tools/programming-java/recaf.md
+  - Programming Powershell:
+    - Overview: tools/programming-powershell/index.md
+    - deobshell: tools/programming-powershell/deobshell.md
+    - PowerDecode: tools/programming-powershell/powerdecode.md
   - Programming Rust:
     - Overview: tools/programming-rust/index.md
     - Rust: tools/programming-rust/rust.md
@@ -240,6 +268,7 @@ nav:
     - FASM: tools/reverse-engineering/fasm.md
     - Iaito: tools/reverse-engineering/iaito.md
     - Radare2: tools/reverse-engineering/radare2.md
+    - scare: tools/reverse-engineering/scare.md
     - x64dbg: tools/reverse-engineering/x64dbg.md
   - Signatures And Information:
     - Overview: tools/signatures-and-information/index.md
@@ -251,6 +280,7 @@ nav:
     - yq: tools/signatures-and-information/yq.md
   - Signatures And Information Online Tools:
     - Overview: tools/signatures-and-information-online-tools/index.md
+    - malware-bazaar-advanced-search: tools/signatures-and-information-online-tools/malware-bazaar-advanced-search.md
     - malwarebazaar: tools/signatures-and-information-online-tools/malwarebazaar.md
     - shodan: tools/signatures-and-information-online-tools/shodan.md
     - VirusTotal CLI: tools/signatures-and-information-online-tools/virustotal-cli.md
@@ -265,18 +295,15 @@ nav:
     - aiohttp: tools/uncategorized/aiohttp.md
     - API Monitor: tools/uncategorized/api-monitor.md
     - APT-Hunter: tools/uncategorized/apt-hunter.md
-    - ASL: tools/uncategorized/asl.md
     - Aspose.Email-for-Python-via-Net: tools/uncategorized/aspose-email-for-python-via-net.md
     - BeautifulSoup4: tools/uncategorized/beautifulsoup4.md
     - bitstruct: tools/uncategorized/bitstruct.md
     - BlueTuxedo: tools/uncategorized/bluetuxedo.md
-    - bmc-tools: tools/uncategorized/bmc-tools.md
     - cabarchive: tools/uncategorized/cabarchive.md
     - capa-explorer: tools/uncategorized/capa-explorer.md
     - capa-rules: tools/uncategorized/capa-rules.md
     - CapaExplorer: tools/uncategorized/capaexplorer.md
     - cart: tools/uncategorized/cart.md
-    - None: tools/uncategorized/category.md
     - chainsaw-rules: tools/uncategorized/chainsaw-rules.md
     - CimSweep: tools/uncategorized/cimsweep.md
     - cmder: tools/uncategorized/cmder.md
@@ -288,8 +315,6 @@ nav:
     - CVE Data: tools/uncategorized/cve-data.md
     - decai: tools/uncategorized/decai.md
     - deep_translator: tools/uncategorized/deep-translator.md
-    - defender-detectionhistory-parser: tools/uncategorized/defender-detectionhistory-parser.md
-    - deobshell: tools/uncategorized/deobshell.md
     - DFIRArtifactMuseum: tools/uncategorized/dfirartifactmuseum.md
     - dfirws-sample-files: tools/uncategorized/dfirws-sample-files.md
     - dictionaries: tools/uncategorized/dictionaries.md
@@ -300,20 +325,14 @@ nav:
     - DotNet 6 Desktop Runtime: tools/uncategorized/dotnet-6-desktop-runtime.md
     - DotNet 8 Desktop Runtime: tools/uncategorized/dotnet-8-desktop-runtime.md
     - DotNet 9 Desktop Runtime: tools/uncategorized/dotnet-9-desktop-runtime.md
-    - dotnetfile: tools/uncategorized/dotnetfile-2.md
     - dotnetfile: tools/uncategorized/dotnetfile.md
     - dpkt: tools/uncategorized/dpkt.md
     - DSpellCheck: tools/uncategorized/dspellcheck.md
     - edit: tools/uncategorized/edit.md
     - Elastic Stack (ELK + Beats): tools/uncategorized/elastic-stack-elk-beats.md
     - elasticsearch: tools/uncategorized/elasticsearch.md
-    - EmailAnalyzer: tools/uncategorized/emailanalyzer.md
-    - ese-analyst: tools/uncategorized/ese-analyst.md
-    - Events-Ripper: tools/uncategorized/events-ripper.md
     - EVTX-ATTACK-SAMPLES: tools/uncategorized/evtx-attack-samples.md
     - evtx: tools/uncategorized/evtx.md
-    - fibratus: tools/uncategorized/fibratus.md
-    - flare-floss: tools/uncategorized/flare-floss.md
     - flatten_json: tools/uncategorized/flatten-json.md
     - flow.record: tools/uncategorized/flow-record.md
     - forensic-timeliner: tools/uncategorized/forensic-timeliner.md
@@ -329,20 +348,15 @@ nav:
     - ghidriff: tools/uncategorized/ghidriff.md
     - git: tools/uncategorized/git.md
     - god-mode-rules: tools/uncategorized/god-mode-rules.md
-    - gootloader: tools/uncategorized/gootloader.md
-    - GoReSym: tools/uncategorized/goresym.md
-    - gostringungarbler: tools/uncategorized/gostringungarbler.md
     - graphviz: tools/uncategorized/graphviz.md
     - grip: tools/uncategorized/grip.md
     - gti-dev-kit: tools/uncategorized/gti-dev-kit.md
     - hayabusa-rules: tools/uncategorized/hayabusa-rules.md
     - hexdump: tools/uncategorized/hexdump.md
-    - HiddenWave: tools/uncategorized/hiddenwave.md
     - IDR: tools/uncategorized/idr.md
     - Incident-Response-Powershell: tools/uncategorized/incident-response-powershell.md
     - IPinfo Country ASN: tools/uncategorized/ipinfo-country-asn.md
     - IrfanView: tools/uncategorized/irfanview.md
-    - iShutdown: tools/uncategorized/ishutdown.md
     - JavaFX SDK: tools/uncategorized/javafx-sdk.md
     - javaobj-py3: tools/uncategorized/javaobj-py3.md
     - jupyter-collection: tools/uncategorized/jupyter-collection.md
@@ -354,9 +368,7 @@ nav:
     - lief: tools/uncategorized/lief.md
     - LnkParse3: tools/uncategorized/lnkparse3.md
     - maclookup: tools/uncategorized/maclookup.md
-    - malware-bazaar-advanced-search: tools/uncategorized/malware-bazaar-advanced-search.md
     - "@marp-team/marp-cli": tools/uncategorized/marp-team-marp-cli.md
-    - MasterParser: tools/uncategorized/masterparser.md
     - matplotlib: tools/uncategorized/matplotlib.md
     - MaxMind GeoLite2 ASN: tools/uncategorized/maxmind-geolite2-asn.md
     - MaxMind GeoLite2 City: tools/uncategorized/maxmind-geolite2-city.md
@@ -389,7 +401,6 @@ nav:
     - one-extract: tools/uncategorized/one-extract.md
     - opencode-ai: tools/uncategorized/opencode-ai.md
     - openpyxl: tools/uncategorized/openpyxl.md
-    - OpenVPN Connect: tools/uncategorized/openvpn-connect.md
     - OpenVPN: tools/uncategorized/openvpn.md
     - orjson: tools/uncategorized/orjson.md
     - PacketCircle: tools/uncategorized/packetcircle.md
@@ -400,13 +411,10 @@ nav:
     - PE-utils: tools/uncategorized/pe-utils.md
     - pefile: tools/uncategorized/pefile.md
     - PersistenceSniper.wiki: tools/uncategorized/persistencesniper-wiki.md
-    - PersistenceSniper: tools/uncategorized/persistencesniper.md
     - peutils: tools/uncategorized/peutils.md
     - pfp: tools/uncategorized/pfp.md
-    - PowerDecode: tools/uncategorized/powerdecode.md
     - PowerShell 7: tools/uncategorized/powershell-7.md
     - PowerShell: tools/uncategorized/powershell.md
-    - PowerSponse: tools/uncategorized/powersponse.md
     - ppdeep: tools/uncategorized/ppdeep.md
     - prettytable: tools/uncategorized/prettytable.md
     - protodeep: tools/uncategorized/protodeep.md
@@ -430,7 +438,6 @@ nav:
     - PySocks: tools/uncategorized/pysocks.md
     - python-docx: tools/uncategorized/python-docx.md
     - python-dotenv: tools/uncategorized/python-dotenv.md
-    - Python-dsstore: tools/uncategorized/python-dsstore.md
     - python-magic: tools/uncategorized/python-magic.md
     - python-registry: tools/uncategorized/python-registry.md
     - pyvis: tools/uncategorized/pyvis.md
@@ -442,20 +449,17 @@ nav:
     - r2ai: tools/uncategorized/r2ai.md
     - radare2-deep-graph: tools/uncategorized/radare2-deep-graph.md
     - radare2-mcp: tools/uncategorized/radare2-mcp.md
-    - RdpCacheStitcher: tools/uncategorized/rdpcachestitcher.md
     - readpe: tools/uncategorized/readpe.md
-    - regipy: tools/uncategorized/regipy.md
+    - regipy-mcp-server: tools/uncategorized/regipy-mcp-server.md
     - RegRipper4.0: tools/uncategorized/regripper4-0.md
     - requests: tools/uncategorized/requests.md
     - Ruby: tools/uncategorized/ruby.md
     - rzpipe: tools/uncategorized/rzpipe.md
-    - scare: tools/uncategorized/scare.md
     - Shadow-Pulse: tools/uncategorized/shadow-pulse.md
     - sigma: tools/uncategorized/sigma.md
     - signature-base: tools/uncategorized/signature-base.md
     - simplejson: tools/uncategorized/simplejson.md
     - Snort Rules: tools/uncategorized/snort-rules.md
-    - sqlit-tui: tools/uncategorized/sqlit-tui.md
     - SQLite Tools: tools/uncategorized/sqlite-tools.md
     - SSC-Threat-Intel-IoCs: tools/uncategorized/ssc-threat-intel-iocs.md
     - SSHniff: tools/uncategorized/sshniff.md
@@ -468,17 +472,13 @@ nav:
     - textsearch: tools/uncategorized/textsearch.md
     - threat-intel: tools/uncategorized/threat-intel.md
     - tomlkit: tools/uncategorized/tomlkit.md
-    - ToolAnalysisResultSheet: tools/uncategorized/toolanalysisresultsheet.md
     - TOR Exit Nodes: tools/uncategorized/tor-exit-nodes.md
     - TotalRecall: tools/uncategorized/totalrecall.md
-    - Trawler: tools/uncategorized/trawler.md
     - treelib: tools/uncategorized/treelib.md
     - unicorn: tools/uncategorized/unicorn.md
     - unpy2exe: tools/uncategorized/unpy2exe.md
     - uv: tools/uncategorized/uv.md
     - Velociraptor Artifact Exchange: tools/uncategorized/velociraptor-artifact-exchange.md
-    - Visual Studio Build Tools: tools/uncategorized/visual-studio-build-tools.md
-    - vmss2core: tools/uncategorized/vmss2core.md
     - Volexity Threat Intel: tools/uncategorized/volexity-threat-intel.md
     - VS Code PowerShell Extension: tools/uncategorized/vs-code-powershell-extension.md
     - VS Code Spell Checker: tools/uncategorized/vs-code-spell-checker.md
@@ -505,12 +505,10 @@ nav:
     - YARA Forge Rules Extended: tools/uncategorized/yara-forge-rules-extended.md
     - YARA Forge Rules Full: tools/uncategorized/yara-forge-rules-full.md
     - yara-python: tools/uncategorized/yara-python.md
-    - Zircolite: tools/uncategorized/zircolite.md
   - Utilities:
     - Overview: tools/utilities/index.md
     - 7-Zip: tools/utilities/7-zip.md
     - DCode: tools/utilities/dcode.md
-    - Docker Desktop: tools/utilities/docker-desktop.md
     - ExifTool: tools/utilities/exiftool.md
     - Flare-Floss: tools/utilities/flare-floss.md
     - geolocus-cli: tools/utilities/geolocus-cli.md
@@ -532,11 +530,6 @@ nav:
     - Chrome: tools/utilities-browsers/chrome.md
     - Firefox: tools/utilities-browsers/firefox.md
     - Tor Browser: tools/utilities-browsers/tor-browser.md
-  - Utilities Crypto:
-    - Overview: tools/utilities-crypto/index.md
-    - Gpg4win: tools/utilities-crypto/gpg4win.md
-    - hashcat: tools/utilities-crypto/hashcat.md
-    - VeraCrypt: tools/utilities-crypto/veracrypt.md
   - Utilities Cryptography:
     - Overview: tools/utilities-cryptography/index.md
     - Ares: tools/utilities-cryptography/ares.md
@@ -547,11 +540,11 @@ nav:
     - name-that-hash: tools/utilities-cryptography/name-that-hash.md
     - protodump: tools/utilities-cryptography/protodump.md
     - VeraCrypt: tools/utilities-cryptography/veracrypt.md
+  - Utilities Ctf:
+    - Overview: tools/utilities-ctf/index.md
+    - HiddenWave: tools/utilities-ctf/hiddenwave.md
   - Utilities Media:
     - Overview: tools/utilities-media/index.md
     - Audacity: tools/utilities-media/audacity.md
     - ffmpeg: tools/utilities-media/ffmpeg.md
     - VLC: tools/utilities-media/vlc.md
-  - Zimmerman:
-    - Overview: tools/zimmerman/index.md
-    - Zimmerman Tools: tools/zimmerman/zimmerman-tools.md

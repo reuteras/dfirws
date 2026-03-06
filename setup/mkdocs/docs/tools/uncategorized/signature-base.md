@@ -2,6 +2,12 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/Neo23x0/signature-base>
+
+**Vendor:** Neo23x0
+
+**License:** [Detection Rule License (DRL) 1.1](https://github.com/Neo23x0/signature-base?tab=License-1-ov-file)
+
 **Source:** Git
 
 **Profiles:** Full, Basic

@@ -2,12 +2,16 @@
 
 **Category:** Programming / Go
 
-**Source:** GitHub Release
+**Homepage:** <https://github.com/mandiant/GoReSym>
+
+**Vendor:** Mandiant
+
+**License:** MIT License
+
+**Source:** Git
 
 **Profiles:** Full, Basic
 
-**File Extensions:** `.exe`, `.elf`
-
 **Tags:** reverse-engineering, golang, symbol-recovery
 
-Go symbol recovery tool.
+Go symbol recovery tool

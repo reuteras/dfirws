@@ -3,6 +3,7 @@
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
 | [4n4lDetector](4n4ldetector.md) | GitHub Release | Advanced static analysis tool | malware-analysis, pe-analysis, detection | `.exe`, `.dll` | Full only |
+| [ASL](asl.md) | Git | Detect packer, compiler, protector, .NET obfuscator, PUA application | pe-analysis, packer-detection | `.exe` |  |
 | [HollowsHunter](hollowshunter.md) | GitHub Release | Scans running processes. Recognizes and dumps a variety of in-memory implants | malware-analysis, pe-analysis, process-injection | `.exe`, `.dll`, `.dmp` |  |
 | [PE-bear](pe-bear.md) | GitHub Release | A tool for analyzing PE files | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
 | [PE-sieve](pe-sieve.md) | GitHub Release | Scans a given process. Recognizes and dumps a variety of potentially malicious implants (replaced/injected PEs, shellcodes, hooks, in-memory patches). | pe-analysis, malware-analysis, process-injection | `.exe`, `.dll` |  |

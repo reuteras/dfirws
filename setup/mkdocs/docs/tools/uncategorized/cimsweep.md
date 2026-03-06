@@ -2,6 +2,12 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/mattifestation/CimSweep>
+
+**Vendor:** mattifestation
+
+**License:** BSD 3-Clause License
+
 **Source:** Git
 
 **Profiles:** Full, Basic

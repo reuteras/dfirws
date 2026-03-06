@@ -8,5 +8,4 @@
 | [OfficeMalScanner](officemalscanner.md) | Git | OfficeMalScanner can scan old office documents. | office, macro, vba, malware-analysis | `.doc`, `.ppt`, `.xls` |  |
 | [XLMMacroDeobfuscator](xlmmacrodeobfuscator.md) | Python |  | office, macro, deobfuscation, malware-analysis | `.xls`, `.xlsm`, `.xlsb` |  |
 | [msoffcrypto-tool](msoffcrypto-tool.md) | Python | Python tool and library for decrypting and encrypting MS Office files using a password or other keys | office, encryption, decryption | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx` |  |
-| [oletools](oletools.md) | Python | Python tools to analyze security characteristics of MS Office and OLE files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), for Malware Analysis and Incident Response #DFIR. | office, macro, malware-analysis, vba | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.rtf` |  |
 | [pcode2code](pcode2code.md) | Python | A vba p-code decompiler based on pcodedmp | office, vba, decompiler | `.doc`, `.xls`, `.ppt` |  |

@@ -17,3 +17,6 @@
 **Tags:** reverse-engineering, mcp, ai, radare2
 
 LLM-based reversing for radare2.
+
+## Tips
+Currently not working in dfirws.

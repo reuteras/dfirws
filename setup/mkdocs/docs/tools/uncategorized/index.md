@@ -5,32 +5,27 @@
 | [@marp-team/marp-cli](marp-team-marp-cli.md) | npm | A CLI interface for Marp and Marpit based converters. Markdown presentations. | markdown, presentation, documentation | `.md`, `.markdown` |  |
 | [API Monitor](api-monitor.md) | HTTP | API Monitor is a tool for monitoring Windows API calls. | reverse-engineering, api-tracing, dynamic-analysis | `.exe`, `.dll` |  |
 | [APT-Hunter](apt-hunter.md) | Git | APT-Hunter is Threat Hunting tool for windows event logs which made by purple team mindset to provide detect APT movements hidden in the sea of windows event logs to decrease the time to uncover suspicious activity. | event-log, threat-hunting | `.evtx` |  |
-| [ASL](asl.md) | Git | Detect packer , compiler , protector , .NET obfuscator , PUA application | pe-analysis, packer-detection | `.exe` |  |
 | [Aspose.Email-for-Python-via-Net](aspose-email-for-python-via-net.md) | Python |  | email, forensics, data-extraction | `.msg`, `.eml`, `.pst`, `.ost`, `.mbox` |  |
 | [BeautifulSoup4](beautifulsoup4.md) | Python |  | web, html-parsing, scraping | `.html`, `.htm`, `.xml` |  |
 | [BlueTuxedo](bluetuxedo.md) | Git | A tiny tool built to find and fix common misconfigurations in Active Directory-integrated DNS | windows, active-directory, dns |  |  |
 | [CVE Data](cve-data.md) | Enrichment | CVE list data from the CVEProject cvelistV5 repository. | cve, vulnerability, threat-intel | `.json`, `.zip` |  |
-| [CapaExplorer](capaexplorer.md) | Git | Capa analysis importer for Ghidra. | reverse-engineering, capa, visualization |  |  |
+| [CapaExplorer](capaexplorer.md) | Git | Capa analysis importer for Ghidra. | reverse-engineering, capa, visualization, plugin |  |  |
 | [CimSweep](cimsweep.md) | Git | CimSweep is a suite of CIM/WMI-based tools that enable the ability to perform incident response and hunting operations remotely across all versions of Windows. | windows, forensics, wmi |  |  |
 | [ComparePlus](compareplus.md) | GitHub Release | A diff plugin for Notepad++. | text-editor, diff, plugins |  |  |
 | [CuTE-tui](cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |  |
-| [DFIRArtifactMuseum](dfirartifactmuseum.md) | Git | The goal of this repo is to archive artifacts from all versions of various OS's and categorizing them by type. This will help with artifact validation processes as well as increase access to artifacts that may no longer be readily available anymore. | forensics, artifacts, reference |  |  |
+| [DFIRArtifactMuseum](dfirartifactmuseum.md) | Git | The goal of this repo is to archive artifacts from all versions of various OS's and categorizing them by type. This will help with artifact validation processes as well as increase access to artifacts that may no longer be readily available anymore. | forensics, artifacts, reference, sample-files |  |  |
 | [DSpellCheck](dspellcheck.md) | GitHub Release | A spell-checker plugin for Notepad++. | text-editor, spell-checker, plugins |  |  |
 | [DotNet 6 Desktop Runtime](dotnet-6-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0. | dotnet, runtime |  |  |
 | [DotNet 8 Desktop Runtime](dotnet-8-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0. | dotnet, runtime |  |  |
 | [DotNet 9 Desktop Runtime](dotnet-9-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0. | dotnet, runtime |  |  |
 | [EVTX-ATTACK-SAMPLES](evtx-attack-samples.md) | Git | Windows Events Attack Samples. | event-log, mitre-attack, samples | `.evtx` |  |
 | [Elastic Stack (ELK + Beats)](elastic-stack-elk-beats.md) | HTTP | Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats. | siem, log-analysis, elasticsearch, visualization | `.json`, `.log` | Full only |
-| [EmailAnalyzer](emailanalyzer.md) | Git | With EmailAnalyzer you can analyze your suspicious emails. You can extract headers, links, and hashes from the .eml file and you can generate reports. | email, forensics, phishing | `.eml` |  |
-| [Events-Ripper](events-ripper.md) | Git | This project is based on RegRipper, to easily extract additional value/pivot points from a TLN events file. | event-log, forensics, windows |  |  |
 | [Geolocus](geolocus.md) | Enrichment | Geolocus MMDB geolocation database. | geolocation, mmdb | `.mmdb` |  |
 | [Ghidra](ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  | Full only |
 | [Ghidra BTIGhidra](ghidra-btighidra.md) | GitHub Release | Binary Type Inference Ghidra Plugin | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra Cartographer](ghidra-cartographer.md) | GitHub Release | Code Coverage Exploration Plugin for Ghidra. | reverse-engineering, disassembler, visualization | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra GhidrAssistMCP](ghidra-ghidrassistmcp.md) | GitHub Release | Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default. | reverse-engineering, mcp, ai, ghidra | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra GolangAnalyzerExtension](ghidra-golanganalyzerextension.md) | GitHub Release | GoLang extension for Ghidra. | reverse-engineering, golang | `.exe`, `.elf` |  |
-| [GoReSym](goresym.md) | Git | Go symbol recovery tool | reverse-engineering, golang, symbol-recovery |  |  |
-| [HiddenWave](hiddenwave.md) | Git | Hide Your Secret Message in any Wave Audio File. | steganography, audio, CTF | `.waw` |  |
 | [IDR](idr.md) | Git | Interactive Delphi Reconstructor | reverse-engineering, delphi, decompiler |  |  |
 | [IPinfo Country ASN](ipinfo-country-asn.md) | Enrichment | IPinfo.io free IP to Country and ASN database in MMDB format. Requires IPINFO_API_KEY. | geolocation, ip-address, asn | `.mmdb` |  |
 | [Incident-Response-Powershell](incident-response-powershell.md) | Git | PowerShell Digital Forensics & Incident Response Scripts. | incident-response, powershell |  |  |
@@ -40,7 +35,6 @@
 | [LnkParse3](lnkparse3.md) | Python | Windows Shortcut file (LNK) parser | windows, forensics, shortcut-analysis | `.lnk` |  |
 | [MEX](mex.md) | HTTP | MEX is an extension for WinDbg. | debugging, windbg, dotnet | `.dmp` |  |
 | [MSRC](msrc.md) | Git | Data from Microsoft patch tuesdays. | vulnerability, microsoft, security-advisory |  |  |
-| [MasterParser](masterparser.md) | Git | MasterParser is a powerful DFIR tool designed for analyzing and parsing Linux logs | log-analysis, linux, authentication | `.log` |  |
 | [MaxMind GeoLite2 ASN](maxmind-geolite2-asn.md) | Enrichment | MaxMind GeoLite2 ASN database for mapping IP addresses to Autonomous System Numbers. Requires MAXMIND_LICENSE_KEY. | geolocation, asn, maxmind | `.mmdb`, `.tar.gz` |  |
 | [MaxMind GeoLite2 City](maxmind-geolite2-city.md) | Enrichment | MaxMind GeoLite2 City database for mapping IP addresses to city-level geolocation. Requires MAXMIND_LICENSE_KEY. | geolocation, city, maxmind | `.mmdb`, `.tar.gz` |  |
 | [MaxMind GeoLite2 Country](maxmind-geolite2-country.md) | Enrichment | MaxMind GeoLite2 Country database for mapping IP addresses to countries. Requires MAXMIND_LICENSE_KEY. | geolocation, country, maxmind | `.mmdb`, `.tar.gz` |  |
@@ -54,16 +48,11 @@
 | [PE-utils](pe-utils.md) | GitHub Release | A set of small utilities, helpers for PIN tracers. | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
 | [PacketCircle](packetcircle.md) | Git | Wireshark Plugin for traffic-matrix visualization. | network, plugin, visualization | `.pcap`, `.pcapng` |  |
 | [PatchaPalooza](patchapalooza.md) | Git | A comprehensive tool that provides an insightful analysis of Microsoft's monthly security updates. | vulnerability, microsoft, patch-analysis |  |  |
-| [PersistenceSniper](persistencesniper.md) | Git | Powershell module that can be used by Blue Teams, Incident Responders and System Administrators to hunt persistences implanted in Windows machines. | windows, persistence, threat-hunting |  |  |
 | [PersistenceSniper.wiki](persistencesniper-wiki.md) | Git | GitHub wiki for PersistenceSniper. | windows, persistence, documentation |  |  |
-| [PowerDecode](powerdecode.md) | Git | PowerDecode is a PowerShell-based tool that allows to deobfuscate PowerShell scripts obfuscated across multiple layers. The tool performs code dynamic analysis, extracting malware hosting URLs and checking http response.It can also detect if the malware attempts to inject shellcode into memory. | powershell, deobfuscation, malware-analysis |  |  |
 | [PowerShell](powershell.md) | GitHub Release | PowerShell is a task automation and configuration management framework from Microsoft. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
 | [PowerShell 7](powershell-7.md) | Winget | PowerShell 7 is a cross-platform shell and scripting language that provides a powerful command-line interface and automation capabilities. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
-| [PowerSponse](powersponse.md) | Git | PowerSponse is a PowerShell module focused on targeted containment and remediation during incident response. | incident-response, powershell, containment |  |  |
 | [PySocks](pysocks.md) | Python |  | network, proxy |  |  |
-| [Python-dsstore](python-dsstore.md) | Git | A library for parsing .DS_Store files and extracting file names | forensics, macos, data-extraction | `.DS_Store` |  |
 | [QEMU](qemu.md) | Winget | QEMU is a generic and open-source machine emulator and virtualizer. It can be used to run operating systems and applications for different architectures on a host system, making it useful for testing, development, and analysis. | virtualization, emulation | `.qcow2`, `.vmdk`, `.vdi`, `.img`, `.iso` | Full only |
-| [RdpCacheStitcher](rdpcachestitcher.md) | Git | RdpCacheStitcher is a tool that supports forensic analysts in reconstructing useful images out of RDP cache bitmaps. | forensics, rdp, image-reconstruction |  |  |
 | [RegRipper4.0](regripper4-0.md) | Git | RegRipper4.0 includes ISO 8601-ish time stamp formatting, MITRE ATT&CK mapping (for some, albeit not all, plugins), and Analysis Tips. Also, there are many new plugins since August, 2020. | registry, forensics, windows |  |  |
 | [Ruby](ruby.md) | Winget | Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. | scripting, ruby | `.rb` | Full only |
 | [SQLite Tools](sqlite-tools.md) | HTTP | SQLite command-line tools. | database, sqlite, cli | `.db`, `.sqlite`, `.sqlite3` |  |
@@ -76,9 +65,7 @@
 | [TOR Exit Nodes](tor-exit-nodes.md) | Enrichment | TOR exit node lists from the Tor Project collector archive. | tor, exit-nodes, network, threat-intel |  |  |
 | [Tailscale](tailscale.md) | Winget | Tailscale is a modern VPN solution that allows you to create secure, private networks between your devices. It is designed to be easy to use and can be used for remote access, secure file sharing, and connecting devices across different networks. | vpn, network |  | Full only |
 | [Templater](templater.md) | GitHub Release | Obsidian templater plugin. | obsidian, automation, plugins |  | Full only |
-| [ToolAnalysisResultSheet](toolanalysisresultsheet.md) | Git | This repository summarizes the results of examining logs recorded in Windows upon execution of the 49 tools which are likely to be used by the attacker that has infiltrated a network. | forensics, reference, lateral-movement | `.evtx` |  |
 | [TotalRecall](totalrecall.md) | Git | This tool extracts and displays data from the Recall feature in Windows 11, providing an easy way to access information about your PC's activity snapshots. | windows, recall, forensics |  |  |
-| [Trawler](trawler.md) | Git | PowerShell script helping Incident Responders discover potential adversary persistence mechanisms. | windows, persistence, threat-hunting |  |  |
 | [VS Code PowerShell Extension](vs-code-powershell-extension.md) | GitHub Release | Visual Studio Code PowerShell extension. | text-editor, powershell, plugins | `.ps1`, `.psm1`, `.psd1` |  |
 | [VS Code Spell Checker](vs-code-spell-checker.md) | GitHub Release | Visual Studio Code Spell Checker extension. | text-editor, spell-checker, plugins |  |  |
 | [Velociraptor Artifact Exchange](velociraptor-artifact-exchange.md) | HTTP | The artifact exchange is a place for sharing community contributed artifacts for Velociraptor. Simply search below for an artifact that might address your need. If you wish to contribute to the exchange, please click the button to the right. | velociraptor |  |  |
@@ -101,13 +88,11 @@
 | [YARA Forge Rules Core](yara-forge-rules-core.md) | Enrichment | YARA Forge core ruleset - curated set of high-quality YARA rules. | yara, detection-rules, malware-detection | `.yar`, `.zip` |  |
 | [YARA Forge Rules Extended](yara-forge-rules-extended.md) | Enrichment | YARA Forge extended ruleset - broader set of YARA rules beyond the core set. | yara, detection-rules, malware-detection | `.yar`, `.zip` |  |
 | [YARA Forge Rules Full](yara-forge-rules-full.md) | Enrichment | YARA Forge full ruleset - comprehensive collection of all available YARA rules. | yara, detection-rules, malware-detection | `.yar`, `.zip` |  |
-| [Zircolite](zircolite.md) | Git | A standalone SIGMA-based detection tool for EVTX, Auditd and Sysmon for Linux logs | event-log, sigma, detection | `.evtx` |  |
 | [admonitions](admonitions.md) | GitHub Release | Obsidian admonitions plugin. | obsidian, plugins |  | Full only |
 | [ai-fs-proxy](ai-fs-proxy.md) | Git | IP over filesystem. | ai, filesystem |  |  |
 | [aiodns](aiodns.md) | Python |  | network, dns |  |  |
 | [aiohttp](aiohttp.md) | Python |  | network, http |  |  |
 | [bitstruct](bitstruct.md) | Python |  | binary-analysis, data-processing |  |  |
-| [bmc-tools](bmc-tools.md) | Git | RDP Bitmap Cache parser | forensics, rdp |  |  |
 | [cabarchive](cabarchive.md) | Python |  | archive, data-extraction | `.cab` |  |
 | [capa-explorer](capa-explorer.md) | Git | capa explorer for Cutter. | reverse-engineering, capa, visualization |  |  |
 | [capa-rules](capa-rules.md) | GitHub Release | Rules for capa. |  |  |  |
@@ -116,26 +101,20 @@
 | [cmder](cmder.md) | GitHub Release | Cmder is a console emulator for Windows. | terminal, shell |  | Full only |
 | [compressed_rtf](compressed-rtf.md) | Python |  | office, rtf, data-extraction | `.rtf` |  |
 | [cutter-jupyter](cutter-jupyter.md) | Git | Jupyter Plugin for Cutter. | reverse-engineering, rizin |  |  |
-| [cutterref](cutterref.md) | Git | Cutter Instruction Reference Plugin | reverse-engineering, rizin, cheat-sheet |  |  |
+| [cutterref](cutterref.md) | Git | Cutter Instruction Reference Plugin | reverse-engineering, rizin, cheat-sheet, plugin |  |  |
 | [decai](decai.md) | Git | r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed by copying decai.r2.js to the radare2 plugins directory. | reverse-engineering, ai, decompilation, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [deep_translator](deep-translator.md) | Python | A flexible free and unlimited python tool to translate between different languages in a simple way using multiple translators | translation, text-processing |  |  |
-| [defender-detectionhistory-parser](defender-detectionhistory-parser.md) | Git | A parser of Windows Defender's DetectionHistory forensic artifact, containing substantial info about quarantined files and executables. | windows, defender, forensics |  |  |
-| [deobshell](deobshell.md) | Git | Powershell script deobfuscation using AST in Python. | powershell, deobfuscation, malware-analysis |  |  |
 | [dfirws-sample-files](dfirws-sample-files.md) | Git | Sample files to test forensics tools. | forensics, samples, testing |  |  |
 | [dictionaries](dictionaries.md) | Git | Dictionaries and related code and data for Libreoffice. | dictionaries, libreoffice |  |  |
 | [dll_to_exe](dll-to-exe.md) | GitHub Release | Converts a DLL into EXE | pe-analysis, conversion | `.dll`, `.exe` |  |
 | [dnslib](dnslib.md) | Python |  | network, dns |  |  |
 | [docsify-cli](docsify-cli.md) | npm | A magical documentation generator. | documentation, markdown | `.md`, `.html` |  |
 | [docx2txt](docx2txt.md) | Python | A pure python-based utility to extract text and images from docx files. | office, word, data-extraction | `.docx` |  |
-| [dotnetfile](dotnetfile.md) | Git | dotnetfile is a Common Language Runtime (CLR) header parser library for Windows .NET files built in Python. The CLR header is present in every Windows .NET assembly beside the Portable Executable (PE) header. It stores a plethora of metadata information for the managed part of the file. | pe-analysis, dotnet |  |  |
-| [dotnetfile](dotnetfile-2.md) | Python |  | pe-analysis, dotnet | `.exe`, `.dll` |  |
+| [dotnetfile](dotnetfile.md) | Python |  | pe-analysis, dotnet | `.exe`, `.dll` |  |
 | [dpkt](dpkt.md) | Python |  | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng` |  |
 | [edit](edit.md) | GitHub Release | Edit is a simple text editor for Windows made by Microsoft. | text-editor |  |  |
 | [elasticsearch](elasticsearch.md) | Python |  | database, elasticsearch, siem |  |  |
-| [ese-analyst](ese-analyst.md) | Git | This is a set of tools for doing forensics analysis on Microsoft ESE databases. | forensics, ese, database | `.dat` |  |
 | [evtx](evtx.md) | Python |  | log-analysis, event-log, windows | `.evtx` |  |
-| [fibratus](fibratus.md) | Git | Adversary tradecraft detection, protection, and hunting | windows, etw, tracing |  | Full only |
-| [flare-floss](flare-floss.md) | Git | FLARE Obfuscated String Solver - Automatically extract obfuscated strings from malware. | reverse-engineering, string-extraction, malware-analysis |  |  |
 | [flatten_json](flatten-json.md) | Python | Flatten JSON objects | python, library, json | `.json` |  |
 | [flow.record](flow-record.md) | Python |  | forensics, data-processing | `.rec` |  |
 | [forensic-timeliner](forensic-timeliner.md) | GitHub Release | A high-speed forensic timeline engine for Windows forensic artifact CSV output built for DFIR investigators. Quickly consolidate CSV output from processed triage evidence for Eric Zimmerman (EZ Tools) Kape, Axiom, Hayabusa, Chainsaw and Nirsoft into a unified timeline. | forensics, timeline | `.evtx`, `.csv`, `.json` | Full only |
@@ -145,14 +124,11 @@
 | [ghidriff](ghidriff.md) | Python | Ghidra Binary Diffing Engine. | reverse-engineering, binary-diffing | `.exe`, `.dll`, `.elf` |  |
 | [git](git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
 | [god-mode-rules](god-mode-rules.md) | Git | God Mode Detection Rules | yara, sigma, detection-rules |  |  |
-| [gootloader](gootloader.md) | Git | Collection of scripts used to deobfuscate GOOTLOADER malware samples. | malware-analysis, gootloader |  |  |
-| [gostringungarbler](gostringungarbler.md) | Git | Python tool to resolve all strings in Go binaries obfuscated by garble. | reverse-engineering, golang, deobfuscation |  |  |
 | [graphviz](graphviz.md) | Python |  | visualization, graph | `.dot`, `.gv` |  |
 | [grip](grip.md) | Python | Render local readme files before sending off to GitHub. | markdown, preview | `.md` |  |
 | [gti-dev-kit](gti-dev-kit.md) | Git | The Google Threat Intelligence dev kit is a collection of example code to quickly develop functional integrations with the GTI API, enabling a unified view of the threat landscape and reducing manual effort in threat analysis. | virustotal, threat-intelligence |  |  |
 | [hayabusa-rules](hayabusa-rules.md) | Git | Curated Windows event log Sigma rules used in Hayabusa and Velociraptor. | event-log, detection-rules, sigma | `.evtx` |  |
 | [hexdump](hexdump.md) | Python |  | hex-editor, binary-analysis | `.bin` |  |
-| [iShutdown](ishutdown.md) | Git | iShutdown scripts: extracts, analyzes, and parses Shutdown.log forensic artifact from iOS Sysdiagnose archives | ios, forensics, mobile |  |  |
 | [javaobj-py3](javaobj-py3.md) | Python |  |  |  |  |
 | [jupyter-collection](jupyter-collection.md) | Git | Collection of Jupyter Notebooks by @fr0gger_ | jupyter, notebook |  |  |
 | [jupyterlab](jupyterlab.md) | Python | JupyterLab computational environment | python, notebook, data-analysis | `.ipynb` |  |
@@ -161,7 +137,6 @@
 | [legacy-sigmatools](legacy-sigmatools.md) | Git | Legacy Sigma Tools (sigmac etc.) | sigma, detection-rules |  |  |
 | [lief](lief.md) | Python |  | pe-analysis, elf-analysis, binary-analysis | `.exe`, `.dll`, `.elf`, `.mach-o` |  |
 | [maclookup](maclookup.md) | Python |  | network, mac-address |  |  |
-| [malware-bazaar-advanced-search](malware-bazaar-advanced-search.md) | Git | Script to chain search parameters for MalwareBazaar | malware-analysis, threat-intelligence |  |  |
 | [matplotlib](matplotlib.md) | Python |  | visualization, plotting |  |  |
 | [mcp-server-elasticsearch](mcp-server-elasticsearch.md) | GitHub Release | MCP server to connect to elastic 8.X | mcp, ai, logs | `` |  |
 | [minidump](minidump.md) | Python | Python library to parse Windows minidump file format. | memory-forensics, windows | `.dmp` |  |
@@ -220,17 +195,15 @@
 | [quickadd](quickadd.md) | GitHub Release | Obsidian quickadd plugin. | obsidian, automation, plugins |  | Full only |
 | [r2ai](r2ai.md) | Git | Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models. | reverse-engineering, ai, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [r2ai](r2ai-2.md) | GitHub Release | LLM-based reversing for radare2. | reverse-engineering, mcp, ai, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
-| [radare2-deep-graph](radare2-deep-graph.md) | Git | A Cutter plugin to generate radare2 graphs. | reverse-engineering, visualization |  |  |
+| [radare2-deep-graph](radare2-deep-graph.md) | Git | A Cutter plugin to generate radare2 graphs. | reverse-engineering, visualization, plugin, radare2 |  |  |
 | [radare2-mcp](radare2-mcp.md) | GitHub Release | MCP stdio server for radare2. Enables AI assistants to interact with radare2 for binary analysis. Known issue: Windows binary may crash with stack overflow (GitHub issue #24). | reverse-engineering, mcp, ai, radare2 | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [readpe](readpe.md) | GitHub Release | The PE file analysis toolkit | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
-| [regipy](regipy.md) | Git | regipy repository including regipy MCP server for AI-assisted registry analysis. | registry, windows, forensics, mcp | `.reg`, `.dat` |  |
+| [regipy-mcp-server](regipy-mcp-server.md) | Git | regipy repository including regipy MCP server for AI-assisted registry analysis. | registry, windows, forensics, mcp | `.reg`, `.dat` |  |
 | [requests](requests.md) | Python |  | network, http |  |  |
 | [rzpipe](rzpipe.md) | Python |  | reverse-engineering, radare2, scripting | `.exe`, `.dll`, `.elf`, `.bin` |  |
-| [scare](scare.md) | Git | A multi-arch assembly REPL and emulator for your command line. | assembly, emulation, repl |  |  |
 | [sigma](sigma.md) | Git | Main Sigma Rule Repository | sigma, detection-rules, siem |  |  |
 | [signature-base](signature-base.md) | Git | YARA signature and IOC database for my scanners and tools. | yara, detection-rules, ioc | `.yara` |  |
 | [simplejson](simplejson.md) | Python |  | json, data-processing | `.json` |  |
-| [sqlit-tui](sqlit-tui.md) | Python |  | database, sqlite, tui | `.db`, `.sqlite`, `.sqlite3` |  |
 | [stego-lsb](stego-lsb.md) | Python |  | steganography, image, audio | `.png`, `.bmp`, `.wav` |  |
 | [termcolor](termcolor.md) | Python |  | terminal, formatting |  |  |
 | [textsearch](textsearch.md) | Python |  | text-processing, search |  |  |

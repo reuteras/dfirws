@@ -2,8 +2,11 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
+| [Events-Ripper](events-ripper.md) | Git | This project is based on RegRipper, to easily extract additional value/pivot points from a TLN events file. | event-log, forensics, windows |  |  |
 | [LUMEN](lumen.md) | npm | Your Browser-based EVTX Companion. | log-analysis, event-log, forensics, visualization | `.evtx` |  |
 | [LogBoost](logboost.md) | GitHub Release | Convert a variety of log formats to CSV while enriching detected IPs with Geolocation, ASN, DNS, WhoIs, Shodan InternetDB and Threat Indicator matches. | log-analysis, event-log | `.evtx`, `.csv`, `.json` | Full only |
+| [MasterParser](masterparser.md) | Git | MasterParser is a powerful DFIR tool designed for analyzing and parsing Linux logs | log-analysis, linux, authentication | `.log` |  |
+| [ToolAnalysisResultSheet](toolanalysisresultsheet.md) | Git | This repository summarizes the results of examining logs recorded in Windows upon execution of the 49 tools which are likely to be used by the attacker that has infiltrated a network. | forensics, reference, lateral-movement | `.evtx` |  |
 | [YAMAGoya](yamagoya.md) | GitHub Release | Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA | yara, rule-generation | `.yar`, `.yara` | Full only |
 | [Zircolite](zircolite.md) | GitHub Release | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |  |
 | [chainsaw](chainsaw.md) | GitHub Release | Rapidly Search and Hunt through Windows Forensic Artefacts | log-analysis, incident-response, sigma, detection | `.evtx` |  |

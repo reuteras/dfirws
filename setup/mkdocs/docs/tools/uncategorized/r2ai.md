@@ -18,8 +18,5 @@
 
 Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models.
 
-## Usage
-Load automatically as a radare2 core plugin. Use r2ai commands within the radare2 shell for AI-assisted binary analysis.
-
 ## Sample Commands
 - `r2ai -h`

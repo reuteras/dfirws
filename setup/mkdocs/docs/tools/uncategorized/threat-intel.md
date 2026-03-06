@@ -2,8 +2,11 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/volexity/threat-intel>
+
 **Vendor:** Volexity
 
+**License:** BSD-2-Clause License
 
 **Source:** Git
 

@@ -1,3 +1,0 @@
-# Docker Desktop
-
-**Category:** Utilities

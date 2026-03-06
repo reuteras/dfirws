@@ -2,6 +2,10 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/rizinorg/cutter-jupyter>
+
+**License:** GPL-3.0 License
+
 **Source:** Git
 
 **Profiles:** Full, Basic

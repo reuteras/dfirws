@@ -2,6 +2,10 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://jupyter.securitybreak.io/>
+
+**License:** Apache License 2.0
+
 **Source:** Git
 
 **Profiles:** Full, Basic

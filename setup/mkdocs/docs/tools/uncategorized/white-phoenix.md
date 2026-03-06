@@ -2,6 +2,12 @@
 
 **Category:** Uncategorized
 
+**Homepage:** <https://github.com/cyberark/White-Phoenix>
+
+**Vendor:** CyberArk
+
+**License:** Apache License 2.0
+
 **Source:** Git
 
 **Profiles:** Full (not included in Basic profile)

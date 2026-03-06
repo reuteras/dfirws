@@ -4,3 +4,4 @@
 | --- | --- | --- | --- | --- | --- |
 | [aLEAPP](aleapp.md) | GitHub Release | ALEAPP is a tool for parsing and analyzing Android logs, events, and protobuf files. It can be used to extract artifacts from Android devices and analyze them in a structured way. | mobile-forensics, android, artifact-extraction | `.tar`, `.zip` |  |
 | [iLEAPP](ileapp.md) | GitHub Release | iLEAPP is a tool for parsing and analyzing iOS logs, events, and plists. It can be used to extract artifacts from iOS devices and analyze them in a structured way. | mobile-forensics, ios, artifact-extraction | `.tar`, `.zip` |  |
+| [iShutdown](ishutdown.md) | Git | iShutdown scripts: extracts, analyzes, and parses Shutdown.log forensic artifact from iOS Sysdiagnose archives | ios, forensics, mobile |  |  |

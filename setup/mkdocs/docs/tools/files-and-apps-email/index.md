@@ -2,6 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
+| [EmailAnalyzer](emailanalyzer.md) | Git | With EmailAnalyzer you can analyze your suspicious emails. You can extract headers, links, and hashes from the .eml file and you can generate reports. | email, forensics, phishing | `.eml` |  |
 | [Mail Viewer](mail-viewer.md) | HTTP | Mail Viewer is a tool for viewing email files and mailboxes. | email, forensics | `.eml`, `.msg` |  |
 | [MsgViewer](msgviewer.md) | GitHub Release | A tool for viewing and analyzing Outlook MSG files. | email, forensics, outlook | `.msg` |  |
 | [PST Walker](pst-walker.md) | HTTP | PST Walker is a tool for analyzing PST files. | email, forensics, outlook | `.pst` |  |
