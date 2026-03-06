@@ -93,7 +93,6 @@ $TOOL_DEFINITIONS += @{
     LicenseUrl = "https://github.com/Cisco-Talos/clamav?tab=GPL-2.0-1-ov-file"
     Category = "Malware tools"
     Shortcuts = @(
-        # Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -ClamAV"
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk"
             Target   = "`${CLI_TOOL}"
@@ -135,6 +134,46 @@ if ($all -or $Node) {
     $status = Get-FileFromUri -uri "https://nodejs.org/dist/${NodeJSVersion}/node-${NodeJSVersion}-win-x64.zip" -FilePath ".\downloads\nodejs.zip" -CheckURL "Yes" -check "Zip archive data"
 }
 
+$TOOL_DEFINITIONS += @{
+    Name = "NodeJS"
+    Homepage = "https://nodejs.org/"
+    Vendor = ""
+    License = ""
+    LicenseUrl = "https://github.com/nodejs/node/blob/main/LICENSE"
+    Category = "Programming"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\NodeJS.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Node"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Node"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\Users\WDAGUtilityAccount\Desktop\node\node.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine."
+    Tips = ""
+    Usage = "Node.js is used for building server-side applications, command-line tools, and for running JavaScript code outside of a web browser."
+    SampleCommands = @(
+        "node -v",
+        "npm init -y",
+        "npm install express"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    Tags = @("javascript", "nodejs")
+    FileExtensions = @(".js")
+}
+
 #
 # Packages used in Python sandbox
 if ($all -or $Python) {
@@ -150,51 +189,9 @@ if ($all -or $Python) {
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
     }
 
-    $TOOL_DEFINITIONS += @{
-        Name = "uv"
-        Category = "Programming\Python"
-        Shortcuts = @()
-        InstallVerifyCommand = ""
-        Verify = @()
-        FileExtensions = @(".py")
-        Tags = @("python", "package-management")
-        Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
-        Tips = ""
-        Usage = ""
-        SampleCommands = @()
-        SampleFiles = @()
-        Dependencies = @()
-        Homepage = ""
-        Vendor = ""
-        License = ""
-        LicenseUrl = ""
-        PythonVersion = ""
-    }
-
     # DotNet 6 Desktop runtime - installed during startup
     Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
     $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
-
-    $TOOL_DEFINITIONS += @{
-        Name = "DotNet 6 Desktop Runtime"
-        Category = "Programming\dotNET"
-        Shortcuts = @()
-        InstallVerifyCommand = ""
-        Verify = @()
-        FileExtensions = @()
-        Tags = @("dotnet", "runtime")
-        Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0."
-        Tips = ""
-        Usage = ""
-        SampleCommands = @()
-        SampleFiles = @()
-        Dependencies = @()
-        Homepage = ""
-        Vendor = ""
-        License = ""
-        LicenseUrl = ""
-        PythonVersion = ""
-    }
 
     # Get Amazon Corretto - installed during start
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"
@@ -213,39 +210,159 @@ if ($all -or $Python) {
         }
     }
 
-    $TOOL_DEFINITIONS += @{
-        Name = "Ghidra"
-        Homepage = "https://ghidra-sre.org/"
-        Vendor = "National Security Agency"
-        License = "Apache-2.0"
-        LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
-        Category = "Reverse engineering"
-        Shortcuts = @()
-        InstallVerifyCommand = ""
-        Verify = @(
-            @{
-                Type = "file"
-                Name = "ghidraRun.bat"
-                Expect = "Batch file"
-            }
-        )
-        Notes = "Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate."
-        Tips = "Ghidra is a free and open-source software reverse engineering (SRE) framework developed by NSA's Research Directorate."
-        Usage = "Ghidra is used for analyzing compiled code on a variety of platforms including Windows, macOS, and Linux."
-        SampleCommands = @(
-            "ghidraRun.bat"
-        )
-        SampleFiles = @(
-            "N/A"
-        )
-        Dependencies = @("openjdk11")
-        Tags = @()
+    # Tools to compile and build - version 2019
+    $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe" -check "PE32"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Amazon Corretto 21"
+    Homepage = "https://aws.amazon.com/corretto/"
+    Vendor = "Amazon"
+    License = ""
+    LicenseUrl = ""
+    Category = "Programming\Java"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\Amazon Corretto 21.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command java -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "java.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK)."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @(
+        "java -version",
+        "javac MyProgram.java"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    Tags = @("java", "corretto")
+    FileExtensions = @(".java")
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Python 3.11"
+    Homepage = "https://www.python.org/"
+    Vendor = "Python Software Foundation"
+    License = ""
+    LicenseUrl = "https://docs.python.org/3/license.html"
+    Category = "Programming\Python"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Python 3.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command python"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "python3.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Python is a programming language that lets you work quickly and integrate systems more effectively."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @(
+        "python3",
+        "python3 script.py"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    Tags = @("programming", "python")
+    FileExtensions = @(".py")
+    PythonVersion = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Ghidra"
+    Homepage = "https://ghidra-sre.org/"
+    Vendor = "National Security Agency"
+    License = "Apache-2.0"
+    LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
+    Category = "Reverse engineering"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "file"
+            Name = "ghidraRun.bat"
+            Expect = "Batch file"
+        }
+    )
+    Notes = "Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate."
+    Tips = "Ghidra is a free and open-source software reverse engineering (SRE) framework developed by NSA's Research Directorate."
+    Usage = "Ghidra is used for analyzing compiled code on a variety of platforms including Windows, macOS, and Linux."
+    SampleCommands = @(
+        "ghidraRun.bat"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @("openjdk11")
+    Tags = @()
     FileExtensions = @()
     PythonVersion = ""
 }
 
-    # Tools to compile and build - version 2019
-    $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vs_BuildTools.exe" -FilePath ".\downloads\vs_BuildTools.exe" -check "PE32"
+$TOOL_DEFINITIONS += @{
+    Name = "uv"
+    Category = "Programming\Python"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".py")
+    Tags = @("python", "package-management")
+    Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "DotNet 6 Desktop Runtime"
+    Category = "Programming\dotNET"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("dotnet", "runtime")
+    Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
 }
 
 # MSYS2
@@ -263,42 +380,42 @@ if (($all -and $profileGoEnabled) -or $Go) {
     # GoLang - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading GoLang."
     $status = Get-WinGet "GoLang.Go" "Go*.msi" "golang.msi" -check "Composite Document File V2 Document"
-    $TOOL_DEFINITIONS += @{
-        Name = "GoLang"
-        Homepage = "https://go.dev/"
-        Vendor = ""
-        License = ""
-        LicenseUrl = ""
-        Category = "Programming"
-        Shortcuts = @(
-            @{
-                Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\GoLang (runs dfirws-install -GoLang).lnk"
-                Target   = "`${CLI_TOOL}"
-                Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -GoLang"
-                Icon     = ""
-                WorkDir  = "`${HOME}\Desktop"
-            }
-        )
-        InstallVerifyCommand = "dfirws-install.ps1 -GoLang"
-        Verify = @(
-            @{
-                Type = "command"
-                Name = "go.exe"
-                Expect = "PE32"
-            }
-        )
-        Notes = "Go programming language."
-        Tips = ""
-        Usage = ""
-        SampleCommands = @()
-        SampleFiles = @(
-            "N/A"
-        )
-        Dependencies = @("openjdk11")
-        Tags = @()
-        FileExtensions = @()
-        PythonVersion = ""
-    }
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "GoLang"
+    Homepage = "https://go.dev/"
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    Category = "Programming"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\GoLang (runs dfirws-install -GoLang).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -GoLang"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -GoLang"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "go.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Go programming language."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @("openjdk11")
+    Tags = @()
+    FileExtensions = @()
 }
 
 #
@@ -307,43 +424,42 @@ if (($all -and $profileRustEnabled) -or $Rust) {
     # Rust - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading Rust."
     $status = Get-WinGet "Rustlang.Rust.GNU" "Rust*.msi" "rust.msi" -check "Composite Document File V2 Document"
+}
 
-    $TOOL_DEFINITIONS += @{
-        Name = "Rust"
-        Homepage = "https://rust-lang.org/"
-        Vendor = ""
-        License = ""
-        LicenseUrl = ""
-        Category = "Programming"
-        Shortcuts = @(
-            @{
-                Lnk      = "`${HOME}\Desktop\dfirws\Programming\Rust\Rust (runs dfirws-install -Rust).lnk"
-                Target   = "`${CLI_TOOL}"
-                Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Rust"
-                Icon     = ""
-                WorkDir  = "`${HOME}\Desktop"
-            }
-        )
-        InstallVerifyCommand = "dfirws-install.ps1 -Rust"
-        Verify = @(
-            @{
-                Type = "command"
-                Name = "rustc.exe"
-                Expect = "PE32"
-            }
-        )
-        Notes = "Rust programming language."
-        Tips = ""
-        Usage = ""
-        SampleCommands = @()
-        SampleFiles = @(
-            "N/A"
-        )
-        Dependencies = @("openjdk11")
-        Tags = @()
-        FileExtensions = @()
-        PythonVersion = ""
-    }
+$TOOL_DEFINITIONS += @{
+    Name = "Rust"
+    Homepage = "https://rust-lang.org/"
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    Category = "Programming"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Rust\Rust (runs dfirws-install -Rust).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Rust"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Rust"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "rustc.exe"
+            Expect = "PE32"
+        }
+    )
+    Notes = "Rust programming language."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @("openjdk11")
+    Tags = @()
+    FileExtensions = @()
 }
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "basic"

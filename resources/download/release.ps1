@@ -3214,6 +3214,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # radare2-mcp - MCP server for radare2
+# TODO: Not working
 $status = Get-GitHubRelease -repo "radareorg/radare2-mcp" -path "${SETUP_PATH}\r2mcp.zip" -match "windows.zip" -check "Zip archive data"
 if ($status -or $radare_status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\r2mcp.zip" -o"${TOOLS}\radare2\bin" | Out-Null
@@ -3231,8 +3232,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
     Tags = @("reverse-engineering", "mcp", "ai", "radare2")
     Notes = "MCP stdio server for radare2. Enables AI assistants to interact with radare2 for binary analysis. Known issue: Windows binary may crash with stack overflow (GitHub issue #24)."
-    Tips = "Configure in opencode.json with command: r2mcp. The server communicates via stdio."
-    Usage = "Used as a local MCP server with opencode-ai or other MCP clients."
+    Tips = "Currently not working in dfirws."
+    Usage = ""
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Radare2")
@@ -3241,6 +3242,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # r2ai
+# TODO: Not working
 $status = Get-GitHubRelease -repo "radareorg/r2ai" -path "${SETUP_PATH}\r2ai.zip" -match "windows-latest" -check "Zip archive data"
 if ($status -or $radare_status) {
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\r2ai.zip" -o"${TOOLS}\r2ai" | Out-Null
@@ -3262,7 +3264,7 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
     Tags = @("reverse-engineering", "mcp", "ai", "radare2")
     Notes = "LLM-based reversing for radare2."
-    Tips = ""
+    Tips = "Currently not working in dfirws."
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()

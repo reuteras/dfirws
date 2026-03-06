@@ -9,7 +9,7 @@ if (Test-Path 'C:\Users\Public\Desktop\Microsoft Edge.lnk') {
 	Remove-Item 'C:\Users\Public\Desktop\Microsoft Edge.lnk' -Force
 }
 
-# Import common functions
+# Import common functions - first is for sandbox second is for VM
 if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
     . "${HOME}\Documents\tools\wscommon.ps1"
 } else {
@@ -23,9 +23,9 @@ Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEM
 
 # Total number of Update-SandboxProgress calls in this script.
 # Increment this by 1 whenever you add a new Update-SandboxProgress call,
-# and decrement it when you remove one.  Verify with:
-#   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count
-$SANDBOX_PROGRESS_STEPS = 30
+# and decrement it when you remove one.  Verify with (remove 3 for the ones this comment):
+#   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count - 3
+$SANDBOX_PROGRESS_STEPS = 31
 Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
 
 # Check if running in verify mode
@@ -84,7 +84,7 @@ if ($pythonInstalled) {
     Write-DateLog "WARNING: Python installation may have failed after 3 attempts" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 
-# Install Visual C++ Redistributable 16 and 17
+# Install Visual C++ Redistributable 17
 Update-SandboxProgress "Installing Visual C++ Redistributable..."
 $procVcredist = Start-Process -Wait -PassThru "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
 if ($procVcredist.ExitCode -ne 0) {
@@ -110,9 +110,9 @@ Write-DateLog ".NET 8 Desktop runtime installed" | Tee-Object -FilePath "${WSDFI
 
 # Install .NET 9
 Update-SandboxProgress "Installing .NET 9..."
-$procDotnet8 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet8desktop.exe" -ArgumentList "/install /quiet /norestart"
-if ($procDotnet8.ExitCode -ne 0) {
-    Write-DateLog "WARNING: .NET 9 installer exited with code $($procDotnet8.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+$procDotnet9 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet9desktop.exe" -ArgumentList "/install /quiet /norestart"
+if ($procDotnet9.ExitCode -ne 0) {
+    Write-DateLog "WARNING: .NET 9 installer exited with code $($procDotnet9.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 }
 Write-DateLog ".NET 9 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 
@@ -174,6 +174,7 @@ if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
 }
 
 # Install Terminal and link to it
+Update-SandboxProgress "Install Windows Terminal..."
 Expand-Archive "${SETUP_PATH}\Terminal.zip" -DestinationPath "$env:ProgramFiles\Windows Terminal" -Force | Out-Null
 $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
 if (! (Test-Path "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings")) {
@@ -593,7 +594,8 @@ Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${WSDFIR_TEMP}
 New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
 if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
     Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force | Out-Null
-}if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
+}
+if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
     Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force | Out-Null
 }
 
@@ -637,6 +639,11 @@ Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\TimelineExplorer" "${env:ProgramFil
 if (Test-Path "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb") {
     New-Item -Path "${HOME}\.cache\geolocus-cli" -ItemType Directory -Force | Out-Null
     Copy-Item "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb" "${HOME}\.cache\geolocus-cli\geolocus.mmdb" -Force | Out-Null
+}
+
+# mvt IOCs
+if (Test-Path "C:\venv\iocs\mvt") {
+    Robocopy.exe /MT:96 /MIR "C:\venv\iocs\mvt" "${HOME}\AppData\Local\mvt" | Out-Null
 }
 
 # 4n4lDetector
@@ -735,6 +742,10 @@ Get-Job | Remove-Job | Out-Null
 Remove-Item "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 
 Write-DateLog "Setup done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+
+While (! (Test-Path "${WSDFIR_TEMP}\dfirws_folder_done.txt")) {
+    Start-Sleep -Seconds 1
+}
 
 Close-SandboxProgress
 

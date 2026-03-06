@@ -119,6 +119,7 @@ foreach ($package in `
     "minidump", `
     "mkyara", `
     "msoffcrypto-tool", `
+    "mvt", `
     "mwcp", `
     "name-that-hash", `
     "netaddr", `
@@ -148,6 +149,11 @@ foreach ($package in `
         uv tool install --python "C:\Program Files\Python311\python.exe" $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
         Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
+
+# Download IOCs for mvt
+ mvt-ios download-iocs 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+ New-Item -ItemType Directory -Force -Path "C:\venv\iocs" | Out-Null
+ Copy-Item "C:\Users\WDAGUtilityAccount\AppData\Local\mvt" "C:\venv\iocs" -Recurse -Force 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 # Profile-conditional Python packages
 if (Test-ToolIncludedSandbox -ToolName "jpterm") {
@@ -202,6 +208,7 @@ uv pip install -U `
     "Aspose.Email-for-Python-via-Net", `
     "BeautifulSoup4", `
     "bitstruct", `
+    "capstone", `
     "compressed_rtf", `
     "dissect", `
     "dissect.target[yara]", `
@@ -214,7 +221,9 @@ uv pip install -U `
     "dpkt", `
     "elasticsearch", `
     "evtx", `
+    "flatten_json", `
     "graphviz", `
+    "geoip2", `
     "javaobj-py3", `
     "keystone-engine", `
     "lief", `
@@ -224,11 +233,14 @@ uv pip install -U `
     "msticpy", `
     "neo4j", `
     "neo4j-driver", `
+    "netaddr", `
     "networkx", `
+    "numpy", `
     "olefile", `
     "oletools", `
     "openpyxl", `
     "orjson", `
+    "pandas", `
     "paramiko", `
     "pathlab", `
     "pefile", `
@@ -244,11 +256,13 @@ uv pip install -U `
     "pypdf2", `
     "pyshark", `
     "PySocks", `
+    "python-dateutil", `
     "python-docx", `
     "python-dotenv", `
     "python-magic", `
     "python-magic-bin", `
     "python-registry", `
+    "pytz", `
     "pyvis", `
     "pywin32", `
     "pyzipper", `
@@ -263,11 +277,13 @@ uv pip install -U `
         "pysigma-pipeline-sysmon", `
         "pysigma-pipeline-windows", `
     "simplejson", `
+    "six", `
     "termcolor", `
     "textsearch", `
     "tomlkit", `
     "treelib", `
     "unicorn", `
+    "XlsxWriter", `
     "xxhash", `
     "yara-python", `
     "win_inet_pton" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -460,6 +476,71 @@ if (((Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") -and ($NeedVSBuildTools -
     #Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 }
 # End venvs needing Visual Studio Build Tools
+
+$TOOL_DEFINITIONS += @{
+    Name = "white-phoenix"
+    Category = "Forensics"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\IR\White-Phoenix.py (recovers content from files encrypted by Ransomware using intermittent encryption).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command venv.ps1 -whitephoenix ; White-Phoenix.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".encrypted", ".locked", ".enc")
+    Tags = @("ransomware", "encryption", "decryption", "forensics", "data-recovery")
+    Notes = "White-Phoenix is a tool that recovers content from files encrypted by Ransomware using intermittent encryption. It is designed to help incident responders and forensic analysts to retrieve data from encrypted files when the decryption key is not available."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = $PYTHON_DEFAULT
+    Homepage = "https://github.com/cyberark/White-Phoenix"
+    Vendor = "CyberArk"
+    License = "Apache License 2.0"
+    LicenseUrl = "https://github.com/cyberark/White-Phoenix/blob/main/LICENSE"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "msidump"
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\msidump.py (a tool that analyzes malicious MSI installation packages, extracts files, streams, binary data and incorporates YARA scanner).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command msidump.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\bin\msidump.py"
+            Expect = "Python"
+        }
+    )
+    FileExtensions = @(".msi")
+    Tags = @("indicator-extraction", "enrichment", "parsing", "forensics")
+    Notes = "MSI Dump - a tool that analyzes malicious MSI installation packages, extracts files, streams, binary data and incorporates YARA scanner."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = $PYTHON_DEFAULT
+    Homepage = "https://github.com/mgeeky/msidump"
+    Vendor = "mgeeky"
+    License = ""
+    LicenseUrl = ""
+}
+
 
 $TOOL_DEFINITIONS += @{
     Name = "dfir_ntfs"
@@ -1552,6 +1633,13 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps\Office"
     Shortcuts = @(
         @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\ezhexviewer (A simple hexadecimal viewer).lnk"
+            Target   = "C:\venv\bin\ezhexviewer.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
             Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Office\oleid.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command oleid -h"
@@ -1962,7 +2050,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "sqlit-tui"
     Category = "Files and apps\Database"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\sqlit (TUI for SQL databases).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command sqlit.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".db", ".sqlite", ".sqlite3")

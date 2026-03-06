@@ -248,11 +248,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/ahmedkhlief/APT-Hunter"
+    Vendor = "ahmedkhlief"
+    License = "GPL-3.0 License"
     LicenseUrl = ""
-    PythonVersion = ""
+    PythonVersion = "3.11"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -262,16 +262,16 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("forensics", "artifacts", "reference")
+    Tags = @("forensics", "artifacts", "reference", "sample-files")
     Notes = "The goal of this repo is to archive artifacts from all versions of various OS's and categorizing them by type. This will help with artifact validation processes as well as increase access to artifacts that may no longer be readily available anymore."
     Tips = ""
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/AndrewRathbun/DFIRArtifactMuseum"
+    Vendor = "AndrewRathbun"
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -279,7 +279,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "bmc-tools"
     Category = "Files and apps"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\RDP\bmc-tools.py (RDP Bitmap Cache parser).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command bmc-tools.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -290,11 +298,11 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/ANSSI-FR/bmc-tools"
+    Vendor = "ANSSI-FR"
+    License = "CECILL-2.1 License"
     LicenseUrl = ""
-    PythonVersion = ""
+    PythonVersion = "3.11"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -332,9 +340,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/Bert-JanP/Incident-Response-Powershell"
     Vendor = ""
-    License = ""
+    License = "BSD 3-Clause License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -342,7 +350,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "RdpCacheStitcher"
     Category = "Files and apps"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\RDP\RdpCacheStitcher.lnk"
+            Target   = "`${TOOLS}\RdpCacheStitcher\RdpCacheStitcher.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -353,8 +369,8 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
+    Homepage = "https://github.com/BSI-Bund/RdpCacheStitcher"
+    Vendor = "BSI-Bund"
     License = ""
     LicenseUrl = ""
     PythonVersion = ""
@@ -374,9 +390,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/crypto2011/IDR"
     Vendor = ""
-    License = ""
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -395,9 +411,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/cyberark/White-Phoenix"
+    Vendor = "CyberArk"
+    License = "Apache License 2.0"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -405,19 +421,27 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "ASL"
     Category = "Files and apps\PE"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\ExeinfoPE.lnk"
+            Target   = "`${TOOLS}\exeinfope\exeinfope.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".exe")
     Tags = @("pe-analysis", "packer-detection")
-    Notes = "Detect packer , compiler , protector , .NET obfuscator , PUA application"
+    Notes = "Detect packer, compiler, protector, .NET obfuscator, PUA application"
     Tips = ""
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
+    Homepage = "https://github.com/ExeinfoASL/ASL"
+    Vendor = "A.S.L Soft"
     License = ""
     LicenseUrl = ""
     PythonVersion = ""
@@ -437,9 +461,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://jupyter.securitybreak.io/"
     Vendor = ""
-    License = ""
+    License = "Apache License 2.0"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -447,7 +471,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Python-dsstore"
     Category = "Files and apps"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\dsstore_parser.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command python `${GIT_PATH}\Python-dsstore\main.py"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".DS_Store")
@@ -458,9 +490,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/gehaxelt/Python-dsstore"
     Vendor = ""
-    License = ""
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -479,9 +511,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/import-pandas-as-numpy/chainsaw-rules"
+    Vendor = "import-pandas-as-numpy"
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -493,16 +525,16 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("reverse-engineering", "visualization")
+    Tags = @("reverse-engineering", "visualization", "plugin", "radare2")
     Notes = "A Cutter plugin to generate radare2 graphs."
     Tips = ""
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
+    Dependencies = @("Cutter")
+    Homepage = "https://github.com/JavierYuste/radare2-deep-graph"
     Vendor = ""
-    License = ""
+    License = "GPL-3.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -515,18 +547,12 @@ $TOOL_DEFINITIONS += @{
     Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "path"
-            Name = "`${HOME}\.local\share\radare2\plugins\r2ai.dll"
-            Expect = "PE32"
-        }
-    )
+    Verify = @()
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
     Tags = @("reverse-engineering", "ai", "radare2")
     Notes = "Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models."
     Tips = ""
-    Usage = "Load automatically as a radare2 core plugin. Use r2ai commands within the radare2 shell for AI-assisted binary analysis."
+    Usage = ""
     SampleCommands = @(
         "r2ai -h"
     )
@@ -548,8 +574,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
     Tags = @("reverse-engineering", "ai", "decompilation", "radare2")
     Notes = "r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed by copying decai.r2.js to the radare2 plugins directory."
-    Tips = "Use within radare2 to get AI-powered decompilation output. Requires an LLM API key configured."
-    Usage = "Use within radare2 shell for AI-assisted decompilation of binary code."
+    Tips = ""
+    Usage = ""
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Radare2")
@@ -560,7 +586,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "defender-detectionhistory-parser"
     Category = "OS\Windows"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\defender-detectionhistory-parser (dhparser).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dhparser -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -571,9 +605,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/jklepsercyber/defender-detectionhistory-parser"
     Vendor = ""
-    License = ""
+    License = "GPL-3.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -581,7 +615,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Trawler"
     Category = "OS\Windows"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\IR\Trawler.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Get-Help trawler"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -592,9 +634,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/joeavanzato/Trawler"
     Vendor = ""
-    License = ""
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -602,7 +644,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "ToolAnalysisResultSheet"
     Category = "Signatures and information"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\ToolAnalysisResultSheet (Summarizes the results of examining logs recorded in Windows upon execution common tools used by attackers that has infiltrated a network).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ToolAnalysisResultSheet.ps1"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".evtx")
@@ -613,8 +663,8 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
+    Homepage = "https://github.com/JPCERTCC/ToolAnalysisResultSheet"
+    Vendor = "JPCERTCC"
     License = ""
     LicenseUrl = ""
     PythonVersion = ""
@@ -623,7 +673,29 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "iShutdown"
     Category = "Files and apps"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iShutdown_detect.py (sysdiagnose_file.tar.gz).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\iShutdown\iShutdown_detect.py"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iShutdown_parse.py (A tool to extract and parse iOS shutdown logs from a .tar.gz archive).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\iShutdown\iShutdown_parse.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iShutdown_stats.py (Process an iOS shutdown.log file to create stats on reboots).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\iShutdown\iShutdown_stats.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -644,7 +716,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "EmailAnalyzer"
     Category = "Files and apps\Email"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Email\email-analyzer.py.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command .\email-analyzer.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".eml")
@@ -655,9 +735,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/keraattin/EmailAnalyzer"
     Vendor = ""
-    License = ""
+    License = "GPL-3.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -665,7 +745,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "Events-Ripper"
     Category = "Files and apps\Log"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\erip (Parse timeline-format events file - Events-Ripper).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command erip.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -682,9 +770,9 @@ This tool is intended to address a very specific problem set, one that leverages
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/keydet89/Events-Ripper"
     Vendor = ""
-    License = ""
+    License = "GPL-3.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -703,7 +791,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/keydet89/RegRipper4.0"
     Vendor = ""
     License = ""
     LicenseUrl = ""
@@ -713,7 +801,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "PersistenceSniper"
     Category = "OS\Windows"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\IR\PersistenceSniper.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1 ; Get-Help -Name Find-AllPersistence"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -724,7 +820,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/last-byte/PersistenceSniper"
     Vendor = ""
     License = ""
     LicenseUrl = ""
@@ -745,7 +841,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/last-byte/PersistenceSniper/wiki"
     Vendor = ""
     License = ""
     LicenseUrl = ""
@@ -766,8 +862,8 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
+    Homepage = "https://github.com/LibreOffice/dictionaries"
+    Vendor = "LibreOffice"
     License = ""
     LicenseUrl = ""
     PythonVersion = ""
@@ -776,7 +872,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "PowerDecode"
     Category = "Files and apps"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\PowerShell\PowerDecode.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command .\GUI.ps1"
+            Icon     = ""
+            WorkDir  = "`${GIT_PATH}\PowerDecode"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -787,38 +891,27 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/Malandrone/PowerDecode"
     Vendor = ""
-    License = ""
+    License = "GPL-3.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
 
-$TOOL_DEFINITIONS += @{
-    Name = "flare-floss"
-    Category = "Malware tools"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("reverse-engineering", "string-extraction", "malware-analysis")
-    Notes = "FLARE Obfuscated String Solver - Automatically extract obfuscated strings from malware."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = "Mandiant"
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
+# Flare floss (flare-floss) has its TOOL_DEFINITIONS in release.ps1.
 
 $TOOL_DEFINITIONS += @{
     Name = "gootloader"
     Category = "Malware tools"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\Gootloader\Gootloader (Mandiant).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dir"
+            Icon     = ""
+            WorkDir  = "`${GIT_PATH}\gootloader"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -829,9 +922,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/mandiant/gootloader"
     Vendor = "Mandiant"
-    License = ""
+    License = "Apache License 2.0"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -839,7 +932,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "GoReSym"
     Category = "Reverse Engineering"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\GoReSym.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command GoReSym.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -850,9 +951,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/mandiant/GoReSym"
     Vendor = "Mandiant"
-    License = ""
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -860,7 +961,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "gostringungarbler"
     Category = "Reverse Engineering"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\gostringungarbler.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command gostringungarbler.py -h"
+            Icon     = ""
+            WorkDir  = "`${GIT_PATH}\gostringungarbler"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -885,16 +994,16 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("reverse-engineering", "capa", "visualization")
+    Tags = @("reverse-engineering", "capa", "visualization", "plugin")
     Notes = "Capa analysis importer for Ghidra."
     Tips = ""
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/mari-mari/CapaExplorer"
+    Vendor = "mari-mari"
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -902,19 +1011,27 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "ese-analyst"
     Category = "Files and apps\Database"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\ese-analyst.lnk"
+            Target   = "`${GIT_PATH}\ese-analyst\ese2csv.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${DESKTOP}"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".dat")
-    Tags = @("forensics", "ese", "database")
+    Tags = @("forensics", "ese", "database", "csv")
     Notes = "This is a set of tools for doing forensics analysis on Microsoft ESE databases."
     Tips = ""
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
+    Homepage = "https://github.com/MarkBaggett/ese-analyst"
+    Vendor = "MarkBaggett"
     License = ""
     LicenseUrl = ""
     PythonVersion = ""
@@ -934,9 +1051,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/mattifestation/CimSweep"
+    Vendor = "mattifestation"
+    License = "BSD 3-Clause License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -944,7 +1061,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "malware-bazaar-advanced-search"
     Category = "Malware tools"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\Online tools\malware-bazaar-advanced-search (search.py).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\malware-bazaar-advanced-search\search.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -955,7 +1080,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("online")
-    Homepage = ""
+    Homepage = "https://github.com/montysecurity/malware-bazaar-advanced-search"
     Vendor = ""
     License = ""
     LicenseUrl = ""
@@ -976,9 +1101,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/Neo23x0/god-mode-rules"
+    Vendor = "Neo23x0"
+    License = "Apache 2.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -997,17 +1122,25 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/Neo23x0/signature-base"
+    Vendor = "Neo23x0"
+    License = "Detection Rule License (DRL) 1.1"
+    LicenseUrl = "https://github.com/Neo23x0/signature-base?tab=License-1-ov-file"
     PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
     Name = "scare"
     Category = "Reverse Engineering"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\scare.ps1.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command scare.ps1 -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -1018,9 +1151,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/netspooky/scare"
     Vendor = ""
-    License = ""
+    License = "GPL 2.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1039,9 +1172,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Cutter")
-    Homepage = ""
+    Homepage = "https://github.com/ninewayhandshake/capa-explorer"
     Vendor = ""
-    License = ""
+    License = "Apache 2.0 license"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1049,7 +1182,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "dotnetfile"
     Category = "Programming\dotNET"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\dotNET\dotnetfile_dump.py.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\dotnetfile\dotnetfile_dump.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -1060,33 +1201,14 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/pan-unit42/dotnetfile"
     Vendor = "Unit42"
-    License = ""
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
 
-$TOOL_DEFINITIONS += @{
-    Name = "fibratus"
-    Category = "OS\Windows"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("windows", "etw", "tracing")
-    Notes = "Adversary tradecraft detection, protection, and hunting"
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
+# Fibratus has its TOOL_DEFINITIONS in release.ps1.
 
 $TOOL_DEFINITIONS += @{
     Name = "ai-fs-proxy"
@@ -1165,9 +1287,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/rizinorg/cutter-jupyter"
     Vendor = ""
-    License = ""
+    License = "GPL-3.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1259,7 +1381,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "PowerSponse"
     Category = "IR"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\IR\PowerSponse.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Import-Module ${GIT_PATH}\PowerSponse\PowerSponse.psd1 ; Get-Help -Name Invoke-PowerSponse"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -1270,9 +1400,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/swisscom/PowerSponse"
     Vendor = ""
-    License = ""
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1280,7 +1410,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "HiddenWave"
     Category = "Utilities\CTF"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\CTF\HiddenWave (and ExWave).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dir"
+            Icon     = ""
+            WorkDir  = "`${GIT_PATH}\HiddenWave"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".waw")
@@ -1291,7 +1429,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/techchipnet/HiddenWave"
     Vendor = ""
     License = ""
     LicenseUrl = ""
@@ -1301,7 +1439,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "deobshell"
     Category = "Files and apps"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\PowerShell\deobshell (main.py).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command .\main.py -h"
+            Icon     = ""
+            WorkDir  = "`${GIT_PATH}\deobshell"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
@@ -1312,9 +1458,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/thewhiteninja/deobshell"
     Vendor = ""
-    License = ""
+    License = "MIT License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1333,10 +1479,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/jakehildreth/BlueTuxedo"
     Vendor = ""
     License = ""
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/jakehildreth/BlueTuxedo/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -1354,11 +1500,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/ufrisk/LeechCore/wiki"
+    Vendor = "Ulf Frisk"
+    License = "GPL-3.0 License"
     LicenseUrl = ""
-    PythonVersion = ""
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1375,9 +1520,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/ufrisk/MemProcFS/wiki"
+    Vendor = "Ulf Frisk"
+    License = "AGPL-3.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1396,7 +1541,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/VirusTotal/gti-dev-kit"
     Vendor = "VirusTotal"
     License = ""
     LicenseUrl = ""
@@ -1417,9 +1562,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/volexity/one-extract"
+    Vendor = "Volexity"
+    License = "BSD-3-Clause License"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1438,33 +1583,14 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/volexity/threat-intel"
     Vendor = "Volexity"
-    License = ""
+    License = "BSD-2-Clause License"
     LicenseUrl = ""
     PythonVersion = ""
 }
 
-$TOOL_DEFINITIONS += @{
-    Name = "Zircolite"
-    Category = "Files and apps\Log"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".evtx")
-    Tags = @("event-log", "sigma", "detection")
-    Notes = "A standalone SIGMA-based detection tool for EVTX, Auditd and Sysmon for Linux logs"
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
+# Zircolite has its TOOL_DEFINITIONS in release.ps1.
 
 $TOOL_DEFINITIONS += @{
     Name = "PatchaPalooza"
@@ -1488,7 +1614,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 $TOOL_DEFINITIONS += @{
-    Name = "regipy"
+    Name = "regipy-mcp-server"
     Homepage = "https://github.com/mkorman90/regipy"
     Vendor = "mkorman90"
     License = "MIT License"
@@ -1522,7 +1648,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/xaitax/TotalRecall"
     Vendor = ""
     License = ""
     LicenseUrl = ""
@@ -1553,7 +1679,15 @@ $TOOL_DEFINITIONS += @{
 $TOOL_DEFINITIONS += @{
     Name = "MasterParser"
     Category = "Files and apps\Log"
-    Shortcuts = @()
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\MasterParser.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command .\MasterParser.ps1 -o Menu"
+            Icon     = ""
+            WorkDir  = "`${GIT_PATH}\MasterParser"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".log")
@@ -1564,9 +1698,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://github.com/securityjoes/MasterParser"
     Vendor = ""
-    License = ""
+    License = "MIT"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -1578,16 +1712,16 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("reverse-engineering", "rizin", "cheat-sheet")
+    Tags = @("reverse-engineering", "rizin", "cheat-sheet", "plugin")
     Notes = "Cutter Instruction Reference Plugin"
     Tips = ""
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
+    Dependencies = @("Cutter")
+    Homepage = "https://github.com/yossizap/cutterref"
     Vendor = ""
-    License = ""
+    License = "GPL-2.0 License"
     LicenseUrl = ""
     PythonVersion = ""
 }
