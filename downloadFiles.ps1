@@ -87,7 +87,9 @@ param(
     [Parameter(HelpMessage = "Install and Update Visual Studio buildtools.")]
     [Switch]$VisualStudioBuildTools,
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
-    [Switch]$Zimmerman
+    [Switch]$Zimmerman,
+    [Parameter(HelpMessage = "Allow curl alias.")]
+    [Switch]$AllowCurlAlias
     )
 
 if (Test-Path ".\resources\download\common.ps1") {
@@ -204,11 +206,13 @@ if (! (Get-Command "winget.exe" -ErrorAction SilentlyContinue)) {
     Exit
 }
 
-$cmd = Get-Command curl
+if (! $AllowCurlAlias.IsPresent) {
+    $cmd = Get-Command curl
 
-if ($cmd.CommandType -eq "Alias") {
-    Write-DateLog "Error: curl is an alias to $($cmd.Definition) which won't work in this script."
-    Exit
+    if ($cmd.CommandType -eq "Alias") {
+        Write-DateLog "Error: curl is an alias to $($cmd.Definition) which won't work in this script."
+        Exit
+    }
 }
 
 # Ensure configuration exists for rclone
