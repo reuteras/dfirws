@@ -4787,7 +4787,7 @@ $TOOL_DEFINITIONS += @{
             Target   = "`${TOOLS}\ULogViewer\ULogViewer.exe"
             Args     = ""
             Icon     = ""
-            WorkDir  = "${HOME}\Desktop"
+            WorkDir  = "`${HOME}\Desktop"
         }
     )
     InstallVerifyCommand = ""

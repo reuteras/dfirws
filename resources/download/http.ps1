@@ -3321,6 +3321,103 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# Azure CLI on Windows
+if (Test-ToolIncluded -ToolName "Azure CLI") {
+    $status = Get-FileFromUri -uri "https://aka.ms/installazurecliwindowszipx64" -FilePath ".\downloads\azurecli.zip" -CheckURL "Yes" -check "Zip archive data"
+    if ($status) {
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\azurecli.zip" -o"${TOOLS}\AzureCLI" | Out-Null
+    }
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Azure CLI"
+    Homepage = "https://aka.ms/azurecli"
+    Vendor = "Microsoft"
+    License = "MIT License"
+    Category = "Cloud"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Cloud\Azure CLI.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command az.cmd -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "az.cmd"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("cloud", "azure")
+    Notes = "Azure CLI is a command-line tool for managing Azure resources."
+    Tips = "Azure CLI is installed in ${TOOLS}\AzureCLI."
+    Usage = "Use Azure CLI to manage Azure services."
+    SampleCommands = @(
+        "az.cmd -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
+# Android SDK Platform Tools
+if (Test-ToolIncluded -ToolName "Android SDK Platform Tools") {
+    $status = Get-FileFromUri -uri "https://dl.google.com/android/repository/platform-tools-latest-windows.zip" -FilePath ".\downloads\android_sdk.zip" -CheckURL "Yes" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\AndroidSDK") {
+            Remove-Item -Recurse -Force "${TOOLS}\AndroidSDK" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\android_sdk.zip" -o"${TOOLS}\AndroidSDK" | Out-Null
+    }
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Android SDK Platform Tools"
+    Homepage = "https://developer.android.com/studio/releases/platform-tools"
+    Vendor = "Google"
+    License = "Apache License 2.0"
+    Category = "OS\Android"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Android\ADB (Android Debug Bridge).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command adb.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "adb.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("android", "mobile-forensics", "debugging")
+    Notes = "Android SDK Platform Tools include ADB and Fastboot for Android device management."
+    Tips = "Platform Tools are installed in ${TOOLS}\AndroidSDK."
+    Usage = "Use ADB to interact with Android devices."
+    SampleCommands = @(
+        "adb.exe -h"
+    )
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 # ELK
 if (Test-ToolIncluded -ToolName "Elastic Stack (ELK + Beats)") {
     $ELK_VERSION = ((curl.exe --silent -L "https://api.github.com/repos/elastic/elasticsearch/releases/latest" | ConvertFrom-Json).tag_name).Replace("v", "")

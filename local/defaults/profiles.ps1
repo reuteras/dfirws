@@ -39,6 +39,7 @@ $DFIRWS_PROFILES = @{
             "Ruby",
             "VirusTotal CLI",
             # http.ps1
+            "Android SDK Platform Tools",
             "Binary Ninja",
             "Neo4j",
             "hashcat",
@@ -54,6 +55,7 @@ $DFIRWS_PROFILES = @{
             "vscode-mermaid",
             "vscode-ruff",
             "NetworkMiner",
+            "Azure CLI",
             # release.ps1
             "Audacity",
             "Zui",
@@ -110,6 +112,7 @@ $DFIRWS_PROFILES = @{
             "fibratus",
             "MemProcFS.wiki",
             "LeechCore.wiki",
+            "libimobiledevice-windows",
             "Trawler",
             "White-Phoenix",
             "PersistenceSniper.wiki",

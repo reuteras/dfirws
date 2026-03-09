@@ -25,6 +25,7 @@ $repourls = `
     "https://github.com/fr0gger/jupyter-collection.git", `
     "https://github.com/fboldewin/reconstructer.org.git", `
     "https://github.com/gehaxelt/Python-dsstore.git", `
+    "https://github.com/iFred09/libimobiledevice-windows.git", `
     "https://github.com/import-pandas-as-numpy/chainsaw-rules", `
     "https://github.com/JavierYuste/radare2-deep-graph.git", `
     "https://github.com/jklepsercyber/defender-detectionhistory-parser.git", `
@@ -121,6 +122,15 @@ if (Test-Path -Path ".\reconstructer.org\OfficeMalScanner.zip") {
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
+
+$TOOL_DEFINITIONS += @{
+    Name = "libimobiledevice-windows"
+    Homepage = "https://github.com/iFred09/libimobiledevice-windows"
+    Vendor = ""
+    Category = "Files and apps\Phone"
+    Notes = "A Windows port of libimobiledevice, a cross-platform library to communicate with iOS devices. It includes tools for extracting data from iOS devices, such as lockdown, idevicebackup2, and more."
+    Tags = @("ios", "forensics", "mobile")
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "PacketCircle"
