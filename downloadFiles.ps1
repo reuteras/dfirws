@@ -199,6 +199,18 @@ if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
     Exit
 }
 
+if (! (Get-Command "winget.exe" -ErrorAction SilentlyContinue)) {
+    Write-DateLog "Error: winget.exe not found."
+    Exit
+}
+
+$cmd = Get-Command curl
+
+if ($cmd.CommandType -eq "Alias") {
+    Write-DateLog "Error: curl is an alias to $($cmd.Definition) which won't work in this script."
+    Exit
+}
+
 # Ensure configuration exists for rclone
 rclone.exe config touch | Out-Null
 
