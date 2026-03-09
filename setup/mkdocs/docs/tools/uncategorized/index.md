@@ -135,6 +135,7 @@
 | [jwt-cli](jwt-cli.md) | GitHub Release | A super fast CLI tool to decode and encode JWTs built in Rust | web, authentication, jwt |  |  |
 | [keystone-engine](keystone-engine.md) | Python |  | reverse-engineering, assembler |  |  |
 | [legacy-sigmatools](legacy-sigmatools.md) | Git | Legacy Sigma Tools (sigmac etc.) | sigma, detection-rules |  |  |
+| [libimobiledevice-windows](libimobiledevice-windows.md) | Git | A Windows port of libimobiledevice, a cross-platform library to communicate with iOS devices. It includes tools for extracting data from iOS devices, such as lockdown, idevicebackup2, and more. | ios, forensics, mobile |  |  |
 | [lief](lief.md) | Python |  | pe-analysis, elf-analysis, binary-analysis | `.exe`, `.dll`, `.elf`, `.mach-o` |  |
 | [maclookup](maclookup.md) | Python |  | network, mac-address |  |  |
 | [matplotlib](matplotlib.md) | Python |  | visualization, plotting |  |  |

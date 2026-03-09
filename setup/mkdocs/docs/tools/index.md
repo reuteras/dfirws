@@ -4,6 +4,7 @@ Categories generated from dfirws shortcuts.
 
 ## Categories Index
 
+- [Cloud](./cloud/index.md)
 - [Development](./development/index.md)
 - [Editors](./editors/index.md)
 - [Files and apps](./files-and-apps/index.md)
@@ -63,6 +64,7 @@ Categories generated from dfirws shortcuts.
 | [aiohttp](./uncategorized/aiohttp.md) | Python |  | network, http |  |  |
 | [aLEAPP](./files-and-apps-phone/aleapp.md) | GitHub Release | ALEAPP is a tool for parsing and analyzing Android logs, events, and protobuf files. It can be used to extract artifacts from Android devices and analyze them in a structured way. | mobile-forensics, android, artifact-extraction | `.tar`, `.zip` |  |
 | [Amazon Corretto 21](./programming-java/amazon-corretto-21.md) | Installer | Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK). | java, corretto | `.java` |  |
+| [Android SDK Platform Tools](./os-android/android-sdk-platform-tools.md) | HTTP | Android SDK Platform Tools include ADB and Fastboot for Android device management. | android, mobile-forensics, debugging |  | Full only |
 | [API Monitor](./uncategorized/api-monitor.md) | HTTP | API Monitor is a tool for monitoring Windows API calls. | reverse-engineering, api-tracing, dynamic-analysis | `.exe`, `.dll` |  |
 | [apktool](./os-android/apktool.md) | HTTP | apktool is a tool for reverse engineering Android APK files. | reverse-engineering, android, decompiler | `.apk` |  |
 | [APT-Hunter](./uncategorized/apt-hunter.md) | Git | APT-Hunter is Threat Hunting tool for windows event logs which made by purple team mindset to provide detect APT movements hidden in the sea of windows event logs to decrease the time to uncover suspicious activity. | event-log, threat-hunting | `.evtx` |  |
@@ -73,6 +75,7 @@ Categories generated from dfirws shortcuts.
 | [Audacity](./utilities-media/audacity.md) | GitHub Release | Audacity is a free and open-source audio editing software. | audio, multimedia, steganography | `.wav`, `.mp3`, `.flac`, `.ogg`, `.aiff` | Full only |
 | [autoit-ripper](./files-and-apps/autoit-ripper.md) | Python | Extract AutoIt scripts embedded in PE binaries. | malware-analysis, autoit, deobfuscation | `.exe` |  |
 | [Autopsy](./forensics/autopsy.md) | Winget | Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic. | disk-forensics, forensics, gui, artifact-extraction | `.dd`, `.raw`, `.E01`, `.img`, `.vmdk` | Full only |
+| [Azure CLI](./cloud/azure-cli.md) | HTTP | Azure CLI is a command-line tool for managing Azure resources. | cloud, azure |  | Full only |
 | [BeaconHunter](./malware-tools-cobalt-strike/beaconhunter.md) | GitHub Release | Detect and respond to Cobalt Strike beacons using ETW. | malware-analysis, cobalt-strike, memory-forensics | `.dmp`, `.exe`, `.dll` |  |
 | [BeautifulSoup4](./uncategorized/beautifulsoup4.md) | Python |  | web, html-parsing, scraping | `.html`, `.htm`, `.xml` |  |
 | [Binary Ninja](./reverse-engineering/binary-ninja.md) | HTTP | Binary Ninja is a reverse engineering platform. | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib` | Full only |
@@ -235,6 +238,7 @@ Categories generated from dfirws shortcuts.
 | [LeechCore.wiki](./uncategorized/leechcore-wiki.md) | Git | GitHub wiki for LeechCore. | memory-forensics, documentation |  |  |
 | [legacy-sigmatools](./uncategorized/legacy-sigmatools.md) | Git | Legacy Sigma Tools (sigmac etc.) | sigma, detection-rules |  |  |
 | [lessmsi](./files-and-apps/lessmsi.md) | GitHub Release | lessmsi is a tool to view and extract the contents of a Windows Installer (.msi) file. | windows, installer | `.msi` |  |
+| [libimobiledevice-windows](./uncategorized/libimobiledevice-windows.md) | Git | A Windows port of libimobiledevice, a cross-platform library to communicate with iOS devices. It includes tools for extracting data from iOS devices, such as lockdown, idevicebackup2, and more. | ios, forensics, mobile |  |  |
 | [LibreOffice](./files-and-apps-office/libreoffice.md) | HTTP | LibreOffice is a free and open-source office suite. | office, document-viewer | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.ods`, `.odp` | Full only |
 | [lief](./uncategorized/lief.md) | Python |  | pe-analysis, elf-analysis, binary-analysis | `.exe`, `.dll`, `.elf`, `.mach-o` |  |
 | [litecli](./files-and-apps-database/litecli.md) | Python | CLI for SQLite Databases with auto-completion and syntax highlighting. | database, sqlite, cli | `.db`, `.sqlite` |  |
@@ -335,7 +339,6 @@ Categories generated from dfirws shortcuts.
 | [prettytable](./uncategorized/prettytable.md) | Python |  | data-processing, formatting |  |  |
 | [ProcDOT](./os-windows/procdot.md) | HTTP | ProcDOT is a visual malware analysis tool for process, file, and network activity. | malware-analysis, visualization, dynamic-analysis | `.csv`, `.log` | Full only |
 | [protodeep](./uncategorized/protodeep.md) | Python | A tool to help reversing protobuf. | protobuf, reverse-engineering | `.bin` |  |
-| [protodump](./utilities-cryptography/protodump.md) | Go | Protodump is a tool to extract protobuf messages from binary files without having the .proto schema files. |  |  |  |
 | [psexposed](./uncategorized/psexposed.md) | Git | Community-driven PowerShell detection indicators | windows, forensics, psexec | `.ps1` |  |
 | [PST Walker](./files-and-apps-email/pst-walker.md) | HTTP | PST Walker is a tool for analyzing PST files. | email, forensics, outlook | `.pst` |  |
 | [ptpython](./uncategorized/ptpython.md) | Python | Python REPL build on top of prompt_toolkit. | python, repl | `.py` |  |

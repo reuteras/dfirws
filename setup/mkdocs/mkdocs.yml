@@ -34,6 +34,9 @@ nav:
   - Investigate ZIP files: Investigations/Investigate-ZIP-files.md
 - Tools:
   - Overview: tools/index.md
+  - Cloud:
+    - Overview: tools/cloud/index.md
+    - Azure CLI: tools/cloud/azure-cli.md
   - Development:
     - Overview: tools/development/index.md
     - Win API Search: tools/development/win-api-search.md
@@ -208,6 +211,7 @@ nav:
     - Zui: tools/network/zui.md
   - Os Android:
     - Overview: tools/os-android/index.md
+    - Android SDK Platform Tools: tools/os-android/android-sdk-platform-tools.md
     - apktool: tools/os-android/apktool.md
   - Os Linux:
     - Overview: tools/os-linux/index.md
@@ -367,6 +371,7 @@ nav:
     - keystone-engine: tools/uncategorized/keystone-engine.md
     - LeechCore.wiki: tools/uncategorized/leechcore-wiki.md
     - legacy-sigmatools: tools/uncategorized/legacy-sigmatools.md
+    - libimobiledevice-windows: tools/uncategorized/libimobiledevice-windows.md
     - lief: tools/uncategorized/lief.md
     - LnkParse3: tools/uncategorized/lnkparse3.md
     - maclookup: tools/uncategorized/maclookup.md

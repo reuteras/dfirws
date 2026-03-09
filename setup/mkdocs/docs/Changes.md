@@ -2,6 +2,14 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-03-09
+
+- To get full functionality for ULogViewer the following tools where added:
+    - [https://github.com/iFred09/libimobiledevice-windows](https://github.com/iFred09/libimobiledevice-windows)
+    - [Android SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools)
+    - [Azure CLI](https://azure.microsoft.com/en-us/products/azure-cli/)
+- More functions to check before starting to download tools. Now checks for winget and also checking that curl is not an alias.
+
 ## 2026-03-06
 
 - Added [ULogViewer](https://github.com/carina-studio/ULogViewer/)
