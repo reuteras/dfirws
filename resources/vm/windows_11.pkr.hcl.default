@@ -40,7 +40,7 @@ variable "memory" {
 
 variable "restart_timeout" {
   type    = string
-  default = "5m"
+  default = "30m"
 }
 
 variable "output_directory" {
@@ -78,7 +78,7 @@ source "vmware-iso" "windows_11" {
   boot_wait         = "-1s"
   communicator      = "winrm"
   cpus              = "${var.cpus}"
-  disk_adapter_type = "lsisas1068"
+  disk_adapter_type = "sata"
   disk_size         = "${var.disk_size}"
   disk_type_id      = "${var.disk_type_id}"
   floppy_files      = [
