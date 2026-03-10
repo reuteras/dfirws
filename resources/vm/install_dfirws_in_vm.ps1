@@ -22,13 +22,12 @@ vmrun.exe -T ws start "${VM_VMX}" gui
 
 Wait-VMReady
 
-Write-Output "Add shared folder and mark as read-only"
 $DFIRWS_PATH = Resolve-Path "."
 
 Write-Output "Enabling shared folders"
 vmrun.exe -T ws enableSharedFolders "${VM_VMX}"
 
-Write-Output "Adding shared folder dfirws for installation of dfirws"
+Write-Output "Adding shared folder dfirws for installation of dfirws (removed later)"
 vmrun.exe -T ws addSharedFolder "${VM_VMX}" "dfirws" "${DFIRWS_PATH}"
 vmrun.exe -T ws setSharedFolderState "${VM_VMX}" "dfirws" "${DFIRWS_PATH}" "readonly"
 
@@ -57,7 +56,7 @@ vmrun.exe -T ws start "${VM_VMX}" gui
 
 Wait-VMReady
 
-Write-Output "Install DFIRWS in VM"
+Write-Output "Install DFIRWS in VM via run_start_sandbox.ps1 script"
 vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWindow -interactive "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -File "\\vmware-host\Shared Folders\dfirws\resources\vm\run_start_sandbox.ps1"
 
 Write-Output "Shutting down the VM"

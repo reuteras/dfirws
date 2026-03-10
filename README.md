@@ -73,13 +73,13 @@ Two different configurations for sandboxes will be created:
 - dfirws.wsb - network disabled
 - network_dfirws.wsb - network enabled
 
-Copy the file *config.ps1.template* to *config.ps1*.
+Copy the file *dfirws-config.ps1.template* to *dfirws-config.ps1*.
 
 ```PowerShell
-cp config.ps1.template config.ps1
+cp dfirws-config.ps1.template dfirws-config.ps1
 ```
 
-The file *config.ps1* is used by the scripts to specify token for MaxMind and GitHub. If you prefer not to save the GitHub token in *config.ps1* file you can enter it manually when you run **downloadFiles.ps1**. Another safer alternative is to use your password manager and enter the cli command to get the token from the password manager. Examples for 1Password are available in the file *config.ps1.template*.
+The file *dfirws-config.ps1* is used by the scripts to specify token for MaxMind and GitHub. If you prefer not to save the GitHub token in *dfirws-config.ps1* file you can enter it manually when you run **downloadFiles.ps1**. Another safer alternative is to use your password manager and enter the cli command to get the token from the password manager. Examples for 1Password are available in the file *dfirws-config.ps1.template*.
 
 ## Download tools and enrichment data
 

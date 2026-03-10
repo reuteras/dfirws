@@ -153,10 +153,10 @@ if ($Debloat.IsPresent) {
 if (! ($NoCustomize.IsPresent)) {
     if (Test-Path -Path ".\local\customize-vm.ps1") {
         Write-Output "Running local/customize-vm.ps1 script"
-        & ".\resources\vm\customize-vm.ps1" -CustomizeFile "customize-vm.ps1"
+        & ".\resources\vm\run_customize-vm.ps1" -CustomizeFile "customize-vm.ps1"
     } else {
         Write-Output "Running local/defaults/customize-vm.ps1 script"
-        & ".\resources\vm\customize-vm.ps1" -CustomizeFile "defaults\customize-vm.ps1"
+        & ".\resources\vm\run_customize-vm.ps1" -CustomizeFile "defaults\customize-vm.ps1"
     }
 }
 
@@ -177,5 +177,8 @@ foreach ($file in "tmp\windows_11.pkr.hcl", ".\tmp\git.zip", ".\tmp\tools.zip", 
         Remove-Item -Path $file -Force
     }
 }
+
+Write-Output "Create snapshot 'DFIRWS ready'"
+vmrun.exe -T ws snapshot "${VM_VMX}" "DFIRWS ready"
 
 Write-Output "Done"

@@ -218,6 +218,16 @@
                     <Description>Enable AutoLogon</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\local'"</CommandLine>
+                    <Order>88</Order>
+                    <Description>Add Windows Defender exclusion for local folder</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\Users\dfirws'"</CommandLine>
+                    <Order>89</Order>
+                    <Description>Add Windows Defender exclusion for dfirws user home folder</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath '\\vmware-host\Shared Folders\dfirws\'"</CommandLine>
                     <Order>90</Order>
                     <Description>Add Windows Defender exclusion for dfirws shared folder</Description>

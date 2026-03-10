@@ -99,12 +99,12 @@ if (Test-Path ".\resources\download\common.ps1") {
     Exit
 }
 
-if (Test-Path ".\config.ps1") {
-    . ".\config.ps1"
-} elseif (Test-Path ".\config.ps1.template") {
-    . ".\config.ps1.template"
+if (Test-Path ".\dfirws-config.ps1") {
+    . ".\dfirws-config.ps1"
+} elseif (Test-Path ".\dfirws-config.ps1.template") {
+    . ".\dfirws-config.ps1.template"
 } else {
-    Write-DateLog "Error: Neither config.ps1 nor config.ps1.template found. Please check your installation."
+    Write-DateLog "Error: Neither dfirws-config.ps1 nor dfirws-config.ps1.template found. Please check your installation."
     Exit
 }
 

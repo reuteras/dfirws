@@ -10,23 +10,29 @@ if (Test-Path 'C:\Users\Public\Desktop\Microsoft Edge.lnk') {
 }
 
 # Import common functions - first is for sandbox second is for VM
+$TARGET_ENVIRONMENT = "Sandbox"
 if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
     . "${HOME}\Documents\tools\wscommon.ps1"
 } else {
     . '\\vmware-host\Shared Folders\dfirws\setup\wscommon.ps1'
+    $TARGET_ENVIRONMENT = "VM"
 }
 
 # Start logging
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
-Write-DateLog "Start sandbox configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
+Write-DateLog "Start $TARGET_ENVIRONMENT configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
 
 # Total number of Update-SandboxProgress calls in this script.
 # Increment this by 1 whenever you add a new Update-SandboxProgress call,
 # and decrement it when you remove one.  Verify with (remove 3 for the ones this comment):
 #   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count - 3
 $SANDBOX_PROGRESS_STEPS = 31
-Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
+if ($TARGET_ENVIRONMENT -eq "VM") {
+   Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
+} else {
+   Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS -Title "DFIRWS VM Setup"
+}
 
 # Check if running in verify mode
 if (Test-Path "C:\log\log.txt") {
@@ -699,7 +705,9 @@ if (Test-Path "${LOCAL_PATH}\.zcompdump") {
 #
 
 Update-SandboxProgress "Running customization script..."
-if (Test-Path "${LOCAL_PATH}\customize.ps1") {
+if ($TARGET_ENVIRONMENT -ne "Sandbox") {
+    Write-DateLog "Not running customize script since TARGET_ENVIRONMENT='$TARGET_ENVIRONMENT'." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+} elseif (Test-Path "${LOCAL_PATH}\customize.ps1") {
     Write-DateLog "Running customize script." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
     PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 } elseif (Test-Path "${LOCAL_PATH}\customise.ps1") {

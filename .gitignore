@@ -1,6 +1,7 @@
 .vscode/extensions.json
 config.ps1
 config.ps1.org
+dfirws-config.ps1
 downloads/*
 enrichment/*
 local/*

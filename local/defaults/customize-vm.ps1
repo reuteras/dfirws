@@ -57,28 +57,18 @@ taskkill /f /im OneDrive.exe | Out-Null
 
 Write-Output "Install extra apps"
 dfirws-install.ps1 -Autopsy
-dfirws-install.ps1 -BinaryNinja
 dfirws-install.ps1 -Chrome
 dfirws-install.ps1 -ClamAV
 dfirws-install.ps1 -DCode
 dfirws-install.ps1 -Dokany
-dfirws-install.ps1 -Firefox
 dfirws-install.ps1 -GoLang
-dfirws-install.ps1 -Gpg4win
-dfirws-install.ps1 -Hashcat
-dfirws-install.ps1 -Jadx
 dfirws-install.ps1 -Kape
 dfirws-install.ps1 -LibreOffice
-dfirws-install.ps1 -Loki
 dfirws-install.ps1 -Node
 dfirws-install.ps1 -Obsidian
-dfirws-install.ps1 -OhMyPosh
 dfirws-install.ps1 -PDFStreamDumper
-dfirws-install.ps1 -PuTTY
-dfirws-install.ps1 -Qemu
 dfirws-install.ps1 -Ruby
 dfirws-install.ps1 -Rust
-dfirws-install.ps1 -Tor
 dfirws-install.ps1 -VLC
 dfirws-install.ps1 -VSCode
 dfirws-install.ps1 -Wireshark
