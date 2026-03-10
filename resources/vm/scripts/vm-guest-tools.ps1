@@ -9,13 +9,16 @@ curl.exe -L -o "C:\Windows\Temp\${7Z_MSI_NAME}" -s --retry 10 --retry-all-errors
 Write-Output "Install 7-Zip MSI"
 Start-Process -Wait msiexec -ArgumentList "/i C:\Windows\Temp\${7Z_MSI_NAME} /qn /norestart"
 
-# Packer uploads the VMware Tools ISO from the host via tools_upload_flavor = "windows"
-$vmwareToolsIso = "C:\Windows\Temp\vmware-tools.iso"
-
-if (!(Test-Path $vmwareToolsIso)) {
-    Write-Output "ERROR: VMware Tools ISO not found at $vmwareToolsIso. Packer tools_upload_flavor may not be configured."
+Write-Output "Download VMware Tools ISO"
+$vmwareToolsBaseUrl = "https://packages.vmware.com/tools/releases/latest/windows/"
+$listPage = (Invoke-WebRequest -Uri $vmwareToolsBaseUrl -UseBasicParsing).Content
+$isoName = [regex]::Match($listPage, 'href="(VMware-tools-windows[^"]+\.iso)"').Groups[1].Value
+if (-not $isoName) {
+    Write-Output "ERROR: Could not determine VMware Tools ISO filename from $vmwareToolsBaseUrl"
     Exit 1
 }
+$vmwareToolsIso = "C:\Windows\Temp\vmware-tools.iso"
+curl.exe -L -o "$vmwareToolsIso" -s --retry 10 --retry-all-errors "${vmwareToolsBaseUrl}${isoName}"
 
 Write-Output "Extract VMware Tools ISO"
 & "C:\Program Files\7-Zip\7z.exe" x "$vmwareToolsIso" -o"C:\Windows\Temp\VMWare" | Out-Null
