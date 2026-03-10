@@ -95,6 +95,8 @@ source "vmware-iso" "windows_11" {
                     ]
   guest_os_type        = "windows11-64"
   headless             = "${var.headless}"
+  tools_upload_flavor  = "windows"
+  tools_upload_path    = "c:/Windows/Temp/vmware-tools.iso"
   iso_checksum      = "${var.iso_checksum}"
   iso_urls          = [
                         "${var.iso_url_local}",
