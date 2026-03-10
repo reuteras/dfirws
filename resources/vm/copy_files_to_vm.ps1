@@ -37,5 +37,12 @@ if (-not (Test-Path -Path "${HOME}\Documents\tools")) {
     New-Item -ItemType Directory -Force -Path "${HOME}\Documents\tools" | Out-Null
 }
 
+if (-not (Test-Path -Path "${HOME}\go")) {
+    New-Item -ItemType Directory -Force -Path "${HOME}\go" | Out-Null
+}
+
 Write-Output "Copying setup to the tools directory in the user's directory..."
 Copy-Item -Recurse -Force .\setup\* "${HOME}\Documents\tools"
+
+Write-Output "Copying go to the user's directory..."
+Copy-Item -Recurse -Force .\mount\golang\* "${HOME}\go"
