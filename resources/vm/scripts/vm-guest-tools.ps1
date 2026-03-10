@@ -21,7 +21,7 @@ Write-Output "Extract VMware Tools ISO"
 & "C:\Program Files\7-Zip\7z.exe" x "$vmwareToolsIso" -o"C:\Windows\Temp\VMWare" | Out-Null
 
 Write-Output "Install VMware Tools"
-Start-Process -Wait "C:\Windows\Temp\VMWare\setup.exe" -ArgumentList '/S /v"/qn REBOOT=R\"'
+Start-Process -Wait "C:\Windows\Temp\VMWare\setup64.exe" -ArgumentList '/S /v "/qn REBOOT=R"'
 
 Write-Output "Remove temp files"
 Remove-Item -Force "C:\Windows\Temp\${7Z_MSI_NAME}"
