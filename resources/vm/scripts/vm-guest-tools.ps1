@@ -20,12 +20,24 @@ if (!(Test-Path $vmwareToolsIso)) {
 Write-Output "Extract VMware Tools ISO"
 & "C:\Program Files\7-Zip\7z.exe" x "$vmwareToolsIso" -o"C:\Windows\Temp\VMWare" | Out-Null
 
-Write-Output "Install VMware Tools"
-Start-Process -Wait "C:\Windows\Temp\VMWare\setup64.exe" -ArgumentList '/S /v "/qn REBOOT=R"'
+Write-Output "Locating VMware Tools installer"
+$installer = Get-ChildItem -Path "C:\Windows\Temp\VMWare" -Recurse -Filter "setup64.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
+if (-not $installer) {
+    $installer = Get-ChildItem -Path "C:\Windows\Temp\VMWare" -Recurse -Filter "setup.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
+}
+if (-not $installer) {
+    Write-Output "ERROR: Could not find setup64.exe or setup.exe under C:\Windows\Temp\VMWare"
+    Write-Output "Contents of C:\Windows\Temp\VMWare:"
+    Get-ChildItem -Path "C:\Windows\Temp\VMWare" -Recurse | ForEach-Object { Write-Output $_.FullName }
+    Exit 1
+}
+
+Write-Output "Install VMware Tools from $($installer.FullName)"
+Start-Process -Wait $installer.FullName -ArgumentList '/S /v "/qn REBOOT=R"'
 
 Write-Output "Remove temp files"
 Remove-Item -Force "C:\Windows\Temp\${7Z_MSI_NAME}"
 Remove-Item -Force "$vmwareToolsIso"
-Remove-Item -Force -Recurse "C:\Windows\Temp\VMware"
+Remove-Item -Force -Recurse "C:\Windows\Temp\VMWare"
 
 Exit 0
