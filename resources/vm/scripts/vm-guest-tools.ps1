@@ -4,7 +4,7 @@ $7z_MSI_URL = "https://www.7-zip.org/a/${7Z_MSI_NAME}"
 Write-Output "Install VMware Tools"
 
 Write-Output "Download 7-Zip MSI needed to extract VMware Tools ISO."
-curl.exe -L -o "C:\Windows\Temp\${7Z_MSI_NAME}" -s --retry 10 --retry-all-errors "${7Z_MSI_URL}"
+curl.exe -L -o "C:\Windows\Temp\${7Z_MSI_NAME}" -s --retry 10 --retry-all-errors "${7z_MSI_URL}"
 
 Write-Output "Install 7-Zip MSI"
 Start-Process -Wait msiexec -ArgumentList "/i C:\Windows\Temp\${7Z_MSI_NAME} /qn /norestart"
