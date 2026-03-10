@@ -218,14 +218,44 @@
                     <Description>Enable AutoLogon</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath '\\vmware-host\Shared Folders\dfirws'"</CommandLine>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath '\\vmware-host\Shared Folders\dfirws\'"</CommandLine>
                     <Order>90</Order>
-                    <Description>Add exclusion for Windows Defender</Description>
+                    <Description>Add Windows Defender exclusion for dfirws shared folder</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\'"</CommandLine>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath '\\vmware-host\Shared Folders\readonly\'"</CommandLine>
                     <Order>91</Order>
-                    <Description>Add exclusion for Windows Defender</Description>
+                    <Description>Add Windows Defender exclusion for readonly shared folder</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath '\\vmware-host\Shared Folders\readwrite\'"</CommandLine>
+                    <Order>92</Order>
+                    <Description>Add Windows Defender exclusion for readwrite shared folder</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\Tools'"</CommandLine>
+                    <Order>93</Order>
+                    <Description>Add Windows Defender exclusion for C:\Tools</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\git'"</CommandLine>
+                    <Order>94</Order>
+                    <Description>Add Windows Defender exclusion for C:\git</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\downloads'"</CommandLine>
+                    <Order>95</Order>
+                    <Description>Add Windows Defender exclusion for C:\downloads</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\enrichment'"</CommandLine>
+                    <Order>96</Order>
+                    <Description>Add Windows Defender exclusion for C:\enrichment</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command "Add-MpPreference -ExclusionPath 'C:\venv'"</CommandLine>
+                    <Order>97</Order>
+                    <Description>Add Windows Defender exclusion for C:\venv</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c a:\microsoft-updates.bat</CommandLine>
