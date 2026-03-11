@@ -47,10 +47,6 @@ vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWin
 Write-Output "Shutting down the VM"
 vmrun.exe -T ws stop "${VM_VMX}" soft
 
-Write-Output "Creating snapshot 'DFIRWS copied to VM'"
-vmrun.exe -T ws snapshot "${VM_VMX}" "DFIRWS copied"
-Start-Sleep 5
-
 Write-Output "Starting the VM"
 vmrun.exe -T ws start "${VM_VMX}" gui
 
@@ -61,6 +57,3 @@ vmrun.exe -T ws -gu dfirws -gp password runProgramInGuest "${VM_VMX}" -activeWin
 
 Write-Output "Shutting down the VM"
 vmrun.exe -T ws stop "${VM_VMX}" soft
-
-Write-Output "Creating snapshot 'DFIRWS installed'"
-vmrun.exe -T ws snapshot "${VM_VMX}" "DFIRWS installed"
