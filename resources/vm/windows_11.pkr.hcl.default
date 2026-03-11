@@ -74,7 +74,7 @@ variable "iso_url_remote" {
 }
 
 source "vmware-iso" "windows_11" {
-  boot_command      = [ "a<wait>a<wait>a" ]
+  boot_command      = [ "<enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter>" ]
   boot_wait         = "3s"
   communicator      = "winrm"
   cpus              = "${var.cpus}"
