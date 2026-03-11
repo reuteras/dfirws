@@ -75,7 +75,7 @@ variable "iso_url_remote" {
 
 source "vmware-iso" "windows_11" {
   boot_command      = [ "<enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter><wait><enter>" ]
-  boot_wait         = "3s"
+  boot_wait         = "-1s"
   communicator      = "winrm"
   cpus              = "${var.cpus}"
   disk_adapter_type = "sata"
@@ -112,6 +112,7 @@ source "vmware-iso" "windows_11" {
                         "RemoteDisplay.vnc.enabled" = "false"
                         "RemoteDisplay.vnc.port"    = "5900"
                         "Firmware"                  = "efi"
+                        "bios.bootOrder"            = "cdrom,hdd"
                         "Annotation"                = "Packer version: ${packer.version}|0D|0AVM creation time: ${formatdate("DD MMM YYYY hh:mm ZZZ", timestamp())}|0D|0AUsername: ${var.username}|0D|0APassword: ${var.password}|0D|0A|0D|0AWindows 11 with dfirws installed.",
                     }
   vnc_port_max                   = 5980
