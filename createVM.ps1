@@ -178,6 +178,9 @@ foreach ($file in "tmp\windows_11.pkr.hcl", ".\tmp\git.zip", ".\tmp\tools.zip", 
     }
 }
 
+Write-Output "Delete snapshot 'Installed'"
+vmrun.exe -T ws deleteSnapshot "${VM_VMX}" "Installed"
+
 Write-Output "Create snapshot 'DFIRWS ready'"
 vmrun.exe -T ws snapshot "${VM_VMX}" "DFIRWS ready"
 
