@@ -17,7 +17,7 @@ The first part of DFIRWS downloads and updates the included tools. This is handl
   - [Distribution profiles](#distribution-profiles)
   - [Sandbox configuration](#sandbox-configuration)
 - [Usage and configuration of the VM](#usage-and-configuration-of-the-vm)
-- [Update](#update)
+- [Update tools](#update-tools)
 
 ## Preparation and requirements
 
