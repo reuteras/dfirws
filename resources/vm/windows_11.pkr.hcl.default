@@ -160,6 +160,12 @@ build {
       "./resources/vm/scripts/set-winrm-automatic.bat"
     ]
   }
+
+  post-processor "shell-local" {
+    inline = [
+      "vmrun -T ws snapshot ${var.output_directory}/${var.vm_name}.vmx Installed"
+      ]
+  }
 }
 
 packer {
