@@ -3349,7 +3349,7 @@ $TOOL_DEFINITIONS += @{
         @{
             Type = "command"
             Name = "az.cmd"
-            Expect = "PE32"
+            Expect = "ASCII text"
         }
     )
     FileExtensions = @()

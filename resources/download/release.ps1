@@ -4794,7 +4794,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "${TOOLS}\ULogViewer\ULogViewer.exe"
+            Name = "`${TOOLS}\ULogViewer\ULogViewer.exe"
             Expect = "PE32"
         }
     )

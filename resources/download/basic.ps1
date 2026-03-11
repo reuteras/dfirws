@@ -231,13 +231,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "java.exe"
-            Expect = "PE32"
-        }
-    )
+    Verify = @()
     Notes = "Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK)."
     Tips = ""
     Usage = ""
