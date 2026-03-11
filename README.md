@@ -2,15 +2,15 @@
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-DFIRWS is a solution to do digital forensics and incident response analysis work in a Windows Sandbox.
+DFIRWS is a solution to do digital forensics and incident response analysis work in a Windows Sandbox. There are many great tools available for DFIR work but it can be time consuming to set up a good environment and keep it updated with the tools you like to use. The second problem that the script can solve is use of updates of tools in an offline environment. This is the problems DFIRWS tries to solve.
 
-The first part of DFIRWS downloads and updates many of the great tools that are available. The second part is the scripts that install the tools and starts a Windows Sandbox with the tools available. There is also a script available to create a VM (only VMWare Workstation at the moment) but it is not as well tested as the sandbox scripts. DFIRWS is suitable in environments without internet access and that has always been its main use case. 
+The first part of DFIRWS downloads and updates the included tools. This is handled by the **downloadFiles.ps1** script. The second part of DFIRWS is the scripts that either starts and configures a Windows Sandbox or installs the tools in a Windows VM. The primary use case is the Windows Sandbox. Third part of DFIRWS is a collection of scripts to sync the tools to an offline environment.
 
 **Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. I don't want to have to recommend this but the reason is that AV tools classify some legitimate tools as malware. The choice is yours.
 
 ## Table of contents
 
-- [Preparation](#preparation)
+- [Preparation and requirements](#preparation-and-requirements)
 - [Installation and configuration](#installation-and-configuration)
 - [Download tools and enrichment data](#download-tools-and-enrichment-data)
 - [Usage and configuration of the sandbox](#usage-and-configuration-of-the-sandbox)
@@ -19,15 +19,17 @@ The first part of DFIRWS downloads and updates many of the great tools that are 
 - [Usage and configuration of the VM](#usage-and-configuration-of-the-vm)
 - [Update](#update)
 
-## Preparation
+## Preparation and requirements
 
-1. *Programs:* You need to have the programs `7-zip`, `git` and `rclone` installed on your computer to be able to use DFIRWS. If you miss any of the tools you can install them with **winget** by typing the following commands.
+1. *Programs:* You need to have the programs `winget`, `7-zip`, `git` and `rclone` installed on your computer to be able to use DFIRWS. If you miss any of the tools you can install them with **winget** by typing the following commands assuming you have `winget` installed and working.
 
 ```PowerShell
 winget install 7zip.7zip
 winget install Git.Git
 winget install Rclone.Rclone
 ```
+
+You also can't have `curl` as a PowerShell alias to `Invoke-WebRequest` since the scripts use `curl` to download files and if it's an alias it will fail since `Invoke-WebRequest` doesn't support the same syntax. The `downloadFiles.ps1` script will check if `curl` is an alias and check for the other tools as well.
 
 2. *PowerShell:* If you haven't enabled the option to run PowerShell scripts you have to start a Windows Terminal or PowerShell prompt as administrator and run
 
@@ -53,6 +55,8 @@ The token is needed to avoid problems with rate limiting on GitHub since most of
 
 5. *MaxMind token (optional):* If you like to use MaxMind data you need a token from [https://www.maxmind.com/en/geolite2/signup](https://www.maxmind.com/en/geolite2/signup).
 
+6. *IPinfo token (optional):* If you like to use IPinfo data you need a token from [https://ipinfo.io/signup](https://ipinfo.io/signup).
+
 ## Installation and configuration
 
 Start a PowerShell terminal as your regular user and checkout the code from GitHub with the `git` command.
@@ -73,7 +77,7 @@ Two different configurations for sandboxes will be created:
 - dfirws.wsb - network disabled
 - network_dfirws.wsb - network enabled
 
-Copy the file *dfirws-config.ps1.template* to *dfirws-config.ps1*.
+Next copy the file *dfirws-config.ps1.template* to *dfirws-config.ps1*.
 
 ```PowerShell
 cp dfirws-config.ps1.template dfirws-config.ps1
@@ -88,7 +92,7 @@ Before using a sandbox or creating a VM all the tools has to be downloaded and p
 Download programs and prepare them for use by running:
 
 ```PowerShell
-.\downloadFiles.ps1
+.\downloadFiles.ps1 -AllTools
 ```
 
 Enrichment data can be downloaded by running:
@@ -109,7 +113,7 @@ To simplify the download of tools, enrichment data and ClamAV signatures you can
 .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
 ```
 
-To verify you can run the following command:
+To run the verify code you can run the following command:
 
 ```PowerShell
 .\downloadFiles.ps1 -Verify
@@ -121,10 +125,10 @@ If you like to cache a local copy of Visual Studio Build Tools you can run. **Im
 .\downloadFiles.ps1 -VisualStudioBuildTools
 ```
 
-Personally I run the following command to download everything and cache Visual Studio Build Tools:
+Personally I run the following command to download everything and cache Visual Studio Build Tools and run the verify code as well.
 
 ```PowerShell
-.\downloadFiles.ps1  -AllTools -Enrichment -Freshclam -LogBoost -VisualStudioBuildTools -Verify
+.\downloadFiles.ps1 -AllTools -Enrichment -Freshclam -LogBoost -VisualStudioBuildTools -Verify
 ```
 
 Below is a diagram of the download process of the tools and enrichment data.
@@ -245,8 +249,6 @@ downloadFiles.ps1
      └── report unexpected issues to console
 ```
 
-## Usage and configuration of the sandbox
-
 ### Distribution profiles
 
 DFIRWS supports distribution profiles to control which tools are downloaded. This is useful for standalone or external client installations where you don't need the full tool suite.
@@ -271,6 +273,8 @@ $DFIRWS_EXTRAS = @("Autopsy", "LibreOffice")
 
 The `-DistributionProfile` CLI parameter takes precedence over the config file. Explicit switches like `-Rust` or `-Node` always override the profile setting.
 
+## Usage and configuration of the sandbox
+
 ### Sandbox configuration
 
 The quickest way to use the DFIRWS is to start a sandbox by clicking on **dfirws.wsb** or running **.\dfirws.wsb** in a PowerShell terminal. The sandbox will start and the tools will be available after a couple of minutes.
@@ -281,18 +285,17 @@ You can use the search field in **explorer** to find the tools you like to use. 
 
 ![Search for tools](./resources/images/search.png)
 
-By default the sandbox will have clipboard redirection off as well as secure defaults for other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>`. More information about [Windows Sandbox configuration][wsc].
+By default the sandbox will have clipboard redirection off as well as secure defaults for other settings. If you like to enable clipboard copy and paste you should change `<ClipboardRedirection>Disable</ClipboardRedirection>` to `<ClipboardRedirection>Enable</ClipboardRedirection>` in the file *dfirws.wsb*. More information about [Windows Sandbox configuration][wsc] by Microsoft.
 
-To customize the sandbox you can copy *local\defaults\config.txt* to *local\config.txt* and change the settings to your liking. The file *local\config.txt* is used by the scripts to specify which tools to install when the sandbox starts. Every tool will still be downloaded and can be installed later in the sandbox if needed.
-The difference will be the time it takes to start the sandbox, i.e. running an installer for a program on every start.
+To customize the sandbox you can copy *local\defaults\config.txt* to *local\config.txt* and change the settings to your liking. The file *local\config.txt* is used by the scripts to specify which tools to install when the sandbox starts. This configuration is only for the sandbox and does not affect the download process by *downloadFiles.ps1*. The difference will be the time it takes to start the sandbox, i.e. running an installer for a program on every start.
 
-Extra tools can be installed in a running **dfirws** sandbox with the script **dfirws-install.ps1**. To list available tools run **Get-Help dfirws-install.ps1**. To install a tool run **dfirws-install.ps1 -<tool>**.
+Extra tools can be installed in a running **dfirws** sandbox with the script **dfirws-install.ps1**. To list tools that are available to install run **Get-Help dfirws-install.ps1**. To install a tool run **dfirws-install.ps1 -<tool>**.
 
-If you like to run your own PowerShell code to customize **dfirws** you can copy *local\defaults\customize-sandbox.ps1* to *local\customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** and that version will be used to run the script. Currently this is PowerShell 7.4.x and some things are different from earlier versions of PowerShell.
+If you like to run your own PowerShell code to customize the **dfirws** sandbox you can copy *local\defaults\customize-sandbox.ps1* to *local\customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** and that version will be used to run the script. Currently this is PowerShell 7.4.x and some things are different from earlier versions of PowerShell.
 
-More usage information is available in the [documentation](https://reuteras.github.io/dfirws/). A local copy of the documentation is available by clicking on the **dfirws docs** link on the desktop.
+More information is available in the [documentation](https://reuteras.github.io/dfirws/). A local copy of the documentation is available by clicking on the **dfirws docs** link on the desktop.
 
-The startup process of the sandbox is as illustrated in the diagram below. The scripts are designed to be modular and customizable. You can change the configuration and installation process by modifying the scripts and configuration files.
+The startup process of the sandbox is illustrated in the diagram below.
 
 ```text
 dfirws.wsb  (or network_dfirws.wsb)
@@ -398,7 +401,7 @@ dfirws.wsb  (or network_dfirws.wsb)
 
 ## Usage and configuration of the VM
 
-You can create a VM with the dfirws tools installed by running **.\createVM.ps1**. Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO from Microsoft and create a VM with the tools installed. The VM will be created  in the root folder of the checked out repository.
+You can create a VM with the dfirws tools installed by running **.\createVM.ps1**. Currently only VMWare Workstation is supported on Windows x64. The script will download the Windows 11 Enterprise ISO from Microsoft and create a VM with the tools installed. The VM will be created in the root folder of the checked out repository. The license for Windows 11 Enterprise is valid for 90 days. The VM will be created with the following settings:
 
 - The VM will be created with 4 cores and 16 GB of memory.
 - The VM will be created with a 300 GB sparse disk (space is not preallocated).
@@ -406,6 +409,8 @@ You can create a VM with the dfirws tools installed by running **.\createVM.ps1*
 - The VM will be created with a user named *dfirws* with password *password*.
 
 You can change the settings by copying *local\default\variables.pkr.hcl* to *local\variables.pkr.hcl* and modify the settings to your liking. You can for example change setting for autounattend to change the default keyboard to US (Swedish is the default).
+
+**Important:* The VM isn't hardened in any way and should only be used in an isolated environment.
 
 Currently there is no way to update the tools in the VM. You have to delete the VM and run **.\createVM.ps1** again.
 
@@ -477,15 +482,23 @@ createVM.ps1
      └─[snapshot]  "DFIRWS ready"
 ```
 
-## Update
+## Update tools
 
-Update scripts used to create the sandbox (i.e. this code) by running `git pull` and then update the tools by running **.\downloadFiles.ps1** again. Check *.\local\defaults\config.txt* for changed and added configuration options. You can also opt to only update parts of the included tools. To update Python tools run:
+Update scripts used to create the sandbox (i.e. this code) by running `git pull` and then update the tools by running **.\downloadFiles.ps1** again with the desired parameters. You can also opt to only update parts of the included tools. To update Python tools run:
 
 ```PowerShell
 .\downloadFiles.ps1 -Python
 ```
 
 To see available options run **Get-Help .\downloadFiles.ps1**.
+
+## TODO
+
+- Add a Profile that tries to exclude tools flagged by Windows Defender and other antivirus as malware.
+- Update documentation with more information about the tools included.
+- Look at adding more configuration of the tools in the sandbox, e.g. disable some first usage popups and other things that takes time to click through when you start the apps in the sandbox since the sandbox is reset to a clean state on every start.
+- Investigate adding a script to update the tools in the VM. Currently you have to delete the VM and create a new one to get updated tools.
+- Describe the offline use case and how to sync tools and enrichment data to an offline environment and to clients in that environment.
 
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
   [wsc]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file
