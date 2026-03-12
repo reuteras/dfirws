@@ -2,7 +2,6 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
-| [PersistenceSniper](persistencesniper.md) | Git | Powershell module that can be used by Blue Teams, Incident Responders and System Administrators to hunt persistences implanted in Windows machines. | windows, persistence, threat-hunting |  |  |
 | [PowerSponse](powersponse.md) | Git | PowerSponse is a PowerShell module focused on targeted containment and remediation during incident response. | incident-response, powershell, containment |  |  |
 | [Trawler](trawler.md) | Git | PowerShell script helping Incident Responders discover potential adversary persistence mechanisms. | windows, persistence, threat-hunting |  |  |
 | [Velociraptor](velociraptor.md) | GitHub Release | Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints. | incident-response, forensics, endpoint-detection | `.json`, `.csv` | Full only |

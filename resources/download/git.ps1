@@ -36,8 +36,6 @@ $repourls = `
     "https://github.com/keydet89/Events-Ripper.git", `
     "https://github.com/keydet89/RegRipper4.0", `
     "https://github.com/khyrenz/parseusbs.git", `
-    "https://github.com/last-byte/PersistenceSniper.git", `
-    "https://github.com/last-byte/PersistenceSniper.wiki.git", `
     "https://github.com/LibreOffice/dictionaries.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
     "https://github.com/mandiant/flare-floss.git", `
@@ -802,56 +800,6 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     Homepage = "https://github.com/keydet89/RegRipper4.0"
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "PersistenceSniper"
-    Category = "OS\Windows"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\IR\PersistenceSniper.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1 ; Get-Help -Name Find-AllPersistence"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("windows", "persistence", "threat-hunting")
-    Notes = "Powershell module that can be used by Blue Teams, Incident Responders and System Administrators to hunt persistences implanted in Windows machines."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/last-byte/PersistenceSniper"
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "PersistenceSniper.wiki"
-    Category = "OS\Windows"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("windows", "persistence", "documentation")
-    Notes = "GitHub wiki for PersistenceSniper."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/last-byte/PersistenceSniper/wiki"
     Vendor = ""
     License = ""
     LicenseUrl = ""

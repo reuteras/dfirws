@@ -89,6 +89,9 @@ uv tool install --python "C:\Program Files\Python311\python.exe" --with "pyreadl
 Write-DateLog "Installed peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" --with "mkdocs-material" "mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --python "C:\Program Files\Python311\python.exe" "git+https://github.com/Hexastrike/PyrsistenceSniper.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed PyrsistenceSniper" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+
 if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
     uv tool install --python "C:\Program Files\Python311\python.exe" "binary-refinery[extended]@0.9.26" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
     Write-DateLog "Installed binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
@@ -476,6 +479,41 @@ if (((Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") -and ($NeedVSBuildTools -
     #Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 }
 # End venvs needing Visual Studio Build Tools
+
+$TOOL_DEFINITIONS += @{
+    Name = "PyrsistenceSniper"
+    Category = "Forensics"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\PyrsistenceSniper.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pyrsistencesniper -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\pyrsistencesniper.exe"
+            Expect = "Python"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("persistence", "forensics", "indicator-extraction", "enrichment")
+    Notes = "Point it at a KAPE dump, a Velociraptor collection, or a mounted disk image and get offline Windows persistence detection in seconds. No live system access, no admin privileges, no PowerShell. Runs on Windows, Linux, and macOS because investigators don't always get to pick their workstation."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = $PYTHON_DEFAULT
+    Homepage = "https://github.com/Hexastrike/PyrsistenceSniper"
+    Vendor = ""
+    License = "MIT License"
+    LicenseUrl = ""
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "white-phoenix"

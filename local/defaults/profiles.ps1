@@ -115,7 +115,6 @@ $DFIRWS_PROFILES = @{
             "libimobiledevice-windows",
             "Trawler",
             "White-Phoenix",
-            "PersistenceSniper.wiki",
             "EVTX-ATTACK-SAMPLES",
             "cutter-jupyter",
             "cutterref",

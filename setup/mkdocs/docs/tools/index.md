@@ -324,8 +324,6 @@ Categories generated from dfirws shortcuts.
 | [PE-utils](./uncategorized/pe-utils.md) | GitHub Release | A set of small utilities, helpers for PIN tracers. | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
 | [peepdf-3](./files-and-apps-pdf/peepdf-3.md) | Python | A Python 3 tool to explore, analyse, and disassemble PDF files | pdf, malware-analysis, javascript | `.pdf` |  |
 | [pefile](./uncategorized/pefile.md) | Python |  | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
-| [PersistenceSniper](./ir/persistencesniper.md) | Git | Powershell module that can be used by Blue Teams, Incident Responders and System Administrators to hunt persistences implanted in Windows machines. | windows, persistence, threat-hunting |  |  |
-| [PersistenceSniper.wiki](./uncategorized/persistencesniper-wiki.md) | Git | GitHub wiki for PersistenceSniper. | windows, persistence, documentation |  |  |
 | [pestudio](./files-and-apps-pe/pestudio.md) | HTTP | pestudio is a tool for analyzing PE files. | pe-analysis, malware-analysis, static-analysis | `.exe`, `.dll`, `.sys` |  |
 | [peutils](./uncategorized/peutils.md) | Python |  | pe-analysis, packer-detection | `.exe`, `.dll` |  |
 | [pfp](./uncategorized/pfp.md) | Python |  | binary-analysis, file-format | `.bin` |  |
@@ -352,6 +350,7 @@ Categories generated from dfirws shortcuts.
 | [pyOneNote](./uncategorized/pyonenote.md) | Python |  | office, onenote, data-extraction | `.one` |  |
 | [pypdf](./uncategorized/pypdf.md) | Python |  | pdf, data-extraction | `.pdf` |  |
 | [pypng](./uncategorized/pypng.md) | Python |  | image, steganography | `.png` |  |
+| [PyrsistenceSniper](./forensics/pyrsistencesniper.md) | Python | Point it at a KAPE dump, a Velociraptor collection, or a mounted disk image and get offline Windows persistence detection in seconds. No live system access, no admin privileges, no PowerShell. Runs on Windows, Linux, and macOS because investigators don't always get to pick their workstation. | persistence, forensics, indicator-extraction, enrichment |  |  |
 | [pyshark](./uncategorized/pyshark.md) | Python |  | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng` |  |
 | [pysigma-backend-elasticsearch](./uncategorized/pysigma-backend-elasticsearch.md) | Python |  | sigma, detection, elasticsearch | `.yml`, `.yaml` |  |
 | [pySigma-backend-loki](./uncategorized/pysigma-backend-loki.md) | Python |  | sigma, detection, loki | `.yml`, `.yaml` |  |

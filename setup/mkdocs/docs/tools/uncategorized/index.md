@@ -48,7 +48,6 @@
 | [PE-utils](pe-utils.md) | GitHub Release | A set of small utilities, helpers for PIN tracers. | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
 | [PacketCircle](packetcircle.md) | Git | Wireshark Plugin for traffic-matrix visualization. | network, plugin, visualization | `.pcap`, `.pcapng` |  |
 | [PatchaPalooza](patchapalooza.md) | Git | A comprehensive tool that provides an insightful analysis of Microsoft's monthly security updates. | vulnerability, microsoft, patch-analysis |  |  |
-| [PersistenceSniper.wiki](persistencesniper-wiki.md) | Git | GitHub wiki for PersistenceSniper. | windows, persistence, documentation |  |  |
 | [PowerShell](powershell.md) | GitHub Release | PowerShell is a task automation and configuration management framework from Microsoft. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
 | [PowerShell 7](powershell-7.md) | Winget | PowerShell 7 is a cross-platform shell and scripting language that provides a powerful command-line interface and automation capabilities. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
 | [PySocks](pysocks.md) | Python |  | network, proxy |  |  |

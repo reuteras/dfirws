@@ -191,9 +191,6 @@ Copy-Item "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\wt.exe" "$en
 Copy-Item "$LOCAL_PATH\defaults\Windows_Terminal.json" "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR\settings\settings.json" -Force | Out-Null
 $TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR"
 
-# Add PersistenceSniper
-Import-Module ${GIT_PATH}\PersistenceSniper\PersistenceSniper\PersistenceSniper.psd1
-
 # Set date and time format
 Update-SandboxProgress "Configuring date and time format..."
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortDate -value "yyyy-MM-dd" | Out-Null

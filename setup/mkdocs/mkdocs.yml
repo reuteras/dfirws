@@ -168,9 +168,9 @@ nav:
     - binary-refinery: tools/forensics/binary-refinery.md
     - dissect.target: tools/forensics/dissect-target.md
     - dissect: tools/forensics/dissect.md
+    - PyrsistenceSniper: tools/forensics/pyrsistencesniper.md
   - Ir:
     - Overview: tools/ir/index.md
-    - PersistenceSniper: tools/ir/persistencesniper.md
     - PowerSponse: tools/ir/powersponse.md
     - Trawler: tools/ir/trawler.md
     - Velociraptor: tools/ir/velociraptor.md
@@ -417,7 +417,6 @@ nav:
     - pdfalyzer: tools/uncategorized/pdfalyzer.md
     - PE-utils: tools/uncategorized/pe-utils.md
     - pefile: tools/uncategorized/pefile.md
-    - PersistenceSniper.wiki: tools/uncategorized/persistencesniper-wiki.md
     - peutils: tools/uncategorized/peutils.md
     - pfp: tools/uncategorized/pfp.md
     - PowerShell 7: tools/uncategorized/powershell-7.md
