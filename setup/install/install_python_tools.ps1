@@ -497,7 +497,7 @@ $TOOL_DEFINITIONS += @{
         @{
             Type = "command"
             Name = "C:\venv\bin\pyrsistencesniper.exe"
-            Expect = "Python"
+            Expect = "PE32"
         }
     )
     FileExtensions = @()
