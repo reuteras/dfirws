@@ -2,6 +2,10 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-03-12
+
+- Removed Persistencesniper and add [Pyrsistencesniper](https://github.com/Hexastrike/PyrsistenceSniper) instead.
+
 ## 2026-03-09
 
 - To get full functionality for ULogViewer the following tools where added:
