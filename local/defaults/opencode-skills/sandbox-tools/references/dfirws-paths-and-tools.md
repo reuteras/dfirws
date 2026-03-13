@@ -49,7 +49,6 @@ C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe -d Desktop\readonly\evtx --csv Des
 | Tool | Path | Use case |
 | ---- | ---- | -------- |
 | RegistryExplorer | `C:\Program Files\RegistryExplorer\RegistryExplorer.exe` | GUI registry hive viewer |
-| RegRipper 4.0 | `C:\git\RegRipper4.0\rip.exe` | Scripted broad registry extraction |
 | regipy (CLI) | `C:\venv\bin\registry-dump.exe` | Python-based registry parsing |
 | regipy (MCP) | Via MCP server if enabled | Interactive registry analysis |
 | ShellBagsExplorer | `C:\Program Files\ShellBagsExplorer\ShellBagsExplorer.exe` | Shell bag artifact viewer |
@@ -60,7 +59,6 @@ C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe -d Desktop\readonly\evtx --csv Des
 **Quick triage commands:**
 
 ```pwsh
-C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\SYSTEM -a > Desktop\readwrite\system_regripper.txt
 C:\Tools\Zimmerman\net6\AmcacheParser.exe -f Desktop\readonly\Amcache.hve --csv Desktop\readwrite\amcache_output
 C:\Tools\Zimmerman\net6\AppCompatCacheParser.exe -f Desktop\readonly\SYSTEM --csv Desktop\readwrite\shimcache_output
 ```

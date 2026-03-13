@@ -33,8 +33,6 @@ $repourls = `
     "https://github.com/JPCERTCC/ToolAnalysisResultSheet.git", `
     "https://github.com/KasperskyLab/iShutdown.git", `
     "https://github.com/keraattin/EmailAnalyzer.git", `
-    "https://github.com/keydet89/Events-Ripper.git", `
-    "https://github.com/keydet89/RegRipper4.0", `
     "https://github.com/khyrenz/parseusbs.git", `
     "https://github.com/LibreOffice/dictionaries.git", `
     "https://github.com/Malandrone/PowerDecode.git", `
@@ -746,62 +744,6 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/keraattin/EmailAnalyzer"
     Vendor = ""
     License = "GPL-3.0 License"
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Events-Ripper"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\erip (Parse timeline-format events file - Events-Ripper).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command erip.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("event-log", "forensics", "windows")
-    Notes = "This project is based on RegRipper, to easily extract additional value/pivot points from a TLN events file."
-    Tips = ""
-    Usage = "Events-Ripper is based on the 5-field, pipe-delimited TLN `"intermediate`" events file format. This file is intermediate, as it the culmination or collection of normalized events from different data sources (i.e., Registry, WEVTX, MFT, etc.) that are then parsed into a deduped timeline.
-
-The current iteration of Events-Ripper includes plugins that are written specifically for Windows Event Log (*.evtx) events.
-
-This tool is intended to address a very specific problem set, one that leverages a limited data set to develop as much insight and situational awareness as possible from that data set.
-
-"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/keydet89/Events-Ripper"
-    Vendor = ""
-    License = "GPL-3.0 License"
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "RegRipper4.0"
-    Category = "OS\Windows\Registry"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("registry", "forensics", "windows")
-    Notes = "RegRipper4.0 includes ISO 8601-ish time stamp formatting, MITRE ATT&CK mapping (for some, albeit not all, plugins), and Analysis Tips. Also, there are many new plugins since August, 2020."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/keydet89/RegRipper4.0"
-    Vendor = ""
-    License = ""
     LicenseUrl = ""
     PythonVersion = ""
 }

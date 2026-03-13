@@ -146,13 +146,9 @@ python C:\Tools\DidierStevens\pdf-parser.py --object <id> --filter --raw Desktop
 
 **Goal**: Extract forensic artifacts from Windows registry hives.
 
-### Step 1: Broad extraction with RegRipper
+### Step 1: 
 
-```pwsh
-C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\SYSTEM -a > Desktop\readwrite\system_rip.txt
-C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\SOFTWARE -a > Desktop\readwrite\software_rip.txt
-C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\NTUSER.DAT -a > Desktop\readwrite\ntuser_rip.txt
-```
+TODO: Change from RegRipper.
 
 ### Step 2: Targeted artifact extraction
 

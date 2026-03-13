@@ -36,11 +36,10 @@ C:\Tools\radare2\bin\radare2.exe -q -c "iz" Desktop\readonly\suspect.exe
 - **Use when**: Interactive registry hive analysis requiring exploration of keys, values, and timestamps
 - **Capabilities**: Parse registry hives, enumerate keys, extract values, search for patterns, timeline registry changes
 
-**Fallback if unavailable**: Use the regipy CLI or RegRipper:
+**Fallback if unavailable**: Use the regipy CLI
 
 ```pwsh
 C:\venv\bin\registry-dump.exe Desktop\readonly\NTUSER.DAT
-C:\git\RegRipper4.0\rip.exe -r Desktop\readonly\NTUSER.DAT -a
 ```
 
 ## Related radare2 plugins (non-MCP)
