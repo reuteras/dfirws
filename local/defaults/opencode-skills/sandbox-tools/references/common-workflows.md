@@ -146,7 +146,7 @@ python C:\Tools\DidierStevens\pdf-parser.py --object <id> --filter --raw Desktop
 
 **Goal**: Extract forensic artifacts from Windows registry hives.
 
-### Step 1: 
+### Step 1: Registry
 
 TODO: Change from RegRipper.
 
