@@ -4,6 +4,9 @@
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy" /v VerifiedAndReputablePolicyState /t REG_DWORD /d 0 /f
 "`n" | CiTool.exe -r
 
+# Disable firewall early to enable local web services during setup
+netsh firewall set opmode DISABLE 2>&1 | Out-Null
+
 # Cleanup - double Egde shortcut since sometime 2026
 if (Test-Path 'C:\Users\Public\Desktop\Microsoft Edge.lnk') {
 	Remove-Item 'C:\Users\Public\Desktop\Microsoft Edge.lnk' -Force
@@ -22,12 +25,9 @@ if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 Write-DateLog "Start $TARGET_ENVIRONMENT configuration" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log"
+filter Write-SetupLog { $_ | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append }
 
-# Total number of Update-SandboxProgress calls in this script.
-# Increment this by 1 whenever you add a new Update-SandboxProgress call,
-# and decrement it when you remove one.  Verify with (remove 3 for the ones this comment):
-#   (Select-String 'Update-SandboxProgress' setup\start_sandbox.ps1).Count - 3
-$SANDBOX_PROGRESS_STEPS = 31
+$SANDBOX_PROGRESS_STEPS = (Select-String -Pattern 'Update-SandboxProgress' -Path $PSCommandPath).Count - 1
 if ($TARGET_ENVIRONMENT -eq "VM") {
    Initialize-SandboxProgress -TotalSteps $SANDBOX_PROGRESS_STEPS
 } else {
@@ -37,7 +37,7 @@ if ($TARGET_ENVIRONMENT -eq "VM") {
 # Check if running in verify mode
 if (Test-Path "C:\log\log.txt") {
 	Add-Shortcut -SourceLnk "${HOME}\Desktop\progress.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command Get-Content C:\log\verify.txt -Wait"
-	Write-DateLog "Sandbox started in verify mode." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+	Write-DateLog "Sandbox started in verify mode." | Write-SetupLog
 }
 
 # Set the execution policy to Bypass for default PowerShell
@@ -47,9 +47,9 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 Update-SandboxProgress "Installing 7-Zip..."
 $proc7zip = Start-Process -Wait -PassThru msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
 if ($proc7zip.ExitCode -ne 0) {
-    Write-DateLog "WARNING: 7-Zip installer exited with code $($proc7zip.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: 7-Zip installer exited with code $($proc7zip.ExitCode)" | Write-SetupLog
 }
-Write-DateLog "7-Zip installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "7-Zip installed" | Write-SetupLog
 
 # Install PSDecode module - https://github.com/R3MRUM/PSDecode
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force | Out-Null
@@ -58,7 +58,7 @@ Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\Pow
 Update-SandboxProgress "Configuring PowerShell 7..."
 New-Item -Path "${env:ProgramFiles}\PowerShell\7" -ItemType SymbolicLink -Value "${TOOLS}\pwsh" -Force | Out-Null
 & "${POWERSHELL_EXE}" -Command "Set-ExecutionPolicy -Scope CurrentUser Unrestricted"
-Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "PowerShell installed and execution policy set to Unrestricted for pwsh done." | Write-SetupLog
 
 #
 # Install base tools
@@ -68,9 +68,9 @@ Write-DateLog "PowerShell installed and execution policy set to Unrestricted for
 Update-SandboxProgress "Installing Java..."
 $procJava = Start-Process -Wait -PassThru msiexec -ArgumentList "/i ${SETUP_PATH}\corretto.msi /qn /norestart"
 if ($procJava.ExitCode -ne 0) {
-    Write-DateLog "WARNING: Java installer exited with code $($procJava.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: Java installer exited with code $($procJava.ExitCode)" | Write-SetupLog
 }
-Write-DateLog "Java installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Java installed" | Write-SetupLog
 
 # Install Python - retry up to 3 times as installer can be unreliable
 Update-SandboxProgress "Installing Python..."
@@ -81,46 +81,46 @@ for ($attempt = 1; $attempt -le 3; $attempt++) {
         $pythonInstalled = $true
         break
     }
-    Write-DateLog "Python installation attempt $attempt failed (exit code: $($procPython.ExitCode)), retrying in 5 seconds..." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Python installation attempt $attempt failed (exit code: $($procPython.ExitCode)), retrying in 5 seconds..." | Write-SetupLog
     Start-Sleep -Seconds 5
 }
 if ($pythonInstalled) {
-    Write-DateLog "Python installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Python installed" | Write-SetupLog
 } else {
-    Write-DateLog "WARNING: Python installation may have failed after 3 attempts" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: Python installation may have failed after 3 attempts" | Write-SetupLog
 }
 
 # Install Visual C++ Redistributable 17
 Update-SandboxProgress "Installing Visual C++ Redistributable..."
 $procVcredist = Start-Process -Wait -PassThru "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
 if ($procVcredist.ExitCode -ne 0) {
-    Write-DateLog "WARNING: Visual C++ Redistributable installer exited with code $($procVcredist.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: Visual C++ Redistributable installer exited with code $($procVcredist.ExitCode)" | Write-SetupLog
 }
-Write-DateLog "Visual C++ Redistributable installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Visual C++ Redistributable installed" | Write-SetupLog
 
 # Install .NET 6
 Update-SandboxProgress "Installing .NET 6..."
 $procDotnet6 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
 if ($procDotnet6.ExitCode -ne 0) {
-    Write-DateLog "WARNING: .NET 6 installer exited with code $($procDotnet6.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: .NET 6 installer exited with code $($procDotnet6.ExitCode)" | Write-SetupLog
 }
-Write-DateLog ".NET 6 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog ".NET 6 Desktop runtime installed" | Write-SetupLog
 
 # Install .NET 8
 Update-SandboxProgress "Installing .NET 8..."
 $procDotnet8 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet8desktop.exe" -ArgumentList "/install /quiet /norestart"
 if ($procDotnet8.ExitCode -ne 0) {
-    Write-DateLog "WARNING: .NET 8 installer exited with code $($procDotnet8.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: .NET 8 installer exited with code $($procDotnet8.ExitCode)" | Write-SetupLog
 }
-Write-DateLog ".NET 8 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog ".NET 8 Desktop runtime installed" | Write-SetupLog
 
 # Install .NET 9
 Update-SandboxProgress "Installing .NET 9..."
 $procDotnet9 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet9desktop.exe" -ArgumentList "/install /quiet /norestart"
 if ($procDotnet9.ExitCode -ne 0) {
-    Write-DateLog "WARNING: .NET 9 installer exited with code $($procDotnet9.ExitCode)" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: .NET 9 installer exited with code $($procDotnet9.ExitCode)" | Write-SetupLog
 }
-Write-DateLog ".NET 9 Desktop runtime installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog ".NET 9 Desktop runtime installed" | Write-SetupLog
 
 # Copy config files and import them - needed for OhMyPosh installation
 Update-SandboxProgress "Importing configuration..."
@@ -130,22 +130,21 @@ if (Test-Path "${LOCAL_PATH}\config.txt") {
     Copy-Item "${LOCAL_PATH}\defaults\config.txt" "${WSDFIR_TEMP}\config.ps1" -Force | Out-Null
 }
 . "${WSDFIR_TEMP}\config.ps1"
-Write-DateLog "Config files copied and imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Config files copied and imported" | Write-SetupLog
 
 # Install OhMyPosh
 Update-SandboxProgress "Installing OhMyPosh..."
-Install-OhMyPosh | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Install-OhMyPosh | Write-SetupLog
 
 # Install HxD
 Update-SandboxProgress "Installing HxD..."
-Copy-Item "${TOOLS}\hxd\HxDSetup.exe" "${WSDFIR_TEMP}\HxDSetup.exe" -Force
-& "${WSDFIR_TEMP}\HxDSetup.exe" /VERYSILENT /NORESTART
-Write-DateLog "HxD installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+& "${TOOLS}\hxd\HxDSetup.exe" /VERYSILENT /NORESTART
+Write-DateLog "HxD installed" | Write-SetupLog
 
 # Install IrfanView
 Update-SandboxProgress "Installing IrfanView..."
 & "${SETUP_PATH}\irfanview.exe" /silent /assoc=1 | Out-Null
-Write-DateLog "IrfanView installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "IrfanView installed" | Write-SetupLog
 
 # Install Notepad++ and plugins
 Update-SandboxProgress "Configuring optional editors..."
@@ -153,13 +152,13 @@ if (("${WSDFIR_NOTEPAD}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
 	Add-ToUserPath "${env:ProgramFiles}\Notepad++"
 	Add-Shortcut -SourceLnk "${HOME}\Desktop\Notepad++.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe"
-	Write-DateLog "Notepad++ installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+	Write-DateLog "Notepad++ installed" | Write-SetupLog
 }
 
 # Install Neovim
 if (("${WSDFIR_NEOVIM}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	Install-Neovim
-	Write-DateLog "Neovim installed" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+	Write-DateLog "Neovim installed" | Write-SetupLog
 }
 
 #
@@ -168,7 +167,7 @@ if (("${WSDFIR_NEOVIM}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 
 # Import registry settings
 reg import "${HOME}\Documents\tools\reg\registry.reg" | Out-Null
-Write-DateLog "Registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Registry settings imported" | Write-SetupLog
 
 # PowerShell
 if (Test-Path "${LOCAL_PATH}\Microsoft.PowerShell_profile.ps1") {
@@ -197,13 +196,13 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortDate -val
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sLongDate -value "yyyy-MMMM-dddd" | Out-Null
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sShortTime -value "HH:mm" | Out-Null
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -name sTimeFormat -value "HH:mm:ss" | Out-Null
-Write-DateLog "Date and time format set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Date and time format set" | Write-SetupLog
 
 # Add right-click context menu if specified
 Update-SandboxProgress "Configuring context menu and registry..."
 if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
     reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve | Out-Null
-    Write-DateLog "Right-click context menu added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Right-click context menu added" | Write-SetupLog
 
 	# Change TERMINAL_INSTALL_DIR to actual installed version
 	Get-Content "${HOME}\Documents\tools\reg\right-click.reg" |
@@ -211,7 +210,7 @@ if ("${WSDFIR_RIGHTCLICK}" -eq "Yes") {
 		Set-Content "${WSDFIR_TEMP}\right-click.reg"
 
 	reg import "${WSDFIR_TEMP}\right-click.reg" | Out-Null
-	Write-DateLog "Right-click context menu registry settings imported" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+	Write-DateLog "Right-click context menu registry settings imported" | Write-SetupLog
 }
 
 # Uses SystemFileAssociations so the verbs apply reliably to file types
@@ -224,16 +223,14 @@ $extensions = @(
 )
 
 $wtpath = "C:\\Program Files\\Windows Terminal\\${TERMINAL_INSTALL_DIR}\\wt.exe"
+$cmd_mraptor = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"mraptor '%1'`\`""
+$cmd_oleid   = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"oleid '%1'`\`""
+$cmd_olevba  = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"olevba '%1'`\`""
 
+$allRegistryContent = "Windows Registry Editor Version 5.00`r`n"
 foreach ($extension in $extensions) {
     $baseKey = "HKEY_LOCAL_MACHINE\Software\Classes\SystemFileAssociations\.${extension}\shell\dfirws_office"
-
-    $cmd_mraptor = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"mraptor '%1'`\`""
-    $cmd_oleid   = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"oleid '%1'`\`""
-    $cmd_olevba  = "`\`"$wtpath`\`" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command `\`"olevba '%1'`\`""
-
-    $registry_file = @"
-Windows Registry Editor Version 5.00
+    $allRegistryContent += @"
 
 [$baseKey]
 "MUIVerb"="dfirws office"
@@ -257,15 +254,14 @@ Windows Registry Editor Version 5.00
 [$baseKey\shell\olevba\command]
 @="$cmd_olevba"
 "@
-
-    $regPath = Join-Path $WSDFIR_TEMP "${extension}.reg"
-    $registry_file | Out-File -FilePath $regPath -Encoding ascii
-
-    reg import $regPath | Out-Null
-    Remove-Item -LiteralPath $regPath -Force
 }
 
-Write-DateLog "Office extensions added" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+$combinedRegPath = Join-Path $WSDFIR_TEMP "office_all.reg"
+$allRegistryContent | Out-File -FilePath $combinedRegPath -Encoding ascii
+reg import $combinedRegPath | Out-Null
+Remove-Item -LiteralPath $combinedRegPath -Force
+
+Write-DateLog "Office extensions added" | Write-SetupLog
 
 # Set default editor associations for text files
 Update-SandboxProgress "Configuring text editor associations..."
@@ -317,7 +313,7 @@ function Resolve-Editor {
         ShellKey = "EditWithNeovim"
       }
     }
-    Write-DateLog "WARNING: WSDFIR_TEXT_EDITOR='$sel' but nvim.exe not found; trying Notepad++." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "WARNING: WSDFIR_TEXT_EDITOR='$sel' but nvim.exe not found; trying Notepad++." | Write-SetupLog
     # fall through to Notepad++ below
   }
 
@@ -343,7 +339,7 @@ function Resolve-Editor {
   }
 
   # Neither Neovim nor Notepad++ found - return $null so the caller skips associations.
-  Write-DateLog "WARNING: No text editor (Neovim or Notepad++) found; skipping file associations." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+  Write-DateLog "WARNING: No text editor (Neovim or Notepad++) found; skipping file associations." | Write-SetupLog
   return $null
 }
 
@@ -404,7 +400,7 @@ if ($ed) {
         Set-DefaultForExt -ext $ext -progId $ed.ProgId
     }
 
-    Write-DateLog "Editor associations set" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Editor associations set" | Write-SetupLog
 }
 
 # Set dark theme if selected
@@ -416,10 +412,7 @@ if ("${WSDFIR_DARK}" -eq "Yes") {
 }
 
 Update-Wallpaper "${SETUP_PATH}\dfirws.jpg"
-Write-DateLog "Wallpaper updated" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-
-# Disable firewall to enable local web services
-netsh firewall set opmode DISABLE 2>&1 | Out-Null
+Write-DateLog "Wallpaper updated" | Write-SetupLog
 
 # Hide the taskbar
 if ("${WSDFIR_HIDE_TASKBAR}" -eq "Yes") {
@@ -430,7 +423,7 @@ if ("${WSDFIR_HIDE_TASKBAR}" -eq "Yes") {
 # Restart Explorer process
 Update-SandboxProgress "Restarting Explorer..."
 Stop-Process -ProcessName "Explorer" -Force
-Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Explorer restarted" | Write-SetupLog
 
 #
 # Configure PATH
@@ -438,7 +431,7 @@ Write-DateLog "Explorer restarted" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_
 # PATH - Windows have a limit of <2048 characters for user PATH
 
 Update-SandboxProgress "Configuring PATH environment variable..."
-Write-DateLog "Add to PATH" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Add to PATH" | Write-SetupLog
 $GHIDRA_INSTALL_DIR=""
 if (Test-Path "${TOOLS}\ghidra\") {
     $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
@@ -557,23 +550,23 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${HOME}\Documents\tools\utils")
 
 $ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"
-Write-Output "Adding to PATH: $ADD_TO_PATH_STRING" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-Output "Adding to PATH: $ADD_TO_PATH_STRING" | Write-SetupLog
 # Save length of ADD_TO_PATH_STRING to log
 $length = $ADD_TO_PATH_STRING.Length
-Write-Output "Length of PATH addition string: $length" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-Output "Length of PATH addition string: $length" | Write-SetupLog
 # Total user PATH length
 $existingUserPath = [Environment]::GetEnvironmentVariable("PATH", "User")
 $totalPathLength = $existingUserPath.Length + $length + 1
-Write-Output "Total user PATH length after addition: $totalPathLength" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-Output "Total user PATH length after addition: $totalPathLength" | Write-SetupLog
 # Warn if total length exceeds 2048 characters
 if ($totalPathLength -gt 2048) {
-	Write-Output "WARNING: Total user PATH length exceeds 2048 characters. Some entries may be truncated." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+	Write-Output "WARNING: Total user PATH length exceeds 2048 characters. Some entries may be truncated." | Write-SetupLog
 }
 
 Add-MultipleToUserPath $ADD_TO_PATH_STRING
 
 Update-SandboxProgress "Creating Desktop shortcuts..."
-Write-DateLog "Start creation of Desktop/dfirws" | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Start creation of Desktop/dfirws" | Write-SetupLog
 Start-Process ${POWERSHELL_EXE} -ArgumentList "${HOME}\Documents\tools\utils\dfirws_folder.ps1" -NoNewWindow
 
 # Add shortcuts to desktop
@@ -592,7 +585,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Clipboard" -Name EnableClipboar
 # Install Graphviz
 Update-SandboxProgress "Installing Graphviz..."
 & "${SETUP_PATH}\graphviz.exe" /S /D="${env:ProgramFiles}\graphviz"
-Write-DateLog "Installing Graphviz done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Installing Graphviz done." | Write-SetupLog
 
 # Copy files to user profile
 New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
@@ -614,30 +607,29 @@ if (Test-Path "${GIT_PATH}\cutterref"){
 }
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\icons" | Out-Null
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin" | Out-Null
-Write-DateLog "Installed Cutter plugins." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Installed Cutter plugins." | Write-SetupLog
 
-# BeaconHunter
+# BeaconHunter, IDR, and Zimmerman tools - run Robocopy copies in parallel
 Update-SandboxProgress "Configuring forensic tools..."
-Robocopy.exe /MT:96 /MIR "${TOOLS}\BeaconHunter" "${env:ProgramFiles}\BeaconHunter" | Out-Null
-
-# IDR
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\IDR" "${env:ProgramFiles}\IDR" | Out-Null
+$robocopyJobs = @(
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\BeaconHunter" "$env:ProgramFiles\BeaconHunter" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:GIT_PATH\IDR" "$env:ProgramFiles\IDR" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\iisGeolocate" "$env:ProgramFiles\iisGeolocate" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\RegistryExplorer" "$env:ProgramFiles\RegistryExplorer" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\ShellBagsExplorer" "$env:ProgramFiles\ShellBagsExplorer" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\TimelineExplorer" "$env:ProgramFiles\TimelineExplorer" }
+)
+$robocopyJobs | Wait-Job | Out-Null
+$robocopyJobs | Remove-Job
+if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
+    Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force | Out-Null
+}
 
 # Jupyter
 Update-SandboxProgress "Configuring Jupyter..."
 Robocopy.exe /MT:96 /MIR "${HOME}\Documents\tools\jupyter\.jupyter" "${HOME}\.jupyter" | Out-Null
 Copy-Item "${HOME}\Documents\tools\jupyter\common.py" "${HOME}\Documents\jupyter\" -Force | Out-Null
 Copy-Item "${HOME}\Documents\tools\jupyter\*.ipynb" "${HOME}\Documents\jupyter\" -Force | Out-Null
-
-# IIS Geolocate and other Zimmerman tools that needs readwrite access
-Update-SandboxProgress "Configuring Zimmerman tools..."
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\iisGeolocate" "${env:ProgramFiles}\iisGeolocate" | Out-Null
-if (Test-Path "C:\enrichment\maxmind_current\GeoLite2-City.mmdb") {
-    Copy-Item "C:\enrichment\maxmind_current\GeoLite2-City.mmdb" "${env:ProgramFiles}\iisGeolocate\" -Force | Out-Null
-}
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\RegistryExplorer" "${env:ProgramFiles}\RegistryExplorer" | Out-Null
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\ShellBagsExplorer" "${env:ProgramFiles}\ShellBagsExplorer" | Out-Null
-Robocopy.exe /MT:96 /MIR "${TOOLS}\Zimmerman\TimelineExplorer" "${env:ProgramFiles}\TimelineExplorer" | Out-Null
 
 # geolocus
 if (Test-Path "C:\enrichment\geolocus\.cache\geolocus-cli\geolocus.mmdb") {
@@ -676,12 +668,12 @@ if ($opencode_skills_src -ne "") {
     $opencode_skills_dest = "${opencode_config_dir}\skills"
     New-Item -ItemType Directory -Force -Path "${opencode_skills_dest}" | Out-Null
     Robocopy.exe /MT:96 /MIR "${opencode_skills_src}" "${opencode_skills_dest}" | Out-Null
-    Write-DateLog "Installed opencode-ai skills." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Installed opencode-ai skills." | Write-SetupLog
 } else {
-    Write-DateLog "No opencode-ai skills found in local or defaults." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "No opencode-ai skills found in local or defaults." | Write-SetupLog
 }
 
-Write-DateLog "Installed opencode-ai config." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Installed opencode-ai config." | Write-SetupLog
 
 # Config for bash and zsh
 if (Test-Path "${LOCAL_PATH}\.zshrc") {
@@ -701,16 +693,16 @@ if (Test-Path "${LOCAL_PATH}\.zcompdump") {
 
 Update-SandboxProgress "Running customization script..."
 if ($TARGET_ENVIRONMENT -ne "Sandbox") {
-    Write-DateLog "Not running customize script since TARGET_ENVIRONMENT='$TARGET_ENVIRONMENT'." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Not running customize script since TARGET_ENVIRONMENT='$TARGET_ENVIRONMENT'." | Write-SetupLog
 } elseif (Test-Path "${LOCAL_PATH}\customize.ps1") {
-    Write-DateLog "Running customize script." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "Running customize script." | Write-SetupLog
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" @args | Write-SetupLog
 } elseif (Test-Path "${LOCAL_PATH}\customise.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    Write-DateLog "Running customise scripts done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1" @args | Write-SetupLog
+    Write-DateLog "Running customise scripts done." | Write-SetupLog
 } else {
-    Write-DateLog "No customize scripts found, running defaults\customize-sandbox.ps1." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1" @args | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+    Write-DateLog "No customize scripts found, running defaults\customize-sandbox.ps1." | Write-SetupLog
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1" @args | Write-SetupLog
 }
 
 #
@@ -721,7 +713,7 @@ Update-SandboxProgress "Starting Sysmon..."
 if ("${WSDFIR_SYSMON}" -eq "Yes") {
     & "${TOOLS}\sysinternals\Sysmon64.exe" -accepteula -i "${WSDFIR_SYSMON_CONF}" | Out-Null
 }
-Write-DateLog "Starting sysmon done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Starting sysmon done." | Write-SetupLog
 
 # Main setup is complete - sandbox is now usable even while background tasks finish.
 Set-SandboxProgressReady
@@ -743,11 +735,10 @@ if (Test-Path "C:\log\log.txt") {
 # Wait for all jobs to finish and clean up
 Update-SandboxProgress "Finalizing setup..."
 Get-Job | Wait-Job | Out-Null
-Get-Job | Receive-Job 2>&1 | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Get-Job | Receive-Job 2>&1 | Write-SetupLog
 Get-Job | Remove-Job | Out-Null
-Remove-Item "${WSDFIR_TEMP}\HxDSetup.exe" -Force
 
-Write-DateLog "Setup done." | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+Write-DateLog "Setup done." | Write-SetupLog
 
 While (! (Test-Path "${WSDFIR_TEMP}\dfirws_folder_done.txt")) {
     Start-Sleep -Seconds 1
