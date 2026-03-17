@@ -437,38 +437,6 @@ if (Test-Path "${TOOLS}\ghidra\") {
     $GHIDRA_INSTALL_DIR=((Get-ChildItem "${TOOLS}\ghidra\").Name | findstr "PUBLIC" | Select-Object -Last 1)
 }
 
-# Excluded from PATH due to 2048 character limit. Accessible via desktop shortcuts.
-# "${env:ProgramFiles}\IDR\bin"
-# "${env:ProgramFiles}\jadx\bin"
-# "${GIT_PATH}\defender-detectionhistory-parser"
-# "${GIT_PATH}\ese-analyst"
-# "${GIT_PATH}\iShutdown"
-# "${GIT_PATH}\Regshot"
-# "${GIT_PATH}\Trawler"
-# "${GIT_PATH}\White-Phoenix"
-# "${TOOLS}\h2database"
-# "${TOOLS}\Zimmerman\net6\EvtxECmd"
-# "${TOOLS}\Zimmerman\net6\EZViewer"
-# "${TOOLS}\Zimmerman\net6\JumpListExplorer"
-# "${TOOLS}\Zimmerman\net6\MFTExplorer"
-# "${TOOLS}\Zimmerman\net6\RECmd"
-# "${TOOLS}\Zimmerman\net6\SDBExplorer"
-# "${TOOLS}\Zimmerman\net6\SQLECmd"
-# "${TOOLS}\Zimmerman\net6\XWFIM"
-# "${TOOLS}\nmap"
-# "${TOOLS}\hfs"
-# "${TOOLS}\VolatilityWorkbench"
-# "${TOOLS}\WinApiSearch"
-# "${TOOLS}\gftrace64"
-# "${TOOLS}\procdot\win64"
-# "${TOOLS}\systeminformer\x64"
-# "${TOOLS}\systeminformer\x86"
-# "${TOOLS}\XELFViewer"
-# "${TOOLS}\audacity"
-# "${TOOLS}\capa-ghidra"
-# "${TOOLS}\elfparser-ng\Release"
-# "${TOOLS}\RdpCacheStitcher"
-
 $ADD_TO_PATH = @("${MSYS2_DIR}"
     "${MSYS2_DIR}\ucrt64\bin"
     "${MSYS2_DIR}\usr\bin"
@@ -479,6 +447,8 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${env:ProgramFiles}\Git\usr\bin"
 	"${env:ProgramFiles}\graphviz\bin"
 	"${env:ProgramFiles}\hxd"
+    "${env:ProgramFiles}\IDR\bin"
+    "${env:ProgramFiles}\jadx\bin"
 	"${env:ProgramFiles}\iisGeolocate"
 	"${env:ProgramFiles}\KAPE"
 	"${env:ProgramFiles}\loki"
@@ -486,6 +456,34 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${env:ProgramFiles}\ShellBagsExplorer"
 	"${env:ProgramFiles}\TimelineExplorer"
 	"${env:ProgramFiles}\qemu"
+    "${GIT_PATH}\defender-detectionhistory-parser"
+    "${GIT_PATH}\ese-analyst"
+    "${GIT_PATH}\iShutdown"
+    "${GIT_PATH}\Regshot"
+    "${GIT_PATH}\Trawler"
+    "${GIT_PATH}\White-Phoenix"
+    "${TOOLS}\h2database"
+    "${TOOLS}\Zimmerman\net6\EvtxECmd"
+    "${TOOLS}\Zimmerman\net6\EZViewer"
+    "${TOOLS}\Zimmerman\net6\JumpListExplorer"
+    "${TOOLS}\Zimmerman\net6\MFTExplorer"
+    "${TOOLS}\Zimmerman\net6\RECmd"
+    "${TOOLS}\Zimmerman\net6\SDBExplorer"
+    "${TOOLS}\Zimmerman\net6\SQLECmd"
+    "${TOOLS}\Zimmerman\net6\XWFIM"
+    "${TOOLS}\nmap"
+    "${TOOLS}\hfs"
+    "${TOOLS}\VolatilityWorkbench"
+    "${TOOLS}\WinApiSearch"
+    "${TOOLS}\gftrace64"
+    "${TOOLS}\procdot\win64"
+    "${TOOLS}\systeminformer\x64"
+    "${TOOLS}\systeminformer\x86"
+    "${TOOLS}\XELFViewer"
+    "${TOOLS}\audacity"
+    "${TOOLS}\capa-ghidra"
+    "${TOOLS}\elfparser-ng\Release"
+    "${TOOLS}\RdpCacheStitcher"
     "${GIT_PATH}\libimobiledevice-windows"
 	"${RUST_DIR}\bin"
 	"${HOME}\Go\bin"
@@ -550,18 +548,6 @@ $ADD_TO_PATH = @("${MSYS2_DIR}"
 	"${HOME}\Documents\tools\utils")
 
 $ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"
-Write-Output "Adding to PATH: $ADD_TO_PATH_STRING" | Write-SetupLog
-# Save length of ADD_TO_PATH_STRING to log
-$length = $ADD_TO_PATH_STRING.Length
-Write-Output "Length of PATH addition string: $length" | Write-SetupLog
-# Total user PATH length
-$existingUserPath = [Environment]::GetEnvironmentVariable("PATH", "User")
-$totalPathLength = $existingUserPath.Length + $length + 1
-Write-Output "Total user PATH length after addition: $totalPathLength" | Write-SetupLog
-# Warn if total length exceeds 2048 characters
-if ($totalPathLength -gt 2048) {
-	Write-Output "WARNING: Total user PATH length exceeds 2048 characters. Some entries may be truncated." | Write-SetupLog
-}
 
 Add-MultipleToUserPath $ADD_TO_PATH_STRING
 
@@ -611,13 +597,14 @@ Write-DateLog "Installed Cutter plugins." | Write-SetupLog
 
 # BeaconHunter, IDR, and Zimmerman tools - run Robocopy copies in parallel
 Update-SandboxProgress "Configuring forensic tools..."
+$programFiles = $env:ProgramFiles
 $robocopyJobs = @(
-    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\BeaconHunter" "$env:ProgramFiles\BeaconHunter" }
-    Start-Job { Robocopy.exe /MT:96 /MIR "$using:GIT_PATH\IDR" "$env:ProgramFiles\IDR" }
-    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\iisGeolocate" "$env:ProgramFiles\iisGeolocate" }
-    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\RegistryExplorer" "$env:ProgramFiles\RegistryExplorer" }
-    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\ShellBagsExplorer" "$env:ProgramFiles\ShellBagsExplorer" }
-    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\TimelineExplorer" "$env:ProgramFiles\TimelineExplorer" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\BeaconHunter" "$using:programFiles\BeaconHunter" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:GIT_PATH\IDR" "$using:programFiles\IDR" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\iisGeolocate" "$using:programFiles\iisGeolocate" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\RegistryExplorer" "$using:programFiles\RegistryExplorer" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\ShellBagsExplorer" "$using:programFiles\ShellBagsExplorer" }
+    Start-Job { Robocopy.exe /MT:96 /MIR "$using:TOOLS\Zimmerman\TimelineExplorer" "$using:programFiles\TimelineExplorer" }
 )
 $robocopyJobs | Wait-Job | Out-Null
 $robocopyJobs | Remove-Job
