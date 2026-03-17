@@ -53,6 +53,11 @@ $TOOL_DEFINITIONS += @{
             Name = "gdb"
             Expect = "PE32"
         }
+        @{
+            Type = "command"
+            Name = "C:\Tools\msys64\usr\bin\msys-2.0.dll"
+            Expect = "PE32"
+        }
     )
     FileExtensions = @()
     Tags = @("build-environment", "shell", "linux-tools", "gcc", "debugging")

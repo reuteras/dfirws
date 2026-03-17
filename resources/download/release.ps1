@@ -3366,7 +3366,7 @@ $TOOL_DEFINITIONS += @{
 
 # obsidian-mitre-attack
 if (Test-ToolIncluded -ToolName "obsidian-mitre-attack") {
-    $status = Get-GitHubRelease -repo "reuteras/obsidian-mitre-attack" -path "${SETUP_PATH}\obsidian-mitre-attack.zip" -match "release.zip" -check "Zip archive data"
+    $status = Get-GitHubRelease -repo "reuteras/obsidian-mitre-attack" -path "${SETUP_PATH}\obsidian-mitre-attack.zip" -match "standard.zip" -check "Zip archive data"
     if ($status) {
         if (Test-Path "${TOOLS}\obsidian-mitre-attack") {
             Remove-Item "${TOOLS}\obsidian-mitre-attack" -Recurse -Force
