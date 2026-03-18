@@ -104,6 +104,7 @@ $DFIRWS_PROFILES = @{
             "evt2sigma"
         )
         ExcludeGitRepos = @(
+            "autopsy_addon_modules"
             "DFIRArtifactMuseum",
             "dictionaries",
             "dfirws-sample-files",
