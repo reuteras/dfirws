@@ -149,12 +149,12 @@ foreach ($package in `
     "xlrd", `
     "XLMMacroDeobfuscator", `
     "XlsxWriter" ) {
-        uv tool install --python "C:\Program Files\Python311\python.exe" $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        uv tool install --python "C:\Program Files\Python311\python.exe" --upgrade $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
         Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 # speakeasy-emulator requires setuptools (pkg_resources) which is not included in uv tool isolated envs
-uv tool install --python "C:\Program Files\Python311\python.exe" --with setuptools --reinstall speakeasy-emulator 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --python "C:\Program Files\Python311\python.exe" --with setuptools --upgrade speakeasy-emulator 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed speakeasy-emulator via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 # Download IOCs for mvt
