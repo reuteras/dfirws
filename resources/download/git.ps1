@@ -61,6 +61,7 @@ $repourls = `
     "https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES.git", `
     "https://github.com/SigmaHQ/legacy-sigmatools.git", `
     "https://github.com/SigmaHQ/sigma.git", `
+    "https://github.com/sleuthkit/autopsy_addon_modules.git", `
     "https://github.com/StrangerealIntel/Shadow-Pulse.git", `
     "https://github.com/swisscom/PowerSponse.git", `
     "https://github.com/techchipnet/HiddenWave.git", `
@@ -118,6 +119,27 @@ if (Test-Path -Path ".\reconstructer.org\OfficeMalScanner.zip") {
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
+
+$TOOL_DEFINITIONS += @{
+    Name = "autopsy_addon_modules"
+    Category = "Forensics"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("forensics", "disk-forensics", "plugins", "documentation")
+    Notes = "Collection of third-party add-on modules for Autopsy — ingest modules, content viewers, report modules, and data source processors."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/sleuthkit/autopsy_addon_modules"
+    Vendor = "Sleuth Kit"
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "libimobiledevice-windows"
