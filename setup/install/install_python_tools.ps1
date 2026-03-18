@@ -501,7 +501,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("persistence", "forensics", "indicator-extraction", "enrichment")
+    Tags = @("malware-analysis", "forensics", "ioc", "data-extraction", "enrichment")
     Notes = "Point it at a KAPE dump, a Velociraptor collection, or a mounted disk image and get offline Windows persistence detection in seconds. No live system access, no admin privileges, no PowerShell. Runs on Windows, Linux, and macOS because investigators don't always get to pick their workstation."
     Tips = ""
     Usage = ""
@@ -565,7 +565,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".msi")
-    Tags = @("indicator-extraction", "enrichment", "parsing", "forensics")
+    Tags = @("ioc", "data-extraction", "enrichment", "parsing", "forensics")
     Notes = "MSI Dump - a tool that analyzes malicious MSI installation packages, extracts files, streams, binary data and incorporates YARA scanner."
     Tips = ""
     Usage = ""
@@ -781,7 +781,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe")
-    Tags = @("malware-analysis", "autoit", "deobfuscation")
+    Tags = @("malware-analysis", "scripting", "deobfuscation")
     Notes = "Extract AutoIt scripts embedded in PE binaries."
     Tips = ""
     Usage = ""
@@ -808,7 +808,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".cart")
-    Tags = @("malware-analysis", "packaging")
+    Tags = @("malware-analysis")
     Notes = "Compressed and RC4 Transport (CaRT) Neutering format. This is a file format that is used to neuter malware files for distribution in the malware analyst community."
     Tips = ""
     Usage = ""
@@ -910,7 +910,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("translation", "text-processing")
+    Tags = @("data-processing")
     Notes = "A flexible free and unlimited python tool to translate between different languages in a simple way using multiple translators"
     Tips = ""
     Usage = ""
@@ -937,7 +937,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".docx")
-    Tags = @("office", "word", "data-extraction")
+    Tags = @("office", "data-extraction")
     Notes = "A pure python-based utility to extract text and images from docx files."
     Tips = ""
     Usage = ""
@@ -972,7 +972,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".msg")
-    Tags = @("email", "outlook", "data-extraction")
+    Tags = @("email", "data-extraction")
     Notes = "Extracts emails and attachments saved in Microsoft Outlook's .msg files"
     Tips = ""
     Usage = ""
@@ -999,7 +999,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".json")
-    Tags = @("python", "library", "json")
+    Tags = @("python", "json")
     Notes = "Flatten JSON objects"
     Tips = ""
     Usage = ""
@@ -1031,7 +1031,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".apk", ".ipa")
-    Tags = @("reverse-engineering", "dynamic-analysis", "instrumentation")
+    Tags = @("reverse-engineering", "dynamic-analysis")
     Notes = "Frida CLI tools."
     Tips = ""
     Usage = ""
@@ -1112,7 +1112,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".md")
-    Tags = @("markdown", "preview")
+    Tags = @("markdown", "viewer")
     Notes = "Render local readme files before sending off to GitHub."
     Tips = ""
     Usage = ""
@@ -1147,7 +1147,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".png", ".jpg", ".zip", ".tar", ".gz")
-    Tags = @("binary-analysis", "metadata", "file-format")
+    Tags = @("binary-analysis", "metadata", "file-analysis")
     Notes = "Hachoir is a Python library to view and edit a binary stream field by field. In other words, Hachoir allows you to `"browse`" any binary stream just like you browse directories and files."
     Tips = ""
     Usage = ""
@@ -1182,7 +1182,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".json")
-    Tags = @("jupyter", "data-processing", "tui", "notebook")
+    Tags = @("python", "data-processing", "tui")
     Notes = "Jupyter in the terminal."
     Tips = ""
     Usage = ""
@@ -1217,7 +1217,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".js")
-    Tags = @("javascript", "deobfuscation", "beautifier")
+    Tags = @("javascript", "deobfuscation")
     Notes = "JavaScript unobfuscator and beautifier."
     Tips = ""
     Usage = ""
@@ -1244,7 +1244,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".ipynb")
-    Tags = @("python", "notebook", "data-analysis")
+    Tags = @("python", "data-processing")
     Notes = "JupyterLab computational environment"
     Tips = ""
     Usage = ""
@@ -1306,7 +1306,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".lnk")
-    Tags = @("windows", "forensics", "shortcut-analysis")
+    Tags = @("windows", "forensics", "file-analysis")
     Notes = "Windows Shortcut file (LNK) parser"
     Tips = ""
     Usage = ""
@@ -1341,7 +1341,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("file-identification", "machine-learning")
+    Tags = @("file-analysis", "ai")
     Notes = "A tool to determine the content type of a file with deep learning."
     Tips = ""
     Usage = ""
@@ -1376,7 +1376,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("malware-analysis", "anti-virus")
+    Tags = @("malware-analysis", "malware-detection")
     Notes = "Maldump makes it easy to extract quarantined files of multiple AVs from a live system or a mounted disk image."
     Tips = ""
     Usage = ""
@@ -1445,7 +1445,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".docx", ".xlsx", ".pptx", ".pdf", ".html")
-    Tags = @("conversion", "markdown", "data-extraction", "office", "word")
+    Tags = @("conversion", "markdown", "data-extraction", "office")
     Notes = "Utility tool for converting various files to Markdown."
     Tips = ""
     Usage = ""
@@ -1507,7 +1507,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".bin")
-    Tags = @("yara", "rule-generation", "malware-analysis")
+    Tags = @("yara", "detection-rules", "malware-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1569,7 +1569,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".bin")
-    Tags = @("malware-analysis", "configuration-extraction")
+    Tags = @("malware-analysis", "data-extraction")
     Notes = "A framework for malware configuration parsers."
     Tips = ""
     Usage = ""
@@ -1604,7 +1604,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("hashing", "identification")
+    Tags = @("hashing", "file-analysis")
     Notes = "The Modern Hash Identification System."
     Tips = ""
     Usage = ""
@@ -1631,7 +1631,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("network", "ip-address")
+    Tags = @("network")
     Notes = "A network address manipulation library for Python."
     Tips = ""
     Usage = ""
@@ -1652,7 +1652,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("data-analysis", "scientific-computing")
+    Tags = @("data-processing")
     Notes = "Fundamental package for array computing in Python."
     Tips = ""
     Usage = ""
@@ -1725,7 +1725,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".rtf")
-    Tags = @("office", "macro", "malware-analysis", "vba")
+    Tags = @("office", "malware-analysis", "vba")
     Notes = "Python tools to analyze security characteristics of MS Office and OLE files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), for Malware Analysis and Incident Response #DFIR."
     Tips = ""
     Usage = ""
@@ -1808,7 +1808,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".bin")
-    Tags = @("protobuf", "reverse-engineering")
+    Tags = @("parsing", "reverse-engineering")
     Notes = "A tool to help reversing protobuf."
     Tips = ""
     Usage = ""
@@ -1835,7 +1835,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".py")
-    Tags = @("python", "repl")
+    Tags = @("python", "scripting")
     Notes = "Python REPL build on top of prompt_toolkit."
     Tips = ""
     Usage = ""
@@ -1870,7 +1870,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("exploitation", "post-exploitation")
+    Tags = @("exploitation", "security-testing")
     Notes = "Netcat on steroids with Firewall, IDS/IPS evasion, bind and reverse shell and port forwarding magic - and its fully scriptable with Python (PSE)."
     Tips = ""
     Usage = ""
@@ -1918,7 +1918,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".one")
-    Tags = @("office", "onenote", "data-extraction")
+    Tags = @("office", "data-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1945,7 +1945,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".png")
-    Tags = @("image", "steganography")
+    Tags = @("steganography")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -1980,7 +1980,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("regex", "data-processing", "tui")
+    Tags = @("search", "data-processing", "tui")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2015,7 +2015,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".pcap", ".pcapng")
-    Tags = @("network-analysis", "pcap", "packet-crafting")
+    Tags = @("network-analysis", "pcap", "security-testing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2050,7 +2050,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("osint", "network", "reconnaissance")
+    Tags = @("osint", "network")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2071,7 +2071,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".png", ".bmp", ".wav")
-    Tags = @("steganography", "image", "audio")
+    Tags = @("steganography", "audio")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2135,7 +2135,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("timestamp", "forensics", "decoding")
+    Tags = @("metadata", "forensics", "decoding")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2259,7 +2259,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".xls")
-    Tags = @("office", "excel", "data-extraction")
+    Tags = @("office", "data-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2294,7 +2294,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".xls", ".xlsm", ".xlsb")
-    Tags = @("office", "macro", "deobfuscation", "malware-analysis")
+    Tags = @("office", "vba", "deobfuscation", "malware-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2315,7 +2315,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".xlsx")
-    Tags = @("office", "excel")
+    Tags = @("office")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2362,7 +2362,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".tar")
-    Tags = @("forensics", "incident-response", "disk-imaging")
+    Tags = @("forensics", "incident-response", "acquisition", "disk-forensics")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2446,7 +2446,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".html", ".htm", ".xml")
-    Tags = @("web", "html-parsing", "scraping")
+    Tags = @("web", "parsing", "data-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2649,7 +2649,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".cab")
-    Tags = @("archive", "data-extraction")
+    Tags = @("compression", "data-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2712,7 +2712,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("database", "elasticsearch", "siem")
+    Tags = @("database", "log-analysis", "search", "siem")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2796,7 +2796,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("reverse-engineering", "assembler")
+    Tags = @("reverse-engineering")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2838,7 +2838,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("visualization", "plotting")
+    Tags = @("visualization")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2859,7 +2859,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".json", ".csv")
-    Tags = @("threat-intelligence", "incident-response", "jupyter")
+    Tags = @("threat-intelligence", "incident-response", "python")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2949,7 +2949,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".xlsx")
-    Tags = @("office", "excel", "data-extraction")
+    Tags = @("office", "data-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -2991,7 +2991,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("network", "ssh", "scripting")
+    Tags = @("network", "scripting")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3075,7 +3075,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".bin")
-    Tags = @("binary-analysis", "file-format")
+    Tags = @("binary-analysis", "file-analysis")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3096,7 +3096,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("hashing", "fuzzy-hashing", "similarity")
+    Tags = @("hashing", "fuzzy-hashing", "binary-diffing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3117,7 +3117,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("data-processing", "formatting")
+    Tags = @("data-processing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3201,7 +3201,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".pcap")
-    Tags = @("network", "packet-capture")
+    Tags = @("network", "pcap")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3264,7 +3264,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("network", "proxy")
+    Tags = @("network")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3285,7 +3285,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".docx")
-    Tags = @("office", "word", "data-extraction")
+    Tags = @("office", "data-extraction")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3390,7 +3390,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".zip")
-    Tags = @("archive", "encryption")
+    Tags = @("compression", "encryption")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3432,7 +3432,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".exe", ".dll", ".elf", ".bin")
-    Tags = @("reverse-engineering", "radare2", "scripting")
+    Tags = @("reverse-engineering", "scripting")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3488,7 +3488,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".yml", ".yaml")
-    Tags = @("sigma", "detection", "elasticsearch")
+    Tags = @("sigma", "detection", "log-analysis", "search")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3509,7 +3509,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".yml", ".yaml")
-    Tags = @("sigma", "detection", "loki")
+    Tags = @("sigma", "detection")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3530,7 +3530,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".yml", ".yaml")
-    Tags = @("sigma", "detection", "splunk")
+    Tags = @("sigma", "detection", "siem")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3572,7 +3572,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".yml", ".yaml")
-    Tags = @("sigma", "detection", "sysmon")
+    Tags = @("sigma", "detection", "event-log", "windows")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3635,7 +3635,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("terminal", "formatting")
+    Tags = @("terminal")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3656,7 +3656,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("text-processing", "search")
+    Tags = @("data-processing", "search")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3677,7 +3677,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".toml")
-    Tags = @("toml", "data-processing")
+    Tags = @("parsing", "data-processing")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3698,7 +3698,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("data-processing", "tree")
+    Tags = @("data-processing", "filesystem")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3803,7 +3803,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("url-analysis", "forensics", "visualization")
+    Tags = @("osint", "network", "forensics", "visualization")
     Notes = ""
     Tips = ""
     Usage = ""
@@ -3845,7 +3845,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("network", "mac-address")
+    Tags = @("network")
     Notes = ""
     Tips = ""
     Usage = ""

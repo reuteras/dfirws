@@ -129,7 +129,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".ps1", ".py", ".js", ".ts", ".json", ".xml", ".yaml", ".md")
-    Tags = @("text-editor", "ide", "powershell")
+    Tags = @("text-editor", "code-editor", "powershell")
     Notes = "Visual Studio Code is a source-code editor."
     Tips = "After installation, you can add more extensions via Visual Studio Code Marketplace."
     Usage = "Visual Studio Code is a source-code editor made by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring."
@@ -1081,7 +1081,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".sys")
-    Tags = @("windows", "debugging", "monitoring", "system-administration")
+    Tags = @("windows", "debugging", "monitoring")
     Notes = "Sysinternals Suite is a collection of utilities for Windows."
     Tips = "Sysinternals Suite is installed in ${TOOLS}\sysinternals."
     Usage = "Sysinternals Suite is a collection of utilities for Windows. It includes tools for process management, file system analysis, network monitoring, and more."
@@ -1212,7 +1212,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".jpg", ".jpeg", ".png", ".gif", ".tiff", ".pdf", ".doc", ".docx", ".mp4")
-    Tags = @("metadata", "file-analysis", "image")
+    Tags = @("metadata", "file-analysis")
     Notes = "ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files."
     Tips = "ExifTool is installed in ${TOOLS}\exiftool."
     Usage = ""
@@ -1357,7 +1357,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("file-identification")
+    Tags = @("file-analysis")
     Notes = "TrID is a file identifier utility."
     Tips = "TrID is installed in ${TOOLS}\trid."
     Usage = "TrID is a file identifier utility that can identify file types based on their binary signatures."
@@ -1556,7 +1556,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".pst")
-    Tags = @("email", "forensics", "outlook")
+    Tags = @("email", "forensics")
     Notes = "PST Walker is a tool for analyzing PST files."
     Tips = "PST Walker is installed in ${TOOLS}\pstwalker."
     Usage = "PST Walker is a tool for analyzing PST files. It allows you to view and extract data from PST files."
@@ -1610,7 +1610,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("reverse-engineering", "windows", "api")
+    Tags = @("reverse-engineering", "windows")
     Notes = "Win API Search is a tool for searching Windows API functions."
     Tips = "Win API Search is installed in ${TOOLS}\WinApiSearch."
     Usage = "Win API Search allows you to search for Windows API functions and view their documentation."
@@ -1689,7 +1689,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("velociraptor")
+    Tags = @("forensics", "incident-response")
     Notes = "The artifact exchange is a place for sharing community contributed artifacts for Velociraptor. Simply search below for an artifact that might address your need. If you wish to contribute to the exchange, please click the button to the right."
     Tips = ""
     Usage = ""
@@ -2146,7 +2146,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".gpg", ".asc", ".pgp")
-    Tags = @("encryption", "pgp", "signing")
+    Tags = @("encryption")
     Notes = "Gpg4win provides GnuPG and related tools for Windows."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "Gpg4win includes GPG, Kleopatra, and other tools for encryption and signing."
@@ -2191,7 +2191,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".html", ".htm")
-    Tags = @("browser", "privacy", "network")
+    Tags = @("browser", "network")
     Notes = "Tor Browser is a privacy-focused web browser based on Firefox."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "Tor Browser routes traffic through the Tor network for privacy."
@@ -2242,7 +2242,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("timestamp", "forensics", "decoding")
+    Tags = @("metadata", "forensics", "decoding")
     Notes = "DCode is a date/time conversion and analysis tool."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "DCode helps convert and analyze timestamps across formats and timezones."
@@ -2287,7 +2287,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".hc", ".tc")
-    Tags = @("encryption", "disk-encryption")
+    Tags = @("encryption", "disk-forensics")
     Notes = "VeraCrypt is a disk encryption tool."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "VeraCrypt enables encrypted containers and full-disk encryption."
@@ -2317,7 +2317,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("java", "runtime", "development")
+    Tags = @("java")
     Notes = "Microsofts OpenJDK 11"
     Tips = ""
     Usage = ""
@@ -2455,7 +2455,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll")
-    Tags = @("malware-analysis", "capability-analysis", "visualization")
+    Tags = @("malware-analysis", "visualization")
     Notes = "capa Explorer Web is a web UI for exploring capa results."
     Tips = "Open the HTML file in a browser."
     Usage = "Use it to explore capa output."
@@ -2502,7 +2502,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".odt", ".ods", ".odp")
-    Tags = @("office", "document-viewer")
+    Tags = @("office", "viewer")
     Notes = "LibreOffice is a free and open-source office suite."
     Tips = "After installation, the shortcut is replaced with the installed application."
     Usage = "LibreOffice provides Writer, Calc, Impress, and other office tools."
@@ -2531,7 +2531,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".pcap", ".pcapng")
-    Tags = @("network-analysis", "packet-capture")
+    Tags = @("network-analysis", "pcap")
     Notes = "Npcap packet capture driver installer."
     Tips = "This is a manual install."
     Usage = "Install Npcap to enable packet capture tools."
@@ -2772,7 +2772,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("network-analysis", "port-scanning", "reconnaissance")
+    Tags = @("network-analysis", "security-testing", "osint")
     Notes = "Nmap is a network exploration and security auditing tool."
     Tips = "Nmap is installed in ${TOOLS}\nmap."
     Usage = "Use Nmap to scan hosts and services."
@@ -2821,7 +2821,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".asm")
-    Tags = @("reverse-engineering", "assembler")
+    Tags = @("reverse-engineering")
     Notes = "FASM is a fast assembler for x86 and x86-64 architectures."
     Tips = "FASM is installed in ${TOOLS}\fasm."
     Usage = "Use FASM to assemble x86/x64 source code."
@@ -3071,7 +3071,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".jar")
-    Tags = @("java", "gui", "runtime")
+    Tags = @("java", "gui")
     Notes = "JavaFX SDK provides UI libraries for Java applications."
     Tips = "JavaFX SDK is installed in ${TOOLS}\javafx-sdk."
     Usage = "Use JavaFX SDK with Java development."
@@ -3258,7 +3258,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".dmp")
-    Tags = @("debugging", "windbg", "dotnet")
+    Tags = @("debugging", "dotnet")
     Notes = "MEX is an extension for WinDbg."
     Tips = "MEX is installed in ${TOOLS}\mex."
     Usage = "Use MEX with WinDbg."
@@ -3306,7 +3306,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".res")
-    Tags = @("resource-editing", "reverse-engineering")
+    Tags = @("pe-analysis", "reverse-engineering")
     Notes = "Resource Hacker is a tool for viewing and editing resources in Windows executables."
     Tips = "Resource Hacker is installed in ${TOOLS}\ResourceHacker."
     Usage = "Use Resource Hacker to modify resources in PE files."
@@ -3353,7 +3353,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("cloud", "azure")
+    Tags = @()
     Notes = "Azure CLI is a command-line tool for managing Azure resources."
     Tips = "Azure CLI is installed in ${TOOLS}\AzureCLI."
     Usage = "Use Azure CLI to manage Azure services."
@@ -3444,7 +3444,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".json", ".log")
-    Tags = @("siem", "log-analysis", "elasticsearch", "visualization")
+    Tags = @("siem", "log-analysis", "search", "visualization")
     Notes = "Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats."
     Tips = "Packages are downloaded to ${SETUP_PATH}."
     Usage = "Use the downloaded zips to install ELK components."

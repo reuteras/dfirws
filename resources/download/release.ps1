@@ -79,7 +79,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("active-directory", "ldap")
+    Tags = @("windows", "network-analysis", "network")
     Notes = "godap is a tool for analyzing Active Directory LDAP data."
     Tips = ""
     Usage = ""
@@ -296,7 +296,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".tar", ".zip")
-    Tags = @("mobile-forensics", "ios", "artifact-extraction")
+    Tags = @("mobile-forensics", "artifact-extraction")
     Notes = "iLEAPP is a tool for parsing and analyzing iOS logs, events, and plists. It can be used to extract artifacts from iOS devices and analyze them in a structured way."
     Tips = ""
     Usage = ""
@@ -340,7 +340,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".msi")
-    Tags = @("windows", "installer")
+    Tags = @("windows")
     Notes = "lessmsi is a tool to view and extract the contents of a Windows Installer (.msi) file."
     Tips = ""
     Usage = ""
@@ -469,7 +469,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".wav", ".mp3", ".flac", ".ogg", ".aiff")
-    Tags = @("audio", "multimedia", "steganography")
+    Tags = @("audio", "steganography")
     Notes = "Audacity is a free and open-source audio editing software."
     Tips = ""
     Usage = ""
@@ -555,7 +555,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".pcap", ".pcapng", ".zng")
-    Tags = @("network-analysis", "pcap", "zeek")
+    Tags = @("network-analysis", "pcap")
     Notes = "Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data."
     Tips = ""
     Usage = ""
@@ -600,7 +600,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".bmc", ".bin")
-    Tags = @("rdp", "forensics", "windows")
+    Tags = @("network", "forensics", "windows")
     Notes = "RdpCacheStitcher is a tool for analyzing RDP cache files."
     Tips = ""
     Usage = ""
@@ -647,7 +647,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".mp4", ".avi", ".mkv", ".mov", ".mp3", ".wav", ".flac")
-    Tags = @("multimedia", "video", "audio", "conversion")
+    Tags = @("audio", "conversion")
     Notes = "ffmpeg is a free and open-source multimedia framework for processing video and audio files. It can be used to convert between different formats, extract audio from video files, and perform various other multimedia processing tasks."
     Tips = ""
     Usage = ""
@@ -692,7 +692,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("search", "grep", "cli")
+    Tags = @("search", "cli")
     Notes = "ripgrep is a fast, modern, and user-friendly command-line search tool."
     Tips = ""
     Usage = ""
@@ -733,7 +733,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".elf", ".bin")
-    Tags = @("malware-analysis", "binary-analysis", "similarity")
+    Tags = @("malware-analysis", "binary-analysis", "binary-diffing")
     Notes = "binlex is a binary genetic traits lexer for malware analysis."
     Tips = ""
     Usage = ""
@@ -985,7 +985,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = "dfirws-install.ps1 -Dokany"
     Verify = @()
     FileExtensions = @()
-    Tags = @("filesystem", "mounting")
+    Tags = @("filesystem", "disk-forensics")
     Notes = "User mode file system library for windows with FUSE Wrapper"
     Tips = ""
     Usage = ""
@@ -1143,7 +1143,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @("")
-    Tags = @("mcp", "ai", "logs")
+    Tags = @("mcp", "ai", "log-analysis")
     Notes = "MCP server to connect to elastic 8.X"
     Tips = ""
     Usage = ""
@@ -1350,7 +1350,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".dmp")
-    Tags = @("malware-analysis", "pe-analysis", "process-injection")
+    Tags = @("malware-analysis", "pe-analysis", "dynamic-analysis")
     Notes = "Scans running processes. Recognizes and dumps a variety of in-memory implants"
     Tips = ""
     Usage = ""
@@ -1435,7 +1435,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll")
-    Tags = @("pe-analysis", "malware-analysis", "process-injection")
+    Tags = @("pe-analysis", "malware-analysis", "dynamic-analysis")
     Notes = "Scans a given process. Recognizes and dumps a variety of potentially malicious implants (replaced/injected PEs, shellcodes, hooks, in-memory patches)."
     Tips = ""
     Usage = ""
@@ -1526,7 +1526,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("windows", "kernel", "debugging")
+    Tags = @("windows", "debugging")
     Notes = "WinObjEx64 is an advanced utility that lets you explore the Windows Object Manager namespace."
     Tips = ""
     Usage = ""
@@ -1575,7 +1575,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".elf", ".mach-o", ".bin")
-    Tags = @("pe-analysis", "file-identification", "packer-detection")
+    Tags = @("pe-analysis", "file-analysis", "packer-detection")
     Notes = "Detect It Easy is a tool for identifying file types and detecting packers."
     Tips = ""
     Usage = ""
@@ -1876,7 +1876,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".pf")
-    Tags = @("windows", "forensics", "prefetch")
+    Tags = @("windows", "forensics", "filesystem")
     Notes = "Prefetch Browser is a tool for analyzing Windows Prefetch files, which can provide valuable information about program execution and system activity."
     Tips = ""
     Usage = ""
@@ -1999,7 +1999,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("active-directory", "attack-path", "visualization")
+    Tags = @("windows", "network-analysis", "threat-intelligence", "visualization")
     Notes = "Attack Graph Visualizer and Explorer (Active Directory) ...Who's *really* Domain Admin?"
     Tips = ""
     Usage = ""
@@ -2034,7 +2034,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".msg")
-    Tags = @("email", "forensics", "outlook")
+    Tags = @("email", "forensics")
     Notes = "A tool for viewing and analyzing Outlook MSG files."
     Tips = ""
     Usage = ""
@@ -2098,7 +2098,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe")
-    Tags = @("malware-analysis", "capability-discovery", "pe-analysis", "reverse-engineering", "mitre-att&ck")
+    Tags = @("malware-analysis", "pe-analysis", "reverse-engineering", "mitre-attack")
     Notes = "capa rules for identifying capabilities in binaries."
     Tips = ""
     Usage = ""
@@ -2290,7 +2290,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
-    Tags = @("reverse-engineering", "mcp", "ai", "ghidra")
+    Tags = @("reverse-engineering", "mcp", "ai", "plugins")
     Notes = "Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default."
     Tips = "Start the MCP server from Window > GhidrAssistMCP in Ghidra. Connect opencode-ai or other MCP clients to <http://localhost:8080/sse>."
     Usage = "Install extension in Ghidra, enable plugin, start MCP server, then connect AI tools."
@@ -2376,7 +2376,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".pcap")
-    Tags = @("malware-analysis", "network-simulation", "dynamic-analysis")
+    Tags = @("malware-analysis", "network", "dynamic-analysis")
     Notes = "FakeNet-NG - Next Generation Dynamic Network Analysis Tool"
     Tips = ""
     Usage = ""
@@ -2420,7 +2420,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".elf")
-    Tags = @("reverse-engineering", "golang", "symbol-recovery")
+    Tags = @("reverse-engineering", "golang")
     Notes = "Go symbol recovery tool."
     Tips = ""
     Usage = ""
@@ -2586,7 +2586,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".dit")
-    Tags = @("active-directory", "forensics")
+    Tags = @("windows", "network-analysis", "forensics")
     Notes = "Tool for viewing NTDS.dit Active Directory database files."
     Tips = ""
     Usage = ""
@@ -2627,7 +2627,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".dat")
-    Tags = @("windows", "forensics", "srum")
+    Tags = @("windows", "forensics", "filesystem")
     Notes = "A forensics tool to convert the data in the Windows srum (System Resource Usage Monitor) database to an xlsx spreadsheet."
     Tips = ""
     Usage = ""
@@ -2684,7 +2684,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("web", "authentication", "jwt")
+    Tags = @("web", "security-testing", "decoding")
     Notes = "A super fast CLI tool to decode and encode JWTs built in Rust"
     Tips = ""
     Usage = ""
@@ -2725,7 +2725,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".json", ".csv", ".tsv", ".parquet")
-    Tags = @("data-processing", "sql", "json", "csv")
+    Tags = @("data-processing", "database", "json", "csv")
     Notes = "Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more."
     Tips = ""
     Usage = ""
@@ -2847,7 +2847,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".txt", ".log", ".xml", ".json", ".csv", ".ps1", ".py", ".js")
-    Tags = @("text-editor", "syntax-highlighting")
+    Tags = @("text-editor")
     Notes = "Notepad++ is a free source code editor and Notepad replacement that supports several programming languages."
     Tips = ""
     Usage = ""
@@ -2874,7 +2874,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("text-editor", "diff", "plugins")
+    Tags = @("text-editor", "binary-diffing", "plugins")
     Notes = "A diff plugin for Notepad++."
     Tips = ""
     Usage = ""
@@ -2901,7 +2901,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("text-editor", "spell-checker", "plugins")
+    Tags = @("text-editor", "plugins")
     Notes = "A spell-checker plugin for Notepad++."
     Tips = ""
     Usage = ""
@@ -2954,7 +2954,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".db", ".sqlite")
-    Tags = @("browser-forensics", "chrome", "artifact-extraction")
+    Tags = @("browser-forensics", "browser", "artifact-extraction")
     Notes = "Browser forensics tool for Google Chrome (and other Chromium-based browsers)."
     Tips = ""
     Usage = ""
@@ -3048,7 +3048,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("text-editor", "shellcheck", "linting", "bash", "sh", "plugins")
+    Tags = @("text-editor", "scripting", "plugins")
     Notes = "Shellcheck extension for VS Code."
     Tips = ""
     Usage = ""
@@ -3069,7 +3069,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("text-editor", "spell-checker", "plugins")
+    Tags = @("text-editor", "plugins")
     Notes = "Visual Studio Code Spell Checker extension."
     Tips = ""
     Usage = ""
@@ -3154,7 +3154,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".etl")
-    Tags = @("etw", "windows", "monitoring")
+    Tags = @("windows", "monitoring")
     Notes = "Adversary tradecraft detection, protection, and hunting"
     Tips = ""
     Usage = "Fibratus detects, protects, and eradicates advanced adversary tradecraft by scrutinizing and asserting a wide spectrum of system events against a behavior-driven rule engine and YARA memory scanner."
@@ -3230,7 +3230,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
-    Tags = @("reverse-engineering", "mcp", "ai", "radare2")
+    Tags = @("reverse-engineering", "mcp", "ai")
     Notes = "MCP stdio server for radare2. Enables AI assistants to interact with radare2 for binary analysis. Known issue: Windows binary may crash with stack overflow (GitHub issue #24)."
     Tips = "Currently not working in dfirws."
     Usage = ""
@@ -3262,7 +3262,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
-    Tags = @("reverse-engineering", "mcp", "ai", "radare2")
+    Tags = @("reverse-engineering", "mcp", "ai")
     Notes = "LLM-based reversing for radare2."
     Tips = "Currently not working in dfirws."
     Usage = ""
@@ -3350,7 +3350,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("http", "file-server", "network")
+    Tags = @("http", "network")
     Notes = "hfs is a simple HTTP file server for Windows."
     Tips = ""
     Usage = ""
@@ -3384,7 +3384,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "mitre-attack", "threat-intelligence")
+    Tags = @("markdown", "mitre-attack", "threat-intelligence")
     Notes = "A vault for Obsidian.md containing the MITRE ATT&CK framework in markdown format."
     Tips = ""
     Usage = ""
@@ -3467,7 +3467,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".ttf", ".otf")
-    Tags = @("fonts", "terminal")
+    Tags = @("terminal")
     Notes = "Nerd Fonts for terminal and more."
     Tips = ""
     Usage = ""
@@ -3499,7 +3499,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".pl", ".pm")
-    Tags = @("scripting", "perl")
+    Tags = @("scripting")
     Notes = "Strawberry Perl is a Perl distribution for Windows that includes a complete Perl environment."
     Tips = ""
     Usage = ""
@@ -3656,7 +3656,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".png", ".svg")
-    Tags = @("qr-code", "encoding", "decoding")
+    Tags = @("encoding", "decoding")
     Notes = "Tool for decoding QR codes from images"
     Tips = ""
     Usage = ""
@@ -3741,7 +3741,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".db")
-    Tags = @("windows", "forensics", "thumbnails")
+    Tags = @("windows", "forensics", "metadata")
     Notes = "Thumbcache Viewer - Extract Windows Vista, Windows 7, Windows 8, Windows 8.1, and Windows 10 thumbcache database files."
     Tips = ""
     Usage = ""
@@ -3782,7 +3782,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".json")
-    Tags = @("json", "data-processing", "grep")
+    Tags = @("json", "data-processing", "search")
     Notes = "gron makes JSON greppable by transforming it into discrete assignments that can be easily searched and filtered using standard command-line tools."
     Tips = ""
     Usage = ""
@@ -3871,7 +3871,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".elf")
-    Tags = @("packing", "pe-analysis", "compression")
+    Tags = @("packer-detection", "pe-analysis", "compression")
     Notes = "UPX is a free, portable, extendable, high-performance executable packer."
     Tips = ""
     Usage = ""
@@ -3982,7 +3982,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".pcap", ".pcapng", ".mp4", ".mp3", ".flac", ".zip", ".tar", ".gif", ".png")
-    Tags = @("data-processing", "binary-analysis", "file-format")
+    Tags = @("data-processing", "binary-analysis", "file-analysis")
     Notes = "jq for binary formats - tool, language and decoders for working with binary and text formats"
     Tips = ""
     Usage = ""
@@ -4117,7 +4117,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll", ".bin", ".hex", ".elf")
-    Tags = @("hex-editor", "binary-analysis", "pattern-language")
+    Tags = @("hex-editor", "binary-analysis", "reverse-engineering")
     Notes = "ImHex is a hex editor for binary analysis and pattern language."
     Tips = ""
     Usage = ""
@@ -4222,7 +4222,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
-    Tags = @("yara", "malware-analysis", "detection", "signatures")
+    Tags = @("yara", "malware-analysis", "detection", "detection-rules")
     Notes = "YARA is a tool for identifying and classifying malware."
     Tips = ""
     Usage = ""
@@ -4267,7 +4267,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".yar", ".yara", ".exe", ".dll", ".bin")
-    Tags = @("yara", "malware-analysis", "detection", "signatures")
+    Tags = @("yara", "malware-analysis", "detection", "detection-rules")
     Notes = "yara-x is a faster and more flexible version of YARA."
     Tips = ""
     Usage = ""
@@ -4436,7 +4436,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".json")
-    Tags = @("log-analysis", "hayabusa", "timeline")
+    Tags = @("log-analysis", "timeline")
     Notes = "Takajō (鷹匠) is a Hayabusa results analyzer."
     Tips = ""
     Usage = ""
@@ -4476,7 +4476,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("web", "security-testing", "proxy")
+    Tags = @("web", "security-testing", "network")
     Notes = "The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to."
     Tips = ""
     Usage = ""
@@ -4583,7 +4583,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".dmp")
-    Tags = @("debugging", "memory-forensics", "dotnet", "winDbg", "extension")
+    Tags = @("debugging", "memory-forensics", "dotnet", "plugins")
     Notes = "WinDbg extension for data mining managed heap. It also includes commands to list http request, wcf services, WIF tokens among others"
     Tips = ""
     Usage = ""
@@ -4623,7 +4623,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".yar", ".yara")
-    Tags = @("yara", "rule-generation")
+    Tags = @("yara", "detection-rules")
     Notes = "Yet Another Memory Analyzer for malware detection and Guarding Operations with YARA and SIGMA"
     Tips = ""
     Usage = ""
@@ -4667,7 +4667,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("rpc", "utilities")
+    Tags = @("network", "windows")
     Notes = "RpcView is a tool to view RPC endpoints."
     Tips = ""
     Usage = ""
@@ -4711,7 +4711,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll")
-    Tags = @("go", "binary-analysis", "utilities")
+    Tags = @("golang", "binary-analysis")
     Notes = "go-size-analyzer (gsa) is a tool to analyze the size of Go binaries."
     Tips = ""
     Usage = ""
@@ -4799,7 +4799,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".exe", ".dll")
-    Tags = @("log-viewer", "utilities")
+    Tags = @("log-analysis", "viewer")
     Notes = "ULogViewer is a log viewer for ULog files."
     Tips = ""
     Usage = ""
@@ -4873,7 +4873,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "data-processing", "plugins")
+    Tags = @("markdown", "data-processing", "plugins")
     Notes = "Obsidian dataview plugin."
     Tips = ""
     Usage = ""
@@ -4894,7 +4894,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "project-management", "plugins")
+    Tags = @("markdown", "plugins")
     Notes = "Obsidian Kanban plugin."
     Tips = ""
     Usage = ""
@@ -4915,7 +4915,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "automation", "plugins")
+    Tags = @("markdown", "automation", "plugins")
     Notes = "Obsidian quickadd plugin."
     Tips = ""
     Usage = ""
@@ -4936,7 +4936,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "calendar", "plugins")
+    Tags = @("markdown", "plugins")
     Notes = "Obsidian calendar plugin."
     Tips = ""
     Usage = ""
@@ -4957,7 +4957,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "automation", "plugins")
+    Tags = @("markdown", "automation", "plugins")
     Notes = "Obsidian templater plugin."
     Tips = ""
     Usage = ""
@@ -4978,7 +4978,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "task-management", "plugins")
+    Tags = @("markdown", "plugins")
     Notes = "Obsidian tasks plugin."
     Tips = ""
     Usage = ""
@@ -4999,7 +4999,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "drawing", "plugins")
+    Tags = @("markdown", "plugins")
     Notes = "Obsidian Excalidraw plugin."
     Tips = ""
     Usage = ""
@@ -5020,7 +5020,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "plugins")
+    Tags = @("markdown", "plugins")
     Notes = "Obsidian admonitions plugin."
     Tips = ""
     Usage = ""
@@ -5041,7 +5041,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("obsidian", "timeline", "plugins")
+    Tags = @("markdown", "timeline", "plugins")
     Notes = "Obsidian timeline plugin."
     Tips = ""
     Usage = ""

@@ -55,7 +55,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("forensics", "incident-response", "artifact-collection", "triage")
+    Tags = @("forensics", "incident-response", "acquisition", "artifact-extraction", "triage")
     Notes = "Kroll Artifact Parser and Extractor (KAPE) is an efficient and highly configurable triage program that will target essentially any device or storage location, find forensically useful artifacts, and parse them within a few minutes."
     Tips = ""
     Usage = ""

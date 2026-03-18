@@ -57,7 +57,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = "dfirws-install.ps1 -BurpSuite"
     Verify = @()
     FileExtensions = @()
-    Tags = @("web", "security-testing", "proxy")
+    Tags = @("web", "security-testing", "network")
     Notes = "Burp Suite is an integrated platform for performing security testing of web applications. It provides a wide range of tools for intercepting HTTP traffic, analyzing web applications, and automating security testing tasks."
     Tips = ""
     Usage = ""
@@ -123,7 +123,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("dotnet", "runtime")
+    Tags = @("dotnet")
     Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0."
     Tips = ""
     Usage = ""
@@ -149,7 +149,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("dotnet", "runtime")
+    Tags = @("dotnet")
     Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0."
     Tips = ""
     Usage = ""
@@ -180,7 +180,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".ico", ".webp")
-    Tags = @("image-viewer", "multimedia")
+    Tags = @("viewer")
     Notes = "IrfanView is a fast and compact image viewer and editor for Windows. It supports a wide range of image formats and provides basic editing features, making it useful for quickly viewing and manipulating images."
     Tips = ""
     Usage = ""
@@ -221,7 +221,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".md", ".markdown")
-    Tags = @("obsidian", "markdown")
+    Tags = @("markdown")
     Notes = "Obsidian is a powerful knowledge management and note-taking application that allows you to create and link notes in a graph-based structure."
     Tips = ""
     Usage = ""
@@ -254,7 +254,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = "dfirws-install.ps1 -OhMyPosh"
     Verify = @()
     FileExtensions = @()
-    Tags = @("terminal", "shell", "theming")
+    Tags = @("terminal", "shell")
     Notes = "Oh My Posh is a customizable prompt for PowerShell and other shells. It allows you to create beautiful and functional command-line prompts with themes and customizations."
     Tips = ""
     Usage = ""
@@ -320,7 +320,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("ssh", "network", "terminal")
+    Tags = @("network", "terminal")
     Notes = "PuTTY is a free and open-source terminal emulator and SSH client for Windows. It is used to connect to remote systems via SSH, Telnet, and other protocols."
     Tips = ""
     Usage = ""
@@ -353,7 +353,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".qcow2", ".vmdk", ".vdi", ".img", ".iso")
-    Tags = @("virtualization", "emulation")
+    Tags = @("emulation")
     Notes = "QEMU is a generic and open-source machine emulator and virtualizer. It can be used to run operating systems and applications for different architectures on a host system, making it useful for testing, development, and analysis."
     Tips = ""
     Usage = ""
@@ -386,7 +386,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".rb")
-    Tags = @("scripting", "ruby")
+    Tags = @("scripting")
     Notes = "Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write."
     Tips = ""
     Usage = ""
@@ -427,7 +427,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".mp4", ".avi", ".mkv", ".mov", ".mp3", ".wav", ".flac")
-    Tags = @("multimedia", "video", "audio")
+    Tags = @("audio")
     Notes = "VLC is a versatile media player that supports a wide range of audio and video formats. It can be used for playing media files, streaming content, and even basic media conversion tasks."
     Tips = ""
     Usage = ""
@@ -514,7 +514,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("diff", "file-comparison")
+    Tags = @("binary-diffing")
     Notes = "WinMerge is a visual file and directory comparison tool that helps you compare files and directories. It is useful for identifying differences between files, merging changes, and synchronizing directories."
     Tips = ""
     Usage = ""
@@ -540,7 +540,7 @@ if (Test-ToolIncluded -ToolName "OpenVPN") {
         InstallVerifyCommand = ""
         Verify = @()
         FileExtensions = @(".ovpn")
-        Tags = @("vpn", "network")
+        Tags = @("network")
         Notes = "OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols."
         Tips = ""
         Usage = ""
@@ -621,7 +621,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk", ".iso")
-    Tags = @("disk-forensics", "mounting", "filesystem")
+    Tags = @("disk-forensics", "filesystem")
     Notes = "OSFMount is a tool for mounting disk images and virtual hard disks as virtual drives. It can be used for analyzing disk images, accessing files within them, and performing forensic analysis on the mounted images."
     Tips = ""
     Usage = ""
@@ -648,7 +648,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("vpn", "network")
+    Tags = @("network")
     Notes = "WireGuard is a modern and efficient VPN protocol that provides secure and fast connections. It is designed to be simple to configure and use, making it a popular choice for both personal and enterprise VPN solutions."
     Tips = ""
     Usage = ""
@@ -720,7 +720,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @()
-    Tags = @("vpn", "network")
+    Tags = @("network")
     Notes = "Tailscale is a modern VPN solution that allows you to create secure, private networks between your devices. It is designed to be easy to use and can be used for remote access, secure file sharing, and connecting devices across different networks."
     Tips = ""
     Usage = ""
@@ -827,7 +827,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = "dfirws-install.ps1 -Windbg"
     Verify = @()
     FileExtensions = @(".dmp", ".exe", ".dll", ".sys")
-    Tags = @("debugging", "memory-forensics", "kernel")
+    Tags = @("debugging", "memory-forensics", "windows")
     Notes = "WinDbg is a powerful debugger from Microsoft that can be used for analyzing crash dumps, debugging applications, and performing memory forensics. It is commonly used in incident response and malware analysis to investigate system crashes and analyze the behavior of malicious software."
     Tips = ""
     Usage = ""
