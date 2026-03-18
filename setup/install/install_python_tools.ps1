@@ -140,7 +140,7 @@ foreach ($package in `
     "rexi", `
     "scapy", `
     "shodan", `
-    "speakeasy-emulator[gdb]", `
+    "speakeasy-emulator", `
     "stego-lsb", `
     "sqlit-tui[all]", `
     "time-decode", `
