@@ -8,6 +8,6 @@
 
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`
 
-**Tags:** malware-analysis, binary-analysis, similarity
+**Tags:** malware-analysis, binary-analysis, binary-diffing
 
 binlex is a binary genetic traits lexer for malware analysis.

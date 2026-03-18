@@ -8,4 +8,4 @@
 
 **File Extensions:** `.pcap`, `.pcapng`
 
-**Tags:** network-analysis, pcap, packet-crafting
+**Tags:** network-analysis, pcap, security-testing

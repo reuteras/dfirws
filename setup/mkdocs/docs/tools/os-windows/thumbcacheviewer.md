@@ -8,6 +8,6 @@
 
 **File Extensions:** `.db`
 
-**Tags:** windows, forensics, thumbnails
+**Tags:** windows, forensics, metadata
 
 Thumbcache Viewer - Extract Windows Vista, Windows 7, Windows 8, Windows 8.1, and Windows 10 thumbcache database files.

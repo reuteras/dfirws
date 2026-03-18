@@ -14,7 +14,7 @@
 
 **File Extensions:** `.exe`, `.dll`, `.res`
 
-**Tags:** resource-editing, reverse-engineering
+**Tags:** pe-analysis, reverse-engineering
 
 Resource Hacker is a tool for viewing and editing resources in Windows executables.
 

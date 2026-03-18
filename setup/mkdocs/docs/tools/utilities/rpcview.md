@@ -12,6 +12,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** rpc, utilities
+**Tags:** network, windows
 
 RpcView is a tool to view RPC endpoints.

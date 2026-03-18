@@ -12,6 +12,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** forensics, rdp
+**Tags:** forensics, network, windows
 
 RDP Bitmap Cache parser

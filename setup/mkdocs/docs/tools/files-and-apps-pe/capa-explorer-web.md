@@ -14,7 +14,7 @@
 
 **File Extensions:** `.exe`, `.dll`
 
-**Tags:** malware-analysis, capability-analysis, visualization
+**Tags:** malware-analysis, visualization
 
 capa Explorer Web is a web UI for exploring capa results.
 

@@ -12,6 +12,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** reverse-engineering, golang, symbol-recovery
+**Tags:** reverse-engineering, golang
 
 Go symbol recovery tool

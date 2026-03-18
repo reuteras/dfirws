@@ -12,8 +12,6 @@
 
 **Profiles:** Full (not included in Basic profile)
 
-**Tags:** cloud, azure
-
 Azure CLI is a command-line tool for managing Azure resources.
 
 ## Tips

@@ -6,4 +6,4 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** timestamp, forensics, decoding
+**Tags:** metadata, forensics, decoding

@@ -8,4 +8,4 @@
 
 **File Extensions:** `.xls`, `.xlsm`, `.xlsb`
 
-**Tags:** office, macro, deobfuscation, malware-analysis
+**Tags:** office, vba, deobfuscation, malware-analysis

@@ -13,7 +13,7 @@
 
 **File Extensions:** `.doc`, `.ppt`, `.xls`
 
-**Tags:** office, macro, vba, malware-analysis
+**Tags:** office, vba, malware-analysis
 
 OfficeMalScanner can scan old office documents.
 

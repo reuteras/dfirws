@@ -13,6 +13,6 @@
 
 **File Extensions:** `.dat`
 
-**Tags:** forensics, ese, database, csv
+**Tags:** forensics, windows, database, csv
 
 This is a set of tools for doing forensics analysis on Microsoft ESE databases.

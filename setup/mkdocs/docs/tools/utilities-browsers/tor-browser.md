@@ -14,7 +14,7 @@
 
 **File Extensions:** `.html`, `.htm`
 
-**Tags:** browser, privacy, network
+**Tags:** browser, network
 
 Tor Browser is a privacy-focused web browser based on Firefox.
 

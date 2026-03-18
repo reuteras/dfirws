@@ -14,7 +14,7 @@
 
 **File Extensions:** `.ps1`, `.py`, `.js`, `.ts`, `.json`, `.xml`, `.yaml`, `.md`
 
-**Tags:** text-editor, ide, powershell
+**Tags:** text-editor, code-editor, powershell
 
 Visual Studio Code is a source-code editor.
 

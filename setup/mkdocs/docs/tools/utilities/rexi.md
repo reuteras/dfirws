@@ -6,4 +6,4 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** regex, data-processing, tui
+**Tags:** search, data-processing, tui

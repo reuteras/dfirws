@@ -8,6 +8,6 @@
 
 **File Extensions:** `.exe`
 
-**Tags:** malware-analysis, autoit, deobfuscation
+**Tags:** malware-analysis, scripting, deobfuscation
 
 Extract AutoIt scripts embedded in PE binaries.

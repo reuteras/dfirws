@@ -6,6 +6,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** file-identification, machine-learning
+**Tags:** file-analysis, ai
 
 A tool to determine the content type of a file with deep learning.

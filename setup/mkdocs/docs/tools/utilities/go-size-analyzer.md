@@ -12,6 +12,6 @@
 
 **File Extensions:** `.exe`, `.dll`
 
-**Tags:** go, binary-analysis, utilities
+**Tags:** golang, binary-analysis
 
 go-size-analyzer (gsa) is a tool to analyze the size of Go binaries.

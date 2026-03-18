@@ -10,6 +10,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** windows, persistence, threat-hunting
+**Tags:** windows, malware-analysis, threat-hunting
 
 PowerShell script helping Incident Responders discover potential adversary persistence mechanisms.

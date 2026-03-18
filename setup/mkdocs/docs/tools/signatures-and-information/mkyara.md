@@ -8,4 +8,4 @@
 
 **File Extensions:** `.exe`, `.dll`, `.bin`
 
-**Tags:** yara, rule-generation, malware-analysis
+**Tags:** yara, detection-rules, malware-analysis

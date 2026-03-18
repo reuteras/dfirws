@@ -8,7 +8,7 @@
 
 **File Extensions:** `.etl`
 
-**Tags:** etw, windows, monitoring
+**Tags:** windows, monitoring
 
 Adversary tradecraft detection, protection, and hunting
 

@@ -8,6 +8,6 @@
 
 **File Extensions:** `.exe`
 
-**Tags:** malware-analysis, capability-discovery, pe-analysis, reverse-engineering, mitre-att&ck
+**Tags:** malware-analysis, pe-analysis, reverse-engineering, mitre-attack
 
 capa rules for identifying capabilities in binaries.

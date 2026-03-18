@@ -12,6 +12,6 @@
 
 **File Extensions:** `.log`
 
-**Tags:** log-analysis, linux, authentication
+**Tags:** log-analysis, linux, security-testing
 
 MasterParser is a powerful DFIR tool designed for analyzing and parsing Linux logs

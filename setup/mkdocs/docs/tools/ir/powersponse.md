@@ -10,6 +10,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** incident-response, powershell, containment
+**Tags:** incident-response, powershell
 
 PowerSponse is a PowerShell module focused on targeted containment and remediation during incident response.

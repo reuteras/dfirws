@@ -8,6 +8,6 @@
 
 **File Extensions:** `.json`, `.csv`, `.tsv`, `.parquet`
 
-**Tags:** data-processing, sql, json, csv
+**Tags:** data-processing, database, json, csv
 
 Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more.

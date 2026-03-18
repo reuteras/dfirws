@@ -14,7 +14,7 @@
 
 **File Extensions:** `.gpg`, `.asc`, `.pgp`
 
-**Tags:** encryption, pgp, signing
+**Tags:** encryption
 
 Gpg4win provides GnuPG and related tools for Windows.
 

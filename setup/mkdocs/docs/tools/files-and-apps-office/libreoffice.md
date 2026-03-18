@@ -14,7 +14,7 @@
 
 **File Extensions:** `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.odt`, `.ods`, `.odp`
 
-**Tags:** office, document-viewer
+**Tags:** office, viewer
 
 LibreOffice is a free and open-source office suite.
 

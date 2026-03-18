@@ -6,4 +6,4 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** osint, network, reconnaissance
+**Tags:** osint, network

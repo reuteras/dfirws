@@ -8,6 +8,6 @@
 
 **File Extensions:** `.pcap`
 
-**Tags:** malware-analysis, network-simulation, dynamic-analysis
+**Tags:** malware-analysis, network, dynamic-analysis
 
 FakeNet-NG - Next Generation Dynamic Network Analysis Tool

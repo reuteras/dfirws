@@ -14,7 +14,7 @@
 
 **File Extensions:** `.exe`, `.dll`, `.sys`
 
-**Tags:** windows, debugging, monitoring, system-administration
+**Tags:** windows, debugging, monitoring
 
 Sysinternals Suite is a collection of utilities for Windows.
 

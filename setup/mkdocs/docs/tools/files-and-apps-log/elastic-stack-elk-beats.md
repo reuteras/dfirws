@@ -1,0 +1,31 @@
+# Elastic Stack (ELK + Beats)
+
+**Category:** Files and apps / Log
+
+**Homepage:** <https://www.elastic.co/elastic-stack>
+
+**Vendor:** Elastic
+
+**License:** Elastic License
+
+**Source:** HTTP
+
+**Profiles:** Full (not included in Basic profile)
+
+**File Extensions:** `.json`, `.log`
+
+**Tags:** siem, log-analysis, search, visualization
+
+Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats.
+
+## Tips
+Packages are downloaded to .\downloads.
+
+## Usage
+Use the downloaded zips to install ELK components.
+
+## Sample Commands
+- `N/A`
+
+## Sample Files
+- N/A

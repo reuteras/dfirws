@@ -6,6 +6,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** http, file-server, network
+**Tags:** http, network
 
 hfs is a simple HTTP file server for Windows.

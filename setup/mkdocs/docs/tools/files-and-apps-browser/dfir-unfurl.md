@@ -6,4 +6,4 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** url-analysis, forensics, visualization
+**Tags:** osint, network, forensics, visualization

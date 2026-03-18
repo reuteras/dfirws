@@ -14,7 +14,7 @@
 
 **File Extensions:** `.pst`
 
-**Tags:** email, forensics, outlook
+**Tags:** email, forensics
 
 PST Walker is a tool for analyzing PST files.
 

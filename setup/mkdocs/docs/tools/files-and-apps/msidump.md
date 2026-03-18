@@ -13,6 +13,6 @@
 
 **File Extensions:** `.msi`
 
-**Tags:** indicator-extraction, enrichment, parsing, forensics
+**Tags:** ioc, data-extraction, enrichment, parsing, forensics
 
 MSI Dump - a tool that analyzes malicious MSI installation packages, extracts files, streams, binary data and incorporates YARA scanner.

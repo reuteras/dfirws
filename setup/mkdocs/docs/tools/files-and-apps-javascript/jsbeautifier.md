@@ -8,6 +8,6 @@
 
 **File Extensions:** `.js`
 
-**Tags:** javascript, deobfuscation, beautifier
+**Tags:** javascript, deobfuscation
 
 JavaScript unobfuscator and beautifier.

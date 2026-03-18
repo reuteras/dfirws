@@ -6,6 +6,6 @@
 
 **Profiles:** Full (not included in Basic profile)
 
-**Tags:** active-directory, ldap
+**Tags:** windows, network-analysis, network
 
 godap is a tool for analyzing Active Directory LDAP data.

@@ -6,6 +6,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** hashing, identification
+**Tags:** hashing, file-analysis
 
 The Modern Hash Identification System.

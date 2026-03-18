@@ -8,6 +8,6 @@
 
 **File Extensions:** `.json`
 
-**Tags:** jupyter, data-processing, tui, notebook
+**Tags:** python, data-processing, tui
 
 Jupyter in the terminal.

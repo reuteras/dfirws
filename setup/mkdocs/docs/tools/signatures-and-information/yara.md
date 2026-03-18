@@ -8,6 +8,6 @@
 
 **File Extensions:** `.yar`, `.yara`, `.exe`, `.dll`, `.bin`
 
-**Tags:** yara, malware-analysis, detection, signatures
+**Tags:** yara, malware-analysis, detection, detection-rules
 
 YARA is a tool for identifying and classifying malware.

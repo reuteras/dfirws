@@ -1,0 +1,31 @@
+# MEX
+
+**Category:** Development
+
+**Homepage:** <https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/>
+
+**Vendor:** Microsoft
+
+**License:** Proprietary
+
+**Source:** HTTP
+
+**Profiles:** Full, Basic
+
+**File Extensions:** `.dmp`
+
+**Tags:** debugging, dotnet
+
+MEX is an extension for WinDbg.
+
+## Tips
+MEX is installed in .\mount\Tools\mex.
+
+## Usage
+Use MEX with WinDbg.
+
+## Sample Commands
+- `N/A`
+
+## Sample Files
+- N/A

@@ -11,6 +11,6 @@
 
 **File Extensions:** `.waw`
 
-**Tags:** steganography, audio, CTF
+**Tags:** steganography, audio, ctf
 
 Hide Your Secret Message in any Wave Audio File.

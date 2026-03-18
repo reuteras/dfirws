@@ -8,6 +8,6 @@
 
 **File Extensions:** `.msg`
 
-**Tags:** email, forensics, outlook
+**Tags:** email, forensics
 
 A tool for viewing and analyzing Outlook MSG files.

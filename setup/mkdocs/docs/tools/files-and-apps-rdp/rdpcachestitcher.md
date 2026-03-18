@@ -1,13 +1,16 @@
-# RDPCacheStitcher
+# RdpCacheStitcher
 
 **Category:** Files and apps / RDP
 
-**Source:** GitHub Release
+**Homepage:** <https://github.com/BSI-Bund/RdpCacheStitcher>
+
+**Vendor:** BSI-Bund
+
+
+**Source:** Git
 
 **Profiles:** Full, Basic
 
-**File Extensions:** `.bmc`, `.bin`
+**Tags:** forensics, network, windows, disk-forensics
 
-**Tags:** rdp, forensics, windows
-
-RdpCacheStitcher is a tool for analyzing RDP cache files.
+RdpCacheStitcher is a tool that supports forensic analysts in reconstructing useful images out of RDP cache bitmaps.

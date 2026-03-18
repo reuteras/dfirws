@@ -14,6 +14,6 @@
 
 **File Extensions:** `.exe`, `.dll`
 
-**Tags:** log-viewer, utilities
+**Tags:** log-analysis, viewer
 
 ULogViewer is a log viewer for ULog files.

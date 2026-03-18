@@ -6,6 +6,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** search, grep, cli
+**Tags:** search, cli
 
 ripgrep is a fast, modern, and user-friendly command-line search tool.

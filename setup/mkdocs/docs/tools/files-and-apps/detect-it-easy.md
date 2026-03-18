@@ -8,6 +8,6 @@
 
 **File Extensions:** `.exe`, `.dll`, `.elf`, `.mach-o`, `.bin`
 
-**Tags:** pe-analysis, file-identification, packer-detection
+**Tags:** pe-analysis, file-analysis, packer-detection
 
 Detect It Easy is a tool for identifying file types and detecting packers.

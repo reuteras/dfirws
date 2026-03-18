@@ -8,6 +8,6 @@
 
 **File Extensions:** `.dat`
 
-**Tags:** windows, forensics, srum
+**Tags:** windows, forensics, filesystem
 
 A forensics tool to convert the data in the Windows srum (System Resource Usage Monitor) database to an xlsx spreadsheet.

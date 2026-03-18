@@ -1,0 +1,22 @@
+# r2ai
+
+**Category:** Reverse Engineering
+
+**Homepage:** <https://github.com/radareorg/r2ai>
+
+**Vendor:** radareorg
+
+**License:** MIT License
+
+**Source:** GitHub Release
+
+**Profiles:** Full, Basic
+
+**File Extensions:** `.exe`, `.dll`, `.elf`, `.bin`, `.so`
+
+**Tags:** reverse-engineering, mcp, ai
+
+LLM-based reversing for radare2.
+
+## Tips
+Currently not working in dfirws.

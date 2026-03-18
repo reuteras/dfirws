@@ -8,4 +8,4 @@
 
 **File Extensions:** `.tar`
 
-**Tags:** forensics, incident-response, disk-imaging
+**Tags:** forensics, incident-response, acquisition, disk-forensics

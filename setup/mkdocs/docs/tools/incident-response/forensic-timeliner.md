@@ -1,0 +1,13 @@
+# forensic-timeliner
+
+**Category:** Incident Response
+
+**Source:** GitHub Release
+
+**Profiles:** Full (not included in Basic profile)
+
+**File Extensions:** `.evtx`, `.csv`, `.json`
+
+**Tags:** forensics, timeline
+
+A high-speed forensic timeline engine for Windows forensic artifact CSV output built for DFIR investigators. Quickly consolidate CSV output from processed triage evidence for Eric Zimmerman (EZ Tools) Kape, Axiom, Hayabusa, Chainsaw and Nirsoft into a unified timeline.

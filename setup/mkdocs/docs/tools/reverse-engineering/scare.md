@@ -10,6 +10,6 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** assembly, emulation, repl
+**Tags:** reverse-engineering, emulation, scripting
 
 A multi-arch assembly REPL and emulator for your command line.

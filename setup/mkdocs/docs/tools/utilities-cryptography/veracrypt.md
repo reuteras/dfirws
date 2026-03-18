@@ -14,7 +14,7 @@
 
 **File Extensions:** `.hc`, `.tc`
 
-**Tags:** encryption, disk-encryption
+**Tags:** encryption, disk-forensics
 
 VeraCrypt is a disk encryption tool.
 

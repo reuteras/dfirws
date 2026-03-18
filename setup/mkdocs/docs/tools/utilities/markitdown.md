@@ -8,6 +8,6 @@
 
 **File Extensions:** `.docx`, `.xlsx`, `.pptx`, `.pdf`, `.html`
 
-**Tags:** conversion, markdown, data-extraction, office, word
+**Tags:** conversion, markdown, data-extraction, office
 
 Utility tool for converting various files to Markdown.

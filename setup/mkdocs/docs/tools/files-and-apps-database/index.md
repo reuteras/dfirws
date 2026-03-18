@@ -5,9 +5,12 @@
 | [DB Browser for SQLite](db-browser-for-sqlite.md) | GitHub Release | DB Browser for SQLite is a high quality, visual, open source tool for creating, designing, and editing database files compatible with SQLite. | database, sqlite, gui | `.db`, `.sqlite`, `.sqlite3` |  |
 | [DBeaver](dbeaver.md) | GitHub Release | DBeaver is a database management tool. | database, gui | `.db`, `.sqlite`, `.sqlite3`, `.sql` | Full only |
 | [Neo4j](neo4j.md) | HTTP | Neo4j is a graph database. | database, graph, visualization |  | Full only |
-| [dsq](dsq.md) | GitHub Release | Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more. | data-processing, sql, json, csv | `.json`, `.csv`, `.tsv`, `.parquet` |  |
-| [ese-analyst](ese-analyst.md) | Git | This is a set of tools for doing forensics analysis on Microsoft ESE databases. | forensics, ese, database, csv | `.dat` |  |
+| [SQLite Tools](sqlite-tools.md) | HTTP | SQLite command-line tools. | database, sqlite, cli | `.db`, `.sqlite`, `.sqlite3` |  |
+| [dsq](dsq.md) | GitHub Release | Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more. | data-processing, database, json, csv | `.json`, `.csv`, `.tsv`, `.parquet` |  |
+| [elasticsearch](elasticsearch.md) | Python |  | database, log-analysis, search, siem |  |  |
+| [ese-analyst](ese-analyst.md) | Git | This is a set of tools for doing forensics analysis on Microsoft ESE databases. | forensics, windows, database, csv | `.dat` |  |
 | [fqlite](fqlite.md) | GitHub Release | FQLite - SQLite Forensic Toolkit. FQLite is a tool to find and restore deleted records in SQlite databases. It therefore examines the database for entries marked as deleted. | database, sqlite, forensics | `.db`, `.sqlite`, `.sqlite3` | Full only |
 | [h2database](h2database.md) | GitHub Release | H2 Database is an open source Java SQL database. | database, java | `.h2.db` | Full only |
 | [litecli](litecli.md) | Python | CLI for SQLite Databases with auto-completion and syntax highlighting. | database, sqlite, cli | `.db`, `.sqlite` |  |
+| [neo4j](neo4j-2.md) | Python |  | database, graph |  |  |
 | [sqlit-tui](sqlit-tui.md) | Python |  | database, sqlite, tui | `.db`, `.sqlite`, `.sqlite3` |  |

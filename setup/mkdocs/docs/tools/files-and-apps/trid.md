@@ -12,7 +12,7 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** file-identification
+**Tags:** file-analysis
 
 TrID is a file identifier utility.
 

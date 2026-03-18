@@ -12,7 +12,7 @@
 
 **Profiles:** Full, Basic
 
-**Tags:** timestamp, forensics, decoding
+**Tags:** metadata, forensics, decoding
 
 DCode is a date/time conversion and analysis tool.
 

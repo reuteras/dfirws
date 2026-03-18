@@ -8,6 +8,6 @@
 
 **File Extensions:** `.db`, `.sqlite`
 
-**Tags:** browser-forensics, chrome, artifact-extraction
+**Tags:** browser-forensics, browser, artifact-extraction
 
 Browser forensics tool for Google Chrome (and other Chromium-based browsers).

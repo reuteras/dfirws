@@ -8,6 +8,6 @@
 
 **File Extensions:** `.exe`, `.dll`, `.dmp`
 
-**Tags:** malware-analysis, pe-analysis, process-injection
+**Tags:** malware-analysis, pe-analysis, dynamic-analysis
 
 Scans running processes. Recognizes and dumps a variety of in-memory implants

@@ -8,6 +8,6 @@
 
 **File Extensions:** `.exe`, `.elf`
 
-**Tags:** reverse-engineering, golang, symbol-recovery
+**Tags:** reverse-engineering, golang
 
 Go symbol recovery tool.
