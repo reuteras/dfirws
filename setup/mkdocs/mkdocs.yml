@@ -332,7 +332,6 @@ nav:
     - dnslib: tools/uncategorized/dnslib.md
     - docsify-cli: tools/uncategorized/docsify-cli.md
     - docx2txt: tools/uncategorized/docx2txt.md
-    - DotNet 6 Desktop Runtime: tools/uncategorized/dotnet-6-desktop-runtime.md
     - DotNet 8 Desktop Runtime: tools/uncategorized/dotnet-8-desktop-runtime.md
     - DotNet 9 Desktop Runtime: tools/uncategorized/dotnet-9-desktop-runtime.md
     - dotnetfile: tools/uncategorized/dotnetfile.md
@@ -353,10 +352,8 @@ nav:
     - Ghidra Cartographer: tools/uncategorized/ghidra-cartographer.md
     - Ghidra GhidrAssistMCP: tools/uncategorized/ghidra-ghidrassistmcp.md
     - Ghidra GolangAnalyzerExtension: tools/uncategorized/ghidra-golanganalyzerextension.md
-    - Ghidra: tools/uncategorized/ghidra.md
     - ghidrecomp: tools/uncategorized/ghidrecomp.md
     - ghidriff: tools/uncategorized/ghidriff.md
-    - git: tools/uncategorized/git.md
     - god-mode-rules: tools/uncategorized/god-mode-rules.md
     - graphviz: tools/uncategorized/graphviz.md
     - grip: tools/uncategorized/grip.md
@@ -486,7 +483,6 @@ nav:
     - treelib: tools/uncategorized/treelib.md
     - unicorn: tools/uncategorized/unicorn.md
     - unpy2exe: tools/uncategorized/unpy2exe.md
-    - uv: tools/uncategorized/uv.md
     - Velociraptor Artifact Exchange: tools/uncategorized/velociraptor-artifact-exchange.md
     - Volexity Threat Intel: tools/uncategorized/volexity-threat-intel.md
     - VS Code PowerShell Extension: tools/uncategorized/vs-code-powershell-extension.md
@@ -552,7 +548,6 @@ nav:
     - Gpg4win: tools/utilities-cryptography/gpg4win.md
     - hashcat: tools/utilities-cryptography/hashcat.md
     - name-that-hash: tools/utilities-cryptography/name-that-hash.md
-    - protodump: tools/utilities-cryptography/protodump.md
     - VeraCrypt: tools/utilities-cryptography/veracrypt.md
   - Utilities Ctf:
     - Overview: tools/utilities-ctf/index.md
