@@ -10,7 +10,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/EricZimmerman?tab=repositories"
     Vendor = "Eric Zimmerman"
     License = "MIT License"
-    Category = "Zimmerman"
+    Category = "Forensics\Zimmerman"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\AmcacheParser.lnk"

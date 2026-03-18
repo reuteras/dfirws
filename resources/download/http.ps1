@@ -162,7 +162,7 @@ $TOOL_DEFINITIONS += @{
     Vendor = "Microsoft"
     License = "Sysinternals Software License Terms"
     LicenseUrl = "https://docs.microsoft.com/en-us/sysinternals/license-terms"
-    Category = "Sysinternals"
+    Category = "OS\Windows\Sysinternals"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\accesschk64.exe.lnk"
@@ -1484,7 +1484,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.nirsoft.net/utils/full_event_log_view.html"
     Vendor = "NirSoft"
     License = "Freeware"
-    Category = "Logs"
+    Category = "Files and apps\Log"
 
     Shortcuts = @(
         @{
@@ -3334,7 +3334,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://aka.ms/azurecli"
     Vendor = "Microsoft"
     License = "MIT License"
-    Category = "Cloud"
+    Category = "Utilities"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Cloud\Azure CLI.lnk"
@@ -3439,7 +3439,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.elastic.co/elastic-stack"
     Vendor = "Elastic"
     License = "Elastic License"
-    Category = "Log"
+    Category = "Files and apps\Log"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()

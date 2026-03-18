@@ -91,7 +91,7 @@ $TOOL_DEFINITIONS += @{
     Vendor = "Cisco Talos"
     License = "GPL-2.0"
     LicenseUrl = "https://github.com/Cisco-Talos/clamav?tab=GPL-2.0-1-ov-file"
-    Category = "Malware tools"
+    Category = "Malware Analysis"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\clamav (runs dfirws-install -ClamAV).lnk"
@@ -293,7 +293,7 @@ $TOOL_DEFINITIONS += @{
     Vendor = "National Security Agency"
     License = "Apache-2.0"
     LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
-    Category = "Reverse engineering"
+    Category = "Reverse Engineering"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @(

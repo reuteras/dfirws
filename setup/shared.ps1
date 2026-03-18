@@ -193,7 +193,7 @@ function New-CreateToolFiles {
             }
         }
 
-        $category = "Uncategorized"
+        $category = if (-not [string]::IsNullOrWhiteSpace($tool.Category)) { $tool.Category } else { "Uncategorized" }
         if ($null -ne $category_path -and $category_path -ne "") {
             $category = ($category_path -split "\\")[0]
         }

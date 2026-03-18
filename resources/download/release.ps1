@@ -101,10 +101,10 @@ if ($status) {
 
 $TOOL_DEFINITIONS += @{
     Name = "BeaconHunter"
-    Category = "Malware tools\Cobalt Strike"
+    Category = "Malware Analysis\Cobalt Strike"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware Analysis\Cobalt Strike\BeaconHunter.lnk"
             Target   = "`${env:ProgramFiles}\BeaconHunter\BeaconHunter.exe"
             Args     = ""
             Icon     = ""
@@ -198,17 +198,17 @@ if ($status) {
 
 $TOOL_DEFINITIONS += @{
     Name = "aLEAPP"
-    Category = "Files and apps\Phone"
+    Category = "Files and apps\Mobile"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\aleapp (Android Logs, Events, and Protobuf Parser).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Mobile\aleapp (Android Logs, Events, and Protobuf Parser).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command aleapp.exe -h"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\aleappGUI.lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Mobile\aleappGUI.lnk"
             Target   = "`${TOOLS}\bin\aleappGUI.exe"
             Args     = ""
             Icon     = ""
@@ -265,17 +265,17 @@ if ($status) {
 
 $TOOL_DEFINITIONS += @{
     Name = "iLEAPP"
-    Category = "Files and apps\Phone"
+    Category = "Files and apps\Mobile"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\ileapp (iOS Logs, Events, And Plists Parser).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Mobile\ileapp (iOS Logs, Events, And Plists Parser).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command ileapp.exe -h"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iLEAPPGUI.lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Mobile\iLEAPPGUI.lnk"
             Target   = "`${TOOLS}\bin\iLEAPPGUI.exe"
             Args     = ""
             Icon     = ""
@@ -403,10 +403,10 @@ if ($status) {
 
 $TOOL_DEFINITIONS += @{
     Name = "CobaltStrikeScan"
-    Category = "Malware tools\Cobalt Strike"
+    Category = "Malware Analysis\Cobalt Strike"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\CobaltStrikeScan.lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware Analysis\Cobalt Strike\CobaltStrikeScan.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command CobaltStrikeScan.exe -h"
             Icon     = ""
@@ -581,10 +581,10 @@ if ($status) {
 
 $TOOL_DEFINITIONS += @{
     Name = "RDPCacheStitcher"
-    Category = "Files and apps\RDP"
+    Category = "Forensics"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\RDP\RdpCacheStitcher.lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\RdpCacheStitcher.lnk"
             Target   = "`${TOOLS}\RdpCacheStitcher\RdpCacheStitcher.exe"
             Args     = ""
             Icon     = ""
@@ -1980,10 +1980,10 @@ if (Test-ToolIncluded -ToolName "adalanche") {
 
 $TOOL_DEFINITIONS += @{
     Name = "adalanche"
-    Category = "OS\Windows\Active Directory (AD)"
+    Category = "OS\Windows\Active Directory"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\adalanche (Active Directory ACL Visualizer and Explorer).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory\adalanche (Active Directory ACL Visualizer and Explorer).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command adalanche.exe -h"
             Icon     = ""
@@ -2573,10 +2573,10 @@ if ($status) {
 
 $TOOL_DEFINITIONS += @{
     Name = "DitExplorer"
-    Category = "OS\Windows\Active Directory (AD)"
+    Category = "OS\Windows\Active Directory"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)\DitExplorer (Active Directory Database Explorer).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\Active Directory\DitExplorer (Active Directory Database Explorer).lnk"
             Target   = "`${TOOLS}\DitExplorer\DitExplorer.UI.WpfApp.exe"
             Args     = ""
             Icon     = ""
@@ -2648,7 +2648,7 @@ if (Test-ToolIncluded -ToolName "forensic-timeliner") {
 
 $TOOL_DEFINITIONS += @{
     Name = "forensic-timeliner"
-    Category = "IR"
+    Category = "Incident Response"
     Shortcuts = @()
     InstallVerifyCommand = "dfirws-install.ps1 -ForensicTimeliner"
     Verify = @()
@@ -3895,7 +3895,7 @@ if (Test-ToolIncluded -ToolName "Velociraptor") {
 
 $TOOL_DEFINITIONS += @{
     Name = "Velociraptor"
-    Category = "IR"
+    Category = "Incident Response"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\IR\velociraptor.exe (Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints).lnk"
@@ -3936,7 +3936,7 @@ if ($status) {
 
 $TOOL_DEFINITIONS += @{
     Name = "Witr"
-    Category = "IR"
+    Category = "Incident Response"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
