@@ -12,6 +12,7 @@
 | [RpcView](rpcview.md) | GitHub Release | RpcView is a tool to view RPC endpoints. | rpc, utilities |  |  |
 | [ULogViewer](ulogviewer.md) | GitHub Release | ULogViewer is a log viewer for ULog files. | log-viewer, utilities | `.exe`, `.dll` |  |
 | [geolocus-cli](geolocus-cli.md) | HTTP | geolocus-cli is a geolocation lookup tool. | geolocation, osint | `.json` |  |
+| [git](git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
 | [go-size-analyzer](go-size-analyzer.md) | GitHub Release | go-size-analyzer (gsa) is a tool to analyze the size of Go binaries. | go, binary-analysis, utilities | `.exe`, `.dll` |  |
 | [godap](godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | active-directory, ldap |  | Full only |
 | [jpterm](jpterm.md) | Python | Jupyter in the terminal. | jupyter, data-processing, tui, notebook | `.json` |  |

@@ -36,6 +36,7 @@ Categories generated from dfirws shortcuts.
 - [Programming / Go](./programming-go/index.md)
 - [Programming / Java](./programming-java/index.md)
 - [Programming / PowerShell](./programming-powershell/index.md)
+- [Programming / Python](./programming-python/index.md)
 - [Programming / Rust](./programming-rust/index.md)
 - [Programming / dotNET](./programming-dotnet/index.md)
 - [Reverse Engineering](./reverse-engineering/index.md)
@@ -63,7 +64,7 @@ Categories generated from dfirws shortcuts.
 | [aiodns](./uncategorized/aiodns.md) | Python |  | network, dns |  |  |
 | [aiohttp](./uncategorized/aiohttp.md) | Python |  | network, http |  |  |
 | [aLEAPP](./files-and-apps-phone/aleapp.md) | GitHub Release | ALEAPP is a tool for parsing and analyzing Android logs, events, and protobuf files. It can be used to extract artifacts from Android devices and analyze them in a structured way. | mobile-forensics, android, artifact-extraction | `.tar`, `.zip` |  |
-| [Amazon Corretto 21](./programming-java/amazon-corretto-21.md) | Installer | Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK). | java, corretto | `.java` |  |
+| [Amazon Corretto 21](./programming-java/amazon-corretto-21.md) | Installer | Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK). | java | `.java` |  |
 | [Android SDK Platform Tools](./os-android/android-sdk-platform-tools.md) | HTTP | Android SDK Platform Tools include ADB and Fastboot for Android device management. | android, mobile-forensics, debugging |  | Full only |
 | [API Monitor](./uncategorized/api-monitor.md) | HTTP | API Monitor is a tool for monitoring Windows API calls. | reverse-engineering, api-tracing, dynamic-analysis | `.exe`, `.dll` |  |
 | [apktool](./os-android/apktool.md) | HTTP | apktool is a tool for reverse engineering Android APK files. | reverse-engineering, android, decompiler | `.apk` |  |
@@ -138,7 +139,7 @@ Categories generated from dfirws shortcuts.
 | [docsify-cli](./uncategorized/docsify-cli.md) | npm | A magical documentation generator. | documentation, markdown | `.md`, `.html` |  |
 | [docx2txt](./uncategorized/docx2txt.md) | Python | A pure python-based utility to extract text and images from docx files. | office, word, data-extraction | `.docx` |  |
 | [Dokany](./memory/dokany.md) | GitHub Release | User mode file system library for windows with FUSE Wrapper | filesystem, mounting |  | Full only |
-| [DotNet 6 Desktop Runtime](./uncategorized/dotnet-6-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0. | dotnet, runtime |  |  |
+| [DotNet 6 Desktop Runtime](./programming-dotnet/dotnet-6-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0. | dotnet |  |  |
 | [DotNet 8 Desktop Runtime](./uncategorized/dotnet-8-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0. | dotnet, runtime |  |  |
 | [DotNet 9 Desktop Runtime](./uncategorized/dotnet-9-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0. | dotnet, runtime |  |  |
 | [dotnetfile](./programming-dotnet/dotnetfile.md) | Git | dotnetfile is a Common Language Runtime (CLR) header parser library for Windows .NET files built in Python. The CLR header is present in every Windows .NET assembly beside the Portable Executable (PE) header. It stores a plethora of metadata information for the managed part of the file. | pe-analysis, dotnet |  |  |
@@ -153,7 +154,6 @@ Categories generated from dfirws shortcuts.
 | [Elfparser-ng](./os-linux/elfparser-ng.md) | GitHub Release | Multiplatform CLI and GUI tool to show information about ELF files. | reverse-engineering, elf-analysis, linux | `.elf`, `.so` |  |
 | [EmailAnalyzer](./files-and-apps-email/emailanalyzer.md) | Git | With EmailAnalyzer you can analyze your suspicious emails. You can extract headers, links, and hashes from the .eml file and you can generate reports. | email, forensics, phishing | `.eml` |  |
 | [ese-analyst](./files-and-apps-database/ese-analyst.md) | Git | This is a set of tools for doing forensics analysis on Microsoft ESE databases. | forensics, ese, database, csv | `.dat` |  |
-| [Events-Ripper](./files-and-apps-log/events-ripper.md) | Git | This project is based on RegRipper, to easily extract additional value/pivot points from a TLN events file. | event-log, forensics, windows |  |  |
 | [evtx](./uncategorized/evtx.md) | Python |  | log-analysis, event-log, windows | `.evtx` |  |
 | [EVTX-ATTACK-SAMPLES](./uncategorized/evtx-attack-samples.md) | Git | Windows Events Attack Samples. | event-log, mitre-attack, samples | `.evtx` |  |
 | [evtx_dump](./files-and-apps-log/evtx-dump.md) | GitHub Release | A Fast (and safe) parser for the Windows XML Event Log (EVTX) format | log-analysis, event-log, windows | `.evtx` |  |
@@ -178,14 +178,14 @@ Categories generated from dfirws shortcuts.
 | [Geolocus](./uncategorized/geolocus.md) | Enrichment | Geolocus MMDB geolocation database. | geolocation, mmdb | `.mmdb` |  |
 | [geolocus-cli](./utilities/geolocus-cli.md) | HTTP | geolocus-cli is a geolocation lookup tool. | geolocation, osint | `.json` |  |
 | [gftrace](./programming-go/gftrace.md) | GitHub Release | A command line Windows API tracing tool for Golang binaries. | reverse-engineering, api-tracing, golang | `.exe` |  |
-| [Ghidra](./uncategorized/ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  | Full only |
+| [Ghidra](./reverse-engineering/ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  | Full only |
 | [Ghidra BTIGhidra](./uncategorized/ghidra-btighidra.md) | GitHub Release | Binary Type Inference Ghidra Plugin | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra Cartographer](./uncategorized/ghidra-cartographer.md) | GitHub Release | Code Coverage Exploration Plugin for Ghidra. | reverse-engineering, disassembler, visualization | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra GhidrAssistMCP](./uncategorized/ghidra-ghidrassistmcp.md) | GitHub Release | Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default. | reverse-engineering, mcp, ai, ghidra | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra GolangAnalyzerExtension](./uncategorized/ghidra-golanganalyzerextension.md) | GitHub Release | GoLang extension for Ghidra. | reverse-engineering, golang | `.exe`, `.elf` |  |
 | [ghidrecomp](./uncategorized/ghidrecomp.md) | Python | Python Command-Line Ghidra Decomplier. | reverse-engineering, decompiler | `.exe`, `.dll`, `.elf` |  |
 | [ghidriff](./uncategorized/ghidriff.md) | Python | Ghidra Binary Diffing Engine. | reverse-engineering, binary-diffing | `.exe`, `.dll`, `.elf` |  |
-| [git](./uncategorized/git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
+| [git](./utilities/git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
 | [go-size-analyzer](./utilities/go-size-analyzer.md) | GitHub Release | go-size-analyzer (gsa) is a tool to analyze the size of Go binaries. | go, binary-analysis, utilities | `.exe`, `.dll` |  |
 | [god-mode-rules](./uncategorized/god-mode-rules.md) | Git | God Mode Detection Rules | yara, sigma, detection-rules |  |  |
 | [godap](./utilities/godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | active-directory, ldap |  | Full only |
@@ -359,7 +359,7 @@ Categories generated from dfirws shortcuts.
 | [pysigma-pipeline-sysmon](./uncategorized/pysigma-pipeline-sysmon.md) | Python |  | sigma, detection, sysmon | `.yml`, `.yaml` |  |
 | [pysigma-pipeline-windows](./uncategorized/pysigma-pipeline-windows.md) | Python |  | sigma, detection, windows | `.yml`, `.yaml` |  |
 | [PySocks](./uncategorized/pysocks.md) | Python |  | network, proxy |  |  |
-| [Python 3.11](./programming/python-3-11.md) | Installer | Python is a programming language that lets you work quickly and integrate systems more effectively. | programming, python | `.py` |  |
+| [Python 3.11](./programming/python-3-11.md) | Installer | Python is a programming language that lets you work quickly and integrate systems more effectively. | python | `.py` |  |
 | [python-docx](./uncategorized/python-docx.md) | Python |  | office, word, data-extraction | `.docx` |  |
 | [python-dotenv](./uncategorized/python-dotenv.md) | Python |  |  |  |  |
 | [Python-dsstore](./files-and-apps/python-dsstore.md) | Git | A library for parsing .DS_Store files and extracting file names | forensics, macos, data-extraction | `.DS_Store` |  |
@@ -384,7 +384,6 @@ Categories generated from dfirws shortcuts.
 | [redress](./programming-go/redress.md) | GitHub Release | Redress - A tool for analyzing stripped Go binaries. | reverse-engineering, golang | `.exe`, `.elf` |  |
 | [regipy](./os-windows-registry/regipy.md) | Python | Regipy is a python library for parsing offline registry hives. | registry, windows, forensics | `.reg`, `.dat` |  |
 | [regipy-mcp-server](./uncategorized/regipy-mcp-server.md) | Git | regipy repository including regipy MCP server for AI-assisted registry analysis. | registry, windows, forensics, mcp | `.reg`, `.dat` |  |
-| [RegRipper4.0](./uncategorized/regripper4-0.md) | Git | RegRipper4.0 includes ISO 8601-ish time stamp formatting, MITRE ATT&CK mapping (for some, albeit not all, plugins), and Analysis Tips. Also, there are many new plugins since August, 2020. | registry, forensics, windows |  |  |
 | [RegShot](./os-windows-registry/regshot.md) | Git | RegShot is a small, free and open-source registry compare utility. |  |  |  |
 | [requests](./uncategorized/requests.md) | Python |  | network, http |  |  |
 | [Resource Hacker](./utilities/resource-hacker.md) | HTTP | Resource Hacker is a tool for viewing and editing resources in Windows executables. | resource-editing, reverse-engineering | `.exe`, `.dll`, `.res` |  |
@@ -436,7 +435,7 @@ Categories generated from dfirws shortcuts.
 | [unpy2exe](./uncategorized/unpy2exe.md) | Python |  | reverse-engineering, python, decompiler | `.exe` |  |
 | [upx](./utilities/upx.md) | GitHub Release | UPX is a free, portable, extendable, high-performance executable packer. | packing, pe-analysis, compression | `.exe`, `.dll`, `.elf` |  |
 | [usnjrnl](./os-windows/usnjrnl.md) | Cargo | The usnjrnl tool is a command-line utility for parsing Windows UsnJrnl files. It allows you to extract and analyze information from the USN Journal, which is a feature of the NTFS file system that tracks changes to files and directories. This tool can be useful for forensic investigations and understanding file system activity. | filesystem, forensics, ntfs, windows | `.bin` |  |
-| [uv](./uncategorized/uv.md) | Installer | uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv. | python, package-management | `.py` |  |
+| [uv](./programming-python/uv.md) | Installer | uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv. | python | `.py` |  |
 | [Velociraptor](./ir/velociraptor.md) | GitHub Release | Velociraptor is an advanced digital forensic and incident response tool that enhances your visibility into your endpoints. | incident-response, forensics, endpoint-detection | `.json`, `.csv` | Full only |
 | [Velociraptor Artifact Exchange](./uncategorized/velociraptor-artifact-exchange.md) | HTTP | The artifact exchange is a place for sharing community contributed artifacts for Velociraptor. Simply search below for an artifact that might address your need. If you wish to contribute to the exchange, please click the button to the right. | velociraptor |  |  |
 | [VeraCrypt](./utilities-cryptography/veracrypt.md) | HTTP | VeraCrypt is a disk encryption tool. | encryption, disk-encryption | `.hc`, `.tc` | Full only |

@@ -15,13 +15,11 @@
 | [CuTE-tui](cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |  |
 | [DFIRArtifactMuseum](dfirartifactmuseum.md) | Git | The goal of this repo is to archive artifacts from all versions of various OS's and categorizing them by type. This will help with artifact validation processes as well as increase access to artifacts that may no longer be readily available anymore. | forensics, artifacts, reference, sample-files |  |  |
 | [DSpellCheck](dspellcheck.md) | GitHub Release | A spell-checker plugin for Notepad++. | text-editor, spell-checker, plugins |  |  |
-| [DotNet 6 Desktop Runtime](dotnet-6-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0. | dotnet, runtime |  |  |
 | [DotNet 8 Desktop Runtime](dotnet-8-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0. | dotnet, runtime |  |  |
 | [DotNet 9 Desktop Runtime](dotnet-9-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0. | dotnet, runtime |  |  |
 | [EVTX-ATTACK-SAMPLES](evtx-attack-samples.md) | Git | Windows Events Attack Samples. | event-log, mitre-attack, samples | `.evtx` |  |
 | [Elastic Stack (ELK + Beats)](elastic-stack-elk-beats.md) | HTTP | Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats. | siem, log-analysis, elasticsearch, visualization | `.json`, `.log` | Full only |
 | [Geolocus](geolocus.md) | Enrichment | Geolocus MMDB geolocation database. | geolocation, mmdb | `.mmdb` |  |
-| [Ghidra](ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  | Full only |
 | [Ghidra BTIGhidra](ghidra-btighidra.md) | GitHub Release | Binary Type Inference Ghidra Plugin | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra Cartographer](ghidra-cartographer.md) | GitHub Release | Code Coverage Exploration Plugin for Ghidra. | reverse-engineering, disassembler, visualization | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Ghidra GhidrAssistMCP](ghidra-ghidrassistmcp.md) | GitHub Release | Ghidra extension implementing MCP server for AI-assisted reverse engineering. Enable in Ghidra via File > Configure > Configure Plugins. Server runs on localhost:8080 by default. | reverse-engineering, mcp, ai, ghidra | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
@@ -52,7 +50,6 @@
 | [PowerShell 7](powershell-7.md) | Winget | PowerShell 7 is a cross-platform shell and scripting language that provides a powerful command-line interface and automation capabilities. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
 | [PySocks](pysocks.md) | Python |  | network, proxy |  |  |
 | [QEMU](qemu.md) | Winget | QEMU is a generic and open-source machine emulator and virtualizer. It can be used to run operating systems and applications for different architectures on a host system, making it useful for testing, development, and analysis. | virtualization, emulation | `.qcow2`, `.vmdk`, `.vdi`, `.img`, `.iso` | Full only |
-| [RegRipper4.0](regripper4-0.md) | Git | RegRipper4.0 includes ISO 8601-ish time stamp formatting, MITRE ATT&CK mapping (for some, albeit not all, plugins), and Analysis Tips. Also, there are many new plugins since August, 2020. | registry, forensics, windows |  |  |
 | [Ruby](ruby.md) | Winget | Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. | scripting, ruby | `.rb` | Full only |
 | [SQLite Tools](sqlite-tools.md) | HTTP | SQLite command-line tools. | database, sqlite, cli | `.db`, `.sqlite`, `.sqlite3` |  |
 | [SSC-Threat-Intel-IoCs](ssc-threat-intel-iocs.md) | Enrichment | SecurityScorecard threat intelligence indicators of compromise. | threat-intel, ioc |  |  |
@@ -121,7 +118,6 @@
 | [geoip2](geoip2.md) | Python |  | geolocation, network, maxmind | `.mmdb` |  |
 | [ghidrecomp](ghidrecomp.md) | Python | Python Command-Line Ghidra Decomplier. | reverse-engineering, decompiler | `.exe`, `.dll`, `.elf` |  |
 | [ghidriff](ghidriff.md) | Python | Ghidra Binary Diffing Engine. | reverse-engineering, binary-diffing | `.exe`, `.dll`, `.elf` |  |
-| [git](git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
 | [god-mode-rules](god-mode-rules.md) | Git | God Mode Detection Rules | yara, sigma, detection-rules |  |  |
 | [graphviz](graphviz.md) | Python |  | visualization, graph | `.dot`, `.gv` |  |
 | [grip](grip.md) | Python | Render local readme files before sending off to GitHub. | markdown, preview | `.md` |  |
@@ -212,7 +208,6 @@
 | [treelib](treelib.md) | Python |  | data-processing, tree |  |  |
 | [unicorn](unicorn.md) | Python |  | reverse-engineering, emulation |  |  |
 | [unpy2exe](unpy2exe.md) | Python |  | reverse-engineering, python, decompiler | `.exe` |  |
-| [uv](uv.md) | Installer | uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv. | python, package-management | `.py` |  |
 | [vscode-shellcheck](vscode-shellcheck.md) | GitHub Release | Shellcheck extension for VS Code. | text-editor, shellcheck, linting, bash, sh, plugins |  | Full only |
 | [winpmem](winpmem.md) | HTTP | winpmem is a Windows memory acquisition driver. | memory-forensics, acquisition | `.raw`, `.aff4` |  |
 | [xlrd](xlrd.md) | Python |  | office, excel, data-extraction | `.xls` |  |

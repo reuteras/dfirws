@@ -109,7 +109,6 @@ nav:
     - Overview: tools/files-and-apps-log/index.md
     - chainsaw: tools/files-and-apps-log/chainsaw.md
     - dfir-toolkit: tools/files-and-apps-log/dfir-toolkit.md
-    - Events-Ripper: tools/files-and-apps-log/events-ripper.md
     - evtx_dump: tools/files-and-apps-log/evtx-dump.md
     - fx: tools/files-and-apps-log/fx.md
     - gron: tools/files-and-apps-log/gron.md
@@ -243,6 +242,7 @@ nav:
     - Python 3.11: tools/programming/python-3-11.md
   - Programming Dotnet:
     - Overview: tools/programming-dotnet/index.md
+    - DotNet 6 Desktop Runtime: tools/programming-dotnet/dotnet-6-desktop-runtime.md
     - dotnetfile: tools/programming-dotnet/dotnetfile.md
   - Programming Go:
     - Overview: tools/programming-go/index.md
@@ -262,6 +262,9 @@ nav:
     - Overview: tools/programming-powershell/index.md
     - deobshell: tools/programming-powershell/deobshell.md
     - PowerDecode: tools/programming-powershell/powerdecode.md
+  - Programming Python:
+    - Overview: tools/programming-python/index.md
+    - uv: tools/programming-python/uv.md
   - Programming Rust:
     - Overview: tools/programming-rust/index.md
     - Rust: tools/programming-rust/rust.md
@@ -271,6 +274,7 @@ nav:
     - Cutter: tools/reverse-engineering/cutter.md
     - dnSpy: tools/reverse-engineering/dnspy.md
     - FASM: tools/reverse-engineering/fasm.md
+    - Ghidra: tools/reverse-engineering/ghidra.md
     - Iaito: tools/reverse-engineering/iaito.md
     - ILSpy: tools/reverse-engineering/ilspy.md
     - Radare2: tools/reverse-engineering/radare2.md
@@ -457,7 +461,6 @@ nav:
     - radare2-mcp: tools/uncategorized/radare2-mcp.md
     - readpe: tools/uncategorized/readpe.md
     - regipy-mcp-server: tools/uncategorized/regipy-mcp-server.md
-    - RegRipper4.0: tools/uncategorized/regripper4-0.md
     - requests: tools/uncategorized/requests.md
     - Ruby: tools/uncategorized/ruby.md
     - rzpipe: tools/uncategorized/rzpipe.md
@@ -518,6 +521,7 @@ nav:
     - ExifTool: tools/utilities/exiftool.md
     - Flare-Floss: tools/utilities/flare-floss.md
     - geolocus-cli: tools/utilities/geolocus-cli.md
+    - git: tools/utilities/git.md
     - go-size-analyzer: tools/utilities/go-size-analyzer.md
     - godap: tools/utilities/godap.md
     - Google Earth Pro: tools/utilities/google-earth-pro.md

@@ -2,7 +2,6 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
-| [Events-Ripper](events-ripper.md) | Git | This project is based on RegRipper, to easily extract additional value/pivot points from a TLN events file. | event-log, forensics, windows |  |  |
 | [LUMEN](lumen.md) | npm | Your Browser-based EVTX Companion. | log-analysis, event-log, forensics, visualization | `.evtx` |  |
 | [LogBoost](logboost.md) | GitHub Release | Convert a variety of log formats to CSV while enriching detected IPs with Geolocation, ASN, DNS, WhoIs, Shodan InternetDB and Threat Indicator matches. | log-analysis, event-log | `.evtx`, `.csv`, `.json` | Full only |
 | [MasterParser](masterparser.md) | Git | MasterParser is a powerful DFIR tool designed for analyzing and parsing Linux logs | log-analysis, linux, authentication | `.log` |  |

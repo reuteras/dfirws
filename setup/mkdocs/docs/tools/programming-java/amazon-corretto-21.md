@@ -13,7 +13,7 @@
 
 **File Extensions:** `.java`
 
-**Tags:** java, corretto
+**Tags:** java
 
 Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK).
 
