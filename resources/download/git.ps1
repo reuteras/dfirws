@@ -123,7 +123,7 @@ $TOOL_DEFINITIONS += @{
     Name = "libimobiledevice-windows"
     Homepage = "https://github.com/iFred09/libimobiledevice-windows"
     Vendor = ""
-    Category = "Files and apps\Phone"
+    Category = "Files and apps\Mobile"
     Notes = "A Windows port of libimobiledevice, a cross-platform library to communicate with iOS devices. It includes tools for extracting data from iOS devices, such as lockdown, idevicebackup2, and more."
     Tags = @("mobile-forensics", "forensics")
 }
@@ -334,7 +334,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "Incident-Response-Powershell"
-    Category = "IR"
+    Category = "Incident Response"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
@@ -681,21 +681,21 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iShutdown_detect.py (sysdiagnose_file.tar.gz).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Mobile\iShutdown_detect.py (sysdiagnose_file.tar.gz).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\iShutdown\iShutdown_detect.py"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iShutdown_parse.py (A tool to extract and parse iOS shutdown logs from a .tar.gz archive).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Mobile\iShutdown_parse.py (A tool to extract and parse iOS shutdown logs from a .tar.gz archive).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\iShutdown\iShutdown_parse.py -h"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Phone\iShutdown_stats.py (Process an iOS shutdown.log file to create stats on reboots).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Mobile\iShutdown_stats.py (Process an iOS shutdown.log file to create stats on reboots).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command `${GIT_PATH}\iShutdown\iShutdown_stats.py -h"
             Icon     = ""
@@ -802,7 +802,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "gootloader"
-    Category = "Malware tools"
+    Category = "Malware Analysis"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\Gootloader\Gootloader (Mandiant).lnk"
@@ -960,7 +960,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "malware-bazaar-advanced-search"
-    Category = "Malware tools"
+    Category = "Malware Analysis"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Signatures and information\Online tools\malware-bazaar-advanced-search (search.py).lnk"
@@ -1280,7 +1280,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "PowerSponse"
-    Category = "IR"
+    Category = "Incident Response"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\IR\PowerSponse.lnk"
@@ -1518,7 +1518,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mkorman90/regipy"
     Vendor = "mkorman90"
     License = "MIT License"
-    Category = "OS\\Windows\\Registry"
+    Category = "OS\Windows\Registry"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
