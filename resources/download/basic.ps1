@@ -243,7 +243,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    Tags = @("java", "corretto")
+    Tags = @("java")
     FileExtensions = @(".java")
 }
 
@@ -282,7 +282,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    Tags = @("programming", "python")
+    Tags = @("python")
     FileExtensions = @(".py")
     PythonVersion = ""
 }
@@ -325,7 +325,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".py")
-    Tags = @("python", "package-management")
+    Tags = @("python")
     Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
     Tips = ""
     Usage = ""
@@ -346,7 +346,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @()
-    Tags = @("dotnet", "runtime")
+    Tags = @("dotnet")
     Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0."
     Tips = ""
     Usage = ""

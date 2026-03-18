@@ -225,7 +225,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".evtx", ".reg", ".dat", ".lnk", ".pf", ".mft", ".zip")
-    Tags = @("forensics", "timeline", "log-analysis", "event-log", "registry", "bodyfile")
+    Tags = @("forensics", "timeline", "log-analysis", "event-log", "registry", "filesystem")
     Notes = "The dfir-toolkit is a collection of command-line tools for digital forensics and incident response (DFIR) tasks. It includes various utilities for analyzing log files, registry hives, MFT files, and other artifacts commonly encountered in DFIR investigations."
     Tips = ""
     Usage = ""
@@ -314,7 +314,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     FileExtensions = @(".pcap", ".pcapng")
-    Tags = @("network-analysis", "ssh", "pcap")
+    Tags = @("network-analysis", "network", "pcap")
     Notes = "SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications."
     Tips = ""
     Usage = ""

@@ -273,6 +273,184 @@ The `Dependencies` field tracks high-level build/runtime dependencies between co
 
 Python tools have `PythonVersion = $PYTHON_DEFAULT` (currently 3.11). This prepares for per-tool Python version specification during future upgrades.
 
+### Tags Field
+
+The `Tags` field is an array of lowercase, hyphen-separated strings describing the tool's purpose, capabilities, and context. Tags drive wiki generation and enable filtering.
+
+**Rules:**
+- All tags must be **lowercase** and **hyphen-separated** (e.g., `malware-analysis`, `pe-analysis`)
+- Only use tags from the canonical list below — do not invent new tags without updating this list
+- Do **not** use tool names as tags (e.g., `ghidra`, `radare2`, `hayabusa`) — use descriptive tags instead
+- Use 2–6 tags per tool; avoid over-tagging
+- Multiple tags describing the same concept are redundant — pick the most specific one
+
+**Canonical Tag List:**
+
+*Analysis Domain*
+
+| Tag | Description |
+|-----|-------------|
+| `acquisition` | Data/disk acquisition and imaging |
+| `artifact-extraction` | Extracting forensic artifacts from systems |
+| `binary-analysis` | Analyzing binary files |
+| `binary-diffing` | Comparing binary files for differences |
+| `browser-forensics` | Browser history/cache/artifact analysis |
+| `carving` | File carving from raw storage |
+| `ctf` | Capture The Flag competition tools |
+| `data-extraction` | Extracting data from various formats/sources |
+| `data-processing` | Transforming and processing data |
+| `data-recovery` | Recovering deleted or corrupted data |
+| `debugging` | Debugging executables and processes |
+| `decompiler` | Decompiling binaries to source-like code |
+| `deobfuscation` | Removing obfuscation from code or scripts |
+| `detection` | Detecting malware, threats, or anomalies |
+| `detection-rules` | Managing/creating detection rules |
+| `disassembler` | Disassembling binary code to assembly |
+| `disk-forensics` | Disk and storage media forensics |
+| `dynamic-analysis` | Runtime/behavioral analysis |
+| `elf-analysis` | ELF binary analysis (Linux executables) |
+| `emulation` | Emulating code, CPU, or systems |
+| `entropy-analysis` | Entropy analysis of files/sections |
+| `file-analysis` | General file analysis and inspection |
+| `forensics` | General digital forensics |
+| `fuzzy-hashing` | Approximate/fuzzy hash computation |
+| `hashing` | Cryptographic hash computation |
+| `incident-response` | Incident response activities |
+| `ioc` | Indicators of Compromise handling |
+| `ioc-scanner` | Scanning for IOCs |
+| `log-analysis` | Log file analysis and parsing |
+| `malware-analysis` | Malware investigation and analysis |
+| `malware-detection` | Automated malware detection/scanning |
+| `memory-forensics` | RAM/memory dump analysis |
+| `metadata` | File/data metadata extraction |
+| `mobile-forensics` | Mobile device forensics |
+| `monitoring` | System/event monitoring |
+| `network-analysis` | Network traffic and protocol analysis |
+| `osint` | Open Source Intelligence gathering |
+| `packer-detection` | Detecting packed/obfuscated executables |
+| `password-cracking` | Password and hash cracking |
+| `pe-analysis` | PE/Portable Executable file analysis |
+| `protocol-analysis` | Network protocol analysis and decoding |
+| `reverse-engineering` | Reverse engineering binaries and code |
+| `static-analysis` | Static code or binary analysis (no execution) |
+| `steganography` | Steganography detection and analysis |
+| `string-extraction` | Extracting strings from binaries/files |
+| `threat-hunting` | Proactive threat hunting |
+| `threat-intelligence` | Threat intelligence feeds and data |
+| `timeline` | Timeline creation and analysis |
+| `triage` | Initial triage and rapid assessment |
+| `visualization` | Data visualization and graphing |
+| `vulnerability` | Vulnerability research and analysis |
+
+*File Formats / Data Types*
+
+| Tag | Description |
+|-----|-------------|
+| `csv` | CSV file handling |
+| `database` | Database files and queries |
+| `dns` | DNS records and traffic |
+| `email` | Email file formats (EML, PST, MSG) |
+| `event-log` | Windows Event Log (EVTX) files |
+| `filesystem` | Filesystem structures and analysis |
+| `http` | HTTP traffic and requests |
+| `javascript` | JavaScript code analysis |
+| `json` | JSON format processing |
+| `markdown` | Markdown documents |
+| `network` | Network-related data and protocols |
+| `ntfs` | NTFS filesystem structures |
+| `office` | Microsoft Office document formats (Word, Excel, OneNote) |
+| `ole` | OLE/Compound Document formats |
+| `pcap` | Packet capture files |
+| `pdf` | PDF file analysis |
+| `powershell` | PowerShell scripts and artifacts |
+| `registry` | Windows Registry files and analysis |
+| `rtf` | Rich Text Format documents |
+| `sigma` | Sigma detection rule format |
+| `sqlite` | SQLite database files |
+| `vba` | VBA macro analysis |
+| `xml` | XML format processing |
+| `yaml` | YAML format processing |
+| `yara` | YARA rules and scanning |
+
+*Techniques / Features*
+
+| Tag | Description |
+|-----|-------------|
+| `api-tracing` | API call tracing and hooking |
+| `audio` | Audio file handling and analysis |
+| `automation` | Task automation |
+| `blocklist` | Blocklist/denylist management |
+| `browser` | Browser applications and web browser tools |
+| `compression` | File/data compression and archive handling |
+| `conversion` | Format conversion tools |
+| `cryptography` | Cryptographic analysis (not just encryption/decryption) |
+| `decoding` | Data decoding (Base64, hex, etc.) |
+| `decryption` | Data decryption |
+| `decompression` | Archive/data decompression |
+| `encoding` | Data encoding |
+| `encryption` | Data encryption |
+| `geolocation` | IP/domain geolocation |
+| `graph` | Graph-based data representation |
+| `parsing` | Data format parsing |
+| `scripting` | Scripting and automation |
+| `search` | Search and indexing capabilities |
+| `shell` | Shell environments (bash, zsh, PowerShell) |
+| `web` | Web application analysis and HTTP tooling |
+
+*Tool Type / Interface*
+
+| Tag | Description |
+|-----|-------------|
+| `cli` | Command-line interface tool |
+| `code-editor` | Code editing with syntax support |
+| `documentation` | Documentation and reference material |
+| `gui` | Graphical user interface |
+| `hex-editor` | Hex viewing and editing |
+| `mcp` | MCP server for AI integration |
+| `plugins` | Plugin or extension (for another tool) |
+| `terminal` | Terminal emulator or multiplexer |
+| `text-editor` | Plain text editing |
+| `tui` | Terminal user interface |
+| `viewer` | File/data viewing (read-only) |
+
+*Platform / Runtime*
+
+| Tag | Description |
+|-----|-------------|
+| `ai` | AI/ML-powered analysis |
+| `android` | Android platform/artifacts |
+| `dotnet` | .NET runtime/ecosystem |
+| `golang` | Go language runtime/ecosystem |
+| `java` | Java runtime/ecosystem |
+| `linux` | Linux-specific tools or analysis |
+| `macos` | macOS platform/artifacts |
+| `mobile` | Mobile platform (general) |
+| `nodejs` | Node.js runtime/ecosystem |
+| `python` | Python language/ecosystem |
+| `windows` | Windows-specific tools or analysis |
+
+*Security-Specific*
+
+| Tag | Description |
+|-----|-------------|
+| `cobalt-strike` | Cobalt Strike artifact analysis |
+| `endpoint-detection` | Endpoint detection capabilities |
+| `exploitation` | Exploitation tools (authorized testing) |
+| `ids` | Intrusion Detection System rules/integration |
+| `mitre-attack` | MITRE ATT&CK framework alignment |
+| `phishing` | Phishing analysis tools |
+| `ransomware` | Ransomware analysis |
+| `security-testing` | Security testing (authorized engagements) |
+| `siem` | SIEM platform integration |
+
+*Enrichment / Data Sources*
+
+| Tag | Description |
+|-----|-------------|
+| `enrichment` | Threat intel enrichment databases |
+| `maxmind` | MaxMind GeoIP data |
+| `mmdb` | MaxMind DB format |
+
 ### SourceType Field
 
 Automatically set by `New-CreateToolFiles` from the `-Source` parameter. Maps to display labels in the wiki:
