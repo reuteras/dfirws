@@ -41,6 +41,7 @@ $repourls = `
     "https://github.com/mkorman90/regipy.git", `
     "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mandiant/gostringungarbler.git", `
+    "https://github.com/mandiant/speakeasy.git", `
     "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
     "https://github.com/mattifestation/CimSweep.git", `
@@ -908,6 +909,8 @@ $TOOL_DEFINITIONS += @{
     LicenseUrl = ""
     PythonVersion = ""
 }
+
+# Speakeasy has its TOOL_DEFINITIONS in install_python_tools.ps1.
 
 $TOOL_DEFINITIONS += @{
     Name = "CapaExplorer"

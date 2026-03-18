@@ -140,6 +140,7 @@ foreach ($package in `
     "rexi", `
     "scapy", `
     "shodan", `
+    "speakeasy-emulator[gdb]", `
     "stego-lsb", `
     "sqlit-tui[all]", `
     "time-decode", `
@@ -479,6 +480,35 @@ if (((Test-Path "${TOOLS}\VSLayout\vs_BuildTools.exe") -and ($NeedVSBuildTools -
     #Write-DateLog "Python venv jep done." >> "C:\log\python.txt"
 }
 # End venvs needing Visual Studio Build Tools
+
+$TOOL_DEFINITIONS += @{
+    Name = "speakeasy"
+    Category = "Malware Analysis"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Malware Analysis\speakeasy (Windows malware emulation framework).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command speakeasy -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "speakeasy -h"
+    Verify = @()
+    FileExtensions = @(".exe", ".dll", ".sys", ".bin")
+    Tags = @("malware-analysis", "emulation", "shellcode", "reverse-engineering", "windows")
+    Notes = "Windows malware emulation framework that executes binaries, drivers, and shellcode in a modeled Windows runtime without a full VM. Produces structured JSON reports."
+    Tips = "Docs are available in C:\git\speakeasy\docs, and the source code is in C:\git\speakeasy."
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/mandiant/speakeasy"
+    Vendor = "Mandiant"
+    License = "MIT License"
+    LicenseUrl = ""
+    PythonVersion = ""
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "PyrsistenceSniper"
