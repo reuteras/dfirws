@@ -140,7 +140,6 @@ foreach ($package in `
     "rexi", `
     "scapy", `
     "shodan", `
-    "speakeasy-emulator", `
     "stego-lsb", `
     "sqlit-tui[all]", `
     "time-decode", `
@@ -153,6 +152,10 @@ foreach ($package in `
         uv tool install --python "C:\Program Files\Python311\python.exe" $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
         Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
+
+# speakeasy-emulator requires setuptools (pkg_resources) which is not included in uv tool isolated envs
+uv tool install --python "C:\Program Files\Python311\python.exe" --with setuptools speakeasy-emulator 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed speakeasy-emulator via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 # Download IOCs for mvt
  mvt-ios download-iocs 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
