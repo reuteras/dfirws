@@ -141,7 +141,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://blog.didierstevens.com/didier-stevens-suite/"
     Vendor = "Didier Stevens"
     License = "Unknown"
-    Category = "DidierStevens"
+    Category = "Malware Analysis\DidierStevens"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\DidierStevens\1768.py (Analyze Cobalt Strike beacons).lnk"

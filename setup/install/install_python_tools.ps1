@@ -859,7 +859,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "csvkit"
-    Category = "Malware tools"
+    Category = "Malware Analysis"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files).lnk"
@@ -1357,7 +1357,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "maldump"
-    Category = "Malware tools"
+    Category = "Malware Analysis"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk"
@@ -1558,7 +1558,7 @@ $TOOL_DEFINITIONS += @{
 
 $TOOL_DEFINITIONS += @{
     Name = "mwcp"
-    Category = "Malware tools"
+    Category = "Malware Analysis"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @(

@@ -273,6 +273,71 @@ The `Dependencies` field tracks high-level build/runtime dependencies between co
 
 Python tools have `PythonVersion = $PYTHON_DEFAULT` (currently 3.11). This prepares for per-tool Python version specification during future upgrades.
 
+### Category Field
+
+The `Category` field classifies the tool for wiki navigation and desktop shortcut folder placement. For tools with `Shortcuts`, the category is automatically derived from the first component of the `Lnk` path — the `Category` field must match. For tools with no shortcuts, `Category` is used directly as a fallback.
+
+**Rules:**
+- Use only categories from the canonical list below
+- Match the exact spelling and capitalisation (case-sensitive)
+- For subcategories use a single backslash separator: `Category\Subcategory`
+- Do **not** use vendor or author names as categories (e.g. use `Forensics\Zimmerman`, not `Zimmerman`)
+
+#### Canonical Categories
+
+| Category | Description |
+|----------|-------------|
+| `Development` | Build toolchains and development utilities |
+| `Editors` | Text editors, code editors, note-taking (e.g. Obsidian) |
+| `Enrichment` | Offline threat-intel enrichment databases |
+| `Enrichment\Geolocation` | GeoIP and ASN databases |
+| `Enrichment\IDS` | Snort/Suricata rule databases |
+| `Enrichment\Network` | Network enrichment data (DNS, blocklists, etc.) |
+| `Enrichment\Threat Intelligence` | Threat intelligence feeds and IOC lists |
+| `Enrichment\Vulnerability` | CVE and vulnerability databases |
+| `Enrichment\YARA` | YARA rule collections |
+| `Files and apps` | Generic file analysis tools |
+| `Files and apps\Browser` | Browser artifact analysis |
+| `Files and apps\Database` | Database file analysis (SQLite, ESE, etc.) |
+| `Files and apps\Disk` | Disk image and filesystem tools |
+| `Files and apps\Email` | Email file analysis (EML, PST, MSG) |
+| `Files and apps\JavaScript` | JavaScript analysis and deobfuscation |
+| `Files and apps\Log` | Log file viewers and parsers |
+| `Files and apps\Mobile` | Mobile device file analysis |
+| `Files and apps\Office` | Office document analysis (Word, Excel, OneNote) |
+| `Files and apps\PDF` | PDF analysis |
+| `Files and apps\PE` | PE/executable file analysis |
+| `Forensics` | General digital forensics tools |
+| `Forensics\Zimmerman` | Eric Zimmerman's forensics tool suite |
+| `Incident Response` | Incident response and triage tools |
+| `Malware Analysis` | Malware analysis and investigation |
+| `Malware Analysis\Cobalt Strike` | Cobalt Strike artifact analysis |
+| `Malware Analysis\DidierStevens` | Didier Stevens' malware analysis suite |
+| `Memory` | Memory forensics and analysis |
+| `Network` | Network traffic analysis and protocol tools |
+| `OS\Android` | Android platform tools |
+| `OS\Linux` | Linux-specific tools |
+| `OS\Windows` | Windows-specific tools and artifacts |
+| `OS\Windows\Active Directory` | Active Directory analysis |
+| `OS\Windows\Registry` | Windows Registry analysis |
+| `OS\Windows\Sysinternals` | Sysinternals Suite |
+| `Programming` | Language runtimes and generic dev tools |
+| `Programming\dotNET` | .NET / C# tools |
+| `Programming\Go` | Go language tools |
+| `Programming\Java` | Java tools |
+| `Programming\PowerShell` | PowerShell tools |
+| `Programming\Python` | Python tools |
+| `Programming\Ruby` | Ruby tools |
+| `Programming\Rust` | Rust tools |
+| `Reverse Engineering` | Reverse engineering, disassembly, decompilation |
+| `Signatures and information` | Detection rules, signatures, and reference data |
+| `Signatures and information\Online tools` | Online lookup and reference tools |
+| `Utilities` | General utilities and helper tools |
+| `Utilities\Browsers` | Web browser applications |
+| `Utilities\Cryptography` | Cryptography and encoding utilities |
+| `Utilities\CTF` | CTF-specific tools |
+| `Utilities\Media` | Audio/video/image utilities |
+
 ### Tags Field
 
 The `Tags` field is an array of lowercase, hyphen-separated strings describing the tool's purpose, capabilities, and context. Tags drive wiki generation and enable filtering.

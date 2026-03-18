@@ -29,7 +29,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.kroll.com/en/insights/publications/cyber/kroll-artifact-parser-extractor-kape"
     Vendor = "Kroll"
     License = "Commercial"
-    Category = "IR"
+    Category = "Incident Response"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\IR\gkape.lnk"

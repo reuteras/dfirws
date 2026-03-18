@@ -1,4 +1,4 @@
-#
+﻿#
 # dfirws directory
 #
 
@@ -13,9 +13,6 @@ $CLI_TOOL_ARGS = "-w 0 C:\Program Files\PowerShell\7\pwsh.exe -NoExit"
 
 # Create directory for shortcuts to installed tools
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws" | Out-Null
-
-# DidierStevens
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\DidierStevens" | Out-Null
 
 # Editors
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Editors" | Out-Null
@@ -152,15 +149,14 @@ Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\readpe - PE Ut
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\shellconv.py.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command shellconv.py -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\WinObjEx64.lnk" -DestinationPath "${TOOLS}\WinObjEx64\WinObjEx64.exe"
 
-# Files and apps - Phone
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Phone" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\aleapp (Android Logs, Events, and Protobuf Parser).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command aleapp.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\aleappGUI.lnk" -DestinationPath "${TOOLS}\bin\aleappGUI.exe"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\ileapp (iOS Logs, Events, And Plists Parser).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ileapp.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Phone\iLEAPPGUI.lnk" -DestinationPath "${TOOLS}\bin\iLEAPPGUI.exe"
+# Files and apps - Mobile
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\Mobile" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Mobile\aleapp (Android Logs, Events, and Protobuf Parser).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command aleapp.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Mobile\aleappGUI.lnk" -DestinationPath "${TOOLS}\bin\aleappGUI.exe"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Mobile\ileapp (iOS Logs, Events, And Plists Parser).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ileapp.exe -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Mobile\iLEAPPGUI.lnk" -DestinationPath "${TOOLS}\bin\iLEAPPGUI.exe"
 
 # Files and apps - RDP
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\RDP" | Out-Null
 
 # Forensics
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Forensics" | Out-Null
@@ -192,8 +188,11 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\thumbcache-extract.exe
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\binary-refinery.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command binref -h"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Forensics\vma-extract.exe (dissect).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command vma-extract.exe -h"
 
-# Incident response
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\IR" | Out-Null
+# Forensics - Zimmerman
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Forensics\Zimmerman" | Out-Null
+
+# Incident Response
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Incident Response" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -ForensicTimeliner"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Kanvas (runs dfirws-install -Kanvas).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Kanvas"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Kape (runs dfirws-install -Kape).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Kape"
@@ -201,19 +200,20 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\velociraptor.exe (Velocirapto
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Shadow-pulse (csv with information about ransomware groups).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command EZViewer.exe ${GIT_PATH}\Shadow-pulse\Ransomlist.csv"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\witr (Why is this running).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command witr.exe --help"
 
-# Malware tools
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools" | Out-Null
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\csvkit (tools for working with csv files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command csv --help"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\defender-dump.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command defender-dump.py -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\maldump.exe (Multi-quarantine extractor).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command maldump.exe -h"
+# Malware Analysis
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware Analysis" | Out-Null
 
-# Malware tools - Cobalt Strike
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike" | Out-Null
+# Malware Analysis - DidierStevens
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware Analysis\DidierStevens" | Out-Null
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware Analysis\csvkit (tools for working with csv files).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command csv --help"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware Analysis\defender-dump.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command defender-dump.py -h"
+Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware Analysis\maldump.exe (Multi-quarantine extractor).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command maldump.exe -h"
+
+# Malware Analysis - Cobalt Strike
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware Analysis\Cobalt Strike" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\BeaconHunter.lnk" -DestinationPath "${env:ProgramFiles}\BeaconHunter\BeaconHunter.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Malware tools\Cobalt Strike\CobaltStrikeScan.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command CobaltStrikeScan.exe -h"
 
-# Malware tools - Gootloader
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Malware tools\Gootloader" | Out-Null
 
 # Memory
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Memory" | Out-Null
@@ -238,11 +238,14 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\macOS" | Out-Null
 # OS - Windows
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows" | Out-Null
 
-# OS - Windows - Active Directory (AD)
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Active Directory (AD)" | Out-Null
+# OS - Windows - Active Directory
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Active Directory" | Out-Null
 
 # OS - Windows - Registry
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Registry" | Out-Null
+
+# OS - Windows - Sysinternals
+New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\OS\Windows\Sysinternals" | Out-Null
 
 # Programming and Development
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Programming" | Out-Null
@@ -323,9 +326,6 @@ New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Signatures and infor
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\Online tools\bazaar.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command bazaar --help"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\Online tools\shodan.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command shodan"
 
-# Sysinternals
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Sysinternals" | Out-Null
-
 # Utilities
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\bash (Git-version).lnk" -DestinationPath "${env:ProgramFiles}\Git\bin\bash.exe" -WorkingDirectory "${HOME}\Desktop"
@@ -371,9 +371,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\CTF\stegolsb.lnk" -Des
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Utilities\Media" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\Audacity.lnk" -DestinationPath "${TOOLS}\Audacity\audacity.exe"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Media\ffmpeg.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ffmpeg --help"
-
-# Zimmerman
-New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Zimmerman" | Out-Null
 
 # Add shortcuts from in $SETUP_PATH\dfirws\dfirws_folder_*.ps1 if they exists
 $FOLDER_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "dfirws_folder_*.ps1" -ErrorAction SilentlyContinue
