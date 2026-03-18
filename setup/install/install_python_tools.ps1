@@ -153,9 +153,11 @@ foreach ($package in `
         Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
-# speakeasy-emulator requires setuptools (pkg_resources) which is not included in uv tool isolated envs
-uv tool install --python "C:\Program Files\Python311\python.exe" --with setuptools speakeasy-emulator 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Write-DateLog "Installed speakeasy-emulator via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+# speakeasy-emulator requires setuptools (pkg_resources); use a dedicated venv to ensure it is available
+uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\speakeasy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv pip install --python "C:\venv\speakeasy\Scripts\python.exe" setuptools speakeasy-emulator 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Copy-Item "C:\venv\speakeasy\Scripts\speakeasy.exe" "C:\venv\bin\speakeasy.exe" -Force 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed speakeasy-emulator in dedicated venv." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 # Download IOCs for mvt
  mvt-ios download-iocs 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
