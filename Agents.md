@@ -277,16 +277,16 @@ Python tools have `PythonVersion = $PYTHON_DEFAULT` (currently 3.11). This prepa
 
 The `Tags` field is an array of lowercase, hyphen-separated strings describing the tool's purpose, capabilities, and context. Tags drive wiki generation and enable filtering.
 
-**Rules:**
+#### Rules
 - All tags must be **lowercase** and **hyphen-separated** (e.g., `malware-analysis`, `pe-analysis`)
 - Only use tags from the canonical list below — do not invent new tags without updating this list
 - Do **not** use tool names as tags (e.g., `ghidra`, `radare2`, `hayabusa`) — use descriptive tags instead
 - Use 2–6 tags per tool; avoid over-tagging
 - Multiple tags describing the same concept are redundant — pick the most specific one
 
-**Canonical Tag List:**
+#### Canonical Tag List
 
-*Analysis Domain*
+#### Analysis Domain
 
 | Tag | Description |
 |-----|-------------|
@@ -342,7 +342,7 @@ The `Tags` field is an array of lowercase, hyphen-separated strings describing t
 | `visualization` | Data visualization and graphing |
 | `vulnerability` | Vulnerability research and analysis |
 
-*File Formats / Data Types*
+#### File Formats / Data Types
 
 | Tag | Description |
 |-----|-------------|
@@ -372,7 +372,7 @@ The `Tags` field is an array of lowercase, hyphen-separated strings describing t
 | `yaml` | YAML format processing |
 | `yara` | YARA rules and scanning |
 
-*Techniques / Features*
+#### Techniques / Features
 
 | Tag | Description |
 |-----|-------------|
@@ -397,7 +397,7 @@ The `Tags` field is an array of lowercase, hyphen-separated strings describing t
 | `shell` | Shell environments (bash, zsh, PowerShell) |
 | `web` | Web application analysis and HTTP tooling |
 
-*Tool Type / Interface*
+#### Tool Type / Interface
 
 | Tag | Description |
 |-----|-------------|
@@ -413,7 +413,7 @@ The `Tags` field is an array of lowercase, hyphen-separated strings describing t
 | `tui` | Terminal user interface |
 | `viewer` | File/data viewing (read-only) |
 
-*Platform / Runtime*
+#### Platform / Runtime
 
 | Tag | Description |
 |-----|-------------|
@@ -429,7 +429,7 @@ The `Tags` field is an array of lowercase, hyphen-separated strings describing t
 | `python` | Python language/ecosystem |
 | `windows` | Windows-specific tools or analysis |
 
-*Security-Specific*
+#### Security-Specific
 
 | Tag | Description |
 |-----|-------------|
@@ -443,7 +443,7 @@ The `Tags` field is an array of lowercase, hyphen-separated strings describing t
 | `security-testing` | Security testing (authorized engagements) |
 | `siem` | SIEM platform integration |
 
-*Enrichment / Data Sources*
+#### Enrichment / Data Sources
 
 | Tag | Description |
 |-----|-------------|
