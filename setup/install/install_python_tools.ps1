@@ -493,7 +493,7 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "speakeasy -h"
+    InstallVerifyCommand = ""
     Verify = @()
     FileExtensions = @(".exe", ".dll", ".sys", ".bin")
     Tags = @("malware-analysis", "emulation", "shellcode", "reverse-engineering", "windows")
