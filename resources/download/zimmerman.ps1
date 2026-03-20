@@ -34,6 +34,13 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\SDBExplorer.lnk"
+            Target   = "`${env:ProgramFiles}\SDBExplorer\SDBExplorer.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\Zimmerman\SDBExplorer.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\bstrings.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command bstrings.exe -h"
@@ -44,14 +51,14 @@ $TOOL_DEFINITIONS += @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\EvtxECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command EvtxECmd.exe -h"
-            Icon     = "`${TOOLS}\Zimmerman\EvtxECmd.exe"
+            Icon     = "`${TOOLS}\Zimmerman\EvtxECmd\EvtxECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\EZViewer.lnk"
-            Target   = "`${TOOLS}\Zimmerman\EZViewer.exe"
+            Target   = "`${TOOLS}\Zimmerman\EZViewer\EZViewer.exe"
             Args     = ""
-            Icon     = "`${TOOLS}\Zimmerman\EZViewer.exe"
+            Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
@@ -69,10 +76,32 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\JumpListExplorer.lnk"
+            Target   = "`${TOOLS}\Zimmerman\JumpListExplorer\JumpListExplorer.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\Zimmerman\JumpListExplorer\JumpListExplorer.exe"
+            WorkDir  = "`${HOME}\Desktop"
+
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\MFTExplorer.lnk"
+            Target   = "`${TOOLS}\Zimmerman\MFTExplorer\MFTExplorer.exe"
+            Args     = ""
+            Icon     = "`${TOOLS}\Zimmerman\MFTExplorer\MFTExplorer.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\LECmd.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command LECmd.exe -h"
             Icon     = "`${TOOLS}\Zimmerman\LECmd.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\RECmd.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command RBCmd.exe -h"
+            Icon     = "`${TOOLS}\Zimmerman\RBCmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
@@ -115,6 +144,13 @@ $TOOL_DEFINITIONS += @{
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command SBECmd.exe -h"
             Icon     = "`${TOOLS}\Zimmerman\SBECmd.exe"
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\SQLECmd.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command SQLECmd.exe -h"
+            Icon     = "`${TOOLS}\Zimmerman\SQLECmd\SQLECmd.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
