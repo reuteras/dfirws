@@ -578,9 +578,6 @@ New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
 if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
     Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force | Out-Null
 }
-if (Test-Path "${SETUP_PATH}\capa_ghidra.py") {
-    Copy-Item "${SETUP_PATH}\capa_ghidra.py" "${HOME}/ghidra_scripts/capa_ghidra.py" -Force | Out-Null
-}
 
 # Add plugins to Cutter
 Update-SandboxProgress "Installing Cutter plugins..."
