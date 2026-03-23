@@ -134,6 +134,7 @@ foreach ($package in `
     "protodeep", `
     "ptpython", `
     "pwncat", `
+    "pyghidra", `
     "pynvim", `
     "pyOneNote", `
     "pypng", `
@@ -168,9 +169,6 @@ Write-DateLog "Installed speakeasy-emulator in dedicated venv." 2>&1 | ForEach-O
 # Profile-conditional Python packages
 if (Test-ToolIncludedSandbox -ToolName "jpterm") {
     uv tool install --python "C:\Program Files\Python311\python.exe" jpterm 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-}
-if (Test-ToolIncludedSandbox -ToolName "pyghidra") {
-    uv tool install --python "C:\Program Files\Python311\python.exe" pyghidra 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 Write-DateLog "Install extra scripts in Tools\bin." >> "C:\log\python.txt"
