@@ -65,7 +65,7 @@ Categories generated from dfirws shortcuts.
 | --- | --- | --- | --- | --- | --- |
 | [4n4lDetector](./files-and-apps-pe/4n4ldetector.md) | GitHub Release | Advanced static analysis tool | malware-analysis, pe-analysis, detection | `.exe`, `.dll` | Full only |
 | [7-Zip](./utilities/7-zip.md) | Installer | 7-Zip is a file archive tool. |  |  |  |
-| [@marp-team/marp-cli](./uncategorized/marp-team-marp-cli.md) | npm | A CLI interface for Marp and Marpit based converters. Markdown presentations. | markdown, presentation, documentation | `.md`, `.markdown` |  |
+| [@marp-team/marp-cli](./utilities/marp-team-marp-cli.md) | npm | A CLI interface for Marp and Marpit based converters. Markdown presentations. | markdown, office, documentation | `.md`, `.markdown` |  |
 | [acquire](./forensics/acquire.md) | Python |  | forensics, incident-response, acquisition, disk-forensics | `.tar` |  |
 | [adalanche](./os-windows-active-directory/adalanche.md) | GitHub Release | Attack Graph Visualizer and Explorer (Active Directory) ...Who's *really* Domain Admin? | windows, network-analysis, threat-intelligence, visualization |  | Full only |
 | [admonitions](./editors/admonitions.md) | GitHub Release | Obsidian admonitions plugin. | markdown, plugins |  | Full only |
@@ -146,7 +146,7 @@ Categories generated from dfirws shortcuts.
 | [dll_to_exe](./files-and-apps-pe/dll-to-exe.md) | GitHub Release | Converts a DLL into EXE | pe-analysis, conversion | `.dll`, `.exe` |  |
 | [dnslib](./network/dnslib.md) | Python |  | network, dns |  |  |
 | [dnSpy](./reverse-engineering/dnspy.md) | GitHub Release | dnSpy is a .NET debugger and decompiler. It can be used to analyze and debug .NET applications, including malware. | dotnet, debugging, reverse-engineering |  |  |
-| [docsify-cli](./uncategorized/docsify-cli.md) | npm | A magical documentation generator. | documentation, markdown | `.md`, `.html` |  |
+| [docsify-cli](./utilities/docsify-cli.md) | npm | A magical documentation generator. | documentation, markdown | `.md`, `.html` |  |
 | [docx2txt](./files-and-apps-office/docx2txt.md) | Python | A pure python-based utility to extract text and images from docx files. | office, data-extraction | `.docx` |  |
 | [Dokany](./memory/dokany.md) | GitHub Release | User mode file system library for windows with FUSE Wrapper | filesystem, disk-forensics |  | Full only |
 | [DotNet 6 Desktop Runtime](./programming-dotnet/dotnet-6-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0. | dotnet |  |  |
@@ -239,7 +239,7 @@ Categories generated from dfirws shortcuts.
 | [jpterm](./utilities/jpterm.md) | Python | Jupyter in the terminal. | python, data-processing, tui | `.json` |  |
 | [jq](./files-and-apps/jq.md) | GitHub Release | jq is a powerful command-line JSON processor that allows you to parse, filter, and manipulate JSON data with ease. It supports a wide range of operations, including selecting specific fields, transforming data, and performing complex queries. With its simple syntax and extensive functionality, jq is an essential tool for anyone working with JSON data in the command line. | json, data-processing, cli | `.json`, `.ndjson`, `.jsonl` |  |
 | [jsbeautifier](./files-and-apps-javascript/jsbeautifier.md) | Python | JavaScript unobfuscator and beautifier. | javascript, deobfuscation | `.js` |  |
-| [jsdom](./files-and-apps-javascript/jsdom.md) | npm | jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG DOM and HTML Standards, for use with Node.js. In general, the goal of the project is to emulate enough of a subset of a web browser to be useful for testing and scraping real-world web applications. | javascript, html-parsing, dom | `.html`, `.htm`, `.js` |  |
+| [jsdom](./files-and-apps-javascript/jsdom.md) | npm | jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG DOM and HTML Standards, for use with Node.js. In general, the goal of the project is to emulate enough of a subset of a web browser to be useful for testing and scraping real-world web applications. | javascript, parsing | `.html`, `.htm`, `.js` |  |
 | [Jumplist Browser](./os-windows/jumplist-browser.md) | GitHub Release | Automatic/Custom Destinations & LNK (MS-SHLLINK) Browser | windows, forensics, artifact-extraction | `.automaticDestinations-ms`, `.customDestinations-ms`, `.lnk` |  |
 | [jupyter-collection](./utilities/jupyter-collection.md) | Git | Collection of Jupyter Notebooks by @fr0gger_ | python |  |  |
 | [jupyterlab](./utilities/jupyterlab.md) | Python | JupyterLab computational environment | python, data-processing | `.ipynb` |  |
@@ -317,7 +317,7 @@ Categories generated from dfirws shortcuts.
 | [olefile](./files-and-apps-office/olefile.md) | Python |  | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |  |
 | [oletools](./files-and-apps/oletools.md) | Python | Python tools to analyze security characteristics of MS Office and OLE files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), for Malware Analysis and Incident Response #DFIR. | office, malware-analysis, vba | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.rtf` |  |
 | [one-extract](./forensics/one-extract.md) | Git | Python library for extracting objects from OneNote files. | forensics, office, data-extraction |  |  |
-| [opencode-ai](./uncategorized/opencode-ai.md) | npm | AI coding agent for the terminal with MCP server support. Configured with MCP servers for Ghidra (GhidrAssistMCP), radare2 (r2mcp), and regipy. | ai, code-generation, automation, mcp | `.txt`, `.md`, `.log`, `.json` |  |
+| [opencode-ai](./utilities/opencode-ai.md) | npm | AI coding agent for the terminal with MCP server support. Configured with MCP servers for Ghidra (GhidrAssistMCP), radare2 (r2mcp), and regipy. | ai, automation, mcp | `.txt`, `.md`, `.log`, `.json` |  |
 | [openpyxl](./files-and-apps-office/openpyxl.md) | Python |  | office, data-extraction | `.xlsx` |  |
 | [OpenVPN](./network/openvpn.md) | Winget | OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols. | network | `.ovpn` | Full only |
 | [orjson](./programming-python/orjson.md) | Python |  | json, data-processing | `.json` |  |

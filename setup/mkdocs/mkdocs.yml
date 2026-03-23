@@ -517,6 +517,7 @@ nav:
     - DCode: tools/utilities/dcode.md
     - deep_translator: tools/utilities/deep-translator.md
     - dictionaries: tools/utilities/dictionaries.md
+    - docsify-cli: tools/utilities/docsify-cli.md
     - edit: tools/utilities/edit.md
     - ExifTool: tools/utilities/exiftool.md
     - Flare-Floss: tools/utilities/flare-floss.md
@@ -533,11 +534,13 @@ nav:
     - jupyter-collection: tools/utilities/jupyter-collection.md
     - jupyterlab: tools/utilities/jupyterlab.md
     - markitdown: tools/utilities/markitdown.md
+    - "@marp-team/marp-cli": tools/utilities/marp-team-marp-cli.md
     - mcp-server-elasticsearch: tools/utilities/mcp-server-elasticsearch.md
     - mkdocs: tools/utilities/mkdocs.md
     - mmdbinspect: tools/utilities/mmdbinspect.md
     - Nerd Fonts: tools/utilities/nerd-fonts.md
     - oh-my-posh: tools/utilities/oh-my-posh.md
+    - opencode-ai: tools/utilities/opencode-ai.md
     - prettytable: tools/utilities/prettytable.md
     - pwncat: tools/utilities/pwncat.md
     - pyvis: tools/utilities/pyvis.md
