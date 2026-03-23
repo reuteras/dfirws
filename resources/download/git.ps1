@@ -39,6 +39,7 @@ $repourls = `
     "https://github.com/mandiant/flare-floss.git", `
     "https://github.com/mandiant/gootloader.git", `
     "https://github.com/mkorman90/regipy.git", `
+    "https://github.com/mandiant/capa-rules.git", `
     "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mandiant/gostringungarbler.git", `
     "https://github.com/mandiant/speakeasy.git", `
