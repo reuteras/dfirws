@@ -1667,8 +1667,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Capa integration with Ghidra - installed during start
-$status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_explorer.py" -FilePath ".\downloads\capa_explorer.py" -check "ASCII text"
-$status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/master/capa/ghidra/capa_ghidra.py" -FilePath ".\downloads\capa_ghidra.py" -check "ASCII text"
+$status = Get-FileFromUri -uri "https://raw.githubusercontent.com/mandiant/capa/refs/heads/master/capa/ghidra/plugin/capa_explorer.py" -FilePath ".\downloads\capa_explorer.py" -check "ASCII text"
 
 # Scripts for Cutter
 $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/yossizap/x64dbgcutter/master/x64dbgcutter.py" -FilePath ".\downloads\x64dbgcutter.py" -check "ASCII text"
@@ -3131,11 +3130,11 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     LicenseUrl = ""
     PythonVersion = ""
-}
+}   
 
 # https://windows.php.net/download - PHP 8
-$PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/downloads/releases/php-8.[.0-9]+-nts-Win32-vs16-x64.zip'
-$status = Get-FileFromUri -uri "https://windows.php.net${PHP_URL}" -FilePath ".\downloads\php.zip" -CheckURL "Yes" -check "Zip archive data"
+$PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/releases/archives/php-8.[.0-9]+-nts-Win32-vs17-x64.zip'
+$status = Get-FileFromUri -uri "https://downloads.php.net/~windows${PHP_URL}" -FilePath ".\downloads\php.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\php") {
         Remove-Item -Recurse -Force "${TOOLS}\php" | Out-Null 2>&1
