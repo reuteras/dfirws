@@ -3130,7 +3130,7 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     LicenseUrl = ""
     PythonVersion = ""
-}   
+}
 
 # https://windows.php.net/download - PHP 8
 $PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/releases/archives/php-8.[.0-9]+-nts-Win32-vs17-x64.zip'
