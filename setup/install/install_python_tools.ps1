@@ -134,7 +134,6 @@ foreach ($package in `
     "protodeep", `
     "ptpython", `
     "pwncat", `
-    "pyghidra", `
     "pynvim", `
     "pyOneNote", `
     "pypng", `
@@ -229,6 +228,7 @@ uv pip install -U `
     "dpkt", `
     "elasticsearch", `
     "evtx", `
+    "flare-capa[ghidra]", `
     "flatten_json", `
     "graphviz", `
     "geoip2", `
@@ -260,6 +260,7 @@ uv pip install -U `
     "pycares", `
     "pycryptodome", `
     "pydivert", `
+    "pyghidra", `
     "pypdf", `
     "pypdf2", `
     "pyshark", `

@@ -477,7 +477,6 @@ $ADD_TO_PATH = @("${HOME}\Go\bin"
     "${TOOLS}\systeminformer\x86"
     "${TOOLS}\XELFViewer"
     "${TOOLS}\audacity"
-    "${TOOLS}\capa-ghidra"
     "${TOOLS}\elfparser-ng\Release"
     "${TOOLS}\RdpCacheStitcher"
     "${TOOLS}\AndroidSDK\platform-tools"
@@ -589,7 +588,6 @@ if (Test-Path "${GIT_PATH}\cutterref"){
     Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutterref\archs" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\archs" | Out-Null
 }
 Robocopy.exe /MT:96 /MIR "${GIT_PATH}\cutter-jupyter\icons" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\icons" | Out-Null
-Robocopy.exe /MT:96 /MIR "${GIT_PATH}\capa-explorer\capa_explorer_plugin" "${HOME}\AppData\Roaming\rizin\cutter\plugins\python\capa_explorer_plugin" | Out-Null
 Write-DateLog "Installed Cutter plugins." | Write-SetupLog
 
 # BeaconHunter, IDR, and Zimmerman tools - run Robocopy copies in parallel

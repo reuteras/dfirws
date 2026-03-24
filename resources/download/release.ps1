@@ -2056,21 +2056,6 @@ if ($status) {
     }
     & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-windows.zip" -o"${TOOLS}\capa" | Out-Null
 }
-# Temporary get Capa version 6.0.0 until the issue with the latest version not working with
-# capaexplorer for Ghidra is fixed.
-if (Test-ToolIncluded -ToolName "Ghidra") {
-    $status = Get-FileFromUri -uri "https://github.com/mandiant/capa/releases/download/v6.0.0/capa-v6.0.0-windows.zip" -FilePath "${SETUP_PATH}\capa-ghidra.zip" -check "Zip archive data"
-    if ($status) {
-        if (Test-Path "${TOOLS}\capa-ghidra") {
-            Remove-Item "${TOOLS}\capa-ghidra" -Recurse -Force
-        }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-ghidra.zip" -o"${TOOLS}\capa-ghidra" | Out-Null
-        if (Test-Path "${TOOLS}\capa-ghidra\capa-ghidra.exe") {
-            Remove-Item "${TOOLS}\capa-ghidra\capa-ghidra.exe" -Force
-        }
-        Move-Item ${TOOLS}\capa-ghidra\capa.exe ${TOOLS}\capa-ghidra\capa-ghidra.exe
-    }
-}
 
 $TOOL_DEFINITIONS += @{
     Name = "capa"

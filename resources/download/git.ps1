@@ -51,7 +51,6 @@ $repourls = `
     "https://github.com/Neo23x0/signature-base.git", `
     "https://github.com/netspooky/scare.git", `
     "https://github.com/netwho/PacketCircle.git", `
-    "https://github.com/ninewayhandshake/capa-explorer.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/rabbitstack/fibratus.git", `
     "https://github.com/radareorg/r2ai.git", `
@@ -1080,27 +1079,6 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/netspooky/scare"
     Vendor = ""
     License = "GPL 2.0 License"
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "capa-explorer"
-    Category = "Reverse Engineering"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("reverse-engineering", "malware-analysis", "visualization")
-    Notes = "capa explorer for Cutter."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @("Cutter")
-    Homepage = "https://github.com/ninewayhandshake/capa-explorer"
-    Vendor = ""
-    License = "Apache 2.0 license"
     LicenseUrl = ""
     PythonVersion = ""
 }
