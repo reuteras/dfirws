@@ -12,7 +12,7 @@ if (Test-Path 'C:\Users\Public\Desktop\Microsoft Edge.lnk') {
 	Remove-Item 'C:\Users\Public\Desktop\Microsoft Edge.lnk' -Force
 }
 
-# Import common functions - first is for sandbox second is for VM
+# Import common functions
 $TARGET_ENVIRONMENT = "Sandbox"
 if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
     . "${HOME}\Documents\tools\wscommon.ps1"
@@ -146,7 +146,7 @@ Update-SandboxProgress "Installing IrfanView..."
 & "${SETUP_PATH}\irfanview.exe" /silent /assoc=1 | Out-Null
 Write-DateLog "IrfanView installed" | Write-SetupLog
 
-# Install Notepad++ and plugins
+# Install Notepad++ or Neovim
 Update-SandboxProgress "Configuring optional editors..."
 if (("${WSDFIR_NOTEPAD}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	& "${SETUP_PATH}\notepad++.exe" /S  | Out-Null
@@ -155,7 +155,6 @@ if (("${WSDFIR_NOTEPAD}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	Write-DateLog "Notepad++ installed" | Write-SetupLog
 }
 
-# Install Neovim
 if (("${WSDFIR_NEOVIM}" -eq "Yes") -or (Test-Path "C:\log\log.txt")) {
 	Install-Neovim
 	Write-DateLog "Neovim installed" | Write-SetupLog
@@ -574,9 +573,6 @@ Write-DateLog "Installing Graphviz done." | Write-SetupLog
 
 # Copy files to user profile
 New-Item -Path "${HOME}/ghidra_scripts" -ItemType Directory -Force | Out-Null
-if (Test-Path "${SETUP_PATH}\capa_explorer.py") {
-    Copy-Item "${SETUP_PATH}\capa_explorer.py" "${HOME}/ghidra_scripts/capa_explorer.py" -Force | Out-Null
-}
 
 # Add plugins to Cutter
 Update-SandboxProgress "Installing Cutter plugins..."
@@ -678,13 +674,13 @@ if ($TARGET_ENVIRONMENT -ne "Sandbox") {
     Write-DateLog "Not running customize script since TARGET_ENVIRONMENT='$TARGET_ENVIRONMENT'." | Write-SetupLog
 } elseif (Test-Path "${LOCAL_PATH}\customize.ps1") {
     Write-DateLog "Running customize script." | Write-SetupLog
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" @args | Write-SetupLog
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customize.ps1" @args 2>&1 | Write-SetupLog
 } elseif (Test-Path "${LOCAL_PATH}\customise.ps1") {
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1" @args | Write-SetupLog
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\customise.ps1" @args 2>&1 | Write-SetupLog
     Write-DateLog "Running customise scripts done." | Write-SetupLog
 } else {
     Write-DateLog "No customize scripts found, running defaults\customize-sandbox.ps1." | Write-SetupLog
-    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1" @args | Write-SetupLog
+    PowerShell.exe -ExecutionPolicy Bypass -File "${LOCAL_PATH}\defaults\customize-sandbox.ps1" @args 2>&1 | Write-SetupLog
 }
 
 #
