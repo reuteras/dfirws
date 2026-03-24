@@ -435,7 +435,6 @@ nav:
   - Reverse Engineering:
     - Overview: tools/reverse-engineering/index.md
     - Binary Ninja: tools/reverse-engineering/binary-ninja.md
-    - capa-explorer: tools/reverse-engineering/capa-explorer.md
     - CapaExplorer: tools/reverse-engineering/capaexplorer.md
     - cutter-jupyter: tools/reverse-engineering/cutter-jupyter.md
     - Cutter: tools/reverse-engineering/cutter.md
@@ -505,9 +504,6 @@ nav:
   - Uncategorized:
     - Overview: tools/uncategorized/index.md
     - CuTE-tui: tools/uncategorized/cute-tui.md
-    - docsify-cli: tools/uncategorized/docsify-cli.md
-    - "@marp-team/marp-cli": tools/uncategorized/marp-team-marp-cli.md
-    - opencode-ai: tools/uncategorized/opencode-ai.md
     - SSHniff: tools/uncategorized/sshniff.md
   - Utilities:
     - Overview: tools/utilities/index.md

@@ -17,7 +17,6 @@
 | [NetExt](netext.md) | GitHub Release | WinDbg extension for data mining managed heap. It also includes commands to list http request, wcf services, WIF tokens among others | debugging, memory-forensics, dotnet, plugins | `.dmp` |  |
 | [Radare2](radare2.md) | GitHub Release | UNIX-like reverse engineering framework and command-line toolset | reverse-engineering, disassembler, debugging | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.mach-o` |  |
 | [WinDbg](windbg.md) | Winget | WinDbg is a powerful debugger from Microsoft that can be used for analyzing crash dumps, debugging applications, and performing memory forensics. It is commonly used in incident response and malware analysis to investigate system crashes and analyze the behavior of malicious software. | debugging, memory-forensics, windows | `.dmp`, `.exe`, `.dll`, `.sys` |  |
-| [capa-explorer](capa-explorer.md) | Git | capa explorer for Cutter. | reverse-engineering, malware-analysis, visualization |  |  |
 | [cutter-jupyter](cutter-jupyter.md) | Git | Jupyter Plugin for Cutter. | reverse-engineering |  |  |
 | [cutterref](cutterref.md) | Git | Cutter Instruction Reference Plugin | reverse-engineering, documentation, plugins |  |  |
 | [decai](decai.md) | Git | r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed by copying decai.r2.js to the radare2 plugins directory. | reverse-engineering, ai, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |

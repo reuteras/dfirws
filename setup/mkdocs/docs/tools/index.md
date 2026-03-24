@@ -102,7 +102,6 @@ Categories generated from dfirws shortcuts.
 | [cabarchive](./files-and-apps/cabarchive.md) | Python |  | compression, data-extraction | `.cab` |  |
 | [capa](./files-and-apps-pe/capa.md) | GitHub Release | capa rules for identifying capabilities in binaries. | malware-analysis, pe-analysis, reverse-engineering, mitre-attack | `.exe` |  |
 | [capa Explorer Web](./files-and-apps-pe/capa-explorer-web.md) | HTTP | capa Explorer Web is a web UI for exploring capa results. | malware-analysis, visualization | `.exe`, `.dll` | Full only |
-| [capa-explorer](./reverse-engineering/capa-explorer.md) | Git | capa explorer for Cutter. | reverse-engineering, malware-analysis, visualization |  |  |
 | [capa-rules](./files-and-apps-pe/capa-rules.md) | GitHub Release | Rules for capa. |  |  |  |
 | [CapaExplorer](./reverse-engineering/capaexplorer.md) | Git | Capa analysis importer for Ghidra. | reverse-engineering, malware-analysis, visualization, plugins |  |  |
 | [cart](./forensics/cart.md) | Python | Compressed and RC4 Transport (CaRT) Neutering format. This is a file format that is used to neuter malware files for distribution in the malware analyst community. | malware-analysis | `.cart` |  |
