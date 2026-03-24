@@ -228,7 +228,6 @@ uv pip install -U `
     "dpkt", `
     "elasticsearch", `
     "evtx", `
-    "flare-capa[ghidra]", `
     "flatten_json", `
     "graphviz", `
     "geoip2", `
