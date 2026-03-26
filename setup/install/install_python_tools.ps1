@@ -215,26 +215,26 @@ uv pip install -U `
     "Aspose.Email-for-Python-via-Net", `
     "BeautifulSoup4", `
     "bitstruct", `
+    "cabarchive", `
     "capstone", `
+    "colorama", `
     "compressed_rtf", `
     "dissect", `
     "dissect.target[yara]", `
-    "dnslib", `
-    "flow.record", `
-    "geoip2", `
-    "cabarchive", `
     "dnslib", `
     "dotnetfile", `
     "dpkt", `
     "elasticsearch", `
     "evtx", `
     "flatten_json", `
+    "flow.record", `
     "graphviz", `
     "geoip2", `
     "javaobj-py3", `
     "keystone-engine", `
     "lief", `
     "matplotlib", `
+    "memprocfs", `
     "minidump", `
     "msoffcrypto-tool", `
     "msticpy", `
@@ -289,6 +289,7 @@ uv pip install -U `
     "termcolor", `
     "textsearch", `
     "tomlkit", `
+    "tqdm", `
     "treelib", `
     "unicorn", `
     "XlsxWriter", `
