@@ -5,8 +5,8 @@ if (!(Test-Path "C:\mkdocs")) {
 }
 
 Set-Location "C:\mkdocs"
-& "C:\venv\bin\mkdocs.exe" build | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
+& "C:\venv\bin\zensical.exe" build | Tee-Object -FilePath "${WSDFIR_TEMP}\start_sandbox.log" -Append
 $SLEEP_TIME = 7
-Start-Process "C:\venv\bin\mkdocs.exe" -argumentlist "serve" -WindowStyle Hidden
+Start-Process "C:\venv\bin\zensical.exe" -argumentlist "serve" -WindowStyle Hidden
 Start-Sleep -Seconds "${SLEEP_TIME}"
 & "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --profile-directory=Default http://localhost:8000/

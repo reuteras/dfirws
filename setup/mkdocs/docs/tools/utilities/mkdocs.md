@@ -1,4 +1,4 @@
-# mkdocs
+# zensical
 
 **Category:** Utilities
 
@@ -6,7 +6,7 @@
 
 **Profiles:** Full, Basic
 
-**File Extensions:** `.md`, `.yml`
+**File Extensions:** `.md`, `.toml`
 
 **Tags:** documentation, markdown
 

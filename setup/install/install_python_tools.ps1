@@ -87,8 +87,8 @@ uv tool install --python "C:\Program Files\Python311\python.exe" --with "click, 
 Write-DateLog "Installed regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --python "C:\Program Files\Python311\python.exe" --with "mkdocs-material" "mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Write-DateLog "Installed mkdocs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+uv tool install --python "C:\Program Files\Python311\python.exe" "zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Write-DateLog "Installed zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" "git+https://github.com/Hexastrike/PyrsistenceSniper.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed PyrsistenceSniper" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
@@ -775,12 +775,12 @@ $TOOL_DEFINITIONS += @{
 }
 
 $TOOL_DEFINITIONS += @{
-    Name = "mkdocs"
+    Name = "zensical"
     Category = "Utilities"
     Shortcuts = @()
     InstallVerifyCommand = ""
     Verify = @()
-    FileExtensions = @(".md", ".yml")
+    FileExtensions = @(".md", ".toml")
     Tags = @("documentation", "markdown")
     Notes = "Project documentation with Markdown."
     Tips = ""
