@@ -33,12 +33,12 @@ jobs:
           pip install zensical
 
       - name: Build site
-        run: zensical build --config-file setup/mkdocs/zensical.toml --site-dir setup/mkdocs/site
+        run: zensical build --config-file setup/mkdocs/zensical.toml
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
-          path: /home/runner/work/dfirws/dfirws/setup/mkdocs/setup/mkdocs/site
+          path: setup/mkdocs/site
 
   deploy:
     needs: build
