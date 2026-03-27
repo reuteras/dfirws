@@ -253,7 +253,7 @@ The `generate-tools-docs.py` script:
 - Groups tools by category
 - Generates per-category index tables (Tool, Source, Description, Tags, File Extensions)
 - Generates individual tool detail pages
-- Updates `mkdocs.yml` navigation
+- Updates `zensical.toml` navigation
 
 ## Key Conventions
 

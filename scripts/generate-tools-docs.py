@@ -28,12 +28,12 @@ def get_nav_label(value: str | None) -> str:
     return " ".join(words)
 
 
-def yaml_safe_label(label: str) -> str:
-    """Quote a YAML nav label if it contains characters that cannot start a YAML token."""
-    if re.search(r"[@`%]", label):
-        escaped = label.replace('"', '\\"')
-        return f'"{escaped}"'
-    return label
+def toml_quote_key(key: str) -> str:
+    """Return a TOML key, quoting with double quotes if it contains non-bare-key characters."""
+    if re.match(r"^[A-Za-z0-9_-]+$", key):
+        return key
+    escaped = key.replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{escaped}"'
 
 
 def get_nav_label_from_file(path: Path) -> str:
@@ -255,15 +255,15 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     return page_path
 
 
-def get_docs_nav_lines(
-    root: Path, relative: Path = Path(""), indent: int = 2
-) -> List[str]:
+def build_toml_nav_entries(root: Path, relative: Path, indent: int) -> List[str]:
+    """Build TOML nav entry lines for the given directory at the given indent level."""
     lines: List[str] = []
     current = root / relative if relative != Path("") else root
     if not current.exists():
         return lines
 
-    indent_text = " " * indent
+    pad = "  " * indent
+
     index_file = current / "index.md"
     files = sorted(
         [p for p in current.glob("*.md") if p.name != "index.md"], key=lambda p: p.name
@@ -271,104 +271,76 @@ def get_docs_nav_lines(
     dirs = sorted([p for p in current.iterdir() if p.is_dir()], key=lambda p: p.name)
 
     if index_file.exists():
-        rel = (
-            "index.md"
-            if relative == Path("")
-            else str(relative / "index.md").replace("\\", "/")
-        )
-        label = "Home" if relative == Path("") else "Overview"
-        lines.append(f"{indent_text}- {label}: {rel}")
+        if relative == Path(""):
+            lines.append(f'{pad}{{ Home = "index.md" }},')
+        else:
+            rel = str(relative / "index.md").replace("\\", "/")
+            lines.append(f'{pad}{{ Overview = "{rel}" }},')
 
     for file in files:
         label = get_nav_label_from_file(file)
         rel = (
-            str(relative / file.name).replace("\\", "/")
-            if relative != Path("")
-            else file.name
+            file.name
+            if relative == Path("")
+            else str(relative / file.name).replace("\\", "/")
         )
-        lines.append(f"{indent_text}- {yaml_safe_label(label)}: {rel}")
+        key = toml_quote_key(label)
+        lines.append(f"{pad}{{ {key} = \"{rel}\" }},")
 
     for d in dirs:
-        child_lines = get_docs_nav_lines(root, relative / d.name, indent + 2)
+        section_label = get_nav_label(d.name)
+        key = toml_quote_key(section_label)
+        inner_pad = "  " * (indent + 1)
+        child_relative = relative / d.name if relative != Path("") else Path(d.name)
+        child_lines = build_toml_nav_entries(root, child_relative, indent + 2)
         if child_lines:
-            lines.append(f"{indent_text}- {yaml_safe_label(get_nav_label(d.name))}:")
+            lines.append(f"{pad}{{")
+            lines.append(f"{inner_pad}{key} = [")
             lines.extend(child_lines)
+            lines.append(f"{inner_pad}]")
+            lines.append(f"{pad}}},")
 
     return lines
 
 
-def update_mkdocs_nav(config_path: Path, docs_root: Path) -> None:
+def build_toml_nav(docs_root: Path) -> str:
+    """Build the full TOML nav = [...] block."""
+    entries = build_toml_nav_entries(docs_root, Path(""), indent=1)
+    return "\n".join(["nav = ["] + entries + ["]"])
+
+
+def update_zensical_nav(config_path: Path, docs_root: Path) -> None:
     if not config_path.exists():
-        print(f"mkdocs.yml not found at {config_path}. Skipping nav update.")
+        print(f"zensical.toml not found at {config_path}. Skipping nav update.")
         return
 
     existing = config_path.read_text(encoding="utf-8").splitlines()
-    before: List[str] = []
-    after: List[str] = []
+
+    nav_start = -1
+    nav_end = -1
     in_nav = False
-    found_nav = False
-    in_loose_nav = False
 
-    for line in existing:
+    for i, line in enumerate(existing):
         if not in_nav:
-            if re.match(r"^\s*nav\s*:", line):
+            if re.match(r"^nav\s*=\s*\[", line):
+                nav_start = i
                 in_nav = True
-                found_nav = True
-                continue
-            if not found_nav and not in_loose_nav and line.startswith("- "):
-                in_loose_nav = True
-                continue
-            if in_loose_nav:
-                if re.match(r"^\S", line) and not line.startswith("- "):
-                    in_loose_nav = False
-                    after.append(line)
-                continue
-            before.append(line)
-            continue
-        if re.match(r"^\S", line) and not line.startswith("- "):
-            in_nav = False
-            after.append(line)
+                if re.match(r"^nav\s*=\s*\[\s*\]\s*$", line):
+                    nav_end = i
+                    break
+        else:
+            if re.match(r"^\]\s*$", line):
+                nav_end = i
+                break
 
-    nav_lines: List[str] = ["nav:"]
-    root_index = docs_root / "index.md"
-    if root_index.exists():
-        nav_lines.append("- Home: index.md")
+    new_nav_lines = build_toml_nav(docs_root).splitlines()
 
-    top_files = sorted(
-        [p for p in docs_root.glob("*.md") if p.name != "index.md"],
-        key=lambda p: p.name,
-    )
-    for file in top_files:
-        label = get_nav_label_from_file(file)
-        nav_lines.append(f"- {yaml_safe_label(label)}: {file.name}")
+    if nav_start == -1:
+        output_lines = existing + [""] + new_nav_lines
+    else:
+        output_lines = existing[:nav_start] + new_nav_lines + existing[nav_end + 1:]
 
-    top_dirs = sorted(
-        [p for p in docs_root.iterdir() if p.is_dir()], key=lambda p: p.name
-    )
-    for d in top_dirs:
-        child_lines = get_docs_nav_lines(docs_root, Path(d.name), 2)
-        if child_lines:
-            nav_lines.append(f"- {yaml_safe_label(get_nav_label(d.name))}:")
-            nav_lines.extend(child_lines)
-
-    output: List[str] = []
-    output.extend(before)
-    if output and output[-1] != "":
-        output.append("")
-    output.extend(nav_lines)
-    if after:
-        output.append("")
-        output.extend(after)
-
-    output = [
-        line for line in output if not re.match(r"^\s*-\s*navigation\.expand\s*$", line)
-    ]
-
-    if not any(re.match(r"^\s*nav\s*:", line) for line in output):
-        output.append("")
-        output.extend(nav_lines)
-
-    config_path.write_text("\n".join(output), encoding="utf-8")
+    config_path.write_text("\n".join(output_lines) + "\n", encoding="utf-8")
 
 
 def get_default_docs_root() -> str:
@@ -378,11 +350,11 @@ def get_default_docs_root() -> str:
     return "./docs"
 
 
-def get_default_mkdocs_config() -> str:
-    repo_mkdocs_config = Path("./setup/mkdocs/mkdocs.yml")
-    if repo_mkdocs_config.exists():
-        return str(repo_mkdocs_config)
-    return "./mkdocs.yml"
+def get_default_zensical_config() -> str:
+    repo_zensical_config = Path("./setup/mkdocs/zensical.toml")
+    if repo_zensical_config.exists():
+        return str(repo_zensical_config)
+    return "./zensical.toml"
 
 
 def collect_tools_json_paths(path: Path) -> list[Path]:
@@ -430,7 +402,7 @@ def load_tools(json_paths: list[Path]) -> list[dict]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate dfirws tools docs and mkdocs nav."
+        description="Generate dfirws tools docs and update nav in zensical.toml."
     )
     parser.add_argument(
         "--tools-json",
@@ -445,10 +417,10 @@ def main() -> int:
         help="Docs root directory (default: ./setup/mkdocs/docs when present, else ./docs).",
     )
     parser.add_argument(
-        "--mkdocs-config",
-        dest="mkdocs_config",
-        default=os.environ.get("MKDOCS_CONFIG", get_default_mkdocs_config()),
-        help="Path to mkdocs.yml (default: ./setup/mkdocs/mkdocs.yml when present, else ./mkdocs.yml).",
+        "--zensical-config",
+        dest="zensical_config",
+        default=os.environ.get("ZENSICAL_CONFIG", get_default_zensical_config()),
+        help="Path to zensical.toml (default: ./setup/mkdocs/zensical.toml when present, else ./zensical.toml).",
     )
     parser.add_argument(
         "--profile",
@@ -465,7 +437,7 @@ def main() -> int:
 
     json_path = Path(args.tools_json)
     docs_root = Path(args.docs_root)
-    mkdocs_config = Path(args.mkdocs_config)
+    zensical_config = Path(args.zensical_config)
     active_profile = args.profile.strip() if args.profile else ""
 
     json_paths = collect_tools_json_paths(json_path)
@@ -620,7 +592,7 @@ def main() -> int:
 
     tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
 
-    update_mkdocs_nav(mkdocs_config, docs_root)
+    update_zensical_nav(zensical_config, docs_root)
     return 0
 
 
