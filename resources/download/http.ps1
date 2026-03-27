@@ -1760,6 +1760,9 @@ if (Test-ToolIncluded -ToolName "Volatility Workbench 3") {
         }
         & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
     }
+    $status = Get-FileFromUri -uri "https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip" -FilePath "${TOOLS}\VolatilityWorkbench\Symbols\linux.zip" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip" -FilePath "${TOOLS}\VolatilityWorkbench\Symbols\mac.zip" -check "Zip archive data"
+    $status = Get-FileFromUri -uri "https://downloads.volatilityfoundation.org/volatility3/symbols/windows.zip" -FilePath "${TOOLS}\VolatilityWorkbench\Symbols\windows.zip" -check "Zip archive data"
 }
 
 $TOOL_DEFINITIONS += @{
