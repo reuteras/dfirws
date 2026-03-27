@@ -279,7 +279,6 @@ Categories generated from dfirws shortcuts.
 | [Microsoft.etl2pcapng](./network/microsoft-etl2pcapng.md) | Winget | Microsoft.etl2pcapng is a tool for converting ETL (Event Trace Log) files to PCAPNG format, allowing you to analyze network traffic captured in ETL files using tools like Wireshark. | network-analysis, pcap, protocol-analysis | `.etl` |  |
 | [minidump](./memory/minidump.md) | Python | Python library to parse Windows minidump file format. | memory-forensics, windows | `.dmp` |  |
 | [MiTeC Structured Storage Viewer](./files-and-apps-office/mitec-structured-storage-viewer.md) | HTTP | Full-featured MS OLE Structured Storage based file management tool. | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |  |
-| [mkdocs](./utilities/mkdocs.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.yml` |  |
 | [mkyara](./signatures-and-information/mkyara.md) | Python |  | yara, detection-rules, malware-analysis | `.exe`, `.dll`, `.bin` |  |
 | [mmdbinspect](./utilities/mmdbinspect.md) | GitHub Release | Tool for inspecting MaxMind GeoIP2 databases. | geolocation, maxmind | `.mmdb` |  |
 | [MsgViewer](./files-and-apps-email/msgviewer.md) | GitHub Release | A tool for viewing and analyzing Outlook MSG files. | email, forensics | `.msg` |  |
@@ -494,6 +493,7 @@ Categories generated from dfirws shortcuts.
 | [yara-x](./signatures-and-information/yara-x.md) | GitHub Release | yara-x is a faster and more flexible version of YARA. | yara, malware-analysis, detection, detection-rules | `.yar`, `.yara`, `.exe`, `.dll`, `.bin` |  |
 | [yq](./signatures-and-information/yq.md) | GitHub Release | yq is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor. | yaml, data-processing, cli | `.yaml`, `.yml`, `.json`, `.xml`, `.toml` |  |
 | [zaproxy](./network/zaproxy.md) | GitHub Release | The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to. | web, security-testing, network |  | Full only |
+| [zensical](./utilities/zensical.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.toml` |  |
 | [Zircolite](./files-and-apps-log/zircolite.md) | GitHub Release | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |  |
 | [zstd](./utilities/zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |
 | [Zui](./network/zui.md) | GitHub Release | Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data. | network-analysis, pcap | `.pcap`, `.pcapng`, `.zng` | Full only |

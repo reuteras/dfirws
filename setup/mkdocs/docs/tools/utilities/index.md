@@ -33,7 +33,6 @@
 | [jupyterlab](jupyterlab.md) | Python | JupyterLab computational environment | python, data-processing | `.ipynb` |  |
 | [markitdown](markitdown.md) | Python | Utility tool for converting various files to Markdown. | conversion, markdown, data-extraction, office | `.docx`, `.xlsx`, `.pptx`, `.pdf`, `.html` |  |
 | [mcp-server-elasticsearch](mcp-server-elasticsearch.md) | GitHub Release | MCP server to connect to elastic 8.X | mcp, ai, log-analysis | `` |  |
-| [mkdocs](mkdocs.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.yml` |  |
 | [mmdbinspect](mmdbinspect.md) | GitHub Release | Tool for inspecting MaxMind GeoIP2 databases. | geolocation, maxmind | `.mmdb` |  |
 | [oh-my-posh](oh-my-posh.md) | Winget | Oh My Posh is a customizable prompt for PowerShell and other shells. It allows you to create beautiful and functional command-line prompts with themes and customizations. | terminal, shell |  |  |
 | [opencode-ai](opencode-ai.md) | npm | AI coding agent for the terminal with MCP server support. Configured with MCP servers for Ghidra (GhidrAssistMCP), radare2 (r2mcp), and regipy. | ai, automation, mcp | `.txt`, `.md`, `.log`, `.json` |  |
@@ -44,4 +43,5 @@
 | [time-decode](time-decode.md) | Python |  | metadata, forensics, decoding |  |  |
 | [upx](upx.md) | GitHub Release | UPX is a free, portable, extendable, high-performance executable packer. | packer-detection, pe-analysis, compression | `.exe`, `.dll`, `.elf` |  |
 | [visidata](visidata.md) | Python |  | data-processing, tui, csv | `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx` |  |
+| [zensical](zensical.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.toml` |  |
 | [zstd](zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |
