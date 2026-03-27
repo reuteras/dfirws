@@ -18,41 +18,6 @@ def get_slug(value: str | None) -> str:
     return slug or "category"
 
 
-def get_nav_label(value: str | None) -> str:
-    if not value:
-        return "Docs"
-    label = re.sub(r"[-_]+", " ", value).strip()
-    if not label:
-        return "Docs"
-    words = [w if len(w) <= 1 else (w[0].upper() + w[1:]) for w in label.split()]
-    return " ".join(words)
-
-
-def toml_quote_key(key: str) -> str:
-    """Return a TOML key, quoting with double quotes if it contains non-bare-key characters."""
-    if re.match(r"^[A-Za-z0-9_-]+$", key):
-        return key
-    escaped = key.replace("\\", "\\\\").replace('"', '\\"')
-    return f'"{escaped}"'
-
-
-def get_nav_label_from_file(path: Path) -> str:
-    if not path.exists():
-        return get_nav_label(path.stem)
-    try:
-        with path.open("r", encoding="utf-8") as fh:
-            for line in fh:
-                m = re.match(r"^\s*#\s+(.+)$", line)
-                if m:
-                    title = m.group(1).strip()
-                    if title:
-                        return title
-                    break
-    except OSError:
-        pass
-    return get_nav_label(path.stem)
-
-
 def get_string_list(value) -> List[str]:
     if value is None:
         return []
@@ -255,106 +220,11 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     return page_path
 
 
-def build_toml_nav_entries(root: Path, relative: Path, indent: int) -> List[str]:
-    """Build TOML nav entry lines for the given directory at the given indent level."""
-    lines: List[str] = []
-    current = root / relative if relative != Path("") else root
-    if not current.exists():
-        return lines
-
-    pad = "  " * indent
-
-    index_file = current / "index.md"
-    files = sorted(
-        [p for p in current.glob("*.md") if p.name != "index.md"], key=lambda p: p.name
-    )
-    dirs = sorted([p for p in current.iterdir() if p.is_dir()], key=lambda p: p.name)
-
-    if index_file.exists():
-        if relative == Path(""):
-            lines.append(f'{pad}{{ Home = "index.md" }},')
-        else:
-            rel = str(relative / "index.md").replace("\\", "/")
-            lines.append(f'{pad}{{ Overview = "{rel}" }},')
-
-    for file in files:
-        label = get_nav_label_from_file(file)
-        rel = (
-            file.name
-            if relative == Path("")
-            else str(relative / file.name).replace("\\", "/")
-        )
-        key = toml_quote_key(label)
-        lines.append(f"{pad}{{ {key} = \"{rel}\" }},")
-
-    for d in dirs:
-        section_label = get_nav_label(d.name)
-        key = toml_quote_key(section_label)
-        inner_pad = "  " * (indent + 1)
-        child_relative = relative / d.name if relative != Path("") else Path(d.name)
-        child_lines = build_toml_nav_entries(root, child_relative, indent + 2)
-        if child_lines:
-            lines.append(f"{pad}{{")
-            lines.append(f"{inner_pad}{key} = [")
-            lines.extend(child_lines)
-            lines.append(f"{inner_pad}]")
-            lines.append(f"{pad}}},")
-
-    return lines
-
-
-def build_toml_nav(docs_root: Path) -> str:
-    """Build the full TOML nav = [...] block."""
-    entries = build_toml_nav_entries(docs_root, Path(""), indent=1)
-    return "\n".join(["nav = ["] + entries + ["]"])
-
-
-def update_zensical_nav(config_path: Path, docs_root: Path) -> None:
-    if not config_path.exists():
-        print(f"zensical.toml not found at {config_path}. Skipping nav update.")
-        return
-
-    existing = config_path.read_text(encoding="utf-8").splitlines()
-
-    nav_start = -1
-    nav_end = -1
-    in_nav = False
-
-    for i, line in enumerate(existing):
-        if not in_nav:
-            if re.match(r"^nav\s*=\s*\[", line):
-                nav_start = i
-                in_nav = True
-                if re.match(r"^nav\s*=\s*\[\s*\]\s*$", line):
-                    nav_end = i
-                    break
-        else:
-            if re.match(r"^\]\s*$", line):
-                nav_end = i
-                break
-
-    new_nav_lines = build_toml_nav(docs_root).splitlines()
-
-    if nav_start == -1:
-        output_lines = existing + [""] + new_nav_lines
-    else:
-        output_lines = existing[:nav_start] + new_nav_lines + existing[nav_end + 1:]
-
-    config_path.write_text("\n".join(output_lines) + "\n", encoding="utf-8")
-
-
 def get_default_docs_root() -> str:
     repo_docs_root = Path("./setup/mkdocs/docs")
     if repo_docs_root.exists():
         return str(repo_docs_root)
     return "./docs"
-
-
-def get_default_zensical_config() -> str:
-    repo_zensical_config = Path("./setup/mkdocs/zensical.toml")
-    if repo_zensical_config.exists():
-        return str(repo_zensical_config)
-    return "./zensical.toml"
 
 
 def collect_tools_json_paths(path: Path) -> list[Path]:
@@ -402,7 +272,7 @@ def load_tools(json_paths: list[Path]) -> list[dict]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate dfirws tools docs and update nav in zensical.toml."
+        description="Generate dfirws tools docs."
     )
     parser.add_argument(
         "--tools-json",
@@ -415,12 +285,6 @@ def main() -> int:
         dest="docs_root",
         default=os.environ.get("DOCS_ROOT", get_default_docs_root()),
         help="Docs root directory (default: ./setup/mkdocs/docs when present, else ./docs).",
-    )
-    parser.add_argument(
-        "--zensical-config",
-        dest="zensical_config",
-        default=os.environ.get("ZENSICAL_CONFIG", get_default_zensical_config()),
-        help="Path to zensical.toml (default: ./setup/mkdocs/zensical.toml when present, else ./zensical.toml).",
     )
     parser.add_argument(
         "--profile",
@@ -437,7 +301,6 @@ def main() -> int:
 
     json_path = Path(args.tools_json)
     docs_root = Path(args.docs_root)
-    zensical_config = Path(args.zensical_config)
     active_profile = args.profile.strip() if args.profile else ""
 
     json_paths = collect_tools_json_paths(json_path)
@@ -592,7 +455,6 @@ def main() -> int:
 
     tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
 
-    update_zensical_nav(zensical_config, docs_root)
     return 0
 
 
