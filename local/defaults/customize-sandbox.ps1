@@ -82,6 +82,9 @@ if (Test-Path "${TOOLS}\ghidra\") {
 # Start explorer in ${HOME}\Desktop\dfirws - use search box for easy access to tools
 & "C:\Windows\explorer.exe" "${HOME}\Desktop\dfirws"
 
+# Set timezone to local UTC
+Set-TimeZone -Id "UTC"
+
 # Install extra programs
 # See setup\wscommon.ps1 for available install functions
 #Install-Obsidian
