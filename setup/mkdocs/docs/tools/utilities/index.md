@@ -5,6 +5,7 @@
 | [7-Zip](7-zip.md) | Installer | 7-Zip is a file archive tool. |  |  |  |
 | [@marp-team/marp-cli](marp-team-marp-cli.md) | npm | A CLI interface for Marp and Marpit based converters. Markdown presentations. | markdown, office, documentation | `.md`, `.markdown` |  |
 | [DCode](dcode.md) | HTTP | DCode is a date/time conversion and analysis tool. | metadata, forensics, decoding |  |  |
+| [Dependencies](dependencies.md) | GitHub Release | Dependencies is a tool to view dependencies of Windows binaries. | dependencies, binary-analysis, windows | `.exe`, `.dll` |  |
 | [ExifTool](exiftool.md) | HTTP | ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files. | metadata, file-analysis | `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.pdf`, `.doc`, `.docx`, `.mp4` |  |
 | [Flare-Floss](flare-floss.md) | GitHub Release | Flare-Floss is a tool for extracting strings from malware samples. | malware-analysis, string-extraction, deobfuscation | `.exe`, `.dll`, `.bin` |  |
 | [Google Earth Pro](google-earth-pro.md) | Winget | Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features. | geolocation, osint, visualization | `.kml`, `.kmz` | Full only |

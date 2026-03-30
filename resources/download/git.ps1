@@ -76,6 +76,7 @@ $repourls = `
     "https://github.com/wagga40/Zircolite.git", `
     "https://github.com/reuteras/PatchaPalooza.git", `
     "https://github.com/xaitax/TotalRecall.git", `
+    "https://github.com/Y-Vladimir/SmartDeblur.git", `
     "https://github.com/Yamato-Security/hayabusa-rules.git", `
     "https://github.com/securityjoes/MasterParser.git", `
     "https://github.com/yossizap/cutterref.git"
@@ -117,9 +118,51 @@ if (Test-Path -Path ".\reconstructer.org\OfficeMalScanner.zip") {
     & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\reconstructer.org\OfficeMalScanner.zip" -o"..\Tools\" | Out-Null
 }
 
+# Extract SmartDeblur
+if (Test-Path -Path ".\SmartDeblur\dist\SmartDeblur-1.*-win.zip") {
+    if (Test-Path -Path "..\Tools\SmartDeblur") {
+        Remove-Item -Force -Recurse "..\Tools\SmartDeblur"
+    }
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\SmartDeblur\dist\SmartDeblur-1.*-win.zip" -o"..\Tools\" | Out-Null
+    Move-Item ..\Tools\SmartDeblur-* ..\Tools\SmartDeblur
+}
+
 & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
+
+$TOOL_DEFINITIONS += @{
+    Name = "SmartDeblur"
+    Homepage = "https://github.com/y-vladimir/smartdeblur"
+    Vendor = "Y. Vladimir"
+    License = ""
+    LicenseUrl = ""
+    Category = "Utilities\Media"
+    Shortcuts = @(
+         @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Media\SmartDeblur.lnk"
+            Target   = "`${TOOLS}\SmartDeblur\SmartDeblur.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\SmartDeblur\SmartDeblur.exe"
+            Expect = "SmartDeblur"
+        }
+    )
+    Notes = "SmartDeblur is a tool for restoring defocused and blurred images. It can be used to recover details from images that are out of focus or have motion blur."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Tags = @("image-restoration", "forensics")
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "autopsy_addon_modules"

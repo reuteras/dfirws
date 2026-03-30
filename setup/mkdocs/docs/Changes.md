@@ -2,6 +2,15 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-03-30
+
+Now the default timezone is set to UTC by default.
+
+Added 
+
+- [https://github.com/lucasg/Dependencies](https://github.com/lucasg/Dependencies)
+- [https://github.com/y-vladimir/smartdeblur](https://github.com/y-vladimir/smartdeblur)
+
 ## 2026-03-13
 
 - Removed RegRipper4.0 and Events-Ripper due to README for RegRipper4.0 stating that it is not allowed to be included in distributions and Events-Ripper being based on RegRipper4.0. If you want to use RegRipper4.0 or Events-Ripper, you can still install them in the sandbox by cloning their GitHub repositories and running the respective tools from the command line.

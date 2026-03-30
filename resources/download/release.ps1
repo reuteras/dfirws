@@ -4798,6 +4798,57 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# lucasg/Dependencies
+$status = Get-GitHubRelease -repo "lucasg/Dependencies" -path "${SETUP_PATH}\Dependencies.zip" -match "_x64_Release.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\Dependencies") {
+        Remove-Item "${TOOLS}\Dependencies" -Recurse -Force
+    }
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\Dependencies.zip" -o"${TOOLS}\Dependencies" | Out-Null
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Dependencies"
+    Category = "Utilities"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Dependencies GUI(is a tool to view dependencies of Windows binaries).lnk"
+            Target   = "`${TOOLS}\Dependencies\DependenciesGui.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Dependencies (command-line).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${TOOLS}\Dependencies\Dependencies.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\Dependencies\Dependencies.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe", ".dll")
+    Tags = @("dependencies", "binary-analysis", "windows")
+    Notes = "Dependencies is a tool to view dependencies of Windows binaries."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/lucasg/Dependencies"
+    Vendor = "Lucas Gabriel"
+    License = "MIT"
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 #
 # Obsidian plugins
 #
