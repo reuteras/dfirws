@@ -152,7 +152,7 @@ $TOOL_DEFINITIONS += @{
         @{
             Type = "command"
             Name = "`${TOOLS}\SmartDeblur\SmartDeblur.exe"
-            Expect = "SmartDeblur"
+            Expect = "PE32"
         }
     )
     Notes = "SmartDeblur is a tool for restoring defocused and blurred images. It can be used to recover details from images that are out of focus or have motion blur."
