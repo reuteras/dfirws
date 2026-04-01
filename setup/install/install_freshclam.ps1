@@ -22,6 +22,50 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\freshclam.exe")) {
 
 Write-DateLog "Freshclam update done." | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
 
+# Download additional ClamAV community databases
+Write-DateLog "Downloading additional ClamAV databases..." | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+$ProgressPreference = 'SilentlyContinue'
+$ClamDBDir = "${TOOLS}\ClamAV\db"
+
+# URLhaus (abuse.ch) - active malware distribution URLs/hashes
+try {
+    Invoke-WebRequest -Uri "https://urlhaus.abuse.ch/downloads/urlhaus.ndb" -OutFile "${ClamDBDir}\urlhaus.ndb" -UseBasicParsing
+    Write-DateLog "Downloaded urlhaus.ndb" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+} catch {
+    Write-DateLog "WARNING: Failed to download urlhaus.ndb: $_" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+}
+
+# MalwareBazaar (abuse.ch) - recent malware sample hashes
+try {
+    $MBZip = "${WSDFIR_TEMP}\bazaar_clamav.zip"
+    Invoke-WebRequest -Uri "https://bazaar.abuse.ch/export/txt/clamav/recent/" -OutFile $MBZip -UseBasicParsing
+    Expand-Archive -Path $MBZip -DestinationPath "${ClamDBDir}" -Force
+    Remove-Item $MBZip -Force
+    Write-DateLog "Downloaded MalwareBazaar ClamAV signatures" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+} catch {
+    Write-DateLog "WARNING: Failed to download MalwareBazaar signatures: $_" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+}
+
+# Sanesecurity community databases (phishing, scam, malware, foxhole)
+$SanesecurityMirror = "https://mirror.webtempest.com/clamav"
+$SanesecurityDatabases = @(
+    "phish.ndb",
+    "scam.ndb",
+    "shelter.ldb",
+    "foxhole_all.cdb",
+    "sanesecurity.ftm"
+)
+foreach ($db in $SanesecurityDatabases) {
+    try {
+        Invoke-WebRequest -Uri "${SanesecurityMirror}/${db}" -OutFile "${ClamDBDir}\${db}" -UseBasicParsing
+        Write-DateLog "Downloaded ${db}" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+    } catch {
+        Write-DateLog "WARNING: Failed to download ${db}: $_" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+    }
+}
+
+Write-DateLog "Additional database downloads complete." | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
+
 if (Test-Path -Path "${TOOLS}\Debug") {
     Read-Host "Press Enter to continue"
 }
