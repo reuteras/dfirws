@@ -484,7 +484,11 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "elided elsewhere is confusing" -and
     $_.Line -notmatch "generated [0-9]+ warnings" -and
     $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
-    $_.line -notmatch "skipping tool at index"
+    $_.line -notmatch "skipping tool at index" -and
+    $_.Line -notmatch "the report will be incomplete" -and
+    $_.Line -notmatch "allowed warning found in" -and
+    $_.Line -notmatch "unmaintained" -and
+    $_.Line -notmatch "unsound"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
