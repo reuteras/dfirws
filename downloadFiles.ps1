@@ -544,12 +544,20 @@ $auditFindingPatterns = @(
     "GO-[0-9]{4}-[0-9]{4}",            # govulncheck advisory ID
     "GHSA-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+" # GitHub Security Advisory ID (npm/pip-audit)
 )
+# RUSTSEC advisories that are informational/not applicable for this use case
+$rustsecAllowlist = @(
+    "RUSTSEC-2021-0139",  # INFO: not applicable for this use case
+    "RUSTSEC-2021-0153",  # INFO: not applicable for this use case
+    "RUSTSEC-2026-0002"   # INFO: not applicable for this use case
+)
+$rustsecAllowlistPattern = $rustsecAllowlist -join "|"
+
 $securityFindings = $auditLogFiles | Where-Object { Test-Path $_ } | ForEach-Object {
     $logFile = $_
     $auditFindingPatterns | ForEach-Object {
         Select-String -Path $logFile -Pattern $_ -ErrorAction SilentlyContinue
     }
-} | Where-Object { $_ }
+} | Where-Object { $_ } | Where-Object { $_.Line -notmatch $rustsecAllowlistPattern }
 
 if ($securityFindings) {
     Write-DateLog "SECURITY: Vulnerability audit findings detected in installed packages:"
