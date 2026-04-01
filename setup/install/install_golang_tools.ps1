@@ -22,8 +22,17 @@ Write-DateLog "Install Golang." >> "C:\log\golang.txt"
 Install-GoLang 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
 $env:PATH="${env:ProgramFiles}\Go\bin;${env:ProgramFiles}\Git\bin;${env:ProgramFiles}\Git\usr\bin;${env:PATH}"
 
+Write-DateLog "Golang: Install govulncheck." >> "C:\log\golang.txt"
+go install golang.org/x/vuln/cmd/govulncheck@latest 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
+
 Write-DateLog "Golang: Install protodump in sandbox." >> "C:\log\golang.txt"
 go install github.com/arkadiyt/protodump/cmd/protodump@latest 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
+
+Write-DateLog "Golang: govulncheck on installed binaries." >> "C:\log\golang.txt"
+Get-ChildItem "$HOME\go\bin\*.exe" | Where-Object { $_.Name -ne "govulncheck.exe" } | ForEach-Object {
+    Write-DateLog "govulncheck: $($_.Name)" >> "C:\log\golang.txt"
+    govulncheck -binary $_.FullName 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
+}
 
 $TOOL_DEFINITIONS += @{
     Name = "protodump"

@@ -32,26 +32,49 @@ Write-DateLog "Init npm." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm init -y  | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Add npm packages" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install deobfuscator" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global deobfuscator | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global --ignore-scripts deobfuscator | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install docsify" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global docsify-cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global --ignore-scripts docsify-cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install jsdom" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global jsdom | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global --ignore-scripts jsdom | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install box-js" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global box-js | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global --ignore-scripts box-js | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install Marp CLI" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global @marp-team/marp-cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global --ignore-scripts @marp-team/marp-cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install opencode-ai" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global opencode-ai | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global --ignore-scripts opencode-ai | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 if (Test-ToolIncludedSandbox -ToolName "LUMEN") {
     Set-Location "${HOME}"
     git clone --recurse-submodules https://github.com/Koifman/LUMEN.git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
     Move-Item "${HOME}\LUMEN" "${TOOLS}\Lumen" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
     Set-Location "${TOOLS}\Lumen\LUMEN"
-    npm install 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    npm install --ignore-scripts 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    Write-DateLog "npm audit (Lumen)" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    npm audit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
     npm run build 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 }
+
+# Audit globally-installed npm packages by resolving their dependency tree
+Write-DateLog "npm audit (global packages)" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+$npmAuditDir = "C:\tmp\npm-audit"
+New-Item -ItemType Directory -Force -Path $npmAuditDir | Out-Null
+@{
+    name    = "dfirws-npm-audit"
+    version = "1.0.0"
+    dependencies = [ordered]@{
+        "@marp-team/marp-cli" = "*"
+        "box-js"              = "*"
+        "deobfuscator"        = "*"
+        "docsify-cli"         = "*"
+        "jsdom"               = "*"
+        "opencode-ai"         = "*"
+    }
+} | ConvertTo-Json | Out-File -Encoding utf8 "${npmAuditDir}\package.json"
+Set-Location $npmAuditDir
+npm install --package-lock-only --ignore-scripts 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm audit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+Set-Location "${TOOLS}\node"
 
 Write-DateLog "Node installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
