@@ -516,7 +516,11 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "Adding thiserror" -and
     $_.Line -notmatch "gpg-error" -and
     $_.Line -notmatch "gpg: error reading key: Try again later" -and
-    $_.Line -notmatch "EVTX-ATTACK-SAMPLES"
+    $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
+    $_.Line -notmatch "error\[vulnerability\]" -and
+    $_.Line -notmatch "error\[unmaintained\]" -and
+    $_.Line -notmatch "error\[unsound\]" -and
+    $_.Line -notmatch "error\[notice\]"
 }
 
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
@@ -527,8 +531,36 @@ $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Whe
     $_.Line -notmatch "EVTX-ATTACK-SAMPLES"
 }
 
+# Check for security audit findings (npm audit, govulncheck, pip-audit, cargo audit)
+$auditLogFiles = @(".\log\npm.txt", ".\log\golang.txt", ".\log\python.txt", ".\log\rust.txt")
+$auditFindingPatterns = @(
+    "found [1-9][0-9]* vulnerabilit",   # npm audit: "found 3 vulnerabilities"
+    "Vulnerability #[0-9]",             # govulncheck: "Vulnerability #1: GO-2024-..."
+    "Found [1-9][0-9]* known vulnerabilit", # pip-audit: "Found 2 known vulnerabilities"
+    "error\[vulnerability\]",           # cargo audit: "error[vulnerability]: ..."
+    "error\[unmaintained\]",            # cargo audit: unmaintained crate advisory
+    "error\[unsound\]",                 # cargo audit: unsound code advisory
+    "RUSTSEC-[0-9]",                    # cargo audit advisory ID
+    "GO-[0-9]{4}-[0-9]{4}",            # govulncheck advisory ID
+    "GHSA-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+" # GitHub Security Advisory ID (npm/pip-audit)
+)
+$securityFindings = $auditLogFiles | Where-Object { Test-Path $_ } | ForEach-Object {
+    $logFile = $_
+    $auditFindingPatterns | ForEach-Object {
+        Select-String -Path $logFile -Pattern $_ -ErrorAction SilentlyContinue
+    }
+} | Where-Object { $_ }
+
+if ($securityFindings) {
+    Write-DateLog "SECURITY: Vulnerability audit findings detected in installed packages:"
+    $securityFindings | ForEach-Object {
+        Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())"
+    }
+    Write-DateLog "SECURITY: Review the audit log files for full details and consider updating affected packages."
+}
+
 if ($warnings -or $errors -or $failed) {
     Write-DateLog "Errors or warnings were found in log files. Please check the log files for details."
-} else {
+} elseif (-not $securityFindings) {
     Write-DateLog "Downloads and preparations done."
 }

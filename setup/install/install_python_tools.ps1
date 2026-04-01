@@ -3896,6 +3896,16 @@ $TOOL_DEFINITIONS += @{
 
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "python"
 
+# Audit Python packages installed via uv tool (each tool has an isolated venv under UV_TOOL_DIR)
+Write-DateLog "pip-audit: auditing uv tool environments." >> "C:\log\python.txt"
+Get-ChildItem "${env:UV_TOOL_DIR}" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+    Write-DateLog "pip-audit: $($_.Name)" >> "C:\log\python.txt"
+    uvx pip-audit --path $_.FullName 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+}
+# Also audit the shared default venv
+Write-DateLog "pip-audit: auditing venv default." >> "C:\log\python.txt"
+uvx pip-audit --path "C:\venv\default" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+
 if (Test-Path -Path "${TOOLS}\Debug") {
     Read-Host "Press Enter to continue"
 }
