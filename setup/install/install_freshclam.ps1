@@ -41,7 +41,6 @@ $SanesecurityDatabases = @(
     "phish.ndb",
     "scam.ndb",
     "shelter.ldb",
-    "foxhole_all.cdb",
     "sanesecurity.ftm"
 )
 foreach ($db in $SanesecurityDatabases) {
