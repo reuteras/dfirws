@@ -23,6 +23,10 @@
     This will download and update ClamAV databases with Freshclam.
 
 .EXAMPLE
+    .\downloadFiles.ps1 -ClamScan
+    This will run a ClamAV scan of installed tools in an isolated sandbox.
+
+.EXAMPLE
     .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
     This will download all files needed for DFIRWS, update enrichments and ClamAV databases with Freshclam.
 
@@ -54,6 +58,8 @@ param(
     [Switch]$DebugDownloads,
     [Parameter(HelpMessage = "Update enrichment.")]
     [Switch]$Enrichment,
+    [Parameter(HelpMessage = "Run ClamAV scan of installed tools in sandbox.")]
+    [Switch]$ClamScan,
     [Parameter(HelpMessage = "Update ClamAV databases with Freshclam.")]
     [Switch]$Freshclam,
     [Parameter(HelpMessage = "Update git repositories.")]
@@ -227,7 +233,7 @@ if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($ClamScan.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } elseif ($DistributionProfile -ne "") {
     Write-DateLog "Download tools for dfirws using profile: $DistributionProfile"
@@ -460,6 +466,13 @@ if ($Verify.IsPresent) {
     Write-DateLog "Verify that tools are available."
     .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download | Out-Null
     Write-DateLog "Verify done."
+}
+
+# Run ClamAV scan of installed tools in sandbox
+if ($ClamScan.IsPresent) {
+    Write-DateLog "Run ClamAV scan of installed tools in sandbox."
+    .\resources\download\clamscan.ps1 | Out-Null
+    Write-DateLog "ClamAV scan done."
 }
 
 # Check for errors and warnings in log files
