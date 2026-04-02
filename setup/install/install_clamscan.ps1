@@ -16,37 +16,60 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\clamscan.exe")) {
 }
 
 $ClamDB = "${TOOLS}\ClamAV\db"
+$ClamscanExe = 'C:\Program Files\ClamAV\clamscan.exe'
+$ClamscanArgs = @(
+    '--recursive',
+    '--infected',
+    '--suppress-ok-results',
+    "--database=$ClamDB",
+    '--heuristic-alerts=yes',
+    '--heuristic-scan-precedence=yes',
+    '--alert-broken=yes',
+    '--alert-encrypted-archive=yes',
+    '--alert-macros=yes',
+    '--alert-exceeds-max=yes',
+    '--bytecode=yes',
+    '--exclude-dir=^C:\\Windows',
+    '--exclude-dir=^C:\\Program Files\\Windows Defender',
+    '--exclude-dir=^C:\\ProgramData\\Microsoft\\Windows Defender',
+    '--exclude-dir=^C:\\Tools\\ClamAV',
+    '--exclude-dir=__pycache__',
+    '--exclude=\.lnk$',
+    '--exclude=\.url$',
+    '--exclude=\.mui$',
+    '--exclude=\.cat$',
+    '--exclude=\.manifest$',
+    '--exclude=\.pyc$',
+    '--max-filesize=200M',
+    '--max-scansize=400M'
+)
+
+# Run one clamscan job per target directory in parallel to use multiple cores
+Write-DateLog "Starting parallel ClamAV scan of C:\Tools, C:\venv and C:\git..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+
+$ScanTargets = @("C:\Tools", "C:\venv", "C:\git")
+$Jobs = foreach ($Target in $ScanTargets) {
+    $TargetName = Split-Path $Target -Leaf
+    $TargetLog  = "C:\log\clamav-scan-${TargetName}.log"
+    Start-Job -Name "clamav-${TargetName}" -ScriptBlock {
+        param($Exe, $Args, $Target, $Log)
+        & $Exe @Args "--log=$Log" $Target 2>&1
+    } -ArgumentList $ClamscanExe, $ClamscanArgs, $Target, $TargetLog
+}
+
+# Wait for all jobs and stream their output to the progress log
+$Jobs | Wait-Job | Receive-Job | ForEach-Object{ "$_" } | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+$Jobs | Remove-Job
+
+# Merge per-target logs into one combined log
 $ScanLog = "C:\log\clamav-scan.log"
-
-Write-DateLog "Starting ClamAV scan of C:\Tools, C:\venv and C:\git..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
-
-& 'C:\Program Files\ClamAV\clamscan.exe' `
-    --recursive `
-    --infected `
-    --suppress-ok-results `
-    --database=$ClamDB `
-    --heuristic-alerts=yes `
-    --heuristic-scan-precedence=yes `
-    --alert-broken=yes `
-    --alert-encrypted-archive=yes `
-    --alert-macros=yes `
-    --alert-exceeds-max=yes `
-    --bytecode=yes `
-    "--exclude-dir=^C:\\Windows" `
-    "--exclude-dir=^C:\\Program Files\\Windows Defender" `
-    "--exclude-dir=^C:\\ProgramData\\Microsoft\\Windows Defender" `
-    "--exclude-dir=^C:\\Tools\\ClamAV" `
-    "--exclude-dir=__pycache__" `
-    "--exclude=\.lnk$" `
-    "--exclude=\.url$" `
-    "--exclude=\.mui$" `
-    "--exclude=\.cat$" `
-    "--exclude=\.manifest$" `
-    "--exclude=\.pyc$" `
-    --max-filesize=200M `
-    --max-scansize=400M `
-    --log=$ScanLog `
-    "C:\Tools" "C:\venv" "C:\git" 2>&1 | ForEach-Object{ "$_" } | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+foreach ($Target in $ScanTargets) {
+    $TargetName = Split-Path $Target -Leaf
+    $TargetLog  = "C:\log\clamav-scan-${TargetName}.log"
+    if (Test-Path $TargetLog) {
+        Get-Content $TargetLog | Add-Content $ScanLog
+    }
+}
 
 Write-DateLog "ClamAV scan complete. Results saved to $ScanLog" | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
 
