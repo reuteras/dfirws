@@ -43,7 +43,6 @@ $repourls = `
     "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mandiant/gostringungarbler.git", `
     "https://github.com/mandiant/speakeasy.git", `
-    "https://github.com/mari-mari/CapaExplorer.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
     "https://github.com/mattifestation/CimSweep.git", `
     "https://github.com/montysecurity/malware-bazaar-advanced-search.git", `
@@ -155,7 +154,7 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
-    Notes = "SmartDeblur is a tool for restoring defocused and blurred images. It can be used to recover details from images that are out of focus or have motion blur."
+    Notes = "SmartDeblur is a tool for restoring unfocused and blurred images. It can be used to recover details from images that are out of focus or have motion blur."
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -954,27 +953,6 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Speakeasy has its TOOL_DEFINITIONS in install_python_tools.ps1.
-
-$TOOL_DEFINITIONS += @{
-    Name = "CapaExplorer"
-    Category = "Reverse Engineering"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("reverse-engineering", "malware-analysis", "visualization", "plugins")
-    Notes = "Capa analysis importer for Ghidra."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/mari-mari/CapaExplorer"
-    Vendor = "mari-mari"
-    License = "MIT License"
-    LicenseUrl = ""
-    PythonVersion = ""
-}
 
 $TOOL_DEFINITIONS += @{
     Name = "ese-analyst"

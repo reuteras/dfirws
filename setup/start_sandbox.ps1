@@ -538,11 +538,10 @@ $ADD_TO_PATH = @("${HOME}\Go\bin"
     "${TOOLS}\Zimmerman\SDBExplorer"
     "${TOOLS}\Zimmerman\SQLECmd"
     "${TOOLS}\Zimmerman\XWFIM"
-	"${TOOLS}\zircolite"
-	"${TOOLS}\zircolite\bin"
 	"${TOOLS}\zstd"
 	"${TOOLS}\YAMAGoya"
 	"${VENV}\bin"
+    "${VENV}\zircolite\Scripts"
 	"${HOME}\Documents\tools\utils")
 
 $ADD_TO_PATH_STRING = $ADD_TO_PATH -join ";"

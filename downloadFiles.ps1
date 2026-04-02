@@ -433,9 +433,9 @@ Copy-Item ".\setup\utils\PowerSiem.ps1" ".\mount\Tools\bin\" -Force | Out-Null
 if (Test-Path ".\mount\Tools\Ghidra\") {
     foreach ($directory in (Get-ChildItem ".\mount\Tools\Ghidra\" -Directory).Name | findstr PUBLIC) {
         if (Test-Path ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\") {
-            Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
+            Copy-Item ".\downloads\capa_explorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Python\ghidra_scripts" -Force
         } elseif (Test-Path ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Jython\") {
-            Copy-Item ".\mount\git\CapaExplorer\capaexplorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Jython\ghidra_scripts" -Force
+            Copy-Item ".\downloads\capa_explorer.py" ".\mount\Tools\Ghidra\${directory}\Ghidra\Features\Jython\ghidra_scripts" -Force
         }
     }
 }

@@ -230,6 +230,7 @@ uv pip install -U `
     "flow.record", `
     "graphviz", `
     "geoip2", `
+    "flare-capa[ghidra]", `
     "javaobj-py3", `
     "keystone-engine", `
     "lief", `
@@ -427,9 +428,46 @@ Set-Location "C:\venv\zircolite\zircolite"
 uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 $env:PYTHONWARNINGS = "ignore"
 python zircolite.py -U 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-Copy-Item "C:\venv\zircolite\zircolite\zircolite.py" "C:\venv\zircolite\Scripts"
+$lines = Get-Content "zircolite.py"
+$lines[0] = "#!C:\venv\zircolite\Scripts\python.exe"
+$lines | Set-Content "zircolite.py"
 deactivate
 Write-DateLog "Python venv zircolite done." >> "C:\log\python.txt"
+
+$TOOL_DEFINITIONS += @{
+    Name = "Zircolite"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command zircolite.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "zircolite"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".evtx", ".json")
+    Tags = @("log-analysis", "sigma", "detection", "incident-response")
+    Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
 
 #
 # Venvs that needs Visual Studio Build Tools

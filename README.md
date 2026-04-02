@@ -234,7 +234,6 @@ downloadFiles.ps1
 │   ├── README.md                   →  downloads\
 │   ├── resources\images\dfirws.jpg →  downloads\
 │   ├── setup\utils\PowerSiem.ps1   →  mount\Tools\bin\
-│   ├── CapaExplorer capaexplorer.py →  mount\Tools\Ghidra\*\ghidra_scripts\
 │   └── downloads\done.txt           (timestamp, read by bginfo in sandbox)
 │
 ├─[optional verify]  (-Verify)
@@ -499,7 +498,7 @@ To see available options run **Get-Help .\downloadFiles.ps1**.
 - Look at adding more configuration of the tools in the sandbox, e.g. disable some first usage popups and other things that takes time to click through when you start the apps in the sandbox since the sandbox is reset to a clean state on every start.
 - Investigate adding a script to update the tools in the VM. Currently you have to delete the VM and create a new one to get updated tools.
 - Describe the offline use case and how to sync tools and enrichment data to an offline environment and to clients in that environment.
-- Build more functions to add local tools and data that might have restricted licences etc.
+- Build more functions to add local tools and data that might have restricted licenses etc.
 
   [wsa]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-overview
   [wsc]: https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file

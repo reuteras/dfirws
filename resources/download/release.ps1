@@ -4021,52 +4021,6 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# Zircolite
-$status = Get-GitHubRelease -repo "wagga40/zircolite" -path "${SETUP_PATH}\zircolite.7z" -match "zircolite" -check "7-zip archive data"
-if ($status) {
-    if (Test-Path "${TOOLS}\zircolite") {
-        Remove-Item "${TOOLS}\zircolite" -Recurse -Force
-    }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\zircolite.7z" -o"${TOOLS}" | Out-Null
-    Move-Item ${TOOLS}\zircolite_* ${TOOLS}\zircolite
-    Move-Item ${TOOLS}\zircolite\zircolite_*.exe ${TOOLS}\zircolite\zircolite.exe
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Zircolite"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command zircolite.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "zircolite"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".evtx", ".json")
-    Tags = @("log-analysis", "sigma", "detection", "incident-response")
-    Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
 # imhex
 $status = Get-GitHubRelease -repo "WerWolv/ImHex" -path "${SETUP_PATH}\imhex.zip" -match "Portable-NoGPU-x86_64.zip" -check "Zip archive data"
 if ($status) {

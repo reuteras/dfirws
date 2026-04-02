@@ -294,7 +294,23 @@ $TOOL_DEFINITIONS += @{
     License = "Apache-2.0"
     LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
     Category = "Reverse Engineering"
-    Shortcuts = @()
+    # Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "${TOOLS}\ghidra\${VERSION}\ghidraRun.bat"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\Ghidra.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ghidraRun.bat"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\pyGhidra.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pyghidra -g `$((Get-ChildItem C:\Tools\ghidra\*PUBLIC).FullName)"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
     InstallVerifyCommand = ""
     Verify = @(
         @{
