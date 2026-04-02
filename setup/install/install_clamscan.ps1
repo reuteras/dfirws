@@ -16,7 +16,7 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\clamscan.exe")) {
 }
 
 $ClamDB = "${TOOLS}\ClamAV\db"
-$ScanLog = "C:\Users\WDAGUtilityAccount\Desktop\readwrite\clamav-scan.log"
+$ScanLog = "C:\log\clamav-scan.log"
 
 Write-DateLog "Starting ClamAV scan of C:\Tools, C:\venv and C:\git..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
 
@@ -25,7 +25,6 @@ Write-DateLog "Starting ClamAV scan of C:\Tools, C:\venv and C:\git..." | Tee-Ob
     --infected `
     --suppress-ok-results `
     --database=$ClamDB `
-    --multiscan `
     --heuristic-alerts=yes `
     --heuristic-scan-precedence=yes `
     --alert-broken=yes `
