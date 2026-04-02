@@ -27,6 +27,36 @@ $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
 # Install Visual Studio Build Tools
 # $HAVE_VISUAL_STUDIO_BUILD_TOOLS = $false
 
+# Supply chain security audits (pip-audit, npm audit, govulncheck, cargo audit)
+# Set to $false to skip all supply chain security audit checks during installation
+$SUPPLY_CHAIN_SECURITY_AUDIT = $true
+
+# Accepted/allowlisted advisories per ecosystem.
+# Findings matching these IDs are suppressed in the post-build summary report.
+# Add advisory IDs that are known informational or not applicable to your use case.
+
+# cargo audit (Rust) - RUSTSEC advisory IDs to ignore
+$RUSTSEC_ALLOWLIST = @(
+    "RUSTSEC-2021-0139",  # INFO: ansi_term unmaintained - not applicable for this use case
+    "RUSTSEC-2021-0153",  # INFO: atty potential unaligned read - not applicable for this use case
+    "RUSTSEC-2026-0002"   # INFO: not applicable for this use case
+)
+
+# npm audit (Node.js) - GitHub Security Advisory IDs (GHSA-*) or package names to ignore
+$NPM_AUDIT_ALLOWLIST = @(
+    # Example: "GHSA-1234-abcd-5678"
+)
+
+# pip-audit (Python) - GHSA-* or PYSEC-* advisory IDs to ignore
+$PIP_AUDIT_ALLOWLIST = @(
+    # Example: "GHSA-1234-abcd-5678"
+)
+
+# govulncheck (Go) - GO-* advisory IDs to ignore
+$GO_VULN_ALLOWLIST = @(
+    # Example: "GO-2024-1234"
+)
+
 $null = $IPINFO_API_KEY
 $null = $BURP_SUITE_EDITION
 $null = $GIT_FILE
@@ -34,3 +64,8 @@ $null = $GITHUB_USERNAME
 $null = $GITHUB_TOKEN
 $null = $MAXMIND_LICENSE_KEY
 $null = $HAVE_VISUAL_STUDIO_BUILD_TOOLS
+$null = $SUPPLY_CHAIN_SECURITY_AUDIT
+$null = $RUSTSEC_ALLOWLIST
+$null = $NPM_AUDIT_ALLOWLIST
+$null = $PIP_AUDIT_ALLOWLIST
+$null = $GO_VULN_ALLOWLIST
