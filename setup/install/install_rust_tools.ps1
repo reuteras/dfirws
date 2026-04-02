@@ -55,14 +55,18 @@ Set-Location "C:\tmp\SSHniff\sshniff"
 cargo build --release 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 Copy-Item ".\target\release\sshniff.exe" "C:\cargo\bin\sshniff.exe"
 
-Write-Output "Rust: Install cargo-audit."
-Write-DateLog "Rust: Install cargo-audit." >> "C:\log\rust.txt"
-cargo install --root "C:\cargo" cargo-audit 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
+    Write-Output "Rust: Install cargo-audit."
+    Write-DateLog "Rust: Install cargo-audit." >> "C:\log\rust.txt"
+    cargo install --root "C:\cargo" cargo-audit 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
-Write-DateLog "Rust: cargo audit on installed binaries." >> "C:\log\rust.txt"
-Get-ChildItem "C:\cargo\bin\*.exe" | Where-Object { $_.Name -notin @("cargo-audit.exe") } | ForEach-Object {
-    Write-DateLog "cargo audit bin: $($_.Name)" >> "C:\log\rust.txt"
-    cargo audit bin $_.FullName 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+    Write-DateLog "Rust: cargo audit on installed binaries." >> "C:\log\rust.txt"
+    Get-ChildItem "C:\cargo\bin\*.exe" | Where-Object { $_.Name -notin @("cargo-audit.exe") } | ForEach-Object {
+        Write-DateLog "cargo audit bin: $($_.Name)" >> "C:\log\rust.txt"
+        cargo audit bin $_.FullName 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+    }
+} else {
+    Write-DateLog "Rust: Supply chain security audit disabled - skipping cargo-audit." >> "C:\log\rust.txt"
 }
 
 Write-DateLog "Rust: Done installing Rust based tools in sandbox." >> "C:\log\rust.txt"
