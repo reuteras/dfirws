@@ -23,6 +23,10 @@
     This will download and update ClamAV databases with Freshclam.
 
 .EXAMPLE
+    .\downloadFiles.ps1 -SkipSupplyChainAudit
+    This will download all files needed for DFIRWS but skip supply chain security audit checks (pip-audit, npm audit, govulncheck, cargo audit).
+
+.EXAMPLE
     .\downloadFiles.ps1 -ClamScan
     This will run a ClamAV scan of installed tools in an isolated sandbox.
 
@@ -95,7 +99,9 @@ param(
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
     [Switch]$Zimmerman,
     [Parameter(HelpMessage = "Allow curl alias.")]
-    [Switch]$AllowCurlAlias
+    [Switch]$AllowCurlAlias,
+    [Parameter(HelpMessage = "Skip supply chain security audit checks (pip-audit, npm audit, govulncheck, cargo audit).")]
+    [Switch]$SkipSupplyChainAudit
     )
 
 if (Test-Path ".\resources\download\common.ps1") {
@@ -277,6 +283,8 @@ if (-not (Test-Path variable:RUSTSEC_ALLOWLIST))           { $RUSTSEC_ALLOWLIST 
 if (-not (Test-Path variable:NPM_AUDIT_ALLOWLIST))         { $NPM_AUDIT_ALLOWLIST = @() }
 if (-not (Test-Path variable:PIP_AUDIT_ALLOWLIST))         { $PIP_AUDIT_ALLOWLIST = @() }
 if (-not (Test-Path variable:GO_VULN_ALLOWLIST))           { $GO_VULN_ALLOWLIST = @() }
+# CLI flag overrides config setting
+if ($SkipSupplyChainAudit.IsPresent) { $SUPPLY_CHAIN_SECURITY_AUDIT = $false }
 
 # Write profile settings for sandbox scripts to read
 $rustsecAllowlistFormatted  = ($RUSTSEC_ALLOWLIST  | ForEach-Object { "`"$_`"" }) -join ", "
