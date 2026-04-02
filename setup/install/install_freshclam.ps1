@@ -35,17 +35,6 @@ try {
     Write-DateLog "WARNING: Failed to download urlhaus.ndb: $_" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
 }
 
-# MalwareBazaar (abuse.ch) - recent malware sample hashes
-try {
-    $MBZip = "${WSDFIR_TEMP}\bazaar_clamav.zip"
-    Invoke-WebRequest -Uri "https://bazaar.abuse.ch/export/txt/clamav/recent/" -OutFile $MBZip -UseBasicParsing
-    Expand-Archive -Path $MBZip -DestinationPath "${ClamDBDir}" -Force
-    Remove-Item $MBZip -Force
-    Write-DateLog "Downloaded MalwareBazaar ClamAV signatures" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
-} catch {
-    Write-DateLog "WARNING: Failed to download MalwareBazaar signatures: $_" | Tee-Object -FilePath "C:\log\freshclam.txt" -Append
-}
-
 # Sanesecurity community databases (phishing, scam, malware, foxhole)
 $SanesecurityMirror = "https://mirror.webtempest.com/clamav"
 $SanesecurityDatabases = @(
