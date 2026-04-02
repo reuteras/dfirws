@@ -37,8 +37,13 @@ foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${HOME}\Documents\WindowsPowerShell"
     }
 }
 
-# Load profile exclude list if available (written by downloadFiles.ps1)
+# Load profile settings if available (written by downloadFiles.ps1)
 $DFIRWS_EXCLUDE_TOOLS = @()
+$SUPPLY_CHAIN_SECURITY_AUDIT = $true
+$RUSTSEC_ALLOWLIST  = @()
+$NPM_AUDIT_ALLOWLIST = @()
+$PIP_AUDIT_ALLOWLIST = @()
+$GO_VULN_ALLOWLIST   = @()
 if (Test-Path "${TOOLS}\dfirws-profile.ps1") {
     . "${TOOLS}\dfirws-profile.ps1"
 }

@@ -50,31 +50,37 @@ if (Test-ToolIncludedSandbox -ToolName "LUMEN") {
     Move-Item "${HOME}\LUMEN" "${TOOLS}\Lumen" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
     Set-Location "${TOOLS}\Lumen\LUMEN"
     npm install --ignore-scripts 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-    Write-DateLog "npm audit (Lumen)" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-    npm audit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
+        Write-DateLog "npm audit (Lumen)" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+        npm audit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    }
     npm run build 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 }
 
-# Audit globally-installed npm packages by resolving their dependency tree
-Write-DateLog "npm audit (global packages)" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-$npmAuditDir = "C:\tmp\npm-audit"
-New-Item -ItemType Directory -Force -Path $npmAuditDir | Out-Null
-@{
-    name    = "dfirws-npm-audit"
-    version = "1.0.0"
-    dependencies = [ordered]@{
-        "@marp-team/marp-cli" = "*"
-        "box-js"              = "*"
-        "deobfuscator"        = "*"
-        "docsify-cli"         = "*"
-        "jsdom"               = "*"
-        "opencode-ai"         = "*"
-    }
-} | ConvertTo-Json | Out-File -Encoding utf8 "${npmAuditDir}\package.json"
-Set-Location $npmAuditDir
-npm install --package-lock-only --ignore-scripts 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm audit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-Set-Location "${TOOLS}\node"
+if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
+    # Audit globally-installed npm packages by resolving their dependency tree
+    Write-DateLog "npm audit (global packages)" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    $npmAuditDir = "C:\tmp\npm-audit"
+    New-Item -ItemType Directory -Force -Path $npmAuditDir | Out-Null
+    @{
+        name    = "dfirws-npm-audit"
+        version = "1.0.0"
+        dependencies = [ordered]@{
+            "@marp-team/marp-cli" = "*"
+            "box-js"              = "*"
+            "deobfuscator"        = "*"
+            "docsify-cli"         = "*"
+            "jsdom"               = "*"
+            "opencode-ai"         = "*"
+        }
+    } | ConvertTo-Json | Out-File -Encoding utf8 "${npmAuditDir}\package.json"
+    Set-Location $npmAuditDir
+    npm install --package-lock-only --ignore-scripts 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    npm audit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+    Set-Location "${TOOLS}\node"
+} else {
+    Write-DateLog "npm: Supply chain security audit disabled - skipping npm audit." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+}
 
 Write-DateLog "Node installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
