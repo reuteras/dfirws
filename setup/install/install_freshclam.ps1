@@ -38,7 +38,6 @@ try {
 # Sanesecurity community databases (phishing, scam, malware, foxhole)
 $SanesecurityMirror = "https://mirror.webtempest.com/clamav"
 $SanesecurityDatabases = @(
-    "phish.ndb",
     "scam.ndb",
     "shelter.ldb",
     "sanesecurity.ftm"
