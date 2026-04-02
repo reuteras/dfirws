@@ -5,6 +5,7 @@
         'PSReviewUnusedParameter',
         'PSUseApprovedVerbs',
         'PSUseBOMForUnicodeEncodedFile',
+        'PSUseDeclaredVarsMoreThanAssignments',
         'PSUseShouldProcessForStateChangingFunctions',
         'PSUseSingularNouns'
     )
