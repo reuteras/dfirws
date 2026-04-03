@@ -44,6 +44,11 @@ $RUSTSEC_ALLOWLIST  = @()
 $NPM_AUDIT_ALLOWLIST = @()
 $PIP_AUDIT_ALLOWLIST = @()
 $GO_VULN_ALLOWLIST   = @()
+$null="${SUPPLY_CHAIN_SECURITY_AUDIT}"
+$null="${RUSTSEC_ALLOWLIST}"
+$null="${NPM_AUDIT_ALLOWLIST}"
+$null="${PIP_AUDIT_ALLOWLIST}"
+$null="${GO_VULN_ALLOWLIST}"
 if (Test-Path "${TOOLS}\dfirws-profile.ps1") {
     . "${TOOLS}\dfirws-profile.ps1"
 }
