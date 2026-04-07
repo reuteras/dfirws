@@ -19,6 +19,11 @@
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
+      <HostFolder>__SANDBOX__\enrichment</HostFolder>
+      <SandboxFolder>C:\enrichment</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
       <HostFolder>__SANDBOX__\mount\git</HostFolder>
       <SandboxFolder>C:\git</SandboxFolder>
       <ReadOnly>true</ReadOnly>
