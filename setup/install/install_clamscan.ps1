@@ -13,6 +13,8 @@ New-Item -ItemType Directory "${WSDFIR_TEMP}" 2>&1 | Out-Null
 Write-Output "Get-Content C:\log\clamscan.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"
 Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Out-File -FilePath "$HOME\Desktop\Progress.cmd" -Encoding "ascii"
 
+Start-Process -Wait -PassThru "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"
+
 # Prepare YARA parameters now, but launch after Install-ClamAV provides vcruntime140.dll
 $yaraProc = $null
 $YaraScanLog = "C:\log\yara-scan.log"
