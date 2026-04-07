@@ -53,7 +53,7 @@ if (Test-Path -Path "C:\log\run_yarascan") {
                 -ArgumentList $yaraArgs `
                 -RedirectStandardOutput $YaraScanLog `
                 -RedirectStandardError $YaraScanErrLog `
-                -PassThru -NoNewWindow
+                -PassThru -WindowStyle Hidden
         }
     }
 }
