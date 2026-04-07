@@ -38,7 +38,6 @@ foreach ($ruleset in @("core", "extended", "full")) {
 }
 
 if ($YaraRules.Count -eq 0) {
-    # Fall back to any .yar file found
     $YaraRules = Get-ChildItem -Path $YaraDir -Filter "*.yar" -Recurse -ErrorAction SilentlyContinue
 }
 
@@ -50,7 +49,21 @@ if ($YaraRules.Count -eq 0) {
 
 $ScanTargets = @("C:\Tools", "C:\venv", "C:\git")
 
-Write-DateLog "Starting YARA scan of C:\Tools, C:\venv and C:\git..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+# Verify scan targets exist
+foreach ($Target in $ScanTargets) {
+    if (-not (Test-Path -Path $Target)) {
+        Write-DateLog "WARNING: Scan target not found, skipping: ${Target}" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+    }
+}
+$ScanTargets = $ScanTargets | Where-Object { Test-Path -Path $_ }
+
+if ($ScanTargets.Count -eq 0) {
+    Write-DateLog "ERROR: No scan targets available." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+    Write-Output "" > "C:\log\yarascan_done"
+    exit 1
+}
+
+Write-DateLog "Starting YARA scan of $($ScanTargets -join ', ')..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 Write-DateLog "Using YARA rules: $($YaraRules[0].FullName)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
 "" | Out-File -FilePath $ScanLog -Encoding utf8
@@ -58,12 +71,12 @@ Write-DateLog "Using YARA rules: $($YaraRules[0].FullName)" | Tee-Object -FilePa
 foreach ($RuleFile in $YaraRules) {
     Write-DateLog "Scanning with ruleset: $($RuleFile.Name)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
     foreach ($Target in $ScanTargets) {
-        & $YaraExe `
-            --recursive `
-            --print-strings `
-            --no-warnings `
-            $RuleFile.FullName `
-            $Target 2>&1 | ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+        Write-DateLog "Scanning $Target ..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+        & $YaraExe --recursive $RuleFile.FullName $Target 2>&1 |
+            ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+        if ($LASTEXITCODE -ne 0) {
+            Write-DateLog "WARNING: yara.exe exited with code ${LASTEXITCODE} for target ${Target}" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+        }
     }
 }
 
