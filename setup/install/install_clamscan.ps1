@@ -64,39 +64,53 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\clamscan.exe")) {
 }
 
 $ClamDB = "${TOOLS}\ClamAV\db"
-$ScanLog = "C:\log\clamav-scan.log"
+$ClamExe = "C:\Program Files\ClamAV\clamscan.exe"
+$ClamBaseArgs = @(
+    "--recursive",
+    "--infected",
+    "--suppress-ok-results",
+    "--database=$ClamDB",
+    "--heuristic-alerts=yes",
+    "--heuristic-scan-precedence=yes",
+    "--alert-broken=yes",
+    "--alert-encrypted-archive=yes",
+    "--alert-macros=yes",
+    "--alert-exceeds-max=yes",
+    "--bytecode=yes",
+    "--exclude-dir=^C:\\Windows",
+    "--exclude-dir=^C:\\Program Files\\Windows Defender",
+    "--exclude-dir=^C:\\ProgramData\\Microsoft\\Windows Defender",
+    "--exclude-dir=^C:\\Tools\\ClamAV",
+    "--exclude-dir=__pycache__",
+    "--exclude=\.lnk$",
+    "--exclude=\.url$",
+    "--exclude=\.mui$",
+    "--exclude=\.cat$",
+    "--exclude=\.manifest$",
+    "--exclude=\.pyc$",
+    "--max-filesize=200M",
+    "--max-scansize=400M"
+)
 
-Write-DateLog "Starting ClamAV scan of C:\Tools, C:\venv and C:\git..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+# Start one clamscan process per target in parallel
+$clamProcs = @()
+foreach ($target in @("C:\Tools", "C:\venv", "C:\git") | Where-Object { Test-Path -Path $_ }) {
+    $label = Split-Path $target -Leaf
+    $targetLog = "C:\log\clamav-scan-${label}.log"
+    $args = $ClamBaseArgs + @("--log=$targetLog", $target)
+    Write-DateLog "Starting ClamAV scan of $target..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+    $proc = Start-Process -FilePath $ClamExe -ArgumentList $args -PassThru -WindowStyle Hidden
+    $clamProcs += [PSCustomObject]@{ Proc = $proc; Target = $target; Log = $targetLog }
+}
 
-& 'C:\Program Files\ClamAV\clamscan.exe' `
-    --recursive `
-    --infected `
-    --suppress-ok-results `
-    --database=$ClamDB `
-    --heuristic-alerts=yes `
-    --heuristic-scan-precedence=yes `
-    --alert-broken=yes `
-    --alert-encrypted-archive=yes `
-    --alert-macros=yes `
-    --alert-exceeds-max=yes `
-    --bytecode=yes `
-    "--exclude-dir=^C:\\Windows" `
-    "--exclude-dir=^C:\\Program Files\\Windows Defender" `
-    "--exclude-dir=^C:\\ProgramData\\Microsoft\\Windows Defender" `
-    "--exclude-dir=^C:\\Tools\\ClamAV" `
-    "--exclude-dir=__pycache__" `
-    "--exclude=\.lnk$" `
-    "--exclude=\.url$" `
-    "--exclude=\.mui$" `
-    "--exclude=\.cat$" `
-    "--exclude=\.manifest$" `
-    "--exclude=\.pyc$" `
-    --max-filesize=200M `
-    --max-scansize=400M `
-    --log=$ScanLog `
-    "C:\Tools" "C:\venv" "C:\git" 2>&1 | ForEach-Object{ "$_" } | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+# Wait for all three scans to finish
+Write-DateLog "Waiting for all ClamAV scans to complete..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+foreach ($item in $clamProcs) {
+    $item.Proc.WaitForExit()
+    Write-DateLog "ClamAV scan of $($item.Target) complete (exit $($item.Proc.ExitCode)). Results in $($item.Log)" | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+}
 
-Write-DateLog "ClamAV scan complete. Results saved to $ScanLog" | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+Write-DateLog "All ClamAV scans complete." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
 
 # Wait for YARA process to finish
 if ($null -ne $yaraProc) {
