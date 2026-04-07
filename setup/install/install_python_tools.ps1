@@ -432,6 +432,7 @@ $lines = Get-Content "zircolite.py"
 $lines[0] = "#!C:\venv\zircolite\Scripts\python.exe"
 $lines | Set-Content "zircolite.py"
 deactivate
+Set-Content "C:\venv\zircolite\Scripts\python.exe C:\venv\zircolite\zircolite\zircolite.py `$args" -Encoding Ascii -Path "C:\venv\bin\zircolite.ps1"
 Write-DateLog "Python venv zircolite done." >> "C:\log\python.txt"
 
 $TOOL_DEFINITIONS += @{
@@ -441,7 +442,7 @@ $TOOL_DEFINITIONS += @{
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
             Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command zircolite.py -h"
+            Args     = "`${CLI_TOOL_ARGS} -command zircolite.ps1 -h"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }
@@ -457,7 +458,7 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".evtx", ".json")
     Tags = @("log-analysis", "sigma", "detection", "incident-response")
     Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
-    Tips = ""
+    Tips = "Use zircolite.ps1 to run the tool, as it ensures the correct Python environment is used."
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
