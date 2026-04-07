@@ -48,12 +48,16 @@ if (Test-Path -Path "C:\log\run_yarascan") {
         } else {
             $RuleFile = $YaraRules[0]
             Write-DateLog "Starting YARA scan in background (ruleset: $($RuleFile.Name), targets: $($ScanTargets -join ', '))..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
-            $yaraArgs = @("--recursive", $RuleFile.FullName) + $ScanTargets
-            $yaraProc = Start-Process -FilePath $YaraExe `
-                -ArgumentList $yaraArgs `
-                -RedirectStandardOutput $YaraScanLog `
-                -RedirectStandardError $YaraScanErrLog `
-                -PassThru -WindowStyle Hidden
+
+            # Use a batch file for reliable output capture — PowerShell's
+            # Start-Process -RedirectStandardOutput silently drops output in this context.
+            $targetList = ($ScanTargets | ForEach-Object { "`"$_`"" }) -join " "
+            $batchFile = "${WSDFIR_TEMP}\run_yarascan.bat"
+            @(
+                "@echo off",
+                "`"$YaraExe`" --recursive `"$($RuleFile.FullName)`" $targetList > `"$YaraScanLog`" 2> `"$YaraScanErrLog`""
+            ) | Set-Content -Path $batchFile -Encoding ascii
+            $yaraProc = Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$batchFile`"" -PassThru -WindowStyle Hidden
         }
     }
 }
