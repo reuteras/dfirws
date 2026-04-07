@@ -65,16 +65,18 @@ if ($ScanTargets.Count -eq 0) {
 
 Write-DateLog "Starting YARA scan of $($ScanTargets -join ', ')..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 Write-DateLog "Using YARA rules: $($YaraRules[0].FullName)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+Write-DateLog "YARA executable: ${YaraExe}" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
-# Add C:\Tools to PATH so yara.exe can find any co-located DLLs
-$env:Path = "${TOOLS};${TOOLS}\bin;$env:Path"
+# Verify yara.exe is callable
+$versionOut = & $YaraExe --version 2>&1
+Write-DateLog "YARA version: ${versionOut} (exit ${LASTEXITCODE})" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
 "" | Out-File -FilePath $ScanLog -Encoding utf8
 
 foreach ($RuleFile in $YaraRules) {
     Write-DateLog "Scanning with ruleset: $($RuleFile.Name)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
     foreach ($Target in $ScanTargets) {
-        Write-DateLog "Scanning $Target ..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+        Write-DateLog "Running: & '${YaraExe}' --recursive '$($RuleFile.FullName)' '${Target}'" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
         & $YaraExe --recursive $RuleFile.FullName $Target 2>&1 |
             ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
         if ($LASTEXITCODE -ne 0) {
