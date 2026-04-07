@@ -66,6 +66,9 @@ if ($ScanTargets.Count -eq 0) {
 Write-DateLog "Starting YARA scan of $($ScanTargets -join ', ')..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 Write-DateLog "Using YARA rules: $($YaraRules[0].FullName)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
+# Add C:\Tools to PATH so yara.exe can find any co-located DLLs
+$env:Path = "${TOOLS};${TOOLS}\bin;$env:Path"
+
 "" | Out-File -FilePath $ScanLog -Encoding utf8
 
 foreach ($RuleFile in $YaraRules) {

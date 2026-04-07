@@ -23,7 +23,8 @@ if (Test-Path -Path "C:\log\run_yarascan") {
         Write-DateLog "Starting YARA scan in background..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
 
         $yaraJob = Start-Job -ScriptBlock {
-            param($YaraExe, $YaraDir, $YaraScanLog, $ScanTargets)
+            param($YaraExe, $YaraDir, $YaraScanLog, $ScanTargets, $ToolsPath)
+            $env:Path = "${ToolsPath};${ToolsPath}\bin;$env:Path"
 
             "" | Out-File -FilePath $YaraScanLog -Encoding utf8
 
@@ -51,7 +52,7 @@ if (Test-Path -Path "C:\log\run_yarascan") {
                     }
                 }
             }
-        } -ArgumentList $YaraExe, $YaraDir, $YaraScanLog, $ScanTargets
+        } -ArgumentList $YaraExe, $YaraDir, $YaraScanLog, $ScanTargets, $TOOLS
     } else {
         Write-DateLog "WARNING: YARA not available (yara.exe or enrichment\yara missing), skipping YARA scan." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
     }
