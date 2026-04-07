@@ -48,12 +48,18 @@ if (Test-Path -Path "C:\log\run_yarascan") {
         } else {
             # Store batch file content — will be launched after ClamAV installs
             $RuleFile = $YaraRules[0]
-            $targetList = ($ScanTargets | ForEach-Object { "`"$_`"" }) -join " "
             $batchFile = "${WSDFIR_TEMP}\run_yarascan.bat"
-            @(
-                "@echo off",
-                "`"$YaraExe`" --recursive `"$($RuleFile.FullName)`" $targetList > `"$YaraScanLog`" 2> `"$YaraScanErrLog`""
-            ) | Set-Content -Path $batchFile -Encoding ascii
+            $batchLines = @("@echo off")
+            $firstTarget = $true
+            foreach ($t in $ScanTargets) {
+                if ($firstTarget) {
+                    $batchLines += "`"$YaraExe`" --recursive `"$($RuleFile.FullName)`" `"$t`" > `"$YaraScanLog`" 2> `"$YaraScanErrLog`""
+                    $firstTarget = $false
+                } else {
+                    $batchLines += "`"$YaraExe`" --recursive `"$($RuleFile.FullName)`" `"$t`" >> `"$YaraScanLog`" 2>> `"$YaraScanErrLog`""
+                }
+            }
+            $batchLines | Set-Content -Path $batchFile -Encoding ascii
             Write-DateLog "YARA scan prepared (ruleset: $($RuleFile.Name), targets: $($ScanTargets -join ', '))." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
         }
     }
