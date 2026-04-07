@@ -43,8 +43,12 @@ if (Test-Path -Path "C:\log\run_yarascan") {
 
             foreach ($RuleFile in $YaraRules) {
                 foreach ($Target in ($ScanTargets | Where-Object { Test-Path -Path $_ })) {
+                    "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') - Scanning $Target ..." | Out-File -FilePath $YaraScanLog -Append
                     & $YaraExe --recursive $RuleFile.FullName $Target 2>&1 |
                         ForEach-Object { "$_" } | Out-File -FilePath $YaraScanLog -Append
+                    if ($LASTEXITCODE -ne 0) {
+                        "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') - WARNING: yara.exe exited with code ${LASTEXITCODE} for target ${Target}" | Out-File -FilePath $YaraScanLog -Append
+                    }
                 }
             }
         } -ArgumentList $YaraExe, $YaraDir, $YaraScanLog, $ScanTargets
