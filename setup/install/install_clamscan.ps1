@@ -42,8 +42,8 @@ if (Test-Path -Path "C:\log\run_yarascan") {
             }
 
             foreach ($RuleFile in $YaraRules) {
-                foreach ($Target in $ScanTargets) {
-                    & $YaraExe --recursive --print-strings --no-warnings $RuleFile.FullName $Target 2>&1 |
+                foreach ($Target in ($ScanTargets | Where-Object { Test-Path -Path $_ })) {
+                    & $YaraExe --recursive $RuleFile.FullName $Target 2>&1 |
                         ForEach-Object { "$_" } | Out-File -FilePath $YaraScanLog -Append
                 }
             }
