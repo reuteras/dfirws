@@ -36,7 +36,7 @@
 
 .EXAMPLE
     .\downloadFiles.ps1 -ClamScan -YaraScan
-    This will run ClamAV and YARA scans in parallel in isolated sandboxes.
+    This will run ClamAV and YARA scans in parallel within the same sandbox.
 
 .EXAMPLE
     .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
@@ -504,33 +504,9 @@ if ($Verify.IsPresent) {
 
 # Run ClamAV and/or YARA scans of installed tools in sandbox
 if ($ClamScan.IsPresent -and $YaraScan.IsPresent) {
-    # Run both scans in parallel: start both sandboxes, wait for both done files, then stop.
+    # Run both scans in the same sandbox: YARA starts as a background job while ClamAV installs and scans.
     Write-DateLog "Run ClamAV and YARA scans in parallel in sandbox."
-
-    if (Test-Path -Path "${PWD}\log\clamscan_done") { Remove-Item "${PWD}\log\clamscan_done" | Out-Null }
-    if (Test-Path -Path "${PWD}\log\yarascan_done") { Remove-Item "${PWD}\log\yarascan_done" | Out-Null }
-
-    (Get-Content .\resources\templates\generate_clamscan.wsb.template).replace('__SANDBOX__', "${PWD}/") | Set-Content "${PWD}\tmp\generate_clamscan.wsb"
-    (Get-Content .\resources\templates\generate_yarascan.wsb.template).replace('__SANDBOX__', "${PWD}/") | Set-Content "${PWD}\tmp\generate_yarascan.wsb"
-
-    Start-Process "${PWD}\tmp\generate_clamscan.wsb"
-    Start-Process "${PWD}\tmp\generate_yarascan.wsb"
-
-    while (-not (Test-Path -Path "${PWD}\log\clamscan_done") -or -not (Test-Path -Path "${PWD}\log\yarascan_done")) {
-        Start-Sleep -Seconds 5
-    }
-
-    Stop-Process -Name WindowsSandboxClient -Force -ErrorAction SilentlyContinue
-    Stop-Process -Name WindowsSandboxRemoteSession -Force -ErrorAction SilentlyContinue
-    Start-Sleep 5
-
-    foreach ($wsb in @("${PWD}\tmp\generate_clamscan.wsb", "${PWD}\tmp\generate_yarascan.wsb")) {
-        if (Test-Path -Path $wsb) { Remove-Item -Force $wsb | Out-Null }
-    }
-    foreach ($done in @("${PWD}\log\clamscan_done", "${PWD}\log\yarascan_done")) {
-        if (Test-Path -Path $done) { Remove-Item -Force $done | Out-Null }
-    }
-
+    .\resources\download\clamscan_yarascan.ps1 | Out-Null
     Write-DateLog "ClamAV and YARA scans done."
 } elseif ($ClamScan.IsPresent) {
     Write-DateLog "Run ClamAV scan of installed tools in sandbox."
