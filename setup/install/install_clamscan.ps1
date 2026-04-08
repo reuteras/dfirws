@@ -69,6 +69,7 @@ if (Test-Path -Path "C:\log\run_yarascan") {
                 "C:\Tools\Lumen\LUMEN\dist\sigma-rules",
                 "C:\Tools\Lumen\LUMEN\src\sigma-master",
                 "C:\venv\zircolite\zircolite\rules",
+                "C:\venv\cache",
                 "C:\git\PowerDecode\MalwareRepository.db",
                 "C:\Tools\logboost\intel",
                 "C:\Tools\logboost\threats.db"
@@ -157,6 +158,7 @@ $ClamBaseArgs = @(
     "--exclude-dir=^C:[/\\\\]Tools[/\\\\]Lumen[/\\\\]LUMEN[/\\\\]dist[/\\\\]sigma-rules",
     "--exclude-dir=^C:[/\\\\]Tools[/\\\\]Lumen[/\\\\]LUMEN[/\\\\]src[/\\\\]sigma-master",
     "--exclude-dir=^C:[/\\\\]venv[/\\\\]zircolite[/\\\\]zircolite[/\\\\]rules",
+    "--exclude-dir=^C:[/\\\\]venv[/\\\\]cache",
     "--exclude-dir=^C:[/\\\\]Tools[/\\\\]logboost[/\\\\]intel",
     # Specific false-positive files
     "--exclude=APT-Hunter[/\\\\]rules\\.json$",
