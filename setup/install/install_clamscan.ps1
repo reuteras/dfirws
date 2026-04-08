@@ -69,7 +69,9 @@ if (Test-Path -Path "C:\log\run_yarascan") {
                 "C:\Tools\Lumen\LUMEN\dist\sigma-rules",
                 "C:\Tools\Lumen\LUMEN\src\sigma-master",
                 "C:\venv\zircolite\zircolite\rules",
-                "C:\git\PowerDecode\MalwareRepository.db"
+                "C:\git\PowerDecode\MalwareRepository.db",
+                "C:\Tools\logboost\intel",
+                "C:\Tools\logboost\threats.db"
             )
 
             # Build the generated script line by line (backtick-$ produces literal $ in the output file)
@@ -119,7 +121,7 @@ $ClamBaseArgs = @(
     "--heuristic-scan-precedence=yes",
     "--alert-broken=no",
     "--alert-encrypted-archive=no",
-    "--alert-macros=yes",
+    "--alert-macros=no",
     "--alert-exceeds-max=no",
     "--bytecode=yes",
     # Built-in sandbox/system exclusions
@@ -144,9 +146,11 @@ $ClamBaseArgs = @(
     "--exclude-dir=^C:[/\\\\]Tools[/\\\\]Lumen[/\\\\]LUMEN[/\\\\]dist[/\\\\]sigma-rules",
     "--exclude-dir=^C:[/\\\\]Tools[/\\\\]Lumen[/\\\\]LUMEN[/\\\\]src[/\\\\]sigma-master",
     "--exclude-dir=^C:[/\\\\]venv[/\\\\]zircolite[/\\\\]zircolite[/\\\\]rules",
+    "--exclude-dir=^C:[/\\\\]Tools[/\\\\]logboost[/\\\\]intel",
     # Specific false-positive files
     "--exclude=APT-Hunter[/\\\\]rules\\.json$",
     "--exclude=MalwareRepository\\.db$",
+    "--exclude=logboost[/\\\\]threats\\.db$",
     # Standard file-type exclusions
     "--exclude=\.lnk$",
     "--exclude=\.url$",
