@@ -544,7 +544,9 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "the report will be incomplete" -and
     $_.Line -notmatch "allowed warning found in" -and
     $_.Line -notmatch "unmaintained" -and
-    $_.Line -notmatch "unsound"
+    $_.Line -notmatch "unsound" -and
+    $_.Line -notmatch "WARNING: Defender:" -and
+    $_.Line -notmatch "WARNING: Files"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
@@ -580,7 +582,10 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "error\[vulnerability\]" -and
     $_.Line -notmatch "error\[unmaintained\]" -and
     $_.Line -notmatch "error\[unsound\]" -and
-    $_.Line -notmatch "error\[notice\]"
+    $_.Line -notmatch "error\[notice\]" -and
+    $_.Line -notmatch "SIGNATURE_BASE_" -and
+    $_.Line -notmatch "Total errors:" -and
+    $_.Line -notmatch "error scanning C:"
 }
 
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {

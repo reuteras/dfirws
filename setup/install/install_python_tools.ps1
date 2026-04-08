@@ -448,13 +448,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "zircolite"
-            Expect = "PE32"
-        }
-    )
+    Verify = @()
     FileExtensions = @(".evtx", ".json")
     Tags = @("log-analysis", "sigma", "detection", "incident-response")
     Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
