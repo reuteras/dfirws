@@ -54,7 +54,30 @@ $folderUrl = "https://collector.torproject.org/archive/exit-lists/"
 #
 # TOR exit nodes
 $webClient = New-Object System.Net.WebClient
-$files = $webClient.DownloadString($folderUrl).Split("`n") | Select-String -Pattern '<a href="(exit[^"]+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
+$webClient.Headers.Add("User-Agent", "Mozilla/5.0")
+$maxRetries = 3
+$retryDelay = 5
+$torIndexContent = $null
+for ($attempt = 1; $attempt -le $maxRetries; $attempt++) {
+    try {
+        $torIndexContent = $webClient.DownloadString($folderUrl)
+        break
+    } catch {
+        if ($attempt -lt $maxRetries) {
+            Write-DateLog "Failed to fetch TOR exit list index (attempt $attempt/$maxRetries): $($_.Exception.Message). Retrying in ${retryDelay}s..."
+            Start-Sleep -Seconds $retryDelay
+            $retryDelay *= 2
+        } else {
+            Write-DateLog "Failed to fetch TOR exit list index after $maxRetries attempts: $($_.Exception.Message). Skipping TOR exit node download."
+        }
+    }
+}
+$webClient.Dispose()
+
+$files = @()
+if ($torIndexContent) {
+    $files = $torIndexContent.Split("`n") | Select-String -Pattern '<a href="(exit[^"]+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
+}
 
 Write-DateLog "Downloading TOR exit files"
 foreach ($file in $files) {
@@ -62,7 +85,6 @@ foreach ($file in $files) {
     $savePath = Join-Path -Path "${torsaveDirectory}" -ChildPath "${file}"
     curl --silent -L -z "$savePath" -o "$savePath" "$fileUrl"
 }
-$webClient.Dispose()
 
 #
 # MAC address lookup files - manuf file
