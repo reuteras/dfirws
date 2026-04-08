@@ -63,7 +63,28 @@ if ($ScanTargets.Count -eq 0) {
     exit 1
 }
 
-Write-DateLog "Starting YARA scan of $($ScanTargets -join ', ')..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+$YaraExcludePaths = @(
+    "C:\git\Zircolite\rules",
+    "C:\git\threat-intel",
+    "C:\git\dfirws-sample-files",
+    "C:\git\EVTX-ATTACK-SAMPLES",
+    "C:\git\DFIRArtifactMuseum",
+    "C:\git\APT-Hunter\Samples",
+    "C:\git\APT-Hunter\rules.json",
+    "C:\git\hayabusa-rules",
+    "C:\git\sigma\rules",
+    "C:\git\signature-base",
+    "C:\Tools\capa-rules",
+    "C:\Tools\hayabusa\rules\hayabusa",
+    "C:\Tools\Lumen\LUMEN\dist\samples",
+    "C:\Tools\Lumen\LUMEN\dist\sigma-rules",
+    "C:\Tools\Lumen\LUMEN\src\sigma-master",
+    "C:\venv\zircolite\zircolite\rules",
+    "C:\git\PowerDecode\MalwareRepository.db"
+)
+
+$ScanListFile = "${WSDFIR_TEMP}\yara-scanlist.txt"
+
 Write-DateLog "Using YARA rules: $($YaraRules[0].FullName)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 Write-DateLog "YARA executable: ${YaraExe}" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
@@ -75,13 +96,22 @@ Write-DateLog "YARA version: ${versionOut} (exit ${LASTEXITCODE})" | Tee-Object 
 
 foreach ($RuleFile in $YaraRules) {
     Write-DateLog "Scanning with ruleset: $($RuleFile.Name)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
-    foreach ($Target in $ScanTargets) {
-        Write-DateLog "Running: & '${YaraExe}' --recursive '$($RuleFile.FullName)' '${Target}'" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
-        & $YaraExe --recursive $RuleFile.FullName $Target 2>&1 |
-            ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
-        if ($LASTEXITCODE -ne 0) {
-            Write-DateLog "WARNING: yara.exe exited with code ${LASTEXITCODE} for target ${Target}" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
-        }
+
+    # Build exclusion-filtered file list
+    $files = @(foreach ($t in $ScanTargets) {
+        Get-ChildItem -Path $t -Recurse -File -ErrorAction SilentlyContinue |
+            Where-Object {
+                $fp = $_.FullName
+                -not ($YaraExcludePaths | Where-Object { $fp -eq $_ -or $fp.StartsWith($_ + '\') })
+            } | Select-Object -ExpandProperty FullName
+    })
+    Write-DateLog "Scanning $($files.Count) files (after exclusions)..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+    $files | Set-Content -Path $ScanListFile -Encoding ascii
+
+    & $YaraExe --scan-list $RuleFile.FullName $ScanListFile 2>&1 |
+        ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+    if ($LASTEXITCODE -gt 1) {
+        Write-DateLog "WARNING: yara.exe exited with code ${LASTEXITCODE} (error)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
     }
 }
 

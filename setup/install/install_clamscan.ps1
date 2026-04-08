@@ -46,21 +46,51 @@ if (Test-Path -Path "C:\log\run_yarascan") {
         } elseif ($ScanTargets.Count -eq 0) {
             Write-DateLog "WARNING: No YARA scan targets available, skipping YARA scan." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
         } else {
-            # Store batch file content — will be launched after ClamAV installs
+            # Generate an exclusion-aware PowerShell YARA scan script — launched after ClamAV installs
             $RuleFile = $YaraRules[0]
-            $batchFile = "${WSDFIR_TEMP}\run_yarascan.bat"
-            $batchLines = @("@echo off")
-            $firstTarget = $true
-            foreach ($t in $ScanTargets) {
-                if ($firstTarget) {
-                    $batchLines += "`"$YaraExe`" --recursive `"$($RuleFile.FullName)`" `"$t`" > `"$YaraScanLog`" 2> `"$YaraScanErrLog`""
-                    $firstTarget = $false
-                } else {
-                    $batchLines += "`"$YaraExe`" --recursive `"$($RuleFile.FullName)`" `"$t`" >> `"$YaraScanLog`" 2>> `"$YaraScanErrLog`""
-                }
+            $psFile = "${WSDFIR_TEMP}\run_yarascan.ps1"
+
+            $yaraExcludedPaths = @(
+                "C:\git\Zircolite\rules",
+                "C:\git\threat-intel",
+                "C:\git\dfirws-sample-files",
+                "C:\git\EVTX-ATTACK-SAMPLES",
+                "C:\git\DFIRArtifactMuseum",
+                "C:\git\APT-Hunter\Samples",
+                "C:\git\APT-Hunter\rules.json",
+                "C:\git\hayabusa-rules",
+                "C:\git\sigma\rules",
+                "C:\git\signature-base",
+                "C:\Tools\capa-rules",
+                "C:\Tools\hayabusa\rules\hayabusa",
+                "C:\Tools\Lumen\LUMEN\dist\samples",
+                "C:\Tools\Lumen\LUMEN\dist\sigma-rules",
+                "C:\Tools\Lumen\LUMEN\src\sigma-master",
+                "C:\venv\zircolite\zircolite\rules",
+                "C:\git\PowerDecode\MalwareRepository.db"
+            )
+
+            # Build the generated script line by line (backtick-$ produces literal $ in the output file)
+            $psLines = @('$ExcludePaths = @(')
+            foreach ($excl in $yaraExcludedPaths) {
+                $psLines += "    '$excl',"
             }
-            $batchLines | Set-Content -Path $batchFile -Encoding ascii
-            Write-DateLog "YARA scan prepared (ruleset: $($RuleFile.Name), targets: $($ScanTargets -join ', '))." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+            $psLines[-1] = $psLines[-1].TrimEnd(',')
+            $psLines += ')'
+            $psLines += '$ScanTargets = @(''C:\Tools'', ''C:\venv'', ''C:\git'') | Where-Object { Test-Path $_ }'
+            $psLines += '$files = @(foreach ($t in $ScanTargets) {'
+            $psLines += '    Get-ChildItem -Path $t -Recurse -File -ErrorAction SilentlyContinue |'
+            $psLines += '        Where-Object {'
+            $psLines += '            $fp = $_.FullName'
+            $psLines += "            -not (`$ExcludePaths | Where-Object { `$fp -eq `$_ -or `$fp.StartsWith(`$_ + '\') })"
+            $psLines += '        } | Select-Object -ExpandProperty FullName'
+            $psLines += '})'
+            $psLines += "`$files | Set-Content -Path '${WSDFIR_TEMP}\yara-scanlist.txt' -Encoding ascii"
+            $psLines += "`$output = & '${YaraExe}' --scan-list '$($RuleFile.FullName)' '${WSDFIR_TEMP}\yara-scanlist.txt' 2>'${YaraScanErrLog}'"
+            $psLines += "`$output | Out-File -FilePath '${YaraScanLog}' -Encoding utf8"
+            $psLines | Set-Content -Path $psFile -Encoding utf8
+
+            Write-DateLog "YARA scan prepared (ruleset: $($RuleFile.Name), exclusions: $($yaraExcludedPaths.Count) paths)." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
         }
     }
 }
@@ -71,9 +101,9 @@ while (-not (Test-Path -Path "C:\Program Files\ClamAV\clamscan.exe")) {
 }
 
 # Start YARA now that vcruntime140.dll is available from the ClamAV installation
-if (Test-Path -Path "${WSDFIR_TEMP}\run_yarascan.bat") {
+if (Test-Path -Path "${WSDFIR_TEMP}\run_yarascan.ps1") {
     Write-DateLog "Starting YARA scan in background..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
-    $yaraProc = Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"${WSDFIR_TEMP}\run_yarascan.bat`"" -PassThru -WindowStyle Hidden
+    $yaraProc = Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -NonInteractive -File `"${WSDFIR_TEMP}\run_yarascan.ps1`"" -PassThru -WindowStyle Hidden
 }
 
 $ClamDB = "${TOOLS}\ClamAV\db"
@@ -85,16 +115,37 @@ $ClamBaseArgs = @(
     "--database=$ClamDB",
     "--heuristic-alerts=yes",
     "--heuristic-scan-precedence=yes",
-    "--alert-broken=yes",
-    "--alert-encrypted-archive=yes",
+    "--alert-broken=no",
+    "--alert-encrypted-archive=no",
     "--alert-macros=yes",
-    "--alert-exceeds-max=yes",
+    "--alert-exceeds-max=no",
     "--bytecode=yes",
+    # Built-in sandbox/system exclusions
     "--exclude-dir=^C:\\Windows",
     "--exclude-dir=^C:\\Program Files\\Windows Defender",
     "--exclude-dir=^C:\\ProgramData\\Microsoft\\Windows Defender",
     "--exclude-dir=^C:\\Tools\\ClamAV",
     "--exclude-dir=__pycache__",
+    # Known false-positive / rule-set directories
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]Zircolite[/\\\\]rules",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]threat-intel",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]dfirws-sample-files",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]EVTX-ATTACK-SAMPLES",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]DFIRArtifactMuseum",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]APT-Hunter[/\\\\]Samples",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]hayabusa-rules",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]sigma[/\\\\]rules",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]signature-base",
+    "--exclude-dir=^C:[/\\\\]Tools[/\\\\]capa-rules",
+    "--exclude-dir=^C:[/\\\\]Tools[/\\\\]hayabusa[/\\\\]rules[/\\\\]hayabusa",
+    "--exclude-dir=^C:[/\\\\]Tools[/\\\\]Lumen[/\\\\]LUMEN[/\\\\]dist[/\\\\]samples",
+    "--exclude-dir=^C:[/\\\\]Tools[/\\\\]Lumen[/\\\\]LUMEN[/\\\\]dist[/\\\\]sigma-rules",
+    "--exclude-dir=^C:[/\\\\]Tools[/\\\\]Lumen[/\\\\]LUMEN[/\\\\]src[/\\\\]sigma-master",
+    "--exclude-dir=^C:[/\\\\]venv[/\\\\]zircolite[/\\\\]zircolite[/\\\\]rules",
+    # Specific false-positive files
+    "--exclude=APT-Hunter[/\\\\]rules\\.json$",
+    "--exclude=MalwareRepository\\.db$",
+    # Standard file-type exclusions
     "--exclude=\.lnk$",
     "--exclude=\.url$",
     "--exclude=\.mui$",
