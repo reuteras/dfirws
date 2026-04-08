@@ -89,7 +89,7 @@ if (Test-Path -Path "C:\log\run_yarascan") {
             $psLines += "            -not (`$ExcludePaths | Where-Object { `$fp -eq `$_ -or `$fp.StartsWith(`$_ + '\') })"
             $psLines += '        } | Select-Object -ExpandProperty FullName'
             $psLines += '})'
-            $psLines += "`$files | Set-Content -Path '${WSDFIR_TEMP}\yara-scanlist.txt' -Encoding ascii"
+            $psLines += "[IO.File]::WriteAllLines('${WSDFIR_TEMP}\yara-scanlist.txt', `$files)"
             $psLines += "`$output = & '${YaraExe}' --scan-list '$($RuleFile.FullName)' '${WSDFIR_TEMP}\yara-scanlist.txt' 2>'${YaraScanErrLog}'"
             $psLines += "`$output | Out-File -FilePath '${YaraScanLog}' -Encoding utf8"
             $psLines | Set-Content -Path $psFile -Encoding utf8
