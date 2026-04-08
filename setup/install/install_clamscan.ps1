@@ -87,7 +87,7 @@ if (Test-Path -Path "C:\log\run_yarascan") {
             $psLines += "            -not (`$ExcludePaths | Where-Object { `$fp -eq `$_ -or `$fp.StartsWith(`$_ + '\') })"
             $psLines += '        } | Select-Object -ExpandProperty FullName'
             $psLines += '})'
-            $psLines += "`$files | Set-Content -Path '${WSDFIR_TEMP}\yara-scanlist.txt' -Encoding ascii"
+            $psLines += "[IO.File]::WriteAllLines('${WSDFIR_TEMP}\yara-scanlist.txt', `$files)"
             $psLines += "`$output = & '${YaraExe}' --scan-list '$($RuleFile.FullName)' '${WSDFIR_TEMP}\yara-scanlist.txt' 2>'${YaraScanErrLog}'"
             $psLines += "`$output | Out-File -FilePath '${YaraScanLog}' -Encoding utf8"
             $psLines | Set-Content -Path $psFile -Encoding utf8
@@ -165,9 +165,9 @@ $clamProcs = @()
 foreach ($target in @("C:\Tools", "C:\venv", "C:\git") | Where-Object { Test-Path -Path $_ }) {
     $label = Split-Path $target -Leaf
     $targetLog = "C:\log\clamav-scan-${label}.log"
-    $args = $ClamBaseArgs + @("--log=$targetLog", $target)
+    $clamArgs = $ClamBaseArgs + @("--log=$targetLog", $target)
     Write-DateLog "Starting ClamAV scan of $target..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
-    $proc = Start-Process -FilePath $ClamExe -ArgumentList $args -PassThru -WindowStyle Hidden
+    $proc = Start-Process -FilePath $ClamExe -ArgumentList $clamArgs -PassThru -WindowStyle Hidden
     $clamProcs += [PSCustomObject]@{ Proc = $proc; Target = $target; Log = $targetLog }
 }
 

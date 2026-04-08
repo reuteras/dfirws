@@ -108,7 +108,7 @@ foreach ($RuleFile in $YaraRules) {
             } | Select-Object -ExpandProperty FullName
     })
     Write-DateLog "Scanning $($files.Count) files (after exclusions)..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
-    $files | Set-Content -Path $ScanListFile -Encoding ascii
+    [IO.File]::WriteAllLines($ScanListFile, $files)
 
     & $YaraExe --scan-list $RuleFile.FullName $ScanListFile 2>&1 |
         ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
