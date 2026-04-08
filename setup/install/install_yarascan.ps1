@@ -94,24 +94,31 @@ Write-DateLog "YARA executable: ${YaraExe}" | Tee-Object -FilePath "C:\log\yaras
 $versionOut = & $YaraExe --version 2>&1
 Write-DateLog "YARA version: ${versionOut} (exit ${LASTEXITCODE})" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
+# Returns directories safe to scan with --recursive (splits around excluded subtrees).
+# Uses --recursive rather than --scan-list so YARA handles Unicode filenames via
+# native Windows wide-string file enumeration instead of narrow-string reads.
+function Get-YaraScanDirs {
+    param([string]$Path, [string[]]$ExcludePaths)
+    if ($ExcludePaths | Where-Object { $Path.TrimEnd('\') -ieq $_.TrimEnd('\') }) { return }
+    if (-not ($ExcludePaths | Where-Object { $_.StartsWith($Path.TrimEnd('\') + '\') })) { return $Path }
+    Get-ChildItem -Path $Path -Directory -ErrorAction SilentlyContinue |
+        ForEach-Object { Get-YaraScanDirs -Path $_.FullName -ExcludePaths $ExcludePaths }
+}
+
 "" | Out-File -FilePath $ScanLog -Encoding utf8
 
 foreach ($RuleFile in $YaraRules) {
     Write-DateLog "Scanning with ruleset: $($RuleFile.Name)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
-    # Build exclusion-filtered file list
-    $files = @(foreach ($t in $ScanTargets) {
-        Get-ChildItem -Path $t -Recurse -File -ErrorAction SilentlyContinue |
-            Where-Object {
-                $fp = $_.FullName
-                -not ($YaraExcludePaths | Where-Object { $fp -eq $_ -or $fp.StartsWith($_ + '\') })
-            } | Select-Object -ExpandProperty FullName
+    $scanDirs = @(foreach ($t in $ScanTargets) {
+        Get-YaraScanDirs -Path $t -ExcludePaths $YaraExcludePaths
     })
-    Write-DateLog "Scanning $($files.Count) files (after exclusions)..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
-    [IO.File]::WriteAllLines($ScanListFile, $files)
+    Write-DateLog "Scanning $($scanDirs.Count) directories (after exclusions)..." | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
 
-    & $YaraExe --scan-list $RuleFile.FullName $ScanListFile 2>&1 |
-        ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+    foreach ($dir in $scanDirs) {
+        & $YaraExe --recursive $RuleFile.FullName $dir 2>&1 |
+            ForEach-Object { "$_" } | Tee-Object -FilePath $ScanLog -Append | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
+    }
     if ($LASTEXITCODE -gt 1) {
         Write-DateLog "WARNING: yara.exe exited with code ${LASTEXITCODE} (error)" | Tee-Object -FilePath "C:\log\yarascan.txt" -Append
     }

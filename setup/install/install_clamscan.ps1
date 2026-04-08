@@ -74,24 +74,35 @@ if (Test-Path -Path "C:\log\run_yarascan") {
                 "C:\Tools\logboost\threats.db"
             )
 
-            # Build the generated script line by line (backtick-$ produces literal $ in the output file)
+            # Build the generated script line by line (backtick-$ produces literal $ in the output file).
+            # Uses --recursive rather than --scan-list so YARA handles Unicode filenames via
+            # native Windows wide-string file enumeration instead of narrow-string reads.
             $psLines = @('$ExcludePaths = @(')
             foreach ($excl in $yaraExcludedPaths) {
                 $psLines += "    '$excl',"
             }
             $psLines[-1] = $psLines[-1].TrimEnd(',')
             $psLines += ')'
+            $psLines += 'function Get-YaraScanDirs {'
+            $psLines += '    param([string]$Path, [string[]]$ExcludePaths)'
+            $psLines += "    if (`$ExcludePaths | Where-Object { `$Path.TrimEnd('\') -ieq `$_.TrimEnd('\') }) { return }"
+            $psLines += "    if (-not (`$ExcludePaths | Where-Object { `$_.StartsWith(`$Path.TrimEnd('\') + '\') })) { return `$Path }"
+            $psLines += "    Get-ChildItem -Path `$Path -Directory -ErrorAction SilentlyContinue |"
+            $psLines += "        ForEach-Object { Get-YaraScanDirs -Path `$_.FullName -ExcludePaths `$ExcludePaths }"
+            $psLines += '}'
             $psLines += '$ScanTargets = @(''C:\Tools'', ''C:\venv'', ''C:\git'') | Where-Object { Test-Path $_ }'
-            $psLines += '$files = @(foreach ($t in $ScanTargets) {'
-            $psLines += '    Get-ChildItem -Path $t -Recurse -File -ErrorAction SilentlyContinue |'
-            $psLines += '        Where-Object {'
-            $psLines += '            $fp = $_.FullName'
-            $psLines += "            -not (`$ExcludePaths | Where-Object { `$fp -eq `$_ -or `$fp.StartsWith(`$_ + '\') })"
-            $psLines += '        } | Select-Object -ExpandProperty FullName'
+            $psLines += '$scanDirs = @(foreach ($t in $ScanTargets) {'
+            $psLines += '    Get-YaraScanDirs -Path $t -ExcludePaths $ExcludePaths'
             $psLines += '})'
-            $psLines += "[IO.File]::WriteAllLines('${WSDFIR_TEMP}\yara-scanlist.txt', `$files)"
-            $psLines += "`$output = & '${YaraExe}' --scan-list '$($RuleFile.FullName)' '${WSDFIR_TEMP}\yara-scanlist.txt' 2>'${YaraScanErrLog}'"
-            $psLines += "`$output | Out-File -FilePath '${YaraScanLog}' -Encoding utf8"
+            $psLines += '$first = $true'
+            $psLines += 'foreach ($dir in $scanDirs) {'
+            $psLines += '    if ($first) {'
+            $psLines += "        & '${YaraExe}' --recursive '$($RuleFile.FullName)' `$dir 2>'${YaraScanErrLog}' | Out-File -FilePath '${YaraScanLog}' -Encoding utf8"
+            $psLines += '        $first = $false'
+            $psLines += '    } else {'
+            $psLines += "        & '${YaraExe}' --recursive '$($RuleFile.FullName)' `$dir 2>>'${YaraScanErrLog}' | Out-File -FilePath '${YaraScanLog}' -Append -Encoding utf8"
+            $psLines += '    }'
+            $psLines += '}'
             $psLines | Set-Content -Path $psFile -Encoding utf8
 
             Write-DateLog "YARA scan prepared (ruleset: $($RuleFile.Name), exclusions: $($yaraExcludedPaths.Count) paths)." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
