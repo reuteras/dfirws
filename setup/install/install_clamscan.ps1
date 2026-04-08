@@ -167,9 +167,9 @@ $clamProcs = @()
 foreach ($target in @("C:\Tools", "C:\venv", "C:\git") | Where-Object { Test-Path -Path $_ }) {
     $label = Split-Path $target -Leaf
     $targetLog = "C:\log\clamav-scan-${label}.log"
-    $args = $ClamBaseArgs + @("--log=$targetLog", $target)
+    $scanArgs = $ClamBaseArgs + @("--log=$targetLog", $target)
     Write-DateLog "Starting ClamAV scan of $target..." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
-    $proc = Start-Process -FilePath $ClamExe -ArgumentList $args -PassThru -WindowStyle Hidden
+    $proc = Start-Process -FilePath $ClamExe -ArgumentList $scanArgs -PassThru -WindowStyle Hidden
     $clamProcs += [PSCustomObject]@{ Proc = $proc; Target = $target; Log = $targetLog }
 }
 
