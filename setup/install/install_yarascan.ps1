@@ -79,6 +79,8 @@ $YaraExcludePaths = @(
     "C:\Tools\Lumen\LUMEN\dist\samples",
     "C:\Tools\Lumen\LUMEN\dist\sigma-rules",
     "C:\Tools\Lumen\LUMEN\src\sigma-master",
+    "C:\Tools\Lumen\LUMEN\public\sigma-rules",
+    "C:\Tools\Lumen\LUMEN\samples",
     "C:\venv\zircolite\zircolite\rules",
     "C:\venv\cache",
     "C:\git\PowerDecode\MalwareRepository.db",
