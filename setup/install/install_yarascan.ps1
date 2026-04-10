@@ -65,6 +65,7 @@ if ($ScanTargets.Count -eq 0) {
 
 $YaraExcludePaths = @(
     "C:\git\Zircolite\rules",
+    "C:\git\Zircolite\tests",
     "C:\git\threat-intel",
     "C:\git\dfirws-sample-files",
     "C:\git\EVTX-ATTACK-SAMPLES",
