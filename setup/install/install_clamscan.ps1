@@ -54,6 +54,7 @@ if (Test-Path -Path "C:\log\run_yarascan") {
 
             $yaraExcludedPaths = @(
                 "C:\git\Zircolite\rules",
+                "C:\git\Zircolite\tests",
                 "C:\git\threat-intel",
                 "C:\git\dfirws-sample-files",
                 "C:\git\EVTX-ATTACK-SAMPLES",
@@ -151,6 +152,7 @@ $ClamBaseArgs = @(
     "--exclude-dir=__pycache__",
     # Known false-positive / rule-set directories
     "--exclude-dir=^C:[/\\\\]git[/\\\\]Zircolite[/\\\\]rules",
+    "--exclude-dir=^C:[/\\\\]git[/\\\\]Zircolite[/\\\\]tests",
     "--exclude-dir=^C:[/\\\\]git[/\\\\]threat-intel",
     "--exclude-dir=^C:[/\\\\]git[/\\\\]dfirws-sample-files",
     "--exclude-dir=^C:[/\\\\]git[/\\\\]EVTX-ATTACK-SAMPLES",
@@ -208,6 +210,13 @@ foreach ($item in $clamProcs) {
 }
 
 Write-DateLog "All ClamAV scans complete." | Tee-Object -FilePath "C:\log\clamscan.txt" -Append
+
+# Strip 'Can't access file' warnings from per-target logs (sandbox restricts access to system files)
+foreach ($item in $clamProcs) {
+    if (Test-Path $item.Log) {
+        (Get-Content $item.Log) | Where-Object { $_ -notmatch "WARNING:.*Can't access file" } | Set-Content $item.Log
+    }
+}
 
 # Wait for YARA process to finish
 if ($null -ne $yaraProc) {
