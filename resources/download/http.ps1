@@ -2473,11 +2473,9 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# https://www.libreoffice.org/download/download-libreoffice/ - LibreOffice - installed during start
+# https://www.libreoffice.org/ - LibreOffice - installed during start
 if (Test-ToolIncluded -ToolName "LibreOffice") {
-    $LibreOfficeVersionDownloadPage = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download/download-libreoffice/" -RegEx 'https://[^"]+.msi'
-    $LibreOfficeVersionDownloadPage_64 = $LibreOfficeVersionDownloadPage.Replace("dl/win-x86/", "dl/win-x86_64/").Replace("x86.msi", "x86-64.msi").Replace("https://download.documentfoundation.org/libreoffice/stable/", "https://www.libreoffice.org/donate/dl/")
-    $LibreOfficeVersion = Get-DownloadUrlFromPage -Url "${LibreOfficeVersionDownloadPage_64}" -RegEx 'https://[^"]+.msi'
+    $LibreOfficeVersion = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/" -RegEx 'https://[^"]+.msi'
     $status = Get-FileFromUri -uri ${LibreOfficeVersion} -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
 }
 
