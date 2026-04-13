@@ -623,7 +623,11 @@ if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
     } | Where-Object { $_ } | Where-Object {
         -not $allowlistPattern -or $_.Line -notmatch $allowlistPattern
     } | Where-Object {
-        $_.Line -notmatch "testdata/vulndb"
+        $_.Line -notmatch "testdata/vulndb" -and
+        $_.Line -notmatch "testdata/common/vulndb-v1" -and
+        $_.Line -notmatch "testdata/main/vulndb-v1" -and
+        $_.Line -notmatch "testdata/stdlib/vulndb-v1" -and
+        $_.Line -notmatch "testdata/strip/vulndb-v1"
     }
 
     if ($securityFindings) {
