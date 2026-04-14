@@ -4,6 +4,27 @@ param($script:RestartRequired=0,
         $MaxUpdatesPerCycle=500,
         $BeginWithRestart=0)
 
+function Enable-WinRMForPacker {
+    Write-Output "Enabling WinRM..."
+    $NetworkListManager = [Activator]::CreateInstance([Type]::GetTypeFromCLSID([Guid]"{DCB00C01-570F-4A9B-8D69-199FDBA5723B}"))
+    $Connections = $NetworkListManager.GetNetworkConnections()
+    $Connections | ForEach-Object { $_.GetNetwork().SetCategory(1) }
+
+    Enable-PSRemoting -Force
+    winrm quickconfig -q
+    winrm quickconfig -transport:http
+    winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+    winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="800"}'
+    winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+    winrm set winrm/config/service/auth '@{Basic="true"}'
+    winrm set winrm/config/client/auth '@{Basic="true"}'
+    winrm set winrm/config/listener?Address=*+Transport=HTTP '@{Port="5985"}'
+    netsh advfirewall firewall set rule group="Windows Remote Administration" new enable=yes
+    netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new enable=yes action=allow
+    Set-Service winrm -startuptype "auto"
+    Restart-Service winrm
+}
+
 $LogFile = "C:\Windows\Temp\win-updates.log"
 
 # Linter bugs...
@@ -35,10 +56,10 @@ function Invoke-ContinueRestartOrEnd() {
                 Install-WindowsUpdates
             } elseif ($script:Cycles -gt $script:MaxCycles) {
                 LogWrite "Exceeded Cycle Count - Stopping"
-                & "a:\enable-winrm.ps1"
+                Enable-WinRMForPacker
             } else {
                 LogWrite "Done Installing Windows Updates"
-                & "a:\enable-winrm.ps1"
+                Enable-WinRMForPacker
             }
         }
         1 {
@@ -130,7 +151,7 @@ function Install-WindowsUpdate() {
         LogWrite 'No updates available to install...'
         $script:MoreUpdates=0
         $script:RestartRequired=0
-        & "a:\enable-winrm.ps1"
+        Enable-WinRMForPacker
         $null = $MoreUpdates
         $null = $RestartRequired
         break

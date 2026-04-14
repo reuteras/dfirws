@@ -284,6 +284,11 @@
                     <Order>100</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c echo Enable-PSRemoting -Force -SkipNetworkProfileCheck > C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm quickconfig -q >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/service '@{AllowUnencrypted="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/service/auth '@{Basic="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/client/auth '@{Basic="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo Set-Service winrm -StartupType Automatic >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo Restart-Service winrm >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -File C:\Windows\Temp\ewrm.ps1</CommandLine>
+                    <Description>Enable WinRM for Packer (fallback when floppy is inaccessible)</Description>
+                    <Order>101</Order>
+                </SynchronousCommand>
                 <!-- END WITH WINDOWS UPDATES -->
             </FirstLogonCommands>
             <ShowWindowsLive>false</ShowWindowsLive>
