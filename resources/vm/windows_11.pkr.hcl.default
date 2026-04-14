@@ -136,6 +136,11 @@ build {
     restart_timeout = "${var.restart_timeout}"
   }
 
+  provisioner "file" {
+    source      = "./resources/vm/scripts/vm-guest-tools.ps1"
+    destination = "C:/Windows/Temp/vm-guest-tools.ps1"
+  }
+
   provisioner "windows-shell" {
     execute_command = "{{ .Vars }} cmd /c \"{{ .Path }}\""
     remote_path     = "/tmp/script.bat"
