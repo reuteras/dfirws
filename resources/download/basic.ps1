@@ -3,10 +3,9 @@
 . ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
-# https://www.7-zip.org/download.html - 7-Zip - installed during start
+# https://github.com/ip7z/7zip - 7-Zip - installed during start
 Write-SynchronizedLog "Downloading 7-Zip."
-$7zip_path = Get-DownloadUrlFromPage -url "https://www.7-zip.org/download.html" -RegEx '[^"]+x64.msi'
-$status = Get-FileFromUri -uri "https://www.7-zip.org/${7zip_path}" -FilePath ".\downloads\7zip.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
+$status = Get-GitHubRelease -repo "ip7z/7zip" -path "${SETUP_PATH}\7zip.msi" -match "x64\.msi$" -check "Composite Document File V2 Document"
 
 $TOOL_DEFINITIONS += @{
     Name = "7-Zip"
