@@ -95,7 +95,7 @@ source "vmware-iso" "windows_11" {
                     ]
   guest_os_type           = "windows11-64"
   headless                = "${var.headless}"
-  network_adapter_type    = "vmxnet3"
+  network_adapter_type    = "e1000e"
   tools_mode              = "upload"
   tools_upload_flavor     = "windows"
   tools_upload_path       = "c:/Windows/Temp/vmware-tools.iso"
