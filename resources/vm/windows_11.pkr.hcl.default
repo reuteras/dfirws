@@ -58,6 +58,11 @@ variable "winrm_timeout" {
   default = "6h"
 }
 
+variable "tools_source_path" {
+  type    = string
+  default = "C:\\Program Files (x86)\\VMware\\VMware Workstation\\windows.iso"
+}
+
 variable "iso_checksum" {
   type    = string
   default = "sha256:ISO_HASH"
@@ -98,6 +103,7 @@ source "vmware-iso" "windows_11" {
   headless                = "${var.headless}"
   network_adapter_type    = "e1000e"
   tools_mode              = "attach"
+  tools_source_path       = "${var.tools_source_path}"
   iso_checksum      = "${var.iso_checksum}"
   iso_urls          = [
                         "${var.iso_url_local}",

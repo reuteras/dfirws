@@ -1,4 +1,5 @@
-autounattend      = "./resources/vm/answer_files/Autounattend.xml"
+autounattend        = "./resources/vm/answer_files/Autounattend.xml"
+tools_source_path   = "C:\\Program Files (x86)\\VMware\\VMware Workstation\\windows.iso"
 cpus              = "4"
 disk_size         = "307200"
 disk_type_id      = "1"
