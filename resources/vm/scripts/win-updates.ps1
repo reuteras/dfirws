@@ -50,7 +50,7 @@ function Invoke-ContinueRestartOrEnd() {
             }
 
             LogWrite "No Restart Required"
-            Invoke-WindowsUpdates
+            Invoke-WindowsUpdate
 
             if (($script:MoreUpdates -eq 1) -and ($script:Cycles -le $script:MaxCycles)) {
                 Install-WindowsUpdates
@@ -255,7 +255,7 @@ if ($BeginWithRestart) {
   Invoke-ContinueRestartOrEnd
 }
 
-Invoke-WindowsUpdates
+Invoke-WindowsUpdate
 if ($script:MoreUpdates -eq 1) {
     Install-WindowsUpdate
 } else {
