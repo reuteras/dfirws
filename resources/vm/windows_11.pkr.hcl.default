@@ -96,8 +96,7 @@ source "vmware-iso" "windows_11" {
                         "./resources/vm/scripts/install-vm-guest-tools.bat",
                         "./resources/vm/scripts/microsoft-updates.bat",
                         "./resources/vm/scripts/vm-guest-tools.ps1",
-                        "./resources/vm/scripts/win-updates.ps1",
-                        "./resources/vm/scripts/install-vmware-tools.ps1"
+                        "./resources/vm/scripts/win-updates.ps1"
                     ]
   guest_os_type           = "windows11-64"
   headless                = "${var.headless}"
