@@ -91,14 +91,13 @@ source "vmware-iso" "windows_11" {
                         "./resources/vm/scripts/install-vm-guest-tools.bat",
                         "./resources/vm/scripts/microsoft-updates.bat",
                         "./resources/vm/scripts/vm-guest-tools.ps1",
-                        "./resources/vm/scripts/win-updates.ps1"
+                        "./resources/vm/scripts/win-updates.ps1",
+                        "./resources/vm/scripts/install-vmware-tools.ps1"
                     ]
   guest_os_type           = "windows11-64"
   headless                = "${var.headless}"
   network_adapter_type    = "e1000e"
-  tools_mode              = "upload"
-  tools_upload_flavor     = "windows"
-  tools_upload_path       = "c:/Windows/Temp/vmware-tools.iso"
+  tools_mode              = "attach"
   iso_checksum      = "${var.iso_checksum}"
   iso_urls          = [
                         "${var.iso_url_local}",
@@ -131,23 +130,6 @@ build {
     remote_path     = "/tmp/script.bat"
     scripts         = [
       "./resources/vm/scripts/enable-rdp.bat",
-      ]
-  }
-
-  provisioner "windows-restart" {
-    restart_timeout = "${var.restart_timeout}"
-  }
-
-  provisioner "file" {
-    source      = "./resources/vm/scripts/vm-guest-tools.ps1"
-    destination = "C:/Windows/Temp/vm-guest-tools.ps1"
-  }
-
-  provisioner "windows-shell" {
-    execute_command = "{{ .Vars }} cmd /c \"{{ .Path }}\""
-    remote_path     = "/tmp/script.bat"
-    scripts         = [
-      "./resources/vm/scripts/install-vm-guest-tools.bat",
       ]
   }
 

@@ -268,26 +268,31 @@
                     <Description>Add Windows Defender exclusion for C:\venv</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c a:\microsoft-updates.bat</CommandLine>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -File a:\install-vmware-tools.ps1</CommandLine>
+                    <Description>Install VMware Tools from attached CD</Description>
                     <Order>98</Order>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c a:\microsoft-updates.bat</CommandLine>
+                    <Order>99</Order>
                     <Description>Enable Microsoft Updates</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\disable-screensaver.ps1</CommandLine>
                     <Description>Disable Screensaver</Description>
-                    <Order>99</Order>
+                    <Order>100</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File a:\win-updates.ps1</CommandLine>
                     <Description>Install Windows Updates</Description>
-                    <Order>100</Order>
+                    <Order>101</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c echo Enable-PSRemoting -Force -SkipNetworkProfileCheck > C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm quickconfig -q >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/service '@{AllowUnencrypted="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/service/auth '@{Basic="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/client/auth '@{Basic="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo Set-Service winrm -StartupType Automatic >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo Restart-Service winrm >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -File C:\Windows\Temp\ewrm.ps1</CommandLine>
                     <Description>Enable WinRM for Packer (fallback when floppy is inaccessible)</Description>
-                    <Order>101</Order>
+                    <Order>102</Order>
                 </SynchronousCommand>
                 <!-- END WITH WINDOWS UPDATES -->
             </FirstLogonCommands>
