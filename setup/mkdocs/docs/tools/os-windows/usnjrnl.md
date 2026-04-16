@@ -4,6 +4,8 @@
 
 **Source:** Cargo
 
+**Profiles:** Full, Basic
+
 **File Extensions:** `.bin`
 
 **Tags:** filesystem, forensics, ntfs, windows

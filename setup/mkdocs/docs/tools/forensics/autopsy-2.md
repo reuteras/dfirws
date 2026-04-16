@@ -2,7 +2,7 @@
 
 **Category:** Forensics
 
-**Source:** GitHub Release
+**Source:** Winget
 
 **Profiles:** Full (not included in Basic profile)
 

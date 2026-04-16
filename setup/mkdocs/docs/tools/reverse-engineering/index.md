@@ -3,7 +3,6 @@
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
 | [Binary Ninja](binary-ninja.md) | HTTP | Binary Ninja is a reverse engineering platform. | reverse-engineering, disassembler, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib` | Full only |
-| [CapaExplorer](capaexplorer.md) | Git | Capa analysis importer for Ghidra. | reverse-engineering, malware-analysis, visualization, plugins |  |  |
 | [Cutter](cutter.md) | GitHub Release | Cutter is a Qt and C++ GUI powered by Rizin that provides an intuitive interface for reverse engineering and analyzing binaries across multiple platforms. | reverse-engineering, disassembler, decompiler, gui | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib` | Full only |
 | [FASM](fasm.md) | HTTP | FASM is a fast assembler for x86 and x86-64 architectures. | reverse-engineering | `.asm` |  |
 | [Ghidra](ghidra.md) | Installer | Ghidra is a software reverse engineering (SRE) framework developed by NSA's Research Directorate. |  |  | Full only |

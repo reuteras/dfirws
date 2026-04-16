@@ -55,6 +55,7 @@ $DFIRWS_PROFILES = @{
             "vscode-mermaid",
             "vscode-ruff",
             "NetworkMiner",
+            "PolarProxy",
             "Azure CLI",
             # release.ps1
             "Audacity",

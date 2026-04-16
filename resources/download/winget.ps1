@@ -1,41 +1,6 @@
 ﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
-# Autopsy - available for installation via dfirws-install.ps1
-if (Test-ToolIncluded -ToolName "Autopsy") {
-    Write-SynchronizedLog "winget: Downloading Autopsy."
-    $status = Get-WinGet "SleuthKit.Autopsy" "Autopsy*.msi" "autopsy.msi" -check "Composite Document File V2 Document"
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Autopsy"
-    Category = "Forensics"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\Autopsy (runs dfirws-install -Autopsy).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Autopsy"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -Autopsy"
-    Verify = @()
-    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk")
-    Tags = @("disk-forensics", "forensics", "gui", "artifact-extraction")
-    Notes = "Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
 # Burp suite - available for installation via dfirws-install.ps1
 if (Test-ToolIncluded -ToolName "Burp Suite") {
     Write-SynchronizedLog "winget: Downloading Burp Suite."

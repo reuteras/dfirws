@@ -2742,6 +2742,54 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+if (Test-ToolIncluded -ToolName "PolarProxy") {
+    $status = Get-FileFromUri -uri "https://www.netresec.com/?download=PolarProxy_win-x64" -FilePath ".\downloads\PolarProxy.zip" -CheckURL "Yes" -check "Zip archive data"
+    if ($status) {
+        if (Test-Path -Path "${TOOLS}\PolarProxy") {
+            Remove-Item -Recurse -Force "${TOOLS}\PolarProxy" | Out-Null 2>&1
+        }
+        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\PolarProxy.zip" -o"${TOOLS}\PolarProxy" | Out-Null
+        Move-Item ${TOOLS}\PolarProxy_* "${TOOLS}\PolarProxy"
+    }
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "PolarProxy"
+    Homepage = "https://www.netresec.com/?page=PolarProxy"
+    Vendor = "Netresec"
+    License = "free edition, CC BY-ND 4.0"
+    Category = "Network\Proxies"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\Proxies\PolarProxy.lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${TOOLS}\PolarProxy\PolarProxy.exe"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\PolarProxy\PolarProxy.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".pcap", ".pcapng")
+    Tags = @("network-analysis", "proxy")
+    Notes = "PolarProxy is a transparent TLS and SSL inspection proxy created for incident responders, malware analysts and security researchers."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @(
+        "N/A"
+    )
+    Dependencies = @()
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 # https://nmap.org/download.html - Nmap
 $nmap_url = Get-DownloadUrlFromPage -url "https://nmap.org/download.html" -RegEx 'https[^"]+setup.exe'
 $status = Get-FileFromUri -uri "${nmap_url}" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes" -check "PE32"

@@ -35,6 +35,7 @@ Categories generated from dfirws shortcuts.
 - [Malware tools / Gootloader](./malware-tools-gootloader/index.md)
 - [Memory](./memory/index.md)
 - [Network](./network/index.md)
+- [Network / Proxies](./network-proxies/index.md)
 - [OS / Android](./os-android/index.md)
 - [OS / Linux](./os-linux/index.md)
 - [OS / Windows](./os-windows/index.md)
@@ -52,7 +53,6 @@ Categories generated from dfirws shortcuts.
 - [Signatures and information](./signatures-and-information/index.md)
 - [Signatures and information / Online tools](./signatures-and-information-online-tools/index.md)
 - [Sysinternals](./sysinternals/index.md)
-- [Uncategorized](./uncategorized/index.md)
 - [Utilities](./utilities/index.md)
 - [Utilities / Browsers](./utilities-browsers/index.md)
 - [Utilities / CTF](./utilities-ctf/index.md)
@@ -84,7 +84,8 @@ Categories generated from dfirws shortcuts.
 | [Aspose.Email-for-Python-via-Net](./files-and-apps-email/aspose-email-for-python-via-net.md) | Python |  | email, forensics, data-extraction | `.msg`, `.eml`, `.pst`, `.ost`, `.mbox` |  |
 | [Audacity](./utilities-media/audacity.md) | GitHub Release | Audacity is a free and open-source audio editing software. | audio, steganography | `.wav`, `.mp3`, `.flac`, `.ogg`, `.aiff` | Full only |
 | [autoit-ripper](./files-and-apps/autoit-ripper.md) | Python | Extract AutoIt scripts embedded in PE binaries. | malware-analysis, scripting, deobfuscation | `.exe` |  |
-| [Autopsy](./forensics/autopsy.md) | Winget | Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic. | disk-forensics, forensics, gui, artifact-extraction | `.dd`, `.raw`, `.E01`, `.img`, `.vmdk` | Full only |
+| [Autopsy](./forensics/autopsy.md) | GitHub Release | Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic. | disk-forensics, forensics, gui, artifact-extraction | `.dd`, `.raw`, `.E01`, `.img`, `.vmdk` | Full only |
+| [Autopsy](./forensics/autopsy-2.md) | Winget | Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic. | disk-forensics, forensics, gui, artifact-extraction | `.dd`, `.raw`, `.E01`, `.img`, `.vmdk` | Full only |
 | [autopsy_addon_modules](./forensics/autopsy-addon-modules.md) | Git | Collection of third-party add-on modules for Autopsy — ingest modules, content viewers, report modules, and data source processors. | forensics, disk-forensics, plugins, documentation |  |  |
 | [Azure CLI](./cloud/azure-cli.md) | HTTP | Azure CLI is a command-line tool for managing Azure resources. |  |  | Full only |
 | [BeaconHunter](./malware-analysis-cobalt-strike/beaconhunter.md) | GitHub Release | Detect and respond to Cobalt Strike beacons using ETW. | malware-analysis, cobalt-strike, memory-forensics | `.dmp`, `.exe`, `.dll` |  |
@@ -103,7 +104,6 @@ Categories generated from dfirws shortcuts.
 | [capa](./files-and-apps-pe/capa.md) | GitHub Release | capa rules for identifying capabilities in binaries. | malware-analysis, pe-analysis, reverse-engineering, mitre-attack | `.exe` |  |
 | [capa Explorer Web](./files-and-apps-pe/capa-explorer-web.md) | HTTP | capa Explorer Web is a web UI for exploring capa results. | malware-analysis, visualization | `.exe`, `.dll` | Full only |
 | [capa-rules](./files-and-apps-pe/capa-rules.md) | GitHub Release | Rules for capa. |  |  |  |
-| [CapaExplorer](./reverse-engineering/capaexplorer.md) | Git | Capa analysis importer for Ghidra. | reverse-engineering, malware-analysis, visualization, plugins |  |  |
 | [cart](./forensics/cart.md) | Python | Compressed and RC4 Transport (CaRT) Neutering format. This is a file format that is used to neuter malware files for distribution in the malware analyst community. | malware-analysis | `.cart` |  |
 | [chainsaw](./files-and-apps-log/chainsaw.md) | GitHub Release | Rapidly Search and Hunt through Windows Forensic Artefacts | log-analysis, incident-response, sigma, detection | `.evtx` |  |
 | [chainsaw-rules](./signatures-and-information/chainsaw-rules.md) | Git | A set of custom Chainsaw rules for event log threat hunting. | sigma, detection-rules |  |  |
@@ -116,7 +116,7 @@ Categories generated from dfirws shortcuts.
 | [ComparePlus](./editors/compareplus.md) | GitHub Release | A diff plugin for Notepad++. | text-editor, binary-diffing, plugins |  |  |
 | [compressed_rtf](./files-and-apps-office/compressed-rtf.md) | Python |  | office, rtf, data-extraction | `.rtf` |  |
 | [csvkit](./malware-tools/csvkit.md) | Python | A suite of command-line tools for working with CSV, the king of tabular file formats. | csv, data-processing, cli | `.csv` |  |
-| [CuTE-tui](./uncategorized/cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |  |
+| [CuTE-tui](./utilities/cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |  |
 | [Cutter](./reverse-engineering/cutter.md) | GitHub Release | Cutter is a Qt and C++ GUI powered by Rizin that provides an intuitive interface for reverse engineering and analyzing binaries across multiple platforms. | reverse-engineering, disassembler, decompiler, gui | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.dylib` | Full only |
 | [cutter-jupyter](./reverse-engineering/cutter-jupyter.md) | Git | Jupyter Plugin for Cutter. | reverse-engineering |  |  |
 | [cutterref](./reverse-engineering/cutterref.md) | Git | Cutter Instruction Reference Plugin | reverse-engineering, documentation, plugins |  |  |
@@ -134,7 +134,7 @@ Categories generated from dfirws shortcuts.
 | [deobshell](./programming-powershell/deobshell.md) | Git | Powershell script deobfuscation using AST in Python. | powershell, deobfuscation, malware-analysis |  |  |
 | [Dependencies](./utilities/dependencies.md) | GitHub Release | Dependencies is a tool to view dependencies of Windows binaries. | dependencies, binary-analysis, windows | `.exe`, `.dll` |  |
 | [Detect It Easy](./files-and-apps/detect-it-easy.md) | GitHub Release | Detect It Easy is a tool for identifying file types and detecting packers. | pe-analysis, file-analysis, packer-detection | `.exe`, `.dll`, `.elf`, `.mach-o`, `.bin` |  |
-| [dfir-toolkit](./files-and-apps-log/dfir-toolkit.md) | Cargo | The dfir-toolkit is a collection of command-line tools for digital forensics and incident response (DFIR) tasks. It includes various utilities for analyzing log files, registry hives, MFT files, and other artifacts commonly encountered in DFIR investigations. | forensics, timeline, log-analysis, event-log, registry, bodyfile | `.evtx`, `.reg`, `.dat`, `.lnk`, `.pf`, `.mft`, `.zip` |  |
+| [dfir-toolkit](./files-and-apps-log/dfir-toolkit.md) | Cargo | The dfir-toolkit is a collection of command-line tools for digital forensics and incident response (DFIR) tasks. It includes various utilities for analyzing log files, registry hives, MFT files, and other artifacts commonly encountered in DFIR investigations. | forensics, timeline, log-analysis, event-log, registry, filesystem | `.evtx`, `.reg`, `.dat`, `.lnk`, `.pf`, `.mft`, `.zip` |  |
 | [dfir-unfurl](./files-and-apps-browser/dfir-unfurl.md) | Python |  | osint, network, forensics, visualization |  |  |
 | [dfir_ntfs](./files-and-apps-disk/dfir-ntfs.md) | Python | An NTFS/FAT parser for digital forensics & incident response. | ntfs, filesystem, forensics, disk-forensics | `.mft`, `.dd`, `.raw`, `.img` |  |
 | [DFIRArtifactMuseum](./forensics/dfirartifactmuseum.md) | Git | The goal of this repo is to archive artifacts from all versions of various OS's and categorizing them by type. This will help with artifact validation processes as well as increase access to artifacts that may no longer be readily available anymore. | forensics, artifact-extraction, documentation |  |  |
@@ -337,6 +337,7 @@ Categories generated from dfirws shortcuts.
 | [peutils](./files-and-apps-pe/peutils.md) | Python |  | pe-analysis, packer-detection | `.exe`, `.dll` |  |
 | [pfp](./files-and-apps-pe/pfp.md) | Python |  | binary-analysis, file-analysis | `.bin` |  |
 | [PHP](./programming/php.md) | HTTP | PHP is a scripting language widely used for web development. | scripting, web | `.php` |  |
+| [PolarProxy](./network-proxies/polarproxy.md) | HTTP | PolarProxy is a transparent TLS and SSL inspection proxy created for incident responders, malware analysts and security researchers. | network-analysis, proxy | `.pcap`, `.pcapng` | Full only |
 | [PowerDecode](./programming-powershell/powerdecode.md) | Git | PowerDecode is a PowerShell-based tool that allows to deobfuscate PowerShell scripts obfuscated across multiple layers. The tool performs code dynamic analysis, extracting malware hosting URLs and checking http response.It can also detect if the malware attempts to inject shellcode into memory. | powershell, deobfuscation, malware-analysis |  |  |
 | [PowerShell](./programming-powershell/powershell.md) | GitHub Release | PowerShell is a task automation and configuration management framework from Microsoft. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
 | [PowerShell 7](./programming-powershell/powershell-7.md) | Winget | PowerShell 7 is a cross-platform shell and scripting language that provides a powerful command-line interface and automation capabilities. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
@@ -412,14 +413,14 @@ Categories generated from dfirws shortcuts.
 | [signature-base](./signatures-and-information/signature-base.md) | Git | YARA signature and IOC database for my scanners and tools. | yara, detection-rules, ioc | `.yara` |  |
 | [simplejson](./programming-python/simplejson.md) | Python |  | json, data-processing | `.json` |  |
 | [Sleuthkit](./files-and-apps-disk/sleuthkit.md) | GitHub Release | The Sleuth Kit® (TSK) is a library and collection of command line digital forensics tools that allow you to investigate volume and file system data. The library can be incorporated into larger digital forensics tools and the command line tools can be directly used to find evidence. | disk-forensics, filesystem, forensics | `.dd`, `.raw`, `.E01`, `.img`, `.vmdk` |  |
-| [SmartDeblur](./utilities-media/smartdeblur.md) | Git | SmartDeblur is a tool for restoring defocused and blurred images. It can be used to recover details from images that are out of focus or have motion blur. | image-restoration, forensics |  |  |
+| [SmartDeblur](./utilities-media/smartdeblur.md) | Git | SmartDeblur is a tool for restoring unfocused and blurred images. It can be used to recover details from images that are out of focus or have motion blur. | image-restoration, forensics |  |  |
 | [Snort Rules](./enrichment-ids/snort-rules.md) | Enrichment | Snort 3 community ruleset for network intrusion detection. | ids, detection-rules, network | `.rules`, `.tar.gz` |  |
 | [speakeasy](./malware-analysis/speakeasy.md) | Python | Windows malware emulation framework that executes binaries, drivers, and shellcode in a modeled Windows runtime without a full VM. Produces structured JSON reports. | malware-analysis, emulation, shellcode, reverse-engineering, windows | `.exe`, `.dll`, `.sys`, `.bin` |  |
 | [sqlit-tui](./files-and-apps-database/sqlit-tui.md) | Python |  | database, sqlite, tui | `.db`, `.sqlite`, `.sqlite3` |  |
 | [SQLite Tools](./files-and-apps-database/sqlite-tools.md) | HTTP | SQLite command-line tools. | database, sqlite, cli | `.db`, `.sqlite`, `.sqlite3` |  |
 | [srum_dump](./os-windows/srum-dump.md) | GitHub Release | A forensics tool to convert the data in the Windows srum (System Resource Usage Monitor) database to an xlsx spreadsheet. | windows, forensics, filesystem | `.dat` |  |
 | [SSC-Threat-Intel-IoCs](./enrichment-threat-intelligence/ssc-threat-intel-iocs.md) | Enrichment | SecurityScorecard threat intelligence indicators of compromise. | threat-intelligence, ioc |  |  |
-| [SSHniff](./uncategorized/sshniff.md) | Cargo | SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications. | network-analysis, ssh, pcap | `.pcap`, `.pcapng` |  |
+| [SSHniff](./network/sshniff.md) | Cargo | SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications. | network-analysis, network, pcap | `.pcap`, `.pcapng` |  |
 | [stego-lsb](./utilities-ctf/stego-lsb.md) | Python |  | steganography, audio | `.png`, `.bmp`, `.wav` |  |
 | [Strawberry Perl](./programming/strawberry-perl.md) | GitHub Release | Strawberry Perl is a Perl distribution for Windows that includes a complete Perl environment. | scripting | `.pl`, `.pm` | Full only |
 | [Suricata Rules](./enrichment-ids/suricata-rules.md) | Enrichment | Emerging Threats open ruleset for Suricata IDS. | ids, detection-rules, network | `.rules`, `.zip` |  |
@@ -496,6 +497,6 @@ Categories generated from dfirws shortcuts.
 | [yq](./signatures-and-information/yq.md) | GitHub Release | yq is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor. | yaml, data-processing, cli | `.yaml`, `.yml`, `.json`, `.xml`, `.toml` |  |
 | [zaproxy](./network/zaproxy.md) | GitHub Release | The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to. | web, security-testing, network |  | Full only |
 | [zensical](./utilities/zensical.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.toml` |  |
-| [Zircolite](./files-and-apps-log/zircolite.md) | GitHub Release | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |  |
+| [Zircolite](./files-and-apps-log/zircolite.md) | Python | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |  |
 | [zstd](./utilities/zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |
 | [Zui](./network/zui.md) | GitHub Release | Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data. | network-analysis, pcap | `.pcap`, `.pcapng`, `.zng` | Full only |

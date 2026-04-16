@@ -354,6 +354,37 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# Autopsy - available for installation via dfirws-install.ps1
+$status = Get-GitHubRelease -repo "sleuthkit/autopsy" -path "${SETUP_PATH}\autopsy.msi" -match "64bit.msi$" -check "Composite Document File V2 Document"
+$TOOL_DEFINITIONS += @{
+    Name = "Autopsy"
+    Category = "Forensics"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\Autopsy (runs dfirws-install -Autopsy).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Autopsy"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Autopsy"
+    Verify = @()
+    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk")
+    Tags = @("disk-forensics", "forensics", "gui", "artifact-extraction")
+    Notes = "Autopsy is a digital forensics platform that allows users to analyze disk images and extract artifacts from them. It provides a graphical user interface for examining file systems, recovering deleted files, and analyzing network traffic."
+    Tips = ""
+    Usage = ""
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = ""
+    Vendor = ""
+    License = ""
+    LicenseUrl = ""
+    PythonVersion = ""
+}
+
 # fx
 $status = Get-GitHubRelease -repo "antonmedv/fx" -path "${SETUP_PATH}\fx.exe" -match "fx_windows_amd64.exe" -check "PE32"
 if ($status) {

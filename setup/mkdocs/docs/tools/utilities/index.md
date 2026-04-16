@@ -4,6 +4,7 @@
 | --- | --- | --- | --- | --- | --- |
 | [7-Zip](7-zip.md) | Installer | 7-Zip is a file archive tool. |  |  |  |
 | [@marp-team/marp-cli](marp-team-marp-cli.md) | npm | A CLI interface for Marp and Marpit based converters. Markdown presentations. | markdown, office, documentation | `.md`, `.markdown` |  |
+| [CuTE-tui](cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |  |
 | [DCode](dcode.md) | HTTP | DCode is a date/time conversion and analysis tool. | metadata, forensics, decoding |  |  |
 | [Dependencies](dependencies.md) | GitHub Release | Dependencies is a tool to view dependencies of Windows binaries. | dependencies, binary-analysis, windows | `.exe`, `.dll` |  |
 | [ExifTool](exiftool.md) | HTTP | ExifTool is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files. | metadata, file-analysis | `.jpg`, `.jpeg`, `.png`, `.gif`, `.tiff`, `.pdf`, `.doc`, `.docx`, `.mp4` |  |
