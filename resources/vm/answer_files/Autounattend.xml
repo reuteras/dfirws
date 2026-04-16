@@ -268,7 +268,7 @@
                     <Description>Add Windows Defender exclusion for C:\venv</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c echo Enable-PSRemoting -Force -SkipNetworkProfileCheck > C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm quickconfig -q >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/service '@{AllowUnencrypted="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/service/auth '@{Basic="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo winrm set winrm/config/client/auth '@{Basic="true"}' >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo Set-Service winrm -StartupType Automatic >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; echo Restart-Service winrm >> C:\Windows\Temp\ewrm.ps1 &amp;&amp; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -File C:\Windows\Temp\ewrm.ps1</CommandLine>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command "Enable-PSRemoting -Force -SkipNetworkProfileCheck;Set-Item WSMan:\localhost\Service\AllowUnencrypted $true;Set-Item WSMan:\localhost\Service\Auth\Basic $true;Set-Item WSMan:\localhost\Client\Auth\Basic $true;Set-Service winrm -StartupType Automatic;Restart-Service winrm"</CommandLine>
                     <Description>Enable WinRM for Packer</Description>
                     <Order>98</Order>
                 </SynchronousCommand>
@@ -290,7 +290,7 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c echo $ErrorActionPreference='SilentlyContinue' > C:\Windows\Temp\ivmt.ps1 &amp;&amp; echo $log='C:\Windows\Temp\ivmt.log' >> C:\Windows\Temp\ivmt.ps1 &amp;&amp; echo Add-Content $log 'Starting VMware Tools install' >> C:\Windows\Temp\ivmt.ps1 &amp;&amp; echo $s='' >> C:\Windows\Temp\ivmt.ps1 &amp;&amp; echo foreach ^($dr in 'D:','E:','F:','G:','H:'^) { $t = $dr + '\setup64.exe'; Add-Content $log $t; if ^(Test-Path $t^) { $s = $t; break } } >> C:\Windows\Temp\ivmt.ps1 &amp;&amp; echo if ^($s^) { Add-Content $log 'Installing'; Start-Process -FilePath $s -ArgumentList '/S', '/v', '/qn REBOOT=R' -Wait } else { Add-Content $log 'Not found' } >> C:\Windows\Temp\ivmt.ps1 &amp;&amp; C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -File C:\Windows\Temp\ivmt.ps1</CommandLine>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command "$log='C:\Windows\Temp\ivmt.log';$s='';foreach($d in 'D:','E:','F:','G:','H:'){$t=$d+'\setup64.exe';if(Test-Path $t){$s=$t;break};$t=$d+'\setup.exe';if(Test-Path $t){$s=$t;break}};Add-Content $log ('setup: '+$s);if($s){Start-Process -FilePath $s -ArgumentList '/S /v /qn' -Wait;Add-Content $log 'done'}else{Add-Content $log 'not found'}"</CommandLine>
                     <Description>Install VMware Tools from attached CD</Description>
                     <Order>102</Order>
                 </SynchronousCommand>
