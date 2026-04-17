@@ -268,11 +268,6 @@
                     <Description>Add Windows Defender exclusion for C:\venv</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command "Enable-PSRemoting -Force -SkipNetworkProfileCheck;Set-Item WSMan:\localhost\Service\AllowUnencrypted $true;Set-Item WSMan:\localhost\Service\Auth\Basic $true;Set-Item WSMan:\localhost\Client\Auth\Basic $true;Set-Service winrm -StartupType Automatic;Restart-Service winrm"</CommandLine>
-                    <Description>Enable WinRM for Packer</Description>
-                    <Order>98</Order>
-                </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
                     <CommandLine>cmd.exe /c a:\microsoft-updates.bat</CommandLine>
                     <Order>99</Order>
                     <Description>Enable Microsoft Updates</Description>
