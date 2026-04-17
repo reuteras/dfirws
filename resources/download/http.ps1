@@ -2331,7 +2331,7 @@ $TOOL_DEFINITIONS += @{
 
 # https://neo4j.com/deployment-center/#community - Neo4j - installed during start
 if (Test-ToolIncluded -ToolName "Neo4j") {
-    $NeoVersionString = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx 'release=([^&]+)&flavour=winzip'
+    $NeoVersionString = Get-DownloadUrlFromPage -Url "https://neo4j.com/deployment-center/#community" -RegEx 'release=(2[^&]+)&flavour=winzip'
     $NeoVersion = $NeoVersionString -replace 'release=', '' -replace '&flavour=winzip', ''
     $status = Get-FileFromUri -uri "https://neo4j.com/artifact.php?name=neo4j-community-${NeoVersion}-windows.zip" -FilePath ".\downloads\neo4j.zip" -CheckURL "Yes" -check "Zip archive data"
 }
