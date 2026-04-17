@@ -268,8 +268,8 @@
                     <Description>Add Windows Defender exclusion for C:\venv</Description>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command "Enable-PSRemoting -Force -SkipNetworkProfileCheck;Set-Item WSMan:\localhost\Service\AllowUnencrypted $true;Set-Item WSMan:\localhost\Service\Auth\Basic $true;Set-Item WSMan:\localhost\Client\Auth\Basic $true;Set-Service winrm -StartupType Automatic;Restart-Service winrm;$log='C:\Windows\Temp\ivmt.log';$s='';foreach($d in 'D:','E:','F:','G:','H:'){$t=$d+'\setup64.exe';if(Test-Path $t){$s=$t;break};$t=$d+'\setup.exe';if(Test-Path $t){$s=$t;break}};Add-Content $log ('setup: '+$s);if($s){$ia=[char]47+'S '+[char]47+'v '+[char]47+'qn';Start-Process -FilePath $s -ArgumentList $ia -Wait;Add-Content $log 'done'}else{Add-Content $log 'not found'}"</CommandLine>
-                    <Description>Enable WinRM and install VMware Tools from attached CD</Description>
+                    <CommandLine>cmd.exe /c C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command "Enable-PSRemoting -Force -SkipNetworkProfileCheck;Set-Item WSMan:\localhost\Service\AllowUnencrypted $true;Set-Item WSMan:\localhost\Service\Auth\Basic $true;Set-Item WSMan:\localhost\Client\Auth\Basic $true;Set-Service winrm -StartupType Automatic;Restart-Service winrm"</CommandLine>
+                    <Description>Enable WinRM for Packer</Description>
                     <Order>98</Order>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
