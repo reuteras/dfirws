@@ -32,9 +32,12 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman-key --populate msys2' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman-key --populate' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman-key --populate' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    # pacman-key starts gpg-agent which holds msys-gcrypt-20.dll open; kill it before
+    # pacman upgrade so libgcrypt can be replaced (otherwise GPGME breaks for all later runs).
+    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Get-Process | Where-Object { try { $_.MainModule.FileName -like "C:\Tools\msys64\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 3
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    # Kill gpg-agent and other background processes that hold msys-gcrypt DLL open,
-    # otherwise the second -Syuu cannot replace libgcrypt and GPGME breaks.
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Get-Process | Where-Object { try { $_.MainModule.FileName -like "C:\Tools\msys64\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 3
