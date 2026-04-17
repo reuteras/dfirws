@@ -10,6 +10,9 @@ function Enable-WinRMForPacker {
     $Connections = $NetworkListManager.GetNetworkConnections()
     $Connections | ForEach-Object { $_.GetNetwork().SetCategory(1) }
 
+    # Override any Group Policy that blocks unencrypted WinRM (Windows 11 24H2+)
+    reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service" /v AllowUnencrypted /t REG_DWORD /d 1 /f | Out-Null
+
     Enable-PSRemoting -Force
     winrm quickconfig -q
     winrm quickconfig -transport:http
