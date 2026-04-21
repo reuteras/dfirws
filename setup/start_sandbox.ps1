@@ -13,13 +13,12 @@ if (Test-Path 'C:\Users\Public\Desktop\Microsoft Edge.lnk') {
 }
 
 # Import common functions
-$TARGET_ENVIRONMENT = "Sandbox"
-if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
-    . "${HOME}\Documents\tools\wscommon.ps1"
+if ($env:USERNAME -eq "WDAGUtilityAccount") {
+    $TARGET_ENVIRONMENT = "Sandbox"
 } else {
-    . '\\vmware-host\Shared Folders\dfirws\setup\wscommon.ps1'
     $TARGET_ENVIRONMENT = "VM"
 }
+. "${HOME}\Documents\tools\wscommon.ps1"
 
 # Start logging
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'

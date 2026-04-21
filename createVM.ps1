@@ -1,8 +1,19 @@
 <#
 .SYNOPSIS
-    Create a Windows 11 VM with dfirws installed.
+    DEPRECATED. Create a Windows 11 VM with dfirws installed (VMware Workstation only).
 
 .DESCRIPTION
+    DEPRECATED: this script is tied to VMware Workstation and broke with
+    VMware Tools 13.0+ which requires TPM 2.0 on Windows 11 guests. TPM
+    on Workstation forces partial VM encryption that breaks the vmrun
+    automation this script relies on, and packer-plugin-vmware has no
+    vTPM support.
+
+    Use VMinstall.ps1 instead. It is hypervisor-agnostic: create your VM
+    any way you like, then copy the bundle produced by
+    'VMinstall.ps1 -CreatePackage' into the VM and run
+    'VMinstall.ps1 -Install' from an elevated PowerShell inside the VM.
+
     This script will download the Windows 11 ISO file, create a VM with Windows 11 installed, install dfirws in the VM and run Windows 11 customization.
 
 .PARAMETER NoDownload
@@ -37,6 +48,8 @@ param (
     [Parameter(HelpMessage = "VMX file for the VM.")]
     [string]$VM_VMX = ".\Windows_11_dfirws_64-bit.vmwarevm\Windows_11_dfirws_64-bit.vmx"
 )
+
+Write-Warning "createVM.ps1 is DEPRECATED. Use VMinstall.ps1 (hypervisor-agnostic) instead. See Get-Help .\VMinstall.ps1 -Full."
 
 if (-not (Test-Path -Path "tmp")) {
     New-Item -ItemType Directory -Path "tmp" | Out-Null

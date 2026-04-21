@@ -1,11 +1,7 @@
 # DFIRWS
 
 # Import common functions
-if (Test-Path "${HOME}\Documents\tools\wscommon.ps1") {
-    . "${HOME}\Documents\tools\wscommon.ps1"
-} else {
-    . '\\vmware-host\Shared Folders\dfirws\setup\wscommon.ps1'
-}
+. "${HOME}\Documents\tools\wscommon.ps1"
 
 # Verify that the file command is installed
 
