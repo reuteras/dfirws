@@ -2,6 +2,7 @@
 config.ps1
 config.ps1.org
 dfirws-config.ps1
+dfirws-vm.7z
 downloads/*
 enrichment/*
 local/*
