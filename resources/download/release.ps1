@@ -1577,7 +1577,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\die") {
         Remove-Item "${TOOLS}\die" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\die.zip" -o"${TOOLS}\die" | Out-Null
+    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\die.zip" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
