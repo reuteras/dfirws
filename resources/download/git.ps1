@@ -114,7 +114,7 @@ if (Test-Path -Path ".\reconstructer.org\OfficeMalScanner.zip") {
     if (Test-Path -Path "..\Tools\OfficeMalScanner") {
         Remove-Item -Force -Recurse "..\Tools\OfficeMalScanner"
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\reconstructer.org\OfficeMalScanner.zip" -o"..\Tools\" | Out-Null
+    & $SEVENZIP x -aoa ".\reconstructer.org\OfficeMalScanner.zip" -o"..\Tools\" | Out-Null
 }
 
 # Extract SmartDeblur
@@ -122,11 +122,11 @@ if (Test-Path -Path ".\SmartDeblur\dist\SmartDeblur-1.*-win.zip") {
     if (Test-Path -Path "..\Tools\SmartDeblur") {
         Remove-Item -Force -Recurse "..\Tools\SmartDeblur"
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\SmartDeblur\dist\SmartDeblur-1.*-win.zip" -o"..\Tools\" | Out-Null
+    & $SEVENZIP x -aoa ".\SmartDeblur\dist\SmartDeblur-1.*-win.zip" -o"..\Tools\" | Out-Null
     Move-Item ..\Tools\SmartDeblur-* ..\Tools\SmartDeblur
 }
 
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
+& $SEVENZIP x -aoa "ASL\exeinfope.zip" -o"..\Tools" | Out-Null
 
 Set-Location ..\..
 

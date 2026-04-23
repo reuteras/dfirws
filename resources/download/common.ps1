@@ -20,6 +20,15 @@ if (!(Test-Path variable:GIT_FILE)) {
     $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
 }
 
+# Resolve 7-Zip path: check PATH first, then common install locations
+if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) {
+    $SEVENZIP = "7z.exe"
+} else {
+    $SEVENZIP = @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
+        Where-Object { Test-Path $_ } | Select-Object -First 1
+}
+$null = $SEVENZIP
+
 function ConvertTo-Icon {
     Param(
         [Parameter(Mandatory=$True)] $bitmapPath,

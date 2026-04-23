@@ -22,7 +22,7 @@ Write-Output "PowerShell.exe -ExecutionPolicy Bypass -File C:\Progress.ps1" | Ou
 
 # Update path
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") + ";C:\Tools\node"
-&"${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\nodejs.zip" -o"${TOOLS}\node" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+&$SEVENZIP x -aoa "${SETUP_PATH}\nodejs.zip" -o"${TOOLS}\node" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Set-Location "${TOOLS}\node\node-*"
 Move-Item * ..
 

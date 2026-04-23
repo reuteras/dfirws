@@ -18,7 +18,12 @@ if (!(Test-Path $vmwareToolsIso)) {
 }
 
 Write-Output "Extract VMware Tools ISO"
-& "C:\Program Files\7-Zip\7z.exe" x "$vmwareToolsIso" -o"C:\Windows\Temp\VMWare" | Out-Null
+if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) {
+    $SEVENZIP = "7z.exe"
+} else {
+    $SEVENZIP = "C:\Program Files\7-Zip\7z.exe"
+}
+& $SEVENZIP x "$vmwareToolsIso" -o"C:\Windows\Temp\VMWare" | Out-Null
 
 Write-Output "Install VMware Tools"
 Start-Process -Wait "C:\Windows\Temp\VMWare\setup.exe" -ArgumentList '/S /v "/qn REBOOT=R"'

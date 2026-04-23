@@ -153,7 +153,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\sysinternals") {
         Remove-Item -Recurse -Force "${TOOLS}\sysinternals" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1179,7 +1179,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\exiftool") {
         Remove-Item -Recurse -Force "${TOOLS}\exiftool" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\exiftool.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\exiftool.zip" -o"${TOOLS}" | Out-Null
     Start-Sleep -Seconds 3
     Move-Item ${TOOLS}\exiftool-* "${TOOLS}\exiftool" -Force
     Copy-Item "${TOOLS}\exiftool\exiftool(-k).exe" ${TOOLS}\exiftool\exiftool.exe
@@ -1232,7 +1232,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\pestudio") {
         Remove-Item -Recurse -Force "${TOOLS}\pestudio" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pestudio.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\pestudio.zip" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1280,7 +1280,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\hxd") {
         Remove-Item -Recurse -Force "${TOOLS}\hxd" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hxd.zip" -o"${TOOLS}\hxd" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\hxd.zip" -o"${TOOLS}\hxd" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1325,11 +1325,11 @@ $TOOL_DEFINITIONS += @{
 # Get trid and triddefs
 $status = Get-FileFromUri -uri "https://mark0.net/download/trid_w32.zip" -FilePath ".\downloads\trid.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\trid.zip" -o"${TOOLS}\trid" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\trid.zip" -o"${TOOLS}\trid" | Out-Null
 }
 $status = Get-FileFromUri -uri "https://mark0.net/download/triddefs.zip" -FilePath ".\downloads\triddefs.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\triddefs.zip" -o"${TOOLS}\trid" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\triddefs.zip" -o"${TOOLS}\trid" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1378,7 +1378,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\malcat") {
         Remove-Item -Recurse -Force "${TOOLS}\malcat" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\malcat.zip" -o"${TOOLS}\malcat" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\malcat.zip" -o"${TOOLS}\malcat" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1427,7 +1427,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\ssview") {
         Remove-Item -Recurse -Force "${TOOLS}\ssview" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ssview.zip" -o"${TOOLS}\ssview" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\ssview.zip" -o"${TOOLS}\ssview" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1476,7 +1476,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\FullEventLogView") {
         Remove-Item -Recurse -Force "${TOOLS}\FullEventLogView" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logview.zip" -o"${TOOLS}\FullEventLogView" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\logview.zip" -o"${TOOLS}\FullEventLogView" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1525,7 +1525,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\pstwalker") {
         Remove-Item -Recurse -Force "${TOOLS}\pstwalker" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pstwalker.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\pstwalker.zip" -o"${TOOLS}" | Out-Null
     Start-Sleep -Seconds 3
     Move-Item ${TOOLS}\pstwalker*portable "${TOOLS}\pstwalker"
 }
@@ -1576,7 +1576,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\WinApiSearch") {
         Remove-Item -Recurse -Force "${TOOLS}\WinApiSearch" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinApiSearch.zip" -o"${TOOLS}\WinApiSearch" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\WinApiSearch.zip" -o"${TOOLS}\WinApiSearch" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1709,7 +1709,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\MailView") {
         Remove-Item -Recurse -Force "${TOOLS}\MailView" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mailview.zip" -o"${TOOLS}\MailView" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\mailview.zip" -o"${TOOLS}\MailView" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1758,7 +1758,7 @@ if (Test-ToolIncluded -ToolName "Volatility Workbench 3") {
         if (Test-Path -Path "${TOOLS}\VolatilityWorkbench") {
             Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
     }
     $status = Get-FileFromUri -uri "https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip" -FilePath "${TOOLS}\VolatilityWorkbench\Symbols\linux.zip" -check "Zip archive data"
     $status = Get-FileFromUri -uri "https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip" -FilePath "${TOOLS}\VolatilityWorkbench\Symbols\mac.zip" -check "Zip archive data"
@@ -1811,7 +1811,7 @@ if (Test-ToolIncluded -ToolName "Volatility Workbench 2.1") {
         if (Test-Path -Path "${TOOLS}\VolatilityWorkbench2") {
             Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench2" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\volatilityworkbench2.zip" -o"${TOOLS}\VolatilityWorkbench2" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\volatilityworkbench2.zip" -o"${TOOLS}\VolatilityWorkbench2" | Out-Null
     }
 }
 
@@ -1867,7 +1867,7 @@ if (Test-Path -Path "${TOOLS}\ntemp") {
 
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/lastactivityview.zip" -FilePath ".\downloads\lastactivityview.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\lastactivityview.zip" -o"${TOOLS}\ntemp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\lastactivityview.zip" -o"${TOOLS}\ntemp" | Out-Null
     if (Test-Path -Path ${TOOLS}\ntemp\readme.txt) {
         Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\lastactivityview.txt"
     }
@@ -1877,7 +1877,7 @@ if ($status) {
 
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecv.zip" -FilePath ".\downloads\iecookiesview.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\iecookiesview.zip" -o"${TOOLS}\ntemp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\iecookiesview.zip" -o"${TOOLS}\ntemp" | Out-Null
     if (Test-Path -Path ${TOOLS}\ntemp\readme.txt) {
         Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\iecookiesview.txt"
     }
@@ -1887,7 +1887,7 @@ if ($status) {
 
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/mzcv-x64.zip" -FilePath ".\downloads\MZCookiesView.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\MZCookiesView.zip" -o"${TOOLS}\ntemp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\MZCookiesView.zip" -o"${TOOLS}\ntemp" | Out-Null
     if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
         Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\MZCookiesView.txt"
     }
@@ -1897,7 +1897,7 @@ if ($status) {
 
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/chromecacheview.zip" -FilePath ".\downloads\chromecacheview.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\chromecacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\chromecacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
     if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
         Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\chromecacheview.txt"
     }
@@ -1907,7 +1907,7 @@ Remove-Item -Recurse -Force "${TOOLS}\ntemp" | Out-Null 2>&1
 
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/mzcacheview.zip" -FilePath ".\downloads\mzcacheview.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mzcacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\mzcacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
     if (Test-Path -Path ${TOOLS}\ntemp\readme.txt) {
         Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\mzcacheview.txt"
     }
@@ -1917,7 +1917,7 @@ if ($status) {
 
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/iecacheview.zip" -FilePath ".\downloads\iecacheview.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\iecacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\iecacheview.zip" -o"${TOOLS}\ntemp" | Out-Null
     if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
         Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\iecacheview.txt"
     }
@@ -1927,7 +1927,7 @@ if ($status) {
 
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/browsinghistoryview-x64.zip" -FilePath ".\downloads\browsinghistoryview.zip" -check "Zip archive data"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\browsinghistoryview.zip" -o"${TOOLS}\ntemp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\browsinghistoryview.zip" -o"${TOOLS}\ntemp" | Out-Null
     if (Test-Path -Path "${TOOLS}\ntemp\readme.txt") {
         Copy-Item "${TOOLS}\ntemp\readme.txt" "${TOOLS}\ntemp\browsinghistoryview.txt"
     }
@@ -2215,7 +2215,7 @@ if ($status) {
     if (Test-Path -Path ${SETUP_PATH}\dcode) {
         Remove-Item -Recurse -Force ${SETUP_PATH}\dcode | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dcode.zip" -o"${SETUP_PATH}\dcode" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\dcode.zip" -o"${SETUP_PATH}\dcode" | Out-Null
     Start-Sleep -Seconds 3
     Move-Item ${SETUP_PATH}\dcode\Dcode-* "${SETUP_PATH}\dcode\dcode.exe" | Out-Null
 }
@@ -2430,7 +2430,7 @@ if (Test-ToolIncluded -ToolName "capa Explorer Web") {
         if (Test-Path -Path "${TOOLS}\capa-explorer-web") {
             Remove-Item -Recurse -Force "${TOOLS}\capa-explorer-web" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
     }
 }
 
@@ -2554,7 +2554,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\sqlite") {
         Remove-Item -Recurse -Force "${TOOLS}\sqlite" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2600,7 +2600,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\bulk_extractor") {
         Remove-Item -Recurse -Force "${TOOLS}\bulk_extractor" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\bulk_extractor.zip" -o"${TOOLS}\bulk_extractor" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\bulk_extractor.zip" -o"${TOOLS}\bulk_extractor" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2649,7 +2649,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\bin\densityscout.exe") {
         Remove-Item -Recurse -Force "${TOOLS}\bin\densityscout.exe" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DensityScout.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\DensityScout.zip" -o"${TOOLS}" | Out-Null
     Start-Sleep -Seconds 3
     Move-Item "${TOOLS}\win64\densityscout.exe" "${TOOLS}\bin\densityscout.exe"
 }
@@ -2700,7 +2700,7 @@ if (Test-ToolIncluded -ToolName "NetworkMiner") {
         if (Test-Path -Path "${TOOLS}\NetworkMiner") {
             Remove-Item -Recurse -Force "${TOOLS}\NetworkMiner" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\NetworkMiner.zip" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\NetworkMiner.zip" -o"${TOOLS}" | Out-Null
         Move-Item ${TOOLS}\NetworkMiner_* "${TOOLS}\NetworkMiner"
     }
 }
@@ -2748,7 +2748,7 @@ if (Test-ToolIncluded -ToolName "PolarProxy") {
         if (Test-Path -Path "${TOOLS}\PolarProxy") {
             Remove-Item -Recurse -Force "${TOOLS}\PolarProxy" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\PolarProxy.zip" -o"${TOOLS}\PolarProxy" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\PolarProxy.zip" -o"${TOOLS}\PolarProxy" | Out-Null
         Move-Item ${TOOLS}\PolarProxy_* "${TOOLS}\PolarProxy"
     }
 }
@@ -2797,7 +2797,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\nmap") {
         Remove-Item -Recurse -Force "${TOOLS}\nmap" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\nmap.exe" -o"${TOOLS}\nmap" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\nmap.exe" -o"${TOOLS}\nmap" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2843,7 +2843,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\fasm") {
         Remove-Item -Recurse -Force "${TOOLS}\fasm" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fasm.zip" -o"${TOOLS}\fasm" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\fasm.zip" -o"${TOOLS}\fasm" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2921,7 +2921,7 @@ if (Test-ToolIncluded -ToolName "ProcDOT") {
         if (Test-Path -Path "${TOOLS}\procdot") {
             Remove-Item -Recurse -Force "${TOOLS}\procdot" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
+        & $SEVENZIP x -pprocdot -aoa "${SETUP_PATH}\procdot.zip" -o"${TOOLS}\procdot" | Out-Null
     }
 }
 
@@ -2972,7 +2972,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\geolocus") {
         Remove-Item -Recurse -Force "${TOOLS}\geolocus" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\geolocus.zip" -o"${TOOLS}\geolocus" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\geolocus.zip" -o"${TOOLS}\geolocus" | Out-Null
     Copy-Item "${TOOLS}\geolocus\geolocus-cli-windows.exe" -Destination "${TOOLS}\bin\geolocus-cli.exe" -Force
     Remove-Item -Recurse -Force "${TOOLS}\geolocus\__MACOSX" | Out-Null 2>&1
 }
@@ -3105,7 +3105,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\javafx-sdk") {
         Remove-Item -Recurse -Force "${TOOLS}\javafx-sdk" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\openjfx.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\openjfx.zip" -o"${TOOLS}" | Out-Null
     Start-Sleep -Seconds 3
     Move-Item ${TOOLS}\javafx-sdk-* "${TOOLS}\javafx-sdk"
 }
@@ -3189,7 +3189,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\php") {
         Remove-Item -Recurse -Force "${TOOLS}\php" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\php.zip" -o"${TOOLS}\php" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\php.zip" -o"${TOOLS}\php" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3239,7 +3239,7 @@ if (Test-ToolIncluded -ToolName "hashcat") {
         if (Test-Path -Path "${TOOLS}\hashcat") {
             Remove-Item -Recurse -Force "${TOOLS}\hashcat" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hashcat.7z" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\hashcat.7z" -o"${TOOLS}" | Out-Null
         Start-Sleep -Seconds 3
         Move-Item ${TOOLS}\hashcat-* "${TOOLS}\hashcat" | Out-Null
     }
@@ -3293,8 +3293,8 @@ if (Test-ToolIncluded -ToolName "hashcat") {
 # Mex for WinDbg
 $status = Get-FileFromUri -uri "https://download.microsoft.com/download/0/c/4/0c4c45e3-bf02-49bf-8d68-6fa611f442e6/Mex.exe" -FilePath ".\downloads\mex.exe" -CheckURL "Yes" -check "PE32"
 if ($status) {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mex.exe" -o"${SETUP_PATH}" | Out-Null
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mex.zip" -o"${TOOLS}\mex" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\mex.exe" -o"${SETUP_PATH}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\mex.zip" -o"${TOOLS}\mex" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3328,7 +3328,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\ResourceHacker") {
         Remove-Item -Recurse -Force "${TOOLS}\ResourceHacker" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\resourcehacker.zip" -o"${TOOLS}\ResourceHacker" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\resourcehacker.zip" -o"${TOOLS}\ResourceHacker" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3374,7 +3374,7 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "Azure CLI") {
     $status = Get-FileFromUri -uri "https://aka.ms/installazurecliwindowszipx64" -FilePath ".\downloads\azurecli.zip" -CheckURL "Yes" -check "Zip archive data"
     if ($status) {
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\azurecli.zip" -o"${TOOLS}\AzureCLI" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\azurecli.zip" -o"${TOOLS}\AzureCLI" | Out-Null
     }
 }
 
@@ -3424,7 +3424,7 @@ if (Test-ToolIncluded -ToolName "Android SDK Platform Tools") {
         if (Test-Path -Path "${TOOLS}\AndroidSDK") {
             Remove-Item -Recurse -Force "${TOOLS}\AndroidSDK" | Out-Null 2>&1
         }
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\android_sdk.zip" -o"${TOOLS}\AndroidSDK" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\android_sdk.zip" -o"${TOOLS}\AndroidSDK" | Out-Null
     }
 }
 
