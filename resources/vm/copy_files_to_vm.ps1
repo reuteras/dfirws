@@ -27,11 +27,11 @@ Copy-Item -Recurse -Force ".\enrichment" "${WSDFIR_ROOT}"
 Write-Output "Copying local to the root directory..."
 Copy-Item -Recurse -Force ".\local" "${WSDFIR_ROOT}"
 Write-Output "Extracting git.zip to the root directory..."
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -o"${WSDFIR_ROOT}" ".\tmp\git.zip" | Out-Null
+& $SEVENZIP x -o"${WSDFIR_ROOT}" ".\tmp\git.zip" | Out-Null
 Write-Output "Extracting Tools.zip to the root directory..."
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -o"${WSDFIR_ROOT}" ".\tmp\tools.zip" | Out-Null
+& $SEVENZIP x -o"${WSDFIR_ROOT}" ".\tmp\tools.zip" | Out-Null
 Write-Output "Extracting venv.zip to the root directory..."
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -o"${WSDFIR_ROOT}" ".\tmp\venv.zip" | Out-Null
+& $SEVENZIP x -o"${WSDFIR_ROOT}" ".\tmp\venv.zip" | Out-Null
 
 if (-not (Test-Path -Path "${HOME}\Documents\tools")) {
     New-Item -ItemType Directory -Force -Path "${HOME}\Documents\tools" | Out-Null

@@ -185,7 +185,7 @@ if ($all -or $Python) {
     Write-SynchronizedLog "winget: Downloading uv."
     $status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
     if ($status) {
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
+        & $SEVENZIP x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
     }
 
     # DotNet 6 Desktop runtime - installed during startup
@@ -202,7 +202,7 @@ if ($all -or $Python) {
             if (Test-Path "${TOOLS}\ghidra") {
                 Remove-Item "${TOOLS}\ghidra" -Recurse -Force
             }
-            & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ghidra.zip" -o"${TOOLS}" | Out-Null
+            & $SEVENZIP x -aoa "${SETUP_PATH}\ghidra.zip" -o"${TOOLS}" | Out-Null
             New-Item -ItemType Directory -Force -Path "${TOOLS}\ghidra" | Out-Null
             Move-Item ${TOOLS}\ghidra_1* "${TOOLS}\ghidra\"
             Copy-Item "${TOOLS}\ghidra\*\support\ghidra.ico" "${TOOLS}\ghidra" -Recurse -Force

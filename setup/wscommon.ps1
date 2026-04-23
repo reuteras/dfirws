@@ -20,6 +20,15 @@ $null="${MSYS2_DIR}"
 $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
+# Resolve 7-Zip path: check PATH first, then common install locations
+if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) {
+    $SEVENZIP = "7z.exe"
+} else {
+    $SEVENZIP = @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
+        Where-Object { Test-Path $_ } | Select-Object -First 1
+}
+$null = $SEVENZIP
+
 # Check if C:\log exists, indicating running downloadFiles.ps1
 # Fix DNS servers if needed
 if (Test-Path -Path "C:\log") {
@@ -521,7 +530,7 @@ function Install-ClamAV {
 function Install-CMDer {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-cmder.txt")) {
         Write-Output "Installing Cmder"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cmder.7z" -o"${env:ProgramFiles}\cmder" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\cmder.7z" -o"${env:ProgramFiles}\cmder" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\cmder"
         Add-ToUserPath "${env:ProgramFiles}\cmder\bin"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\cmder.lnk" -DestinationPath "${env:ProgramFiles}\cmder\cmder.exe" -WorkingDirectory "${HOME}\Desktop"
@@ -636,7 +645,7 @@ function Install-ForensicTimeliner {
         $CLI_TOOL = "${TERMINAL_INSTALL_LOCATION}\wt.exe"
         $CLI_TOOL_ARGS = "-w 0 C:\Program Files\PowerShell\7\pwsh.exe -NoExit"
 
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ForensicTimeliner.zip" -o"${env:ProgramFiles}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\ForensicTimeliner.zip" -o"${env:ProgramFiles}" | Out-Null
         Move-Item ${env:ProgramFiles}\ForensicTimeliner* "${env:ProgramFiles}\ForensicTimeliner" -Force
         if (Test-Path "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk" -Force
@@ -778,7 +787,7 @@ function Install-Hashcat {
 function Install-Jadx {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-jadx.txt")) {
         Write-Output "Installing Jadx"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jadx.zip" -o"${env:ProgramFiles}\jadx" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\jadx.zip" -o"${env:ProgramFiles}\jadx" | Out-Null
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Programming\Java\jadx-gui.lnk" -DestinationPath "${env:ProgramFiles}\jadx\bin\jadx-gui.bat"
         if (Test-Path "${HOME}\Desktop\dfirws\Programming\Java\Jadx (runs dfirws-install -Jadx).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Programming\Java\Jadx (runs dfirws-install -Jadx).lnk" -Force
@@ -870,7 +879,7 @@ function Install-LogBoost {
 function Install-Loki {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-loki.txt")) {
         Write-Output "Installing Loki"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\loki.zip" -o"${env:ProgramFiles}\" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\loki.zip" -o"${env:ProgramFiles}\" | Out-Null
         Copy-Item ${GIT_PATH}\signature-base "${env:ProgramFiles}\loki" -Recurse -Force
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Signatures and information\loki.lnk" -DestinationPath "${env:ProgramFiles}\loki\loki.exe"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\loki.lnk" -DestinationPath "${env:ProgramFiles}\loki\loki.exe"
@@ -889,7 +898,7 @@ function Install-Loki {
 function Install-Malcat {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-malcat.txt")) {
         Write-Output "Installing Malcat"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\malcat.zip" -o"${env:ProgramFiles}\malcat" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\malcat.zip" -o"${env:ProgramFiles}\malcat" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\malcat\bin"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-malcat.txt" | Out-Null
     } else {
@@ -904,7 +913,7 @@ function Install-Neo4j {
         Add-ToUserPath "C:\Windows\System32\WindowsPowerShell\v1.0"
         $env:Path = "C:\Windows\System32\WindowsPowerShell\v1.0;${NEO_JAVA}\bin;" + [System.Environment]::GetEnvironmentVariable("Path", "User") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine")
         Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}" | Out-Null
         Move-Item ${env:ProgramFiles}\neo4j-community* ${env:ProgramFiles}\neo4j
         $env:JAVA_HOME = "$NEO_JAVA"
         & "${env:ProgramFiles}\neo4j\bin\neo4j-admin" set-initial-password neo4j
@@ -1355,7 +1364,7 @@ function Install-Wireshark {
 function Install-X64dbg {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-x64dbg.txt")) {
         Write-Output "Installing x64dbg"
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\x64dbg.zip" -o"${env:ProgramFiles}\x64dbg" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\x64dbg.zip" -o"${env:ProgramFiles}\x64dbg" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\x64dbg\release\x32"
         Add-ToUserPath "${env:ProgramFiles}\x64dbg\release\x64"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\x32dbg.lnk" -DestinationPath "${env:ProgramFiles}\x64dbg\release\x32\x32dbg.exe"

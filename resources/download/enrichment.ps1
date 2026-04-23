@@ -227,9 +227,9 @@ $status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/la
 $null = $status
 
 # Unzip yara signatures
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-core.zip" -o"${yaraSaveDirectory}" | Out-Null
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-extended.zip" -o"${yaraSaveDirectory}" | Out-Null
-& "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${yaraSaveDirectory}\yara-forge-rules-full.zip" -o"${yaraSaveDirectory}" | Out-Null
+& $SEVENZIP x -aoa "${yaraSaveDirectory}\yara-forge-rules-core.zip" -o"${yaraSaveDirectory}" | Out-Null
+& $SEVENZIP x -aoa "${yaraSaveDirectory}\yara-forge-rules-extended.zip" -o"${yaraSaveDirectory}" | Out-Null
+& $SEVENZIP x -aoa "${yaraSaveDirectory}\yara-forge-rules-full.zip" -o"${yaraSaveDirectory}" | Out-Null
 
 # Get CVE data
 Write-DateLog "Downloading CVE data"

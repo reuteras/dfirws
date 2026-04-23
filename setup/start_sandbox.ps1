@@ -620,7 +620,7 @@ if (Test-Path "C:\venv\iocs\mvt") {
 
 # 4n4lDetector
 if (Test-Path "${SETUP_PATH}\4n4lDetector.zip") {
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
+    & $SEVENZIP x "${SETUP_PATH}\4n4lDetector.zip" -o"${env:ProgramFiles}\4n4lDetector" | Out-Null
 }
 
 # Config for opencode-ai MCP servers

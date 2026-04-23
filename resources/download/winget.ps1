@@ -411,7 +411,7 @@ if (Test-ToolIncluded -ToolName "VirusTotal CLI") {
     Write-SynchronizedLog "winget: Downloading VirusTotal CLI."
     $status = Get-WinGet "VirusTotal.vt-cli" "vt-cli*.zip" "vt.zip" -check "Zip archive data"
     if ($status) {
-        & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
+        & $SEVENZIP x -aoa ".\downloads\vt.zip" -o"${TOOLS}\bin" | Out-Null
     }
 }
 

@@ -4,7 +4,7 @@ $TOOL_DEFINITIONS = @()
 # artemis
 $status = Get-GitHubRelease -repo "puffyCid/artemis" -path "${SETUP_PATH}\artemis.zip" -match "x86_64-pc-windows-msvc.zip$" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\artemis.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\artemis.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\artemis") {
         Remove-Item "${TOOLS}\artemis" -Recurse -Force
     }
@@ -53,7 +53,7 @@ if (Test-ToolIncluded -ToolName "godap") {
         if (Test-Path "${TOOLS}\godap") {
             Remove-Item "${TOOLS}\godap" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\godap.zip" -o"${TOOLS}\godap" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\godap.zip" -o"${TOOLS}\godap" | Out-Null
         Move-Item ${TOOLS}\godap-* "${TOOLS}\godap"
     }
 }
@@ -96,7 +96,7 @@ $TOOL_DEFINITIONS += @{
 # BeaconHunter - copied to program files during startup
 $status = Get-GitHubRelease -repo "3lp4tr0n/BeaconHunter" -path "${SETUP_PATH}\beaconhunter.zip" -match "BeaconHunter.zip" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\beaconhunter.zip" -o"${TOOLS}\BeaconHunter" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\beaconhunter.zip" -o"${TOOLS}\BeaconHunter" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -182,7 +182,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\aleapp") {
         Remove-Item "${TOOLS}\aleapp" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\aleapp.zip" -o"${TOOLS}\aleapp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\aleapp.zip" -o"${TOOLS}\aleapp" | Out-Null
     Copy-Item ${TOOLS}\aleapp\aleapp.exe ${TOOLS}\bin\
     Remove-Item "${TOOLS}\aleapp" -Recurse -Force
 }
@@ -191,7 +191,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\aleappGUI") {
         Remove-Item "${TOOLS}\aleappGUI" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\aleappGUI.zip" -o"${TOOLS}\aleappGUI" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\aleappGUI.zip" -o"${TOOLS}\aleappGUI" | Out-Null
     Copy-Item ${TOOLS}\aleappGUI\aleappGUI.exe ${TOOLS}\bin\
     Remove-Item "${TOOLS}\aleappGUI" -Recurse -Force
 }
@@ -249,7 +249,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\ileapp") {
         Remove-Item "${TOOLS}\ileapp" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ileapp.zip" -o"${TOOLS}\ileapp" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\ileapp.zip" -o"${TOOLS}\ileapp" | Out-Null
     Copy-Item ${TOOLS}\ileapp\ileapp.exe ${TOOLS}\bin\
     Remove-Item "${TOOLS}\ileapp" -Recurse -Force
 }
@@ -258,7 +258,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\ileappGUI") {
         Remove-Item "${TOOLS}\ileappGUI" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ileappGUI.zip" -o"${TOOLS}\ileappGUI" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\ileappGUI.zip" -o"${TOOLS}\ileappGUI" | Out-Null
     Copy-Item ${TOOLS}\ileappGUI\ileappGUI.exe ${TOOLS}\bin\
     Remove-Item "${TOOLS}\ileappGUI" -Recurse -Force
 }
@@ -316,7 +316,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\lessmsi") {
         Remove-Item "${TOOLS}\lessmsi" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\lessmsi.zip" -o"${TOOLS}\lessmsi" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\lessmsi.zip" -o"${TOOLS}\lessmsi" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -474,7 +474,7 @@ if (Test-ToolIncluded -ToolName "Audacity") {
         if (Test-Path "${TOOLS}\audacity") {
             Remove-Item "${TOOLS}\audacity" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\audacity.zip" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\audacity.zip" -o"${TOOLS}" | Out-Null
         Move-Item ${TOOLS}\audacity-* "${TOOLS}\audacity"
     }
 }
@@ -520,7 +520,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\ares") {
         Remove-Item "${TOOLS}\ares" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ares.zip" -o"${TOOLS}\ares" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\ares.zip" -o"${TOOLS}\ares" | Out-Null
     Copy-Item "${TOOLS}\ares\ares.exe" "${TOOLS}\bin\" -Force
     Remove-Item "${TOOLS}\ares" -Force -Recurse
 }
@@ -603,7 +603,7 @@ $TOOL_DEFINITIONS += @{
 # RDPCacheStitcher
 $status = Get-GitHubRelease -repo "BSI-Bund/RdpCacheStitcher" -path "${SETUP_PATH}\RdpCacheStitcher.zip" -match "win64" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\RdpCacheStitcher.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\RdpCacheStitcher.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\RdpCacheStitcher") {
         Remove-Item "${TOOLS}\RdpCacheStitcher" -Recurse -Force
     }
@@ -652,7 +652,7 @@ if (Test-ToolIncluded -ToolName "ffmpeg") {
         if (Test-Path "${TOOLS}\ffmpeg") {
             Remove-Item "${TOOLS}\ffmpeg" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ffmpeg.zip" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\ffmpeg.zip" -o"${TOOLS}" | Out-Null
         Move-Item ${TOOLS}\ffmpeg-* "${TOOLS}\ffmpeg"
     }
 }
@@ -698,7 +698,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\ripgrep") {
         Remove-Item "${TOOLS}\ripgrep" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ripgrep.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\ripgrep.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\ripgrep-* "${TOOLS}\ripgrep"
 }
 
@@ -740,7 +740,7 @@ $TOOL_DEFINITIONS += @{
 # binlex
 $status = Get-GitHubRelease -repo "c3rb3ru5d3d53c/binlex" -path "${SETUP_PATH}\binlex.zip" -match "windows" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\binlex.zip" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\binlex.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -855,7 +855,7 @@ if (Test-ToolIncluded -ToolName "DBeaver") {
         if (Test-Path "${TOOLS}\dbeaver") {
             Remove-Item "${TOOLS}\dbeaver" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dbeaver.zip" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\dbeaver.zip" -o"${TOOLS}" | Out-Null
     }
 }
 
@@ -900,7 +900,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\dumpbin") {
         Remove-Item "${TOOLS}\dumpbin" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dumpbin.zip" -o"${TOOLS}\dumpbin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\dumpbin.zip" -o"${TOOLS}\dumpbin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -944,14 +944,14 @@ if ($status) {
     if (Test-Path "${TOOLS}\dnSpy32") {
         Remove-Item "${TOOLS}\dnSpy32" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dnSpy32.zip" -o"${TOOLS}\dnSpy32" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\dnSpy32.zip" -o"${TOOLS}\dnSpy32" | Out-Null
 }
 $status = Get-GitHubRelease -repo "dnSpyEx/dnSpy" -path "${SETUP_PATH}\dnSpy64.zip" -match "win64" -check "Zip archive data"
 if ($status) {
     if (Test-Path "${TOOLS}\dnSpy64") {
         Remove-Item "${TOOLS}\dnSpy64" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dnSpy64.zip" -o"${TOOLS}\dnSpy64" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\dnSpy64.zip" -o"${TOOLS}\dnSpy64" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1036,7 +1036,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\mboxviewer") {
         Remove-Item "${TOOLS}\mboxviewer" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mboxviewer.zip" -o"${TOOLS}\mboxviewer" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\mboxviewer.zip" -o"${TOOLS}\mboxviewer" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1077,7 +1077,7 @@ $TOOL_DEFINITIONS += @{
 # zstd
 $status = Get-GitHubRelease -repo "facebook/zstd" -path "${SETUP_PATH}\zstd.zip" -match "win64.zip$" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\downloads\zstd.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa ".\downloads\zstd.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\zstd") {
         Remove-Item "${TOOLS}\zstd" -Recurse -Force
     }
@@ -1125,7 +1125,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\CyberChef") {
         Remove-Item "${TOOLS}\CyberChef" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\CyberChef.zip" -o"${TOOLS}\CyberChef" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\CyberChef.zip" -o"${TOOLS}\CyberChef" | Out-Null
     if (Test-Path "${TOOLS}\CyberChef\CyberChef.html") {
         Remove-Item "${TOOLS}\CyberChef\CyberChef.html" -Force
     }
@@ -1191,7 +1191,7 @@ $TOOL_DEFINITIONS += @{
 # redress
 $status = Get-GitHubRelease -repo "goretk/redress" -path "${SETUP_PATH}\redress.zip" -match "windows.zip" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\redress.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\redress.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\redress") {
         Remove-Item "${TOOLS}\redress" -Recurse -Force
     }
@@ -1240,7 +1240,7 @@ if (Test-ToolIncluded -ToolName "h2database") {
         if (Test-Path "${TOOLS}\h2database") {
             Remove-Item "${TOOLS}\h2database" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\h2database.zip" -o"${TOOLS}\h2database" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\h2database.zip" -o"${TOOLS}\h2database" | Out-Null
     }
     $status = Get-GitHubRelease -repo "h2database/h2database" -path "${SETUP_PATH}\h2.pdf" -match "h2.pdf"
     if ($status) {
@@ -1283,7 +1283,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\INDXRipper") {
         Remove-Item "${TOOLS}\INDXRipper" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\indxripper.zip" -o"${TOOLS}\INDXRipper" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\indxripper.zip" -o"${TOOLS}\INDXRipper" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1401,7 +1401,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\pebear") {
         Remove-Item "${TOOLS}\pebear" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pebear.zip" -o"${TOOLS}\pebear" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\pebear.zip" -o"${TOOLS}\pebear" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1532,8 +1532,8 @@ if ($status -or $plugin_status) {
     if (Test-Path "${TOOLS}\WinObjEx64") {
         Remove-Item "${TOOLS}\WinObjEx64" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinObjEx64.zip" -o"${TOOLS}\WinObjEx64" | Out-Null
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\WinObjEx64_plugins.zip" -o"${TOOLS}\WinObjEx64" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\WinObjEx64.zip" -o"${TOOLS}\WinObjEx64" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\WinObjEx64_plugins.zip" -o"${TOOLS}\WinObjEx64" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1577,7 +1577,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\die") {
         Remove-Item "${TOOLS}\die" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\die.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\die.zip" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1626,7 +1626,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\XELFViewer") {
         Remove-Item "${TOOLS}\XELFViewer" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\XELFViewer.zip" -o"${TOOLS}\XELFViewer" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\XELFViewer.zip" -o"${TOOLS}\XELFViewer" | Out-Null
     if (Test-Path "${CONFIGURATION_FILES}\xelfviewer.ini") {
         Copy-Item "${CONFIGURATION_FILES}\xelfviewer.ini" "${TOOLS}\XELFViewer\xelfviewer.ini"
     } else {
@@ -1672,7 +1672,7 @@ $TOOL_DEFINITIONS += @{
 # jd-gui
 $status = Get-GitHubRelease -repo "java-decompiler/jd-gui" -path "${SETUP_PATH}\jd-gui.zip" -match "jd-gui-windows" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jd-gui.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\jd-gui.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\jd-gui") {
         Remove-Item "${TOOLS}\jd-gui" -Recurse -Force
     }
@@ -1718,7 +1718,7 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "LogBoost") {
     $status = Get-GitHubRelease -repo "joeavanzato/logboost" -path "${SETUP_PATH}\logboost.rar" -match "logboost_release" -check "RAR archive data"
     if ($status) {
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\logboost.rar" -o"${TOOLS}\logboost" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\logboost.rar" -o"${TOOLS}\logboost" | Out-Null
     }
 }
 
@@ -1963,7 +1963,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\gftrace64") {
         Remove-Item "${TOOLS}\gftrace64" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\gftrace.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\gftrace.zip" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2085,7 +2085,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\capa") {
         Remove-Item "${TOOLS}\capa" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-windows.zip" -o"${TOOLS}\capa" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\capa-windows.zip" -o"${TOOLS}\capa" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2131,7 +2131,7 @@ $TOOL_DEFINITIONS += @{
 # capa-rules
 $status = Get-GitHubRelease -repo "mandiant/capa-rules" -path "${SETUP_PATH}\capa-rules.zip" -match "Source" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\capa-rules.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\capa-rules.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\capa-rules") {
         Remove-Item "${TOOLS}\capa-rules" -Recurse -Force
     }
@@ -2206,7 +2206,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\pwsh") {
         Remove-Item "${TOOLS}\pwsh" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\pwsh.zip" -o"${TOOLS}\pwsh" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\pwsh.zip" -o"${TOOLS}\pwsh" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2323,7 +2323,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\floss") {
         Remove-Item "${TOOLS}\floss" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\floss.zip" -o"${TOOLS}\floss" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\floss.zip" -o"${TOOLS}\floss" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2364,7 +2364,7 @@ $TOOL_DEFINITIONS += @{
 # Flare-Fakenet-NG
 $status = Get-GitHubRelease -repo "mandiant/flare-fakenet-ng" -path "${SETUP_PATH}\fakenet.zip" -match "fakenet" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fakenet.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\fakenet.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\fakenet") {
         Remove-Item "${TOOLS}\fakenet" -Recurse -Force
     }
@@ -2412,7 +2412,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\GoReSym") {
         Remove-Item "${TOOLS}\GoReSym" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\GoReSym.zip" -o"${TOOLS}\GoReSym" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\GoReSym.zip" -o"${TOOLS}\GoReSym" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2456,7 +2456,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\mmdbinspect") {
         Remove-Item "${TOOLS}\mmdbinspect" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\mmdbinspect.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\mmdbinspect.zip" -o"${TOOLS}" | Out-Null
     Move-Item "${TOOLS}\mmdbinspect_*" "${TOOLS}\mmdbinspect"
 }
 
@@ -2498,7 +2498,7 @@ $TOOL_DEFINITIONS += @{
 # Elfparser-ng
 $status = Get-GitHubRelease -repo "mentebinaria/elfparser-ng" -path "${SETUP_PATH}\elfparser-ng.zip" -match "win64" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\elfparser-ng.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\elfparser-ng.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\elfparser-ng") {
         Remove-Item "${TOOLS}\elfparser-ng" -Recurse -Force
     }
@@ -2543,7 +2543,7 @@ $TOOL_DEFINITIONS += @{
 # readpe
 $status = Get-GitHubRelease -repo "mentebinaria/readpe" -path "${SETUP_PATH}\readpe.zip" -match "win.zip" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\readpe.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\readpe.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\pev") {
         Remove-Item "${TOOLS}\pev" -Recurse -Force
     }
@@ -2583,7 +2583,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\DitExplorer") {
         Remove-Item "${TOOLS}\DitExplorer" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DitExplorer.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\DitExplorer.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\DitExplorer-* "${TOOLS}\DitExplorer"
 }
 
@@ -2686,8 +2686,8 @@ $TOOL_DEFINITIONS += @{
 # jwt-cli
 $status = Get-GitHubRelease -repo "mike-engel/jwt-cli" -path "${SETUP_PATH}\jwt-cli.tar.gz" -match "jwt-windows.tar.gz"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\jwt-cli.tar.gz" -o"${TOOLS}\bin" | Out-Null
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${TOOLS}\bin\jwt-cli.tar" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\jwt-cli.tar.gz" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${TOOLS}\bin\jwt-cli.tar" -o"${TOOLS}\bin" | Out-Null
     if (Test-Path "${TOOLS}\bin\jwt-cli.tar") {
         Remove-Item "${TOOLS}\bin\jwt-cli.tar" -Force
     }
@@ -2717,7 +2717,7 @@ $TOOL_DEFINITIONS += @{
 # dsq
 $status = Get-GitHubRelease -repo "multiprocessio/dsq" -path "${SETUP_PATH}\dsq.zip" -match "dsq-win" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\dsq.zip" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\dsq.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3102,7 +3102,7 @@ $TOOL_DEFINITIONS += @{
 # qpdf
 $status = Get-GitHubRelease -repo "qpdf/qpdf" -path "${SETUP_PATH}\qpdf.zip" -match "msvc64.zip" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qpdf.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\qpdf.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\qpdf") {
         Remove-Item "${TOOLS}\qpdf" -Recurse -Force
     }
@@ -3187,7 +3187,7 @@ $TOOL_DEFINITIONS += @{
 # Radare2
 $radare_status = Get-GitHubRelease -repo "radareorg/radare2" -path "${SETUP_PATH}\radare2.zip" -match "w64.zip" -check "Zip archive data"
 if ($radare_status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\radare2.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\radare2.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\radare2") {
         Remove-Item "${TOOLS}\radare2" -Recurse -Force
     }
@@ -3233,7 +3233,7 @@ $TOOL_DEFINITIONS += @{
 # TODO: Not working
 $status = Get-GitHubRelease -repo "radareorg/radare2-mcp" -path "${SETUP_PATH}\r2mcp.zip" -match "windows.zip" -check "Zip archive data"
 if ($status -or $radare_status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\r2mcp.zip" -o"${TOOLS}\radare2\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\r2mcp.zip" -o"${TOOLS}\radare2\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3261,7 +3261,7 @@ $TOOL_DEFINITIONS += @{
 # TODO: Not working
 $status = Get-GitHubRelease -repo "radareorg/r2ai" -path "${SETUP_PATH}\r2ai.zip" -match "windows-latest" -check "Zip archive data"
 if ($status -or $radare_status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\r2ai.zip" -o"${TOOLS}\r2ai" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\r2ai.zip" -o"${TOOLS}\r2ai" | Out-Null
     Copy-Item "${TOOLS}\r2ai\decai.r2.js" "${TOOLS}\radare2\share\scripts\"
     Copy-Item "${TOOLS}\r2ai\libr2ai.dll" "${TOOLS}\radare2\bin\"
     Copy-Item "${TOOLS}\r2ai\r2ai.exe" "${TOOLS}\radare2\bin\"
@@ -3295,7 +3295,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\iaito") {
         Remove-Item "${TOOLS}\iaito" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\iaito.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\iaito.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\__MACOSX") {
         Remove-Item "${TOOLS}\__MACOSX" -Recurse -Force
     }
@@ -3342,7 +3342,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\hfs") {
         Remove-Item "${TOOLS}\hfs" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hfs.zip" -o"${TOOLS}\hfs" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\hfs.zip" -o"${TOOLS}\hfs" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3387,7 +3387,7 @@ if (Test-ToolIncluded -ToolName "obsidian-mitre-attack") {
         if (Test-Path "${TOOLS}\obsidian-mitre-attack") {
             Remove-Item "${TOOLS}\obsidian-mitre-attack" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\obsidian-mitre-attack.zip" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\obsidian-mitre-attack.zip" -o"${TOOLS}" | Out-Null
         Move-Item "${TOOLS}\MITRE" "${TOOLS}\obsidian-mitre-attack"
         Remove-Item "${TOOLS}\README.md" -Force
     }
@@ -3418,7 +3418,7 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "Cutter") {
     $status = Get-GitHubRelease -repo "rizinorg/cutter" -path "${SETUP_PATH}\cutter.zip" -match "Windows-x86_64.zip" -check "Zip archive data"
     if ($status) {
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\cutter.zip" -o"${TOOLS}" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\cutter.zip" -o"${TOOLS}" | Out-Null
         if (Test-Path "${TOOLS}\cutter") {
             Remove-Item "${TOOLS}\cutter" -Recurse -Force
         }
@@ -3504,7 +3504,7 @@ if (Test-ToolIncluded -ToolName "Strawberry Perl") {
         if (Test-Path "${TOOLS}\perl") {
             Remove-Item "${TOOLS}\perl" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\perl.zip" -o"${TOOLS}\perl" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\perl.zip" -o"${TOOLS}\perl" | Out-Null
     }
 }
 
@@ -3607,7 +3607,7 @@ $TOOL_DEFINITIONS += @{
 # Sleuthkit
 $status = Get-GitHubRelease -repo "sleuthkit/sleuthkit" -path "${SETUP_PATH}\sleuthkit.zip" -match "win32.zip$" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sleuthkit.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\sleuthkit.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\sleuthkit") {
         Remove-Item "${TOOLS}\sleuthkit" -Recurse -Force
     }
@@ -3652,7 +3652,7 @@ $TOOL_DEFINITIONS += @{
 # qrtool
 $status = Get-GitHubRelease -repo "sorairolake/qrtool" -path "${SETUP_PATH}\qrtool.zip" -match "x86_64-pc-windows-msvc" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\qrtool.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\qrtool.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\qrtool") {
         Remove-Item "${TOOLS}\qrtool" -Recurse -Force
     }
@@ -3689,7 +3689,7 @@ $TOOL_DEFINITIONS += @{
 # debloat
 $status = Get-GitHubRelease -repo "Squiblydoo/debloat" -path "${SETUP_PATH}\debloat.zip" -match "Windows" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\debloat.zip" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\debloat.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3733,7 +3733,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\thumbcacheviewer") {
         Remove-Item "${TOOLS}\thumbcacheviewer" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\thumbcacheviewer.zip" -o"${TOOLS}\thumbcacheviewer" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\thumbcacheviewer.zip" -o"${TOOLS}\thumbcacheviewer" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3774,7 +3774,7 @@ $TOOL_DEFINITIONS += @{
 # gron
 $status = Get-GitHubRelease -repo "tomnomnom/gron" -path "${SETUP_PATH}\gron.zip" -match "gron-windows-amd64" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\gron.zip" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\gron.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3818,7 +3818,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\MemProcFS") {
         Remove-Item "${TOOLS}\MemProcFS" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\memprocfs.zip" -o"${TOOLS}\MemProcFS" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\memprocfs.zip" -o"${TOOLS}\MemProcFS" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3859,7 +3859,7 @@ $TOOL_DEFINITIONS += @{
 # upx
 $status = Get-GitHubRelease -repo "upx/upx" -path "${SETUP_PATH}\upx.zip" -match "win64" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\upx.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\upx.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\upx") {
         Remove-Item "${TOOLS}\upx" -Recurse -Force
     }
@@ -3947,7 +3947,7 @@ $TOOL_DEFINITIONS += @{
 # Witr
 $status = Get-GitHubRelease -repo "pranshuparmar/witr" -path "${SETUP_PATH}\witr.zip" -match "witr-windows-amd64.zip" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\witr.zip" "witr.exe" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\witr.zip" "witr.exe" -o"${TOOLS}\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3974,7 +3974,7 @@ $TOOL_DEFINITIONS += @{
 # fq
 $status = Get-GitHubRelease -repo "wader/fq" -path "${SETUP_PATH}\fq.zip" -match "windows_amd64.zip" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\fq.zip" -o"${TOOLS}\bin" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\fq.zip" -o"${TOOLS}\bin" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4058,7 +4058,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\imhex") {
         Remove-Item "${TOOLS}\imhex" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\imhex.zip" -o"${TOOLS}\imhex" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\imhex.zip" -o"${TOOLS}\imhex" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4107,7 +4107,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\chainsaw") {
         Remove-Item "${TOOLS}\chainsaw" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\chainsaw.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\chainsaw.zip" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4148,7 +4148,7 @@ $TOOL_DEFINITIONS += @{
 # yara
 $status = Get-GitHubRelease -repo "VirusTotal/yara" -path "${SETUP_PATH}\yara.zip" -match "win64" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\yara.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\yara.zip" -o"${TOOLS}" | Out-Null
     if (Test-Path "${TOOLS}\bin\yara.exe") {
         Remove-Item "${TOOLS}\bin\yara.exe" -Force
     }
@@ -4212,7 +4212,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\bin\yr.exe") {
         Remove-Item "${TOOLS}\bin\yr.exe" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\yara-x.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\yara-x.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\yr.exe ${TOOLS}\bin\yr.exe
 }
 
@@ -4336,7 +4336,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\hayabusa") {
         Remove-Item "${TOOLS}\hayabusa" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}\hayabusa" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\hayabusa.zip" -o"${TOOLS}\hayabusa" | Out-Null
     Move-Item ${TOOLS}\hayabusa\hayabusa-* ${TOOLS}\hayabusa\hayabusa.exe
 }
 
@@ -4381,7 +4381,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\takajo") {
         Remove-Item "${TOOLS}\takajo" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\takajo.zip" -o"${TOOLS}\takajo" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\takajo.zip" -o"${TOOLS}\takajo" | Out-Null
     Move-Item ${TOOLS}\takajo\takajo-* "${TOOLS}\takajo\takajo.exe"
 }
 
@@ -4466,7 +4466,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\edit") {
         Remove-Item "${TOOLS}\edit" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\edit.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\edit.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\edit-* ${TOOLS}\edit
     Copy-Item "${TOOLS}\edit\edit.exe" "${TOOLS}\bin\edit.exe"
 }
@@ -4498,7 +4498,7 @@ if ($status) {
     if (Test-Path -Path "${TOOLS}\DB Browser for SQLite") {
         Remove-Item -Recurse -Force "${TOOLS}\DB Browser for SQLite" | Out-Null 2>&1
     }
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\sqlitebrowser" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\sqlitebrowser.zip" -o"${TOOLS}\sqlitebrowser" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4542,7 +4542,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\NetExt") {
         Remove-Item "${TOOLS}\NetExt" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\netext.zip" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\netext.zip" -o"${TOOLS}" | Out-Null
     Move-Item ${TOOLS}\NetExt-* "${TOOLS}\NetExt"
 }
 
@@ -4574,7 +4574,7 @@ if (Test-ToolIncluded -ToolName "YAMAGoya") {
         if (Test-Path "${TOOLS}\YAMAGoya") {
             Remove-Item "${TOOLS}\YAMAGoya" -Recurse -Force
         }
-        & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\YAMAGoya.zip" -o"${TOOLS}\YAMAGoya" | Out-Null
+        & $SEVENZIP x -aoa "${SETUP_PATH}\YAMAGoya.zip" -o"${TOOLS}\YAMAGoya" | Out-Null
     }
 }
 
@@ -4613,7 +4613,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\RpcView") {
         Remove-Item "${TOOLS}\RpcView" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\rpcview.7z" -o"${TOOLS}" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\rpcview.7z" -o"${TOOLS}" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4654,7 +4654,7 @@ $TOOL_DEFINITIONS += @{
 # go-size-analyzer
 $status = Get-GitHubRelease -repo "Zxilly/go-size-analyzer" -path "${SETUP_PATH}\go-size-analyzer.zip" -match "go-size-analyzer_.*_windows_amd64.zip" -check "Zip archive data"
 if ($status) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\go-size-analyzer.zip" -o"${TOOLS}\bin\" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\go-size-analyzer.zip" -o"${TOOLS}\bin\" | Out-Null
     Remove-Item "${TOOLS}\bin\LICENSE" -Force -ErrorAction SilentlyContinue
     Remove-Item "${TOOLS}\bin\README.md" -Force -ErrorAction SilentlyContinue
     Remove-Item "${TOOLS}\bin\README_zh_CN.md" -Force -ErrorAction SilentlyContinue
@@ -4701,7 +4701,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\ILSpy") {
         Remove-Item "${TOOLS}\ILSpy" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ilspy.zip" -o"${TOOLS}\ILSpy" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\ilspy.zip" -o"${TOOLS}\ILSpy" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4745,7 +4745,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\ULogViewer") {
         Remove-Item "${TOOLS}\ULogViewer" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\ULogViewer.zip" -o"${TOOLS}\ULogViewer" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\ULogViewer.zip" -o"${TOOLS}\ULogViewer" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4789,7 +4789,7 @@ if ($status) {
     if (Test-Path "${TOOLS}\Dependencies") {
         Remove-Item "${TOOLS}\Dependencies" -Recurse -Force
     }
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\Dependencies.zip" -o"${TOOLS}\Dependencies" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\Dependencies.zip" -o"${TOOLS}\Dependencies" | Out-Null
 }
 
 $TOOL_DEFINITIONS += @{

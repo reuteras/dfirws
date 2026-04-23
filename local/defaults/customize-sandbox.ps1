@@ -23,8 +23,8 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\CyberChef.lnk" -DestinationPath "C:\Too
 
 if ($WSDFIR_NOTEPAD -eq "Yes") {
     # Configure Notepad++
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x -aoa "${SETUP_PATH}\DSpellCheck.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\DSpellCheck" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\comparePlus.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\ComparePlus" | Out-Null
+    & $SEVENZIP x -aoa "${SETUP_PATH}\DSpellCheck.zip" -o"${env:ProgramFiles}\Notepad++\Plugins\DSpellCheck" | Out-Null
     New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Notepad++\plugins\config\Hunspell" -ItemType Directory -Force | Out-Null
     if ("${WSDFIR_DARK}" -eq "Yes") {
         if (Test-Path "${LOCAL_PATH}\notepad++_dark.xml") {

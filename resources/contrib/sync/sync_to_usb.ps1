@@ -3,8 +3,15 @@ $SOURCE_DIRECTORY="$HOME\Documents\workspace\dfirws"
 $CURRENT="$PWD"
 
 if ($args -contains "--zip") {
+    # Resolve 7-Zip path: check PATH first, then common install locations
+    if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) {
+        $SEVENZIP = "7z.exe"
+    } else {
+        $SEVENZIP = @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
+            Where-Object { Test-Path $_ } | Select-Object -First 1
+    }
     Set-Location "$SOURCE_DIRECTORY"
-    Start-Process -Wait 'C:\Program Files\7-Zip\7z.exe' -Argumentlist "a .\tmp\dfirws.zip .\downloads .\enrichment .\mount .\setup"
+    Start-Process -Wait $SEVENZIP -Argumentlist "a .\tmp\dfirws.zip .\downloads .\enrichment .\mount .\setup"
     Get-Job | Receive-Job
     Get-Job | Remove-Job
     Copy-Item ".\tmp\dfirws.zip" "$CURRENT"

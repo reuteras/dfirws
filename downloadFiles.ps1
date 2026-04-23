@@ -219,8 +219,11 @@ if (! (Get-Command "rclone.exe" -ErrorAction SilentlyContinue)) {
 }
 
 if (! (Get-Command "7z.exe" -ErrorAction SilentlyContinue)) {
-    Write-DateLog "Error: 7z.exe not found. Please install 7-Zip and add it to PATH."
-    Exit
+    $found = @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") | Where-Object { Test-Path $_ } | Select-Object -First 1
+    if (! $found) {
+        Write-DateLog "Error: 7z.exe not found. Please install 7-Zip."
+        Exit
+    }
 }
 
 if (! (Get-Command "winget.exe" -ErrorAction SilentlyContinue)) {

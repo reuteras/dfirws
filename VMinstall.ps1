@@ -41,6 +41,7 @@ param (
 )
 
 function Find-SevenZip {
+    if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) { return "7z.exe" }
     foreach ($c in @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe")) {
         if (Test-Path $c) { return $c }
     }

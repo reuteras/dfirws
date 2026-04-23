@@ -12,7 +12,7 @@ if (test-path .\local\kape.zip) {
 }
 
 if (! (Test-Path -Path "$SETUP_PATH\KAPE" )) {
-    & "$env:ProgramFiles\7-Zip\7z.exe" x -aoa ".\local\kape.zip" -o"$SETUP_PATH" | Out-Null
+    & $SEVENZIP x -aoa ".\local\kape.zip" -o"$SETUP_PATH" | Out-Null
     if (Test-Path "$SETUP_PATH\Get-KAPEUpdate.ps1") {
         Remove-Item "$SETUP_PATH\Get-KAPEUpdate.ps1"  -Force
     }
