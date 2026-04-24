@@ -51,12 +51,7 @@ if ($proc7zip.ExitCode -ne 0) {
 Write-DateLog "7-Zip installed" | Write-SetupLog
 
 # Re-resolve $SEVENZIP now that 7-Zip is installed
-if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) {
-    $SEVENZIP = "7z.exe"
-} else {
-    $SEVENZIP = @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
-        Where-Object { Test-Path $_ } | Select-Object -First 1
-}
+$SEVENZIP = Get-SevenZip
 
 # Install PSDecode module - https://github.com/R3MRUM/PSDecode
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force | Out-Null
