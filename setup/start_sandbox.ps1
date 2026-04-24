@@ -44,14 +44,8 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force
 
 # Install 7-Zip first - needed for other installations
 Update-SandboxProgress "Installing 7-Zip..."
-$proc7zip = Start-Process -Wait -PassThru msiexec -ArgumentList "/i ${SETUP_PATH}\7zip.msi /qn /norestart"
-if ($proc7zip.ExitCode -ne 0) {
-    Write-DateLog "WARNING: 7-Zip installer exited with code $($proc7zip.ExitCode)" | Write-SetupLog
-}
+$SEVENZIP = Install-SevenZip
 Write-DateLog "7-Zip installed" | Write-SetupLog
-
-# Re-resolve $SEVENZIP now that 7-Zip is installed
-$SEVENZIP = Get-SevenZip
 
 # Install PSDecode module - https://github.com/R3MRUM/PSDecode
 Copy-Item "${HOME}\Documents\tools\utils\PSDecode.psm1" "${env:ProgramFiles}\PowerShell\Modules\PSDecode" -Force | Out-Null

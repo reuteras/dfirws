@@ -26,6 +26,19 @@ function Get-SevenZip {
     return @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
         Where-Object { Test-Path $_ } | Select-Object -First 1
 }
+
+# Install 7-Zip from MSI if not already present, then return its path
+function Install-SevenZip {
+    param ([string]$MsiPath = "${SETUP_PATH}\7zip.msi")
+    if (-not (Get-SevenZip)) {
+        $proc = Start-Process -Wait -PassThru msiexec -ArgumentList "/i `"$MsiPath`" /qn /norestart"
+        if ($proc.ExitCode -ne 0) {
+            Write-DateLog "WARNING: 7-Zip installer exited with code $($proc.ExitCode)"
+        }
+    }
+    return Get-SevenZip
+}
+
 $SEVENZIP = Get-SevenZip
 $null = $SEVENZIP
 
