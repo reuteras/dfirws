@@ -681,7 +681,24 @@ function Install-FoxitReader {
 function Install-FQLite {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-fqlite.txt")) {
         Write-Output "Installing FQLite"
-        Start-Process -Wait "${SETUP_PATH}\fqlite.exe" -ArgumentList '/qn /norestart'
+        # fqlite.exe is a jpackage/WiX-Burn wrapper around an MSI. Running the EXE
+        # directly hits a Defender vs. MoveFileEx race when the bootstrapper renames
+        # its extracted payload to main.msi (System error 32). Extract the embedded
+        # MSI with 7-Zip and install it via msiexec to bypass the bootstrapper.
+        $fqliteExtract = "${WSDFIR_TEMP}\fqlite-extract"
+        if (Test-Path $fqliteExtract) {
+            Remove-Item -Recurse -Force $fqliteExtract | Out-Null
+        }
+        & $SEVENZIP x -aoa "${SETUP_PATH}\fqlite.exe" -o"$fqliteExtract" | Out-Null
+        $fqliteMsi = Get-ChildItem -Path $fqliteExtract -Recurse -Filter "*.msi" -ErrorAction SilentlyContinue |
+            Sort-Object Length -Descending | Select-Object -First 1
+        if ($fqliteMsi) {
+            Start-Process -Wait msiexec -ArgumentList "/i `"$($fqliteMsi.FullName)`" /qn /norestart"
+        } else {
+            Write-Output "WARNING: Could not extract MSI from fqlite.exe; falling back to bootstrapper."
+            Start-Process -Wait "${SETUP_PATH}\fqlite.exe" -ArgumentList '/quiet'
+        }
+        Remove-Item -Recurse -Force $fqliteExtract -ErrorAction SilentlyContinue | Out-Null
         if (Test-Path "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk") {
             Copy-Item "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite.lnk" -Force
             Copy-Item "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\fqlite.lnk" -Force
