@@ -681,24 +681,43 @@ function Install-FoxitReader {
 function Install-FQLite {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-fqlite.txt")) {
         Write-Output "Installing FQLite"
-        # fqlite.exe is a jpackage/WiX-Burn wrapper around an MSI. Running the EXE
-        # directly hits a Defender vs. MoveFileEx race when the bootstrapper renames
-        # its extracted payload to main.msi (System error 32). Extract the embedded
-        # MSI with 7-Zip and install it via msiexec to bypass the bootstrapper.
+        # fqlite.exe is a jpackage wrapper that extracts main.msi into
+        # %TEMP%\<id>.tmp\ and renames jds<id>.tmp -> main.msi. Defender real-time
+        # scan of the just-written file races with MoveFileEx and fails with
+        # System error 32. Try to extract the MSI ourselves via 7-Zip first; if
+        # that fails, exclude %TEMP% from Defender while the bootstrapper runs.
+        $fqliteInstalled = $false
         $fqliteExtract = "${WSDFIR_TEMP}\fqlite-extract"
         if (Test-Path $fqliteExtract) {
             Remove-Item -Recurse -Force $fqliteExtract | Out-Null
         }
-        & $SEVENZIP x -aoa "${SETUP_PATH}\fqlite.exe" -o"$fqliteExtract" | Out-Null
-        $fqliteMsi = Get-ChildItem -Path $fqliteExtract -Recurse -Filter "*.msi" -ErrorAction SilentlyContinue |
+        & $SEVENZIP x -aoa "${SETUP_PATH}\fqlite.exe" -o"$fqliteExtract" 2>&1 | Out-Null
+        $fqliteMsi = Get-ChildItem -Path $fqliteExtract -Recurse -ErrorAction SilentlyContinue |
+            Where-Object { -not $_.PSIsContainer -and ($_.Extension -eq ".msi" -or $_.Name -eq "main.msi") } |
             Sort-Object Length -Descending | Select-Object -First 1
         if ($fqliteMsi) {
             Start-Process -Wait msiexec -ArgumentList "/i `"$($fqliteMsi.FullName)`" /qn /norestart"
-        } else {
-            Write-Output "WARNING: Could not extract MSI from fqlite.exe; falling back to bootstrapper."
-            Start-Process -Wait "${SETUP_PATH}\fqlite.exe" -ArgumentList '/quiet'
+            $fqliteInstalled = $true
         }
         Remove-Item -Recurse -Force $fqliteExtract -ErrorAction SilentlyContinue | Out-Null
+
+        if (-not $fqliteInstalled) {
+            Write-Output "7-Zip could not extract MSI from fqlite.exe; running bootstrapper with Defender exclusion."
+            $defenderExcluded = $false
+            try {
+                Add-MpPreference -ExclusionPath "${env:TEMP}" -ErrorAction Stop
+                $defenderExcluded = $true
+            } catch {
+                Write-Output "WARNING: Could not add Defender exclusion for ${env:TEMP}: $_"
+            }
+            try {
+                Start-Process -Wait "${SETUP_PATH}\fqlite.exe" -ArgumentList '/quiet'
+            } finally {
+                if ($defenderExcluded) {
+                    Remove-MpPreference -ExclusionPath "${env:TEMP}" -ErrorAction SilentlyContinue
+                }
+            }
+        }
         if (Test-Path "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk") {
             Copy-Item "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite.lnk" -Force
             Copy-Item "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\fqlite.lnk" -Force
