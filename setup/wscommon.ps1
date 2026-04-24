@@ -682,53 +682,84 @@ function Install-FQLite {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-fqlite.txt")) {
         Write-Output "Installing FQLite"
         # fqlite.exe is a jpackage-produced wrapper that extracts its embedded
-        # main.msi into %TEMP%\<id>.tmp\ via a close() + MoveFileEx(..., 3) pair
+        # main.msi into %TEMP%\<id>.tmp\ via close() + MoveFileEx(..., 3)
         # (jdk.jpackage WinFileUtils.cpp / MsiWrapper.cpp). In Windows Sandbox
         # the wcifs mini-filter can briefly hold the freshly-closed jds<id>.tmp
         # between close and rename, producing ERROR_SHARING_VIOLATION (32) and
-        # a blocking modal dialog. Bypass the wrapper by extracting main.msi
-        # ourselves and invoking msiexec directly. 7-Zip can open the jpackage
-        # EXE as a PE archive; the MSI is stored as an RCDATA resource without
-        # a .msi extension, so we identify it by OLE2 compound-document magic
-        # (D0 CF 11 E0 A1 B1 1A E1).
+        # a blocking modal dialog. Bypass the wrapper: jpackage stores main.msi
+        # as a Win32 PE resource (RT_RCDATA, name "msi"); pull it out directly
+        # via LoadLibraryEx/FindResource/LoadResource and install with msiexec.
         $fqliteInstalled = $false
         $fqliteExtract = "${WSDFIR_TEMP}\fqlite-extract"
         if (Test-Path $fqliteExtract) {
             Remove-Item -Recurse -Force $fqliteExtract | Out-Null
         }
-        & $SEVENZIP x -aoa "${SETUP_PATH}\fqlite.exe" -o"$fqliteExtract" 2>&1 | Out-Null
+        New-Item -ItemType Directory -Force -Path $fqliteExtract | Out-Null
+        $fqliteMsiPath = Join-Path $fqliteExtract "fqlite.msi"
 
-        $msiMagic = "D0-CF-11-E0-A1-B1-1A-E1"
-        $fqliteMsiFile = $null
-        $candidates = Get-ChildItem -Path $fqliteExtract -Recurse -File -ErrorAction SilentlyContinue |
-            Where-Object { $_.Length -gt 64KB } | Sort-Object Length -Descending
-        foreach ($candidate in $candidates) {
+        if (-not ('Dfirws.PeResource' -as [type])) {
+            Add-Type -TypeDefinition @"
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
+namespace Dfirws {
+    public static class PeResource {
+        [DllImport("kernel32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+        static extern IntPtr LoadLibraryExW(string lpFileName, IntPtr hFile, uint dwFlags);
+        [DllImport("kernel32.dll", SetLastError=true)]
+        static extern bool FreeLibrary(IntPtr hModule);
+        [DllImport("kernel32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+        static extern IntPtr FindResourceW(IntPtr hModule, string lpName, IntPtr lpType);
+        [DllImport("kernel32.dll", SetLastError=true)]
+        static extern IntPtr LoadResource(IntPtr hModule, IntPtr hResInfo);
+        [DllImport("kernel32.dll", SetLastError=true)]
+        static extern IntPtr LockResource(IntPtr hResData);
+        [DllImport("kernel32.dll", SetLastError=true)]
+        static extern uint SizeofResource(IntPtr hModule, IntPtr hResInfo);
+
+        const uint LOAD_LIBRARY_AS_DATAFILE = 0x00000002;
+        const uint LOAD_LIBRARY_AS_IMAGE_RESOURCE = 0x00000020;
+
+        public static bool Extract(string exePath, string resName, int resType, string outPath) {
+            IntPtr hMod = LoadLibraryExW(exePath, IntPtr.Zero,
+                LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
+            if (hMod == IntPtr.Zero) return false;
             try {
-                $stream = [System.IO.File]::OpenRead($candidate.FullName)
-                try {
-                    $header = [byte[]]::new(8)
-                    $read = $stream.Read($header, 0, 8)
-                } finally {
-                    $stream.Dispose()
-                }
-                if ($read -eq 8 -and [BitConverter]::ToString($header) -eq $msiMagic) {
-                    $fqliteMsiFile = $candidate
-                    break
-                }
-            } catch {
-                continue
+                IntPtr hRes = FindResourceW(hMod, resName, (IntPtr)resType);
+                if (hRes == IntPtr.Zero) return false;
+                uint size = SizeofResource(hMod, hRes);
+                if (size == 0) return false;
+                IntPtr hData = LoadResource(hMod, hRes);
+                if (hData == IntPtr.Zero) return false;
+                IntPtr pData = LockResource(hData);
+                if (pData == IntPtr.Zero) return false;
+                byte[] buf = new byte[size];
+                Marshal.Copy(pData, buf, 0, (int)size);
+                File.WriteAllBytes(outPath, buf);
+                return true;
+            } finally {
+                FreeLibrary(hMod);
             }
         }
+    }
+}
+"@
+        }
 
-        if ($fqliteMsiFile) {
-            $fqliteMsiPath = Join-Path $fqliteExtract "fqlite.msi"
-            if ($fqliteMsiFile.FullName -ne $fqliteMsiPath) {
-                Copy-Item -LiteralPath $fqliteMsiFile.FullName -Destination $fqliteMsiPath -Force
+        # RT_RCDATA = 10; jpackage names the embedded MSI resource "msi".
+        $extracted = [Dfirws.PeResource]::Extract("${SETUP_PATH}\fqlite.exe", "msi", 10, $fqliteMsiPath)
+        if ($extracted -and (Test-Path $fqliteMsiPath)) {
+            $magic = [byte[]]::new(8)
+            $fs = [System.IO.File]::OpenRead($fqliteMsiPath)
+            try { [void]$fs.Read($magic, 0, 8) } finally { $fs.Dispose() }
+            if ([BitConverter]::ToString($magic) -eq "D0-CF-11-E0-A1-B1-1A-E1") {
+                Start-Process -Wait msiexec -ArgumentList "/i `"$fqliteMsiPath`" /qn /norestart"
+                $fqliteInstalled = $true
+            } else {
+                Write-Output "ERROR: Extracted MSI resource from fqlite.exe is not a valid MSI (magic: $([BitConverter]::ToString($magic)))."
             }
-            Start-Process -Wait msiexec -ArgumentList "/i `"$fqliteMsiPath`" /qn /norestart"
-            $fqliteInstalled = $true
         } else {
-            Write-Output "ERROR: Could not locate MSI payload inside fqlite.exe. Skipping FQLite install."
+            Write-Output "ERROR: Could not locate RT_RCDATA 'msi' resource inside fqlite.exe (LastError: $([Runtime.InteropServices.Marshal]::GetLastWin32Error()))."
         }
 
         Remove-Item -Recurse -Force $fqliteExtract -ErrorAction SilentlyContinue | Out-Null
