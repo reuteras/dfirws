@@ -681,24 +681,58 @@ function Install-FoxitReader {
 function Install-FQLite {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-fqlite.txt")) {
         Write-Output "Installing FQLite"
-        # fqlite.exe is a jpackage/WiX-Burn wrapper around an MSI. Running the EXE
-        # directly hits a Defender vs. MoveFileEx race when the bootstrapper renames
-        # its extracted payload to main.msi (System error 32). Extract the embedded
-        # MSI with 7-Zip and install it via msiexec to bypass the bootstrapper.
+        # fqlite.exe is a jpackage-produced wrapper that extracts its embedded
+        # main.msi into %TEMP%\<id>.tmp\ via a close() + MoveFileEx(..., 3) pair
+        # (jdk.jpackage WinFileUtils.cpp / MsiWrapper.cpp). In Windows Sandbox
+        # the wcifs mini-filter can briefly hold the freshly-closed jds<id>.tmp
+        # between close and rename, producing ERROR_SHARING_VIOLATION (32) and
+        # a blocking modal dialog. Bypass the wrapper by extracting main.msi
+        # ourselves and invoking msiexec directly. 7-Zip can open the jpackage
+        # EXE as a PE archive; the MSI is stored as an RCDATA resource without
+        # a .msi extension, so we identify it by OLE2 compound-document magic
+        # (D0 CF 11 E0 A1 B1 1A E1).
+        $fqliteInstalled = $false
         $fqliteExtract = "${WSDFIR_TEMP}\fqlite-extract"
         if (Test-Path $fqliteExtract) {
             Remove-Item -Recurse -Force $fqliteExtract | Out-Null
         }
-        & $SEVENZIP x -aoa "${SETUP_PATH}\fqlite.exe" -o"$fqliteExtract" | Out-Null
-        $fqliteMsi = Get-ChildItem -Path $fqliteExtract -Recurse -Filter "*.msi" -ErrorAction SilentlyContinue |
-            Sort-Object Length -Descending | Select-Object -First 1
-        if ($fqliteMsi) {
-            Start-Process -Wait msiexec -ArgumentList "/i `"$($fqliteMsi.FullName)`" /qn /norestart"
-        } else {
-            Write-Output "WARNING: Could not extract MSI from fqlite.exe; falling back to bootstrapper."
-            Start-Process -Wait "${SETUP_PATH}\fqlite.exe" -ArgumentList '/quiet'
+        & $SEVENZIP x -aoa "${SETUP_PATH}\fqlite.exe" -o"$fqliteExtract" 2>&1 | Out-Null
+
+        $msiMagic = "D0-CF-11-E0-A1-B1-1A-E1"
+        $fqliteMsiFile = $null
+        $candidates = Get-ChildItem -Path $fqliteExtract -Recurse -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.Length -gt 64KB } | Sort-Object Length -Descending
+        foreach ($candidate in $candidates) {
+            try {
+                $stream = [System.IO.File]::OpenRead($candidate.FullName)
+                try {
+                    $header = [byte[]]::new(8)
+                    $read = $stream.Read($header, 0, 8)
+                } finally {
+                    $stream.Dispose()
+                }
+                if ($read -eq 8 -and [BitConverter]::ToString($header) -eq $msiMagic) {
+                    $fqliteMsiFile = $candidate
+                    break
+                }
+            } catch {
+                continue
+            }
         }
+
+        if ($fqliteMsiFile) {
+            $fqliteMsiPath = Join-Path $fqliteExtract "fqlite.msi"
+            if ($fqliteMsiFile.FullName -ne $fqliteMsiPath) {
+                Copy-Item -LiteralPath $fqliteMsiFile.FullName -Destination $fqliteMsiPath -Force
+            }
+            Start-Process -Wait msiexec -ArgumentList "/i `"$fqliteMsiPath`" /qn /norestart"
+            $fqliteInstalled = $true
+        } else {
+            Write-Output "ERROR: Could not locate MSI payload inside fqlite.exe. Skipping FQLite install."
+        }
+
         Remove-Item -Recurse -Force $fqliteExtract -ErrorAction SilentlyContinue | Out-Null
+        if (-not $fqliteInstalled) { return }
         if (Test-Path "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk") {
             Copy-Item "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\dfirws\Files and apps\Database\fqlite.lnk" -Force
             Copy-Item "${HOME}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Unknown\fqlite.lnk" "${HOME}\Desktop\fqlite.lnk" -Force
