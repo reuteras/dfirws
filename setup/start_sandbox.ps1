@@ -693,16 +693,26 @@ Set-SandboxProgressReady
 
 # If in verify mode, run install_all and install_verify scripts
 if (Test-Path "C:\log\log.txt") {
-    Write-SynchronizedLog "Running install_all.ps1 script."
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
-    & "${HOME}\Documents\tools\install\install_all.ps1" | Out-Null
-    Write-SynchronizedLog "Running install_verify.ps1 script."
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
-    & "${HOME}\Documents\tools\install\install_verify.ps1" | Out-Null
-    Get-Job | Wait-Job | Out-Null
-    Get-Job | Receive-Job 2>&1 >> ".\log\jobs.txt"
-    Get-Job | Remove-Job | Out-Null
-    Write-Output "" > "C:\log\verify_done"
+    try {
+        Write-SynchronizedLog "Running install_all.ps1 script."
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
+        & "${HOME}\Documents\tools\install\install_all.ps1" 2>&1 | ForEach-Object { Write-SynchronizedLog "install_all: $_" }
+        Write-SynchronizedLog "install_all.ps1 finished."
+        Write-SynchronizedLog "Running install_verify.ps1 script."
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
+        & "${HOME}\Documents\tools\install\install_verify.ps1" 2>&1 | ForEach-Object { Write-SynchronizedLog "install_verify: $_" }
+        Write-SynchronizedLog "install_verify.ps1 finished."
+        Get-Job | Wait-Job | Out-Null
+        Get-Job | Receive-Job 2>&1 >> "${WSDFIR_TEMP}\jobs.txt"
+        Get-Job | Remove-Job | Out-Null
+    }
+    catch {
+        Write-SynchronizedLog "ERROR in verify block: $_"
+    }
+    finally {
+        Write-SynchronizedLog "Writing verify_done signal file."
+        New-Item -ItemType File -Path "C:\log\verify_done" -Force | Out-Null
+    }
 }
 
 # Wait for all jobs to finish and clean up
