@@ -13,8 +13,7 @@ Install-Git 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 New-Item -ItemType Directory "${WSDFIR_TEMP}" 2>&1 | ForEach-Object{ "$_" } | Out-Null
 
-Copy-Item "${SETUP_PATH}\7zip.msi" "${WSDFIR_TEMP}\7zip.msi"
-Start-Process -Wait msiexec -ArgumentList "/i ${WSDFIR_TEMP}\7zip.msi /qn /norestart"
+$SEVENZIP = Install-SevenZip
 Get-Job | Receive-Job
 
 Write-Output "Get-Content C:\log\npm.txt -Wait" | Out-File -FilePath "C:\Progress.ps1" -Encoding "ascii"

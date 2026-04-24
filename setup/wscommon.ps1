@@ -21,12 +21,25 @@ $null="${RUST_DIR}"
 $null="${WSDFIR_TEMP}"
 
 # Resolve 7-Zip path: check PATH first, then common install locations
-if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) {
-    $SEVENZIP = "7z.exe"
-} else {
-    $SEVENZIP = @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
+function Get-SevenZip {
+    if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) { return "7z.exe" }
+    return @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
         Where-Object { Test-Path $_ } | Select-Object -First 1
 }
+
+# Install 7-Zip from MSI if not already present, then return its path
+function Install-SevenZip {
+    param ([string]$MsiPath = "${SETUP_PATH}\7zip.msi")
+    if (-not (Get-SevenZip)) {
+        $proc = Start-Process -Wait -PassThru msiexec -ArgumentList "/i `"$MsiPath`" /qn /norestart"
+        if ($proc.ExitCode -ne 0) {
+            Write-DateLog "WARNING: 7-Zip installer exited with code $($proc.ExitCode)"
+        }
+    }
+    return Get-SevenZip
+}
+
+$SEVENZIP = Get-SevenZip
 $null = $SEVENZIP
 
 # Check if C:\log exists, indicating running downloadFiles.ps1

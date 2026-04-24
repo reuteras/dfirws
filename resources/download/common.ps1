@@ -21,12 +21,12 @@ if (!(Test-Path variable:GIT_FILE)) {
 }
 
 # Resolve 7-Zip path: check PATH first, then common install locations
-if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) {
-    $SEVENZIP = "7z.exe"
-} else {
-    $SEVENZIP = @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
+function Get-SevenZip {
+    if (Get-Command "7z.exe" -ErrorAction SilentlyContinue) { return "7z.exe" }
+    return @("${env:ProgramFiles}\7-Zip\7z.exe", "${env:ProgramFiles(x86)}\7-Zip\7z.exe") |
         Where-Object { Test-Path $_ } | Select-Object -First 1
 }
+$SEVENZIP = Get-SevenZip
 $null = $SEVENZIP
 
 function ConvertTo-Icon {
