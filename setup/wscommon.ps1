@@ -1007,16 +1007,18 @@ function Install-Neo4j {
         Add-ToUserPath "${env:ProgramFiles}\neo4j\bin"
         Add-ToUserPath "C:\Windows\System32\WindowsPowerShell\v1.0"
         $env:Path = "C:\Windows\System32\WindowsPowerShell\v1.0;${NEO_JAVA}\bin;" + [System.Environment]::GetEnvironmentVariable("Path", "User") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\microsoft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\microsoft-jdk-21.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR=$NEO_JAVA /qn /norestart"
         & $SEVENZIP x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}" | Out-Null
         Move-Item ${env:ProgramFiles}\neo4j-community* ${env:ProgramFiles}\neo4j
         $env:JAVA_HOME = "$NEO_JAVA"
         & "${env:ProgramFiles}\neo4j\bin\neo4j-admin" set-initial-password neo4j
-        if (Test-Path "${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk") {
-            Remove-Item "${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk" -Force
-        }
-        if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Files and apps - Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk") {
-            Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Files and apps - Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk" -Force
+        foreach ($lnkName in @("Neo4j 4 (runs dfirws-install -Neo4j).lnk", "Neo4j (runs dfirws-install -Neo4j).lnk")) {
+            if (Test-Path "${HOME}\Desktop\dfirws\Files and apps\Database\${lnkName}") {
+                Remove-Item "${HOME}\Desktop\dfirws\Files and apps\Database\${lnkName}" -Force
+            }
+            if (Test-Path "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Files and apps - Database\${lnkName}") {
+                Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Files and apps - Database\${lnkName}" -Force
+            }
         }
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command neo4j.bat console"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-neo4j.txt" | Out-Null

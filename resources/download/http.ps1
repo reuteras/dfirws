@@ -2304,12 +2304,12 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# Microsoft OpenJDK 11 - installed during start
-$MicrosoftJDKUrl = get-downloadUrlFromPage -url "https://learn.microsoft.com/en-us/java/openjdk/download" -RegEx 'https://aka.ms/download-jdk/microsoft-jdk-11.[.0-9]+-windows-x64.msi'
-$status = Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\microsoft-jdk-11.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
+# Microsoft OpenJDK 21 - installed during start (required by Neo4j 2025.x)
+$MicrosoftJDKUrl = get-downloadUrlFromPage -url "https://learn.microsoft.com/en-us/java/openjdk/download" -RegEx 'https://aka.ms/download-jdk/microsoft-jdk-21.[.0-9]+-windows-x64.msi'
+$status = Get-FileFromUri -uri "${MicrosoftJDKUrl}" -FilePath ".\downloads\microsoft-jdk-21.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
 
 $TOOL_DEFINITIONS += @{
-    Name = "Microsoft OpenJDK 11"
+    Name = "Microsoft OpenJDK 21"
     Homepage = "https://learn.microsoft.com/en-us/java/openjdk/download"
     Vendor = "Microsoft"
     License = "GPLv2 with Classpath Exception"
@@ -2320,7 +2320,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @()
     FileExtensions = @()
     Tags = @("java")
-    Notes = "Microsofts OpenJDK 11"
+    Notes = "Microsofts OpenJDK 21"
     Tips = ""
     Usage = ""
     SampleCommands = @()
@@ -2344,7 +2344,7 @@ $TOOL_DEFINITIONS += @{
     Category = "Files and apps\Database"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j 4 (runs dfirws-install -Neo4j).lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Database\Neo4j (runs dfirws-install -Neo4j).lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Neo4j"
             Icon     = ""
