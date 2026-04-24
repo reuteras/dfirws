@@ -596,7 +596,8 @@ $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Whe
     $_.Line -notmatch "ucrt64/share" -and
     $_.Line -notmatch "origin/main Updating" -and
     $_.Line -notmatch "origin/master Updating" -and
-    $_.Line -notmatch "EVTX-ATTACK-SAMPLES"
+    $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
+    $_.Line -notmatch "failed-to-read-json.js"
 }
 
 # Check for security audit findings (npm audit, govulncheck, pip-audit, cargo audit)
