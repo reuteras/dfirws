@@ -19,5 +19,3 @@ Write-SynchronizedLog "Install all tools in the sandbox completed."
 if (Test-Path -Path "${TOOLS}\Debug") {
     Read-Host "Press Enter to continue"
 }
-
-exit 0
