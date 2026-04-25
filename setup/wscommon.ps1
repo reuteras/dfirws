@@ -1483,14 +1483,19 @@ function Install-X64dbg {
 function Install-ZAProxy {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-zaproxy.txt")) {
         Write-Output "Installing ZAProxy"
+        Write-Output "[ZAProxy] starting installer"
         $zapProc = Start-Process -PassThru "${SETUP_PATH}\zaproxy.exe" -ArgumentList '-q'
         if ($zapProc) {
             if (-not $zapProc.WaitForExit(600000)) {
-                Write-Output "ZAProxy installer timed out after 10 minutes, killing"
+                Write-Output "[ZAProxy] installer timed out after 10 minutes, killing"
                 $zapProc | Stop-Process -Force -ErrorAction SilentlyContinue
+            } else {
+                Write-Output "[ZAProxy] installer exited with code $($zapProc.ExitCode)"
             }
         }
+        Write-Output "[ZAProxy] updating PATH"
         Add-ToUserPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy"
+        Write-Output "[ZAProxy] creating shortcut"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\zaproxy.lnk" -DestinationPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.ico"
         if (Test-Path "${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-install -Zaproxy).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-install -Zaproxy).lnk" -Force
@@ -1499,6 +1504,7 @@ function Install-ZAProxy {
             Remove-Item "${env:ProgramData}\Microsoft\Windows\Start Menu\Programs\dfirws - Network\Zaproxy (runs dfirws-install -Zaproxy).lnk" -Force
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-zaproxy.txt" | Out-Null
+        Write-Output "[ZAProxy] install complete"
     } else {
         Write-Output "ZAProxy is already installed"
     }

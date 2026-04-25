@@ -5,8 +5,14 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # Run tests in $SETUP_PATH\dfirws\install_*.ps1 if they exists
 $INSTALL_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "install_*.ps1" -ErrorAction SilentlyContinue
 foreach ($script in $INSTALL_SCRIPTS) {
-    Write-SynchronizedLog "Running install script: $($script.FullName)"
-    & $script.FullName
+    Write-SynchronizedLog "Started install script: $($script.Name)"
+    try {
+        & $script.FullName
+        Write-SynchronizedLog "Finished install script: $($script.Name)"
+    }
+    catch {
+        Write-SynchronizedLog "ERROR in install script $($script.Name): $_"
+    }
 }
 
 Write-SynchronizedLog "Install all tools in the sandbox."

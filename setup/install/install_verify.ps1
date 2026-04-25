@@ -19,8 +19,14 @@ Test-Command 7z PE32
 # Run tests in $SETUP_PATH\dfirws\verify_*.ps1 if they exists
 $VERIFY_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "verify_*.ps1" -ErrorAction SilentlyContinue
 foreach ($script in $VERIFY_SCRIPTS) {
-    Write-SynchronizedLog "Running verify script: $($script.FullName)"
-    & $script.FullName
+    Write-SynchronizedLog "Started verify script: $($script.Name)"
+    try {
+        & $script.FullName
+        Write-SynchronizedLog "Finished verify script: $($script.Name)"
+    }
+    catch {
+        Write-SynchronizedLog "ERROR in verify script $($script.Name): $_"
+    }
 }
 
 # Extra tools
