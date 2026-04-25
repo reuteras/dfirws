@@ -1483,7 +1483,13 @@ function Install-X64dbg {
 function Install-ZAProxy {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-zaproxy.txt")) {
         Write-Output "Installing ZAProxy"
-        Start-Process -Wait "${SETUP_PATH}\zaproxy.exe" -ArgumentList '-q'
+        $zapProc = Start-Process -PassThru "${SETUP_PATH}\zaproxy.exe" -ArgumentList '-q'
+        if ($zapProc) {
+            if (-not $zapProc.WaitForExit(600000)) {
+                Write-Output "ZAProxy installer timed out after 10 minutes, killing"
+                $zapProc | Stop-Process -Force -ErrorAction SilentlyContinue
+            }
+        }
         Add-ToUserPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\zaproxy.lnk" -DestinationPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.ico"
         if (Test-Path "${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-install -Zaproxy).lnk") {

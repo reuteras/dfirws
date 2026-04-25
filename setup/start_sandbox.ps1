@@ -693,6 +693,18 @@ Set-SandboxProgressReady
 
 # If in verify mode, run install_all and install_verify scripts
 if (Test-Path "C:\log\log.txt") {
+    # Spawn an independent watchdog process that ensures verify_done is written
+    # even if start_sandbox.ps1 hangs (e.g., if an installer blocks indefinitely).
+    $watchdogScript = @'
+Start-Sleep -Seconds 5400
+if (-not (Test-Path "C:\log\verify_done")) {
+    New-Item -ItemType File -Path "C:\log\verify_done" -Force | Out-Null
+}
+'@
+    $watchdogPath = "${WSDFIR_TEMP}\verify_watchdog.ps1"
+    Set-Content -Path $watchdogPath -Value $watchdogScript -Encoding UTF8
+    Start-Process -WindowStyle Hidden "${POWERSHELL_EXE}" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$watchdogPath`""
+
     try {
         Write-SynchronizedLog "Running install_all.ps1 script."
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
