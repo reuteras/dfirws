@@ -1488,10 +1488,10 @@ function Install-ZAProxy {
         # from start_sandbox.ps1 - the ZAP installer has been observed to
         # terminate its parent PowerShell, which previously killed the entire
         # verify run before verify_done could be written.
+        $zapExePath = "${SETUP_PATH}\zaproxy.exe"
         $zapJob = Start-Job -Name "install-zaproxy" -ScriptBlock {
-            param($exe)
-            Start-Process -Wait $exe -ArgumentList '-q'
-        } -ArgumentList "${SETUP_PATH}\zaproxy.exe"
+            Start-Process -Wait $using:zapExePath -ArgumentList '-q'
+        }
 
         $completed = Wait-Job -Job $zapJob -Timeout 600
         if (-not $completed) {
