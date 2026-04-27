@@ -4441,7 +4441,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "zap"
+            Name = "C:\Program Files\ZAP\Zed Attack Proxy\ZAP.exe"
             Expect = "PE32"
         }
     )

@@ -653,7 +653,7 @@ function Install-ForensicTimeliner {
         Write-Output "Installing Forensic Timeliner"
         #$CLI_TOOL = "${POWERSHELL_EXE}"
         #$CLI_TOOL_ARGS = "-NoExit"
-        $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | findstr "terminal" | Select-Object -Last 1)
+        $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | Select-String "terminal" | Select-Object -Last 1)
         $TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR"
         $CLI_TOOL = "${TERMINAL_INSTALL_LOCATION}\wt.exe"
         $CLI_TOOL_ARGS = "-w 0 C:\Program Files\PowerShell\7\pwsh.exe -NoExit"
