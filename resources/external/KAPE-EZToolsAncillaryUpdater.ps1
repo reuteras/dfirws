@@ -105,28 +105,21 @@ function Get-Zimmerman {
 		New-Item -ItemType Directory -Path $getZimmermanToolsFolderKape | Out-Null
 	}
 
-	$scriptArgs = @{
-		Dest = "$getZimmermanToolsFolderKape"
+	# Use the locally bundled (hardened) Get-ZimmermanTools.ps1 shipped next to this updater
+	# instead of downloading the upstream zip, which currently 404s on tools without net9 builds.
+	$localGetZimmermanToolsPs1 = Join-Path $PSScriptRoot $getZimmermanToolsFileName
+	if (-not (Test-Path $localGetZimmermanToolsPs1)) {
+		Log -logFilePath $logFilePath -msg "Local $getZimmermanToolsFileName not found at $localGetZimmermanToolsPs1. Skipping Zimmerman update."
+		return
 	}
 
-	try {
-		Start-BitsTransfer -Source $ZTdlUrl -Destination $kapeModulesBin -ErrorAction Stop
-	} catch {
-		Log -logFilePath $logFilePath -msg "Failed to download $ZTZipFile from $ZTdlUrl. Error: $($_.Exception.Message)"
-	}
-
-	Expand-Archive -Path "$getZimmermanToolsZipKape" -DestinationPath "$kapeModulesBin" -Force
-	$getZimmermanToolsPs1 = (Get-ChildItem -Path $kapeModulesBin -Filter $getZimmermanToolsFileName).FullName
-
-	# Move Get-ZimmermanTools.ps1 from .\KAPE\Modules\bin to .\KAPE\Modules\bin\ZimmermanTools
-	Move-Item -Path $getZimmermanToolsPs1 -Destination $getZimmermanToolsFolderKape -Force
-
-	$getZimmermanToolsPs1ZT = (Get-ChildItem -Path $getZimmermanToolsFolderKape -Filter $getZimmermanToolsFileName).FullName
+	$getZimmermanToolsPs1ZT = Join-Path $getZimmermanToolsFolderKape $getZimmermanToolsFileName
+	Copy-Item -Path $localGetZimmermanToolsPs1 -Destination $getZimmermanToolsPs1ZT -Force
 
 	Log -logFilePath $logFilePath -msg "Running $getZimmermanToolsFileName! Downloading .NET 6 version of EZ Tools to $getZimmermanToolsFolderKape"
 
-	# executing .\KAPE\Modules\bin\Get-ZimmermanTools.ps1 -Dest .\KAPE\Modules\bin\ZimmermanTools
-	Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-File $getZimmermanToolsPs1ZT", "-Dest $($scriptArgs.Dest)" -Wait -NoNewWindow
+	# executing .\KAPE\Modules\bin\ZimmermanTools\Get-ZimmermanTools.ps1 -Dest .\KAPE\Modules\bin\ZimmermanTools -NetVersion 6
+	Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-File `"$getZimmermanToolsPs1ZT`"", "-Dest `"$getZimmermanToolsFolderKape`"", "-NetVersion", "6" -Wait -NoNewWindow
 }
 
 <#

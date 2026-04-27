@@ -20,6 +20,7 @@ if (! (Test-Path -Path "$SETUP_PATH\KAPE" )) {
 
 $CURRENT_DIR = $PWD
 Copy-Item ".\resources\external\KAPE-EZToolsAncillaryUpdater.ps1" "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" -Force
+Copy-Item ".\resources\download\Get-ZimmermanTools.ps1" "$SETUP_PATH\KAPE\Get-ZimmermanTools.ps1" -Force
 Set-Location "$SETUP_PATH\KAPE"
 & .\KAPE-EZToolsAncillaryUpdater.ps1 -silent -net 6 *> $CURRENT_DIR\log\kape.txt
 Set-Location $CURRENT_DIR
