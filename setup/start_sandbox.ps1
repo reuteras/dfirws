@@ -708,12 +708,14 @@ if (-not (Test-Path "C:\log\verify_done")) {
     try {
         Write-SynchronizedLog "Running install_all.ps1 script."
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
-        & "${HOME}\Documents\tools\install\install_all.ps1" 2>&1 | ForEach-Object { Write-SynchronizedLog "install_all: $_" }
-        Write-SynchronizedLog "install_all.ps1 finished."
+        # Run in a separate process so that any exit call in a child script
+        # only terminates that subprocess and cannot bypass this finally block.
+        $installAllProc = Start-Process -Wait -PassThru "${POWERSHELL_EXE}" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"${HOME}\Documents\tools\install\install_all.ps1`""
+        Write-SynchronizedLog "install_all.ps1 finished with exit code $($installAllProc.ExitCode)."
         Write-SynchronizedLog "Running install_verify.ps1 script."
         $env:Path = [System.Environment]::GetEnvironmentVariable("Path","User")
-        & "${HOME}\Documents\tools\install\install_verify.ps1" 2>&1 | ForEach-Object { Write-SynchronizedLog "install_verify: $_" }
-        Write-SynchronizedLog "install_verify.ps1 finished."
+        $installVerifyProc = Start-Process -Wait -PassThru "${POWERSHELL_EXE}" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"${HOME}\Documents\tools\install\install_verify.ps1`""
+        Write-SynchronizedLog "install_verify.ps1 finished with exit code $($installVerifyProc.ExitCode)."
         Get-Job | Wait-Job | Out-Null
         Get-Job | Receive-Job 2>&1 >> "${WSDFIR_TEMP}\jobs.txt"
         Get-Job | Remove-Job | Out-Null
