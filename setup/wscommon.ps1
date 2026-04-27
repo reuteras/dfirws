@@ -1483,16 +1483,26 @@ function Install-X64dbg {
 function Install-ZAProxy {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-zaproxy.txt")) {
         Write-Output "Installing ZAProxy"
-        Write-Output "[ZAProxy] starting installer"
-        $zapProc = Start-Process -PassThru "${SETUP_PATH}\zaproxy.exe" -ArgumentList '-q'
-        if ($zapProc) {
-            if (-not $zapProc.WaitForExit(600000)) {
-                Write-Output "[ZAProxy] installer timed out after 10 minutes, killing"
-                $zapProc | Stop-Process -Force -ErrorAction SilentlyContinue
-            } else {
-                Write-Output "[ZAProxy] installer exited with code $($zapProc.ExitCode)"
-            }
+        Write-Output "[ZAProxy] starting installer in isolated job"
+        # Run the installer in a background job so its process tree is detached
+        # from start_sandbox.ps1 - the ZAP installer has been observed to
+        # terminate its parent PowerShell, which previously killed the entire
+        # verify run before verify_done could be written.
+        $zapJob = Start-Job -Name "install-zaproxy" -ScriptBlock {
+            param($exe)
+            Start-Process -Wait $exe -ArgumentList '-q'
+        } -ArgumentList "${SETUP_PATH}\zaproxy.exe"
+
+        $completed = Wait-Job -Job $zapJob -Timeout 600
+        if (-not $completed) {
+            Write-Output "[ZAProxy] installer job timed out after 10 minutes, stopping"
+            Stop-Job -Job $zapJob -ErrorAction SilentlyContinue
+        } else {
+            Write-Output "[ZAProxy] installer job finished with state $($zapJob.State)"
         }
+        Receive-Job -Job $zapJob 2>&1 | ForEach-Object { Write-Output "[ZAProxy] $_" }
+        Remove-Job -Job $zapJob -Force -ErrorAction SilentlyContinue
+
         Write-Output "[ZAProxy] updating PATH"
         Add-ToUserPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy"
         Write-Output "[ZAProxy] creating shortcut"
