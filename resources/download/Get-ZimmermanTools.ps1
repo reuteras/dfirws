@@ -326,10 +326,19 @@ while ($matchdetails.Success)
 	}
 	
 	$isnet6 = $newUrl.Contains('/net6/')
-	
+
 	#Write-Host $newUrl
-	
-	$headers = (Invoke-WebRequest @IWRProxyConfig -Uri $newUrl -UseBasicParsing -Method Head).Headers
+
+	try
+	{
+		$headers = (Invoke-WebRequest @IWRProxyConfig -Uri $newUrl -UseBasicParsing -Method Head -ErrorAction Stop).Headers
+	}
+	catch
+	{
+		Write-Color -Text "* ", "Skipping $newUrl ($($_.Exception.Message))" -Color Green, Red
+		$matchdetails = $matchdetails.NextMatch()
+		continue
+	}
 
 	#Write-Host $headers
 	
@@ -457,11 +466,11 @@ foreach ($td in $toDownload)
 	finally
 	{
 		$progressPreference = 'Continue'
-		if ($name.endswith("zip"))
+		if ($name.endswith("zip") -and (Test-Path -Path $destFile))
 		{
-			remove-item -Path $destFile
+			remove-item -Path $destFile -ErrorAction SilentlyContinue
 		}
-		
+
 	}
 	$i += 1
 }
