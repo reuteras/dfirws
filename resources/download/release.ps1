@@ -1031,7 +1031,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # mboxviewer
-$status = Get-GitHubRelease -repo "eneam/mboxviewer" -path "${SETUP_PATH}\mboxviewer.zip" -match "mbox-viewer.exe" -check "Zip archive data"
+$status = Get-GitHubRelease -repo "eneam/mboxviewer" -path "${SETUP_PATH}\mboxviewer.zip" -match "mbox-viewer.exe"
 if ($status) {
     if (Test-Path "${TOOLS}\mboxviewer") {
         Remove-Item "${TOOLS}\mboxviewer" -Recurse -Force
@@ -2451,7 +2451,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # mmdbinspect
-$status = Get-GitHubRelease -repo "maxmind/mmdbinspect" -path "${SETUP_PATH}\mmdbinspect.zip" -match "windows_amd64.zip" -check "Zip archive data"
+$status = Get-GitHubRelease -repo "maxmind/mmdbinspect" -path "${SETUP_PATH}\mmdbinspect.zip" -match "windows_amd64.zip"
 if ($status) {
     if (Test-Path "${TOOLS}\mmdbinspect") {
         Remove-Item "${TOOLS}\mmdbinspect" -Recurse -Force
