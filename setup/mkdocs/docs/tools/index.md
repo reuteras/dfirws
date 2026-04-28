@@ -275,7 +275,7 @@ Categories generated from dfirws shortcuts.
 | [MetadataPlus](./files-and-apps-office/metadataplus.md) | GitHub Release | A tool to use novel locations to extract metadata from Office documents. | metadata, file-analysis | `.exe`, `.dll`, `.doc`, `.docx`, `.xls`, `.xlsx`, `.pdf`, `.jpg`, `.png` |  |
 | [MEX](./development/mex.md) | HTTP | MEX is an extension for WinDbg. | debugging, dotnet | `.dmp` |  |
 | [MFTBrowser](./files-and-apps-disk/mftbrowser.md) | GitHub Release | $MFT directory tree reconstruction & FILE record info | ntfs, filesystem, forensics | `.mft` |  |
-| [Microsoft OpenJDK 11](./development/microsoft-openjdk-11.md) | HTTP | Microsofts OpenJDK 11 | java |  |  |
+| [Microsoft OpenJDK 21](./development/microsoft-openjdk-21.md) | HTTP | Microsofts OpenJDK 21 | java |  |  |
 | [Microsoft.etl2pcapng](./network/microsoft-etl2pcapng.md) | Winget | Microsoft.etl2pcapng is a tool for converting ETL (Event Trace Log) files to PCAPNG format, allowing you to analyze network traffic captured in ETL files using tools like Wireshark. | network-analysis, pcap, protocol-analysis | `.etl` |  |
 | [minidump](./memory/minidump.md) | Python | Python library to parse Windows minidump file format. | memory-forensics, windows | `.dmp` |  |
 | [MiTeC Structured Storage Viewer](./files-and-apps-office/mitec-structured-storage-viewer.md) | HTTP | Full-featured MS OLE Structured Storage based file management tool. | office, ole, data-extraction | `.doc`, `.xls`, `.ppt`, `.msg` |  |
