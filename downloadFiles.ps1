@@ -27,6 +27,10 @@
     This will download all files needed for DFIRWS but skip supply chain security audit checks (pip-audit, npm audit, govulncheck, cargo audit).
 
 .EXAMPLE
+    .\downloadFiles.ps1 -ShowErrors
+    This will only show errors, warnings and failures from the log files without doing any updates.
+
+.EXAMPLE
     .\downloadFiles.ps1 -ClamScan
     This will run a ClamAV scan of installed tools in an isolated sandbox.
 
@@ -111,7 +115,9 @@ param(
     [Parameter(HelpMessage = "Allow curl alias.")]
     [Switch]$AllowCurlAlias,
     [Parameter(HelpMessage = "Skip supply chain security audit checks (pip-audit, npm audit, govulncheck, cargo audit).")]
-    [Switch]$SkipSupplyChainAudit
+    [Switch]$SkipSupplyChainAudit,
+    [Parameter(HelpMessage = "Show errors, warnings and failures from log files without doing any updates.")]
+    [Switch]$ShowErrors
     )
 
 if (Test-Path ".\resources\download\common.ps1") {
@@ -204,6 +210,8 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     $DFIRWS_EXTRAS_RESOLVED = @()
     $DFIRWS_EXCLUDE_GIT_REPOS = @()
 }
+
+if (-not $ShowErrors.IsPresent) {
 
 $ProgressPreference = "SilentlyContinue"
 
@@ -521,6 +529,8 @@ if ($ClamScan.IsPresent -and $YaraScan.IsPresent) {
     Write-DateLog "YARA scan done."
 }
 
+} # end if (-not $ShowErrors.IsPresent)
+
 # Check for errors and warnings in log files
 $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
     $_.Line -notmatch " INFO " -and
@@ -645,6 +655,22 @@ if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
 
 if ($warnings -or $errors -or $failed) {
     Write-DateLog "Errors or warnings were found in log files. Please check the log files for details."
+    if ($ShowErrors.IsPresent) {
+        if ($errors) {
+            Write-DateLog "Errors:"
+            $errors | ForEach-Object { Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())" }
+        }
+        if ($warnings) {
+            Write-DateLog "Warnings:"
+            $warnings | ForEach-Object { Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())" }
+        }
+        if ($failed) {
+            Write-DateLog "Failed:"
+            $failed | ForEach-Object { Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())" }
+        }
+    }
+} elseif ($ShowErrors.IsPresent) {
+    Write-DateLog "No errors, warnings or failures found in log files."
 } elseif (-not $securityFindings) {
     Write-DateLog "Downloads and preparations done."
 }
