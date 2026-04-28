@@ -607,49 +607,52 @@ $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Whe
     $_.Line -notmatch "origin/main Updating" -and
     $_.Line -notmatch "origin/master Updating" -and
     $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
-    $_.Line -notmatch "failed-to-read-json.js"
+    $_.Line -notmatch "failed-to-read-json.js" -and
+    $_.Line -notmatch "LUMEN/src/sigma-master"
 }
 
 # Check for security audit findings (npm audit, govulncheck, pip-audit, cargo audit)
-$securityFindings = $null
-if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
-    $auditLogFiles = @(".\log\npm.txt", ".\log\golang.txt", ".\log\python.txt", ".\log\rust.txt")
-    $auditFindingPatterns = @(
-        "found [1-9][0-9]* vulnerabilit",      # npm audit: "found 3 vulnerabilities"
-        "Vulnerability #[0-9]",                # govulncheck: "Vulnerability #1: GO-2024-..."
-        "Found [1-9][0-9]* known vulnerabilit", # pip-audit: "Found 2 known vulnerabilities"
-        "error\[vulnerability\]",              # cargo audit: "error[vulnerability]: ..."
-        "error\[unmaintained\]",               # cargo audit: unmaintained crate advisory
-        "error\[unsound\]",                    # cargo audit: unsound code advisory
-        "RUSTSEC-[0-9]",                       # cargo audit advisory ID
-        "GO-[0-9]{4}-[0-9]{4}",               # govulncheck advisory ID
-        "GHSA-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+"  # GitHub Security Advisory ID (npm/pip-audit)
-    )
-    # Build combined allowlist pattern from all ecosystem allowlists
-    $allAllowlist = @() + $RUSTSEC_ALLOWLIST + $NPM_AUDIT_ALLOWLIST + $PIP_AUDIT_ALLOWLIST + $GO_VULN_ALLOWLIST
-    $allowlistPattern = if ($allAllowlist.Count -gt 0) { $allAllowlist -join "|" } else { $null }
+if ( -not $ShowErrors.IsPresent) {
+    $securityFindings = $null
+    if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
+        $auditLogFiles = @(".\log\npm.txt", ".\log\golang.txt", ".\log\python.txt", ".\log\rust.txt")
+        $auditFindingPatterns = @(
+            "found [1-9][0-9]* vulnerabilit",      # npm audit: "found 3 vulnerabilities"
+            "Vulnerability #[0-9]",                # govulncheck: "Vulnerability #1: GO-2024-..."
+            "Found [1-9][0-9]* known vulnerabilit", # pip-audit: "Found 2 known vulnerabilities"
+            "error\[vulnerability\]",              # cargo audit: "error[vulnerability]: ..."
+            "error\[unmaintained\]",               # cargo audit: unmaintained crate advisory
+            "error\[unsound\]",                    # cargo audit: unsound code advisory
+            "RUSTSEC-[0-9]",                       # cargo audit advisory ID
+            "GO-[0-9]{4}-[0-9]{4}",               # govulncheck advisory ID
+            "GHSA-[0-9a-z]+-[0-9a-z]+-[0-9a-z]+"  # GitHub Security Advisory ID (npm/pip-audit)
+        )
+        # Build combined allowlist pattern from all ecosystem allowlists
+        $allAllowlist = @() + $RUSTSEC_ALLOWLIST + $NPM_AUDIT_ALLOWLIST + $PIP_AUDIT_ALLOWLIST + $GO_VULN_ALLOWLIST
+        $allowlistPattern = if ($allAllowlist.Count -gt 0) { $allAllowlist -join "|" } else { $null }
 
-    $securityFindings = $auditLogFiles | Where-Object { Test-Path $_ } | ForEach-Object {
-        $logFile = $_
-        $auditFindingPatterns | ForEach-Object {
-            Select-String -Path $logFile -Pattern $_ -ErrorAction SilentlyContinue
+        $securityFindings = $auditLogFiles | Where-Object { Test-Path $_ } | ForEach-Object {
+            $logFile = $_
+            $auditFindingPatterns | ForEach-Object {
+                Select-String -Path $logFile -Pattern $_ -ErrorAction SilentlyContinue
+            }
+        } | Where-Object { $_ } | Where-Object {
+            -not $allowlistPattern -or $_.Line -notmatch $allowlistPattern
+        } | Where-Object {
+            $_.Line -notmatch "testdata/vulndb" -and
+            $_.Line -notmatch "testdata/common/vulndb-v1" -and
+            $_.Line -notmatch "testdata/main/vulndb-v1" -and
+            $_.Line -notmatch "testdata/stdlib/vulndb-v1" -and
+            $_.Line -notmatch "testdata/strip/vulndb-v1"
         }
-    } | Where-Object { $_ } | Where-Object {
-        -not $allowlistPattern -or $_.Line -notmatch $allowlistPattern
-    } | Where-Object {
-        $_.Line -notmatch "testdata/vulndb" -and
-        $_.Line -notmatch "testdata/common/vulndb-v1" -and
-        $_.Line -notmatch "testdata/main/vulndb-v1" -and
-        $_.Line -notmatch "testdata/stdlib/vulndb-v1" -and
-        $_.Line -notmatch "testdata/strip/vulndb-v1"
-    }
 
-    if ($securityFindings) {
-        Write-DateLog "SECURITY: Vulnerability audit findings detected in installed packages:"
-        $securityFindings | ForEach-Object {
-            Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())"
+        if ($securityFindings) {
+            Write-DateLog "SECURITY: Vulnerability audit findings detected in installed packages:"
+            $securityFindings | ForEach-Object {
+                Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())"
+            }
+            Write-DateLog "SECURITY: Review the audit log files for full details and consider updating affected packages."
         }
-        Write-DateLog "SECURITY: Review the audit log files for full details and consider updating affected packages."
     }
 }
 
@@ -658,15 +661,15 @@ if ($warnings -or $errors -or $failed) {
     if ($ShowErrors.IsPresent) {
         if ($errors) {
             Write-DateLog "Errors:"
-            $errors | ForEach-Object { Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())" }
+            $errors
         }
         if ($warnings) {
             Write-DateLog "Warnings:"
-            $warnings | ForEach-Object { Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())" }
+            $warnings
         }
         if ($failed) {
             Write-DateLog "Failed:"
-            $failed | ForEach-Object { Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())" }
+            $failed
         }
     }
 } elseif ($ShowErrors.IsPresent) {
