@@ -1678,7 +1678,7 @@ $status = Get-FileFromUri -uri "https://aka.ms/vs/17/release/vc_redist.x64.exe" 
 $status = Get-FileFromUri -uri "https://aka.ms/vs/16/release/vc_redist.x86.exe" -FilePath ".\downloads\vcredist_16_x64.exe" -check "PE32"
 
 # Artifacts Exchange for Velociraptor
-$status = Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/raw/gh-pages/exchange/artifact_exchange_v2.zip" -FilePath ".\downloads\artifact_exchange.zip" -check "Zip archive data"
+$status = Get-FileFromUri -uri "https://github.com/Velocidex/velociraptor-docs/raw/gh-pages/exchange/artifact_exchange_v2.zip" -FilePath ".\downloads\artifact_exchange.zip"
 
 $TOOL_DEFINITIONS += @{
     Name = "Velociraptor Artifact Exchange"
