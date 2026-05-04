@@ -119,7 +119,7 @@ function Get-Zimmerman {
 	Log -logFilePath $logFilePath -msg "Running $getZimmermanToolsFileName! Downloading .NET 6 version of EZ Tools to $getZimmermanToolsFolderKape"
 
 	# executing .\KAPE\Modules\bin\ZimmermanTools\Get-ZimmermanTools.ps1 -Dest .\KAPE\Modules\bin\ZimmermanTools -NetVersion 6
-	Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-File `"$getZimmermanToolsPs1ZT`"", "-Dest `"$getZimmermanToolsFolderKape`"", "-NetVersion", "6" -Wait -NoNewWindow
+	Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-File `"$getZimmermanToolsPs1ZT`"", "-Dest `"$getZimmermanToolsFolderKape`"", "-NetVersion", "9" -Wait -NoNewWindow
 }
 
 <#
