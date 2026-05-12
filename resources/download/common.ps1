@@ -702,25 +702,31 @@ function Get-Winget {
             return $false
         }
         if ($FILE_TYPE.Contains("Zip archive data")) {
-            $7Z_TEST = 7z t -pprocdot -bb0 -bd $FileName
-            if (! ($7Z_TEST.Contains("Everything is Ok"))) {
-                Write-SynchronizedLog "Error: Downloaded file, ${FileName}, did not pass 7z test. Result: $7Z_TEST"
-                Remove-Item $FileName -Force | Out-Null
-                return $false
+            if ($SEVENZIP) {
+                $7Z_TEST = & $SEVENZIP t -pprocdot -bb0 -bd $FileName 2>&1
+                if (! ($7Z_TEST -join "" | Select-String -Pattern "Everything is Ok" -Quiet)) {
+                    Write-SynchronizedLog "Error: Downloaded file, ${FileName}, did not pass 7z test. Result: $7Z_TEST"
+                    Remove-Item $FileName -Force | Out-Null
+                    return $false
+                }
             }
         } elseif ($FILE_TYPE.Contains("RAR archive data")) {
-            $RAR_TEST = 7z t -bb0 -bd $FileName
-            if (! ($RAR_TEST.Contains("All OK"))) {
-                Write-SynchronizedLog "Error: Downloaded file, ${FileName}, did not pass 7z test. Result: $RAR_TEST"
-                Remove-Item $FileName -Force | Out-Null
-                return $false
+            if ($SEVENZIP) {
+                $RAR_TEST = & $SEVENZIP t -bb0 -bd $FileName 2>&1
+                if (! ($RAR_TEST -join "" | Select-String -Pattern "All OK" -Quiet)) {
+                    Write-SynchronizedLog "Error: Downloaded file, ${FileName}, did not pass 7z test. Result: $RAR_TEST"
+                    Remove-Item $FileName -Force | Out-Null
+                    return $false
+                }
             }
         } elseif ($FILE_TYPE.Contains("Composite Document File V2 Document")) {
-            $MSI_TEST = 7z t -bb0 -bd $FileName
-            if (! ($MSI_TEST.Contains("Everything is Ok"))) {
-                Write-SynchronizedLog "Error: Downloaded file, ${FileName}, did not pass 7z test. Result: $MSI_TEST"
-                Remove-Item $FileName -Force | Out-Null
-                return $false
+            if ($SEVENZIP) {
+                $MSI_TEST = & $SEVENZIP t -bb0 -bd $FileName 2>&1
+                if (! ($MSI_TEST -join "" | Select-String -Pattern "Everything is Ok" -Quiet)) {
+                    Write-SynchronizedLog "Error: Downloaded file, ${FileName}, did not pass 7z test. Result: $MSI_TEST"
+                    Remove-Item $FileName -Force | Out-Null
+                    return $false
+                }
             }
         }
     }
