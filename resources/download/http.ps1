@@ -2475,7 +2475,7 @@ $TOOL_DEFINITIONS += @{
 
 # https://www.libreoffice.org/ - LibreOffice - installed during start
 if (Test-ToolIncluded -ToolName "LibreOffice") {
-    $LibreOfficeVersion = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/" -RegEx 'https://[^"]+.msi'
+    $LibreOfficeVersion = Get-DownloadUrlFromPage -Url "https://www.libreoffice.org/download" -RegEx 'https://[^"]+x86-64.msi'
     $status = Get-FileFromUri -uri ${LibreOfficeVersion} -FilePath ".\downloads\LibreOffice.msi" -CheckURL "Yes" -check "Composite Document File V2 Document"
 }
 
