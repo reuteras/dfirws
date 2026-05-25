@@ -41,7 +41,7 @@ npm install --global --ignore-scripts box-js | Out-String -Stream 2>&1 | ForEach
 Write-DateLog "Install Marp CLI" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global --ignore-scripts @marp-team/marp-cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Write-DateLog "Install opencode-ai" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global --ignore-scripts opencode-ai | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global opencode-ai | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 if (Test-ToolIncludedSandbox -ToolName "LUMEN") {
     Set-Location "${HOME}"
