@@ -63,8 +63,8 @@ $WSDFIR_FONT_NAME="Meslo"
 #$WSDFIR_FONT_FULL_NAME="Consolas, 'Courier New', monospace"
 $WSDFIR_FONT_FULL_NAME="MesloLGM Nerd Font Mono"
 
-# Generate a CHANGELOG.md in downloads/ tracking tool version updates and new tools
-# detected between runs of downloadFiles.ps1.
-# Set to "Yes" to enable. Set to "No" to disable.
+# Show a CHANGELOG.md shortcut on the sandbox Desktop.
+# The changelog is always generated in downloads/CHANGELOG.md by downloadFiles.ps1.
+# Set to "Yes" to place a shortcut to it on the Desktop.
 $WSDFIR_CHANGELOG="No"
 

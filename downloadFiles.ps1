@@ -511,12 +511,10 @@ if (Test-Path ".\tmp\msys2") {
     Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
 }
 
-# Update tool changelog if enabled
-if ($WSDFIR_CHANGELOG -eq "Yes") {
-    Write-DateLog "Updating tool changelog."
-    . ".\resources\download\changelog.ps1"
-    Update-ToolChangelog
-}
+# Update tool changelog
+Write-DateLog "Updating tool changelog."
+. ".\resources\download\changelog.ps1"
+Update-ToolChangelog
 
 if (!(Test-Path ".\mount\golang")){
     New-Item -ItemType Directory -Force -Path ".\mount\golang" 2>&1 | Out-Null

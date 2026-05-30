@@ -553,6 +553,14 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\jupyter.lnk" -DestinationPath "${HOME}\
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws docs.lnk" -DestinationPath "${HOME}\Documents\tools\utils\mkdocs.bat" -IconLocation "$env:windir\System32\shell32.dll" -IconIndex 23
 Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
 
+if ("${WSDFIR_CHANGELOG}" -eq "Yes" -and (Test-Path "C:\downloads\CHANGELOG.md")) {
+    if (Test-Path "${env:ProgramFiles}\Notepad++\notepad++.exe") {
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe" -Arguments "C:\downloads\CHANGELOG.md" -IconLocation "${env:ProgramFiles}\Notepad++\notepad++.exe"
+    } else {
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "${env:SystemRoot}\System32\notepad.exe" -Arguments "C:\downloads\CHANGELOG.md"
+    }
+}
+
 # Enable clipboard history
 New-Item -Path "HKCU:\Software\Microsoft\Clipboard" -Force | Out-Null
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Clipboard" -Name EnableClipboardHistory -Type DWord -Value 1
