@@ -146,6 +146,15 @@ if (Test-Path ".\local\profile-config.ps1") {
     . ".\local\profile-config.ps1"
 }
 
+# Load sandbox config for download-time settings (e.g. WSDFIR_CHANGELOG)
+if (Test-Path ".\local\defaults\config.txt") {
+    . ".\local\defaults\config.txt"
+}
+if (Test-Path ".\local\config.txt") {
+    . ".\local\config.txt"
+}
+if (-not (Test-Path variable:WSDFIR_CHANGELOG)) { $WSDFIR_CHANGELOG = "No" }
+
 # Resolve active profile: CLI parameter > config file > none (Full)
 if ($DistributionProfile -ne "") {
     $activeProfileName = $DistributionProfile
@@ -500,6 +509,13 @@ if (Test-Path ".\tmp\mount") {
 }
 if (Test-Path ".\tmp\msys2") {
     Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
+}
+
+# Update tool changelog if enabled
+if ($WSDFIR_CHANGELOG -eq "Yes") {
+    Write-DateLog "Updating tool changelog."
+    . ".\resources\download\changelog.ps1"
+    Update-ToolChangelog
 }
 
 if (!(Test-Path ".\mount\golang")){
