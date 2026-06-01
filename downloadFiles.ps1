@@ -147,11 +147,13 @@ if (Test-Path ".\local\profile-config.ps1") {
 }
 
 # Load sandbox config for download-time settings (e.g. WSDFIR_CHANGELOG)
+# .txt files cannot be dot-sourced directly (PowerShell opens them in Notepad),
+# so read and invoke the content as a script.
 if (Test-Path ".\local\defaults\config.txt") {
-    . ".\local\defaults\config.txt"
+    Invoke-Expression (Get-Content ".\local\defaults\config.txt" -Raw)
 }
 if (Test-Path ".\local\config.txt") {
-    . ".\local\config.txt"
+    Invoke-Expression (Get-Content ".\local\config.txt" -Raw)
 }
 if (-not (Test-Path variable:WSDFIR_CHANGELOG)) { $WSDFIR_CHANGELOG = "No" }
 
