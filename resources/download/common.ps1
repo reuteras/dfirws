@@ -635,7 +635,10 @@ function Update-ToolsDownloaded {
 
         $toolsDownloaded.Add($addNewTool)
     } else {
-        $localFile.URL = $URL
+        $localFile.URL    = $URL
+        $localFile.SHA256 = Get-FileHash -Path $Path -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+        $localFile.Size   = Get-Item $Path | Select-Object -ExpandProperty Length
+        $localFile.Path   = Resolve-Path -Path $Path
     }
 
     if($PSCmdlet.ShouldProcess($file.Name)) {
