@@ -1537,3 +1537,103 @@ function Install-Zui {
         Write-Output "Zui is already installed"
     }
 }
+
+# Saves metadata for a globally-installed npm package to downloads\.metadata\npm\.
+# Call this immediately after a successful `npm install --global <pkg>`.
+function Save-NpmMetadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+    param (
+        [Parameter(Mandatory=$True)] [string]$Package
+    )
+
+    $metadataDir = "C:\downloads\.metadata\npm"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    # npm list --global returns installed version; --json makes it machine-readable
+    try {
+        $listJson = npm list --global --depth=0 --json 2>$null | Out-String
+        $listData = $listJson | ConvertFrom-Json -ErrorAction Stop
+    } catch {
+        Write-DateLog "Save-NpmMetadata: could not query npm list for $Package"
+        return
+    }
+
+    # Package names with scopes (@org/pkg) are stored as-is in npm's dependency map
+    $version = $null
+    if ($listData.dependencies -and $listData.dependencies.PSObject.Properties[$Package]) {
+        $version = $listData.dependencies.PSObject.Properties[$Package].Value.version
+    }
+
+    if (-not $version) {
+        Write-DateLog "Save-NpmMetadata: could not find installed version for $Package"
+        return
+    }
+
+    $safeName = $Package -replace "[/@]", "_" -replace "^_", ""
+    $metadataFile = "$metadataDir\${safeName}.json"
+
+    $metadata = [ordered]@{
+        Name      = $Package
+        Version   = $version
+        Source    = "npm"
+        FetchedAt = (Get-Date).ToString("s")
+    }
+
+    Set-Content -Path $metadataFile -Value ($metadata | ConvertTo-Json -Depth 2)
+    Write-DateLog "Saved npm metadata for $Package ($version)."
+}
+
+# Saves metadata for a uv-tool-installed package to downloads\.metadata\uv\.
+# Call this immediately after a successful `uv tool install <pkg>`.
+# $Package should be the canonical PyPI package name (e.g. "regipy", "binary-refinery").
+function Save-UvToolMetadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+    param (
+        [Parameter(Mandatory=$True)] [string]$Package
+    )
+
+    $metadataDir = "C:\downloads\.metadata\uv"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    # uv tool list output: "<name> v<version>"
+    $version = $null
+    try {
+        $uvList = uv tool list 2>$null
+        foreach ($line in $uvList) {
+            # Normalise package name: lowercase, hyphens == underscores for matching
+            $canonPkg   = $Package -replace '[_\-]', '[-_]' -replace '\[.*\]', '' -replace '>=.*', '' -replace '@.*', '' -replace 'git\+https.*/', ''
+            $pattern    = "^($canonPkg)\s+v(.+)"
+            if ($line -match $pattern) {
+                $version = $Matches[2]
+                break
+            }
+        }
+    } catch {
+        Write-DateLog "Save-UvToolMetadata: could not run uv tool list for $Package"
+        return
+    }
+
+    if (-not $version) {
+        Write-DateLog "Save-UvToolMetadata: could not find installed version for $Package in uv tool list"
+        return
+    }
+
+    # Strip version specifiers to get a safe filename
+    $safeName = ($Package -replace '\[.*\]', '' -replace '>=.*', '' -replace '@.*', '' -replace 'git\+https.*/', '').Trim()
+
+    $metadataFile = "$metadataDir\${safeName}.json"
+
+    $metadata = [ordered]@{
+        Name      = $safeName
+        Version   = $version
+        Source    = "uv"
+        FetchedAt = (Get-Date).ToString("s")
+    }
+
+    Set-Content -Path $metadataFile -Value ($metadata | ConvertTo-Json -Depth 2)
+    Write-DateLog "Saved uv tool metadata for $safeName ($version)."
+}
