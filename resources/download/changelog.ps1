@@ -187,7 +187,7 @@ function Update-ToolChangelog {
 
     foreach ($key in $newVersions.Keys) {
         $cur = $newVersions[$key]
-        if ($oldVersions.ContainsKey($key)) {
+        if ($oldVersions.Contains($key)) {
             if ($oldVersions[$key].Version -ne $cur.Version) {
                 $updated.Add([PSCustomObject]@{
                     Name       = $cur.Name
@@ -216,7 +216,7 @@ function Update-ToolChangelog {
 
     foreach ($name in $newHttp.Keys) {
         $newUrl = $newHttp[$name]
-        if ($oldHttp.ContainsKey($name)) {
+        if ($oldHttp.Contains($name)) {
             $oldUrl = $oldHttp[$name]
             if ($oldUrl -ne $newUrl) {
                 $oldVer = Get-VersionFromUrl -Url $oldUrl
