@@ -106,6 +106,62 @@ function Save-ChangelogVersions {
         Set-Content -Path "$changelogDir\versions.json" -Encoding UTF8
 }
 
+# Extracts a version string from a URL, e.g. ".../v1.2.3/..." -> "1.2.3".
+# Returns $null if no version-like pattern is found.
+function Get-VersionFromUrl {
+    param([string]$Url)
+    # Match common patterns: /v1.2.3/, /1.2.3/, _1.2.3_, -1.2.3-, filename-1.2.3.ext
+    if ($Url -match '(?:^|[/_\-v])(\d+\.\d+(?:\.\d+){0,3})(?:[/_\-\.]|$)') {
+        return $Matches[1]
+    }
+    return $null
+}
+
+# Reads tools_downloaded.csv and returns a hashtable keyed by Name with URL values.
+function Get-HttpToolsCurrentSnapshot {
+    $csvFile = "$PSScriptRoot\..\..\downloads\tools_downloaded.csv"
+    $snapshot = [ordered]@{}
+    if (-not (Test-Path $csvFile)) {
+        return $snapshot
+    }
+    try {
+        Import-Csv $csvFile -ErrorAction Stop | ForEach-Object {
+            if ($_.Name -and $_.URL) {
+                $snapshot[$_.Name] = $_.URL
+            }
+        }
+    } catch { }
+    return $snapshot
+}
+
+# Loads the persisted HTTP tools snapshot from .changelog\http_snapshot.json.
+function Get-HttpToolsSavedSnapshot {
+    $snapshotFile = "$PSScriptRoot\..\..\downloads\.changelog\http_snapshot.json"
+    $snapshot = [ordered]@{}
+    if (-not (Test-Path $snapshotFile)) {
+        return $snapshot
+    }
+    try {
+        $raw = Get-Content $snapshotFile -Raw | ConvertFrom-Json -ErrorAction Stop
+        foreach ($prop in $raw.PSObject.Properties) {
+            $snapshot[$prop.Name] = $prop.Value
+        }
+    } catch { }
+    return $snapshot
+}
+
+# Persists the current HTTP tools snapshot to .changelog\http_snapshot.json.
+function Save-HttpToolsSnapshot {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+    param([object]$Snapshot)
+    $changelogDir = "$PSScriptRoot\..\..\downloads\.changelog"
+    if (-not (Test-Path $changelogDir)) {
+        New-Item -ItemType Directory -Force -Path $changelogDir | Out-Null
+    }
+    $Snapshot | ConvertTo-Json -Depth 2 |
+        Set-Content -Path "$changelogDir\http_snapshot.json" -Encoding UTF8
+}
+
 function Update-ToolChangelog {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
     param()
@@ -151,7 +207,46 @@ function Update-ToolChangelog {
         }
     }
 
-    if ($updated.Count -eq 0 -and $added.Count -eq 0) {
+    # HTTP tools: compare URL snapshots
+    $oldHttp = Get-HttpToolsSavedSnapshot
+    $newHttp = Get-HttpToolsCurrentSnapshot
+
+    $httpUpdated = [System.Collections.Generic.List[PSCustomObject]]::new()
+    $httpAdded   = [System.Collections.Generic.List[PSCustomObject]]::new()
+
+    foreach ($name in $newHttp.Keys) {
+        $newUrl = $newHttp[$name]
+        if ($oldHttp.ContainsKey($name)) {
+            $oldUrl = $oldHttp[$name]
+            if ($oldUrl -ne $newUrl) {
+                $oldVer = Get-VersionFromUrl -Url $oldUrl
+                $newVer = Get-VersionFromUrl -Url $newUrl
+                $httpUpdated.Add([PSCustomObject]@{
+                    Name   = $name
+                    OldUrl = $oldUrl
+                    NewUrl = $newUrl
+                    OldVer = $oldVer
+                    NewVer = $newVer
+                })
+            }
+        } else {
+            $ver = Get-VersionFromUrl -Url $newUrl
+            $httpAdded.Add([PSCustomObject]@{
+                Name = $name
+                Url  = $newUrl
+                Ver  = $ver
+            })
+        }
+    }
+
+    $isFirstHttpRun = ($oldHttp.Count -eq 0)
+    Save-HttpToolsSnapshot -Snapshot $newHttp
+
+    if ($isFirstHttpRun) {
+        Write-DateLog "Changelog: HTTP baseline recorded for $($newHttp.Count) tools."
+    }
+
+    if ($updated.Count -eq 0 -and $added.Count -eq 0 -and $httpUpdated.Count -eq 0 -and ($httpAdded.Count -eq 0 -or $isFirstHttpRun)) {
         Write-DateLog "Changelog: No tool version changes detected."
         return
     }
@@ -176,6 +271,20 @@ function Update-ToolChangelog {
         $lines.Add("")
     }
 
+    if ($httpUpdated.Count -gt 0) {
+        $lines.Add("#### Updated Tools (HTTP)")
+        foreach ($t in ($httpUpdated | Sort-Object Name)) {
+            if ($t.OldVer -and $t.NewVer) {
+                $lines.Add("- **$($t.Name)**: $($t.OldVer) -> $($t.NewVer)")
+            } else {
+                $lines.Add("- **$($t.Name)**: updated (version not available in URL)")
+            }
+            $lines.Add("  - old: $($t.OldUrl)")
+            $lines.Add("  - new: $($t.NewUrl)")
+        }
+        $lines.Add("")
+    }
+
     if ($added.Count -gt 0) {
         $lines.Add("#### New Tools")
         foreach ($t in ($added | Sort-Object Name)) {
@@ -187,6 +296,16 @@ function Update-ToolChangelog {
                 default  { "$($t.Source): $($t.Identifier)" }
             }
             $lines.Add("- **$($t.Name)** ($src): $($t.Version)")
+        }
+        $lines.Add("")
+    }
+
+    if (-not $isFirstHttpRun -and $httpAdded.Count -gt 0) {
+        $lines.Add("#### New Tools (HTTP)")
+        foreach ($t in ($httpAdded | Sort-Object Name)) {
+            $verStr = if ($t.Ver) { ": $($t.Ver)" } else { "" }
+            $lines.Add("- **$($t.Name)**$verStr")
+            $lines.Add("  - url: $($t.Url)")
         }
         $lines.Add("")
     }
@@ -206,5 +325,6 @@ function Update-ToolChangelog {
     }
 
     Set-Content -Path $changelogFile -Value $newContent -Encoding UTF8 -NoNewline
-    Write-DateLog "Changelog: $($updated.Count) updated, $($added.Count) new tool(s). See downloads\CHANGELOG.md"
+    $httpCount = $httpUpdated.Count + $(if (-not $isFirstHttpRun) { $httpAdded.Count } else { 0 })
+    Write-DateLog "Changelog: $($updated.Count) updated, $($added.Count) new, $httpCount HTTP change(s). See downloads\CHANGELOG.md"
 }

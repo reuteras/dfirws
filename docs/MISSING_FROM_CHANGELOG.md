@@ -50,9 +50,19 @@ the venv-level tools that have CLI entry points.
 
 ## Direct HTTP downloads
 
-Tools fetched via plain URL (e.g. raw GitHub content, vendor download pages)
-where no GitHub release or winget package exists. Version is sometimes embedded
-in the URL but requires per-tool parsing.
+Tools fetched via plain URL are now **partially tracked** via `tools_downloaded.csv`.
+The changelog compares the URL from the previous run against the current URL:
+
+- If the URL changed and contains a version string (e.g. `/v1.2.3/`), the old and
+  new versions are shown.
+- If the URL changed but contains no parseable version, the entry is flagged as
+  "updated (version not available in URL)" and both URLs are shown.
+- If the URL is unchanged (mutable URL, file content may have changed silently),
+  no entry is generated. This is a known gap.
+
+Tools fetched **inside the sandbox** (raw GitHub scripts downloaded by
+`install_python_tools.ps1`) are not in `tools_downloaded.csv` and therefore
+not tracked at all:
 
 | Tool | Location |
 |------|----------|
@@ -65,7 +75,6 @@ in the URL but requires per-tool parsing.
 | sigs.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
 | defender-dump.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
 | Various (pe2pic, evt2sigma scripts) | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| Many tools in `downloadFiles.ps1` | `downloadFiles.ps1` (direct URL) |
 
 ## MSYS2 packages (`pacman -S`)
 
