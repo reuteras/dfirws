@@ -159,7 +159,7 @@ if (Test-Path $configTmp) {
     . $configTmp
     Remove-Item $configTmp -Force -ErrorAction SilentlyContinue
 }
-if (-not (Test-Path variable:WSDFIR_CHANGELOG)) { $WSDFIR_CHANGELOG = "No" }
+if (-not (Test-Path variable:WSDFIR_CHANGELOG)) { $WSDFIR_CHANGELOG = "Yes" }
 
 # Resolve active profile: CLI parameter > config file > none (Full)
 if ($DistributionProfile -ne "") {
