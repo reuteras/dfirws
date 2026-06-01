@@ -147,11 +147,17 @@ if (Test-Path ".\local\profile-config.ps1") {
 }
 
 # Load sandbox config for download-time settings (e.g. WSDFIR_CHANGELOG)
-if (Test-Path ".\local\defaults\config.txt") {
-    . ".\local\defaults\config.txt"
-}
+# .txt files cannot be dot-sourced directly (PowerShell opens them in Notepad),
+# so copy to a .ps1 temp file first, matching the pattern in start_sandbox.ps1.
+$configTmp = Join-Path $env:TEMP "dfirws_config_$PID.ps1"
 if (Test-Path ".\local\config.txt") {
-    . ".\local\config.txt"
+    Copy-Item ".\local\config.txt" $configTmp -Force
+} elseif (Test-Path ".\local\defaults\config.txt") {
+    Copy-Item ".\local\defaults\config.txt" $configTmp -Force
+}
+if (Test-Path $configTmp) {
+    . $configTmp
+    Remove-Item $configTmp -Force -ErrorAction SilentlyContinue
 }
 if (-not (Test-Path variable:WSDFIR_CHANGELOG)) { $WSDFIR_CHANGELOG = "No" }
 
