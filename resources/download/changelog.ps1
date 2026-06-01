@@ -4,9 +4,10 @@
 
 function Get-ChangelogCurrentVersions {
     $versions = [ordered]@{}
-    $metadataBase = "$PSScriptRoot\..\..\downloads\.metadata"
+    $downloadsMetadata = "$PSScriptRoot\..\..\downloads\.metadata"
+    $toolsMetadata     = "$PSScriptRoot\..\..\mount\Tools\.metadata"
 
-    $githubDir = "$metadataBase\github"
+    $githubDir = "$downloadsMetadata\github"
     if (Test-Path $githubDir) {
         Get-ChildItem $githubDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
             try {
@@ -23,7 +24,7 @@ function Get-ChangelogCurrentVersions {
         }
     }
 
-    $wingetDir = "$metadataBase\winget"
+    $wingetDir = "$downloadsMetadata\winget"
     if (Test-Path $wingetDir) {
         Get-ChildItem $wingetDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
             try {
@@ -34,6 +35,40 @@ function Get-ChangelogCurrentVersions {
                         Version    = $data.Version
                         Source     = "winget"
                         Identifier = $data.AppId
+                    }
+                }
+            } catch { }
+        }
+    }
+
+    $npmDir = "$toolsMetadata\npm"
+    if (Test-Path $npmDir) {
+        Get-ChildItem $npmDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+                $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
+                if ($data.Name -and $data.Version) {
+                    $versions["npm:$($data.Name)"] = [PSCustomObject]@{
+                        Name       = $data.Name
+                        Version    = $data.Version
+                        Source     = "npm"
+                        Identifier = $data.Name
+                    }
+                }
+            } catch { }
+        }
+    }
+
+    $uvDir = "$toolsMetadata\uv"
+    if (Test-Path $uvDir) {
+        Get-ChildItem $uvDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+                $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
+                if ($data.Name -and $data.Version) {
+                    $versions["uv:$($data.Name)"] = [PSCustomObject]@{
+                        Name       = $data.Name
+                        Version    = $data.Version
+                        Source     = "uv"
+                        Identifier = $data.Name
                     }
                 }
             } catch { }
@@ -129,7 +164,13 @@ function Update-ToolChangelog {
     if ($updated.Count -gt 0) {
         $lines.Add("#### Updated Tools")
         foreach ($t in ($updated | Sort-Object Name)) {
-            $src = if ($t.Source -eq "github") { "GitHub: $($t.Identifier)" } else { "winget: $($t.Identifier)" }
+            $src = switch ($t.Source) {
+                "github" { "GitHub: $($t.Identifier)" }
+                "winget" { "winget: $($t.Identifier)" }
+                "npm"    { "npm: $($t.Identifier)" }
+                "uv"     { "uv: $($t.Identifier)" }
+                default  { "$($t.Source): $($t.Identifier)" }
+            }
             $lines.Add("- **$($t.Name)** ($src): $($t.OldVersion) -> $($t.NewVersion)")
         }
         $lines.Add("")
@@ -138,7 +179,13 @@ function Update-ToolChangelog {
     if ($added.Count -gt 0) {
         $lines.Add("#### New Tools")
         foreach ($t in ($added | Sort-Object Name)) {
-            $src = if ($t.Source -eq "github") { "GitHub: $($t.Identifier)" } else { "winget: $($t.Identifier)" }
+            $src = switch ($t.Source) {
+                "github" { "GitHub: $($t.Identifier)" }
+                "winget" { "winget: $($t.Identifier)" }
+                "npm"    { "npm: $($t.Identifier)" }
+                "uv"     { "uv: $($t.Identifier)" }
+                default  { "$($t.Source): $($t.Identifier)" }
+            }
             $lines.Add("- **$($t.Name)** ($src): $($t.Version)")
         }
         $lines.Add("")

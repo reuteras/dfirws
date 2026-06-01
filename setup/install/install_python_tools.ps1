@@ -83,18 +83,24 @@ Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" "git+https://github.com/msuhanov/dfir_ntfs.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed dfir_ntfs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Save-UvToolMetadata -Package "dfir_ntfs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" --with "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" "regipy>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Save-UvToolMetadata -Package "regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Save-UvToolMetadata -Package "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" "zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Save-UvToolMetadata -Package "zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 uv tool install --python "C:\Program Files\Python311\python.exe" "git+https://github.com/Hexastrike/PyrsistenceSniper.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed PyrsistenceSniper" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Save-UvToolMetadata -Package "PyrsistenceSniper" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
     uv tool install --python "C:\Program Files\Python311\python.exe" "binary-refinery[extended]@0.9.26" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
     Write-DateLog "Installed binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Save-UvToolMetadata -Package "binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 foreach ($package in `
@@ -151,6 +157,7 @@ foreach ($package in `
     "XlsxWriter" ) {
         uv tool install --python "C:\Program Files\Python311\python.exe" $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
         Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        Save-UvToolMetadata -Package $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 # speakeasy-emulator requires setuptools (pkg_resources); use python -m venv + pip to ensure it is available
@@ -168,6 +175,7 @@ Write-DateLog "Installed speakeasy-emulator in dedicated venv." 2>&1 | ForEach-O
 # Profile-conditional Python packages
 if (Test-ToolIncludedSandbox -ToolName "jpterm") {
     uv tool install --python "C:\Program Files\Python311\python.exe" jpterm 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Save-UvToolMetadata -Package "jpterm" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 }
 
 Write-DateLog "Install extra scripts in Tools\bin." >> "C:\log\python.txt"
