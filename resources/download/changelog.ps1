@@ -4,9 +4,10 @@
 
 function Get-ChangelogCurrentVersions {
     $versions = [ordered]@{}
-    $metadataBase = "$PSScriptRoot\..\..\downloads\.metadata"
+    $downloadsMetadata = "$PSScriptRoot\..\..\downloads\.metadata"
+    $toolsMetadata     = "$PSScriptRoot\..\..\mount\Tools\.metadata"
 
-    $githubDir = "$metadataBase\github"
+    $githubDir = "$downloadsMetadata\github"
     if (Test-Path $githubDir) {
         Get-ChildItem $githubDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
             try {
@@ -23,7 +24,7 @@ function Get-ChangelogCurrentVersions {
         }
     }
 
-    $wingetDir = "$metadataBase\winget"
+    $wingetDir = "$downloadsMetadata\winget"
     if (Test-Path $wingetDir) {
         Get-ChildItem $wingetDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
             try {
@@ -40,7 +41,7 @@ function Get-ChangelogCurrentVersions {
         }
     }
 
-    $npmDir = "$metadataBase\npm"
+    $npmDir = "$toolsMetadata\npm"
     if (Test-Path $npmDir) {
         Get-ChildItem $npmDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
             try {
@@ -57,7 +58,7 @@ function Get-ChangelogCurrentVersions {
         }
     }
 
-    $uvDir = "$metadataBase\uv"
+    $uvDir = "$toolsMetadata\uv"
     if (Test-Path $uvDir) {
         Get-ChildItem $uvDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
             try {

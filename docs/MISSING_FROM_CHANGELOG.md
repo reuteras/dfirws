@@ -2,7 +2,7 @@
 
 This document lists tools installed by dfirws that are **not yet tracked** in the
 automated changelog (`downloads/CHANGELOG.md`). The changelog currently covers
-tools installed via GitHub releases, winget, npm (`uv tool install`), and uv tools
+tools installed via GitHub releases, winget, npm, and uv tools
 (`uv tool install`).
 
 ## Go tools (`go install @latest`)

@@ -1538,7 +1538,8 @@ function Install-Zui {
     }
 }
 
-# Saves metadata for a globally-installed npm package to downloads\.metadata\npm\.
+# Saves metadata for a globally-installed npm package to C:\Tools\.metadata\npm\.
+# C:\Tools is mapped read-write from mount\Tools on the host, so the file persists.
 # Call this immediately after a successful `npm install --global <pkg>`.
 function Save-NpmMetadata {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
@@ -1546,7 +1547,7 @@ function Save-NpmMetadata {
         [Parameter(Mandatory=$True)] [string]$Package
     )
 
-    $metadataDir = "C:\downloads\.metadata\npm"
+    $metadataDir = "C:\Tools\.metadata\npm"
     if (!(Test-Path $metadataDir)) {
         New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
     }
@@ -1585,7 +1586,8 @@ function Save-NpmMetadata {
     Write-DateLog "Saved npm metadata for $Package ($version)."
 }
 
-# Saves metadata for a uv-tool-installed package to downloads\.metadata\uv\.
+# Saves metadata for a uv-tool-installed package to C:\Tools\.metadata\uv\.
+# C:\Tools is mapped read-write from mount\Tools on the host, so the file persists.
 # Call this immediately after a successful `uv tool install <pkg>`.
 # $Package should be the canonical PyPI package name (e.g. "regipy", "binary-refinery").
 function Save-UvToolMetadata {
@@ -1594,7 +1596,7 @@ function Save-UvToolMetadata {
         [Parameter(Mandatory=$True)] [string]$Package
     )
 
-    $metadataDir = "C:\downloads\.metadata\uv"
+    $metadataDir = "C:\Tools\.metadata\uv"
     if (!(Test-Path $metadataDir)) {
         New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
     }
