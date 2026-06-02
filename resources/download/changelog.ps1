@@ -251,13 +251,13 @@ function Update-ToolChangelog {
         return
     }
 
-    $date  = Get-Date -Format "yyyy-MM-dd"
-    $lines = [System.Collections.Generic.List[string]]::new()
-    $lines.Add("### $date")
-    $lines.Add("")
+    $date = Get-Date -Format "yyyy-MM-dd"
+
+    # Build section lines (no date heading yet — we handle that when writing the file).
+    $sections = [System.Collections.Generic.List[string]]::new()
 
     if ($updated.Count -gt 0) {
-        $lines.Add("#### Updated Tools")
+        $sections.Add("#### Updated Tools")
         foreach ($t in ($updated | Sort-Object Name)) {
             $src = switch ($t.Source) {
                 "github" { "GitHub: $($t.Identifier)" }
@@ -266,27 +266,27 @@ function Update-ToolChangelog {
                 "uv"     { "uv: $($t.Identifier)" }
                 default  { "$($t.Source): $($t.Identifier)" }
             }
-            $lines.Add("- **$($t.Name)** ($src): $($t.OldVersion) -> $($t.NewVersion)")
+            $sections.Add("- **$($t.Name)** ($src): $($t.OldVersion) -> $($t.NewVersion)")
         }
-        $lines.Add("")
+        $sections.Add("")
     }
 
     if ($httpUpdated.Count -gt 0) {
-        $lines.Add("#### Updated Tools (HTTP)")
+        $sections.Add("#### Updated Tools (HTTP)")
         foreach ($t in ($httpUpdated | Sort-Object Name)) {
             if ($t.OldVer -and $t.NewVer) {
-                $lines.Add("- **$($t.Name)**: $($t.OldVer) -> $($t.NewVer)")
+                $sections.Add("- **$($t.Name)**: $($t.OldVer) -> $($t.NewVer)")
             } else {
-                $lines.Add("- **$($t.Name)**: updated (version not available in URL)")
+                $sections.Add("- **$($t.Name)**: updated (version not available in URL)")
             }
-            $lines.Add("  - old: $($t.OldUrl)")
-            $lines.Add("  - new: $($t.NewUrl)")
+            $sections.Add("  - old: $($t.OldUrl)")
+            $sections.Add("  - new: $($t.NewUrl)")
         }
-        $lines.Add("")
+        $sections.Add("")
     }
 
     if ($added.Count -gt 0) {
-        $lines.Add("#### New Tools")
+        $sections.Add("#### New Tools")
         foreach ($t in ($added | Sort-Object Name)) {
             $src = switch ($t.Source) {
                 "github" { "GitHub: $($t.Identifier)" }
@@ -295,33 +295,43 @@ function Update-ToolChangelog {
                 "uv"     { "uv: $($t.Identifier)" }
                 default  { "$($t.Source): $($t.Identifier)" }
             }
-            $lines.Add("- **$($t.Name)** ($src): $($t.Version)")
+            $sections.Add("- **$($t.Name)** ($src): $($t.Version)")
         }
-        $lines.Add("")
+        $sections.Add("")
     }
 
     if (-not $isFirstHttpRun -and $httpAdded.Count -gt 0) {
-        $lines.Add("#### New Tools (HTTP)")
+        $sections.Add("#### New Tools (HTTP)")
         foreach ($t in ($httpAdded | Sort-Object Name)) {
             $verStr = if ($t.Ver) { ": $($t.Ver)" } else { "" }
-            $lines.Add("- **$($t.Name)**$verStr")
-            $lines.Add("  - url: $($t.Url)")
+            $sections.Add("- **$($t.Name)**$verStr")
+            $sections.Add("  - url: $($t.Url)")
         }
-        $lines.Add("")
+        $sections.Add("")
     }
 
-    $newEntry      = $lines -join "`n"
+    $newSections   = $sections -join "`n"
     $changelogFile = "$PSScriptRoot\..\..\downloads\CHANGELOG.md"
+    $todayHeading  = "### $date"
 
     if (Test-Path $changelogFile) {
         $existing = Get-Content $changelogFile -Raw -Encoding UTF8
-        if ($existing -match "(?s)^(# DFIRWS Changelog\r?\n\r?\n?)(.*)$") {
-            $newContent = "# DFIRWS Changelog`n`n${newEntry}`n$($Matches[2].TrimStart())"
+        # Normalise line endings for matching
+        $existingLf = $existing -replace "`r`n", "`n"
+
+        if ($existingLf -match "(?s)(.*\Q$todayHeading\E\n\n)(.*)") {
+            # An entry for today already exists — append new sections after it.
+            $before      = $Matches[1]
+            $after       = $Matches[2]
+            $newContent  = "${before}${newSections}`n${after}"
+        } elseif ($existingLf -match "(?s)^(# DFIRWS Changelog\n\n?)(.*)$") {
+            # No entry for today — prepend a new dated section.
+            $newContent = "# DFIRWS Changelog`n`n${todayHeading}`n`n${newSections}`n$($Matches[2].TrimStart())"
         } else {
-            $newContent = "# DFIRWS Changelog`n`n${newEntry}`n${existing}"
+            $newContent = "# DFIRWS Changelog`n`n${todayHeading}`n`n${newSections}`n${existingLf}"
         }
     } else {
-        $newContent = "# DFIRWS Changelog`n`n${newEntry}"
+        $newContent = "# DFIRWS Changelog`n`n${todayHeading}`n`n${newSections}"
     }
 
     Set-Content -Path $changelogFile -Value $newContent -Encoding UTF8 -NoNewline
