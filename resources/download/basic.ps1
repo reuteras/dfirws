@@ -44,7 +44,7 @@ $TOOL_DEFINITIONS += @{
     )
     Dependencies = @()
     Tags = @()
-    FileExtensions = @()
+    FileExtensions = @(".7z", ".zip")
     PythonVersion = ""
 }
 
@@ -56,11 +56,17 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://gitforwindows.org/"
     Vendor = ""
     License = ""
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses"
     Category = "Utilities"
     Shortcuts = @()
     InstallVerifyCommand = "dfirws-install.ps1 -Git"
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${env:ProgramFiles}\Git\cmd\git.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = "A fork of Git containing Windows-specific patches."
     Tips = ""
     Usage = ""
@@ -104,7 +110,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "`clamscan"
+            Name = "clamscan"
             Expect = "PE32"
         }
     )
@@ -230,7 +236,13 @@ $TOOL_DEFINITIONS += @{
         }
     )
     InstallVerifyCommand = ""
-    Verify = @()
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "java.exe"
+            Expect = "PE32"
+        }
+    )
     Notes = "Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK)."
     Tips = ""
     Usage = ""
@@ -346,10 +358,10 @@ $TOOL_DEFINITIONS += @{
     Usage = ""
     SampleCommands = @()
     SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Dependencies = @("python3")
+    Homepage = "https://docs.astral.sh/uv/"
+    Vendor = "Astral"
+    License = "MIT and Apache-2"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -395,7 +407,7 @@ $TOOL_DEFINITIONS += @{
     Name = "GoLang"
     Homepage = "https://go.dev/"
     Vendor = ""
-    License = ""
+    License = "BSD"
     LicenseUrl = ""
     Category = "Programming"
     Shortcuts = @(
@@ -439,7 +451,7 @@ $TOOL_DEFINITIONS += @{
     Name = "Rust"
     Homepage = "https://rust-lang.org/"
     Vendor = ""
-    License = ""
+    License = "MIT and Apache-2"
     LicenseUrl = ""
     Category = "Programming"
     Shortcuts = @(
