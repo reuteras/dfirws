@@ -313,17 +313,18 @@ function Update-ToolChangelog {
     $newSections   = $sections -join "`n"
     $changelogFile = "$PSScriptRoot\..\..\downloads\CHANGELOG.md"
     $todayHeading  = "### $date"
+    $escapedHeading = [regex]::Escape($todayHeading)
 
     if (Test-Path $changelogFile) {
         $existing = Get-Content $changelogFile -Raw -Encoding UTF8
         # Normalise line endings for matching
         $existingLf = $existing -replace "`r`n", "`n"
 
-        if ($existingLf -match "(?s)(.*\Q$todayHeading\E\n\n)(.*)") {
+        if ($existingLf -match "(?s)(.*$escapedHeading\n\n)(.*)") {
             # An entry for today already exists — append new sections after it.
-            $before      = $Matches[1]
-            $after       = $Matches[2]
-            $newContent  = "${before}${newSections}`n${after}"
+            $before     = $Matches[1]
+            $after      = $Matches[2]
+            $newContent = "${before}${newSections}`n${after}"
         } elseif ($existingLf -match "(?s)^(# DFIRWS Changelog\n\n?)(.*)$") {
             # No entry for today — prepend a new dated section.
             $newContent = "# DFIRWS Changelog`n`n${todayHeading}`n`n${newSections}`n$($Matches[2].TrimStart())"
@@ -332,6 +333,11 @@ function Update-ToolChangelog {
         }
     } else {
         $newContent = "# DFIRWS Changelog`n`n${todayHeading}`n`n${newSections}"
+    }
+
+    if (-not $newContent) {
+        Write-DateLog "Changelog: ERROR - newContent is empty, skipping write to avoid data loss."
+        return
     }
 
     Set-Content -Path $changelogFile -Value $newContent -Encoding UTF8 -NoNewline
