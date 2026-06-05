@@ -554,11 +554,7 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws docs.lnk" -DestinationPath "${HO
 Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath "${TERMINAL_INSTALL_LOCATION}\wt.exe" -WorkingDirectory "${HOME}\Desktop"
 
 if ("${WSDFIR_CHANGELOG}" -eq "Yes" -and (Test-Path "C:\downloads\CHANGELOG.md")) {
-    if (Test-Path "${env:ProgramFiles}\Notepad++\notepad++.exe") {
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe" -Arguments "C:\downloads\CHANGELOG.md" -IconLocation "${env:ProgramFiles}\Notepad++\notepad++.exe"
-    } else {
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "${env:SystemRoot}\System32\notepad.exe" -Arguments "C:\downloads\CHANGELOG.md"
-    }
+    Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "C:\downloads\CHANGELOG.md"
 }
 
 # Enable clipboard history
