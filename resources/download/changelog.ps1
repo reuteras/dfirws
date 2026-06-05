@@ -258,6 +258,7 @@ function Update-ToolChangelog {
 
     if ($updated.Count -gt 0) {
         $sections.Add("#### Updated Tools")
+        $sections.Add("")
         foreach ($t in ($updated | Sort-Object Name)) {
             $src = switch ($t.Source) {
                 "github" { "GitHub: $($t.Identifier)" }
@@ -273,6 +274,7 @@ function Update-ToolChangelog {
 
     if ($httpUpdated.Count -gt 0) {
         $sections.Add("#### Updated Tools (HTTP)")
+        $sections.Add("")
         foreach ($t in ($httpUpdated | Sort-Object Name)) {
             if ($t.OldVer -and $t.NewVer) {
                 $sections.Add("- **$($t.Name)**: $($t.OldVer) -> $($t.NewVer)")
@@ -287,6 +289,7 @@ function Update-ToolChangelog {
 
     if ($added.Count -gt 0) {
         $sections.Add("#### New Tools")
+        $sections.Add("")
         foreach ($t in ($added | Sort-Object Name)) {
             $src = switch ($t.Source) {
                 "github" { "GitHub: $($t.Identifier)" }
@@ -302,6 +305,7 @@ function Update-ToolChangelog {
 
     if (-not $isFirstHttpRun -and $httpAdded.Count -gt 0) {
         $sections.Add("#### New Tools (HTTP)")
+        $sections.Add("")
         foreach ($t in ($httpAdded | Sort-Object Name)) {
             $verStr = if ($t.Ver) { ": $($t.Ver)" } else { "" }
             $sections.Add("- **$($t.Name)**$verStr")
