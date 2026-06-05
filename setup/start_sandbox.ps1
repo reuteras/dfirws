@@ -556,8 +556,10 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\Windows Terminal.lnk" -DestinationPath 
 if ("${WSDFIR_CHANGELOG}" -eq "Yes" -and (Test-Path "C:\downloads\CHANGELOG.md")) {
     if (Test-Path "${env:ProgramFiles}\Notepad++\notepad++.exe") {
         Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "${env:ProgramFiles}\Notepad++\notepad++.exe" -Arguments "C:\downloads\CHANGELOG.md" -IconLocation "${env:ProgramFiles}\Notepad++\notepad++.exe"
-    } else {
+    } elseif (Test-Path "${env:SystemRoot}\System32\notepad.exe") {
         Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "${env:SystemRoot}\System32\notepad.exe" -Arguments "C:\downloads\CHANGELOG.md"
+    } elseif (Test-Path "${env:SystemRoot}\notepad.exe") {
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\CHANGELOG.lnk" -DestinationPath "${env:SystemRoot}\notepad.exe" -Arguments "C:\downloads\CHANGELOG.md"
     }
 }
 
