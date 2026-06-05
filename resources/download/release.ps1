@@ -4461,7 +4461,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # edit
-$status = Get-GitHubRelease -repo "microsoft/edit" -path "${SETUP_PATH}\edit.zip" -match "windows.zip" -check "Zip archive data"
+$status = Get-GitHubRelease -repo "microsoft/edit" -path "${SETUP_PATH}\edit.zip" -match "x86_64-windows.zip" -check "Zip archive data"
 if ($status) {
     if (Test-Path "${TOOLS}\edit") {
         Remove-Item "${TOOLS}\edit" -Recurse -Force
