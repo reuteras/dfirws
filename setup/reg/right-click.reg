@@ -197,7 +197,7 @@ Windows Registry Editor Version 5.00
 "MUIVerb"="lnkparse"
 
 [HKEY_LOCAL_MACHINE\Software\Classes\lnkfile\shell\lnk\shell\lnkparse\command]
-@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command lnkparse '%1'"
+@="\"C:\\Program Files\\Windows Terminal\\TERMINAL_INSTALL_DIR\\wt.exe\" -w 0 C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoExit -Command C:\\venv\\bin\\lnkparse '%1'"
 
 
 ;
