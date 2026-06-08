@@ -4860,6 +4860,11 @@ if (Test-ToolIncluded -ToolName "Obsidian") {
     $status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\manifest.json" -match "manifest.json" -check "JSON text data"
     $status = Get-GitHubRelease -repo "liamcain/obsidian-calendar-plugin" -path "${SETUP_PATH}\obsidian-plugins\obsidian-calendar-plugin\styles.css" -match "styles.css" -check "ASCII text"
 
+    # notebook-navigator
+    $status = Get-GitHubRelease -repo "johansan/notebook-navigator" -path "${SETUP_PATH}\obsidian-plugins\notebook-navigator\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "johansan/notebook-navigator" -path "${SETUP_PATH}\obsidian-plugins\notebook-navigator\manifest.json" -match "manifest.json" -check "JSON text data"
+    $status = Get-GitHubRelease -repo "johansan/notebook-navigator" -path "${SETUP_PATH}\obsidian-plugins\notebook-navigator\styles.css" -match "styles.css" -check "ASCII text"
+
     # Templater
     $status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\main.js" -match "main.js" -check "JavaScript source"
     $status = Get-GitHubRelease -repo "SilentVoid13/Templater" -path "${SETUP_PATH}\obsidian-plugins\Templater\manifest.json" -match "manifest.json" -check "JSON text data"
