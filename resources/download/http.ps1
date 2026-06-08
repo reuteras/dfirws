@@ -1422,7 +1422,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Get ssview
-$status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/SSView.zip" -FilePath ".\downloads\ssview.zip" -check "Zip archive data"
+$status = Get-FileFromUri -uri "https://www.mitec.cz/wp/files/SSView.zip" -FilePath ".\downloads\ssview.zip" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\ssview") {
         Remove-Item -Recurse -Force "${TOOLS}\ssview" | Out-Null 2>&1
@@ -1704,7 +1704,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Mail Viewer
-$status = Get-FileFromUri -uri "https://www.mitec.cz/Downloads/MailView.zip" -FilePath ".\downloads\mailview.zip" -check "Zip archive data"
+$status = Get-FileFromUri -uri "https://www.mitec.cz/wp/files/MailView.zip" -FilePath ".\downloads\mailview.zip" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\MailView") {
         Remove-Item -Recurse -Force "${TOOLS}\MailView" | Out-Null 2>&1
