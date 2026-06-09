@@ -2,6 +2,19 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-06-09
+
+There is a new option to have a link on the sandbox desktop to `CHANGELOG.md` file showing updated versions of installed tools. This is updated tools after running the `downloadFiles.ps1` script. The file is always generated and to have it on the desktop make sure you change the default of `No` for this setting to `Yes`:
+
+```bash
+# Show a CHANGELOG.md shortcut on the sandbox Desktop.
+# The changelog is always generated in downloads/CHANGELOG.md by downloadFiles.ps1.
+# Set to "Yes" to place a shortcut to it on the Desktop.
+$WSDFIR_CHANGELOG="No"
+
+Obsidian has a new plugin, Notebook Navigator, that can be used instead of Calendar and also adds many other functions.
+```
+
 ## 2026-03-30
 
 Now the default timezone is set to UTC by default.
