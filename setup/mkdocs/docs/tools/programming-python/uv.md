@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://docs.astral.sh/uv/>
+
+**Vendor:** Astral
+
+**License:** MIT and Apache-2
+
 **Source:** Installer
 
 **Profiles:** Full, Basic

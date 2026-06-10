@@ -4,6 +4,7 @@
 
 **Homepage:** <https://rust-lang.org/>
 
+**License:** MIT and Apache-2
 
 **Source:** Installer
 

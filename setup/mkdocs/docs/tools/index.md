@@ -64,7 +64,7 @@ Categories generated from dfirws shortcuts.
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
 | [4n4lDetector](./files-and-apps-pe/4n4ldetector.md) | GitHub Release | Advanced static analysis tool | malware-analysis, pe-analysis, detection | `.exe`, `.dll` | Full only |
-| [7-Zip](./utilities/7-zip.md) | Installer | 7-Zip is a file archive tool. |  |  |  |
+| [7-Zip](./utilities/7-zip.md) | Installer | 7-Zip is a file archive tool. |  | `.7z`, `.zip` |  |
 | [@marp-team/marp-cli](./utilities/marp-team-marp-cli.md) | npm | A CLI interface for Marp and Marpit based converters. Markdown presentations. | markdown, office, documentation | `.md`, `.markdown` |  |
 | [acquire](./forensics/acquire.md) | Python |  | forensics, incident-response, acquisition, disk-forensics | `.tar` |  |
 | [adalanche](./os-windows-active-directory/adalanche.md) | GitHub Release | Attack Graph Visualizer and Explorer (Active Directory) ...Who's *really* Domain Admin? | windows, network-analysis, threat-intelligence, visualization |  | Full only |

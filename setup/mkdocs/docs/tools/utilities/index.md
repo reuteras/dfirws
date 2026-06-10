@@ -2,7 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
-| [7-Zip](7-zip.md) | Installer | 7-Zip is a file archive tool. |  |  |  |
+| [7-Zip](7-zip.md) | Installer | 7-Zip is a file archive tool. |  | `.7z`, `.zip` |  |
 | [@marp-team/marp-cli](marp-team-marp-cli.md) | npm | A CLI interface for Marp and Marpit based converters. Markdown presentations. | markdown, office, documentation | `.md`, `.markdown` |  |
 | [CuTE-tui](cute-tui.md) | Cargo | CuTE-tui is a terminal user interface (TUI) tool for making HTTP requests and analyzing responses. It provides a user-friendly interface for crafting and sending HTTP requests, as well as viewing and analyzing the responses. This tool can be useful for testing APIs, debugging web applications, and performing various HTTP-related tasks from the command line. | tui, http, network |  |  |
 | [DCode](dcode.md) | HTTP | DCode is a date/time conversion and analysis tool. | metadata, forensics, decoding |  |  |

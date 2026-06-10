@@ -12,6 +12,8 @@
 
 **Profiles:** Full, Basic
 
+**File Extensions:** `.7z`, `.zip`
+
 7-Zip is a file archive tool.
 
 ## Tips

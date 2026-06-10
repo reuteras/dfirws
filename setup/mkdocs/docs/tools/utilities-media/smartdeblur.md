@@ -6,6 +6,7 @@
 
 **Vendor:** Y. Vladimir
 
+**License:** GPL-3
 
 **Source:** Git
 

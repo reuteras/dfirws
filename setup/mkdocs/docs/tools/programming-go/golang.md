@@ -4,6 +4,7 @@
 
 **Homepage:** <https://go.dev/>
 
+**License:** BSD
 
 **Source:** Installer
 

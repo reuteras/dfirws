@@ -4,6 +4,7 @@
 
 **Homepage:** <https://gitforwindows.org/>
 
+**License:** <https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses>
 
 **Source:** Installer
 
