@@ -70,10 +70,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.google.com/chrome/"
+    Vendor = "Google LLC"
+    License = "Freeware"
+    LicenseUrl = "https://www.google.com/chrome/terms/"
     PythonVersion = ""
 }
 
@@ -95,9 +95,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://dotnet.microsoft.com"
+    Vendor = "Microsoft Corporation"
+    License = "MIT"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -121,9 +121,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://dotnet.microsoft.com"
+    Vendor = "Microsoft Corporation"
+    License = "MIT"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -152,10 +152,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.irfanview.com/"
+    Vendor = "Irfan Skiljan"
+    License = "Proprietary, free for private and non-commercial use"
+    LicenseUrl = "https://www.irfanview.com/eula.htm"
     PythonVersion = ""
 }
 
@@ -193,10 +193,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://obsidian.md/"
+    Vendor = "Obsidian"
+    License = "Proprietary"
+    LicenseUrl = "https://obsidian.md/terms"
     PythonVersion = ""
 }
 
@@ -226,10 +226,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://ohmyposh.dev/"
+    Vendor = "Jan De Dobbeleer"
+    License = "MIT"
+    LicenseUrl = "https://github.com/JanDeDobbeleer/oh-my-posh/raw/main/COPYING"
     PythonVersion = ""
 }
 
@@ -251,10 +251,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://microsoft.com/PowerShell"
+    Vendor = "Microsoft Corporation"
+    License = "MIT"
+    LicenseUrl = "https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -292,10 +292,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.chiark.greenend.org.uk/~sgtatham/putty/"
+    Vendor = "Simon Tatham"
+    License = "MIT"
+    LicenseUrl = "https://www.chiark.greenend.org.uk/~sgtatham/putty/licence.html"
     PythonVersion = ""
 }
 
@@ -325,10 +325,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://qemu.weilnetz.de/"
+    Vendor = "QEMU Community"
+    License = "GPL-2.0"
+    LicenseUrl = "https://wiki.qemu.org/License"
     PythonVersion = ""
 }
 
@@ -358,10 +358,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://rubyinstaller.org/downloads/"
+    Vendor = "RubyInstaller Team"
+    License = "BSD-3-Clause"
+    LicenseUrl = "https://github.com/oneclick/rubyinstaller2/blob/HEAD/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -399,10 +399,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.videolan.org/vlc/"
+    Vendor = "VideoLAN"
+    License = "GPL-2.0"
+    LicenseUrl = "https://code.videolan.org/videolan/vlc/-/blob/HEAD/COPYING"
     PythonVersion = ""
 }
 
@@ -447,10 +447,10 @@ $TOOL_DEFINITIONS += @{
     )
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/VirusTotal/vt-cli"
+    Vendor = "VirusTotal"
+    License = "Apache-2.0"
+    LicenseUrl = "https://github.com/VirusTotal/vt-cli/blob/HEAD/LICENSE"
     PythonVersion = ""
 }
 
@@ -486,10 +486,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://winmerge.org/"
+    Vendor = "Thingamahoochie Software"
+    License = "GPL-2.0"
+    LicenseUrl = "https://github.com/WinMerge/winmerge/blob/v2.16.46/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -512,10 +512,10 @@ if (Test-ToolIncluded -ToolName "OpenVPN") {
         SampleCommands = @()
         SampleFiles = @()
         Dependencies = @()
-        Homepage = ""
-        Vendor = ""
-        License = ""
-        LicenseUrl = ""
+        Homepage = "https://openvpn.net/client/"
+        Vendor = "OpenVPN Inc."
+        License = "Proprietary"
+        LicenseUrl = "https://openvpn.net/legal/"
         PythonVersion = ""
     }
 }
@@ -554,10 +554,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.google.com/earth/about/"
+    Vendor = "Google"
+    License = "Freeware"
+    LicenseUrl = "https://www.google.com/help/terms_maps/"
     PythonVersion = ""
 }
 
@@ -620,10 +620,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.wireguard.com/install/"
+    Vendor = "WireGuard LLC"
+    License = "MIT"
+    LicenseUrl = "https://git.zx2c4.com/wireguard-windows/tree/COPYING"
     PythonVersion = ""
 }
 
@@ -659,10 +659,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.wireshark.org/"
+    Vendor = "The Wireshark developer community, https://www.wireshark.org"
+    License = "GPL-2.0"
+    LicenseUrl = "https://gitlab.com/wireshark/wireshark/-/blob/HEAD/COPYING"
     PythonVersion = ""
 }
 
@@ -692,10 +692,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://tailscale.com/download"
+    Vendor = "Tailscale Inc."
+    License = "BSD-3-Clause"
+    LicenseUrl = "https://github.com/tailscale/tailscale/blob/HEAD/LICENSE"
     PythonVersion = ""
 }
 
@@ -733,10 +733,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.mozilla.org/firefox/"
+    Vendor = "Mozilla"
+    License = "MPL-2.0"
+    LicenseUrl = "https://www.mozilla.org/MPL/2.0"
     PythonVersion = ""
 }
 
@@ -774,10 +774,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.foxitsoftware.com/pdf-reader/"
+    Vendor = "Foxit Software Inc."
+    License = "Proprietary"
+    LicenseUrl = "https://www.foxit.com/pdf-editor/eula.html"
     PythonVersion = ""
 }
 
@@ -800,8 +800,8 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @()
     Homepage = ""
-    Vendor = ""
-    License = ""
+    Vendor = "Microsoft"
+    License = "Proprietary"
     LicenseUrl = ""
     PythonVersion = ""
 }
@@ -846,10 +846,10 @@ $TOOL_DEFINITIONS += @{
     )
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://neovim.io/"
+    Vendor = "neovim.io"
+    License = "Apache-2.0 or Vim"
+    LicenseUrl = "https://github.com/neovim/neovim/blob/HEAD/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -890,9 +890,9 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
+    Homepage = "https://github.com/microsoft/etl2pcapng"
+    Vendor = "Microsoft"
+    License = "MIT"
     LicenseUrl = ""
     PythonVersion = ""
 }
