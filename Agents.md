@@ -76,7 +76,13 @@ dfirws/
 ├── local/                         # User config (mapped into sandbox)
 │   └── defaults/                  # Default configs shipped with project
 ├── scripts/
-│   └── generate-tools-docs.py     # Generates wiki from tools_*.json
+│   ├── generate-tools-docs.py     # Generates wiki from tools_*.json
+│   ├── validate-tool-metadata.ps1 # Lints TOOL_DEFINITIONS metadata (runs in CI)
+│   ├── update-tool-metadata.ps1   # Fills empty Homepage/Vendor/License fields
+│   └── lib/
+│       └── Get-ToolDefinitionAst.ps1  # Shared static AST parser (never executes scripts)
+├── tests/
+│   └── changelog.Tests.ps1        # Pester tests for changelog.ps1 (runs in CI)
 └── setup/mkdocs/                  # MkDocs site for tool documentation
 ```
 

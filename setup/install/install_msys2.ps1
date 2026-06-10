@@ -16,10 +16,20 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";"
 $env:CHERE_INVOKING = 'yes'
 $env:MSYSTEM = 'UCRT64'
 
+# Explicitly installed packages - also used for changelog version tracking.
+$MSYS2_PACKAGES = @(
+    "bc", "binutils", "cpio", "expect", "git", "gnu-netcat",
+    "mingw-w64-ucrt-x86_64-autotools", "mingw-w64-ucrt-x86_64-cmake",
+    "mingw-w64-ucrt-x86_64-gcc", "mingw-w64-ucrt-x86_64-make",
+    "mingw-w64-ucrt-x86_64-toolchain", "nasm", "ncurses", "ncurses-devel",
+    "pv", "rsync", "tree", "zsh", "vim"
+)
+
 if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     Write-DateLog "MSYS2 already installed, updating." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-Output "MSYS2 already installed, updating."
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Save-Msys2Metadata -Packages $MSYS2_PACKAGES 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-DateLog "MSYS2 update done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-Output "MSYS2 update done."
 } else {
@@ -42,7 +52,8 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     Get-Process | Where-Object { try { $_.MainModule.FileName -like "C:\Tools\msys64\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 3
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syu bc binutils cpio expect git gnu-netcat mingw-w64-ucrt-x86_64-autotools mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-make mingw-w64-ucrt-x86_64-toolchain nasm ncurses ncurses-devel pv rsync tree zsh vim' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & "C:\Tools\msys64\usr\bin\bash.exe" -lc "pacman --noconfirm -Syu $($MSYS2_PACKAGES -join ' ')" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Save-Msys2Metadata -Packages $MSYS2_PACKAGES 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-DateLog "MSYS2 installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-Output "MSYS2 installation done."
 }

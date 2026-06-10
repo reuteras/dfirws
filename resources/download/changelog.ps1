@@ -2,10 +2,49 @@
 # Compares current .metadata/ JSON files against the persisted versions.json
 # state file to produce a Markdown changelog entry per run.
 
+# Loads the changelog ignore list: package/tool names that should never appear
+# in the changelog (noisy library dependencies). One entry per line, optionally
+# prefixed with a source ("pip:six" only ignores the pip package); '#' starts a
+# comment. Names are matched case-insensitively with '_' and '-' treated as
+# equal. Defaults ship in local\defaults\changelog-ignore.txt; add your own
+# entries in local\changelog-ignore.txt.
+function Get-ChangelogIgnoreList {
+    $entries = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($file in @(
+        "$PSScriptRoot\..\..\local\defaults\changelog-ignore.txt",
+        "$PSScriptRoot\..\..\local\changelog-ignore.txt"
+    )) {
+        if (Test-Path $file) {
+            foreach ($line in (Get-Content $file -ErrorAction SilentlyContinue)) {
+                $entry = ($line -split "#")[0].Trim()
+                if ($entry) {
+                    [void]$entries.Add(($entry -replace "_", "-"))
+                }
+            }
+        }
+    }
+    # The comma keeps PowerShell from enumerating the set into the pipeline.
+    return , $entries
+}
+
+function Test-ChangelogIgnored {
+    param (
+        $IgnoreList,
+        [string]$Source,
+        [string]$Name
+    )
+    if ($null -eq $IgnoreList -or $IgnoreList.Count -eq 0) {
+        return $false
+    }
+    $normalized = $Name -replace "_", "-"
+    return $IgnoreList.Contains($normalized) -or $IgnoreList.Contains("${Source}:${normalized}")
+}
+
 function Get-ChangelogCurrentVersions {
     $versions = [ordered]@{}
     $downloadsMetadata = "$PSScriptRoot\..\..\downloads\.metadata"
     $toolsMetadata     = "$PSScriptRoot\..\..\mount\Tools\.metadata"
+    $ignoreList        = Get-ChangelogIgnoreList
 
     $githubDir = "$downloadsMetadata\github"
     if (Test-Path $githubDir) {
@@ -13,6 +52,9 @@ function Get-ChangelogCurrentVersions {
             try {
                 $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
                 if ($data.FullName -and $data.LatestRelease -and $data.LatestRelease.TagName) {
+                    if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source "github" -Name $data.Name) {
+                        return
+                    }
                     $versions[$data.FullName] = [PSCustomObject]@{
                         Name       = $data.Name
                         Version    = $data.LatestRelease.TagName
@@ -30,6 +72,9 @@ function Get-ChangelogCurrentVersions {
             try {
                 $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
                 if ($data.AppId -and $data.Version) {
+                    if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source "winget" -Name $data.AppId) {
+                        return
+                    }
                     $versions[$data.AppId] = [PSCustomObject]@{
                         Name       = if ($data.Name) { $data.Name } else { $data.AppId }
                         Version    = $data.Version
@@ -41,37 +86,35 @@ function Get-ChangelogCurrentVersions {
         }
     }
 
-    $npmDir = "$toolsMetadata\npm"
-    if (Test-Path $npmDir) {
-        Get-ChildItem $npmDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
-            try {
-                $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
-                if ($data.Name -and $data.Version) {
-                    $versions["npm:$($data.Name)"] = [PSCustomObject]@{
-                        Name       = $data.Name
-                        Version    = $data.Version
-                        Source     = "npm"
-                        Identifier = $data.Name
+    # Sandbox-side sources: each writes per-tool JSON {Name, Version, Source, FetchedAt}
+    # to mount\Tools\.metadata\<source>\ (directly, or via C:\log for the rust/go
+    # sandboxes where C:\Tools is read-only). pip entries carry an extra Venv
+    # field since the same package can live in several virtual environments.
+    foreach ($source in @("npm", "uv", "cargo", "go", "msys2", "raw", "pip")) {
+        $sourceDir = "$toolsMetadata\$source"
+        if (Test-Path $sourceDir) {
+            Get-ChildItem $sourceDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
+                try {
+                    $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
+                    if ($data.Name -and $data.Version) {
+                        if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source $source -Name $data.Name) {
+                            return
+                        }
+                        $venv = $null
+                        if ($data.PSObject.Properties["Venv"] -and $data.Venv) {
+                            $venv = $data.Venv
+                        }
+                        $key        = if ($venv) { "${source}:${venv}:$($data.Name)" } else { "${source}:$($data.Name)" }
+                        $identifier = if ($venv) { "${venv}/$($data.Name)" } else { $data.Name }
+                        $versions[$key] = [PSCustomObject]@{
+                            Name       = $data.Name
+                            Version    = $data.Version
+                            Source     = $source
+                            Identifier = $identifier
+                        }
                     }
-                }
-            } catch { }
-        }
-    }
-
-    $uvDir = "$toolsMetadata\uv"
-    if (Test-Path $uvDir) {
-        Get-ChildItem $uvDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
-            try {
-                $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
-                if ($data.Name -and $data.Version) {
-                    $versions["uv:$($data.Name)"] = [PSCustomObject]@{
-                        Name       = $data.Name
-                        Version    = $data.Version
-                        Source     = "uv"
-                        Identifier = $data.Name
-                    }
-                }
-            } catch { }
+                } catch { }
+            }
         }
     }
 
@@ -117,7 +160,41 @@ function Get-VersionFromUrl {
     return $null
 }
 
-# Reads tools_downloaded.csv and returns a hashtable keyed by Name with URL values.
+# Reads the cached etag for a URI from downloads\.etag\<sha256-of-uri>.
+# Uses the same URI hashing scheme as Get-FileFromUri in common.ps1.
+function Get-UriEtag {
+    param([string]$Uri)
+    $stringAsStream = [System.IO.MemoryStream]::new()
+    $writer = [System.IO.StreamWriter]::new($stringAsStream)
+    $writer.write("$Uri")
+    $writer.Flush()
+    $stringAsStream.Position = 0
+    $uriHash = Get-FileHash -InputStream $stringAsStream -Algorithm SHA256 | Select-Object -ExpandProperty Hash
+    $etagFile = "$PSScriptRoot\..\..\downloads\.etag\${uriHash}"
+    if (Test-Path $etagFile) {
+        try {
+            return (Get-Content $etagFile -Raw -ErrorAction Stop).Trim()
+        } catch { }
+    }
+    return $null
+}
+
+# Snapshot entries are {Url, Etag} objects; entries saved by older versions are
+# plain URL strings. These helpers read both formats.
+function Get-HttpSnapshotUrl {
+    param($Entry)
+    if ($Entry -is [string]) { return $Entry }
+    return $Entry.Url
+}
+
+function Get-HttpSnapshotEtag {
+    param($Entry)
+    if ($Entry -is [string]) { return $null }
+    return $Entry.Etag
+}
+
+# Reads tools_downloaded.csv and returns a hashtable keyed by Name with
+# {Url, Etag} values. The etag detects content changes behind mutable URLs.
 function Get-HttpToolsCurrentSnapshot {
     $csvFile = "$PSScriptRoot\..\..\downloads\tools_downloaded.csv"
     $snapshot = [ordered]@{}
@@ -127,7 +204,10 @@ function Get-HttpToolsCurrentSnapshot {
     try {
         Import-Csv $csvFile -ErrorAction Stop | ForEach-Object {
             if ($_.Name -and $_.URL) {
-                $snapshot[$_.Name] = $_.URL
+                $snapshot[$_.Name] = [PSCustomObject]@{
+                    Url  = $_.URL
+                    Etag = Get-UriEtag -Uri $_.URL
+                }
             }
         }
     } catch { }
@@ -158,7 +238,7 @@ function Save-HttpToolsSnapshot {
     if (-not (Test-Path $changelogDir)) {
         New-Item -ItemType Directory -Force -Path $changelogDir | Out-Null
     }
-    $Snapshot | ConvertTo-Json -Depth 2 |
+    $Snapshot | ConvertTo-Json -Depth 3 |
         Set-Content -Path "$changelogDir\http_snapshot.json" -Encoding UTF8
 }
 
@@ -215,18 +295,31 @@ function Update-ToolChangelog {
     $httpAdded   = [System.Collections.Generic.List[PSCustomObject]]::new()
 
     foreach ($name in $newHttp.Keys) {
-        $newUrl = $newHttp[$name]
+        $newUrl  = Get-HttpSnapshotUrl -Entry $newHttp[$name]
+        $newEtag = Get-HttpSnapshotEtag -Entry $newHttp[$name]
         if ($oldHttp.Contains($name)) {
-            $oldUrl = $oldHttp[$name]
+            $oldUrl  = Get-HttpSnapshotUrl -Entry $oldHttp[$name]
+            $oldEtag = Get-HttpSnapshotEtag -Entry $oldHttp[$name]
             if ($oldUrl -ne $newUrl) {
                 $oldVer = Get-VersionFromUrl -Url $oldUrl
                 $newVer = Get-VersionFromUrl -Url $newUrl
                 $httpUpdated.Add([PSCustomObject]@{
-                    Name   = $name
-                    OldUrl = $oldUrl
-                    NewUrl = $newUrl
-                    OldVer = $oldVer
-                    NewVer = $newVer
+                    Name        = $name
+                    OldUrl      = $oldUrl
+                    NewUrl      = $newUrl
+                    OldVer      = $oldVer
+                    NewVer      = $newVer
+                    ContentOnly = $false
+                })
+            } elseif ($oldEtag -and $newEtag -and $oldEtag -ne $newEtag) {
+                # Mutable URL: same address, but the served content changed.
+                $httpUpdated.Add([PSCustomObject]@{
+                    Name        = $name
+                    OldUrl      = $oldUrl
+                    NewUrl      = $newUrl
+                    OldVer      = $null
+                    NewVer      = $null
+                    ContentOnly = $true
                 })
             }
         } else {
@@ -267,7 +360,13 @@ function Update-ToolChangelog {
                 "uv"     { "uv: $($t.Identifier)" }
                 default  { "$($t.Source): $($t.Identifier)" }
             }
-            $sections.Add("- **$($t.Name)** ($src): $($t.OldVersion) -> $($t.NewVersion)")
+            if ($t.Source -eq "raw") {
+                # Raw downloads use a content hash as the version - the hash pair
+                # is meaningless to readers, so just report that content changed.
+                $sections.Add("- **$($t.Name)** ($src): updated (content changed)")
+            } else {
+                $sections.Add("- **$($t.Name)** ($src): $($t.OldVersion) -> $($t.NewVersion)")
+            }
         }
         $sections.Add("")
     }
@@ -276,13 +375,18 @@ function Update-ToolChangelog {
         $sections.Add("#### Updated Tools (HTTP)")
         $sections.Add("")
         foreach ($t in ($httpUpdated | Sort-Object Name)) {
-            if ($t.OldVer -and $t.NewVer) {
+            if ($t.ContentOnly) {
+                $sections.Add("- **$($t.Name)**: updated (content changed, same URL)")
+                $sections.Add("  - url: $($t.NewUrl)")
+            } elseif ($t.OldVer -and $t.NewVer) {
                 $sections.Add("- **$($t.Name)**: $($t.OldVer) -> $($t.NewVer)")
+                $sections.Add("  - old: $($t.OldUrl)")
+                $sections.Add("  - new: $($t.NewUrl)")
             } else {
                 $sections.Add("- **$($t.Name)**: updated (version not available in URL)")
+                $sections.Add("  - old: $($t.OldUrl)")
+                $sections.Add("  - new: $($t.NewUrl)")
             }
-            $sections.Add("  - old: $($t.OldUrl)")
-            $sections.Add("  - new: $($t.NewUrl)")
         }
         $sections.Add("")
     }
@@ -298,7 +402,11 @@ function Update-ToolChangelog {
                 "uv"     { "uv: $($t.Identifier)" }
                 default  { "$($t.Source): $($t.Identifier)" }
             }
-            $sections.Add("- **$($t.Name)** ($src): $($t.Version)")
+            if ($t.Source -eq "raw") {
+                $sections.Add("- **$($t.Name)** ($src): added")
+            } else {
+                $sections.Add("- **$($t.Name)** ($src): $($t.Version)")
+            }
         }
         $sections.Add("")
     }

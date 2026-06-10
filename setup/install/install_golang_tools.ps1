@@ -25,12 +25,14 @@ $env:PATH="${env:ProgramFiles}\Go\bin;${env:ProgramFiles}\Git\bin;${env:ProgramF
 if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
     Write-DateLog "Golang: Install govulncheck." >> "C:\log\golang.txt"
     go install golang.org/x/vuln/cmd/govulncheck@latest 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
+    Save-GoToolMetadata -Binary "$HOME\go\bin\govulncheck.exe" -Name "govulncheck" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
 } else {
     Write-DateLog "Golang: Supply chain security audit disabled - skipping govulncheck install." >> "C:\log\golang.txt"
 }
 
 Write-DateLog "Golang: Install protodump in sandbox." >> "C:\log\golang.txt"
 go install github.com/arkadiyt/protodump/cmd/protodump@latest 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
+Save-GoToolMetadata -Binary "$HOME\go\bin\protodump.exe" -Name "protodump" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\golang.txt"
 
 if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
     Write-DateLog "Golang: govulncheck on installed binaries." >> "C:\log\golang.txt"

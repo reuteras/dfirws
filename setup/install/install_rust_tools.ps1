@@ -36,16 +36,19 @@ $env:PATH="${env:PATH};C:\cargo\bin;" + [System.Environment]::GetEnvironmentVari
 Write-Output "Rust: Install dfir-toolkit in sandbox."
 Write-DateLog "Rust: Install dfir-toolkit in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+Save-CargoToolMetadata -Package "dfir-toolkit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 (Get-ChildItem "C:\cargo\bin").Name | ForEach-Object { & "$_" --autocomplete powershell > "C:\cargo\autocomplete\$_.ps1"} 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 Write-Output "Rust: Install usnjrnl in sandbox."
 Write-DateLog "Rust: Install usnjrnl in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" usnjrnl 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+Save-CargoToolMetadata -Package "usnjrnl" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 Write-Output "Rust: Install CuTE-tui in sandbox."
 Write-DateLog "Rust: Install CuTE-tui in sandbox." >> "C:\log\rust.txt"
 cargo install --root "C:\cargo" CuTE-tui 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+Save-CargoToolMetadata -Package "CuTE-tui" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
 Write-Output "Rust: Install SSHniff in sandbox."
 Write-DateLog "Rust: Install SSHniff in sandbox." >> "C:\log\rust.txt"
@@ -54,11 +57,17 @@ git clone https://github.com/CrzPhil/SSHniff.git 2>&1 | ForEach-Object { "$_" } 
 Set-Location "C:\tmp\SSHniff\sshniff"
 cargo build --release 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 Copy-Item ".\target\release\sshniff.exe" "C:\cargo\bin\sshniff.exe"
+# Built from git, not crates.io - record the commit hash as the version.
+$SSHNIFF_COMMIT = (git -C "C:\tmp\SSHniff" rev-parse --short HEAD 2>$null | Out-String).Trim()
+if ($SSHNIFF_COMMIT) {
+    Save-CargoToolMetadata -Package "SSHniff" -Version $SSHNIFF_COMMIT 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+}
 
 if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
     Write-Output "Rust: Install cargo-audit."
     Write-DateLog "Rust: Install cargo-audit." >> "C:\log\rust.txt"
     cargo install --root "C:\cargo" cargo-audit 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
+    Save-CargoToolMetadata -Package "cargo-audit" 2>&1 | ForEach-Object { "$_" } >> "C:\log\rust.txt"
 
     Write-DateLog "Rust: cargo audit on installed binaries." >> "C:\log\rust.txt"
     Get-ChildItem "C:\cargo\bin\*.exe" | Where-Object { $_.Name -notin @("cargo-audit.exe") } | ForEach-Object {

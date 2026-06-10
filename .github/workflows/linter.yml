@@ -62,3 +62,19 @@ jobs:
           VALIDATE_SPELL_CODESPELL: false
           VALIDATE_YAML_PRETTIER: false
           FILTER_REGEX_EXCLUDE: hash-id\.py|PSDecode\.psm1|PowerSiem\.ps1|Get-ZimmermanTools\.ps1|Sync-EZTools\.ps1|kanvas_update\.ps1|setup\/mkdocs\/docs\/tools
+
+  metadata:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Validate tool metadata
+        shell: pwsh
+        run: ./scripts/validate-tool-metadata.ps1
+
+      - name: Run changelog tests
+        shell: pwsh
+        run: Invoke-Pester -Path tests -CI

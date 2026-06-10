@@ -1,87 +1,64 @@
-# Tools missing from the changelog
+# Changelog coverage
 
-This document lists tools installed by dfirws that are **not yet tracked** in the
-automated changelog (`downloads/CHANGELOG.md`). The changelog currently covers
-tools installed via GitHub releases, winget, npm, and uv tools
-(`uv tool install`).
+This document tracks which installed tools are covered by the automated
+changelog (`downloads/CHANGELOG.md`) and which are deliberately excluded.
 
-## Go tools (`go install @latest`)
+## Tracked sources
 
-Version is not captured at install time; `go version -m <binary>` can read the
-embedded version from the compiled binary after install, but no metadata write has
-been added yet.
+| Source | Mechanism | Metadata location |
+|--------|-----------|-------------------|
+| GitHub releases | `Save-GitHubRepoMetadata` (release tag) | `downloads/.metadata/github/` |
+| winget | `Save-WingetMetadata` (`winget show`) | `downloads/.metadata/winget/` |
+| npm (global) | `Save-NpmMetadata` (`npm list --global`) | `mount/Tools/.metadata/npm/` |
+| uv tools | `Save-UvToolMetadata` (`uv tool list`) | `mount/Tools/.metadata/uv/` |
+| Cargo tools | `Save-CargoToolMetadata` (`cargo install --list`) | `mount/Tools/.metadata/cargo/` (via `C:\log`, copied by `resources/download/rust.ps1`) |
+| Go tools | `Save-GoToolMetadata` (`go version -m`) | `mount/Tools/.metadata/go/` (via `C:\log`, copied by `resources/download/go.ps1`) |
+| MSYS2 (explicit packages) | `Save-Msys2Metadata` (`pacman -Q`) | `mount/Tools/.metadata/msys2/` |
+| Raw script downloads | `Get-RawGitHubFile` (SHA256 content hash as version) | `mount/Tools/.metadata/raw/` |
+| Python venv packages | `Save-VenvPackageMetadata` (`uv pip list`) per venv | `mount/Tools/.metadata/pip/` |
+| Direct HTTP downloads | URL + etag snapshot from `tools_downloaded.csv` and `downloads/.etag/` | `downloads/.changelog/http_snapshot.json` |
 
-| Tool | Install script | Module path |
-|------|---------------|-------------|
-| govulncheck | `setup/install/install_golang_tools.ps1` | `golang.org/x/vuln/cmd/govulncheck` |
-| protodump | `setup/install/install_golang_tools.ps1` | `github.com/arkadiyt/protodump/cmd/protodump` |
+Notes on specific tools:
 
-## Rust / Cargo tools (`cargo install`)
+- **SSHniff** is built from a git checkout, so its tracked version is the short
+  commit hash.
+- Raw script downloads (machofile-cli.py, msidump.py, shellconv.py, smtpsmug.py,
+  SQLiteWalker.py, CanaryTokenScanner.py, sigs.py, defender-dump.py, pe2pic.py,
+  evt2sigma.py) come from mutable branch URLs, so the version is a content hash
+  and the changelog reports "updated (content changed)".
+- Direct HTTP downloads with mutable URLs are detected via the cached etag: if
+  the URL is unchanged but the etag differs, the changelog reports
+  "updated (content changed, same URL)". Servers that do not return an etag
+  remain undetectable when the URL stays the same.
 
-`cargo install` does not write a machine-readable version file by default.
-`cargo install --list` can report installed versions after the fact.
+## The changelog ignore list
 
-| Tool | Install script |
-|------|---------------|
-| dfir-toolkit | `setup/install/install_rust_tools.ps1` |
-| usnjrnl | `setup/install/install_rust_tools.ps1` |
-| CuTE-tui | `setup/install/install_rust_tools.ps1` |
-| cargo-audit | `setup/install/install_rust_tools.ps1` (optional) |
+All packages in every virtual environment (`C:\venv\default`,
+`C:\venv\dfir-unfurl`, `C:\venv\speakeasy`, `C:\venv\white-phoenix`,
+`C:\venv\Kanvas`, `C:\venv\gostringungarbler`, `C:\venv\pe2pic`,
+`C:\venv\evt2sigma`, `C:\venv\scare`, `C:\venv\zircolite`) are recorded, keyed
+per venv (the changelog shows e.g. `pip: default/oletools`). Many of these are
+relevant DFIR tools (flare-capa, oletools, dissect, sigma-cli, capstone, ...),
+so they are tracked - but pure library dependencies would drown the changelog
+in noise. Those are filtered out via an ignore list:
 
-## Python venv packages (`uv pip install -U` / `uv venv`)
+- `local/defaults/changelog-ignore.txt` - defaults shipped with dfirws
+- `local/changelog-ignore.txt` - your own additions (merged with the defaults)
 
-These are library/runtime packages installed into shared or per-tool virtual
-environments rather than as standalone `uv tool` entries. Tracking individual
-library versions would produce very noisy changelogs; consider tracking only
-the venv-level tools that have CLI entry points.
+One entry per line. A plain name applies to every source; a `source:` prefix
+(e.g. `pip:six`) limits it. Matching is case-insensitive and `_` equals `-`.
+The list works for all changelog sources, so a noisy GitHub/winget/msys2 entry
+can be silenced the same way.
 
-| Environment | Script |
-|-------------|--------|
-| `C:\venv\default` (≈70 packages) | `setup/install/install_python_tools.ps1` |
-| `C:\venv\dfir-unfurl` | `setup/install/install_python_tools.ps1` |
-| `C:\venv\speakeasy` (pip) | `setup/install/install_python_tools.ps1` |
-| `C:\venv\white-phoenix` (optional) | `setup/install/install_python_tools.ps1` |
-| `C:\venv\Kanvas` (optional) | `setup/install/install_python_tools.ps1` |
-| `C:\venv\gostringungarbler` | `setup/install/install_python_tools.ps1` |
-| `C:\venv\pe2pic` | `setup/install/install_python_tools.ps1` |
-| `C:\venv\evt2sigma` (optional) | `setup/install/install_python_tools.ps1` |
-| `C:\venv\scare` | `setup/install/install_python_tools.ps1` |
-| `C:\venv\zircolite` | `setup/install/install_python_tools.ps1` |
+## Deliberately excluded
 
-## Direct HTTP downloads
+### MSYS2 dependency packages
 
-Tools fetched via plain URL are now **partially tracked** via `tools_downloaded.csv`.
-The changelog compares the URL from the previous run against the current URL:
+Only the explicitly requested packages (see `$MSYS2_PACKAGES` in
+`setup/install/install_msys2.ps1`) plus `msys2-runtime` are tracked. The full
+`pacman -Q` output lists hundreds of transitive dependencies.
 
-- If the URL changed and contains a version string (e.g. `/v1.2.3/`), the old and
-  new versions are shown.
-- If the URL changed but contains no parseable version, the entry is flagged as
-  "updated (version not available in URL)" and both URLs are shown.
-- If the URL is unchanged (mutable URL, file content may have changed silently),
-  no entry is generated. This is a known gap.
-
-Tools fetched **inside the sandbox** (raw GitHub scripts downloaded by
-`install_python_tools.ps1`) are not in `tools_downloaded.csv` and therefore
-not tracked at all:
-
-| Tool | Location |
-|------|----------|
-| machofile-cli.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| msidump.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| shellconv.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| smtpsmug.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| SQLiteWalker.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| CanaryTokenScanner.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| sigs.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| defender-dump.py | `setup/install/install_python_tools.ps1` (raw GitHub) |
-| Various (pe2pic, evt2sigma scripts) | `setup/install/install_python_tools.ps1` (raw GitHub) |
-
-## MSYS2 packages (`pacman -S`)
-
-Version tracking would require querying `pacman -Q` after install.
-See `setup/install/install_msys2.ps1`.
-
-## npm project installs (`npm install` inside a project directory)
+### npm project installs (`npm install` inside a project directory)
 
 LUMEN is cloned from GitHub and built locally — its version comes from the
 repository, not from the npm registry, so `npm list` does not report a useful

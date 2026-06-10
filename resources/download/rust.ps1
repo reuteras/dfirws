@@ -51,3 +51,11 @@ if (Test-Path -Path "${ROOT_PATH}\log\dfirws" ) {
     Copy-Item "${ROOT_PATH}\log\dfirws\tools_rust.json" "${ROOT_PATH}\downloads\dfirws\" -Force
     Remove-Item -Recurse -Force "${ROOT_PATH}\log\dfirws" 2>&1 | Out-Null
 }
+
+# Changelog metadata is written to C:\log inside the sandbox (C:\Tools is
+# read-only there); move it to mount\Tools\.metadata where changelog.ps1 reads it.
+if (Test-Path -Path "${ROOT_PATH}\log\.metadata\cargo" ) {
+    New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\.metadata\cargo" | Out-Null
+    Copy-Item "${ROOT_PATH}\log\.metadata\cargo\*.json" "${ROOT_PATH}\mount\Tools\.metadata\cargo\" -Force
+    Remove-Item -Recurse -Force "${ROOT_PATH}\log\.metadata\cargo" 2>&1 | Out-Null
+}

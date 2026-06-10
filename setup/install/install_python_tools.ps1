@@ -165,6 +165,7 @@ foreach ($package in `
 & "C:\Program Files\Python311\python.exe" -m venv "C:\venv\speakeasy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 & "C:\venv\speakeasy\Scripts\pip.exe" install setuptools speakeasy-emulator 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Copy-Item "C:\venv\speakeasy\Scripts\speakeasy.exe" "C:\venv\bin\speakeasy.exe" -Force 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Save-VenvPackageMetadata -Venv "speakeasy" -Python "C:\venv\speakeasy\Scripts\python.exe" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 Write-DateLog "Installed speakeasy-emulator in dedicated venv." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
 
 # Download IOCs for mvt
@@ -180,15 +181,15 @@ if (Test-ToolIncludedSandbox -ToolName "jpterm") {
 
 Write-DateLog "Install extra scripts in Tools\bin." >> "C:\log\python.txt"
 Set-Location "C:\Tools\bin"
-C:\Windows\System32\curl.exe -L --silent -o "machofile-cli.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py"
-C:\Windows\System32\curl.exe -L --silent -o "machofile.py" "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
-C:\Windows\System32\curl.exe -L --silent -o "msidump.py" "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py"
-C:\Windows\System32\curl.exe -L --silent -o "shellconv.py" "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
-C:\Windows\System32\curl.exe -L --silent -o "smtpsmug.py" "https://raw.githubusercontent.com/hannob/smtpsmug/main/smtpsmug"
-C:\Windows\System32\curl.exe -L --silent -o "SQLiteWalker.py" "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
-C:\Windows\System32\curl.exe -L --silent -o "CanaryTokenScanner.py" "https://raw.githubusercontent.com/0xNslabs/CanaryTokenScanner/main/CanaryTokenScanner.py"
-C:\Windows\System32\curl.exe -L --silent -o "sigs.py" "https://raw.githubusercontent.com/clausing/scripts/master/sigs.py"
-C:\Windows\System32\curl.exe -L --silent -o "defender-dump.py" "https://raw.githubusercontent.com/AlexJ4n6/Defender-Quarantine-Dump/refs/heads/main/defender-dump.py"
+Get-RawGitHubFile -OutFile "machofile-cli.py" -Url "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile-cli.py"
+Get-RawGitHubFile -OutFile "machofile.py" -Url "https://raw.githubusercontent.com/pstirparo/machofile/main/machofile.py"
+Get-RawGitHubFile -OutFile "msidump.py" -Url "https://raw.githubusercontent.com/mgeeky/msidump/main/msidump.py"
+Get-RawGitHubFile -OutFile "shellconv.py" -Url "https://raw.githubusercontent.com/hasherezade/shellconv/master/shellconv.py"
+Get-RawGitHubFile -OutFile "smtpsmug.py" -Url "https://raw.githubusercontent.com/hannob/smtpsmug/main/smtpsmug"
+Get-RawGitHubFile -OutFile "SQLiteWalker.py" -Url "https://raw.githubusercontent.com/stark4n6/SQLiteWalker/main/SQLiteWalker.py"
+Get-RawGitHubFile -OutFile "CanaryTokenScanner.py" -Url "https://raw.githubusercontent.com/0xNslabs/CanaryTokenScanner/main/CanaryTokenScanner.py"
+Get-RawGitHubFile -OutFile "sigs.py" -Url "https://raw.githubusercontent.com/clausing/scripts/master/sigs.py"
+Get-RawGitHubFile -OutFile "defender-dump.py" -Url "https://raw.githubusercontent.com/AlexJ4n6/Defender-Quarantine-Dump/refs/heads/main/defender-dump.py"
 
 # Copy executables to bin folder
 Copy-Item "C:\venv\uv\chepy\Scripts\pyjwt.exe" "C:\venv\bin\pyjwt.exe" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -306,6 +307,8 @@ uv pip install -U `
     "yara-python", `
     "win_inet_pton" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
+Save-VenvPackageMetadata -Venv "default" -Python "C:\venv\default\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+
 #
 # venv white-phoenix
 #
@@ -316,6 +319,7 @@ if (Test-ToolIncludedSandbox -ToolName "White-Phoenix") {
     C:\venv\white-phoenix\Scripts\Activate.ps1 >> "C:\log\python.txt"
     Set-Location "C:\venv\white-phoenix"
     uv pip install -r "${WSDFIR_TEMP}\white-phoenix.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Save-VenvPackageMetadata -Venv "white-phoenix" -Python "C:\venv\white-phoenix\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv white-phoenix done." >> "C:\log\python.txt"
 }
@@ -329,6 +333,7 @@ if (Test-ToolIncludedSandbox -ToolName "Kanvas") {
     C:\venv\Kanvas\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
     uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     C:\Users\WDAGUtilityAccount\Documents\tools\utils\kanvas_update.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Save-VenvPackageMetadata -Venv "Kanvas" -Python "C:\venv\Kanvas\.venv\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv kanvas done." >> "C:\log\python.txt"
 }
@@ -340,6 +345,7 @@ Set-Location "C:\venv\gostringungarbler"
 uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\gostringungarbler\.venv" >> "C:\log\python.txt"
 C:\venv\gostringungarbler\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Save-VenvPackageMetadata -Venv "gostringungarbler" -Python "C:\venv\gostringungarbler\.venv\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 deactivate
 Write-DateLog "Python venv gostringungarbler done." >> "C:\log\python.txt"
 
@@ -355,6 +361,7 @@ uv pip install -U `
         hexdump `
         maclookup `
         tomlkit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Save-VenvPackageMetadata -Venv "dfir-unfurl" -Python "C:\venv\dfir-unfurl\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 # Download each file and update the base.html content with the local path
 $baseHtmlPath = "C:\venv\dfir-unfurl\Lib\site-packages\unfurl\templates\base.html"
@@ -378,11 +385,12 @@ Write-DateLog "Python venv dfir-unfurl done." >> "C:\log\python.txt"
 #
 Write-DateLog "Install packages in venv pe2pic in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
 Set-Location "C:\tmp"
-C:\Windows\System32\curl.exe -L --silent -o "pe2pic.py" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py" 2>&1 >> "C:\log\python.txt"
+Get-RawGitHubFile -OutFile "pe2pic.py" -Url "https://raw.githubusercontent.com/hasherezade/pe2pic/master/pe2pic.py" 2>&1 >> "C:\log\python.txt"
 C:\Windows\System32\curl.exe -L --silent -o "pe2pic_requirements.txt" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
 uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\pe2pic"
 C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install -r "C:\tmp\pe2pic_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Save-VenvPackageMetadata -Venv "pe2pic" -Python "C:\venv\pe2pic\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Copy-Item "C:\tmp\pe2pic.py" "C:\venv\pe2pic\Scripts\pe2pic.py" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 deactivate
 Set-Content "C:\venv\pe2pic\Scripts\python.exe C:\venv\pe2pic\Scripts\pe2pic.py `$args" -Encoding Ascii -Path C:\venv\default\Scripts\pe2pic.ps1
@@ -394,11 +402,12 @@ Write-DateLog "Python venv pe2pic done." >> "C:\log\python.txt"
 if (Test-ToolIncludedSandbox -ToolName "evt2sigma") {
     Write-DateLog "Install packages in venv evt2sigma in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
     Set-Location "C:\tmp"
-    C:\Windows\System32\curl.exe -L --silent -o "evt2sigma.py" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py" 2>&1 >> "C:\log\python.txt"
+    Get-RawGitHubFile -OutFile "evt2sigma.py" -Url "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py" 2>&1 >> "C:\log\python.txt"
     C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
     uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\evt2sigma"
     C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
     uv pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Save-VenvPackageMetadata -Venv "evt2sigma" -Python "C:\venv\evt2sigma\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
     Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
     deactivate
@@ -416,6 +425,7 @@ Set-Location "C:\venv\scare\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
 uv pip install ptpython pyreadline3 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Save-VenvPackageMetadata -Venv "scare" -Python "C:\venv\scare\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 (Get-Content .\scarelib.py -raw) -replace "print\(splash\)","splash = 'Simple Configurable Asm REPL && Emulator'`n    print(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
 Copy-Item scarelib2.py scarelib.py
 Remove-Item scarelib2.py
@@ -434,6 +444,7 @@ C:\venv\zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Copy-Item -Recurse "C:\git\zircolite" "C:\venv\zircolite"
 Set-Location "C:\venv\zircolite\zircolite"
 uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+Save-VenvPackageMetadata -Venv "zircolite" -Python "C:\venv\zircolite\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 $env:PYTHONWARNINGS = "ignore"
 python zircolite.py -U 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 $lines = Get-Content "zircolite.py"

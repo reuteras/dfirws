@@ -1639,3 +1639,251 @@ function Save-UvToolMetadata {
     Set-Content -Path $metadataFile -Value ($metadata | ConvertTo-Json -Depth 2)
     Write-DateLog "Saved uv tool metadata for $safeName ($version)."
 }
+
+# Saves metadata for all packages in a Python virtual environment to
+# C:\Tools\.metadata\pip\, one JSON file per package (<venv>__<package>.json).
+# Noisy library packages are filtered out of the changelog host-side via
+# local\defaults\changelog-ignore.txt (plus user additions in
+# local\changelog-ignore.txt), so everything is recorded here.
+# Call this after the venv's packages have been installed.
+function Save-VenvPackageMetadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+    param (
+        [Parameter(Mandatory=$True)] [string]$Venv,
+        [Parameter(Mandatory=$True)] [string]$Python
+    )
+
+    $metadataDir = "C:\Tools\.metadata\pip"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    # uv pip list inspects any environment via --python, including venvs
+    # created with python -m venv + pip (e.g. speakeasy).
+    try {
+        $listJson = uv pip list --python $Python --format json 2>$null | Out-String
+        $packages = $listJson | ConvertFrom-Json -ErrorAction Stop
+    } catch {
+        Write-DateLog "Save-VenvPackageMetadata: could not list packages for venv $Venv"
+        return
+    }
+
+    if (-not $packages) {
+        Write-DateLog "Save-VenvPackageMetadata: no packages found in venv $Venv"
+        return
+    }
+
+    # Remove stale entries from earlier runs so uninstalled packages disappear.
+    Remove-Item "$metadataDir\${Venv}__*.json" -Force -ErrorAction SilentlyContinue
+
+    foreach ($pkg in $packages) {
+        $metadata = [ordered]@{
+            Name      = $pkg.name
+            Version   = $pkg.version
+            Source    = "pip"
+            Venv      = $Venv
+            FetchedAt = (Get-Date).ToString("s")
+        }
+        Set-Content -Path "$metadataDir\${Venv}__$($pkg.name).json" -Value ($metadata | ConvertTo-Json -Depth 2)
+    }
+
+    Write-DateLog "Saved pip metadata for $(@($packages).Count) package(s) in venv $Venv."
+}
+
+# Saves metadata for a cargo-installed tool to C:\log\.metadata\cargo\.
+# C:\Tools is mapped read-only in the rust build sandbox, so the file travels
+# via the writable C:\log mount and is copied to mount\Tools\.metadata\cargo
+# by the host script resources\download\rust.ps1.
+# Call this immediately after a successful `cargo install --root C:\cargo <pkg>`.
+# For tools built from a git checkout (no crates.io version), pass -Version
+# explicitly (e.g. the short commit hash).
+function Save-CargoToolMetadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+    param (
+        [Parameter(Mandatory=$True)] [string]$Package,
+        [Parameter(Mandatory=$False)] [string]$Root = "C:\cargo",
+        [Parameter(Mandatory=$False)] [string]$Version = ""
+    )
+
+    $metadataDir = "C:\log\.metadata\cargo"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    # cargo install --list output: "<name> v<version>:" followed by indented binary names
+    if (-not $Version) {
+        try {
+            $cargoList = cargo install --root $Root --list 2>$null
+            foreach ($line in $cargoList) {
+                if ($line -match "^$([regex]::Escape($Package))\s+v([^\s:]+)") {
+                    $Version = $Matches[1]
+                    break
+                }
+            }
+        } catch {
+            Write-DateLog "Save-CargoToolMetadata: could not run cargo install --list for $Package"
+            return
+        }
+    }
+
+    if (-not $Version) {
+        Write-DateLog "Save-CargoToolMetadata: could not find installed version for $Package"
+        return
+    }
+
+    $metadata = [ordered]@{
+        Name      = $Package
+        Version   = $Version
+        Source    = "cargo"
+        FetchedAt = (Get-Date).ToString("s")
+    }
+
+    Set-Content -Path "$metadataDir\${Package}.json" -Value ($metadata | ConvertTo-Json -Depth 2)
+    Write-DateLog "Saved cargo tool metadata for $Package ($Version)."
+}
+
+# Saves metadata for a go-installed tool to C:\log\.metadata\go\.
+# C:\Tools is mapped read-only in the golang build sandbox, so the file travels
+# via the writable C:\log mount and is copied to mount\Tools\.metadata\go
+# by the host script resources\download\go.ps1.
+# Call this immediately after a successful `go install <module>@latest`.
+function Save-GoToolMetadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+    param (
+        [Parameter(Mandatory=$True)] [string]$Binary,
+        [Parameter(Mandatory=$True)] [string]$Name
+    )
+
+    $metadataDir = "C:\log\.metadata\go"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    if (!(Test-Path $Binary)) {
+        Write-DateLog "Save-GoToolMetadata: binary not found: $Binary"
+        return
+    }
+
+    # go version -m output contains a "mod <module-path> <version>" line with the
+    # main module version embedded in the binary.
+    $version = $null
+    try {
+        $goInfo = go version -m $Binary 2>$null
+        foreach ($line in $goInfo) {
+            if ($line -match '^\s+mod\s+\S+\s+(\S+)') {
+                $version = $Matches[1]
+                break
+            }
+        }
+    } catch {
+        Write-DateLog "Save-GoToolMetadata: could not run go version -m for $Name"
+        return
+    }
+
+    if (-not $version) {
+        Write-DateLog "Save-GoToolMetadata: could not find embedded version for $Name"
+        return
+    }
+
+    $metadata = [ordered]@{
+        Name      = $Name
+        Version   = $version
+        Source    = "go"
+        FetchedAt = (Get-Date).ToString("s")
+    }
+
+    Set-Content -Path "$metadataDir\${Name}.json" -Value ($metadata | ConvertTo-Json -Depth 2)
+    Write-DateLog "Saved go tool metadata for $Name ($version)."
+}
+
+# Saves metadata for explicitly installed MSYS2 packages to C:\Tools\.metadata\msys2\.
+# C:\Tools is mapped read-write in the msys2 build sandbox, so the files persist.
+# Only the explicitly requested packages (plus msys2-runtime as the umbrella
+# MSYS2 version) are tracked - a full `pacman -Q` would list hundreds of
+# dependencies and make the changelog too noisy.
+# Call this after `pacman -Syu <packages>` or `pacman -Syuu`.
+function Save-Msys2Metadata {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+    param (
+        [Parameter(Mandatory=$False)] [string[]]$Packages = @()
+    )
+
+    $bash = "C:\Tools\msys64\usr\bin\bash.exe"
+    if (!(Test-Path $bash)) {
+        Write-DateLog "Save-Msys2Metadata: bash.exe not found, skipping."
+        return
+    }
+
+    $metadataDir = "C:\Tools\.metadata\msys2"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    # pacman -Q output: "<name> <version>" per package. Group packages
+    # (e.g. mingw-w64-ucrt-x86_64-toolchain) print an error to stderr but do not
+    # affect the lines for real packages.
+    $query = (@("msys2-runtime") + $Packages) -join " "
+    $count = 0
+    try {
+        $lines = & $bash -lc "pacman -Q $query" 2>$null
+        foreach ($line in $lines) {
+            if ($line -match '^(\S+)\s+(\S+)$') {
+                $metadata = [ordered]@{
+                    Name      = $Matches[1]
+                    Version   = $Matches[2]
+                    Source    = "msys2"
+                    FetchedAt = (Get-Date).ToString("s")
+                }
+                Set-Content -Path "$metadataDir\$($Matches[1]).json" -Value ($metadata | ConvertTo-Json -Depth 2)
+                $count++
+            }
+        }
+    } catch {
+        Write-DateLog "Save-Msys2Metadata: could not query pacman."
+        return
+    }
+
+    Write-DateLog "Saved MSYS2 metadata for $count package(s)."
+}
+
+# Downloads a raw script file (e.g. from raw.githubusercontent.com) and records
+# changelog metadata to C:\Tools\.metadata\raw\. These URLs are mutable (they
+# track a branch), so the version is the first 12 hex characters of the SHA256
+# of the downloaded content - the changelog reports "content changed" when it
+# differs between runs.
+function Get-RawGitHubFile {
+    param (
+        [Parameter(Mandatory=$True)] [string]$Url,
+        [Parameter(Mandatory=$True)] [string]$OutFile,
+        [Parameter(Mandatory=$False)] [string]$Name = ""
+    )
+
+    & "C:\Windows\System32\curl.exe" -L --silent -o $OutFile $Url
+
+    if (!(Test-Path $OutFile)) {
+        Write-DateLog "Get-RawGitHubFile: download failed for $Url"
+        return
+    }
+
+    if (-not $Name) {
+        $Name = Split-Path $OutFile -Leaf
+    }
+
+    $metadataDir = "C:\Tools\.metadata\raw"
+    if (!(Test-Path $metadataDir)) {
+        New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+    }
+
+    $hash = (Get-FileHash -Algorithm SHA256 -Path $OutFile).Hash.Substring(0, 12).ToLower()
+
+    $metadata = [ordered]@{
+        Name      = $Name
+        Version   = $hash
+        Source    = "raw"
+        Url       = $Url
+        FetchedAt = (Get-Date).ToString("s")
+    }
+
+    Set-Content -Path "$metadataDir\${Name}.json" -Value ($metadata | ConvertTo-Json -Depth 2)
+    Write-DateLog "Saved raw download metadata for $Name ($hash)."
+}
