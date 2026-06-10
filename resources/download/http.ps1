@@ -150,10 +150,7 @@ $status = Get-FileFromUri -uri "https://raw.githubusercontent.com/SwiftOnSecurit
 # Get Sysinternals Suite
 $status = Get-FileFromUri -uri "https://download.sysinternals.com/files/SysinternalsSuite.zip" -FilePath ".\downloads\sysinternals.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\sysinternals") {
-        Remove-Item -Recurse -Force "${TOOLS}\sysinternals" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\sysinternals.zip" -o"${TOOLS}\sysinternals" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\sysinternals.zip" -Destination "${TOOLS}\sysinternals" -Target "${TOOLS}\sysinternals"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1229,10 +1226,7 @@ $TOOL_DEFINITIONS += @{
 # Get pestudio
 $status = Get-FileFromUri -uri "https://www.winitor.com/tools/pestudio/current/pestudio.zip" -FilePath ".\downloads\pestudio.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\pestudio") {
-        Remove-Item -Recurse -Force "${TOOLS}\pestudio" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\pestudio.zip" -o"${TOOLS}" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\pestudio.zip" -Destination "${TOOLS}" -Target "${TOOLS}\pestudio"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1277,10 +1271,7 @@ $TOOL_DEFINITIONS += @{
 # Get HxD
 $status = Get-FileFromUri -uri "https://mh-nexus.de/downloads/HxDSetup.zip" -FilePath ".\downloads\hxd.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\hxd") {
-        Remove-Item -Recurse -Force "${TOOLS}\hxd" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\hxd.zip" -o"${TOOLS}\hxd" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\hxd.zip" -Destination "${TOOLS}\hxd" -Target "${TOOLS}\hxd"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1375,10 +1366,7 @@ $TOOL_DEFINITIONS += @{
 # Get malcat - installed during start - 313 indicates use of Python 3.13
 $status = Get-FileFromUri -uri "https://malcat.fr/latest/malcat_win313_lite.zip" -FilePath ".\downloads\malcat.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\malcat") {
-        Remove-Item -Recurse -Force "${TOOLS}\malcat" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\malcat.zip" -o"${TOOLS}\malcat" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\malcat.zip" -Destination "${TOOLS}\malcat" -Target "${TOOLS}\malcat"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1463,10 +1451,7 @@ $TOOL_DEFINITIONS += @{
 # Get ssview
 $status = Get-FileFromUri -uri "https://www.mitec.cz/wp/files/SSView.zip" -FilePath ".\downloads\ssview.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\ssview") {
-        Remove-Item -Recurse -Force "${TOOLS}\ssview" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\ssview.zip" -o"${TOOLS}\ssview" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\ssview.zip" -Destination "${TOOLS}\ssview" -Target "${TOOLS}\ssview"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1512,10 +1497,7 @@ $TOOL_DEFINITIONS += @{
 # FullEventLogView
 $status = Get-FileFromUri -uri "https://www.nirsoft.net/utils/fulleventlogview-x64.zip" -FilePath ".\downloads\logview.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\FullEventLogView") {
-        Remove-Item -Recurse -Force "${TOOLS}\FullEventLogView" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\logview.zip" -o"${TOOLS}\FullEventLogView" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\logview.zip" -Destination "${TOOLS}\FullEventLogView" -Target "${TOOLS}\FullEventLogView"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1612,10 +1594,7 @@ $TOOL_DEFINITIONS += @{
 # Win API Search
 $status = Get-FileFromUri -uri "https://dennisbabkin.com/php/downloads/WinApiSearch.zip" -FilePath ".\downloads\WinApiSearch.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\WinApiSearch") {
-        Remove-Item -Recurse -Force "${TOOLS}\WinApiSearch" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\WinApiSearch.zip" -o"${TOOLS}\WinApiSearch" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\WinApiSearch.zip" -Destination "${TOOLS}\WinApiSearch" -Target "${TOOLS}\WinApiSearch"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1745,10 +1724,7 @@ $TOOL_DEFINITIONS += @{
 # Mail Viewer
 $status = Get-FileFromUri -uri "https://www.mitec.cz/wp/files/MailView.zip" -FilePath ".\downloads\mailview.zip" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\MailView") {
-        Remove-Item -Recurse -Force "${TOOLS}\MailView" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\mailview.zip" -o"${TOOLS}\MailView" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\mailview.zip" -Destination "${TOOLS}\MailView" -Target "${TOOLS}\MailView"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1794,10 +1770,7 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "Volatility Workbench 3") {
     $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench.zip" -FilePath ".\downloads\volatilityworkbench.zip" -check "Zip archive data"
     if ($status) {
-        if (Test-Path -Path "${TOOLS}\VolatilityWorkbench") {
-            Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench" | Out-Null 2>&1
-        }
-        & $SEVENZIP x -aoa "${SETUP_PATH}\volatilityworkbench.zip" -o"${TOOLS}\VolatilityWorkbench" | Out-Null
+        Install-ToolFromArchive -Archive "${SETUP_PATH}\volatilityworkbench.zip" -Destination "${TOOLS}\VolatilityWorkbench" -Target "${TOOLS}\VolatilityWorkbench"
     }
     $status = Get-FileFromUri -uri "https://downloads.volatilityfoundation.org/volatility3/symbols/linux.zip" -FilePath "${TOOLS}\VolatilityWorkbench\Symbols\linux.zip" -check "Zip archive data"
     $status = Get-FileFromUri -uri "https://downloads.volatilityfoundation.org/volatility3/symbols/mac.zip" -FilePath "${TOOLS}\VolatilityWorkbench\Symbols\mac.zip" -check "Zip archive data"
@@ -1847,10 +1820,7 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "Volatility Workbench 2.1") {
     $status = Get-FileFromUri -uri "https://www.osforensics.com/downloads/VolatilityWorkbench-v2.1.zip" -FilePath ".\downloads\volatilityworkbench2.zip" -check "Zip archive data"
     if ($status) {
-        if (Test-Path -Path "${TOOLS}\VolatilityWorkbench2") {
-            Remove-Item -Recurse -Force "${TOOLS}\VolatilityWorkbench2" | Out-Null 2>&1
-        }
-        & $SEVENZIP x -aoa "${SETUP_PATH}\volatilityworkbench2.zip" -o"${TOOLS}\VolatilityWorkbench2" | Out-Null
+        Install-ToolFromArchive -Archive "${SETUP_PATH}\volatilityworkbench2.zip" -Destination "${TOOLS}\VolatilityWorkbench2" -Target "${TOOLS}\VolatilityWorkbench2"
     }
 }
 
@@ -2466,10 +2436,7 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "capa Explorer Web") {
     $status = Get-FileFromUri -uri "https://mandiant.github.io/capa/explorer/capa-explorer-web.zip" -FilePath ".\downloads\capa-explorer-web.zip" -check "Zip archive data"
     if ($status) {
-        if (Test-Path -Path "${TOOLS}\capa-explorer-web") {
-            Remove-Item -Recurse -Force "${TOOLS}\capa-explorer-web" | Out-Null 2>&1
-        }
-        & $SEVENZIP x -aoa "${SETUP_PATH}\capa-explorer-web.zip" -o"${TOOLS}" | Out-Null
+        Install-ToolFromArchive -Archive "${SETUP_PATH}\capa-explorer-web.zip" -Destination "${TOOLS}" -Target "${TOOLS}\capa-explorer-web"
     }
 }
 
@@ -2590,10 +2557,7 @@ $TOOL_DEFINITIONS += @{
 $SQLiteVersion = Get-DownloadUrlFromPage -Url "https://sqlite.org/download.html" -RegEx '[0-9]+/sqlite-tools-win-x64-[^"]+.zip'
 $status = Get-FileFromUri -uri "https://sqlite.org/${SQLiteVersion}" -FilePath ".\downloads\sqlite.zip" -CheckURL "Yes"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\sqlite") {
-        Remove-Item -Recurse -Force "${TOOLS}\sqlite" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\sqlite.zip" -o"${TOOLS}\sqlite" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\sqlite.zip" -Destination "${TOOLS}\sqlite" -Target "${TOOLS}\sqlite"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2636,10 +2600,7 @@ $TOOL_DEFINITIONS += @{
 $digitalcorpora_url = "https://digitalcorpora.s3.amazonaws.com/downloads/bulk_extractor/bulk_extractor-2.0.0-windows.zip"
 $status = Get-FileFromUri -uri "${digitalcorpora_url}" -FilePath ".\downloads\bulk_extractor.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\bulk_extractor") {
-        Remove-Item -Recurse -Force "${TOOLS}\bulk_extractor" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\bulk_extractor.zip" -o"${TOOLS}\bulk_extractor" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\bulk_extractor.zip" -Destination "${TOOLS}\bulk_extractor" -Target "${TOOLS}\bulk_extractor"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2833,10 +2794,7 @@ $TOOL_DEFINITIONS += @{
 $nmap_url = Get-DownloadUrlFromPage -url "https://nmap.org/download.html" -RegEx 'https[^"]+setup.exe'
 $status = Get-FileFromUri -uri "${nmap_url}" -FilePath ".\downloads\nmap.exe" -CheckURL "Yes" -check "PE32"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\nmap") {
-        Remove-Item -Recurse -Force "${TOOLS}\nmap" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\nmap.exe" -o"${TOOLS}\nmap" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\nmap.exe" -Destination "${TOOLS}\nmap" -Target "${TOOLS}\nmap"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2879,10 +2837,7 @@ $TOOL_DEFINITIONS += @{
 $flatassembler_version = Get-DownloadUrlFromPage -url "https://flatassembler.net/download.php" -RegEx 'fasmw[^"]+zip'
 $status = Get-FileFromUri -uri "https://flatassembler.net/${flatassembler_version}" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\fasm") {
-        Remove-Item -Recurse -Force "${TOOLS}\fasm" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\fasm.zip" -o"${TOOLS}\fasm" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\fasm.zip" -Destination "${TOOLS}\fasm" -Target "${TOOLS}\fasm"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3008,10 +2963,7 @@ $TOOL_DEFINITIONS += @{
 $geolocus_url = Get-DownloadUrlFromPage -url "https://codeberg.org/hrbrmstr/geolocus-cli/releases" -RegEx 'https://[^"]*geolocus-cli-windows\.exe\.zip' -last
 $status = Get-FileFromUri -uri "${geolocus_url}" -FilePath ".\downloads\geolocus.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\geolocus") {
-        Remove-Item -Recurse -Force "${TOOLS}\geolocus" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\geolocus.zip" -o"${TOOLS}\geolocus" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\geolocus.zip" -Destination "${TOOLS}\geolocus" -Target "${TOOLS}\geolocus"
     Copy-Item "${TOOLS}\geolocus\geolocus-cli-windows.exe" -Destination "${TOOLS}\bin\geolocus-cli.exe" -Force
     Remove-Item -Recurse -Force "${TOOLS}\geolocus\__MACOSX" | Out-Null 2>&1
 }
@@ -3225,10 +3177,7 @@ $TOOL_DEFINITIONS += @{
 $PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/releases/archives/php-8.[.0-9]+-nts-Win32-vs17-x64.zip'
 $status = Get-FileFromUri -uri "https://downloads.php.net/~windows${PHP_URL}" -FilePath ".\downloads\php.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\php") {
-        Remove-Item -Recurse -Force "${TOOLS}\php" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\php.zip" -o"${TOOLS}\php" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\php.zip" -Destination "${TOOLS}\php" -Target "${TOOLS}\php"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3364,10 +3313,7 @@ $TOOL_DEFINITIONS += @{
 # Resource hacker
 $status = Get-FileFromUri -uri "https://www.angusj.com/resourcehacker/resource_hacker.zip" -FilePath ".\downloads\resourcehacker.zip" -CheckURL "No" -check "Zip archive data"
 if ($status) {
-    if (Test-Path -Path "${TOOLS}\ResourceHacker") {
-        Remove-Item -Recurse -Force "${TOOLS}\ResourceHacker" | Out-Null 2>&1
-    }
-    & $SEVENZIP x -aoa "${SETUP_PATH}\resourcehacker.zip" -o"${TOOLS}\ResourceHacker" | Out-Null
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\resourcehacker.zip" -Destination "${TOOLS}\ResourceHacker" -Target "${TOOLS}\ResourceHacker"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -3460,10 +3406,7 @@ $TOOL_DEFINITIONS += @{
 if (Test-ToolIncluded -ToolName "Android SDK Platform Tools") {
     $status = Get-FileFromUri -uri "https://dl.google.com/android/repository/platform-tools-latest-windows.zip" -FilePath ".\downloads\android_sdk.zip" -CheckURL "Yes" -check "Zip archive data"
     if ($status) {
-        if (Test-Path -Path "${TOOLS}\AndroidSDK") {
-            Remove-Item -Recurse -Force "${TOOLS}\AndroidSDK" | Out-Null 2>&1
-        }
-        & $SEVENZIP x -aoa "${SETUP_PATH}\android_sdk.zip" -o"${TOOLS}\AndroidSDK" | Out-Null
+        Install-ToolFromArchive -Archive "${SETUP_PATH}\android_sdk.zip" -Destination "${TOOLS}\AndroidSDK" -Target "${TOOLS}\AndroidSDK"
     }
 }
 
