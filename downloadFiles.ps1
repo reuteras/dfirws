@@ -136,12 +136,10 @@ if (Test-Path ".\dfirws-config.ps1") {
     Exit
 }
 
-# Load profile definitions
 if (Test-Path ".\local\defaults\profiles.ps1") {
     . ".\local\defaults\profiles.ps1"
 }
 
-# Load user profile config
 if (Test-Path ".\local\profile-config.ps1") {
     . ".\local\profile-config.ps1"
 }
@@ -266,7 +264,6 @@ if (! $AllowCurlAlias.IsPresent) {
 # Ensure configuration exists for rclone
 rclone.exe config touch | Out-Null
 
-# Check if sandbox is running
 if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
     Write-DateLog "Sandbox can't be running while updating."
     Exit
@@ -364,7 +361,6 @@ if ($DebugDownloads.IsPresent) {
 }
 
 if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
-    # Get GitHub password from user input
     if ($GITHUB_USERNAME -ne "YOUR GITHUB USERNAME" -and $GITHUB_TOKEN -ne "YOUR GITHUB TOKEN") {
         $GH_USER = "${GITHUB_USERNAME}"
         $GH_PASS = "${GITHUB_TOKEN}"
@@ -517,7 +513,6 @@ if (Test-Path ".\tmp\msys2") {
     Remove-Item -Recurse -Force .\tmp\msys2\ 2>&1 | Out-Null
 }
 
-# Update tool changelog
 Write-DateLog "Updating tool changelog."
 . ".\resources\download\changelog.ps1"
 Update-ToolChangelog
@@ -526,14 +521,12 @@ if (!(Test-Path ".\mount\golang")){
     New-Item -ItemType Directory -Force -Path ".\mount\golang" 2>&1 | Out-Null
 }
 
-# Verify that tools are available
 if ($Verify.IsPresent) {
     Write-DateLog "Verify that tools are available."
     .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download | Out-Null
     Write-DateLog "Verify done."
 }
 
-# Run ClamAV and/or YARA scans of installed tools in sandbox
 if ($ClamScan.IsPresent -and $YaraScan.IsPresent) {
     # Run both scans in the same sandbox: YARA starts as a background job while ClamAV installs and scans.
     Write-DateLog "Run ClamAV and YARA scans in parallel in sandbox."

@@ -4,7 +4,6 @@
 
 $TOOL_DEFINITIONS = @()
 
-# Set directories
 $currentDirectory = "${PWD}"
 $enrichmentDirectory = "${PWD}\enrichment"
 $cveSaveDirectory = "${enrichmentDirectory}\cve"
@@ -23,7 +22,6 @@ $maxmindASNUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-ASN"
 $maxmindCityUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-City"
 $maxmindCountryUnpackDirectory = "${maxmindUnpackDirectory}\GeoLite2-Country"
 
-# Create directories if they don't exist
 Foreach ($directory in @($enrichmentDirectory, $cveSaveDirectory, $geolocusSaveDirectory, $gitSaveDirectory, $IPinfoSaveDirectory, $manufSaveDirectory, $maxmindCurrentDirectory, $maxmindSaveDirectory, $maxmindUnpackDirectory, $maxmindASNUnpackDirectory, $maxmindCityUnpackDirectory, $maxmindCountryUnpackDirectory, $snortSaveDirectory, $suricataSaveDirectory, $torsaveDirectory, $yaraSaveDirectory)) {
     if (-not (Test-Path -Path "${directory}")) {
         New-Item -ItemType Directory -Path "${directory}" -Force | Out-Null
@@ -45,14 +43,11 @@ if (!(Test-Path -Path "$geolocusSaveDirectory\mmdb")) {
     New-Item -ItemType Directory -Path "$geolocusSaveDirectory\mmdb" -Force | Out-Null
 }
 
-# Get the current date
 $DATE = Get-Date -Format "yyyy-MM-dd"
-
-# Download Tor exit nodes
-$folderUrl = "https://collector.torproject.org/archive/exit-lists/"
 
 #
 # TOR exit nodes
+$folderUrl = "https://collector.torproject.org/archive/exit-lists/"
 $webClient = New-Object System.Net.WebClient
 $webClient.Headers.Add("User-Agent", "Mozilla/5.0")
 $maxRetries = 3
@@ -101,7 +96,6 @@ if (-not "${IPINFO_API_KEY}") {
 } elseif ($IPINFO_API_KEY -eq "YOUR KEY") {
     Write-DateLog "Please enter your key for the IPINFO_API_KEY variable in config.ps1 if you like to download databases from IPinfo."
 } else {
-    # Download IPinfo.io Free IP to Country database
     $folderUrl = "https://ipinfo.io/data/free/country_asn.mmdb?token=${IPINFO_API_KEY}"
     $savePath = Join-Path -Path "${IPinfoSaveDirectory}" -ChildPath "country_asn.mmdb"
     Write-DateLog "Downloading country_asn.mmdb from IPinfo.io"
@@ -111,35 +105,29 @@ if (-not "${IPINFO_API_KEY}") {
 
 #
 # Maxmind GeoLite2 databases
-
-# Check if the Maxmind license key is set
 if (-not "${MAXMIND_LICENSE_KEY}") {
     Write-DateLog "Please set the MAXMIND_LICENSE_KEY variable in config.ps1 if you want to download Maxmind databases"
 } elseif ($MAXMIND_LICENSE_KEY -eq "YOUR KEY") {
     Write-DateLog "Please enter your key for the MAXMIND_LICENSE_KEY variable in config.ps1."
 } else {
-    # Download Maxmind GeoLite2 ASN database
     $folderUrl = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz"
     $savePath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-ASN.tar.gz"
     Write-DateLog "Downloading GeoLite2-ASN.tar.gz"
     Invoke-WebRequest -Uri "${folderUrl}" -OutFile "${savePath}"
     Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-ASN-${DATE}.tar.gz" -Force
 
-    # Download Maxmind GeoLite2 City database
     $folderUrl = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz"
     $savePath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-City.tar.gz"
     Write-DateLog "Downloading GeoLite2-City.tar.gz"
     Invoke-WebRequest -Uri "${folderUrl}" -OutFile "${savePath}"
     Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-City-${DATE}.tar.gz" -Force
 
-    # Download Maxmind GeoLite2 Country database
     $folderUrl = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${MAXMIND_LICENSE_KEY}&suffix=tar.gz"
     $savePath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-Country.tar.gz"
     Write-DateLog "Downloading GeoLite2-Country.tar.gz"
     Invoke-WebRequest -Uri "${folderUrl}" -OutFile "${savePath}"
     Copy-Item -Path "${savePath}" -Destination "${maxmindSaveDirectory}\GeoLite2-Country-${DATE}.tar.gz" -Force
 
-    # Unpack latest Maxmind GeoLite2 databases
     Write-DateLog "Unpacking Maxmind GeoLite2 databases"
 
     $maxmindASNUnpackPath = Join-Path -Path "${maxmindSaveDirectory}" -ChildPath "GeoLite2-ASN.tar.gz"
@@ -161,7 +149,6 @@ if (-not "${MAXMIND_LICENSE_KEY}") {
         Copy-Item -Path "${maxmindCurrentDirectory}\*.mmdb" -Destination ".\mount\Tools\logboost\"  -Force
     }
 
-    # Remove unpack directory
     Remove-Item -Path "${maxmindUnpackDirectory}" -Recurse -Force
 }
 
@@ -226,7 +213,6 @@ $status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/la
 $status = Get-FileFromUri -uri "https://github.com/YARAHQ/yara-forge/releases/latest/download/yara-forge-rules-full.zip" -FilePath ".\enrichment\yara\yara-forge-rules-full.zip"
 $null = $status
 
-# Unzip yara signatures
 & $SEVENZIP x -aoa "${yaraSaveDirectory}\yara-forge-rules-core.zip" -o"${yaraSaveDirectory}" | Out-Null
 & $SEVENZIP x -aoa "${yaraSaveDirectory}\yara-forge-rules-extended.zip" -o"${yaraSaveDirectory}" | Out-Null
 & $SEVENZIP x -aoa "${yaraSaveDirectory}\yara-forge-rules-full.zip" -o"${yaraSaveDirectory}" | Out-Null

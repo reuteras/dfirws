@@ -299,7 +299,6 @@ $TOOL_DEFINITIONS += @{
     License = "Apache-2.0"
     LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
     Category = "Reverse Engineering"
-    # Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Reverse Engineering\${VERSION}.lnk" -DestinationPath "${TOOLS}\ghidra\${VERSION}\ghidraRun.bat"
     Shortcuts = @(
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\Ghidra.lnk"

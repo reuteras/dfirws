@@ -1,4 +1,3 @@
-# Set variables
 $ENRICHMENT = "C:\enrichment"
 $GIT_PATH = "C:\git"
 $LOCAL_PATH = "C:\local"
@@ -52,7 +51,6 @@ if (Test-Path -Path "C:\log") {
     }
 }
 
-# Create required directories
 foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
     if (-not (Test-Path -Path $dir)) {
         New-Item -ItemType Directory -Path $dir -Force | Out-Null
@@ -88,8 +86,6 @@ function Test-ToolIncludedSandbox {
     }
     return $true
 }
-
-# Declare helper functions
 
 # Adds a directory to the user's PATH environment variable.
 function Add-ToUserPath {
@@ -163,7 +159,6 @@ function Add-Shortcut {
     $Shortcut.Save()
 }
 
-# Update the wallpaper for the current users desktop
 function Update-WallPaper {
     [CmdletBinding(SupportsShouldProcess)]
     param (
@@ -175,7 +170,6 @@ function Update-WallPaper {
     & "${TOOLS}\sysinternals\Bginfo64.exe" /NOLICPROMPT /timer:0 "${HOME}\Documents\tools\config.bgi"
 }
 
-# Write a log with a timestamp
 function Write-DateLog {
     param (
         [Parameter(Mandatory=$True)] [string]$Message
@@ -386,7 +380,6 @@ function Close-SandboxProgress {
     }
 }
 
-# Function to verify a command exists and is of a certain type
 function Test-Command {
     [CmdletBinding()]
     param (
@@ -651,8 +644,6 @@ function Install-Firefox {
 function Install-ForensicTimeliner {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-forensictimeliner.txt")) {
         Write-Output "Installing Forensic Timeliner"
-        #$CLI_TOOL = "${POWERSHELL_EXE}"
-        #$CLI_TOOL_ARGS = "-NoExit"
         $TERMINAL_INSTALL_DIR = ((Get-ChildItem "$env:ProgramFiles\Windows Terminal").Name | Select-String "terminal" | Select-Object -Last 1)
         $TERMINAL_INSTALL_LOCATION = "$env:ProgramFiles\Windows Terminal\$TERMINAL_INSTALL_DIR"
         $CLI_TOOL = "${TERMINAL_INSTALL_LOCATION}\wt.exe"
@@ -866,7 +857,6 @@ function Install-Hashcat {
         Copy-Item -Recurse "${TOOLS}\hashcat" "${env:ProgramFiles}" -Force
         Add-ToUserPath "${env:ProgramFiles}\hashcat"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${env:ProgramFiles}\hashcat"
-        #Start-Process -Wait "${SETUP_PATH}\intel_driver.exe" -ArgumentList '--s --a /quiet /norestart'
         if (Test-Path "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat (runs dfirws-install -Hashcat).lnk") {
             Remove-Item "${HOME}\Desktop\dfirws\Utilities\Crypto\hashcat (runs dfirws-install -Hashcat).lnk" -Force
         }
