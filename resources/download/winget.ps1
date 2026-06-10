@@ -561,45 +561,6 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# Passmark OSFMount - available for installation via dfirws-install.ps1
-Write-SynchronizedLog "winget: Downloading OSFMount."
-$status = Get-WinGet "PassmarkSoftware.OSFMount" "OSFMount*.exe" "osfmount.exe" -check "PE32"
-
-$TOOL_DEFINITIONS += @{
-    Name = "OSFMount"
-    Category = "Files and apps\Disk"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Disk\OSFMount (runs dfirws-install -OSFMount).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -OSFMount"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "C:\downloads\osfmount.exe"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".dd", ".raw", ".E01", ".img", ".vmdk", ".iso")
-    Tags = @("disk-forensics", "filesystem")
-    Notes = "OSFMount is a tool for mounting disk images and virtual hard disks as virtual drives. It can be used for analyzing disk images, accessing files within them, and performing forensic analysis on the mounted images."
-    Tips = ""
-    Usage = ""
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
 # WireGuard.WireGuard - available for installation via dfirws-install.ps1
 if (Test-ToolIncluded -ToolName "WireGuard") {
     Write-SynchronizedLog "winget: Downloading WireGuard."
