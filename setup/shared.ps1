@@ -1,4 +1,3 @@
-# Function to create tool files
 function Normalize-ToolDefinitions {
     param(
         [Parameter(Mandatory=$True)] [array]$ToolDefinitions

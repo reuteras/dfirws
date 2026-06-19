@@ -1,9 +1,7 @@
-# Set the default encoding for Out-File to UTF-8
 $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 
 . ".\setup\shared.ps1"
 
-# Variables used by the script
 $CONFIGURATION_FILES = ".\local"
 $SETUP_PATH = ".\downloads"
 $WSDFIR_TEMP = "C:\tmp"
@@ -47,7 +45,6 @@ function ConvertTo-Icon {
     }
 }
 
-# Function to download a file from a given URI and save it to a specified file path.
 function Get-FileFromUri {
     Param (
         [Parameter(Mandatory=$True)] [string]$Uri,
@@ -56,7 +53,6 @@ function Get-FileFromUri {
         [Parameter(Mandatory=$False)] [string]$check = ""
     )
 
-    # Validate URI before attempting download
     if ([string]::IsNullOrWhiteSpace($Uri)) {
         Write-SynchronizedLog "Error: Empty URI provided for $FilePath. Skipping download."
         Write-DateLog "ERROR: Empty URI provided for $FilePath. Skipping download."
@@ -73,7 +69,6 @@ function Get-FileFromUri {
 
     $fileDownloadedOrChanged = $false
 
-    # Check if the file has already been downloaded
     if ((Test-Path -Path "$FilePath") -and $CheckURL -eq "Yes") {
         if (Compare-ToolsDownloaded -URL $Uri -AppName ([System.IO.FileInfo]$FilePath).Name) {
             Write-SynchronizedLog "File $FilePath already downloaded according to tools_downloaded.csv."
@@ -95,12 +90,10 @@ function Get-FileFromUri {
     $downloaded = $false
     $ProgressPreference = 'SilentlyContinue'
 
-    # Ensure the directory for the final file path exists
     If (! ( Test-Path ([System.IO.FileInfo]$FilePath).DirectoryName )) {
         New-Item ([System.IO.FileInfo]$FilePath).DirectoryName -force -type directory | Out-Null
     }
 
-    # Ensure the directory for the temporary file path exists
     If (! ( Test-Path ([System.IO.FileInfo]$TmpFilePath).DirectoryName )) {
         New-Item ([System.IO.FileInfo]$TmpFilePath).DirectoryName -force -type directory | Out-Null
     }
@@ -113,7 +106,6 @@ function Get-FileFromUri {
     $UriHash = $(Get-FileHash -InputStream $stringAsStream -Algorithm SHA256 | Select-Object -ExpandProperty Hash)
     $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
 
-    # Remove etag if file doesn't exist
     if (! (Test-Path "$FilePath")) {
         Remove-Item -Force "${ETAG_FILE}" -ErrorAction SilentlyContinue
     }
@@ -134,7 +126,6 @@ function Get-FileFromUri {
         }
     }
 
-    # Attempt to download the file from the specified URI
     while($true) {
         try {
             Remove-Item -Force $TmpFilePath -ErrorAction SilentlyContinue
@@ -168,7 +159,6 @@ function Get-FileFromUri {
             if (Test-Path $TmpFilePath) {
                 Write-SynchronizedLog "Downloaded $Uri to $FilePath."
                 $downloaded = $true
-                # Check if size of ETAG file is less then 10 bytes and remove it if it is
                 if (Test-Path $ETAG_FILE) {
                     if ((Get-Item $ETAG_FILE).length -lt 10) {
                         Remove-Item -Force $ETAG_FILE
@@ -202,7 +192,6 @@ function Get-FileFromUri {
     }
 
     if ($downloaded) {
-        # Check if downloaded file is the correct type with help of $GIT_CHECK and the value of $check
         if ($check -ne "" ) {
             $FILE_TYPE = & "$GIT_FILE" -b "$TmpFilePath"
             # Check if the file type is correct - Git file returns "data" for some zip files
@@ -212,7 +201,6 @@ function Get-FileFromUri {
                 return $false
             }
         }
-        # Copy the temporary file to the final file path and remove the temporary file
         try {
             $result = rclone --log-level ERROR copyto --metadata --inplace --checksum "${TmpFilePath}" "${FilePath}" | Out-String
             if ("" -eq $result) {
@@ -266,7 +254,6 @@ function Save-GitHubRepoMetadata {
         return
     }
 
-    # Extract release info if provided
     $releaseInfo = $null
     if ($null -ne $ReleaseData) {
         $releaseInfo = [ordered]@{
@@ -278,7 +265,6 @@ function Save-GitHubRepoMetadata {
         }
     }
 
-    # Build license info
     $licenseInfo = $null
     if ($null -ne $repoData.license) {
         $licenseInfo = [ordered]@{
@@ -331,13 +317,11 @@ function Save-WingetMetadata {
         return
     }
 
-    # Parse winget show output into a hashtable
     $metadata = [ordered]@{
         AppId     = $AppName
         FetchedAt = (Get-Date).ToString("s")
     }
 
-    # Parse key-value pairs from winget show output
     foreach ($line in ($showOutput -split "`n")) {
         $line = $line.Trim()
         if ($line -match "^(.+?):\s+(.+)$") {
@@ -378,7 +362,6 @@ function Get-DownloadUrl {
         [Parameter(Mandatory=$True)] [string]$match
     )
     try {
-        # Retrieve the download URLs and filter them based on the provided regex match
         if ($GH_USER -eq "" -or $GH_PASS -eq "") {
             $downloads = (curl.exe --silent -L $releases | ConvertFrom-Json)[0].assets.browser_download_url
         } else {
@@ -430,10 +413,7 @@ function Get-GitHubRelease {
     if ($version -eq "latest") {
         Write-SynchronizedLog "Getting the latest release for $repo."
 
-        # Construct the URL to get the latest release information
         $releasesURL = "https://api.github.com/repos/$repo/releases/latest"
-
-        # Get the download URL by matching the specified regex pattern
         $latest_release = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releasesURL | ConvertFrom-Json
 
         foreach ($asset in $latest_release.assets) {
@@ -487,7 +467,6 @@ function Get-GitHubRelease {
     # Cache repository and release metadata for documentation generation
     Save-GitHubRepoMetadata -Repo $repo -ReleaseData $matchedRelease
 
-    # Log the chosen URL and download the file
     Write-SynchronizedLog "Using $Url for $repo."
     if ($download -eq $false) {
         return $Url
@@ -546,7 +525,6 @@ function Get-DownloadUrlFromPage {
     return $downloadUrl
 }
 
-# Function to write a synchronized log to a specified file.
 function Write-SynchronizedLog {
     param (
         [Parameter(Mandatory=$True)] [string]$Message,
@@ -570,7 +548,6 @@ function Write-SynchronizedLog {
     }
 }
 
-# Write a log entry with a timestamp.
 function Write-DateLog {
     param (
         [Parameter(Mandatory=$True)] [string]$Message
@@ -594,12 +571,10 @@ function Compare-ToolsDownloaded {
 
     $localFile = $toolsDownloaded | Where-Object { $_.Name -eq $AppName }
 
-    # No local file found
     if (!$localFile) {
         return $false
     }
 
-    # Is it the same URL?
     if ($localFile.URL -eq $URL) {
         return $true
     } else {
@@ -623,7 +598,6 @@ function Update-ToolsDownloaded {
 
     $localFile = $toolsDownloaded | Where-Object { $_.Name -eq $Name }
 
-    # No local file found
     if (!$localFile) {
         $addNewTool = [PSCustomObject]@{
             URL = $URL
@@ -646,7 +620,6 @@ function Update-ToolsDownloaded {
     }
 }
 
-# Function to clear tmp directory
 function Clear-Tmp {
     param (
         [Parameter(Mandatory=$True)] [string]$Folder
@@ -657,7 +630,6 @@ function Clear-Tmp {
     }
 }
 
-# Function to download via winget
 function Get-Winget {
     param (
         [Parameter(Mandatory=$true)] [string]$AppName,
@@ -747,7 +719,6 @@ function Get-Winget {
     return $true
 }
 
-# Function to wait for the sandbox to finish
 function Wait-Sandbox {
     param (
         [Parameter(Mandatory=$True)] [string]$WSBPath,
@@ -776,8 +747,7 @@ function Wait-Sandbox {
     }
 }
 
-# Function to check if a tool should be downloaded based on the active profile.
-# Returns $true if the tool should be included, $false if excluded by profile.
+# Returns $true if the tool should be included, $false if excluded by the active profile.
 function Test-ToolIncluded {
     param (
         [Parameter(Mandatory=$True)] [string]$ToolName
@@ -802,7 +772,6 @@ function Test-ToolIncluded {
     return $true
 }
 
-# Function to stop the sandbox
 function Stop-Sandbox {
     [CmdletBinding(SupportsShouldProcess)]
     param (

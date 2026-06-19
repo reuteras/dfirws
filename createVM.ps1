@@ -87,12 +87,9 @@ if ($NoDownload.IsPresent) {
         }
         Write-Output "Will use link $real_link."
 
-        # Get filename part from the link
         $filename = $real_link.Split("/")[-1]
 
-        # Check if the iso file is already downloaded
         if (! (Test-Path -Path "iso\$filename")) {
-            # Download the iso file
             Set-Location tmp
             curl -O --retry 10 --retry-all-errors $real_link
             Set-Location ..
