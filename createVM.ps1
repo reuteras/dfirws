@@ -155,11 +155,6 @@ if (! ($NoInstall.IsPresent)) {
     & ".\resources\vm\install_dfirws_in_vm.ps1"
 }
 
-if ($Debloat.IsPresent) {
-    Write-Output "Running debloat.ps1 script"
-    & ".\resources\vm\debloat.ps1"
-}
-
 if (! ($NoCustomize.IsPresent)) {
     if (Test-Path -Path ".\local\customize-vm.ps1") {
         Write-Output "Running local/customize-vm.ps1 script"

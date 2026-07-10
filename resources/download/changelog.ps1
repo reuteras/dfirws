@@ -49,8 +49,9 @@ function Get-ChangelogCurrentVersions {
     $githubDir = "$downloadsMetadata\github"
     if (Test-Path $githubDir) {
         Get-ChildItem $githubDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
+            $metadataFile = $_.FullName
             try {
-                $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
+                $data = Get-Content $metadataFile -Raw | ConvertFrom-Json -ErrorAction Stop
                 if ($data.FullName -and $data.LatestRelease -and $data.LatestRelease.TagName) {
                     if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source "github" -Name $data.Name) {
                         return
@@ -62,15 +63,18 @@ function Get-ChangelogCurrentVersions {
                         Identifier = $data.FullName
                     }
                 }
-            } catch { }
+            } catch {
+                Write-DateLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
+            }
         }
     }
 
     $wingetDir = "$downloadsMetadata\winget"
     if (Test-Path $wingetDir) {
         Get-ChildItem $wingetDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
+            $metadataFile = $_.FullName
             try {
-                $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
+                $data = Get-Content $metadataFile -Raw | ConvertFrom-Json -ErrorAction Stop
                 if ($data.AppId -and $data.Version) {
                     if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source "winget" -Name $data.AppId) {
                         return
@@ -82,7 +86,9 @@ function Get-ChangelogCurrentVersions {
                         Identifier = $data.AppId
                     }
                 }
-            } catch { }
+            } catch {
+                Write-DateLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
+            }
         }
     }
 
@@ -94,8 +100,9 @@ function Get-ChangelogCurrentVersions {
         $sourceDir = "$toolsMetadata\$source"
         if (Test-Path $sourceDir) {
             Get-ChildItem $sourceDir -Filter "*.json" -ErrorAction SilentlyContinue | ForEach-Object {
+                $metadataFile = $_.FullName
                 try {
-                    $data = Get-Content $_.FullName -Raw | ConvertFrom-Json -ErrorAction Stop
+                    $data = Get-Content $metadataFile -Raw | ConvertFrom-Json -ErrorAction Stop
                     if ($data.Name -and $data.Version) {
                         if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source $source -Name $data.Name) {
                             return
@@ -113,7 +120,9 @@ function Get-ChangelogCurrentVersions {
                             Identifier = $identifier
                         }
                     }
-                } catch { }
+                } catch {
+                    Write-DateLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
+                }
             }
         }
     }
@@ -134,6 +143,7 @@ function Get-ChangelogSavedVersions {
         }
         return $versions
     } catch {
+        Write-DateLog "Changelog: WARNING - could not read ${versionsFile}, treating as first run: $($_.Exception.Message)"
         return [ordered]@{}
     }
 }
@@ -174,7 +184,9 @@ function Get-UriEtag {
     if (Test-Path $etagFile) {
         try {
             return (Get-Content $etagFile -Raw -ErrorAction Stop).Trim()
-        } catch { }
+        } catch {
+            Write-DateLog "Changelog: WARNING - could not read etag file ${etagFile}: $($_.Exception.Message)"
+        }
     }
     return $null
 }
@@ -210,7 +222,9 @@ function Get-HttpToolsCurrentSnapshot {
                 }
             }
         }
-    } catch { }
+    } catch {
+        Write-DateLog "Changelog: WARNING - could not read ${csvFile}: $($_.Exception.Message)"
+    }
     return $snapshot
 }
 
@@ -226,7 +240,9 @@ function Get-HttpToolsSavedSnapshot {
         foreach ($prop in $raw.PSObject.Properties) {
             $snapshot[$prop.Name] = $prop.Value
         }
-    } catch { }
+    } catch {
+        Write-DateLog "Changelog: WARNING - could not read ${snapshotFile}, treating as first run: $($_.Exception.Message)"
+    }
     return $snapshot
 }
 

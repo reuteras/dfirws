@@ -454,11 +454,12 @@ function Get-GitHubRelease {
     # If still no download URL is found, try getting the tarball URL
     if ( !$Url ) {
         $releases = "https://api.github.com/repos/$repo/releases/latest"
-        $Url = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json).zipball_url.ToString()
+        $Url = (curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" $releases | ConvertFrom-Json).zipball_url
 
         if ( !$Url) {
-            Write-Error "Can't find a file to download for repo $repo."
-            Exit
+            Write-SynchronizedLog "Error: Can't find a file to download for repo $repo."
+            Write-DateLog "ERROR: Can't find a file to download for repo $repo."
+            return $false
         } else {
             Write-SynchronizedLog "Using tarball URL for $repo."
         }
@@ -485,28 +486,18 @@ function Get-DownloadUrlFromPage {
     $downloadUrl = ""
     $retries = 3
 
+    $curlArgs = @("--silent", "-L")
+    if ($Url -like "*github.com*" -and $GH_USER -ne "" -and $GH_PASS -ne "") {
+        $curlArgs += @("-u", "${GH_USER}:${GH_PASS}")
+    }
+
     while ("$downloadUrl" -eq "") {
         try {
-            if ($Url -contains "github.com") {
-                if ($last) {
-                    if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-                        $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -Last 1
-                    } else {
-                        $downloadUrl = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -Last 1
-                    }
-                } else {
-                    if ($GH_USER -eq "" -or $GH_PASS -eq "") {
-                        $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
-                    } else {
-                        $downloadUrl = curl.exe --silent -L -u "${GH_USER}:${GH_PASS}" "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
-                    }
-                }
+            $found = curl.exe @curlArgs "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+            if ($last) {
+                $downloadUrl = $found | Select-Object -Last 1
             } else {
-                if ($last) {
-                    $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -Last 1
-                } else {
-                    $downloadUrl = curl.exe --silent -L "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value | Select-Object -First 1
-                }
+                $downloadUrl = $found | Select-Object -First 1
             }
         }
         catch {
@@ -615,8 +606,34 @@ function Update-ToolsDownloaded {
         $localFile.Path   = Resolve-Path -Path $Path
     }
 
-    if($PSCmdlet.ShouldProcess($file.Name)) {
+    if($PSCmdlet.ShouldProcess($Name)) {
         $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\downloads\tools_downloaded.csv" -NoTypeInformation
+    }
+}
+
+# Extracts a downloaded archive with 7-Zip and optionally renames the
+# extracted versioned directory to a stable target name. The target is removed
+# before extraction by default; -CleanAfterExtract removes it between
+# extraction and the rename instead (for archives that unpack to a versioned
+# directory next to the target).
+function Install-ToolFromArchive {
+    param (
+        [Parameter(Mandatory=$true)] [string]$Archive,
+        [Parameter(Mandatory=$true)] [string]$Destination,
+        [Parameter(Mandatory=$false)] [string]$Target = "",
+        [Parameter(Mandatory=$false)] [string]$MoveFrom = "",
+        [Parameter(Mandatory=$false)] [switch]$CleanAfterExtract
+    )
+
+    if ($Target -ne "" -and -not $CleanAfterExtract -and (Test-Path $Target)) {
+        Remove-Item $Target -Recurse -Force
+    }
+    & $SEVENZIP x -aoa $Archive -o"$Destination" | Out-Null
+    if ($Target -ne "" -and $CleanAfterExtract -and (Test-Path $Target)) {
+        Remove-Item $Target -Recurse -Force
+    }
+    if ($MoveFrom -ne "") {
+        Move-Item $MoveFrom $Target
     }
 }
 
@@ -722,18 +739,23 @@ function Get-Winget {
 function Wait-Sandbox {
     param (
         [Parameter(Mandatory=$True)] [string]$WSBPath,
-        [Parameter(Mandatory=$True)] [string]$WaitForPath
+        [Parameter(Mandatory=$True)] [string]$WaitForPath,
+        [Parameter(Mandatory=$False)] [int]$TimeoutMinutes = 240
     )
 
-    $sandboxRunning = $true
+    $deadline = (Get-Date).AddMinutes($TimeoutMinutes)
 
-    while ($sandboxRunning) {
+    while ($true) {
         if (Test-Path -Path $WaitForPath) {
             Write-SynchronizedLog "Sandbox finished."
-            $sandboxRunning = $false
-        } else {
-            Start-Sleep -Seconds 5
+            break
         }
+        if ((Get-Date) -gt $deadline) {
+            Write-SynchronizedLog "Error: Sandbox for $WSBPath did not finish within $TimeoutMinutes minutes. Stopping sandbox."
+            Write-DateLog "ERROR: Sandbox for $WSBPath did not finish within $TimeoutMinutes minutes."
+            break
+        }
+        Start-Sleep -Seconds 5
     }
 
     Stop-Sandbox

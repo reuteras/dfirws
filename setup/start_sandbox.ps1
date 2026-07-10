@@ -741,7 +741,12 @@ Get-Job | Remove-Job | Out-Null
 
 Write-DateLog "Setup done." | Write-SetupLog
 
+$dfirwsFolderDeadline = (Get-Date).AddMinutes(30)
 While (! (Test-Path "${WSDFIR_TEMP}\dfirws_folder_done.txt")) {
+    if ((Get-Date) -gt $dfirwsFolderDeadline) {
+        Write-DateLog "WARNING: Timed out waiting for dfirws_folder_done.txt. Continuing." | Write-SetupLog
+        break
+    }
     Start-Sleep -Seconds 1
 }
 
