@@ -1170,8 +1170,8 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Get exiftool
-$EXIFTOOL_VERSION = Get-DownloadUrlFromPage -url https://exiftool.org/index.html -RegEx 'exiftool-[^zip]+_64.zip'
-$status = Get-FileFromUri -uri "https://exiftool.org/$EXIFTOOL_VERSION" -FilePath ".\downloads\exiftool.zip" -check "Zip archive data"
+$EXIFTOOL_URL = Get-DownloadUrlFromPage -url https://exiftool.org/index.html -RegEx 'https://[^"]+exiftool-[^zip]+_64.zip[^"]+'
+$status = Get-FileFromUri -uri "$EXIFTOOL_URL" -FilePath ".\downloads\exiftool.zip" -check "Zip archive data"
 if ($status) {
     if (Test-Path -Path "${TOOLS}\exiftool") {
         Remove-Item -Recurse -Force "${TOOLS}\exiftool" | Out-Null 2>&1
