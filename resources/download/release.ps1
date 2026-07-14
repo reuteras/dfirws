@@ -2235,7 +2235,7 @@ $TOOL_DEFINITIONS += @{
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Utilities\floss.lnk"
             Target   = "`${CLI_TOOL}"
-            Args     = "`${TOOLS}\floss\floss.exe --help"
+            Args     = "`${CLI_TOOL_ARGS} -command `${TOOLS}\floss\floss.exe --help"
             Icon     = "`${TOOLS}\floss\floss.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
