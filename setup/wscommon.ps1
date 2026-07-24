@@ -899,7 +899,7 @@ function Install-Neo4j {
         & $SEVENZIP x -aoa "${SETUP_PATH}\neo4j.zip" -o"${env:ProgramFiles}" | Out-Null
         Move-Item ${env:ProgramFiles}\neo4j-community* ${env:ProgramFiles}\neo4j
         $env:JAVA_HOME = "$NEO_JAVA"
-        & "${env:ProgramFiles}\neo4j\bin\neo4j-admin" set-initial-password neo4j
+        & "${env:ProgramFiles}\neo4j\bin\neo4j-admin" dbms set-initial-password neo4j
         foreach ($lnkName in @("Neo4j 4 (runs dfirws-install -Neo4j).lnk", "Neo4j (runs dfirws-install -Neo4j).lnk")) {
             Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\Files and apps\Database\${lnkName}"
         }
