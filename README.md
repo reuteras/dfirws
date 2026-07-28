@@ -2,9 +2,9 @@
 
 [![GitHub Super-Linter](https://github.com/reuteras/dfirws/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
-DFIRWS is a solution to do digital forensics and incident response analysis work in a Windows Sandbox. There are many great tools available for DFIR work but it can be time consuming to set up a good environment and keep it updated with the tools you like to use. The second problem that the script can solve is use of updates of tools in an offline environment. This is the problems DFIRWS tries to solve.
+DFIRWS is a solution to do digital forensics and incident response work in a Windows Sandbox. There are many great tools available for DFIR work but it can be time consuming to set up a good environment and keep it updated.
 
-The first part of DFIRWS downloads and updates the included tools. This is handled by the **downloadFiles.ps1** script. The second part of DFIRWS is the scripts that either starts and configures a Windows Sandbox or installs the tools in a Windows VM. The primary use case is the Windows Sandbox. Third part of DFIRWS is a collection of scripts to sync the tools to an offline environment.
+The first part of DFIRWS handles downloads and updates of the included tools. This is handled by the script **downloadFiles.ps1**. The second part is the scripts that starts and configures a Windows Sandbox. Third part of DFIRWS is a collection of scripts to sync the tools to an offline environment.
 
 **Recommendation:** Exclude the folder where you have the dfirws code from your antivirus program. I don't want to have to recommend this but the reason is that AV tools classify some legitimate tools as malware. The choice is yours.
 
@@ -29,9 +29,11 @@ winget install Git.Git
 winget install Rclone.Rclone
 ```
 
-You also can't have `curl` as a PowerShell alias to `Invoke-WebRequest` since the scripts use `curl` to download files and if it's an alias it will fail since `Invoke-WebRequest` doesn't support the same syntax. The `downloadFiles.ps1` script will check if `curl` is an alias and check for the other tools as well.
+You can't have `curl` as a PowerShell alias to `Invoke-WebRequest` since the scripts uses `curl` to download files. If it's an alias it will fail since `Invoke-WebRequest` doesn't support the same syntax. The `downloadFiles.ps1` script will check if `curl` is an alias and check for the other tools as well.
 
-2. *PowerShell:* If you haven't enabled the option to run PowerShell scripts you have to start a Windows Terminal or PowerShell prompt as administrator and run
+If you have installed `git` in a non-standard location you have to specify the full path to the file `file.exe` in the configuration dfirws-config.ps1`.
+
+1. *PowerShell:* If you haven't enabled the option to run PowerShell scripts you have to start a Windows Terminal or PowerShell prompt as administrator and run
 
 ```PowerShell
 Set-ExecutionPolicy -ExecutionPolicy Bypass
@@ -39,7 +41,7 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass
 
 **Important:** This must be done for both **PowerShell** and **pwsh**.
 
-3. *Windows Sandbox:* The Windows Sandbox feature must be enabled on the host. This is true even if you only like to build and run the DFIRWS tools in a VM. The Sandbox feature is used to build and download tools when you run the **downloadFiles.ps1** script.
+1. *Windows Sandbox:* The Windows Sandbox feature must be enabled on the host. This is true even if you only like to build and run the DFIRWS tools in a VM. The Sandbox feature is used to build and download tools when you run the **downloadFiles.ps1** script.
 You can enable the Sandbox feature by using the **Add and remove Windows features** in Windows and add *Windows Sandbox*. An alternative way is to open a Windows terminal as administrator and run:
 
 ```PowerShell
@@ -48,14 +50,14 @@ Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All 
 
 For more information about Windows Sandbox look at the Microsoft page [Windows Sandbox][wsa].
 
-4. *GitHub token:* You also need a GitHub account to create a GitHub token. If you have a GitHub account you can create a token at [https://github.com/settings/tokens](https://github.com/settings/tokens). Select *Generate new token (Fine grained or classic)*. Give the token a name and change the default expiration. The token doesn't need any added rights.
+1. *GitHub token:* You also need a GitHub account to create a GitHub token. If you have a GitHub account you can create a token at [https://github.com/settings/tokens](https://github.com/settings/tokens). Select *Generate new token (Fine grained or classic)*. Give the token a name and change the default expiration. The token doesn't need any added rights.
 Remember to save the token in your password manager since you can't get the value again.
 
 The token is needed to avoid problems with rate limiting on GitHub since most of the tools are downloaded from there and you will be blocked otherwise and the downloads will fail.
 
-5. *MaxMind token (optional):* If you like to use MaxMind data you need a token from [https://www.maxmind.com/en/geolite2/signup](https://www.maxmind.com/en/geolite2/signup).
+1. *MaxMind token (optional):* If you like to use MaxMind data you need a token from [https://www.maxmind.com/en/geolite2/signup](https://www.maxmind.com/en/geolite2/signup).
 
-6. *IPinfo token (optional):* If you like to use IPinfo data you need a token from [https://ipinfo.io/signup](https://ipinfo.io/signup).
+2. *IPinfo token (optional):* If you like to use IPinfo data you need a token from [https://ipinfo.io/signup](https://ipinfo.io/signup).
 
 ## Installation and configuration
 
