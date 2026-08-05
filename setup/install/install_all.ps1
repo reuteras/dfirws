@@ -6,16 +6,31 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # PowerShell subprocess via Start-Process -Wait so that a fatal error in one
 # script (an installer that terminates its parent process, an `exit` call in
 # a generated helper, etc.) cannot prevent the next script from running.
+#
+# stdout/stderr are redirected to C:\log (mapped back to the host) instead of
+# being left in the subprocess's own console window, which closes the moment
+# the process exits. Without this, a hard crash in one of the per-tool
+# install commands (e.g. a COM/Appx deployment failure that takes down the
+# whole PowerShell host rather than raising a catchable .NET exception) is
+# invisible after the fact - only the numeric exit code survives.
+if (! (Test-Path "C:\log\install-logs")) {
+    New-Item -ItemType Directory -Force -Path "C:\log\install-logs" | Out-Null
+}
 $INSTALL_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "install_*.ps1" -ErrorAction SilentlyContinue
 foreach ($script in $INSTALL_SCRIPTS) {
     Write-SynchronizedLog "Started install script: $($script.Name)"
+    $stdoutLog = "C:\log\install-logs\$($script.BaseName).stdout.log"
+    $stderrLog = "C:\log\install-logs\$($script.BaseName).stderr.log"
     try {
         $proc = Start-Process -Wait -PassThru "${POWERSHELL_EXE}" -ArgumentList @(
             "-NoProfile",
             "-ExecutionPolicy", "Bypass",
             "-File", "`"$($script.FullName)`""
-        )
+        ) -RedirectStandardOutput $stdoutLog -RedirectStandardError $stderrLog
         Write-SynchronizedLog "Finished install script: $($script.Name) (exit code $($proc.ExitCode))"
+        if ($proc.ExitCode -ne 0) {
+            Write-SynchronizedLog "ERROR: $($script.Name) exited with code $($proc.ExitCode). See install-logs\$($script.BaseName).stderr.log for details."
+        }
     }
     catch {
         Write-SynchronizedLog "ERROR in install script $($script.Name): $_"
