@@ -127,7 +127,17 @@ function New-CreateToolFiles {
         $install_verify_command = $ToolDefinitions[$i].InstallVerifyCommand
 
         if ($null -ne $install_verify_command -and $install_verify_command -ne "") {
-            Add-Content -Path "$BASE_PATH\dfirws\install_${source}.ps1" -Value "$install_verify_command"
+            # Wrap each tool's install command in its own try/catch so an unhandled
+            # terminating error from one tool (e.g. a raw .NET exception) can't unwind
+            # the whole script and silently skip every tool listed after it in this file.
+            $installLines = @(
+                "try {"
+                "    $install_verify_command"
+                "} catch {"
+                ('    Write-Output "ERROR: {0} failed: $_"' -f $install_verify_command)
+                "}"
+            )
+            Add-Content -Path "$BASE_PATH\dfirws\install_${source}.ps1" -Value $installLines
         }
 
         # Create helper file dfirws_folder_${source}.ps1 called from dfirws-install.ps1.
