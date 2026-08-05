@@ -99,8 +99,17 @@ function Add-ToUserPath {
     $path = [Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
     if (!(${path}.Contains("${dir}"))) {
         # append dir to path
-        [Environment]::SetEnvironmentVariable("PATH", "${path}" + ";${dir}", [EnvironmentVariableTarget]::User)
-        Write-Output "Added ${dir} to PATH"
+        # SetEnvironmentVariable throws (raw .NET exception, bypasses $ErrorActionPreference)
+        # when the User PATH would exceed ~2047 characters. Left uncaught, that terminating
+        # error unwinds the whole call stack and aborts whichever install_*.ps1 script called
+        # us, silently skipping every tool listed after it in that file.
+        try {
+            [Environment]::SetEnvironmentVariable("PATH", "${path}" + ";${dir}", [EnvironmentVariableTarget]::User)
+            Write-Output "Added ${dir} to PATH"
+        }
+        catch {
+            Write-Output "WARNING: Failed to add ${dir} to PATH: $_"
+        }
         return
     }
     Write-Output "${dir} is already in PATH"
@@ -115,8 +124,13 @@ function Add-MultipleToUserPath {
     )
 
     $path = [Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
-    [Environment]::SetEnvironmentVariable("PATH", "${path}" + "${dirs}", [EnvironmentVariableTarget]::User)
-    Write-Output "Added ${dirs} to PATH"
+    try {
+        [Environment]::SetEnvironmentVariable("PATH", "${path}" + "${dirs}", [EnvironmentVariableTarget]::User)
+        Write-Output "Added ${dirs} to PATH"
+    }
+    catch {
+        Write-Output "WARNING: Failed to add ${dirs} to PATH: $_"
+    }
 }
 
 function Add-Shortcut {
