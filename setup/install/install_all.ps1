@@ -13,6 +13,9 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # install commands (e.g. a COM/Appx deployment failure that takes down the
 # whole PowerShell host rather than raising a catchable .NET exception) is
 # invisible after the fact - only the numeric exit code survives.
+# install-logs itself is cleared by downloadFiles.ps1 on the host before the
+# sandbox starts (it needs to happen there regardless of whether the sandbox
+# reaches this script at all); just make sure the directory exists here.
 if (! (Test-Path "C:\log\install-logs")) {
     New-Item -ItemType Directory -Force -Path "C:\log\install-logs" | Out-Null
 }
