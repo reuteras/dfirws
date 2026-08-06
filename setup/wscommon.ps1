@@ -627,7 +627,6 @@ function Install-ForensicTimeliner {
         $CLI_TOOL_ARGS = "-w 0 C:\Program Files\PowerShell\7\pwsh.exe -NoExit"
 
         & $SEVENZIP x -aoa "${SETUP_PATH}\ForensicTimeliner.zip" -o"${env:ProgramFiles}\ForensicTimeliner" | Out-Null
-        Move-Item ${env:ProgramFiles}\ForensicTimeliner* "${env:ProgramFiles}\ForensicTimeliner" -Force
         Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk"
         Add-ToUserPath "${env:ProgramFiles}\ForensicTimeliner"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ForensicTimeliner -h"
@@ -938,23 +937,38 @@ function Install-Node {
 function Install-Obsidian {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-obsidian.txt")) {
         Write-Output "Installing Obsidian"
-        Start-Process -Wait "${SETUP_PATH}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
-        # Obsidian uses a Squirrel/Electron installer that spawns a child process
-        # (Update.exe) to perform the actual installation. Start-Process -Wait only
-        # waits for the parent process, so the desktop shortcut may not exist yet.
-        $retries = 0
-        while (!(Test-Path "${HOME}\Desktop\Obsidian.lnk") -and $retries -lt 30) {
-            Start-Sleep -Seconds 2
-            $retries++
+        # Diagnostic tracing (temporary): install_winget.ps1 has been observed to stop
+        # producing any further output right after this function starts, with an empty
+        # stderr log, so every tool after Obsidian in that file silently fails to run.
+        # These trace lines + try/catch pinpoint exactly which step never returns/throws.
+        try {
+            Start-Process -Wait "${SETUP_PATH}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+            Write-Output "TRACE: Obsidian installer process exited"
+            # Obsidian uses a Squirrel/Electron installer that spawns a child process
+            # (Update.exe) to perform the actual installation. Start-Process -Wait only
+            # waits for the parent process, so the desktop shortcut may not exist yet.
+            $retries = 0
+            while (!(Test-Path "${HOME}\Desktop\Obsidian.lnk") -and $retries -lt 30) {
+                Start-Sleep -Seconds 2
+                $retries++
+            }
+            Write-Output "TRACE: Obsidian shortcut wait finished after $retries retries (found: $(Test-Path "${HOME}\Desktop\Obsidian.lnk"))"
+            Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-install -Obsidian).lnk"
+            Write-Output "TRACE: Removed Obsidian installer shortcut"
+            if (Test-Path "${HOME}\Desktop\Obsidian.lnk") {
+                Copy-Item "${HOME}\Desktop\Obsidian.lnk" "${HOME}\Desktop\dfirws\Editors\Obsidian.lnk" -Force
+            } else {
+                Write-Output "WARNING: Obsidian.lnk not found on Desktop after installation. Creating shortcut manually."
+                Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Obsidian.lnk" -DestinationPath "${HOME}\AppData\Local\Programs\Obsidian\Obsidian.exe" -WorkingDirectory "${HOME}\Desktop"
+            }
+            Write-Output "TRACE: Obsidian shortcut handling complete"
         }
-        Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\Editors\Obsidian (runs dfirws-install -Obsidian).lnk"
-        if (Test-Path "${HOME}\Desktop\Obsidian.lnk") {
-            Copy-Item "${HOME}\Desktop\Obsidian.lnk" "${HOME}\Desktop\dfirws\Editors\Obsidian.lnk" -Force
-        } else {
-            Write-Warning "Obsidian.lnk not found on Desktop after installation. Creating shortcut manually."
-            Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Editors\Obsidian.lnk" -DestinationPath "${HOME}\AppData\Local\Programs\Obsidian\Obsidian.exe" -WorkingDirectory "${HOME}\Desktop"
+        catch {
+            Write-Output "ERROR in Install-Obsidian: $($_.Exception.GetType().FullName): $($_.Exception.Message)"
+            Write-Output "ERROR in Install-Obsidian: $($_.ScriptStackTrace)"
         }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-obsidian.txt" | Out-Null
+        Write-Output "TRACE: Obsidian install marker written"
     } else {
         Write-Output "Obsidian is already installed"
     }
@@ -975,12 +989,25 @@ function Install-OSFMount {
 function Install-OhMyPosh {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-ohmyposh.txt")) {
         Write-Output "Installing OhMyPosh"
-        Add-AppxPackage "${SETUP_PATH}\oh-my-posh.msi"
-        Write-Output "Installing OhMyPosh fonts"
-        Start-Process -Wait "oh-my-posh.exe" -ArgumentList "font install ${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
-        Write-Output "Creating new shortcut"
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oh-my-posh.exe --help"
+        # Diagnostic tracing (temporary): Add-AppxPackage is a known source of hard,
+        # uncatchable Appx deployment failures inside Windows Sandbox. See the matching
+        # try/catch + TRACE lines in Install-Obsidian for why this is here.
+        try {
+            Add-AppxPackage "${SETUP_PATH}\oh-my-posh.msi"
+            Write-Output "TRACE: Add-AppxPackage for OhMyPosh completed"
+            Write-Output "Installing OhMyPosh fonts"
+            Start-Process -Wait "oh-my-posh.exe" -ArgumentList "font install ${SETUP_PATH}\${WSDFIR_FONT_NAME}.zip" | Out-Null
+            Write-Output "TRACE: OhMyPosh font install completed"
+            Write-Output "Creating new shortcut"
+            Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Utilities\Oh-My-Posh.lnk" -DestinationPath "${POWERSHELL_EXE}" -WorkingDirectory "${HOME}\Desktop" -Arguments "-NoExit -command oh-my-posh.exe --help"
+            Write-Output "TRACE: OhMyPosh shortcut created"
+        }
+        catch {
+            Write-Output "ERROR in Install-OhMyPosh: $($_.Exception.GetType().FullName): $($_.Exception.Message)"
+            Write-Output "ERROR in Install-OhMyPosh: $($_.ScriptStackTrace)"
+        }
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-ohmyposh.txt" | Out-Null
+        Write-Output "TRACE: OhMyPosh install marker written"
     } else {
         Write-Output "OhMyPosh is already installed"
     }
