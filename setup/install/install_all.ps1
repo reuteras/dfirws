@@ -40,6 +40,34 @@ foreach ($script in $INSTALL_SCRIPTS) {
     }
 }
 
+# install_release.ps1 and install_winget.ps1 have both been observed to exit
+# non-zero with a completely empty stderr log and stdout that just stops mid-
+# script - no exception text, nothing our own try/catch wrappers can catch.
+# That pattern (silent death, no PowerShell-visible error) is consistent with
+# something external killing the process outright, e.g. Windows Sandbox's
+# Smart App Control / Defender reputation-based protection terminating a
+# newly downloaded, unsigned/unrecognized executable. The sandbox is
+# ephemeral, so any Event Viewer evidence of that is otherwise lost the
+# moment it closes - export the logs most likely to show it here instead.
+$eventLogSources = @(
+    "System"
+    "Application"
+    "Microsoft-Windows-Windows Defender/Operational"
+    "Microsoft-Windows-CodeIntegrity/Operational"
+)
+foreach ($logName in $eventLogSources) {
+    $safeName = $logName -replace "[\\/]", "-"
+    $outFile = "C:\log\install-logs\eventlog-${safeName}.txt"
+    try {
+        Get-WinEvent -LogName $logName -MaxEvents 100 -ErrorAction Stop |
+            Select-Object TimeCreated, LevelDisplayName, Id, ProviderName, Message |
+            Format-List | Out-File -FilePath $outFile -Encoding utf8
+    }
+    catch {
+        Write-SynchronizedLog "Could not export event log '$logName': $_"
+    }
+}
+
 Write-SynchronizedLog "Install all tools in the sandbox."
 Write-OutPut "Install all tools in the sandbox."
 if (Test-Path -Path C:\venv\visualstudio.txt) {
