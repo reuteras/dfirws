@@ -13,9 +13,13 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # install commands (e.g. a COM/Appx deployment failure that takes down the
 # whole PowerShell host rather than raising a catchable .NET exception) is
 # invisible after the fact - only the numeric exit code survives.
-if (! (Test-Path "C:\log\install-logs")) {
-    New-Item -ItemType Directory -Force -Path "C:\log\install-logs" | Out-Null
+# C:\log is mapped back to the host and persists across sandbox runs, so stale
+# logs from a script that no longer exists (excluded source, skipped flag, ...)
+# would otherwise linger and could be mistaken for current output.
+if (Test-Path "C:\log\install-logs") {
+    Remove-Item -Recurse -Force "C:\log\install-logs" | Out-Null
 }
+New-Item -ItemType Directory -Force -Path "C:\log\install-logs" | Out-Null
 $INSTALL_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "install_*.ps1" -ErrorAction SilentlyContinue
 foreach ($script in $INSTALL_SCRIPTS) {
     Write-SynchronizedLog "Started install script: $($script.Name)"
