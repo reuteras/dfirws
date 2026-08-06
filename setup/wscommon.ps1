@@ -42,13 +42,27 @@ $SEVENZIP = Get-SevenZip
 $null = $SEVENZIP
 
 # Check if C:\log exists, indicating running downloadFiles.ps1
-# Fix DNS servers if needed
-if (Test-Path -Path "C:\log") {
+# Fix DNS servers if needed - guarded to run at most once per sandbox session.
+# wscommon.ps1 is dot-sourced on every dfirws-install.ps1 invocation (once per
+# tool, so many times per install_*.ps1 file). Re-running a network-stack
+# -modifying netsh command that often is wasteful at best, and if it lands
+# while another process (e.g. an app installer's own update/connectivity
+# check) is mid-network-operation, is a plausible source of hangs.
+# C:\Tools is mapped read-only in the verify sandbox, so the marker has to live
+# somewhere actually writable - use the same ${env:ProgramFiles}\dfirws
+# directory every Install-* function already uses for its own installed-*.txt
+# marker.
+$dnsFixMarker = "${env:ProgramFiles}\dfirws\dns-fixed.txt"
+if ((Test-Path -Path "C:\log") -and -not (Test-Path -Path $dnsFixMarker)) {
     $dns = C:\Windows\System32\ipconfig /all | Select-String -Pattern "8.8.8.8"
     if ($null -eq $dns) {
         C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=8.8.8.8 index=1 | Out-Null
         C:\Windows\System32\netsh interface ipv4 add dnsserver "Ethernet" address=1.1.1.1 index=2 | Out-Null
     }
+    if (! (Test-Path -Path "${env:ProgramFiles}\dfirws")) {
+        New-Item -ItemType Directory -Force -Path "${env:ProgramFiles}\dfirws" | Out-Null
+    }
+    New-Item -ItemType File -Path $dnsFixMarker -Force | Out-Null
 }
 
 foreach ($dir in @("${WSDFIR_TEMP}\msys2", "${HOME}\Documents\WindowsPowerShell", "${HOME}\Documents\PowerShell", "${env:ProgramFiles}\PowerShell\Modules\PSDecode", "${env:ProgramFiles}\dfirws", "${HOME}\Documents\jupyter")) {
