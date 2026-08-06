@@ -355,6 +355,15 @@ Get-Date > ".\log\logboost.txt"
 Get-Date > ".\log\jobs.txt"
 Get-Date > ".\log\verify.txt"
 
+# install-logs is written from inside the sandbox (mapped via .\log), but the
+# error/warning/failed scan at the bottom of this script reads everything
+# under .\log recursively on every run, verify or not. Clear it here so a
+# stale error from an earlier run - or a run where the sandbox never got as
+# far as install_all.ps1 - can't be misread as coming from this run.
+if (Test-Path ".\log\install-logs") {
+    Remove-Item -Recurse -Force ".\log\install-logs" | Out-Null
+}
+
 if ($DebugDownloads.IsPresent) {
     Write-DateLog "Debug mode enabled."
     New-Item -ItemType Directory -Force -Path "${TOOLS}\Debug" 2>&1 | Out-Null
