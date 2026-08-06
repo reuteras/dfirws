@@ -951,13 +951,25 @@ function Install-Node {
 function Install-Obsidian {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-obsidian.txt")) {
         Write-Output "Installing Obsidian"
-        # Diagnostic tracing (temporary): install_winget.ps1 has been observed to stop
-        # producing any further output right after this function starts, with an empty
-        # stderr log, so every tool after Obsidian in that file silently fails to run.
-        # These trace lines + try/catch pinpoint exactly which step never returns/throws.
+        # install_winget.ps1 has been observed to silently stop producing any
+        # further output right after this function starts - no exception, no
+        # crash/hang event anywhere in Event Viewer, stderr log empty - which
+        # blocks every tool listed after Obsidian in that file. Diagnostic
+        # tracing (added while narrowing this down, left in place) confirmed
+        # `Start-Process -Wait` on the installer itself never returns control.
+        # Obsidian's installer is Squirrel/Electron-based (see comment below),
+        # not an MSI/Inno-style installer, so it may not honor - or may be
+        # confused by - the `/V"/qn REBOOT=ReallySuppress"` MSI-passthrough
+        # flag, and Squirrel installers are known to auto-launch the app after
+        # a silent install completes. Cap the wait instead of blocking forever
+        # so a misbehaving installer here can't take down the rest of the run.
         try {
-            Start-Process -Wait "${SETUP_PATH}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
-            Write-Output "TRACE: Obsidian installer process exited"
+            $obsidianProc = Start-Process -PassThru "${SETUP_PATH}\obsidian.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+            if (-not $obsidianProc.WaitForExit(120000)) {
+                Write-Output "WARNING: Obsidian installer (PID $($obsidianProc.Id)) did not exit within 120s; continuing without waiting further."
+            } else {
+                Write-Output "TRACE: Obsidian installer process exited (code $($obsidianProc.ExitCode))"
+            }
             # Obsidian uses a Squirrel/Electron installer that spawns a child process
             # (Update.exe) to perform the actual installation. Start-Process -Wait only
             # waits for the parent process, so the desktop shortcut may not exist yet.
