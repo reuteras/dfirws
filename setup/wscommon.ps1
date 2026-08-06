@@ -627,7 +627,6 @@ function Install-ForensicTimeliner {
         $CLI_TOOL_ARGS = "-w 0 C:\Program Files\PowerShell\7\pwsh.exe -NoExit"
 
         & $SEVENZIP x -aoa "${SETUP_PATH}\ForensicTimeliner.zip" -o"${env:ProgramFiles}\ForensicTimeliner" | Out-Null
-        Move-Item ${env:ProgramFiles}\ForensicTimeliner* "${env:ProgramFiles}\ForensicTimeliner" -Force
         Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner (runs dfirws-install -ForensicTimeliner).lnk"
         Add-ToUserPath "${env:ProgramFiles}\ForensicTimeliner"
         Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\IR\Forensic Timeliner.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command ForensicTimeliner -h"
