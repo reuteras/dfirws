@@ -43,11 +43,25 @@ $eventLogSources = @(
     "Microsoft-Windows-Windows Defender/Operational"
     "Microsoft-Windows-CodeIntegrity/Operational"
 )
+# Format-List splits each event across several lines (LevelDisplayName,
+# ProviderName, Message, ...), so downloadFiles.ps1's line-by-line -ShowErrors
+# grep can't reliably tell a benign event's header lines from a real one just
+# by excluding its Message text - "LevelDisplayName : Error"/"Warning" alone
+# always matches, for any provider. Filter known Windows Sandbox/OS noise out
+# here instead, using the actual event properties, before it's ever written
+# to disk - keeps the exported logs themselves clean and leaves genuine
+# errors (from dfirws-installed tools or otherwise) fully visible.
 foreach ($logName in $eventLogSources) {
     $safeName = $logName -replace "[\\/]", "-"
     $outFile = "C:\log\install-logs\eventlog-${safeName}.txt"
     try {
         Get-WinEvent -LogName $logName -MaxEvents 100 -ErrorAction Stop |
+            Where-Object {
+                -not ($_.ProviderName -eq "Service Control Manager" -and $_.Message -match "luafv") -and
+                -not ($_.ProviderName -eq "Microsoft-Windows-DistributedCOM" -and $_.Message -match "Local Activation permission") -and
+                $_.ProviderName -ne "Windows Error Reporting" -and
+                -not ($_.ProviderName -eq "Application Error" -and $_.Message -match "msedge\.exe|MicrosoftEdgeUpdate")
+            } |
             Select-Object TimeCreated, LevelDisplayName, Id, ProviderName, Message |
             Format-List | Out-File -FilePath $outFile -Encoding utf8
     }
