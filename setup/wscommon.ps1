@@ -611,6 +611,20 @@ function Install-Fibratus {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-fibratus.txt")) {
         Write-Output "Installing Fibratus"
         Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\fibratus.msi /qn /norestart"
+        # The MSI registers Fibratus as an auto-start service, so its rule engine
+        # (which supports kill actions on matched detections, not just logging)
+        # becomes active immediately - including for the rest of this automated
+        # setup, which triggers several of its default high-severity heuristics
+        # as false positives (script execution via shortcut, netsh helper DLL
+        # loading, .NET assemblies loaded by pwsh.exe). That has been observed
+        # to silently kill installer process trees later in the run (e.g.
+        # Obsidian's) with no PowerShell-visible error and no crash/hang event.
+        # Fibratus is a tool for the end user to run later, not something that
+        # should be actively enforcing during dfirws's own setup, so stop it and
+        # set it back to manual start; the user can start it themselves via the
+        # Fibratus shortcut/docs once the sandbox is ready.
+        Stop-Service -Name "Fibratus" -Force -ErrorAction SilentlyContinue
+        Set-Service -Name "Fibratus" -StartupType Manual -ErrorAction SilentlyContinue
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-fibratus.txt" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\Fibratus\bin"
         Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\OS\Windows\fibratus (runs dfirws-install -Fibratus).lnk"
