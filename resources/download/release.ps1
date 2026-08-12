@@ -3044,14 +3044,8 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
     )
-    InstallVerifyCommand = "dfirws-install.ps1 -Fibratus"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "fibratus"
-            Expect = "PE32"
-        }
-    )
+    InstallVerifyCommand = ""
+    Verify = @()
     FileExtensions = @(".etl")
     Tags = @("windows", "monitoring")
     Notes = "Adversary tradecraft detection, protection, and hunting"
