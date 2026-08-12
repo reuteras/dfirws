@@ -581,7 +581,8 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "unmaintained" -and
     $_.Line -notmatch "unsound" -and
     $_.Line -notmatch "WARNING: Defender:" -and
-    $_.Line -notmatch "WARNING: Files"
+    $_.Line -notmatch "WARNING: Files" -and
+    $_.Line -notmatch "Local Activation permission for the COM Server"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
@@ -620,7 +621,10 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "error\[notice\]" -and
     $_.Line -notmatch "SIGNATURE_BASE_" -and
     $_.Line -notmatch "Total errors:" -and
-    $_.Line -notmatch "error scanning C:"
+    $_.Line -notmatch "error scanning C:" -and
+    $_.Line -notmatch "Installation success or error status: 0" -and
+    $_.Line -notmatch "The luafv service failed to start" -and
+    $_.Line -notmatch "EdgeInstallerError"
 }
 
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
@@ -630,7 +634,8 @@ $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Whe
     $_.Line -notmatch "origin/master Updating" -and
     $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
     $_.Line -notmatch "failed-to-read-json.js" -and
-    $_.Line -notmatch "LUMEN/src/sigma-master"
+    $_.Line -notmatch "LUMEN/src/sigma-master" -and
+    $_.Line -notmatch "The luafv service failed to start"
 }
 
 # Check for security audit findings (npm audit, govulncheck, pip-audit, cargo audit)
