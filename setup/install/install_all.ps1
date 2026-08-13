@@ -6,9 +6,6 @@ $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
 # PowerShell subprocess via Start-Process -Wait so that a fatal error in one
 # script (an installer that terminates its parent process, an `exit` call in
 # a generated helper, etc.) cannot prevent the next script from running.
-if (! (Test-Path "C:\log\install-logs")) {
-    New-Item -ItemType Directory -Force -Path "C:\log\install-logs" | Out-Null
-}
 $INSTALL_SCRIPTS = Get-ChildItem -Path "${SETUP_PATH}\dfirws" -Filter "install_*.ps1" -ErrorAction SilentlyContinue
 foreach ($script in $INSTALL_SCRIPTS) {
     Write-SynchronizedLog "Started install script: $($script.Name)"
@@ -25,48 +22,6 @@ foreach ($script in $INSTALL_SCRIPTS) {
     }
     catch {
         Write-SynchronizedLog "ERROR in install script $($script.Name): $_"
-    }
-}
-
-# install_release.ps1 and install_winget.ps1 have both been observed to exit
-# non-zero with a completely empty stderr log and stdout that just stops mid-
-# script - no exception text, nothing our own try/catch wrappers can catch.
-# That pattern (silent death, no PowerShell-visible error) is consistent with
-# something external killing the process outright, e.g. Windows Sandbox's
-# Smart App Control / Defender reputation-based protection terminating a
-# newly downloaded, unsigned/unrecognized executable. The sandbox is
-# ephemeral, so any Event Viewer evidence of that is otherwise lost the
-# moment it closes - export the logs most likely to show it here instead.
-$eventLogSources = @(
-    "System"
-    "Application"
-    "Microsoft-Windows-Windows Defender/Operational"
-    "Microsoft-Windows-CodeIntegrity/Operational"
-)
-# Format-List splits each event across several lines (LevelDisplayName,
-# ProviderName, Message, ...), so downloadFiles.ps1's line-by-line -ShowErrors
-# grep can't reliably tell a benign event's header lines from a real one just
-# by excluding its Message text - "LevelDisplayName : Error"/"Warning" alone
-# always matches, for any provider. Filter known Windows Sandbox/OS noise out
-# here instead, using the actual event properties, before it's ever written
-# to disk - keeps the exported logs themselves clean and leaves genuine
-# errors (from dfirws-installed tools or otherwise) fully visible.
-foreach ($logName in $eventLogSources) {
-    $safeName = $logName -replace "[\\/]", "-"
-    $outFile = "C:\log\install-logs\eventlog-${safeName}.txt"
-    try {
-        Get-WinEvent -LogName $logName -MaxEvents 100 -ErrorAction Stop |
-            Where-Object {
-                -not ($_.ProviderName -eq "Service Control Manager" -and $_.Message -match "luafv") -and
-                -not ($_.ProviderName -eq "Microsoft-Windows-DistributedCOM" -and $_.Message -match "Local Activation permission") -and
-                $_.ProviderName -ne "Windows Error Reporting" -and
-                -not ($_.ProviderName -eq "Application Error" -and $_.Message -match "msedge\.exe|MicrosoftEdgeUpdate")
-            } |
-            Select-Object TimeCreated, LevelDisplayName, Id, ProviderName, Message |
-            Format-List | Out-File -FilePath $outFile -Encoding utf8
-    }
-    catch {
-        Write-SynchronizedLog "Could not export event log '$logName': $_"
     }
 }
 

@@ -355,11 +355,10 @@ Get-Date > ".\log\logboost.txt"
 Get-Date > ".\log\jobs.txt"
 Get-Date > ".\log\verify.txt"
 
-# install-logs is written from inside the sandbox (mapped via .\log), but the
-# error/warning/failed scan at the bottom of this script reads everything
-# under .\log recursively on every run, verify or not. Clear it here so a
-# stale error from an earlier run - or a run where the sandbox never got as
-# far as install_all.ps1 - can't be misread as coming from this run.
+# install-logs no longer gets written to (it held per-script stdout/stderr
+# and event log exports added while diagnosing a since-fixed -verify issue).
+# Remove any leftover directory from an older run so its stale content can't
+# keep being misread as coming from this run.
 if (Test-Path ".\log\install-logs") {
     Remove-Item -Recurse -Force ".\log\install-logs" | Out-Null
 }
@@ -581,8 +580,7 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "unmaintained" -and
     $_.Line -notmatch "unsound" -and
     $_.Line -notmatch "WARNING: Defender:" -and
-    $_.Line -notmatch "WARNING: Files" -and
-    $_.Line -notmatch "Local Activation permission for the COM Server"
+    $_.Line -notmatch "WARNING: Files"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
@@ -621,10 +619,7 @@ $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Wher
     $_.Line -notmatch "error\[notice\]" -and
     $_.Line -notmatch "SIGNATURE_BASE_" -and
     $_.Line -notmatch "Total errors:" -and
-    $_.Line -notmatch "error scanning C:" -and
-    $_.Line -notmatch "Installation success or error status: 0" -and
-    $_.Line -notmatch "The luafv service failed to start" -and
-    $_.Line -notmatch "EdgeInstallerError"
+    $_.Line -notmatch "error scanning C:"
 }
 
 $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
@@ -634,8 +629,7 @@ $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Whe
     $_.Line -notmatch "origin/master Updating" -and
     $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
     $_.Line -notmatch "failed-to-read-json.js" -and
-    $_.Line -notmatch "LUMEN/src/sigma-master" -and
-    $_.Line -notmatch "The luafv service failed to start"
+    $_.Line -notmatch "LUMEN/src/sigma-master"
 }
 
 # Check for security audit findings (npm audit, govulncheck, pip-audit, cargo audit)
