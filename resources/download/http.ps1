@@ -2174,8 +2174,8 @@ $TOOL_DEFINITIONS += @{
 
 # Tor browser
 if (Test-ToolIncluded -ToolName "Tor Browser") {
-    $TorBrowserUrl = Get-DownloadUrlFromPage -Url "https://www.torproject.org/download/" -RegEx '/dist/[^"]+exe'
-    $status = Get-FileFromUri -uri "https://www.torproject.org$TorBrowserUrl" -FilePath ".\downloads\torbrowser.exe" -check "PE32"
+    $TorBrowserUrl = Get-DownloadUrlFromPage -Url "https://download.torproject.org/tor-browser-for-desktop/" -RegEx 'https://dist\.[^"]+exe'
+    $status = Get-FileFromUri -uri "$TorBrowserUrl" -FilePath ".\downloads\torbrowser.exe" -check "PE32"
 }
 
 $TOOL_DEFINITIONS += @{
