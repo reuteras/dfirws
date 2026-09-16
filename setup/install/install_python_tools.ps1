@@ -13,6 +13,46 @@ Write-Output "Start installation of Python in Sandbox."
 $TOOL_DEFINITIONS = @()
 $PYTHON_DEFAULT = "3.11"
 
+# Python interpreters available for uv tool installs, keyed by version. uv tool
+# venvs reference the interpreter by absolute path, so every version listed here
+# must also be installed by start_sandbox.ps1 in the final (offline) sandbox.
+# To move a tool to a newer Python: pass -PythonVersion to Install-UvTool and set
+# PythonVersion in its TOOL_DEFINITIONS entry to the same value.
+$PYTHON_INTERPRETERS = @{
+    "3.11" = "C:\Program Files\Python311\python.exe"
+    "3.13" = "C:\Program Files\Python313\python.exe"
+}
+
+# Installs a package with "uv tool install" on the requested Python version,
+# logs the result and records changelog metadata.
+#   -Package  requirement spec passed to uv (name, name[extra]@ver, git+https URL)
+#   -Name     package name for metadata when -Package is not a plain name
+#   -With     extra requirements (uv --with), comma separated
+function Install-UvTool {
+    param (
+        [Parameter(Mandatory=$True)] [string]$Package,
+        [Parameter(Mandatory=$False)] [string]$PythonVersion = $PYTHON_DEFAULT,
+        [Parameter(Mandatory=$False)] [string]$With = "",
+        [Parameter(Mandatory=$False)] [string]$Name = ""
+    )
+
+    $label = if ($Name) { $Name } else { $Package }
+    $python = $PYTHON_INTERPRETERS[$PythonVersion]
+    if (-not $python -or -not (Test-Path $python)) {
+        Write-DateLog "ERROR: Python $PythonVersion is not installed, skipping $label." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        return
+    }
+
+    $uvArgs = @("tool", "install", "--python", $python)
+    if ($With) {
+        $uvArgs += @("--with", $With)
+    }
+    $uvArgs += $Package
+    uv @uvArgs 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Write-DateLog "Installed $label via uv tool install (Python $PythonVersion)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Save-UvToolMetadata -Package $label 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+}
+
 $GHIDRA_INSTALL_DIR = ""
 if (Test-Path "${TOOLS}\ghidra\") {
     $GHIDRA_INSTALL_DIR = (Get-ChildItem "${TOOLS}\ghidra\").FullName | findstr.exe PUBLIC | Select-Object -Last 1
@@ -81,29 +121,18 @@ Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 # Install Python packages
 #
 Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
-uv tool install --python "C:\Program Files\Python311\python.exe" "git+https://github.com/msuhanov/dfir_ntfs.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Write-DateLog "Installed dfir_ntfs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Save-UvToolMetadata -Package "dfir_ntfs" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --python "C:\Program Files\Python311\python.exe" --with "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" "regipy[rust]>=4.0.0" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Write-DateLog "Installed regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Save-UvToolMetadata -Package "regipy" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --python "C:\Program Files\Python311\python.exe" --with "pyreadline3, stpyv8" "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Write-DateLog "Installed peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Save-UvToolMetadata -Package "peepdf-3" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --python "C:\Program Files\Python311\python.exe" "zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Write-DateLog "Installed zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Save-UvToolMetadata -Package "zensical" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-uv tool install --python "C:\Program Files\Python311\python.exe" "git+https://github.com/Hexastrike/PyrsistenceSniper.git" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Write-DateLog "Installed PyrsistenceSniper" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-Save-UvToolMetadata -Package "PyrsistenceSniper" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+Install-UvTool -Package "git+https://github.com/msuhanov/dfir_ntfs.git" -Name "dfir_ntfs"
+Install-UvTool -Package "regipy[rust]>=4.0.0" -With "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" -Name "regipy"
+Install-UvTool -Package "peepdf-3" -With "pyreadline3, stpyv8"
+Install-UvTool -Package "zensical"
+Install-UvTool -Package "git+https://github.com/Hexastrike/PyrsistenceSniper.git" -Name "PyrsistenceSniper"
 
 if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
-    uv tool install --python "C:\Program Files\Python311\python.exe" "binary-refinery[extended]@0.9.26" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    Write-DateLog "Installed binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    Save-UvToolMetadata -Package "binary-refinery" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Install-UvTool -Package "binary-refinery[extended]@0.9.26" -Name "binary-refinery"
 }
 
 foreach ($package in `
+    "apkid", `
     "autoit-ripper", `
     "cart", `
     "chepy", `
@@ -140,6 +169,7 @@ foreach ($package in `
     "protodeep", `
     "ptpython", `
     "pwncat", `
+    "pyinstxtractor-ng", `
     "pynvim", `
     "pyOneNote", `
     "pypng", `
@@ -155,9 +185,7 @@ foreach ($package in `
     "xlrd", `
     "XLMMacroDeobfuscator", `
     "XlsxWriter" ) {
-        uv tool install --python "C:\Program Files\Python311\python.exe" $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-        Write-DateLog "Installed $package via uv tool install." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-        Save-UvToolMetadata -Package $package 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        Install-UvTool -Package $package
 }
 
 # speakeasy-emulator requires setuptools (pkg_resources); use python -m venv + pip to ensure it is available
@@ -175,8 +203,12 @@ Write-DateLog "Installed speakeasy-emulator in dedicated venv." 2>&1 | ForEach-O
 
 # Profile-conditional Python packages
 if (Test-ToolIncludedSandbox -ToolName "jpterm") {
-    uv tool install --python "C:\Program Files\Python311\python.exe" jpterm 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    Save-UvToolMetadata -Package "jpterm" 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    Install-UvTool -Package "jpterm"
+}
+
+# Tools that need a newer Python than $PYTHON_DEFAULT. filterforge requires >= 3.12.
+if ((Test-ToolIncludedSandbox -ToolName "python3.13") -and (Test-ToolIncludedSandbox -ToolName "filterforge")) {
+    Install-UvTool -Package "git+https://github.com/cloudflare/filterforge.git" -Name "filterforge" -PythonVersion "3.13"
 }
 
 Write-DateLog "Install extra scripts in Tools\bin." >> "C:\log\python.txt"
@@ -472,7 +504,7 @@ $TOOL_DEFINITIONS += @{
     Tags = @("log-analysis", "sigma", "detection", "incident-response")
     Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
     Tips = "Use zircolite.ps1 to run the tool, as it ensures the correct Python environment is used."
-    Usage = ""
+    Usage = "zircolite.ps1 --evtx <evtx folder> --ruleset <rules.json>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -481,6 +513,62 @@ $TOOL_DEFINITIONS += @{
     License = ""
     LicenseUrl = ""
     PythonVersion = ""
+}
+
+#
+# venv eventhawk - EVTX analysis with ATT&CK mapping, IOC extraction and a Qt GUI.
+# Cloned by git.ps1; the repository has no package, so it runs from the checkout.
+#
+if ((Test-ToolIncludedSandbox -ToolName "EventHawk") -and (Test-Path "C:\git\EventHawk\requirements.txt")) {
+    Write-DateLog "Install packages in venv eventhawk in sandbox." >> "C:\log\python.txt"
+    uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\eventhawk" >> "C:\log\python.txt"
+    C:\venv\eventhawk\Scripts\Activate.ps1 >> "C:\log\python.txt"
+    Copy-Item -Recurse "C:\git\EventHawk" "C:\venv\eventhawk" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Set-Location "C:\venv\eventhawk\EventHawk"
+    uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    Save-VenvPackageMetadata -Venv "eventhawk" -Python "C:\venv\eventhawk\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    deactivate
+    Set-Content "C:\venv\eventhawk\Scripts\python.exe C:\venv\eventhawk\EventHawk\evtx_tool.py `$args" -Encoding Ascii -Path "C:\venv\bin\eventhawk.ps1"
+    Write-DateLog "Python venv eventhawk done." >> "C:\log\python.txt"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "EventHawk"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\EventHawk (Windows EVTX analysis - ATT&CK mapping, IOC extraction, profiles, diff and Qt GUI).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command eventhawk.ps1 --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\eventhawk\Scripts\python.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".evtx")
+    Tags = @("event-log", "log-analysis", "threat-hunting", "mitre-attack", "ioc")
+    Notes = "EventHawk parses Windows EVTX logs at speed, maps events to MITRE ATT&CK techniques, extracts IOCs and exports to JSON, CSV, XML, HTML, PDF, STIX 2.1, OpenIOC and YARA. Analysis profiles focus on themes such as logon activity, and the Sentinel module builds a baseline from known-good logs and flags anomalies with Sigma rules. Includes a Qt GUI."
+    Tips = "Run it through eventhawk.ps1 so the dedicated virtual environment is used. Start with 'eventhawk.ps1 profiles' to list the built-in analysis profiles, then 'parse' a folder of EVTX files with --profile and --output. Use --juggernaut for very large collections (DuckDB backed). Hayabusa integration is optional and picks up the hayabusa binary already in dfirws."
+    Usage = "eventhawk.ps1 parse <evtx folder> --profile <profile> --output results.json"
+    SampleCommands = @(
+        "eventhawk.ps1 profiles",
+        "eventhawk.ps1 parse C:\Users\WDAGUtilityAccount\Desktop\readwrite\evtx --profile `"Logon/Logoff Activity`" --output results.json",
+        "eventhawk.ps1 gui"
+    )
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = $PYTHON_DEFAULT
+    Homepage = "https://github.com/Mihir-Choudhary/EventHawk"
+    Vendor = "Mihir-Choudhary"
+    License = "Apache License 2.0"
+    LicenseUrl = "https://github.com/Mihir-Choudhary/EventHawk/blob/main/LICENSE"
 }
 
 #
@@ -556,7 +644,7 @@ $TOOL_DEFINITIONS += @{
     Tags = @("malware-analysis", "emulation", "shellcode", "reverse-engineering", "windows")
     Notes = "Windows malware emulation framework that executes binaries, drivers, and shellcode in a modeled Windows runtime without a full VM. Produces structured JSON reports."
     Tips = "Docs are available in C:\git\speakeasy\docs, and the source code is in C:\git\speakeasy."
-    Usage = ""
+    Usage = "speakeasy -t sample.exe -o report.json"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -590,8 +678,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("malware-analysis", "forensics", "ioc", "data-extraction", "enrichment")
     Notes = "Point it at a KAPE dump, a Velociraptor collection, or a mounted disk image and get offline Windows persistence detection in seconds. No live system access, no admin privileges, no PowerShell. Runs on Windows, Linux, and macOS because investigators don't always get to pick their workstation."
-    Tips = ""
-    Usage = ""
+    Tips = "Point it at a KAPE or Velociraptor collection or a mounted image and review the persistence techniques it reports (run keys, services, scheduled tasks, WMI subscriptions and more). Output can be written as CSV or JSON for the timeline."
+    Usage = "pyrsistencesniper -h"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -619,8 +707,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".encrypted", ".locked", ".enc")
     Tags = @("ransomware", "encryption", "decryption", "forensics", "data-recovery")
     Notes = "White-Phoenix is a tool that recovers content from files encrypted by Ransomware using intermittent encryption. It is designed to help incident responders and forensic analysts to retrieve data from encrypted files when the decryption key is not available."
-    Tips = ""
-    Usage = ""
+    Tips = "Works on files hit by intermittent encryption (BlackCat, Play, Qilin and similar). Supports PDF, Office and zip based formats; recovery is partial so triage the most valuable files first. Excluded from the Basic profile."
+    Usage = "venv.ps1 -whitephoenix ; White-Phoenix.py -f <encrypted file> -o <output dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -654,8 +742,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".msi")
     Tags = @("ioc", "data-extraction", "enrichment", "parsing", "forensics")
     Notes = "MSI Dump - a tool that analyzes malicious MSI installation packages, extracts files, streams, binary data and incorporates YARA scanner."
-    Tips = ""
-    Usage = ""
+    Tips = "Lists tables, custom actions and embedded binaries of an MSI and flags suspicious ones; -y runs YARA on the extracted streams. lessmsi is the GUI alternative for benign packages."
+    Usage = "msidump.py <file.msi> -e <extract dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -702,8 +790,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".mft", ".dd", ".raw", ".img")
     Tags = @("ntfs", "filesystem", "forensics", "disk-forensics")
     Notes = "An NTFS/FAT parser for digital forensics & incident response."
-    Tips = ""
-    Usage = ""
+    Tips = "Parses NTFS (MFT, USN journal, LogFile) and FAT structures including deleted entries and can decrypt BitLocker volumes with a key. fat_parser.py handles FAT12/16/32 images."
+    Usage = "ntfs_parser.py <image or MFT file> --mft-csv out.csv"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -737,8 +825,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".bin")
     Tags = @("malware-analysis", "deobfuscation", "data-extraction", "scripting")
     Notes = "The Binary Refinery is a collection of Python scripts that implement transformations of binary data such as compression and encryption. We will often refer to it simply by refinery, which is also the name of the corresponding package."
-    Tips = ""
-    Usage = ""
+    Tips = "A pipeline of small units (binref -h lists them): carve, xor, aes, zl, pemeta, vstack, xtzip and hundreds more. Every unit has --help; chain them with pipes like CyberChef on the command line. Excluded from the Basic profile."
+    Usage = "emit sample.bin | xor 0x41 | dump out.bin"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -779,8 +867,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".reg", ".dat")
     Tags = @("registry", "windows", "forensics")
     Notes = "Regipy is a python library for parsing offline registry hives."
-    Tips = ""
-    Usage = ""
+    Tips = "Parses offline registry hives. regipy-plugins-run executes all plugins (run keys, services, user assist, shellbags and more), regipy-dump exports a hive, regipy-diff compares two hives, and --transaction-logs applies dirty LOG files first."
+    Usage = "regipy-plugins-run <hive> -o out.json"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -814,8 +902,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pdf")
     Tags = @("pdf", "malware-analysis", "javascript")
     Notes = "A Python 3 tool to explore, analyse, and disassemble PDF files"
-    Tips = ""
-    Usage = ""
+    Tips = "Interactive PDF analysis of objects, streams, JavaScript and suspicious elements. Use -f to force parsing of broken files and -x for XML output; pdfalyzer and pdf-parser.py are the alternatives."
+    Usage = "peepdf -i <file.pdf>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -835,8 +923,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".md", ".toml")
     Tags = @("documentation", "markdown")
     Notes = "Project documentation with Markdown."
-    Tips = ""
-    Usage = ""
+    Tips = "Static site generator used for the dfirws documentation. Run it in a project folder containing zensical.toml."
+    Usage = "zensical build"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -845,6 +933,45 @@ $TOOL_DEFINITIONS += @{
     Vendor = ""
     License = ""
     LicenseUrl = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "apkid"
+    Category = "OS\Android"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Android\apkid (Android Application Identifier for packers, protectors, obfuscators and oddities).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command apkid -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\apkid.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".apk", ".dex")
+    Tags = @("android", "packer-detection", "malware-analysis")
+    Notes = "APKiD identifies the compiler, packer, protector and obfuscator used to build an Android APK or DEX file - PEiD for Android."
+    Tips = "Run apkid before decompiling with jadx or apktool to know which packer or obfuscator you are dealing with. Use -r to scan recursively and -j for JSON output."
+    Usage = "apkid sample.apk"
+    SampleCommands = @(
+        "apkid sample.apk",
+        "apkid -j sample.apk",
+        "apkid -r C:\Users\WDAGUtilityAccount\Desktop\readwrite\apks"
+    )
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = $PYTHON_DEFAULT
+    Homepage = "https://github.com/rednaga/APKiD"
+    Vendor = "RedNaga"
+    License = "GNU General Public License v3.0"
+    LicenseUrl = "https://github.com/rednaga/APKiD/blob/master/LICENSE.COMMERCIAL"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -870,8 +997,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe")
     Tags = @("malware-analysis", "scripting", "deobfuscation")
     Notes = "Extract AutoIt scripts embedded in PE binaries."
-    Tips = ""
-    Usage = ""
+    Tips = "Extracts the AutoIt script and bundled resources from compiled AutoIt executables. The script is written as a .au3 text file which can then be read or deobfuscated."
+    Usage = "autoit-ripper <compiled.exe> <output dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -897,8 +1024,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".cart")
     Tags = @("malware-analysis")
     Notes = "Compressed and RC4 Transport (CaRT) Neutering format. This is a file format that is used to neuter malware files for distribution in the malware analyst community."
-    Tips = ""
-    Usage = ""
+    Tips = "Neuters malware for safe transport by RC4 encrypting and compressing it with metadata. Decode with -d before analysis; -s shows the metadata header."
+    Usage = "cart <file> (creates file.cart) or cart -d file.cart"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -932,8 +1059,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".bin", ".txt", ".hex")
     Tags = @("data-processing", "encoding", "decoding", "deobfuscation", "hashing")
     Notes = "Chepy is a python library with a handy cli that is aimed to mirror some of the capabilities of CyberChef. A reasonable amount of effort was put behind Chepy to make it compatible to the various functionalities that CyberChef offers, all in a pure Pythonic manner."
-    Tips = ""
-    Usage = ""
+    Tips = "CyberChef operations from the command line and Python. Start 'chepy' without arguments for the interactive shell with tab completion; useful for scripting decode chains on many files."
+    Usage = "chepy 'aGVsbG8=' base64_decode o"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -972,8 +1099,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".csv")
     Tags = @("csv", "data-processing", "cli")
     Notes = "A suite of command-line tools for working with CSV, the king of tabular file formats."
-    Tips = ""
-    Usage = ""
+    Tips = "csvcut, csvgrep, csvsort, csvstat, csvsql (SQL on CSV), in2csv (Excel and JSON to CSV) and csvjson. Use -e for encoding problems and -t for tab separated input."
+    Usage = "csvcut -c 1,3 file.csv | csvlook"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -999,8 +1126,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("data-processing")
     Notes = "A flexible free and unlimited python tool to translate between different languages in a simple way using multiple translators"
-    Tips = ""
-    Usage = ""
+    Tips = "Translates text via online services, so it needs the network sandbox. Useful for ransom notes and foreign language artifacts."
+    Usage = "deep-translator -trans google -src auto -tgt en -txt '<text>'"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1026,8 +1153,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".docx")
     Tags = @("office", "data-extraction")
     Notes = "A pure python-based utility to extract text and images from docx files."
-    Tips = ""
-    Usage = ""
+    Tips = "Dumps the text of a DOCX without opening it in Word. Extract embedded images with -i <dir>."
+    Usage = "docx2txt.py <file.docx> [output.txt]"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1061,8 +1188,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".msg")
     Tags = @("email", "data-extraction")
     Notes = "Extracts emails and attachments saved in Microsoft Outlook's .msg files"
-    Tips = ""
-    Usage = ""
+    Tips = "Extracts body, headers and attachments from Outlook MSG files into a folder. Use --json for machine readable output, --raw to keep original encodings and --out-name to set the folder."
+    Usage = "extract_msg <file.msg>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1071,6 +1198,43 @@ $TOOL_DEFINITIONS += @{
     Vendor = ""
     License = ""
     LicenseUrl = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "filterforge"
+    Category = "Network"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Network\filterforge (ff - solve BPF filters and craft matching packets).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command ff --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\ff.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".pcap", ".pcapng")
+    Tags = @("network-analysis", "network", "pcap")
+    Notes = "filterforge from Cloudflare solves BPF filters with the z3 SMT solver and crafts packets that match (or do not match) a given filter expression."
+    Tips = "The command is ff. Useful for validating capture and firewall filters and generating test packets for them. Requires Python 3.13 and is skipped when python3.13 is excluded by the profile."
+    Usage = "ff --help"
+    SampleCommands = @(
+        "ff --help"
+    )
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = "3.13"
+    Homepage = "https://github.com/cloudflare/filterforge"
+    Vendor = "Cloudflare"
+    License = "Apache License 2.0"
+    LicenseUrl = "https://github.com/cloudflare/filterforge/blob/main/LICENSE"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1088,8 +1252,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".json")
     Tags = @("python", "json")
     Notes = "Flatten JSON objects"
-    Tips = ""
-    Usage = ""
+    Tips = "Flattens nested JSON to a single level so it can be loaded into CSV tools or spreadsheets; also usable as a Python library."
+    Usage = "flatten_json <file.json>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1120,8 +1284,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".apk", ".ipa")
     Tags = @("reverse-engineering", "dynamic-analysis")
     Notes = "Frida CLI tools."
-    Tips = ""
-    Usage = ""
+    Tips = "Dynamic instrumentation: frida-trace traces API calls, frida -p <pid> -l script.js injects a script and frida-ps lists processes. Only instrument samples inside the sandbox."
+    Usage = "frida-trace -i 'CreateFile*' <exe>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1147,8 +1311,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf")
     Tags = @("reverse-engineering", "decompiler")
     Notes = "Python Command-Line Ghidra Decomplier."
-    Tips = ""
-    Usage = ""
+    Tips = "Headless decompilation of every function with Ghidra into text files; requires Ghidra and Java. Use --filter to limit functions and -o for the output directory."
+    Usage = "ghidrecomp <binary>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1174,8 +1338,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf")
     Tags = @("reverse-engineering", "binary-diffing")
     Notes = "Ghidra Binary Diffing Engine."
-    Tips = ""
-    Usage = ""
+    Tips = "Binary diffing with Ghidra headless. Produces Markdown and JSON diffs of changed, added and removed functions; useful for patch analysis and variant comparison."
+    Usage = "ghidriff old.exe new.exe"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1201,8 +1365,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".md")
     Tags = @("markdown", "viewer")
     Notes = "Render local readme files before sending off to GitHub."
-    Tips = ""
-    Usage = ""
+    Tips = "Renders Markdown as GitHub would in a local browser. It uses the GitHub API, so run it in the network sandbox; for offline preview use Obsidian or VS Code."
+    Usage = "grip README.md"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1236,8 +1400,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".png", ".jpg", ".zip", ".tar", ".gz")
     Tags = @("binary-analysis", "metadata", "file-analysis")
     Notes = "Hachoir is a Python library to view and edit a binary stream field by field. In other words, Hachoir allows you to `"browse`" any binary stream just like you browse directories and files."
-    Tips = ""
-    Usage = ""
+    Tips = "hachoir-metadata extracts metadata from many formats, hachoir-urwid browses a file field by field, hachoir-subfile carves embedded files and hachoir-strip removes metadata."
+    Usage = "hachoir-metadata <file>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1271,8 +1435,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".json")
     Tags = @("python", "data-processing", "tui")
     Notes = "Jupyter in the terminal."
-    Tips = ""
-    Usage = ""
+    Tips = "Jupyter notebooks in the terminal. Open or create .ipynb files and run cells without a browser. Excluded from the Basic profile."
+    Usage = "jpterm"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1306,8 +1470,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".js")
     Tags = @("javascript", "deobfuscation")
     Notes = "JavaScript unobfuscator and beautifier."
-    Tips = ""
-    Usage = ""
+    Tips = "Formats minified or obfuscated JavaScript for reading. Combine with synchrony (deobfuscator) and box-js for behaviour analysis."
+    Usage = "js-beautify obfuscated.js > pretty.js"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1333,8 +1497,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".ipynb")
     Tags = @("python", "data-processing")
     Notes = "JupyterLab computational environment"
-    Tips = ""
-    Usage = ""
+    Tips = "Start from the desktop shortcut. Notebooks from jupyter-collection and the dfirws setup are available, and the default venv kernel has the installed DFIR libraries (dissect, pefile, yara, msticpy)."
+    Usage = "jupyter lab --notebook-dir <folder>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1368,8 +1532,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".db", ".sqlite")
     Tags = @("database", "sqlite", "cli")
     Notes = "CLI for SQLite Databases with auto-completion and syntax highlighting."
-    Tips = ""
-    Usage = ""
+    Tips = "SQLite shell with auto completion and syntax highlighting. Use .tables to list tables and .schema <table> to describe one."
+    Usage = "litecli <database.sqlite>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1395,8 +1559,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".lnk")
     Tags = @("windows", "forensics", "file-analysis")
     Notes = "Windows Shortcut file (LNK) parser"
-    Tips = ""
-    Usage = ""
+    Tips = "Prints target path, arguments, timestamps, machine ID and MAC address from LNK files; --json for structured output. Jumplist Browser covers Jump Lists."
+    Usage = "lnkparse <file.lnk>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1430,8 +1594,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("file-analysis", "ai")
     Notes = "A tool to determine the content type of a file with deep learning."
-    Tips = ""
-    Usage = ""
+    Tips = "Deep learning file type identification that works on renamed or partial files. Use -r for recursive scanning and --json for output; compare with file-magic.py for edge cases."
+    Usage = "magika <file or dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1465,8 +1629,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("malware-analysis", "malware-detection")
     Notes = "Maldump makes it easy to extract quarantined files of multiple AVs from a live system or a mounted disk image."
-    Tips = ""
-    Usage = ""
+    Tips = "Extracts quarantined files from Windows Defender, Avast, AVG, Kaspersky, ESET, Malwarebytes and more. Use -l to list entries and -q to extract them to a folder."
+    Usage = "maldump.exe <root of mounted image or drive>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1505,8 +1669,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("malware-analysis", "threat-intelligence", "ioc-scanner")
     Notes = "CLI wrapper for malware bazaar API (bazaar.abuse.ch) and YARAify API (yaraify.abuse.ch)"
-    Tips = ""
-    Usage = ""
+    Tips = "Query and download samples from MalwareBazaar and scan with YARAify. Needs an abuse.ch auth key and the network sandbox; downloads are password protected zips (infected)."
+    Usage = "bazaar -h ; yaraify -h"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1534,8 +1698,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".docx", ".xlsx", ".pptx", ".pdf", ".html")
     Tags = @("conversion", "markdown", "data-extraction", "office")
     Notes = "Utility tool for converting various files to Markdown."
-    Tips = ""
-    Usage = ""
+    Tips = "Converts PDF, Office, HTML, images and audio to Markdown for reading and for feeding LLMs. Use it to turn documents into notes for Obsidian."
+    Usage = "markitdown <file> -o out.md"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1561,8 +1725,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".dmp")
     Tags = @("memory-forensics", "windows")
     Notes = "Python library to parse Windows minidump file format."
-    Tips = ""
-    Usage = ""
+    Tips = "Parses Windows minidump files and lists modules, threads and memory regions. Used by pypykatz for LSASS dumps."
+    Usage = "minidump <file.dmp>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1596,8 +1760,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".bin")
     Tags = @("yara", "detection-rules", "malware-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Generates YARA rules from a code region by masking operands. Use it to write a signature for a unique function in a sample."
+    Usage = "mkyara -i <file> -s <start offset> -e <end offset>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1631,8 +1795,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx")
     Tags = @("office", "encryption", "decryption")
     Notes = "Python tool and library for decrypting and encrypting MS Office files using a password or other keys"
-    Tips = ""
-    Usage = ""
+    Tips = "Decrypts password protected Office files (including the default VelvetSweatshop password) so olevba and oledump can analyse them. Use -t to test whether a file is encrypted."
+    Usage = "msoffcrypto-tool -p <password> encrypted.docx decrypted.docx"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1658,8 +1822,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".bin")
     Tags = @("malware-analysis", "data-extraction")
     Notes = "A framework for malware configuration parsers."
-    Tips = ""
-    Usage = ""
+    Tips = "Framework for malware configuration parsers; 'mwcp list' shows the available parsers. Write your own parser for a family and run it on samples to extract C2 addresses and keys."
+    Usage = "mwcp parse <parser> <file>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1693,8 +1857,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("hashing", "file-analysis")
     Notes = "The Modern Hash Identification System."
-    Tips = ""
-    Usage = ""
+    Tips = "Identifies hash types and suggests hashcat and John modes. Use -f for a file of hashes."
+    Usage = "nth -t '<hash>'"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1720,8 +1884,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network")
     Notes = "A network address manipulation library for Python."
-    Tips = ""
-    Usage = ""
+    Tips = "Python library for IP and MAC address maths. The netaddr command opens an interactive shell for subnet calculations and OUI lookups."
+    Usage = "netaddr"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1741,8 +1905,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("data-processing")
     Notes = "Fundamental package for array computing in Python."
-    Tips = ""
-    Usage = ""
+    Tips = "Numerical library used by other tools and notebooks; nothing to run directly."
+    Usage = "import numpy as np"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1814,8 +1978,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".rtf")
     Tags = @("office", "malware-analysis", "vba")
     Notes = "Python tools to analyze security characteristics of MS Office and OLE files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), for Malware Analysis and Incident Response #DFIR."
-    Tips = ""
-    Usage = ""
+    Tips = "oleid triages, olevba extracts and deobfuscates VBA (--deobf for obfuscated macros), mraptor flags auto exec macros, msodde finds DDE links, rtfobj extracts objects from RTF and oleobj extracts embedded objects."
+    Usage = "olevba <file> ; oleid <file> ; mraptor <file>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1849,8 +2013,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".doc", ".xls", ".ppt")
     Tags = @("office", "vba", "decompiler")
     Notes = "A vba p-code decompiler based on pcodedmp"
-    Tips = ""
-    Usage = ""
+    Tips = "Decompiles VBA p-code, recovering macros whose source was stomped (VBA stomping). Compare with olevba output to detect stomping."
+    Usage = "pcode2code <file.doc>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1870,8 +2034,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pdf")
     Tags = @("pdf", "malware-analysis", "visualization")
     Notes = "Analyze PDFs with colors (and YARA). Visualize a PDF's inner tree-like data structure, check it against a library of YARA rules, force decodes of suspicious font binaries, and more."
-    Tips = ""
-    Usage = ""
+    Tips = "Visualises the PDF object tree, runs YARA rules and decodes suspicious streams and fonts. Use --streams to dump stream contents and --extract-binary for embedded data."
+    Usage = "pdfalyze <file.pdf>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1897,8 +2061,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".bin")
     Tags = @("parsing", "reverse-engineering")
     Notes = "A tool to help reversing protobuf."
-    Tips = ""
-    Usage = ""
+    Tips = "Decodes protobuf data without the schema, guessing field types. Useful for app databases and C2 traffic that use protobuf."
+    Usage = "protodeep <file or hex string>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1924,8 +2088,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".py")
     Tags = @("python", "scripting")
     Notes = "Python REPL build on top of prompt_toolkit."
-    Tips = ""
-    Usage = ""
+    Tips = "Better Python REPL with completion and history. Use it for quick experiments with the installed libraries such as pefile, lief and dissect."
+    Usage = "ptpython"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1959,8 +2123,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("exploitation", "security-testing")
     Notes = "Netcat on steroids with Firewall, IDS/IPS evasion, bind and reverse shell and port forwarding magic - and its fully scriptable with Python (PSE)."
-    Tips = ""
-    Usage = ""
+    Tips = "Netcat replacement with port forwarding, bind and reverse shells and Python scripting. Use it in the network sandbox to catch callbacks from a detonated sample."
+    Usage = "pwncat.py -l 4444"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -1980,8 +2144,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf")
     Tags = @("reverse-engineering", "decompiler", "scripting")
     Notes = "The PyGhidra Python library, originally developed by the Department of Defense Cyber Crime Center (DC3) under the name `"Pyhidra`", is a Python library that provides direct access to the Ghidra API within a native CPython 3 interpreter using JPype. PyGhidra contains some conveniences for setting up analysis on a given sample and running a Ghidra script locally. It also contains a Ghidra plugin to allow the use of CPython 3 from the Ghidra GUI."
-    Tips = ""
-    Usage = ""
+    Tips = "Runs Ghidra headless from CPython. Set GHIDRA_INSTALL_DIR to the Ghidra folder first. Used by ghidrecomp and ghidriff. Excluded from the Basic profile."
+    Usage = "python -c 'import pyghidra; pyghidra.start()'"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Ghidra")
@@ -1990,6 +2154,44 @@ $TOOL_DEFINITIONS += @{
     Vendor = ""
     License = ""
     LicenseUrl = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "pyinstxtractor-ng"
+    Category = "Files and apps"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\pyinstxtractor-ng (extract the contents of PyInstaller generated executables).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pyinstxtractor-ng -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "C:\venv\bin\pyinstxtractor-ng.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".exe")
+    Tags = @("reverse-engineering", "python", "data-extraction")
+    Notes = "PyInstaller Extractor Next Generation extracts the Python scripts, modules and PYZ archives from PyInstaller generated Windows and Linux executables, including encrypted ones."
+    Tips = "The extracted .pyc files are written to <file>_extracted. Decompile or disassemble them with pycdc / pycdas (built in the MSYS2 sandbox) - the entry point script is usually named after the original executable."
+    Usage = "pyinstxtractor-ng sample.exe"
+    SampleCommands = @(
+        "pyinstxtractor-ng sample.exe",
+        "pycdc sample.exe_extracted\sample.pyc"
+    )
+    SampleFiles = @()
+    Dependencies = @()
+    PythonVersion = $PYTHON_DEFAULT
+    Homepage = "https://github.com/pyinstxtractor/pyinstxtractor-ng"
+    Vendor = "pyinstxtractor"
+    License = "GNU General Public License v3.0"
+    LicenseUrl = "https://github.com/pyinstxtractor/pyinstxtractor-ng/blob/master/LICENSE"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -2007,8 +2209,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".one")
     Tags = @("office", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Parses OneNote files and extracts embedded files and images. Compare with onedump.py and one-extract when a file is malformed."
+    Usage = "pyonenote -f <file.one>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2034,8 +2236,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".png")
     Tags = @("steganography")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Pure Python PNG library. The bundled scripts inspect and rewrite chunks, which helps with steganography and corrupt PNG files."
+    Usage = "priweavepng.py <image.png>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2069,8 +2271,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("search", "data-processing", "tui")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Interactive regular expression tester in the terminal. Paste sample text and edit the pattern live before using it in rg or a script."
+    Usage = "rexi"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2104,8 +2306,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pcap", ".pcapng")
     Tags = @("network-analysis", "pcap", "security-testing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Craft, send and dissect packets in Python. rdpcap('file.pcap') loads a capture for analysis; sniffing and sending need the network sandbox and administrator rights."
+    Usage = "scapy"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2139,8 +2341,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("osint", "network")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Needs an API key and the network sandbox. shodan host, search and download for IP and service lookups."
+    Usage = "shodan init <api key> ; shodan host 8.8.8.8"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2160,8 +2362,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".png", ".bmp", ".wav")
     Tags = @("steganography", "audio")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Hides and recovers data in the least significant bits of PNG and WAV files. Try -n 1 to 4 bits when recovering unknown payloads."
+    Usage = "stegolsb steglsb -r -i stego.png -o out.bin -n 1"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2189,8 +2391,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".db", ".sqlite", ".sqlite3")
     Tags = @("database", "sqlite", "tui")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Terminal UI for browsing SQLite tables and running queries. A lightweight alternative to DB Browser for SQLite."
+    Usage = "sqlit <database.sqlite>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2224,8 +2426,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("metadata", "forensics", "decoding")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Converts timestamps between formats (Unix, Windows FILETIME, WebKit, Cocoa, OLE, GPS and dozens more). --guess tries every format on a raw value."
+    Usage = "time-decode --guess <value>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2259,8 +2461,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".log", ".txt")
     Tags = @("log-analysis", "tui")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Terminal log viewer with tailing, merging of multiple files and JSON pretty printing. Opens large logs that editors choke on."
+    Usage = "tl <logfile>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2286,8 +2488,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe")
     Tags = @("reverse-engineering", "python", "decompiler")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Extracts the compiled Python code from py2exe executables. For PyInstaller use pyinstxtractor-ng, then decompile the .pyc files with pycdc."
+    Usage = "unpy2exe.py <py2exe executable>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2321,8 +2523,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".csv", ".tsv", ".json", ".sqlite", ".xlsx")
     Tags = @("data-processing", "tui", "csv")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Terminal spreadsheet for CSV, JSON, SQLite, Excel and more. Press F for frequency tables, Shift+F to plot and Ctrl+S to save; excellent for large timelines."
+    Usage = "vd file.csv"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2348,8 +2550,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".xls")
     Tags = @("office", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Reads legacy .xls files. runxlrd.py dumps sheets and cells from the command line without Excel."
+    Usage = "runxlrd.py show <file.xls>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2383,8 +2585,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".xls", ".xlsm", ".xlsb")
     Tags = @("office", "vba", "deobfuscation", "malware-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Emulates Excel 4.0 (XLM) macros to reveal the hidden commands. --no-ms-excel forces the internal emulator and -x extracts the macros only."
+    Usage = "xlmdeobfuscator -f <file.xls>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2404,8 +2606,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".xlsx")
     Tags = @("office")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Python library for writing Excel files. Used by other tools such as srum_dump; nothing to run directly."
+    Usage = "import xlsxwriter"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2451,8 +2653,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".tar")
     Tags = @("forensics", "incident-response", "acquisition", "disk-forensics")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Dissect's collector: 'acquire -p full' collects artifacts from a live host or 'acquire <image>' from an image into a tar file. acquire-decrypt opens encrypted collections."
+    Usage = "acquire --help"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2472,8 +2674,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network", "dns")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Async DNS resolver library used by other tools; nothing to run directly."
+    Usage = "import aiodns"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2493,8 +2695,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network", "http")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Async HTTP client and server library used by other tools; nothing to run directly."
+    Usage = "import aiohttp"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2514,8 +2716,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".msg", ".eml", ".pst", ".ost", ".mbox")
     Tags = @("email", "forensics", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Library for reading and converting PST, OST, MSG and EML mail files from Python. The free mode has limits; extract-msg and pst tools cover most cases."
+    Usage = "import aspose.email"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2535,8 +2737,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".html", ".htm", ".xml")
     Tags = @("web", "parsing", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "HTML and XML parsing library for scripts, for example to pull links from phishing pages; nothing to run directly."
+    Usage = "from bs4 import BeautifulSoup"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2556,8 +2758,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("binary-analysis", "data-processing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Packs and unpacks bit level structures in Python; useful for custom binary formats."
+    Usage = "import bitstruct"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2577,8 +2779,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".rtf")
     Tags = @("office", "rtf", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Decompresses RTF stored in Outlook MSG files. Used by extract-msg; nothing to run directly."
+    Usage = "import compressed_rtf"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2612,8 +2814,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".dd", ".raw", ".tar")
     Tags = @("forensics", "incident-response", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "The Dissect framework: target-query runs plugins against images (E01, VMDK, VHDX, tar, acquire collections) without mounting, target-shell browses the file system and target-dump exports records. Pipe records into rdump for CSV or JSON."
+    Usage = "target-query -f users <image>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2654,8 +2856,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".dd", ".raw", ".tar", ".vmdk", ".E01")
     Tags = @("forensics", "incident-response", "artifact-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Interactive shell over a disk image or collection, and target-query -l lists the plugins (evtx, registry, prefetch, mft, browser history and more). Records pipe into rdump."
+    Usage = "target-shell <image>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2675,8 +2877,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network", "dns")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "DNS packet parsing and building library for scripts; nothing to run directly."
+    Usage = "import dnslib"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2696,8 +2898,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".rec")
     Tags = @("forensics", "data-processing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Reads and writes dissect record streams. Use rdump with -F to select fields, -s for filter expressions and -w to write CSV, JSON or JSONL."
+    Usage = "rdump records.rec -w out.csv"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2717,8 +2919,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".mmdb")
     Tags = @("geolocation", "network", "maxmind")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Reader for the MaxMind databases in the enrichment folder. Use mmdbinspect for command line lookups."
+    Usage = "import geoip2.database"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("enrichment")
@@ -2738,8 +2940,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".cab")
     Tags = @("compression", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Reads and extracts Microsoft cabinet files from Python. 7-Zip handles the same from the shell."
+    Usage = "import cabarchive"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2759,8 +2961,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll")
     Tags = @("pe-analysis", "dotnet")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Library for CLR header parsing of .NET assemblies. The git checkout under C:\git\dotnetfile has dotnetfile_dump.py for command line use."
+    Usage = "import dotnetfile"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2780,8 +2982,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pcap", ".pcapng")
     Tags = @("network-analysis", "pcap", "protocol-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Fast PCAP parsing library for scripts. pyshark and scapy are easier for interactive work."
+    Usage = "import dpkt"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2801,8 +3003,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("database", "log-analysis", "search", "siem")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Python client for the Elastic Stack installed on demand; needs the cluster running."
+    Usage = "from elasticsearch import Elasticsearch"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2822,8 +3024,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".evtx")
     Tags = @("log-analysis", "event-log", "windows")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "python-evtx scripts: evtx_dump.py, evtx_info.py, evtx_templates.py and evtx_dump_json.py. The Rust evtx_dump tool is much faster for bulk work."
+    Usage = "evtx_dump.py <file.evtx>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2843,8 +3045,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".dot", ".gv")
     Tags = @("visualization", "graph")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Python bindings plus the dot layout engine used for rendering call graphs, process trees and attack paths."
+    Usage = "dot -Tpng graph.dot -o graph.png"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2864,8 +3066,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @()
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Deserialises Java serialized objects from Python for inspecting Java application data."
+    Usage = "import javaobj"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2885,8 +3087,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("reverse-engineering")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Assembler library for x86, ARM, MIPS and more. Use it with unicorn and capstone in notebooks; scare wraps them in a REPL."
+    Usage = "import keystone"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2906,8 +3108,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf", ".mach-o")
     Tags = @("pe-analysis", "elf-analysis", "binary-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Parse and modify PE, ELF, Mach-O and DEX files. Good for scripted extraction of imports, resources, signatures and for patching headers."
+    Usage = "import lief; b = lief.parse('file.exe')"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2927,8 +3129,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("visualization")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Plotting library for notebooks and scripts; nothing to run directly."
+    Usage = "import matplotlib.pyplot as plt"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2948,8 +3150,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".json", ".csv")
     Tags = @("threat-intelligence", "incident-response", "python")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Microsoft's security notebooks toolkit for enrichment, visualisation and querying (Sentinel, Splunk, Elastic). Threat intel providers need API keys and the network sandbox."
+    Usage = "import msticpy"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2969,8 +3171,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("database", "graph")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Python driver for the Neo4j database installed on demand. Used for graph analysis such as BloodHound style data."
+    Usage = "from neo4j import GraphDatabase"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -2990,8 +3192,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("visualization", "graph")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Graph analysis in Python. Build process trees or infrastructure graphs and export them to pyvis for interactive visualisation."
+    Usage = "import networkx as nx"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3017,8 +3219,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".doc", ".xls", ".ppt", ".msg")
     Tags = @("office", "ole", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Lists OLE streams and storages and is the underlying library for oletools. oledump.py gives more detail and can dump streams."
+    Usage = "olefile <file>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3038,8 +3240,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".xlsx")
     Tags = @("office", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Read and write xlsx files from Python; nothing to run directly."
+    Usage = "import openpyxl"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3059,8 +3261,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".json")
     Tags = @("json", "data-processing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Fast JSON library used by other tools; nothing to run directly."
+    Usage = "import orjson"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3080,8 +3282,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network", "scripting")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "SSH client library for scripts; needs the network sandbox to reach hosts."
+    Usage = "import paramiko"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3101,8 +3303,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("forensics", "filesystem")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Path abstraction library used by dissect; nothing to run directly."
+    Usage = "import pathlab"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3122,8 +3324,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".sys")
     Tags = @("pe-analysis", "reverse-engineering")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Parse PE headers, imports, exports and resources in Python. pe.dump_info() prints everything; pe.get_imphash() gives the import hash."
+    Usage = "import pefile; pe = pefile.PE('file.exe')"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3143,8 +3345,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll")
     Tags = @("pe-analysis", "packer-detection")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Signature matching helper for pefile using PEiD style userdb signatures."
+    Usage = "import peutils"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3164,8 +3366,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".bin")
     Tags = @("binary-analysis", "file-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Python interpreter for 010 Editor templates. Parse binary formats with existing .bt templates from scripts."
+    Usage = "import pfp"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3185,8 +3387,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("hashing", "fuzzy-hashing", "binary-diffing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Pure Python ssdeep fuzzy hashing. ssdeep.py from the Didier Stevens suite wraps it for the command line."
+    Usage = "import ppdeep"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3206,8 +3408,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("data-processing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "ASCII table output for scripts; nothing to run directly."
+    Usage = "import prettytable"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3227,8 +3429,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @()
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Decode ASN.1 structures such as certificates and Kerberos tickets in scripts."
+    Usage = "import pyasn1"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3248,8 +3450,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network", "dns")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "c-ares DNS bindings used by aiodns; nothing to run directly."
+    Usage = "import pycares"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3269,8 +3471,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("encryption", "cryptography")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Crypto primitives (AES, RC4, RSA, ChaCha20, hashes) for decrypting configs and payloads in scripts."
+    Usage = "from Crypto.Cipher import AES"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3290,8 +3492,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pcap")
     Tags = @("network", "pcap")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "WinDivert bindings for capturing and modifying packets on the sandbox. Needs the driver and administrator rights."
+    Usage = "import pydivert"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3311,8 +3513,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pdf")
     Tags = @("pdf", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Read, split and extract text from PDFs in scripts. Use pdf-parser, peepdf or pdfalyzer for malicious PDFs."
+    Usage = "import pypdf"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3332,8 +3534,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".pcap", ".pcapng")
     Tags = @("network-analysis", "pcap", "protocol-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Wireshark dissectors from Python. Requires tshark, so install Wireshark on demand first."
+    Usage = "import pyshark; cap = pyshark.FileCapture('file.pcap')"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3353,8 +3555,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "SOCKS proxy support for Python sockets and requests; nothing to run directly."
+    Usage = "import socks"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3374,8 +3576,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".docx")
     Tags = @("office", "data-extraction")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Read and write DOCX files from Python; docx2txt is the quick text dumper."
+    Usage = "import docx"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3395,8 +3597,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @()
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Loads .env files into the environment for scripts; nothing to run directly."
+    Usage = "from dotenv import load_dotenv"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3416,8 +3618,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @()
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "libmagic bindings giving the same identification as the file command. magika is the machine learning alternative."
+    Usage = "import magic; magic.from_file('file')"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3437,8 +3639,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".reg", ".dat")
     Tags = @("registry", "windows", "forensics")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Library for offline registry hives. regipy is more actively maintained, but python-registry is still used by several older scripts."
+    Usage = "import Registry"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3458,8 +3660,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("visualization", "graph")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Interactive network graphs in HTML from networkx graphs; open the result in a browser."
+    Usage = "from pyvis.network import Network"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3479,8 +3681,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".zip")
     Tags = @("compression", "encryption")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "AES encrypted zip support (read and write) in Python, for example for password protected malware archives."
+    Usage = "import pyzipper"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3500,8 +3702,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network", "http")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "HTTP client library for scripts; needs the network sandbox to reach the internet."
+    Usage = "import requests"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3521,8 +3723,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf", ".bin")
     Tags = @("reverse-engineering", "scripting")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Script Rizin (the engine behind Cutter) from Python with r.cmd('aaa'). r2pipe works the same for radare2."
+    Usage = "import rzpipe; r = rzpipe.open('file.exe')"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3556,8 +3758,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yml", ".yaml")
     Tags = @("sigma", "detection", "log-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Converts Sigma rules using the installed backends (elasticsearch, loki, splunk, sqlite) and pipelines (sysmon, windows). 'sigma list targets' shows what is available and 'sigma check' validates rules."
+    Usage = "sigma convert -t <target> -p <pipeline> <rules dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3577,8 +3779,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yml", ".yaml")
     Tags = @("sigma", "detection", "log-analysis", "search")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Elasticsearch backend for sigma-cli producing Lucene, EQL or ES|QL queries."
+    Usage = "sigma convert -t lucene <rules dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3598,8 +3800,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yml", ".yaml")
     Tags = @("sigma", "detection")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Loki backend for sigma-cli producing LogQL queries for Grafana Loki."
+    Usage = "sigma convert -t loki <rules dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3619,8 +3821,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yml", ".yaml")
     Tags = @("sigma", "detection", "siem")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Splunk backend for sigma-cli producing SPL searches and saved search configuration."
+    Usage = "sigma convert -t splunk <rules dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3640,8 +3842,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yml", ".yaml")
     Tags = @("sigma", "detection", "sqlite")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "SQLite backend for sigma-cli, useful for running Sigma rules against log data loaded into an SQLite database."
+    Usage = "sigma convert -t sqlite <rules dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3661,8 +3863,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yml", ".yaml")
     Tags = @("sigma", "detection", "event-log", "windows")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Pipeline that maps generic Sigma log sources to Sysmon event IDs; use it together with the windows pipeline."
+    Usage = "sigma convert -t <target> -p sysmon <rules dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3682,8 +3884,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yml", ".yaml")
     Tags = @("sigma", "detection", "windows")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Pipelines that map generic Sigma log sources to Windows event log channels and audit event IDs."
+    Usage = "sigma convert -t <target> -p windows-logsources <rules dir>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3703,8 +3905,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".json")
     Tags = @("json", "data-processing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "JSON library used by other tools; nothing to run directly."
+    Usage = "import simplejson"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3724,8 +3926,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("terminal")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Coloured terminal output for scripts; nothing to run directly."
+    Usage = "import termcolor"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3745,8 +3947,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("data-processing", "search")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Fast multi keyword search library used by other tools; nothing to run directly."
+    Usage = "import textsearch"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3766,8 +3968,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".toml")
     Tags = @("parsing", "data-processing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "TOML parsing library used by other tools; nothing to run directly."
+    Usage = "import tomlkit"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3787,8 +3989,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("data-processing", "filesystem")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Tree data structure library, handy for printing process or directory trees in scripts."
+    Usage = "import treelib"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3808,8 +4010,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("reverse-engineering", "emulation")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "CPU emulator library. Emulate shellcode or decryption routines in scripts; speakeasy and scare are the higher level tools built on it."
+    Usage = "import unicorn"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3829,8 +4031,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("hashing")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Fast non cryptographic hashing used by other tools; nothing to run directly."
+    Usage = "import xxhash"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3850,8 +4052,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".yar", ".yara")
     Tags = @("yara", "malware-analysis", "detection")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "YARA from Python for scripted scanning. The yara and yr command line tools are usually more convenient for one off scans."
+    Usage = "import yara; rules = yara.compile('rules.yar')"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3892,8 +4094,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("osint", "network", "forensics", "visualization")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Breaks URLs into their parts and decodes embedded timestamps, IDs and tracking data (Google, Twitter, Discord, Snowflake IDs). Start the web UI with unfurl_app for a graph view. Runs in its own venv (venv.ps1 -unfurl)."
+    Usage = "unfurl '<url>'"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3913,8 +4115,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".bin")
     Tags = @("hex-editor", "binary-analysis")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Simple hex dump from Python. ImHex or xxd from MSYS2 give more options."
+    Usage = "hexdump <file>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -3934,8 +4136,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("network")
     Notes = ""
-    Tips = ""
-    Usage = ""
+    Tips = "Looks up the vendor for a MAC address from the OUI database; updating the database needs the network sandbox."
+    Usage = "maclookup <mac address>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()

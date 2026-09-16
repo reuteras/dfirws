@@ -102,13 +102,15 @@ $DFIRWS_PROFILES = @{
             "pyghidra",
             "White-Phoenix",
             "Kanvas",
-            "evt2sigma"
+            "evt2sigma",
+            "EventHawk"
         )
         ExcludeGitRepos = @(
             "autopsy_addon_modules"
             "DFIRArtifactMuseum",
             "dictionaries",
             "dfirws-sample-files",
+            "EventHawk",
             "IDR",
             "MSRC",
             "fibratus",

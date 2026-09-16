@@ -2,6 +2,18 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-09-16
+
+- Added [hacksguard](https://github.com/Rhacknarok/hacksguard)
+- Added [forensic-webhistory](https://github.com/acquiredsecurity/forensic-webhistory)
+- Added [EventHawk](https://github.com/Mihir-Choudhary/EventHawk) (own venv, use `eventhawk.ps1`)
+- Added [pycdc](https://github.com/zrax/pycdc) (built in the MSYS2 sandbox)
+- Added [pyinstxtractor-ng](https://github.com/pyinstxtractor/pyinstxtractor-ng)
+- Added [APKiD](https://github.com/rednaga/APKiD)
+- Added [filterforge](https://github.com/cloudflare/filterforge) (first tool running on Python 3.13)
+- Python 3.13 is now installed in the sandbox next to 3.11 so tools can be moved to newer Python versions one by one.
+- Usage and Tips documentation added for all tools in the wiki.
+
 ## 2026-06-09
 
 There is a new option to have a link on the sandbox desktop to `CHANGELOG.md` file showing updated versions of installed tools. This is updated tools after running the `downloadFiles.ps1` script. The file is always generated and to have it on the desktop make sure you change the default of `No` for this setting to `Yes`:

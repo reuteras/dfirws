@@ -545,7 +545,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     Notes = "Didier Stevens Suite is a collection of tools written in Python and some compiled executables for various digital forensics and incident response tasks."
-    Tips = ""
+    Tips = "All scripts accept -h and most read stdin so they can be chained. Typical workflow: oledump.py for OLE and Office files, pdfid.py then pdf-parser.py for PDFs, zipdump.py for archives, base64dump.py and xorsearch.py for encoded payloads, 1768.py for Cobalt Strike beacon configs, emldump.py for mail."
     Usage = "Didier Stevens Suite is a collection of tools written in Python and some compiled executables for various digital forensics and incident response tasks."
     SampleCommands = @(
         "1768.py -h",

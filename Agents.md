@@ -205,7 +205,7 @@ if (Test-Path -Path "${ROOT_PATH}\log\dfirws") {
 | generate_rust.wsb | install_rust_tools.ps1 | 5 Rust tools via cargo | Rust, msys2 gcc |
 | generate_golang.wsb | install_golang_tools.ps1 | 1 Go tool | Go |
 | generate_node.wsb | install_node.ps1 | 7 npm packages | Node.js, npm |
-| generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment + r2ai plugin | msys2 gcc, pkg-config |
+| generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment + r2ai plugin + pycdc (built from git, static) | msys2 gcc, cmake, pkg-config |
 | generate_freshclam.wsb | install_freshclam.ps1 | ClamAV signatures | ClamAV |
 
 ### Adding a New Build Sandbox
@@ -277,7 +277,9 @@ The `Dependencies` field tracks high-level build/runtime dependencies between co
 
 ### PythonVersion Field
 
-Python tools have `PythonVersion = $PYTHON_DEFAULT` (currently 3.11). This prepares for per-tool Python version specification during future upgrades.
+Python tools have `PythonVersion = $PYTHON_DEFAULT` (currently 3.11). Tools that need a newer interpreter set it explicitly (e.g. `PythonVersion = "3.13"`).
+
+In `install_python_tools.ps1`, uv tools are installed with `Install-UvTool -Package <spec> [-PythonVersion <ver>] [-With <extras>] [-Name <name>]`. The interpreter for each version comes from `$PYTHON_INTERPRETERS` (3.11 and 3.13 today). Because uv tool venvs reference the interpreter by absolute path, every version in that table must also be installed by `start_sandbox.ps1` in the final offline sandbox (`python3.exe` = 3.11, `python3.13.exe` = 3.13, both downloaded by `basic.ps1`). To migrate a tool to a newer Python: add `-PythonVersion` to its `Install-UvTool` call and set `PythonVersion` in its metadata entry to match. Guard tools on non-default versions with `Test-ToolIncludedSandbox -ToolName "python3.13"` so profiles that exclude the extra interpreter skip them.
 
 ### Category Field
 

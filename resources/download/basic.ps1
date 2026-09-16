@@ -68,8 +68,8 @@ $TOOL_DEFINITIONS += @{
         }
     )
     Notes = "A fork of Git containing Windows-specific patches."
-    Tips = ""
-    Usage = ""
+    Tips = "Git for Windows also provides the Unix utilities under Program Files\Git\usr\bin (file.exe, bash, sed) that the verify scripts and several tools rely on. The analysis sandbox is offline, so clone what you need on the host and put it in the readwrite folder."
+    Usage = "git clone <repository url>"
     SampleCommands = @(
         "git clone https://github.com/reuteras/dfirws.git"
     )
@@ -164,7 +164,7 @@ $TOOL_DEFINITIONS += @{
         }
     )
     Notes = "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine."
-    Tips = ""
+    Tips = "Node.js is not on PATH by default; install it on demand with dfirws-install.ps1 -Node. The npm tools built in the Node sandbox (box-js, synchrony, jsdom, marp) live under C:\Tools\node and have their own wrappers."
     Usage = "Node.js is used for building server-side applications, command-line tools, and for running JavaScript code outside of a web browser."
     SampleCommands = @(
         "node -v",
@@ -238,8 +238,8 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     Notes = "Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK)."
-    Tips = ""
-    Usage = ""
+    Tips = "Corretto 21 is the default Java runtime used by Ghidra, jd-gui, Recaf, bytecode-viewer, MsgViewer and other Java tools. Run 'java -version' to confirm which runtime is active on PATH."
+    Usage = "java -jar tool.jar"
     SampleCommands = @(
         "java -version",
         "javac MyProgram.java"
@@ -277,8 +277,8 @@ $TOOL_DEFINITIONS += @{
         }
     )
     Notes = "Python is a programming language that lets you work quickly and integrate systems more effectively."
-    Tips = ""
-    Usage = ""
+    Tips = "Python 3.11 is the default interpreter for the uv tools and the default venv. Use venv.ps1 to switch between virtual environments and 'py -0' to list installed interpreters (3.13 is installed as well for newer tools)."
+    Usage = "python script.py"
     SampleCommands = @(
         "python3",
         "python3 script.py"
@@ -347,8 +347,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".py")
     Tags = @("python")
     Notes = "uv is a fast Python package installer and manager. It can be used to create and manage virtual environments, install packages, and run Python scripts. It is designed to be a faster and more efficient alternative to pip and virtualenv."
-    Tips = ""
-    Usage = ""
+    Tips = "uv builds all Python tools in the Python sandbox and is available in the analysis sandbox for throwaway environments (uv venv, uv pip). The analysis sandbox is offline, so only packages already in the uv cache under C:\venv\cache can be installed."
+    Usage = "uv pip install <package>"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("python3")
@@ -368,8 +368,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("dotnet")
     Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0."
-    Tips = ""
-    Usage = ""
+    Tips = "Required by tools still built for .NET 6. Check which runtimes are present with 'dotnet --list-runtimes'."
+    Usage = "Installed silently during sandbox start; nothing to run."
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -421,8 +421,8 @@ $TOOL_DEFINITIONS += @{
         }
     )
     Notes = "Go programming language."
-    Tips = ""
-    Usage = ""
+    Tips = "Install the Go toolchain on demand when you need to build or run Go source in the sandbox. Compiled Go DFIR tools are already installed and do not need it."
+    Usage = "dfirws-install.ps1 -GoLang"
     SampleCommands = @()
     SampleFiles = @(
         "N/A"
@@ -465,8 +465,8 @@ $TOOL_DEFINITIONS += @{
         }
     )
     Notes = "Rust programming language."
-    Tips = ""
-    Usage = ""
+    Tips = "Install Rust on demand for building Rust projects inside the sandbox. Tools built with cargo in the Rust build sandbox (dfir-toolkit, usnjrnl, SSHniff and others) are already available without it."
+    Usage = "dfirws-install.ps1 -Rust"
     SampleCommands = @()
     SampleFiles = @(
         "N/A"

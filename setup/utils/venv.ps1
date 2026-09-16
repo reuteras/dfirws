@@ -5,6 +5,8 @@ param(
     [Switch]$default,
     [Parameter(HelpMessage = "Switch to venv dfir-unfurl.")]
     [Switch]$unfurl,
+    [Parameter(HelpMessage = "Switch to venv eventhawk.")]
+    [Switch]$eventhawk,
     [Parameter(HelpMessage = "Switch to venv evt2sigma.")]
     [Switch]$evt2sigma,
     [Parameter(HelpMessage = "Switch to venv gostringungarbler.")]
@@ -31,6 +33,10 @@ if ($default) {
     $venv = "default"
 } elseif ($unfurl) {
     $venv = "dfir-unfurl"
+} elseif ($eventhawk) {
+    $venv = "eventhawk"
+} elseif ($evt2sigma) {
+    $venv = "evt2sigma"
 } elseif ($gostringungarbler) {
     $venv = "gostringungarbler"
     & "C:\venv\gostringungarbler\.venv\Scripts\Activate.ps1"

@@ -58,6 +58,48 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     Write-Output "MSYS2 installation done."
 }
 
+#
+# pycdc - Python bytecode decompiler (pycdc) and disassembler (pycdas).
+# Upstream publishes no binaries, so it is built here with the MSYS2 UCRT64
+# toolchain and linked statically so it runs without the msys64 DLLs on PATH.
+# Built from git, so the changelog version is the short commit hash.
+#
+Write-DateLog "Build pycdc." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+Write-Output "Build pycdc."
+$BASH = "C:\Tools\msys64\usr\bin\bash.exe"
+$PYCDC_SRC = "${WSDFIR_TEMP}\pycdc"
+if (Test-Path -Path $PYCDC_SRC) {
+    Remove-Item -Recurse -Force $PYCDC_SRC 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+}
+& $BASH -lc 'git clone --depth 1 https://github.com/zrax/pycdc.git /c/tmp/pycdc' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+# CMAKE_SH=CMAKE_SH-NOTFOUND lets the MinGW generator run from an MSYS shell that has sh.exe on PATH.
+& $BASH -lc 'cd /c/tmp/pycdc && cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_SH=CMAKE_SH-NOTFOUND -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static" && cmake --build build --config Release' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+
+if ((Test-Path -Path "${PYCDC_SRC}\build\pycdc.exe") -and (Test-Path -Path "${PYCDC_SRC}\build\pycdas.exe")) {
+    New-Item -ItemType Directory -Force -Path "C:\Tools\bin" | Out-Null
+    Copy-Item "${PYCDC_SRC}\build\pycdc.exe" "C:\Tools\bin\pycdc.exe" -Force
+    Copy-Item "${PYCDC_SRC}\build\pycdas.exe" "C:\Tools\bin\pycdas.exe" -Force
+    $PYCDC_COMMIT = (& $BASH -lc 'git -C /c/tmp/pycdc rev-parse --short HEAD' 2>$null | Out-String).Trim()
+    if ($PYCDC_COMMIT) {
+        $metadataDir = "C:\Tools\.metadata\msys2"
+        if (!(Test-Path $metadataDir)) {
+            New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
+        }
+        $metadata = [ordered]@{
+            Name      = "pycdc"
+            Version   = $PYCDC_COMMIT
+            Source    = "msys2"
+            FetchedAt = (Get-Date).ToString("s")
+        }
+        Set-Content -Path "$metadataDir\pycdc.json" -Value ($metadata | ConvertTo-Json -Depth 2)
+    }
+    Write-DateLog "pycdc build done (commit ${PYCDC_COMMIT})." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Write-Output "pycdc build done."
+} else {
+    Write-DateLog "ERROR: pycdc build failed, pycdc.exe/pycdas.exe not found." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Write-Output "ERROR: pycdc build failed."
+}
+
 if (Test-Path -Path "${TOOLS}\Debug") {
     Read-Host "Press Enter to continue"
 }

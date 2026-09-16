@@ -35,7 +35,7 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "msys2"
+            Name = "C:\Tools\msys64\msys2.exe"
             Expect = "PE32"
         }
         @{
@@ -62,8 +62,8 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @()
     Tags = @("shell", "linux", "debugging")
     Notes = "MSYS2 is a collection of tools and libraries providing you with an easy-to-use environment for building, installing and running native Windows software."
-    Tips = ""
-    Usage = ""
+    Tips = "Provides gcc, cmake, make, git and Unix utilities. The ucrt64\bin and usr\bin directories are on PATH in the sandbox so gcc and bash work directly from PowerShell. Not included in the Basic profile."
+    Usage = "bash -lc '<command>' or start the MSYS2 UCRT64 shell"
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
@@ -73,3 +73,49 @@ $TOOL_DEFINITIONS += @{
     LicenseUrl = ""
     PythonVersion = ""
 }
+
+# Built from source in the MSYS2 sandbox by setup\install\install_msys2.ps1.
+$TOOL_DEFINITIONS += @{
+    Name = "pycdc"
+    Category = "Reverse Engineering"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Reverse Engineering\pycdc (Python bytecode decompiler, pycdas disassembler).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command pycdc --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "pycdc.exe"
+            Expect = "PE32"
+        }
+        @{
+            Type = "command"
+            Name = "pycdas.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".pyc", ".pyo")
+    Tags = @("decompiler", "reverse-engineering", "python")
+    Notes = "pycdc (Decompyle++) is a C++ decompiler and disassembler for Python bytecode covering Python 1.0 through 3.13. pycdc produces Python source, pycdas a bytecode listing."
+    Tips = "Use pycdc on the .pyc files produced by pyinstxtractor-ng. When decompilation of newer bytecode fails, pycdas still gives a readable disassembly. Only available when the MSYS2 build sandbox is enabled in the profile."
+    Usage = "pycdc file.pyc"
+    SampleCommands = @(
+        "pycdc file.pyc",
+        "pycdas file.pyc"
+    )
+    SampleFiles = @()
+    Dependencies = @("msys2")
+    Homepage = "https://github.com/zrax/pycdc"
+    Vendor = "Michael Hansen (zrax)"
+    License = "GNU General Public License v3.0"
+    LicenseUrl = "https://github.com/zrax/pycdc/blob/master/LICENSE"
+    PythonVersion = ""
+}
+
+New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "msys2"

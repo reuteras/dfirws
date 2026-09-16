@@ -86,6 +86,18 @@ if ($pythonInstalled) {
     Write-DateLog "WARNING: Python installation may have failed after 3 attempts" | Write-SetupLog
 }
 
+# Python 3.13 - some uv tools are installed on it (see $PYTHON_INTERPRETERS in
+# install_python_tools.ps1) and their venvs reference the interpreter by absolute path.
+if (Test-Path "${SETUP_PATH}\python3.13.exe") {
+    Update-SandboxProgress "Installing Python 3.13..."
+    $procPython313 = Start-Process -Wait -PassThru "${SETUP_PATH}\python3.13.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=0 Include_test=0"
+    if ($procPython313.ExitCode -eq 0) {
+        Write-DateLog "Python 3.13 installed" | Write-SetupLog
+    } else {
+        Write-DateLog "WARNING: Python 3.13 installer exited with code $($procPython313.ExitCode)" | Write-SetupLog
+    }
+}
+
 # Install Visual C++ Redistributable 17
 Update-SandboxProgress "Installing Visual C++ Redistributable..."
 $procVcredist = Start-Process -Wait -PassThru "${SETUP_PATH}\vcredist_17_x64.exe" -ArgumentList "/passive /norestart"

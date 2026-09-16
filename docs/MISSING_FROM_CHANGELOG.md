@@ -22,6 +22,8 @@ Notes on specific tools:
 
 - **SSHniff** is built from a git checkout, so its tracked version is the short
   commit hash.
+- **pycdc** is built from a git checkout in the MSYS2 sandbox and recorded under
+  the `msys2` source with the short commit hash as version.
 - Raw script downloads (machofile-cli.py, msidump.py, shellconv.py, smtpsmug.py,
   SQLiteWalker.py, CanaryTokenScanner.py, sigs.py, defender-dump.py, pe2pic.py,
   evt2sigma.py) come from mutable branch URLs, so the version is a content hash
@@ -34,7 +36,7 @@ Notes on specific tools:
 ## The changelog ignore list
 
 All packages in every virtual environment (`C:\venv\default`,
-`C:\venv\dfir-unfurl`, `C:\venv\speakeasy`, `C:\venv\white-phoenix`,
+`C:\venv\dfir-unfurl`, `C:\venv\eventhawk`, `C:\venv\speakeasy`, `C:\venv\white-phoenix`,
 `C:\venv\Kanvas`, `C:\venv\gostringungarbler`, `C:\venv\pe2pic`,
 `C:\venv\evt2sigma`, `C:\venv\scare`, `C:\venv\zircolite`) are recorded, keyed
 per venv (the changelog shows e.g. `pip: default/oletools`). Many of these are
