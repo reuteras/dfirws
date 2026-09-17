@@ -4459,7 +4459,7 @@ $TOOL_DEFINITIONS += @{
             Target   = "`${TOOLS}\RpcView64\RpcView.exe"
             Args     = ""
             Icon     = ""
-            WorkDir  = "${HOME}\Desktop"
+            WorkDir  = "`${HOME}\Desktop"
         }
     )
     InstallVerifyCommand = ""
@@ -4503,7 +4503,7 @@ $TOOL_DEFINITIONS += @{
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command gsa.exe -h"
             Icon     = ""
-            WorkDir  = "${HOME}\Desktop"
+            WorkDir  = "`${HOME}\Desktop"
         }
     )
     InstallVerifyCommand = ""
@@ -4544,7 +4544,7 @@ $TOOL_DEFINITIONS += @{
             Target   = "`${TOOLS}\ILSpy\ILSpy.exe"
             Args     = ""
             Icon     = ""
-            WorkDir  = "${HOME}\Desktop"
+            WorkDir  = "`${HOME}\Desktop"
         }
     )
     InstallVerifyCommand = ""

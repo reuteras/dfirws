@@ -249,18 +249,30 @@ function Save-GitHubRepoMetadata {
         return
     }
 
-    if ($null -eq $repoData -or $null -ne $repoData.message) {
+    if ($null -eq $repoData) {
+        Write-SynchronizedLog "Warning: GitHub API returned no data for $Repo."
+        return
+    }
+
+    if ($repoData.PSObject.Properties['message']) {
         Write-SynchronizedLog "Warning: GitHub API returned no data for $Repo."
         return
     }
 
     $releaseInfo = $null
     if ($null -ne $ReleaseData) {
+        $releaseBody = $ReleaseData.body
+        if ($null -ne $releaseBody) {
+            if ($releaseBody.Length -gt 500) {
+                $releaseBody = $releaseBody.Substring(0, 500) + "..."
+            }
+        }
+
         $releaseInfo = [ordered]@{
             TagName    = $ReleaseData.tag_name
             Name       = $ReleaseData.name
             PublishedAt = $ReleaseData.published_at
-            Body       = if ($ReleaseData.body.Length -gt 500) { $ReleaseData.body.Substring(0, 500) + "..." } else { $ReleaseData.body }
+            Body       = $releaseBody
             Prerelease = $ReleaseData.prerelease
         }
     }
@@ -776,7 +788,10 @@ function Test-ToolIncluded {
     )
 
     # If no profile filtering is active, include everything
-    if ($null -eq $DFIRWS_EXCLUDE_TOOLS -or $DFIRWS_EXCLUDE_TOOLS.Count -eq 0) {
+    if ($null -eq $DFIRWS_EXCLUDE_TOOLS) {
+        return $true
+    }
+    if ($DFIRWS_EXCLUDE_TOOLS.Count -eq 0) {
         return $true
     }
 

@@ -33,7 +33,10 @@ function Test-ChangelogIgnored {
         [string]$Source,
         [string]$Name
     )
-    if ($null -eq $IgnoreList -or $IgnoreList.Count -eq 0) {
+    if ($null -eq $IgnoreList) {
+        return $false
+    }
+    if ($IgnoreList.Count -eq 0) {
         return $false
     }
     $normalized = $Name -replace "_", "-"
@@ -52,19 +55,23 @@ function Get-ChangelogCurrentVersions {
             $metadataFile = $_.FullName
             try {
                 $data = Get-Content $metadataFile -Raw | ConvertFrom-Json -ErrorAction Stop
-                if ($data.FullName -and $data.LatestRelease -and $data.LatestRelease.TagName) {
+                $tagName = $null
+                if ($data.FullName -and $data.LatestRelease) {
+                    $tagName = $data.LatestRelease.TagName
+                }
+                if ($data.FullName -and $tagName) {
                     if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source "github" -Name $data.Name) {
                         return
                     }
                     $versions[$data.FullName] = [PSCustomObject]@{
                         Name       = $data.Name
-                        Version    = $data.LatestRelease.TagName
+                        Version    = $tagName
                         Source     = "github"
                         Identifier = $data.FullName
                     }
                 }
             } catch {
-                Write-DateLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
+                Write-SynchronizedLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
             }
         }
     }
@@ -87,7 +94,7 @@ function Get-ChangelogCurrentVersions {
                     }
                 }
             } catch {
-                Write-DateLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
+                Write-SynchronizedLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
             }
         }
     }
@@ -121,7 +128,7 @@ function Get-ChangelogCurrentVersions {
                         }
                     }
                 } catch {
-                    Write-DateLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
+                    Write-SynchronizedLog "Changelog: WARNING - skipping unreadable metadata file ${metadataFile}: $($_.Exception.Message)"
                 }
             }
         }
@@ -143,7 +150,7 @@ function Get-ChangelogSavedVersions {
         }
         return $versions
     } catch {
-        Write-DateLog "Changelog: WARNING - could not read ${versionsFile}, treating as first run: $($_.Exception.Message)"
+        Write-SynchronizedLog "Changelog: WARNING - could not read ${versionsFile}, treating as first run: $($_.Exception.Message)"
         return [ordered]@{}
     }
 }
@@ -185,7 +192,7 @@ function Get-UriEtag {
         try {
             return (Get-Content $etagFile -Raw -ErrorAction Stop).Trim()
         } catch {
-            Write-DateLog "Changelog: WARNING - could not read etag file ${etagFile}: $($_.Exception.Message)"
+            Write-SynchronizedLog "Changelog: WARNING - could not read etag file ${etagFile}: $($_.Exception.Message)"
         }
     }
     return $null
@@ -223,7 +230,7 @@ function Get-HttpToolsCurrentSnapshot {
             }
         }
     } catch {
-        Write-DateLog "Changelog: WARNING - could not read ${csvFile}: $($_.Exception.Message)"
+        Write-SynchronizedLog "Changelog: WARNING - could not read ${csvFile}: $($_.Exception.Message)"
     }
     return $snapshot
 }
@@ -241,7 +248,7 @@ function Get-HttpToolsSavedSnapshot {
             $snapshot[$prop.Name] = $prop.Value
         }
     } catch {
-        Write-DateLog "Changelog: WARNING - could not read ${snapshotFile}, treating as first run: $($_.Exception.Message)"
+        Write-SynchronizedLog "Changelog: WARNING - could not read ${snapshotFile}, treating as first run: $($_.Exception.Message)"
     }
     return $snapshot
 }

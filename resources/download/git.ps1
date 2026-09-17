@@ -1313,7 +1313,7 @@ $TOOL_DEFINITIONS += @{
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\IR\PowerSponse.lnk"
             Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command Import-Module ${GIT_PATH}\PowerSponse\PowerSponse.psd1 ; Get-Help -Name Invoke-PowerSponse"
+            Args     = "`${CLI_TOOL_ARGS} -command Import-Module `${GIT_PATH}\PowerSponse\PowerSponse.psd1 ; Get-Help -Name Invoke-PowerSponse"
             Icon     = ""
             WorkDir  = "`${HOME}\Desktop"
         }

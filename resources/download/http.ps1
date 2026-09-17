@@ -1195,7 +1195,7 @@ $TOOL_DEFINITIONS += @{
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Utilities\ExifTool.lnk"
             Target   = "`${CLI_TOOL}"
-            Args     = "${CLI_TOOL_ARGS} -command exiftool --help"
+            Args     = "`${CLI_TOOL_ARGS} -command exiftool --help"
             Icon     = "`${TOOLS}\exiftool\exiftool.exe"
             WorkDir  = "`${HOME}\Desktop"
         }

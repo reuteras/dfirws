@@ -4,10 +4,38 @@ $ROOT_PATH = "${PWD}"
 
 Write-DateLog "Start Sandbox to install Rust based tools for dfirws." > "${ROOT_PATH}\log\rust.txt"
 
+# Looks up the latest stable version of a crate on crates.io. Returns "" (instead of
+# throwing) if the API call fails or the response doesn't have the expected shape, e.g.
+# a rate-limit or error response without a "crate" field.
+function Get-CratesIoVersion {
+    param (
+        [Parameter(Mandatory=$True)] [string]$CrateName
+    )
+
+    try {
+        $response = curl --silent -L "https://crates.io/api/v1/crates/$CrateName" | ConvertFrom-Json
+    } catch {
+        Write-SynchronizedLog "Warning: Could not fetch crates.io metadata for $CrateName."
+        return ""
+    }
+
+    if ($null -eq $response) {
+        Write-SynchronizedLog "Warning: crates.io returned no data for $CrateName."
+        return ""
+    }
+
+    if (!$response.PSObject.Properties['crate'] -or $null -eq $response.crate) {
+        Write-SynchronizedLog "Warning: crates.io response for $CrateName has no 'crate' field."
+        return ""
+    }
+
+    return $response.crate.max_stable_version
+}
+
 # Requires gcc to compile
-${CURRENT_VERSION_DFIR_TOOLKIT} = (curl --silent -L "https://crates.io/api/v1/crates/dfir-toolkit" | ConvertFrom-Json).crate.max_stable_version
-${CURRENT_VERSION_CUTE_TUI} = (curl --silent -L "https://crates.io/api/v1/crates/cute-tui" | ConvertFrom-Json).crate.max_stable_version
-${CURRENT_VERSION_USNJRNL} = (curl --silent -L "https://crates.io/api/v1/crates/usnjrnl" | ConvertFrom-Json).crate.max_stable_version
+${CURRENT_VERSION_DFIR_TOOLKIT} = Get-CratesIoVersion -CrateName "dfir-toolkit"
+${CURRENT_VERSION_CUTE_TUI} = Get-CratesIoVersion -CrateName "cute-tui"
+${CURRENT_VERSION_USNJRNL} = Get-CratesIoVersion -CrateName "usnjrnl"
 ${STATUS} = $true
 
 if (Test-Path -Path "${ROOT_PATH}\mount\Tools\cargo\.crates.toml" ) {

@@ -482,8 +482,14 @@ Foreach ($webKey in $webKeyCollection)
 	}
 	
 	$localFile = $LocalKeyCollection | Where-Object { $_.URL -eq $webKey.URL }
-	
-	if ($null -eq $localFile -or $localFile.SHA1 -ne $webKey.SHA1)
+
+	$needsDownload = $true
+	if ($null -ne $localFile)
+	{
+		$needsDownload = $localFile.SHA1 -ne $webKey.SHA1
+	}
+
+	if ($needsDownload)
 	{
 		#Needs to be downloaded since SHA is different or it doesnt exist
 		$toDownload += $webKey
