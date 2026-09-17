@@ -86,8 +86,12 @@ function Get-ChangelogCurrentVersions {
                     if (Test-ChangelogIgnored -IgnoreList $ignoreList -Source "winget" -Name $data.AppId) {
                         return
                     }
+                    $wingetName = $data.AppId
+                    if ($data.PSObject.Properties['Name'] -and $data.Name) {
+                        $wingetName = $data.Name
+                    }
                     $versions[$data.AppId] = [PSCustomObject]@{
-                        Name       = if ($data.Name) { $data.Name } else { $data.AppId }
+                        Name       = $wingetName
                         Version    = $data.Version
                         Source     = "winget"
                         Identifier = $data.AppId
@@ -190,7 +194,10 @@ function Get-UriEtag {
     $etagFile = "$PSScriptRoot\..\..\downloads\.etag\${uriHash}"
     if (Test-Path $etagFile) {
         try {
-            return (Get-Content $etagFile -Raw -ErrorAction Stop).Trim()
+            $etagContent = Get-Content $etagFile -Raw -ErrorAction Stop
+            if ($null -ne $etagContent) {
+                return $etagContent.Trim()
+            }
         } catch {
             Write-SynchronizedLog "Changelog: WARNING - could not read etag file ${etagFile}: $($_.Exception.Message)"
         }

@@ -48,9 +48,30 @@ function Install-UvTool {
         $uvArgs += @("--with", $With)
     }
     $uvArgs += $Package
-    uv @uvArgs 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    Write-DateLog "Installed $label via uv tool install (Python $PythonVersion)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    Save-UvToolMetadata -Package $label 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+
+    # Windows AV/indexer scanners transiently lock freshly-extracted wheel files (seen as
+    # "os error 32, The process cannot access the file because it is being used by another
+    # process" from uv), so a failed install is retried a couple of times before giving up.
+    $maxAttempts = 3
+    $succeeded = $false
+    for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+        uv @uvArgs 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        if ($LASTEXITCODE -eq 0) {
+            $succeeded = $true
+            break
+        }
+        if ($attempt -lt $maxAttempts) {
+            Write-DateLog "WARNING: uv tool install failed for $label (attempt $attempt/$maxAttempts, exit $LASTEXITCODE), retrying." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+            Start-Sleep -Seconds 5
+        }
+    }
+
+    if ($succeeded) {
+        Write-DateLog "Installed $label via uv tool install (Python $PythonVersion)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        Save-UvToolMetadata -Package $label 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    } else {
+        Write-DateLog "ERROR: uv tool install failed for $label after $maxAttempts attempts (exit $LASTEXITCODE)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    }
 }
 
 $GHIDRA_INSTALL_DIR = ""

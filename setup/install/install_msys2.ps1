@@ -72,8 +72,22 @@ if (Test-Path -Path $PYCDC_SRC) {
     Remove-Item -Recurse -Force $PYCDC_SRC 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 }
 & $BASH -lc 'git clone --depth 1 https://github.com/zrax/pycdc.git /c/tmp/pycdc' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+# The cmake configure/build step is written to a script file and run with `bash file.sh`
+# rather than inlined into `bash -lc '...'`. A -G "MinGW Makefiles" value containing a
+# space, passed as a single quoted argument through PowerShell's native-command line
+# reconstruction into bash.exe's own argv parsing, is exactly the kind of value that can
+# get split across that boundary (observed as cmake seeing just "MinGW" as -G); a script
+# file removes that boundary entirely since bash reads the command text straight from disk.
+$PYCDC_BUILD_SCRIPT = "${WSDFIR_TEMP}\build-pycdc.sh"
+$pycdcBuildScript = @'
+set -e
+cd /c/tmp/pycdc
 # CMAKE_SH=CMAKE_SH-NOTFOUND lets the MinGW generator run from an MSYS shell that has sh.exe on PATH.
-& $BASH -lc 'cd /c/tmp/pycdc && cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_SH=CMAKE_SH-NOTFOUND -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static" && cmake --build build --config Release' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_SH=CMAKE_SH-NOTFOUND -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static"
+cmake --build build --config Release
+'@
+[System.IO.File]::WriteAllText($PYCDC_BUILD_SCRIPT, ($pycdcBuildScript -replace "`r`n", "`n"), [System.Text.UTF8Encoding]::new($false))
+& $BASH -lc 'bash /c/tmp/build-pycdc.sh' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
 
 if ((Test-Path -Path "${PYCDC_SRC}\build\pycdc.exe") -and (Test-Path -Path "${PYCDC_SRC}\build\pycdas.exe")) {
     New-Item -ItemType Directory -Force -Path "C:\Tools\bin" | Out-Null

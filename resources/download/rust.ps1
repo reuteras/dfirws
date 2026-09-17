@@ -13,7 +13,9 @@ function Get-CratesIoVersion {
     )
 
     try {
-        $response = curl --silent -L "https://crates.io/api/v1/crates/$CrateName" | ConvertFrom-Json
+        # crates.io's crawler policy rejects requests without a descriptive User-Agent
+        # (returns 403), which curl's default UA doesn't satisfy.
+        $response = curl --silent -L -A "dfirws (https://github.com/reuteras/dfirws)" "https://crates.io/api/v1/crates/$CrateName" | ConvertFrom-Json
     } catch {
         Write-SynchronizedLog "Warning: Could not fetch crates.io metadata for $CrateName."
         return ""

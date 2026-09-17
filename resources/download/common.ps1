@@ -334,6 +334,12 @@ function Save-WingetMetadata {
         FetchedAt = (Get-Date).ToString("s")
     }
 
+    # winget show's first line is "Found <Name> [<Id>]", not a "Name:" field,
+    # so it has to be pulled out separately before the generic "Key: Value" loop.
+    if ($showOutput -match "(?m)^Found\s+(.+?)\s+\[.+?\]\s*$") {
+        $metadata["Name"] = $Matches[1].Trim()
+    }
+
     foreach ($line in ($showOutput -split "`n")) {
         $line = $line.Trim()
         if ($line -match "^(.+?):\s+(.+)$") {
