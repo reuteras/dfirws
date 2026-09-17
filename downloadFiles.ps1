@@ -580,7 +580,12 @@ $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | 
     $_.Line -notmatch "unmaintained" -and
     $_.Line -notmatch "unsound" -and
     $_.Line -notmatch "WARNING: Defender:" -and
-    $_.Line -notmatch "WARNING: Files"
+    $_.Line -notmatch "WARNING: Files" -and
+    # Harmless CMake "developer warning": CMAKE_SH is deliberately passed on the
+    # command line to bypass the MinGW Makefiles generator's sh.exe-on-PATH check
+    # (see install_msys2.ps1), and CMake flags it as unused-cli because it's read by
+    # its own generator startup code rather than by the project's CMakeLists.txt.
+    $_.Line -notmatch "CMake Warning \(unused-cli\)"
 }
 
 $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
