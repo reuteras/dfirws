@@ -20,3 +20,6 @@ LLM-based reversing for radare2.
 
 ## Tips
 Currently not working in dfirws.
+
+## Usage
+r2ai -h

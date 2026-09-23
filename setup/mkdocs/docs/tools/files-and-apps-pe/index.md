@@ -15,9 +15,10 @@
 | [debloat](debloat.md) | GitHub Release | A GUI and CLI tool for removing bloat from executables | malware-analysis, pe-analysis, deobfuscation | `.exe`, `.dll` |  |
 | [dll_to_exe](dll-to-exe.md) | GitHub Release | Converts a DLL into EXE | pe-analysis, conversion | `.dll`, `.exe` |  |
 | [hachoir](hachoir.md) | Python | Hachoir is a Python library to view and edit a binary stream field by field. In other words, Hachoir allows you to "browse" any binary stream just like you browse directories and files. | binary-analysis, metadata, file-analysis | `.exe`, `.dll`, `.png`, `.jpg`, `.zip`, `.tar`, `.gz` |  |
-| [lief](lief.md) | Python |  | pe-analysis, elf-analysis, binary-analysis | `.exe`, `.dll`, `.elf`, `.mach-o` |  |
-| [pefile](pefile.md) | Python |  | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
+| [hacksguard](hacksguard.md) | GitHub Release | hacksguard is a fast, multi-threaded terminal UI for static malware triage. It parses PE, ELF and Mach-O headers and sections, calculates entropy, imphash and Rich header data, extracts strings and Authenticode certificates, runs YARA rules and combines it all into a heuristic risk score. | pe-analysis, yara, triage, static-analysis, malware-analysis | `.exe`, `.dll`, `.sys`, `.elf`, `.so`, `.dylib` |  |
+| [lief](lief.md) | Python | import lief; b = lief.parse('file.exe') | pe-analysis, elf-analysis, binary-analysis | `.exe`, `.dll`, `.elf`, `.mach-o` |  |
+| [pefile](pefile.md) | Python | import pefile; pe = pefile.PE('file.exe') | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
 | [pestudio](pestudio.md) | HTTP | pestudio is a tool for analyzing PE files. | pe-analysis, malware-analysis, static-analysis | `.exe`, `.dll`, `.sys` |  |
-| [peutils](peutils.md) | Python |  | pe-analysis, packer-detection | `.exe`, `.dll` |  |
-| [pfp](pfp.md) | Python |  | binary-analysis, file-analysis | `.bin` |  |
+| [peutils](peutils.md) | Python | import peutils | pe-analysis, packer-detection | `.exe`, `.dll` |  |
+| [pfp](pfp.md) | Python | import pfp | binary-analysis, file-analysis | `.bin` |  |
 | [readpe](readpe.md) | GitHub Release | The PE file analysis toolkit | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |

@@ -15,3 +15,9 @@
 **Tags:** java
 
 Microsofts OpenJDK 21
+
+## Tips
+Installed for tools that require the Microsoft build of OpenJDK. Amazon Corretto is the default java on PATH.
+
+## Usage
+Run with the full path when a tool requires this JDK.

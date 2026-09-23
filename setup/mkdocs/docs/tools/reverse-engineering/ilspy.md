@@ -17,3 +17,9 @@
 **Tags:** dotnet, decompiler, reverse-engineering
 
 ILSpy is a .NET assembly browser and decompiler.
+
+## Tips
+.NET decompiler with IL view, search and project export. Use it alongside dnSpy when one produces better output for obfuscated code.
+
+## Usage
+GUI: start from the desktop shortcut and open a .NET assembly.

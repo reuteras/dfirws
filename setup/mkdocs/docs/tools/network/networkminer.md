@@ -18,5 +18,11 @@
 
 NetworkMiner is an open source network forensics tool that extracts artifacts, such as files, images, emails and passwords, from captured network traffic in PCAP files.
 
+## Tips
+Extracts files, images, credentials, sessions and host details from PCAPs passively. TLS traffic must be decrypted first, for example with PolarProxy. The free version has no command line.
+
+## Usage
+GUI: start from the desktop shortcut and open a PCAP file.
+
 ## Sample Files
 - N/A

@@ -17,3 +17,9 @@
 **Tags:** yara, detection-rules, ioc
 
 YARA signature and IOC database for my scanners and tools.
+
+## Tips
+The YARA rules and IOCs used by Loki and THOR. Some rules need external variables (filename, filepath, extension, filetype); Loki sets them for you, with plain yara pass -d filename=x or exclude those rules.
+
+## Usage
+yara -r C:\git\signature-base\yara <dir>

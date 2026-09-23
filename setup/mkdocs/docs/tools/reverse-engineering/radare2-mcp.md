@@ -20,3 +20,6 @@ MCP stdio server for radare2. Enables AI assistants to interact with radare2 for
 
 ## Tips
 Currently not working in dfirws.
+
+## Usage
+Enable radare2-mcp in opencode.json (see local\defaults\opencode.json).

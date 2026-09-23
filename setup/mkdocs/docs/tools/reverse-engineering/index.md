@@ -23,13 +23,14 @@
 | [frida-tools](frida-tools.md) | Python | Frida CLI tools. | reverse-engineering, dynamic-analysis | `.exe`, `.apk`, `.ipa` |  |
 | [ghidrecomp](ghidrecomp.md) | Python | Python Command-Line Ghidra Decomplier. | reverse-engineering, decompiler | `.exe`, `.dll`, `.elf` |  |
 | [ghidriff](ghidriff.md) | Python | Ghidra Binary Diffing Engine. | reverse-engineering, binary-diffing | `.exe`, `.dll`, `.elf` |  |
-| [keystone-engine](keystone-engine.md) | Python |  | reverse-engineering |  |  |
+| [keystone-engine](keystone-engine.md) | Python | import keystone | reverse-engineering |  |  |
+| [pycdc](pycdc.md) | Installer | pycdc (Decompyle++) is a C++ decompiler and disassembler for Python bytecode covering Python 1.0 through 3.13. pycdc produces Python source, pycdas a bytecode listing. | decompiler, reverse-engineering, python | `.pyc`, `.pyo` |  |
 | [pyghidra](pyghidra.md) | Python | The PyGhidra Python library, originally developed by the Department of Defense Cyber Crime Center (DC3) under the name "Pyhidra", is a Python library that provides direct access to the Ghidra API within a native CPython 3 interpreter using JPype. PyGhidra contains some conveniences for setting up analysis on a given sample and running a Ghidra script locally. It also contains a Ghidra plugin to allow the use of CPython 3 from the Ghidra GUI. | reverse-engineering, decompiler, scripting | `.exe`, `.dll`, `.elf` |  |
 | [r2ai](r2ai.md) | Git | Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models. | reverse-engineering, ai | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [r2ai](r2ai-2.md) | GitHub Release | LLM-based reversing for radare2. | reverse-engineering, mcp, ai | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [radare2-deep-graph](radare2-deep-graph.md) | Git | A Cutter plugin to generate radare2 graphs. | reverse-engineering, visualization, plugins |  |  |
 | [radare2-mcp](radare2-mcp.md) | GitHub Release | MCP stdio server for radare2. Enables AI assistants to interact with radare2 for binary analysis. Known issue: Windows binary may crash with stack overflow (GitHub issue #24). | reverse-engineering, mcp, ai | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
-| [rzpipe](rzpipe.md) | Python |  | reverse-engineering, scripting | `.exe`, `.dll`, `.elf`, `.bin` |  |
+| [rzpipe](rzpipe.md) | Python | import rzpipe; r = rzpipe.open('file.exe') | reverse-engineering, scripting | `.exe`, `.dll`, `.elf`, `.bin` |  |
 | [scare](scare.md) | Git | A multi-arch assembly REPL and emulator for your command line. | reverse-engineering, emulation, scripting |  |  |
-| [unicorn](unicorn.md) | Python |  | reverse-engineering, emulation |  |  |
+| [unicorn](unicorn.md) | Python | import unicorn | reverse-engineering, emulation |  |  |
 | [x64dbg](x64dbg.md) | GitHub Release | An open-source user mode debugger for Windows. Optimized for reverse engineering and malware analysis. | reverse-engineering, debugging, dynamic-analysis | `.exe`, `.dll` |  |

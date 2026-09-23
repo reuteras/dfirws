@@ -12,15 +12,16 @@
 | [autoit-ripper](autoit-ripper.md) | Python | Extract AutoIt scripts embedded in PE binaries. | malware-analysis, scripting, deobfuscation | `.exe` |  |
 | [binlex](binlex.md) | GitHub Release | binlex is a binary genetic traits lexer for malware analysis. | malware-analysis, binary-analysis, binary-diffing | `.exe`, `.dll`, `.elf`, `.bin` |  |
 | [bulk_extractor](bulk-extractor.md) | HTTP | bulk_extractor extracts features such as email addresses and URLs from disk images. | forensics, carving, data-extraction | `.dd`, `.raw`, `.E01`, `.img` |  |
-| [cabarchive](cabarchive.md) | Python |  | compression, data-extraction | `.cab` |  |
+| [cabarchive](cabarchive.md) | Python | import cabarchive | compression, data-extraction | `.cab` |  |
 | [fq](fq.md) | GitHub Release | jq for binary formats - tool, language and decoders for working with binary and text formats | data-processing, binary-analysis, file-analysis | `.pcap`, `.pcapng`, `.mp4`, `.mp3`, `.flac`, `.zip`, `.tar`, `.gif`, `.png` |  |
 | [jq](jq.md) | GitHub Release | jq is a powerful command-line JSON processor that allows you to parse, filter, and manipulate JSON data with ease. It supports a wide range of operations, including selecting specific fields, transforming data, and performing complex queries. With its simple syntax and extensive functionality, jq is an essential tool for anyone working with JSON data in the command line. | json, data-processing, cli | `.json`, `.ndjson`, `.jsonl` |  |
 | [lessmsi](lessmsi.md) | GitHub Release | lessmsi is a tool to view and extract the contents of a Windows Installer (.msi) file. | windows | `.msi` |  |
 | [magika](magika.md) | Python | A tool to determine the content type of a file with deep learning. | file-analysis, ai |  |  |
 | [msidump](msidump.md) | Python | MSI Dump - a tool that analyzes malicious MSI installation packages, extracts files, streams, binary data and incorporates YARA scanner. | ioc, data-extraction, enrichment, parsing, forensics | `.msi` |  |
 | [oletools](oletools.md) | Python | Python tools to analyze security characteristics of MS Office and OLE files (also called Structured Storage, Compound File Binary Format or Compound Document File Format), for Malware Analysis and Incident Response #DFIR. | office, malware-analysis, vba | `.doc`, `.docx`, `.xls`, `.xlsx`, `.ppt`, `.pptx`, `.rtf` |  |
-| [python-magic](python-magic.md) | Python |  |  |  |  |
-| [pyzipper](pyzipper.md) | Python |  | compression, encryption | `.zip` |  |
+| [pyinstxtractor-ng](pyinstxtractor-ng.md) | Python | PyInstaller Extractor Next Generation extracts the Python scripts, modules and PYZ archives from PyInstaller generated Windows and Linux executables, including encrypted ones. | reverse-engineering, python, data-extraction | `.exe` |  |
+| [python-magic](python-magic.md) | Python | import magic; magic.from_file('file') |  |  |  |
+| [pyzipper](pyzipper.md) | Python | import pyzipper | compression, encryption | `.zip` |  |
 | [qrtool](qrtool.md) | GitHub Release | Tool for decoding QR codes from images | encoding, decoding | `.png`, `.svg` |  |
 | [ripgrep](ripgrep.md) | GitHub Release | ripgrep is a fast, modern, and user-friendly command-line search tool. | search, cli |  |  |
-| [unpy2exe](unpy2exe.md) | Python |  | reverse-engineering, python, decompiler | `.exe` |  |
+| [unpy2exe](unpy2exe.md) | Python | unpy2exe.py <py2exe executable> | reverse-engineering, python, decompiler | `.exe` |  |

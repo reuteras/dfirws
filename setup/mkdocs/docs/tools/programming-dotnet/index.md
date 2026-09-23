@@ -6,4 +6,4 @@
 | [DotNet 8 Desktop Runtime](dotnet-8-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0. | dotnet |  |  |
 | [DotNet 9 Desktop Runtime](dotnet-9-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0. | dotnet |  |  |
 | [dotnetfile](dotnetfile.md) | Git | dotnetfile is a Common Language Runtime (CLR) header parser library for Windows .NET files built in Python. The CLR header is present in every Windows .NET assembly beside the Portable Executable (PE) header. It stores a plethora of metadata information for the managed part of the file. | pe-analysis, dotnet |  |  |
-| [dotnetfile](dotnetfile-2.md) | Python |  | pe-analysis, dotnet | `.exe`, `.dll` |  |
+| [dotnetfile](dotnetfile-2.md) | Python | import dotnetfile | pe-analysis, dotnet | `.exe`, `.dll` |  |

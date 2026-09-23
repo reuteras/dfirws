@@ -2,6 +2,11 @@
 
 **Category:** Editors
 
+**Homepage:** <https://streetsidesoftware.github.io/vscode-spell-checker/>
+
+**Vendor:** streetsidesoftware
+
+
 **Source:** GitHub Release
 
 **Profiles:** Full, Basic
@@ -11,3 +16,9 @@
 **Tags:** text-editor, powershell, plugins
 
 Visual Studio Code PowerShell extension.
+
+## Tips
+Provides PowerShell IntelliSense, linting and debugging in VS Code.
+
+## Usage
+Installed into VS Code automatically.

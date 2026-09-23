@@ -4,7 +4,9 @@
 
 **Homepage:** <https://github.com/gehaxelt/Python-dsstore>
 
-**License:** MIT License
+**Vendor:** gehaxelt
+
+**License:** [MIT License](https://github.com/gehaxelt/Python-dsstore/blob/master/LICENSE.md)
 
 **Source:** Git
 
@@ -15,3 +17,9 @@
 **Tags:** forensics, macos, data-extraction
 
 A library for parsing .DS_Store files and extracting file names
+
+## Tips
+Lists the file names recorded in macOS .DS_Store files, which often reveal directory contents on web servers or in archives created on a Mac.
+
+## Usage
+python C:\git\Python-dsstore\main.py <.DS_Store file>

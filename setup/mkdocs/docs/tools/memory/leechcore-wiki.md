@@ -15,3 +15,9 @@
 **Tags:** memory-forensics, documentation
 
 GitHub wiki for LeechCore.
+
+## Tips
+Offline copy of the LeechCore wiki describing the memory acquisition devices and file formats supported by MemProcFS.
+
+## Usage
+Browse C:\git\LeechCore.wiki for documentation.

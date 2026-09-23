@@ -5,6 +5,7 @@
 | [APT-Hunter](apt-hunter.md) | Git | APT-Hunter is Threat Hunting tool for windows event logs which made by purple team mindset to provide detect APT movements hidden in the sea of windows event logs to decrease the time to uncover suspicious activity. | event-log, threat-hunting | `.evtx` |  |
 | [EVTX-ATTACK-SAMPLES](evtx-attack-samples.md) | Git | Windows Events Attack Samples. | event-log, mitre-attack | `.evtx` |  |
 | [Elastic Stack (ELK + Beats)](elastic-stack-elk-beats.md) | HTTP | Downloads Elasticsearch, Kibana, Logstash, Elastic Agent, and Beats. | siem, log-analysis, search, visualization | `.json`, `.log` | Full only |
+| [EventHawk](eventhawk.md) | Python | EventHawk parses Windows EVTX logs at speed, maps events to MITRE ATT&CK techniques, extracts IOCs and exports to JSON, CSV, XML, HTML, PDF, STIX 2.1, OpenIOC and YARA. Analysis profiles focus on themes such as logon activity, and the Sentinel module builds a baseline from known-good logs and flags anomalies with Sigma rules. Includes a Qt GUI. | event-log, log-analysis, threat-hunting, mitre-attack, ioc | `.evtx` |  |
 | [LUMEN](lumen.md) | npm | Your Browser-based EVTX Companion. | log-analysis, event-log, forensics, visualization | `.evtx` |  |
 | [LogBoost](logboost.md) | GitHub Release | Convert a variety of log formats to CSV while enriching detected IPs with Geolocation, ASN, DNS, WhoIs, Shodan InternetDB and Threat Indicator matches. | log-analysis, event-log | `.evtx`, `.csv`, `.json` | Full only |
 | [MasterParser](masterparser.md) | Git | MasterParser is a powerful DFIR tool designed for analyzing and parsing Linux logs | log-analysis, linux, security-testing | `.log` |  |
@@ -13,7 +14,7 @@
 | [Zircolite](zircolite.md) | Python | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |  |
 | [chainsaw](chainsaw.md) | GitHub Release | Rapidly Search and Hunt through Windows Forensic Artefacts | log-analysis, incident-response, sigma, detection | `.evtx` |  |
 | [dfir-toolkit](dfir-toolkit.md) | Cargo | The dfir-toolkit is a collection of command-line tools for digital forensics and incident response (DFIR) tasks. It includes various utilities for analyzing log files, registry hives, MFT files, and other artifacts commonly encountered in DFIR investigations. | forensics, timeline, log-analysis, event-log, registry, filesystem | `.evtx`, `.reg`, `.dat`, `.lnk`, `.pf`, `.mft`, `.zip` |  |
-| [evtx](evtx.md) | Python |  | log-analysis, event-log, windows | `.evtx` |  |
+| [evtx](evtx.md) | Python | evtx_dump.py <file.evtx> | log-analysis, event-log, windows | `.evtx` |  |
 | [evtx_dump](evtx-dump.md) | GitHub Release | A Fast (and safe) parser for the Windows XML Event Log (EVTX) format | log-analysis, event-log, windows | `.evtx` |  |
 | [flatten_json](flatten-json.md) | Python | Flatten JSON objects | python, json | `.json` |  |
 | [fx](fx.md) | GitHub Release | fx is a terminal JSON viewer and processor. | json, data-processing, visualization | `.json`, `.jsonl` |  |
@@ -21,4 +22,4 @@
 | [hayabusa](hayabusa.md) | GitHub Release | Hayabusa (隼) is a sigma-based threat hunting and fast forensics timeline generator for Windows event logs. | log-analysis, event-log, sigma, detection, timeline, incident-response | `.evtx` |  |
 | [hayabusa-rules](hayabusa-rules.md) | Git | Curated Windows event log Sigma rules used in Hayabusa and Velociraptor. | event-log, detection-rules, sigma | `.evtx` |  |
 | [takajo](takajo.md) | GitHub Release | Takajō (鷹匠) is a Hayabusa results analyzer. | log-analysis, timeline | `.json` |  |
-| [toolong](toolong.md) | Python |  | log-analysis, tui | `.log`, `.txt` |  |
+| [toolong](toolong.md) | Python | tl <logfile> | log-analysis, tui | `.log`, `.txt` |  |

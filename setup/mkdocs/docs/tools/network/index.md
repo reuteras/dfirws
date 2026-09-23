@@ -11,22 +11,23 @@
 | [OpenVPN](openvpn.md) | Winget | OpenVPN is a widely used open-source VPN solution that allows you to create secure connections over the internet. It is designed to be flexible and secure, supporting various authentication methods and encryption protocols. | network | `.ovpn` | Full only |
 | [PacketCircle](packetcircle.md) | Git | Wireshark Plugin for traffic-matrix visualization. | network, plugins, visualization | `.pcap`, `.pcapng` |  |
 | [PuTTY](putty.md) | Winget | PuTTY is a free and open-source terminal emulator and SSH client for Windows. It is used to connect to remote systems via SSH, Telnet, and other protocols. | network, terminal |  | Full only |
-| [PySocks](pysocks.md) | Python |  | network |  |  |
+| [PySocks](pysocks.md) | Python | import socks | network |  |  |
 | [SSHniff](sshniff.md) | Cargo | SSHniff is a command-line tool for capturing and analyzing SSH network traffic. It can be used to monitor and inspect SSH sessions, helping in forensic analysis of network communications. | network-analysis, network, pcap | `.pcap`, `.pcapng` |  |
 | [Tailscale](tailscale.md) | Winget | Tailscale is a modern VPN solution that allows you to create secure, private networks between your devices. It is designed to be easy to use and can be used for remote access, secure file sharing, and connecting devices across different networks. | network |  | Full only |
 | [WireGuard](wireguard.md) | Winget | WireGuard is a modern and efficient VPN protocol that provides secure and fast connections. It is designed to be simple to configure and use, making it a popular choice for both personal and enterprise VPN solutions. | network |  | Full only |
 | [Wireshark](wireshark.md) | Winget | Wireshark is a widely used network protocol analyzer that allows you to capture and analyze network traffic. It can be used for troubleshooting network issues, analyzing security incidents, and learning about network protocols. Wireshark provides a graphical interface for viewing and filtering captured packets, making it easier to analyze complex network traffic. | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng`, `.cap` |  |
 | [Zui](zui.md) | GitHub Release | Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data. | network-analysis, pcap | `.pcap`, `.pcapng`, `.zng` | Full only |
-| [dnslib](dnslib.md) | Python |  | network, dns |  |  |
-| [dpkt](dpkt.md) | Python |  | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng` |  |
-| [geoip2](geoip2.md) | Python |  | geolocation, network, maxmind | `.mmdb` |  |
+| [dnslib](dnslib.md) | Python | import dnslib | network, dns |  |  |
+| [dpkt](dpkt.md) | Python | import dpkt | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng` |  |
+| [filterforge](filterforge.md) | Python | filterforge from Cloudflare solves BPF filters with the z3 SMT solver and crafts packets that match (or do not match) a given filter expression. | network-analysis, network, pcap | `.pcap`, `.pcapng` |  |
+| [geoip2](geoip2.md) | Python | import geoip2.database | geolocation, network, maxmind | `.mmdb` |  |
 | [hfs](hfs.md) | GitHub Release | hfs is a simple HTTP file server for Windows. | http, network |  |  |
-| [maclookup](maclookup.md) | Python |  | network |  |  |
+| [maclookup](maclookup.md) | Python | maclookup <mac address> | network |  |  |
 | [netaddr](netaddr.md) | Python | A network address manipulation library for Python. | network |  |  |
-| [paramiko](paramiko.md) | Python |  | network, scripting |  |  |
+| [paramiko](paramiko.md) | Python | import paramiko | network, scripting |  |  |
 | [protodeep](protodeep.md) | Python | A tool to help reversing protobuf. | parsing, reverse-engineering | `.bin` |  |
-| [pycares](pycares.md) | Python |  | network, dns |  |  |
-| [pydivert](pydivert.md) | Python |  | network, pcap | `.pcap` |  |
-| [pyshark](pyshark.md) | Python |  | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng` |  |
-| [scapy](scapy.md) | Python |  | network-analysis, pcap, security-testing | `.pcap`, `.pcapng` |  |
+| [pycares](pycares.md) | Python | import pycares | network, dns |  |  |
+| [pydivert](pydivert.md) | Python | import pydivert | network, pcap | `.pcap` |  |
+| [pyshark](pyshark.md) | Python | import pyshark; cap = pyshark.FileCapture('file.pcap') | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng` |  |
+| [scapy](scapy.md) | Python | scapy | network-analysis, pcap, security-testing | `.pcap`, `.pcapng` |  |
 | [zaproxy](zaproxy.md) | GitHub Release | The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to. | web, security-testing, network |  | Full only |

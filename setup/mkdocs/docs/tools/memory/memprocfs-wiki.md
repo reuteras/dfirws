@@ -15,3 +15,9 @@
 **Tags:** memory-forensics, documentation
 
 GitHub wiki for MemProcFS
+
+## Tips
+Offline copy of the MemProcFS wiki. Read the pages on the virtual file system layout and forensic mode before analysing a memory image.
+
+## Usage
+Browse C:\git\MemProcFS.wiki for documentation.

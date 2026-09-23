@@ -27,9 +27,9 @@
 | [git](git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
 | [go-size-analyzer](go-size-analyzer.md) | GitHub Release | go-size-analyzer (gsa) is a tool to analyze the size of Go binaries. | golang, binary-analysis | `.exe`, `.dll` |  |
 | [godap](godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | windows, network-analysis, network |  | Full only |
-| [graphviz](graphviz-2.md) | Python |  | visualization, graph | `.dot`, `.gv` |  |
+| [graphviz](graphviz-2.md) | Python | dot -Tpng graph.dot -o graph.png | visualization, graph | `.dot`, `.gv` |  |
 | [grip](grip.md) | Python | Render local readme files before sending off to GitHub. | markdown, viewer | `.md` |  |
-| [hexdump](hexdump.md) | Python |  | hex-editor, binary-analysis | `.bin` |  |
+| [hexdump](hexdump.md) | Python | hexdump <file> | hex-editor, binary-analysis | `.bin` |  |
 | [jpterm](jpterm.md) | Python | Jupyter in the terminal. | python, data-processing, tui | `.json` |  |
 | [jupyter-collection](jupyter-collection.md) | Git | Collection of Jupyter Notebooks by @fr0gger_ | python |  |  |
 | [jupyterlab](jupyterlab.md) | Python | JupyterLab computational environment | python, data-processing | `.ipynb` |  |
@@ -38,12 +38,12 @@
 | [mmdbinspect](mmdbinspect.md) | GitHub Release | Tool for inspecting MaxMind GeoIP2 databases. | geolocation, maxmind | `.mmdb` |  |
 | [oh-my-posh](oh-my-posh.md) | Winget | Oh My Posh is a customizable prompt for PowerShell and other shells. It allows you to create beautiful and functional command-line prompts with themes and customizations. | terminal, shell |  |  |
 | [opencode-ai](opencode-ai.md) | npm | AI coding agent for the terminal with MCP server support. Configured with MCP servers for Ghidra (GhidrAssistMCP), radare2 (r2mcp), and regipy. | ai, automation, mcp | `.txt`, `.md`, `.log`, `.json` |  |
-| [prettytable](prettytable.md) | Python |  | data-processing |  |  |
+| [prettytable](prettytable.md) | Python | import prettytable | data-processing |  |  |
 | [pwncat](pwncat.md) | Python | Netcat on steroids with Firewall, IDS/IPS evasion, bind and reverse shell and port forwarding magic - and its fully scriptable with Python (PSE). | exploitation, security-testing |  |  |
-| [pyvis](pyvis.md) | Python |  | visualization, graph |  |  |
-| [rexi](rexi.md) | Python |  | search, data-processing, tui |  |  |
-| [time-decode](time-decode.md) | Python |  | metadata, forensics, decoding |  |  |
+| [pyvis](pyvis.md) | Python | from pyvis.network import Network | visualization, graph |  |  |
+| [rexi](rexi.md) | Python | rexi | search, data-processing, tui |  |  |
+| [time-decode](time-decode.md) | Python | time-decode --guess <value> | metadata, forensics, decoding |  |  |
 | [upx](upx.md) | GitHub Release | UPX is a free, portable, extendable, high-performance executable packer. | packer-detection, pe-analysis, compression | `.exe`, `.dll`, `.elf` |  |
-| [visidata](visidata.md) | Python |  | data-processing, tui, csv | `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx` |  |
+| [visidata](visidata.md) | Python | vd file.csv | data-processing, tui, csv | `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx` |  |
 | [zensical](zensical.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.toml` |  |
 | [zstd](zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |

@@ -9,4 +9,4 @@
 | [chepy](chepy.md) | Python | Chepy is a python library with a handy cli that is aimed to mirror some of the capabilities of CyberChef. A reasonable amount of effort was put behind Chepy to make it compatible to the various functionalities that CyberChef offers, all in a pure Pythonic manner. | data-processing, encoding, decoding, deobfuscation, hashing | `.bin`, `.txt`, `.hex` |  |
 | [hashcat](hashcat.md) | HTTP | hashcat is a password recovery tool. | password-cracking, hashing |  | Full only |
 | [name-that-hash](name-that-hash.md) | Python | The Modern Hash Identification System. | hashing, file-analysis |  |  |
-| [pycryptodome](pycryptodome.md) | Python |  | encryption, cryptography |  |  |
+| [pycryptodome](pycryptodome.md) | Python | from Crypto.Cipher import AES | encryption, cryptography |  |  |

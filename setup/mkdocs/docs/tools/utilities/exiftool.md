@@ -21,6 +21,9 @@ ExifTool is a platform-independent Perl library plus a command-line application 
 ## Tips
 ExifTool is installed in .\mount\Tools\exiftool.
 
+## Usage
+exiftool <file>
+
 ## Sample Commands
 - `exiftool image.jpg`
 

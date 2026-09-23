@@ -6,6 +6,7 @@
 
 **Vendor:** Amazon
 
+**License:** Apache-2.0
 
 **Source:** Installer
 
@@ -16,6 +17,12 @@
 **Tags:** java
 
 Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK).
+
+## Tips
+Corretto 21 is the default Java runtime used by Ghidra, jd-gui, Recaf, bytecode-viewer, MsgViewer and other Java tools. Run 'java -version' to confirm which runtime is active on PATH.
+
+## Usage
+java -jar tool.jar
 
 ## Sample Commands
 - `java -version`

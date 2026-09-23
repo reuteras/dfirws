@@ -2,7 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
-| [Aspose.Email-for-Python-via-Net](aspose-email-for-python-via-net.md) | Python |  | email, forensics, data-extraction | `.msg`, `.eml`, `.pst`, `.ost`, `.mbox` |  |
+| [Aspose.Email-for-Python-via-Net](aspose-email-for-python-via-net.md) | Python | import aspose.email | email, forensics, data-extraction | `.msg`, `.eml`, `.pst`, `.ost`, `.mbox` |  |
 | [EmailAnalyzer](emailanalyzer.md) | Git | With EmailAnalyzer you can analyze your suspicious emails. You can extract headers, links, and hashes from the .eml file and you can generate reports. | email, forensics, phishing | `.eml` |  |
 | [Mail Viewer](mail-viewer.md) | HTTP | Mail Viewer is a tool for viewing email files and mailboxes. | email, forensics | `.eml`, `.msg` |  |
 | [MsgViewer](msgviewer.md) | GitHub Release | A tool for viewing and analyzing Outlook MSG files. | email, forensics | `.msg` |  |

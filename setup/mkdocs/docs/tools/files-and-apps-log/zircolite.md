@@ -14,3 +14,6 @@ Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon fo
 
 ## Tips
 Use zircolite.ps1 to run the tool, as it ensures the correct Python environment is used.
+
+## Usage
+zircolite.ps1 --evtx <evtx folder> --ruleset <rules.json>

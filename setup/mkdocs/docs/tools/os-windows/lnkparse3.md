@@ -11,3 +11,9 @@
 **Tags:** windows, forensics, file-analysis
 
 Windows Shortcut file (LNK) parser
+
+## Tips
+Prints target path, arguments, timestamps, machine ID and MAC address from LNK files; --json for structured output. Jumplist Browser covers Jump Lists.
+
+## Usage
+lnkparse <file.lnk>
