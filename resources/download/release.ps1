@@ -2544,32 +2544,6 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# forensic-timeliner
-if (Test-ToolIncluded -ToolName "forensic-timeliner") {
-    $status = Get-GitHubRelease -repo "acquiredsecurity/forensic-timeliner" -path "${SETUP_PATH}\ForensicTimeliner.zip" -match "ForensicTimeliner" -check "Zip archive data"
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "forensic-timeliner"
-    Category = "Incident Response"
-    Shortcuts = @()
-    InstallVerifyCommand = "dfirws-install.ps1 -ForensicTimeliner"
-    Verify = @()
-    FileExtensions = @(".evtx", ".csv", ".json")
-    Tags = @("forensics", "timeline")
-    Notes = "A high-speed forensic timeline engine for Windows forensic artifact CSV output built for DFIR investigators. Quickly consolidate CSV output from processed triage evidence for Eric Zimmerman (EZ Tools) Kape, Axiom, Hayabusa, Chainsaw and Nirsoft into a unified timeline."
-    Tips = "Merges CSV output from the Zimmerman tools, KAPE, Axiom, Hayabusa, Chainsaw and Nirsoft into one timeline. Run it on the module output folder and open the result in Timeline Explorer. Excluded from the Basic profile."
-    Usage = "forensic-timeliner.exe --help"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/acquiredsecurity/forensic-timeliner"
-    Vendor = "acquiredsecurity"
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
 # jwt-cli
 $status = Get-GitHubRelease -repo "mike-engel/jwt-cli" -path "${SETUP_PATH}\jwt-cli.tar.gz" -match "jwt-windows.tar.gz"
 if ($status) {

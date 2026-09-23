@@ -294,7 +294,6 @@ C:\Tools\capa\capa.exe Desktop\readonly\suspect.exe
 | Tool | Path | Use case |
 | ---- | ---- | -------- |
 | TimelineExplorer | `C:\Program Files\TimelineExplorer\TimelineExplorer.exe` | View and filter CSV timelines |
-| forensic-timeliner | `C:\Tools\forensic-timeliner\` | Automated timeline generation |
 | DCode | `C:\Tools\DCode\DCode.exe` | Individual timestamp decode |
 | time-decode | `C:\venv\bin\time-decode.exe` | CLI timestamp decoder |
 

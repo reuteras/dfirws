@@ -78,7 +78,6 @@ $DFIRWS_PROFILES = @{
             "fqlite",
             "LogBoost",
             "jadx",
-            "forensic-timeliner",
             "vscode-shellcheck",
             "vscode-spell-checker",
             # release.ps1 - Obsidian plugins (excluded with Obsidian)
