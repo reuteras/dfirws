@@ -31,6 +31,10 @@
     This will only show errors, warnings and failures from the log files without doing any updates.
 
 .EXAMPLE
+    .\downloadFiles.ps1 -VerifyOnSuccess
+    This will verify that tools are available, but only if no download errors, warnings or failures were found, saving time by skipping the verify sandbox when a download needs to be fixed first.
+
+.EXAMPLE
     .\downloadFiles.ps1 -ClamScan
     This will run a ClamAV scan of installed tools in an isolated sandbox.
 
@@ -108,6 +112,8 @@ param(
     [Switch]$Winget,
     [Parameter(HelpMessage = "Verify that tools are available.")]
     [Switch]$Verify,
+    [Parameter(HelpMessage = "Verify that tools are available, but only if no errors, warnings or failures were found in the logs (skips the slow verify sandbox when a download needs to be fixed first).")]
+    [Switch]$VerifyOnSuccess,
     [Parameter(HelpMessage = "Install and Update Visual Studio buildtools.")]
     [Switch]$VisualStudioBuildTools,
     [Parameter(HelpMessage = "Update Zimmerman tools.")]
@@ -224,6 +230,100 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
     $DFIRWS_EXCLUDE_GIT_REPOS = @()
 }
 
+# Scan log files for errors, warnings and failures, using the same filters as -ShowErrors.
+# Used both to gate -VerifyOnSuccess and for the final summary at the end of the script.
+function Get-LogIssues {
+    $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
+        $_.Line -notmatch " INFO " -and
+        $_.Line -notmatch "This is taking longer than usual" -and
+        $_.Line -notmatch "Installing collected packages" -and
+        $_.Line -notmatch "pymispwarninglists" -and
+        $_.Line -notmatch "warning: be sure to add" -and
+        $_.Line -notmatch "create mode " -and
+        $_.Line -notmatch "delete mode " -and
+        $_.Line -notmatch "rename " -and
+        $_.Line -notmatch "reinstalling" -and
+        $_.Line -notmatch "origin/main Updating" -and
+        $_.Line -notmatch "new branch" -and
+        $_.Line -notmatch "warnings.py" -and
+        $_.Line -notmatch "core_perl" -and
+        $_.Line -notmatch "unused import" -and
+        $_.Line -notmatch "unused variable" -and
+        $_.Line -notmatch "is never used" -and
+        $_.Line -notmatch "is never constructed" -and
+        $_.Line -notmatch "elided elsewhere is confusing" -and
+        $_.Line -notmatch "generated [0-9]+ warnings" -and
+        $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
+        $_.line -notmatch "skipping tool at index" -and
+        $_.Line -notmatch "the report will be incomplete" -and
+        $_.Line -notmatch "allowed warning found in" -and
+        $_.Line -notmatch "unmaintained" -and
+        $_.Line -notmatch "unsound" -and
+        $_.Line -notmatch "WARNING: Defender:" -and
+        $_.Line -notmatch "WARNING: Files" -and
+        # Harmless CMake "developer warning": CMAKE_SH is deliberately passed on the
+        # command line to bypass the MinGW Makefiles generator's sh.exe-on-PATH check
+        # (see install_msys2.ps1), and CMake flags it as unused-cli because it's read by
+        # its own generator startup code rather than by the project's CMakeLists.txt.
+        $_.Line -notmatch "CMake Warning \(unused-cli\)"
+    }
+
+    $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
+        $_.Line -notmatch "Error: no test specified" -and
+        $_.Line -notmatch "pretty.errors" -and
+        $_.Line -notmatch "Copied (replaced existing)" -and
+        $_.Line -notmatch "INFO" -and
+        $_.Line -notmatch "perl-Error" -and
+        $_.Line -notmatch "Downloaded " -and
+        $_.Line -notmatch "/cffi/error.py" -and
+        $_.Line -notmatch "github/workflows" -and
+        $_.Line -notmatch " Compiling " -and
+        $_.Line -notmatch "create mode " -and
+        $_.Line -notmatch "delete mode " -and
+        $_.Line -notmatch "rename " -and
+        $_.Line -notmatch "new branch" -and
+        $_.Line -notmatch "origin/main Updating" -and
+        $_.Line -notmatch "libgpg-error" -and
+        $_.Line -notmatch "could not be locally" -and
+        $_.Line -notmatch "via WKD" -and
+        $_.Line -notmatch "ERROR: 9DD0D4217D75" -and
+        $_.Line -notmatch "msys64\\usr\\" -and
+        $_.Line -notmatch "gpg-error.exe" -and
+        $_.Line -notmatch "gpg: error reading key: Network error" -and
+        $_.Line -notmatch "gpg: error reading key: No data" -and
+        $_.Line -notmatch "gpg: error reading key: general error" -and
+        $_.Line -notmatch "ERROR: Could not update key:" -and
+        $_.Line -notmatch "Error Getting File from" -and
+        $_.Line -notmatch "Adding thiserror" -and
+        $_.Line -notmatch "gpg-error" -and
+        $_.Line -notmatch "gpg: error reading key: Try again later" -and
+        $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
+        $_.Line -notmatch "error\[vulnerability\]" -and
+        $_.Line -notmatch "error\[unmaintained\]" -and
+        $_.Line -notmatch "error\[unsound\]" -and
+        $_.Line -notmatch "error\[notice\]" -and
+        $_.Line -notmatch "SIGNATURE_BASE_" -and
+        $_.Line -notmatch "Total errors:" -and
+        $_.Line -notmatch "error scanning C:"
+    }
+
+    $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
+        $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
+        $_.Line -notmatch "ucrt64/share" -and
+        $_.Line -notmatch "origin/main Updating" -and
+        $_.Line -notmatch "origin/master Updating" -and
+        $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
+        $_.Line -notmatch "failed-to-read-json.js" -and
+        $_.Line -notmatch "LUMEN/src/sigma-master"
+    }
+
+    return [PSCustomObject]@{
+        Warnings = $warnings
+        Errors   = $errors
+        Failed   = $failed
+    }
+}
+
 if (-not $ShowErrors.IsPresent) {
 
 $ProgressPreference = "SilentlyContinue"
@@ -272,7 +372,7 @@ if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($ClamScan.IsPresent -or $YaraScan.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($ClamScan.IsPresent -or $YaraScan.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VerifyOnSuccess.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } elseif ($DistributionProfile -ne "") {
     Write-DateLog "Download tools for dfirws using profile: $DistributionProfile"
@@ -529,10 +629,20 @@ if (!(Test-Path ".\mount\golang")){
     New-Item -ItemType Directory -Force -Path ".\mount\golang" 2>&1 | Out-Null
 }
 
-if ($Verify.IsPresent) {
-    Write-DateLog "Verify that tools are available."
-    .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download | Out-Null
-    Write-DateLog "Verify done."
+if ($Verify.IsPresent -or $VerifyOnSuccess.IsPresent) {
+    $runVerify = $true
+    if ($VerifyOnSuccess.IsPresent -and -not $Verify.IsPresent) {
+        $preVerifyIssues = Get-LogIssues
+        if ($preVerifyIssues.Warnings -or $preVerifyIssues.Errors -or $preVerifyIssues.Failed) {
+            $runVerify = $false
+            Write-DateLog "Skipping verify sandbox: errors, warnings or failures found in log files. Fix these first (see -ShowErrors), then re-run with -Verify."
+        }
+    }
+    if ($runVerify) {
+        Write-DateLog "Verify that tools are available."
+        .\resources\download\verify.ps1 -WorkingDirectory $PWD\resources\download | Out-Null
+        Write-DateLog "Verify done."
+    }
 }
 
 if ($ClamScan.IsPresent -and $YaraScan.IsPresent) {
@@ -553,89 +663,10 @@ if ($ClamScan.IsPresent -and $YaraScan.IsPresent) {
 } # end if (-not $ShowErrors.IsPresent)
 
 # Check for errors and warnings in log files
-$warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
-    $_.Line -notmatch " INFO " -and
-    $_.Line -notmatch "This is taking longer than usual" -and
-    $_.Line -notmatch "Installing collected packages" -and
-    $_.Line -notmatch "pymispwarninglists" -and
-    $_.Line -notmatch "warning: be sure to add" -and
-    $_.Line -notmatch "create mode " -and
-    $_.Line -notmatch "delete mode " -and
-    $_.Line -notmatch "rename " -and
-    $_.Line -notmatch "reinstalling" -and
-    $_.Line -notmatch "origin/main Updating" -and
-    $_.Line -notmatch "new branch" -and
-    $_.Line -notmatch "warnings.py" -and
-    $_.Line -notmatch "core_perl" -and
-    $_.Line -notmatch "unused import" -and
-    $_.Line -notmatch "unused variable" -and
-    $_.Line -notmatch "is never used" -and
-    $_.Line -notmatch "is never constructed" -and
-    $_.Line -notmatch "elided elsewhere is confusing" -and
-    $_.Line -notmatch "generated [0-9]+ warnings" -and
-    $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
-    $_.line -notmatch "skipping tool at index" -and
-    $_.Line -notmatch "the report will be incomplete" -and
-    $_.Line -notmatch "allowed warning found in" -and
-    $_.Line -notmatch "unmaintained" -and
-    $_.Line -notmatch "unsound" -and
-    $_.Line -notmatch "WARNING: Defender:" -and
-    $_.Line -notmatch "WARNING: Files" -and
-    # Harmless CMake "developer warning": CMAKE_SH is deliberately passed on the
-    # command line to bypass the MinGW Makefiles generator's sh.exe-on-PATH check
-    # (see install_msys2.ps1), and CMake flags it as unused-cli because it's read by
-    # its own generator startup code rather than by the project's CMakeLists.txt.
-    $_.Line -notmatch "CMake Warning \(unused-cli\)"
-}
-
-$errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
-    $_.Line -notmatch "Error: no test specified" -and
-    $_.Line -notmatch "pretty.errors" -and
-    $_.Line -notmatch "Copied (replaced existing)" -and
-    $_.Line -notmatch "INFO" -and
-    $_.Line -notmatch "perl-Error" -and
-    $_.Line -notmatch "Downloaded " -and
-    $_.Line -notmatch "/cffi/error.py" -and
-    $_.Line -notmatch "github/workflows" -and
-    $_.Line -notmatch " Compiling " -and
-    $_.Line -notmatch "create mode " -and
-    $_.Line -notmatch "delete mode " -and
-    $_.Line -notmatch "rename " -and
-    $_.Line -notmatch "new branch" -and
-    $_.Line -notmatch "origin/main Updating" -and
-    $_.Line -notmatch "libgpg-error" -and
-    $_.Line -notmatch "could not be locally" -and
-    $_.Line -notmatch "via WKD" -and
-    $_.Line -notmatch "ERROR: 9DD0D4217D75" -and
-    $_.Line -notmatch "msys64\\usr\\" -and
-    $_.Line -notmatch "gpg-error.exe" -and
-    $_.Line -notmatch "gpg: error reading key: Network error" -and
-    $_.Line -notmatch "gpg: error reading key: No data" -and
-    $_.Line -notmatch "gpg: error reading key: general error" -and
-    $_.Line -notmatch "ERROR: Could not update key:" -and
-    $_.Line -notmatch "Error Getting File from" -and
-    $_.Line -notmatch "Adding thiserror" -and
-    $_.Line -notmatch "gpg-error" -and
-    $_.Line -notmatch "gpg: error reading key: Try again later" -and
-    $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
-    $_.Line -notmatch "error\[vulnerability\]" -and
-    $_.Line -notmatch "error\[unmaintained\]" -and
-    $_.Line -notmatch "error\[unsound\]" -and
-    $_.Line -notmatch "error\[notice\]" -and
-    $_.Line -notmatch "SIGNATURE_BASE_" -and
-    $_.Line -notmatch "Total errors:" -and
-    $_.Line -notmatch "error scanning C:"
-}
-
-$failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
-    $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
-    $_.Line -notmatch "ucrt64/share" -and
-    $_.Line -notmatch "origin/main Updating" -and
-    $_.Line -notmatch "origin/master Updating" -and
-    $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
-    $_.Line -notmatch "failed-to-read-json.js" -and
-    $_.Line -notmatch "LUMEN/src/sigma-master"
-}
+$logIssues = Get-LogIssues
+$warnings = $logIssues.Warnings
+$errors = $logIssues.Errors
+$failed = $logIssues.Failed
 
 # Check for security audit findings (npm audit, govulncheck, pip-audit, cargo audit)
 if ( -not $ShowErrors.IsPresent) {
