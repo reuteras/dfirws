@@ -3520,47 +3520,6 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# debloat
-$status = Get-GitHubRelease -repo "Squiblydoo/debloat" -path "${SETUP_PATH}\debloat.zip" -match "Windows" -check "Zip archive data"
-if ($status) {
-    & $SEVENZIP x -aoa "${SETUP_PATH}\debloat.zip" -o"${TOOLS}\bin" | Out-Null
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "debloat"
-    Category = "Files and apps\PE"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\PE\Debloat.lnk"
-            Target   = "`${TOOLS}\bin\debloat.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = ""
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "debloat"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".exe", ".dll")
-    Tags = @("malware-analysis", "pe-analysis", "deobfuscation")
-    Notes = "A GUI and CLI tool for removing bloat from executables"
-    Tips = "Removes junk padding that malware uses to exceed sandbox and upload size limits so the file can be scanned and shared. Keep the original for hashing."
-    Usage = "debloat.exe <bloated.exe>"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/Squiblydoo/debloat"
-    Vendor = "Squiblydoo"
-    License = "BSD-3-Clause"
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
 # Thumbcacheviewer
 $status = Get-GitHubRelease -repo "thumbcacheviewer/thumbcacheviewer" -path "${SETUP_PATH}\thumbcacheviewer.zip" -match "viewer_64" -check "Zip archive data"
 if ($status) {

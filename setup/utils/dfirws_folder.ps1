@@ -136,7 +136,6 @@ Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PDF\xray.lnk" -De
 New-Item -Force -ItemType Directory "${HOME}\Desktop\dfirws\Files and apps\PE" | Out-Null
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\4n4lDetector.lnk" -DestinationPath "${env:ProgramFiles}\4n4lDetector\4N4LDetector.exe"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\capa.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\capa\capa.exe" -Arguments "${CLI_TOOL_ARGS} -command capa.exe -h"
-Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\Debloat.lnk" -DestinationPath "${TOOLS}\bin\debloat.exe"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\dll_to_exe.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop"
 Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\hachoir-tools.lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Arguments "${CLI_TOOL_ARGS} -command dir C:\venv\bin\hachoir-*"
 Add-shortcut -SourceLnk "${HOME}\Desktop\dfirws\Files and apps\PE\hollows_hunter (Scans running processes. Recognizes and dumps a variety of in-memory implants).lnk" -DestinationPath "${CLI_TOOL}" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${TOOLS}\bin\hollows_hunter.exe" -Arguments "${CLI_TOOL_ARGS} -command hollows_hunter.exe /help"
