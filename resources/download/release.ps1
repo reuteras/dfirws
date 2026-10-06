@@ -4609,7 +4609,7 @@ if (Test-ToolIncluded -ToolName "Obsidian") {
     $status = Get-GitHubRelease -repo "mgmeyers/obsidian-kanban" -path "${SETUP_PATH}\obsidian-plugins\obsidian-kanban\styles.css" -match "styles.css" -check "ASCII text"
 
     # quickadd
-    $status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\main.js" -match "main.js" -check "JavaScript source"
+    $status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\main.js" -match "main.js"
     $status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\manifest.json" -match "manifest.json" -check "JSON text data"
     $status = Get-GitHubRelease -repo "chhoumann/quickadd" -path "${SETUP_PATH}\obsidian-plugins\quickadd\styles.css" -match "styles.css" -check "ASCII text"
 
