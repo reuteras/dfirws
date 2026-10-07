@@ -456,6 +456,130 @@ function Test-Command {
     }
 }
 
+# Computes the UserChoice hash that Explorer uses to validate a default app choice.
+# Algorithm as reverse engineered by PS-SFTA (https://github.com/DanysysTeam/PS-SFTA).
+function Get-UserChoiceHash {
+    param (
+        [Parameter(Mandatory=$true)] [string]$Extension,
+        [Parameter(Mandatory=$true)] [string]$ProgId,
+        [Parameter(Mandatory=$true)] [string]$UserSid,
+        [Parameter(Mandatory=$true)] [DateTime]$Timestamp
+    )
+
+    # Timestamp is the UserChoice key's last write time, truncated to the minute.
+    $t = [DateTime]::new($Timestamp.Year, $Timestamp.Month, $Timestamp.Day, $Timestamp.Hour, $Timestamp.Minute, 0, $Timestamp.Kind)
+    $fileTime = $t.ToFileTime()
+    $hexTime = (($fileTime -shr 32).ToString("x8") + ($fileTime -band 0xFFFFFFFFL).ToString("x8"))
+
+    $experience = "User Choice set via Windows User Experience {D18B6DD5-6124-4341-9318-804003BAFA0B}"
+    $baseInfo = "${Extension}${UserSid}${ProgId}${hexTime}${experience}".ToLowerInvariant()
+
+    [byte[]]$data = [System.Text.Encoding]::Unicode.GetBytes($baseInfo) + [byte[]](0, 0)
+    [byte[]]$md5 = [System.Security.Cryptography.MD5]::Create().ComputeHash($data)
+
+    # 32-bit helpers: wrap to uint32, read little-endian uint32, multiply mod 2^32
+    function ConvertTo-U32([long]$v) { return [uint32]($v -band 0xFFFFFFFFL) }
+    function Get-U32At([int]$i) { return [uint32][BitConverter]::ToUInt32($data, $i) }
+    # Multiply mod 2^32 in 16-bit halves so intermediate values stay below 2^63
+    function Get-MulU32([uint32]$a, [uint32]$b) {
+        $lo = [long]($a -band 0xFFFF) * $b
+        $hi = ([long]($a -shr 16) * $b) -band 0xFFFF
+        return [uint32](($lo + ($hi -shl 16)) -band 0xFFFFFFFFL)
+    }
+
+    $lengthBase = $data.Length
+    $length = [int](($lengthBase -band 4) -le 1) + ($lengthBase -shr 2) - 1
+    if ($length -le 1) { return "" }
+    $pairs = (($length - 2) -shr 1) + 1
+
+    $md51 = [uint32]([BitConverter]::ToUInt32($md5, 0) -bor 1)
+    $md52 = [uint32]([BitConverter]::ToUInt32($md5, 4) -bor 1)
+
+    # First pass
+    $m1 = ConvertTo-U32 ([long]$md51 + 0x69FB0000L)
+    $m2 = ConvertTo-U32 ([long]$md52 + 0x13DB0000L)
+    [uint32]$h1 = 0; [uint32]$cache = 0; [uint32]$h2 = 0
+    for ($p = 0; $p -lt $pairs; $p++) {
+        $r0 = ConvertTo-U32 ([long](Get-U32At ($p * 8)) + $h1)
+        $r1 = Get-U32At ($p * 8 + 4)
+        $r2a = ConvertTo-U32 ([long](Get-MulU32 $r0 $m1) - [long](Get-MulU32 0x10FA9605L ($r0 -shr 16)))
+        $r2b = ConvertTo-U32 ([long](Get-MulU32 0x79F8A395L $r2a) + [long](Get-MulU32 0x689B6B9FL ($r2a -shr 16)))
+        $r3 = ConvertTo-U32 ([long](Get-MulU32 0xEA970001L $r2b) - [long](Get-MulU32 0x3C101569L ($r2b -shr 16)))
+        $r4 = ConvertTo-U32 ([long]$r3 + $r1)
+        $r5 = ConvertTo-U32 ([long]$cache + $r3)
+        $r6a = ConvertTo-U32 ([long](Get-MulU32 $r4 $m2) - [long](Get-MulU32 0x3CE8EC25L ($r4 -shr 16)))
+        $r6b = ConvertTo-U32 ([long](Get-MulU32 0x59C3AF2DL $r6a) - [long](Get-MulU32 0x2232E0F1L ($r6a -shr 16)))
+        $h1 = ConvertTo-U32 ([long](Get-MulU32 0x1EC90001L $r6b) + [long](Get-MulU32 0x35BD1EC9L ($r6b -shr 16)))
+        $h2 = ConvertTo-U32 ([long]$r5 + $h1)
+        $cache = $h2
+    }
+    $a1 = $h1; $a2 = $h2
+
+    # Second pass
+    [uint32]$h1 = 0; [uint32]$cache = 0; [uint32]$h2 = 0
+    for ($p = 0; $p -lt $pairs; $p++) {
+        $r0 = ConvertTo-U32 ([long](Get-U32At ($p * 8)) + $h1)
+        $r1a = Get-MulU32 $r0 $md51
+        $r1b = ConvertTo-U32 ([long](Get-MulU32 0xB1110000L $r1a) - [long](Get-MulU32 0x30674EEFL ($r1a -shr 16)))
+        $r2a = ConvertTo-U32 ([long](Get-MulU32 0x5B9F0000L $r1b) - [long](Get-MulU32 0x78F7A461L ($r1b -shr 16)))
+        $r2b = ConvertTo-U32 ([long](Get-MulU32 0x12CEB96DL ($r2a -shr 16)) - [long](Get-MulU32 0x46930000L $r2a))
+        $r3 = ConvertTo-U32 ([long](Get-MulU32 0x1D830000L $r2b) + [long](Get-MulU32 0x257E1D83L ($r2b -shr 16)))
+        $r4a = Get-MulU32 $md52 (ConvertTo-U32 ([long]$r3 + (Get-U32At ($p * 8 + 4))))
+        $r4b = ConvertTo-U32 ([long](Get-MulU32 0x16F50000L $r4a) - [long](Get-MulU32 0x5D8BE90BL ($r4a -shr 16)))
+        $r5a = ConvertTo-U32 ([long](Get-MulU32 0x96FF0000L $r4b) - [long](Get-MulU32 0x2C7C6901L ($r4b -shr 16)))
+        $r5b = ConvertTo-U32 ([long](Get-MulU32 0x2B890000L $r5a) + [long](Get-MulU32 0x7C932B89L ($r5a -shr 16)))
+        $h1 = ConvertTo-U32 ([long](Get-MulU32 0x9F690000L $r5b) - [long](Get-MulU32 0x405B6097L ($r5b -shr 16)))
+        $h2 = ConvertTo-U32 ([long]$h1 + $cache + $r3)
+        $cache = $h2
+    }
+
+    $out = [BitConverter]::GetBytes([uint32]($a1 -bxor $h1)) + [BitConverter]::GetBytes([uint32]($a2 -bxor $h2))
+    return [Convert]::ToBase64String($out)
+}
+
+# Sets the default app for a file extension for the current user. A UserChoice
+# entry without a valid hash is ignored by Explorer, which then asks which app to use.
+function Set-UserFileAssociation {
+    param (
+        [Parameter(Mandatory=$true)] [string]$Extension,
+        [Parameter(Mandatory=$true)] [string]$ProgId
+    )
+
+    $path = "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\${Extension}\UserChoice"
+    $sid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+
+    for ($i = 0; $i -lt 3; $i++) {
+        try {
+            # Windows adds a deny SetValue rule to the UserChoice key it creates. Remove
+            # the rule so the key can be deleted, then write a new key.
+            $old = [Microsoft.Win32.Registry]::CurrentUser.OpenSubKey($path, [Microsoft.Win32.RegistryKeyPermissionCheck]::ReadWriteSubTree, [System.Security.AccessControl.RegistryRights]'ChangePermissions, ReadPermissions')
+            if ($old) {
+                $acl = $old.GetAccessControl()
+                $acl.GetAccessRules($true, $false, [System.Security.Principal.SecurityIdentifier]) |
+                    Where-Object { $_.AccessControlType -eq "Deny" } |
+                    ForEach-Object { [void]$acl.RemoveAccessRuleSpecific($_) }
+                $old.SetAccessControl($acl)
+                $old.Close()
+                [Microsoft.Win32.Registry]::CurrentUser.DeleteSubKeyTree($path, $false)
+            }
+            $now = [DateTime]::Now
+            $hash = Get-UserChoiceHash -Extension $Extension -ProgId $ProgId -UserSid $sid -Timestamp $now
+            $key = [Microsoft.Win32.Registry]::CurrentUser.CreateSubKey($path)
+            $key.SetValue("ProgId", $ProgId)
+            $key.SetValue("Hash", $hash)
+            $key.Close()
+        } catch {
+            Write-DateLog "WARNING: Failed to set ${Extension} to ${ProgId}: $_"
+            return $false
+        }
+        # The hash covers the key's last write time to the minute, retry if the minute changed
+        if ([DateTime]::Now.ToString("yyyyMMddHHmm") -eq $now.ToString("yyyyMMddHHmm")) {
+            return $true
+        }
+    }
+    return $false
+}
+
 # Functions to help install programs
 function Install-Apimonitor {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-apimonitor.txt")) {

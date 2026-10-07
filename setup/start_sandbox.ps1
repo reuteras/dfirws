@@ -410,6 +410,18 @@ if ($ed) {
     Write-DateLog "Editor associations set" | Write-SetupLog
 }
 
+# Open HTML files in Edge. In some sandboxes Windows rejects the hash of the
+# UserChoice it created for .html and asks which app to use on every open.
+if (Test-Path "Registry::HKEY_CLASSES_ROOT\MSEdgeHTM") {
+    foreach ($ext in ".htm", ".html") {
+        if (Set-UserFileAssociation -Extension $ext -ProgId "MSEdgeHTM") {
+            Write-DateLog "Default app for $ext set to Edge" | Write-SetupLog
+        } else {
+            Write-DateLog "WARNING: Could not set default app for $ext to Edge" | Write-SetupLog
+        }
+    }
+}
+
 # Set dark theme if selected
 Update-SandboxProgress "Applying theme and wallpaper..."
 if ("${WSDFIR_DARK}" -eq "Yes") {
