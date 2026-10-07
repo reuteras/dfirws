@@ -410,9 +410,23 @@ if ($ed) {
     Write-DateLog "Editor associations set" | Write-SetupLog
 }
 
-# Open HTML files in Edge. In some sandboxes Windows rejects the hash of the
-# UserChoice it created for .html and asks which app to use on every open.
-if (Test-Path "Registry::HKEY_CLASSES_ROOT\MSEdgeHTM") {
+# Open HTML files in Edge. In some sandboxes the MSEdgeHTM ProgID is missing,
+# so the default for .html points to nothing and Windows asks which app to use.
+$edgeExe = @("${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe", "${env:ProgramFiles}\Microsoft\Edge\Application\msedge.exe") |
+    Where-Object { Test-Path $_ } | Select-Object -First 1
+if (-not $edgeExe) {
+    Write-DateLog "WARNING: msedge.exe not found, not setting default app for HTML files" | Write-SetupLog
+} else {
+    if (-not (Test-Path "Registry::HKEY_CLASSES_ROOT\MSEdgeHTM\shell\open\command")) {
+        $progRoot = "HKCU:\Software\Classes\MSEdgeHTM"
+        New-Item -Path "$progRoot\shell\open\command" -Force | Out-Null
+        Set-ItemProperty -Path $progRoot -Name "(default)" -Value "Microsoft Edge HTML Document"
+        Set-ItemProperty -Path $progRoot -Name "AppUserModelId" -Value "MSEdge"
+        New-Item -Path "$progRoot\DefaultIcon" -Force | Out-Null
+        Set-ItemProperty -Path "$progRoot\DefaultIcon" -Name "(default)" -Value "`"$edgeExe`",0"
+        Set-ItemProperty -Path "$progRoot\shell\open\command" -Name "(default)" -Value "`"$edgeExe`" --single-argument %1"
+        Write-DateLog "Registered MSEdgeHTM for $edgeExe" | Write-SetupLog
+    }
     foreach ($ext in ".htm", ".html") {
         if (Set-UserFileAssociation -Extension $ext -ProgId "MSEdgeHTM") {
             Write-DateLog "Default app for $ext set to Edge" | Write-SetupLog
