@@ -2,6 +2,13 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-10-08
+
+- HTML files (`.html` and `.htm`) now always open in Edge. `.html` is no longer opened in the text editor by default, use the right-click menu to edit it.
+- New option `-VerifyOnSuccess` for `downloadFiles.ps1` that only starts the verify sandbox if the downloads finished without errors or warnings.
+- Removed debloat since the repository is no longer available on GitHub.
+- Removed forensic-timeliner since the repository is no longer available on GitHub.
+
 ## 2026-09-16
 
 - Added [hacksguard](https://github.com/Rhacknarok/hacksguard)

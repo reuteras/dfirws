@@ -275,7 +275,7 @@ Update-SandboxProgress "Configuring text editor associations..."
 # Extensions you want
 $exts = @(
   ".txt",".log",".md",".json",".yaml",".yml",".toml",".ini",".cfg",
-  ".css",".ts",".tsx",".lua",".c",".cpp",".h",".cs",".go",".rs",".sh"
+  ".xml",".css",".ts",".tsx",".lua",".c",".cpp",".h",".cs",".go",".rs",".sh"
 )
 
 # Select editor
