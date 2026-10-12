@@ -30,14 +30,14 @@ $TOOL_DEFINITIONS += @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\RegistryExplorer.lnk"
             Target   = "`${env:ProgramFiles}\RegistryExplorer\RegistryExplorer.exe"
             Args     = ""
-            Icon     = "`${TOOLS}\Zimmerman\RegistryExplorer.exe"
+            Icon     = "`${TOOLS}\Zimmerman\RegistryExplorer\RegistryExplorer.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
             Lnk      = "`${HOME}\Desktop\dfirws\Zimmerman\SDBExplorer.lnk"
             Target   = "`${env:ProgramFiles}\SDBExplorer\SDBExplorer.exe"
             Args     = ""
-            Icon     = "`${TOOLS}\Zimmerman\SDBExplorer.exe"
+            Icon     = "`${TOOLS}\Zimmerman\SDBExplorer\SDBExplorer.exe"
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
