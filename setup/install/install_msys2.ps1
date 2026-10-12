@@ -25,6 +25,24 @@ $MSYS2_PACKAGES = @(
     "pv", "rsync", "tree", "zsh", "vim"
 )
 
+# An msys2-runtime update cannot be applied in place: pacman itself has msys-2.0.dll
+# loaded, and Cygwin's move-in-use-file-aside trick does not work on the mapped C:\Tools
+# folder ("Can't create '/usr/bin/msys-2.0.dll'"). The package db then says the new
+# runtime is installed while the old DLL stays on disk, breaking later builds. When a
+# runtime update is pending, reinstall from the (nightly) installer instead.
+if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
+    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Sy' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    $MSYS2_PENDING = @(& "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman -Qqu' 2>$null)
+    if ($MSYS2_PENDING -contains "msys2-runtime") {
+        Write-DateLog "msys2-runtime update pending, reinstalling MSYS2." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "msys2-runtime update pending, reinstalling MSYS2."
+        & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Get-Process | Where-Object { try { $_.MainModule.FileName -like "C:\Tools\msys64\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 3
+        Get-ChildItem -Path "C:\Tools\msys64" -Force | Remove-Item -Recurse -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    }
+}
+
 if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     Write-DateLog "MSYS2 already installed, updating." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-Output "MSYS2 already installed, updating."

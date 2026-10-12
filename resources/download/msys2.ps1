@@ -23,7 +23,9 @@ Start-Process "${ROOT_PATH}\tmp\generate_msys2.wsb"
 Wait-Sandbox -WSBPath "${ROOT_PATH}\tmp\generate_msys2.wsb" -WaitForPath "${ROOT_PATH}\mount\Tools\msys64\done"
 
 # Change tmp directory
-Write-Output "C:/tmp/msys2 /tmp ntfs auto 0 0" >> "${ROOT_PATH}\mount\Tools\msys64\etc\fstab"
+if (! (Select-String -Path "${ROOT_PATH}\mount\Tools\msys64\etc\fstab" -Pattern "^C:/tmp/msys2 /tmp " -Quiet)) {
+    Write-Output "C:/tmp/msys2 /tmp ntfs auto 0 0" >> "${ROOT_PATH}\mount\Tools\msys64\etc\fstab"
+}
 
 Write-DateLog "MSYS2 and packages done." >> ${ROOT_PATH}\log\msys2.txt 2>&1
 
