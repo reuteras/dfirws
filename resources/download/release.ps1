@@ -1918,7 +1918,7 @@ $TOOL_DEFINITIONS += @{
 
 # adalanche
 if (Test-ToolIncluded -ToolName "adalanche") {
-    $status = Get-GitHubRelease -repo "lkarlslund/adalanche" -path "${SETUP_PATH}\adalanche.exe" -match "adalanche-windows-x64" -check "PE32"
+    $status = Get-GitHubRelease -repo "lkarlslund/adalanche" -path "${SETUP_PATH}\adalanche.exe" -match "adalanche-windows-x64.*\.exe$" -check "PE32"
     if ($status) {
         Copy-Item ${SETUP_PATH}\adalanche.exe ${TOOLS}\bin\
     }
