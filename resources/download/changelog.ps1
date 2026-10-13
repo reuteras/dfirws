@@ -455,17 +455,20 @@ function Update-ToolChangelog {
     $newSections   = $sections -join "`n"
     $changelogFile = "$PSScriptRoot\..\..\downloads\CHANGELOG.md"
     $todayHeading  = "### $date"
-    $escapedHeading = [regex]::Escape($todayHeading)
 
     if (Test-Path $changelogFile) {
         $existing = Get-Content $changelogFile -Raw -Encoding UTF8
         # Normalise line endings for matching
         $existingLf = $existing -replace "`r`n", "`n"
 
-        if ($existingLf -match "(?s)(.*$escapedHeading\n\n)(.*)") {
+        # Plain string search: a "(?s)(.*heading)" regex backtracks quadratically
+        # when the heading is absent and hangs on a large changelog.
+        $headingIndex = $existingLf.IndexOf("${todayHeading}`n`n", [System.StringComparison]::Ordinal)
+        if ($headingIndex -ge 0) {
             # An entry for today already exists — append new sections after it.
-            $before     = $Matches[1]
-            $after      = $Matches[2]
+            $splitAt    = $headingIndex + $todayHeading.Length + 2
+            $before     = $existingLf.Substring(0, $splitAt)
+            $after      = $existingLf.Substring($splitAt)
             $newContent = "${before}${newSections}`n${after}"
         } elseif ($existingLf -match "(?s)^(# DFIRWS Changelog\n\n?)(.*)$") {
             # No entry for today — prepend a new dated section.
