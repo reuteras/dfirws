@@ -5,7 +5,7 @@ import sys
 
 if len(sys.argv) < 2:
     print("Usage: ipexpand <range>")
-    print("")
+    print()
     print("Example: ipexpand 192.168.1.0/24")
     sys.exit()
 

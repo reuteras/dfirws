@@ -1,12 +1,12 @@
 import sys
 
 try:
-    from aspose.email import MsgSaveOptions, MailMessageSaveType
+    from aspose.email import MailMessageSaveType, MsgSaveOptions
     from aspose.email.storage.pst import PersonalStorage
 except ImportError:
     try:
         sys.path.append("C:/venv/aspose/lib/site-packages")
-        from aspose.email import MsgSaveOptions, MailMessageSaveType
+        from aspose.email import MailMessageSaveType, MsgSaveOptions
         from aspose.email.storage.pst import PersonalStorage
     except ImportError:
         print("Please install aspose libraries for Python")
@@ -28,7 +28,7 @@ if not Path(PST_FILE).is_file():
 pst = PersonalStorage.from_file(PST_FILE)
 attachment_nr = 1
 msg_nr = 1
-valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
+valid_chars = f"-_.() {string.ascii_letters}{string.digits}"
 
 
 # Handle a messages in folder and call the function recursively for every subfolder
@@ -45,7 +45,6 @@ def handle_folder(current):
 # Save msg file for current message
 def save_msg(msg):
     global msg_nr
-    global valid_chars
     if msg.subject:
         file_path = str(msg_nr) + "-" + msg.subject + ".msg"
         subject = msg.subject
@@ -53,7 +52,7 @@ def save_msg(msg):
         file_path = str(msg_nr) + "-NO-SUBJECT.msg"
         subject = "NO-SUBJECT"
     file_path = "".join(c for c in file_path if c in valid_chars)
-    print("Saving msg file for message %s as: %s" % (subject, file_path))
+    print(f"Saving msg file for message {subject} as: {file_path}")
     msg_save_options = MsgSaveOptions(
         MailMessageSaveType.outlook_message_format_unicode
     )
@@ -65,7 +64,6 @@ def save_msg(msg):
 # Save every attachment for the current message
 def save_attachments(msg):
     global attachment_nr
-    global valid_chars
     if msg.subject:
         subject = msg.subject
     else:
@@ -85,7 +83,7 @@ def save_attachments(msg):
             file_path = str(attachment_nr) + "-unknown.dat"
             file_name = "unknown.dat"
     file_path = "".join(c for c in file_path if c in valid_chars)
-    print("Saving original %s attachment as %s" % (file_name, file_path))
+    print(f"Saving original {file_name} attachment as {file_path}")
     attachment_nr = attachment_nr + 1
     with open(file_path, "wb") as file:
         file.write(attachment.binary_data)

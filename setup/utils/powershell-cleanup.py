@@ -13,7 +13,7 @@ try:
     with open(powershellPath, "r", encoding="utf-8") as powershellFile:
         # Read all lines of the original script
         powershellContent = powershellFile.readlines()
-except (OSError, IOError):
+except OSError:
     print("No such file!")
     sys.exit()
 
@@ -81,4 +81,4 @@ print(formatCount)
 print("Amount of variables that have been concatenated:")
 print(variableCount)
 print("Total amount of modifications:")
-print((backtickCount + formatCount + variableCount))
+print(backtickCount + formatCount + variableCount)

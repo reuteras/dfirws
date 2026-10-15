@@ -6,7 +6,6 @@ import json
 import os
 import re
 from pathlib import Path
-from typing import Dict, List
 
 
 def get_slug(value: str | None) -> str:
@@ -18,7 +17,7 @@ def get_slug(value: str | None) -> str:
     return slug or "category"
 
 
-def get_string_list(value) -> List[str]:
+def get_string_list(value) -> list[str]:
     if value is None:
         return []
     if isinstance(value, list):
@@ -72,21 +71,19 @@ def get_source_label(tool: dict) -> str:
 
 def get_tool_summary(tool: dict) -> str:
     notes = tool.get("Notes")
-    if isinstance(notes, list) and notes:
-        if notes[0]:
-            return notes[0]
+    if isinstance(notes, list) and notes and notes[0]:
+        return notes[0]
     if isinstance(notes, str) and notes:
         return notes
     usage = tool.get("Usage")
-    if isinstance(usage, list) and usage:
-        if usage[0]:
-            return usage[0]
+    if isinstance(usage, list) and usage and usage[0]:
+        return usage[0]
     if isinstance(usage, str) and usage:
         return usage
     return ""
 
 
-def get_tool_page_slug(name: str, used: Dict[str, int]) -> str:
+def get_tool_page_slug(name: str, used: dict[str, int]) -> str:
     slug = get_slug(name)
     if slug not in used:
         used[slug] = 1
@@ -101,7 +98,7 @@ def write_tool_page(docs_root: Path, tool: dict, category_path: str, slug: str) 
     category_dir.mkdir(parents=True, exist_ok=True)
     page_path = category_dir / f"{slug}.md"
 
-    lines: List[str] = []
+    lines: list[str] = []
     lines.append(f"# {tool.get('Name', '')}")
     lines.append("")
     category_display = category_path.replace("\\", " / ")
@@ -340,7 +337,7 @@ def main() -> int:
         print(f"Warning: skipping {len(unnamed)} tool(s) with no Name.")
     tools = [t for t in tools if (t.get("Name") or "").strip()]
 
-    grouped: Dict[str, List[dict]] = {}
+    grouped: dict[str, list[dict]] = {}
     for tool in tools:
         category_path = (
             tool.get("CategoryPath") or tool.get("Category") or "Uncategorized"
@@ -370,7 +367,7 @@ def main() -> int:
 
     tools_index_path = tools_root / "index.md"
 
-    tools_index_lines: List[str] = []
+    tools_index_lines: list[str] = []
     tools_index_lines.append("# Categories")
     tools_index_lines.append("")
     tools_index_lines.append("Categories generated from dfirws shortcuts.")
@@ -383,7 +380,7 @@ def main() -> int:
         tools_index_lines.append(f"- [{display_name}](./{slug}/index.md)")
     tools_index_lines.append("")
 
-    tools_index_entries: List[tuple[str, str, str, str, str, str, str]] = []
+    tools_index_entries: list[tuple[str, str, str, str, str, str, str]] = []
     for category_path in ordered_categories:
         display_name = category_path.replace("\\", " / ")
         slug = get_slug(category_path)
@@ -391,7 +388,7 @@ def main() -> int:
         category_dir.mkdir(parents=True, exist_ok=True)
         category_file = category_dir / "index.md"
 
-        lines: List[str] = []
+        lines: list[str] = []
         lines.append(f"# {display_name}")
         lines.append("")
         lines.append(
@@ -402,7 +399,7 @@ def main() -> int:
         tools_in_category = sorted(
             grouped[category_path], key=lambda t: t.get("Name") or ""
         )
-        used_slugs: Dict[str, int] = {}
+        used_slugs: dict[str, int] = {}
         for tool in tools_in_category:
             tool_slug = get_tool_page_slug(tool.get("Name") or "", used_slugs)
             write_tool_page(docs_root, tool, category_path, tool_slug)

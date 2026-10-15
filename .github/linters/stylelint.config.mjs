@@ -1,0 +1,5 @@
+export default {
+  rules: {
+    "custom-property-pattern": "^[a-z][a-z0-9]*(-{1,2}[a-z0-9]+)*$",
+  },
+};
