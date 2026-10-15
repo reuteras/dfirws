@@ -82,11 +82,11 @@ def save_attachments(msg):
         else:
             file_path = str(attachment_nr) + "-unknown.dat"
             file_name = "unknown.dat"
-    file_path = "".join(c for c in file_path if c in valid_chars)
-    print(f"Saving original {file_name} attachment as {file_path}")
-    attachment_nr = attachment_nr + 1
-    with open(file_path, "wb") as file:
-        file.write(attachment.binary_data)
+        file_path = "".join(c for c in file_path if c in valid_chars)
+        print(f"Saving original {file_name} attachment as {file_path}")
+        attachment_nr = attachment_nr + 1
+        with open(file_path, "wb") as file:
+            file.write(attachment.binary_data)
 
 
 # Start with enumerating folders in the root folder
