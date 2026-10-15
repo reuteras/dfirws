@@ -15,8 +15,8 @@ def execute7z(zipPathInput, zipPassword, zipPathOutput):
             r"7z.exe",
             "x",
             zipPathInput,
-            "-p{}".format(zipPassword),
-            "-o{}".format(zipPathOutput),
+            f"-p{zipPassword}",
+            f"-o{zipPathOutput}",
         ]
     )
     process.wait()
