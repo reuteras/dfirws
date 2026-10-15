@@ -261,6 +261,9 @@ function Get-LogIssues {
         $_.Line -notmatch "unsound" -and
         $_.Line -notmatch "WARNING: Defender:" -and
         $_.Line -notmatch "WARNING: Files" -and
+        # pacman's notice before a core update. install_msys2.ps1 only lets core updates run
+        # on the sandbox's local disk; a failed one still shows as "Can't create '...'".
+        $_.Line -notmatch "warning: terminate other MSYS2 programs before proceeding" -and
         # Harmless CMake "developer warning": CMAKE_SH is deliberately passed on the
         # command line to bypass the MinGW Makefiles generator's sh.exe-on-PATH check
         # (see install_msys2.ps1), and CMake flags it as unused-cli because it's read by
