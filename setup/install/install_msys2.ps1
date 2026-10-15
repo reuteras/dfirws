@@ -28,14 +28,18 @@ $MSYS2_PACKAGES = @(
 # An msys2-runtime update cannot be applied in place: pacman itself has msys-2.0.dll
 # loaded, and Cygwin's move-in-use-file-aside trick does not work on the mapped C:\Tools
 # folder ("Can't create '/usr/bin/msys-2.0.dll'"). The package db then says the new
-# runtime is installed while the old DLL stays on disk, breaking later builds. When a
-# runtime update is pending, reinstall from the (nightly) installer instead.
+# runtime is installed while the old DLL stays on disk, breaking later builds. bash.exe
+# has the same problem ("Can't create '/usr/bin/bash.exe'"). When either update is
+# pending, reinstall from the (nightly) installer instead.
 if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Sy' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     $MSYS2_PENDING = @(& "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman -Qqu' 2>$null)
-    if ($MSYS2_PENDING -contains "msys2-runtime") {
-        Write-DateLog "msys2-runtime update pending, reinstalling MSYS2." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-        Write-Output "msys2-runtime update pending, reinstalling MSYS2."
+    # A runtime update applied in place by an earlier run leaves the db ahead of the DLL on
+    # disk; -Qkk detects that through the package mtree checksums.
+    $MSYS2_RUNTIME_BROKEN = [bool](& "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman -Qkk msys2-runtime' 2>&1 | ForEach-Object{ "$_" } | Select-String -Pattern "msys-2\.0\.dll" -Quiet)
+    if (($MSYS2_PENDING -contains "msys2-runtime") -or ($MSYS2_PENDING -contains "bash") -or $MSYS2_RUNTIME_BROKEN) {
+        Write-DateLog "msys2-runtime or bash update pending, or runtime mismatch, reinstalling MSYS2." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+        Write-Output "msys2-runtime or bash update pending, reinstalling MSYS2."
         & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
         Get-Process | Where-Object { try { $_.MainModule.FileName -like "C:\Tools\msys64\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
         Start-Sleep -Seconds 3
@@ -53,24 +57,43 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
 } else {
     Write-DateLog "MSYS2 installation." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-Output "MSYS2 installation."
-    & "${SETUP_PATH}\msys2.exe" -y -oC:\Tools 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc ' ' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'rm -rf /etc/pacman.d/gnupg/' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman-key --init' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman-key --populate msys2' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman-key --populate' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman-key --populate' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    # Install and run the first updates on the sandbox's local disk. The nightly installer
+    # can ship an older msys2-runtime than the repo, and that update only works where the
+    # in-use msys-2.0.dll can be moved aside, which is not possible on the mapped C:\Tools.
+    $MSYS2_LOCAL = "${WSDFIR_TEMP}\msys64"
+    $MSYS2_BASH = "${MSYS2_LOCAL}\usr\bin\bash.exe"
+    if (Test-Path -Path $MSYS2_LOCAL) {
+        Remove-Item -Recurse -Force $MSYS2_LOCAL 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    }
+    & "${SETUP_PATH}\msys2.exe" -y "-o${WSDFIR_TEMP}" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc ' ' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'rm -rf /etc/pacman.d/gnupg/' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'pacman-key --init' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'pacman-key --populate msys2' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'pacman-key --populate' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'pacman-key --populate' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     # pacman-key starts gpg-agent which holds msys-gcrypt-20.dll open; kill it before
     # pacman upgrade so libgcrypt can be replaced (otherwise GPGME breaks for all later runs).
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    Get-Process | Where-Object { try { $_.MainModule.FileName -like "C:\Tools\msys64\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
+    & $MSYS2_BASH -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Get-Process | Where-Object { try { $_.MainModule.FileName -like "${MSYS2_LOCAL}\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 3
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    Get-Process | Where-Object { try { $_.MainModule.FileName -like "C:\Tools\msys64\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
+    & $MSYS2_BASH -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Get-Process | Where-Object { try { $_.MainModule.FileName -like "${MSYS2_LOCAL}\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 3
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
-    & "C:\Tools\msys64\usr\bin\bash.exe" -lc "pacman --noconfirm -Syu $($MSYS2_PACKAGES -join ' ')" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc "pacman --noconfirm -Syu $($MSYS2_PACKAGES -join ' ')" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    & $MSYS2_BASH -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Get-Process | Where-Object { try { $_.MainModule.FileName -like "${MSYS2_LOCAL}\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 3
+    Write-DateLog "Copy MSYS2 to C:\Tools\msys64." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    # /NJS drops the summary table, whose "FAILED" column header trips the log scan;
+    # failures are reported from the exit code below.
+    robocopy $MSYS2_LOCAL "C:\Tools\msys64" /MIR /R:2 /W:1 /NFL /NDL /NP /NJH /NJS 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    if ($LASTEXITCODE -ge 8) {
+        Write-DateLog "ERROR: Copying MSYS2 to C:\Tools\msys64 failed (robocopy exit code ${LASTEXITCODE})." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    }
+    Remove-Item -Recurse -Force $MSYS2_LOCAL 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Save-Msys2Metadata -Packages $MSYS2_PACKAGES 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-DateLog "MSYS2 installation done." 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Write-Output "MSYS2 installation done."
