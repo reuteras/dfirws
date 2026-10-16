@@ -1,7 +1,7 @@
 . ".\resources\download\common.ps1"
 
 $ROOT_PATH = "${PWD}"
-$node_packages = @("box-js", "deobfuscator", "docsify-cli", "jsdom", "@marp-team/marp-cli", "opencode-ai")
+$node_packages = @("box-js", "deobfuscator", "docsify-cli", "jsdom", "@marp-team/marp-cli", "@opencode/cli")
 
 Write-DateLog "Setup Node and install npm packages in Sandbox." > ${ROOT_PATH}\log\npm.txt
 
