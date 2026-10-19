@@ -45,9 +45,9 @@ Save-NpmMetadata -Package "box-js" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.
 Write-DateLog "Install Marp CLI" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 npm install --global --ignore-scripts @marp-team/marp-cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 Save-NpmMetadata -Package "@marp-team/marp-cli" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-Write-DateLog "Install opencode-ai" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-npm install --global opencode-ai | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
-Save-NpmMetadata -Package "opencode-ai" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+Write-DateLog "Install opencode (@opencode/cli)" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+npm install --global --allow-scripts=@opencode/cli @opencode/cli | Out-String -Stream 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
+Save-NpmMetadata -Package "@opencode/cli" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\npm.txt"
 
 if (Test-ToolIncludedSandbox -ToolName "LUMEN") {
     Set-Location "${HOME}"
@@ -76,7 +76,7 @@ if ($SUPPLY_CHAIN_SECURITY_AUDIT) {
             "deobfuscator"        = "*"
             "docsify-cli"         = "*"
             "jsdom"               = "*"
-            "opencode-ai"         = "*"
+            "@opencode/cli"       = "*"
         }
     } | ConvertTo-Json | Out-File -Encoding utf8 "${npmAuditDir}\package.json"
     Set-Location $npmAuditDir
