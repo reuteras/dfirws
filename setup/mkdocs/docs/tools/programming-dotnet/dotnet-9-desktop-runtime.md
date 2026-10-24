@@ -17,7 +17,7 @@
 The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0.
 
 ## Tips
-Required by the current Eric Zimmerman tools and other .NET 9 applications. Check installed runtimes with 'dotnet --list-runtimes'.
+Required by tools built for .NET 9. Check installed runtimes with 'dotnet --list-runtimes'.
 
 ## Usage
 Installed silently during sandbox start; nothing to run.

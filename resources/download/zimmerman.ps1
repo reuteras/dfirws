@@ -2,7 +2,18 @@
 $TOOL_DEFINITIONS = @()
 
 # Download and update Zimmerman tools.
-PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File .\resources\download\Get-ZimmermanTools.ps1 -Dest ".\mount\Tools\Zimmerman" -NetVersion 9 2>&1 >> ".\log\log.txt"
+PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File .\resources\download\Get-ZimmermanTools.ps1 -Dest ".\mount\Tools\Zimmerman" -NetVersion 10 -NoUpdate 2>&1 >> ".\log\log.txt"
+
+# Get-ZimmermanTools.ps1 extracts the .NET 10 builds to Zimmerman\net. Move them up one level so the paths used by dfirws stay the same.
+if (Test-Path ".\mount\Tools\Zimmerman\net") {
+    robocopy ".\mount\Tools\Zimmerman\net" ".\mount\Tools\Zimmerman" /E /MOVE /IS /IT /NFL /NDL /NJH /NJS /NP | Out-Null
+}
+
+# Remove the .NET 9 builds left by older versions of Get-ZimmermanTools.ps1
+if (Test-Path ".\mount\Tools\Zimmerman\net9") {
+    Remove-Item -Recurse -Force ".\mount\Tools\Zimmerman\net9"
+}
+
 PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File .\resources\external\Sync-EZTools.ps1 ".\mount\Tools\Zimmerman" 2>&1 >> ".\log\log.txt"
 
 $TOOL_DEFINITIONS += @{
@@ -328,7 +339,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
-    Dependencies = @("dotnet9")
+    Dependencies = @("dotnet10")
     LicenseUrl = ""
     Tags = @()
     FileExtensions = @()

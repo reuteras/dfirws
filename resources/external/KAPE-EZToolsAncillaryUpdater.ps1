@@ -30,6 +30,7 @@
 		4.1 - (June 16, 2023) Minor adjustments based on feedback from version 4.0. Additionally, added script info to the log output
 		4.2 - (August 04, 2023) Added PowerShell 5 requirement to avoid any potential complications
 		x.x - (January 19, 2024) Minimize script for use with dfirws.
+		x.x - (October 24, 2026) Use the .NET 10 versions of EZ Tools, based on upstream 4.6.
 
 	.PARAMETER silent
 		Disable the progress bar and exit the script without pausing in the end
@@ -105,8 +106,8 @@ function Get-Zimmerman {
 		New-Item -ItemType Directory -Path $getZimmermanToolsFolderKape | Out-Null
 	}
 
-	# Use the locally bundled (hardened) Get-ZimmermanTools.ps1 shipped next to this updater
-	# instead of downloading the upstream zip, which currently 404s on tools without net9 builds.
+	# Use the locally bundled Get-ZimmermanTools.ps1 shipped next to this updater
+	# instead of downloading the upstream zip.
 	$localGetZimmermanToolsPs1 = Join-Path $PSScriptRoot $getZimmermanToolsFileName
 	if (-not (Test-Path $localGetZimmermanToolsPs1)) {
 		Log -logFilePath $logFilePath -msg "Local $getZimmermanToolsFileName not found at $localGetZimmermanToolsPs1. Skipping Zimmerman update."
@@ -116,10 +117,10 @@ function Get-Zimmerman {
 	$getZimmermanToolsPs1ZT = Join-Path $getZimmermanToolsFolderKape $getZimmermanToolsFileName
 	Copy-Item -Path $localGetZimmermanToolsPs1 -Destination $getZimmermanToolsPs1ZT -Force
 
-	Log -logFilePath $logFilePath -msg "Running $getZimmermanToolsFileName! Downloading .NET 6 version of EZ Tools to $getZimmermanToolsFolderKape"
+	Log -logFilePath $logFilePath -msg "Running $getZimmermanToolsFileName! Downloading .NET 10 version of EZ Tools to $getZimmermanToolsFolderKape"
 
-	# executing .\KAPE\Modules\bin\ZimmermanTools\Get-ZimmermanTools.ps1 -Dest .\KAPE\Modules\bin\ZimmermanTools -NetVersion 6
-	Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-File `"$getZimmermanToolsPs1ZT`"", "-Dest `"$getZimmermanToolsFolderKape`"", "-NetVersion", "9" -Wait -NoNewWindow
+	# executing .\KAPE\Modules\bin\ZimmermanTools\Get-ZimmermanTools.ps1 -Dest .\KAPE\Modules\bin\ZimmermanTools -NetVersion 10 -NoUpdate
+	Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-File `"$getZimmermanToolsPs1ZT`"", "-Dest `"$getZimmermanToolsFolderKape`"", "-NetVersion", "10", "-NoUpdate" -Wait -NoNewWindow
 }
 
 <#
@@ -203,23 +204,23 @@ function Sync-SQLECmdMap {
 
 <#
 	.SYNOPSIS
-		Set up KAPE for use with .NET 6 EZ Tools!
+		Set up KAPE for use with .NET 10 EZ Tools!
 
 	.DESCRIPTION
-		Ensures all .NET 6 EZ Tools that were downloaded using Get-ZimmermanTools.ps1 are copied into the correct folders within .\KAPE\Modules\bin
+		Ensures all .NET 10 EZ Tools that were downloaded using Get-ZimmermanTools.ps1 are copied into the correct folders within .\KAPE\Modules\bin
 #>
-function Move-EZToolsNET6 {
+function Move-EZToolsNET {
 	[CmdletBinding()]
 	param ()
 
-	# Only run if Get-ZimmermanTools.ps1 has downloaded new .NET 6 tools, otherwise continue on.
-	if (Test-Path -Path "$getZimmermanToolsFolderKapeNet6") {
+	# Only run if Get-ZimmermanTools.ps1 has downloaded new .NET 10 tools, otherwise continue on.
+	if (Test-Path -Path "$getZimmermanToolsFolderKapeNet") {
 		# Create array of folders to be copied
 		$folders = @(
-			"$getZimmermanToolsFolderKapeNet6\EvtxECmd",
-			"$getZimmermanToolsFolderKapeNet6\RECmd",
-			"$getZimmermanToolsFolderKapeNet6\SQLECmd",
-			"$getZimmermanToolsFolderKapeNet6\iisGeolocate"
+			"$getZimmermanToolsFolderKapeNet\EvtxECmd",
+			"$getZimmermanToolsFolderKapeNet\RECmd",
+			"$getZimmermanToolsFolderKapeNet\SQLECmd",
+			"$getZimmermanToolsFolderKapeNet\iisGeolocate"
 		)
 
 		# Copy each folder that exists
@@ -237,8 +238,8 @@ function Move-EZToolsNET6 {
 		# Create an array of the file extensions to copy
 		$fileExts = @('*.dll', '*.exe', '*.json')
 
-		# Get all files in $getZimmermanToolsFolderKapeNet6 that match any of the extensions in $fileExts
-		$files = Get-ChildItem -Path "$getZimmermanToolsFolderKapeNet6\*" -Include $fileExts
+		# Get all files in $getZimmermanToolsFolderKapeNet that match any of the extensions in $fileExts
+		$files = Get-ChildItem -Path "$getZimmermanToolsFolderKapeNet\*" -Include $fileExts
 
 		# Copy the files to the destination
 		foreach ($file in $files) {
@@ -249,10 +250,10 @@ function Move-EZToolsNET6 {
 		}
 
 		# This removes the downloaded EZ Tools that we no longer need to reside on disk
-		Log -logFilePath $logFilePath -msg "Removing extra copies of EZ Tools from $getZimmermanToolsFolderKapeNet6"
-		Remove-Item -Path $getZimmermanToolsFolderKapeNet6 -Recurse -Force -ErrorAction SilentlyContinue
+		Log -logFilePath $logFilePath -msg "Removing extra copies of EZ Tools from $getZimmermanToolsFolderKapeNet"
+		Remove-Item -Path $getZimmermanToolsFolderKapeNet -Recurse -Force -ErrorAction SilentlyContinue
 	} else {
-		Log -logFilePath $logFilePath -msg "$getZimmermanToolsFolderKapeNet6 doesn't exist. Make sure you have the latest version of Get-ZimmermanTools.ps1 in $kapeModulesBin"
+		Log -logFilePath $logFilePath -msg "$getZimmermanToolsFolderKapeNet doesn't exist. Make sure you have the latest version of Get-ZimmermanTools.ps1 in $kapeModulesBin"
 	}
 }
 
@@ -270,7 +271,7 @@ try
 	$script:kapeModulesFolder = Join-Path -Path $PSScriptRoot -ChildPath 'Modules' # .\KAPE\Modules
 	$script:kapeModulesBin = Join-Path -Path $kapeModulesFolder -ChildPath 'bin' # .\KAPE\Modules\bin
 	$script:getZimmermanToolsFolderKape = Join-Path -Path $kapeModulesBin -ChildPath 'ZimmermanTools' # .\KAPE\Modules\bin\ZimmermanTools, also serves as our .NET 4 folder, if needed
-	$script:getZimmermanToolsFolderKapeNet6 = Join-Path -Path $getZimmermanToolsFolderKape -ChildPath 'net6' # .\KAPE\Modules\bin\ZimmermanTools\net6
+	$script:getZimmermanToolsFolderKapeNet = Join-Path -Path $getZimmermanToolsFolderKape -ChildPath 'net' # .\KAPE\Modules\bin\ZimmermanTools\net
 
 	$script:ZTZipFile = 'Get-ZimmermanTools.zip'
 	$script:ZTdlUrl = "https://f001.backblazeb2.com/file/EricZimmermanTools/$ZTZipFile" # https://f001.backblazeb2.com/file/EricZimmermanTools\Get-ZimmermanTools.zip
@@ -301,7 +302,7 @@ try
 	& Get-Zimmerman
 
 	# Let's move all EZ Tools and place them into .\KAPE\Modules\bin
-	Move-EZToolsNET6
+	Move-EZToolsNET
 
 	# Let's update KAPE, EvtxECmd, RECmd, and SQLECmd's ancillary files
 	& Sync-KAPETargetsModule
