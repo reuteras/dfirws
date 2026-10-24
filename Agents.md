@@ -79,6 +79,7 @@ dfirws/
 │   ├── generate-tools-docs.py     # Generates wiki from tools_*.json
 │   ├── validate-tool-metadata.ps1 # Lints TOOL_DEFINITIONS metadata (runs in CI)
 │   ├── update-tool-metadata.ps1   # Fills empty Homepage/Vendor/License fields
+│   ├── Get-DotNetToolVersions.ps1 # Reports which .NET runtime each downloaded tool needs
 │   └── lib/
 │       └── Get-ToolDefinitionAst.ps1  # Shared static AST parser (never executes scripts)
 ├── tests/
@@ -267,7 +268,7 @@ The `generate-tools-docs.py` script:
 
 The `Dependencies` field tracks high-level build/runtime dependencies between components:
 - `"msys2"` - Needs gcc/g++ from MSYS2
-- `"dotnet6"` / `"dotnet9"` - Needs .NET runtime
+- `"dotnet6"` / `"dotnet8"` / `"dotnet9"` / `"dotnet10"` - Needs .NET runtime
 - `"Ghidra"` - Needs Ghidra installed
 - `"openjdk11"` - Needs Java runtime
 - `"nodejs"` - Needs Node.js runtime

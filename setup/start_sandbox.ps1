@@ -130,6 +130,14 @@ if ($procDotnet9.ExitCode -ne 0) {
 }
 Write-DateLog ".NET 9 Desktop runtime installed" | Write-SetupLog
 
+# Install .NET 10
+Update-SandboxProgress "Installing .NET 10..."
+$procDotnet10 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet10desktop.exe" -ArgumentList "/install /quiet /norestart"
+if ($procDotnet10.ExitCode -ne 0) {
+    Write-DateLog "WARNING: .NET 10 installer exited with code $($procDotnet10.ExitCode)" | Write-SetupLog
+}
+Write-DateLog ".NET 10 Desktop runtime installed" | Write-SetupLog
+
 # Copy config files and import them - needed for OhMyPosh installation
 Update-SandboxProgress "Importing configuration..."
 if (Test-Path "${LOCAL_PATH}\config.txt") {

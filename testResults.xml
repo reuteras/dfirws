@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="17" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2026-10-24" time="07:16:53">
+  <environment user="root" platform="Linux" clr-version="8.0.10" user-domain="" os-version="6.18.44-fc-v153" machine-name="vm" nunit-version="2.5.8.0" cwd="/home/user/dfirws" />
+  <culture-info current-culture="" current-uiculture="" />
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="1.6952" asserts="0" description="Pester">
+    <results>
+      <test-suite type="TestFixture" name="/home/user/dfirws/tests/changelog.Tests.ps1" executed="True" result="Success" success="True" time="1.6952" asserts="0" description="/home/user/dfirws/tests/changelog.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Get-VersionFromUrl" executed="True" result="Success" success="True" time="0.266" asserts="0" description="Get-VersionFromUrl">
+            <results>
+              <test-case description="extracts a v-prefixed version from a path segment" name="Get-VersionFromUrl.extracts a v-prefixed version from a path segment" time="0.1665" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="extracts a version embedded in a file name" name="Get-VersionFromUrl.extracts a version embedded in a file name" time="0.0052" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="returns null when no version is present" name="Get-VersionFromUrl.returns null when no version is present" time="0.0165" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="HTTP snapshot format compatibility" executed="True" result="Success" success="True" time="0.2951" asserts="0" description="HTTP snapshot format compatibility">
+            <results>
+              <test-case description="reads the legacy plain-string format" name="HTTP snapshot format compatibility.reads the legacy plain-string format" time="0.0073" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="reads the {Url, Etag} object format" name="HTTP snapshot format compatibility.reads the {Url, Etag} object format" time="0.0077" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Get-UriEtag" executed="True" result="Success" success="True" time="0.3385" asserts="0" description="Get-UriEtag">
+            <results>
+              <test-case description="reads the cached etag for a URI" name="Get-UriEtag.reads the cached etag for a URI" time="0.0257" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="returns null when no etag is cached" name="Get-UriEtag.returns null when no etag is cached" time="0.0043" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+          <test-suite type="TestFixture" name="Update-ToolChangelog" executed="True" result="Success" success="True" time="1.317" asserts="0" description="Update-ToolChangelog">
+            <results>
+              <test-case description="records a baseline without writing an entry on the first run" name="Update-ToolChangelog.records a baseline without writing an entry on the first run" time="0.0828" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="reports a version change for a cargo tool" name="Update-ToolChangelog.reports a version change for a cargo tool" time="0.093" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="reports new go and msys2 tools after the baseline run" name="Update-ToolChangelog.reports new go and msys2 tools after the baseline run" time="0.2715" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="reports raw script updates as content changes without hashes" name="Update-ToolChangelog.reports raw script updates as content changes without hashes" time="0.0714" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="detects a content change behind a mutable URL via the etag" name="Update-ToolChangelog.detects a content change behind a mutable URL via the etag" time="0.109" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="tracks pip packages per venv and renders the venv in the identifier" name="Update-ToolChangelog.tracks pip packages per venv and renders the venv in the identifier" time="0.0734" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="suppresses pip packages on the ignore list" name="Update-ToolChangelog.suppresses pip packages on the ignore list" time="0.0867" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="applies a source-prefixed ignore entry only to that source" name="Update-ToolChangelog.applies a source-prefixed ignore entry only to that source" time="0.0806" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="merges user entries from local/changelog-ignore.txt with the defaults" name="Update-ToolChangelog.merges user entries from local/changelog-ignore.txt with the defaults" time="0.0398" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="upgrades a legacy string-format HTTP snapshot without a false update" name="Update-ToolChangelog.upgrades a legacy string-format HTTP snapshot without a false update" time="0.064" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
