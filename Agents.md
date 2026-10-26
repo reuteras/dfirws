@@ -33,7 +33,7 @@ dfirws/
 │   │   ├── rust.ps1               # Launches Rust build sandbox
 │   │   ├── go.ps1                 # Launches Go build sandbox
 │   │   ├── node.ps1               # Launches Node build sandbox
-│   │   ├── zimmerman.ps1          # Eric Zimmerman's .NET forensic tools
+│   │   ├── zimmerman.ps1          # Launches Zimmerman sandbox (Eric Zimmerman's .NET forensic tools)
 │   │   ├── didier.ps1             # Didier Stevens tools
 │   │   ├── kape.ps1               # KAPE forensic framework
 │   │   ├── msys2.ps1              # MSYS2 build environment
@@ -47,7 +47,8 @@ dfirws/
 │       ├── generate_rust.wsb.template       # Rust build sandbox
 │       ├── generate_node.wsb.template       # Node build sandbox
 │       ├── generate_msys2.wsb.template      # MSYS2 setup sandbox
-│       └── generate_freshclam.wsb.template  # ClamAV DB update sandbox
+│       ├── generate_freshclam.wsb.template  # ClamAV DB update sandbox
+│       └── generate_zimmerman.wsb.template  # Zimmerman tools download + map sync sandbox
 │
 ├── setup/
 │   ├── shared.ps1                 # New-CreateToolFiles function
@@ -56,7 +57,8 @@ dfirws/
 │   │   ├── install_python_tools.ps1  # Runs inside Python build sandbox
 │   │   ├── install_rust_tools.ps1    # Runs inside Rust build sandbox
 │   │   ├── install_golang_tools.ps1  # Runs inside Go build sandbox
-│   │   └── install_node.ps1          # Runs inside Node build sandbox
+│   │   ├── install_node.ps1          # Runs inside Node build sandbox
+│   │   └── install_zimmerman.ps1     # Runs inside Zimmerman sandbox
 │   └── utils/
 │       └── dfirws-install.ps1     # On-demand installer (40+ switches)
 │
@@ -208,6 +210,7 @@ if (Test-Path -Path "${ROOT_PATH}\log\dfirws") {
 | generate_node.wsb | install_node.ps1 | 7 npm packages | Node.js, npm |
 | generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment + r2ai plugin + pycdc (built from git, static) | msys2 gcc, cmake, pkg-config |
 | generate_freshclam.wsb | install_freshclam.ps1 | ClamAV signatures | ClamAV |
+| generate_zimmerman.wsb | install_zimmerman.ps1 | Zimmerman tools via Get-ZimmermanTools + `--sync` of EvtxECmd/RECmd/SQLECmd maps (keeps .NET 10 off the host) | .NET 10 Desktop runtime |
 
 ### Adding a New Build Sandbox
 
