@@ -137,7 +137,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "How to use."
     SampleCommands = @("tool --help")
     SampleFiles = @()
-    Dependencies = @()          # High-level deps: "msys2", "dotnet6", "Ghidra", etc.
+    Dependencies = @()          # High-level deps: "msys2", "dotnet10", "Ghidra", etc.
     PythonVersion = $PYTHON_DEFAULT  # Only for Python tools
 }
 ```
@@ -271,7 +271,7 @@ The `generate-tools-docs.py` script:
 
 The `Dependencies` field tracks high-level build/runtime dependencies between components:
 - `"msys2"` - Needs gcc/g++ from MSYS2
-- `"dotnet6"` / `"dotnet8"` / `"dotnet9"` / `"dotnet10"` - Needs .NET runtime
+- `"dotnet8"` / `"dotnet9"` / `"dotnet10"` - Needs .NET runtime
 - `"Ghidra"` - Needs Ghidra installed
 - `"openjdk11"` - Needs Java runtime
 - `"nodejs"` - Needs Node.js runtime

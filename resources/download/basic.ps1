@@ -194,10 +194,6 @@ if ($all -or $Python) {
         & $SEVENZIP x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
     }
 
-    # DotNet 6 Desktop runtime - installed during startup
-    Write-SynchronizedLog "winget: Downloading DotNet 6 Desktop runtime."
-    $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.6" "Microsoft*.exe" "dotnet6desktop.exe" -check "PE32"
-
     # Get Amazon Corretto - installed during start
     $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"
 
@@ -355,27 +351,6 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://docs.astral.sh/uv/"
     Vendor = "Astral"
     License = "MIT and Apache-2"
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "DotNet 6 Desktop Runtime"
-    Category = "Programming\dotNET"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("dotnet")
-    Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0."
-    Tips = "Required by tools still built for .NET 6. Check which runtimes are present with 'dotnet --list-runtimes'."
-    Usage = "Installed silently during sandbox start; nothing to run."
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://dotnet.microsoft.com"
-    Vendor = "Microsoft Corporation"
-    License = "MIT"
     LicenseUrl = ""
     PythonVersion = ""
 }

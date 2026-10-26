@@ -44,7 +44,7 @@ $DOTNET_END_OF_SUPPORT = @{
 }
 
 # Runtimes installed by setup/start_sandbox.ps1
-$SANDBOX_RUNTIMES = @(6, 8, 9, 10)
+$SANDBOX_RUNTIMES = @(8, 9, 10)
 
 $LATIN1 = [Text.Encoding]::GetEncoding(28591)
 

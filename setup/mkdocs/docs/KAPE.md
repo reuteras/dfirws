@@ -2,11 +2,7 @@
 
 - [KAPE documentation](https://ericzimmerman.github.io/KapeDocs/#!index.md)
 
-**Notice:** For Kape to be installed and available you will have to place your copy of kape.zip in the *local* subdirectory and then run **.\downloadFiles.ps1** or **.\downloadFiles.ps1 --kape**. You also have to install the following package on the host:
-
-```bash
-winget install Microsoft.DotNet.Runtime.6
-```
+**Notice:** For Kape to be installed and available you will have to place your copy of kape.zip in the *local* subdirectory and then run **.\downloadFiles.ps1** or **.\downloadFiles.ps1 -Kape**. KAPE and its EZ Tools are updated in a sandbox, so you don't need to install .NET on the host.
 
 ## Usage
 

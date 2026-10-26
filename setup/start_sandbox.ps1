@@ -106,14 +106,6 @@ if ($procVcredist.ExitCode -ne 0) {
 }
 Write-DateLog "Visual C++ Redistributable installed" | Write-SetupLog
 
-# Install .NET 6
-Update-SandboxProgress "Installing .NET 6..."
-$procDotnet6 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet6desktop.exe" -ArgumentList "/install /quiet /norestart"
-if ($procDotnet6.ExitCode -ne 0) {
-    Write-DateLog "WARNING: .NET 6 installer exited with code $($procDotnet6.ExitCode)" | Write-SetupLog
-}
-Write-DateLog ".NET 6 Desktop runtime installed" | Write-SetupLog
-
 # Install .NET 8
 Update-SandboxProgress "Installing .NET 8..."
 $procDotnet8 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet8desktop.exe" -ArgumentList "/install /quiet /norestart"

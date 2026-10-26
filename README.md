@@ -347,7 +347,7 @@ dfirws.wsb  (or network_dfirws.wsb)
         │   ├── Java (Corretto)
         │   ├── Python 3
         │   ├── Visual C++ Redistributable
-        │   └── .NET 6 / 8 / 9 / 10
+        │   └── .NET 8 / 9 / 10
         │
         ├─[optional installs]  (controlled by config.txt)
         │   ├── Notepad++       (WSDFIR_NOTEPAD=Yes)
