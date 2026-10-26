@@ -299,7 +299,9 @@ foreach ($root in $Path) {
     $rootFull = (Resolve-Path -LiteralPath $root).ProviderPath.TrimEnd('\', '/')
 
     $files = Get-ChildItem -Path $rootFull -Recurse -File -ErrorAction SilentlyContinue |
-        Where-Object { $_.Name -like "*.runtimeconfig.json" -or $_.Extension -in @(".exe", ".dll") }
+        Where-Object { $_.Name -like "*.runtimeconfig.json" -or $_.Extension -in @(".exe", ".dll") } |
+        # Skip the installed .NET runtimes and SDKs themselves (e.g. C:\Program Files\dotnet\shared\...)
+        Where-Object { $_.FullName -notmatch '\\dotnet\\(shared|host|sdk|packs)\\' }
 
     foreach ($file in $files) {
         $relative = $file.FullName.Substring($rootFull.Length).TrimStart('\', '/')
