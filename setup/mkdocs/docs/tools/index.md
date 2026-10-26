@@ -6,6 +6,7 @@ Categories generated from dfirws shortcuts.
 
 - [Cloud](./cloud/index.md)
 - [Development](./development/index.md)
+- [DidierStevens](./didierstevens/index.md)
 - [Editors](./editors/index.md)
 - [Enrichment / Geolocation](./enrichment-geolocation/index.md)
 - [Enrichment / IDS](./enrichment-ids/index.md)
@@ -58,6 +59,7 @@ Categories generated from dfirws shortcuts.
 - [Utilities / CTF](./utilities-ctf/index.md)
 - [Utilities / Cryptography](./utilities-cryptography/index.md)
 - [Utilities / Media](./utilities-media/index.md)
+- [Zimmerman](./zimmerman/index.md)
 
 ## Tools Index
 
@@ -140,6 +142,7 @@ Categories generated from dfirws shortcuts.
 | [DFIRArtifactMuseum](./forensics/dfirartifactmuseum.md) | Git | The goal of this repo is to archive artifacts from all versions of various OS's and categorizing them by type. This will help with artifact validation processes as well as increase access to artifacts that may no longer be readily available anymore. | forensics, artifact-extraction, documentation |  |  |
 | [dfirws-sample-files](./forensics/dfirws-sample-files.md) | Git | Sample files to test forensics tools. | forensics |  |  |
 | [dictionaries](./utilities/dictionaries.md) | Git | Dictionaries and related code and data for Libreoffice. | password-cracking, office |  |  |
+| [Didier Stevens Suite](./didierstevens/didier-stevens-suite.md) | HTTP | Didier Stevens Suite is a collection of tools written in Python and some compiled executables for various digital forensics and incident response tasks. |  |  |  |
 | [dissect](./forensics/dissect.md) | Python | target-query -f users <image> | forensics, incident-response, data-extraction | `.dd`, `.raw`, `.tar` |  |
 | [dissect.target](./forensics/dissect-target.md) | Python | target-shell <image> | forensics, incident-response, artifact-extraction | `.dd`, `.raw`, `.tar`, `.vmdk`, `.E01` |  |
 | [DitExplorer](./os-windows-active-directory/ditexplorer.md) | GitHub Release | Tool for viewing NTDS.dit Active Directory database files. | windows, network-analysis, forensics | `.dit` |  |
@@ -149,7 +152,8 @@ Categories generated from dfirws shortcuts.
 | [docsify-cli](./utilities/docsify-cli.md) | npm | A magical documentation generator. | documentation, markdown | `.md`, `.html` |  |
 | [docx2txt](./files-and-apps-office/docx2txt.md) | Python | A pure python-based utility to extract text and images from docx files. | office, data-extraction | `.docx` |  |
 | [Dokany](./memory/dokany.md) | GitHub Release | User mode file system library for windows with FUSE Wrapper | filesystem, disk-forensics |  | Full only |
-| [DotNet 10 Desktop Runtime](./programming-dotnet/dotnet-10-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 10.0. | dotnet |  |  |
+| [DotNet 10 Desktop Runtime](./programming-dotnet/dotnet-10-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 10.0. | dotnet |  |  |
+| [DotNet 6 Desktop Runtime](./programming-dotnet/dotnet-6-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 6.0. | dotnet |  |  |
 | [DotNet 8 Desktop Runtime](./programming-dotnet/dotnet-8-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0. | dotnet |  |  |
 | [DotNet 9 Desktop Runtime](./programming-dotnet/dotnet-9-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0. | dotnet |  |  |
 | [dotnetfile](./programming-dotnet/dotnetfile.md) | Git | dotnetfile is a Common Language Runtime (CLR) header parser library for Windows .NET files built in Python. The CLR header is present in every Windows .NET assembly beside the Portable Executable (PE) header. It stores a plethora of metadata information for the managed part of the file. | pe-analysis, dotnet |  |  |
@@ -247,6 +251,7 @@ Categories generated from dfirws shortcuts.
 | [jupyter-collection](./utilities/jupyter-collection.md) | Git | Collection of Jupyter Notebooks by @fr0gger_ | python |  |  |
 | [jupyterlab](./utilities/jupyterlab.md) | Python | JupyterLab computational environment | python, data-processing | `.ipynb` |  |
 | [jwt-cli](./programming-java/jwt-cli.md) | GitHub Release | A super fast CLI tool to decode and encode JWTs built in Rust | web, security-testing, decoding |  |  |
+| [KAPE](./ir/kape.md) | Installer | Kroll Artifact Parser and Extractor (KAPE) is an efficient and highly configurable triage program that will target essentially any device or storage location, find forensically useful artifacts, and parse them within a few minutes. | forensics, incident-response, acquisition, artifact-extraction, triage |  |  |
 | [keystone-engine](./reverse-engineering/keystone-engine.md) | Python | import keystone | reverse-engineering |  |  |
 | [LeechCore.wiki](./memory/leechcore-wiki.md) | Git | GitHub wiki for LeechCore. | memory-forensics, documentation |  |  |
 | [legacy-sigmatools](./signatures-and-information/legacy-sigmatools.md) | Git | Legacy Sigma Tools (sigmac etc.) | sigma, detection-rules |  |  |
@@ -459,6 +464,7 @@ Categories generated from dfirws shortcuts.
 | [VeraCrypt](./utilities-cryptography/veracrypt.md) | HTTP | VeraCrypt is a disk encryption tool. | encryption, disk-forensics | `.hc`, `.tc` | Full only |
 | [VirusTotal CLI](./signatures-and-information-online-tools/virustotal-cli.md) | Winget | VirusTotal CLI is a command-line tool for interacting with VirusTotal, allowing you to analyze files and URLs for malware and other threats. | malware-analysis, threat-intelligence, ioc-scanner |  | Full only |
 | [visidata](./utilities/visidata.md) | Python | vd file.csv | data-processing, tui, csv | `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx` |  |
+| [Visual Studio Build Tools](./development/visual-studio-build-tools.md) | Installer | The most comprehensive IDE for .NET and C++ developers on Windows for building web, cloud, desktop, mobile apps, services and games. |  |  |  |
 | [Visual Studio Code](./editors/visual-studio-code.md) | HTTP | Visual Studio Code is a source-code editor. | text-editor, code-editor, powershell | `.ps1`, `.py`, `.js`, `.ts`, `.json`, `.xml`, `.yaml`, `.md` |  |
 | [VLC](./utilities-media/vlc.md) | Winget | VLC is a versatile media player that supports a wide range of audio and video formats. It can be used for playing media files, streaming content, and even basic media conversion tasks. | audio | `.mp4`, `.avi`, `.mkv`, `.mov`, `.mp3`, `.wav`, `.flac` | Full only |
 | [Volatility Workbench 2.1](./memory/volatility-workbench-2-1.md) | HTTP | Volatility Workbench is a GUI for the Volatility memory analysis framework. | memory-forensics, gui | `.dmp`, `.raw`, `.vmem`, `.img` | Full only |
@@ -503,6 +509,7 @@ Categories generated from dfirws shortcuts.
 | [yq](./signatures-and-information/yq.md) | GitHub Release | yq is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor. | yaml, data-processing, cli | `.yaml`, `.yml`, `.json`, `.xml`, `.toml` |  |
 | [zaproxy](./network/zaproxy.md) | GitHub Release | The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to. | web, security-testing, network |  | Full only |
 | [zensical](./utilities/zensical.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.toml` |  |
+| [Zimmerman Tools](./zimmerman/zimmerman-tools.md) | .NET | Zimmerman Tools is a collection of Windows forensics tools developed by Eric Zimmerman. |  |  |  |
 | [Zircolite](./files-and-apps-log/zircolite.md) | Python | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |  |
 | [zstd](./utilities/zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |
 | [Zui](./network/zui.md) | GitHub Release | Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data. | network-analysis, pcap | `.pcap`, `.pcapng`, `.zng` | Full only |

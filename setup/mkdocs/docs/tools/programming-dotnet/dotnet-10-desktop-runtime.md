@@ -8,7 +8,7 @@
 
 **License:** MIT
 
-**Source:** Winget
+**Source:** Installer
 
 **Profiles:** Full, Basic
 
