@@ -35,7 +35,7 @@ dfirws/
 │   │   ├── node.ps1               # Launches Node build sandbox
 │   │   ├── zimmerman.ps1          # Launches Zimmerman sandbox (Eric Zimmerman's .NET forensic tools)
 │   │   ├── didier.ps1             # Didier Stevens tools
-│   │   ├── kape.ps1               # KAPE forensic framework
+│   │   ├── kape.ps1               # KAPE metadata (KAPE is updated in the Zimmerman sandbox)
 │   │   ├── msys2.ps1              # MSYS2 build environment
 │   │   └── visualstudiobuildtools.ps1
 │   │
@@ -210,7 +210,7 @@ if (Test-Path -Path "${ROOT_PATH}\log\dfirws") {
 | generate_node.wsb | install_node.ps1 | 7 npm packages | Node.js, npm |
 | generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment + r2ai plugin + pycdc (built from git, static) | msys2 gcc, cmake, pkg-config |
 | generate_freshclam.wsb | install_freshclam.ps1 | ClamAV signatures | ClamAV |
-| generate_zimmerman.wsb | install_zimmerman.ps1 | Zimmerman tools via Get-ZimmermanTools + `--sync` of EvtxECmd/RECmd/SQLECmd maps (keeps .NET 10 off the host) | .NET 10 Desktop runtime |
+| generate_zimmerman.wsb | install_zimmerman.ps1 | Zimmerman tools via Get-ZimmermanTools + `--sync` of EvtxECmd/RECmd/SQLECmd maps, and KAPE via KAPE-EZToolsAncillaryUpdater if `local\kape.zip` exists (keeps .NET 10 off the host) | .NET 10 Desktop runtime |
 
 ### Adding a New Build Sandbox
 

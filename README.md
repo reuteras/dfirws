@@ -176,7 +176,7 @@ downloadFiles.ps1
 ├─[download scripts]
 │   │
 │   ├── resources\download\basic.ps1          always first when toolchains run
-│   │    (installers needed by node/go/rust/msys2/python/freshclam/logboost/zimmerman)
+│   │    (installers needed by node/go/rust/msys2/python/freshclam/logboost/zimmerman/kape)
 │   │
 │   ├── resources\download\release.ps1        -Release  | -AllTools
 │   │    └── GitHub releases  →  mount\Tools\
@@ -198,9 +198,10 @@ downloadFiles.ps1
 │   ├── resources\download\zimmerman.ps1      -Zimmerman  | -AllTools
 │   │    └── [sandbox] .NET 10 + Get-ZimmermanTools + Sync-EZTools  →  mount\Tools\Zimmerman\
 │   │         (uses downloads\dotnet10desktop.exe from basic.ps1)
+│   │         + KAPE-EZToolsAncillaryUpdater if local\kape.zip exists  →  downloads\KAPE\
 │   │
 │   ├── resources\download\kape.ps1           -Kape  | -AllTools
-│   │    └── requires local\kape.zip          →  mount\Tools\KAPE\
+│   │    └── requires local\kape.zip, KAPE metadata (-Kape also runs zimmerman.ps1)
 │   │
 │   ├── resources\download\powershell.ps1     -PowerShell  | -AllTools
 │   │    └── PS modules + latest pwsh  →  mount\Tools\

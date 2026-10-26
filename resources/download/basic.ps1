@@ -380,8 +380,8 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# DotNet 10 Desktop runtime - used in the Zimmerman sandbox and installed during startup
-if ($all -or $Zimmerman) {
+# DotNet 10 Desktop runtime - used in the Zimmerman sandbox (also for KAPE) and installed during startup
+if ($all -or $Zimmerman -or $Kape) {
     Write-SynchronizedLog "winget: Downloading DotNet 10 Desktop runtime."
     $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.10" "Microsoft*.exe" "dotnet10desktop.exe" -check "PE32"
 }

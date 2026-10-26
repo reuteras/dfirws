@@ -27,6 +27,7 @@
       <SandboxFolder>C:\Zimmerman</SandboxFolder>
       <ReadOnly>false</ReadOnly>
     </MappedFolder>
+    <!-- __KAPE__ -->
     <MappedFolder>
       <HostFolder>__SANDBOX__tmp\zimmerman</HostFolder>
       <SandboxFolder>C:\tmp\zimmerman</SandboxFolder>

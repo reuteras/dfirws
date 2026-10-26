@@ -33,5 +33,18 @@ if (Test-Path "C:\Zimmerman\net9") {
 Write-DateLog "Sync maps and batch files for EvtxECmd, RECmd and SQLECmd." >> "C:\log\zimmerman.txt"
 PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File C:\resources\external\Sync-EZTools.ps1 "C:\Zimmerman" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\zimmerman.txt"
 
+# C:\KAPE is only mapped when local\kape.zip exists on the host.
+if (Test-Path "C:\KAPE\kape.exe") {
+    Write-DateLog "Update KAPE, its targets and modules, and the EZ Tools in KAPE\Modules\bin." >> "C:\log\zimmerman.txt"
+    Set-Location "C:\KAPE"
+    & .\KAPE-EZToolsAncillaryUpdater.ps1 -silent *> "C:\log\kape.txt"
+    Set-Location "${HOME}"
+    # Remove the .NET 9 builds left by older versions of the updater
+    if (Test-Path "C:\KAPE\Modules\bin\ZimmermanTools\net9") {
+        Remove-Item -Recurse -Force "C:\KAPE\Modules\bin\ZimmermanTools\net9"
+    }
+    Write-DateLog "KAPE done." >> "C:\log\zimmerman.txt"
+}
+
 Write-DateLog "Zimmerman tools done." >> "C:\log\zimmerman.txt"
 Write-Output "" > "C:\tmp\zimmerman\done"

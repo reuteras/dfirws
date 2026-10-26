@@ -1,4 +1,5 @@
-﻿# Install and update kape if kape.zip is present
+﻿# Create metadata for KAPE if kape.zip is present. KAPE is extracted and updated in the
+# Zimmerman sandbox by zimmerman.ps1.
 
 . ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
@@ -10,20 +11,6 @@ if (test-path .\local\kape.zip) {
     Write-dateLog "If you want to add Kape place your copy of kape.zip in the local directory."
     Exit
 }
-
-if (! (Test-Path -Path "$SETUP_PATH\KAPE" )) {
-    & $SEVENZIP x -aoa ".\local\kape.zip" -o"$SETUP_PATH" | Out-Null
-    if (Test-Path "$SETUP_PATH\Get-KAPEUpdate.ps1") {
-        Remove-Item "$SETUP_PATH\Get-KAPEUpdate.ps1"  -Force
-    }
-}
-
-$CURRENT_DIR = $PWD
-Copy-Item ".\resources\external\KAPE-EZToolsAncillaryUpdater.ps1" "$SETUP_PATH\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" -Force
-Copy-Item ".\resources\download\Get-ZimmermanTools.ps1" "$SETUP_PATH\KAPE\Get-ZimmermanTools.ps1" -Force
-Set-Location "$SETUP_PATH\KAPE"
-& .\KAPE-EZToolsAncillaryUpdater.ps1 -silent -net 6 *> $CURRENT_DIR\log\kape.txt
-Set-Location $CURRENT_DIR
 
 $TOOL_DEFINITIONS += @{
     Name = "KAPE"

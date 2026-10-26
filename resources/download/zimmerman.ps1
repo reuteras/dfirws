@@ -5,8 +5,22 @@ ${ROOT_PATH} = "${PWD}"
 
 # Download the Zimmerman tools and sync their maps in a sandbox, since running --sync needs the
 # .NET 10 runtime and we don't want to require it on the host. dotnet10desktop.exe is downloaded by basic.ps1.
+# KAPE is updated in the same sandbox if local\kape.zip exists, since its updater also runs the EZ Tools.
 if (Test-Path -Path "${ROOT_PATH}\downloads\dotnet10desktop.exe") {
     Write-DateLog "Start Sandbox to download Zimmerman tools." > "${ROOT_PATH}\log\zimmerman.txt"
+
+    $kapeMapping = "<!-- KAPE not used, local\kape.zip not found -->"
+    if (Test-Path -Path "${ROOT_PATH}\local\kape.zip") {
+        if (! (Test-Path -Path "${SETUP_PATH}\KAPE")) {
+            & $SEVENZIP x -aoa "${ROOT_PATH}\local\kape.zip" -o"${SETUP_PATH}" | Out-Null
+        }
+        if (Test-Path -Path "${SETUP_PATH}\KAPE\Get-KAPEUpdate.ps1") {
+            Remove-Item "${SETUP_PATH}\KAPE\Get-KAPEUpdate.ps1" -Force
+        }
+        Copy-Item "${ROOT_PATH}\resources\external\KAPE-EZToolsAncillaryUpdater.ps1" "${SETUP_PATH}\KAPE\KAPE-EZToolsAncillaryUpdater.ps1" -Force
+        Copy-Item "${ROOT_PATH}\resources\download\Get-ZimmermanTools.ps1" "${SETUP_PATH}\KAPE\Get-ZimmermanTools.ps1" -Force
+        $kapeMapping = "<MappedFolder><HostFolder>__SANDBOX__downloads\KAPE</HostFolder><SandboxFolder>C:\KAPE</SandboxFolder><ReadOnly>false</ReadOnly></MappedFolder>"
+    }
 
     if (! (Test-Path -Path "${ROOT_PATH}\tmp\zimmerman")) {
         New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\zimmerman" | Out-Null
@@ -14,7 +28,7 @@ if (Test-Path -Path "${ROOT_PATH}\downloads\dotnet10desktop.exe") {
         Remove-Item "${ROOT_PATH}\tmp\zimmerman\done" | Out-Null
     }
 
-    (Get-Content "${ROOT_PATH}\resources\templates\generate_zimmerman.wsb.template").replace("__SANDBOX__", "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_zimmerman.wsb"
+    (Get-Content "${ROOT_PATH}\resources\templates\generate_zimmerman.wsb.template").replace("<!-- __KAPE__ -->", $kapeMapping).replace("__SANDBOX__", "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_zimmerman.wsb"
     Start-Process "${ROOT_PATH}\tmp\generate_zimmerman.wsb"
     Wait-Sandbox -WSBPath "${ROOT_PATH}\tmp\generate_zimmerman.wsb" -WaitForPath "${ROOT_PATH}\tmp\zimmerman\done"
 

@@ -489,7 +489,7 @@ if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Py
     }
 }
 
-if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent -or $Zimmerman.IsPresent) {
+if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent -or $Zimmerman.IsPresent -or $Kape.IsPresent) {
     Write-DateLog "Download common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
 }
@@ -557,14 +557,15 @@ if ($all -or $Winget.IsPresent) {
     .\resources\download\winget.ps1
 }
 
-if ($all -or $Zimmerman.IsPresent) {
-    Write-DateLog "Download Zimmerman tools."
+# KAPE is updated in the Zimmerman sandbox, so -Kape runs it too.
+if ($all -or $Zimmerman.IsPresent -or $Kape.IsPresent) {
+    Write-DateLog "Download Zimmerman tools (and update KAPE if local\kape.zip exists)."
     .\resources\download\zimmerman.ps1
 }
 
 if ($all -or $Kape.IsPresent) {
     if (Test-Path ".\local\kape.zip") {
-        Write-DateLog "Download and update KAPE and related tools."
+        Write-DateLog "Create KAPE metadata."
         .\resources\download\kape.ps1
     }
 }
