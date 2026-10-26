@@ -347,7 +347,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
-    Dependencies = @("dotnet10")
+    Dependencies = @("dotnet9", "dotnet10")
     LicenseUrl = ""
     Tags = @()
     FileExtensions = @()

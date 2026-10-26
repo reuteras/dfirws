@@ -14,6 +14,11 @@
       <ReadOnly>true</ReadOnly>
     </MappedFolder>
     <MappedFolder>
+      <HostFolder>__SANDBOX__\scripts</HostFolder>
+      <SandboxFolder>C:\Users\WDAGUtilityAccount\Documents\scripts</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+    <MappedFolder>
       <HostFolder>__SANDBOX__\downloads</HostFolder>
       <SandboxFolder>C:\downloads</SandboxFolder>
       <ReadOnly>true</ReadOnly>

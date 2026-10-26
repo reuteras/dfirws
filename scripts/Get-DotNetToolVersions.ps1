@@ -17,6 +17,7 @@
 #   .\scripts\Get-DotNetToolVersions.ps1 -Path C:\Tools         # inside the sandbox
 #   .\scripts\Get-DotNetToolVersions.ps1 -AssumeInstalled 10    # what breaks with only .NET 10?
 #   .\scripts\Get-DotNetToolVersions.ps1 -CsvPath .\log\dotnet.csv
+#   .\scripts\Get-DotNetToolVersions.ps1 -AssumeInstalled 8,9,10 -FailOnMissing  # exit 1 if a program needs another runtime
 
 param (
     [string[]]$Path = @(".\mount\Tools"),
@@ -25,7 +26,9 @@ param (
     [int[]]$AssumeInstalled = @(),
     [switch]$IncludeLibraries,
     [int]$MaxFileSizeMB = 512,
-    [string]$CsvPath = ""
+    [string]$CsvPath = "",
+    # Exit with code 1 if any program needs a runtime that is not in the checked list.
+    [switch]$FailOnMissing
 )
 
 Set-StrictMode -Version Latest
@@ -413,3 +416,8 @@ if ($CsvPath) {
 }
 
 $sorted
+
+if ($FailOnMissing -and $problems.Count -gt 0) {
+    Write-Host "ERROR: $($problems.Count) programs need a .NET runtime other than $(($installed | ForEach-Object { ".NET $_" }) -join ', ')."
+    exit 1
+}

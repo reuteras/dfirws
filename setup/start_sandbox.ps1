@@ -769,6 +769,18 @@ if (-not (Test-Path "C:\log\verify_done")) {
         Get-Job | Wait-Job | Out-Null
         Get-Job | Receive-Job 2>&1 >> "${WSDFIR_TEMP}\jobs.txt"
         Get-Job | Remove-Job | Out-Null
+
+        # Run last, when everything is installed: fail if any program needs a .NET runtime other than 8, 9 or 10.
+        Write-SynchronizedLog "Running Get-DotNetToolVersions.ps1."
+        $global:LASTEXITCODE = 0
+        & "${HOME}\Documents\scripts\Get-DotNetToolVersions.ps1" -Path "C:\Tools", "C:\git", "C:\venv", "${env:ProgramFiles}", "${env:ProgramFiles(x86)}" -AssumeInstalled 8, 9, 10 -FailOnMissing -CsvPath "C:\log\dotnet-tools.csv" 6>&1 |
+            Where-Object { $_ -is [System.Management.Automation.InformationRecord] } |
+            ForEach-Object { "$_" } | Out-File -FilePath "C:\log\dotnet-tools.txt" -Encoding utf8
+        if ($LASTEXITCODE -ne 0) {
+            Write-SynchronizedLog "ERROR: Some programs need a .NET runtime other than 8, 9 or 10. See C:\log\dotnet-tools.txt and C:\log\dotnet-tools.csv."
+        } else {
+            Write-SynchronizedLog "Get-DotNetToolVersions.ps1: all programs run with .NET 8, 9 or 10."
+        }
     }
     catch {
         Write-SynchronizedLog "ERROR in verify block: $_"
