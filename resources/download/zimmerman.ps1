@@ -1,20 +1,28 @@
 ﻿. ".\resources\download\common.ps1"
 $TOOL_DEFINITIONS = @()
 
-# Download and update Zimmerman tools.
-PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File .\resources\download\Get-ZimmermanTools.ps1 -Dest ".\mount\Tools\Zimmerman" -NetVersion 10 -NoUpdate 2>&1 >> ".\log\log.txt"
+${ROOT_PATH} = "${PWD}"
 
-# Get-ZimmermanTools.ps1 extracts the .NET 10 builds to Zimmerman\net. Move them up one level so the paths used by dfirws stay the same.
-if (Test-Path ".\mount\Tools\Zimmerman\net") {
-    robocopy ".\mount\Tools\Zimmerman\net" ".\mount\Tools\Zimmerman" /E /MOVE /IS /IT /NFL /NDL /NJH /NJS /NP | Out-Null
+# Download the Zimmerman tools and sync their maps in a sandbox, since running --sync needs the
+# .NET 10 runtime and we don't want to require it on the host. dotnet10desktop.exe is downloaded by basic.ps1.
+if (Test-Path -Path "${ROOT_PATH}\downloads\dotnet10desktop.exe") {
+    Write-DateLog "Start Sandbox to download Zimmerman tools." > "${ROOT_PATH}\log\zimmerman.txt"
+
+    if (! (Test-Path -Path "${ROOT_PATH}\tmp\zimmerman")) {
+        New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\tmp\zimmerman" | Out-Null
+    } elseif (Test-Path -Path "${ROOT_PATH}\tmp\zimmerman\done") {
+        Remove-Item "${ROOT_PATH}\tmp\zimmerman\done" | Out-Null
+    }
+
+    (Get-Content "${ROOT_PATH}\resources\templates\generate_zimmerman.wsb.template").replace("__SANDBOX__", "${ROOT_PATH}\") | Set-Content "${ROOT_PATH}\tmp\generate_zimmerman.wsb"
+    Start-Process "${ROOT_PATH}\tmp\generate_zimmerman.wsb"
+    Wait-Sandbox -WSBPath "${ROOT_PATH}\tmp\generate_zimmerman.wsb" -WaitForPath "${ROOT_PATH}\tmp\zimmerman\done"
+
+    Remove-Item -Recurse -Force "${ROOT_PATH}\tmp\zimmerman" 2>&1 | Out-Null
+    Write-DateLog "Zimmerman tools done." >> "${ROOT_PATH}\log\zimmerman.txt"
+} else {
+    Write-SynchronizedLog "Error: ${ROOT_PATH}\downloads\dotnet10desktop.exe not found, it should have been downloaded by basic.ps1. Skipping Zimmerman tools."
 }
-
-# Remove the .NET 9 builds left by older versions of Get-ZimmermanTools.ps1
-if (Test-Path ".\mount\Tools\Zimmerman\net9") {
-    Remove-Item -Recurse -Force ".\mount\Tools\Zimmerman\net9"
-}
-
-PowerShell.exe -NoProfile -ExecutionPolicy Bypass -File .\resources\external\Sync-EZTools.ps1 ".\mount\Tools\Zimmerman" 2>&1 >> ".\log\log.txt"
 
 $TOOL_DEFINITIONS += @{
     Name = "Zimmerman Tools"

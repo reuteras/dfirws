@@ -87,9 +87,10 @@ function New-CreateToolFiles {
         $ToolDefinitions = $filteredToolDefinitions
     }
 
-    $ToolDefinitions = Normalize-ToolDefinitions -ToolDefinitions $ToolDefinitions
+    # Wrap in @() so a source with a single tool stays an array instead of being unrolled to a bare hashtable.
+    $ToolDefinitions = @(Normalize-ToolDefinitions -ToolDefinitions $ToolDefinitions)
     # Normalize any tools that were filtered out so they are ready for JSON export too.
-    $AllToolDefinitions = Normalize-ToolDefinitions -ToolDefinitions $AllToolDefinitions
+    $AllToolDefinitions = @(Normalize-ToolDefinitions -ToolDefinitions $AllToolDefinitions)
 
     # Remove old helper files for HTTP installations and create new ones.
     if (Test-Path -Path "$BASE_PATH\dfirws\verify_${source}.ps1") {
