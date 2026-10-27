@@ -3174,7 +3174,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # https://windows.php.net/download - PHP 8
-$PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/releases/archives/php-8.[.0-9]+-nts-Win32-vs17-x64.zip'
+$PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/releases/archives/php-8\.[0-9]+\.[0-9]+(-[0-9]+)?-nts-Win32-vs17-x64\.zip'
 $status = Get-FileFromUri -uri "https://downloads.php.net/~windows${PHP_URL}" -FilePath ".\downloads\php.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     Install-ToolFromArchive -Archive "${SETUP_PATH}\php.zip" -Destination "${TOOLS}\php" -Target "${TOOLS}\php"
