@@ -501,15 +501,15 @@ function Get-DownloadUrlFromPage {
         [Parameter(Mandatory=$False)] [switch]$last
     )
 
-    $downloadUrl = ""
-    $retries = 3
+    $maxAttempts = 3
 
     $curlArgs = @("--silent", "-L")
     if ($Url -like "*github.com*" -and $GH_USER -ne "" -and $GH_PASS -ne "") {
         $curlArgs += @("-u", "${GH_USER}:${GH_PASS}")
     }
 
-    while ("$downloadUrl" -eq "") {
+    for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+        $downloadUrl = ""
         try {
             $found = curl.exe @curlArgs "$Url" | Select-String -Pattern "$RegEx" | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
             if ($last) {
@@ -521,17 +521,18 @@ function Get-DownloadUrlFromPage {
         catch {
             $downloadUrl = ""
         }
-        if ("$downloadUrl" -eq "") {
-            Start-Sleep 60
+        if ("$downloadUrl" -ne "") {
+            return $downloadUrl
         }
-        $retries--
-        if ($retries -eq 0) {
-            Write-DateLog "Failed to get download URL from $Url."
-            return ""
+        if ($attempt -lt $maxAttempts) {
+            Start-Sleep 60
         }
     }
 
-    return $downloadUrl
+    # Log to the file only. Write-DateLog writes to the output stream, which
+    # would become part of the returned URL.
+    Write-SynchronizedLog "Failed to get download URL from $Url."
+    return ""
 }
 
 function Write-SynchronizedLog {
