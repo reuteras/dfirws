@@ -190,8 +190,15 @@ if ($all -or $Python) {
     # uv - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading uv."
     $status = Get-WinGet "astral-sh.uv" "uv*.zip" "uv" -check "data"
-    if ($status) {
-        & $SEVENZIP x -aoa ".\downloads\uv\uv*.zip" -o"${TOOLS}\bin" | Out-Null
+    # Each uv release is saved as its own uv_<version>_*.zip in downloads\uv. Only extract
+    # the newest one and remove older ones; extracting them all on top of each other
+    # left a corrupt uv.exe in Tools\bin.
+    $uvZips = @(Get-ChildItem ".\downloads\uv\uv*.zip" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime)
+    if ($uvZips.Count -gt 0) {
+        $uvZips | Select-Object -SkipLast 1 | Remove-Item -Force -ErrorAction SilentlyContinue
+        if ($status -or -not (Test-Path "${TOOLS}\bin\uv.exe")) {
+            & $SEVENZIP x -aoa $uvZips[-1].FullName -o"${TOOLS}\bin" | Out-Null
+        }
     }
 
     # Get Amazon Corretto - installed during start
