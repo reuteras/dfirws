@@ -8,6 +8,12 @@ if (! (Test-Path -Path "${ROOT_PATH}\mount\Tools\ClamAV")) {
     New-Item -ItemType Directory -Force -Path "${ROOT_PATH}\mount\Tools\ClamAV" | Out-Null
 }
 
+# The URLhaus ClamAV feed now requires an abuse.ch Auth-Key and is no longer
+# downloaded. Remove the stale copy left by earlier runs.
+if (Test-Path -Path "${ROOT_PATH}\mount\Tools\ClamAV\db\urlhaus.ndb") {
+    Remove-Item "${ROOT_PATH}\mount\Tools\ClamAV\db\urlhaus.ndb" -Force | Out-Null
+}
+
 if (Test-Path -Path "${ROOT_PATH}\mount\Tools\ClamAV\done") {
     Remove-Item "${ROOT_PATH}\mount\Tools\ClamAV\done" | Out-Null
 }
