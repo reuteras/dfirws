@@ -2,6 +2,34 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-10-27
+
+- Fixed a corrupt `uv.exe` that broke the Python sandbox. `downloadFiles.ps1` now only extracts the newest uv release and removes older downloads.
+- Removed the URLhaus ClamAV signatures (`urlhaus.ndb`) since abuse.ch now requires an Auth-Key to download them.
+
+## 2026-10-26
+
+- The Zimmerman tools are now downloaded and synced in a separate build sandbox, so the host no longer needs the .NET 10 runtime.
+- KAPE is updated in the same sandbox if `local\kape.zip` exists. `-Kape` now also runs the Zimmerman download.
+- The .NET 6 runtime is no longer downloaded or installed since no tool needs it.
+- The verify sandbox (`-Verify`) now checks that all .NET programs have the runtime they need. The report is written to `log\dotnet-tools.txt` and `log\dotnet-tools.csv`.
+
+## 2026-10-24
+
+- Added the .NET 10 Desktop Runtime. The Zimmerman tools now use the .NET 10 builds since .NET 9 builds are no longer published. The .NET 8 and 9 runtimes are still installed.
+
+## 2026-10-16
+
+- opencode is updated to version 2 and is now installed from the `@opencode/cli` npm package instead of `opencode-ai`.
+
+## 2026-10-15
+
+- `pst-extract` now saves every attachment of a message. Before only the last attachment was saved and messages without attachments caused a crash.
+
+## 2026-10-10
+
+- Restored debloat since the repository is available on GitHub again.
+
 ## 2026-10-08
 
 - HTML files (`.html` and `.htm`) now always open in Edge. `.html` is no longer opened in the text editor by default, use the right-click menu to edit it.
