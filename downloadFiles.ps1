@@ -233,7 +233,7 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
 # Scan log files for errors, warnings and failures, using the same filters as -ShowErrors.
 # Used both to gate -VerifyOnSuccess and for the final summary at the end of the script.
 function Get-LogIssues {
-    $warnings = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "warning" | Where-Object {
+    $warnings = Get-ChildItem .\log\* -Recurse -Exclude "security.txt" | Select-String -Pattern "warning" | Where-Object {
         $_.Line -notmatch " INFO " -and
         $_.Line -notmatch "This is taking longer than usual" -and
         $_.Line -notmatch "Installing collected packages" -and
@@ -271,7 +271,7 @@ function Get-LogIssues {
         $_.Line -notmatch "CMake Warning \(unused-cli\)"
     }
 
-    $errors = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "error" | Where-Object {
+    $errors = Get-ChildItem .\log\* -Recurse -Exclude "security.txt" | Select-String -Pattern "error" | Where-Object {
         $_.Line -notmatch "Error: no test specified" -and
         $_.Line -notmatch "pretty.errors" -and
         $_.Line -notmatch "Copied (replaced existing)" -and
@@ -310,7 +310,7 @@ function Get-LogIssues {
         $_.Line -notmatch "error scanning C:"
     }
 
-    $failed = Get-ChildItem .\log\* -Recurse | Select-String -Pattern "Failed" | Where-Object {
+    $failed = Get-ChildItem .\log\* -Recurse -Exclude "security.txt" | Select-String -Pattern "Failed" | Where-Object {
         $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
         $_.Line -notmatch "ucrt64/share" -and
         $_.Line -notmatch "origin/main Updating" -and
@@ -707,12 +707,14 @@ if ( -not $ShowErrors.IsPresent) {
             $_.Line -notmatch "testdata/strip/vulndb-v1"
         }
 
+        $securityLog = ".\log\security.txt"
         if ($securityFindings) {
-            Write-DateLog "SECURITY: Vulnerability audit findings detected in installed packages:"
-            $securityFindings | ForEach-Object {
-                Write-DateLog "  [$($_.Filename)] $($_.Line.Trim())"
-            }
-            Write-DateLog "SECURITY: Review the audit log files for full details and consider updating affected packages."
+            $securityFindings | ForEach-Object { "[$($_.Filename)] $($_.Line.Trim())" } | Set-Content -Path $securityLog -Encoding UTF8
+            $perFile = ($securityFindings | Group-Object Filename | ForEach-Object { "$($_.Name): $($_.Count)" }) -join ", "
+            Write-DateLog "SECURITY: $(@($securityFindings).Count) vulnerability audit findings ($perFile)."
+            Write-DateLog "SECURITY: Details written to ${securityLog}. Consider updating affected packages."
+        } elseif (Test-Path $securityLog) {
+            Remove-Item -Force $securityLog
         }
     }
 }
