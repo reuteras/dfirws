@@ -273,7 +273,7 @@ The `Dependencies` field tracks high-level build/runtime dependencies between co
 - `"msys2"` - Needs gcc/g++ from MSYS2
 - `"dotnet8"` / `"dotnet9"` / `"dotnet10"` - Needs .NET runtime
 - `"Ghidra"` - Needs Ghidra installed
-- `"openjdk11"` - Needs Java runtime
+- `"corretto25"` - Needs Java runtime (Amazon Corretto 25)
 - `"nodejs"` - Needs Node.js runtime
 - `"golang"` - Needs Go runtime
 - `"enrichment"` - Needs enrichment databases

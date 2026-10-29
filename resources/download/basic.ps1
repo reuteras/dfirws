@@ -202,7 +202,7 @@ if ($all -or $Python) {
     }
 
     # Get Amazon Corretto - installed during start
-    $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"
+    $status = Get-FileFromUri -uri "https://corretto.aws/downloads/latest/amazon-corretto-25-x64-windows-jdk.msi" -FilePath ".\downloads\corretto.msi" -check "Composite Document File V2 Document"
 
     # Ghidra - latest release
     if (Test-ToolIncluded -ToolName "Ghidra") {
@@ -223,7 +223,7 @@ if ($all -or $Python) {
 }
 
 $TOOL_DEFINITIONS += @{
-    Name = "Amazon Corretto 21"
+    Name = "Amazon Corretto 25"
     Homepage = "https://aws.amazon.com/corretto/"
     Vendor = "Amazon"
     License = "Apache-2.0"
@@ -231,7 +231,7 @@ $TOOL_DEFINITIONS += @{
     Category = "Programming\Java"
     Shortcuts = @(
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\Amazon Corretto 21.lnk"
+            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Java\Amazon Corretto 25.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command java -h"
             Icon     = ""
@@ -241,7 +241,7 @@ $TOOL_DEFINITIONS += @{
     InstallVerifyCommand = ""
     Verify = @()
     Notes = "Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK)."
-    Tips = "Corretto 21 is the default Java runtime used by Ghidra, jd-gui, Recaf, bytecode-viewer, MsgViewer and other Java tools. Run 'java -version' to confirm which runtime is active on PATH."
+    Tips = "Corretto 25 is the default Java runtime used by Ghidra, jd-gui, Recaf, bytecode-viewer, MsgViewer and other Java tools. Run 'java -version' to confirm which runtime is active on PATH."
     Usage = "java -jar tool.jar"
     SampleCommands = @(
         "java -version",
@@ -335,7 +335,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
-    Dependencies = @("openjdk11")
+    Dependencies = @("corretto25")
     Tags = @()
     FileExtensions = @()
     PythonVersion = ""
@@ -437,7 +437,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
-    Dependencies = @("openjdk11")
+    Dependencies = @()
     Tags = @()
     FileExtensions = @()
 }
@@ -481,7 +481,7 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @(
         "N/A"
     )
-    Dependencies = @("openjdk11")
+    Dependencies = @()
     Tags = @()
     FileExtensions = @()
 }
