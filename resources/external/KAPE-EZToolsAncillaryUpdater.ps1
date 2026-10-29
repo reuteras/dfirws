@@ -86,6 +86,11 @@ function Get-KAPEUpdateEXE {
 	Log -logFilePath $logFilePath -msg ' --- Update KAPE ---'
 
 	$script:getKapeUpdatePs1 = Get-ChildItem -Path $PSScriptRoot -Filter $getKapeUpdatePs1FileName # .\KAPE\Get-KAPEUpdate.ps1
+	# dfirws removes Get-KAPEUpdate.ps1 and uses the kape.exe from local\kape.zip
+	if ($null -eq $getKapeUpdatePs1) {
+		Log -logFilePath $logFilePath -msg "$getKapeUpdatePs1FileName not found in $PSScriptRoot. Skipping kape.exe update."
+		return
+	}
 	Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$($getKapeUpdatePs1.FullName)`"" -NoNewWindow -Wait
 }
 
@@ -253,7 +258,8 @@ function Move-EZToolsNET {
 		Log -logFilePath $logFilePath -msg "Removing extra copies of EZ Tools from $getZimmermanToolsFolderKapeNet"
 		Remove-Item -Path $getZimmermanToolsFolderKapeNet -Recurse -Force -ErrorAction SilentlyContinue
 	} else {
-		Log -logFilePath $logFilePath -msg "$getZimmermanToolsFolderKapeNet doesn't exist. Make sure you have the latest version of Get-ZimmermanTools.ps1 in $kapeModulesBin"
+		# Get-ZimmermanTools.ps1 only downloads tools whose ETag changed, so no net folder means no updates
+		Log -logFilePath $logFilePath -msg "No updated .NET 10 EZ Tools downloaded to $getZimmermanToolsFolderKapeNet. Tools in $kapeModulesBin are up to date."
 	}
 }
 
