@@ -17,7 +17,7 @@
 #   .\scripts\Get-DotNetToolVersions.ps1 -Path C:\Tools         # inside the sandbox
 #   .\scripts\Get-DotNetToolVersions.ps1 -AssumeInstalled 10    # what breaks with only .NET 10?
 #   .\scripts\Get-DotNetToolVersions.ps1 -CsvPath .\log\dotnet.csv
-#   .\scripts\Get-DotNetToolVersions.ps1 -AssumeInstalled 8,9,10 -FailOnMissing  # exit 1 if a program needs another runtime
+#   .\scripts\Get-DotNetToolVersions.ps1 -AssumeInstalled 8,10 -FailOnMissing  # exit 1 if a program needs another runtime
 
 param (
     [string[]]$Path = @(".\mount\Tools"),
@@ -44,7 +44,7 @@ $DOTNET_END_OF_SUPPORT = @{
 }
 
 # Runtimes installed by setup/start_sandbox.ps1
-$SANDBOX_RUNTIMES = @(8, 9, 10)
+$SANDBOX_RUNTIMES = @(8, 10)
 
 $LATIN1 = [Text.Encoding]::GetEncoding(28591)
 

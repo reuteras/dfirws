@@ -273,7 +273,7 @@ The `generate-tools-docs.py` script:
 
 The `Dependencies` field tracks high-level build/runtime dependencies between components:
 - `"msys2"` - Needs gcc/g++ from MSYS2
-- `"dotnet8"` / `"dotnet9"` / `"dotnet10"` - Needs .NET runtime
+- `"dotnet8"` / `"dotnet10"` - Needs .NET runtime
 - `"Ghidra"` - Needs Ghidra installed
 - `"corretto25"` - Needs Java runtime (Amazon Corretto 25)
 - `"nodejs"` - Needs Node.js runtime

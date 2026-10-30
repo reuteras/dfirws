@@ -103,31 +103,6 @@ $TOOL_DEFINITIONS += @{
 }
 
 
-# DotNet 9 Desktop runtime - installed during startup
-Write-SynchronizedLog "winget: Downloading DotNet 9 Desktop runtime."
-$status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.9" "Microsoft*.exe" "dotnet9desktop.exe" -check "PE32"
-
-$TOOL_DEFINITIONS += @{
-    Name = "DotNet 9 Desktop Runtime"
-    Category = "Programming\dotNET"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("dotnet")
-    Notes = "The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 9.0."
-    Tips = "Required by tools built for .NET 9. Check installed runtimes with 'dotnet --list-runtimes'."
-    Usage = "Installed silently during sandbox start; nothing to run."
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://dotnet.microsoft.com"
-    Vendor = "Microsoft Corporation"
-    License = "MIT"
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
 # IrfanView - installed during startup
 Write-SynchronizedLog "winget: Downloading IrfanView."
 $status = Get-WinGet "IrfanSkiljan.IrfanView" "IrfanView*.exe" "irfanview.exe" -check "PE32"

@@ -114,14 +114,6 @@ if ($procDotnet8.ExitCode -ne 0) {
 }
 Write-DateLog ".NET 8 Desktop runtime installed" | Write-SetupLog
 
-# Install .NET 9
-Update-SandboxProgress "Installing .NET 9..."
-$procDotnet9 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet9desktop.exe" -ArgumentList "/install /quiet /norestart"
-if ($procDotnet9.ExitCode -ne 0) {
-    Write-DateLog "WARNING: .NET 9 installer exited with code $($procDotnet9.ExitCode)" | Write-SetupLog
-}
-Write-DateLog ".NET 9 Desktop runtime installed" | Write-SetupLog
-
 # Install .NET 10
 Update-SandboxProgress "Installing .NET 10..."
 $procDotnet10 = Start-Process -Wait -PassThru "${SETUP_PATH}\dotnet10desktop.exe" -ArgumentList "/install /quiet /norestart"
@@ -762,16 +754,16 @@ if (-not (Test-Path "C:\log\verify_done")) {
         Get-Job | Receive-Job 2>&1 >> "${WSDFIR_TEMP}\jobs.txt"
         Get-Job | Remove-Job | Out-Null
 
-        # Run last, when everything is installed: fail if any program needs a .NET runtime other than 8, 9 or 10.
+        # Run last, when everything is installed: fail if any program needs a .NET runtime that is not installed.
         Write-SynchronizedLog "Running Get-DotNetToolVersions.ps1."
         $global:LASTEXITCODE = 0
-        & "${HOME}\Documents\scripts\Get-DotNetToolVersions.ps1" -Path "C:\Tools", "C:\git", "C:\venv", "${env:ProgramFiles}", "${env:ProgramFiles(x86)}" -AssumeInstalled 8, 9, 10 -FailOnMissing -CsvPath "C:\log\dotnet-tools.csv" 6>&1 |
+        & "${HOME}\Documents\scripts\Get-DotNetToolVersions.ps1" -Path "C:\Tools", "C:\git", "C:\venv", "${env:ProgramFiles}", "${env:ProgramFiles(x86)}" -FailOnMissing -CsvPath "C:\log\dotnet-tools.csv" 6>&1 |
             Where-Object { $_ -is [System.Management.Automation.InformationRecord] } |
             ForEach-Object { "$_" } | Out-File -FilePath "C:\log\dotnet-tools.txt" -Encoding utf8
         if ($LASTEXITCODE -ne 0) {
-            Write-SynchronizedLog "ERROR: Some programs need a .NET runtime other than 8, 9 or 10. See C:\log\dotnet-tools.txt and C:\log\dotnet-tools.csv."
+            Write-SynchronizedLog "ERROR: Some programs need a .NET runtime that is not installed. See C:\log\dotnet-tools.txt and C:\log\dotnet-tools.csv."
         } else {
-            Write-SynchronizedLog "Get-DotNetToolVersions.ps1: all programs run with .NET 8, 9 or 10."
+            Write-SynchronizedLog "Get-DotNetToolVersions.ps1: all programs run with the installed .NET runtimes."
         }
 
         # Fail if any jar or Ghidra needs a newer Java than the installed Amazon Corretto.
