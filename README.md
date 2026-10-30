@@ -115,6 +115,12 @@ To simplify the download of tools, enrichment data and ClamAV signatures you can
 .\downloadFiles.ps1 -AllTools -Enrichment -Freshclam
 ```
 
+To only update the runtimes, build tools and installers in **basic.ps1**, such as Java, Python and Ghidra, without starting any sandbox you can run:
+
+```PowerShell
+.\downloadFiles.ps1 -Basic
+```
+
 To run the verify code you can run the following command:
 
 ```PowerShell
@@ -175,7 +181,7 @@ downloadFiles.ps1
 │
 ├─[download scripts]
 │   │
-│   ├── resources\download\basic.ps1          always first when toolchains run
+│   ├── resources\download\basic.ps1          -Basic  | always first when toolchains run
 │   │    (installers needed by node/go/rust/msys2/python/freshclam/logboost/zimmerman/kape)
 │   │
 │   ├── resources\download\release.ps1        -Release  | -AllTools

@@ -106,7 +106,10 @@ function Get-FileFromUri {
     $UriHash = $(Get-FileHash -InputStream $stringAsStream -Algorithm SHA256 | Select-Object -ExpandProperty Hash)
     $ETAG_FILE = "$PSScriptRoot\..\..\downloads\.etag\${UriHash}"
 
-    if (! (Test-Path "$FilePath")) {
+    # The etag and the file date only say something about a file downloaded from this URI.
+    # A 304 from -z also saves the etag, so without this a changed URI never replaces the file.
+    $fileIsFromUri = (Test-Path "$FilePath") -and (Compare-ToolsDownloaded -URL $Uri -AppName ([System.IO.FileInfo]$FilePath).Name)
+    if (! $fileIsFromUri) {
         Remove-Item -Force "${ETAG_FILE}" -ErrorAction SilentlyContinue
     }
 
@@ -119,7 +122,7 @@ function Get-FileFromUri {
         } else {
             $ETAG_FLAGS = @("--etag-save", "${ETAG_FILE}")
         }
-        if (Test-Path $FilePath) {
+        if ($fileIsFromUri) {
             $Z_FLAGS = @("-z", "$FilePath")
         } else {
             $Z_FLAGS = @()

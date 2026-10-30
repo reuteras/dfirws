@@ -7,6 +7,10 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 - The verify sandbox (`-Verify`) now checks that Ghidra and all jar files run with the installed Amazon Corretto. The report is written to `log\java-tools.txt` and `log\java-tools.csv`.
 - The same report lists the Ghidra extensions in `C:\Tools\ghidra_extensions` that are not built for the installed Ghidra version. Ghidra will not install them. dfirws follows the latest Ghidra, so these are listed as a note and not as an error.
 - The verify sandbox also checks that all Python venvs match the Python they use, and reports which packages block moving to Python 3.12, 3.13 and 3.14. The report is written to `log\python-tools.txt` and `log\python-tools.csv`. Run `.\scripts\Get-PythonToolVersions.ps1 -CheckPyPI` on the host to also check if the latest release of each blocking package on PyPI supports the newer Python.
+- The .NET 9 runtime is no longer downloaded or installed since no tool needs it. YAMAGoya is .NET 9 but self-contained.
+- The .NET check in the verify sandbox now checks against the runtimes that are installed instead of a fixed list.
+- Fixed downloads that kept the old file when the URL changed, which left Amazon Corretto 21 in place after the switch to Corretto 25.
+- Added `.\downloadFiles.ps1 -Basic` to only update the runtimes, build tools and installers in `basic.ps1`, such as Java, Python and Ghidra.
 
 ## 2026-10-27
 

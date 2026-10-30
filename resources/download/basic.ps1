@@ -83,7 +83,7 @@ $TOOL_DEFINITIONS += @{
 }
 #
 # Packages used in freshclam sandbox
-if ($all -or $Freshclam) {
+if ($all -or $Basic -or $Freshclam) {
     # ClamAV - installed during start
     if (Test-ToolIncluded -ToolName "ClamAV") {
         $status = Get-GitHubRelease -repo "Cisco-Talos/clamav" -path "${SETUP_PATH}\clamav.msi" -match "win.x64.msi$" -check "Composite Document File V2 Document"
@@ -132,7 +132,7 @@ $TOOL_DEFINITIONS += @{
 
 #
 # Packages used in NodeJS sandbox
-if ($all -or $Node) {
+if ($all -or $Basic -or $Node) {
     $NodeJSVersion = (Get-DownloadUrlFromPage -url "https://nodejs.org/en/download/prebuilt-binaries" -RegEx 'https://nodejs.org/dist/(v[^/]+)').split('/')[4]
 
     # nodejs - installed via sandbox during download and setup of tools for dfirws
@@ -181,7 +181,7 @@ $TOOL_DEFINITIONS += @{
 
 #
 # Packages used in Python sandbox
-if ($all -or $Python) {
+if ($all -or $Basic -or $Python) {
     # https://www.python.org/downloads/ - Python - installed during start
     Write-SynchronizedLog "winget: Downloading Python."
     $status = Get-WinGet "Python.Python.3.11" "Python*.exe" "python3.exe" -check "PE32"
@@ -363,7 +363,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # DotNet 10 Desktop runtime - used in the Zimmerman sandbox (also for KAPE) and installed during startup
-if ($all -or $Zimmerman -or $Kape) {
+if ($all -or $Basic -or $Zimmerman -or $Kape) {
     Write-SynchronizedLog "winget: Downloading DotNet 10 Desktop runtime."
     $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.10" "Microsoft*.exe" "dotnet10desktop.exe" -check "PE32"
 }
@@ -390,7 +390,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # MSYS2
-if (($all -and $profileMsys2Enabled) -or $MSYS2) {
+if ((($all -or $Basic) -and $profileMsys2Enabled) -or $MSYS2) {
     $status = Get-FileFromUri -uri "https://github.com/msys2/msys2-installer/releases/download/nightly-x86_64/msys2-base-x86_64-latest.sfx.exe" -FilePath "${SETUP_PATH}\msys2.exe" -CheckURL "No" -check "PE32"
     if ($status) {
         Copy-Item "${SETUP_PATH}\msys2.exe" "${TOOLS}\bin\msys2.exe"
@@ -400,7 +400,7 @@ if (($all -and $profileMsys2Enabled) -or $MSYS2) {
 
 #
 # Packages used in Go sandbox
-if (($all -and $profileGoEnabled) -or $Go) {
+if ((($all -or $Basic) -and $profileGoEnabled) -or $GoLang) {
     # GoLang - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading GoLang."
     $status = Get-WinGet "GoLang.Go" "Go*.msi" "golang.msi" -check "Composite Document File V2 Document"
@@ -444,7 +444,7 @@ $TOOL_DEFINITIONS += @{
 
 #
 # Packages used in Rust sandbox
-if (($all -and $profileRustEnabled) -or $Rust) {
+if ((($all -or $Basic) -and $profileRustEnabled) -or $Rust) {
     # Rust - available for installation via dfirws-install.ps1
     Write-SynchronizedLog "winget: Downloading Rust."
     $status = Get-WinGet "Rustlang.Rust.GNU" "Rust*.msi" "rust.msi" -check "Composite Document File V2 Document"

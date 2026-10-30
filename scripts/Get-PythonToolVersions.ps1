@@ -4,7 +4,8 @@
 #
 # What is detected:
 #   pyvenv.cfg          - venvs (C:\venv\default, uv tool venvs in C:\venv\uv\...)
-#                         and the Python version and interpreter they use
+#                         and the Python version and interpreter they use. The
+#                         uv cache (a cache folder in a scanned path) is skipped.
 #   *.dist-info         - every installed package in a venv:
 #                           Requires-Python from METADATA
 #                           wheel tags from WHEEL. A package built for one
@@ -367,8 +368,11 @@ foreach ($root in $Path) {
     }
     $rootFull = (Resolve-Path -LiteralPath $root).ProviderPath.TrimEnd('\', '/')
 
+    # C:\venv\cache is the uv cache: unpacked wheels and build environments, not installed tools
+    $uvCache = (Join-Path $rootFull "cache") + [IO.Path]::DirectorySeparatorChar
     $files = @(Get-ChildItem -Path $rootFull -Recurse -Depth 3 -File -ErrorAction SilentlyContinue |
-        Where-Object { $_.Name -in @("pyvenv.cfg", "pyproject.toml", "setup.cfg", "setup.py") })
+        Where-Object { $_.Name -in @("pyvenv.cfg", "pyproject.toml", "setup.cfg", "setup.py") -and
+            -not $_.FullName.StartsWith($uvCache, [StringComparison]::OrdinalIgnoreCase) })
 
     $venvDirs = @($files | Where-Object { $_.Name -eq "pyvenv.cfg" } | ForEach-Object { $_.DirectoryName })
 

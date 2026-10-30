@@ -2,7 +2,7 @@
 
 | Tool | Source | Description | Tags | File Extensions | Profiles |
 | --- | --- | --- | --- | --- | --- |
-| [Amazon Corretto 21](amazon-corretto-21.md) | Installer | Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK). | java | `.java` |  |
+| [Amazon Corretto 25](amazon-corretto-25.md) | Installer | Amazon Corretto is a no-cost, multiplatform, production-ready distribution of the Open Java Development Kit (OpenJDK). | java | `.java` |  |
 | [Recaf](recaf.md) | GitHub Release | Recaf is a modern Java bytecode editor. | reverse-engineering, java, decompiler, deobfuscation | `.class`, `.jar` | Full only |
 | [jadx](jadx.md) | GitHub Release | Dex to Java decompiler | reverse-engineering, android, decompiler, java, deobfuscation | `.apk`, `.dex`, `.jar`, `.class`, `.zip` | Full only |
 | [javaobj-py3](javaobj-py3.md) | Python | import javaobj |  |  |  |

@@ -19,6 +19,10 @@
     This will download and update packages for Python but no other files.
 
 .EXAMPLE
+    .\downloadFiles.ps1 -Basic
+    This will only run basic.ps1 and update the runtimes, build tools and installers used in sandboxes, such as Java, Python and Ghidra. No sandboxes are started.
+
+.EXAMPLE
     .\downloadFiles.ps1 -Freshclam
     This will download and update ClamAV databases with Freshclam.
 
@@ -72,6 +76,8 @@ param(
     [string]$DistributionProfile = "",
     [Parameter(HelpMessage = "Download all tools for dfirws.")]
     [Switch]$AllTools,
+    [Parameter(HelpMessage = "Update the files in basic.ps1: runtimes, build tools and installers used in sandboxes.")]
+    [Switch]$Basic,
     [Parameter(HelpMessage = "Update Didier Stevens tools.")]
     [Switch]$Didier,
     [Parameter(HelpMessage = "Debug downloads.")]
@@ -375,7 +381,7 @@ if ( tasklist | Select-String "(WindowsSandboxClient|WindowsSandboxRemote)" ) {
 if ($AllTools.IsPresent) {
     Write-DateLog "Download all tools for dfirws."
     $all = $true
-} elseif ($ClamScan.IsPresent -or $YaraScan.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VerifyOnSuccess.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
+} elseif ($Basic.IsPresent -or $ClamScan.IsPresent -or $YaraScan.IsPresent -or $Didier.IsPresent -or $Enrichment.IsPresent -or $Freshclam.IsPresent -or $Git.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Kape.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $PowerShell.IsPresent -or $Python.IsPresent -or $Release.IsPresent -or $Rust.IsPresent -or $Winget.IsPresent -or $Verify.IsPresent -or $VerifyOnSuccess.IsPresent -or $VisualStudioBuildTools.IsPresent -or $Zimmerman.IsPresent) {
     $all = $false
 } elseif ($DistributionProfile -ne "") {
     Write-DateLog "Download tools for dfirws using profile: $DistributionProfile"
@@ -471,7 +477,7 @@ if ($DebugDownloads.IsPresent) {
     New-Item -ItemType Directory -Force -Path "${TOOLS}\Debug" 2>&1 | Out-Null
 }
 
-if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
+if ($all -or $Basic.IsPresent -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Python.IsPresent -or $Release.IsPresent) {
     if ($GITHUB_USERNAME -ne "YOUR GITHUB USERNAME" -and $GITHUB_TOKEN -ne "YOUR GITHUB TOKEN") {
         $GH_USER = "${GITHUB_USERNAME}"
         $GH_PASS = "${GITHUB_TOKEN}"
@@ -489,7 +495,7 @@ if ($all -or $Didier.IsPresent -or $GoLang.IsPresent -or $Http.IsPresent -or $Py
     }
 }
 
-if ($all -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent -or $Zimmerman.IsPresent -or $Kape.IsPresent) {
+if ($all -or $Basic.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent -or $Zimmerman.IsPresent -or $Kape.IsPresent) {
     Write-DateLog "Download common files needed in Sandboxes for installation."
     .\resources\download\basic.ps1
 }
