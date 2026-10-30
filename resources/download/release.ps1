@@ -290,6 +290,56 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# GLEAPP
+$status = Get-GitHubRelease -repo "abrignoni/GLEAPP" -path "${SETUP_PATH}\gleapp.zip" -match "GLEAPP-.*-windows-x64-portable.zip" -check "Zip archive data"
+if ($status) {
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\gleapp.zip" -Destination "${TOOLS}\gleapp" -Target "${TOOLS}\gleapp"
+    Copy-Item ${TOOLS}\gleapp\GLEAPP.exe ${TOOLS}\bin\
+    Remove-Item "${TOOLS}\gleapp" -Recurse -Force
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "GLEAPP"
+    Category = "Utilities\Media"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Media\GLEAPP.lnk"
+            Target   = "`${TOOLS}\bin\GLEAPP.exe"
+            Args     = ""
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Media\GLEAPP (browser).lnk"
+            Target   = "`${TOOLS}\bin\GLEAPP.exe"
+            Args     = "web"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "GLEAPP"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".E01", ".vhd", ".vhdx", ".vmdk", ".tar", ".zip")
+    Tags = @("triage", "metadata", "hashing")
+    Notes = "GLEAPP is a triage toolkit for large sets of images and video. It hashes and de-duplicates media, reads metadata, extracts video key frames, matches known-hash lists and opens a local review gallery with find-similar."
+    Tips = "Accepts folders, extraction archives and disk images. Create cases under Desktop\readwrite since other folders in the sandbox are lost when it closes. Use the browser shortcut if the GLEAPP window fails to open, it does not need WebView2. No known-hash lists are included."
+    Usage = "Start GLEAPP from the shortcut and create a case in the launcher. The Windows build has no command line, only GLEAPP.exe and GLEAPP.exe web. Starting it takes a while since it unpacks itself to a temporary folder."
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/abrignoni/GLEAPP"
+    Vendor = "abrignoni"
+    License = "MIT"
+    LicenseUrl = "https://github.com/abrignoni/GLEAPP/blob/main/LICENSE"
+    PythonVersion = ""
+}
+
 # lessmsi
 $status = Get-GitHubRelease -repo "activescott/lessmsi" -path "${SETUP_PATH}\lessmsi.zip" -match "lessmsi-v" -check "Zip archive data"
 if ($status) {
