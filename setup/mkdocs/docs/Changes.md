@@ -11,6 +11,8 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 - The .NET check in the verify sandbox now checks against the runtimes that are installed instead of a fixed list.
 - Fixed downloads that kept the old file when the URL changed, which left Amazon Corretto 21 in place after the switch to Corretto 25.
 - Added `.\downloadFiles.ps1 -Basic` to only update the runtimes, build tools and installers in `basic.ps1`, such as Java, Python and Ghidra.
+- ZAP now uses the cross-platform release, installed to `C:\Program Files\ZAP`, since the Windows installer can't run unattended on Java 25. Run `dfirws-install.ps1 -ZAProxy` as before and start ZAP from the shortcut, not from the command line.
+- Removed `EfsInfo64.exe` since it is no longer part of the Sysinternals Suite.
 
 ## 2026-10-27
 

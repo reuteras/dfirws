@@ -4240,7 +4240,7 @@ $TOOL_DEFINITIONS += @{
 
 # zaproxy - available for installation with dfirws-install.ps1
 if (Test-ToolIncluded -ToolName "zaproxy") {
-    $status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.exe" -match "windows.exe" -check "PE32"
+    $status = Get-GitHubRelease -repo "zaproxy/zaproxy" -path "${SETUP_PATH}\zaproxy.zip" -match "Crossplatform.zip" -check "Zip archive data"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -4259,8 +4259,8 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "C:\Program Files\ZAP\Zed Attack Proxy\ZAP.exe"
-            Expect = "PE32"
+            Name = "C:\Program Files\ZAP\zap.bat"
+            Expect = "text"
         }
     )
     FileExtensions = @()
@@ -4270,7 +4270,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "dfirws-install.ps1 -Zaproxy"
     SampleCommands = @()
     SampleFiles = @()
-    Dependencies = @()
+    Dependencies = @("corretto25")
     Homepage = "https://www.zaproxy.org"
     Vendor = "zaproxy"
     License = "Apache-2.0"

@@ -46,7 +46,6 @@ Sysinternals Suite is a collection of utilities for Windows. It includes tools f
 - `DiskMon64.exe`
 - `DiskView64.exe`
 - `du64.exe`
-- `EfsInfo64.exe`
 - `FindLinks64.exe`
 - `Handle64.exe`
 - `Hex2dec64.exe`

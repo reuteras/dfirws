@@ -309,13 +309,6 @@ $TOOL_DEFINITIONS += @{
             WorkDir  = "`${HOME}\Desktop"
         }
         @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\EfsInfo64.exe.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command EfsInfo64.exe /?"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-        @{
             Lnk      = "`${HOME}\Desktop\dfirws\Sysinternals\FindLinks64.exe.lnk"
             Target   = "`${CLI_TOOL}"
             Args     = "`${CLI_TOOL_ARGS} -command FindLinks64.exe /?"
@@ -803,11 +796,6 @@ $TOOL_DEFINITIONS += @{
         }
         @{
             Type = "command"
-            Name = "EfsInfo64.exe"
-            Expect = "PE32"
-        }
-        @{
-            Type = "command"
             Name = "FindLinks64.exe"
             Expect = "PE32"
         }
@@ -1104,7 +1092,6 @@ $TOOL_DEFINITIONS += @{
         "DiskMon64.exe"
         "DiskView64.exe"
         "du64.exe"
-        "EfsInfo64.exe"
         "FindLinks64.exe"
         "Handle64.exe"
         "Hex2dec64.exe"
