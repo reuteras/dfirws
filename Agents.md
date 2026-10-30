@@ -82,6 +82,7 @@ dfirws/
 │   ├── validate-tool-metadata.ps1 # Lints TOOL_DEFINITIONS metadata (runs in CI)
 │   ├── update-tool-metadata.ps1   # Fills empty Homepage/Vendor/License fields
 │   ├── Get-DotNetToolVersions.ps1 # Reports which .NET runtime each downloaded tool needs
+│   ├── Get-JavaToolVersions.ps1   # Reports which Java version each jar (and Ghidra) needs
 │   └── lib/
 │       └── Get-ToolDefinitionAst.ps1  # Shared static AST parser (never executes scripts)
 ├── tests/
