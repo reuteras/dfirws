@@ -1534,14 +1534,15 @@ function Save-UvToolMetadata {
         New-Item -ItemType Directory -Force -Path $metadataDir | Out-Null
     }
 
-    # uv tool list output: "<name> v<version>"
+    # Strip extras, version specifiers and git URLs to get the name and a safe filename
+    $safeName = ($Package -replace '\[.*\]', '' -replace '>=.*', '' -replace '@.*', '' -replace 'git\+https.*/', '').Trim()
+
+    # uv tool list output: "<name> v<version>". It normalises names, so -, _ and . are equal.
+    $pattern = "^($($safeName -replace '[-_.]+', '[-_.]'))\s+v(.+)"
     $version = $null
     try {
         $uvList = uv tool list 2>$null
         foreach ($line in $uvList) {
-            # Normalise package name: lowercase, hyphens == underscores for matching
-            $canonPkg   = $Package -replace '[_\-]', '[-_]' -replace '\[.*\]', '' -replace '>=.*', '' -replace '@.*', '' -replace 'git\+https.*/', ''
-            $pattern    = "^($canonPkg)\s+v(.+)"
             if ($line -match $pattern) {
                 $version = $Matches[2]
                 break
@@ -1556,9 +1557,6 @@ function Save-UvToolMetadata {
         Write-DateLog "Save-UvToolMetadata: could not find installed version for $Package in uv tool list"
         return
     }
-
-    # Strip version specifiers to get a safe filename
-    $safeName = ($Package -replace '\[.*\]', '' -replace '>=.*', '' -replace '@.*', '' -replace 'git\+https.*/', '').Trim()
 
     $metadataFile = "$metadataDir\${safeName}.json"
 
