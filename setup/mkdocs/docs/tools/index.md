@@ -200,6 +200,7 @@ Categories generated from dfirws shortcuts.
 | [ghidrecomp](./reverse-engineering/ghidrecomp.md) | Python | Python Command-Line Ghidra Decomplier. | reverse-engineering, decompiler | `.exe`, `.dll`, `.elf` |  |
 | [ghidriff](./reverse-engineering/ghidriff.md) | Python | Ghidra Binary Diffing Engine. | reverse-engineering, binary-diffing | `.exe`, `.dll`, `.elf` |  |
 | [git](./utilities/git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
+| [GLEAPP](./utilities-media/gleapp.md) | GitHub Release | GLEAPP is a triage toolkit for large sets of images and video. It hashes and de-duplicates media, reads metadata, extracts video key frames, matches known-hash lists and opens a local review gallery with find-similar. | triage, metadata, hashing | `.E01`, `.vhd`, `.vhdx`, `.vmdk`, `.tar`, `.zip` |  |
 | [go-size-analyzer](./utilities/go-size-analyzer.md) | GitHub Release | go-size-analyzer (gsa) is a tool to analyze the size of Go binaries. | golang, binary-analysis | `.exe`, `.dll` |  |
 | [god-mode-rules](./signatures-and-information/god-mode-rules.md) | Git | God Mode Detection Rules | yara, sigma, detection-rules |  |  |
 | [godap](./utilities/godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | windows, network-analysis, network |  | Full only |
