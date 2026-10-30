@@ -13,6 +13,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 - Added `.\downloadFiles.ps1 -Basic` to only update the runtimes, build tools and installers in `basic.ps1`, such as Java, Python and Ghidra.
 - ZAP now uses the cross-platform release, installed to `C:\Program Files\ZAP`, since the Windows installer can't run unattended on Java 25. Run `dfirws-install.ps1 -ZAProxy` as before and start ZAP from the shortcut, not from the command line.
 - Removed `EfsInfo64.exe` since it is no longer part of the Sysinternals Suite.
+- 25 Python tools moved from Python 3.11 to 3.13, such as `scapy`, `hachoir`, `litecli` and `ptpython`. Profiles that exclude Python 3.13 keep them on 3.11.
 
 ## 2026-10-27
 
