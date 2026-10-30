@@ -89,8 +89,17 @@ foreach ($repourl in $repourls) {
     }
     if ( Test-Path -Path "${repo}" ) {
         Set-Location "${repo}"
-        ${result} = git pull 2>&1
-        Write-SynchronizedLog "${result}"
+        # Clones never have local changes, so always match the remote. This also
+        # handles forced updates upstream and clears a previously failed merge.
+        ${result} = git fetch 2>&1
+        if ("${result}") {
+            Write-SynchronizedLog "${result}"
+        }
+        # Quiet since the output has the commit subject, which can match the log filters
+        ${result} = git reset --hard --quiet "@{u}" 2>&1
+        if ("${result}") {
+            Write-SynchronizedLog "${result}"
+        }
         Set-Location ..
     } else {
         $result = git clone "${repourl}" 2>&1
