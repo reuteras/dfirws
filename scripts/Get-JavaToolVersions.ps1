@@ -10,6 +10,10 @@
 #   release                  - Java runtimes bundled with a tool (jlink/jpackage)
 #                              or installed in the scanned folders. Jars in the
 #                              tool folder are checked against the bundled runtime.
+#   ghidra_extensions\*.zip  - the Ghidra version in extension.properties. Ghidra
+#                              only installs extensions built for its own version.
+#                              Others are reported as a note, not an error, since
+#                              dfirws follows the latest Ghidra.
 #
 # Not detected: jars wrapped in an .exe (launch4j and similar) and loose .class files.
 #
@@ -160,6 +164,36 @@ function Get-JarJavaMajor {
     return [Math]::Max($maxClassVersion - 44, 1)
 }
 
+# Returns name and version from extension.properties in a Ghidra extension zip, or $null.
+function Get-GhidraExtensionProperties {
+    param ([string]$ZipPath)
+
+    $zip = [IO.Compression.ZipFile]::OpenRead($ZipPath)
+    try {
+        $entry = $zip.Entries | Where-Object { $_.FullName -match '^[^/]+/extension\.properties$' } | Select-Object -First 1
+        if ($null -eq $entry) {
+            return $null
+        }
+        $reader = New-Object IO.StreamReader($entry.Open())
+        try {
+            $text = $reader.ReadToEnd()
+        } finally {
+            $reader.Dispose()
+        }
+    } finally {
+        $zip.Dispose()
+    }
+    $properties = @{ Name = [IO.Path]::GetFileNameWithoutExtension($ZipPath); Version = "unknown" }
+    foreach ($line in $text -split "`r?`n") {
+        if ($line -match '^\s*name\s*=\s*(.+?)\s*$') {
+            $properties.Name = $Matches[1]
+        } elseif ($line -match '^\s*version\s*=\s*(.+?)\s*$') {
+            $properties.Version = $Matches[1]
+        }
+    }
+    return $properties
+}
+
 if ($AssumeInstalled -gt 0) {
     $installed = $AssumeInstalled
     $installedSource = "-AssumeInstalled"
@@ -175,6 +209,8 @@ if ($AssumeInstalled -gt 0) {
 
 $results = [System.Collections.Generic.List[PSCustomObject]]::new()
 $maxBytes = [int64]$MaxFileSizeMB * 1MB
+$ghidraVersions = @()
+$extensionZips = [System.Collections.Generic.List[hashtable]]::new()
 
 function New-ResultRow {
     param ([string]$RootFull, [string]$FullName, [string]$Kind, $Major, [string]$Detail, [string]$Status)
@@ -198,7 +234,12 @@ foreach ($root in $Path) {
     $rootFull = (Resolve-Path -LiteralPath $root).ProviderPath.TrimEnd('\', '/')
 
     $files = @(Get-ChildItem -Path $rootFull -Recurse -File -ErrorAction SilentlyContinue |
-        Where-Object { $_.Extension -eq ".jar" -or $_.Name -eq "release" -or $_.Name -eq "application.properties" })
+        Where-Object { $_.Extension -eq ".jar" -or $_.Name -eq "release" -or $_.Name -eq "application.properties" -or
+            ($_.Extension -eq ".zip" -and $_.Directory.Name -eq "ghidra_extensions") })
+
+    foreach ($file in $files | Where-Object { $_.Extension -eq ".zip" }) {
+        $extensionZips.Add(@{ RootFull = $rootFull; File = $file })
+    }
 
     # Java runtimes (bundled or installed). Their own jars are skipped, and jars
     # in the folder above the runtime (the tool folder) run with that runtime.
@@ -222,15 +263,21 @@ foreach ($root in $Path) {
     foreach ($file in $files | Where-Object { $_.Name -eq "application.properties" }) {
         $javaMin = $null
         $javaMax = ""
+        $applicationVersion = ""
         foreach ($line in Get-Content -LiteralPath $file.FullName -ErrorAction SilentlyContinue) {
             if ($line -match '^\s*application\.java\.min\s*=\s*(\S+)') {
                 $javaMin = ConvertTo-JavaMajor $Matches[1]
             } elseif ($line -match '^\s*application\.java\.max\s*=\s*(\S+)') {
                 $javaMax = $Matches[1]
+            } elseif ($line -match '^\s*application\.version\s*=\s*(\S+)') {
+                $applicationVersion = $Matches[1]
             }
         }
         if ($null -eq $javaMin) {
             continue
+        }
+        if ($applicationVersion) {
+            $ghidraVersions += $applicationVersion
         }
         # Ghidra keeps application.properties in <install>\Ghidra\
         $appDir = Split-Path $file.DirectoryName
@@ -295,6 +342,31 @@ foreach ($root in $Path) {
     }
 }
 
+# Ghidra only installs extensions built for its exact version. Extensions for
+# other versions are reported as a note and do not fail the check, since dfirws
+# follows the latest Ghidra.
+if ($ghidraVersions.Count -gt 0) {
+    $ghidraVersions = @($ghidraVersions | Sort-Object -Unique)
+    foreach ($zip in $extensionZips) {
+        try {
+            $properties = Get-GhidraExtensionProperties $zip.File.FullName
+        } catch {
+            Write-Warning "Unable to read $($zip.File.FullName): $($_.Exception.Message)"
+            continue
+        }
+        if ($null -eq $properties) {
+            continue
+        }
+        $detail = "$($properties.Name) for Ghidra $($properties.Version)"
+        if ($ghidraVersions -contains $properties.Version) {
+            $status = "OK"
+        } else {
+            $status = "NOTE: not for Ghidra $($ghidraVersions -join ', ')"
+        }
+        $results.Add((New-ResultRow -RootFull $zip.RootFull -FullName $zip.File.FullName -Kind "GhidraExtension" -Major $null -Detail $detail -Status $status))
+    }
+}
+
 $sorted = $results | Sort-Object Tool, File
 
 Write-Host ""
@@ -306,6 +378,13 @@ $sorted | Where-Object { $_.Kind -in @("Jar", "Declared") } |
         $tools = ($_.Group | Select-Object -ExpandProperty Tool -Unique) -join ", "
         Write-Host ("  Java {0,-3}: {1} programs in {2}" -f $_.Name, $_.Count, $tools)
     }
+
+$notes = @($sorted | Where-Object { $_.Status -like "NOTE*" })
+if ($notes.Count -gt 0) {
+    Write-Host ""
+    Write-Host "Ghidra extensions that the installed Ghidra will not install (not an error):"
+    $notes | Format-Table File, Detail, Status -AutoSize | Out-String -Width 4096 | Write-Host
+}
 
 $problems = @($sorted | Where-Object { $_.Status -like "MISSING*" -or $_.Status -like "Needs*" })
 if ($problems.Count -gt 0) {
