@@ -198,7 +198,9 @@ foreach ($repourl in $repourls) {
     $repo = Write-Output $repourl | ForEach-Object { $_ -replace "^.*/" } | ForEach-Object { $_ -replace "\.git$" }
     if ( Test-Path -Path "${repo}" ) {
         Set-Location "${repo}"
-        git pull 2>&1 | ForEach-Object{ "$_" } | Out-Null
+        # Clones never have local changes, so always match the remote
+        git fetch 2>&1 | ForEach-Object{ "$_" } | Out-Null
+        git reset --hard --quiet "@{u}" 2>&1 | ForEach-Object{ "$_" } | Out-Null
         Set-Location ..
     } else {
         git clone "${repourl}" 2>&1 | ForEach-Object{ "$_" } | Out-Null
