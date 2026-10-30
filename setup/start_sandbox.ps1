@@ -785,6 +785,18 @@ if (-not (Test-Path "C:\log\verify_done")) {
         } else {
             Write-SynchronizedLog "Get-JavaToolVersions.ps1: all programs run with the installed Amazon Corretto."
         }
+
+        # Fail if a venv is broken with the Python it uses. The report also shows what blocks newer Python versions.
+        Write-SynchronizedLog "Running Get-PythonToolVersions.ps1."
+        $global:LASTEXITCODE = 0
+        & "${HOME}\Documents\scripts\Get-PythonToolVersions.ps1" -Path "C:\venv", "C:\git" -CheckInterpreter -FailOnMissing -CsvPath "C:\log\python-tools.csv" 6>&1 |
+            Where-Object { $_ -is [System.Management.Automation.InformationRecord] } |
+            ForEach-Object { "$_" } | Out-File -FilePath "C:\log\python-tools.txt" -Encoding utf8
+        if ($LASTEXITCODE -ne 0) {
+            Write-SynchronizedLog "ERROR: Some Python venvs are broken. See C:\log\python-tools.txt and C:\log\python-tools.csv."
+        } else {
+            Write-SynchronizedLog "Get-PythonToolVersions.ps1: all Python venvs match the Python they use."
+        }
     }
     catch {
         Write-SynchronizedLog "ERROR in verify block: $_"

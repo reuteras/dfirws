@@ -5,6 +5,7 @@ This changelog is for changes affecting the usage of the **dfirws** sandbox. Mos
 ## 2026-10-30
 
 - The verify sandbox (`-Verify`) now checks that Ghidra and all jar files run with the installed Amazon Corretto. The report is written to `log\java-tools.txt` and `log\java-tools.csv`.
+- The verify sandbox also checks that all Python venvs match the Python they use, and reports which packages block moving to Python 3.12, 3.13 and 3.14. The report is written to `log\python-tools.txt` and `log\python-tools.csv`. Run `.\scripts\Get-PythonToolVersions.ps1 -CheckPyPI` on the host to also check if the latest release of each blocking package on PyPI supports the newer Python.
 
 ## 2026-10-27
 

@@ -9,8 +9,8 @@ if (Test-Path -Path "${ROOT_PATH}\log\verify_done" ) {
     Remove-Item -Force "${ROOT_PATH}\log\verify_done" | Out-Null
 }
 
-# Written by Get-DotNetToolVersions.ps1 and Get-JavaToolVersions.ps1 in the verify sandbox. Remove results from earlier runs.
-foreach ($runtimeReport in @("dotnet-tools.txt", "dotnet-tools.csv", "java-tools.txt", "java-tools.csv")) {
+# Written by Get-DotNetToolVersions.ps1, Get-JavaToolVersions.ps1 and Get-PythonToolVersions.ps1 in the verify sandbox. Remove results from earlier runs.
+foreach ($runtimeReport in @("dotnet-tools.txt", "dotnet-tools.csv", "java-tools.txt", "java-tools.csv", "python-tools.txt", "python-tools.csv")) {
     if (Test-Path -Path "${ROOT_PATH}\log\${runtimeReport}" ) {
         Remove-Item -Force "${ROOT_PATH}\log\${runtimeReport}" | Out-Null
     }
