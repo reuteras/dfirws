@@ -214,7 +214,7 @@ foreach ($root in $Path) {
             $appDir = $runtimeDir
         }
         $runtimes += @{ RuntimeDir = $runtimeDir; AppDir = $appDir; Major = $major }
-        $results.Add((New-ResultRow $rootFull $file.FullName "Runtime" $major "Java runtime" "Runtime"))
+        $results.Add((New-ResultRow -RootFull $rootFull -FullName $file.FullName -Kind "Runtime" -Major $major -Detail "Java runtime" -Status "Runtime"))
     }
 
     # Applications that declare the Java version they need (Ghidra)
@@ -250,7 +250,7 @@ foreach ($root in $Path) {
                 $status = "Needs Java $javaMin to $maxMajor"
             }
         }
-        $results.Add((New-ResultRow $rootFull $file.FullName "Declared" $javaMin $detail $status))
+        $results.Add((New-ResultRow -RootFull $rootFull -FullName $file.FullName -Kind "Declared" -Major $javaMin -Detail $detail -Status $status))
     }
 
     foreach ($file in $files | Where-Object { $_.Extension -eq ".jar" }) {
@@ -291,7 +291,7 @@ foreach ($root in $Path) {
                 $status = "MISSING Java $major"
             }
         }
-        $results.Add((New-ResultRow $rootFull $file.FullName "Jar" $major $detail $status))
+        $results.Add((New-ResultRow -RootFull $rootFull -FullName $file.FullName -Kind "Jar" -Major $major -Detail $detail -Status $status))
     }
 }
 
