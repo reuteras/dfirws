@@ -283,13 +283,13 @@ The `Dependencies` field tracks high-level build/runtime dependencies between co
 
 ### PythonVersion Field
 
-Python tools have `PythonVersion = $PYTHON_DEFAULT` (currently 3.11). Tools that need a newer interpreter set it explicitly (e.g. `PythonVersion = "3.13"`).
+Python tools have `PythonVersion = $PYTHON_DEFAULT` (currently 3.11). Tools that have moved to a newer interpreter use `PythonVersion = $PYTHON_UPGRADED` (3.13, or `$PYTHON_DEFAULT` in profiles that exclude `python3.13`). Tools that can't run on the default set it explicitly (e.g. `PythonVersion = "3.13"`).
 
 In `install_python_tools.ps1`, uv tools are installed with `Install-UvTool -Package <spec> [-PythonVersion <ver>] [-With <extras>] [-Name <name>]`. The interpreter for each version comes from `$PYTHON_INTERPRETERS` (3.11 and 3.13 today).
 
 Because uv tool venvs reference the interpreter by absolute path, every version in that table must also be installed by `start_sandbox.ps1` in the final offline sandbox (`python3.exe` = 3.11, `python3.13.exe` = 3.13, both downloaded by `basic.ps1`).
 
-To migrate a tool to a newer Python: add `-PythonVersion` to its `Install-UvTool` call and set `PythonVersion` in its metadata entry to match. Guard tools on non-default versions with `Test-ToolIncludedSandbox -ToolName "python3.13"` so profiles that exclude the extra interpreter skip them.
+To migrate a tool to a newer Python: add `-PythonVersion $PYTHON_UPGRADED` to its `Install-UvTool` call and set `PythonVersion` in its metadata entry to match, so profiles that exclude the extra interpreter keep the tool on the default. Only tools that can't run on the default should be guarded with `Test-ToolIncludedSandbox -ToolName "python3.13"` and skipped. Check for imports of modules removed from the standard library first (`imp` and `distutils` in 3.12, `cgi` and `imghdr` in 3.13): `Get-PythonToolVersions.ps1` only checks wheels and `Requires-Python`, and `unpy2exe` stays on 3.11 because it imports `imp`.
 
 ### Category Field
 

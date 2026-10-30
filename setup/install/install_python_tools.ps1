@@ -16,8 +16,8 @@ $PYTHON_DEFAULT = "3.11"
 # Python interpreters available for uv tool installs, keyed by version. uv tool
 # venvs reference the interpreter by absolute path, so every version listed here
 # must also be installed by start_sandbox.ps1 in the final (offline) sandbox.
-# To move a tool to a newer Python: pass -PythonVersion to Install-UvTool and set
-# PythonVersion in its TOOL_DEFINITIONS entry to the same value.
+# To move a tool to a newer Python: pass -PythonVersion $PYTHON_UPGRADED to Install-UvTool
+# and set PythonVersion in its TOOL_DEFINITIONS entry to the same value.
 $PYTHON_INTERPRETERS = @{
     "3.11" = "C:\Program Files\Python311\python.exe"
     "3.13" = "C:\Program Files\Python313\python.exe"
@@ -73,6 +73,10 @@ function Install-UvTool {
         Write-DateLog "ERROR: uv tool install failed for $label after $maxAttempts attempts (exit $LASTEXITCODE)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
     }
 }
+
+# Version for tools that have moved past $PYTHON_DEFAULT. Profiles that exclude python3.13
+# keep these tools on $PYTHON_DEFAULT.
+$PYTHON_UPGRADED = if (Test-ToolIncludedSandbox -ToolName "python3.13") { "3.13" } else { $PYTHON_DEFAULT }
 
 $GHIDRA_INSTALL_DIR = ""
 if (Test-Path "${TOOLS}\ghidra\") {
@@ -136,7 +140,7 @@ Get-Job | Receive-Job 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 # Install Python packages
 #
 Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
-Install-UvTool -Package "git+https://github.com/msuhanov/dfir_ntfs.git" -Name "dfir_ntfs"
+Install-UvTool -Package "git+https://github.com/msuhanov/dfir_ntfs.git" -Name "dfir_ntfs" -PythonVersion $PYTHON_UPGRADED
 Install-UvTool -Package "regipy[rust]>=4.0.0" -With "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" -Name "regipy"
 Install-UvTool -Package "peepdf-3" -With "pyreadline3, stpyv8"
 Install-UvTool -Package "zensical"
@@ -148,59 +152,63 @@ if (Test-ToolIncludedSandbox -ToolName "binary-refinery") {
 
 foreach ($package in `
     "apkid", `
-    "autoit-ripper", `
-    "cart", `
     "chepy", `
     "csvkit", `
     "deep_translator", `
-    "docx2txt", `
     "extract-msg>=0.48.4", `
-    "flatten_json", `
     "frida-tools", `
     "ghidrecomp", `
     "ghidriff", `
     "grip", `
-    "hachoir", `
-    "jsbeautifier", `
     "jupyterlab", `
-    "litecli", `
     "LnkParse3", `
     "magika", `
     "maldump", `
     "malwarebazaar", `
     "markitdown[all]", `
-    "minidump", `
     "mkyara", `
     "msoffcrypto-tool", `
     "mvt", `
     "mwcp", `
-    "name-that-hash", `
-    "netaddr", `
     "numpy", `
     "oletools[full]", `
     "pcode2code", `
     "pdfalyzer", `
-    "pip", `
     "protodeep", `
+    "pynvim", `
+    "shodan", `
+    "stego-lsb", `
+    "sqlit-tui[all]", `
+    "unpy2exe", `
+    "visidata", `
+    "XLMMacroDeobfuscator" ) {
+        Install-UvTool -Package $package
+}
+
+foreach ($package in `
+    "autoit-ripper", `
+    "cart", `
+    "docx2txt", `
+    "flatten_json", `
+    "hachoir", `
+    "jsbeautifier", `
+    "litecli", `
+    "minidump", `
+    "name-that-hash", `
+    "netaddr", `
+    "pip", `
     "ptpython", `
     "pwncat", `
     "pyinstxtractor-ng", `
-    "pynvim", `
     "pyOneNote", `
     "pypng", `
     "rexi", `
     "scapy", `
-    "shodan", `
-    "stego-lsb", `
-    "sqlit-tui[all]", `
     "time-decode", `
     "toolong", `
-    "unpy2exe", `
-    "visidata", `
     "xlrd", `
-    "XLMMacroDeobfuscator", `
     "XlsxWriter" ) {
-        Install-UvTool -Package $package
+        Install-UvTool -Package $package -PythonVersion $PYTHON_UPGRADED
 }
 
 # speakeasy-emulator requires setuptools (pkg_resources); use python -m venv + pip to ensure it is available
@@ -451,7 +459,7 @@ if (Test-ToolIncludedSandbox -ToolName "evt2sigma") {
     Set-Location "C:\tmp"
     Get-RawGitHubFile -OutFile "evt2sigma.py" -Url "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/evt2sigma.py" 2>&1 >> "C:\log\python.txt"
     C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
-    uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\evt2sigma"
+    uv venv --python $PYTHON_INTERPRETERS[$PYTHON_UPGRADED] "C:\venv\evt2sigma"
     C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
     uv pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     Save-VenvPackageMetadata -Venv "evt2sigma" -Python "C:\venv\evt2sigma\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
@@ -466,7 +474,7 @@ if (Test-ToolIncludedSandbox -ToolName "evt2sigma") {
 # venv scare
 #
 Write-DateLog "Install packages in venv scare in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\scare"
+uv venv --python $PYTHON_INTERPRETERS[$PYTHON_UPGRADED] "C:\venv\scare"
 Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
@@ -810,7 +818,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1017,7 +1025,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1044,7 +1052,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1173,7 +1181,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1272,7 +1280,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1420,7 +1428,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1490,7 +1498,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1552,7 +1560,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1745,7 +1753,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1877,7 +1885,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -1904,7 +1912,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2108,7 +2116,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2143,7 +2151,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2202,7 +2210,7 @@ $TOOL_DEFINITIONS += @{
     )
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = "https://github.com/pyinstxtractor/pyinstxtractor-ng"
     Vendor = "pyinstxtractor"
     License = "GNU General Public License v3.0"
@@ -2229,7 +2237,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2256,7 +2264,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2291,7 +2299,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2326,7 +2334,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2446,7 +2454,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2481,7 +2489,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2570,7 +2578,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
@@ -2626,7 +2634,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    PythonVersion = $PYTHON_DEFAULT
+    PythonVersion = $PYTHON_UPGRADED
     Homepage = ""
     Vendor = ""
     License = ""
