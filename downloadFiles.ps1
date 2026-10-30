@@ -239,7 +239,11 @@ if ($activeProfileName -ne "" -and (Test-Path variable:DFIRWS_PROFILES) -and $DF
 # Scan log files for errors, warnings and failures, using the same filters as -ShowErrors.
 # Used both to gate -VerifyOnSuccess and for the final summary at the end of the script.
 function Get-LogIssues {
-    $warnings = Get-ChildItem .\log\* -Recurse -Exclude "security.txt" | Select-String -Pattern "warning" | Where-Object {
+    # The tool reports list file names such as error_prone_annotations-2.35.1.jar. A failed
+    # check is logged as ERROR in verify.txt.
+    $excludedLogs = "security.txt", "*-tools.txt", "*-tools.csv"
+
+    $warnings = Get-ChildItem .\log\* -Recurse -Exclude $excludedLogs | Select-String -Pattern "warning" | Where-Object {
         $_.Line -notmatch " INFO " -and
         $_.Line -notmatch "This is taking longer than usual" -and
         $_.Line -notmatch "Installing collected packages" -and
@@ -277,7 +281,7 @@ function Get-LogIssues {
         $_.Line -notmatch "CMake Warning \(unused-cli\)"
     }
 
-    $errors = Get-ChildItem .\log\* -Recurse -Exclude "security.txt" | Select-String -Pattern "error" | Where-Object {
+    $errors = Get-ChildItem .\log\* -Recurse -Exclude $excludedLogs | Select-String -Pattern "error" | Where-Object {
         $_.Line -notmatch "Error: no test specified" -and
         $_.Line -notmatch "pretty.errors" -and
         $_.Line -notmatch "Copied (replaced existing)" -and
@@ -316,7 +320,7 @@ function Get-LogIssues {
         $_.Line -notmatch "error scanning C:"
     }
 
-    $failed = Get-ChildItem .\log\* -Recurse -Exclude "security.txt" | Select-String -Pattern "Failed" | Where-Object {
+    $failed = Get-ChildItem .\log\* -Recurse -Exclude $excludedLogs | Select-String -Pattern "Failed" | Where-Object {
         $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
         $_.Line -notmatch "ucrt64/share" -and
         $_.Line -notmatch "origin/main Updating" -and

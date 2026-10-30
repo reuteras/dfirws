@@ -163,7 +163,10 @@ function Add-Shortcut {
         # Icon index inside the file (0-based)
         [int]$IconIndex = 0,
 
-        [string]$Arguments = $null
+        [string]$Arguments = $null,
+
+        # Window state on start: 1 normal, 3 maximized, 7 minimized. 0 keeps the default.
+        [int]$WindowStyle = 0
     )
 
     $WshShell = New-Object -ComObject WScript.Shell
@@ -177,6 +180,7 @@ function Add-Shortcut {
 
     if ($WorkingDirectory) { $Shortcut.WorkingDirectory = $WorkingDirectory }
     if ($Arguments)        { $Shortcut.Arguments = $Arguments }
+    if ($WindowStyle)      { $Shortcut.WindowStyle = $WindowStyle }
 
     $Shortcut.TargetPath = $DestinationPath
 
@@ -1440,33 +1444,15 @@ function Install-X64dbg {
 function Install-ZAProxy {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-zaproxy.txt")) {
         Write-Output "Installing ZAProxy"
-        Write-Output "[ZAProxy] starting installer in isolated job"
-        # Run the installer in a background job so its process tree is detached
-        # from start_sandbox.ps1 - the ZAP installer has been observed to
-        # terminate its parent PowerShell, which previously killed the entire
-        # verify run before verify_done could be written.
-        $zapExePath = "${SETUP_PATH}\zaproxy.exe"
-        $zapJob = Start-Job -Name "install-zaproxy" -ScriptBlock {
-            Start-Process -Wait $using:zapExePath -ArgumentList '-q'
-        }
-
-        $completed = Wait-Job -Job $zapJob -Timeout 600
-        if (-not $completed) {
-            Write-Output "[ZAProxy] installer job timed out after 10 minutes, stopping"
-            Stop-Job -Job $zapJob -ErrorAction SilentlyContinue
-        } else {
-            Write-Output "[ZAProxy] installer job finished with state $($zapJob.State)"
-        }
-        Receive-Job -Job $zapJob 2>&1 | ForEach-Object { Write-Output "[ZAProxy] $_" }
-        Remove-Job -Job $zapJob -Force -ErrorAction SilentlyContinue
-
-        Write-Output "[ZAProxy] updating PATH"
-        Add-ToUserPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy"
-        Write-Output "[ZAProxy] creating shortcut"
-        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\zaproxy.lnk" -DestinationPath "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.exe" -WorkingDirectory "${HOME}\Desktop" -Iconlocation "${env:ProgramFiles}\ZAP\Zed Attack Proxy\zap.ico"
+        # The Windows installer can't run unattended on Java 24 and later since install4j
+        # calls Policy.setPolicy, so use the cross-platform release that only needs Java.
+        & $SEVENZIP x -aoa "${SETUP_PATH}\zaproxy.zip" -o"${env:ProgramFiles}" | Out-Null
+        Move-Item "${env:ProgramFiles}\ZAP_*" "${env:ProgramFiles}\ZAP"
+        # zap.bat finds the jar relative to the working directory, so it can't be run from PATH.
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\dfirws\Network\zaproxy.lnk" -DestinationPath "${env:ProgramFiles}\ZAP\zap.bat" -WorkingDirectory "${env:ProgramFiles}\ZAP" -Iconlocation "${env:ProgramFiles}\ZAP\zap.ico" -WindowStyle 7
+        Add-Shortcut -SourceLnk "${HOME}\Desktop\zaproxy.lnk" -DestinationPath "${env:ProgramFiles}\ZAP\zap.bat" -WorkingDirectory "${env:ProgramFiles}\ZAP" -Iconlocation "${env:ProgramFiles}\ZAP\zap.ico" -WindowStyle 7
         Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\Network\Zaproxy (runs dfirws-install -Zaproxy).lnk"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-zaproxy.txt" | Out-Null
-        Write-Output "[ZAProxy] install complete"
     } else {
         Write-Output "ZAProxy is already installed"
     }
