@@ -44,6 +44,6 @@
 | [rexi](rexi.md) | Python | rexi | search, data-processing, tui |  |  |
 | [time-decode](time-decode.md) | Python | time-decode --guess <value> | metadata, forensics, decoding |  |  |
 | [upx](upx.md) | GitHub Release | UPX is a free, portable, extendable, high-performance executable packer. | packer-detection, pe-analysis, compression | `.exe`, `.dll`, `.elf` |  |
-| [visidata](visidata.md) | Python | vd file.csv | data-processing, tui, csv | `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx` |  |
+| [visidata](visidata.md) | Python | vd file.csv | data-processing, tui, csv | `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx`, `.xls` |  |
 | [zensical](zensical.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.toml` |  |
 | [zstd](zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |
