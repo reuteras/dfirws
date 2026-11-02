@@ -3488,6 +3488,55 @@ if (Test-Path -Path "${TOOLS}\win64") {
     Remove-Item -Recurse -Force "${TOOLS}\win64" | Out-Null 2>&1
 }
 
+# Chrome - available for installation via dfirws-install.ps1
+# Google replaces the file behind this URL for every release, so the hash in the winget
+# manifest is often out of date. No -CheckURL since it would never get a new version.
+if (Test-ToolIncluded -ToolName "Chrome") {
+    $status = Get-FileFromUri -uri "https://dl.google.com/dl/chrome/install/googlechromestandaloneenterprise64.msi" -FilePath ".\downloads\chrome.msi" -check "Composite Document File V2 Document"
+    if ($status) {
+        $signature = Get-AuthenticodeSignature -FilePath "${SETUP_PATH}\chrome.msi"
+        if ($signature.Status -ne "Valid" -or $signature.SignerCertificate.Subject -notmatch "^CN=Google LLC,") {
+            Write-SynchronizedLog "Error: chrome.msi is not correctly signed by Google. Status: $($signature.Status). Subject: $($signature.SignerCertificate.Subject)"
+            Remove-Item "${SETUP_PATH}\chrome.msi" -Force
+        }
+    }
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Chrome"
+    Category = "Utilities\Browsers"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Browsers\Chrome (runs dfirws-install -Chrome).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Chrome"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = "dfirws-install.ps1 -Chrome"
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "chrome"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".html", ".htm", ".js", ".css")
+    Tags = @("browser", "web")
+    Notes = "Chrome is a widely used web browser developed by Google. It offers fast browsing, a user-friendly interface, and a wide range of extensions and developer tools, making it popular for both general web browsing and web development."
+    Tips = "Install on demand for viewing HTML reports and browser based tools such as CyberChef, LUMEN and hindsight_gui. Keep the sandbox offline when opening untrusted HTML."
+    Usage = "dfirws-install.ps1 -Chrome"
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://www.google.com/chrome/"
+    Vendor = "Google LLC"
+    License = "Freeware"
+    LicenseUrl = "https://www.google.com/chrome/terms/"
+    PythonVersion = ""
+}
+
 if (Test-Path -Path "${TOOLS}\license.txt") {
     Remove-Item -Force "${TOOLS}\license.txt"
 }

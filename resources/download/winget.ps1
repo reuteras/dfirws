@@ -36,47 +36,6 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# Chrome - available for installation via dfirws-install.ps1
-if (Test-ToolIncluded -ToolName "Chrome") {
-    Write-SynchronizedLog "winget: Downloading Chrome."
-    $status = Get-WinGet "Google.Chrome" "Google*.msi" "chrome.msi" -check "Composite Document File V2 Document"
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "Chrome"
-    Category = "Utilities\Browsers"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Utilities\Browsers\Chrome (runs dfirws-install -Chrome).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command dfirws-install.ps1 -Chrome"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = "dfirws-install.ps1 -Chrome"
-    Verify = @(
-        @{
-            Type = "command"
-            Name = "chrome"
-            Expect = "PE32"
-        }
-    )
-    FileExtensions = @(".html", ".htm", ".js", ".css")
-    Tags = @("browser", "web")
-    Notes = "Chrome is a widely used web browser developed by Google. It offers fast browsing, a user-friendly interface, and a wide range of extensions and developer tools, making it popular for both general web browsing and web development."
-    Tips = "Install on demand for viewing HTML reports and browser based tools such as CyberChef, LUMEN and hindsight_gui. Keep the sandbox offline when opening untrusted HTML."
-    Usage = "dfirws-install.ps1 -Chrome"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://www.google.com/chrome/"
-    Vendor = "Google LLC"
-    License = "Freeware"
-    LicenseUrl = "https://www.google.com/chrome/terms/"
-    PythonVersion = ""
-}
-
 # DotNet 8 Desktop runtime - installed during startup
 Write-SynchronizedLog "winget: Downloading DotNet 8 Desktop runtime."
 $status = Get-WinGet "Microsoft.DotNet.DesktopRuntime.8" "Microsoft*.exe" "dotnet8desktop.exe" -check "PE32"
