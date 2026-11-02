@@ -6,7 +6,7 @@
 
 **Profiles:** Full, Basic
 
-**File Extensions:** `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx`
+**File Extensions:** `.csv`, `.tsv`, `.json`, `.sqlite`, `.xlsx`, `.xls`
 
 **Tags:** data-processing, tui, csv
 

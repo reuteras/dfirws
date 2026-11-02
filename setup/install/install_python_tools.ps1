@@ -143,6 +143,7 @@ Write-DateLog "Install Python packages in sandbox." >> "C:\log\python.txt"
 Install-UvTool -Package "git+https://github.com/msuhanov/dfir_ntfs.git" -Name "dfir_ntfs" -PythonVersion $PYTHON_UPGRADED
 Install-UvTool -Package "regipy[rust]>=4.0.0" -With "click, libfwsi-python, mcp, python-evtx, tabulate, zipp" -Name "regipy"
 Install-UvTool -Package "peepdf-3" -With "pyreadline3, stpyv8"
+Install-UvTool -Package "visidata" -With "openpyxl, xlrd"
 Install-UvTool -Package "zensical"
 Install-UvTool -Package "git+https://github.com/Hexastrike/PyrsistenceSniper.git" -Name "PyrsistenceSniper"
 
@@ -180,7 +181,6 @@ foreach ($package in `
     "stego-lsb", `
     "sqlit-tui[all]", `
     "unpy2exe", `
-    "visidata", `
     "XLMMacroDeobfuscator" ) {
         Install-UvTool -Package $package
 }
@@ -2543,7 +2543,7 @@ $TOOL_DEFINITIONS += @{
             Expect = "PE32"
         }
     )
-    FileExtensions = @(".csv", ".tsv", ".json", ".sqlite", ".xlsx")
+    FileExtensions = @(".csv", ".tsv", ".json", ".sqlite", ".xlsx", ".xls")
     Tags = @("data-processing", "tui", "csv")
     Notes = ""
     Tips = "Terminal spreadsheet for CSV, JSON, SQLite, Excel and more. Press F for frequency tables, Shift+F to plot and Ctrl+S to save; excellent for large timelines."
