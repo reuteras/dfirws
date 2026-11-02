@@ -8,7 +8,7 @@
 
 **License:** [Freeware](https://www.google.com/chrome/terms/)
 
-**Source:** Winget
+**Source:** HTTP
 
 **Profiles:** Full (not included in Basic profile)
 
