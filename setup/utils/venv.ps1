@@ -18,9 +18,7 @@ param(
     [Parameter(HelpMessage = "Switch to venv scare.")]
     [Switch]$scare,
     [Parameter(HelpMessage = "Switch to venv white-phoenix.")]
-    [Switch]$whitephoenix,
-    [Parameter(HelpMessage = "Switch to venv zircolite.")]
-    [Switch]$zircolite
+    [Switch]$whitephoenix
 )
 
 $venv = "default"
@@ -51,8 +49,6 @@ if ($default) {
     $venv = "scare"
 } elseif ($whitephoenix) {
     $venv = "white-phoenix"
-} elseif ($zircolite) {
-    $venv = "zircolite"
 } else {
     $venv = "default"
 }

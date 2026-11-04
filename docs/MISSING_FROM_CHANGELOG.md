@@ -38,7 +38,7 @@ Notes on specific tools:
 All packages in every virtual environment (`C:\venv\default`,
 `C:\venv\dfir-unfurl`, `C:\venv\eventhawk`, `C:\venv\speakeasy`, `C:\venv\white-phoenix`,
 `C:\venv\Kanvas`, `C:\venv\gostringungarbler`, `C:\venv\pe2pic`,
-`C:\venv\evt2sigma`, `C:\venv\scare`, `C:\venv\zircolite`) are recorded, keyed
+`C:\venv\evt2sigma`, `C:\venv\scare`) are recorded, keyed
 per venv (the changelog shows e.g. `pip: default/oletools`). Many of these are
 relevant DFIR tools (flare-capa, oletools, dissect, sigma-cli, capstone, ...),
 so they are tracked - but pure library dependencies would drown the changelog

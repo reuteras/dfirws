@@ -340,6 +340,55 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# Zircolite - the release binary includes the Cython flattening kernel, which a
+# source install can only build with MSVC.
+$status = Get-GitHubRelease -repo "wagga40/Zircolite" -path "${SETUP_PATH}\zircolite.zip" -match "Zircolite-.*-windows-x64.zip$" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\zircolite") {
+        Remove-Item "${TOOLS}\zircolite" -Recurse -Force
+    }
+    Get-ChildItem "${TOOLS}" -Directory -Filter "Zircolite-*-windows-x64" | Remove-Item -Recurse -Force
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\zircolite.zip" -Destination "${TOOLS}"
+    Get-ChildItem "${TOOLS}" -Directory -Filter "Zircolite-*-windows-x64" | Select-Object -First 1 | Move-Item -Destination "${TOOLS}\zircolite"
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "Zircolite"
+    Category = "Files and apps\Log"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command Zircolite.exe -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "Zircolite"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @(".evtx", ".json", ".xml", ".jsonl")
+    Tags = @("log-analysis", "sigma", "detection", "incident-response")
+    Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
+    Tips = "Run Zircolite.exe from Desktop\readwrite. The rulesets in C:\Tools\zircolite\rules are from the release. C:\Tools is read-only, so Zircolite.exe -U writes updated rules to .\rules in the current folder, which needs network access. The binary only includes the sysmon, windows-logsources and windows-audit pySigma pipelines (list them with -pl)."
+    Usage = "Zircolite.exe --events <evtx folder> --ruleset C:\Tools\zircolite\rules\rules_windows_generic.json"
+    SampleCommands = @(
+        "Zircolite.exe --events C:\git\EVTX-ATTACK-SAMPLES --ruleset C:\Tools\zircolite\rules\rules_windows_generic.json -o Desktop\readwrite\detected_events.json"
+    )
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/wagga40/Zircolite"
+    Vendor = "wagga40"
+    License = "GNU Lesser General Public License v3.0"
+    LicenseUrl = "https://github.com/wagga40/Zircolite/blob/master/LICENSE"
+    PythonVersion = ""
+}
+
 # lessmsi
 $status = Get-GitHubRelease -repo "activescott/lessmsi" -path "${SETUP_PATH}\lessmsi.zip" -match "lessmsi-v" -check "Zip archive data"
 if ($status) {
