@@ -266,7 +266,7 @@ function Get-LogIssues {
         $_.Line -notmatch "EVTX-ATTACK-SAMPLES" -and
         $_.line -notmatch "skipping tool at index" -and
         $_.Line -notmatch "the report will be incomplete" -and
-        $_.Line -notmatch "allowed warning found in" -and
+        $_.Line -notmatch "allowed warnings? found in" -and
         $_.Line -notmatch "unmaintained" -and
         $_.Line -notmatch "unsound" -and
         $_.Line -notmatch "WARNING: Defender:" -and
@@ -315,6 +315,9 @@ function Get-LogIssues {
         $_.Line -notmatch "error\[unmaintained\]" -and
         $_.Line -notmatch "error\[unsound\]" -and
         $_.Line -notmatch "error\[notice\]" -and
+        # cargo audit per-binary summary ("error: 2 vulnerabilities found in C:\cargo\bin\x.exe").
+        # The RUSTSEC advisories themselves are reported in security.txt.
+        $_.Line -notmatch "vulnerabilit(y|ies) found in" -and
         $_.Line -notmatch "SIGNATURE_BASE_" -and
         $_.Line -notmatch "Total errors:" -and
         $_.Line -notmatch "error scanning C:"
