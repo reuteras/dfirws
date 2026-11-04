@@ -47,7 +47,6 @@ C:\venv\default\Scripts\sigma.exe convert -t <target> -f Desktop\readonly\rule.y
 Some tools have their own isolated virtual environments:
 
 ```pwsh
-C:\venv\zircolite\Scripts\python.exe C:\git\zircolite\zircolite.py -e Desktop\readonly\evtx
 C:\venv\dfir-unfurl\Scripts\unfurl.exe "https://example.com/path?param=value"
 C:\venv\white-phoenix\Scripts\python.exe C:\git\White-Phoenix\wp.py
 C:\venv\evt2sigma\Scripts\python.exe C:\git\evt2sigma\evt2sigma.py

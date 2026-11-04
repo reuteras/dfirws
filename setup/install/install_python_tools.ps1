@@ -491,54 +491,6 @@ Write-DateLog "Python venv scare done." >> "C:\log\python.txt"
 
 
 #
-# venv zircolite
-#
-Write-DateLog "Install packages in venv zircolite in sandbox (needs specific versions of packages)." >> "C:\log\python.txt"
-uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\zircolite"
-C:\venv\zircolite\Scripts\Activate.ps1 >> "C:\log\python.txt"
-Copy-Item -Recurse "C:\git\zircolite" "C:\venv\zircolite"
-Set-Location "C:\venv\zircolite\zircolite"
-uv pip install . 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-Save-VenvPackageMetadata -Venv "zircolite" -Python "C:\venv\zircolite\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-$env:PYTHONWARNINGS = "ignore"
-python zircolite.py -U 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-$lines = Get-Content "zircolite.py"
-$lines[0] = "#!C:\venv\zircolite\Scripts\python.exe"
-$lines | Set-Content "zircolite.py"
-deactivate
-Set-Content "C:\venv\zircolite\Scripts\python.exe C:\venv\zircolite\zircolite\zircolite.py `$args" -Encoding Ascii -Path "C:\venv\bin\zircolite.ps1"
-Write-DateLog "Python venv zircolite done." >> "C:\log\python.txt"
-
-$TOOL_DEFINITIONS += @{
-    Name = "Zircolite"
-    Category = "Files and apps\Log"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\Log\zircolite (Standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs).lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command zircolite.ps1 -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".evtx", ".json")
-    Tags = @("log-analysis", "sigma", "detection", "incident-response")
-    Notes = "Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs"
-    Tips = "Use zircolite.ps1 to run the tool, as it ensures the correct Python environment is used."
-    Usage = "zircolite.ps1 --evtx <evtx folder> --ruleset <rules.json>"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
-    PythonVersion = ""
-}
-
-#
 # venv eventhawk - EVTX analysis with ATT&CK mapping, IOC extraction and a Qt GUI.
 # Cloned by git.ps1; the repository has no package, so it runs from the checkout.
 #

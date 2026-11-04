@@ -1527,7 +1527,7 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# Zircolite has its TOOL_DEFINITIONS in install_python_tools.ps1.
+# Zircolite has its TOOL_DEFINITIONS in release.ps1.
 
 $TOOL_DEFINITIONS += @{
     Name = "PatchaPalooza"

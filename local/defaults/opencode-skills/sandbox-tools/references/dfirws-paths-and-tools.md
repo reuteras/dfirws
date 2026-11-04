@@ -30,7 +30,7 @@ Use this file when command/path specificity matters. All paths are Windows-nativ
 | EvtxECmd | `C:\Tools\Zimmerman\net6\EvtxeCmd\EvtxECmd.exe` | Detailed EVTX parsing to CSV/JSON |
 | evtx_dump | `C:\Tools\bin\evtx_dump.exe` | Raw EVTX to XML/JSON conversion |
 | FullEventLogView | `C:\Tools\FullEventLogView\FullEventLogView.exe` | GUI event log viewer |
-| Zircolite | `C:\venv\zircolite\Scripts\python.exe C:\git\zircolite\zircolite.py` | Standalone SIGMA detection engine |
+| Zircolite | `C:\Tools\zircolite\Zircolite.exe` | Standalone SIGMA detection engine (rulesets in `C:\Tools\zircolite\rules`) |
 | takajo | `C:\Tools\takajo\takajo.exe` | Post-process Hayabusa JSONL output |
 | LUMEN | `C:\Tools\LUMEN\` | Event log visualization |
 | LogBoost | `C:\Tools\LogBoost\LogBoost.exe` | Log enrichment and analysis |
