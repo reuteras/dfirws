@@ -2822,7 +2822,11 @@ $TOOL_DEFINITIONS += @{
 
 # https://flatassembler.net/download.php - FASM
 $flatassembler_version = Get-DownloadUrlFromPage -url "https://flatassembler.net/download.php" -RegEx 'fasmw[^"]+zip'
-$status = Get-FileFromUri -uri "https://flatassembler.net/${flatassembler_version}" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes" -check "Zip archive data"
+# Without this guard an empty match downloads the site's front page as fasm.zip.
+$status = $false
+if ("$flatassembler_version" -ne "") {
+    $status = Get-FileFromUri -uri "https://flatassembler.net/${flatassembler_version}" -FilePath ".\downloads\fasm.zip" -CheckURL "Yes" -check "Zip archive data"
+}
 if ($status) {
     Install-ToolFromArchive -Archive "${SETUP_PATH}\fasm.zip" -Destination "${TOOLS}\fasm" -Target "${TOOLS}\fasm"
 }

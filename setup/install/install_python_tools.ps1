@@ -49,29 +49,42 @@ function Install-UvTool {
     }
     $uvArgs += $Package
 
-    # Windows AV/indexer scanners transiently lock freshly-extracted wheel files (seen as
-    # "os error 32, The process cannot access the file because it is being used by another
-    # process" from uv), so a failed install is retried a couple of times before giving up.
+    if (Invoke-UvWithRetry $label @uvArgs) {
+        Write-DateLog "Installed $label via uv tool install (Python $PythonVersion)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+        Save-UvToolMetadata -Package $label 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    }
+}
+
+# Runs uv with the given arguments, logging to python.txt, and retries on failure.
+# Usage: Invoke-UvWithRetry <label> <uv args...>   (e.g. Invoke-UvWithRetry default pip install -U pkg)
+# Windows AV/indexer scanners transiently lock freshly-extracted wheel files, which uv reports as
+# "os error 32, The process cannot access the file because it is being used by another process"
+# or, when moving a download into the cache (C:\venv\cache is a mapped host folder), as
+# "failed to rename file ... Access is denied. (os error 5)". Both go away on a retry.
+# Deliberately a simple function (no param block) so uv flags like -U and -r land in $args.
+# Array arguments (comma-separated package lists) are flattened. Returns $true on success.
+function Invoke-UvWithRetry {
+    $label = $args[0]
+    $uvArgs = @()
+    foreach ($arg in ($args | Select-Object -Skip 1)) {
+        $uvArgs += $arg
+    }
+
     $maxAttempts = 3
-    $succeeded = $false
+    $exitCode = 0
     for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
         uv @uvArgs 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-        if ($LASTEXITCODE -eq 0) {
-            $succeeded = $true
-            break
+        $exitCode = $LASTEXITCODE
+        if ($exitCode -eq 0) {
+            return $true
         }
         if ($attempt -lt $maxAttempts) {
-            Write-DateLog "WARNING: uv tool install failed for $label (attempt $attempt/$maxAttempts, exit $LASTEXITCODE), retrying." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+            Write-DateLog "WARNING: uv $($uvArgs[0..1] -join ' ') failed for $label (attempt $attempt/$maxAttempts, exit $exitCode), retrying." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
             Start-Sleep -Seconds 5
         }
     }
-
-    if ($succeeded) {
-        Write-DateLog "Installed $label via uv tool install (Python $PythonVersion)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-        Save-UvToolMetadata -Package $label 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    } else {
-        Write-DateLog "ERROR: uv tool install failed for $label after $maxAttempts attempts (exit $LASTEXITCODE)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
-    }
+    Write-DateLog "ERROR: uv $($uvArgs[0..1] -join ' ') failed for $label after $maxAttempts attempts (exit $exitCode)." 2>&1 | ForEach-Object { "$_" } >> "C:\log\python.txt"
+    return $false
 }
 
 # Version for tools that have moved past $PYTHON_DEFAULT. Profiles that exclude python3.13
@@ -272,7 +285,7 @@ Write-DateLog "Install packages in venv default in sandbox." >> "C:\log\python.t
 uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\default" >> "C:\log\python.txt"
 C:\venv\default\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Set-Location "C:\venv\default"
-uv pip install -U `
+$null = Invoke-UvWithRetry default pip install -U `
     "acquire", `
     "aiodns", `
     "aiohttp[speedups]", `
@@ -360,7 +373,7 @@ uv pip install -U `
     "XlsxWriter", `
     "xxhash", `
     "yara-python", `
-    "win_inet_pton" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    "win_inet_pton"
 
 Save-VenvPackageMetadata -Venv "default" -Python "C:\venv\default\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
@@ -373,7 +386,7 @@ if (Test-ToolIncludedSandbox -ToolName "White-Phoenix") {
     uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\white-phoenix" >> "C:\log\python.txt"
     C:\venv\white-phoenix\Scripts\Activate.ps1 >> "C:\log\python.txt"
     Set-Location "C:\venv\white-phoenix"
-    uv pip install -r "${WSDFIR_TEMP}\white-phoenix.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    $null = Invoke-UvWithRetry white-phoenix pip install -r "${WSDFIR_TEMP}\white-phoenix.txt"
     Save-VenvPackageMetadata -Venv "white-phoenix" -Python "C:\venv\white-phoenix\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     deactivate
     Write-DateLog "Python venv white-phoenix done." >> "C:\log\python.txt"
@@ -386,7 +399,7 @@ if (Test-ToolIncludedSandbox -ToolName "Kanvas") {
     Set-Location "C:\venv\Kanvas"
     uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\Kanvas\.venv" >> "C:\log\python.txt"
     C:\venv\Kanvas\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    $null = Invoke-UvWithRetry Kanvas pip install -r ".\requirements.txt"
     C:\Users\WDAGUtilityAccount\Documents\tools\utils\kanvas_update.ps1 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     Save-VenvPackageMetadata -Venv "Kanvas" -Python "C:\venv\Kanvas\.venv\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     deactivate
@@ -399,7 +412,7 @@ git clone https://github.com/mandiant/gostringungarbler.git C:\venv\gostringunga
 Set-Location "C:\venv\gostringungarbler"
 uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\gostringungarbler\.venv" >> "C:\log\python.txt"
 C:\venv\gostringungarbler\.venv\Scripts\Activate.ps1 >> "C:\log\python.txt"
-uv pip install -r ".\requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+$null = Invoke-UvWithRetry gostringungarbler pip install -r ".\requirements.txt"
 Save-VenvPackageMetadata -Venv "gostringungarbler" -Python "C:\venv\gostringungarbler\.venv\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 deactivate
 Write-DateLog "Python venv gostringungarbler done." >> "C:\log\python.txt"
@@ -411,11 +424,11 @@ Write-DateLog "Install packages in venv dfir-unfurl in sandbox (needs specific v
 uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\dfir-unfurl" >> "C:\log\python.txt"
 C:\venv\dfir-unfurl\Scripts\Activate.ps1 >> "C:\log\python.txt"
 Set-Location "C:\venv\dfir-unfurl"
-uv pip install -U `
+$null = Invoke-UvWithRetry dfir-unfurl pip install -U `
         dfir-unfurl[ui] `
         hexdump `
         maclookup `
-        tomlkit 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+        tomlkit
 Save-VenvPackageMetadata -Venv "dfir-unfurl" -Python "C:\venv\dfir-unfurl\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 
 # Download each file and update the base.html content with the local path
@@ -444,7 +457,7 @@ Get-RawGitHubFile -OutFile "pe2pic.py" -Url "https://raw.githubusercontent.com/h
 C:\Windows\System32\curl.exe -L --silent -o "pe2pic_requirements.txt" "https://raw.githubusercontent.com/hasherezade/pe2pic/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
 uv venv --python "C:\Program Files\Python311\python.exe" "C:\venv\pe2pic"
 C:\venv\pe2pic\Scripts\Activate.ps1 >> "C:\log\python.txt"
-uv pip install -r "C:\tmp\pe2pic_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+$null = Invoke-UvWithRetry pe2pic pip install -r "C:\tmp\pe2pic_requirements.txt"
 Save-VenvPackageMetadata -Venv "pe2pic" -Python "C:\venv\pe2pic\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 Copy-Item "C:\tmp\pe2pic.py" "C:\venv\pe2pic\Scripts\pe2pic.py" -Force 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 deactivate
@@ -461,7 +474,7 @@ if (Test-ToolIncludedSandbox -ToolName "evt2sigma") {
     C:\Windows\System32\curl.exe -L --silent -o "evt2sigma_requirements.txt" "https://raw.githubusercontent.com/Neo23x0/evt2sigma/master/requirements.txt" 2>&1 >> "C:\log\python.txt"
     uv venv --python $PYTHON_INTERPRETERS[$PYTHON_UPGRADED] "C:\venv\evt2sigma"
     C:\venv\evt2sigma\Scripts\Activate.ps1 >> "C:\log\python.txt"
-    uv pip install -r "C:\tmp\evt2sigma_requirements.txt" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    $null = Invoke-UvWithRetry evt2sigma pip install -r "C:\tmp\evt2sigma_requirements.txt"
     Save-VenvPackageMetadata -Venv "evt2sigma" -Python "C:\venv\evt2sigma\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     Copy-Item "C:\tmp\evt2sigma.py" "C:\venv\evt2sigma\Scripts\evt2sigma.py"
     Set-Content "C:\venv\evt2sigma\Scripts\python.exe C:\venv\evt2sigma\Scripts\evt2sigma.py `$args" -Encoding Ascii -Path "C:\venv\default\Scripts\evt2sigma.ps1"
@@ -478,8 +491,8 @@ uv venv --python $PYTHON_INTERPRETERS[$PYTHON_UPGRADED] "C:\venv\scare"
 Copy-Item -Recurse "C:\git\scare" "C:\venv\scare"
 Set-Location "C:\venv\scare\scare"
 C:\venv\scare\Scripts\Activate.ps1 >> "C:\log\python.txt"
-uv pip install ptpython pyreadline3 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
-uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+$null = Invoke-UvWithRetry scare pip install ptpython pyreadline3
+$null = Invoke-UvWithRetry scare pip install -r .\requirements.txt
 Save-VenvPackageMetadata -Venv "scare" -Python "C:\venv\scare\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
 (Get-Content .\scarelib.py -raw) -replace "print\(splash\)","splash = 'Simple Configurable Asm REPL && Emulator'`n    print(splash)" | Set-Content -Path ".\scarelib2.py" -Encoding ascii
 Copy-Item scarelib2.py scarelib.py
@@ -500,7 +513,7 @@ if ((Test-ToolIncludedSandbox -ToolName "EventHawk") -and (Test-Path "C:\git\Eve
     C:\venv\eventhawk\Scripts\Activate.ps1 >> "C:\log\python.txt"
     Copy-Item -Recurse "C:\git\EventHawk" "C:\venv\eventhawk" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     Set-Location "C:\venv\eventhawk\EventHawk"
-    uv pip install -r .\requirements.txt 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
+    $null = Invoke-UvWithRetry eventhawk pip install -r .\requirements.txt
     Save-VenvPackageMetadata -Venv "eventhawk" -Python "C:\venv\eventhawk\Scripts\python.exe" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\python.txt"
     deactivate
     Set-Content "C:\venv\eventhawk\Scripts\python.exe C:\venv\eventhawk\EventHawk\evtx_tool.py `$args" -Encoding Ascii -Path "C:\venv\bin\eventhawk.ps1"
