@@ -3118,7 +3118,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # https://bitbucket.org/iBotPeaches/apktool/downloads/ - apktool
-$apktool_version = Get-DownloadUrlFromPage -url "https://apktool.org/" -RegEx 'apktool_[^"]+'
+$apktool_version = Get-DownloadUrlFromPage -url "https://apktool.org/" -RegEx 'apktool_[0-9.]+\.jar'
 $status = Get-FileFromUri -uri "https://bitbucket.org/iBotPeaches/apktool/downloads/${apktool_version}" -FilePath ".\downloads\apktool.jar" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     Copy-Item ".\downloads\apktool.jar" "${TOOLS}\bin\apktool.jar" -Force

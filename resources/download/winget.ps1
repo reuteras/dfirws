@@ -169,7 +169,7 @@ $TOOL_DEFINITIONS += @{
 
 # PowerShell 7 - installed during startup
 Write-SynchronizedLog "winget: Downloading PowerShell 7."
-$status = Get-WinGet "Microsoft.PowerShell" "PowerShell*.msi" "powershell.msi" -check "Composite Document File V2 Document"
+$status = Get-WinGet "Microsoft.PowerShell" "PowerShell*.msi" "powershell.msi" -check "Composite Document File V2 Document" -InstallerType wix
 
 $TOOL_DEFINITIONS += @{
     Name = "PowerShell 7"
@@ -302,7 +302,7 @@ $TOOL_DEFINITIONS += @{
 # VideoLAN VLC - available for installation via dfirws-install.ps1
 if (Test-ToolIncluded -ToolName "VLC") {
     Write-SynchronizedLog "winget: Downloading VLC."
-    $status = Get-WinGet "VideoLAN.VLC" "VLC*.exe" "vlc_installer.exe" -check "PE32"
+    $status = Get-WinGet "VideoLAN.VLC" "VLC*.msi" "vlc_installer.msi" -check "Composite Document File V2 Document"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -524,7 +524,7 @@ $TOOL_DEFINITIONS += @{
 
 # Wireshark - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading Wireshark."
-$status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.exe" "wireshark.exe" -check "PE32"
+$status = Get-WinGet "WiresharkFoundation.Wireshark" "Wireshark*.msi" "wireshark.msi" -check "Composite Document File V2 Document"
 
 $TOOL_DEFINITIONS += @{
     Name = "Wireshark"
@@ -564,7 +564,7 @@ $TOOL_DEFINITIONS += @{
 # tailscale - available for installation via dfirws-install.ps1
 if (Test-ToolIncluded -ToolName "Tailscale") {
     Write-SynchronizedLog "winget: Downloading Tailscale."
-    $status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.exe" "tailscale.exe" -check "PE32"
+    $status = Get-WinGet "Tailscale.Tailscale" "Tailscale*.msi" "tailscale.msi" -check "Composite Document File V2 Document"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -575,8 +575,8 @@ $TOOL_DEFINITIONS += @{
     Verify = @(
         @{
             Type = "command"
-            Name = "C:\downloads\tailscale.exe"
-            Expect = "PE32"
+            Name = "C:\downloads\tailscale.msi"
+            Expect = "Composite Document File V2 Document"
         }
     )
     FileExtensions = @()

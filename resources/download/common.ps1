@@ -674,7 +674,8 @@ function Get-Winget {
         [Parameter(Mandatory=$true)] [string]$AppName,
         [Parameter(Mandatory=$true)] [string]$TmpFileName,
         [Parameter(Mandatory=$true)] [string]$DownloadName,
-        [Parameter(Mandatory=$false)] [string]$check = ""
+        [Parameter(Mandatory=$false)] [string]$check = "",
+        [Parameter(Mandatory=$false)] [string]$InstallerType = ""
     )
 
     $VERSION = (winget search --exact --id "$AppName") -match '^([A-Z0-9]+|-)' | Select-Object -Last 1 | ForEach-Object { ($_ -split("\s+"))[-2] }
@@ -693,7 +694,11 @@ function Get-Winget {
     Write-SynchronizedLog "Downloading $AppName version $VERSION."
 
     New-Item -ItemType Directory -Force -Path .\tmp\winget | Out-Null
-    winget download --disable-interactivity	--exact --id "$AppName" -d .\tmp\winget 2>&1 | Out-Null
+    $wingetArgs = @("download", "--disable-interactivity", "--exact", "--id", "$AppName", "-d", ".\tmp\winget")
+    if ($InstallerType -ne "") {
+        $wingetArgs += @("--installer-type", $InstallerType)
+    }
+    winget @wingetArgs 2>&1 | Out-Null
     Remove-Item .\tmp\winget\*.yaml -Force 2>&1 | Out-Null
 
     if (-not (Test-Path .\tmp\winget\)) {
