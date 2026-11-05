@@ -1599,9 +1599,10 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Detect It Easy
-$status = Get-GitHubRelease -repo "horsicq/DIE-engine" -path "${SETUP_PATH}\die.zip" -match "die_win64_portable" -check "Zip archive data"
+$status = Get-GitHubRelease -repo "horsicq/DIE-engine" -path "${SETUP_PATH}\die.zip" -match "die_win64_(qt6_[0-9]|portable)" -check "Zip archive data"
 if ($status) {
-    Install-ToolFromArchive -Archive "${SETUP_PATH}\die.zip" -Destination "${TOOLS}" -Target "${TOOLS}\die"
+    # 4.0.0 and later zips have no top-level folder, so extract straight into die.
+    Install-ToolFromArchive -Archive "${SETUP_PATH}\die.zip" -Destination "${TOOLS}\die" -Target "${TOOLS}\die"
 }
 
 $TOOL_DEFINITIONS += @{
