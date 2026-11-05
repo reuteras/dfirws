@@ -1290,7 +1290,7 @@ function Install-VisualStudioBuildTool {
 function Install-VLC {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-vlc.txt")) {
         Write-Output "Installing VLC"
-        Start-Process -Wait "${SETUP_PATH}\vlc_installer.exe" -ArgumentList "/L=1033 /S"
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\vlc_installer.msi /qn /norestart"
         New-Item -ItemType File -Path "${env:ProgramFiles}\dfirws" -Name "installed-vlc.txt" | Out-Null
         Add-ToUserPath "${env:ProgramFiles}\VideoLAN\VLC"
         Remove-InstallerShortcut -DesktopLnk "${HOME}\Desktop\dfirws\Utilities\Media\VLC (runs dfirws-install -VLC).lnk"
@@ -1407,7 +1407,7 @@ function Install-WinMerge {
 function Install-Wireshark {
     if (!(Test-Path "${env:ProgramFiles}\dfirws\installed-wireshark.txt")) {
         Write-Output "Installing Wireshark"
-        Start-Process -Wait "${SETUP_PATH}\wireshark.exe" -ArgumentList '/S /V"/qn REBOOT=ReallySuppress"'
+        Start-Process -Wait msiexec -ArgumentList "/i ${SETUP_PATH}\wireshark.msi /qn REBOOT=ReallySuppress"
         New-Item -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark" -Force -Type Directory | Out-Null
         if (Test-Path "${ENRICHMENT}\maxmind_current") {
             Set-Content '"C:/enrichment/maxmind_current"' -Encoding Ascii -Path "${env:USERPROFILE}\AppData\Roaming\Wireshark\maxmind_db_paths"

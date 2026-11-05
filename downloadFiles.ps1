@@ -287,7 +287,9 @@ function Get-LogIssues {
         $_.Line -notmatch "Copied (replaced existing)" -and
         $_.Line -notmatch "INFO" -and
         $_.Line -notmatch "perl-Error" -and
-        $_.Line -notmatch "Downloaded " -and
+        # Hide cargo's "Downloaded <crate>" lines, but keep "Error: Downloaded file ... is
+        # not the correct type" from Get-Winget so failed downloads block -VerifyOnSuccess.
+        $_.Line -notmatch "(?<!Error: )Downloaded " -and
         $_.Line -notmatch "/cffi/error.py" -and
         $_.Line -notmatch "github/workflows" -and
         $_.Line -notmatch " Compiling " -and
