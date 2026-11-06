@@ -25,6 +25,15 @@ $MSYS2_PACKAGES = @(
     "pv", "rsync", "tree", "zsh", "vim"
 )
 
+# Remove Russian (.ru) mirrors from the pacman mirrorlists. They are in MSYS2's default
+# lists (e.g. mirror.yandex.ru) but are slow/unreliable from here and we do not want to
+# depend on infrastructure in Russia. Safe to call repeatedly; the mirrorlists are
+# backup-flagged in the package, so upgrades keep our edits (as .pacnew) but we rerun anyway.
+function Remove-RussianMirrors {
+    param([string]$Bash)
+    & $Bash -lc "sed -i -E '/^[[:space:]]*Server[[:space:]]*=[[:space:]]*https?:\/\/[^\/]*\.ru([:\/]|$)/d' /etc/pacman.d/mirrorlist.*" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+}
+
 # An msys2-runtime update cannot be applied in place: pacman itself has msys-2.0.dll
 # loaded, and Cygwin's move-in-use-file-aside trick does not work on the mapped C:\Tools
 # folder ("Can't create '/usr/bin/msys-2.0.dll'"). The package db then says the new
@@ -32,6 +41,7 @@ $MSYS2_PACKAGES = @(
 # has the same problem ("Can't create '/usr/bin/bash.exe'"). When either update is
 # pending, reinstall from the (nightly) installer instead.
 if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
+    Remove-RussianMirrors -Bash "C:\Tools\msys64\usr\bin\bash.exe"
     & "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman --noconfirm -Sy' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     $MSYS2_PENDING = @(& "C:\Tools\msys64\usr\bin\bash.exe" -lc 'pacman -Qqu' 2>$null)
     # A runtime update applied in place by an earlier run leaves the db ahead of the DLL on
@@ -67,6 +77,7 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     }
     & "${SETUP_PATH}\msys2.exe" -y "-o${WSDFIR_TEMP}" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     & $MSYS2_BASH -lc ' ' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
+    Remove-RussianMirrors -Bash $MSYS2_BASH
     & $MSYS2_BASH -lc 'rm -rf /etc/pacman.d/gnupg/' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     & $MSYS2_BASH -lc 'pacman-key --init' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     & $MSYS2_BASH -lc 'pacman-key --populate msys2' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
@@ -81,6 +92,7 @@ if (Test-Path -Path "C:\Tools\msys64\usr\bin\bash.exe") {
     & $MSYS2_BASH -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     Get-Process | Where-Object { try { $_.MainModule.FileName -like "${MSYS2_LOCAL}\*" } catch { $false } } | Stop-Process -Force -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 3
+    Remove-RussianMirrors -Bash $MSYS2_BASH
     & $MSYS2_BASH -lc 'pacman --noconfirm -Syuu' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     & $MSYS2_BASH -lc "pacman --noconfirm -Syu $($MSYS2_PACKAGES -join ' ')" 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
     & $MSYS2_BASH -lc 'gpgconf --kill all' 2>&1 | ForEach-Object{ "$_" } >> "C:\log\msys2.txt"
