@@ -27,6 +27,12 @@ $GIT_FILE = "C:\Program Files\Git\usr\bin\file.exe"
 # Install Visual Studio Build Tools
 # $HAVE_VISUAL_STUDIO_BUILD_TOOLS = $false
 
+# Include the uv cache (mount\venv\cache) when syncing with resources\contrib\sync\sync_to_usb.ps1.
+# The cache is not needed by the installed Python tools, only for offline `uv pip install` in the
+# analysis sandbox. It is large and contains a lot of small files. Set to $false to skip it.
+# sync_to_usb.ps1 reads this line without running the rest of the file, so keep it a literal value.
+$SYNC_UV_CACHE = $true
+
 # Supply chain security audits (pip-audit, npm audit, govulncheck, cargo audit)
 # Set to $false to skip all supply chain security audit checks during installation
 $SUPPLY_CHAIN_SECURITY_AUDIT = $true
@@ -64,6 +70,7 @@ $null = $GITHUB_USERNAME
 $null = $GITHUB_TOKEN
 $null = $MAXMIND_LICENSE_KEY
 $null = $HAVE_VISUAL_STUDIO_BUILD_TOOLS
+$null = $SYNC_UV_CACHE
 $null = $SUPPLY_CHAIN_SECURITY_AUDIT
 $null = $RUSTSEC_ALLOWLIST
 $null = $NPM_AUDIT_ALLOWLIST
