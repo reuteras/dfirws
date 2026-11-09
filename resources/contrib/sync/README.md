@@ -8,6 +8,8 @@ This script synchronizes files from the workspace directory (*$HOME\Documents\wo
 
 Usage: Run **sync_to_usb.ps1** from the USB drive in PowerShell to sync files to the USB drive.
 
+Set `$SYNC_UV_CACHE = $false` in *dfirws-config.ps1* to skip the uv cache (*mount\venv\cache*). The installed Python tools do not need it, it is only used for offline `uv pip install` in the analysis sandbox. When disabled, an earlier copy of the cache on the USB drive is removed and the other scripts remove it downstream on their next sync.
+
 ## sync_from_usb.ps1
 
 This script copies files from the USB drive to an internal file server.
