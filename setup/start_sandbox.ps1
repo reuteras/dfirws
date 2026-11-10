@@ -680,6 +680,13 @@ if ($opencode_skills_src -ne "") {
     Write-DateLog "No opencode-ai skills found in local or defaults." | Write-SetupLog
 }
 
+# Skills shipped in cloned repositories. Copied after the mirror above, which would remove them.
+if (Test-Path "${GIT_PATH}\marimo-pair\skills\marimo-pair") {
+    New-Item -ItemType Directory -Force -Path "${opencode_config_dir}\skills" | Out-Null
+    Robocopy.exe /MT:96 /MIR "${GIT_PATH}\marimo-pair\skills\marimo-pair" "${opencode_config_dir}\skills\marimo-pair" | Out-Null
+    Write-DateLog "Installed marimo-pair opencode-ai skill." | Write-SetupLog
+}
+
 Write-DateLog "Installed opencode-ai config." | Write-SetupLog
 
 # Config for bash and zsh

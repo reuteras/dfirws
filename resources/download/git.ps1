@@ -38,6 +38,7 @@ $repourls = `
     "https://github.com/Malandrone/PowerDecode.git", `
     "https://github.com/mandiant/flare-floss.git", `
     "https://github.com/mandiant/gootloader.git", `
+    "https://github.com/marimo-team/marimo-pair.git", `
     "https://github.com/mkorman90/regipy.git", `
     "https://github.com/mandiant/capa-rules.git", `
     "https://github.com/mandiant/GoReSym.git", `
@@ -1662,6 +1663,27 @@ $TOOL_DEFINITIONS += @{
     Vendor = "yossizap"
     License = "GPL-2.0 License"
     LicenseUrl = "https://github.com/yossizap/cutterref/blob/master/LICENSE.md"
+    PythonVersion = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "marimo-pair"
+    Homepage = "https://github.com/marimo-team/marimo-pair"
+    Vendor = "marimo-team"
+    License = "Apache-2.0"
+    LicenseUrl = "https://github.com/marimo-team/marimo-pair/blob/main/LICENSE"
+    Category = "Utilities"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @()
+    Tags = @("ai", "python", "automation")
+    Notes = "Agent skill that lets an AI agent such as opencode-ai run code inside a live marimo notebook session."
+    Tips = "Installed as an opencode-ai skill at startup. The skill scripts need bash, curl and jq on PATH: install Git first with dfirws-install.ps1 -Git and run opencode from Git Bash. Start marimo with --no-token so the scripts can discover the server. Use a local model by configuring a provider in opencode.json; remote models only work in the network enabled sandbox."
+    Usage = "marimo edit --no-token notebook.py, then ask opencode to pair on the notebook."
+    SampleCommands = @("marimo edit --no-token notebook.py")
+    SampleFiles = @()
+    Dependencies = @("nodejs")
     PythonVersion = ""
 }
 
