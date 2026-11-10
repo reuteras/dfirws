@@ -61,7 +61,16 @@ if ($SYNC_UV_CACHE) {
     # sync_from_usb.ps1 and dfirws.ps1 then remove it downstream with their own /MIR.
     if (Test-Path .\dfirws\mount\venv\cache) {
         Write-Output "Removing uv cache from USB since SYNC_UV_CACHE is false"
-        Remove-Item -Recurse -Force .\dfirws\mount\venv\cache
+        # Remove-Item -Recurse fails with "directory not empty" on large trees of small files
+        # on USB drives, so empty the directory by mirroring an empty one over it first.
+        $EMPTY_DIRECTORY = Join-Path ([System.IO.Path]::GetTempPath()) "dfirws-empty-$PID"
+        New-Item -ItemType Directory -Path $EMPTY_DIRECTORY -Force | Out-Null
+        Robocopy.exe $EMPTY_DIRECTORY .\dfirws\mount\venv\cache /MIR /MT:96 | Out-Null
+        Remove-Item -Recurse -Force $EMPTY_DIRECTORY -ErrorAction SilentlyContinue
+        Remove-Item -Recurse -Force .\dfirws\mount\venv\cache -ErrorAction SilentlyContinue
+        if (Test-Path .\dfirws\mount\venv\cache) {
+            Write-Warning "Could not fully remove .\dfirws\mount\venv\cache"
+        }
     }
     Robocopy.exe $SOURCE_DIRECTORY\mount .\dfirws\mount /MIR /MT:96 /XD $UV_CACHE_DIRECTORY | Out-Null
 }
