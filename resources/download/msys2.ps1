@@ -69,10 +69,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.msys2.org/"
+    Vendor = "MSYS2"
+    License = "See repository"
+    LicenseUrl = "https://github.com/msys2/MSYS2-packages"
     PythonVersion = ""
 }
 

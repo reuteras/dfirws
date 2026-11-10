@@ -55,7 +55,7 @@ $TOOL_DEFINITIONS += @{
     Name = "git"
     Homepage = "https://gitforwindows.org/"
     Vendor = "git-for-windows"
-    License = ""
+    License = "See repository"
     LicenseUrl = "https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses"
     Category = "Utilities"
     Shortcuts = @()
@@ -227,7 +227,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://aws.amazon.com/corretto/"
     Vendor = "Amazon"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
     Category = "Programming\Java"
     Shortcuts = @(
         @{
@@ -358,7 +358,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://docs.astral.sh/uv/"
     Vendor = "Astral"
     License = "MIT and Apache-2"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -385,7 +385,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://dotnet.microsoft.com"
     Vendor = "Microsoft Corporation"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -411,7 +411,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://go.dev/"
     Vendor = "NationalSecurityAgency"
     License = "BSD"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
     Category = "Programming"
     Shortcuts = @(
         @{
@@ -455,7 +455,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://rust-lang.org/"
     Vendor = "NationalSecurityAgency"
     License = "MIT and Apache-2"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE"
     Category = "Programming"
     Shortcuts = @(
         @{

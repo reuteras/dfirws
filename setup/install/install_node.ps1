@@ -111,10 +111,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("nodejs")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/CapacitorSet/box-js#readme"
+    Vendor = "CapacitorSet"
+    License = "MIT"
+    LicenseUrl = "https://github.com/CapacitorSet/box-js/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -140,10 +140,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("nodejs")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/relative/synchrony#readme"
+    Vendor = "relative"
+    License = "GPL-3.0-only"
+    LicenseUrl = "https://github.com/relative/synchrony/blob/master/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -161,10 +161,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("nodejs")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/docsifyjs/docsify-cli#readme"
+    Vendor = "docsifyjs"
+    License = "MIT"
+    LicenseUrl = "https://github.com/docsifyjs/docsify-cli/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -190,10 +190,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("nodejs")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/jsdom/jsdom#readme"
+    Vendor = "jsdom"
+    License = "MIT"
+    LicenseUrl = "https://github.com/jsdom/jsdom/blob/main/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -219,10 +219,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("nodejs")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/Koifman/LUMEN"
+    Vendor = "Koifman"
+    License = "MIT"
+    LicenseUrl = "https://github.com/Koifman/LUMEN/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -240,10 +240,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("nodejs")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/marp-team/marp-cli#readme"
+    Vendor = "marp-team"
+    License = "MIT"
+    LicenseUrl = "https://github.com/marp-team/marp-cli/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -263,10 +263,10 @@ $TOOL_DEFINITIONS += @{
     )
     SampleFiles = @()
     Dependencies = @("nodejs")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.npmjs.com/package/opencode-ai"
+    Vendor = "anomalyco"
+    License = "MIT"
+    LicenseUrl = "https://www.npmjs.com/package/opencode-ai"
     PythonVersion = ""
 }
 

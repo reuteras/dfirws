@@ -110,17 +110,30 @@ function Get-ToolDefinitionsFromFile {
         }
 
         $offset = $assignment.Extent.StartOffset
-        $github = $sourceMarkers |
-            Where-Object { $_.Type -eq "github" -and $_.Offset -lt $offset } |
-            Sort-Object Offset | Select-Object -Last 1
-        $winget = $sourceMarkers |
-            Where-Object { $_.Type -eq "winget" -and $_.Offset -lt $offset } |
-            Sort-Object Offset | Select-Object -Last 1
-
         $name = $null
         if ($keys.Contains("Name") -and $keys["Name"].IsString) {
             $name = $keys["Name"].Value
         }
+
+        # Prefer the repo whose name matches the tool name (downloads and definitions are
+        # often in separate blocks, so "nearest preceding" alone picks the last repo of the
+        # block); fall back to the nearest preceding Get-GitHubRelease call.
+        $github = $null
+        if ($name) {
+            $normalizedName = $name.ToLower() -replace "[ _.]", "-"
+            $github = $sourceMarkers |
+                Where-Object { $_.Type -eq "github" -and
+                    (($_.Value -split "/")[-1].ToLower() -replace "[ _.]", "-") -eq $normalizedName } |
+                Select-Object -First 1
+        }
+        if (-not $github) {
+            $github = $sourceMarkers |
+                Where-Object { $_.Type -eq "github" -and $_.Offset -lt $offset } |
+                Sort-Object Offset | Select-Object -Last 1
+        }
+        $winget = $sourceMarkers |
+            Where-Object { $_.Type -eq "winget" -and $_.Offset -lt $offset } |
+            Sort-Object Offset | Select-Object -Last 1
 
         $definitions.Add([PSCustomObject]@{
             File       = "$Path"

@@ -255,10 +255,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://codeberg.org/dfir-dd/dfir-toolkit"
+    Vendor = "dfir-dd"
+    License = "GPL-3.0"
+    LicenseUrl = "https://crates.io/crates/dfir-toolkit"
     PythonVersion = ""
 }
 
@@ -290,10 +290,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.github.com/janstarke/usnjrnl"
+    Vendor = "janstarke"
+    License = "See repository"
+    LicenseUrl = "https://github.com/janstarke/usnjrnl/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -317,10 +317,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/PThorpe92/CuTE"
+    Vendor = "PThorpe92"
+    License = "GPL-3.0"
+    LicenseUrl = "https://github.com/PThorpe92/CuTE/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -344,10 +344,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("msys2")
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://github.com/CrzPhil/SSHniff"
+    Vendor = "CrzPhil"
+    License = "GPL-3.0"
+    LicenseUrl = "https://github.com/CrzPhil/SSHniff/blob/main/LICENSE"
     PythonVersion = ""
 }
 

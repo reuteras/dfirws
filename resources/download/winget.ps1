@@ -29,10 +29,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://portswigger.net/burp"
+    Vendor = "PortSwigger"
+    License = "Proprietary"
+    LicenseUrl = "https://portswigger.net/burp/eula"
     PythonVersion = ""
 }
 
@@ -57,7 +57,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://dotnet.microsoft.com"
     Vendor = "Microsoft Corporation"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/dotnet/runtime/blob/main/LICENSE.TXT"
     PythonVersion = ""
 }
 
@@ -694,10 +694,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
+    Homepage = "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
     Vendor = "Microsoft"
     License = "Proprietary"
-    LicenseUrl = ""
+    LicenseUrl = "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
     PythonVersion = ""
 }
 
@@ -788,7 +788,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/microsoft/etl2pcapng"
     Vendor = "Microsoft"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/microsoft/etl2pcapng/blob/HEAD/LICENSE"
     PythonVersion = ""
 }
 

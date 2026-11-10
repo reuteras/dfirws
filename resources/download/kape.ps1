@@ -52,7 +52,7 @@ $TOOL_DEFINITIONS += @{
     )
     SampleFiles = @()
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.kroll.com/en/insights/publications/cyber/kroll-artifact-parser-extractor-kape"
     PythonVersion = ""
 }
 
