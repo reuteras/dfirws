@@ -375,6 +375,7 @@ $null = Invoke-UvWithRetry -Label "default" -UvArgs @(
     "XlsxWriter",
     "xxhash",
     "yara-python",
+    "yara-x",
     "win_inet_pton"
 )
 

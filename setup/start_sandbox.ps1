@@ -687,6 +687,12 @@ if (Test-Path "${GIT_PATH}\marimo-pair\skills\marimo-pair") {
     Write-DateLog "Installed marimo-pair opencode-ai skill." | Write-SetupLog
 }
 
+if (Test-Path "${GIT_PATH}\yara-rule-skill\yara-rule-skill") {
+    New-Item -ItemType Directory -Force -Path "${opencode_config_dir}\skills" | Out-Null
+    Robocopy.exe /MT:96 /MIR "${GIT_PATH}\yara-rule-skill\yara-rule-skill" "${opencode_config_dir}\skills\yara-rule-skill" | Out-Null
+    Write-DateLog "Installed yara-rule-skill opencode-ai skill." | Write-SetupLog
+}
+
 Write-DateLog "Installed opencode-ai config." | Write-SetupLog
 
 # Config for bash and zsh
