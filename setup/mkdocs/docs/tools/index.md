@@ -355,6 +355,7 @@ Categories generated from dfirws shortcuts.
 | [prettytable](./utilities/prettytable.md) | Python | import prettytable | data-processing |  |  |
 | [ProcDOT](./os-windows/procdot.md) | HTTP | ProcDOT is a visual malware analysis tool for process, file, and network activity. | malware-analysis, visualization, dynamic-analysis | `.csv`, `.log` | Full only |
 | [protodeep](./network/protodeep.md) | Python | A tool to help reversing protobuf. | parsing, reverse-engineering | `.bin` |  |
+| [protodump](./utilities-cryptography/protodump.md) | Go | Protodump is a tool to extract protobuf messages from binary files without having the .proto schema files. |  |  |  |
 | [psexposed](./os-windows/psexposed.md) | Git | Community-driven PowerShell detection indicators | windows, forensics | `.ps1` |  |
 | [PST Walker](./files-and-apps-email/pst-walker.md) | HTTP | PST Walker is a tool for analyzing PST files. | email, forensics | `.pst` |  |
 | [ptpython](./programming-python/ptpython.md) | Python | Python REPL build on top of prompt_toolkit. | python, scripting | `.py` |  |
@@ -509,6 +510,6 @@ Categories generated from dfirws shortcuts.
 | [zaproxy](./network/zaproxy.md) | GitHub Release | The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to. | web, security-testing, network |  | Full only |
 | [zensical](./utilities/zensical.md) | Python | Project documentation with Markdown. | documentation, markdown | `.md`, `.toml` |  |
 | [Zimmerman Tools](./zimmerman/zimmerman-tools.md) | .NET | Zimmerman Tools is a collection of Windows forensics tools developed by Eric Zimmerman. |  |  |  |
-| [Zircolite](./files-and-apps-log/zircolite.md) | Python | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json` |  |
+| [Zircolite](./files-and-apps-log/zircolite.md) | GitHub Release | Zircolite is a standalone SIGMA-based detection tool for EVTX, Auditd, Sysmon for linux, XML or JSONL,NDJSON Logs | log-analysis, sigma, detection, incident-response | `.evtx`, `.json`, `.xml`, `.jsonl` |  |
 | [zstd](./utilities/zstd.md) | GitHub Release | Zstandard is a fast lossless compression algorithm. | compression, decompression, cli | `.zst` |  |
 | [Zui](./network/zui.md) | GitHub Release | Zui is a tool for analyzing network traffic. It can read pcap and zng files and provides a powerful query language for analyzing the data. | network-analysis, pcap | `.pcap`, `.pcapng`, `.zng` | Full only |
