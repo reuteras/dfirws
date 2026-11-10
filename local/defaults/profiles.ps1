@@ -100,6 +100,7 @@ $DFIRWS_PROFILES = @{
             "jpterm",
             "pyghidra",
             "White-Phoenix",
+            "White-Phoenix (venv)",
             "Kanvas",
             "evt2sigma",
             "EventHawk"

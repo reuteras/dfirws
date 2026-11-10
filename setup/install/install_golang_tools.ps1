@@ -76,7 +76,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @("golang")
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/arkadiyt/protodump"
     Tags = @()
     FileExtensions = @()
     PythonVersion = ""

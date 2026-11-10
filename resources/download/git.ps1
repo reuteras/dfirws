@@ -145,7 +145,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/y-vladimir/smartdeblur"
     Vendor = "Y. Vladimir"
     License = "GPL-3"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/y-vladimir/smartdeblur"
     Category = "Utilities\Media"
     Shortcuts = @(
          @{
@@ -189,8 +189,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/sleuthkit/autopsy_addon_modules"
     Vendor = "Sleuth Kit"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/sleuthkit/autopsy_addon_modules"
     PythonVersion = ""
 }
 
@@ -198,6 +198,8 @@ $TOOL_DEFINITIONS += @{
     Name = "libimobiledevice-windows"
     Homepage = "https://github.com/iFred09/libimobiledevice-windows"
     Vendor = "iFred09"
+    License = "See repository"
+    LicenseUrl = "https://github.com/iFred09/libimobiledevice-windows"
     Category = "Files and apps\Mobile"
     Notes = "A Windows port of libimobiledevice, a cross-platform library to communicate with iOS devices. It includes tools for extracting data from iOS devices, such as lockdown, idevicebackup2, and more."
     Tips = "Needed by ULogViewer to read logs from an iOS device. The binaries are under C:\git\libimobiledevice-windows; the sandbox cannot see USB devices, so in practice you work with backups and logs copied into the readwrite folder."
@@ -232,8 +234,8 @@ $TOOL_DEFINITIONS += @{
     Name = "OfficeMalScanner"
     Homepage = "https://github.com/fboldewin/reconstructer.org"
     Vendor = "fboldewin"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/fboldewin/reconstructer.org"
     Category = "Files and apps\Office"
     Shortcuts = @(
          @{
@@ -404,8 +406,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://www.powershell.exposed"
     Vendor = "avasero"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/avasero/psexposed"
     PythonVersion = ""
 }
 
@@ -431,7 +433,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 $TOOL_DEFINITIONS += @{
-    Name = "RdpCacheStitcher"
+    Name = "RdpCacheStitcher (git repository)"
     Category = "Files and apps"
     Shortcuts = @(
         @{
@@ -454,8 +456,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/BSI-Bund/RdpCacheStitcher"
     Vendor = "BSI-Bund"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/BSI-Bund/RdpCacheStitcher"
     PythonVersion = ""
 }
 
@@ -525,8 +527,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/ExeinfoASL/ASL"
     Vendor = "A.S.L Soft"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/ExeinfoASL/ASL"
     PythonVersion = ""
 }
 
@@ -623,7 +625,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 $TOOL_DEFINITIONS += @{
-    Name = "r2ai"
+    Name = "r2ai (git repository)"
     Homepage = "https://github.com/radareorg/r2ai"
     Vendor = "radareorg"
     License = "MIT License"
@@ -641,7 +643,7 @@ $TOOL_DEFINITIONS += @{
     )
     SampleFiles = @()
     Dependencies = @("Radare2", "msys2")
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/radareorg/r2ai/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -662,7 +664,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Radare2")
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/radareorg/r2ai/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -748,8 +750,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/JPCERTCC/ToolAnalysisResultSheet"
     Vendor = "JPCERTCC"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/JPCERTCC/ToolAnalysisResultSheet"
     PythonVersion = ""
 }
 
@@ -841,8 +843,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/LibreOffice/dictionaries"
     Vendor = "LibreOffice"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/LibreOffice/dictionaries"
     PythonVersion = ""
 }
 
@@ -907,7 +909,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 $TOOL_DEFINITIONS += @{
-    Name = "GoReSym"
+    Name = "GoReSym (git repository)"
     Category = "Reverse Engineering"
     Shortcuts = @(
         @{
@@ -931,7 +933,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mandiant/GoReSym"
     Vendor = "Mandiant"
     License = "MIT License"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mandiant/GoReSym/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -990,8 +992,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/MarkBaggett/ese-analyst"
     Vendor = "MarkBaggett"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/MarkBaggett/ese-analyst"
     PythonVersion = ""
 }
 
@@ -1040,8 +1042,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @("online")
     Homepage = "https://github.com/montysecurity/malware-bazaar-advanced-search"
     Vendor = "montysecurity"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/montysecurity/malware-bazaar-advanced-search"
     PythonVersion = ""
 }
 
@@ -1163,8 +1165,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/reuteras/ai-fs-proxy"
     Vendor = "reuteras"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/reuteras/ai-fs-proxy"
     PythonVersion = ""
 }
 
@@ -1205,8 +1207,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/reuteras/MSRC"
     Vendor = "reuteras"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/reuteras/MSRC"
     PythonVersion = ""
 }
 
@@ -1289,8 +1291,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://sigmahq.io/"
     Vendor = "SigmaHQ"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/SigmaHQ/sigma/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1310,8 +1312,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/StrangerealIntel/Shadow-Pulse"
     Vendor = "StrangerealIntel"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/StrangerealIntel/Shadow-Pulse"
     PythonVersion = ""
 }
 
@@ -1368,8 +1370,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/techchipnet/HiddenWave"
     Vendor = "techchipnet"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/techchipnet/HiddenWave"
     PythonVersion = ""
 }
 
@@ -1418,7 +1420,7 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/jakehildreth/BlueTuxedo"
     Vendor = "jakehildreth"
-    License = ""
+    License = "See repository"
     LicenseUrl = "https://github.com/jakehildreth/BlueTuxedo/blob/main/LICENSE"
     PythonVersion = ""
 }
@@ -1440,7 +1442,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/ufrisk/LeechCore/wiki"
     Vendor = "Ulf Frisk"
     License = "GPL-3.0 License"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/ufrisk/LeechCore/blob/master/LICENSE"
 }
 
 $TOOL_DEFINITIONS += @{
@@ -1460,7 +1462,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/ufrisk/MemProcFS/wiki"
     Vendor = "Ulf Frisk"
     License = "AGPL-3.0 License"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/ufrisk/MemProcFS/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1480,8 +1482,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/VirusTotal/gti-dev-kit"
     Vendor = "VirusTotal"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/VirusTotal/gti-dev-kit"
     PythonVersion = ""
 }
 
@@ -1523,7 +1525,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/volexity/threat-intel"
     Vendor = "Volexity"
     License = "BSD-2-Clause License"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/volexity/threat-intel/blob/main/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -1545,8 +1547,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/reuteras/PatchaPalooza"
     Vendor = "reuteras"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/reuteras/PatchaPalooza"
     PythonVersion = ""
 }
 
@@ -1567,7 +1569,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mkorman90/regipy/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1587,8 +1589,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/xaitax/TotalRecall"
     Vendor = "xaitax"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/xaitax/TotalRecall"
     PythonVersion = ""
 }
 
@@ -1608,8 +1610,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/Yamato-Security/hayabusa-rules"
     Vendor = "Yamato-Security"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/Yamato-Security/hayabusa-rules/blob/main/LICENSE.md"
     PythonVersion = ""
 }
 

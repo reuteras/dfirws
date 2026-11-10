@@ -362,7 +362,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @("dotnet10")
-    LicenseUrl = ""
+    LicenseUrl = "https://ericzimmerman.github.io/"
     Tags = @()
     FileExtensions = @()
     PythonVersion = ""

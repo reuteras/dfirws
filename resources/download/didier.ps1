@@ -609,7 +609,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/DidierStevens/DidierStevensSuite"
     Tags = @()
     FileExtensions = @()
     PythonVersion = ""

@@ -38,7 +38,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://puffycid.github.io/artemis-api"
     Vendor = "puffyCid"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/puffyCid/artemis/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -81,7 +81,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Macmod/godap"
     Vendor = "Macmod"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Macmod/godap/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -121,8 +121,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/3lp4tr0n/BeaconHunter"
     Vendor = "3lp4tr0n"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/3lp4tr0n/BeaconHunter"
     PythonVersion = ""
 }
 
@@ -163,8 +163,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/4n0nym0us/4n4lDetector"
     Vendor = "4n0nym0us"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/4n0nym0us/4n4lDetector"
     PythonVersion = ""
 }
 
@@ -225,7 +225,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/abrignoni/ALEAPP"
     Vendor = "abrignoni"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/abrignoni/ALEAPP/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -286,7 +286,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/abrignoni/iLEAPP"
     Vendor = "abrignoni"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/abrignoni/iLEAPP/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -426,7 +426,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://lessmsi.activescott.com"
     Vendor = "activescott"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/activescott/lessmsi/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -456,8 +456,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "http://www.sleuthkit.org/autopsy/"
     Vendor = "sleuthkit"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/sleuthkit/autopsy"
     PythonVersion = ""
 }
 
@@ -498,7 +498,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://fx.wtf"
     Vendor = "antonmedv"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/antonmedv/fx/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -539,7 +539,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Apr4h/CobaltStrikeScan"
     Vendor = "Apr4h"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Apr4h/CobaltStrikeScan/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -581,8 +581,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://wiki.audacityteam.org/wiki/For_Developers"
     Vendor = "audacity"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/audacity/audacity/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -625,7 +625,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/bee-san/Ares"
     Vendor = "bee-san"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/bee-san/Ares/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -664,8 +664,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://www.brimdata.io/download/"
     Vendor = "brimdata"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/brimdata/zui"
     PythonVersion = ""
 }
 
@@ -705,8 +705,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/BSI-Bund/RdpCacheStitcher"
     Vendor = "BSI-Bund"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/BSI-Bund/RdpCacheStitcher"
     PythonVersion = ""
 }
 
@@ -749,7 +749,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/BtbN/FFmpeg-Builds"
     Vendor = "BtbN"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/FFmpeg-Builds/FFmpeg-Builds/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -790,7 +790,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/BurntSushi/ripgrep"
     Vendor = "BurntSushi"
     License = "Unlicense"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/BurntSushi/ripgrep/blob/master/UNLICENSE"
     PythonVersion = ""
 }
 
@@ -831,7 +831,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/c3rb3ru5d3d53c/binlex"
     Vendor = "c3rb3ru5d3d53c"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/c3rb3ru5d3d53c/binlex/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -863,7 +863,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://cmder.app"
     Vendor = "cmderdev"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/cmderdev/cmder/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -901,7 +901,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://recaf.coley.software"
     Vendor = "Col-E"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Col-E/Recaf/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -944,7 +944,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://dbeaver.io"
     Vendor = "dbeaver"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/dbeaver/dbeaver/blob/devel/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -984,8 +984,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://learn.microsoft.com/en-us/cpp/build/reference/dumpbin-options"
     Vendor = "Delphier"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/Delphier/dumpbin"
     PythonVersion = ""
 }
 
@@ -1037,7 +1037,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/dnSpyEx/dnSpy"
     Vendor = "dnSpyEx"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/dnSpyEx/dnSpy/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -1070,8 +1070,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "http://dokan-dev.github.io"
     Vendor = "dokan-dev"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/dokan-dev/dokany"
     PythonVersion = ""
 }
 
@@ -1111,8 +1111,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/eneam/mboxviewer"
     Vendor = "eneam"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/eneam/mboxviewer/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -1156,8 +1156,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "http://www.zstd.net"
     Vendor = "facebook"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/meta/zstd/blob/dev/LICENSE"
     PythonVersion = ""
 }
 
@@ -1199,7 +1199,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://gchq.github.io/CyberChef"
     Vendor = "gchq"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/gchq/CyberChef/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1223,7 +1223,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.elastic.co/elasticsearch"
     Vendor = "Elastic"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/elastic/mcp-server-elasticsearch/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -1268,7 +1268,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/goretk/redress"
     Vendor = "goretk"
     License = "AGPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/goretk/redress/blob/develop/LICENSE"
     PythonVersion = ""
 }
 
@@ -1308,8 +1308,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://h2database.com"
     Vendor = "h2database"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/h2database/h2database/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -1350,7 +1350,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/harelsegev/INDXRipper"
     Vendor = "harelsegev"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/harelsegev/INDXRipper/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -1382,8 +1382,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://hshrzd.wordpress.com/2016/07/21/how-to-turn-a-dll-into-a-standalone-exe/"
     Vendor = "hasherezade"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/hasherezade/dll_to_exe"
     PythonVersion = ""
 }
 
@@ -1424,7 +1424,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/hasherezade/hollows_hunter/wiki"
     Vendor = "hasherezade"
     License = "BSD-2-Clause"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/hasherezade/hollows_hunter/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1465,7 +1465,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://hshrzd.wordpress.com/pe-bear/"
     Vendor = "hasherezade"
     License = "GPL-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/hasherezade/pe-bear/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -1506,7 +1506,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://hshrzd.wordpress.com/pe-sieve/"
     Vendor = "hasherezade"
     License = "BSD-2-Clause"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/hasherezade/pe-sieve/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1550,8 +1550,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/hasherezade/pe_utils"
     Vendor = "hasherezade"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/hasherezade/pe_utils"
     PythonVersion = ""
 }
 
@@ -1594,7 +1594,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/hfiref0x/WinObjEx64"
     Vendor = "hfiref0x"
     License = "BSD-2-Clause"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/hfiref0x/WinObjEx64/blob/master/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -1641,7 +1641,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/horsicq/DIE-engine"
     Vendor = "horsicq"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/horsicq/DIE-engine/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1687,7 +1687,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "http://ntinfo.biz"
     Vendor = "horsicq"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/horsicq/XELFViewer/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1728,7 +1728,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/java-decompiler/jd-gui"
     Vendor = "java-decompiler"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/java-decompiler/jd-gui/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1771,7 +1771,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/joeavanzato/LogBoost"
     Vendor = "joeavanzato"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/joeavanzato/LogBoost/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -1811,8 +1811,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://jqlang.org"
     Vendor = "jqlang"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/jqlang/jq/blob/master/COPYING"
     PythonVersion = ""
 }
 
@@ -1853,7 +1853,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://kacos2000.github.io/Jumplist-Browser/"
     Vendor = "kacos2000"
     License = "GPL-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/kacos2000/Jumplist-Browser/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1894,7 +1894,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://kacos2000.github.io/MFT_Browser/"
     Vendor = "kacos2000"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/kacos2000/MFT_Browser/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1935,7 +1935,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://kacos2000.github.io/Prefetch-Browser/"
     Vendor = "kacos2000"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/kacos2000/Prefetch-Browser/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -1971,7 +1971,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://bytecodeviewer.com"
     Vendor = "Konloch"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Konloch/bytecode-viewer/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2012,7 +2012,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/leandrofroes/gftrace"
     Vendor = "leandrofroes"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/leandrofroes/gftrace/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2055,7 +2055,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.netsection.com"
     Vendor = "lkarlslund"
     License = "AGPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/lkarlslund/Adalanche/blob/master/license.MD"
     PythonVersion = ""
 }
 
@@ -2090,7 +2090,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/lolo101/MsgViewer"
     Vendor = "lolo101"
     License = "Unlicense"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/lolo101/MsgViewer/blob/master/LICENCE.md"
     PythonVersion = ""
 }
 
@@ -2136,7 +2136,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://mandiant.github.io/capa/"
     Vendor = "mandiant"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mandiant/capa/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -2163,7 +2163,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mandiant/capa/"
     Vendor = "mandiant"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mandiant/capa-rules/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -2203,8 +2203,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @("Ghidra")
     Homepage = "https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension"
     Vendor = "mooncat-greenpy"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension"
     PythonVersion = ""
 }
 
@@ -2231,7 +2231,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://microsoft.com/PowerShell"
     Vendor = "PowerShell"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -2260,7 +2260,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/trailofbits/BTIGhidra"
     Vendor = "trailofbits"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/trailofbits/BTIGhidra/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -2289,7 +2289,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/nccgroup/Cartographer"
     Vendor = "nccgroup"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/nccgroup/Cartographer/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -2318,7 +2318,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Ghidra")
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/symgraph/GhidrAssistMCP/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2359,7 +2359,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mandiant/flare-floss"
     Vendor = "mandiant"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mandiant/flare-floss/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -2400,7 +2400,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mandiant/flare-fakenet-ng"
     Vendor = "mandiant"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mandiant/flare-fakenet-ng/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -2441,7 +2441,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mandiant/GoReSym"
     Vendor = "mandiant"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mandiant/GoReSym/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2486,7 +2486,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/maxmind/mmdbinspect"
     Vendor = "maxmind"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/maxmind/mmdbinspect/blob/main/LICENSE-APACHE"
     PythonVersion = ""
 }
 
@@ -2526,8 +2526,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/mentebinaria/elfparser-ng"
     Vendor = "mentebinaria"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/mentebinaria/elfparser-ng/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2564,7 +2564,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mentebinaria/readpe"
     Vendor = "mentebinaria"
     License = "GPL-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mentebinaria/readpe/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2599,7 +2599,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/trustedsec/DitExplorer"
     Vendor = "trustedsec"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/trustedsec/DitExplorer/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -2640,7 +2640,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/MarkBaggett/srum-dump"
     Vendor = "MarkBaggett"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/MarkBaggett/srum-dump/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2671,7 +2671,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/mike-engel/jwt-cli"
     Vendor = "mike-engel"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mike-engel/jwt-cli/blob/main/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -2711,8 +2711,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/multiprocessio/dsq"
     Vendor = "multiprocessio"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/multiprocessio/dsq/blob/main/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -2753,7 +2753,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/nccgroup/MetadataPlus"
     Vendor = "nccgroup"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/nccgroup/MetadataPlus/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -2791,7 +2791,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.nextron-systems.com/compare-our-scanners/"
     Vendor = "Neo23x0"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Neo23x0/Loki/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2834,7 +2834,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Predelnik/DSpellCheck"
     Vendor = "Predelnik"
     License = "GPL-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Predelnik/DSpellCheck/blob/master/License.txt"
     PythonVersion = ""
 }
 
@@ -2861,7 +2861,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Predelnik/DSpellCheck"
     Vendor = "Predelnik"
     License = "GPL-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/pnedev/comparePlus/blob/main/license.txt"
     PythonVersion = ""
 }
 
@@ -2888,7 +2888,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Predelnik/DSpellCheck"
     Vendor = "Predelnik"
     License = "GPL-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Predelnik/DSpellCheck/blob/master/License.txt"
     PythonVersion = ""
 }
 
@@ -2941,7 +2941,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://dfir.blog/hindsight/"
     Vendor = "RyanDFIR"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/RyanDFIR/hindsight/blob/main/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -2982,7 +2982,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/omerbenamram/evtx"
     Vendor = "omerbenamram"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/omerbenamram/evtx/blob/master/LICENSE-APACHE"
     PythonVersion = ""
 }
 
@@ -3013,8 +3013,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://streetsidesoftware.github.io/vscode-spell-checker/"
     Vendor = "streetsidesoftware"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/streetsidesoftware/vscode-spell-checker/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3034,8 +3034,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://streetsidesoftware.github.io/vscode-spell-checker/"
     Vendor = "streetsidesoftware"
-    License = ""
-    LicenseUrl = ""
+    License = "MIT"
+    LicenseUrl = "https://github.com/vscode-shellcheck/vscode-shellcheck/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3055,8 +3055,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://streetsidesoftware.github.io/vscode-spell-checker/"
     Vendor = "streetsidesoftware"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/streetsidesoftware/vscode-spell-checker/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3097,7 +3097,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://qpdf.sourceforge.io/"
     Vendor = "qpdf"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/qpdf/qpdf/blob/main/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -3130,8 +3130,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://www.fibratus.io"
     Vendor = "rabbitstack"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/rabbitstack/fibratus/blob/master/LICENSE.MD"
     PythonVersion = ""
 }
 
@@ -3175,8 +3175,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://www.radare.org"
     Vendor = "radareorg"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/radareorg/radare2/blob/master/COPYING.md"
     PythonVersion = ""
 }
 
@@ -3204,7 +3204,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Radare2")
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/radareorg/radare2-mcp/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3236,7 +3236,7 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("Radare2")
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/radareorg/r2ai/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3280,7 +3280,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/radareorg/iaito"
     Vendor = "radareorg"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/radareorg/iaito/blob/master/COPYING"
     PythonVersion = ""
 }
 
@@ -3321,7 +3321,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/rejetto/hfs"
     Vendor = "rejetto"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/rejetto/hfs/blob/main/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -3355,7 +3355,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/reuteras/obsidian-mitre-attack"
     Vendor = "reuteras"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/reuteras/obsidian-mitre-attack/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3407,7 +3407,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://cutter.re"
     Vendor = "rizinorg"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/rizinorg/cutter/blob/dev/COPYING"
     PythonVersion = ""
 }
 
@@ -3437,8 +3437,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://NerdFonts.com"
     Vendor = "ryanoasis"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/ryanoasis/nerd-fonts/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3466,8 +3466,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://strawberryperl.com"
     Vendor = "StrawberryPerl"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/StrawberryPerl/Perl-Dist-Strawberry/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3507,8 +3507,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/strozfriedberg/sidr"
     Vendor = "strozfriedberg"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/strozfriedberg/sidr/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3542,7 +3542,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/skylot/jadx"
     Vendor = "skylot"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/skylot/jadx/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3582,8 +3582,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "http://www.sleuthkit.org/sleuthkit/"
     Vendor = "sleuthkit"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/sleuthkit/sleuthkit"
     PythonVersion = ""
 }
 
@@ -3615,8 +3615,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://sorairolake.github.io/qrtool/"
     Vendor = "sorairolake"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/sorairolake/qrtool"
     PythonVersion = ""
 }
 
@@ -3657,7 +3657,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Squiblydoo/debloat"
     Vendor = "Squiblydoo"
     License = "BSD-3-Clause"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Squiblydoo/debloat/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3697,8 +3697,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://thumbcacheviewer.github.io/"
     Vendor = "thumbcacheviewer"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/thumbcacheviewer/thumbcacheviewer"
     PythonVersion = ""
 }
 
@@ -3739,7 +3739,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/tomnomnom/gron"
     Vendor = "tomnomnom"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/tomnomnom/gron/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3780,7 +3780,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/ufrisk/MemProcFS"
     Vendor = "ufrisk"
     License = "AGPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/ufrisk/MemProcFS/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3820,8 +3820,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://upx.github.io"
     Vendor = "upx"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/upx/upx/blob/devel/LICENSE"
     PythonVersion = ""
 }
 
@@ -3863,8 +3863,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://docs.velociraptor.app/"
     Vendor = "Velocidex"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/Velocidex/velociraptor/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3891,7 +3891,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/pranshuparmar/witr"
     Vendor = "pranshuparmar"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/pranshuparmar/witr/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3931,8 +3931,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/wader/fq"
     Vendor = "wader"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/wader/fq/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -3972,7 +3972,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.staff.hs-mittweida.de/~pawlaszc/fqlite/"
     Vendor = "pawlaszczyk"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/pawlaszczyk/fqlite/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4018,7 +4018,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://imhex.werwolv.net/"
     Vendor = "WerWolv"
     License = "GPL-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/WerWolv/ImHex/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4059,7 +4059,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/WithSecureLabs/chainsaw"
     Vendor = "WithSecureLabs"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/WithSecureOpenSource/chainsaw/blob/master/LICENCE"
     PythonVersion = ""
 }
 
@@ -4120,7 +4120,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://virustotal.github.io/yara/"
     Vendor = "VirusTotal"
     License = "BSD-3-Clause"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/VirusTotal/yara/blob/master/COPYING"
     PythonVersion = ""
 }
 
@@ -4165,7 +4165,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://virustotal.github.io/yara-x/"
     Vendor = "VirusTotal"
     License = "BSD-3-Clause"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/VirusTotal/yara-x/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -4206,7 +4206,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://mikefarah.gitbook.io/yq/"
     Vendor = "mikefarah"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mikefarah/yq/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4243,8 +4243,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "http://x64dbg.com"
     Vendor = "x64dbg"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/x64dbg/x64dbg/blob/development/LICENSE"
     PythonVersion = ""
 }
 
@@ -4289,7 +4289,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Yamato-Security/hayabusa"
     Vendor = "Yamato-Security"
     License = "AGPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Yamato-Security/hayabusa/blob/main/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -4334,7 +4334,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://yamato-security.github.io/takajo/"
     Vendor = "Yamato-Security"
     License = "AGPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Yamato-Security/takajo/blob/main/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -4374,7 +4374,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://www.zaproxy.org"
     Vendor = "zaproxy"
     License = "Apache-2.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/zaproxy/zaproxy/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -4406,7 +4406,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/microsoft/edit"
     Vendor = "microsoft"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/microsoft/edit/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -4449,8 +4449,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://sqlitebrowser.org"
     Vendor = "sqlitebrowser"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/sqlitebrowser/sqlitebrowser/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4476,8 +4476,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "http://blogs.msdn.microsoft.com/rodneyviana"
     Vendor = "rodneyviana"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/rodneyviana/netext/blob/master/LICENSE.MD"
     PythonVersion = ""
 }
 
@@ -4513,8 +4513,8 @@ $TOOL_DEFINITIONS += @{
     Dependencies = @()
     Homepage = "https://github.com/JPCERTCC/YAMAGoya"
     Vendor = "JPCERTCC"
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/JPCERTCC/YAMAGoya/blob/main/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -4555,7 +4555,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/silverf0x/RpcView"
     Vendor = "Silverf0x"
     License = "GPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/silverf0x/RpcView/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4599,7 +4599,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/Zxilly/go-size-analyzer"
     Vendor = "Zxilly"
     License = "AGPL-3.0"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Zxilly/go-size-analyzer/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4640,7 +4640,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/icsharpcode/ILSpy"
     Vendor = "ICSharpCode"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/icsharpcode/ILSpy/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4681,7 +4681,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/carina-studio/ULogViewer"
     Vendor = "Carina Studio"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/carina-studio/ULogViewer/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4729,7 +4729,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/lucasg/Dependencies"
     Vendor = "Lucas Gabriel"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/lucasg/Dependencies/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4805,10 +4805,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
+    Homepage = "https://blacksmithgu.github.io/obsidian-dataview/"
+    Vendor = "blacksmithgu"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/blacksmithgu/obsidian-dataview/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -4826,10 +4826,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
-    License = "MIT"
-    LicenseUrl = ""
+    Homepage = "https://publish.obsidian.md/kanban/"
+    Vendor = "community-archive"
+    License = "GPL-3.0"
+    LicenseUrl = "https://github.com/community-archive/obsidian-kanban/blob/main/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -4847,10 +4847,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
+    Homepage = "https://quickadd.obsidian.guide"
+    Vendor = "chhoumann"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/chhoumann/quickadd/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4868,10 +4868,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
+    Homepage = "https://github.com/liamcain/obsidian-calendar-plugin"
+    Vendor = "liamcain"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/liamcain/obsidian-calendar-plugin/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4889,10 +4889,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
-    License = "MIT"
-    LicenseUrl = ""
+    Homepage = "https://silentvoid13.github.io/Templater"
+    Vendor = "SilentVoid13"
+    License = "AGPL-3.0"
+    LicenseUrl = "https://github.com/SilentVoid13/Templater/blob/master/LICENSE.TXT"
     PythonVersion = ""
 }
 
@@ -4910,10 +4910,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
+    Homepage = "https://publish.obsidian.md/tasks/"
+    Vendor = "obsidian-tasks-group"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/obsidian-tasks-group/obsidian-tasks/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -4931,10 +4931,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
-    License = "MIT"
-    LicenseUrl = ""
+    Homepage = "https://github.com/zsviczian/obsidian-excalidraw-plugin"
+    Vendor = "zsviczian"
+    License = "AGPL-3.0"
+    LicenseUrl = "https://github.com/zsviczian/obsidian-excalidraw-plugin/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -4952,10 +4952,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = "https://github.com/George-debug/obsidian-timeline"
-    Vendor = "George-debug"
+    Homepage = "https://github.com/ebullient/obsidian-admonition"
+    Vendor = "ebullient"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/ebullient/obsidian-admonition/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -4976,7 +4976,7 @@ $TOOL_DEFINITIONS += @{
     Homepage = "https://github.com/George-debug/obsidian-timeline"
     Vendor = "George-debug"
     License = "MIT"
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/George-debug/obsidian-timeline/blob/master/LICENSE"
     PythonVersion = ""
 }
 

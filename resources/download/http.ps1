@@ -1251,7 +1251,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.winitor.com/"
     PythonVersion = ""
 }
 
@@ -1346,7 +1346,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://mark0.net/soft-trid-e.html"
     PythonVersion = ""
 }
 
@@ -1392,7 +1392,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://malcat.fr/"
     PythonVersion = ""
 }
 
@@ -1428,10 +1428,10 @@ $TOOL_DEFINITIONS += @{
     SampleCommands = @()
     SampleFiles = @()
     Dependencies = @()
-    Homepage = ""
-    Vendor = ""
-    License = ""
-    LicenseUrl = ""
+    Homepage = "https://www.osforensics.com/tools/mount-disk-images.html"
+    Vendor = "PassMark Software"
+    License = "Freeware"
+    LicenseUrl = "https://www.osforensics.com/tools/mount-disk-images.html"
     PythonVersion = ""
 }
 
@@ -1477,7 +1477,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.mitec.cz/wp/mssv/"
     PythonVersion = ""
 }
 
@@ -1523,7 +1523,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.nirsoft.net/utils/full_event_log_view.html"
     PythonVersion = ""
 }
 
@@ -1667,7 +1667,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://sandsprite.com/tools.php?id=17"
     PythonVersion = ""
 }
 
@@ -1702,8 +1702,8 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    License = ""
-    LicenseUrl = ""
+    License = "See repository"
+    LicenseUrl = "https://github.com/Velocidex/velociraptor-docs/blob/master/LICENSE"
     Shortcuts = @()
     PythonVersion = ""
 }
@@ -1749,7 +1749,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.mitec.cz/wp/mmv/"
     PythonVersion = ""
 }
 
@@ -1799,7 +1799,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.osforensics.com/tools/volatility-workbench.html"
     PythonVersion = ""
 }
 
@@ -1846,7 +1846,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.osforensics.com/tools/volatility-workbench.html"
     PythonVersion = ""
 }
 
@@ -2035,7 +2035,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.nirsoft.net/"
     PythonVersion = ""
 }
 
@@ -2069,7 +2069,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Velocidex/c-aff4/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2113,7 +2113,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://binary.ninja/"
     PythonVersion = ""
 }
 
@@ -2155,7 +2155,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.gpg4win.org/license.html"
     PythonVersion = ""
 }
 
@@ -2200,7 +2200,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://gitlab.torproject.org/tpo/applications/tor-browser/-/blob/HEAD/LICENSE"
     PythonVersion = ""
 }
 
@@ -2251,7 +2251,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.digital-detective.net/dcode/"
     PythonVersion = ""
 }
 
@@ -2296,7 +2296,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.veracrypt.fr/"
     PythonVersion = ""
 }
 
@@ -2367,7 +2367,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://neo4j.com/licensing/"
     PythonVersion = ""
 }
 
@@ -2415,7 +2415,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/keydet89/Tools"
     PythonVersion = ""
 }
 
@@ -2462,7 +2462,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/mandiant/capa/blob/master/LICENSE.txt"
     PythonVersion = ""
 }
 
@@ -2507,7 +2507,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.libreoffice.org/about-us/licenses/"
     PythonVersion = ""
 }
 
@@ -2536,7 +2536,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/nmap/npcap/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -2579,7 +2579,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://sqlite.org/copyright.html"
     PythonVersion = ""
 }
 
@@ -2625,7 +2625,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/simsong/bulk_extractor/blob/main/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -2676,7 +2676,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://cert.at/en/downloads/software/software-densityscout"
     PythonVersion = ""
 }
 
@@ -2725,7 +2725,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.netresec.com/?page=NetworkMiner"
     PythonVersion = ""
 }
 
@@ -2773,7 +2773,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.netresec.com/?page=PolarProxy"
     PythonVersion = ""
 }
 
@@ -2816,7 +2816,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://nmap.org/npsl/"
     PythonVersion = ""
 }
 
@@ -2866,7 +2866,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://flatassembler.net/"
     PythonVersion = ""
 }
 
@@ -2894,7 +2894,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/microsoft/terminal/blob/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -2945,7 +2945,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://procdot.com/"
     PythonVersion = ""
 }
 
@@ -2994,7 +2994,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @("enrichment")
-    LicenseUrl = ""
+    LicenseUrl = "https://codeberg.org/hrbrmstr/geolocus-cli/src/branch/main/LICENSE"
     PythonVersion = ""
 }
 
@@ -3037,7 +3037,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://graphviz.org/license/"
     PythonVersion = ""
 }
 
@@ -3076,7 +3076,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "http://www.rohitab.com/apimonitor"
     PythonVersion = ""
 }
 
@@ -3113,7 +3113,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://openjdk.org/legal/gplv2+ce.html"
     PythonVersion = ""
 }
 
@@ -3160,7 +3160,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/iBotPeaches/Apktool/blob/master/LICENSE.md"
     PythonVersion = ""
 }
 
@@ -3206,7 +3206,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.php.net/license/"
     PythonVersion = ""
 }
 
@@ -3261,7 +3261,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/hashcat/hashcat/blob/master/docs/license.txt"
     PythonVersion = ""
 }
 
@@ -3299,7 +3299,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/"
     PythonVersion = ""
 }
 
@@ -3344,7 +3344,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://angusj.com/resourcehacker/"
     PythonVersion = ""
 }
 
@@ -3391,7 +3391,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://github.com/Azure/azure-cli/blob/dev/LICENSE"
     PythonVersion = ""
 }
 
@@ -3438,7 +3438,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://developer.android.com/studio/terms"
     PythonVersion = ""
 }
 
@@ -3479,7 +3479,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = ""
+    LicenseUrl = "https://www.elastic.co/licensing/elastic-license"
     PythonVersion = ""
 }
 
