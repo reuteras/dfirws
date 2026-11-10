@@ -79,6 +79,7 @@ $repourls = `
     "https://github.com/xaitax/TotalRecall.git", `
     "https://github.com/Y-Vladimir/SmartDeblur.git", `
     "https://github.com/Yamato-Security/hayabusa-rules.git", `
+    "https://github.com/YARAHQ/yara-rule-skill.git", `
     "https://github.com/securityjoes/MasterParser.git", `
     "https://github.com/yossizap/cutterref.git"
 
@@ -1682,6 +1683,27 @@ $TOOL_DEFINITIONS += @{
     Tips = "Installed as an opencode-ai skill at startup. The skill scripts need bash, curl and jq on PATH: install Git first with dfirws-install.ps1 -Git and run opencode from Git Bash. Start marimo with --no-token so the scripts can discover the server. Use a local model by configuring a provider in opencode.json; remote models only work in the network enabled sandbox."
     Usage = "marimo edit --no-token notebook.py, then ask opencode to pair on the notebook."
     SampleCommands = @("marimo edit --no-token notebook.py")
+    SampleFiles = @()
+    Dependencies = @("nodejs")
+    PythonVersion = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "yara-rule-skill"
+    Homepage = "https://github.com/YARAHQ/yara-rule-skill"
+    Vendor = "YARAHQ"
+    License = "See repository"
+    LicenseUrl = "https://github.com/YARAHQ/yara-rule-skill"
+    Category = "Malware Analysis"
+    Shortcuts = @()
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".yar", ".yara")
+    Tags = @("ai", "yara", "malware-analysis")
+    Notes = "Agent skill for writing, reviewing and optimizing YARA rules, with quality checks based on yaraQA."
+    Tips = "Installed as an opencode-ai skill at startup, so opencode loads it when you discuss YARA rules. It works with a local model if you configure a provider in opencode.json. The validation script C:\\git\\yara-rule-skill\\yara-rule-skill\\scripts\\validate_rule.py needs the yara-x Python package from the default venv. The repository has no license file."
+    Usage = "Ask opencode to review or write a YARA rule. Validate a rule with: C:\\venv\\default\\Scripts\\python.exe C:\\git\\yara-rule-skill\\yara-rule-skill\\scripts\\validate_rule.py rule.yar"
+    SampleCommands = @()
     SampleFiles = @()
     Dependencies = @("nodejs")
     PythonVersion = ""

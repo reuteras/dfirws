@@ -2866,7 +2866,7 @@ $TOOL_DEFINITIONS += @{
         "N/A"
     )
     Dependencies = @()
-    LicenseUrl = "https://flatassembler.net/"
+    LicenseUrl = "https://github.com/tgrysztar/fasm/blob/master/LICENSE.TXT"
     PythonVersion = ""
 }
 
