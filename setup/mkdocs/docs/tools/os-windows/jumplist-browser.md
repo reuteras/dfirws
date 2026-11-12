@@ -6,7 +6,7 @@
 
 **Vendor:** kacos2000
 
-**License:** GPL-2.0
+**License:** [GPL-2.0](https://github.com/kacos2000/Jumplist-Browser/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

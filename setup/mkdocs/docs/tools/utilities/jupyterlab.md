@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://jupyter.org>
+
+**Vendor:** jupyterlab
+
+**License:** [BSD](https://github.com/jupyterlab/jupyterlab/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

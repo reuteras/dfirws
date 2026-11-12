@@ -6,6 +6,7 @@
 
 **Vendor:** thumbcacheviewer
 
+**License:** [See repository](https://github.com/thumbcacheviewer/thumbcacheviewer)
 
 **Source:** GitHub Release
 

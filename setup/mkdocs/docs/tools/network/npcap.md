@@ -6,7 +6,7 @@
 
 **Vendor:** Nmap Project
 
-**License:** Npcap License
+**License:** [Npcap License](https://github.com/nmap/npcap/blob/master/LICENSE)
 
 **Source:** HTTP
 

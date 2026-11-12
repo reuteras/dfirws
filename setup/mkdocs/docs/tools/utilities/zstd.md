@@ -6,6 +6,7 @@
 
 **Vendor:** facebook
 
+**License:** [See repository](https://github.com/meta/zstd/blob/dev/LICENSE)
 
 **Source:** GitHub Release
 

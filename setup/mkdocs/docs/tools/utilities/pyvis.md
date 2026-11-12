@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/WestHealth/pyvis>
+
+**Vendor:** WestHealth
+
+**License:** [BSD](https://github.com/WestHealth/pyvis/blob/master/LICENSE_BSD.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

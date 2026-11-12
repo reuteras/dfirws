@@ -6,6 +6,7 @@
 
 **Vendor:** hasherezade
 
+**License:** [See repository](https://github.com/hasherezade/pe_utils)
 
 **Source:** GitHub Release
 

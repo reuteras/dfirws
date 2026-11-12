@@ -6,7 +6,7 @@
 
 **Vendor:** OSForensics
 
-**License:** Freeware
+**License:** [Freeware](https://www.osforensics.com/tools/volatility-workbench.html)
 
 **Source:** HTTP
 

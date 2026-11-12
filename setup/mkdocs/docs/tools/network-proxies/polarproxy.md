@@ -6,7 +6,7 @@
 
 **Vendor:** Netresec
 
-**License:** free edition, CC BY-ND 4.0
+**License:** [free edition, CC BY-ND 4.0](https://www.netresec.com/?page=PolarProxy)
 
 **Source:** HTTP
 

@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://github.com/jmcnamara/XlsxWriter>
+
+**Vendor:** jmcnamara
+
+**License:** [BSD-2-Clause](https://github.com/jmcnamara/XlsxWriter/blob/main/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

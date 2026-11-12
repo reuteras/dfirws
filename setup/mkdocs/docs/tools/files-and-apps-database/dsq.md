@@ -6,6 +6,7 @@
 
 **Vendor:** multiprocessio
 
+**License:** [See repository](https://github.com/multiprocessio/dsq/blob/main/LICENSE.md)
 
 **Source:** GitHub Release
 

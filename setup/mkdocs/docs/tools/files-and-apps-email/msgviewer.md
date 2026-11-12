@@ -6,7 +6,7 @@
 
 **Vendor:** lolo101
 
-**License:** Unlicense
+**License:** [Unlicense](https://github.com/lolo101/MsgViewer/blob/master/LICENCE.md)
 
 **Source:** GitHub Release
 

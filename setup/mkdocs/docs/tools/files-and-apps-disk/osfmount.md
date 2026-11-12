@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Disk
 
+**Homepage:** <https://www.osforensics.com/tools/mount-disk-images.html>
+
+**Vendor:** PassMark Software
+
+**License:** [Freeware](https://www.osforensics.com/tools/mount-disk-images.html)
+
 **Source:** HTTP
 
 **Profiles:** Full, Basic

@@ -6,6 +6,7 @@
 
 **Vendor:** rodneyviana
 
+**License:** [See repository](https://github.com/rodneyviana/netext/blob/master/LICENSE.MD)
 
 **Source:** GitHub Release
 

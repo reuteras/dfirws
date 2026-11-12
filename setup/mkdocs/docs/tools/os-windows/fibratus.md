@@ -6,6 +6,7 @@
 
 **Vendor:** rabbitstack
 
+**License:** [See repository](https://github.com/rabbitstack/fibratus/blob/master/LICENSE.MD)
 
 **Source:** GitHub Release
 

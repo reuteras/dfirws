@@ -6,7 +6,7 @@
 
 **Vendor:** mkorman90
 
-**License:** MIT License
+**License:** [MIT License](https://github.com/mkorman90/regipy/blob/master/LICENSE)
 
 **Source:** Git
 

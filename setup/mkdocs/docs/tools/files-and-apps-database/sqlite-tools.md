@@ -6,7 +6,7 @@
 
 **Vendor:** SQLite
 
-**License:** Public Domain
+**License:** [Public Domain](https://sqlite.org/copyright.html)
 
 **Source:** HTTP
 

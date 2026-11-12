@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://github.com/liamcain/obsidian-calendar-plugin>
 
-**Vendor:** George-debug
+**Vendor:** liamcain
 
-**License:** MIT
+**License:** [MIT](https://github.com/liamcain/obsidian-calendar-plugin/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

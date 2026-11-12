@@ -6,7 +6,7 @@
 
 **Vendor:** Microsoft Corporation
 
-**License:** MIT
+**License:** [MIT](https://github.com/dotnet/runtime/blob/main/LICENSE.TXT)
 
 **Source:** Winget
 

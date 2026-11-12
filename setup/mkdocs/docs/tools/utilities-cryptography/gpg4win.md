@@ -6,7 +6,7 @@
 
 **Vendor:** Gpg4win Project
 
-**License:** Open source
+**License:** [Open source](https://www.gpg4win.org/license.html)
 
 **Source:** HTTP
 

@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / JavaScript
 
+**Homepage:** <https://github.com/CapacitorSet/box-js#readme>
+
+**Vendor:** CapacitorSet
+
+**License:** [MIT](https://github.com/CapacitorSet/box-js/blob/master/LICENSE)
+
 **Source:** npm
 
 **Profiles:** Full, Basic

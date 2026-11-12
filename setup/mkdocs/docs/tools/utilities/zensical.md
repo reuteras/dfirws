@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/zensical/zensical>
+
+**Vendor:** zensical
+
+**License:** [MIT](https://github.com/zensical/zensical/blob/master/LICENSE.md)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

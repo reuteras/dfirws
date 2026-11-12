@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <http://github.com/joeyespo/grip>
+
+**Vendor:** joeyespo
+
+**License:** [MIT](https://github.com/joeyespo/grip/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

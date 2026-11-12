@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://openpyxl.readthedocs.io>
+
+**Vendor:** See AUTHORS
+
+**License:** [MIT](https://pypi.org/project/openpyxl/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

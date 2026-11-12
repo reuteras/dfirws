@@ -6,7 +6,7 @@
 
 **Vendor:** c3rb3ru5d3d53c
 
-**License:** MIT
+**License:** [MIT](https://github.com/c3rb3ru5d3d53c/binlex/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

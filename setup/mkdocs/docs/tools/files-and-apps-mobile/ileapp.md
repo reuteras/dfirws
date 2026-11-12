@@ -6,7 +6,7 @@
 
 **Vendor:** abrignoni
 
-**License:** MIT
+**License:** [MIT](https://github.com/abrignoni/iLEAPP/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

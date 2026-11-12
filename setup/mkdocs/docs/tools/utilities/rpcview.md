@@ -6,7 +6,7 @@
 
 **Vendor:** Silverf0x
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/silverf0x/RpcView/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

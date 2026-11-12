@@ -6,7 +6,7 @@
 
 **Vendor:** Predelnik
 
-**License:** GPL-2.0
+**License:** [GPL-2.0](https://github.com/pnedev/comparePlus/blob/main/license.txt)
 
 **Source:** GitHub Release
 

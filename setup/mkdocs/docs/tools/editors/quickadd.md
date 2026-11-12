@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://quickadd.obsidian.guide>
 
-**Vendor:** George-debug
+**Vendor:** chhoumann
 
-**License:** MIT
+**License:** [MIT](https://github.com/chhoumann/quickadd/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

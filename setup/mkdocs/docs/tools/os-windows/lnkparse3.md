@@ -2,6 +2,12 @@
 
 **Category:** OS / Windows
 
+**Homepage:** <https://github.com/Matmaus/LnkParse>
+
+**Vendor:** Matmaus
+
+**License:** [MIT](https://github.com/Matmaus/LnkParse3/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

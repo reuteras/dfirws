@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://github.com/ebullient/obsidian-admonition>
 
-**Vendor:** George-debug
+**Vendor:** ebullient
 
-**License:** MIT
+**License:** [MIT](https://github.com/ebullient/obsidian-admonition/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

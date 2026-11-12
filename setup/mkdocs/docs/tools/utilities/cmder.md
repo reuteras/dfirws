@@ -6,7 +6,7 @@
 
 **Vendor:** cmderdev
 
-**License:** MIT
+**License:** [MIT](https://github.com/cmderdev/cmder/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

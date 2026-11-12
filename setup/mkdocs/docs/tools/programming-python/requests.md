@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/psf/requests>
+
+**Vendor:** psf
+
+**License:** [Apache-2.0](https://github.com/psf/requests/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

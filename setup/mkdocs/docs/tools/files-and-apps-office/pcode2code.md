@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://github.com/Big5_sec/pcode2code>
+
+**Vendor:** Nicolas Zilio
+
+**License:** [GPL-3.0](https://pypi.org/project/pcode2code/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

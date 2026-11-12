@@ -6,7 +6,7 @@
 
 **Vendor:** Malcat EI
 
-**License:** Proprietary
+**License:** [Proprietary](https://malcat.fr/)
 
 **Source:** HTTP
 

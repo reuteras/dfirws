@@ -6,7 +6,7 @@
 
 **Vendor:** Flat Assembler
 
-**License:** Freeware
+**License:** [Freeware](https://github.com/tgrysztar/fasm/blob/master/LICENSE.TXT)
 
 **Source:** HTTP
 

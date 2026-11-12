@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / JavaScript
 
+**Homepage:** <https://github.com/jsdom/jsdom#readme>
+
+**Vendor:** jsdom
+
+**License:** [MIT](https://github.com/jsdom/jsdom/blob/main/LICENSE.txt)
+
 **Source:** npm
 
 **Profiles:** Full, Basic

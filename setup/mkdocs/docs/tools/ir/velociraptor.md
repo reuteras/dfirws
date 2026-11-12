@@ -6,6 +6,7 @@
 
 **Vendor:** Velocidex
 
+**License:** [See repository](https://github.com/Velocidex/velociraptor/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

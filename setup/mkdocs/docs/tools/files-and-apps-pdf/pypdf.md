@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / PDF
 
+**Homepage:** <https://github.com/py-pdf/pypdf>
+
+**Vendor:** py-pdf
+
+**License:** [BSD-3-Clause](https://github.com/py-pdf/pypdf/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

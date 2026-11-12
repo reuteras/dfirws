@@ -6,7 +6,7 @@
 
 **Vendor:** VirusTotal
 
-**License:** BSD-3-Clause
+**License:** [BSD-3-Clause](https://github.com/VirusTotal/yara/blob/master/COPYING)
 
 **Source:** GitHub Release
 

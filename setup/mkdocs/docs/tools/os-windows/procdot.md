@@ -6,7 +6,7 @@
 
 **Vendor:** ProcDOT
 
-**License:** Freeware
+**License:** [Freeware](https://procdot.com/)
 
 **Source:** HTTP
 

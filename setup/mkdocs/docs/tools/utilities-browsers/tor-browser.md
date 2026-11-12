@@ -6,7 +6,7 @@
 
 **Vendor:** Tor Project
 
-**License:** Open source
+**License:** [Open source](https://gitlab.torproject.org/tpo/applications/tor-browser/-/blob/HEAD/LICENSE)
 
 **Source:** HTTP
 

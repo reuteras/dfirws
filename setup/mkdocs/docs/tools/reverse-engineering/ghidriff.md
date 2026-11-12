@@ -2,6 +2,12 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <https://github.com/clearbluejar/ghidriff>
+
+**Vendor:** clearbluejar
+
+**License:** [GPL-3.0](https://github.com/clearbluejar/ghidriff/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

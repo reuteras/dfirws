@@ -6,7 +6,7 @@
 
 **Vendor:** MiTeC
 
-**License:** Proprietary
+**License:** [Proprietary](https://www.mitec.cz/wp/mssv/)
 
 **Source:** HTTP
 

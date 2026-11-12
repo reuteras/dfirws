@@ -6,7 +6,7 @@
 
 **Vendor:** puffyCid
 
-**License:** MIT
+**License:** [MIT](https://github.com/puffyCid/artemis/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

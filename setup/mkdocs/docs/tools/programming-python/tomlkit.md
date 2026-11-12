@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/python-poetry/tomlkit>
+
+**Vendor:** python-poetry
+
+**License:** [MIT](https://github.com/python-poetry/tomlkit/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

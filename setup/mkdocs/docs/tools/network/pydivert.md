@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://github.com/ffalcinelli/pydivert>
+
+**Vendor:** ffalcinelli
+
+**License:** [LGPL-3.0-or-later OR GPL-2.0-or-later](https://github.com/ffalcinelli/pydivert/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

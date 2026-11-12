@@ -6,6 +6,7 @@
 
 **Vendor:** SigmaHQ
 
+**License:** [See repository](https://github.com/SigmaHQ/sigma/blob/master/LICENSE)
 
 **Source:** Git
 

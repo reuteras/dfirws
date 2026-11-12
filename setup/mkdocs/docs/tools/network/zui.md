@@ -6,6 +6,7 @@
 
 **Vendor:** brimdata
 
+**License:** [See repository](https://github.com/brimdata/zui)
 
 **Source:** GitHub Release
 

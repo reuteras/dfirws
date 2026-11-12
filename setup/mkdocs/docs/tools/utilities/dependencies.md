@@ -6,7 +6,7 @@
 
 **Vendor:** Lucas Gabriel
 
-**License:** MIT
+**License:** [MIT](https://github.com/lucasg/Dependencies/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

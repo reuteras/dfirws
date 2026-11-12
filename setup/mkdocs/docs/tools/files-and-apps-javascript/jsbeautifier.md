@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / JavaScript
 
+**Homepage:** <https://beautifier.io>
+
+**Vendor:** Liam Newman, Einar Lielmanis, et al.
+
+**License:** [MIT](https://pypi.org/project/jsbeautifier/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

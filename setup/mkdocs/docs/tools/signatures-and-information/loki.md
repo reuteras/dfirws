@@ -6,7 +6,7 @@
 
 **Vendor:** Neo23x0
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/Neo23x0/Loki/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

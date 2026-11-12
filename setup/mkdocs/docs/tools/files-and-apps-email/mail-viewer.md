@@ -6,7 +6,7 @@
 
 **Vendor:** MiTeC
 
-**License:** Freeware
+**License:** [Freeware](https://www.mitec.cz/wp/mmv/)
 
 **Source:** HTTP
 

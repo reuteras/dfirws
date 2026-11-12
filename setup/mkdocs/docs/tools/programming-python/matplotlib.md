@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://matplotlib.org>
+
+**Vendor:** matplotlib
+
+**License:** [PSF-2.0](https://github.com/matplotlib/matplotlib)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

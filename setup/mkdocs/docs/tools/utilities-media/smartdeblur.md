@@ -6,7 +6,7 @@
 
 **Vendor:** Y. Vladimir
 
-**License:** GPL-3
+**License:** [GPL-3](https://github.com/y-vladimir/smartdeblur)
 
 **Source:** Git
 

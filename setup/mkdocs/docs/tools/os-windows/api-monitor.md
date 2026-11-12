@@ -6,7 +6,7 @@
 
 **Vendor:** Rohitab
 
-**License:** Proprietary
+**License:** [Proprietary](http://www.rohitab.com/apimonitor)
 
 **Source:** HTTP
 

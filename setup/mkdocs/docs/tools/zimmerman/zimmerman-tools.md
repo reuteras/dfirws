@@ -6,7 +6,7 @@
 
 **Vendor:** Eric Zimmerman
 
-**License:** MIT License
+**License:** [MIT License](https://ericzimmerman.github.io/)
 
 **Source:** .NET
 

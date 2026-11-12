@@ -6,7 +6,7 @@
 
 **Vendor:** kacos2000
 
-**License:** MIT
+**License:** [MIT](https://github.com/kacos2000/MFT_Browser/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

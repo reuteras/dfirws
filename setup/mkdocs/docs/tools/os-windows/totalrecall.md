@@ -6,6 +6,7 @@
 
 **Vendor:** xaitax
 
+**License:** [See repository](https://github.com/xaitax/TotalRecall)
 
 **Source:** Git
 

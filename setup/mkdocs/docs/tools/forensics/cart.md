@@ -2,6 +2,12 @@
 
 **Category:** Forensics
 
+**Homepage:** <https://github.com/CybercentreCanada/cart>
+
+**Vendor:** CybercentreCanada
+
+**License:** [MIT](https://github.com/CybercentreCanada/cart/blob/master/LICENSE.md)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

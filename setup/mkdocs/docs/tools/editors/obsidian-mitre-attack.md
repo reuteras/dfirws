@@ -6,7 +6,7 @@
 
 **Vendor:** reuteras
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/reuteras/obsidian-mitre-attack/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

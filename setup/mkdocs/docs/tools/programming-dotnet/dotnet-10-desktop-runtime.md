@@ -6,7 +6,7 @@
 
 **Vendor:** Microsoft Corporation
 
-**License:** MIT
+**License:** [MIT](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)
 
 **Source:** Installer
 

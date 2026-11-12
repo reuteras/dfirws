@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <http://github.com/saghul/pycares>
+
+**Vendor:** saghul
+
+**License:** [MIT](https://github.com/saghul/pycares/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

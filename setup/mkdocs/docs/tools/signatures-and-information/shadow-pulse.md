@@ -6,6 +6,7 @@
 
 **Vendor:** StrangerealIntel
 
+**License:** [See repository](https://github.com/StrangerealIntel/Shadow-Pulse)
 
 **Source:** Git
 

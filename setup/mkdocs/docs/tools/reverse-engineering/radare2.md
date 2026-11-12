@@ -6,6 +6,7 @@
 
 **Vendor:** radareorg
 
+**License:** [See repository](https://github.com/radareorg/radare2/blob/master/COPYING.md)
 
 **Source:** GitHub Release
 

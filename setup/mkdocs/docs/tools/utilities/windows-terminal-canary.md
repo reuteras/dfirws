@@ -6,7 +6,7 @@
 
 **Vendor:** Microsoft
 
-**License:** MIT License
+**License:** [MIT License](https://github.com/microsoft/terminal/blob/main/LICENSE)
 
 **Source:** HTTP
 

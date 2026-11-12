@@ -6,7 +6,7 @@
 
 **Vendor:** WithSecureLabs
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/WithSecureOpenSource/chainsaw/blob/master/LICENCE)
 
 **Source:** GitHub Release
 

@@ -2,6 +2,12 @@
 
 **Category:** Forensics
 
+**Homepage:** <https://github.com/microsoft/msticpy>
+
+**Vendor:** microsoft
+
+**License:** [MIT](https://github.com/microsoft/msticpy/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

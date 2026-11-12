@@ -2,6 +2,12 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <https://rizin.re>
+
+**Vendor:** rizinorg
+
+**License:** [MIT](https://pypi.org/project/rzpipe/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

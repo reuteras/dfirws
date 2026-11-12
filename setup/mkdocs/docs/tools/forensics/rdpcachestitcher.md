@@ -6,6 +6,7 @@
 
 **Vendor:** BSI-Bund
 
+**License:** [See repository](https://github.com/BSI-Bund/RdpCacheStitcher)
 
 **Source:** GitHub Release
 

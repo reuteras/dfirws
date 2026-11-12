@@ -6,7 +6,7 @@
 
 **Vendor:** IDRIX
 
-**License:** VeraCrypt License
+**License:** [VeraCrypt License](https://www.veracrypt.fr/)
 
 **Source:** HTTP
 

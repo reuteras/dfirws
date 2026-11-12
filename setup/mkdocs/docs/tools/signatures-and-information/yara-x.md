@@ -6,7 +6,7 @@
 
 **Vendor:** VirusTotal
 
-**License:** BSD-3-Clause
+**License:** [BSD-3-Clause](https://github.com/VirusTotal/yara-x/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

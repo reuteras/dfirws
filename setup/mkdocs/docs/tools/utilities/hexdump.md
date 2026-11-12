@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://bitbucket.org/techtonik/hexdump/>
+
+**Vendor:** anatoly techtonik
+
+**License:** [Public Domain](https://pypi.org/project/hexdump/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

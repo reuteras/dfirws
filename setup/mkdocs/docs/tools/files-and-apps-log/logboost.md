@@ -6,7 +6,7 @@
 
 **Vendor:** joeavanzato
 
-**License:** MIT
+**License:** [MIT](https://github.com/joeavanzato/LogBoost/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

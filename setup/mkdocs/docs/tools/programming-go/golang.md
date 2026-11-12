@@ -6,7 +6,7 @@
 
 **Vendor:** NationalSecurityAgency
 
-**License:** BSD
+**License:** [BSD](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)
 
 **Source:** Installer
 

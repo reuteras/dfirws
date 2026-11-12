@@ -6,7 +6,7 @@
 
 **Vendor:** radareorg
 
-**License:** MIT License
+**License:** [MIT License](https://github.com/radareorg/radare2-mcp/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

@@ -6,6 +6,7 @@
 
 **Vendor:** mooncat-greenpy
 
+**License:** [See repository](https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension)
 
 **Source:** GitHub Release
 

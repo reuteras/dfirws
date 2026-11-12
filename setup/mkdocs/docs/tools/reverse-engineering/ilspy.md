@@ -6,7 +6,7 @@
 
 **Vendor:** ICSharpCode
 
-**License:** MIT
+**License:** [MIT](https://github.com/icsharpcode/ILSpy/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Database
 
+**Homepage:** <https://github.com/Maxteabag/sqlit>
+
+**Vendor:** Maxteabag
+
+**License:** [MIT](https://github.com/Maxteabag/sqlit/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

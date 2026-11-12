@@ -6,7 +6,7 @@
 
 **Vendor:** goretk
 
-**License:** AGPL-3.0
+**License:** [AGPL-3.0](https://github.com/goretk/redress/blob/develop/LICENSE)
 
 **Source:** GitHub Release
 

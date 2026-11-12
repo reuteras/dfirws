@@ -6,7 +6,7 @@
 
 **Vendor:** PHP Group
 
-**License:** PHP License
+**License:** [PHP License](https://www.php.net/license/)
 
 **Source:** HTTP
 

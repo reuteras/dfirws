@@ -6,6 +6,7 @@
 
 **Vendor:** VirusTotal
 
+**License:** [See repository](https://github.com/VirusTotal/gti-dev-kit)
 
 **Source:** Git
 

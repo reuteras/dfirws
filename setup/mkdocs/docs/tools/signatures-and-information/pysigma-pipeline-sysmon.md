@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://github.com/SigmaHQ/pySigma-pipeline-sysmon/>
+
+**Vendor:** SigmaHQ
+
+**License:** [LGPL-2.1-only](https://github.com/SigmaHQ/pySigma-pipeline-sysmon/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

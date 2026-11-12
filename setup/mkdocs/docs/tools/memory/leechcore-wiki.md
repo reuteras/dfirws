@@ -6,7 +6,7 @@
 
 **Vendor:** Ulf Frisk
 
-**License:** GPL-3.0 License
+**License:** [GPL-3.0 License](https://github.com/ufrisk/LeechCore/blob/master/LICENSE)
 
 **Source:** Git
 

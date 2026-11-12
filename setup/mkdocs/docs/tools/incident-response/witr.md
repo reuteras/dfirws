@@ -6,7 +6,7 @@
 
 **Vendor:** pranshuparmar
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/pranshuparmar/witr/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

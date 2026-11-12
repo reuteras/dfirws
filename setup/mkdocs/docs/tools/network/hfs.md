@@ -6,7 +6,7 @@
 
 **Vendor:** rejetto
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/rejetto/hfs/blob/main/LICENSE.txt)
 
 **Source:** GitHub Release
 

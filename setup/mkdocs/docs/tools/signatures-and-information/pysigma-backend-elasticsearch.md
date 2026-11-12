@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://pypi.org/project/pySigma-backend-elasticsearch/>
+
+**Vendor:** Thomas Patzke
+
+**License:** [LGPL-3.0-only](https://pypi.org/project/pysigma-backend-elasticsearch/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

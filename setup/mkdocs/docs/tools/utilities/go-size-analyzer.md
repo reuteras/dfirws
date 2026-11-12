@@ -6,7 +6,7 @@
 
 **Vendor:** Zxilly
 
-**License:** AGPL-3.0
+**License:** [AGPL-3.0](https://github.com/Zxilly/go-size-analyzer/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

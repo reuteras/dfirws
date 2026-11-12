@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://github.com/elceef/ppdeep>
+
+**Vendor:** elceef
+
+**License:** [Apache-2.0](https://github.com/elceef/ppdeep)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

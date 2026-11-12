@@ -6,7 +6,7 @@
 
 **Vendor:** microsoft
 
-**License:** MIT
+**License:** [MIT](https://github.com/microsoft/edit/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

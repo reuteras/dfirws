@@ -6,6 +6,7 @@
 
 **Vendor:** avasero
 
+**License:** [See repository](https://github.com/avasero/psexposed)
 
 **Source:** Git
 

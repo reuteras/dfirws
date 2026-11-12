@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / JavaScript
 
+**Homepage:** <https://github.com/relative/synchrony#readme>
+
+**Vendor:** relative
+
+**License:** [GPL-3.0-only](https://github.com/relative/synchrony/blob/master/LICENSE.md)
+
 **Source:** npm
 
 **Profiles:** Full, Basic

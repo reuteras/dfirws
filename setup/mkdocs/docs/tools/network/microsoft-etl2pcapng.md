@@ -6,7 +6,7 @@
 
 **Vendor:** Microsoft
 
-**License:** MIT
+**License:** [MIT](https://github.com/microsoft/etl2pcapng/blob/HEAD/LICENSE)
 
 **Source:** Winget
 

@@ -4,7 +4,9 @@
 
 **Homepage:** <https://github.com/Hexastrike/PyrsistenceSniper>
 
-**License:** MIT License
+**Vendor:** Hexastrike
+
+**License:** [MIT License](https://github.com/Hexastrike/PyrsistenceSniper/blob/main/LICENSE)
 
 **Source:** Python
 

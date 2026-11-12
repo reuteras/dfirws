@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://github.com/KimiNewt/pyshark>
+
+**Vendor:** KimiNewt
+
+**License:** [MIT](https://github.com/KimiNewt/pyshark/blob/master/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

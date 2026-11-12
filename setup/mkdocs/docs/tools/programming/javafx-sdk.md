@@ -6,7 +6,7 @@
 
 **Vendor:** Gluon
 
-**License:** GPL + Classpath Exception
+**License:** [GPL + Classpath Exception](https://openjdk.org/legal/gplv2+ce.html)
 
 **Source:** HTTP
 

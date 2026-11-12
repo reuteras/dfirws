@@ -2,6 +2,12 @@
 
 **Category:** Utilities / Cryptography
 
+**Homepage:** <https://pypi.org/project/name-that-hash/>
+
+**Vendor:** autumn
+
+**License:** [GPL-3.0-or-later](https://pypi.org/project/name-that-hash/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

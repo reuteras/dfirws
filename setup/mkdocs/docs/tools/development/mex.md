@@ -6,7 +6,7 @@
 
 **Vendor:** Microsoft
 
-**License:** Proprietary
+**License:** [Proprietary](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)
 
 **Source:** HTTP
 

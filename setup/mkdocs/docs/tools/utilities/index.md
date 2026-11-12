@@ -27,12 +27,14 @@
 | [git](git.md) | Installer | A fork of Git containing Windows-specific patches. |  |  |  |
 | [go-size-analyzer](go-size-analyzer.md) | GitHub Release | go-size-analyzer (gsa) is a tool to analyze the size of Go binaries. | golang, binary-analysis | `.exe`, `.dll` |  |
 | [godap](godap.md) | GitHub Release | godap is a tool for analyzing Active Directory LDAP data. | windows, network-analysis, network |  | Full only |
-| [graphviz](graphviz-2.md) | Python | dot -Tpng graph.dot -o graph.png | visualization, graph | `.dot`, `.gv` |  |
+| [graphviz (Python package)](graphviz-python-package.md) | Python | dot -Tpng graph.dot -o graph.png | visualization, graph | `.dot`, `.gv` |  |
 | [grip](grip.md) | Python | Render local readme files before sending off to GitHub. | markdown, viewer | `.md` |  |
 | [hexdump](hexdump.md) | Python | hexdump <file> | hex-editor, binary-analysis | `.bin` |  |
 | [jpterm](jpterm.md) | Python | Jupyter in the terminal. | python, data-processing, tui | `.json` |  |
 | [jupyter-collection](jupyter-collection.md) | Git | Collection of Jupyter Notebooks by @fr0gger_ | python |  |  |
 | [jupyterlab](jupyterlab.md) | Python | JupyterLab computational environment | python, data-processing | `.ipynb` |  |
+| [marimo](marimo.md) | Python | Reactive Python notebook stored as plain .py files. | python, data-processing, visualization |  |  |
+| [marimo-pair](marimo-pair.md) | Git | Agent skill that lets an AI agent such as opencode-ai run code inside a live marimo notebook session. | ai, python, automation |  |  |
 | [markitdown](markitdown.md) | Python | Utility tool for converting various files to Markdown. | conversion, markdown, data-extraction, office | `.docx`, `.xlsx`, `.pptx`, `.pdf`, `.html` |  |
 | [mcp-server-elasticsearch](mcp-server-elasticsearch.md) | GitHub Release | MCP server to connect to elastic 8.X | mcp, ai, log-analysis | `` |  |
 | [mmdbinspect](mmdbinspect.md) | GitHub Release | Tool for inspecting MaxMind GeoIP2 databases. | geolocation, maxmind | `.mmdb` |  |

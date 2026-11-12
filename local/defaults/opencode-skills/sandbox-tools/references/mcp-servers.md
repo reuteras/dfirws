@@ -47,7 +47,6 @@ C:\venv\bin\registry-dump.exe Desktop\readonly\NTUSER.DAT
 These are loaded directly by radare2, not as MCP servers:
 
 - **decai** - AI-assisted decompilation plugin (JavaScript, loaded by radare2 directly)
-- **r2ai** - Native C plugin for AI-assisted analysis (`r2ai.dll` in radare2 plugins dir, `r2ai.exe` in `C:\Tools\radare2\bin\`)
 
 ## Checking MCP server status
 

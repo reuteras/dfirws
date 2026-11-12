@@ -2,6 +2,12 @@
 
 **Category:** OS / Windows / Registry
 
+**Homepage:** <http://www.williballenthin.com/registry/>
+
+**Vendor:** Willi Ballenthin
+
+**License:** [Apache-2.0](https://pypi.org/project/python-registry/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,7 +6,7 @@
 
 **Vendor:** Yamato-Security
 
-**License:** AGPL-3.0
+**License:** [AGPL-3.0](https://github.com/Yamato-Security/takajo/blob/main/LICENSE.txt)
 
 **Source:** GitHub Release
 

@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://pypi.org/project/mkYARA/>
+
+**Vendor:** Jelle Vergeer / Fox-IT
+
+**License:** [GPL-3.0](https://pypi.org/project/mkyara/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

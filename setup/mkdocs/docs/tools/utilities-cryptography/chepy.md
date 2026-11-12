@@ -2,6 +2,12 @@
 
 **Category:** Utilities / Cryptography
 
+**Homepage:** <https://github.com/securisec/chepy>
+
+**Vendor:** securisec
+
+**License:** [GPL](https://github.com/securisec/chepy/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,6 +6,7 @@
 
 **Vendor:** x64dbg
 
+**License:** [See repository](https://github.com/x64dbg/x64dbg/blob/development/LICENSE)
 
 **Source:** GitHub Release
 

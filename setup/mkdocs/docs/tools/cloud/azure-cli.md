@@ -6,7 +6,7 @@
 
 **Vendor:** Microsoft
 
-**License:** MIT License
+**License:** [MIT License](https://github.com/Azure/azure-cli/blob/dev/LICENSE)
 
 **Source:** HTTP
 

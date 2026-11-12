@@ -6,6 +6,7 @@
 
 **Vendor:** StrawberryPerl
 
+**License:** [See repository](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

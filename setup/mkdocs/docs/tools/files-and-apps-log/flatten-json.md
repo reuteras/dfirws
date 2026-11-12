@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Log
 
+**Homepage:** <https://github.com/amirziai/flatten>
+
+**Vendor:** amirziai
+
+**License:** [MIT](https://github.com/amirziai/flatten/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

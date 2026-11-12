@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://www.decalage.info/python/olefileio>
+
+**Vendor:** decalage2
+
+**License:** [BSD](https://github.com/decalage2/olefile/blob/master/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,7 +6,7 @@
 
 **Vendor:** hfiref0x
 
-**License:** BSD-2-Clause
+**License:** [BSD-2-Clause](https://github.com/hfiref0x/WinObjEx64/blob/master/LICENSE.md)
 
 **Source:** GitHub Release
 

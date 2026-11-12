@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Log
 
+**Homepage:** <https://pypi.org/project/evtx/>
+
+**Vendor:** omerbenamram
+
+**License:** [MIT](https://pypi.org/project/evtx/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

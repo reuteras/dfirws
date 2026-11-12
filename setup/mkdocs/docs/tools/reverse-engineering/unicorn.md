@@ -2,6 +2,12 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <http://www.unicorn-engine.org>
+
+**Vendor:** unicorn-engine
+
+**License:** [BSD](https://github.com/unicorn-engine/unicorn/blob/master/COPYING)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

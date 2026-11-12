@@ -6,6 +6,7 @@
 
 **Vendor:** dokan-dev
 
+**License:** [See repository](https://github.com/dokan-dev/dokany)
 
 **Source:** GitHub Release
 

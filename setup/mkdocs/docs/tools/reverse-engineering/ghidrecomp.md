@@ -2,6 +2,12 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <https://github.com/clearbluejar/ghidrecomp>
+
+**Vendor:** clearbluejar
+
+**License:** [GPL-3.0](https://github.com/clearbluejar/ghidrecomp/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,7 +6,7 @@
 
 **Vendor:** radareorg
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/radareorg/iaito/blob/master/COPYING)
 
 **Source:** GitHub Release
 

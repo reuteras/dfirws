@@ -6,7 +6,7 @@
 
 **Vendor:** Digital Detective
 
-**License:** Proprietary
+**License:** [Proprietary](https://www.digital-detective.net/dcode/)
 
 **Source:** HTTP
 

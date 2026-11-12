@@ -6,6 +6,7 @@
 
 **Vendor:** mentebinaria
 
+**License:** [See repository](https://github.com/mentebinaria/elfparser-ng/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

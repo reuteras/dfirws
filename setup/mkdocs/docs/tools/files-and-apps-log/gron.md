@@ -6,7 +6,7 @@
 
 **Vendor:** tomnomnom
 
-**License:** MIT
+**License:** [MIT](https://github.com/tomnomnom/gron/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

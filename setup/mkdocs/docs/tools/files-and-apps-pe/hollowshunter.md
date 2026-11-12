@@ -6,7 +6,7 @@
 
 **Vendor:** hasherezade
 
-**License:** BSD-2-Clause
+**License:** [BSD-2-Clause](https://github.com/hasherezade/hollows_hunter/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

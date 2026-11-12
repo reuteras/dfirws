@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / PDF
 
+**Homepage:** <https://github.com/digitalsleuth/peepdf-3>
+
+**Vendor:** digitalsleuth
+
+**License:** [GPL-3.0](https://github.com/digitalsleuth/peepdf-3/blob/main/COPYING)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

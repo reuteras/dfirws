@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/termcolor/termcolor>
+
+**Vendor:** termcolor
+
+**License:** [MIT](https://github.com/termcolor/termcolor/blob/main/COPYING.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

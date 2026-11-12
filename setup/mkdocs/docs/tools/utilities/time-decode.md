@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/digitalsleuth/time_decode>
+
+**Vendor:** digitalsleuth
+
+**License:** [MIT](https://github.com/digitalsleuth/time_decode/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

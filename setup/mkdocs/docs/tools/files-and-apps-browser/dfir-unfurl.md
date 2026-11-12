@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Browser
 
+**Homepage:** <https://github.com/RyanDFIR/unfurl>
+
+**Vendor:** RyanDFIR
+
+**License:** [Apache-2.0](https://github.com/RyanDFIR/unfurl/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

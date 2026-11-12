@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://scapy.net>
+
+**Vendor:** secdev
+
+**License:** [GPL-2.0-only](https://github.com/secdev/scapy/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

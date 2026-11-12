@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://portswigger.net/burp>
+
+**Vendor:** PortSwigger
+
+**License:** [Proprietary](https://portswigger.net/burp/eula)
+
 **Source:** Winget
 
 **Profiles:** Full (not included in Basic profile)

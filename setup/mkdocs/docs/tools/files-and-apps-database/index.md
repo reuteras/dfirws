@@ -12,5 +12,5 @@
 | [fqlite](fqlite.md) | GitHub Release | FQLite - SQLite Forensic Toolkit. FQLite is a tool to find and restore deleted records in SQlite databases. It therefore examines the database for entries marked as deleted. | database, sqlite, forensics | `.db`, `.sqlite`, `.sqlite3` | Full only |
 | [h2database](h2database.md) | GitHub Release | H2 Database is an open source Java SQL database. | database, java | `.h2.db` | Full only |
 | [litecli](litecli.md) | Python | CLI for SQLite Databases with auto-completion and syntax highlighting. | database, sqlite, cli | `.db`, `.sqlite` |  |
-| [neo4j](neo4j-2.md) | Python | from neo4j import GraphDatabase | database, graph |  |  |
+| [neo4j (Python driver)](neo4j-python-driver.md) | Python | from neo4j import GraphDatabase | database, graph |  |  |
 | [sqlit-tui](sqlit-tui.md) | Python | sqlit <database.sqlite> | database, sqlite, tui | `.db`, `.sqlite`, `.sqlite3` |  |

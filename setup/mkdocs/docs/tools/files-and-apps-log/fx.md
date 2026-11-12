@@ -6,7 +6,7 @@
 
 **Vendor:** antonmedv
 
-**License:** MIT
+**License:** [MIT](https://github.com/antonmedv/fx/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

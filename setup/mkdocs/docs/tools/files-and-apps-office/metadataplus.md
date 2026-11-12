@@ -6,7 +6,7 @@
 
 **Vendor:** nccgroup
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/nccgroup/MetadataPlus/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

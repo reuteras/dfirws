@@ -210,7 +210,7 @@ if (Test-Path -Path "${ROOT_PATH}\log\dfirws") {
 | generate_rust.wsb | install_rust_tools.ps1 | 5 Rust tools via cargo | Rust, msys2 gcc |
 | generate_golang.wsb | install_golang_tools.ps1 | 1 Go tool | Go |
 | generate_node.wsb | install_node.ps1 | 7 npm packages | Node.js, npm |
-| generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment + r2ai plugin + pycdc (built from git, static) | msys2 gcc, cmake, pkg-config |
+| generate_msys2.wsb | install_msys2.ps1 | MSYS2 environment + pycdc (built from git, static) | msys2 gcc, cmake, pkg-config |
 | generate_freshclam.wsb | install_freshclam.ps1 | ClamAV signatures | ClamAV |
 | generate_zimmerman.wsb | install_zimmerman.ps1 | Zimmerman tools via Get-ZimmermanTools + `--sync` of EvtxECmd/RECmd/SQLECmd maps, and KAPE via KAPE-EZToolsAncillaryUpdater if `local\kape.zip` exists (keeps .NET 10 off the host) | .NET 10 Desktop runtime |
 
@@ -332,7 +332,6 @@ opencode-ai is configured with MCP servers for AI-assisted analysis. Config depl
 | radare2-mcp (r2mcp) | Local (stdio) | Binary downloaded | Known Windows crash issue (#24) |
 | regipy MCP | Local (stdio) | Repository cloned + mcp pkg | Uses regipy venv Python |
 | decai | radare2 plugin | JS file copied | Loaded by radare2 directly (not MCP) |
-| r2ai | radare2 plugin | Compiled in MSYS2 sandbox | Native C plugin, r2ai.dll + r2ai.exe |
 
 ### MCP Configuration
 

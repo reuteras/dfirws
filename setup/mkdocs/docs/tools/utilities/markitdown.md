@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/microsoft/markitdown>
+
+**Vendor:** microsoft
+
+**License:** [MIT](https://github.com/microsoft/markitdown/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

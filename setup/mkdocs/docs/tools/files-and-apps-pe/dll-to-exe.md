@@ -6,6 +6,7 @@
 
 **Vendor:** hasherezade
 
+**License:** [See repository](https://github.com/hasherezade/dll_to_exe)
 
 **Source:** GitHub Release
 

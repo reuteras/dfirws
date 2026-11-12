@@ -6,6 +6,7 @@
 
 **Vendor:** strozfriedberg
 
+**License:** [See repository](https://github.com/strozfriedberg/sidr/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

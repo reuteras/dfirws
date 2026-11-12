@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://www.npmjs.com/package/opencode-ai>
+
+**Vendor:** anomalyco
+
+**License:** [MIT](https://www.npmjs.com/package/opencode-ai)
+
 **Source:** npm
 
 **Profiles:** Full, Basic

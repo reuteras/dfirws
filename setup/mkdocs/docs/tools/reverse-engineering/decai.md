@@ -6,7 +6,7 @@
 
 **Vendor:** radareorg
 
-**License:** MIT License
+**License:** [MIT License](https://github.com/radareorg/r2ai/blob/master/LICENSE)
 
 **Source:** Git
 

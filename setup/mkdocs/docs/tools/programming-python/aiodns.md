@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/aio-libs/aiodns.git>
+
+**Vendor:** aio-libs
+
+**License:** [MIT](https://github.com/aio-libs/aiodns/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

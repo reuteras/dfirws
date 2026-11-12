@@ -6,7 +6,7 @@
 
 **Vendor:** bee-san
 
-**License:** MIT
+**License:** [MIT](https://github.com/bee-san/Ares/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

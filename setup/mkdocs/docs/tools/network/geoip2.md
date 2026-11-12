@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://www.maxmind.com/en/home>
+
+**Vendor:** maxmind
+
+**License:** [Apache-2.0](https://github.com/maxmind/GeoIP2-python/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

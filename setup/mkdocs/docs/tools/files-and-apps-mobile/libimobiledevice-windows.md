@@ -6,6 +6,7 @@
 
 **Vendor:** iFred09
 
+**License:** [See repository](https://github.com/iFred09/libimobiledevice-windows)
 
 **Source:** Git
 
