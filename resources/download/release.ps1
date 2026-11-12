@@ -3168,7 +3168,7 @@ $TOOL_DEFINITIONS += @{
     FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so", ".mach-o")
     Tags = @("reverse-engineering", "disassembler", "debugging")
     Notes = "UNIX-like reverse engineering framework and command-line toolset"
-    Tips = "Type ? for help. Common commands: aaa (analyse), afl (list functions), pdf @ main (disassemble), s (seek), V (visual mode), pdc (pseudo code), iz (strings). Use r2ai or decai for AI assistance."
+    Tips = "Type ? for help. Common commands: aaa (analyse), afl (list functions), pdf @ main (disassemble), s (seek), V (visual mode), pdc (pseudo code), iz (strings). Use decai for AI assistance."
     Usage = "radare2 -A <file>"
     SampleCommands = @()
     SampleFiles = @()
@@ -3205,38 +3205,6 @@ $TOOL_DEFINITIONS += @{
     SampleFiles = @()
     Dependencies = @("Radare2")
     LicenseUrl = "https://github.com/radareorg/radare2-mcp/blob/main/LICENSE"
-    PythonVersion = ""
-}
-
-# r2ai
-# TODO: Not working
-$status = Get-GitHubRelease -repo "radareorg/r2ai" -path "${SETUP_PATH}\r2ai.zip" -match "windows-latest" -check "Zip archive data"
-if ($status -or $radare_status) {
-    & $SEVENZIP x -aoa "${SETUP_PATH}\r2ai.zip" -o"${TOOLS}\r2ai" | Out-Null
-    Copy-Item "${TOOLS}\r2ai\decai.r2.js" "${TOOLS}\radare2\share\scripts\"
-    Copy-Item "${TOOLS}\r2ai\libr2ai.dll" "${TOOLS}\radare2\bin\"
-    Copy-Item "${TOOLS}\r2ai\r2ai.exe" "${TOOLS}\radare2\bin\"
-    Remove-Item -Recurse -Force "${TOOLS}\r2ai"
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "r2ai"
-    Homepage = "https://github.com/radareorg/r2ai"
-    Vendor = "radareorg"
-    License = "MIT License"
-    Category = "Reverse Engineering"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
-    Tags = @("reverse-engineering", "mcp", "ai")
-    Notes = "LLM-based reversing for radare2."
-    Tips = "Currently not working in dfirws."
-    Usage = "r2ai -h"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @("Radare2")
-    LicenseUrl = "https://github.com/radareorg/r2ai/blob/master/LICENSE"
     PythonVersion = ""
 }
 
