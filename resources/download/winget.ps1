@@ -167,30 +167,8 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# PowerShell 7 - installed during startup
-Write-SynchronizedLog "winget: Downloading PowerShell 7."
-$status = Get-WinGet "Microsoft.PowerShell" "PowerShell*.msi" "powershell.msi" -check "Composite Document File V2 Document" -InstallerType wix
-
-$TOOL_DEFINITIONS += @{
-    Name = "PowerShell 7"
-    Category = "Programming\PowerShell"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".ps1", ".psm1", ".psd1")
-    Tags = @("scripting", "shell", "automation")
-    Notes = "PowerShell 7 is a cross-platform shell and scripting language that provides a powerful command-line interface and automation capabilities."
-    Tips = "PowerShell 7 is the default shell in the sandbox terminal. Windows PowerShell 5.1 is still available as powershell.exe for scripts and modules that need it."
-    Usage = "pwsh"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://microsoft.com/PowerShell"
-    Vendor = "Microsoft Corporation"
-    License = "MIT"
-    LicenseUrl = "https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt"
-    PythonVersion = ""
-}
+# PowerShell 7 is no longer downloaded via winget: upstream 7.7.0 dropped the MSI
+# (only msix/zip remain). It is installed from the GitHub release zip in release.ps1.
 
 # Putty - available for installation via dfirws-install.ps1
 if (Test-ToolIncluded -ToolName "PuTTY") {

@@ -300,7 +300,7 @@ To customize the sandbox you can copy *local\defaults\config.txt* to *local\conf
 
 Extra tools can be installed in a running **dfirws** sandbox with the script **dfirws-install.ps1**. To list tools that are available to install run **Get-Help dfirws-install.ps1**. To install a tool run **dfirws-install.ps1 -<tool>**.
 
-If you like to run your own PowerShell code to customize the **dfirws** sandbox you can copy *local\defaults\customize-sandbox.ps1* to *local\customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** and that version will be used to run the script. Currently this is PowerShell 7.4.x and some things are different from earlier versions of PowerShell.
+If you like to run your own PowerShell code to customize the **dfirws** sandbox you can copy *local\defaults\customize-sandbox.ps1* to *local\customize.ps1* and modify it. Observe that the latest version of PowerShell will be installed when you start **dfirws** and that version will be used to run the script. Currently this is PowerShell 7.x (the latest release) and some things are different from earlier versions of PowerShell.
 
 More information is available in the [documentation](https://reuteras.github.io/dfirws/). A local copy of the documentation is available by clicking on the **dfirws docs** link on the desktop.
 
@@ -349,7 +349,7 @@ dfirws.wsb  (or network_dfirws.wsb)
         ├─[base installs]
         │   ├── 7-Zip
         │   ├── PSDecode module
-        │   ├── PowerShell 7
+        │   ├── PowerShell 7 (GitHub zip, linked into Program Files)
         │   ├── Java (Corretto)
         │   ├── Python 3
         │   ├── Visual C++ Redistributable
