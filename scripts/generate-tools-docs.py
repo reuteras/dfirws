@@ -267,6 +267,48 @@ def load_tools(json_paths: list[Path]) -> list[dict]:
     return tools
 
 
+def find_orphan_pages(tools_root: Path, written: set[Path]) -> list[Path]:
+    """Return generated-looking pages under tools_root that this run did not write.
+
+    Only Markdown files inside category sub-directories are considered, so
+    hand-written files directly in tools_root are never flagged.
+    """
+    orphans: list[Path] = []
+    for category_dir in sorted(p for p in tools_root.iterdir() if p.is_dir()):
+        for page in sorted(category_dir.rglob("*.md")):
+            if page.resolve() not in written:
+                orphans.append(page)
+    return orphans
+
+
+def handle_orphans(
+    tools_root: Path, written: set[Path], delete: bool, safe_to_delete: bool
+) -> None:
+    orphans = find_orphan_pages(tools_root, written)
+    if not orphans:
+        return
+    verb = "Deleting" if delete and safe_to_delete else "Orphaned"
+    print(f"{verb} {len(orphans)} page(s) not generated from the current tool metadata:")
+    for page in orphans:
+        print(f"  {page}")
+    if not delete:
+        print("Re-run with --delete-orphans to remove them.")
+        return
+    if not safe_to_delete:
+        print(
+            "Not deleting: --delete-orphans cannot be combined with --profile or a single "
+            "--tools-json file, since that run only generates a subset of the pages."
+        )
+        return
+    for page in orphans:
+        page.unlink()
+    for category_dir in sorted(
+        (p for p in tools_root.iterdir() if p.is_dir()), reverse=True
+    ):
+        if not any(category_dir.iterdir()):
+            category_dir.rmdir()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Generate dfirws tools docs."
@@ -292,6 +334,15 @@ def main() -> int:
             "Tools whose 'Profiles' metadata does not include the requested profile are "
             "omitted from the output. Has no effect when the tools JSON was generated "
             "without profile metadata."
+        ),
+    )
+    parser.add_argument(
+        "--delete-orphans",
+        dest="delete_orphans",
+        action="store_true",
+        help=(
+            "Delete tool pages that were not generated in this run (for example pages "
+            "of removed tools). Without this flag orphaned pages are only listed."
         ),
     )
     args = parser.parse_args()
@@ -381,6 +432,7 @@ def main() -> int:
     tools_index_lines.append("")
 
     tools_index_entries: list[tuple[str, str, str, str, str, str, str]] = []
+    written_pages: set[Path] = set()
     for category_path in ordered_categories:
         display_name = category_path.replace("\\", " / ")
         slug = get_slug(category_path)
@@ -402,7 +454,8 @@ def main() -> int:
         used_slugs: dict[str, int] = {}
         for tool in tools_in_category:
             tool_slug = get_tool_page_slug(tool.get("Name") or "", used_slugs)
-            write_tool_page(docs_root, tool, category_path, tool_slug)
+            page_path = write_tool_page(docs_root, tool, category_path, tool_slug)
+            written_pages.add(Path(page_path).resolve())
             tool_link = f"{tool_slug}.md"
             summary = get_tool_summary(tool).replace("|", "\\|")
             source_label = get_source_label(tool)
@@ -430,6 +483,7 @@ def main() -> int:
             )
 
         category_file.write_text("\n".join(lines), encoding="utf-8")
+        written_pages.add(category_file.resolve())
 
     tools_index_lines.append("## Tools Index")
     tools_index_lines.append("")
@@ -451,6 +505,13 @@ def main() -> int:
         )
 
     tools_index_path.write_text("\n".join(tools_index_lines), encoding="utf-8")
+
+    handle_orphans(
+        tools_root,
+        written_pages,
+        delete=args.delete_orphans,
+        safe_to_delete=not active_profile and json_path.is_dir(),
+    )
 
     return 0
 
