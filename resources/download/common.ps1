@@ -629,7 +629,7 @@ function Update-ToolsDownloaded {
     }
 
     if($PSCmdlet.ShouldProcess($Name)) {
-        $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\downloads\tools_downloaded.csv" -NoTypeInformation
+        $toolsDownloaded.ToArray() | Export-Csv "$PSScriptRoot\..\..\downloads\tools_downloaded.csv"
     }
 }
 

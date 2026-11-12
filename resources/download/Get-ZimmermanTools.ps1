@@ -569,7 +569,7 @@ if ($NetVersion -ne 4 -and (Test-Path -Path (Join-Path $Dest "net9")))
 #Failed downloads are left out so they are retried on the next run
 Write-Color -LinesBefore 1 -Text "* ", "Saving downloaded version information to $localDetailsFile" -Color Green -LinesAfter 1
 
-$currentDetails | Sort-Object -Property URL | Export-Csv -Path $localDetailsFile -NoTypeInformation
+$currentDetails | Sort-Object -Property URL | Export-Csv -Path $localDetailsFile
 
 #We need to sync the Maps for EvtxECmd and SQLECmd, and the batch files for RECmd
 #Reference: https://www.youtube.com/watch?v=mIb1GQP3ciE
