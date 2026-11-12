@@ -6,7 +6,7 @@
 
 **Vendor:** hasherezade
 
-**License:** GPL-2.0
+**License:** [GPL-2.0](https://github.com/hasherezade/pe-bear/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

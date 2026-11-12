@@ -6,7 +6,7 @@
 
 **Vendor:** Volexity
 
-**License:** BSD-2-Clause License
+**License:** [BSD-2-Clause License](https://github.com/volexity/threat-intel/blob/main/LICENSE.txt)
 
 **Source:** Git
 

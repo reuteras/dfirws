@@ -2,6 +2,12 @@
 
 **Category:** Files and apps
 
+**Homepage:** <https://github.com/nazywam/AutoIt-Ripper>
+
+**Vendor:** nazywam
+
+**License:** [MIT](https://github.com/nazywam/AutoIt-Ripper/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

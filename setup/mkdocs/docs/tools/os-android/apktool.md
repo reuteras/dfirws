@@ -6,7 +6,7 @@
 
 **Vendor:** iBotPeaches
 
-**License:** Apache License 2.0
+**License:** [Apache License 2.0](https://github.com/iBotPeaches/Apktool/blob/master/LICENSE.md)
 
 **Source:** HTTP
 

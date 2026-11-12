@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Email
 
+**Homepage:** <https://github.com/TeamMsgExtractor/msg-extractor>
+
+**Vendor:** TeamMsgExtractor
+
+**License:** [GPL](https://github.com/TeamMsgExtractor/msg-extractor/blob/master/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

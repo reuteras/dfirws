@@ -6,6 +6,7 @@
 
 **Vendor:** h2database
 
+**License:** [See repository](https://github.com/h2database/h2database/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

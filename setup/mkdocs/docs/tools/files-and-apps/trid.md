@@ -6,7 +6,7 @@
 
 **Vendor:** Marco Pontello
 
-**License:** TrID is free for personal / non commercial use.
+**License:** [TrID is free for personal / non commercial use.](https://mark0.net/soft-trid-e.html)
 
 **Source:** HTTP
 

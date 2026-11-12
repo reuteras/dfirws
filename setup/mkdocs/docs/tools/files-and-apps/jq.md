@@ -6,6 +6,7 @@
 
 **Vendor:** jqlang
 
+**License:** [See repository](https://github.com/jqlang/jq/blob/master/COPYING)
 
 **Source:** GitHub Release
 

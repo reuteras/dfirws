@@ -6,7 +6,7 @@
 
 **Vendor:** RyanDFIR
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/RyanDFIR/hindsight/blob/main/LICENSE.md)
 
 **Source:** GitHub Release
 

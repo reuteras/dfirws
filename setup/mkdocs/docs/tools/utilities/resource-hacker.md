@@ -6,7 +6,7 @@
 
 **Vendor:** Angus Johnson
 
-**License:** Freeware
+**License:** [Freeware](https://angusj.com/resourcehacker/)
 
 **Source:** HTTP
 

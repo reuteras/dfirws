@@ -6,7 +6,7 @@
 
 **Vendor:** mike-engel
 
-**License:** MIT
+**License:** [MIT](https://github.com/mike-engel/jwt-cli/blob/main/LICENSE.md)
 
 **Source:** GitHub Release
 

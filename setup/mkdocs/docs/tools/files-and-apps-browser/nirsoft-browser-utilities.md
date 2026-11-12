@@ -6,7 +6,7 @@
 
 **Vendor:** NirSoft
 
-**License:** Freeware
+**License:** [Freeware](https://www.nirsoft.net/)
 
 **Source:** HTTP
 

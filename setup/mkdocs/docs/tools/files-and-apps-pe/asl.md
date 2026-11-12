@@ -6,6 +6,7 @@
 
 **Vendor:** A.S.L Soft
 
+**License:** [See repository](https://github.com/ExeinfoASL/ASL)
 
 **Source:** Git
 

@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://github.com/kbandla/dpkt>
+
+**Vendor:** kbandla
+
+**License:** [BSD](https://github.com/kbandla/dpkt/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

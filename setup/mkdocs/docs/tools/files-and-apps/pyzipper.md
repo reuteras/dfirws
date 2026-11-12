@@ -2,6 +2,12 @@
 
 **Category:** Files and apps
 
+**Homepage:** <https://github.com/danifus/pyzipper>
+
+**Vendor:** danifus
+
+**License:** [MIT](https://github.com/danifus/pyzipper/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

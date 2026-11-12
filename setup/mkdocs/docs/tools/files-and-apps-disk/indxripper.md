@@ -6,7 +6,7 @@
 
 **Vendor:** harelsegev
 
-**License:** MIT
+**License:** [MIT](https://github.com/harelsegev/INDXRipper/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

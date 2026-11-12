@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / PE
 
+**Homepage:** <https://github.com/erocarrera/pefile>
+
+**Vendor:** erocarrera
+
+**License:** [MIT](https://github.com/erocarrera/pefile/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

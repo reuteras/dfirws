@@ -6,7 +6,7 @@
 
 **Vendor:** mandiant
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/mandiant/flare-floss/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

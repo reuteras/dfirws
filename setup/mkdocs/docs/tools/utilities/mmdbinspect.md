@@ -6,7 +6,7 @@
 
 **Vendor:** maxmind
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/maxmind/mmdbinspect/blob/main/LICENSE-APACHE)
 
 **Source:** GitHub Release
 

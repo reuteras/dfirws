@@ -6,7 +6,7 @@
 
 **Vendor:** trailofbits
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/trailofbits/BTIGhidra/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

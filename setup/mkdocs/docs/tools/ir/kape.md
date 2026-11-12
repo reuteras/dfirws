@@ -6,7 +6,7 @@
 
 **Vendor:** Kroll
 
-**License:** Commercial
+**License:** [Commercial](https://www.kroll.com/en/end-user-license-agreement)
 
 **Source:** Installer
 

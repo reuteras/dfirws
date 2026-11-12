@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://github.com/VirusTotal/yara-python>
+
+**Vendor:** VirusTotal
+
+**License:** [Apache-2.0](https://github.com/VirusTotal/yara-python/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

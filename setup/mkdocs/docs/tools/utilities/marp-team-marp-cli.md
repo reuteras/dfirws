@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/marp-team/marp-cli#readme>
+
+**Vendor:** marp-team
+
+**License:** [MIT](https://github.com/marp-team/marp-cli/blob/main/LICENSE)
+
 **Source:** npm
 
 **Profiles:** Full, Basic

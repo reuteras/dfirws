@@ -6,6 +6,7 @@
 
 **Vendor:** JPCERTCC
 
+**License:** [See repository](https://github.com/JPCERTCC/YAMAGoya/blob/main/LICENSE.txt)
 
 **Source:** GitHub Release
 

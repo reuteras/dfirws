@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://github.com/SigmaHQ/sigma-cli>
+
+**Vendor:** SigmaHQ
+
+**License:** [LGPL-2.1-or-later](https://github.com/SigmaHQ/sigma-cli/blob/main/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

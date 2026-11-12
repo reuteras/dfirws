@@ -2,6 +2,12 @@
 
 **Category:** OS / Windows / Registry
 
+**Homepage:** <https://github.com/mkorman90/regipy/>
+
+**Vendor:** mkorman90
+
+**License:** [MIT](https://github.com/mkorman90/regipy/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

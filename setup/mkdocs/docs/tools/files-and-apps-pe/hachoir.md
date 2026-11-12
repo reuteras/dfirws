@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / PE
 
+**Homepage:** <http://hachoir.readthedocs.io/>
+
+**Vendor:** vstinner
+
+**License:** [GPL-2.0](https://github.com/vstinner/hachoir/blob/main/COPYING)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

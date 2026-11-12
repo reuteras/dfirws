@@ -6,7 +6,7 @@
 
 **Vendor:** Squiblydoo
 
-**License:** BSD-3-Clause
+**License:** [BSD-3-Clause](https://github.com/Squiblydoo/debloat/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

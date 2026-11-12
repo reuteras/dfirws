@@ -6,7 +6,7 @@
 
 **Vendor:** mandiant
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/mandiant/flare-fakenet-ng/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

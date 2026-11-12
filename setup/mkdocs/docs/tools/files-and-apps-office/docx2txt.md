@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://github.com/ankushshah89/python-docx2txt>
+
+**Vendor:** ankushshah89
+
+**License:** [MIT](https://github.com/ankushshah89/python-docx2txt/blob/master/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

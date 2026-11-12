@@ -6,7 +6,7 @@
 
 **Vendor:** activescott
 
-**License:** MIT
+**License:** [MIT](https://github.com/activescott/lessmsi/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

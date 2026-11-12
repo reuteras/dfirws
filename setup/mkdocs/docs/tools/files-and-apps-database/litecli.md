@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Database
 
+**Homepage:** <https://github.com/dbcli/litecli>
+
+**Vendor:** dbcli
+
+**License:** [BSD](https://github.com/dbcli/litecli/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,6 +6,7 @@
 
 **Vendor:** audacity
 
+**License:** [See repository](https://github.com/audacity/audacity/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

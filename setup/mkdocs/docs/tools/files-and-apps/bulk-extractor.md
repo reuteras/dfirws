@@ -6,7 +6,7 @@
 
 **Vendor:** Digital Corpora
 
-**License:** Open source
+**License:** [Open source](https://github.com/simsong/bulk_extractor/blob/main/LICENSE.md)
 
 **Source:** HTTP
 

@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://pypi.org/project/protodeep/>
+
+**Vendor:** mxrch
+
+**License:** [MIT](https://pypi.org/project/protodeep/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

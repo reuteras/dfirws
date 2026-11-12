@@ -6,7 +6,7 @@
 
 **Vendor:** pawlaszczyk
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/pawlaszczyk/fqlite/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

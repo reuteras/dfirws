@@ -6,6 +6,7 @@
 
 **Vendor:** mgeeky
 
+**License:** [See repository](https://github.com/mgeeky/msidump)
 
 **Source:** Python
 

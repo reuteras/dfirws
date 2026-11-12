@@ -6,6 +6,7 @@
 
 **Vendor:** streetsidesoftware
 
+**License:** [MIT](https://github.com/vscode-shellcheck/vscode-shellcheck/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

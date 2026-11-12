@@ -6,7 +6,7 @@
 
 **Vendor:** Google
 
-**License:** Apache License 2.0
+**License:** [Apache License 2.0](https://developer.android.com/studio/terms)
 
 **Source:** HTTP
 

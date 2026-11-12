@@ -6,6 +6,7 @@
 
 **Vendor:** LibreOffice
 
+**License:** [See repository](https://github.com/LibreOffice/dictionaries)
 
 **Source:** Git
 

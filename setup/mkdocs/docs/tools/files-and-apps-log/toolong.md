@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Log
 
+**Homepage:** <https://github.com/textualize/toolong>
+
+**Vendor:** Textualize
+
+**License:** [MIT](https://github.com/Textualize/toolong/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,7 +6,7 @@
 
 **Vendor:** java-decompiler
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/java-decompiler/jd-gui/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

@@ -6,7 +6,7 @@
 
 **Vendor:** skylot
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/skylot/jadx/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

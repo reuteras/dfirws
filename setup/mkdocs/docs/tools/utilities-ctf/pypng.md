@@ -2,6 +2,12 @@
 
 **Category:** Utilities / CTF
 
+**Homepage:** <https://gitlab.com/drj11/pypng>
+
+**Vendor:** David Jones
+
+**License:** [MIT](https://pypi.org/project/pypng/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

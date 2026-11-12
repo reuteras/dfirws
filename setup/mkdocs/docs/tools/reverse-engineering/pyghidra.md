@@ -2,6 +2,12 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <https://github.com/NationalSecurityAgency/ghidra>
+
+**Vendor:** NationalSecurityAgency
+
+**License:** [Apache-2.0](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

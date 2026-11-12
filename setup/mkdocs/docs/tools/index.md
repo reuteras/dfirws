@@ -155,7 +155,7 @@ Categories generated from dfirws shortcuts.
 | [DotNet 10 Desktop Runtime](./programming-dotnet/dotnet-10-desktop-runtime.md) | Installer | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 10.0. | dotnet |  |  |
 | [DotNet 8 Desktop Runtime](./programming-dotnet/dotnet-8-desktop-runtime.md) | Winget | The .NET Desktop Runtime enables you to run existing Windows desktop applications. This release includes the .NET Runtime; you don't need to install it separately. Version 8.0. | dotnet |  |  |
 | [dotnetfile](./programming-dotnet/dotnetfile.md) | Git | dotnetfile is a Common Language Runtime (CLR) header parser library for Windows .NET files built in Python. The CLR header is present in every Windows .NET assembly beside the Portable Executable (PE) header. It stores a plethora of metadata information for the managed part of the file. | pe-analysis, dotnet |  |  |
-| [dotnetfile](./programming-dotnet/dotnetfile-2.md) | Python | import dotnetfile | pe-analysis, dotnet | `.exe`, `.dll` |  |
+| [dotnetfile (Python package)](./programming-dotnet/dotnetfile-python-package.md) | Python | import dotnetfile | pe-analysis, dotnet | `.exe`, `.dll` |  |
 | [dpkt](./network/dpkt.md) | Python | import dpkt | network-analysis, pcap, protocol-analysis | `.pcap`, `.pcapng` |  |
 | [DSpellCheck](./editors/dspellcheck.md) | GitHub Release | A spell-checker plugin for Notepad++. | text-editor, plugins |  |  |
 | [dsq](./files-and-apps-database/dsq.md) | GitHub Release | Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more. | data-processing, database, json, csv | `.json`, `.csv`, `.tsv`, `.parquet` |  |
@@ -207,12 +207,12 @@ Categories generated from dfirws shortcuts.
 | [GoLang](./programming-go/golang.md) | Installer | Go programming language. |  |  |  |
 | [Google Earth Pro](./utilities/google-earth-pro.md) | Winget | Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features. | geolocation, osint, visualization | `.kml`, `.kmz` | Full only |
 | [gootloader](./malware-tools-gootloader/gootloader.md) | Git | Collection of scripts used to deobfuscate GOOTLOADER malware samples. | malware-analysis |  |  |
-| [GoReSym](./programming-go/goresym.md) | Git | Go symbol recovery tool | reverse-engineering, golang |  |  |
-| [GoReSym](./programming-go/goresym-2.md) | GitHub Release | Go symbol recovery tool. | reverse-engineering, golang | `.exe`, `.elf` |  |
+| [GoReSym](./programming-go/goresym.md) | GitHub Release | Go symbol recovery tool. | reverse-engineering, golang | `.exe`, `.elf` |  |
+| [GoReSym (git repository)](./programming-go/goresym-git-repository.md) | Git | Go symbol recovery tool | reverse-engineering, golang |  |  |
 | [gostringungarbler](./programming-go/gostringungarbler.md) | Git | Python tool to resolve all strings in Go binaries obfuscated by garble. | reverse-engineering, golang, deobfuscation |  |  |
 | [Gpg4win](./utilities-cryptography/gpg4win.md) | HTTP | Gpg4win provides GnuPG and related tools for Windows. | encryption | `.gpg`, `.asc`, `.pgp` |  |
 | [Graphviz](./utilities/graphviz.md) | HTTP | Graphviz is a graph visualization software suite. | visualization, graph | `.dot`, `.gv` |  |
-| [graphviz](./utilities/graphviz-2.md) | Python | dot -Tpng graph.dot -o graph.png | visualization, graph | `.dot`, `.gv` |  |
+| [graphviz (Python package)](./utilities/graphviz-python-package.md) | Python | dot -Tpng graph.dot -o graph.png | visualization, graph | `.dot`, `.gv` |  |
 | [grip](./utilities/grip.md) | Python | Render local readme files before sending off to GitHub. | markdown, viewer | `.md` |  |
 | [gron](./files-and-apps-log/gron.md) | GitHub Release | gron makes JSON greppable by transforming it into discrete assignments that can be easily searched and filtered using standard command-line tools. | json, data-processing, search | `.json` |  |
 | [gti-dev-kit](./signatures-and-information-online-tools/gti-dev-kit.md) | Git | The Google Threat Intelligence dev kit is a collection of example code to quickly develop functional integrations with the GTI API, enabling a unified view of the threat landscape and reducing manual effort in threat analysis. | malware-detection, threat-intelligence |  |  |
@@ -270,6 +270,8 @@ Categories generated from dfirws shortcuts.
 | [maldump](./malware-tools/maldump.md) | Python | Maldump makes it easy to extract quarantined files of multiple AVs from a live system or a mounted disk image. | malware-analysis, malware-detection |  |  |
 | [malware-bazaar-advanced-search](./signatures-and-information-online-tools/malware-bazaar-advanced-search.md) | Git | Script to chain search parameters for MalwareBazaar | malware-analysis, threat-intelligence |  |  |
 | [malwarebazaar](./signatures-and-information-online-tools/malwarebazaar.md) | Python | CLI wrapper for malware bazaar API (bazaar.abuse.ch) and YARAify API (yaraify.abuse.ch) | malware-analysis, threat-intelligence, ioc-scanner |  |  |
+| [marimo](./utilities/marimo.md) | Python | Reactive Python notebook stored as plain .py files. | python, data-processing, visualization |  |  |
+| [marimo-pair](./utilities/marimo-pair.md) | Git | Agent skill that lets an AI agent such as opencode-ai run code inside a live marimo notebook session. | ai, python, automation |  |  |
 | [markitdown](./utilities/markitdown.md) | Python | Utility tool for converting various files to Markdown. | conversion, markdown, data-extraction, office | `.docx`, `.xlsx`, `.pptx`, `.pdf`, `.html` |  |
 | [MasterParser](./files-and-apps-log/masterparser.md) | Git | MasterParser is a powerful DFIR tool designed for analyzing and parsing Linux logs | log-analysis, linux, security-testing | `.log` |  |
 | [matplotlib](./programming-python/matplotlib.md) | Python | import matplotlib.pyplot as plt | visualization |  |  |
@@ -298,7 +300,7 @@ Categories generated from dfirws shortcuts.
 | [mwcp](./malware-analysis/mwcp.md) | Python | A framework for malware configuration parsers. | malware-analysis, data-extraction | `.exe`, `.dll`, `.bin` |  |
 | [name-that-hash](./utilities-cryptography/name-that-hash.md) | Python | The Modern Hash Identification System. | hashing, file-analysis |  |  |
 | [Neo4j](./files-and-apps-database/neo4j.md) | HTTP | Neo4j is a graph database. | database, graph, visualization |  | Full only |
-| [neo4j](./files-and-apps-database/neo4j-2.md) | Python | from neo4j import GraphDatabase | database, graph |  |  |
+| [neo4j (Python driver)](./files-and-apps-database/neo4j-python-driver.md) | Python | from neo4j import GraphDatabase | database, graph |  |  |
 | [Neovim](./editors/neovim.md) | Winget | Neovim is a terminal-based text editor that can be used for editing scripts, notes, and other text files. It is a fork of Vim with additional features and improvements. | text-editor, code-editor, terminal | `.txt`, `.md`, `.log`, `.ps1`, `.py`, `.rb`, `.js` |  |
 | [Nerd Fonts](./utilities/nerd-fonts.md) | GitHub Release | Nerd Fonts for terminal and more. | terminal | `.ttf`, `.otf` |  |
 | [netaddr](./network/netaddr.md) | Python | A network address manipulation library for Python. | network |  |  |
@@ -348,7 +350,6 @@ Categories generated from dfirws shortcuts.
 | [PolarProxy](./network-proxies/polarproxy.md) | HTTP | PolarProxy is a transparent TLS and SSL inspection proxy created for incident responders, malware analysts and security researchers. | network-analysis, proxy | `.pcap`, `.pcapng` | Full only |
 | [PowerDecode](./programming-powershell/powerdecode.md) | Git | PowerDecode is a PowerShell-based tool that allows to deobfuscate PowerShell scripts obfuscated across multiple layers. The tool performs code dynamic analysis, extracting malware hosting URLs and checking http response.It can also detect if the malware attempts to inject shellcode into memory. | powershell, deobfuscation, malware-analysis |  |  |
 | [PowerShell](./programming-powershell/powershell.md) | GitHub Release | PowerShell is a task automation and configuration management framework from Microsoft. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
-| [PowerShell 7](./programming-powershell/powershell-7.md) | Winget | PowerShell 7 is a cross-platform shell and scripting language that provides a powerful command-line interface and automation capabilities. | scripting, shell, automation | `.ps1`, `.psm1`, `.psd1` |  |
 | [PowerSponse](./ir/powersponse.md) | Git | PowerSponse is a PowerShell module focused on targeted containment and remediation during incident response. | incident-response, powershell |  |  |
 | [ppdeep](./signatures-and-information/ppdeep.md) | Python | import ppdeep | hashing, fuzzy-hashing, binary-diffing |  |  |
 | [Prefetch Browser](./os-windows/prefetch-browser.md) | GitHub Release | Prefetch Browser is a tool for analyzing Windows Prefetch files, which can provide valuable information about program execution and system activity. | windows, forensics, filesystem | `.pf` |  |
@@ -392,13 +393,11 @@ Categories generated from dfirws shortcuts.
 | [qpdf](./files-and-apps-pdf/qpdf.md) | GitHub Release | qpdf: A content-preserving PDF document transformer | pdf, data-processing | `.pdf` |  |
 | [qrtool](./files-and-apps/qrtool.md) | GitHub Release | Tool for decoding QR codes from images | encoding, decoding | `.png`, `.svg` |  |
 | [quickadd](./editors/quickadd.md) | GitHub Release | Obsidian quickadd plugin. | markdown, automation, plugins |  | Full only |
-| [r2ai](./reverse-engineering/r2ai.md) | Git | Native AI plugin for radare2. Compiled from source in the MSYS2 sandbox using gcc and pkg-config. Provides AI-assisted analysis using local and remote language models. | reverse-engineering, ai | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
-| [r2ai](./reverse-engineering/r2ai-2.md) | GitHub Release | LLM-based reversing for radare2. | reverse-engineering, mcp, ai | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [Radare2](./reverse-engineering/radare2.md) | GitHub Release | UNIX-like reverse engineering framework and command-line toolset | reverse-engineering, disassembler, debugging | `.exe`, `.dll`, `.elf`, `.bin`, `.so`, `.mach-o` |  |
 | [radare2-deep-graph](./reverse-engineering/radare2-deep-graph.md) | Git | A Cutter plugin to generate radare2 graphs. | reverse-engineering, visualization, plugins |  |  |
 | [radare2-mcp](./reverse-engineering/radare2-mcp.md) | GitHub Release | MCP stdio server for radare2. Enables AI assistants to interact with radare2 for binary analysis. Known issue: Windows binary may crash with stack overflow (GitHub issue #24). | reverse-engineering, mcp, ai | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
-| [RdpCacheStitcher](./files-and-apps-rdp/rdpcachestitcher.md) | Git | RdpCacheStitcher is a tool that supports forensic analysts in reconstructing useful images out of RDP cache bitmaps. | forensics, network, windows, disk-forensics |  |  |
 | [RDPCacheStitcher](./forensics/rdpcachestitcher.md) | GitHub Release | RdpCacheStitcher is a tool for analyzing RDP cache files. | network, forensics, windows | `.bmc`, `.bin` |  |
+| [RdpCacheStitcher (git repository)](./files-and-apps-rdp/rdpcachestitcher-git-repository.md) | Git | RdpCacheStitcher is a tool that supports forensic analysts in reconstructing useful images out of RDP cache bitmaps. | forensics, network, windows, disk-forensics |  |  |
 | [readpe](./files-and-apps-pe/readpe.md) | GitHub Release | The PE file analysis toolkit | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
 | [Recaf](./programming-java/recaf.md) | GitHub Release | Recaf is a modern Java bytecode editor. | reverse-engineering, java, decompiler, deobfuscation | `.class`, `.jar` | Full only |
 | [recbin](./os-windows/recbin.md) | HTTP | recbin parses Windows Recycle Bin files. | binary-analysis, carving | `.bin` |  |
@@ -474,7 +473,7 @@ Categories generated from dfirws shortcuts.
 | [VS Code Spell Checker](./editors/vs-code-spell-checker.md) | GitHub Release | Visual Studio Code Spell Checker extension. | text-editor, plugins |  |  |
 | [vscode-shellcheck](./editors/vscode-shellcheck.md) | GitHub Release | Shellcheck extension for VS Code. | text-editor, scripting, plugins |  | Full only |
 | [White-Phoenix](./forensics/white-phoenix.md) | Git | A tool to recover content from files encrypted with intermittent encryption | ransomware, decryption, data-recovery |  | Full only |
-| [white-phoenix](./ir/white-phoenix.md) | Python | White-Phoenix is a tool that recovers content from files encrypted by Ransomware using intermittent encryption. It is designed to help incident responders and forensic analysts to retrieve data from encrypted files when the decryption key is not available. | ransomware, encryption, decryption, forensics, data-recovery | `.encrypted`, `.locked`, `.enc` |  |
+| [White-Phoenix (venv)](./ir/white-phoenix-venv.md) | Python | White-Phoenix is a tool that recovers content from files encrypted by Ransomware using intermittent encryption. It is designed to help incident responders and forensic analysts to retrieve data from encrypted files when the decryption key is not available. | ransomware, encryption, decryption, forensics, data-recovery | `.encrypted`, `.locked`, `.enc` |  |
 | [Win API Search](./development/win-api-search.md) | HTTP | Win API Search is a tool for searching Windows API functions. | reverse-engineering, windows |  |  |
 | [WinDbg](./reverse-engineering/windbg.md) | Winget | WinDbg is a powerful debugger from Microsoft that can be used for analyzing crash dumps, debugging applications, and performing memory forensics. It is commonly used in incident response and malware analysis to investigate system crashes and analyze the behavior of malicious software. | debugging, memory-forensics, windows | `.dmp`, `.exe`, `.dll`, `.sys` |  |
 | [Windows Terminal (Canary)](./utilities/windows-terminal-canary.md) | HTTP | Windows Terminal Canary package. | terminal, shell |  |  |
@@ -505,6 +504,7 @@ Categories generated from dfirws shortcuts.
 | [YARA Forge Rules Extended](./enrichment-yara/yara-forge-rules-extended.md) | Enrichment | YARA Forge extended ruleset - broader set of YARA rules beyond the core set. | yara, detection-rules, malware-detection | `.yar`, `.zip` |  |
 | [YARA Forge Rules Full](./enrichment-yara/yara-forge-rules-full.md) | Enrichment | YARA Forge full ruleset - comprehensive collection of all available YARA rules. | yara, detection-rules, malware-detection | `.yar`, `.zip` |  |
 | [yara-python](./signatures-and-information/yara-python.md) | Python | import yara; rules = yara.compile('rules.yar') | yara, malware-analysis, detection | `.yar`, `.yara` |  |
+| [yara-rule-skill](./malware-analysis/yara-rule-skill.md) | Git | Agent skill for writing, reviewing and optimizing YARA rules, with quality checks based on yaraQA. | ai, yara, malware-analysis | `.yar`, `.yara` |  |
 | [yara-x](./signatures-and-information/yara-x.md) | GitHub Release | yara-x is a faster and more flexible version of YARA. | yara, malware-analysis, detection, detection-rules | `.yar`, `.yara`, `.exe`, `.dll`, `.bin` |  |
 | [yq](./signatures-and-information/yq.md) | GitHub Release | yq is a portable command-line YAML, JSON, XML, CSV, TOML and properties processor. | yaml, data-processing, cli | `.yaml`, `.yml`, `.json`, `.xml`, `.toml` |  |
 | [zaproxy](./network/zaproxy.md) | GitHub Release | The Zed Attack Proxy (ZAP) by Checkmarx is the world’s most widely used web app scanner. Free and open source. A community based GitHub Top 1000 project that anyone can contribute to. | web, security-testing, network |  | Full only |

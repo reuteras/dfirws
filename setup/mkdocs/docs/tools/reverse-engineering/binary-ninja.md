@@ -6,7 +6,7 @@
 
 **Vendor:** Vector 35
 
-**License:** Proprietary
+**License:** [Proprietary](https://binary.ninja/)
 
 **Source:** HTTP
 

@@ -2,6 +2,12 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <https://www.keystone-engine.org>
+
+**Vendor:** Nguyen Anh Quynh
+
+**License:** [BSD](https://pypi.org/project/keystone-engine/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

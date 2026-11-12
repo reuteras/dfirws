@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / PE
 
+**Homepage:** <https://github.com/d0c-s4vage/pfp>
+
+**Vendor:** d0c-s4vage
+
+**License:** [MIT](https://github.com/d0c-s4vage/pfp/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

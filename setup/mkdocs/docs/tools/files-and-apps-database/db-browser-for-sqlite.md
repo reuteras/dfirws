@@ -6,6 +6,7 @@
 
 **Vendor:** sqlitebrowser
 
+**License:** [See repository](https://github.com/sqlitebrowser/sqlitebrowser/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

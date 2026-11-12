@@ -6,7 +6,7 @@
 
 **Vendor:** rizinorg
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/rizinorg/cutter/blob/dev/COPYING)
 
 **Source:** GitHub Release
 

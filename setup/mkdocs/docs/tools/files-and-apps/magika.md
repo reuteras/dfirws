@@ -2,6 +2,12 @@
 
 **Category:** Files and apps
 
+**Homepage:** <https://github.com/google/magika>
+
+**Vendor:** google
+
+**License:** [Apache-2.0](https://github.com/google/magika/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

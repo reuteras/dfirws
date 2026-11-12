@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://github.com/DissectMalware/pyOneNote>
+
+**Vendor:** DissectMalware
+
+**License:** [Apache-2.0](https://github.com/DissectMalware/pyOneNote/blob/main/license)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

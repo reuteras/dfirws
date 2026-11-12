@@ -6,6 +6,7 @@
 
 **Vendor:** ryanoasis
 
+**License:** [See repository](https://github.com/ryanoasis/nerd-fonts/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

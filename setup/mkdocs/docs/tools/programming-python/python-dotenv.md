@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/theskumar/python-dotenv>
+
+**Vendor:** theskumar
+
+**License:** [BSD-3-Clause](https://github.com/theskumar/python-dotenv/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <http://www.python-excel.org/>
+
+**Vendor:** Chris Withers
+
+**License:** [BSD](https://pypi.org/project/xlrd/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

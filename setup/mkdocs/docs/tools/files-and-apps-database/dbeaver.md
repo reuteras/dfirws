@@ -6,7 +6,7 @@
 
 **Vendor:** dbeaver
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/dbeaver/dbeaver/blob/devel/LICENSE.md)
 
 **Source:** GitHub Release
 

@@ -2,9 +2,11 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/>
+
 **Vendor:** Microsoft
 
-**License:** Proprietary
+**License:** [Proprietary](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/)
 
 **Source:** Winget
 

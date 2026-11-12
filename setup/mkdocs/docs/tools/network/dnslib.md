@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://github.com/paulc/dnslib>
+
+**Vendor:** paulc
+
+**License:** [BSD](https://github.com/paulc/dnslib/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

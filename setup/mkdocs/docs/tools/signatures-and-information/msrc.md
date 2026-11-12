@@ -6,6 +6,7 @@
 
 **Vendor:** reuteras
 
+**License:** [See repository](https://github.com/reuteras/MSRC)
 
 **Source:** Git
 

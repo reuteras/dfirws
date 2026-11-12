@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Disk
 
+**Homepage:** <https://github.com/msuhanov/dfir_ntfs>
+
+**Vendor:** msuhanov
+
+**License:** [GPL-3.0](https://github.com/msuhanov/dfir_ntfs/blob/master/License)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

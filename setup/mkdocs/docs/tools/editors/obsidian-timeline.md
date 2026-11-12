@@ -6,7 +6,7 @@
 
 **Vendor:** George-debug
 
-**License:** MIT
+**License:** [MIT](https://github.com/George-debug/obsidian-timeline/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

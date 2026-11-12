@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://silentvoid13.github.io/Templater>
 
-**Vendor:** George-debug
+**Vendor:** SilentVoid13
 
-**License:** MIT
+**License:** [AGPL-3.0](https://github.com/SilentVoid13/Templater/blob/master/LICENSE.TXT)
 
 **Source:** GitHub Release
 

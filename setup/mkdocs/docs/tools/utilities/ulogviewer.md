@@ -6,7 +6,7 @@
 
 **Vendor:** Carina Studio
 
-**License:** MIT
+**License:** [MIT](https://github.com/carina-studio/ULogViewer/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

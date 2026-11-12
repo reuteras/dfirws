@@ -6,7 +6,7 @@
 
 **Vendor:** hashcat
 
-**License:** MIT License
+**License:** [MIT License](https://github.com/hashcat/hashcat/blob/master/docs/license.txt)
 
 **Source:** HTTP
 

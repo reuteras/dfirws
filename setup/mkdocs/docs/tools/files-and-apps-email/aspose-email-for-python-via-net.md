@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Email
 
+**Homepage:** <https://products.aspose.com/email/python-net>
+
+**Vendor:** Aspose
+
+**License:** [See repository](https://pypi.org/project/Aspose.Email-for-Python-via-Net/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

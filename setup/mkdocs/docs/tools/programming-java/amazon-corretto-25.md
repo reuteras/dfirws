@@ -6,7 +6,7 @@
 
 **Vendor:** Amazon
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)
 
 **Source:** Installer
 

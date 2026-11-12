@@ -6,7 +6,7 @@
 
 **Vendor:** The Document Foundation
 
-**License:** Mozilla Public License 2.0
+**License:** [Mozilla Public License 2.0](https://www.libreoffice.org/about-us/licenses/)
 
 **Source:** HTTP
 

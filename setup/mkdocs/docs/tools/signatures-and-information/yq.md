@@ -6,7 +6,7 @@
 
 **Vendor:** mikefarah
 
-**License:** MIT
+**License:** [MIT](https://github.com/mikefarah/yq/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

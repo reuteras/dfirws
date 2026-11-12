@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/eerimoq/bitstruct>
+
+**Vendor:** eerimoq
+
+**License:** [MIT](https://github.com/eerimoq/bitstruct/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

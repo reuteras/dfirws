@@ -6,7 +6,7 @@
 
 **Vendor:** dnSpyEx
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/dnSpyEx/dnSpy/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

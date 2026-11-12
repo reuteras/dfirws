@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/davidbrochart/jpterm>
+
+**Vendor:** davidbrochart
+
+**License:** [MIT](https://github.com/davidbrochart/jpterm/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -2,6 +2,12 @@
 
 **Category:** Forensics
 
+**Homepage:** <https://github.com/binref/refinery/>
+
+**Vendor:** binref
+
+**License:** [See repository](https://github.com/binref/refinery/blob/master/LICENSE.md)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -2,6 +2,12 @@
 
 **Category:** Files and apps
 
+**Homepage:** <http://github.com/ahupp/python-magic>
+
+**Vendor:** ahupp
+
+**License:** [MIT](https://github.com/ahupp/python-magic/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

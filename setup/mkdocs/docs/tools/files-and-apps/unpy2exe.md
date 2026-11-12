@@ -2,6 +2,12 @@
 
 **Category:** Files and apps
 
+**Homepage:** <http://github.com/matiasb/unpy2exe>
+
+**Vendor:** matiasb
+
+**License:** [MIT](https://github.com/matiasb/unpy2exe/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

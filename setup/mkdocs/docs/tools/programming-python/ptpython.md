@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/prompt-toolkit/ptpython>
+
+**Vendor:** prompt-toolkit
+
+**License:** [BSD](https://github.com/prompt-toolkit/ptpython/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,6 +6,7 @@
 
 **Vendor:** Sleuth Kit
 
+**License:** [See repository](https://github.com/sleuthkit/autopsy_addon_modules)
 
 **Source:** Git
 

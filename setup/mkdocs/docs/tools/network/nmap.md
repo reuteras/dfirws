@@ -6,7 +6,7 @@
 
 **Vendor:** Nmap Project
 
-**License:** Nmap Public Source License
+**License:** [Nmap Public Source License](https://nmap.org/npsl/)
 
 **Source:** HTTP
 

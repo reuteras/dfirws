@@ -2,6 +2,12 @@
 
 **Category:** Utilities / CTF
 
+**Homepage:** <https://github.com/ragibson/Steganography>
+
+**Vendor:** ragibson
+
+**License:** [MIT](https://github.com/ragibson/Steganography/blob/master/LICENSE.md)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

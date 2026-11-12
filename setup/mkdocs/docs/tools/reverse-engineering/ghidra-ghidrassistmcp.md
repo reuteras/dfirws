@@ -6,7 +6,7 @@
 
 **Vendor:** jtang613
 
-**License:** MIT License
+**License:** [MIT License](https://github.com/symgraph/GhidrAssistMCP/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

@@ -6,7 +6,7 @@
 
 **Vendor:** BurntSushi
 
-**License:** Unlicense
+**License:** [Unlicense](https://github.com/BurntSushi/ripgrep/blob/master/UNLICENSE)
 
 **Source:** GitHub Release
 

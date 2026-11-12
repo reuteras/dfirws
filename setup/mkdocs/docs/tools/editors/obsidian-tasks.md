@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://publish.obsidian.md/tasks/>
 
-**Vendor:** George-debug
+**Vendor:** obsidian-tasks-group
 
-**License:** MIT
+**License:** [MIT](https://github.com/obsidian-tasks-group/obsidian-tasks/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

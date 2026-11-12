@@ -6,7 +6,7 @@
 
 **Vendor:** Konloch
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/Konloch/bytecode-viewer/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

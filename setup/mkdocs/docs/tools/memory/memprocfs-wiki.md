@@ -6,7 +6,7 @@
 
 **Vendor:** Ulf Frisk
 
-**License:** AGPL-3.0 License
+**License:** [AGPL-3.0 License](https://github.com/ufrisk/MemProcFS/blob/master/LICENSE)
 
 **Source:** Git
 

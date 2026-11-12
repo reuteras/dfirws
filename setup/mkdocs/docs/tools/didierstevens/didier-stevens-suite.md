@@ -6,7 +6,7 @@
 
 **Vendor:** Didier Stevens
 
-**License:** Unknown
+**License:** [Unknown](https://github.com/DidierStevens/DidierStevensSuite)
 
 **Source:** HTTP
 

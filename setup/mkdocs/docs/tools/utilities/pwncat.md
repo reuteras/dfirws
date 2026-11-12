@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://pwncat.org/>
+
+**Vendor:** cytopia
+
+**License:** [MIT](https://github.com/cytopia/pwncat/blob/master/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

@@ -6,7 +6,7 @@
 
 **Vendor:** BtbN
 
-**License:** MIT
+**License:** [MIT](https://github.com/FFmpeg-Builds/FFmpeg-Builds/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

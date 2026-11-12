@@ -6,7 +6,7 @@
 
 **Vendor:** lkarlslund
 
-**License:** AGPL-3.0
+**License:** [AGPL-3.0](https://github.com/lkarlslund/Adalanche/blob/master/license.MD)
 
 **Source:** GitHub Release
 

@@ -6,6 +6,7 @@
 
 **Vendor:** streetsidesoftware
 
+**License:** [See repository](https://github.com/streetsidesoftware/vscode-spell-checker/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

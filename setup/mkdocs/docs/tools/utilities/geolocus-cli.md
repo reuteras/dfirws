@@ -6,7 +6,7 @@
 
 **Vendor:** hrbrmstr
 
-**License:** MIT License
+**License:** [MIT License](https://codeberg.org/hrbrmstr/geolocus-cli/src/branch/main/LICENSE)
 
 **Source:** HTTP
 

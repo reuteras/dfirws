@@ -6,7 +6,7 @@
 
 **Vendor:** jakehildreth
 
-**License:** <https://github.com/jakehildreth/BlueTuxedo/blob/main/LICENSE>
+**License:** [See repository](https://github.com/jakehildreth/BlueTuxedo/blob/main/LICENSE)
 
 **Source:** Git
 

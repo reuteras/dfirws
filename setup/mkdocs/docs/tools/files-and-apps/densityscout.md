@@ -6,7 +6,7 @@
 
 **Vendor:** CERT.at
 
-**License:** Freeware
+**License:** [Freeware](https://cert.at/en/downloads/software/software-densityscout)
 
 **Source:** HTTP
 

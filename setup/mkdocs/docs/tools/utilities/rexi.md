@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/royreznik/rexi>
+
+**Vendor:** royreznik
+
+**License:** [MIT](https://github.com/royreznik/rexi/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

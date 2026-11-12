@@ -6,7 +6,7 @@
 
 **Vendor:** Astral
 
-**License:** MIT and Apache-2
+**License:** [MIT and Apache-2](https://github.com/NationalSecurityAgency/ghidra/blob/master/LICENSE)
 
 **Source:** Installer
 

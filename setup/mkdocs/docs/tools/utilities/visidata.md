@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://visidata.org>
+
+**Vendor:** saulpw
+
+**License:** [GPL-3.0-only](https://github.com/saulpw/visidata/blob/develop/LICENSE.gpl3)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

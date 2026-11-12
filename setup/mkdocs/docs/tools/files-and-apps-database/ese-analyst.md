@@ -6,6 +6,7 @@
 
 **Vendor:** MarkBaggett
 
+**License:** [See repository](https://github.com/MarkBaggett/ese-analyst)
 
 **Source:** Git
 

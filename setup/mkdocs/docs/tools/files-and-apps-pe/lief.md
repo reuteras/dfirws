@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / PE
 
+**Homepage:** <https://lief-project.github.io/>
+
+**Vendor:** lief-project
+
+**License:** [Apache-2.0](https://github.com/lief-project/LIEF/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

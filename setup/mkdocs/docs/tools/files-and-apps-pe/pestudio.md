@@ -6,7 +6,7 @@
 
 **Vendor:** Winitor
 
-**License:** Proprietary
+**License:** [Proprietary](https://www.winitor.com/)
 
 **Source:** HTTP
 

@@ -6,6 +6,7 @@
 
 **Vendor:** eneam
 
+**License:** [See repository](https://github.com/eneam/mboxviewer/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

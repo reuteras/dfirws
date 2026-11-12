@@ -6,7 +6,7 @@
 
 **Vendor:** MarkBaggett
 
-**License:** GPL-3.0
+**License:** [GPL-3.0](https://github.com/MarkBaggett/srum-dump/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

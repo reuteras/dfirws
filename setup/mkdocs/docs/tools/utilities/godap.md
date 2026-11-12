@@ -6,7 +6,7 @@
 
 **Vendor:** Macmod
 
-**License:** MIT
+**License:** [MIT](https://github.com/Macmod/godap/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

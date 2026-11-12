@@ -6,7 +6,7 @@
 
 **Vendor:** Graphviz
 
-**License:** Eclipse Public License 1.0
+**License:** [Eclipse Public License 1.0](https://graphviz.org/license/)
 
 **Source:** HTTP
 

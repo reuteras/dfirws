@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Log
 
+**Homepage:** <https://github.com/Koifman/LUMEN>
+
+**Vendor:** Koifman
+
+**License:** [MIT](https://github.com/Koifman/LUMEN/blob/main/LICENSE)
+
 **Source:** npm
 
 **Profiles:** Full, Basic

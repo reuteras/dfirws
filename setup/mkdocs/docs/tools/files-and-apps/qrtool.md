@@ -6,6 +6,7 @@
 
 **Vendor:** sorairolake
 
+**License:** [See repository](https://github.com/sorairolake/qrtool)
 
 **Source:** GitHub Release
 

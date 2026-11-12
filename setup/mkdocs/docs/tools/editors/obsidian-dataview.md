@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://blacksmithgu.github.io/obsidian-dataview/>
 
-**Vendor:** George-debug
+**Vendor:** blacksmithgu
 
-**License:** MIT
+**License:** [MIT](https://github.com/blacksmithgu/obsidian-dataview/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

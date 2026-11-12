@@ -6,7 +6,7 @@
 
 **Vendor:** Col-E
 
-**License:** MIT
+**License:** [MIT](https://github.com/Col-E/Recaf/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

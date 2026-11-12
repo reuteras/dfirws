@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://github.com/kootenpv/textsearch>
+
+**Vendor:** kootenpv
+
+**License:** [MIT](https://github.com/kootenpv/textsearch)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

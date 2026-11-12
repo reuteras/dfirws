@@ -6,7 +6,7 @@
 
 **Vendor:** Neo4j
 
-**License:** Neo4j Community License
+**License:** [Neo4j Community License](https://neo4j.com/licensing/)
 
 **Source:** HTTP
 

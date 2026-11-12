@@ -6,7 +6,7 @@
 
 **Vendor:** Elastic
 
-**License:** Elastic License
+**License:** [Elastic License](https://www.elastic.co/licensing/elastic-license)
 
 **Source:** HTTP
 

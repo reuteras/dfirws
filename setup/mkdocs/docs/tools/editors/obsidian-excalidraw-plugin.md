@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://github.com/zsviczian/obsidian-excalidraw-plugin>
 
-**Vendor:** George-debug
+**Vendor:** zsviczian
 
-**License:** MIT
+**License:** [AGPL-3.0](https://github.com/zsviczian/obsidian-excalidraw-plugin/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

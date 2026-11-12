@@ -6,7 +6,7 @@
 
 **Vendor:** PowerShell
 
-**License:** MIT
+**License:** [MIT](https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt)
 
 **Source:** GitHub Release
 

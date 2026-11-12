@@ -6,6 +6,7 @@
 
 **Vendor:** techchipnet
 
+**License:** [See repository](https://github.com/techchipnet/HiddenWave)
 
 **Source:** Git
 

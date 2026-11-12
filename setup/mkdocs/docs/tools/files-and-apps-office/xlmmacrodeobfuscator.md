@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://github.com/DissectMalware/XLMMacroDeobfuscator>
+
+**Vendor:** DissectMalware
+
+**License:** [Apache-2.0](https://github.com/DissectMalware/XLMMacroDeobfuscator/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

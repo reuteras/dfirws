@@ -6,6 +6,7 @@
 
 **Vendor:** upx
 
+**License:** [See repository](https://github.com/upx/upx/blob/devel/LICENSE)
 
 **Source:** GitHub Release
 

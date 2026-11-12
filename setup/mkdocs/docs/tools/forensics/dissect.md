@@ -2,6 +2,12 @@
 
 **Category:** Forensics
 
+**Homepage:** <https://dissect.tools>
+
+**Vendor:** fox-it
+
+**License:** [AGPL-3.0-or-later](https://github.com/fox-it/dissect/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

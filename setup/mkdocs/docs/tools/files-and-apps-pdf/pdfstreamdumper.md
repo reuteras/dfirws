@@ -6,7 +6,7 @@
 
 **Vendor:** Sandsprite
 
-**License:** Proprietary
+**License:** [Proprietary](https://sandsprite.com/tools.php?id=17)
 
 **Source:** HTTP
 

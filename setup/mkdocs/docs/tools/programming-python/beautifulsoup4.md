@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://www.crummy.com/software/BeautifulSoup/bs4/>
+
+**Vendor:** Leonard Richardson
+
+**License:** [MIT](https://pypi.org/project/BeautifulSoup4/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

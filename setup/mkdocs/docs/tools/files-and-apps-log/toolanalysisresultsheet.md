@@ -6,6 +6,7 @@
 
 **Vendor:** JPCERTCC
 
+**License:** [See repository](https://github.com/JPCERTCC/ToolAnalysisResultSheet)
 
 **Source:** Git
 

@@ -6,7 +6,7 @@
 
 **Vendor:** Netresec
 
-**License:** free edition
+**License:** [free edition](https://www.netresec.com/?page=NetworkMiner)
 
 **Source:** HTTP
 

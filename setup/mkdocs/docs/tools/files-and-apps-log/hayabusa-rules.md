@@ -6,6 +6,7 @@
 
 **Vendor:** Yamato-Security
 
+**License:** [See repository](https://github.com/Yamato-Security/hayabusa-rules/blob/main/LICENSE.md)
 
 **Source:** Git
 

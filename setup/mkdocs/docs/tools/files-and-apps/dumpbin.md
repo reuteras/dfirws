@@ -6,6 +6,7 @@
 
 **Vendor:** Delphier
 
+**License:** [See repository](https://github.com/Delphier/dumpbin)
 
 **Source:** GitHub Release
 

@@ -6,6 +6,7 @@
 
 **Vendor:** sleuthkit
 
+**License:** [See repository](https://github.com/sleuthkit/sleuthkit)
 
 **Source:** GitHub Release
 

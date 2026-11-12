@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information / Online tools
 
+**Homepage:** <https://github.com/achillean/shodan-python>
+
+**Vendor:** achillean
+
+**License:** [MIT](https://github.com/achillean/shodan-python/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

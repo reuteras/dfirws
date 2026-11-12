@@ -6,7 +6,7 @@
 
 **Vendor:** omerbenamram
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/omerbenamram/evtx/blob/master/LICENSE-APACHE)
 
 **Source:** GitHub Release
 

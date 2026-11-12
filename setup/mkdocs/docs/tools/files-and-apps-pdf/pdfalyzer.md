@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / PDF
 
+**Homepage:** <https://github.com/michelcrypt4d4mus/pdfalyzer>
+
+**Vendor:** michelcrypt4d4mus
+
+**License:** [GPL-3.0-or-later](https://github.com/michelcrypt4d4mus/pdfalyzer/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

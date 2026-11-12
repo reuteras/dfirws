@@ -2,6 +2,12 @@
 
 **Category:** Utilities
 
+**Homepage:** <https://github.com/nidhaloff/deep_translator>
+
+**Vendor:** nidhaloff
+
+**License:** [MIT](https://github.com/nidhaloff/deep-translator/blob/master/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

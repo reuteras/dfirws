@@ -6,7 +6,7 @@
 
 **Vendor:** Elastic
 
-**License:** Apache-2.0
+**License:** [Apache-2.0](https://github.com/elastic/mcp-server-elasticsearch/blob/main/LICENSE)
 
 **Source:** GitHub Release
 

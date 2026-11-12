@@ -2,6 +2,12 @@
 
 **Category:** Files and apps
 
+**Homepage:** <https://github.com/decalage2/oletools>
+
+**Vendor:** decalage2
+
+**License:** [BSD](https://github.com/decalage2/oletools/blob/master/LICENSE.md)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

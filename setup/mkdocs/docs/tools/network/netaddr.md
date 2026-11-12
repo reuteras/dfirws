@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://github.com/netaddr/netaddr/>
+
+**Vendor:** netaddr
+
+**License:** [BSD](https://github.com/netaddr/netaddr/blob/master/LICENSE.rst)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

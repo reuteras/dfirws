@@ -6,6 +6,7 @@
 
 **Vendor:** fboldewin
 
+**License:** [See repository](https://github.com/fboldewin/reconstructer.org)
 
 **Source:** Git
 

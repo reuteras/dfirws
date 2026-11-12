@@ -2,6 +2,12 @@
 
 **Category:** Reverse Engineering
 
+**Homepage:** <https://frida.re>
+
+**Vendor:** frida
+
+**License:** [LGPL-2.0-or-later WITH WxWindows-exception-3.1](https://github.com/frida/frida-tools/blob/main/COPYING)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

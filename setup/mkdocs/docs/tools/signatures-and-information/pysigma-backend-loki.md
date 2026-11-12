@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://github.com/grafana/pySigma-backend-loki>
+
+**Vendor:** grafana
+
+**License:** [AGPL-3.0-only](https://github.com/grafana/pySigma-backend-loki/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

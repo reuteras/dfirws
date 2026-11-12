@@ -2,11 +2,11 @@
 
 **Category:** Editors
 
-**Homepage:** <https://github.com/George-debug/obsidian-timeline>
+**Homepage:** <https://publish.obsidian.md/kanban/>
 
-**Vendor:** George-debug
+**Vendor:** community-archive
 
-**License:** MIT
+**License:** [GPL-3.0](https://github.com/community-archive/obsidian-kanban/blob/main/LICENSE.md)
 
 **Source:** GitHub Release
 

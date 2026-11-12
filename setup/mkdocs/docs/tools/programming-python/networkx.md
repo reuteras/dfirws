@@ -2,6 +2,12 @@
 
 **Category:** Programming / Python
 
+**Homepage:** <https://networkx.org/>
+
+**Vendor:** networkx
+
+**License:** [BSD-3-Clause](https://github.com/networkx/networkx/blob/main/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

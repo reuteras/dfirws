@@ -2,6 +2,12 @@
 
 **Category:** Utilities / Cryptography
 
+**Homepage:** <https://www.pycryptodome.org>
+
+**Vendor:** Legrandin
+
+**License:** [BSD-2-Clause AND Unlicense AND MIT](https://github.com/Legrandin/pycryptodome/blob/master/LICENSE.rst)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

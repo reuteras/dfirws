@@ -6,7 +6,7 @@
 
 **Vendor:** horsicq
 
-**License:** MIT
+**License:** [MIT](https://github.com/horsicq/XELFViewer/blob/master/LICENSE)
 
 **Source:** GitHub Release
 

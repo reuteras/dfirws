@@ -2,6 +2,12 @@
 
 **Category:** Network
 
+**Homepage:** <https://github.com/CodeLineFi/maclookup-python>
+
+**Vendor:** CodeLine OY
+
+**License:** [MIT](https://pypi.org/project/maclookup/)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

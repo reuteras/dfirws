@@ -2,6 +2,12 @@
 
 **Category:** Memory
 
+**Homepage:** <https://github.com/skelsec/minidump>
+
+**Vendor:** skelsec
+
+**License:** [MIT](https://github.com/skelsec/minidump/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

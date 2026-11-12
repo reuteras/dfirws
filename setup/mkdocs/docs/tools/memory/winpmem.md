@@ -6,7 +6,7 @@
 
 **Vendor:** Velocidex
 
-**License:** Apache License 2.0
+**License:** [Apache License 2.0](https://github.com/Velocidex/c-aff4/blob/master/LICENSE)
 
 **Source:** HTTP
 

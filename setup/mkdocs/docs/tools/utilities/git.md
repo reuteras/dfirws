@@ -6,7 +6,7 @@
 
 **Vendor:** git-for-windows
 
-**License:** <https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses>
+**License:** [See repository](https://github.com/git-for-windows/build-extra/blob/main/ReleaseNotes.md#licenses)
 
 **Source:** Installer
 

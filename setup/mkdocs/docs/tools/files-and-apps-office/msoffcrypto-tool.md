@@ -2,6 +2,12 @@
 
 **Category:** Files and apps / Office
 
+**Homepage:** <https://github.com/nolze/msoffcrypto-tool>
+
+**Vendor:** nolze
+
+**License:** [MIT](https://github.com/nolze/msoffcrypto-tool/blob/master/LICENSE.txt)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

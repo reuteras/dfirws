@@ -2,6 +2,12 @@
 
 **Category:** Signatures and information
 
+**Homepage:** <https://github.com/SigmaHQ/pySigma-backend-sqlite>
+
+**Vendor:** SigmaHQ
+
+**License:** [LGPL-3.0-only](https://github.com/SigmaHQ/pySigma-backend-sqlite/blob/main/LICENSE)
+
 **Source:** Python
 
 **Profiles:** Full, Basic

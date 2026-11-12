@@ -6,6 +6,7 @@
 
 **Vendor:** wader
 
+**License:** [See repository](https://github.com/wader/fq/blob/master/LICENSE)
 
 **Source:** GitHub Release
 
