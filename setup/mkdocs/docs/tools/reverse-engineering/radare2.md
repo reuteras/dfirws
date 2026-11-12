@@ -19,7 +19,7 @@
 UNIX-like reverse engineering framework and command-line toolset
 
 ## Tips
-Type ? for help. Common commands: aaa (analyse), afl (list functions), pdf @ main (disassemble), s (seek), V (visual mode), pdc (pseudo code), iz (strings). Use r2ai or decai for AI assistance.
+Type ? for help. Common commands: aaa (analyse), afl (list functions), pdf @ main (disassemble), s (seek), V (visual mode), pdc (pseudo code), iz (strings).
 
 ## Usage
 radare2 -A <file>

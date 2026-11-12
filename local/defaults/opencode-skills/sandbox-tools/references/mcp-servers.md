@@ -42,12 +42,6 @@ C:\Tools\radare2\bin\radare2.exe -q -c "iz" Desktop\readonly\suspect.exe
 C:\venv\bin\registry-dump.exe Desktop\readonly\NTUSER.DAT
 ```
 
-## Related radare2 plugins (non-MCP)
-
-These are loaded directly by radare2, not as MCP servers:
-
-- **decai** - AI-assisted decompilation plugin (JavaScript, loaded by radare2 directly)
-
 ## Checking MCP server status
 
 To determine if an MCP server is enabled, check the opencode configuration:
