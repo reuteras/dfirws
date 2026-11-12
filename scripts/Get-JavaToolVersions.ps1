@@ -394,7 +394,7 @@ if ($problems.Count -gt 0) {
 }
 
 if ($CsvPath) {
-    $sorted | Export-Csv -Path $CsvPath -NoTypeInformation -Encoding UTF8
+    $sorted | Export-Csv -Path $CsvPath -Encoding UTF8
     Write-Host "Saved $(@($sorted).Count) rows to $CsvPath"
 }
 
