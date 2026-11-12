@@ -18,7 +18,6 @@ $repourls = `
     "https://github.com/ANSSI-FR/bmc-tools.git", `
     "https://github.com/avasero/psexposed.git", `
     "https://github.com/Bert-JanP/Incident-Response-Powershell.git", `
-    "https://github.com/BSI-Bund/RdpCacheStitcher.git", `
     "https://github.com/crypto2011/IDR.git", `
     "https://github.com/cyberark/White-Phoenix.git", `
     "https://github.com/ExeinfoASL/ASL.git", `
@@ -41,7 +40,6 @@ $repourls = `
     "https://github.com/marimo-team/marimo-pair.git", `
     "https://github.com/mkorman90/regipy.git", `
     "https://github.com/mandiant/capa-rules.git", `
-    "https://github.com/mandiant/GoReSym.git", `
     "https://github.com/mandiant/gostringungarbler.git", `
     "https://github.com/mandiant/speakeasy.git", `
     "https://github.com/MarkBaggett/ese-analyst.git", `
@@ -54,7 +52,6 @@ $repourls = `
     "https://github.com/netwho/PacketCircle.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
     "https://github.com/rabbitstack/fibratus.git", `
-    "https://github.com/radareorg/r2ai.git", `
     "https://github.com/reuteras/ai-fs-proxy.git", `
     "https://github.com/reuteras/dfirws-sample-files.git", `
     "https://github.com/reuteras/MSRC.git", `
@@ -435,35 +432,6 @@ $TOOL_DEFINITIONS += @{
 }
 
 $TOOL_DEFINITIONS += @{
-    Name = "RdpCacheStitcher (git repository)"
-    Category = "Files and apps"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Files and apps\RDP\RdpCacheStitcher.lnk"
-            Target   = "`${TOOLS}\RdpCacheStitcher\RdpCacheStitcher.exe"
-            Args     = ""
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("forensics", "network", "windows", "disk-forensics")
-    Notes = "RdpCacheStitcher is a tool that supports forensic analysts in reconstructing useful images out of RDP cache bitmaps."
-    Tips = "Extract tiles with bmc-tools first, then drag tiles into the workspace to reconstruct the screens an attacker saw over RDP. Save the project regularly since large caches take time to work through."
-    Usage = "GUI: start from the desktop shortcut and open the tiles extracted with bmc-tools."
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/BSI-Bund/RdpCacheStitcher"
-    Vendor = "BSI-Bund"
-    License = "See repository"
-    LicenseUrl = "https://github.com/BSI-Bund/RdpCacheStitcher"
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
     Name = "IDR"
     Category = "Reverse Engineering"
     Shortcuts = @()
@@ -623,32 +591,6 @@ $TOOL_DEFINITIONS += @{
     Vendor = "JavierYuste"
     License = "GPL-3.0 License"
     LicenseUrl = "https://github.com/JavierYuste/radare2-deep-graph/blob/master/LICENSE"
-    PythonVersion = ""
-}
-
-# decai - r2js plugin from the r2ai repository, copied into radare2 (r2ai itself does not work on Windows)
-if ((Test-Path ".\mount\git2ai\decai\decai.r2.js") -and (Test-Path "${TOOLS}adare2\share\scripts")) {
-    Copy-Item ".\mount\git2ai\decai\decai.r2.js" "${TOOLS}adare2\share\scripts\" -Force
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "decai"
-    Homepage = "https://github.com/radareorg/r2ai"
-    Vendor = "radareorg"
-    License = "MIT License"
-    Category = "Reverse Engineering"
-    Shortcuts = @()
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @(".exe", ".dll", ".elf", ".bin", ".so")
-    Tags = @("reverse-engineering", "ai", "decompiler")
-    Notes = "r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed by copying decai.r2.js to the radare2 plugins directory."
-    Tips = "decai is copied into the radare2 plugins directory at sandbox start. Use 'decai -e api=<provider>' to select the backend and 'decai -d' to decompile the current function; remote backends need the network sandbox."
-    Usage = "Inside radare2: decai -h"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @("Radare2")
-    LicenseUrl = "https://github.com/radareorg/r2ai/blob/master/LICENSE"
     PythonVersion = ""
 }
 
@@ -889,35 +831,6 @@ $TOOL_DEFINITIONS += @{
     Vendor = "Mandiant"
     License = "Apache License 2.0"
     LicenseUrl = "https://github.com/mandiant/gootloader/blob/main/LICENSE.txt"
-    PythonVersion = ""
-}
-
-$TOOL_DEFINITIONS += @{
-    Name = "GoReSym (git repository)"
-    Category = "Reverse Engineering"
-    Shortcuts = @(
-        @{
-            Lnk      = "`${HOME}\Desktop\dfirws\Programming\Go\GoReSym.lnk"
-            Target   = "`${CLI_TOOL}"
-            Args     = "`${CLI_TOOL_ARGS} -command GoReSym.exe -h"
-            Icon     = ""
-            WorkDir  = "`${HOME}\Desktop"
-        }
-    )
-    InstallVerifyCommand = ""
-    Verify = @()
-    FileExtensions = @()
-    Tags = @("reverse-engineering", "golang")
-    Notes = "Go symbol recovery tool"
-    Tips = "Recovers Go function names, types, file paths and build info from stripped binaries. Import the JSON into Ghidra with the bundled script or into IDA to rename functions."
-    Usage = "GoReSym.exe -t -d -p <go binary> > symbols.json"
-    SampleCommands = @()
-    SampleFiles = @()
-    Dependencies = @()
-    Homepage = "https://github.com/mandiant/GoReSym"
-    Vendor = "Mandiant"
-    License = "MIT License"
-    LicenseUrl = "https://github.com/mandiant/GoReSym/blob/master/LICENSE"
     PythonVersion = ""
 }
 

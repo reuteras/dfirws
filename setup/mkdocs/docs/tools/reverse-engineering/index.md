@@ -18,7 +18,6 @@
 | [WinDbg](windbg.md) | Winget | WinDbg is a powerful debugger from Microsoft that can be used for analyzing crash dumps, debugging applications, and performing memory forensics. It is commonly used in incident response and malware analysis to investigate system crashes and analyze the behavior of malicious software. | debugging, memory-forensics, windows | `.dmp`, `.exe`, `.dll`, `.sys` |  |
 | [cutter-jupyter](cutter-jupyter.md) | Git | Jupyter Plugin for Cutter. | reverse-engineering |  |  |
 | [cutterref](cutterref.md) | Git | Cutter Instruction Reference Plugin | reverse-engineering, documentation, plugins |  |  |
-| [decai](decai.md) | Git | r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed by copying decai.r2.js to the radare2 plugins directory. | reverse-engineering, ai, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [dnSpy](dnspy.md) | GitHub Release | dnSpy is a .NET debugger and decompiler. It can be used to analyze and debug .NET applications, including malware. | dotnet, debugging, reverse-engineering |  |  |
 | [frida-tools](frida-tools.md) | Python | Frida CLI tools. | reverse-engineering, dynamic-analysis | `.exe`, `.apk`, `.ipa` |  |
 | [ghidrecomp](ghidrecomp.md) | Python | Python Command-Line Ghidra Decomplier. | reverse-engineering, decompiler | `.exe`, `.dll`, `.elf` |  |

@@ -128,7 +128,6 @@ Categories generated from dfirws shortcuts.
 | [DBeaver](./files-and-apps-database/dbeaver.md) | GitHub Release | DBeaver is a database management tool. | database, gui | `.db`, `.sqlite`, `.sqlite3`, `.sql` | Full only |
 | [DCode](./utilities/dcode.md) | HTTP | DCode is a date/time conversion and analysis tool. | metadata, forensics, decoding |  |  |
 | [debloat](./files-and-apps-pe/debloat.md) | GitHub Release | A GUI and CLI tool for removing bloat from executables | malware-analysis, pe-analysis, deobfuscation | `.exe`, `.dll` |  |
-| [decai](./reverse-engineering/decai.md) | Git | r2js plugin for radare2 with special focus on AI-assisted decompilation. Installed by copying decai.r2.js to the radare2 plugins directory. | reverse-engineering, ai, decompiler | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [deep_translator](./utilities/deep-translator.md) | Python | A flexible free and unlimited python tool to translate between different languages in a simple way using multiple translators | data-processing |  |  |
 | [defender-detectionhistory-parser](./malware-tools/defender-detectionhistory-parser.md) | Git | A parser of Windows Defender's DetectionHistory forensic artifact, containing substantial info about quarantined files and executables. | windows, malware-detection, forensics |  |  |
 | [DensityScout](./files-and-apps/densityscout.md) | HTTP | DensityScout calculates file entropy and density. | malware-analysis, entropy-analysis | `.exe`, `.dll`, `.bin` |  |
@@ -208,7 +207,6 @@ Categories generated from dfirws shortcuts.
 | [Google Earth Pro](./utilities/google-earth-pro.md) | Winget | Google Earth Pro is a tool for viewing satellite imagery, maps, and geographic information. It can be used for geolocation analysis, visualizing data, and exploring geographic features. | geolocation, osint, visualization | `.kml`, `.kmz` | Full only |
 | [gootloader](./malware-tools-gootloader/gootloader.md) | Git | Collection of scripts used to deobfuscate GOOTLOADER malware samples. | malware-analysis |  |  |
 | [GoReSym](./programming-go/goresym.md) | GitHub Release | Go symbol recovery tool. | reverse-engineering, golang | `.exe`, `.elf` |  |
-| [GoReSym (git repository)](./programming-go/goresym-git-repository.md) | Git | Go symbol recovery tool | reverse-engineering, golang |  |  |
 | [gostringungarbler](./programming-go/gostringungarbler.md) | Git | Python tool to resolve all strings in Go binaries obfuscated by garble. | reverse-engineering, golang, deobfuscation |  |  |
 | [Gpg4win](./utilities-cryptography/gpg4win.md) | HTTP | Gpg4win provides GnuPG and related tools for Windows. | encryption | `.gpg`, `.asc`, `.pgp` |  |
 | [Graphviz](./utilities/graphviz.md) | HTTP | Graphviz is a graph visualization software suite. | visualization, graph | `.dot`, `.gv` |  |
@@ -397,7 +395,6 @@ Categories generated from dfirws shortcuts.
 | [radare2-deep-graph](./reverse-engineering/radare2-deep-graph.md) | Git | A Cutter plugin to generate radare2 graphs. | reverse-engineering, visualization, plugins |  |  |
 | [radare2-mcp](./reverse-engineering/radare2-mcp.md) | GitHub Release | MCP stdio server for radare2. Enables AI assistants to interact with radare2 for binary analysis. Known issue: Windows binary may crash with stack overflow (GitHub issue #24). | reverse-engineering, mcp, ai | `.exe`, `.dll`, `.elf`, `.bin`, `.so` |  |
 | [RDPCacheStitcher](./forensics/rdpcachestitcher.md) | GitHub Release | RdpCacheStitcher is a tool for analyzing RDP cache files. | network, forensics, windows | `.bmc`, `.bin` |  |
-| [RdpCacheStitcher (git repository)](./files-and-apps-rdp/rdpcachestitcher-git-repository.md) | Git | RdpCacheStitcher is a tool that supports forensic analysts in reconstructing useful images out of RDP cache bitmaps. | forensics, network, windows, disk-forensics |  |  |
 | [readpe](./files-and-apps-pe/readpe.md) | GitHub Release | The PE file analysis toolkit | pe-analysis, reverse-engineering | `.exe`, `.dll`, `.sys` |  |
 | [Recaf](./programming-java/recaf.md) | GitHub Release | Recaf is a modern Java bytecode editor. | reverse-engineering, java, decompiler, deobfuscation | `.class`, `.jar` | Full only |
 | [recbin](./os-windows/recbin.md) | HTTP | recbin parses Windows Recycle Bin files. | binary-analysis, carving | `.bin` |  |
