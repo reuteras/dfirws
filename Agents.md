@@ -231,7 +231,7 @@ The analysis sandbox runs **offline**. It:
 1. Loads config from `C:\local\config.txt`
 2. Installs base software from `C:\downloads\` (7-Zip, Java, .NET, etc.)
 3. Configures PATH (max 2048 chars on Windows)
-4. Copies plugins to user directories (Cutter plugins, decai for radare2, etc.)
+4. Copies plugins to user directories (Cutter plugins, etc.)
 5. Runs auto-generated install scripts from `downloads/dfirws/`
 6. Creates desktop shortcuts via `dfirws_folder_*.ps1`
 7. Runs user customization scripts from `local/`
@@ -331,7 +331,6 @@ opencode-ai is configured with MCP servers for AI-assisted analysis. Config depl
 | GhidrAssistMCP | Remote (SSE) | Extension downloaded | Requires Ghidra running with plugin enabled |
 | radare2-mcp (r2mcp) | Local (stdio) | Binary downloaded | Known Windows crash issue (#24) |
 | regipy MCP | Local (stdio) | Repository cloned + mcp pkg | Uses regipy venv Python |
-| decai | radare2 plugin | JS file copied | Loaded by radare2 directly (not MCP) |
 
 ### MCP Configuration
 
