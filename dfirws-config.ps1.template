@@ -51,6 +51,7 @@ $RUSTSEC_ALLOWLIST = @(
 # npm audit (Node.js) - GitHub Security Advisory IDs (GHSA-*) or package names to ignore
 $NPM_AUDIT_ALLOWLIST = @(
     # Example: "GHSA-1234-abcd-5678"
+    "GHSA-5pm8-86m8-9m6r"  # basic-ftp MLSD parser DoS - transitive dependency, no FTP client use, sandbox is offline
 )
 
 # pip-audit (Python) - GHSA-* or PYSEC-* advisory IDs to ignore

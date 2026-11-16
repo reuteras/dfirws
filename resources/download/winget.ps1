@@ -136,7 +136,7 @@ $TOOL_DEFINITIONS += @{
 
 # oh-my-posh - available for installation via dfirws-install.ps1
 Write-SynchronizedLog "winget: Downloading oh-my-posh."
-$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.msi" "oh-my-posh.msi" -check "Zip archive data"
+$status = Get-WinGet "JanDeDobbeleer.OhMyPosh" "Oh*.msi" "oh-my-posh.msi" -check "Zip archive data|Microsoft OOXML"
 
 $TOOL_DEFINITIONS += @{
     Name = "oh-my-posh"
