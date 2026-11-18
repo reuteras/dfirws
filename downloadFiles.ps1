@@ -244,6 +244,9 @@ function Get-LogIssues {
     $excludedLogs = "security.txt", "*-tools.txt", "*-tools.csv"
 
     $warnings = Get-ChildItem .\log\* -Recurse -Exclude $excludedLogs | Select-String -Pattern "warning" | Where-Object {
+        # npm audit advisory titles ("pkg: ... - https://github.com/advisories/GHSA-...") can
+        # contain words like "error"; the advisories are reported in security.txt instead.
+        $_.Line -notmatch "https://github.com/advisories/GHSA-" -and
         $_.Line -notmatch " INFO " -and
         $_.Line -notmatch "This is taking longer than usual" -and
         $_.Line -notmatch "Installing collected packages" -and
@@ -282,6 +285,9 @@ function Get-LogIssues {
     }
 
     $errors = Get-ChildItem .\log\* -Recurse -Exclude $excludedLogs | Select-String -Pattern "error" | Where-Object {
+        # npm audit advisory titles ("pkg: ... - https://github.com/advisories/GHSA-...") can
+        # contain words like "error"; the advisories are reported in security.txt instead.
+        $_.Line -notmatch "https://github.com/advisories/GHSA-" -and
         $_.Line -notmatch "Error: no test specified" -and
         $_.Line -notmatch "pretty.errors" -and
         $_.Line -notmatch "Copied (replaced existing)" -and
@@ -326,6 +332,9 @@ function Get-LogIssues {
     }
 
     $failed = Get-ChildItem .\log\* -Recurse -Exclude $excludedLogs | Select-String -Pattern "Failed" | Where-Object {
+        # npm audit advisory titles ("pkg: ... - https://github.com/advisories/GHSA-...") can
+        # contain words like "error"; the advisories are reported in security.txt instead.
+        $_.Line -notmatch "https://github.com/advisories/GHSA-" -and
         $_.Line -notmatch "A connection attempt failed because the connected party did not" -and
         $_.Line -notmatch "ucrt64/share" -and
         $_.Line -notmatch "origin/main Updating" -and
