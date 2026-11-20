@@ -935,7 +935,7 @@ function Install-Gpg4win {
         # Kleopatra refuses to start when elevated (default in Windows Sandbox) unless
         # HKCU\Software\<organization>\kleopatra\AllowRunningAsAdmin is "I_KNOW_THE_RISKS".
         # The organization is a build-time setting (KDE upstream), so set it for both.
-        foreach ($org in @("KDE", "GnuPG")) {
+        foreach ($org in @("KDE", "GnuPG", "Gpg4win")) {
             $kleoKey = "HKCU:\Software\${org}\kleopatra"
             New-Item -Path $kleoKey -Force | Out-Null
             New-ItemProperty -Path $kleoKey -Name "AllowRunningAsAdmin" -PropertyType String -Value "I_KNOW_THE_RISKS" -Force | Out-Null
