@@ -3164,8 +3164,8 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
-# https://windows.php.net/download - PHP 8
-$PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/releases/archives/php-8\.[0-9]+\.[0-9]+(-[0-9]+)?-nts-Win32-vs17-x64\.zip'
+# https://windows.php.net/download - PHP 8 (VS toolset changes between majors, e.g. vs17 -> vs18 in 8.6)
+$PHP_URL = Get-DownloadUrlFromPage -Url "https://windows.php.net/download" -RegEx '/releases/archives/php-8\.[0-9]+\.[0-9]+(-[0-9]+)?-nts-Win32-vs[0-9]+-x64\.zip'
 $status = Get-FileFromUri -uri "https://downloads.php.net/~windows${PHP_URL}" -FilePath ".\downloads\php.zip" -CheckURL "Yes" -check "Zip archive data"
 if ($status) {
     Install-ToolFromArchive -Archive "${SETUP_PATH}\php.zip" -Destination "${TOOLS}\php" -Target "${TOOLS}\php"
