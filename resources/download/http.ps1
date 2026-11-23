@@ -3304,7 +3304,7 @@ $TOOL_DEFINITIONS += @{
 }
 
 # Resource hacker
-$status = Get-FileFromUri -uri "https://www.angusj.com/resourcehacker/resource_hacker.zip" -FilePath ".\downloads\resourcehacker.zip" -CheckURL "No" -check "Zip archive data"
+$status = Get-FileFromUri -uri "https://angusj.com/resourcehacker/resource_hacker.zip" -FilePath ".\downloads\resourcehacker.zip" -CheckURL "No" -check "Zip archive data"
 if ($status) {
     Install-ToolFromArchive -Archive "${SETUP_PATH}\resourcehacker.zip" -Destination "${TOOLS}\ResourceHacker" -Target "${TOOLS}\ResourceHacker"
 }
