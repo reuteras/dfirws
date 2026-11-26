@@ -511,6 +511,15 @@ if ($all -or $Basic.IsPresent -or $Didier.IsPresent -or $GoLang.IsPresent -or $H
         Write-DateLog "Error: No GitHub username or token given. Can't continue."
         Exit
     }
+    switch (Test-GitHubToken -User $GH_USER -Token $GH_PASS) {
+        "invalid" {
+            Write-DateLog "Error: GitHub rejected the token (invalid or expired). Create a new token, or remove the old one from dfirws-config.ps1 to be prompted. Can't continue."
+            Exit 1
+        }
+        "unknown" {
+            Write-DateLog "Warning: Could not verify the GitHub token (network problem?). Continuing."
+        }
+    }
 }
 
 if ($all -or $Basic.IsPresent -or $Freshclam.IsPresent -or $GoLang.IsPresent -or $LogBoost.IsPresent -or $MSYS2.IsPresent -or $Node.IsPresent -or $Python.IsPresent -or $Rust.IsPresent -or $Zimmerman.IsPresent -or $Kape.IsPresent) {

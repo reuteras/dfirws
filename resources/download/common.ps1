@@ -228,6 +228,22 @@ function Get-FileFromUri {
 
 # Saves GitHub repository and release metadata to a cache file for documentation generation.
 # This reuses data already fetched by Get-GitHubRelease to avoid duplicate API calls.
+# Returns "valid", "invalid" (rejected by GitHub) or "unknown" (could not check).
+function Test-GitHubToken {
+    param (
+        [Parameter(Mandatory = $true)] [string] $User,
+        [Parameter(Mandatory = $true)] [string] $Token
+    )
+    try {
+        $status = curl.exe --silent --max-time 20 -o NUL -w "%{http_code}" -u "${User}:${Token}" "https://api.github.com/user"
+    } catch {
+        return "unknown"
+    }
+    if ($status -eq "200") { return "valid" }
+    if ($status -eq "401") { return "invalid" }
+    return "unknown"
+}
+
 function Save-GitHubRepoMetadata {
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
     param (
