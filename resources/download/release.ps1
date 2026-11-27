@@ -5037,4 +5037,111 @@ $TOOL_DEFINITIONS += @{
     PythonVersion = ""
 }
 
+# juntei - Windows forensic artifact parser from Yamato Security
+$status = Get-GitHubRelease -repo "Yamato-Security/juntei" -path "${SETUP_PATH}\juntei.zip" -match "win-x64.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${SETUP_PATH}\juntei_extract") {
+        Remove-Item "${SETUP_PATH}\juntei_extract" -Recurse -Force
+    }
+    & $SEVENZIP x -aoa "${SETUP_PATH}\juntei.zip" -o"${SETUP_PATH}\juntei_extract" | Out-Null
+    $juntei_exe = Get-ChildItem "${SETUP_PATH}\juntei_extract" -Filter "juntei*.exe" | Select-Object -First 1
+    if ($juntei_exe) {
+        Copy-Item $juntei_exe.FullName "${TOOLS}\bin\juntei.exe" -Force
+    }
+    Remove-Item "${SETUP_PATH}\juntei_extract" -Recurse -Force
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "juntei"
+    Category = "Forensics"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\juntei (Windows forensic artifact parser from Yamato Security).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command juntei.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "juntei.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("forensics", "artifact-extraction", "parsing", "timeline", "triage", "windows")
+    Notes = "Juntei is a Windows forensic artifact parser from Yamato Security, a sibling of Hayabusa for artifacts that are not event logs. It supports 42 artifacts (registry, Prefetch, SRUM, MFT and more) and has an auto-parse mode and a persistence hunter. The project is new (first commits in October 2026)."
+    Tips = "Run auto-parse on a collection to parse every supported artifact in parallel. The parsers use temporary file copies on the output filesystem, so write the output to Desktop\readwrite with enough free space. Overlaps with the Zimmerman tools and dfir-toolkit, which makes it useful for cross-checking results."
+    Usage = "juntei.exe auto-parse -d <evidence dir> -o <output dir>"
+    SampleCommands = @(
+        "juntei.exe auto-parse -d <evidence dir> -o <output dir>",
+        "juntei.exe parse-file prefetch -d <evidence dir> -o prefetch.csv",
+        "juntei.exe persistence-hunter --help"
+    )
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/Yamato-Security/juntei"
+    Vendor = "Yamato-Security"
+    License = "RPL-1.5"
+    LicenseUrl = "https://github.com/Yamato-Security/juntei/blob/main/LICENSE"
+    PythonVersion = ""
+}
+
+# usbhawk - USB forensics for threat hunting and incident response
+$status = Get-GitHubRelease -repo "aakashraman/usbhawk" -path "${SETUP_PATH}\usbhawk.zip" -match "windows-x64.zip" -check "Zip archive data"
+if ($status) {
+    if (Test-Path "${TOOLS}\usbhawk") {
+        Remove-Item "${TOOLS}\usbhawk" -Recurse -Force
+    }
+    & $SEVENZIP x -aoa "${SETUP_PATH}\usbhawk.zip" -o"${TOOLS}\usbhawk" | Out-Null
+    # The zip contains one folder (usbhawk-<version>-windows-x64); move its content up one level.
+    $usbhawk_dir = Get-ChildItem "${TOOLS}\usbhawk" -Directory | Select-Object -First 1
+    if ($usbhawk_dir) {
+        Move-Item "$($usbhawk_dir.FullName)\*" "${TOOLS}\usbhawk" -Force
+        Remove-Item $usbhawk_dir.FullName -Recurse -Force
+    }
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "usbhawk"
+    Category = "Forensics"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\Forensics\usbhawk (USB forensics for threat hunting and incident response).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command `${TOOLS}\usbhawk\usbhawk.exe --help"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @(
+        @{
+            Type = "command"
+            Name = "`${TOOLS}\usbhawk\usbhawk.exe"
+            Expect = "PE32"
+        }
+    )
+    FileExtensions = @()
+    Tags = @("forensics", "artifact-extraction", "detection-rules", "sigma", "incident-response", "windows")
+    Notes = "USBHawk analyses a Windows triage collection (KAPE, Velociraptor, a mounted image or a live machine) for USB activity. It scores sessions that look like data exfiltration, detects wiped USB evidence, generates detection rules (Sigma, Elastic, Microsoft Sentinel) and builds a device graph across hosts. The project is new (first commits in November 2026)."
+    Tips = "Run it from C:\Tools\usbhawk, where the demo evidence is in the examples folder. Use --triage <folder> to point it at a collection; evidence is recognised by file name. The release ships SHA256SUMS.txt for the download."
+    Usage = "usbhawk.exe tamper --triage <triage folder>"
+    SampleCommands = @(
+        "usbhawk.exe detections run --events examples\detections\insider_timeline.jsonl",
+        "usbhawk.exe tamper --triage examples\tamper\wiped-host",
+        "usbhawk.exe graph --runs examples\graph\fleet"
+    )
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/aakashraman/usbhawk"
+    Vendor = "aakashraman"
+    License = "MIT"
+    LicenseUrl = "https://github.com/aakashraman/usbhawk/blob/main/LICENSE"
+    PythonVersion = ""
+}
+
 New-CreateToolFiles -ToolDefinitions $TOOL_DEFINITIONS -Source "release"

@@ -2,6 +2,10 @@
 
 This changelog is for changes affecting the usage of the **dfirws** sandbox. Most updates to installed tools will not be listed here.
 
+## 2026-11-27
+
+- Added [juntei](https://github.com/Yamato-Security/juntei), a Windows forensic artifact parser from Yamato Security, [usbhawk](https://github.com/aakashraman/usbhawk) for USB forensics and [mpenginedb_parser](https://github.com/Protokol-7/mpenginedb_parser) for the Microsoft Defender `mpenginedb.db`. All three are new projects, so expect changes. Start juntei and usbhawk from the shortcuts in `Forensics` and mpenginedb_parser from `OS\Windows`.
+
 ## 2026-11-04
 
 - Zircolite is now the release binary in `C:\Tools\zircolite` instead of a Python venv. The binary includes the compiled flattening kernel, which is more than twice as fast, and no longer breaks the Python sandbox when its dependencies change. Run `Zircolite.exe` instead of `zircolite.ps1`, and `venv.ps1 -zircolite` is removed. Rulesets are in `C:\Tools\zircolite\rules`.

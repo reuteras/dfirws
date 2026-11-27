@@ -51,6 +51,7 @@ $repourls = `
     "https://github.com/netspooky/scare.git", `
     "https://github.com/netwho/PacketCircle.git", `
     "https://github.com/pan-unit42/dotnetfile.git", `
+    "https://github.com/Protokol-7/mpenginedb_parser.git", `
     "https://github.com/rabbitstack/fibratus.git", `
     "https://github.com/reuteras/ai-fs-proxy.git", `
     "https://github.com/reuteras/dfirws-sample-files.git", `
@@ -621,6 +622,35 @@ $TOOL_DEFINITIONS += @{
     License = "GPL-3.0 License"
     LicenseUrl = "https://github.com/jklepsercyber/defender-detectionhistory-parser/blob/main/LICENSE"
     PythonVersion = ""
+}
+
+$TOOL_DEFINITIONS += @{
+    Name = "mpenginedb_parser"
+    Category = "OS\Windows"
+    Shortcuts = @(
+        @{
+            Lnk      = "`${HOME}\Desktop\dfirws\OS\Windows\mpenginedb_parser (Microsoft Defender MpEngineDb parser).lnk"
+            Target   = "`${CLI_TOOL}"
+            Args     = "`${CLI_TOOL_ARGS} -command python `${GIT_PATH}\mpenginedb_parser\mpenginedb_parser.py -h"
+            Icon     = ""
+            WorkDir  = "`${HOME}\Desktop"
+        }
+    )
+    InstallVerifyCommand = ""
+    Verify = @()
+    FileExtensions = @(".db")
+    Tags = @("forensics", "windows", "sqlite", "decryption", "timeline")
+    Notes = "Forensic parser for Microsoft Defender's MpEngineDb (mpenginedb.db). The database is SQLite with every page RC4 encrypted, so normal SQLite tools can't open it. The parser decrypts it, replays the WAL, carves deleted rows and writes a timeline. The project is new (first commits in November 2026)."
+    Tips = "Collect mpenginedb.db together with its -wal file from C:\ProgramData\Microsoft\Windows Defender\Scans, or the newest changes are missing. Write the output folder to Desktop\readwrite. Python standard library only. defender-detectionhistory-parser covers a different Defender artifact."
+    Usage = "python C:\git\mpenginedb_parser\mpenginedb_parser.py -f <mpenginedb.db or folder> -o <output folder>"
+    SampleCommands = @()
+    SampleFiles = @()
+    Dependencies = @()
+    Homepage = "https://github.com/Protokol-7/mpenginedb_parser"
+    Vendor = "Protokol-7"
+    License = "MIT"
+    LicenseUrl = "https://github.com/Protokol-7/mpenginedb_parser/blob/main/LICENSE"
+    PythonVersion = "3.11"
 }
 
 $TOOL_DEFINITIONS += @{
