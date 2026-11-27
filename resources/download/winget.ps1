@@ -358,7 +358,7 @@ $TOOL_DEFINITIONS += @{
         "vt ip 8.8.8.8"
     )
     SampleFiles = @()
-    Dependencies = @()
+    Dependencies = @("online")
     Homepage = "https://github.com/VirusTotal/vt-cli"
     Vendor = "VirusTotal"
     License = "Apache-2.0"
@@ -423,7 +423,7 @@ if (Test-ToolIncluded -ToolName "OpenVPN") {
         Usage = "Install on demand and import a .ovpn profile in the OpenVPN GUI."
         SampleCommands = @()
         SampleFiles = @()
-        Dependencies = @()
+        Dependencies = @("online")
         Homepage = "https://openvpn.net/client/"
         Vendor = "OpenVPN Inc."
         License = "Proprietary"
@@ -492,7 +492,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "Install on demand and import a tunnel configuration in the WireGuard GUI."
     SampleCommands = @()
     SampleFiles = @()
-    Dependencies = @()
+    Dependencies = @("online")
     Homepage = "https://www.wireguard.com/install/"
     Vendor = "WireGuard LLC"
     License = "MIT"
@@ -564,7 +564,7 @@ $TOOL_DEFINITIONS += @{
     Usage = "Install on demand and run 'tailscale up' in the network sandbox."
     SampleCommands = @()
     SampleFiles = @()
-    Dependencies = @()
+    Dependencies = @("online")
     Homepage = "https://tailscale.com/download"
     Vendor = "Tailscale Inc."
     License = "BSD-3-Clause"
