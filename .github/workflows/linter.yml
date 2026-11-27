@@ -78,3 +78,23 @@ jobs:
       - name: Run changelog tests
         shell: pwsh
         run: Invoke-Pester -Path tests -CI
+
+  # The required check (ruleset required-checks) that Dependabot auto-merge
+  # waits for; see dev-docs docs/github.md.
+  checks-passed:
+    name: Checks passed
+    if: always()
+    needs: [build, metadata]
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Check job results
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          for result in $RESULTS; do
+            if [ "$result" != "success" ]; then
+              echo "A job ended with: $result"
+              exit 1
+            fi
+          done
